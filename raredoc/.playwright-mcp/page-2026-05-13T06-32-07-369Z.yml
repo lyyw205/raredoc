@@ -1,0 +1,17 @@
+- generic [ref=e2]:
+  - heading "cafe24" [level=1] [ref=e4]:
+    - link "cafe24" [ref=e5] [cursor=pointer]:
+      - /url: https://www.cafe24.com
+      - img "cafe24" [ref=e6]
+  - generic [ref=e9]:
+    - img "404" [ref=e10]
+    - heading "다시 한번 확인해주세요!" [level=2] [ref=e11]
+    - paragraph [ref=e12]:
+      - text: 접근하신 주소의 페이지는
+      - text: 사라졌거나 다른 페이지로 변경되었어요.
+      - text: 주소를 다시 확인해주세요.
+    - generic [ref=e13]:
+      - link "이전 페이지로 가기" [ref=e14] [cursor=pointer]:
+        - /url: javascript:history.back();
+      - link "메인 페이지로 가기" [ref=e15] [cursor=pointer]:
+        - /url: /

@@ -1,0 +1,239 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - link "PokeTrace" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e9]: PokeTrace
+        - navigation [ref=e10]:
+          - link "Why" [ref=e11] [cursor=pointer]:
+            - /url: /why
+          - link "For Developers" [ref=e12] [cursor=pointer]:
+            - /url: /developers
+          - link "Pricing" [ref=e13] [cursor=pointer]:
+            - /url: /pricing
+          - link "FAQ" [ref=e14] [cursor=pointer]:
+            - /url: /faq
+          - link "Catalog" [ref=e15] [cursor=pointer]:
+            - /url: /catalog
+          - link "Docs" [ref=e16] [cursor=pointer]:
+            - /url: /docs
+          - link "Blog" [ref=e17] [cursor=pointer]:
+            - /url: /blog
+          - link "Portfolio" [ref=e18] [cursor=pointer]:
+            - /url: /portfolio
+          - link "Status" [ref=e19] [cursor=pointer]:
+            - /url: https://status.poketrace.com/
+      - button "Select language" [ref=e22]:
+        - img [ref=e23]
+        - generic [ref=e26]: EN
+  - generic [ref=e27]:
+    - generic [ref=e29]:
+      - link "PokeTrace" [ref=e30] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e33]: PokeTrace
+      - button [ref=e34]:
+        - img [ref=e35]
+    - main [ref=e36]:
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - generic [ref=e39]: API_Reference
+          - heading "Documentation" [level=1] [ref=e40]
+          - paragraph [ref=e41]: REST API for Pokemon card prices, sets, raw tiers, graded tiers, listings, and price history.
+          - generic [ref=e42]:
+            - link "Cards Search cards and read current price tiers." [ref=e43] [cursor=pointer]:
+              - /url: /docs/cards
+              - generic [ref=e44]: Cards
+              - generic [ref=e45]: Search cards and read current price tiers.
+            - link "Sets List sets and release metadata." [ref=e46] [cursor=pointer]:
+              - /url: /docs/sets
+              - generic [ref=e47]: Sets
+              - generic [ref=e48]: List sets and release metadata.
+            - link "Auth API keys, plans, limits, and headers." [ref=e49] [cursor=pointer]:
+              - /url: /docs/authentication
+              - generic [ref=e50]: Auth
+              - generic [ref=e51]: API keys, plans, limits, and headers.
+            - link "LLM Ground agents with docs and OpenAPI." [ref=e52] [cursor=pointer]:
+              - /url: /docs/llm-integration
+              - generic [ref=e53]: LLM
+              - generic [ref=e54]: Ground agents with docs and OpenAPI.
+          - generic [ref=e55]:
+            - link "History Daily price rows by card and tier." [ref=e56] [cursor=pointer]:
+              - /url: /docs/price-history
+              - generic [ref=e57]: History
+              - generic [ref=e58]: Daily price rows by card and tier.
+            - link "Listings Sold comps and listing-level evidence." [ref=e59] [cursor=pointer]:
+              - /url: /docs/listings
+              - generic [ref=e60]: Listings
+              - generic [ref=e61]: Sold comps and listing-level evidence.
+            - link "Graded PSA, BGS, CGC, SGC, ACE, TAG tiers." [ref=e62] [cursor=pointer]:
+              - /url: /docs/graded-prices
+              - generic [ref=e63]: Graded
+              - generic [ref=e64]: PSA, BGS, CGC, SGC, ACE, TAG tiers.
+            - link "OpenAPI Machine-readable API contract." [ref=e65] [cursor=pointer]:
+              - /url: /docs/openapi
+              - generic [ref=e66]: OpenAPI
+              - generic [ref=e67]: Machine-readable API contract.
+          - paragraph [ref=e68]: "Base URL: api.poketrace.com/v1 · Auth: X-API-Key · Free: 250/day (US, Raw) · Pro: 10k/day (+ EU, Graded) · Scale: 100k/day"
+        - generic [ref=e69]:
+          - heading "Quick Start" [level=2] [ref=e70]
+          - paragraph [ref=e71]:
+            - text: Get up and running with the PokeTrace API in under 5 minutes. Access real-time pricing data for over 60,000 Pokemon cards including PSA, BGS, and CGC graded values from US and EU markets. Check API status at
+            - link "status.poketrace.com" [ref=e72] [cursor=pointer]:
+              - /url: https://status.poketrace.com/
+            - text: .
+          - paragraph [ref=e73]:
+            - code [ref=e74]: approxSaleCount
+            - text: tells you whether a source uses an approximate sale count. This is useful for unstable sold-listing sources such as
+            - code [ref=e75]: ebay
+            - text: ", where revoked, removed, or reclassified listings can change the visible count after the initial sale. Stable marketplace sources return"
+            - code [ref=e76]: "approxSaleCount: false"
+            - text: .
+          - generic [ref=e77]:
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - generic [ref=e80]: "01"
+                - heading "Get API Key" [level=3] [ref=e81]
+                - paragraph [ref=e82]: Sign up and create a key in the dashboard
+              - generic [ref=e83]:
+                - generic [ref=e84]: "02"
+                - heading "Add Header" [level=3] [ref=e85]
+                - paragraph [ref=e86]: Include X-API-Key in requests
+              - generic [ref=e87]:
+                - generic [ref=e88]: "03"
+                - heading "Query Data" [level=3] [ref=e89]
+                - paragraph [ref=e90]: Access cards, sets, and pricing
+            - generic [ref=e91]:
+              - generic [ref=e92]:
+                - generic [ref=e98]:
+                  - img [ref=e99]
+                  - generic [ref=e101]: quick_start
+                - generic [ref=e102]:
+                  - generic [ref=e103]:
+                    - button "cURL" [ref=e104]
+                    - button "JS" [ref=e105]
+                    - button "Python" [ref=e106]
+                  - button [ref=e107]:
+                    - img [ref=e108]
+              - generic [ref=e111]:
+                - code [ref=e113]: "# Get your API key from the dashboard # Then use your key to query cards curl -H \"X-API-Key: YOUR_KEY\" \\ https://api.poketrace.com/v1/cards/019bff77-befa-771d-bab0-f5909f0a78c9"
+                - generic [ref=e115]: Response 200 OK
+                - generic [ref=e117]:
+                  - generic [ref=e118]: // US Card Example
+                  - generic [ref=e119]: "{"
+                  - generic [ref=e120]: "\"data\": {"
+                  - generic [ref=e121]: "\"id\": \"019bff77-befa-771d-bab0-f5909f0a78c9\","
+                  - generic [ref=e122]: "\"name\": \"Charizard ex\","
+                  - generic [ref=e123]: "\"cardNumber\": \"101/108\","
+                  - generic [ref=e124]: "\"set\": { \"slug\": \"obsidian-flames\", \"name\": \"Obsidian Flames\" },"
+                  - generic [ref=e125]: "\"variant\": \"Holofoil\","
+                  - generic [ref=e126]: "\"rarity\": \"Ultra Rare\","
+                  - generic [ref=e127]: "\"game\": \"pokemon\","
+                  - generic [ref=e128]: "\"market\": \"US\","
+                  - generic [ref=e129]: "\"currency\": \"USD\","
+                  - generic [ref=e130]: "\"refs\": { \"tcgplayerId\": \"123456\", \"cardmarketId\": null },"
+                  - generic [ref=e131]: "\"prices\": {"
+                  - generic [ref=e132]: "\"ebay\": {"
+                  - generic [ref=e133]: "\"PSA_10\": { \"avg\": 1250, \"low\": 1180, \"high\": 1320, \"saleCount\": 12, \"approxSaleCount\": true, \"avg1d\": 1240, \"avg7d\": 1220, \"avg30d\": 1180 },"
+                  - generic [ref=e134]: "\"NEAR_MINT\": { \"avg\": 180, \"low\": 150, \"high\": 220, \"saleCount\": 45, \"approxSaleCount\": true, \"avg1d\": 178, \"avg7d\": 175, \"avg30d\": 170 }"
+                  - generic [ref=e135]: "},"
+                  - generic [ref=e136]: "\"tcgplayer\": {"
+                  - generic [ref=e137]: "\"NEAR_MINT\": { \"avg\": 165, \"low\": 140, \"high\": 195, \"saleCount\": 89, \"approxSaleCount\": false, \"avg1d\": 162, \"avg7d\": 160, \"avg30d\": 155 }"
+                  - generic [ref=e138]: "}"
+                  - generic [ref=e139]: "},"
+                  - generic [ref=e140]: "\"gradedOptions\": [\"PSA_10\", \"PSA_9\", \"CGC_9_5\"],"
+                  - generic [ref=e141]: "\"conditionOptions\": [\"NEAR_MINT\", \"LIGHTLY_PLAYED\"],"
+                  - generic [ref=e142]: "\"topPrice\": 1250,"
+                  - generic [ref=e143]: "\"totalSaleCount\": 146,"
+                  - generic [ref=e144]: "\"hasGraded\": true,"
+                  - generic [ref=e145]: "\"lastUpdated\": \"2026-01-29T12:00:00Z\""
+                  - generic [ref=e146]: "}"
+                  - generic [ref=e147]: "}"
+                  - generic [ref=e149]: // EU Card Example
+                  - generic [ref=e150]: "{"
+                  - generic [ref=e151]: "\"data\": {"
+                  - generic [ref=e152]: "\"id\": \"eu_273550\","
+                  - generic [ref=e153]: "\"name\": \"Charizard ex\","
+                  - generic [ref=e154]: "\"cardNumber\": \"101/108\","
+                  - generic [ref=e155]: "\"set\": { \"slug\": \"obsidian-flames\", \"name\": \"Obsidian Flames\" },"
+                  - generic [ref=e156]: "\"rarity\": \"Ultra Rare\","
+                  - generic [ref=e157]: "\"game\": \"pokemon\","
+                  - generic [ref=e158]: "\"market\": \"EU\","
+                  - generic [ref=e159]: "\"currency\": \"EUR\","
+                  - generic [ref=e160]: "\"refs\": { \"tcgplayerId\": null, \"cardmarketId\": \"273550\" },"
+                  - generic [ref=e161]: "\"prices\": {"
+                  - generic [ref=e162]: "\"cardmarket\": {"
+                  - generic [ref=e163]: "\"AGGREGATED\": { \"avg\": 145, \"low\": null, \"high\": null, \"avg1d\": 142, \"avg7d\": 140, \"avg30d\": 138 }"
+                  - generic [ref=e164]: "},"
+                  - generic [ref=e165]: "\"cardmarket_unsold\": {"
+                  - generic [ref=e166]: "\"PSA_10\": { \"avg\": 980, \"low\": 850, \"high\": 1200, \"saleCount\": 8, \"approxSaleCount\": false, \"country\": { \"DE\": { \"avg\": 950, \"language\": { \"ALL\": { \"avg\": 930, \"saleCount\": 2 }, \"EN\": { \"avg\": 990, \"saleCount\": 3 }, \"JP\": { \"avg\": 910, \"saleCount\": 2 } } }, \"FR\": { \"avg\": 1020 } } },"
+                  - generic [ref=e167]: "\"NEAR_MINT\": { \"avg\": 165, \"low\": 120, \"high\": 280, \"saleCount\": 95, \"approxSaleCount\": false, \"country\": { \"DE\": { \"avg\": 155, \"language\": { \"ALL\": { \"avg\": 149, \"saleCount\": 10 }, \"EN\": { \"avg\": 168, \"saleCount\": 12 }, \"JP\": { \"avg\": 140, \"saleCount\": 5 } } }, \"FR\": { \"avg\": 175 }, \"IT\": { \"avg\": 160 } } }"
+                  - generic [ref=e168]: "}"
+                  - generic [ref=e169]: "},"
+                  - generic [ref=e170]: "\"gradedOptions\": [\"PSA_10\", \"CGC_9_5\"],"
+                  - generic [ref=e171]: "\"conditionOptions\": [\"NEAR_MINT\", \"EXCELLENT\"],"
+                  - generic [ref=e172]: "\"topPrice\": 980,"
+                  - generic [ref=e173]: "\"totalSaleCount\": 103,"
+                  - generic [ref=e174]: "\"hasGraded\": true,"
+                  - generic [ref=e175]: "\"lastUpdated\": \"2026-01-29T12:00:00Z\""
+                  - generic [ref=e176]: "}"
+                  - generic [ref=e177]: "}"
+  - contentinfo [ref=e178]:
+    - generic [ref=e179]:
+      - generic [ref=e180]:
+        - generic [ref=e181]:
+          - generic [ref=e182]:
+            - generic [ref=e183]: "0"
+            - generic [ref=e184]: PokeTrace
+          - paragraph [ref=e185]: Real-time Pokemon card price tracker API. Track Charizard, Pikachu, and 60,000+ Pokemon TCG cards with PSA, BGS, CGC graded pricing from trusted global marketplaces.
+        - generic [ref=e186]:
+          - navigation "Product navigation" [ref=e187]:
+            - heading "Pokemon Card API" [level=4] [ref=e188]
+            - list [ref=e189]:
+              - listitem [ref=e190]:
+                - link "Features" [ref=e191] [cursor=pointer]:
+                  - /url: /#why
+              - listitem [ref=e192]:
+                - link "API" [ref=e193] [cursor=pointer]:
+                  - /url: /#api
+              - listitem [ref=e194]:
+                - link "API Pricing" [ref=e195] [cursor=pointer]:
+                  - /url: /pricing
+              - listitem [ref=e196]:
+                - link "Pokemon Price FAQ" [ref=e197] [cursor=pointer]:
+                  - /url: /faq
+          - navigation "Resources navigation" [ref=e198]:
+            - heading "Resources" [level=4] [ref=e199]
+            - list [ref=e200]:
+              - listitem [ref=e201]:
+                - link "Blog" [ref=e202] [cursor=pointer]:
+                  - /url: /blog
+              - listitem [ref=e203]:
+                - link "Documentation" [ref=e204] [cursor=pointer]:
+                  - /url: /docs
+              - listitem [ref=e205]:
+                - link "Card Catalog" [ref=e206] [cursor=pointer]:
+                  - /url: /catalog
+              - listitem [ref=e207]:
+                - link "Value Checker" [ref=e208] [cursor=pointer]:
+                  - /url: /value-checker
+              - listitem [ref=e209]:
+                - link "Status" [ref=e210] [cursor=pointer]:
+                  - /url: https://status.poketrace.com/
+          - navigation "Legal navigation" [ref=e211]:
+            - heading "Legal" [level=4] [ref=e212]
+            - list [ref=e213]:
+              - listitem [ref=e214]:
+                - link "Privacy Policy" [ref=e215] [cursor=pointer]:
+                  - /url: /privacy
+              - listitem [ref=e216]:
+                - link "Terms of Service" [ref=e217] [cursor=pointer]:
+                  - /url: /terms
+      - paragraph [ref=e219]: Pokemon card prices • Pokemon TCG API • PSA graded cards • BGS Pokemon • CGC grading • Charizard value • Pikachu card prices • Base Set Pokemon • First Edition prices • Shadowless cards • Pokemon card tracker • Vintage Pokemon values • Pokemon card investing • Japanese Pokemon cards • Alt art Pokemon • Rainbow rare prices • Pokemon price history
+      - generic [ref=e220]:
+        - generic [ref=e221]:
+          - paragraph [ref=e222]: © 2026 PokeTrace — Pokemon Card Price Tracker API. All rights reserved.
+          - link "contact@poketrace.com" [ref=e223] [cursor=pointer]:
+            - /url: mailto:contact@poketrace.com
+        - paragraph [ref=e225]: Pokémon and all respective names are trademark & © of Nintendo 1996-2026. PokeTrace is an independent Pokemon card price tracking service not affiliated with Nintendo, The Pokémon Company, Creatures Inc., PSA, BGS, or CGC. All Pokémon card names and imagery are used solely for trading card identification and price tracking purposes.
+        - paragraph [ref=e227]: "Affiliate Disclosure: This website contains affiliate links to eBay and other retailers. We may receive a commission for purchases made through these links at no additional cost to you. This helps support our work in providing accurate Pokemon card pricing data."

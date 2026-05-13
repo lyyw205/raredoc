@@ -12,25 +12,40 @@ import {
 } from "recharts";
 
 interface PricePoint {
-  recordedAt: string; // ISO string
+  recordedAt: string;
   normal: number | null;
   holofoil: number | null;
 }
 
+type RangeDef = { key: string; label: string; days: number | null };
+
 interface Props {
   history: PricePoint[];
+  lineLabels?: { normal: string; holofoil: string };
+  ranges?: RangeDef[];
 }
 
-type Range = "30d" | "90d" | "all";
+const DEFAULT_RANGES: RangeDef[] = [
+  { key: "30d", label: "30일", days: 30 },
+  { key: "90d", label: "90일", days: 90 },
+  { key: "all", label: "전체", days: null },
+];
 
-export function PriceChart({ history }: Props) {
-  const [range, setRange] = useState<Range>("30d");
+export const PT_RANGES: RangeDef[] = [
+  { key: "7d",  label: "7일",  days: 7  },
+  { key: "14d", label: "14일", days: 14 },
+  { key: "30d", label: "30일", days: 30 },
+];
 
+export function PriceChart({ history, lineLabels, ranges = DEFAULT_RANGES }: Props) {
+  const labels = lineLabels ?? { normal: "노말", holofoil: "홀로포일" };
+  const [rangeKey, setRangeKey] = useState(ranges[0].key);
+
+  const selected = ranges.find((r) => r.key === rangeKey) ?? ranges[0];
   const now = Date.now();
   const filtered = history.filter((p) => {
-    if (range === "all") return true;
-    const days = range === "30d" ? 30 : 90;
-    return now - new Date(p.recordedAt).getTime() <= days * 86400000;
+    if (selected.days === null) return true;
+    return now - new Date(p.recordedAt).getTime() <= selected.days * 86400000;
   });
 
   if (!filtered.length) {
@@ -51,15 +66,15 @@ export function PriceChart({ history }: Props) {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-sm font-semibold text-gray-300">가격 히스토리</h2>
         <div className="flex gap-1 bg-gray-800 rounded p-1">
-          {(["30d", "90d", "all"] as Range[]).map((r) => (
+          {ranges.map((r) => (
             <button
-              key={r}
-              onClick={() => setRange(r)}
+              key={r.key}
+              onClick={() => setRangeKey(r.key)}
               className={`px-2 py-0.5 rounded text-xs font-medium transition-colors ${
-                range === r ? "bg-gray-600 text-white" : "text-gray-400 hover:text-white"
+                rangeKey === r.key ? "bg-gray-600 text-white" : "text-gray-400 hover:text-white"
               }`}
             >
-              {r === "30d" ? "30일" : r === "90d" ? "90일" : "전체"}
+              {r.label}
             </button>
           ))}
         </div>
@@ -88,7 +103,7 @@ export function PriceChart({ history }: Props) {
           <Line
             type="monotone"
             dataKey="normal"
-            name="노말"
+            name={labels.normal}
             stroke="#60A5FA"
             dot={false}
             strokeWidth={2}
@@ -97,7 +112,7 @@ export function PriceChart({ history }: Props) {
           <Line
             type="monotone"
             dataKey="holofoil"
-            name="홀로포일"
+            name={labels.holofoil}
             stroke="#FBBF24"
             dot={false}
             strokeWidth={2}

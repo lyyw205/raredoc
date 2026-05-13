@@ -1,0 +1,331 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - link "PokeTrace" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e9]: PokeTrace
+        - navigation [ref=e10]:
+          - link "Why" [ref=e11] [cursor=pointer]:
+            - /url: /why
+          - link "For Developers" [ref=e12] [cursor=pointer]:
+            - /url: /developers
+          - link "Pricing" [ref=e13] [cursor=pointer]:
+            - /url: /pricing
+          - link "FAQ" [ref=e14] [cursor=pointer]:
+            - /url: /faq
+          - link "Catalog" [ref=e15] [cursor=pointer]:
+            - /url: /catalog
+          - link "Docs" [ref=e16] [cursor=pointer]:
+            - /url: /docs
+          - link "Blog" [ref=e17] [cursor=pointer]:
+            - /url: /blog
+          - link "Portfolio" [ref=e18] [cursor=pointer]:
+            - /url: /portfolio
+          - link "Status" [ref=e19] [cursor=pointer]:
+            - /url: https://status.poketrace.com/
+      - button "Select language" [ref=e22]:
+        - img [ref=e23]
+        - generic [ref=e26]: EN
+  - generic [ref=e27]:
+    - generic [ref=e29]:
+      - link "PokeTrace" [ref=e30] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e33]: PokeTrace
+      - button [ref=e34]:
+        - img [ref=e35]
+    - main [ref=e36]:
+      - article [ref=e38]:
+        - generic [ref=e39]:
+          - generic [ref=e40]: Sold comps
+          - heading "Pokemon Card Listings API" [level=1] [ref=e41]
+          - paragraph [ref=e42]: Use this Scale endpoint when aggregate prices are not enough and the user needs the sold listings behind a valuation.
+        - region "Endpoint" [ref=e43]:
+          - heading "Endpoint" [level=2] [ref=e45]
+          - generic [ref=e46]:
+            - paragraph [ref=e47]: GET /cards/:id/listings
+            - code [ref=e49]: "curl -H \"X-API-Key: YOUR_KEY\" \\ \"https://api.poketrace.com/v1/cards/019bff77.../listings?grader=PSA&grade=10&sort=price_desc\""
+            - paragraph [ref=e50]: Returns eBay sold comps with title, source item ID, price, sold date, grader, grade, condition, URL, anomaly metadata, and pagination.
+            - list [ref=e51]:
+              - listitem [ref=e52]: Listings require the Scale plan.
+              - listitem [ref=e53]: The endpoint only returns eBay sold listings.
+              - listitem [ref=e54]: The listings burst limit is 30 requests per 30 seconds per user/account.
+        - region "Key facts" [ref=e55]:
+          - generic [ref=e56]:
+            - generic [ref=e57]: Source
+            - generic [ref=e58]: eBay sold
+            - paragraph [ref=e59]: Completed-sale evidence behind aggregate values.
+          - generic [ref=e60]:
+            - generic [ref=e61]: Limit
+            - generic [ref=e62]: 1-20
+            - paragraph [ref=e63]: Default 20; cursor pagination for deeper comp review.
+          - generic [ref=e64]:
+            - generic [ref=e65]: Plan
+            - generic [ref=e66]: Scale
+            - paragraph [ref=e67]: Rate limited separately at 30 requests per 30 seconds per account.
+        - region "Parameters" [ref=e68]:
+          - heading "Parameters" [level=2] [ref=e69]
+          - generic [ref=e70]:
+            - generic [ref=e71]:
+              - heading "Path Parameters" [level=3] [ref=e73]
+              - generic [ref=e75]:
+                - generic [ref=e76]:
+                  - generic [ref=e77]: id
+                  - generic [ref=e78]: string
+                - generic [ref=e79]:
+                  - paragraph [ref=e80]: PokeTrace card ID from /cards or /cards/:id.
+                  - paragraph [ref=e81]: 019bff77-befa-771d-bab0-f5909f0a78c9
+            - generic [ref=e82]:
+              - heading "Query Parameters" [level=3] [ref=e84]
+              - generic [ref=e85]:
+                - generic [ref=e86]:
+                  - generic [ref=e87]:
+                    - generic [ref=e88]: limit
+                    - generic [ref=e89]: number
+                  - generic [ref=e90]:
+                    - paragraph [ref=e91]: Listings per page. Max 20, default 20.
+                    - paragraph [ref=e92]: "20"
+                - generic [ref=e93]:
+                  - generic [ref=e94]:
+                    - generic [ref=e95]: cursor
+                    - generic [ref=e96]: string
+                  - generic [ref=e97]:
+                    - paragraph [ref=e98]: Pagination cursor from pagination.nextCursor.
+                    - paragraph [ref=e99]: MjA=
+                - generic [ref=e100]:
+                  - generic [ref=e101]:
+                    - generic [ref=e102]: grader
+                    - generic [ref=e103]: string
+                  - generic [ref=e104]:
+                    - paragraph [ref=e105]: Filter by grading company. The API normalizes this to uppercase.
+                    - paragraph [ref=e106]: PSA
+                - generic [ref=e107]:
+                  - generic [ref=e108]:
+                    - generic [ref=e109]: grade
+                    - generic [ref=e110]: string
+                  - generic [ref=e111]:
+                    - paragraph [ref=e112]: Filter by numeric grade stored on the listing.
+                    - paragraph [ref=e113]: "10"
+                - generic [ref=e114]:
+                  - generic [ref=e115]:
+                    - generic [ref=e116]: min_price / max_price
+                    - generic [ref=e117]: number
+                  - generic [ref=e118]:
+                    - paragraph [ref=e119]: Positive price bounds for comp review.
+                    - paragraph [ref=e120]: 1000 / 10000
+                - generic [ref=e121]:
+                  - generic [ref=e122]:
+                    - generic [ref=e123]: sort
+                    - generic [ref=e124]: enum
+                  - generic [ref=e125]:
+                    - paragraph [ref=e126]: sold_at_desc, sold_at_asc, price_desc, or price_asc.
+                    - paragraph [ref=e127]: price_desc
+        - region "Response Fields" [ref=e128]:
+          - heading "Response Fields" [level=2] [ref=e129]
+          - generic [ref=e130]:
+            - generic [ref=e131]:
+              - generic [ref=e132]:
+                - heading "Listing Fields" [level=3] [ref=e133]
+                - paragraph [ref=e134]: Fields returned for each sold eBay listing.
+              - generic [ref=e135]:
+                - generic [ref=e136]:
+                  - generic [ref=e137]:
+                    - generic [ref=e138]: id
+                    - generic [ref=e139]: number
+                  - generic [ref=e140]:
+                    - paragraph [ref=e141]: Internal listing row ID.
+                    - paragraph [ref=e142]: "421012"
+                - generic [ref=e143]:
+                  - generic [ref=e144]:
+                    - generic [ref=e145]: sourceItemId
+                    - generic [ref=e146]: string
+                  - generic [ref=e147]:
+                    - paragraph [ref=e148]: Marketplace item identifier.
+                    - paragraph [ref=e149]: "123456789012"
+                - generic [ref=e150]:
+                  - generic [ref=e151]:
+                    - generic [ref=e152]: listingType
+                    - generic [ref=e153]: string | null
+                  - generic [ref=e154]:
+                    - paragraph [ref=e155]: Listing classification when available.
+                    - paragraph [ref=e156]: auction
+                - generic [ref=e157]:
+                  - generic [ref=e158]:
+                    - generic [ref=e159]: title
+                    - generic [ref=e160]: string
+                  - generic [ref=e161]:
+                    - paragraph [ref=e162]: Original listing title used for comp inspection.
+                    - paragraph [ref=e163]: Pokemon Base Set Charizard PSA 10
+                - generic [ref=e164]:
+                  - generic [ref=e165]:
+                    - generic [ref=e166]: price / currency
+                    - generic [ref=e167]: number / string
+                  - generic [ref=e168]:
+                    - paragraph [ref=e169]: Sold price and currency for the comp.
+                    - paragraph [ref=e170]: 5200 USD
+                - generic [ref=e171]:
+                  - generic [ref=e172]:
+                    - generic [ref=e173]: listingUrl
+                    - generic [ref=e174]: string | null
+                  - generic [ref=e175]:
+                    - paragraph [ref=e176]: URL back to the marketplace listing when available.
+                    - paragraph [ref=e177]: https://www.ebay.com/itm/123456789012
+            - generic [ref=e178]:
+              - generic [ref=e179]:
+                - heading "Comp Metadata" [level=3] [ref=e180]
+                - paragraph [ref=e181]: Fields used to explain why a listing matched a raw or graded tier.
+              - generic [ref=e182]:
+                - generic [ref=e183]:
+                  - generic [ref=e184]:
+                    - generic [ref=e185]: condition
+                    - generic [ref=e186]: string | null
+                  - generic [ref=e187]:
+                    - paragraph [ref=e188]: Raw card condition inferred or stored for the listing.
+                    - paragraph [ref=e189]: NEAR_MINT
+                - generic [ref=e190]:
+                  - generic [ref=e191]:
+                    - generic [ref=e192]: grader
+                    - generic [ref=e193]: string | null
+                  - generic [ref=e194]:
+                    - paragraph [ref=e195]: Detected grading company for slab comps.
+                    - paragraph [ref=e196]: PSA
+                - generic [ref=e197]:
+                  - generic [ref=e198]:
+                    - generic [ref=e199]: grade
+                    - generic [ref=e200]: string | null
+                  - generic [ref=e201]:
+                    - paragraph [ref=e202]: Detected numeric grade for slab comps.
+                    - paragraph [ref=e203]: "10"
+                - generic [ref=e204]:
+                  - generic [ref=e205]:
+                    - generic [ref=e206]: soldAt
+                    - generic [ref=e207]: string | null
+                  - generic [ref=e208]:
+                    - paragraph [ref=e209]: ISO timestamp for completed sale.
+                    - paragraph [ref=e210]: 2026-01-27T12:00:00.000Z
+                - generic [ref=e211]:
+                  - generic [ref=e212]:
+                    - generic [ref=e213]: anomalyFlag
+                    - generic [ref=e214]: boolean | null
+                  - generic [ref=e215]:
+                    - paragraph [ref=e216]: Whether the listing was flagged as suspicious or outlier-like.
+                    - paragraph [ref=e217]: "false"
+                - generic [ref=e218]:
+                  - generic [ref=e219]:
+                    - generic [ref=e220]: anomalyReason
+                    - generic [ref=e221]: string | null
+                  - generic [ref=e222]:
+                    - paragraph [ref=e223]: Reason attached to anomalyFlag when present.
+                    - paragraph [ref=e224]: price_outlier
+        - region "Examples" [ref=e225]:
+          - heading "Examples" [level=2] [ref=e226]
+          - generic [ref=e227]:
+            - generic [ref=e228]:
+              - generic [ref=e229]:
+                - heading "Review high-value PSA 10 comps" [level=3] [ref=e230]
+                - generic [ref=e231]: javascript
+              - code [ref=e233]: "const params = new URLSearchParams({ grader: \"PSA\", grade: \"10\", min_price: \"1000\", sort: \"price_desc\", }) const response = await fetch( `https://api.poketrace.com/v1/cards/019bff77.../listings?${params}`, { headers: { \"X-API-Key\": process.env.POKETRACE_API_KEY } }, ) const { data } = await response.json()"
+            - generic [ref=e234]:
+              - generic [ref=e235]:
+                - heading "Listing response shape" [level=3] [ref=e236]
+                - generic [ref=e237]: json
+              - code [ref=e239]: "{ \"data\": [{ \"sourceItemId\": \"123456789012\", \"title\": \"Pokemon Base Set Charizard PSA 10\", \"price\": 5200, \"currency\": \"USD\", \"listingUrl\": \"https://www.ebay.com/itm/123456789012\", \"grader\": \"PSA\", \"grade\": \"10\", \"soldAt\": \"2026-01-27T12:00:00.000Z\", \"anomalyFlag\": false, \"anomalyReason\": null }], \"pagination\": { \"hasMore\": true, \"nextCursor\": \"MjA=\", \"count\": 20 } }"
+        - generic [ref=e240]:
+          - generic [ref=e241]:
+            - heading "When to Use It" [level=2] [ref=e242]
+            - paragraph [ref=e244]: Use listings for comp evidence, not for normal search. Load /cards first, then fetch /listings only when the UI needs to show why a price is believable.
+          - generic [ref=e245]:
+            - heading "Audit Trail" [level=2] [ref=e246]
+            - paragraph [ref=e248]: Show title, soldAt, price, grader, grade, listingUrl, and anomalyReason together. That gives users enough context to accept or reject a comp.
+          - generic [ref=e249]:
+            - heading "Filtering Strategy" [level=2] [ref=e250]
+            - paragraph [ref=e252]: For slab workflows, pass grader and grade instead of parsing titles client-side. For raw workflows, use price bounds and sort order to review extreme comps.
+        - region "Frequently Asked Questions" [ref=e253]:
+          - heading "Frequently Asked Questions" [level=2] [ref=e254]
+          - generic [ref=e255]:
+            - generic [ref=e256]:
+              - heading "Can I show sold eBay Pokemon card comps in my app?" [level=3] [ref=e257]
+              - paragraph [ref=e258]: Yes, on Scale. The endpoint returns individual sold listings with prices, sold timestamps, grader fields, URLs, and anomaly metadata.
+            - generic [ref=e259]:
+              - heading "Should I call listings for every search result?" [level=3] [ref=e260]
+              - paragraph [ref=e261]: No. Use /cards for search and current pricing. Use /listings when a user opens a card, audits a valuation, or needs high-confidence comp evidence.
+        - region "Related Docs" [ref=e262]:
+          - heading "Related Docs" [level=2] [ref=e263]
+          - generic [ref=e264]:
+            - link "Cards API Start with aggregated current prices and available tiers." [ref=e265] [cursor=pointer]:
+              - /url: /docs/cards
+              - generic [ref=e266]:
+                - text: Cards API
+                - img [ref=e267]
+              - paragraph [ref=e269]: Start with aggregated current prices and available tiers.
+            - link "Price History Chart a selected tier across time." [ref=e270] [cursor=pointer]:
+              - /url: /docs/price-history
+              - generic [ref=e271]:
+                - text: Price History
+                - img [ref=e272]
+              - paragraph [ref=e274]: Chart a selected tier across time.
+            - link "Graded Prices Use grader and grade filters correctly." [ref=e275] [cursor=pointer]:
+              - /url: /docs/graded-prices
+              - generic [ref=e276]:
+                - text: Graded Prices
+                - img [ref=e277]
+              - paragraph [ref=e279]: Use grader and grade filters correctly.
+  - contentinfo [ref=e280]:
+    - generic [ref=e281]:
+      - generic [ref=e282]:
+        - generic [ref=e283]:
+          - generic [ref=e284]:
+            - generic [ref=e285]: "0"
+            - generic [ref=e286]: PokeTrace
+          - paragraph [ref=e287]: Real-time Pokemon card price tracker API. Track Charizard, Pikachu, and 60,000+ Pokemon TCG cards with PSA, BGS, CGC graded pricing from trusted global marketplaces.
+        - generic [ref=e288]:
+          - navigation "Product navigation" [ref=e289]:
+            - heading "Pokemon Card API" [level=4] [ref=e290]
+            - list [ref=e291]:
+              - listitem [ref=e292]:
+                - link "Features" [ref=e293] [cursor=pointer]:
+                  - /url: /#why
+              - listitem [ref=e294]:
+                - link "API" [ref=e295] [cursor=pointer]:
+                  - /url: /#api
+              - listitem [ref=e296]:
+                - link "API Pricing" [ref=e297] [cursor=pointer]:
+                  - /url: /pricing
+              - listitem [ref=e298]:
+                - link "Pokemon Price FAQ" [ref=e299] [cursor=pointer]:
+                  - /url: /faq
+          - navigation "Resources navigation" [ref=e300]:
+            - heading "Resources" [level=4] [ref=e301]
+            - list [ref=e302]:
+              - listitem [ref=e303]:
+                - link "Blog" [ref=e304] [cursor=pointer]:
+                  - /url: /blog
+              - listitem [ref=e305]:
+                - link "Documentation" [ref=e306] [cursor=pointer]:
+                  - /url: /docs
+              - listitem [ref=e307]:
+                - link "Card Catalog" [ref=e308] [cursor=pointer]:
+                  - /url: /catalog
+              - listitem [ref=e309]:
+                - link "Value Checker" [ref=e310] [cursor=pointer]:
+                  - /url: /value-checker
+              - listitem [ref=e311]:
+                - link "Status" [ref=e312] [cursor=pointer]:
+                  - /url: https://status.poketrace.com/
+          - navigation "Legal navigation" [ref=e313]:
+            - heading "Legal" [level=4] [ref=e314]
+            - list [ref=e315]:
+              - listitem [ref=e316]:
+                - link "Privacy Policy" [ref=e317] [cursor=pointer]:
+                  - /url: /privacy
+              - listitem [ref=e318]:
+                - link "Terms of Service" [ref=e319] [cursor=pointer]:
+                  - /url: /terms
+      - paragraph [ref=e321]: Pokemon card prices • Pokemon TCG API • PSA graded cards • BGS Pokemon • CGC grading • Charizard value • Pikachu card prices • Base Set Pokemon • First Edition prices • Shadowless cards • Pokemon card tracker • Vintage Pokemon values • Pokemon card investing • Japanese Pokemon cards • Alt art Pokemon • Rainbow rare prices • Pokemon price history
+      - generic [ref=e322]:
+        - generic [ref=e323]:
+          - paragraph [ref=e324]: © 2026 PokeTrace — Pokemon Card Price Tracker API. All rights reserved.
+          - link "contact@poketrace.com" [ref=e325] [cursor=pointer]:
+            - /url: mailto:contact@poketrace.com
+        - paragraph [ref=e327]: Pokémon and all respective names are trademark & © of Nintendo 1996-2026. PokeTrace is an independent Pokemon card price tracking service not affiliated with Nintendo, The Pokémon Company, Creatures Inc., PSA, BGS, or CGC. All Pokémon card names and imagery are used solely for trading card identification and price tracking purposes.
+        - paragraph [ref=e329]: "Affiliate Disclosure: This website contains affiliate links to eBay and other retailers. We may receive a commission for purchases made through these links at no additional cost to you. This helps support our work in providing accurate Pokemon card pricing data."

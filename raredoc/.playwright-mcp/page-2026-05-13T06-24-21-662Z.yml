@@ -1,0 +1,326 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - link "PokeTrace" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e9]: PokeTrace
+        - navigation [ref=e10]:
+          - link "Why" [ref=e11] [cursor=pointer]:
+            - /url: /why
+          - link "For Developers" [ref=e12] [cursor=pointer]:
+            - /url: /developers
+          - link "Pricing" [ref=e13] [cursor=pointer]:
+            - /url: /pricing
+          - link "FAQ" [ref=e14] [cursor=pointer]:
+            - /url: /faq
+          - link "Catalog" [ref=e15] [cursor=pointer]:
+            - /url: /catalog
+          - link "Docs" [ref=e16] [cursor=pointer]:
+            - /url: /docs
+          - link "Blog" [ref=e17] [cursor=pointer]:
+            - /url: /blog
+          - link "Portfolio" [ref=e18] [cursor=pointer]:
+            - /url: /portfolio
+          - link "Status" [ref=e19] [cursor=pointer]:
+            - /url: https://status.poketrace.com/
+      - generic [ref=e20]:
+        - button "Select language" [ref=e22]:
+          - img [ref=e23]
+          - generic [ref=e26]: EN
+        - link "Sign In" [ref=e27] [cursor=pointer]:
+          - /url: /sign-in
+        - link "Get started with Pokemon Pricing API" [ref=e28] [cursor=pointer]:
+          - /url: /pricing
+          - text: Get Started
+  - generic [ref=e29]:
+    - generic [ref=e31]:
+      - link "PokeTrace" [ref=e32] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e35]: PokeTrace
+      - button [ref=e36]:
+        - img [ref=e37]
+    - main [ref=e38]:
+      - generic [ref=e40]:
+        - heading "Markets & Tiers" [level=1] [ref=e41]
+        - paragraph [ref=e42]: PokeTrace aggregates pricing from multiple markets and sources. Understanding the market structure, grading companies, and tier formats is essential for correctly interpreting price data and building accurate pricing displays.
+        - generic [ref=e43]:
+          - heading "Markets" [level=3] [ref=e44]
+          - paragraph [ref=e45]:
+            - text: ⚠️ Cards are
+            - strong [ref=e46]: separate per market
+            - text: — each card belongs to US OR EU, never both.
+          - generic [ref=e47]:
+            - generic [ref=e48]:
+              - text: US Market
+              - paragraph [ref=e49]:
+                - text: "Sources:"
+                - code [ref=e50]: ebay
+                - text: (graded + raw from sold listings) +
+                - code [ref=e51]: tcgplayer
+                - text: (raw conditions only)
+              - paragraph [ref=e52]:
+                - text: "Examples:"
+                - code [ref=e53]: prices.ebay.PSA_10
+                - text: ","
+                - code [ref=e54]: prices.ebay.NEAR_MINT
+                - text: ","
+                - code [ref=e55]: prices.tcgplayer.NEAR_MINT
+              - paragraph [ref=e56]:
+                - text: "Currency: USD. Includes"
+                - code [ref=e57]: variant
+                - text: data (Holofoil, Normal, etc.)
+              - paragraph [ref=e58]:
+                - text: If
+                - code [ref=e59]: approxSaleCount
+                - text: is
+                - code [ref=e60]: "true"
+                - text: ", that source uses an approximate sale count because sold-listing totals can change after the fact due to revoked, removed, or reclassified listings. Today this applies to"
+                - code [ref=e61]: ebay
+                - text: . Stable marketplace sources return
+                - code [ref=e62]: "approxSaleCount: false"
+                - text: .
+            - generic [ref=e63]:
+              - text: EU Market
+              - paragraph [ref=e64]: "Sources:"
+              - list [ref=e65]:
+                - listitem [ref=e66]:
+                  - code [ref=e67]: cardmarket
+                  - text: —
+                  - strong [ref=e68]: Price Trend
+                  - text: (verified sales average)
+                  - paragraph [ref=e69]: Single avg per card. No condition/grade/country breakdown. Most reliable baseline.
+                - listitem [ref=e70]:
+                  - code [ref=e71]: cardmarket_unsold
+                  - text: —
+                  - strong [ref=e72]: Active listings
+                  - text: (asking prices)
+                  - paragraph [ref=e73]: Has condition, graded tiers, country + language breakdown (language is nested under country), and rolling medians (median3d/7d/30d). May include inflated prices.
+              - paragraph [ref=e74]:
+                - text: "Examples:"
+                - code [ref=e75]: prices.cardmarket.AGGREGATED.avg
+                - text: ","
+                - code [ref=e76]: prices.cardmarket_unsold.PSA_10.country.DE.language.ALL
+              - paragraph [ref=e77]:
+                - text: "Currency: EUR."
+                - strong [ref=e78]: No variant data.
+        - generic [ref=e79]:
+          - heading "Rolling Medians" [level=3] [ref=e80]
+          - paragraph [ref=e81]: "Price data includes rolling medians calculated from individual listings (anomalies excluded):"
+          - generic [ref=e82]:
+            - generic [ref=e83]: median3d
+            - generic [ref=e84]: median7d
+            - generic [ref=e85]: median30d
+          - paragraph [ref=e86]: Medians are more robust against outliers than averages. Anomalous prices (<10% or >10x of 3-day median) are automatically excluded.
+        - generic [ref=e87]:
+          - heading "EU Country Breakdown" [level=3] [ref=e88]
+          - paragraph [ref=e89]: "EU cards include per-country pricing based on seller origin:"
+          - generic [ref=e90]:
+            - generic [ref=e91]: DE (Germany)
+            - generic [ref=e92]: FR (France)
+            - generic [ref=e93]: IT (Italy)
+            - generic [ref=e94]: ES (Spain)
+            - generic [ref=e95]: PL (Poland)
+            - generic [ref=e96]: BE (Belgium)
+        - generic [ref=e97]:
+          - heading "Card Variants (US Only)" [level=3] [ref=e98]
+          - paragraph [ref=e99]:
+            - text: US cards include variant from TCGPlayer SKU.
+            - strong [ref=e100]: EU cards do not have variant data.
+          - generic [ref=e101]:
+            - generic [ref=e102]: Normal
+            - generic [ref=e103]: Holofoil
+            - generic [ref=e104]: Reverse_Holofoil
+            - generic [ref=e105]: 1st Edition Holofoil
+            - generic [ref=e106]: Unlimited Holofoil
+        - paragraph [ref=e107]:
+          - text: "Grade format (US):"
+          - code [ref=e108]: COMPANY_GRADE
+          - text: (e.g., PSA_10, BGS_9_5). Half grades use underscore (9.5 → 9_5).
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - heading "Grading Companies & Grades" [level=3] [ref=e111]
+            - generic [ref=e112]:
+              - generic [ref=e113]:
+                - text: PSA
+                - generic [ref=e114]:
+                  - generic [ref=e115]: PSA_1
+                  - generic [ref=e116]: PSA_1_5
+                  - generic [ref=e117]: PSA_2
+                  - generic [ref=e118]: PSA_2_5
+                  - generic [ref=e119]: PSA_3
+                  - generic [ref=e120]: PSA_3_5
+                  - generic [ref=e121]: PSA_4
+                  - generic [ref=e122]: PSA_4_5
+                  - generic [ref=e123]: PSA_5
+                  - generic [ref=e124]: PSA_5_5
+                  - generic [ref=e125]: PSA_6
+                  - generic [ref=e126]: PSA_6_5
+                  - generic [ref=e127]: PSA_7
+                  - generic [ref=e128]: PSA_7_5
+                  - generic [ref=e129]: PSA_8
+                  - generic [ref=e130]: PSA_8_5
+                  - generic [ref=e131]: PSA_9
+                  - generic [ref=e132]: PSA_9_5
+                  - generic [ref=e133]: PSA_10
+              - generic [ref=e134]:
+                - text: BGS
+                - generic [ref=e135]:
+                  - generic [ref=e136]: BGS_1
+                  - generic [ref=e137]: BGS_1_5
+                  - generic [ref=e138]: BGS_2
+                  - generic [ref=e139]: BGS_2_5
+                  - generic [ref=e140]: BGS_3
+                  - generic [ref=e141]: BGS_3_5
+                  - generic [ref=e142]: BGS_4
+                  - generic [ref=e143]: BGS_4_5
+                  - generic [ref=e144]: BGS_5
+                  - generic [ref=e145]: BGS_5_5
+                  - generic [ref=e146]: BGS_6
+                  - generic [ref=e147]: BGS_6_5
+                  - generic [ref=e148]: BGS_7
+                  - generic [ref=e149]: BGS_7_5
+                  - generic [ref=e150]: BGS_8
+                  - generic [ref=e151]: BGS_8_5
+                  - generic [ref=e152]: BGS_9
+                  - generic [ref=e153]: BGS_9_5
+                  - generic [ref=e154]: BGS_10
+              - generic [ref=e155]:
+                - text: CGC
+                - generic [ref=e156]:
+                  - generic [ref=e157]: CGC_1
+                  - generic [ref=e158]: CGC_1_5
+                  - generic [ref=e159]: CGC_2
+                  - generic [ref=e160]: CGC_2_5
+                  - generic [ref=e161]: CGC_3
+                  - generic [ref=e162]: CGC_3_5
+                  - generic [ref=e163]: CGC_4
+                  - generic [ref=e164]: CGC_4_5
+                  - generic [ref=e165]: CGC_5
+                  - generic [ref=e166]: CGC_5_5
+                  - generic [ref=e167]: CGC_6
+                  - generic [ref=e168]: CGC_6_5
+                  - generic [ref=e169]: CGC_7
+                  - generic [ref=e170]: CGC_7_5
+                  - generic [ref=e171]: CGC_8
+                  - generic [ref=e172]: CGC_8_5
+                  - generic [ref=e173]: CGC_9
+                  - generic [ref=e174]: CGC_9_5
+                  - generic [ref=e175]: CGC_10
+              - generic [ref=e176]:
+                - text: SGC
+                - generic [ref=e177]:
+                  - generic [ref=e178]: SGC_1
+                  - generic [ref=e179]: SGC_1_5
+                  - generic [ref=e180]: SGC_2
+                  - generic [ref=e181]: SGC_3
+                  - generic [ref=e182]: SGC_4
+                  - generic [ref=e183]: SGC_5
+                  - generic [ref=e184]: SGC_6
+                  - generic [ref=e185]: SGC_7
+                  - generic [ref=e186]: SGC_7_5
+                  - generic [ref=e187]: SGC_8
+                  - generic [ref=e188]: SGC_8_5
+                  - generic [ref=e189]: SGC_9
+                  - generic [ref=e190]: SGC_9_5
+                  - generic [ref=e191]: SGC_10
+              - generic [ref=e192]:
+                - text: ACE
+                - generic [ref=e193]:
+                  - generic [ref=e194]: ACE_1
+                  - generic [ref=e195]: ACE_4
+                  - generic [ref=e196]: ACE_5
+                  - generic [ref=e197]: ACE_6
+                  - generic [ref=e198]: ACE_7
+                  - generic [ref=e199]: ACE_8
+                  - generic [ref=e200]: ACE_9
+                  - generic [ref=e201]: ACE_10
+              - generic [ref=e202]:
+                - text: TAG
+                - generic [ref=e203]:
+                  - generic [ref=e204]: TAG_1
+                  - generic [ref=e205]: TAG_1_5
+                  - generic [ref=e206]: TAG_2_5
+                  - generic [ref=e207]: TAG_3
+                  - generic [ref=e208]: TAG_3_5
+                  - generic [ref=e209]: TAG_4
+                  - generic [ref=e210]: TAG_4_5
+                  - generic [ref=e211]: TAG_5
+                  - generic [ref=e212]: TAG_5_5
+                  - generic [ref=e213]: TAG_6
+                  - generic [ref=e214]: TAG_6_5
+                  - generic [ref=e215]: TAG_7
+                  - generic [ref=e216]: TAG_7_5
+                  - generic [ref=e217]: TAG_8
+                  - generic [ref=e218]: TAG_8_5
+                  - generic [ref=e219]: TAG_9
+                  - generic [ref=e220]: TAG_10
+          - generic [ref=e221]:
+            - heading "Ungraded / Raw" [level=3] [ref=e222]
+            - generic [ref=e223]:
+              - generic [ref=e224]: MINT
+              - generic [ref=e225]: NEAR_MINT
+              - generic [ref=e226]: LIGHTLY_PLAYED
+              - generic [ref=e227]: MODERATELY_PLAYED
+              - generic [ref=e228]: HEAVILY_PLAYED
+              - generic [ref=e229]: DAMAGED
+  - contentinfo [ref=e230]:
+    - generic [ref=e231]:
+      - generic [ref=e232]:
+        - generic [ref=e233]:
+          - generic [ref=e234]:
+            - generic [ref=e235]: "0"
+            - generic [ref=e236]: PokeTrace
+          - paragraph [ref=e237]: Real-time Pokemon card price tracker API. Track Charizard, Pikachu, and 60,000+ Pokemon TCG cards with PSA, BGS, CGC graded pricing from trusted global marketplaces.
+        - generic [ref=e238]:
+          - navigation "Product navigation" [ref=e239]:
+            - heading "Pokemon Card API" [level=4] [ref=e240]
+            - list [ref=e241]:
+              - listitem [ref=e242]:
+                - link "Features" [ref=e243] [cursor=pointer]:
+                  - /url: /#why
+              - listitem [ref=e244]:
+                - link "API" [ref=e245] [cursor=pointer]:
+                  - /url: /#api
+              - listitem [ref=e246]:
+                - link "API Pricing" [ref=e247] [cursor=pointer]:
+                  - /url: /pricing
+              - listitem [ref=e248]:
+                - link "Pokemon Price FAQ" [ref=e249] [cursor=pointer]:
+                  - /url: /faq
+          - navigation "Resources navigation" [ref=e250]:
+            - heading "Resources" [level=4] [ref=e251]
+            - list [ref=e252]:
+              - listitem [ref=e253]:
+                - link "Blog" [ref=e254] [cursor=pointer]:
+                  - /url: /blog
+              - listitem [ref=e255]:
+                - link "Documentation" [ref=e256] [cursor=pointer]:
+                  - /url: /docs
+              - listitem [ref=e257]:
+                - link "Card Catalog" [ref=e258] [cursor=pointer]:
+                  - /url: /catalog
+              - listitem [ref=e259]:
+                - link "Value Checker" [ref=e260] [cursor=pointer]:
+                  - /url: /value-checker
+              - listitem [ref=e261]:
+                - link "Status" [ref=e262] [cursor=pointer]:
+                  - /url: https://status.poketrace.com/
+          - navigation "Legal navigation" [ref=e263]:
+            - heading "Legal" [level=4] [ref=e264]
+            - list [ref=e265]:
+              - listitem [ref=e266]:
+                - link "Privacy Policy" [ref=e267] [cursor=pointer]:
+                  - /url: /privacy
+              - listitem [ref=e268]:
+                - link "Terms of Service" [ref=e269] [cursor=pointer]:
+                  - /url: /terms
+      - paragraph [ref=e271]: Pokemon card prices • Pokemon TCG API • PSA graded cards • BGS Pokemon • CGC grading • Charizard value • Pikachu card prices • Base Set Pokemon • First Edition prices • Shadowless cards • Pokemon card tracker • Vintage Pokemon values • Pokemon card investing • Japanese Pokemon cards • Alt art Pokemon • Rainbow rare prices • Pokemon price history
+      - generic [ref=e272]:
+        - generic [ref=e273]:
+          - paragraph [ref=e274]: © 2026 PokeTrace — Pokemon Card Price Tracker API. All rights reserved.
+          - link "contact@poketrace.com" [ref=e275] [cursor=pointer]:
+            - /url: mailto:contact@poketrace.com
+        - paragraph [ref=e277]: Pokémon and all respective names are trademark & © of Nintendo 1996-2026. PokeTrace is an independent Pokemon card price tracking service not affiliated with Nintendo, The Pokémon Company, Creatures Inc., PSA, BGS, or CGC. All Pokémon card names and imagery are used solely for trading card identification and price tracking purposes.
+        - paragraph [ref=e279]: "Affiliate Disclosure: This website contains affiliate links to eBay and other retailers. We may receive a commission for purchases made through these links at no additional cost to you. This helps support our work in providing accurate Pokemon card pricing data."
+  - alert [ref=e280]

@@ -1,0 +1,1403 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - link "게시판 목록 바로가기" [ref=e2] [cursor=pointer]:
+      - /url: "#cafe-menu"
+    - link "본문 바로가기" [ref=e3] [cursor=pointer]:
+      - /url: "#main-area"
+    - link "웹 접근성이 좋은 모바일 웹에서 사용하겠습니까?" [ref=e4] [cursor=pointer]:
+      - /url: https://m.cafe.naver.com/pokemontcg
+  - heading "포켓몬TCG커뮤니티" [level=1] [ref=e5]
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - link "NAVER" [ref=e9] [cursor=pointer]:
+          - /url: http://www.naver.com
+          - img "NAVER" [ref=e10]
+        - generic [ref=e11]:
+          - paragraph [ref=e12]:
+            - link "카페홈" [ref=e13] [cursor=pointer]:
+              - /url: https://section.cafe.naver.com
+          - link "이웃" [ref=e15] [cursor=pointer]:
+            - /url: https://cafe.naver.com/ca-fe/home/town
+          - generic [ref=e16]:
+            - link "가입카페" [ref=e17] [cursor=pointer]:
+              - /url: "#"
+            - link "가입카페" [ref=e18] [cursor=pointer]:
+              - /url: "#"
+              - img "가입카페" [ref=e19]
+          - link "새글" [ref=e21] [cursor=pointer]:
+            - /url: "#"
+          - link "내소식" [ref=e23] [cursor=pointer]:
+            - /url: "#"
+          - link "채팅" [ref=e25] [cursor=pointer]:
+            - /url: "#"
+          - generic [ref=e26]:
+            - strong [ref=e27]: 사용자 링크
+            - list [ref=e28]:
+              - listitem [ref=e29]:
+                - link "로그인" [ref=e30] [cursor=pointer]:
+                  - /url: https://nid.naver.com/nidlogin.login
+                  - generic [ref=e33]: 로그인
+              - listitem [ref=e34]:
+                - link "서비스 더보기" [ref=e35] [cursor=pointer]:
+                  - /url: javascript:;
+                  - generic [ref=e36]: 서비스 더보기
+      - link "포켓몬TCG커뮤니티" [ref=e40] [cursor=pointer]:
+        - /url: /MyCafeIntro.nhn?clubid=19480246
+        - img "포켓몬TCG커뮤니티" [ref=e41]
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - generic [ref=e45]:
+            - list [ref=e46]:
+              - listitem [ref=e47] [cursor=pointer]:
+                - button "카페정보" [disabled] [ref=e48]
+              - listitem [ref=e49] [cursor=pointer]:
+                - button "나의활동" [ref=e50]
+            - generic [ref=e51]:
+              - heading "카페정보" [level=4] [ref=e52]
+              - list [ref=e54]:
+                - listitem [ref=e55]:
+                  - link "카페아이콘" [ref=e56] [cursor=pointer]:
+                    - /url: /MyCafeIntro.nhn?clubid=19480246
+                    - img "카페아이콘" [ref=e57]
+                - listitem [ref=e58]:
+                  - link "lk" [ref=e59] [cursor=pointer]:
+                    - /url: /f-e/cafes/19480246/members/elR-CtWat6eeN-0PWgF8MCmO04CWa6olLaeugUHrnFg
+                    - generic [ref=e61]: lk
+                  - emphasis [ref=e62]: 매니저
+                  - link "2009.10.29. 개설" [ref=e64] [cursor=pointer]:
+                    - /url: "#"
+                  - link "카페소개" [ref=e66] [cursor=pointer]:
+                    - /url: "#"
+              - list [ref=e68]:
+                - listitem [ref=e69]:
+                  - link "카페등급 나무2단계" [ref=e70] [cursor=pointer]:
+                    - /url: "#"
+                    - strong [ref=e71]: 카페등급
+                    - emphasis [ref=e73]: 나무2단계
+                - listitem [ref=e74] [cursor=pointer]:
+                  - strong [ref=e75]: 카페멤버수
+                  - link "멤버수 65,206 비공개" [ref=e76]:
+                    - /url: "#"
+                    - img "멤버수" [ref=e77]
+                    - emphasis [ref=e78]:
+                      - text: 65,206
+                      - generic [ref=e79]: 비공개
+                  - link "닫기":
+                    - /url: "#"
+                    - generic [ref=e80]: 닫기
+                  - link "초대" [ref=e81]:
+                    - /url: "#"
+            - link "카페 가입하기" [ref=e83] [cursor=pointer]:
+              - /url: "#"
+            - list [ref=e85]:
+              - listitem [ref=e86]:
+                - link "카페 채팅" [ref=e87] [cursor=pointer]:
+                  - /url: "#"
+          - generic [ref=e89]:
+            - textbox "카페글 검색어 입력" [ref=e90]
+            - button "검색" [ref=e91] [cursor=pointer]
+          - generic [ref=e93]:
+            - list [ref=e94]:
+              - listitem [ref=e95]:
+                - link "전체글보기" [ref=e96] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.boardtype=L
+                - generic [ref=e97]: 322,322
+              - listitem [ref=e98]:
+                - link "인기글" [ref=e99] [cursor=pointer]:
+                  - /url: /f-e/cafes/19480246/popular
+                - img "새 게시글" [ref=e100]
+            - heading "Cafe" [level=3] [ref=e102]:
+              - generic "Cafe" [ref=e103]
+            - list [ref=e104]:
+              - listitem [ref=e105]:
+                - link "커뮤니티 공지사항" [ref=e106] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=1&search.boardtype=L
+              - listitem [ref=e107]:
+                - link "필독 공지사항" [ref=e108] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=164&search.boardtype=L
+              - listitem [ref=e109]:
+                - link "등업 게시판" [ref=e110] [cursor=pointer]:
+                  - /url: /LevelUpApplyList.nhn?search.clubid=19480246
+                - img "새 게시글" [ref=e111]
+              - listitem [ref=e112]:
+                - link "카페 건의 게시판" [ref=e113] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=63&search.boardtype=L
+              - listitem [ref=e114]:
+                - link "카페 보유 이벤트 상품" [ref=e115] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=181&search.boardtype=L
+            - heading "Information" [level=3] [ref=e117]:
+              - generic "Information" [ref=e118]
+            - list [ref=e119]:
+              - listitem [ref=e120]:
+                - link "새소식 & 포케카신문" [ref=e121] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=11&search.boardtype=L
+              - listitem [ref=e122]:
+                - link "매장 소식 & 정보" [ref=e123] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=151&search.boardtype=L
+                - img "새 게시글" [ref=e124]
+            - heading "Tournament" [level=3] [ref=e126]:
+              - generic "Tournament" [ref=e127]
+            - list [ref=e128]:
+              - listitem [ref=e129]:
+                - link "대전상대 구하기" [ref=e130] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=202&search.boardtype=L
+                - img "새 게시글" [ref=e131]
+              - listitem [ref=e132]:
+                - link "실드전 게시판" [ref=e133] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=160&search.boardtype=L
+              - listitem [ref=e134]:
+                - link "대회/모임 공지 게시판" [ref=e135] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=42&search.boardtype=L
+                - img "새 게시글" [ref=e136]
+              - listitem [ref=e137]:
+                - link "대회/이벤트 후기" [ref=e138] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=35&search.boardtype=L
+            - heading "User Tornaments" [level=3] [ref=e140]:
+              - generic "User Tornaments" [ref=e141]
+            - list [ref=e142]:
+              - listitem [ref=e143]:
+                - link "★ 랭킹전 게시판" [ref=e144] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=137&search.boardtype=L
+              - listitem [ref=e145]:
+                - link "ECG 리그 게시판" [ref=e146] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=196&search.boardtype=L
+              - listitem [ref=e147]:
+                - link "KCG PTCL 리그 게시판" [ref=e148] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=193&search.boardtype=L
+              - listitem [ref=e149]:
+                - link "시아쨩주니어리그" [ref=e150] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=195&search.boardtype=L
+            - heading "Closed Tornaments" [level=3] [ref=e152]:
+              - generic "Closed Tornaments" [ref=e153]
+            - heading "Mini League" [level=3] [ref=e155]:
+              - generic "Mini League" [ref=e156]
+            - list [ref=e157]:
+              - listitem [ref=e158]:
+                - link "초보자 강습 및 공지" [ref=e159] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=119&search.boardtype=L
+              - listitem [ref=e160]:
+                - link "우승 덱 리스트" [ref=e161] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=158&search.boardtype=L
+              - listitem [ref=e162]:
+                - link "미니리그 관련 질문" [ref=e163] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=154&search.boardtype=L
+            - heading "Community" [level=3] [ref=e165]:
+              - generic "Community" [ref=e166]
+            - list [ref=e167]:
+              - listitem [ref=e168]:
+                - link "새 소식 게시판" [ref=e169] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=67&search.boardtype=L
+              - listitem [ref=e170]:
+                - link "발매 정보 게시판(회원 전용)" [ref=e171] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=186&search.boardtype=L
+                - img "새 게시글" [ref=e172]
+              - listitem [ref=e173]:
+                - link "자유 게시판" [ref=e174] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=8&search.boardtype=L
+                - img "새 게시글" [ref=e175]
+              - listitem [ref=e176]:
+                - link "PTCGL 게시판" [ref=e177] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=116&search.boardtype=L
+              - listitem [ref=e178]:
+                - link "포케카 포켓 게시판" [ref=e179] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=199&search.boardtype=L
+              - listitem [ref=e180]:
+                - link "질문 게시판" [ref=e181] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=10&search.boardtype=L
+                - img "새 게시글" [ref=e182]
+              - listitem [ref=e183]:
+                - link "가짜 카드 질문 게시판" [ref=e184] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=174&search.boardtype=L
+                - img "새 게시글" [ref=e185]
+              - listitem [ref=e186]:
+                - link "카드 자랑 게시판" [ref=e187] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=155&search.boardtype=L
+                - img "새 게시글" [ref=e188]
+              - listitem [ref=e189]:
+                - link "영상 게시판" [ref=e190] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=98&search.boardtype=L
+              - listitem [ref=e191]:
+                - link "사진 게시판" [ref=e192] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=18&search.boardtype=I
+              - listitem [ref=e193]:
+                - link "성사모" [ref=e194] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=136&search.boardtype=L
+            - heading "Deck" [level=3] [ref=e196]:
+              - generic "Deck" [ref=e197]
+            - list [ref=e198]:
+              - listitem [ref=e199]:
+                - link "일반 덱 게시판" [ref=e200] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=22&search.boardtype=L
+              - listitem [ref=e201]:
+                - link "추천 덱 게시판" [ref=e202] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=115&search.boardtype=L
+              - listitem [ref=e203]:
+                - link "덱 평가 게시판" [ref=e204] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=120&search.boardtype=L
+                - img "새 게시글" [ref=e205]
+            - heading "Column & Tips" [level=3] [ref=e207]:
+              - generic "Column & Tips" [ref=e208]
+            - list [ref=e209]:
+              - listitem [ref=e210]:
+                - link "컬럼 게시판" [ref=e211] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=37&search.boardtype=L
+              - listitem [ref=e212]:
+                - link "팁 게시판" [ref=e213] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=38&search.boardtype=L
+                - img "새 게시글" [ref=e214]
+              - listitem [ref=e215]:
+                - link "카드 리스트" [ref=e216] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=60&search.boardtype=L
+              - listitem [ref=e217]:
+                - link "인터뷰" [ref=e218] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=167&search.boardtype=L
+              - listitem [ref=e219]:
+                - link "환경/카드 분석" [ref=e220] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=168&search.boardtype=L
+            - heading "Event" [level=3] [ref=e222]:
+              - generic "Event" [ref=e223]
+            - list [ref=e224]:
+              - listitem [ref=e225]:
+                - link "카페 이벤트 게시판" [ref=e226] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=179&search.boardtype=L
+              - listitem [ref=e227]:
+                - link "나눔 & 이벤트" [ref=e228] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=170&search.boardtype=L
+                - img "새 게시글" [ref=e229]
+            - heading "Trade" [level=3] [ref=e231]:
+              - generic "Trade" [ref=e232]
+            - list [ref=e233]:
+              - listitem [ref=e234]:
+                - link "싱글 카드 트레이드" [ref=e235] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=24&search.boardtype=L
+                - img "새 게시글" [ref=e236]
+              - listitem [ref=e237]:
+                - link "덱 트레이드" [ref=e238] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=189&search.boardtype=L
+                - img "새 게시글" [ref=e239]
+              - listitem [ref=e240]:
+                - link "등급 카드 트레이드" [ref=e241] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=187&search.boardtype=L
+                - img "새 게시글" [ref=e242]
+              - listitem [ref=e243]:
+                - link "미개봉 제품/카드용품 트레이드" [ref=e244] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=188&search.boardtype=L
+                - img "새 게시글" [ref=e245]
+              - listitem [ref=e246]:
+                - link "블랙리스트, 사기 정보" [ref=e247] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=172&search.boardtype=L
+              - listitem [ref=e248]:
+                - link "사기 관련 정보" [ref=e249] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=194&search.boardtype=L
+              - listitem [ref=e250]:
+                - link "트레이드 만남의 광장" [ref=e251] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=169&search.boardtype=L
+              - listitem [ref=e252]:
+                - link "트레이드 후기 게시판" [ref=e253] [cursor=pointer]:
+                  - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=191&search.boardtype=L
+            - heading "WebLink" [level=3] [ref=e255]:
+              - generic "WebLink" [ref=e256]
+            - list [ref=e257]:
+              - listitem [ref=e258]:
+                - link "덱 제작기(포코 공홈)" [ref=e259] [cursor=pointer]:
+                  - /url: https://pokemoncard.co.kr/recipe
+              - listitem [ref=e260]:
+                - link "포켓몬코리아(포켓몬카드)" [ref=e261] [cursor=pointer]:
+                  - /url: https://pokemoncard.co.kr/
+              - listitem [ref=e262]:
+                - link "이벤트 정보" [ref=e263] [cursor=pointer]:
+                  - /url: https://pokemoncard.co.kr/news
+              - listitem [ref=e264]:
+                - link "한글판 카드 검색" [ref=e265] [cursor=pointer]:
+                  - /url: http://pokemonkorea.co.kr/cards
+              - listitem [ref=e266]:
+                - link "영문판 카드 검색" [ref=e267] [cursor=pointer]:
+                  - /url: https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/
+              - listitem [ref=e268]:
+                - link "Pokellector(카드정보)" [ref=e269] [cursor=pointer]:
+                  - /url: http://www.pokellector.com/
+              - listitem [ref=e270]:
+                - link "공식 홈페이지(일어)" [ref=e271] [cursor=pointer]:
+                  - /url: http://www.pokemon-card.com
+            - generic [ref=e272]:
+              - heading "Card List[XY]" [level=3] [ref=e273]:
+                - link "Card List[XY]" [ref=e274] [cursor=pointer]:
+                  - /url: "#"
+              - paragraph [ref=e275]:
+                - link "열기/닫기" [ref=e276] [cursor=pointer]:
+                  - /url: "#"
+                  - img "열기/닫기" [ref=e277]
+            - generic [ref=e278]:
+              - heading "Card List[BW]" [level=3] [ref=e279]:
+                - link "Card List[BW]" [ref=e280] [cursor=pointer]:
+                  - /url: "#"
+              - paragraph [ref=e281]:
+                - link "열기/닫기" [ref=e282] [cursor=pointer]:
+                  - /url: "#"
+                  - img "열기/닫기" [ref=e283]
+            - generic [ref=e284]:
+              - heading "Card List[SM]" [level=3] [ref=e285]:
+                - link "Card List[SM]" [ref=e286] [cursor=pointer]:
+                  - /url: "#"
+              - paragraph [ref=e287]:
+                - link "열기/닫기" [ref=e288] [cursor=pointer]:
+                  - /url: "#"
+                  - img "열기/닫기" [ref=e289]
+            - generic [ref=e290]:
+              - heading "사용하지 않는 게시판" [level=3] [ref=e291]:
+                - link "사용하지 않는 게시판" [ref=e292] [cursor=pointer]:
+                  - /url: "#"
+              - paragraph [ref=e293]:
+                - link "열기/닫기" [ref=e294] [cursor=pointer]:
+                  - /url: "#"
+                  - img "열기/닫기" [ref=e295]
+          - list [ref=e296]:
+            - listitem [ref=e297]:
+              - iframe [ref=e299]:
+                - generic [ref=f235e2]:
+                  - heading "경찰청 수사국" [level=1] [ref=f235e3]:
+                    - link "경찰청 수사국" [ref=f235e4] [cursor=pointer]:
+                      - /url: http://cyberbureau.police.go.kr
+                      - img "경찰청 수사국" [ref=f235e5]
+                  - group "필수입력항목":
+                    - paragraph [ref=f235e6]:
+                      - combobox [ref=f235e7]:
+                        - option "전화번호" [selected]
+                        - option "계좌번호"
+                        - option "email주소"
+                    - paragraph [ref=f235e8]:
+                      - textbox "내용" [ref=f235e9]
+                      - generic [ref=f235e10] [cursor=pointer]: 검색
+                  - paragraph [ref=f235e11]: 거래 전 반드시 상대방이 최근 3개월 내 3회 이상 '사이버사기'로 사이버범죄 신고시스템에 신고된 사실이 있는지 확인해 보세요.
+                  - paragraph [ref=f235e12]:
+                    - generic [ref=f235e13] [cursor=pointer]: 예방수칙
+                    - generic [ref=f235e14] [cursor=pointer]: 신고하기
+            - listitem [ref=e300]:
+              - generic [ref=e301]:
+                - heading "사기피해사례 조회" [level=4] [ref=e303]
+                - generic [ref=e304]:
+                  - generic:
+                    - textbox "전화 또는 계좌번호 입력" [ref=e305]: 전화, 계좌번호
+                    - link "검색" [ref=e306] [cursor=pointer]:
+                      - /url: "#"
+                  - paragraph [ref=e307]:
+                    - text: 더치트는 범죄피해 방지를 위해
+                    - text: 2006년부터 운영되고 있습니다.
+                  - paragraph [ref=e308]:
+                    - text: 최근 6개월내 1회 이상 등록된
+                    - text: 정보를 확인 할 수 있습니다.
+                  - generic [ref=e309]: "제공: 더치트(TheCheat.co.kr)"
+            - listitem [ref=e310]:
+              - generic [ref=e311]:
+                - heading "거래내역 조회하기" [level=4] [ref=e313]
+                - paragraph [ref=e315]:
+                  - link "네이버페이 거래내역" [ref=e316] [cursor=pointer]:
+                    - /url: https://order.pay.naver.com/home
+          - link "궁금한게 있을 땐 카페 스마트봇" [ref=e318] [cursor=pointer]:
+            - /url: https://talk.naver.com/ct/w4nd8o
+            - img "궁금한게 있을 땐 카페 스마트봇" [ref=e319]
+        - iframe [ref=e321]:
+          - generic [active] [ref=f236e1]:
+            - generic [ref=f236e5]:
+              - generic [ref=f236e6]:
+                - generic [ref=f236e7]:
+                  - term:
+                    - strong [ref=f236e8]: "[사전안내] 답글쓰기 기능 종료"
+                  - definition [ref=f236e9]:
+                    - paragraph [ref=f236e10]: 게시글에 답글쓰기 기능이 종료됩니다. (5/27)
+                    - paragraph [ref=f236e11]:
+                      - link "자세히보기 >" [ref=f236e13] [cursor=pointer]:
+                        - /url: https://cafe.naver.com/cafesupport/194700
+                    - paragraph
+                - link "닫기" [ref=f236e14] [cursor=pointer]:
+                  - /url: "#"
+                  - generic [ref=f236e15]: 닫기
+              - generic [ref=f236e18]:
+                - generic [ref=f236e19]: 카페 대문
+                - heading "전국 포켓몬카드 취급 / 미니리그 진행 매장 위치" [level=4] [ref=f236e20]
+                - link "[매장 위치 모음 공지 글 보기]" [ref=f236e24] [cursor=pointer]:
+                  - /url: https://cafe.naver.com/pokemontcg/195175
+                - generic [ref=f236e27]: 온라인 공인 스토어
+                - list [ref=f236e30]:
+                  - listitem [ref=f236e31]:
+                    - generic [ref=f236e34]: 포켓몬 카드 게임 공식 인증샵
+                  - listitem [ref=f236e35]:
+                    - list [ref=f236e36]:
+                      - listitem [ref=f236e37]:
+                        - text: "- 11번가"
+                        - link "(PC)" [ref=f236e38] [cursor=pointer]:
+                          - /url: https://shop.11st.co.kr/stores/pokemontcg
+                        - text: /
+                        - link "(모바일)" [ref=f236e39] [cursor=pointer]:
+                          - /url: https://shop.11st.co.kr/m/pokemontcg
+                      - listitem [ref=f236e40]:
+                        - text: "- 네이버 스마트 스토어"
+                        - link "(PC)" [ref=f236e41] [cursor=pointer]:
+                          - /url: https://smartstore.naver.com/pokemontcg
+                        - text: /
+                        - link "(모바일)" [ref=f236e42] [cursor=pointer]:
+                          - /url: https://m.smartstore.naver.com/pokemontcg
+                - generic [ref=f236e44]: "[If foreigner need help or information about Korean Pokemon card game, please send mail to kasumielf@naver.com ]"
+              - generic [ref=f236e46]:
+                - generic [ref=f236e47]:
+                  - generic [ref=f236e49]:
+                    - generic [ref=f236e51]:
+                      - heading "커뮤니티 공지사항" [level=3] [ref=f236e52]:
+                        - link "커뮤니티 공지사항" [ref=f236e53] [cursor=pointer]:
+                          - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=1&search.boardtype=L
+                      - link "더보기" [ref=f236e55] [cursor=pointer]:
+                        - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=1&search.boardtype=L
+                    - table "게시물 목록" [ref=f236e56]:
+                      - caption:
+                        - generic [ref=f236e57]: 게시물 목록
+                      - rowgroup [ref=f236e61]:
+                        - row "필독 포켓몬스터 TCG 중요 팁 모음(2024-07-08) [3] 3.1만" [ref=f236e62]:
+                          - cell "필독 포켓몬스터 TCG 중요 팁 모음(2024-07-08) [3]" [ref=f236e63]:
+                            - strong [ref=f236e65]: 필독
+                            - generic [ref=f236e67]:
+                              - link "포켓몬스터 TCG 중요 팁 모음(2024-07-08)" [ref=f236e68] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=163783&referrerAllArticles=false
+                                - generic [ref=f236e69]: 포켓몬스터 TCG 중요 팁 모음(2024-07-08)
+                              - link "[3]" [ref=f236e71] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=163783&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e72]: "3"
+                                - text: "]"
+                          - cell "3.1만" [ref=f236e73]
+                        - row "필독 [통합 공지] 2026년 05월 02일자 [135] 5.1만" [ref=f236e74]:
+                          - cell "필독 [통합 공지] 2026년 05월 02일자 [135]" [ref=f236e75]:
+                            - strong [ref=f236e77]: 필독
+                            - generic [ref=f236e79]:
+                              - link "[통합 공지] 2026년 05월 02일자" [ref=f236e80] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175796&referrerAllArticles=false
+                                - generic [ref=f236e81]: "[통합 공지] 2026년 05월 02일자"
+                              - link "[135]" [ref=f236e83] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175796&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e84]: "135"
+                                - text: "]"
+                          - cell "5.1만" [ref=f236e85]
+                        - row "전체 공지 [2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지 741" [ref=f236e86]:
+                          - cell "전체 공지 [2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지" [ref=f236e87]:
+                            - strong [ref=f236e89]:
+                              - generic [ref=f236e91]:
+                                - generic [ref=f236e92]: 전체
+                                - text: 공지
+                            - link "[2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지" [ref=f236e95] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=539979&referrerAllArticles=false
+                              - generic [ref=f236e96]: "[2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지"
+                          - cell "741" [ref=f236e97]
+                        - row "전체 공지 [거래/트레이드 관련 공지] 2026년 03월 12일자 [50] 2.7만" [ref=f236e98]:
+                          - cell "전체 공지 [거래/트레이드 관련 공지] 2026년 03월 12일자 [50]" [ref=f236e99]:
+                            - strong [ref=f236e101]:
+                              - generic [ref=f236e103]:
+                                - generic [ref=f236e104]: 전체
+                                - text: 공지
+                            - generic [ref=f236e106]:
+                              - link "[거래/트레이드 관련 공지] 2026년 03월 12일자" [ref=f236e107] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175794&referrerAllArticles=false
+                                - generic [ref=f236e108]: "[거래/트레이드 관련 공지] 2026년 03월 12일자"
+                              - link "[50]" [ref=f236e110] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175794&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e111]: "50"
+                                - text: "]"
+                          - cell "2.7만" [ref=f236e112]
+                        - row "전체 공지 전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02) [42] 3만" [ref=f236e113]:
+                          - cell "전체 공지 전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02) [42]" [ref=f236e114]:
+                            - strong [ref=f236e116]:
+                              - generic [ref=f236e118]:
+                                - generic [ref=f236e119]: 전체
+                                - text: 공지
+                            - generic [ref=f236e121]:
+                              - link "전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02)" [ref=f236e122] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=195175&referrerAllArticles=false
+                                - generic [ref=f236e123]: 전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02)
+                              - link "[42]" [ref=f236e125] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=195175&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e126]: "42"
+                                - text: "]"
+                          - cell "3만" [ref=f236e127]
+                        - row "전체 공지 트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신] [49] 1.1만" [ref=f236e128]:
+                          - cell "전체 공지 트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신] [49]" [ref=f236e129]:
+                            - strong [ref=f236e131]:
+                              - generic [ref=f236e133]:
+                                - generic [ref=f236e134]: 전체
+                                - text: 공지
+                            - generic [ref=f236e136]:
+                              - link "트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신]" [ref=f236e137] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=128787&referrerAllArticles=false
+                                - generic [ref=f236e138]: 트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신]
+                              - link "[49]" [ref=f236e140] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=128787&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e141]: "49"
+                                - text: "]"
+                          - cell "1.1만" [ref=f236e142]
+                        - row "전체 공지 [공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요. [32] 9,385" [ref=f236e143]:
+                          - cell "전체 공지 [공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요. [32]" [ref=f236e144]:
+                            - strong [ref=f236e146]:
+                              - generic [ref=f236e148]:
+                                - generic [ref=f236e149]: 전체
+                                - text: 공지
+                            - generic [ref=f236e151]:
+                              - link "[공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요." [ref=f236e152] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112209&referrerAllArticles=false
+                                - generic [ref=f236e153]: "[공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요."
+                              - link "[32]" [ref=f236e155] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112209&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e156]: "32"
+                                - text: "]"
+                          - cell "9,385" [ref=f236e157]
+                        - row "전체 공지 등업 신청 공지 / 등업 방법 / 등업 게시판 링크 [210] 2.9만" [ref=f236e158]:
+                          - cell "전체 공지 등업 신청 공지 / 등업 방법 / 등업 게시판 링크 [210]" [ref=f236e159]:
+                            - strong [ref=f236e161]:
+                              - generic [ref=f236e163]:
+                                - generic [ref=f236e164]: 전체
+                                - text: 공지
+                            - generic [ref=f236e166]:
+                              - link "등업 신청 공지 / 등업 방법 / 등업 게시판 링크" [ref=f236e167] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112208&referrerAllArticles=false
+                                - generic [ref=f236e168]: 등업 신청 공지 / 등업 방법 / 등업 게시판 링크
+                              - link "[210]" [ref=f236e170] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112208&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e171]: "210"
+                                - text: "]"
+                          - cell "2.9만" [ref=f236e172]
+                        - row "나옹 덱케이스, 플레이매트, 잉어킹 프로모는 당분간 거래 불가로 하겠습니다. [2] 940" [ref=f236e173]:
+                          - cell "나옹 덱케이스, 플레이매트, 잉어킹 프로모는 당분간 거래 불가로 하겠습니다. [2]" [ref=f236e174]:
+                            - generic [ref=f236e177]:
+                              - link "나옹 덱케이스, 플레이매트, 잉어킹 프로모는 당분간 거래 불가로 하겠습니다." [ref=f236e178] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=543215&referrerAllArticles=false
+                                - generic [ref=f236e179]: 나옹 덱케이스, 플레이매트, 잉어킹 프로모는 당분간 거래 불가로 하겠습니다.
+                              - link "[2]" [ref=f236e181] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=543215&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e182]: "2"
+                                - text: "]"
+                          - cell "940" [ref=f236e183]
+                        - row "옛날에도 말씀드린 것 같은데, 이 곳은 그레이딩, 등급 카페가 아닙니다. [8] 1,882" [ref=f236e184]:
+                          - cell "옛날에도 말씀드린 것 같은데, 이 곳은 그레이딩, 등급 카페가 아닙니다. [8]" [ref=f236e185]:
+                            - generic [ref=f236e188]:
+                              - link "옛날에도 말씀드린 것 같은데, 이 곳은 그레이딩, 등급 카페가 아닙니다." [ref=f236e189] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=539927&referrerAllArticles=false
+                                - generic [ref=f236e190]: 옛날에도 말씀드린 것 같은데, 이 곳은 그레이딩, 등급 카페가 아닙니다.
+                              - link "[8]" [ref=f236e192] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=539927&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e193]: "8"
+                                - text: "]"
+                          - cell "1,882" [ref=f236e194]
+                        - row "본 커뮤니티는 미개봉 확장팩에 대한 되팔이 및 리셀 불가합니다. [4] 1,097" [ref=f236e195]:
+                          - cell "본 커뮤니티는 미개봉 확장팩에 대한 되팔이 및 리셀 불가합니다. [4]" [ref=f236e196]:
+                            - generic [ref=f236e199]:
+                              - link "본 커뮤니티는 미개봉 확장팩에 대한 되팔이 및 리셀 불가합니다." [ref=f236e200] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=539160&referrerAllArticles=false
+                                - generic [ref=f236e201]: 본 커뮤니티는 미개봉 확장팩에 대한 되팔이 및 리셀 불가합니다.
+                              - link "[4]" [ref=f236e203] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=539160&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e204]: "4"
+                                - text: "]"
+                          - cell "1,097" [ref=f236e205]
+                        - row "스탠다드 블럭 HIJ 확장팩은 정가 초과 거래 불가합니다. [2] 559" [ref=f236e206]:
+                          - cell "스탠다드 블럭 HIJ 확장팩은 정가 초과 거래 불가합니다. [2]" [ref=f236e207]:
+                            - generic [ref=f236e210]:
+                              - link "스탠다드 블럭 HIJ 확장팩은 정가 초과 거래 불가합니다." [ref=f236e211] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=536887&referrerAllArticles=false
+                                - generic [ref=f236e212]: 스탠다드 블럭 HIJ 확장팩은 정가 초과 거래 불가합니다.
+                              - link "[2]" [ref=f236e214] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=536887&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e215]: "2"
+                                - text: "]"
+                          - cell "559" [ref=f236e216]
+                        - row "최근 카페 내 가입자가 늘는 추세인 것 같은데 거래 할 때 주의 부탁드립니다. [8] 839" [ref=f236e217]:
+                          - cell "최근 카페 내 가입자가 늘는 추세인 것 같은데 거래 할 때 주의 부탁드립니다. [8]" [ref=f236e218]:
+                            - generic [ref=f236e221]:
+                              - link "최근 카페 내 가입자가 늘는 추세인 것 같은데 거래 할 때 주의 부탁드립니다." [ref=f236e222] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=536409&referrerAllArticles=false
+                                - generic [ref=f236e223]: 최근 카페 내 가입자가 늘는 추세인 것 같은데 거래 할 때 주의 부탁드립니다.
+                              - link "[8]" [ref=f236e225] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=536409&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e226]: "8"
+                                - text: "]"
+                          - cell "839" [ref=f236e227]
+                  - generic [ref=f236e229]:
+                    - generic [ref=f236e231]:
+                      - heading "필독 공지사항" [level=3] [ref=f236e232]:
+                        - link "필독 공지사항" [ref=f236e233] [cursor=pointer]:
+                          - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=164&search.boardtype=L
+                      - link "더보기" [ref=f236e235] [cursor=pointer]:
+                        - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=164&search.boardtype=L
+                    - table "게시물 목록" [ref=f236e236]:
+                      - caption:
+                        - generic [ref=f236e237]: 게시물 목록
+                      - rowgroup [ref=f236e241]:
+                        - row "필독 포켓몬스터 TCG 중요 팁 모음(2024-07-08) [3] 3.1만" [ref=f236e242]:
+                          - cell "필독 포켓몬스터 TCG 중요 팁 모음(2024-07-08) [3]" [ref=f236e243]:
+                            - strong [ref=f236e245]: 필독
+                            - generic [ref=f236e247]:
+                              - link "포켓몬스터 TCG 중요 팁 모음(2024-07-08)" [ref=f236e248] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=163783&referrerAllArticles=false
+                                - generic [ref=f236e249]: 포켓몬스터 TCG 중요 팁 모음(2024-07-08)
+                              - link "[3]" [ref=f236e251] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=163783&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e252]: "3"
+                                - text: "]"
+                          - cell "3.1만" [ref=f236e253]
+                        - row "필독 [통합 공지] 2026년 05월 02일자 [135] 5.1만" [ref=f236e254]:
+                          - cell "필독 [통합 공지] 2026년 05월 02일자 [135]" [ref=f236e255]:
+                            - strong [ref=f236e257]: 필독
+                            - generic [ref=f236e259]:
+                              - link "[통합 공지] 2026년 05월 02일자" [ref=f236e260] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175796&referrerAllArticles=false
+                                - generic [ref=f236e261]: "[통합 공지] 2026년 05월 02일자"
+                              - link "[135]" [ref=f236e263] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175796&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e264]: "135"
+                                - text: "]"
+                          - cell "5.1만" [ref=f236e265]
+                        - row "전체 공지 [2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지 741" [ref=f236e266]:
+                          - cell "전체 공지 [2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지" [ref=f236e267]:
+                            - strong [ref=f236e269]:
+                              - generic [ref=f236e271]:
+                                - generic [ref=f236e272]: 전체
+                                - text: 공지
+                            - link "[2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지" [ref=f236e275] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=539979&referrerAllArticles=false
+                              - generic [ref=f236e276]: "[2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지"
+                          - cell "741" [ref=f236e277]
+                        - row "전체 공지 [거래/트레이드 관련 공지] 2026년 03월 12일자 [50] 2.7만" [ref=f236e278]:
+                          - cell "전체 공지 [거래/트레이드 관련 공지] 2026년 03월 12일자 [50]" [ref=f236e279]:
+                            - strong [ref=f236e281]:
+                              - generic [ref=f236e283]:
+                                - generic [ref=f236e284]: 전체
+                                - text: 공지
+                            - generic [ref=f236e286]:
+                              - link "[거래/트레이드 관련 공지] 2026년 03월 12일자" [ref=f236e287] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175794&referrerAllArticles=false
+                                - generic [ref=f236e288]: "[거래/트레이드 관련 공지] 2026년 03월 12일자"
+                              - link "[50]" [ref=f236e290] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175794&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e291]: "50"
+                                - text: "]"
+                          - cell "2.7만" [ref=f236e292]
+                        - row "전체 공지 전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02) [42] 3만" [ref=f236e293]:
+                          - cell "전체 공지 전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02) [42]" [ref=f236e294]:
+                            - strong [ref=f236e296]:
+                              - generic [ref=f236e298]:
+                                - generic [ref=f236e299]: 전체
+                                - text: 공지
+                            - generic [ref=f236e301]:
+                              - link "전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02)" [ref=f236e302] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=195175&referrerAllArticles=false
+                                - generic [ref=f236e303]: 전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02)
+                              - link "[42]" [ref=f236e305] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=195175&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e306]: "42"
+                                - text: "]"
+                          - cell "3만" [ref=f236e307]
+                        - row "전체 공지 트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신] [49] 1.1만" [ref=f236e308]:
+                          - cell "전체 공지 트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신] [49]" [ref=f236e309]:
+                            - strong [ref=f236e311]:
+                              - generic [ref=f236e313]:
+                                - generic [ref=f236e314]: 전체
+                                - text: 공지
+                            - generic [ref=f236e316]:
+                              - link "트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신]" [ref=f236e317] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=128787&referrerAllArticles=false
+                                - generic [ref=f236e318]: 트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신]
+                              - link "[49]" [ref=f236e320] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=128787&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e321]: "49"
+                                - text: "]"
+                          - cell "1.1만" [ref=f236e322]
+                        - row "전체 공지 [공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요. [32] 9,385" [ref=f236e323]:
+                          - cell "전체 공지 [공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요. [32]" [ref=f236e324]:
+                            - strong [ref=f236e326]:
+                              - generic [ref=f236e328]:
+                                - generic [ref=f236e329]: 전체
+                                - text: 공지
+                            - generic [ref=f236e331]:
+                              - link "[공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요." [ref=f236e332] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112209&referrerAllArticles=false
+                                - generic [ref=f236e333]: "[공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요."
+                              - link "[32]" [ref=f236e335] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112209&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e336]: "32"
+                                - text: "]"
+                          - cell "9,385" [ref=f236e337]
+                        - row "전체 공지 등업 신청 공지 / 등업 방법 / 등업 게시판 링크 [210] 2.9만" [ref=f236e338]:
+                          - cell "전체 공지 등업 신청 공지 / 등업 방법 / 등업 게시판 링크 [210]" [ref=f236e339]:
+                            - strong [ref=f236e341]:
+                              - generic [ref=f236e343]:
+                                - generic [ref=f236e344]: 전체
+                                - text: 공지
+                            - generic [ref=f236e346]:
+                              - link "등업 신청 공지 / 등업 방법 / 등업 게시판 링크" [ref=f236e347] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112208&referrerAllArticles=false
+                                - generic [ref=f236e348]: 등업 신청 공지 / 등업 방법 / 등업 게시판 링크
+                              - link "[210]" [ref=f236e350] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112208&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e351]: "210"
+                                - text: "]"
+                          - cell "2.9만" [ref=f236e352]
+                        - row "게시판 공지 매니저 연락 수단(이메일, 쪽지 등) [6] 1,189" [ref=f236e353]:
+                          - cell "게시판 공지 매니저 연락 수단(이메일, 쪽지 등) [6]" [ref=f236e354]:
+                            - strong [ref=f236e356]:
+                              - generic [ref=f236e358]:
+                                - generic [ref=f236e359]: 게시판
+                                - text: 공지
+                            - generic [ref=f236e361]:
+                              - link "매니저 연락 수단(이메일, 쪽지 등)" [ref=f236e362] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=140474&referrerAllArticles=false
+                                - generic [ref=f236e363]: 매니저 연락 수단(이메일, 쪽지 등)
+                              - link "[6]" [ref=f236e365] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=140474&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e366]: "6"
+                                - text: "]"
+                          - cell "1,189" [ref=f236e367]
+                        - row "이브이 히어로즈, 메타몽 프로모 그리고 활동 정지 조치에 관련하여 [6] 2,183" [ref=f236e368]:
+                          - cell "이브이 히어로즈, 메타몽 프로모 그리고 활동 정지 조치에 관련하여 [6]" [ref=f236e369]:
+                            - generic [ref=f236e372]:
+                              - link "이브이 히어로즈, 메타몽 프로모 그리고 활동 정지 조치에 관련하여" [ref=f236e373] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=512704&referrerAllArticles=false
+                                - generic [ref=f236e374]: 이브이 히어로즈, 메타몽 프로모 그리고 활동 정지 조치에 관련하여
+                              - link "[6]" [ref=f236e376] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=512704&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e377]: "6"
+                                - text: "]"
+                          - cell "2,183" [ref=f236e378]
+                        - row "나눔 관련해서 조심하셔야할 것 공지 드립니다. [7] 1,066" [ref=f236e379]:
+                          - cell "나눔 관련해서 조심하셔야할 것 공지 드립니다. [7]" [ref=f236e380]:
+                            - generic [ref=f236e383]:
+                              - link "나눔 관련해서 조심하셔야할 것 공지 드립니다." [ref=f236e384] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=509973&referrerAllArticles=false
+                                - generic [ref=f236e385]: 나눔 관련해서 조심하셔야할 것 공지 드립니다.
+                              - link "[7]" [ref=f236e387] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=509973&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e388]: "7"
+                                - text: "]"
+                          - cell "1,066" [ref=f236e389]
+                        - row "사기 관련된 내용은 새벽이든 언제는 좋으니 운영진에게 채팅으로 메시지 부탁드립니다. [5] 801" [ref=f236e390]:
+                          - cell "사기 관련된 내용은 새벽이든 언제는 좋으니 운영진에게 채팅으로 메시지 부탁드립니다. [5]" [ref=f236e391]:
+                            - generic [ref=f236e394]:
+                              - link "사기 관련된 내용은 새벽이든 언제는 좋으니 운영진에게 채팅으로 메시지 부탁드립니다." [ref=f236e395] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=483167&referrerAllArticles=false
+                                - generic [ref=f236e396]: 사기 관련된 내용은 새벽이든 언제는 좋으니 운영진에게 채팅으로 메시지 부탁드립니다.
+                              - link "[5]" [ref=f236e398] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=483167&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e399]: "5"
+                                - text: "]"
+                          - cell "801" [ref=f236e400]
+                        - row "나이키, 아디다스, 뉴발란스는 스팸때문에 금칙어 등록되어 있으니 글 작성시 주의해주세요. 사진 427" [ref=f236e401]:
+                          - cell "나이키, 아디다스, 뉴발란스는 스팸때문에 금칙어 등록되어 있으니 글 작성시 주의해주세요. 사진" [ref=f236e402]:
+                            - generic [ref=f236e405]:
+                              - link "나이키, 아디다스, 뉴발란스는 스팸때문에 금칙어 등록되어 있으니 글 작성시 주의해주세요." [ref=f236e406] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=479570&referrerAllArticles=false
+                                - generic [ref=f236e407]: 나이키, 아디다스, 뉴발란스는 스팸때문에 금칙어 등록되어 있으니 글 작성시 주의해주세요.
+                              - generic [ref=f236e410]: 사진
+                          - cell "427" [ref=f236e411]
+                - generic [ref=f236e412]:
+                  - generic [ref=f236e414]:
+                    - generic [ref=f236e416]:
+                      - heading "대회/모임 공지 게시판" [level=3] [ref=f236e417]:
+                        - link "대회/모임 공지 게시판" [ref=f236e418] [cursor=pointer]:
+                          - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=42&search.boardtype=L
+                      - link "더보기" [ref=f236e420] [cursor=pointer]:
+                        - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=42&search.boardtype=L
+                    - table "게시물 목록" [ref=f236e421]:
+                      - caption:
+                        - generic [ref=f236e422]: 게시물 목록
+                      - rowgroup [ref=f236e426]:
+                        - row "필독 포켓몬스터 TCG 중요 팁 모음(2024-07-08) [3] 3.1만" [ref=f236e427]:
+                          - cell "필독 포켓몬스터 TCG 중요 팁 모음(2024-07-08) [3]" [ref=f236e428]:
+                            - strong [ref=f236e430]: 필독
+                            - generic [ref=f236e432]:
+                              - link "포켓몬스터 TCG 중요 팁 모음(2024-07-08)" [ref=f236e433] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=163783&referrerAllArticles=false
+                                - generic [ref=f236e434]: 포켓몬스터 TCG 중요 팁 모음(2024-07-08)
+                              - link "[3]" [ref=f236e436] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=163783&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e437]: "3"
+                                - text: "]"
+                          - cell "3.1만" [ref=f236e438]
+                        - row "필독 [통합 공지] 2026년 05월 02일자 [135] 5.1만" [ref=f236e439]:
+                          - cell "필독 [통합 공지] 2026년 05월 02일자 [135]" [ref=f236e440]:
+                            - strong [ref=f236e442]: 필독
+                            - generic [ref=f236e444]:
+                              - link "[통합 공지] 2026년 05월 02일자" [ref=f236e445] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175796&referrerAllArticles=false
+                                - generic [ref=f236e446]: "[통합 공지] 2026년 05월 02일자"
+                              - link "[135]" [ref=f236e448] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175796&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e449]: "135"
+                                - text: "]"
+                          - cell "5.1만" [ref=f236e450]
+                        - row "전체 공지 [2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지 741" [ref=f236e451]:
+                          - cell "전체 공지 [2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지" [ref=f236e452]:
+                            - strong [ref=f236e454]:
+                              - generic [ref=f236e456]:
+                                - generic [ref=f236e457]: 전체
+                                - text: 공지
+                            - link "[2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지" [ref=f236e460] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=539979&referrerAllArticles=false
+                              - generic [ref=f236e461]: "[2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지"
+                          - cell "741" [ref=f236e462]
+                        - row "전체 공지 [거래/트레이드 관련 공지] 2026년 03월 12일자 [50] 2.7만" [ref=f236e463]:
+                          - cell "전체 공지 [거래/트레이드 관련 공지] 2026년 03월 12일자 [50]" [ref=f236e464]:
+                            - strong [ref=f236e466]:
+                              - generic [ref=f236e468]:
+                                - generic [ref=f236e469]: 전체
+                                - text: 공지
+                            - generic [ref=f236e471]:
+                              - link "[거래/트레이드 관련 공지] 2026년 03월 12일자" [ref=f236e472] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175794&referrerAllArticles=false
+                                - generic [ref=f236e473]: "[거래/트레이드 관련 공지] 2026년 03월 12일자"
+                              - link "[50]" [ref=f236e475] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175794&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e476]: "50"
+                                - text: "]"
+                          - cell "2.7만" [ref=f236e477]
+                        - row "전체 공지 전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02) [42] 3만" [ref=f236e478]:
+                          - cell "전체 공지 전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02) [42]" [ref=f236e479]:
+                            - strong [ref=f236e481]:
+                              - generic [ref=f236e483]:
+                                - generic [ref=f236e484]: 전체
+                                - text: 공지
+                            - generic [ref=f236e486]:
+                              - link "전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02)" [ref=f236e487] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=195175&referrerAllArticles=false
+                                - generic [ref=f236e488]: 전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02)
+                              - link "[42]" [ref=f236e490] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=195175&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e491]: "42"
+                                - text: "]"
+                          - cell "3만" [ref=f236e492]
+                        - row "전체 공지 트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신] [49] 1.1만" [ref=f236e493]:
+                          - cell "전체 공지 트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신] [49]" [ref=f236e494]:
+                            - strong [ref=f236e496]:
+                              - generic [ref=f236e498]:
+                                - generic [ref=f236e499]: 전체
+                                - text: 공지
+                            - generic [ref=f236e501]:
+                              - link "트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신]" [ref=f236e502] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=128787&referrerAllArticles=false
+                                - generic [ref=f236e503]: 트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신]
+                              - link "[49]" [ref=f236e505] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=128787&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e506]: "49"
+                                - text: "]"
+                          - cell "1.1만" [ref=f236e507]
+                        - row "전체 공지 [공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요. [32] 9,385" [ref=f236e508]:
+                          - cell "전체 공지 [공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요. [32]" [ref=f236e509]:
+                            - strong [ref=f236e511]:
+                              - generic [ref=f236e513]:
+                                - generic [ref=f236e514]: 전체
+                                - text: 공지
+                            - generic [ref=f236e516]:
+                              - link "[공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요." [ref=f236e517] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112209&referrerAllArticles=false
+                                - generic [ref=f236e518]: "[공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요."
+                              - link "[32]" [ref=f236e520] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112209&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e521]: "32"
+                                - text: "]"
+                          - cell "9,385" [ref=f236e522]
+                        - row "전체 공지 등업 신청 공지 / 등업 방법 / 등업 게시판 링크 [210] 2.9만" [ref=f236e523]:
+                          - cell "전체 공지 등업 신청 공지 / 등업 방법 / 등업 게시판 링크 [210]" [ref=f236e524]:
+                            - strong [ref=f236e526]:
+                              - generic [ref=f236e528]:
+                                - generic [ref=f236e529]: 전체
+                                - text: 공지
+                            - generic [ref=f236e531]:
+                              - link "등업 신청 공지 / 등업 방법 / 등업 게시판 링크" [ref=f236e532] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112208&referrerAllArticles=false
+                                - generic [ref=f236e533]: 등업 신청 공지 / 등업 방법 / 등업 게시판 링크
+                              - link "[210]" [ref=f236e535] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112208&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e536]: "210"
+                                - text: "]"
+                          - cell "2.9만" [ref=f236e537]
+                        - row "게시판 공지 대회 관련 공지 등록 안내 512" [ref=f236e538]:
+                          - cell "게시판 공지 대회 관련 공지 등록 안내" [ref=f236e539]:
+                            - strong [ref=f236e541]:
+                              - generic [ref=f236e543]:
+                                - generic [ref=f236e544]: 게시판
+                                - text: 공지
+                            - link "대회 관련 공지 등록 안내" [ref=f236e547] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=207430&referrerAllArticles=false
+                              - generic [ref=f236e548]: 대회 관련 공지 등록 안내
+                          - cell "512" [ref=f236e549]
+                        - row "[신사 포카드] 5월 16일(토) 공인 미니리그 안내 사진 new 14" [ref=f236e550]:
+                          - cell "[신사 포카드] 5월 16일(토) 공인 미니리그 안내 사진 new" [ref=f236e551]:
+                            - generic [ref=f236e554]:
+                              - link "[신사 포카드] 5월 16일(토) 공인 미니리그 안내" [ref=f236e555] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=546827&referrerAllArticles=false
+                                - generic [ref=f236e556]: "[신사 포카드] 5월 16일(토) 공인 미니리그 안내"
+                              - generic [ref=f236e557]:
+                                - generic [ref=f236e559]: 사진
+                                - generic [ref=f236e561]: new
+                          - cell "14" [ref=f236e562]
+                        - row "[안산 LAS TCG] 5/15(금) 비공인 미니리그 안내 사진 new 19" [ref=f236e563]:
+                          - cell "[안산 LAS TCG] 5/15(금) 비공인 미니리그 안내 사진 new" [ref=f236e564]:
+                            - generic [ref=f236e567]:
+                              - link "[안산 LAS TCG] 5/15(금) 비공인 미니리그 안내" [ref=f236e568] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=546693&referrerAllArticles=false
+                                - generic [ref=f236e569]: "[안산 LAS TCG] 5/15(금) 비공인 미니리그 안내"
+                              - generic [ref=f236e570]:
+                                - generic [ref=f236e572]: 사진
+                                - generic [ref=f236e574]: new
+                          - cell "19" [ref=f236e575]
+                        - row "[수원 카드플래닛] 5월 17일 (일) 포켓몬 카드샵 수원 공인 미니리그 사진 지도 링크 new 45" [ref=f236e576]:
+                          - cell "[수원 카드플래닛] 5월 17일 (일) 포켓몬 카드샵 수원 공인 미니리그 사진 지도 링크 new" [ref=f236e577]:
+                            - generic [ref=f236e580]:
+                              - link "[수원 카드플래닛] 5월 17일 (일) 포켓몬 카드샵 수원 공인 미니리그" [ref=f236e581] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=546689&referrerAllArticles=false
+                                - generic [ref=f236e582]: "[수원 카드플래닛] 5월 17일 (일) 포켓몬 카드샵 수원 공인 미니리그"
+                              - generic [ref=f236e583]:
+                                - generic [ref=f236e585]: 사진
+                                - generic [ref=f236e587]: 지도
+                                - generic [ref=f236e589]: 링크
+                                - generic [ref=f236e591]: new
+                          - cell "45" [ref=f236e592]
+                        - row "[수원 카드플래닛] 5월 14일 (목) 포켓몬 카드샵 수원 공인 미니리그 사진 지도 링크 new 32" [ref=f236e593]:
+                          - cell "[수원 카드플래닛] 5월 14일 (목) 포켓몬 카드샵 수원 공인 미니리그 사진 지도 링크 new" [ref=f236e594]:
+                            - generic [ref=f236e597]:
+                              - link "[수원 카드플래닛] 5월 14일 (목) 포켓몬 카드샵 수원 공인 미니리그" [ref=f236e598] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=546688&referrerAllArticles=false
+                                - generic [ref=f236e599]: "[수원 카드플래닛] 5월 14일 (목) 포켓몬 카드샵 수원 공인 미니리그"
+                              - generic [ref=f236e600]:
+                                - generic [ref=f236e602]: 사진
+                                - generic [ref=f236e604]: 지도
+                                - generic [ref=f236e606]: 링크
+                                - generic [ref=f236e608]: new
+                          - cell "32" [ref=f236e609]
+                        - row "[수원 카드플래닛] 5월 12일 (화) 카드플래닛 미니리그 사진 지도 링크 104" [ref=f236e610]:
+                          - cell "[수원 카드플래닛] 5월 12일 (화) 카드플래닛 미니리그 사진 지도 링크" [ref=f236e611]:
+                            - generic [ref=f236e614]:
+                              - link "[수원 카드플래닛] 5월 12일 (화) 카드플래닛 미니리그" [ref=f236e615] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=546506&referrerAllArticles=false
+                                - generic [ref=f236e616]: "[수원 카드플래닛] 5월 12일 (화) 카드플래닛 미니리그"
+                              - generic [ref=f236e617]:
+                                - generic [ref=f236e619]: 사진
+                                - generic [ref=f236e621]: 지도
+                                - generic [ref=f236e623]: 링크
+                          - cell "104" [ref=f236e624]
+                        - row "[카드냥 역삼] 5월 17일(일) 카드냥 Take A Look League Season 6 예선전 사진 175" [ref=f236e625]:
+                          - cell "[카드냥 역삼] 5월 17일(일) 카드냥 Take A Look League Season 6 예선전 사진" [ref=f236e626]:
+                            - generic [ref=f236e629]:
+                              - link "[카드냥 역삼] 5월 17일(일) 카드냥 Take A Look League Season 6 예선전" [ref=f236e630] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=546488&referrerAllArticles=false
+                                - generic [ref=f236e631]: "[카드냥 역삼] 5월 17일(일) 카드냥 Take A Look League Season 6 예선전"
+                              - generic [ref=f236e634]: 사진
+                          - cell "175" [ref=f236e635]
+                        - row "[카드냥 역삼] 5월 15일(금) 포켓몬 카드샵 미니리그 사진 60" [ref=f236e636]:
+                          - cell "[카드냥 역삼] 5월 15일(금) 포켓몬 카드샵 미니리그 사진" [ref=f236e637]:
+                            - generic [ref=f236e640]:
+                              - link "[카드냥 역삼] 5월 15일(금) 포켓몬 카드샵 미니리그" [ref=f236e641] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=546487&referrerAllArticles=false
+                                - generic [ref=f236e642]: "[카드냥 역삼] 5월 15일(금) 포켓몬 카드샵 미니리그"
+                              - generic [ref=f236e645]: 사진
+                          - cell "60" [ref=f236e646]
+                        - row "[카드냥 역삼] 5월 13일(수) 카드냥 수요 위클리 이벤트 사진 118" [ref=f236e647]:
+                          - cell "[카드냥 역삼] 5월 13일(수) 카드냥 수요 위클리 이벤트 사진" [ref=f236e648]:
+                            - generic [ref=f236e651]:
+                              - link "[카드냥 역삼] 5월 13일(수) 카드냥 수요 위클리 이벤트" [ref=f236e652] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=546486&referrerAllArticles=false
+                                - generic [ref=f236e653]: "[카드냥 역삼] 5월 13일(수) 카드냥 수요 위클리 이벤트"
+                              - generic [ref=f236e656]: 사진
+                          - cell "118" [ref=f236e657]
+                        - row "[수내 카드빈] 5/14 (목) 공인 미니리그 안내 사진 지도 47" [ref=f236e658]:
+                          - cell "[수내 카드빈] 5/14 (목) 공인 미니리그 안내 사진 지도" [ref=f236e659]:
+                            - generic [ref=f236e662]:
+                              - link "[수내 카드빈] 5/14 (목) 공인 미니리그 안내" [ref=f236e663] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=546442&referrerAllArticles=false
+                                - generic [ref=f236e664]: "[수내 카드빈] 5/14 (목) 공인 미니리그 안내"
+                              - generic [ref=f236e665]:
+                                - generic [ref=f236e667]: 사진
+                                - generic [ref=f236e669]: 지도
+                          - cell "47" [ref=f236e670]
+                        - row "[천안 카드빌리지] 26.05.15 포켓몬 카드게임 공인 미니리그 개최 안내 사진 36" [ref=f236e671]:
+                          - cell "[천안 카드빌리지] 26.05.15 포켓몬 카드게임 공인 미니리그 개최 안내 사진" [ref=f236e672]:
+                            - generic [ref=f236e675]:
+                              - link "[천안 카드빌리지] 26.05.15 포켓몬 카드게임 공인 미니리그 개최 안내" [ref=f236e676] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=546327&referrerAllArticles=false
+                                - generic [ref=f236e677]: "[천안 카드빌리지] 26.05.15 포켓몬 카드게임 공인 미니리그 개최 안내"
+                              - generic [ref=f236e680]: 사진
+                          - cell "36" [ref=f236e681]
+                        - row "[카드냥 역삼] 5월 20일(수) 카드냥 4th Anniversary Double Up 수요 위클리 이벤트 사진 링크 456" [ref=f236e682]:
+                          - cell "[카드냥 역삼] 5월 20일(수) 카드냥 4th Anniversary Double Up 수요 위클리 이벤트 사진 링크" [ref=f236e683]:
+                            - generic [ref=f236e686]:
+                              - link "[카드냥 역삼] 5월 20일(수) 카드냥 4th Anniversary Double Up 수요 위클리 이벤트" [ref=f236e687] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=546169&referrerAllArticles=false
+                                - generic [ref=f236e688]: "[카드냥 역삼] 5월 20일(수) 카드냥 4th Anniversary Double Up 수요 위클리 이벤트"
+                              - generic [ref=f236e689]:
+                                - generic [ref=f236e691]: 사진
+                                - generic [ref=f236e693]: 링크
+                          - cell "456" [ref=f236e694]
+                        - row "[카드냥 역삼] 5월 18/19/21(월/화/목) 카드냥 4th Anniversary Duo Champions Cup Qualify 사진 링크 327" [ref=f236e695]:
+                          - cell "[카드냥 역삼] 5월 18/19/21(월/화/목) 카드냥 4th Anniversary Duo Champions Cup Qualify 사진 링크" [ref=f236e696]:
+                            - generic [ref=f236e699]:
+                              - link "[카드냥 역삼] 5월 18/19/21(월/화/목) 카드냥 4th Anniversary Duo Champions Cup Qualify" [ref=f236e700] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=546168&referrerAllArticles=false
+                                - generic [ref=f236e701]: "[카드냥 역삼] 5월 18/19/21(월/화/목) 카드냥 4th Anniversary Duo Champions Cup Qualify"
+                              - generic [ref=f236e702]:
+                                - generic [ref=f236e704]: 사진
+                                - generic [ref=f236e706]: 링크
+                          - cell "327" [ref=f236e707]
+                        - row "[카드냥 역삼] 5월 23일(토) 카드냥 4th Anniversary Duo Champions Cup 사진 링크 [2] 397" [ref=f236e708]:
+                          - cell "[카드냥 역삼] 5월 23일(토) 카드냥 4th Anniversary Duo Champions Cup 사진 링크 [2]" [ref=f236e709]:
+                            - generic [ref=f236e712]:
+                              - link "[카드냥 역삼] 5월 23일(토) 카드냥 4th Anniversary Duo Champions Cup" [ref=f236e713] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=546167&referrerAllArticles=false
+                                - generic [ref=f236e714]: "[카드냥 역삼] 5월 23일(토) 카드냥 4th Anniversary Duo Champions Cup"
+                              - generic [ref=f236e715]:
+                                - generic [ref=f236e717]: 사진
+                                - generic [ref=f236e719]: 링크
+                                - link "[2]" [ref=f236e720] [cursor=pointer]:
+                                  - /url: /ArticleRead.nhn?clubid=19480246&articleid=546167&referrerAllArticles=false&commentFocus=true
+                                  - text: "["
+                                  - emphasis [ref=f236e721]: "2"
+                                  - text: "]"
+                          - cell "397" [ref=f236e722]
+                        - row "[도곡듀얼샵]포켓몬카드게임 미니리그 안내!!(5/10) 사진 지도 74" [ref=f236e723]:
+                          - cell "[도곡듀얼샵]포켓몬카드게임 미니리그 안내!!(5/10) 사진 지도" [ref=f236e724]:
+                            - generic [ref=f236e727]:
+                              - link "[도곡듀얼샵]포켓몬카드게임 미니리그 안내!!(5/10)" [ref=f236e728] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=545688&referrerAllArticles=false
+                                - generic [ref=f236e729]: "[도곡듀얼샵]포켓몬카드게임 미니리그 안내!!(5/10)"
+                              - generic [ref=f236e730]:
+                                - generic [ref=f236e732]: 사진
+                                - generic [ref=f236e734]: 지도
+                          - cell "74" [ref=f236e735]
+                        - row "[안산 LAS TCG] 5/8(금) 비공인 미니리그 안내 사진 38" [ref=f236e736]:
+                          - cell "[안산 LAS TCG] 5/8(금) 비공인 미니리그 안내 사진" [ref=f236e737]:
+                            - generic [ref=f236e740]:
+                              - link "[안산 LAS TCG] 5/8(금) 비공인 미니리그 안내" [ref=f236e741] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=545671&referrerAllArticles=false
+                                - generic [ref=f236e742]: "[안산 LAS TCG] 5/8(금) 비공인 미니리그 안내"
+                              - generic [ref=f236e745]: 사진
+                          - cell "38" [ref=f236e746]
+                        - row "[신사 포카드] 5월 9일(토) 공인 미니리그 안내 사진 [2] 116" [ref=f236e747]:
+                          - cell "[신사 포카드] 5월 9일(토) 공인 미니리그 안내 사진 [2]" [ref=f236e748]:
+                            - generic [ref=f236e751]:
+                              - link "[신사 포카드] 5월 9일(토) 공인 미니리그 안내" [ref=f236e752] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=545457&referrerAllArticles=false
+                                - generic [ref=f236e753]: "[신사 포카드] 5월 9일(토) 공인 미니리그 안내"
+                              - generic [ref=f236e754]:
+                                - generic [ref=f236e756]: 사진
+                                - link "[2]" [ref=f236e757] [cursor=pointer]:
+                                  - /url: /ArticleRead.nhn?clubid=19480246&articleid=545457&referrerAllArticles=false&commentFocus=true
+                                  - text: "["
+                                  - emphasis [ref=f236e758]: "2"
+                                  - text: "]"
+                          - cell "116" [ref=f236e759]
+                        - row "[수원 카드플래닛] 5월 9일 (토) 수원 닌자스피너 발매 기념 토너먼트 사진 지도 링크 228" [ref=f236e760]:
+                          - cell "[수원 카드플래닛] 5월 9일 (토) 수원 닌자스피너 발매 기념 토너먼트 사진 지도 링크" [ref=f236e761]:
+                            - generic [ref=f236e764]:
+                              - link "[수원 카드플래닛] 5월 9일 (토) 수원 닌자스피너 발매 기념 토너먼트" [ref=f236e765] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=545243&referrerAllArticles=false
+                                - generic [ref=f236e766]: "[수원 카드플래닛] 5월 9일 (토) 수원 닌자스피너 발매 기념 토너먼트"
+                              - generic [ref=f236e767]:
+                                - generic [ref=f236e769]: 사진
+                                - generic [ref=f236e771]: 지도
+                                - generic [ref=f236e773]: 링크
+                          - cell "228" [ref=f236e774]
+                  - generic [ref=f236e776]:
+                    - generic [ref=f236e778]:
+                      - heading "초보자 강습 및 공지" [level=3] [ref=f236e779]:
+                        - link "초보자 강습 및 공지" [ref=f236e780] [cursor=pointer]:
+                          - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=119&search.boardtype=L
+                      - link "더보기" [ref=f236e782] [cursor=pointer]:
+                        - /url: /ArticleList.nhn?search.clubid=19480246&search.menuid=119&search.boardtype=L
+                    - table "게시물 목록" [ref=f236e783]:
+                      - caption:
+                        - generic [ref=f236e784]: 게시물 목록
+                      - rowgroup [ref=f236e788]:
+                        - row "필독 포켓몬스터 TCG 중요 팁 모음(2024-07-08) [3] 3.1만" [ref=f236e789]:
+                          - cell "필독 포켓몬스터 TCG 중요 팁 모음(2024-07-08) [3]" [ref=f236e790]:
+                            - strong [ref=f236e792]: 필독
+                            - generic [ref=f236e794]:
+                              - link "포켓몬스터 TCG 중요 팁 모음(2024-07-08)" [ref=f236e795] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=163783&referrerAllArticles=false
+                                - generic [ref=f236e796]: 포켓몬스터 TCG 중요 팁 모음(2024-07-08)
+                              - link "[3]" [ref=f236e798] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=163783&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e799]: "3"
+                                - text: "]"
+                          - cell "3.1만" [ref=f236e800]
+                        - row "필독 [통합 공지] 2026년 05월 02일자 [135] 5.1만" [ref=f236e801]:
+                          - cell "필독 [통합 공지] 2026년 05월 02일자 [135]" [ref=f236e802]:
+                            - strong [ref=f236e804]: 필독
+                            - generic [ref=f236e806]:
+                              - link "[통합 공지] 2026년 05월 02일자" [ref=f236e807] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175796&referrerAllArticles=false
+                                - generic [ref=f236e808]: "[통합 공지] 2026년 05월 02일자"
+                              - link "[135]" [ref=f236e810] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175796&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e811]: "135"
+                                - text: "]"
+                          - cell "5.1만" [ref=f236e812]
+                        - row "전체 공지 [2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지 741" [ref=f236e813]:
+                          - cell "전체 공지 [2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지" [ref=f236e814]:
+                            - strong [ref=f236e816]:
+                              - generic [ref=f236e818]:
+                                - generic [ref=f236e819]: 전체
+                                - text: 공지
+                            - link "[2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지" [ref=f236e822] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=539979&referrerAllArticles=false
+                              - generic [ref=f236e823]: "[2026/05/23]트레이너스 운동회 X ㅌㅌㄷ 포켓몬카드게임 부문 안내공지"
+                          - cell "741" [ref=f236e824]
+                        - row "전체 공지 [거래/트레이드 관련 공지] 2026년 03월 12일자 [50] 2.7만" [ref=f236e825]:
+                          - cell "전체 공지 [거래/트레이드 관련 공지] 2026년 03월 12일자 [50]" [ref=f236e826]:
+                            - strong [ref=f236e828]:
+                              - generic [ref=f236e830]:
+                                - generic [ref=f236e831]: 전체
+                                - text: 공지
+                            - generic [ref=f236e833]:
+                              - link "[거래/트레이드 관련 공지] 2026년 03월 12일자" [ref=f236e834] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175794&referrerAllArticles=false
+                                - generic [ref=f236e835]: "[거래/트레이드 관련 공지] 2026년 03월 12일자"
+                              - link "[50]" [ref=f236e837] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=175794&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e838]: "50"
+                                - text: "]"
+                          - cell "2.7만" [ref=f236e839]
+                        - row "전체 공지 전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02) [42] 3만" [ref=f236e840]:
+                          - cell "전체 공지 전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02) [42]" [ref=f236e841]:
+                            - strong [ref=f236e843]:
+                              - generic [ref=f236e845]:
+                                - generic [ref=f236e846]: 전체
+                                - text: 공지
+                            - generic [ref=f236e848]:
+                              - link "전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02)" [ref=f236e849] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=195175&referrerAllArticles=false
+                                - generic [ref=f236e850]: 전국 포켓몬 카드 취급(온/오프라인) / 미니리그 진행 샵 목록 (2026-02-02)
+                              - link "[42]" [ref=f236e852] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=195175&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e853]: "42"
+                                - text: "]"
+                          - cell "3만" [ref=f236e854]
+                        - row "전체 공지 트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신] [49] 1.1만" [ref=f236e855]:
+                          - cell "전체 공지 트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신] [49]" [ref=f236e856]:
+                            - strong [ref=f236e858]:
+                              - generic [ref=f236e860]:
+                                - generic [ref=f236e861]: 전체
+                                - text: 공지
+                            - generic [ref=f236e863]:
+                              - link "트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신]" [ref=f236e864] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=128787&referrerAllArticles=false
+                                - generic [ref=f236e865]: 트레이드 하기 전에 사기 등, 주의하셔야 할 사항[2021-04-27 갱신]
+                              - link "[49]" [ref=f236e867] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=128787&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e868]: "49"
+                                - text: "]"
+                          - cell "1.1만" [ref=f236e869]
+                        - row "전체 공지 [공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요. [32] 9,385" [ref=f236e870]:
+                          - cell "전체 공지 [공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요. [32]" [ref=f236e871]:
+                            - strong [ref=f236e873]:
+                              - generic [ref=f236e875]:
+                                - generic [ref=f236e876]: 전체
+                                - text: 공지
+                            - generic [ref=f236e878]:
+                              - link "[공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요." [ref=f236e879] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112209&referrerAllArticles=false
+                                - generic [ref=f236e880]: "[공지] 카드 거래 중 문제가 생겼을 경우 읽어보세요."
+                              - link "[32]" [ref=f236e882] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112209&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e883]: "32"
+                                - text: "]"
+                          - cell "9,385" [ref=f236e884]
+                        - row "전체 공지 등업 신청 공지 / 등업 방법 / 등업 게시판 링크 [210] 2.9만" [ref=f236e885]:
+                          - cell "전체 공지 등업 신청 공지 / 등업 방법 / 등업 게시판 링크 [210]" [ref=f236e886]:
+                            - strong [ref=f236e888]:
+                              - generic [ref=f236e890]:
+                                - generic [ref=f236e891]: 전체
+                                - text: 공지
+                            - generic [ref=f236e893]:
+                              - link "등업 신청 공지 / 등업 방법 / 등업 게시판 링크" [ref=f236e894] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112208&referrerAllArticles=false
+                                - generic [ref=f236e895]: 등업 신청 공지 / 등업 방법 / 등업 게시판 링크
+                              - link "[210]" [ref=f236e897] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=112208&referrerAllArticles=false&commentFocus=true
+                                - text: "["
+                                - emphasis [ref=f236e898]: "210"
+                                - text: "]"
+                          - cell "2.9만" [ref=f236e899]
+                        - row "게시판 공지 미니리그 포인트 제도 시즌2! 544" [ref=f236e900]:
+                          - cell "게시판 공지 미니리그 포인트 제도 시즌2!" [ref=f236e901]:
+                            - strong [ref=f236e903]:
+                              - generic [ref=f236e905]:
+                                - generic [ref=f236e906]: 게시판
+                                - text: 공지
+                            - link "미니리그 포인트 제도 시즌2!" [ref=f236e909] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=60656&referrerAllArticles=false
+                              - generic [ref=f236e910]: 미니리그 포인트 제도 시즌2!
+                          - cell "544" [ref=f236e911]
+                        - row "포켓몬 카드 게임 카드샵 구입 특전! 일정변경 공지 사진 6,578" [ref=f236e912]:
+                          - cell "포켓몬 카드 게임 카드샵 구입 특전! 일정변경 공지 사진" [ref=f236e913]:
+                            - generic [ref=f236e916]:
+                              - link "포켓몬 카드 게임 카드샵 구입 특전! 일정변경 공지" [ref=f236e917] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=114529&referrerAllArticles=false
+                                - generic [ref=f236e918]: 포켓몬 카드 게임 카드샵 구입 특전! 일정변경 공지
+                              - generic [ref=f236e921]: 사진
+                          - cell "6,578" [ref=f236e922]
+                        - row "2020년 3월 1주차 미니리그 일정 그 외 사진 903" [ref=f236e923]:
+                          - cell "2020년 3월 1주차 미니리그 일정 그 외 사진" [ref=f236e924]:
+                            - generic [ref=f236e927]:
+                              - link "2020년 3월 1주차 미니리그 일정 그 외" [ref=f236e928] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=110014&referrerAllArticles=false
+                                - generic [ref=f236e929]: 2020년 3월 1주차 미니리그 일정 그 외
+                              - generic [ref=f236e932]: 사진
+                          - cell "903" [ref=f236e933]
+                        - row "포켓몬코리아 본사 휴무 건 1,603" [ref=f236e934]:
+                          - cell "포켓몬코리아 본사 휴무 건" [ref=f236e935]:
+                            - link "포켓몬코리아 본사 휴무 건" [ref=f236e939] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=109790&referrerAllArticles=false
+                              - generic [ref=f236e940]: 포켓몬코리아 본사 휴무 건
+                          - cell "1,603" [ref=f236e941]
+                        - row "2월 Sunday 토너먼트 취소 안내(2/21 갱신) 195" [ref=f236e942]:
+                          - cell "2월 Sunday 토너먼트 취소 안내(2/21 갱신)" [ref=f236e943]:
+                            - link "2월 Sunday 토너먼트 취소 안내(2/21 갱신)" [ref=f236e947] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=109749&referrerAllArticles=false
+                              - generic [ref=f236e948]: 2월 Sunday 토너먼트 취소 안내(2/21 갱신)
+                          - cell "195" [ref=f236e949]
+                        - row "[재 공지] **2020년 2월 4주차 미니리그 일정 그 외** 2월 21일 18시 수정됨 사진 387" [ref=f236e950]:
+                          - cell "[재 공지] **2020년 2월 4주차 미니리그 일정 그 외** 2월 21일 18시 수정됨 사진" [ref=f236e951]:
+                            - generic [ref=f236e954]:
+                              - link "[재 공지] **2020년 2월 4주차 미니리그 일정 그 외** 2월 21일 18시 수정됨" [ref=f236e955] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=109618&referrerAllArticles=false
+                                - generic [ref=f236e956]: "[재 공지] **2020년 2월 4주차 미니리그 일정 그 외** 2월 21일 18시 수정됨"
+                              - generic [ref=f236e959]: 사진
+                          - cell "387" [ref=f236e960]
+                        - row "포켓몬코리아 본사 미니토너먼트 2월 일정 공개 2월 12일 15:20분 수정됨 사진 지도 299" [ref=f236e961]:
+                          - cell "포켓몬코리아 본사 미니토너먼트 2월 일정 공개 2월 12일 15:20분 수정됨 사진 지도" [ref=f236e962]:
+                            - generic [ref=f236e965]:
+                              - link "포켓몬코리아 본사 미니토너먼트 2월 일정 공개 2월 12일 15:20분 수정됨" [ref=f236e966] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=108945&referrerAllArticles=false
+                                - generic [ref=f236e967]: 포켓몬코리아 본사 미니토너먼트 2월 일정 공개 2월 12일 15:20분 수정됨
+                              - generic [ref=f236e968]:
+                                - generic [ref=f236e970]: 사진
+                                - generic [ref=f236e972]: 지도
+                          - cell "299" [ref=f236e973]
+                        - row "2020년 2월 3주차 미니리그 일정 그 외 2월12일 14:30분 수정 됨 339" [ref=f236e974]:
+                          - cell "2020년 2월 3주차 미니리그 일정 그 외 2월12일 14:30분 수정 됨" [ref=f236e975]:
+                            - link "2020년 2월 3주차 미니리그 일정 그 외 2월12일 14:30분 수정 됨" [ref=f236e979] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=108933&referrerAllArticles=false
+                              - generic [ref=f236e980]: 2020년 2월 3주차 미니리그 일정 그 외 2월12일 14:30분 수정 됨
+                          - cell "339" [ref=f236e981]
+                        - row "2020년 2월 2주차 미니리그 일정 그 외 240" [ref=f236e982]:
+                          - cell "2020년 2월 2주차 미니리그 일정 그 외" [ref=f236e983]:
+                            - link "2020년 2월 2주차 미니리그 일정 그 외" [ref=f236e987] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=108398&referrerAllArticles=false
+                              - generic [ref=f236e988]: 2020년 2월 2주차 미니리그 일정 그 외
+                          - cell "240" [ref=f236e989]
+                        - row "2020년 2월 1주차 미니리그 일정 184" [ref=f236e990]:
+                          - cell "2020년 2월 1주차 미니리그 일정" [ref=f236e991]:
+                            - link "2020년 2월 1주차 미니리그 일정" [ref=f236e995] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=107971&referrerAllArticles=false
+                              - generic [ref=f236e996]: 2020년 2월 1주차 미니리그 일정
+                          - cell "184" [ref=f236e997]
+                        - row "2020년 1월 4주차 미니리그 일정 189" [ref=f236e998]:
+                          - cell "2020년 1월 4주차 미니리그 일정" [ref=f236e999]:
+                            - link "2020년 1월 4주차 미니리그 일정" [ref=f236e1003] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=107541&referrerAllArticles=false
+                              - generic [ref=f236e1004]: 2020년 1월 4주차 미니리그 일정
+                          - cell "189" [ref=f236e1005]
+                        - row "2020년 1월 3주차 미니리그 일정 184" [ref=f236e1006]:
+                          - cell "2020년 1월 3주차 미니리그 일정" [ref=f236e1007]:
+                            - link "2020년 1월 3주차 미니리그 일정" [ref=f236e1011] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=107209&referrerAllArticles=false
+                              - generic [ref=f236e1012]: 2020년 1월 3주차 미니리그 일정
+                          - cell "184" [ref=f236e1013]
+                        - row "제 1회 아시아탑리그 대표 선발전 (2020) 대회 개요 및 안내 사진 파일 지도 640" [ref=f236e1014]:
+                          - cell "제 1회 아시아탑리그 대표 선발전 (2020) 대회 개요 및 안내 사진 파일 지도" [ref=f236e1015]:
+                            - generic [ref=f236e1018]:
+                              - link "제 1회 아시아탑리그 대표 선발전 (2020) 대회 개요 및 안내" [ref=f236e1019] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=106804&referrerAllArticles=false
+                                - generic [ref=f236e1020]: 제 1회 아시아탑리그 대표 선발전 (2020) 대회 개요 및 안내
+                              - generic [ref=f236e1021]:
+                                - generic [ref=f236e1023]: 사진
+                                - generic [ref=f236e1025]: 파일
+                                - generic [ref=f236e1027]: 지도
+                          - cell "640" [ref=f236e1028]
+                        - row "2020년 1월 2주차 미니리그 일정 171" [ref=f236e1029]:
+                          - cell "2020년 1월 2주차 미니리그 일정" [ref=f236e1030]:
+                            - link "2020년 1월 2주차 미니리그 일정" [ref=f236e1034] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=106801&referrerAllArticles=false
+                              - generic [ref=f236e1035]: 2020년 1월 2주차 미니리그 일정
+                          - cell "171" [ref=f236e1036]
+                        - row "미니리그2020 소드&실드 레귤레이션 안내 사진 560" [ref=f236e1037]:
+                          - cell "미니리그2020 소드&실드 레귤레이션 안내 사진" [ref=f236e1038]:
+                            - generic [ref=f236e1041]:
+                              - link "미니리그2020 소드&실드 레귤레이션 안내" [ref=f236e1042] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=106733&referrerAllArticles=false
+                                - generic [ref=f236e1043]: 미니리그2020 소드&실드 레귤레이션 안내
+                              - generic [ref=f236e1046]: 사진
+                          - cell "560" [ref=f236e1047]
+                        - row "포켓몬코리아 본사 미니토너먼트 1월 일정 공개 사진 253" [ref=f236e1048]:
+                          - cell "포켓몬코리아 본사 미니토너먼트 1월 일정 공개 사진" [ref=f236e1049]:
+                            - generic [ref=f236e1052]:
+                              - link "포켓몬코리아 본사 미니토너먼트 1월 일정 공개" [ref=f236e1053] [cursor=pointer]:
+                                - /url: /ArticleRead.nhn?clubid=19480246&articleid=106507&referrerAllArticles=false
+                                - generic [ref=f236e1054]: 포켓몬코리아 본사 미니토너먼트 1월 일정 공개
+                              - generic [ref=f236e1057]: 사진
+                          - cell "253" [ref=f236e1058]
+                        - row "2020년 1월 1주차 미니리그 일정 197" [ref=f236e1059]:
+                          - cell "2020년 1월 1주차 미니리그 일정" [ref=f236e1060]:
+                            - link "2020년 1월 1주차 미니리그 일정" [ref=f236e1064] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=106491&referrerAllArticles=false
+                              - generic [ref=f236e1065]: 2020년 1월 1주차 미니리그 일정
+                          - cell "197" [ref=f236e1066]
+                        - row "12월 4주차 미니리그 일정 253" [ref=f236e1067]:
+                          - cell "12월 4주차 미니리그 일정" [ref=f236e1068]:
+                            - link "12월 4주차 미니리그 일정" [ref=f236e1072] [cursor=pointer]:
+                              - /url: /ArticleRead.nhn?clubid=19480246&articleid=106083&referrerAllArticles=false
+                              - generic [ref=f236e1073]: 12월 4주차 미니리그 일정
+                          - cell "253" [ref=f236e1074]
+                - generic [ref=f236e1075]:
+                  - list
+            - link "콘텐츠 하단" [ref=f236e1076] [cursor=pointer]:
+              - /url: "#"
+      - contentinfo [ref=e322]:
+        - heading "포켓몬TCG커뮤니티" [level=2] [ref=e323]
+        - link "https://cafe.naver.com/pokemontcg" [ref=e324] [cursor=pointer]:
+          - /url: "#"
+        - heading "NAVER 카페" [level=2]:
+          - link "NAVER 카페" [ref=e325] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e326]: NAVER 카페
+    - link "콘텐츠 상단" [ref=e327] [cursor=pointer]:
+      - /url: "#"
+  - iframe

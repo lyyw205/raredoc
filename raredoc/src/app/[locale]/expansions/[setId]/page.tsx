@@ -93,7 +93,7 @@ export default async function SetDetailPage({
   const maxPrice = prices.length ? Math.max(...prices) : null;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="px-6 py-8">
       {/* 헤더 */}
       <div className="flex items-start gap-4 mb-6">
         {set.logoUrl && (

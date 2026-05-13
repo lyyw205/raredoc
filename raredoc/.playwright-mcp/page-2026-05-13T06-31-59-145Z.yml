@@ -1,0 +1,1015 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - paragraph:
+      - link "See All Categories" [ref=e2] [cursor=pointer]:
+        - /url: "#category"
+    - paragraph:
+      - link "Learn More" [ref=e3] [cursor=pointer]:
+        - /url: "#contents"
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - heading "TCGBOX" [level=1] [ref=e7]:
+        - link "TCGBOX" [ref=e8] [cursor=pointer]:
+          - /url: /shop2/index.html
+      - group "Search" [ref=e10]:
+        - textbox [ref=e11]
+        - button "Search" [ref=e12] [cursor=pointer]
+    - button "English" [ref=e14] [cursor=pointer]
+    - 'link "Ship to : KOREA (REP OF,) Language : English" [ref=e17] [cursor=pointer]':
+      - /url: "#none"
+      - generic [ref=e18]:
+        - strong [ref=e19]: Ship to
+        - text: ": KOREA (REP OF,)"
+      - generic [ref=e20]:
+        - strong [ref=e21]: Language
+        - text: ": English"
+    - generic [ref=e22]:
+      - link "Sign In" [ref=e23] [cursor=pointer]:
+        - /url: /shop2/member/login.html
+      - link "Sign Up" [ref=e24] [cursor=pointer]:
+        - /url: /shop2/member/join.html
+      - link "Cart" [ref=e25] [cursor=pointer]:
+        - /url: /shop2/order/basket.html
+      - link "Order History" [ref=e26] [cursor=pointer]:
+        - /url: /shop2/myshop/order/list.html
+      - link "My Account" [ref=e27] [cursor=pointer]:
+        - /url: /shop2/myshop/index.html
+      - link "Forum" [ref=e28] [cursor=pointer]:
+        - /url: /shop2/board/index.html
+    - list [ref=e29]:
+      - listitem [ref=e30]:
+        - link "New Arrivals" [ref=e31] [cursor=pointer]:
+          - /url: /shop2/product/list.html?cate_no=24
+  - generic [ref=e32]:
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - generic [ref=e36]:
+            - generic: Current Page
+            - list [ref=e37]:
+              - listitem [ref=e38]:
+                - link "Home" [ref=e39] [cursor=pointer]:
+                  - /url: /shop2
+              - listitem [ref=e40]:
+                - link "SV single card" [ref=e41] [cursor=pointer]:
+                  - /url: /shop2/category/sv-single-card/300/
+              - listitem [ref=e42]:
+                - link "Shineet Leisureex (S/AR/SR/SAR/UR)" [ref=e43] [cursor=pointer]:
+                  - /url: /shop2/category/shineet-leisureex-sarsrsarur/321/
+          - generic [ref=e44]:
+            - paragraph
+            - heading "Shineet Leisureex (S/AR/SR/SAR/UR)" [level=2] [ref=e45]
+          - list [ref=e46]:
+            - listitem [ref=e47]:
+              - link "SV-Promo (88)" [ref=e48] [cursor=pointer]:
+                - /url: /shop2/category/sv-promo/303/
+            - listitem [ref=e49]:
+              - link "Scarletex (sv1S) (109)" [ref=e50] [cursor=pointer]:
+                - /url: /shop2/category/scarletex-sv1s/301/
+            - listitem [ref=e51]:
+              - link "Violet ex (sv1V) (109)" [ref=e52] [cursor=pointer]:
+                - /url: /shop2/category/violet-ex-sv1v/302/
+            - listitem [ref=e53]:
+              - link "triplet beat (sv1a) (104)" [ref=e54] [cursor=pointer]:
+                - /url: /shop2/category/triplet-beat-sv1a/304/
+            - listitem [ref=e55]:
+              - link "Pikachu special set (svc)_ (26)" [ref=e56] [cursor=pointer]:
+                - /url: /shop2/category/pikachu-special-set-svc/311/
+            - listitem [ref=e57]:
+              - link "Snow Hazard (sv2P) (100)" [ref=e58] [cursor=pointer]:
+                - /url: /shop2/category/snow-hazard-sv2p/305/
+            - listitem [ref=e59]:
+              - link "Clayburst (sv2D) (100)" [ref=e60] [cursor=pointer]:
+                - /url: /shop2/category/clayburst-sv2d/306/
+            - listitem [ref=e61]:
+              - link "Pokemon Card 151 (sv2a) (211)" [ref=e62] [cursor=pointer]:
+                - /url: /shop2/category/pokemon-card-151-sv2a/308/
+            - listitem [ref=e63]:
+              - link "Pokémon Card 151 Mirror Card (sv2am) (166)" [ref=e64] [cursor=pointer]:
+                - /url: /shop2/category/pokémon-card-151-mirror-card-sv2am/316/
+            - listitem [ref=e65]:
+              - link "The ruler of black salt (sv3) (142)" [ref=e66] [cursor=pointer]:
+                - /url: /shop2/category/the-ruler-of-black-salt-sv3/309/
+            - listitem [ref=e67]:
+              - link "60 sheets random ex starter deck (svd) (148)" [ref=e68] [cursor=pointer]:
+                - /url: /shop2/category/60-sheets-random-ex-starter-deck-svd/312/
+            - listitem [ref=e69]:
+              - link "Raging Surf (sv3a) (93)" [ref=e70] [cursor=pointer]:
+                - /url: /shop2/category/raging-surf-sv3a/315/
+            - listitem [ref=e71]:
+              - link "Ancient Roaring (sv4k) (96)" [ref=e72] [cursor=pointer]:
+                - /url: /shop2/category/ancient-roaring-sv4k/318/
+            - listitem [ref=e73]:
+              - link "The Island of the Future (sv4m) (96)" [ref=e74] [cursor=pointer]:
+                - /url: /shop2/category/the-island-of-the-future-sv4m/319/
+            - listitem [ref=e75]:
+              - link "Special Decsetex Weird Flower*Lizamong*Turtle K... (56)" [ref=e76] [cursor=pointer]:
+                - /url: /shop2/category/special-decsetex-weird-flowerlizamongturtle-k/322/
+            - listitem [ref=e77]:
+              - link "Shiny Treasure EX (sv4a) - Limited quantity (191)" [ref=e78] [cursor=pointer]:
+                - /url: /shop2/category/shiny-treasure-ex-sv4a-limited-quantity/320/
+            - listitem [ref=e79]:
+              - link "Shineet Leisureex (S/AR/SR/SAR/UR) (171)" [ref=e80] [cursor=pointer]:
+                - /url: /shop2/category/shineet-leisureex-sarsrsarur/321/
+            - listitem [ref=e81]:
+              - link "Terrestrial Mutesex (svEM) (24)" [ref=e82] [cursor=pointer]:
+                - /url: /shop2/category/terrestrial-mutesex-svem/323/
+            - listitem [ref=e83]:
+              - link "Terrestrial Loudbonex (svEL) (24)" [ref=e84] [cursor=pointer]:
+                - /url: /shop2/category/terrestrial-loudbonex-svel/324/
+            - listitem [ref=e85]:
+              - link "Cyber Jersey (sv5m) (101)" [ref=e86] [cursor=pointer]:
+                - /url: /shop2/category/cyber-jersey-sv5m/325/
+            - listitem [ref=e87]:
+              - link "Wild Force (sv5k) (101)" [ref=e88] [cursor=pointer]:
+                - /url: /shop2/category/wild-force-sv5k/327/
+            - listitem [ref=e89]:
+              - link "Crimson Haze (sv5a) (97)" [ref=e90] [cursor=pointer]:
+                - /url: /shop2/category/crimson-haze-sv5a/328/
+            - listitem [ref=e91]:
+              - link "Mask of Transformation (sv6) (134)" [ref=e92] [cursor=pointer]:
+                - /url: /shop2/category/mask-of-transformation-sv6/329/
+            - listitem [ref=e93]:
+              - link "Nightwinder (sv6a) (95)" [ref=e94] [cursor=pointer]:
+                - /url: /shop2/category/nightwinder-sv6a/330/
+            - listitem [ref=e95]:
+              - link "new product category (136)" [ref=e96] [cursor=pointer]:
+                - /url: /shop2/category/new-product-category/331/
+            - listitem [ref=e97]:
+              - link "Naoha & Lucarioex (svAM) (29)" [ref=e98] [cursor=pointer]:
+                - /url: /shop2/category/naoha-amp-lucarioex-svam/332/
+            - listitem [ref=e99]:
+              - link "Hot & Dragon ex(svAL) (27)" [ref=e100] [cursor=pointer]:
+                - /url: /shop2/category/hot-amp-dragon-exsval/336/
+            - listitem [ref=e101]:
+              - link "Kuwax & Taraq ex (svAW) (29)" [ref=e102] [cursor=pointer]:
+                - /url: /shop2/category/kuwax-amp-taraq-ex-svaw/337/
+            - listitem [ref=e103]:
+              - link "Paradise Dragona (sv7a) (95)" [ref=e104] [cursor=pointer]:
+                - /url: /shop2/category/paradise-dragona-sv7a/334/
+            - listitem [ref=e105]:
+              - link "Super Brake (sv8) (139)" [ref=e106] [cursor=pointer]:
+                - /url: /shop2/category/super-brake-sv8/335/
+            - listitem [ref=e107]:
+              - link "Terrastal Festa (sv8a) (238)" [ref=e108] [cursor=pointer]:
+                - /url: /shop2/category/terrastal-festa-sv8a/338/
+            - listitem [ref=e109]:
+              - link "Terrastal Festa Mirror Card (sv8a-m) (145)" [ref=e110] [cursor=pointer]:
+                - /url: /shop2/category/terrastal-festa-mirror-card-sv8a-m/343/
+            - listitem [ref=e111]:
+              - link "Starter set parablaze ex(svLS) (26)" [ref=e112] [cursor=pointer]:
+                - /url: /shop2/category/starter-set-parablaze-exsvls/340/
+            - listitem [ref=e113]:
+              - link "Starter Set Nymphiaex (svLN) (26)" [ref=e114] [cursor=pointer]:
+                - /url: /shop2/category/starter-set-nymphiaex-svln/341/
+            - listitem [ref=e115]:
+              - link "Battle Partners (sv9) (133)" [ref=e116] [cursor=pointer]:
+                - /url: /shop2/category/battle-partners-sv9/342/
+            - listitem [ref=e117]:
+              - link "Arena of Fever (sv9a) (93)" [ref=e118] [cursor=pointer]:
+                - /url: /shop2/category/arena-of-fever-sv9a/347/
+            - listitem [ref=e119]:
+              - link "Team Rocket's Glory (sv10) (133)" [ref=e120] [cursor=pointer]:
+                - /url: /shop2/category/team-rocket39s-glory-sv10/348/
+            - listitem [ref=e121]:
+              - link "Random Start Deck Generations (svM) (184)" [ref=e122] [cursor=pointer]:
+                - /url: /shop2/category/random-start-deck-generations-svm/349/
+            - listitem [ref=e123]:
+              - link "White Flare (sv11W) (175)" [ref=e124] [cursor=pointer]:
+                - /url: /shop2/category/white-flare-sv11w/350/
+            - listitem [ref=e125]:
+              - link "Black Bolt (sv11B) (175)" [ref=e126] [cursor=pointer]:
+                - /url: /shop2/category/black-bolt-sv11b/351/
+            - listitem [ref=e127]:
+              - link "MarleyMorpeko & Orlongtile EX (svom) (22)" [ref=e128] [cursor=pointer]:
+                - /url: /shop2/category/marleymorpeko-orlongtile-ex-svom/359/
+            - listitem [ref=e129]:
+              - link "Metang & Metagross ex (svod) (22)" [ref=e130] [cursor=pointer]:
+                - /url: /shop2/category/metang-metagross-ex-svod/360/
+            - listitem [ref=e131]:
+              - link "고대의 코라이돈ex(svHK) (1)" [ref=e132] [cursor=pointer]:
+                - /url: /shop2/category/고대의-코라이돈exsvhk/362/
+            - listitem [ref=e133]:
+              - link "Miraidon ex (svHM) (1)" [ref=e134] [cursor=pointer]:
+                - /url: /shop2/category/miraidon-ex-svhm/363/
+        - generic [ref=e135]:
+          - generic [ref=e137]:
+            - paragraph [ref=e138]:
+              - strong [ref=e139]: "171"
+              - text: items were found.
+            - list [ref=e140]:
+              - listitem [ref=e141]:
+                - link "New Item" [ref=e142] [cursor=pointer]:
+                  - /url: "?cate_no=321&sort_method=5#Product_ListMenu"
+              - listitem [ref=e143]:
+                - link "Product Name" [ref=e144] [cursor=pointer]:
+                  - /url: "?cate_no=321&sort_method=1#Product_ListMenu"
+              - listitem [ref=e145]:
+                - link "Lowest Price" [ref=e146] [cursor=pointer]:
+                  - /url: "?cate_no=321&sort_method=3#Product_ListMenu"
+              - listitem [ref=e147]:
+                - link "Highest Price" [ref=e148] [cursor=pointer]:
+                  - /url: "?cate_no=321&sort_method=4#Product_ListMenu"
+              - listitem [ref=e149]:
+                - link "Manufacture Company" [ref=e150] [cursor=pointer]:
+                  - /url: "?cate_no=321&sort_method=2#Product_ListMenu"
+              - listitem [ref=e151]:
+                - link "Product Review" [ref=e152] [cursor=pointer]:
+                  - /url: "?cate_no=321&sort_method=7#Product_ListMenu"
+          - list [ref=e154]:
+            - listitem [ref=e155]:
+              - generic [ref=e156]:
+                - generic [ref=e157]:
+                  - link "Important information when using the customer center bulletin board &amp; ordering a single card":
+                    - /url: /shop2/product/important-information-when-using-the-customer-center-bulletin-board-or/14666/category/321/display/1/
+                    - img "Important information when using the customer center bulletin board &amp; ordering a single card" [ref=e158] [cursor=pointer]
+                - generic [ref=e160]:
+                  - img "Add to cart" [ref=e161] [cursor=pointer]
+                  - img "View larger image" [ref=e162] [cursor=pointer]
+              - generic [ref=e163]:
+                - strong [ref=e164]:
+                  - link "Important information when using the customer center bulletin board & ordering a single card" [ref=e165] [cursor=pointer]:
+                    - /url: /shop2/product/important-information-when-using-the-customer-center-bulletin-board-or/14666/category/321/display/1/
+                - list [ref=e166]:
+                  - listitem [ref=e167]: $0
+            - listitem [ref=e168]:
+              - generic [ref=e169]:
+                - generic [ref=e170]:
+                  - link "뚜벅쵸 (sv4a 191)":
+                    - /url: /shop2/product/뚜벅쵸-sv4a-191/18502/category/321/display/1/
+                    - img "뚜벅쵸 (sv4a 191)" [ref=e171] [cursor=pointer]
+                - generic [ref=e172]:
+                  - img "Out-of-stock" [ref=e174]
+                  - img "View larger image" [ref=e176] [cursor=pointer]
+              - generic [ref=e177]:
+                - strong [ref=e178]:
+                  - link "뚜벅쵸 (sv4a 191)" [ref=e179] [cursor=pointer]:
+                    - /url: /shop2/product/뚜벅쵸-sv4a-191/18502/category/321/display/1/
+                - list [ref=e180]:
+                  - listitem [ref=e181]:
+                    - generic [ref=e182]: $2.31 ￦2,996
+                  - listitem [ref=e183]: sv4a 191
+            - listitem [ref=e184]:
+              - generic [ref=e185]:
+                - generic [ref=e186]:
+                  - link "냄새꼬 (sv4a 192)":
+                    - /url: /shop2/product/냄새꼬-sv4a-192/18503/category/321/display/1/
+                    - img "냄새꼬 (sv4a 192)" [ref=e187] [cursor=pointer]
+                - generic [ref=e188]:
+                  - img "Out-of-stock" [ref=e190]
+                  - img "View larger image" [ref=e192] [cursor=pointer]
+              - generic [ref=e193]:
+                - strong [ref=e194]:
+                  - link "냄새꼬 (sv4a 192)" [ref=e195] [cursor=pointer]:
+                    - /url: /shop2/product/냄새꼬-sv4a-192/18503/category/321/display/1/
+                - list [ref=e196]:
+                  - listitem [ref=e197]:
+                    - generic [ref=e198]: $3.08 ￦3,994
+                  - listitem [ref=e199]: sv4a 192
+            - listitem [ref=e200]:
+              - generic [ref=e201]:
+                - generic [ref=e202]:
+                  - link "라플레시아 (sv4a 193)":
+                    - /url: /shop2/product/라플레시아-sv4a-193/18504/category/321/display/1/
+                    - img "라플레시아 (sv4a 193)" [ref=e203] [cursor=pointer]
+                - generic [ref=e205]:
+                  - img "Add to cart" [ref=e206] [cursor=pointer]
+                  - img "View larger image" [ref=e207] [cursor=pointer]
+              - generic [ref=e208]:
+                - strong [ref=e209]:
+                  - link "라플레시아 (sv4a 193)" [ref=e210] [cursor=pointer]:
+                    - /url: /shop2/product/라플레시아-sv4a-193/18504/category/321/display/1/
+                - list [ref=e211]:
+                  - listitem [ref=e212]:
+                    - generic [ref=e213]: $3.47 ￦4,500
+                  - listitem [ref=e214]: sv4a 193
+            - listitem [ref=e215]:
+              - generic [ref=e216]:
+                - generic [ref=e217]:
+                  - link "스라크 (sv4a 194)":
+                    - /url: /shop2/product/스라크-sv4a-194/18505/category/321/display/1/
+                    - img "스라크 (sv4a 194)" [ref=e218] [cursor=pointer]
+                - generic [ref=e219]:
+                  - img "Out-of-stock" [ref=e221]
+                  - img "View larger image" [ref=e223] [cursor=pointer]
+              - generic [ref=e224]:
+                - strong [ref=e225]:
+                  - link "스라크 (sv4a 194)" [ref=e226] [cursor=pointer]:
+                    - /url: /shop2/product/스라크-sv4a-194/18505/category/321/display/1/
+                - list [ref=e227]:
+                  - listitem [ref=e228]:
+                    - generic [ref=e229]: $2.31 ￦2,996
+                  - listitem [ref=e230]: sv4a 194
+            - listitem [ref=e231]:
+              - generic [ref=e232]:
+                - generic [ref=e233]:
+                  - link "통통코 (sv4a 195)":
+                    - /url: /shop2/product/통통코-sv4a-195/18506/category/321/display/1/
+                    - img "통통코 (sv4a 195)" [ref=e234] [cursor=pointer]
+                - generic [ref=e235]:
+                  - img "Out-of-stock" [ref=e237]
+                  - img "View larger image" [ref=e239] [cursor=pointer]
+              - generic [ref=e240]:
+                - strong [ref=e241]:
+                  - link "통통코 (sv4a 195)" [ref=e242] [cursor=pointer]:
+                    - /url: /shop2/product/통통코-sv4a-195/18506/category/321/display/1/
+                - list [ref=e243]:
+                  - listitem [ref=e244]:
+                    - generic [ref=e245]: $3.47 ￦4,500
+                  - listitem [ref=e246]: sv4a 195
+            - listitem [ref=e247]:
+              - generic [ref=e248]:
+                - generic [ref=e249]:
+                  - link "두코 (sv4a 196)":
+                    - /url: /shop2/product/두코-sv4a-196/18507/category/321/display/1/
+                    - img "두코 (sv4a 196)" [ref=e250] [cursor=pointer]
+                - generic [ref=e251]:
+                  - img "Out-of-stock" [ref=e253]
+                  - img "View larger image" [ref=e255] [cursor=pointer]
+              - generic [ref=e256]:
+                - strong [ref=e257]:
+                  - link "두코 (sv4a 196)" [ref=e258] [cursor=pointer]:
+                    - /url: /shop2/product/두코-sv4a-196/18507/category/321/display/1/
+                - list [ref=e259]:
+                  - listitem [ref=e260]:
+                    - generic [ref=e261]: $2.31 ￦2,996
+                  - listitem [ref=e262]: sv4a 196
+            - listitem [ref=e263]:
+              - generic [ref=e264]:
+                - generic [ref=e265]:
+                  - link "솜솜코 (sv4a 197)":
+                    - /url: /shop2/product/솜솜코-sv4a-197/18508/category/321/display/1/
+                    - img "솜솜코 (sv4a 197)" [ref=e266] [cursor=pointer]
+                - generic [ref=e267]:
+                  - img "Out-of-stock" [ref=e269]
+                  - img "View larger image" [ref=e271] [cursor=pointer]
+              - generic [ref=e272]:
+                - strong [ref=e273]:
+                  - link "솜솜코 (sv4a 197)" [ref=e274] [cursor=pointer]:
+                    - /url: /shop2/product/솜솜코-sv4a-197/18508/category/321/display/1/
+                - list [ref=e275]:
+                  - listitem [ref=e276]:
+                    - generic [ref=e277]: $4.24 ￦5,499
+                  - listitem [ref=e278]: sv4a 197
+            - listitem [ref=e279]:
+              - generic [ref=e280]:
+                - generic [ref=e281]:
+                  - link "피콘 (sv4a 198)":
+                    - /url: /shop2/product/피콘-sv4a-198/18509/category/321/display/1/
+                    - img "피콘 (sv4a 198)" [ref=e282] [cursor=pointer]
+                - generic [ref=e283]:
+                  - img "Out-of-stock" [ref=e285]
+                  - img "View larger image" [ref=e287] [cursor=pointer]
+              - generic [ref=e288]:
+                - strong [ref=e289]:
+                  - link "피콘 (sv4a 198)" [ref=e290] [cursor=pointer]:
+                    - /url: /shop2/product/피콘-sv4a-198/18509/category/321/display/1/
+                - list [ref=e291]:
+                  - listitem [ref=e292]:
+                    - generic [ref=e293]: $2.31 ￦2,996
+                  - listitem [ref=e294]: sv4a 198
+            - listitem [ref=e295]:
+              - generic [ref=e296]:
+                - generic [ref=e297]:
+                  - link "눈쓰개 (sv4a 199)":
+                    - /url: /shop2/product/눈쓰개-sv4a-199/18510/category/321/display/1/
+                    - img "눈쓰개 (sv4a 199)" [ref=e298] [cursor=pointer]
+                - generic [ref=e299]:
+                  - img "Out-of-stock" [ref=e301]
+                  - img "View larger image" [ref=e303] [cursor=pointer]
+              - generic [ref=e304]:
+                - strong [ref=e305]:
+                  - link "눈쓰개 (sv4a 199)" [ref=e306] [cursor=pointer]:
+                    - /url: /shop2/product/눈쓰개-sv4a-199/18510/category/321/display/1/
+                - list [ref=e307]:
+                  - listitem [ref=e308]:
+                    - generic [ref=e309]: $2.31 ￦2,996
+                  - listitem [ref=e310]: sv4a 199
+            - listitem [ref=e311]:
+              - generic [ref=e312]:
+                - generic [ref=e313]:
+                  - link "눈설왕 (sv4a 200)":
+                    - /url: /shop2/product/눈설왕-sv4a-200/18511/category/321/display/1/
+                    - img "눈설왕 (sv4a 200)" [ref=e314] [cursor=pointer]
+                - generic [ref=e315]:
+                  - img "Out-of-stock" [ref=e317]
+                  - img "View larger image" [ref=e319] [cursor=pointer]
+              - generic [ref=e320]:
+                - strong [ref=e321]:
+                  - link "눈설왕 (sv4a 200)" [ref=e322] [cursor=pointer]:
+                    - /url: /shop2/product/눈설왕-sv4a-200/18511/category/321/display/1/
+                - list [ref=e323]:
+                  - listitem [ref=e324]:
+                    - generic [ref=e325]: $2.31 ￦2,996
+                  - listitem [ref=e326]: sv4a 200
+            - listitem [ref=e327]:
+              - generic [ref=e328]:
+                - generic [ref=e329]:
+                  - link "나오하 (sv4a 201)":
+                    - /url: /shop2/product/나오하-sv4a-201/18512/category/321/display/1/
+                    - img "나오하 (sv4a 201)" [ref=e330] [cursor=pointer]
+                - generic [ref=e331]:
+                  - img "Out-of-stock" [ref=e333]
+                  - img "View larger image" [ref=e335] [cursor=pointer]
+              - generic [ref=e336]:
+                - strong [ref=e337]:
+                  - link "나오하 (sv4a 201)" [ref=e338] [cursor=pointer]:
+                    - /url: /shop2/product/나오하-sv4a-201/18512/category/321/display/1/
+                - list [ref=e339]:
+                  - listitem [ref=e340]:
+                    - generic [ref=e341]: $5.01 ￦6,498
+                  - listitem [ref=e342]: sv4a 201
+        - generic [ref=e343]:
+          - link "First":
+            - /url: "#none"
+            - img "First" [ref=e344] [cursor=pointer]
+          - link "Prev":
+            - /url: "#none"
+            - img "Prev" [ref=e345] [cursor=pointer]
+          - list [ref=e346]:
+            - listitem [ref=e347]:
+              - link "1" [ref=e348] [cursor=pointer]:
+                - /url: "?page=1"
+            - listitem [ref=e349]:
+              - link "2" [ref=e350] [cursor=pointer]:
+                - /url: "?page=2"
+            - listitem [ref=e351]:
+              - link "3" [ref=e352] [cursor=pointer]:
+                - /url: "?page=3"
+            - listitem [ref=e353]:
+              - link "4" [ref=e354] [cursor=pointer]:
+                - /url: "?page=4"
+            - listitem [ref=e355]:
+              - link "5" [ref=e356] [cursor=pointer]:
+                - /url: "?page=5"
+          - link "Next":
+            - /url: "?page=2"
+            - img "Next" [ref=e357] [cursor=pointer]
+          - link "Last":
+            - /url: "?page=15"
+            - img "Last" [ref=e358] [cursor=pointer]
+      - generic [ref=e359]:
+        - list [ref=e362]:
+          - listitem [ref=e363]:
+            - link "Cookie Run Bravers" [ref=e364] [cursor=pointer]:
+              - /url: /shop2/category/cookie-run-bravers/310/
+          - listitem [ref=e365]:
+            - link "Construction Deck/Expansion Pack" [ref=e366] [cursor=pointer]:
+              - /url: /shop2/category/construction-deckexpansion-pack/54/
+          - listitem [ref=e367]:
+            - link "special card" [ref=e368] [cursor=pointer]:
+              - /url: /shop2/category/special-card/307/
+          - listitem [ref=e369]:
+            - link "MEGA Single Card" [ref=e370] [cursor=pointer]:
+              - /url: /shop2/category/mega-single-card/352/
+          - listitem [ref=e371]:
+            - link "MEGA-P" [ref=e372] [cursor=pointer]:
+              - /url: /shop2/category/mega-p/357/
+          - listitem [ref=e373]:
+            - link "M1L (Megabrave)" [ref=e374] [cursor=pointer]:
+              - /url: /shop2/category/m1l-megabrave/353/
+          - listitem [ref=e375]:
+            - link "M1S (Mega Symphonia)" [ref=e376] [cursor=pointer]:
+              - /url: /shop2/category/m1s-mega-symphonia/354/
+          - listitem [ref=e377]:
+            - link "MBG (Starter Set Mega Phantom EX)" [ref=e378] [cursor=pointer]:
+              - /url: /shop2/category/mbg-starter-set-mega-phantom-ex/355/
+          - listitem [ref=e379]:
+            - link "MBD (Starter Set Megadiancy EX)" [ref=e380] [cursor=pointer]:
+              - /url: /shop2/category/mbd-starter-set-megadiancy-ex/356/
+          - listitem [ref=e381]:
+            - link "M2 (InfernoX)" [ref=e382] [cursor=pointer]:
+              - /url: /shop2/category/m2-infernox/358/
+          - listitem [ref=e383]:
+            - link "M2A (메가드림ex)" [ref=e384] [cursor=pointer]:
+              - /url: /shop2/category/m2a-메가드림ex/366/
+          - listitem [ref=e385]:
+            - link "M3" [ref=e386] [cursor=pointer]:
+              - /url: /shop2/category/m3/367/
+          - listitem [ref=e387]:
+            - link "M4 (Ninja Spinner)" [ref=e388] [cursor=pointer]:
+              - /url: /shop2/category/m4-ninja-spinner/368/
+          - listitem [ref=e389]:
+            - link "SV single card" [ref=e390] [cursor=pointer]:
+              - /url: /shop2/category/sv-single-card/300/
+          - listitem [ref=e391]:
+            - link "SV-Promo" [ref=e392] [cursor=pointer]:
+              - /url: /shop2/category/sv-promo/303/
+          - listitem [ref=e393]:
+            - link "triplet beat (sv1a)" [ref=e394] [cursor=pointer]:
+              - /url: /shop2/category/triplet-beat-sv1a/304/
+          - listitem [ref=e395]:
+            - link "Pikachu special set (svc)_" [ref=e396] [cursor=pointer]:
+              - /url: /shop2/category/pikachu-special-set-svc/311/
+          - listitem [ref=e397]:
+            - link "Snow Hazard (sv2P)" [ref=e398] [cursor=pointer]:
+              - /url: /shop2/category/snow-hazard-sv2p/305/
+          - listitem [ref=e399]:
+            - link "Clayburst (sv2D)" [ref=e400] [cursor=pointer]:
+              - /url: /shop2/category/clayburst-sv2d/306/
+          - listitem [ref=e401]:
+            - link "Pokemon Card 151 (sv2a)" [ref=e402] [cursor=pointer]:
+              - /url: /shop2/category/pokemon-card-151-sv2a/308/
+          - listitem [ref=e403]:
+            - link "Pokémon Card 151 Mirror Card (sv2am)" [ref=e404] [cursor=pointer]:
+              - /url: /shop2/category/pokémon-card-151-mirror-card-sv2am/316/
+          - listitem [ref=e405]:
+            - link "The ruler of black salt (sv3)" [ref=e406] [cursor=pointer]:
+              - /url: /shop2/category/the-ruler-of-black-salt-sv3/309/
+          - listitem [ref=e407]:
+            - link "60 sheets random ex starter deck (svd)" [ref=e408] [cursor=pointer]:
+              - /url: /shop2/category/60-sheets-random-ex-starter-deck-svd/312/
+          - listitem [ref=e409]:
+            - link "Raging Surf (sv3a)" [ref=e410] [cursor=pointer]:
+              - /url: /shop2/category/raging-surf-sv3a/315/
+          - listitem [ref=e411]:
+            - link "Ancient Roaring (sv4k)" [ref=e412] [cursor=pointer]:
+              - /url: /shop2/category/ancient-roaring-sv4k/318/
+          - listitem [ref=e413]:
+            - link "The Island of the Future (sv4m)" [ref=e414] [cursor=pointer]:
+              - /url: /shop2/category/the-island-of-the-future-sv4m/319/
+          - listitem [ref=e415]:
+            - link "Special Decsetex Weird Flower*Lizamong*Turtle K..." [ref=e416] [cursor=pointer]:
+              - /url: /shop2/category/special-decsetex-weird-flowerlizamongturtle-k/322/
+          - listitem [ref=e417]:
+            - link "Shiny Treasure EX (sv4a) - Limited quantity" [ref=e418] [cursor=pointer]:
+              - /url: /shop2/category/shiny-treasure-ex-sv4a-limited-quantity/320/
+          - listitem [ref=e419]:
+            - link "Shineet Leisureex (S/AR/SR/SAR/UR)" [ref=e420] [cursor=pointer]:
+              - /url: /shop2/category/shineet-leisureex-sarsrsarur/321/
+          - listitem [ref=e421]:
+            - link "Terrestrial Mutesex (svEM)" [ref=e422] [cursor=pointer]:
+              - /url: /shop2/category/terrestrial-mutesex-svem/323/
+          - listitem [ref=e423]:
+            - link "Terrestrial Loudbonex (svEL)" [ref=e424] [cursor=pointer]:
+              - /url: /shop2/category/terrestrial-loudbonex-svel/324/
+          - listitem [ref=e425]:
+            - link "Cyber Jersey (sv5m)" [ref=e426] [cursor=pointer]:
+              - /url: /shop2/category/cyber-jersey-sv5m/325/
+          - listitem [ref=e427]:
+            - link "Wild Force (sv5k)" [ref=e428] [cursor=pointer]:
+              - /url: /shop2/category/wild-force-sv5k/327/
+          - listitem [ref=e429]:
+            - link "Crimson Haze (sv5a)" [ref=e430] [cursor=pointer]:
+              - /url: /shop2/category/crimson-haze-sv5a/328/
+          - listitem [ref=e431]:
+            - link "Mask of Transformation (sv6)" [ref=e432] [cursor=pointer]:
+              - /url: /shop2/category/mask-of-transformation-sv6/329/
+          - listitem [ref=e433]:
+            - link "Nightwinder (sv6a)" [ref=e434] [cursor=pointer]:
+              - /url: /shop2/category/nightwinder-sv6a/330/
+          - listitem [ref=e435]:
+            - link "new product category" [ref=e436] [cursor=pointer]:
+              - /url: /shop2/category/new-product-category/331/
+          - listitem [ref=e437]:
+            - link "Naoha & Lucarioex (svAM)" [ref=e438] [cursor=pointer]:
+              - /url: /shop2/category/naoha-amp-lucarioex-svam/332/
+          - listitem [ref=e439]:
+            - link "Hot & Dragon ex(svAL)" [ref=e440] [cursor=pointer]:
+              - /url: /shop2/category/hot-amp-dragon-exsval/336/
+          - listitem [ref=e441]:
+            - link "Kuwax & Taraq ex (svAW)" [ref=e442] [cursor=pointer]:
+              - /url: /shop2/category/kuwax-amp-taraq-ex-svaw/337/
+          - listitem [ref=e443]:
+            - link "Paradise Dragona (sv7a)" [ref=e444] [cursor=pointer]:
+              - /url: /shop2/category/paradise-dragona-sv7a/334/
+          - listitem [ref=e445]:
+            - link "Super Brake (sv8)" [ref=e446] [cursor=pointer]:
+              - /url: /shop2/category/super-brake-sv8/335/
+          - listitem [ref=e447]:
+            - link "Terrastal Festa (sv8a)" [ref=e448] [cursor=pointer]:
+              - /url: /shop2/category/terrastal-festa-sv8a/338/
+          - listitem [ref=e449]:
+            - link "Terrastal Festa Mirror Card (sv8a-m)" [ref=e450] [cursor=pointer]:
+              - /url: /shop2/category/terrastal-festa-mirror-card-sv8a-m/343/
+          - listitem [ref=e451]:
+            - link "Starter set parablaze ex(svLS)" [ref=e452] [cursor=pointer]:
+              - /url: /shop2/category/starter-set-parablaze-exsvls/340/
+          - listitem [ref=e453]:
+            - link "Starter Set Nymphiaex (svLN)" [ref=e454] [cursor=pointer]:
+              - /url: /shop2/category/starter-set-nymphiaex-svln/341/
+          - listitem [ref=e455]:
+            - link "Battle Partners (sv9)" [ref=e456] [cursor=pointer]:
+              - /url: /shop2/category/battle-partners-sv9/342/
+          - listitem [ref=e457]:
+            - link "Arena of Fever (sv9a)" [ref=e458] [cursor=pointer]:
+              - /url: /shop2/category/arena-of-fever-sv9a/347/
+          - listitem [ref=e459]:
+            - link "Team Rocket's Glory (sv10)" [ref=e460] [cursor=pointer]:
+              - /url: /shop2/category/team-rocket39s-glory-sv10/348/
+          - listitem [ref=e461]:
+            - link "Random Start Deck Generations (svM)" [ref=e462] [cursor=pointer]:
+              - /url: /shop2/category/random-start-deck-generations-svm/349/
+          - listitem [ref=e463]:
+            - link "White Flare (sv11W)" [ref=e464] [cursor=pointer]:
+              - /url: /shop2/category/white-flare-sv11w/350/
+          - listitem [ref=e465]:
+            - link "Black Bolt (sv11B)" [ref=e466] [cursor=pointer]:
+              - /url: /shop2/category/black-bolt-sv11b/351/
+          - listitem [ref=e467]:
+            - link "MarleyMorpeko & Orlongtile EX (svom)" [ref=e468] [cursor=pointer]:
+              - /url: /shop2/category/marleymorpeko-orlongtile-ex-svom/359/
+          - listitem [ref=e469]:
+            - link "Metang & Metagross ex (svod)" [ref=e470] [cursor=pointer]:
+              - /url: /shop2/category/metang-metagross-ex-svod/360/
+          - listitem [ref=e471]:
+            - link "고대의 코라이돈ex(svHK)" [ref=e472] [cursor=pointer]:
+              - /url: /shop2/category/고대의-코라이돈exsvhk/362/
+          - listitem [ref=e473]:
+            - link "Miraidon ex (svHM)" [ref=e474] [cursor=pointer]:
+              - /url: /shop2/category/miraidon-ex-svhm/363/
+          - listitem [ref=e475]:
+            - link "SS single card" [ref=e476] [cursor=pointer]:
+              - /url: /shop2/category/ss-single-card/222/
+          - listitem [ref=e477]:
+            - link "SM single card" [ref=e478] [cursor=pointer]:
+              - /url: /shop2/category/sm-single-card/99/
+          - listitem [ref=e479]:
+            - link "...SM Promo" [ref=e480] [cursor=pointer]:
+              - /url: /shop2/category/sm-promo/100/
+          - listitem [ref=e481]:
+            - link "...SM (Energy Card)" [ref=e482] [cursor=pointer]:
+              - /url: /shop2/category/sm-energy-card/120/
+          - listitem [ref=e483]:
+            - link "...smA (3 types of starters)" [ref=e484] [cursor=pointer]:
+              - /url: /shop2/category/sma-3-types-of-starters/101/
+          - listitem [ref=e485]:
+            - link "...SM1 (Sun Collection)" [ref=e486] [cursor=pointer]:
+              - /url: /shop2/category/sm1-sun-collection/102/
+          - listitem [ref=e487]:
+            - link "...SM1 (Moon Collection)" [ref=e488] [cursor=pointer]:
+              - /url: /shop2/category/sm1-moon-collection/103/
+          - listitem [ref=e489]:
+            - link "...sm60A (Rougaruam GX)" [ref=e490] [cursor=pointer]:
+              - /url: /shop2/category/sm60a-rougaruam-gx/106/
+          - listitem [ref=e491]:
+            - link "...SM1+ (Enhanced Expansion Pack)" [ref=e492] [cursor=pointer]:
+              - /url: /shop2/category/sm1-enhanced-expansion-pack/107/
+          - listitem [ref=e493]:
+            - link "...SM1+ (Enhanced Expansion Pack Mirror Card)" [ref=e494] [cursor=pointer]:
+              - /url: /shop2/category/sm1-enhanced-expansion-pack-mirror-card/108/
+          - listitem [ref=e495]:
+            - link "...SM2 (Moonlight of Alola)" [ref=e496] [cursor=pointer]:
+              - /url: /shop2/category/sm2-moonlight-of-alola/109/
+          - listitem [ref=e497]:
+            - link "...SM2 (Sunshine of Alola)" [ref=e498] [cursor=pointer]:
+              - /url: /shop2/category/sm2-sunshine-of-alola/110/
+          - listitem [ref=e499]:
+            - link "...smC (Capu Bruru GX)" [ref=e500] [cursor=pointer]:
+              - /url: /shop2/category/smc-capu-bruru-gx/111/
+          - listitem [ref=e501]:
+            - link "...SM2+ (New Trial)" [ref=e502] [cursor=pointer]:
+              - /url: /shop2/category/sm2-new-trial/112/
+          - listitem [ref=e503]:
+            - link "...SM2+ (New Trial Mirror Card)" [ref=e504] [cursor=pointer]:
+              - /url: /shop2/category/sm2-new-trial-mirror-card/113/
+          - listitem [ref=e505]:
+            - link "...SM3 (a rainbow that brightens the darkness)" [ref=e506] [cursor=pointer]:
+              - /url: /shop2/category/sm3-a-rainbow-that-brightens-the-darkness/114/
+          - listitem [ref=e507]:
+            - link "...SM3 (Darkness that swallowed the light)" [ref=e508] [cursor=pointer]:
+              - /url: /shop2/category/sm3-darkness-that-swallowed-the-light/115/
+          - listitem [ref=e509]:
+            - link "...smD (Jiwoo VS Team Rocket) last in stock" [ref=e510] [cursor=pointer]:
+              - /url: /shop2/category/smd-jiwoo-vs-team-rocket-last-in-stock/122/
+          - listitem [ref=e511]:
+            - link "...SM3+ (Shining Legend)" [ref=e512] [cursor=pointer]:
+              - /url: /shop2/category/sm3-shining-legend/143/
+          - listitem [ref=e513]:
+            - link "...SM4a (Extradimensional Invaders)" [ref=e514] [cursor=pointer]:
+              - /url: /shop2/category/sm4a-extradimensional-invaders/138/
+          - listitem [ref=e515]:
+            - link "...SM4s (Awakening Hero)" [ref=e516] [cursor=pointer]:
+              - /url: /shop2/category/sm4s-awakening-hero/140/
+          - listitem [ref=e517]:
+            - link "...SM4+ (GX Battle Boost)" [ref=e518] [cursor=pointer]:
+              - /url: /shop2/category/sm4-gx-battle-boost/147/
+          - listitem [ref=e519]:
+            - link "...smE (Premium Trainer Edition)" [ref=e520] [cursor=pointer]:
+              - /url: /shop2/category/sme-premium-trainer-edition/148/
+          - listitem [ref=e521]:
+            - link "...SM5s (Ultra Sun)" [ref=e522] [cursor=pointer]:
+              - /url: /shop2/category/sm5s-ultra-sun/161/
+          - listitem [ref=e523]:
+            - link "...SM5m (Ultra Moon)" [ref=e524] [cursor=pointer]:
+              - /url: /shop2/category/sm5m-ultra-moon/162/
+          - listitem [ref=e525]:
+            - link "...SM5+ (Ultra Force)" [ref=e526] [cursor=pointer]:
+              - /url: /shop2/category/sm5-ultra-force/164/
+          - listitem [ref=e527]:
+            - link "...SM5+ (Ultra Force Mirror Card)" [ref=e528] [cursor=pointer]:
+              - /url: /shop2/category/sm5-ultra-force-mirror-card/165/
+          - listitem [ref=e529]:
+            - link "...SM6 (Forbidden Light)" [ref=e530] [cursor=pointer]:
+              - /url: /shop2/category/sm6-forbidden-light/166/
+          - listitem [ref=e531]:
+            - link "...SM6a (Dragon Storm)" [ref=e532] [cursor=pointer]:
+              - /url: /shop2/category/sm6a-dragon-storm/167/
+          - listitem [ref=e533]:
+            - link "...SM6a (Dragon Storm Mirror Card)" [ref=e534] [cursor=pointer]:
+              - /url: /shop2/category/sm6a-dragon-storm-mirror-card/168/
+          - listitem [ref=e535]:
+            - link "...SM6b (Champion Road)" [ref=e536] [cursor=pointer]:
+              - /url: /shop2/category/sm6b-champion-road/171/
+          - listitem [ref=e537]:
+            - link "...SM6b (Champion Road Mirror Card)" [ref=e538] [cursor=pointer]:
+              - /url: /shop2/category/sm6b-champion-road-mirror-card/172/
+          - listitem [ref=e539]:
+            - link "...SM7 (Charisma of the Sky)" [ref=e540] [cursor=pointer]:
+              - /url: /shop2/category/sm7-charisma-of-the-sky/174/
+          - listitem [ref=e541]:
+            - link "...sm60B (Lico GX) last stock" [ref=e542] [cursor=pointer]:
+              - /url: /shop2/category/sm60b-lico-gx-last-stock/178/
+          - listitem [ref=e543]:
+            - link "...SM7a (Plasma Park)" [ref=e544] [cursor=pointer]:
+              - /url: /shop2/category/sm7a-plasma-park/183/
+          - listitem [ref=e545]:
+            - link "...SM7a (Plasma Park Mirror Card)" [ref=e546] [cursor=pointer]:
+              - /url: /shop2/category/sm7a-plasma-park-mirror-card/208/
+          - listitem [ref=e547]:
+            - link "...SM7b (Fairyrise)" [ref=e548] [cursor=pointer]:
+              - /url: /shop2/category/sm7b-fairyrise/179/
+          - listitem [ref=e549]:
+            - link "...SM7b (Fairize Mirror Card)" [ref=e550] [cursor=pointer]:
+              - /url: /shop2/category/sm7b-fairize-mirror-card/180/
+          - listitem [ref=e551]:
+            - link "...SM8 (Beast Impact)" [ref=e552] [cursor=pointer]:
+              - /url: /shop2/category/sm8-beast-impact/181/
+          - listitem [ref=e553]:
+            - link "...SM4+(GX Battle Boost REMASTER)" [ref=e554] [cursor=pointer]:
+              - /url: /shop2/category/sm4gx-battle-boost-remaster/182/
+          - listitem [ref=e555]:
+            - link "...sm1 (3 types of Sun & Moon starter set)" [ref=e556] [cursor=pointer]:
+              - /url: /shop2/category/sm1-3-types-of-sun-amp-moon-starter-set/184/
+          - listitem [ref=e557]:
+            - link "...SM8a (Dark Order)" [ref=e558] [cursor=pointer]:
+              - /url: /shop2/category/sm8a-dark-order/185/
+          - listitem [ref=e559]:
+            - link "...SM8a (Dark Order Mirror Card)" [ref=e560] [cursor=pointer]:
+              - /url: /shop2/category/sm8a-dark-order-mirror-card/207/
+          - listitem [ref=e561]:
+            - link "...SM8b (Ultra Shiny) inventory being cleared..." [ref=e562] [cursor=pointer]:
+              - /url: /shop2/category/sm8b-ultra-shiny-inventory-being-cleared/193/
+          - listitem [ref=e563]:
+            - link "...SM9 (Tag Bolt)" [ref=e564] [cursor=pointer]:
+              - /url: /shop2/category/sm9-tag-bolt/186/
+          - listitem [ref=e565]:
+            - link "...SM9a (Night Unison)" [ref=e566] [cursor=pointer]:
+              - /url: /shop2/category/sm9a-night-unison/194/
+          - listitem [ref=e567]:
+            - link "...SM9a (Night Unison Mirror Card)" [ref=e568] [cursor=pointer]:
+              - /url: /shop2/category/sm9a-night-unison-mirror-card/206/
+          - listitem [ref=e569]:
+            - link "...smK (Acusta GX & Longstone GX)" [ref=e570] [cursor=pointer]:
+              - /url: /shop2/category/smk-acusta-gx-amp-longstone-gx/195/
+          - listitem [ref=e571]:
+            - link "...SM9b (full metal wall)" [ref=e572] [cursor=pointer]:
+              - /url: /shop2/category/sm9b-full-metal-wall/196/
+          - listitem [ref=e573]:
+            - link "...SM9b (full metal wall mirror card)" [ref=e574] [cursor=pointer]:
+              - /url: /shop2/category/sm9b-full-metal-wall-mirror-card/204/
+          - listitem [ref=e575]:
+            - link "...smP2 (Detective Pikachu)" [ref=e576] [cursor=pointer]:
+              - /url: /shop2/category/smp2-detective-pikachu/197/
+          - listitem [ref=e577]:
+            - link "...SM10 (double blaze)" [ref=e578] [cursor=pointer]:
+              - /url: /shop2/category/sm10-double-blaze/199/
+          - listitem [ref=e579]:
+            - link "...SM10a (GG end)" [ref=e580] [cursor=pointer]:
+              - /url: /shop2/category/sm10a-gg-end/201/
+          - listitem [ref=e581]:
+            - link "...SM10a (GG end mirror card)" [ref=e582] [cursor=pointer]:
+              - /url: /shop2/category/sm10a-gg-end-mirror-card/203/
+          - listitem [ref=e583]:
+            - link "..SM10b (Sky Legend)" [ref=e584] [cursor=pointer]:
+              - /url: /shop2/category/sm10b-sky-legend/210/
+          - listitem [ref=e585]:
+            - link "...SM10b mr (Sky Legend Mirror Card)" [ref=e586] [cursor=pointer]:
+              - /url: /shop2/category/sm10b-mr-sky-legend-mirror-card/209/
+          - listitem [ref=e587]:
+            - link "...smM (starter set TAG TEAM GX) 2 types" [ref=e588] [cursor=pointer]:
+              - /url: /shop2/category/smm-starter-set-tag-team-gx-2-types/211/
+          - listitem [ref=e589]:
+            - link "...SM11 (Miracle Twin)" [ref=e590] [cursor=pointer]:
+              - /url: /shop2/category/sm11-miracle-twin/212/
+          - listitem [ref=e591]:
+            - link "...SM8b ULTIMATE" [ref=e592] [cursor=pointer]:
+              - /url: /shop2/category/sm8b-ultimate/213/
+          - listitem [ref=e593]:
+            - link "...SM11a (Remixbout)" [ref=e594] [cursor=pointer]:
+              - /url: /shop2/category/sm11a-remixbout/214/
+          - listitem [ref=e595]:
+            - link "...SM11a mr (Remix Bout Mirror Card)" [ref=e596] [cursor=pointer]:
+              - /url: /shop2/category/sm11a-mr-remix-bout-mirror-card/215/
+          - listitem [ref=e597]:
+            - link "...SM11b (Dream League)" [ref=e598] [cursor=pointer]:
+              - /url: /shop2/category/sm11b-dream-league/217/
+          - listitem [ref=e599]:
+            - link "...SM11b mr (Dream League Mirror Card)" [ref=e600] [cursor=pointer]:
+              - /url: /shop2/category/sm11b-mr-dream-league-mirror-card/218/
+          - listitem [ref=e601]:
+            - link "...SM12 (Alter Genesis)" [ref=e602] [cursor=pointer]:
+              - /url: /shop2/category/sm12-alter-genesis/219/
+          - listitem [ref=e603]:
+            - link "...Sun & Moon Expansion Pack Set (Melmethane.." [ref=e604] [cursor=pointer]:
+              - /url: /shop2/category/sun-amp-moon-expansion-pack-set-melmethane/220/
+          - listitem [ref=e605]:
+            - link "...SM12a (Tag All Stars)" [ref=e606] [cursor=pointer]:
+              - /url: /shop2/category/sm12a-tag-all-stars/221/
+          - listitem [ref=e607]:
+            - link "XY single card" [ref=e608] [cursor=pointer]:
+              - /url: /shop2/category/xy-single-card/55/
+          - listitem [ref=e609]:
+            - link "...SR/UR card" [ref=e610] [cursor=pointer]:
+              - /url: /shop2/category/srur-card/66/
+          - listitem [ref=e611]:
+            - link "...RR card (EX, break)" [ref=e612] [cursor=pointer]:
+              - /url: /shop2/category/rr-card-ex-break/67/
+          - listitem [ref=e613]:
+            - link "...Trainers/Energy" [ref=e614] [cursor=pointer]:
+              - /url: /shop2/category/trainersenergy/68/
+          - listitem [ref=e615]:
+            - link "...General card (R, U, C grade)" [ref=e616] [cursor=pointer]:
+              - /url: /shop2/category/general-card-r-u-c-grade/69/
+          - listitem [ref=e617]:
+            - link "...promo" [ref=e618] [cursor=pointer]:
+              - /url: /shop2/category/promo/72/
+          - listitem [ref=e619]:
+            - link "...construction deck" [ref=e620] [cursor=pointer]:
+              - /url: /shop2/category/construction-deck/74/
+          - listitem [ref=e621]:
+            - link "...Best of XY" [ref=e622] [cursor=pointer]:
+              - /url: /shop2/category/best-of-xy/117/
+          - listitem [ref=e623]:
+            - link "DP&BW single card" [ref=e624] [cursor=pointer]:
+              - /url: /shop2/category/dpbw-single-card/78/
+          - listitem [ref=e625]:
+            - link "SR/UR card" [ref=e626] [cursor=pointer]:
+              - /url: /shop2/category/srur-card/81/
+          - listitem [ref=e627]:
+            - link "Foreign version single card" [ref=e628] [cursor=pointer]:
+              - /url: /shop2/category/foreign-version-single-card/118/
+          - listitem [ref=e629]:
+            - link "*Special price product (event)*" [ref=e630] [cursor=pointer]:
+              - /url: /shop2/category/special-price-product-event/119/
+          - listitem [ref=e631]:
+            - link "*Card supplies*" [ref=e632] [cursor=pointer]:
+              - /url: /shop2/category/card-supplies/56/
+          - listitem [ref=e633]:
+            - link "Dragon Shield" [ref=e634] [cursor=pointer]:
+              - /url: /shop2/category/dragon-shield/125/
+          - listitem [ref=e635]:
+            - link "Pokemon Card Coins" [ref=e636] [cursor=pointer]:
+              - /url: /shop2/category/pokemon-card-coins/344/
+          - listitem [ref=e637]:
+            - link "New product classification" [ref=e638] [cursor=pointer]:
+              - /url: /shop2/category/new-product-classification/269/
+          - listitem [ref=e639]:
+            - link "Etc" [ref=e640] [cursor=pointer]:
+              - /url: /shop2/category/etc/63/
+          - listitem [ref=e641]:
+            - link "BEST" [ref=e642] [cursor=pointer]:
+              - /url: /shop2/category/best/365/
+        - generic [ref=e643]:
+          - heading "Main Forum" [level=2] [ref=e644]
+          - list [ref=e645]:
+            - listitem [ref=e646]:
+              - link "Notice" [ref=e647] [cursor=pointer]:
+                - /url: /shop2/board/notice/1/
+            - listitem [ref=e648]:
+              - link "News and Events" [ref=e649] [cursor=pointer]:
+                - /url: /shop2/board/news-and-events/2/
+            - listitem [ref=e650]:
+              - link "FAQ" [ref=e651] [cursor=pointer]:
+                - /url: /shop2/board/faq/3/
+            - listitem [ref=e652]:
+              - link "Product Review" [ref=e653] [cursor=pointer]:
+                - /url: /shop2/board/product-review/4/
+            - listitem [ref=e654]:
+              - link "Product Q&A" [ref=e655] [cursor=pointer]:
+                - /url: /shop2/board/product-qa/6/
+            - listitem [ref=e656]:
+              - link "General Discussion Forum" [ref=e657] [cursor=pointer]:
+                - /url: /shop2/board/general-discussion-forum/5/
+            - listitem [ref=e658]:
+              - link "General Discussion Forum2" [ref=e659] [cursor=pointer]:
+                - /url: /shop2/board/general-discussion-forum2/1002/
+            - listitem [ref=e660]:
+              - link "Gallery" [ref=e661] [cursor=pointer]:
+                - /url: /shop2/board/gallery/8/
+            - listitem [ref=e662]:
+              - link "Data" [ref=e663] [cursor=pointer]:
+                - /url: /shop2/board/data/7/
+        - generic [ref=e665]:
+          - heading "Product Search" [level=2] [ref=e666]
+          - group "Search" [ref=e667]:
+            - textbox [ref=e668]
+            - button "Search" [ref=e669] [cursor=pointer]
+          - text: ",,"
+          - paragraph [ref=e670]:
+            - link "Advanced Search" [ref=e671] [cursor=pointer]:
+              - /url: /shop2/product/search.html
+        - generic [ref=e673]:
+          - heading "Sign In" [level=2] [ref=e674]
+          - group "Log In" [ref=e675]:
+            - paragraph [ref=e676]:
+              - generic "ID or email" [ref=e678]:
+                - textbox [ref=e679]:
+                  - /placeholder: ID or email
+              - generic "Password" [ref=e681]:
+                - textbox [ref=e682]:
+                  - /placeholder: Password
+            - paragraph [ref=e683]:
+              - img "Secured Login" [ref=e684]
+              - text: Secured Login
+            - generic [ref=e685]:
+              - link "Sign In" [ref=e686] [cursor=pointer]:
+                - /url: "#none"
+              - link "Sign Up" [ref=e687] [cursor=pointer]:
+                - /url: /shop2/member/join.html
+          - list [ref=e688]:
+            - listitem [ref=e689]:
+              - link "Forgot ID" [ref=e690] [cursor=pointer]:
+                - /url: /shop2/member/id/find_id.html
+            - listitem [ref=e691]:
+              - link "Forgot Password" [ref=e692] [cursor=pointer]:
+                - /url: /shop2/member/passwd/find_passwd_info.html
+        - generic [ref=e693]:
+          - heading "Customer Service" [level=2] [ref=e694]
+          - list [ref=e695]:
+            - listitem [ref=e696]:
+              - generic [ref=e697]: 070-8262-0805
+            - listitem [ref=e698]:
+              - strong [ref=e699]: Fax
+            - listitem [ref=e700]:
+              - strong [ref=e701]: Time
+              - generic [ref=e702]: AM10-PM5
+        - paragraph [ref=e704]:
+          - link "Savor's Coupon Zone" [ref=e705] [cursor=pointer]:
+            - /url: /shop2/coupon/coupon_zone.html
+    - generic [ref=e706]:
+      - generic [ref=e707]:
+        - strong [ref=e708]: Cart
+        - generic [ref=e709]:
+          - link "0" [ref=e710] [cursor=pointer]:
+            - /url: /shop2/order/basket.html
+          - text: item(s)
+      - generic [ref=e711]:
+        - heading "Recently Viewed" [level=2] [ref=e712]:
+          - link "Recently Viewed" [ref=e713] [cursor=pointer]:
+            - /url: /shop2/product/recent_view_product.html
+        - list [ref=e714]:
+          - listitem [ref=e715]:
+            - link "캐터피 (sv9 0" [ref=e716] [cursor=pointer]:
+              - /url: /shop2/product/detail.html?product_no=20541&cate_no=342&display_group=1
+              - generic [ref=e717]: 캐터피 (sv9 0
+        - paragraph [ref=e718]:
+          - img "Prev" [ref=e719] [cursor=pointer]
+          - img "Next" [ref=e720] [cursor=pointer]
+      - paragraph [ref=e721]:
+        - link "Top" [ref=e722] [cursor=pointer]:
+          - /url: "#header"
+          - img "Top" [ref=e723]
+  - generic [ref=e725]:
+    - link "TCGBOX" [ref=e727] [cursor=pointer]:
+      - /url: /shop2/index.html
+    - generic [ref=e728]:
+      - list [ref=e729]:
+        - listitem [ref=e730]:
+          - link "Home" [ref=e731] [cursor=pointer]:
+            - /url: /shop2/index.html
+        - listitem [ref=e732]:
+          - link "About Us" [ref=e733] [cursor=pointer]:
+            - /url: /shop2/shopinfo/company.html
+        - listitem [ref=e734]:
+          - link "Terms and Conditions" [ref=e735] [cursor=pointer]:
+            - /url: /shop2/member/agreement.html
+        - listitem [ref=e736]:
+          - link "Privacy Policy" [ref=e737] [cursor=pointer]:
+            - /url: /shop2/member/privacy.html
+            - strong [ref=e738]: Privacy Policy
+        - listitem [ref=e739]:
+          - link "Help" [ref=e740] [cursor=pointer]:
+            - /url: /shop2/shopinfo/guide.html
+        - button "Reference currency KRW ￦" [ref=e742] [cursor=pointer]
+      - paragraph [ref=e743]:
+        - text: "Corporate Name (Company Name) : TCGBOX CEO (Name) : HAN HYE JEONG Business Registration No.: [475-59-00124] E-commerce Permit 제2016-서울도봉-0058호"
+        - link "[Mail-order Business Registration Number]" [ref=e745] [cursor=pointer]:
+          - /url: "#none"
+        - text: "Phone : 01039060805 Fax : Address : 02749 40 Opaesan-ro 16ga-gil, Seongbuk-gu, Seoul, Republic of Korea 102-1304"
+        - generic [ref=e746]:
+          - text: "Personal Information Manager:"
+          - link "HAN HYE JEONG(tcgnu@naver.com)" [ref=e747] [cursor=pointer]:
+            - /url: mailto:tcgnu@naver.com
+        - generic [ref=e748]:
+          - text: Contact
+          - strong [ref=e749]:
+            - link "tcgnu@naver.com" [ref=e750] [cursor=pointer]:
+              - /url: mailto:tcgnu@naver.com
+          - text: for more information.
+      - paragraph [ref=e751]:
+        - text: Copyright ©
+        - strong [ref=e752]: TCGBOX
+        - text: . All rights reserved.
+      - paragraph [ref=e753]:
+        - img "hosting by cafe24 corporation" [ref=e754]

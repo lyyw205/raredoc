@@ -1,0 +1,1834 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - link "통합검색 바로가기" [ref=e2] [cursor=pointer]:
+      - /url: "#search_wrap"
+      - generic [ref=e3]: 통합검색 바로가기
+    - link "본문영역 바로가기" [ref=e4] [cursor=pointer]:
+      - /url: "#container"
+      - generic [ref=e5]: 본문영역 바로가기
+    - link "페이지 하단 게시물 리스트 바로가기" [ref=e6] [cursor=pointer]:
+      - /url: "#bottom_listwrap"
+      - generic [ref=e7]: 페이지 하단 게시물 리스트 바로가기
+    - link "페이지 하단 로그인영역 바로가기" [ref=e8] [cursor=pointer]:
+      - /url: "#login"
+      - generic [ref=e9]: 페이지 하단 로그인영역 바로가기
+  - generic [ref=e10]:
+    - banner [ref=e11]:
+      - generic [ref=e12]:
+        - heading "디시인사이드 갤러리" [level=1] [ref=e13]:
+          - link "디시인사이드" [ref=e14] [cursor=pointer]:
+            - /url: https://www.dcinside.com/
+            - img "디시인사이드" [ref=e15]
+          - link "갤러리" [ref=e16] [cursor=pointer]:
+            - /url: https://gall.dcinside.com/m
+            - img "갤러리" [ref=e17]
+        - search [ref=e19]:
+          - group "통합검색" [ref=e20]:
+            - generic [ref=e21]:
+              - textbox "검색어 입력" [ref=e23]:
+                - /placeholder: 갤러리 & 통합검색
+              - button [ref=e24] [cursor=pointer]
+        - generic [ref=e25]:
+          - list [ref=e26]:
+            - listitem [ref=e27]:
+              - link "갤러리" [ref=e28] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/
+            - listitem [ref=e29]:
+              - text: "|"
+              - link "미니갤" [ref=e30] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/n
+            - listitem [ref=e31]:
+              - text: "|"
+              - link "인물갤" [ref=e32] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/p
+            - listitem [ref=e33]:
+              - text: "|"
+              - link "갤로그" [ref=e34] [cursor=pointer]:
+                - /url: https://gallog.dcinside.com
+            - listitem [ref=e35]:
+              - text: "|"
+              - link "디시게임" [ref=e36] [cursor=pointer]:
+                - /url: //h5.dcinside.com/game/main
+            - listitem [ref=e37]:
+              - text: "|"
+              - link "이벤트" [ref=e38] [cursor=pointer]:
+                - /url: https://event.dcinside.com
+            - listitem [ref=e39]:
+              - text: "|"
+              - link "디시콘" [ref=e40] [cursor=pointer]:
+                - /url: https://mall.dcinside.com/?from=A08
+            - listitem [ref=e41]:
+              - link "로그인" [ref=e42] [cursor=pointer]:
+                - /url: https://sign.dcinside.com/login?s_url=https%3A%2F%2Fgall.dcinside.com%2Fmgallery%2Fboard%2Fview%2F%3Fid%3Dpokemoncardgame%26no%3D108413&s_key=681
+          - link "야간모드" [ref=e44] [cursor=pointer]:
+            - /url: javascript:;
+            - emphasis [ref=e45]
+            - text: 야간모드
+    - navigation [ref=e47]:
+      - list [ref=e48]:
+        - listitem [ref=e49]:
+          - link "갤러리" [ref=e50] [cursor=pointer]:
+            - /url: https://gall.dcinside.com
+        - listitem [ref=e52]:
+          - link "마이너갤" [ref=e53] [cursor=pointer]:
+            - /url: //gall.dcinside.com/m
+        - listitem [ref=e54]:
+          - link "미니갤" [ref=e55] [cursor=pointer]:
+            - /url: //gall.dcinside.com/n
+        - listitem [ref=e56]:
+          - link "인물갤" [ref=e57] [cursor=pointer]:
+            - /url: //gall.dcinside.com/p
+        - listitem [ref=e58]:
+          - link "갤로그" [ref=e59] [cursor=pointer]:
+            - /url: https://gallog.dcinside.com
+        - listitem [ref=e60]:
+          - link "BJ방송" [ref=e61] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=e62]:
+          - button [ref=e63] [cursor=pointer]
+      - generic [ref=e64]:
+        - link "어제 1,038,088개 게시글 등록" [ref=e66] [cursor=pointer]:
+          - /url: https://gall.dcinside.com/board/lists/?id=dclottery
+          - text: 어제
+          - emphasis [ref=e67]: 1,038,088개
+          - text: 게시글 등록
+        - link "어제 2,697,081개 댓글 등록" [ref=e69] [cursor=pointer]:
+          - /url: https://gall.dcinside.com/board/lists/?id=dclottery
+          - text: 어제
+          - emphasis [ref=e70]: 2,697,081개
+          - text: 댓글 등록
+        - generic [ref=e71]:
+          - text: 총 갤러리 수
+          - emphasis [ref=e72]: 94,684개
+        - link "디시 로터리 응모" [ref=e74] [cursor=pointer]:
+          - /url: https://gall.dcinside.com/board/lists/?id=dclottery
+    - generic [ref=e76]:
+      - heading "최근 방문" [level=3] [ref=e77]
+      - button [ref=e78] [cursor=pointer]:
+        - emphasis [ref=e79]
+      - button [ref=e80] [cursor=pointer]:
+        - emphasis [ref=e81]
+      - list [ref=e83]:
+        - listitem [ref=e84]:
+          - link "포켓몬 카드 게임" [ref=e85] [cursor=pointer]:
+            - /url: https://gall.dcinside.com/mgallery/board/lists?id=pokemoncardgame
+          - emphasis [ref=e86]: ⓜ
+          - button [ref=e87] [cursor=pointer]:
+            - emphasis [ref=e88]
+      - button [ref=e89] [cursor=pointer]:
+        - emphasis [ref=e90]
+      - button "전체" [ref=e91] [cursor=pointer]
+    - generic [ref=e92]:
+      - main [ref=e93]:
+        - generic [ref=e94]:
+          - generic [ref=e96]:
+            - heading "포켓몬 카드 게임 갤러리" [level=2] [ref=e98]:
+              - link "포켓몬 카드 게임 갤러리" [ref=e99] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/mgallery/board/lists/?id=pokemoncardgame
+                - text: 포켓몬 카드 게임 갤러리
+            - generic [ref=e101]:
+              - generic [ref=e102]:
+                - button "설정" [ref=e103] [cursor=pointer]
+                - emphasis [ref=e105]
+              - button "|연관 갤러리(0/3)" [ref=e106] [cursor=pointer]:
+                - text: "|연관 갤러리(0/3)"
+                - emphasis [ref=e107]
+              - button "|갤주소 복사" [ref=e108] [cursor=pointer]
+              - button "|이용안내" [ref=e109] [cursor=pointer]
+              - button "|" [ref=e110] [cursor=pointer]:
+                - text: "|"
+                - emphasis [ref=e111]
+          - article [ref=e112]
+          - article [ref=e114]:
+            - generic [ref=e115]:
+              - generic [ref=e117]:
+                - heading "[일반] 카드 시세 어디서 봐야함?" [level=3] [ref=e118]: "[일반] 카드 시세 어디서 봐야함?"
+                - generic:
+                  - generic [ref=e120] [cursor=pointer]:
+                    - generic "Wisp" [ref=e121]:
+                      - emphasis [ref=e122]: Wisp
+                    - img "갤로그로 이동합니다." [ref=e124]
+                    - text: 2026.04.20 20:07:56
+                  - generic [ref=e125] [cursor=pointer]:
+                    - button "스크랩" [ref=e127]
+                    - text: 조회 3687 추천 0
+                    - link "댓글 5" [ref=e129]:
+                      - /url: "#focus_cmt"
+              - generic [ref=e130]:
+                - generic [ref=e131]:
+                  - generic [ref=e132]:
+                    - iframe [ref=e135]:
+                      - generic [ref=f172e3]:
+                        - link "광고 이미지 광고 이미지 달콤한 햇 부사 35% 할인중! 달콤한 경북 꿀사과를 제철 특가로 만나보세요. 전국농부들 지금 구매하기" [ref=f172e4] [cursor=pointer]:
+                          - /url: https://g.tivan.naver.com/gfa/J_QfFb1hjiKgbStzTgPhhu8Aac88m6ZnK58Sjfla5Oo6TIn8kFSy5JIW4x3TIufLNQ3mmcwwOpwz4muvX1BkrvlETQOgA1q6qSZl7AGAXNsNp19JLBirf-hCwusr2CbivCMNGznr57auc_y_916T_I_wVgF5onciGtm9udhnt8KuKlh1sQtaWS34rWRiUPZrBDJYPrPOY0lpay651EOEeqqTZfNx085HVPrK5wSOBFezlFEcenvRnrbxHyIqnHF4rPVYo3Dxbgoja4CMMo6iqiC7UNsqK_pLUpMrN2jF48c8WmA4ZgxT_FgVzJUSGfdFzfULOi7C5bSE9GqrlUSKlnIJ52hUaLXBMuFU4-wezYj5NQmyiGNSQ3bbpXxWkvJz7bSJQf_DmzIGIdI3aHjLZjWZfB_f2ApfcaSzR7cYeNZ4Br8hdnAwcUbdBM7r1UdmYoP6OVIt0egKQzHwnER7RPbtdiVcclqv_lv26utbLTp5UypVUPj7GCp1omDIoqUAihYNux2MPi-DLgpig6VEFVE8R3Gbjc70k8Oc1w7ja-69zxe73GpwbExe0rPRsUqvMp2gP6jTOBenyr1VVxhG5i68HE_8-EjL1I9-_3GOjgBAbPLbxMpjzshkosZdAd2IuFwPwdzgyoa-gEUSTDReO8Uis7h0jCG96XX8bONFiNUD6tK6Z-mawzifKCcThzYPkXvnWEXRlk3yX9wD6zUims1m-lc8vliroT8mFjByhyoCMCCkP135DeDvuU_cHVozwVfum1ELtnSUkAWAbw19YaKTDcVfcJRsTtWxu1mssIqWyfp-D9qK9H95ObUd8lLxudVX2aYpr46lxdxnCoqCGOcpW3HijgG8vUfLbgh8ylXGiHXoLk9P7IXN0dK3ekwygtfyzCkWSilHsBIbNvDb2vSQNrXDSTf3E_A0Zhc1O5SF1l8abkeayBFGaxAoT8qPEAf0ZYS-oJaYsX-2Xe4eQkrh1gBKa-VDDTD1KgnMMqcPF_2MlF4ka76hdRoCQGLsV6KxpRS9FxOHj7k2chOa86iFz77jJvPZ81tiY00i7arYKz7GuaC4zD_9DlLdtjaiVh5is1SyfPnOTybhoSPqyylJo7Gh_Oobd4cqnQSS9WeJJlh69XXUT5A22jmfjO3c4BYf3I7llTJAIQURP4J0a9W8o_fxN8gIfinQ1dA8HF0iQuSHLW_r4Bouvz2n3acdFpHfgC8iKB2yFiraukRozseuN8acNCGezMxRf560DBV-TyCI3ODQ_HXYB8c63P7i2Xh3BnhJvmHP9tm48DWopM6tj0dmmFwM-Brh74QWMmTTuDYGG7VMCsqyPaiD5BzYVm0pDSiYNe0_3EQZAJw7HlRMfvMk0Bxkvlh5FxE1Kmcqn2AbiyvvChnhTL3m1b7gfkhiv4gzAKm8AWvz8x2XBjLoIArwho7v4tSsThRG77k=/
+                          - generic [ref=f172e5]:
+                            - img [ref=f172e7]
+                            - img "광고 이미지" [ref=f172e9]
+                            - img "광고 이미지" [ref=f172e11]
+                          - generic [ref=f172e12]:
+                            - strong [ref=f172e13]: 달콤한 햇 부사 35% 할인중!
+                            - paragraph [ref=f172e14]: 달콤한 경북 꿀사과를 제철 특가로 만나보세요.
+                          - generic [ref=f172e15]:
+                            - generic [ref=f172e17]: 전국농부들
+                            - generic [ref=f172e19]: 지금 구매하기
+                        - button "AD" [ref=f172e21] [cursor=pointer]:
+                          - generic [ref=f172e22]: AD
+                    - paragraph [ref=e137]: 너정다 말고
+                  - iframe [ref=e140]:
+                    - insertion [ref=f177e2]:
+                      - iframe [ref=f177e5]:
+                        - generic [ref=f183e3]:
+                          - link "광고 기준을 높이는 고품질 NI DAQ 기준을 높이는 고품질 NI DAQ Emerson 자세히 보기" [ref=f183e4] [cursor=pointer]:
+                            - /url: https://tr.ds.kakao.com/clk?wa=gWhshyx2WYEntF65rRqeSeuxdJCtT5P27VXzyfZ1VXE&enc=OR1am20Ml_l0--KuINuaGwgVLyOBQP11o9HLW7-r3xhWg_ap5XAoaez0wRBbVjwZzh70RrVvFFrGAQHqnIo_pmkdgR206uXwSBPfm_WUX4cqDbhpeqwR35YPdnwtM93mJx3lt_J5Wzy-d5v56kEzxrTlD_ewiVAZwD-DFiV57oVbsP1c7iFw3V5J_0c6Dy8aIxswT63dW3JcU_mfLN9ej1wlEvai49htPxSMSzVuOoV8PO6noYhUlvjPQgJKuvq87sJlP7oc-TbyonnbnYDChxQ7UfAItfBIr1uIoTB7GcuBdjdEuPCCQxOgZEONuYb_Ao95IdypRrFT1982_ptnNMQC5eb6OpzDcJ4IRIDzX5C87EZjvHzVEKO_TCs6da3IYU__b1webKn2PO-uWoSfyhfntsJl7rTwLIdF_4YO8uM_-4YGwzmx_Iv1yd1mcYxI-HuXQ7LStTF2ShM8cm58qySSmj0CjL3Q_aDQNKsrjonGJDk8hghOj43j4QTk4VpiIXIFobaoWexil8PUfZRXRNwc5Fb87BV89EbVd4Aw6pNAGNoCkCjckUge2hj4IQVrBHbjI94sDgLPM4WmFidxZ9RCQaMmiA0qFi-JRwf9J9CHGXQqJlRBSIMerlUx6vbOKwDnvvKyBshSRd6zSOHBJgadbyJnB1n49E8u5Z6KIRyw-ejiBvFry38Bj5801bJs&signature=a4ee2aaa0b18a01f1fd9380085aa73b2&lc=1&rd=%7B%22adunit_type_seq%22%3A130%2C%22banner_adunit_type_seq%22%3A130%2C%22native_adunit_type_seq%22%3A1379%2C%22template_seq%22%3A255%7D
+                            - img "광고 기준을 높이는 고품질 NI DAQ" [ref=f183e6]
+                            - generic [ref=f183e9]:
+                              - strong [ref=f183e10]: 기준을 높이는 고품질 NI DAQ
+                              - generic [ref=f183e11]: Emerson
+                            - generic [ref=f183e13]: 자세히 보기
+                          - link "광고 정보" [ref=f183e14] [cursor=pointer]:
+                            - /url: https://info.ds.kakao.com/optout.do
+                            - img "광고 정보" [ref=f183e15]
+                - generic [ref=e141]:
+                  - img "자동등록방지" [ref=e143]
+                  - textbox "코드 입력" [ref=e144]
+                - generic [ref=e146]:
+                  - generic [ref=e147]:
+                    - generic [ref=e148]:
+                      - generic [ref=e149]:
+                        - paragraph [ref=e150]: "0"
+                        - paragraph [ref=e151]:
+                          - img "고정닉" [ref=e153]
+                          - text: "0"
+                      - button [ref=e154] [cursor=pointer]:
+                        - emphasis [ref=e155]
+                    - generic [ref=e156]:
+                      - button [ref=e157] [cursor=pointer]:
+                        - emphasis [ref=e158]
+                      - paragraph [ref=e160]: "0"
+                  - generic [ref=e161]:
+                    - button "실베추" [ref=e162] [cursor=pointer]:
+                      - emphasis [ref=e163]
+                      - text: 실베추
+                    - button "공유" [ref=e164] [cursor=pointer]:
+                      - emphasis [ref=e165]
+                      - text: 공유
+                    - button "스크랩" [ref=e166] [cursor=pointer]:
+                      - emphasis [ref=e167]
+                      - text: 스크랩
+                    - button "신고" [ref=e168] [cursor=pointer]:
+                      - emphasis [ref=e169]
+                      - text: 신고
+                - iframe [ref=e172]:
+                  - insertion [ref=f178e2]:
+                    - iframe [ref=f178e5]:
+                      - iframe [ref=f181e4]:
+                        - generic [ref=f182e2] [cursor=pointer]:
+                          - link [ref=f182e4]:
+                            - /url: https://privacy.as.criteo.com/adchoices?cppv=3&cpp=wKRRqimm88qSXOD7_AHu83v-2eeMUJH0pQ0vqC_KBAgeJBi6J5DyPABm9IJRNjzAd4HgQrBZTLrjXHY5OnajjCXiN8AhBAQUFMCCAYo0VnBJCnq_S_nCA2aipo0vZbGzcFFvgQ2wT2pB2D1smoLLQ9PRQYE
+                            - img [ref=f182e5]
+                          - img [ref=f182e7]
+                          - generic [ref=f182e8]:
+                            - link [ref=f182e9]:
+                              - /url: https://cat.jp2.as.criteo.com/delivery/ck.php?cppv=3&cpp=c-deOqBzWG0pmyD8deKklyYgWDVYPWuCVqIxOzd6N2NQsV56bTJLkB3GeH-nyBHy6d57WNcZFos_0SNxUjqX-W-hsmsbM7elYbLLwLMVazhCWQQZP_2VnoNDnMxUY9GCKfgQpS0cLhlwZjMBW2O___SM7b-6CdCExq_9ZEt9JkY2eReKoVHJEeZ17djLHccO1ouW1jagozIOG7v6gCxJkPiHtQKSvJ-lS4YKGxYMfW1LG2LXZGS-wmCcPBSyvPbuQgoyhZS2AzTR_rch5Fy6xKW7mx2OtTejoYEa8Vns1H-4kXPnEETpxFRQaeqyqvRglX0_afjqG6kCEOL6x_1IwAg8WxhkncJm52ry8oZNpWfPk6B3thP86Q34R_G0XeMS9fNgY96HRyZEPqKc54D9qCRDpDc52DkeOg_TKV9HMAaJPjY5GECl6DPwnfOh2DhTR4n6JZ1EjZBuODL8BwX-jNDWlX48gCbdN2bZrRHjXT1hEdkBWLKkA_tLDALWnslc0Nw7DjsTXOhuppnANG1d6CRh6Xjcvzn2Gpa3xe4m40TU6AiPwtDvGiliNvlxEMP_FftnMV5HUPK3MC4U8FwweA3ay6oPHRPdZIqPwwgTrZxLwWKHyWcw9OL96RbVMzD6t7y6FIKeI7Cx4qGg-elydQp34qA&maxdest=https%3A%2F%2Fwww.adobe.com%2Fkr%2Fcreativecloud%2Froc%2Fdesign%2Fall-in-one.html%3Fsdid%3DGR3XXTQS%26mv%3Ddisplay%26mv2%3Ddisplay%26cto_pld%3DHBekRCK_AQCXbevu5a3hEg
+                              - img [ref=f182e12]
+                            - link [ref=f182e13]:
+                              - /url: https://cat.jp2.as.criteo.com/delivery/ck.php?cppv=3&cpp=KU6cdaBzWG0pmyD8deKklyYgWDVYPWuCVqIxOzd6N2NQsV56bTJLkB3GeH-nyBHy6d57WNcZFos_0SNxUjqX-W-hsmsbM7elYbLLwLMVazhCWQQZP_2VnoNDnMxUY9GCKfgQpS0cLhlwZjMBW2O___SM7b-6CdCExq_9ZEt9JkY2eReKoVHJEeZ17djLHccO1ouW1jagozIOG7v6gCxJkPiHtQKSvJ-lS4YKGxYMfW1LG2LXZGS-wmCcPBSyvPbuQgoyhZS2AzTR_rch5Fy6xKW7mx2OtTejoYEa8Vns1H-4kXPnEETpxFRQaeqyqvRglX0_afjqG6kCEOL6x_1IwAg8WxhkncJm52ry8oZNpWfPk6B3thP86Q34R_G0XeMS9fNgY96HRyZEPqKc54D9qCRDpDc52DkeOg_TKV9HMAaJPjY5GECl6DPwnfOh2DhTR4n6JZ1EjZBuODL8BwX-jNDWlX48gCbdN2bZrRHjXT1hEdkBRBIvH5LRMOcVzbSLBegUjrxdJ8isRjS3U6ohoN61LkRaSBRFiokSiKAB-waNYpJVN7jFawU4HvXXifGUU9NVSRm50HBPJySsf8xN6iPOVA4cRhDYCwU3z7-rycUl7u5W2riyVpaeUj7iUIlsy9h7kbmxCoa4W3cjBqLmmHDPznM&maxdest=https%3A%2F%2Fwww.adobe.com%2Fkr%2Fcreativecloud%2Froc%2Fdesign%2Fall-in-one.html%3Fsdid%3DGR3XXTQS%26mv%3Ddisplay%26mv2%3Ddisplay%26cto_pld%3DIlydoCK_AQC6xSClZ5sB_Q
+            - generic [ref=e173]:
+              - generic [ref=e174]:
+                - generic [ref=e175]:
+                  - generic [ref=e176]:
+                    - text: 전체 댓글
+                    - emphasis [ref=e177]: "5"
+                    - text: 개
+                    - generic [ref=e178]:
+                      - generic [ref=e179]:
+                        - radio "등록순" [checked] [ref=e180] [cursor=pointer]
+                        - emphasis [ref=e181]
+                        - text: 등록순
+                      - generic [ref=e182]:
+                        - radio "최신순" [ref=e183] [cursor=pointer]
+                        - emphasis [ref=e184]
+                        - text: 최신순
+                      - generic [ref=e185]:
+                        - radio "답글순" [ref=e186] [cursor=pointer]
+                        - emphasis [ref=e187]
+                        - text: 답글순
+                  - generic [ref=e188]:
+                    - link "본문 보기" [ref=e189] [cursor=pointer]:
+                      - /url: "#container"
+                    - button "댓글닫기" [ref=e190] [cursor=pointer]:
+                      - text: 댓글닫기
+                      - emphasis [ref=e191]
+                    - button "새로고침" [ref=e192] [cursor=pointer]
+                - generic [ref=e193]:
+                  - list [ref=e194]:
+                    - listitem [ref=e195]:
+                      - generic [ref=e196]:
+                        - generic:
+                          - generic [ref=e198] [cursor=pointer]:
+                            - generic "공간" [ref=e199]:
+                              - emphasis [ref=e200]: 공간
+                            - img "갤로그로 이동합니다." [ref=e202]
+                          - paragraph [ref=e204] [cursor=pointer]: 카페
+                        - generic [ref=e206]: 04.20 20:08:21
+                    - listitem [ref=e207]:
+                      - list [ref=e210]:
+                        - listitem [ref=e211]:
+                          - generic [ref=e212]:
+                            - generic:
+                              - generic [ref=e214] [cursor=pointer]:
+                                - generic "Wisp" [ref=e215]:
+                                  - emphasis [ref=e216]: Wisp
+                                - img "갤로그로 이동합니다." [ref=e218]
+                              - paragraph [ref=e220] [cursor=pointer]: 무슨 카페
+                            - generic [ref=e222]: 04.20 20:08:37
+                        - listitem [ref=e223]:
+                          - generic [ref=e224]:
+                            - generic:
+                              - generic [ref=e226] [cursor=pointer]:
+                                - generic "공간" [ref=e227]:
+                                  - emphasis [ref=e228]: 공간
+                                - img "갤로그로 이동합니다." [ref=e230]
+                              - paragraph [ref=e232] [cursor=pointer]:
+                                - link "@Wisp" [ref=e233]:
+                                  - /url: javascript:focusComment(381718);
+                                - text: 그냥 포켓몬tcg커뮤니티
+                            - generic [ref=e235]: 04.20 20:09:21
+                        - listitem [ref=e236]:
+                          - generic [ref=e237]:
+                            - generic:
+                              - generic [ref=e239] [cursor=pointer]:
+                                - generic "Wisp" [ref=e240]:
+                                  - emphasis [ref=e241]: Wisp
+                                - img "갤로그로 이동합니다." [ref=e243]
+                              - generic [ref=e244] [cursor=pointer]:
+                                - link "@공간" [ref=e245]:
+                                  - /url: javascript:focusComment(381720);
+                                - generic "48" [ref=e248]
+                            - generic [ref=e250]: 04.20 20:11:24
+                    - listitem [ref=e251]:
+                      - generic [ref=e252]:
+                        - generic:
+                          - generic [ref=e254] [cursor=pointer]:
+                            - generic "므브브" [ref=e255]:
+                              - emphasis [ref=e256]: 므브브
+                            - img "갤로그로 이동합니다." [ref=e258]
+                          - paragraph [ref=e260] [cursor=pointer]:
+                            - text: 일단 나는 카드냥 tcg999로 샵시세 한번보고
+                            - text: 그다음 갤이나 카페에서 한번 더 보고 함.
+                        - generic [ref=e262]: 04.20 20:22:01
+                    - listitem [ref=e263]:
+                      - generic [ref=e264]:
+                        - generic [ref=e267] [cursor=pointer]:
+                          - emphasis [ref=e268]
+                          - text: 댓글돌이
+                        - generic [ref=e269] [cursor=pointer]:
+                          - link [ref=e272]:
+                            - /url: https://issuefeed.dcinside.com/content/2254291
+                            - img [ref=e273]
+                          - link "카페서 부담 없이 골랐는데…앞으로 기준 더 엄격해진다는 음료" [ref=e274]:
+                            - /url: https://issuefeed.dcinside.com/content/2254291
+                          - generic [ref=e275]:
+                            - generic [ref=e276]:
+                              - strong [ref=e277]: "1"
+                              - text: /20
+                            - generic [ref=e278]:
+                              - button [ref=e279]:
+                                - emphasis [ref=e280]
+                              - button [ref=e281]:
+                                - emphasis [ref=e282]
+                  - generic [ref=e283]:
+                    - emphasis [ref=e285]: "1"
+                    - generic [ref=e286]:
+                      - link "본문 보기" [ref=e287] [cursor=pointer]:
+                        - /url: "#container"
+                      - button "댓글닫기" [ref=e288] [cursor=pointer]:
+                        - generic [ref=e289]: 댓글닫기
+                        - emphasis [ref=e290]
+                      - button "새로고침" [ref=e291] [cursor=pointer]
+              - generic [ref=e292]:
+                - generic [ref=e293]:
+                  - generic [ref=e294]:
+                    - generic [ref=e296]:
+                      - paragraph [ref=e297]:
+                        - text: 포갤러는 갤러리에서 권장하는 비회원 전용
+                        - text: 갤닉네임입니다. (삭제 시 닉네임 등록 가능)
+                      - button [ref=e298] [cursor=pointer]
+                    - textbox [ref=e299]: 포갤러
+                    - button [ref=e300] [cursor=pointer]
+                  - textbox "비밀번호" [ref=e302]
+                  - textbox "코드 입력" [ref=e304]
+                  - img "자동등록방지" [ref=e306]
+                - generic [ref=e307]:
+                  - generic [ref=e308]:
+                    - generic [ref=e309]:
+                      - text: 타인의 권리를 침해하거나 명예를 훼손하는 댓글은 운영원칙 및 관련 법률에 제재를 받을 수 있습니다.
+                      - text: Shift+Enter 키를 동시에 누르면 줄바꿈이 됩니다.
+                    - textbox [ref=e310]
+                  - generic [ref=e311]:
+                    - generic [ref=e312]:
+                      - button "디시콘" [ref=e313] [cursor=pointer]:
+                        - emphasis [ref=e314]
+                        - text: 디시콘
+                      - button [ref=e315] [cursor=pointer]:
+                        - emphasis [ref=e316]
+                    - generic [ref=e317]:
+                      - button "등록" [ref=e318] [cursor=pointer]
+                      - button "등록+추천" [ref=e319] [cursor=pointer]
+            - generic [ref=e320]:
+              - generic [ref=e321]:
+                - button "전체글" [ref=e322] [cursor=pointer]
+                - button "개념글" [ref=e323] [cursor=pointer]
+              - button "글쓰기" [ref=e325] [cursor=pointer]
+          - article [ref=e326]:
+            - generic [ref=e327]:
+              - article [ref=e329]:
+                - table "갤러리 리스트" [ref=e331]:
+                  - caption: 갤러리 리스트
+                  - rowgroup [ref=e340]:
+                    - row "번호 말머리 제목 글쓴이 작성일 조회 추천" [ref=e341]:
+                      - columnheader "번호" [ref=e342]
+                      - columnheader "말머리" [ref=e343]
+                      - columnheader "제목" [ref=e344]
+                      - columnheader "글쓴이" [ref=e345]
+                      - columnheader "작성일" [ref=e346]
+                      - columnheader "조회" [ref=e347]
+                      - columnheader "추천" [ref=e348]
+                  - rowgroup [ref=e349]:
+                    - row "- 설문 치어리딩 가장 잘할 것 같은 스타는? 운영자 26/05/11 - -" [ref=e350]:
+                      - cell "-" [ref=e351]
+                      - cell "설문" [ref=e352]
+                      - cell "치어리딩 가장 잘할 것 같은 스타는?" [ref=e353]:
+                        - link "치어리딩 가장 잘할 것 같은 스타는?" [ref=e354] [cursor=pointer]:
+                          - /url: javascript:;
+                          - emphasis [ref=e355]
+                          - text: 치어리딩 가장 잘할 것 같은 스타는?
+                      - cell "운영자" [ref=e356] [cursor=pointer]
+                      - cell "26/05/11" [ref=e357]
+                      - cell "-" [ref=e358]
+                      - cell "-" [ref=e359]
+                    - row "- AD 조립컴퓨터, 헤드셋, 게이밍 마우스, 장패드 운영자 26/03/05 - -" [ref=e360]:
+                      - cell "-" [ref=e361]
+                      - cell "AD" [ref=e362]
+                      - cell "조립컴퓨터, 헤드셋, 게이밍 마우스, 장패드" [ref=e363]:
+                        - link "조립컴퓨터, 헤드셋, 게이밍 마우스, 장패드" [ref=e364] [cursor=pointer]:
+                          - /url: https://link.coupang.com/a/ecki96
+                          - emphasis [ref=e365]
+                          - text: 조립컴퓨터, 헤드셋, 게이밍 마우스, 장패드
+                      - cell "운영자" [ref=e366] [cursor=pointer]
+                      - cell "26/03/05" [ref=e367]
+                      - cell "-" [ref=e368]
+                      - cell "-" [ref=e369]
+                    - row "106036 공지 갤러리 이용 지침 및 규정 v.260504 [4] 공지 (223.38) 26.04.02 1111 5" [ref=e370]:
+                      - cell "106036" [ref=e371]
+                      - cell "공지" [ref=e372]
+                      - cell "갤러리 이용 지침 및 규정 v.260504 [4]" [ref=e373]:
+                        - link "갤러리 이용 지침 및 규정 v.260504" [ref=e374] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=106036&page=1
+                          - emphasis [ref=e375]
+                          - text: 갤러리 이용 지침 및 규정 v.260504
+                        - link "[4]" [ref=e376] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=106036&t=cv
+                      - cell "공지 (223.38)" [ref=e377] [cursor=pointer]:
+                        - generic [ref=e379]:
+                          - generic "공지" [ref=e380]:
+                            - emphasis [ref=e381]: 공지
+                          - generic [ref=e382]: (223.38)
+                      - cell "26.04.02" [ref=e383]
+                      - cell "1111" [ref=e384]
+                      - cell "5" [ref=e385]
+                    - row "64076 공지 대부분의 \"이 카드 얼마에요?\" 에 대한 답변 [6] 긴급보드 갤로그로 이동합니다. 24.12.04 13514 34" [ref=e386]:
+                      - cell "64076" [ref=e387]
+                      - cell "공지" [ref=e388]
+                      - cell "대부분의 \"이 카드 얼마에요?\" 에 대한 답변 [6]" [ref=e389]:
+                        - link "대부분의 \"이 카드 얼마에요?\" 에 대한 답변" [ref=e390] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=64076&page=1
+                          - emphasis [ref=e391]
+                          - text: 대부분의 "이 카드 얼마에요?" 에 대한 답변
+                        - link "[6]" [ref=e392] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=64076&t=cv
+                      - cell "긴급보드 갤로그로 이동합니다." [ref=e393] [cursor=pointer]:
+                        - generic [ref=e395]:
+                          - generic "긴급보드" [ref=e396]:
+                            - emphasis [ref=e397]: 긴급보드
+                          - img "갤로그로 이동합니다." [ref=e399]
+                      - cell "24.12.04" [ref=e400]
+                      - cell "13514" [ref=e401]
+                      - cell "34" [ref=e402]
+                    - row "81015 공지 포딱갤 정보글 모아보기(250515) [3] 긴급보드 갤로그로 이동합니다. 25.05.16 8218 3" [ref=e403]:
+                      - cell "81015" [ref=e404]
+                      - cell "공지" [ref=e405]
+                      - cell "포딱갤 정보글 모아보기(250515) [3]" [ref=e406]:
+                        - link "포딱갤 정보글 모아보기(250515)" [ref=e407] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=81015&page=1
+                          - emphasis [ref=e408]
+                          - text: 포딱갤 정보글 모아보기(250515)
+                        - link "[3]" [ref=e409] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=81015&t=cv
+                      - cell "긴급보드 갤로그로 이동합니다." [ref=e410] [cursor=pointer]:
+                        - generic [ref=e412]:
+                          - generic "긴급보드" [ref=e413]:
+                            - emphasis [ref=e414]: 긴급보드
+                          - img "갤로그로 이동합니다." [ref=e416]
+                      - cell "25.05.16" [ref=e417]
+                      - cell "8218" [ref=e418]
+                      - cell "3" [ref=e419]
+                    - row "77465 공지 호출벨 [2] 포갤러 (108.181) 25.04.13 1958 0" [ref=e420]:
+                      - cell "77465" [ref=e421]
+                      - cell "공지" [ref=e422]
+                      - cell "호출벨 [2]" [ref=e423]:
+                        - link "호출벨" [ref=e424] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=77465&page=1
+                          - emphasis [ref=e425]
+                          - text: 호출벨
+                        - link "[2]" [ref=e426] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=77465&t=cv
+                      - cell "포갤러 (108.181)" [ref=e427] [cursor=pointer]:
+                        - generic [ref=e429]:
+                          - generic "포갤러" [ref=e430]:
+                            - emphasis [ref=e431]: 포갤러
+                          - generic [ref=e432]: (108.181)
+                      - cell "25.04.13" [ref=e433]
+                      - cell "1958" [ref=e434]
+                      - cell "0" [ref=e435]
+                    - row "60527 공지 ❗❗❗모바일 게임 갤러리 아님❗❗❗ [9] 로즈레이드 갤로그로 이동합니다. 24.11.01 8748 25" [ref=e436]:
+                      - cell "60527" [ref=e437]
+                      - cell "공지" [ref=e438]
+                      - cell "❗❗❗모바일 게임 갤러리 아님❗❗❗ [9]" [ref=e439]:
+                        - link "❗❗❗모바일 게임 갤러리 아님❗❗❗" [ref=e440] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=60527&page=1
+                          - emphasis [ref=e441]
+                          - text: ❗❗❗모바일 게임 갤러리 아님❗❗❗
+                        - link "[9]" [ref=e442] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=60527&t=cv
+                      - cell "로즈레이드 갤로그로 이동합니다." [ref=e443] [cursor=pointer]:
+                        - generic [ref=e445]:
+                          - generic "로즈레이드" [ref=e446]:
+                            - emphasis [ref=e447]: 로즈레이드
+                          - img "갤로그로 이동합니다." [ref=e449]
+                      - cell "24.11.01" [ref=e450]
+                      - cell "8748" [ref=e451]
+                      - cell "25" [ref=e452]
+                    - row "39108 공지 한국의 공식 대회의 슬리브 관련 규정에 대하여 [3] PastelPalettes 갤로그로 이동합니다. 23.09.06 7679 9" [ref=e453]:
+                      - cell "39108" [ref=e454]
+                      - cell "공지" [ref=e455]
+                      - cell "한국의 공식 대회의 슬리브 관련 규정에 대하여 [3]" [ref=e456]:
+                        - link "한국의 공식 대회의 슬리브 관련 규정에 대하여" [ref=e457] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=39108&page=1
+                          - emphasis [ref=e458]
+                          - text: 한국의 공식 대회의 슬리브 관련 규정에 대하여
+                        - link "[3]" [ref=e459] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=39108&t=cv
+                      - cell "PastelPalettes 갤로그로 이동합니다." [ref=e460] [cursor=pointer]:
+                        - generic [ref=e462]:
+                          - generic "PastelPalettes" [ref=e463]:
+                            - emphasis [ref=e464]: PastelPalettes
+                          - img "갤로그로 이동합니다." [ref=e466]
+                      - cell "23.09.06" [ref=e467]
+                      - cell "7679" [ref=e468]
+                      - cell "9" [ref=e469]
+                    - row "112437 일반 포케카는 재생산 안해?? [4] ㅇㅇ 갤로그로 이동합니다. 15:01 122 0" [ref=e470]:
+                      - cell "112437" [ref=e471]
+                      - cell "일반" [ref=e472]
+                      - cell "포케카는 재생산 안해?? [4]" [ref=e473]:
+                        - link "포케카는 재생산 안해??" [ref=e474] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112437&page=1
+                          - emphasis [ref=e475]
+                          - text: 포케카는 재생산 안해??
+                        - link "[4]" [ref=e476] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112437&t=cv
+                      - cell "ㅇㅇ 갤로그로 이동합니다." [ref=e477] [cursor=pointer]:
+                        - generic [ref=e478]:
+                          - generic "ㅇㅇ" [ref=e479]:
+                            - emphasis [ref=e480]: ㅇㅇ
+                          - img "갤로그로 이동합니다." [ref=e482]
+                      - cell "15:01" [ref=e483]
+                      - cell "122" [ref=e484]
+                      - cell "0" [ref=e485]
+                    - row "112436 일반 솔직히 개닌 역대급으로 빨리 가격떨어지는데 [1] 포갤러 (118.235) 14:56 114 0" [ref=e486]:
+                      - cell "112436" [ref=e487]
+                      - cell "일반" [ref=e488]
+                      - cell "솔직히 개닌 역대급으로 빨리 가격떨어지는데 [1]" [ref=e489]:
+                        - link "솔직히 개닌 역대급으로 빨리 가격떨어지는데" [ref=e490] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112436&page=1
+                          - emphasis [ref=e491]
+                          - text: 솔직히 개닌 역대급으로 빨리 가격떨어지는데
+                        - link "[1]" [ref=e492] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112436&t=cv
+                      - cell "포갤러 (118.235)" [ref=e493] [cursor=pointer]:
+                        - generic [ref=e494]:
+                          - generic "포갤러" [ref=e495]:
+                            - emphasis [ref=e496]: 포갤러
+                          - generic [ref=e497]: (118.235)
+                      - cell "14:56" [ref=e498]
+                      - cell "114" [ref=e499]
+                      - cell "0" [ref=e500]
+                    - row "112435 ❓질문 격개닌 2기술 [2] 포갤러 (58.125) 14:42 91 0" [ref=e501]:
+                      - cell "112435" [ref=e502]
+                      - cell "❓질문" [ref=e503]
+                      - cell "격개닌 2기술 [2]" [ref=e504]:
+                        - link "격개닌 2기술" [ref=e505] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112435&page=1
+                          - emphasis [ref=e506]
+                          - text: 격개닌 2기술
+                        - link "[2]" [ref=e507] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112435&t=cv
+                      - cell "포갤러 (58.125)" [ref=e508] [cursor=pointer]:
+                        - generic [ref=e509]:
+                          - generic "포갤러" [ref=e510]:
+                            - emphasis [ref=e511]: 포갤러
+                          - generic [ref=e512]: (58.125)
+                      - cell "14:42" [ref=e513]
+                      - cell "91" [ref=e514]
+                      - cell "0" [ref=e515]
+                    - row "112434 일반 역대급 사기카드들 뭐있늠 [12] ㅇㅇ 갤로그로 이동합니다. 14:32 157 0" [ref=e516]:
+                      - cell "112434" [ref=e517]
+                      - cell "일반" [ref=e518]
+                      - cell "역대급 사기카드들 뭐있늠 [12]" [ref=e519]:
+                        - link "역대급 사기카드들 뭐있늠" [ref=e520] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112434&page=1
+                          - emphasis [ref=e521]
+                          - text: 역대급 사기카드들 뭐있늠
+                        - link "[12]" [ref=e522] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112434&t=cv
+                      - cell "ㅇㅇ 갤로그로 이동합니다." [ref=e523] [cursor=pointer]:
+                        - generic [ref=e524]:
+                          - generic "ㅇㅇ" [ref=e525]:
+                            - emphasis [ref=e526]: ㅇㅇ
+                          - img "갤로그로 이동합니다." [ref=e528]
+                      - cell "14:32" [ref=e529]
+                      - cell "157" [ref=e530]
+                      - cell "0" [ref=e531]
+                    - row "112433 🔁거래 삼삼드래 ex sar 2장&하이퍼볼 ur 4장 삽니다 포갤러 (118.235) 14:21 78 0" [ref=e532]:
+                      - cell "112433" [ref=e533]
+                      - cell "🔁거래" [ref=e534]
+                      - cell "삼삼드래 ex sar 2장&하이퍼볼 ur 4장 삽니다" [ref=e535]:
+                        - link "삼삼드래 ex sar 2장&하이퍼볼 ur 4장 삽니다" [ref=e536] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112433&page=1
+                          - emphasis [ref=e537]
+                          - text: 삼삼드래 ex sar 2장&하이퍼볼 ur 4장 삽니다
+                      - cell "포갤러 (118.235)" [ref=e538] [cursor=pointer]:
+                        - generic [ref=e539]:
+                          - generic "포갤러" [ref=e540]:
+                            - emphasis [ref=e541]: 포갤러
+                          - generic [ref=e542]: (118.235)
+                      - cell "14:21" [ref=e543]
+                      - cell "78" [ref=e544]
+                      - cell "0" [ref=e545]
+                    - row "112432 덱레시 182명 참가 GL대회 우승 메타그로스바렛 [2] 갈비띠 갤로그로 이동합니다. 13:54 160 0" [ref=e546]:
+                      - cell "112432" [ref=e547]
+                      - cell "덱레시" [ref=e548]
+                      - cell "182명 참가 GL대회 우승 메타그로스바렛 [2]" [ref=e549]:
+                        - link "182명 참가 GL대회 우승 메타그로스바렛" [ref=e550] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112432&page=1
+                          - emphasis [ref=e551]
+                          - text: 182명 참가 GL대회 우승 메타그로스바렛
+                        - link "[2]" [ref=e552] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112432&t=cv
+                      - cell "갈비띠 갤로그로 이동합니다." [ref=e553] [cursor=pointer]:
+                        - generic [ref=e554]:
+                          - generic "갈비띠" [ref=e555]:
+                            - emphasis [ref=e556]: 갈비띠
+                          - img "갤로그로 이동합니다." [ref=e558]
+                      - cell "13:54" [ref=e559]
+                      - cell "160" [ref=e560]
+                      - cell "0" [ref=e561]
+                    - row "112431 일반 지금 블럭 카드 db 볼수있는곳있음? [3] 포갤러 (115.91) 13:41 61 0" [ref=e562]:
+                      - cell "112431" [ref=e563]
+                      - cell "일반" [ref=e564]
+                      - cell "지금 블럭 카드 db 볼수있는곳있음? [3]" [ref=e565]:
+                        - link "지금 블럭 카드 db 볼수있는곳있음?" [ref=e566] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112431&page=1
+                          - emphasis [ref=e567]
+                          - text: 지금 블럭 카드 db 볼수있는곳있음?
+                        - link "[3]" [ref=e568] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112431&t=cv
+                      - cell "포갤러 (115.91)" [ref=e569] [cursor=pointer]:
+                        - generic [ref=e570]:
+                          - generic "포갤러" [ref=e571]:
+                            - emphasis [ref=e572]: 포갤러
+                          - generic [ref=e573]: (115.91)
+                      - cell "13:41" [ref=e574]
+                      - cell "61" [ref=e575]
+                      - cell "0" [ref=e576]
+                    - row "112430 🔁거래 릴리에의 결심 sr 플레이용 2장 구합니다 [2] 사소리 갤로그로 이동합니다. 13:36 78 0" [ref=e577]:
+                      - cell "112430" [ref=e578]
+                      - cell "🔁거래" [ref=e579]
+                      - cell "릴리에의 결심 sr 플레이용 2장 구합니다 [2]" [ref=e580]:
+                        - link "릴리에의 결심 sr 플레이용 2장 구합니다" [ref=e581] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112430&page=1
+                          - emphasis [ref=e582]
+                          - text: 릴리에의 결심 sr 플레이용 2장 구합니다
+                        - link "[2]" [ref=e583] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112430&t=cv
+                      - cell "사소리 갤로그로 이동합니다." [ref=e584] [cursor=pointer]:
+                        - generic [ref=e585]:
+                          - generic "사소리" [ref=e586]:
+                            - emphasis [ref=e587]: 사소리
+                          - img "갤로그로 이동합니다." [ref=e589]
+                      - cell "13:36" [ref=e590]
+                      - cell "78" [ref=e591]
+                      - cell "0" [ref=e592]
+                    - row "112429 🔁거래 명희 sar ㅍㅍ 8.0 [1] ㅇㅇ 갤로그로 이동합니다. 13:36 159 0" [ref=e593]:
+                      - cell "112429" [ref=e594]
+                      - cell "🔁거래" [ref=e595]
+                      - cell "명희 sar ㅍㅍ 8.0 [1]" [ref=e596]:
+                        - link "명희 sar ㅍㅍ 8.0" [ref=e597] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112429&page=1
+                          - emphasis [ref=e598]
+                          - text: 명희 sar ㅍㅍ 8.0
+                        - link "[1]" [ref=e599] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112429&t=cv
+                      - cell "ㅇㅇ 갤로그로 이동합니다." [ref=e600] [cursor=pointer]:
+                        - generic [ref=e601]:
+                          - generic "ㅇㅇ" [ref=e602]:
+                            - emphasis [ref=e603]: ㅇㅇ
+                          - img "갤로그로 이동합니다." [ref=e605]
+                      - cell "13:36" [ref=e606]
+                      - cell "159" [ref=e607]
+                      - cell "0" [ref=e608]
+                    - row "112428 일반 샹델라 하자가 개크네 [4] 목호 갤로그로 이동합니다. 13:34 175 0" [ref=e609]:
+                      - cell "112428" [ref=e610]
+                      - cell "일반" [ref=e611]
+                      - cell "샹델라 하자가 개크네 [4]" [ref=e612]:
+                        - link "샹델라 하자가 개크네" [ref=e613] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112428&page=1
+                          - emphasis [ref=e614]
+                          - text: 샹델라 하자가 개크네
+                        - link "[4]" [ref=e615] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112428&t=cv
+                      - cell "목호 갤로그로 이동합니다." [ref=e616] [cursor=pointer]:
+                        - generic [ref=e617]:
+                          - generic "목호" [ref=e618]:
+                            - emphasis [ref=e619]: 목호
+                          - img "갤로그로 이동합니다." [ref=e621]
+                      - cell "13:34" [ref=e622]
+                      - cell "175" [ref=e623]
+                      - cell "0" [ref=e624]
+                    - row "112427 일반 오늘 gs에 닌자스피너 들어왔길래 재고뜨는곳 5군데 돌았는데 포갤러 (211.223) 13:20 124 1" [ref=e625]:
+                      - cell "112427" [ref=e626]
+                      - cell "일반" [ref=e627]
+                      - cell "오늘 gs에 닌자스피너 들어왔길래 재고뜨는곳 5군데 돌았는데" [ref=e628]:
+                        - link "오늘 gs에 닌자스피너 들어왔길래 재고뜨는곳 5군데 돌았는데" [ref=e629] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112427&page=1
+                          - emphasis [ref=e630]
+                          - text: 오늘 gs에 닌자스피너 들어왔길래 재고뜨는곳 5군데 돌았는데
+                      - cell "포갤러 (211.223)" [ref=e631] [cursor=pointer]:
+                        - generic [ref=e632]:
+                          - generic "포갤러" [ref=e633]:
+                            - emphasis [ref=e634]: 포갤러
+                          - generic [ref=e635]: (211.223)
+                      - cell "13:20" [ref=e636]
+                      - cell "124" [ref=e637]
+                      - cell "1" [ref=e638]
+                    - row "112426 일반 gl에 매개닌 언제나옴? 이하울님 갤로그로 이동합니다. 13:18 68 0" [ref=e639]:
+                      - cell "112426" [ref=e640]
+                      - cell "일반" [ref=e641]
+                      - cell "gl에 매개닌 언제나옴?" [ref=e642]:
+                        - link "gl에 매개닌 언제나옴?" [ref=e643] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112426&page=1
+                          - emphasis [ref=e644]
+                          - text: gl에 매개닌 언제나옴?
+                      - cell "이하울님 갤로그로 이동합니다." [ref=e645] [cursor=pointer]:
+                        - generic [ref=e646]:
+                          - generic "이하울님" [ref=e647]:
+                            - emphasis [ref=e648]: 이하울님
+                          - img "갤로그로 이동합니다." [ref=e650]
+                      - cell "13:18" [ref=e651]
+                      - cell "68" [ref=e652]
+                      - cell "0" [ref=e653]
+                    - row "112425 ❓질문 뉴비 질문있사옵니다. [19] 포갤러 (124.194) 13:16 137 0" [ref=e654]:
+                      - cell "112425" [ref=e655]
+                      - cell "❓질문" [ref=e656]
+                      - cell "뉴비 질문있사옵니다. [19]" [ref=e657]:
+                        - link "뉴비 질문있사옵니다." [ref=e658] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112425&page=1
+                          - emphasis [ref=e659]
+                          - text: 뉴비 질문있사옵니다.
+                        - link "[19]" [ref=e660] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112425&t=cv
+                      - cell "포갤러 (124.194)" [ref=e661] [cursor=pointer]:
+                        - generic [ref=e662]:
+                          - generic "포갤러" [ref=e663]:
+                            - emphasis [ref=e664]: 포갤러
+                          - generic [ref=e665]: (124.194)
+                      - cell "13:16" [ref=e666]
+                      - cell "137" [ref=e667]
+                      - cell "0" [ref=e668]
+                    - row "112424 일반 코리안리그 나가보고 싶은데 지금부터 덱 하나 잡고 [3] 비띠엠마 갤로그로 이동합니다. 13:16 101 0" [ref=e669]:
+                      - cell "112424" [ref=e670]
+                      - cell "일반" [ref=e671]
+                      - cell "코리안리그 나가보고 싶은데 지금부터 덱 하나 잡고 [3]" [ref=e672]:
+                        - link "코리안리그 나가보고 싶은데 지금부터 덱 하나 잡고" [ref=e673] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112424&page=1
+                          - emphasis [ref=e674]
+                          - text: 코리안리그 나가보고 싶은데 지금부터 덱 하나 잡고
+                        - link "[3]" [ref=e675] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112424&t=cv
+                      - cell "비띠엠마 갤로그로 이동합니다." [ref=e676] [cursor=pointer]:
+                        - generic [ref=e677]:
+                          - generic "비띠엠마" [ref=e678]:
+                            - emphasis [ref=e679]: 비띠엠마
+                          - img "갤로그로 이동합니다." [ref=e681]
+                      - cell "13:16" [ref=e682]
+                      - cell "101" [ref=e683]
+                      - cell "0" [ref=e684]
+                    - row "112423 🏆대회 <신사 포카드> 5월 3주차 포켓몬 미니리그 일정 안내 포카드TCG 갤로그로 이동합니다. 13:09 50 0" [ref=e685]:
+                      - cell "112423" [ref=e686]
+                      - cell "🏆대회" [ref=e687]
+                      - cell "<신사 포카드> 5월 3주차 포켓몬 미니리그 일정 안내" [ref=e688]:
+                        - link "<신사 포카드> 5월 3주차 포켓몬 미니리그 일정 안내" [ref=e689] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112423&page=1
+                          - emphasis [ref=e690]
+                          - text: <신사 포카드> 5월 3주차 포켓몬 미니리그 일정 안내
+                      - cell "포카드TCG 갤로그로 이동합니다." [ref=e691] [cursor=pointer]:
+                        - generic [ref=e692]:
+                          - generic "포카드TCG" [ref=e693]:
+                            - emphasis [ref=e694]: 포카드TCG
+                          - img "갤로그로 이동합니다." [ref=e696]
+                      - cell "13:09" [ref=e697]
+                      - cell "50" [ref=e698]
+                      - cell "0" [ref=e699]
+                    - row "112421 ❓질문 포켓몬 카드 장수 [3] 포갤러 (211.193) 12:56 126 0" [ref=e700]:
+                      - cell "112421" [ref=e701]
+                      - cell "❓질문" [ref=e702]
+                      - cell "포켓몬 카드 장수 [3]" [ref=e703]:
+                        - link "포켓몬 카드 장수" [ref=e704] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112421&page=1
+                          - emphasis [ref=e705]
+                          - text: 포켓몬 카드 장수
+                        - link "[3]" [ref=e706] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112421&t=cv
+                      - cell "포갤러 (211.193)" [ref=e707] [cursor=pointer]:
+                        - generic [ref=e708]:
+                          - generic "포갤러" [ref=e709]:
+                            - emphasis [ref=e710]: 포갤러
+                          - generic [ref=e711]: (211.193)
+                      - cell "12:56" [ref=e712]
+                      - cell "126" [ref=e713]
+                      - cell "0" [ref=e714]
+                    - row "112420 🔁거래 개굴닌자 sar팝니다 [1] 포갤러 (211.235) 12:24 214 2" [ref=e715]:
+                      - cell "112420" [ref=e716]
+                      - cell "🔁거래" [ref=e717]
+                      - cell "개굴닌자 sar팝니다 [1]" [ref=e718]:
+                        - link "개굴닌자 sar팝니다" [ref=e719] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112420&page=1
+                          - emphasis [ref=e720]
+                          - text: 개굴닌자 sar팝니다
+                        - link "[1]" [ref=e721] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112420&t=cv
+                      - cell "포갤러 (211.235)" [ref=e722] [cursor=pointer]:
+                        - generic [ref=e723]:
+                          - generic "포갤러" [ref=e724]:
+                            - emphasis [ref=e725]: 포갤러
+                          - generic [ref=e726]: (211.235)
+                      - cell "12:24" [ref=e727]
+                      - cell "214" [ref=e728]
+                      - cell "2" [ref=e729]
+                    - row "112419 일반 오택 [1] 화리수 갤로그로 이동합니다. 12:12 120 0" [ref=e730]:
+                      - cell "112419" [ref=e731]
+                      - cell "일반" [ref=e732]
+                      - cell "오택 [1]" [ref=e733]:
+                        - link "오택" [ref=e734] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112419&page=1
+                          - emphasis [ref=e735]
+                          - text: 오택
+                        - link "[1]" [ref=e736] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112419&t=cv
+                      - cell "화리수 갤로그로 이동합니다." [ref=e737] [cursor=pointer]:
+                        - generic [ref=e738]:
+                          - generic "화리수" [ref=e739]:
+                            - emphasis [ref=e740]: 화리수
+                          - img "갤로그로 이동합니다." [ref=e742]
+                      - cell "12:12" [ref=e743]
+                      - cell "120" [ref=e744]
+                      - cell "0" [ref=e745]
+                    - row "112417 ❓질문 메가켕카 바렛 계열 덱 선공 vs 후공? [5] 긴급보드 갤로그로 이동합니다. 11:54 147 0" [ref=e746]:
+                      - cell "112417" [ref=e747]
+                      - cell "❓질문" [ref=e748]
+                      - cell "메가켕카 바렛 계열 덱 선공 vs 후공? [5]" [ref=e749]:
+                        - link "메가켕카 바렛 계열 덱 선공 vs 후공?" [ref=e750] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112417&page=1
+                          - emphasis [ref=e751]
+                          - text: 메가켕카 바렛 계열 덱 선공 vs 후공?
+                        - emphasis [ref=e752]
+                        - link "[5]" [ref=e753] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112417&t=cv
+                      - cell "긴급보드 갤로그로 이동합니다." [ref=e754] [cursor=pointer]:
+                        - generic [ref=e755]:
+                          - generic "긴급보드" [ref=e756]:
+                            - emphasis [ref=e757]: 긴급보드
+                          - img "갤로그로 이동합니다." [ref=e759]
+                      - cell "11:54" [ref=e760]
+                      - cell "147" [ref=e761]
+                      - cell "0" [ref=e762]
+                    - row "112416 일반 오늘 비공인이나 공인 열리는곳 있음? [2] 양식 갤로그로 이동합니다. 11:44 78 0" [ref=e763]:
+                      - cell "112416" [ref=e764]
+                      - cell "일반" [ref=e765]
+                      - cell "오늘 비공인이나 공인 열리는곳 있음? [2]" [ref=e766]:
+                        - link "오늘 비공인이나 공인 열리는곳 있음?" [ref=e767] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112416&page=1
+                          - emphasis [ref=e768]
+                          - text: 오늘 비공인이나 공인 열리는곳 있음?
+                        - link "[2]" [ref=e769] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112416&t=cv
+                      - cell "양식 갤로그로 이동합니다." [ref=e770] [cursor=pointer]:
+                        - generic [ref=e771]:
+                          - generic "양식" [ref=e772]:
+                            - emphasis [ref=e773]: 양식
+                          - img "갤로그로 이동합니다." [ref=e775]
+                      - cell "11:44" [ref=e776]
+                      - cell "78" [ref=e777]
+                      - cell "0" [ref=e778]
+                    - row "112414 ❓질문 덱 짜기 고민 [4] 그레이트다간gx 갤로그로 이동합니다. 11:12 108 0" [ref=e779]:
+                      - cell "112414" [ref=e780]
+                      - cell "❓질문" [ref=e781]
+                      - cell "덱 짜기 고민 [4]" [ref=e782]:
+                        - link "덱 짜기 고민" [ref=e783] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112414&page=1
+                          - emphasis [ref=e784]
+                          - text: 덱 짜기 고민
+                        - link "[4]" [ref=e785] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112414&t=cv
+                      - cell "그레이트다간gx 갤로그로 이동합니다." [ref=e786] [cursor=pointer]:
+                        - generic [ref=e787]:
+                          - generic "그레이트다간gx" [ref=e788]:
+                            - emphasis [ref=e789]: 그레이트다간gx
+                          - img "갤로그로 이동합니다." [ref=e791]
+                      - cell "11:12" [ref=e792]
+                      - cell "108" [ref=e793]
+                      - cell "0" [ref=e794]
+                    - row "112413 일반 드펄독재가 풀타입 때문이라고? [18] 님피아동굴탐험대 갤로그로 이동합니다. 10:56 317 0" [ref=e795]:
+                      - cell "112413" [ref=e796]
+                      - cell "일반" [ref=e797]
+                      - cell "드펄독재가 풀타입 때문이라고? [18]" [ref=e798]:
+                        - link "드펄독재가 풀타입 때문이라고?" [ref=e799] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112413&page=1
+                          - emphasis [ref=e800]
+                          - text: 드펄독재가 풀타입 때문이라고?
+                        - link "[18]" [ref=e801] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112413&t=cv
+                      - cell "님피아동굴탐험대 갤로그로 이동합니다." [ref=e802] [cursor=pointer]:
+                        - generic [ref=e803]:
+                          - generic "님피아동굴탐험대" [ref=e804]:
+                            - emphasis [ref=e805]: 님피아동굴탐험대
+                          - img "갤로그로 이동합니다." [ref=e807]
+                      - cell "10:56" [ref=e808]
+                      - cell "317" [ref=e809]
+                      - cell "0" [ref=e810]
+                    - row "112411 일반 와일드포스 살만함? [5] 포갤러 (106.101) 10:41 117 0" [ref=e811]:
+                      - cell "112411" [ref=e812]
+                      - cell "일반" [ref=e813]
+                      - cell "와일드포스 살만함? [5]" [ref=e814]:
+                        - link "와일드포스 살만함?" [ref=e815] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112411&page=1
+                          - emphasis [ref=e816]
+                          - text: 와일드포스 살만함?
+                        - link "[5]" [ref=e817] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112411&t=cv
+                      - cell "포갤러 (106.101)" [ref=e818] [cursor=pointer]:
+                        - generic [ref=e819]:
+                          - generic "포갤러" [ref=e820]:
+                            - emphasis [ref=e821]: 포갤러
+                          - generic [ref=e822]: (106.101)
+                      - cell "10:41" [ref=e823]
+                      - cell "117" [ref=e824]
+                      - cell "0" [ref=e825]
+                    - row "112410 🔁거래 브라이어 sar 팔고 난한카 고레어 ㅅㅅ [1] 잘하자 갤로그로 이동합니다. 10:20 196 0" [ref=e826]:
+                      - cell "112410" [ref=e827]
+                      - cell "🔁거래" [ref=e828]
+                      - cell "브라이어 sar 팔고 난한카 고레어 ㅅㅅ [1]" [ref=e829]:
+                        - link "브라이어 sar 팔고 난한카 고레어 ㅅㅅ" [ref=e830] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112410&page=1
+                          - emphasis [ref=e831]
+                          - text: 브라이어 sar 팔고 난한카 고레어 ㅅㅅ
+                        - link "[1]" [ref=e832] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112410&t=cv
+                      - cell "잘하자 갤로그로 이동합니다." [ref=e833] [cursor=pointer]:
+                        - generic [ref=e834]:
+                          - generic "잘하자" [ref=e835]:
+                            - emphasis [ref=e836]: 잘하자
+                          - img "갤로그로 이동합니다." [ref=e838]
+                      - cell "10:20" [ref=e839]
+                      - cell "196" [ref=e840]
+                      - cell "0" [ref=e841]
+                    - row "112409 일반 드펄독주 진짜 범인 [2] 포갤러 (222.238) 09:55 234 0" [ref=e842]:
+                      - cell "112409" [ref=e843]
+                      - cell "일반" [ref=e844]
+                      - cell "드펄독주 진짜 범인 [2]" [ref=e845]:
+                        - link "드펄독주 진짜 범인" [ref=e846] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112409&page=1
+                          - emphasis [ref=e847]
+                          - text: 드펄독주 진짜 범인
+                        - link "[2]" [ref=e848] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112409&t=cv
+                      - cell "포갤러 (222.238)" [ref=e849] [cursor=pointer]:
+                        - generic [ref=e850]:
+                          - generic "포갤러" [ref=e851]:
+                            - emphasis [ref=e852]: 포갤러
+                          - generic [ref=e853]: (222.238)
+                      - cell "09:55" [ref=e854]
+                      - cell "234" [ref=e855]
+                      - cell "0" [ref=e856]
+                    - row "112408 일반 닌스 GS25에 재고 좀 풀리네 ㅇㅇ (218.149) 09:36 197 0" [ref=e857]:
+                      - cell "112408" [ref=e858]
+                      - cell "일반" [ref=e859]
+                      - cell "닌스 GS25에 재고 좀 풀리네" [ref=e860]:
+                        - link "닌스 GS25에 재고 좀 풀리네" [ref=e861] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112408&page=1
+                          - emphasis [ref=e862]
+                          - text: 닌스 GS25에 재고 좀 풀리네
+                      - cell "ㅇㅇ (218.149)" [ref=e863] [cursor=pointer]:
+                        - generic [ref=e864]:
+                          - generic "ㅇㅇ" [ref=e865]:
+                            - emphasis [ref=e866]: ㅇㅇ
+                          - generic [ref=e867]: (218.149)
+                      - cell "09:36" [ref=e868]
+                      - cell "197" [ref=e869]
+                      - cell "0" [ref=e870]
+                    - row "112407 PTC 신규 게임 모드 Build & Battle 업데이트 [3] 갈비띠 갤로그로 이동합니다. 09:06 249 1" [ref=e871]:
+                      - cell "112407" [ref=e872]
+                      - cell "PTC" [ref=e873]
+                      - cell "신규 게임 모드 Build & Battle 업데이트 [3]" [ref=e874]:
+                        - link "신규 게임 모드 Build & Battle 업데이트" [ref=e875] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112407&page=1
+                          - emphasis [ref=e876]
+                          - text: 신규 게임 모드 Build & Battle 업데이트
+                        - link "[3]" [ref=e877] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112407&t=cv
+                      - cell "갈비띠 갤로그로 이동합니다." [ref=e878] [cursor=pointer]:
+                        - generic [ref=e879]:
+                          - generic "갈비띠" [ref=e880]:
+                            - emphasis [ref=e881]: 갈비띠
+                          - img "갤로그로 이동합니다." [ref=e883]
+                      - cell "09:06" [ref=e884]
+                      - cell "249" [ref=e885]
+                      - cell "1" [ref=e886]
+                    - row "112406 🔁거래 금칠 덱소스 삽니다 포갤러 (61.37) 08:33 97 0" [ref=e887]:
+                      - cell "112406" [ref=e888]
+                      - cell "🔁거래" [ref=e889]
+                      - cell "금칠 덱소스 삽니다" [ref=e890]:
+                        - link "금칠 덱소스 삽니다" [ref=e891] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112406&page=1
+                          - emphasis [ref=e892]
+                          - text: 금칠 덱소스 삽니다
+                      - cell "포갤러 (61.37)" [ref=e893] [cursor=pointer]:
+                        - generic [ref=e894]:
+                          - generic "포갤러" [ref=e895]:
+                            - emphasis [ref=e896]: 포갤러
+                          - generic [ref=e897]: (61.37)
+                      - cell "08:33" [ref=e898]
+                      - cell "97" [ref=e899]
+                      - cell "0" [ref=e900]
+                    - row "112405 일반 개닌덱에 왜 메가앱솔 채용은 없음? [9] 포갤러 (221.142) 08:10 178 0" [ref=e901]:
+                      - cell "112405" [ref=e902]
+                      - cell "일반" [ref=e903]
+                      - cell "개닌덱에 왜 메가앱솔 채용은 없음? [9]" [ref=e904]:
+                        - link "개닌덱에 왜 메가앱솔 채용은 없음?" [ref=e905] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112405&page=1
+                          - emphasis [ref=e906]
+                          - text: 개닌덱에 왜 메가앱솔 채용은 없음?
+                        - link "[9]" [ref=e907] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112405&t=cv
+                      - cell "포갤러 (221.142)" [ref=e908] [cursor=pointer]:
+                        - generic [ref=e909]:
+                          - generic "포갤러" [ref=e910]:
+                            - emphasis [ref=e911]: 포갤러
+                          - generic [ref=e912]: (221.142)
+                      - cell "08:10" [ref=e913]
+                      - cell "178" [ref=e914]
+                      - cell "0" [ref=e915]
+                    - row "112404 일반 여친이 코로챠오? 그 무슨 카드덱 있는거 사왔는데 [2] 포갤러 (218.152) 05:06 297 0" [ref=e916]:
+                      - cell "112404" [ref=e917]
+                      - cell "일반" [ref=e918]
+                      - cell "여친이 코로챠오? 그 무슨 카드덱 있는거 사왔는데 [2]" [ref=e919]:
+                        - link "여친이 코로챠오? 그 무슨 카드덱 있는거 사왔는데" [ref=e920] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112404&page=1
+                          - emphasis [ref=e921]
+                          - text: 여친이 코로챠오? 그 무슨 카드덱 있는거 사왔는데
+                        - link "[2]" [ref=e922] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112404&t=cv
+                      - cell "포갤러 (218.152)" [ref=e923] [cursor=pointer]:
+                        - generic [ref=e924]:
+                          - generic "포갤러" [ref=e925]:
+                            - emphasis [ref=e926]: 포갤러
+                          - generic [ref=e927]: (218.152)
+                      - cell "05:06" [ref=e928]
+                      - cell "297" [ref=e929]
+                      - cell "0" [ref=e930]
+                    - row "112403 일반 로토무 바렛.. [1] 후냥냥 갤로그로 이동합니다. 03:35 96 0" [ref=e931]:
+                      - cell "112403" [ref=e932]
+                      - cell "일반" [ref=e933]
+                      - cell "로토무 바렛.. [1]" [ref=e934]:
+                        - link "로토무 바렛.." [ref=e935] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112403&page=1
+                          - emphasis [ref=e936]
+                          - text: 로토무 바렛..
+                        - link "[1]" [ref=e937] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112403&t=cv
+                      - cell "후냥냥 갤로그로 이동합니다." [ref=e938] [cursor=pointer]:
+                        - generic [ref=e939]:
+                          - generic "후냥냥" [ref=e940]:
+                            - emphasis [ref=e941]: 후냥냥
+                          - img "갤로그로 이동합니다." [ref=e943]
+                      - cell "03:35" [ref=e944]
+                      - cell "96" [ref=e945]
+                      - cell "0" [ref=e946]
+                    - row "112400 🔁거래 난한카 고레어 ㅅㅅ 잘하자 갤로그로 이동합니다. 01:59 93 0" [ref=e947]:
+                      - cell "112400" [ref=e948]
+                      - cell "🔁거래" [ref=e949]
+                      - cell "난한카 고레어 ㅅㅅ" [ref=e950]:
+                        - link "난한카 고레어 ㅅㅅ" [ref=e951] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112400&page=1
+                          - emphasis [ref=e952]
+                          - text: 난한카 고레어 ㅅㅅ
+                      - cell "잘하자 갤로그로 이동합니다." [ref=e953] [cursor=pointer]:
+                        - generic [ref=e954]:
+                          - generic "잘하자" [ref=e955]:
+                            - emphasis [ref=e956]: 잘하자
+                          - img "갤로그로 이동합니다." [ref=e958]
+                      - cell "01:59" [ref=e959]
+                      - cell "93" [ref=e960]
+                      - cell "0" [ref=e961]
+                    - row "112399 🔁거래 덱소스 삽니다 [2] 코제 갤로그로 이동합니다. 01:55 131 0" [ref=e962]:
+                      - cell "112399" [ref=e963]
+                      - cell "🔁거래" [ref=e964]
+                      - cell "덱소스 삽니다 [2]" [ref=e965]:
+                        - link "덱소스 삽니다" [ref=e966] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112399&page=1
+                          - emphasis [ref=e967]
+                          - text: 덱소스 삽니다
+                        - link "[2]" [ref=e968] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112399&t=cv
+                      - cell "코제 갤로그로 이동합니다." [ref=e969] [cursor=pointer]:
+                        - generic [ref=e970]:
+                          - generic "코제" [ref=e971]:
+                            - emphasis [ref=e972]: 코제
+                          - img "갤로그로 이동합니다." [ref=e974]
+                      - cell "01:55" [ref=e975]
+                      - cell "131" [ref=e976]
+                      - cell "0" [ref=e977]
+                    - row "112397 일반 이야 극수감 이거 괜찮네 [6] 포갤러 (116.33) 01:31 276 0" [ref=e978]:
+                      - cell "112397" [ref=e979]
+                      - cell "일반" [ref=e980]
+                      - cell "이야 극수감 이거 괜찮네 [6]" [ref=e981]:
+                        - link "이야 극수감 이거 괜찮네" [ref=e982] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112397&page=1
+                          - emphasis [ref=e983]
+                          - text: 이야 극수감 이거 괜찮네
+                        - link "[6]" [ref=e984] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112397&t=cv
+                      - cell "포갤러 (116.33)" [ref=e985] [cursor=pointer]:
+                        - generic [ref=e986]:
+                          - generic "포갤러" [ref=e987]:
+                            - emphasis [ref=e988]: 포갤러
+                          - generic [ref=e989]: (116.33)
+                      - cell "01:31" [ref=e990]
+                      - cell "276" [ref=e991]
+                      - cell "0" [ref=e992]
+                    - row "112394 일반 유령숨기 왜 재밌어보이지 [4] 아니스단 갤로그로 이동합니다. 00:38 195 0" [ref=e993]:
+                      - cell "112394" [ref=e994]
+                      - cell "일반" [ref=e995]
+                      - cell "유령숨기 왜 재밌어보이지 [4]" [ref=e996]:
+                        - link "유령숨기 왜 재밌어보이지" [ref=e997] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112394&page=1
+                          - emphasis [ref=e998]
+                          - text: 유령숨기 왜 재밌어보이지
+                        - link "[4]" [ref=e999] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112394&t=cv
+                      - cell "아니스단 갤로그로 이동합니다." [ref=e1000] [cursor=pointer]:
+                        - generic [ref=e1001]:
+                          - generic "아니스단" [ref=e1002]:
+                            - emphasis [ref=e1003]: 아니스단
+                          - img "갤로그로 이동합니다." [ref=e1005]
+                      - cell "00:38" [ref=e1006]
+                      - cell "195" [ref=e1007]
+                      - cell "0" [ref=e1008]
+                    - row "112393 일반 포켓몬이 싸긴하네 화리수 갤로그로 이동합니다. 00:36 431 0" [ref=e1009]:
+                      - cell "112393" [ref=e1010]
+                      - cell "일반" [ref=e1011]
+                      - cell "포켓몬이 싸긴하네" [ref=e1012]:
+                        - link "포켓몬이 싸긴하네" [ref=e1013] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112393&page=1
+                          - emphasis [ref=e1014]
+                          - text: 포켓몬이 싸긴하네
+                      - cell "화리수 갤로그로 이동합니다." [ref=e1015] [cursor=pointer]:
+                        - generic [ref=e1016]:
+                          - generic "화리수" [ref=e1017]:
+                            - emphasis [ref=e1018]: 화리수
+                          - img "갤로그로 이동합니다." [ref=e1020]
+                      - cell "00:36" [ref=e1021]
+                      - cell "431" [ref=e1022]
+                      - cell "0" [ref=e1023]
+                    - row "112392 ❓질문 대구샵 물량 있음?? [1] 포갤러 (211.235) 00:29 130 0" [ref=e1024]:
+                      - cell "112392" [ref=e1025]
+                      - cell "❓질문" [ref=e1026]
+                      - cell "대구샵 물량 있음?? [1]" [ref=e1027]:
+                        - link "대구샵 물량 있음??" [ref=e1028] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112392&page=1
+                          - emphasis [ref=e1029]
+                          - text: 대구샵 물량 있음??
+                        - link "[1]" [ref=e1030] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112392&t=cv
+                      - cell "포갤러 (211.235)" [ref=e1031] [cursor=pointer]:
+                        - generic [ref=e1032]:
+                          - generic "포갤러" [ref=e1033]:
+                            - emphasis [ref=e1034]: 포갤러
+                          - generic [ref=e1035]: (211.235)
+                      - cell "00:29" [ref=e1036]
+                      - cell "130" [ref=e1037]
+                      - cell "0" [ref=e1038]
+                    - row "112391 💀얼마 지금 트래이너 가격 어떰? [4] 포갤러 (114.205) 00:27 225 0" [ref=e1039]:
+                      - cell "112391" [ref=e1040]
+                      - cell "💀얼마" [ref=e1041]
+                      - cell "지금 트래이너 가격 어떰? [4]" [ref=e1042]:
+                        - link "지금 트래이너 가격 어떰?" [ref=e1043] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112391&page=1
+                          - emphasis [ref=e1044]
+                          - text: 지금 트래이너 가격 어떰?
+                        - link "[4]" [ref=e1045] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112391&t=cv
+                      - cell "포갤러 (114.205)" [ref=e1046] [cursor=pointer]:
+                        - generic [ref=e1047]:
+                          - generic "포갤러" [ref=e1048]:
+                            - emphasis [ref=e1049]: 포갤러
+                          - generic [ref=e1050]: (114.205)
+                      - cell "00:27" [ref=e1051]
+                      - cell "225" [ref=e1052]
+                      - cell "0" [ref=e1053]
+                    - row "112389 일반 메가픽시 고레어 거의 다했다 [6] ㅇㅇ 갤로그로 이동합니다. 00:23 268 1" [ref=e1054]:
+                      - cell "112389" [ref=e1055]
+                      - cell "일반" [ref=e1056]
+                      - cell "메가픽시 고레어 거의 다했다 [6]" [ref=e1057]:
+                        - link "메가픽시 고레어 거의 다했다" [ref=e1058] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112389&page=1
+                          - emphasis [ref=e1059]
+                          - text: 메가픽시 고레어 거의 다했다
+                        - link "[6]" [ref=e1060] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112389&t=cv
+                      - cell "ㅇㅇ 갤로그로 이동합니다." [ref=e1061] [cursor=pointer]:
+                        - generic [ref=e1062]:
+                          - generic "ㅇㅇ" [ref=e1063]:
+                            - emphasis [ref=e1064]: ㅇㅇ
+                          - img "갤로그로 이동합니다." [ref=e1066]
+                      - cell "00:23" [ref=e1067]
+                      - cell "268" [ref=e1068]
+                      - cell "1" [ref=e1069]
+                    - row "112387 ❓질문 완전 뉴빈데 100덱 사봤어요 [1] ㅇㅇ (49.168) 00:18 175 0" [ref=e1070]:
+                      - cell "112387" [ref=e1071]
+                      - cell "❓질문" [ref=e1072]
+                      - cell "완전 뉴빈데 100덱 사봤어요 [1]" [ref=e1073]:
+                        - link "완전 뉴빈데 100덱 사봤어요" [ref=e1074] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112387&page=1
+                          - emphasis [ref=e1075]
+                          - text: 완전 뉴빈데 100덱 사봤어요
+                        - link "[1]" [ref=e1076] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112387&t=cv
+                      - cell "ㅇㅇ (49.168)" [ref=e1077] [cursor=pointer]:
+                        - generic [ref=e1078]:
+                          - generic "ㅇㅇ" [ref=e1079]:
+                            - emphasis [ref=e1080]: ㅇㅇ
+                          - generic [ref=e1081]: (49.168)
+                      - cell "00:18" [ref=e1082]
+                      - cell "175" [ref=e1083]
+                      - cell "0" [ref=e1084]
+                    - row "112386 일반 벌써부터 커신덱 짤 생각하니 설레네 ㅇㅇ 갤로그로 이동합니다. 00:18 69 0" [ref=e1085]:
+                      - cell "112386" [ref=e1086]
+                      - cell "일반" [ref=e1087]
+                      - cell "벌써부터 커신덱 짤 생각하니 설레네" [ref=e1088]:
+                        - link "벌써부터 커신덱 짤 생각하니 설레네" [ref=e1089] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112386&page=1
+                          - emphasis [ref=e1090]
+                          - text: 벌써부터 커신덱 짤 생각하니 설레네
+                      - cell "ㅇㅇ 갤로그로 이동합니다." [ref=e1091] [cursor=pointer]:
+                        - generic [ref=e1092]:
+                          - generic "ㅇㅇ" [ref=e1093]:
+                            - emphasis [ref=e1094]: ㅇㅇ
+                          - img "갤로그로 이동합니다." [ref=e1096]
+                      - cell "00:18" [ref=e1097]
+                      - cell "69" [ref=e1098]
+                      - cell "0" [ref=e1099]
+                    - row "112385 일반 여자친구가 모은 포켓몬카드 [1] 포갤러 (118.235) 00:17 476 1" [ref=e1100]:
+                      - cell "112385" [ref=e1101]
+                      - cell "일반" [ref=e1102]
+                      - cell "여자친구가 모은 포켓몬카드 [1]" [ref=e1103]:
+                        - link "여자친구가 모은 포켓몬카드" [ref=e1104] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112385&page=1
+                          - emphasis [ref=e1105]
+                          - text: 여자친구가 모은 포켓몬카드
+                        - link "[1]" [ref=e1106] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112385&t=cv
+                      - cell "포갤러 (118.235)" [ref=e1107] [cursor=pointer]:
+                        - generic [ref=e1108]:
+                          - generic "포갤러" [ref=e1109]:
+                            - emphasis [ref=e1110]: 포갤러
+                          - generic [ref=e1111]: (118.235)
+                      - cell "00:17" [ref=e1112]
+                      - cell "476" [ref=e1113]
+                      - cell "1" [ref=e1114]
+                    - row "112384 일반 아직 어비스아이 카드 다 공개 안됐? [3] 아니스단 갤로그로 이동합니다. 00:11 174 0" [ref=e1115]:
+                      - cell "112384" [ref=e1116]
+                      - cell "일반" [ref=e1117]
+                      - cell "아직 어비스아이 카드 다 공개 안됐? [3]" [ref=e1118]:
+                        - link "아직 어비스아이 카드 다 공개 안됐?" [ref=e1119] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112384&page=1
+                          - emphasis [ref=e1120]
+                          - text: 아직 어비스아이 카드 다 공개 안됐?
+                        - link "[3]" [ref=e1121] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112384&t=cv
+                      - cell "아니스단 갤로그로 이동합니다." [ref=e1122] [cursor=pointer]:
+                        - generic [ref=e1123]:
+                          - generic "아니스단" [ref=e1124]:
+                            - emphasis [ref=e1125]: 아니스단
+                          - img "갤로그로 이동합니다." [ref=e1127]
+                      - cell "00:11" [ref=e1128]
+                      - cell "174" [ref=e1129]
+                      - cell "0" [ref=e1130]
+                    - row "112381 ❓질문 히어로 망토 질문 [1] 장비없이번지점프 갤로그로 이동합니다. 05.12 113 0" [ref=e1131]:
+                      - cell "112381" [ref=e1132]
+                      - cell "❓질문" [ref=e1133]
+                      - cell "히어로 망토 질문 [1]" [ref=e1134]:
+                        - link "히어로 망토 질문" [ref=e1135] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112381&page=1
+                          - emphasis [ref=e1136]
+                          - text: 히어로 망토 질문
+                        - link "[1]" [ref=e1137] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112381&t=cv
+                      - cell "장비없이번지점프 갤로그로 이동합니다." [ref=e1138] [cursor=pointer]:
+                        - generic [ref=e1139]:
+                          - generic "장비없이번지점프" [ref=e1140]:
+                            - emphasis [ref=e1141]: 장비없이번지점프
+                          - img "갤로그로 이동합니다." [ref=e1143]
+                      - cell "05.12" [ref=e1144]
+                      - cell "113" [ref=e1145]
+                      - cell "0" [ref=e1146]
+                    - row "112380 🔁거래 레드카드외 덱소스 일괄로 구해봅니다 [1] 포갤러 (39.7) 05.12 118 0" [ref=e1147]:
+                      - cell "112380" [ref=e1148]
+                      - cell "🔁거래" [ref=e1149]
+                      - cell "레드카드외 덱소스 일괄로 구해봅니다 [1]" [ref=e1150]:
+                        - link "레드카드외 덱소스 일괄로 구해봅니다" [ref=e1151] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112380&page=1
+                          - emphasis [ref=e1152]
+                          - text: 레드카드외 덱소스 일괄로 구해봅니다
+                        - link "[1]" [ref=e1153] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112380&t=cv
+                      - cell "포갤러 (39.7)" [ref=e1154] [cursor=pointer]:
+                        - generic [ref=e1155]:
+                          - generic "포갤러" [ref=e1156]:
+                            - emphasis [ref=e1157]: 포갤러
+                          - generic [ref=e1158]: (39.7)
+                      - cell "05.12" [ref=e1159]
+                      - cell "118" [ref=e1160]
+                      - cell "0" [ref=e1161]
+                    - row "112378 🤝구인 내일 역삼에서 익펜 구인해봅니다. (덱 11개, 대여가능) [1] ㅇㅇ (211.36) 05.12 157 0" [ref=e1162]:
+                      - cell "112378" [ref=e1163]
+                      - cell "🤝구인" [ref=e1164]
+                      - cell "내일 역삼에서 익펜 구인해봅니다. (덱 11개, 대여가능) [1]" [ref=e1165]:
+                        - link "내일 역삼에서 익펜 구인해봅니다. (덱 11개, 대여가능)" [ref=e1166] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112378&page=1
+                          - emphasis [ref=e1167]
+                          - text: 내일 역삼에서 익펜 구인해봅니다. (덱 11개, 대여가능)
+                        - link "[1]" [ref=e1168] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112378&t=cv
+                      - cell "ㅇㅇ (211.36)" [ref=e1169] [cursor=pointer]:
+                        - generic [ref=e1170]:
+                          - generic "ㅇㅇ" [ref=e1171]:
+                            - emphasis [ref=e1172]: ㅇㅇ
+                          - generic [ref=e1173]: (211.36)
+                      - cell "05.12" [ref=e1174]
+                      - cell "157" [ref=e1175]
+                      - cell "0" [ref=e1176]
+                    - row "112377 ❓질문 뉴비 질문 있음 [4] ㅇㅇ (211.251) 05.12 131 0" [ref=e1177]:
+                      - cell "112377" [ref=e1178]
+                      - cell "❓질문" [ref=e1179]
+                      - cell "뉴비 질문 있음 [4]" [ref=e1180]:
+                        - link "뉴비 질문 있음" [ref=e1181] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112377&page=1
+                          - emphasis [ref=e1182]
+                          - text: 뉴비 질문 있음
+                        - link "[4]" [ref=e1183] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112377&t=cv
+                      - cell "ㅇㅇ (211.251)" [ref=e1184] [cursor=pointer]:
+                        - generic [ref=e1185]:
+                          - generic "ㅇㅇ" [ref=e1186]:
+                            - emphasis [ref=e1187]: ㅇㅇ
+                          - generic [ref=e1188]: (211.251)
+                      - cell "05.12" [ref=e1189]
+                      - cell "131" [ref=e1190]
+                      - cell "0" [ref=e1191]
+                    - row "112376 📝후기 20260512 범계 비공인 미니리그 백령도민 갤로그로 이동합니다. 05.12 144 0" [ref=e1192]:
+                      - cell "112376" [ref=e1193]
+                      - cell "📝후기" [ref=e1194]
+                      - cell "20260512 범계 비공인 미니리그" [ref=e1195]:
+                        - link "20260512 범계 비공인 미니리그" [ref=e1196] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112376&page=1
+                          - emphasis [ref=e1197]
+                          - text: 20260512 범계 비공인 미니리그
+                      - cell "백령도민 갤로그로 이동합니다." [ref=e1198] [cursor=pointer]:
+                        - generic [ref=e1199]:
+                          - generic "백령도민" [ref=e1200]:
+                            - emphasis [ref=e1201]: 백령도민
+                          - img "갤로그로 이동합니다." [ref=e1203]
+                      - cell "05.12" [ref=e1204]
+                      - cell "144" [ref=e1205]
+                      - cell "0" [ref=e1206]
+                    - row "112375 📝후기 05/12 범계 비공인 미니리그 전승 심향의 블레이범 [6] SacredHeart1390 갤로그로 이동합니다. 05.12 274 5" [ref=e1207]:
+                      - cell "112375" [ref=e1208]
+                      - cell "📝후기" [ref=e1209]
+                      - cell "05/12 범계 비공인 미니리그 전승 심향의 블레이범 [6]" [ref=e1210]:
+                        - link "05/12 범계 비공인 미니리그 전승 심향의 블레이범" [ref=e1211] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112375&page=1
+                          - emphasis [ref=e1212]
+                          - text: 05/12 범계 비공인 미니리그 전승 심향의 블레이범
+                        - link "[6]" [ref=e1213] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/mgallery/board/view/?id=pokemoncardgame&no=112375&t=cv
+                      - cell "SacredHeart1390 갤로그로 이동합니다." [ref=e1214] [cursor=pointer]:
+                        - generic [ref=e1215]:
+                          - generic "SacredHeart1390" [ref=e1216]:
+                            - emphasis [ref=e1217]: SacredHeart1390
+                          - img "갤로그로 이동합니다." [ref=e1219]
+                      - cell "05.12" [ref=e1220]
+                      - cell "274" [ref=e1221]
+                      - cell "5" [ref=e1222]
+                    - row "112373 일반 포카 관심 없다가 AR SAR 너무 예뻐서 입문함 포갤러 (121.136) 05.12 161 0" [ref=e1223]:
+                      - cell "112373" [ref=e1224]
+                      - cell "일반" [ref=e1225]
+                      - cell "포카 관심 없다가 AR SAR 너무 예뻐서 입문함" [ref=e1226]:
+                        - link "포카 관심 없다가 AR SAR 너무 예뻐서 입문함" [ref=e1227] [cursor=pointer]:
+                          - /url: /mgallery/board/view/?id=pokemoncardgame&no=112373&page=1
+                          - emphasis [ref=e1228]
+                          - text: 포카 관심 없다가 AR SAR 너무 예뻐서 입문함
+                      - cell "포갤러 (121.136)" [ref=e1229] [cursor=pointer]:
+                        - generic [ref=e1230]:
+                          - generic "포갤러" [ref=e1231]:
+                            - emphasis [ref=e1232]: 포갤러
+                          - generic [ref=e1233]: (121.136)
+                      - cell "05.12" [ref=e1234]
+                      - cell "161" [ref=e1235]
+                      - cell "0" [ref=e1236]
+                - generic [ref=e1237]:
+                  - generic [ref=e1238]:
+                    - button "전체글" [ref=e1239] [cursor=pointer]
+                    - button "개념글" [ref=e1240] [cursor=pointer]
+                  - button "글쓰기" [ref=e1242] [cursor=pointer]
+                - generic [ref=e1243]:
+                  - generic [ref=e1244]:
+                    - emphasis [ref=e1245]: "1"
+                    - link "2" [ref=e1246] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=2
+                    - link "3" [ref=e1247] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=3
+                    - link "4" [ref=e1248] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=4
+                    - link "5" [ref=e1249] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=5
+                    - link "6" [ref=e1250] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=6
+                    - link "7" [ref=e1251] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=7
+                    - link "8" [ref=e1252] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=8
+                    - link "9" [ref=e1253] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=9
+                    - link "10" [ref=e1254] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=10
+                    - link "11" [ref=e1255] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=11
+                    - link "12" [ref=e1256] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=12
+                    - link "13" [ref=e1257] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=13
+                    - link "14" [ref=e1258] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=14
+                    - link "15" [ref=e1259] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=15
+                    - link "다음" [ref=e1260] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=16
+                    - link "끝" [ref=e1261] [cursor=pointer]:
+                      - /url: /mgallery/board/lists/?id=pokemoncardgame&page=2067
+                  - button "페이지 이동" [ref=e1263] [cursor=pointer]: 페이지 이동
+                  - text: /
+                - group "갤러리 내부 검색" [ref=e1266]:
+                  - generic [ref=e1267]:
+                    - generic [ref=e1269] [cursor=pointer]:
+                      - text: 제목+내용
+                      - emphasis [ref=e1271]
+                    - generic [ref=e1272]:
+                      - textbox "검색어 입력" [ref=e1274]
+                      - button [ref=e1275] [cursor=pointer]
+              - generic [ref=e1277]:
+                - generic [ref=e1278]:
+                  - strong [ref=e1280] [cursor=pointer]: 로그인해 주세요.
+                  - generic [ref=e1281]:
+                    - link "즐겨찾기" [ref=e1283] [cursor=pointer]:
+                      - /url: javascript:;
+                    - generic [ref=e1284]: "|스크랩"
+                    - generic [ref=e1285]:
+                      - text: "|"
+                      - link "알림" [ref=e1286] [cursor=pointer]:
+                        - /url: javascript:;
+                        - emphasis [ref=e1287]
+                        - text: 알림
+                  - text: "| | | |"
+                - insertion [ref=e1289]:
+                  - iframe [ref=e1292]:
+                    - iframe [ref=f174e4]:
+                      - generic [ref=f176e2] [cursor=pointer]:
+                        - link [ref=f176e4]:
+                          - /url: https://privacy.as.criteo.com/adchoices?cppv=3&cpp=np0nqaIS9JRKKasGROPmK4iBmldSZCGVc-wLEmjjlhNaY8Gue-uJJ1vpLv512mT2s6ad9Rjd5QaTvygjZLFicwDaR8-KPFDCYARZ3CRqj4d7T4Umcu6qPxXcwr3PGv8pwntLaZKstCxRBzBZvAEHVjsKq_k
+                          - img [ref=f176e5]
+                        - img [ref=f176e7]
+                        - generic [ref=f176e8]:
+                          - link [ref=f176e9]:
+                            - /url: https://cat.jp2.as.criteo.com/delivery/ck.php?cppv=3&cpp=yVEerOoHgjkLRka_SINoNmmihg17dNccYc9x2kZg6zNSAxkMjN-pcROVADD-KfnnzuVnzQqf7NOH5s7gP55eR0fYbEQ6McgMwdpYcX2zfDhjNg_p84oaIF221brcuq-ZXY_gSQntJlxRln0qKP_BlhSKHRCwOzxbFL9WZU5q5zL4ipRkEjGxxROAODkNK20GvOQbDxpk3jhDv5pd9m_UMboPURv-5FMDo565kwwNysL-CClax96hyeYk2RDMWdr0sJvKa20EM7GRcWjqUxzsPv_EteSJmcHqw8Dp9j_AZnaICA2SmVUwbCBKoMpwjMNdJvsBPTt2BxU9uBIWX_eHKOrEDq-bytXDX1MNVBdHRt4XYlRjDKMWpMv0HbttGdwtc3dbeIVAvK0VUAFRUl4RhGundVRkNTauk6nSejESrmBmg44CjefvwnTGUb7Los6oiZYaAqGmF8kGLQnnOv750hnRmaPXLltQEUdPtpCi_sEsmYYNf9aMZkL3WpQy-DYpIq7jhOBzaL-fuC6O0qmHdPwZpQ8Mpr_Nl39tMsXwjHOF0jTiXmxUs0NLjjvQGmvjKftIdpJ9AAO0PsdoizmE-Yqj2351iV3kuXMSq2dvU75bAaBQCdShi4zb-axtU0Jd_cvUhKotkoQwufZ2suzSWYF8e44&maxdest=https%3A%2F%2Fwww.adobe.com%2Fkr%2Fcreativecloud%2Froc%2Fdesign%2Fall-in-one.html%3Fsdid%3DGR3XXTQS%26mv%3Ddisplay%26mv2%3Ddisplay%26cto_pld%3DKBEhDiK_AQCsGxwXXn4k-A
+                            - img [ref=f176e12]
+                          - link [ref=f176e13]:
+                            - /url: https://cat.jp2.as.criteo.com/delivery/ck.php?cppv=3&cpp=wxdrrOoHgjkLRka_SINoNmmihg17dNccYc9x2kZg6zNSAxkMjN-pcROVADD-KfnnzuVnzQqf7NOH5s7gP55eR0fYbEQ6McgMwdpYcX2zfDhjNg_p84oaIF221brcuq-ZXY_gSQntJlxRln0qKP_BlhSKHRCwOzxbFL9WZU5q5zL4ipRkEjGxxROAODkNK20GvOQbDxpk3jhDv5pd9m_UMboPURv-5FMDo565kwwNysL-CClax96hyeYk2RDMWdr0sJvKa20EM7GRcWjqUxzsPv_EteSJmcHqw8Dp9j_AZnaICA2SmVUwbCBKoMpwjMNdJvsBPTt2BxU9uBIWX_eHKOrEDq-bytXDX1MNVBdHRt4XYlRjDKMWpMv0HbttGdwtc3dbeIVAvK0VUAFRUl4RhGundVRkNTauk6nSejESrmBmg44CjefvwnTGUb7Los6oiZYaAqGmF8kGLQnnOv750hnRmaPXLltQEUdPtpCi_sEsmYYN25Nc7w6JcaXbXOSocYNEWimeydPsAk9jUHky-q6z4F-R9PSNABvr3dcoOEWv6EhqGbpMSqXkcOmIjzUhqlyyfwn7RloIGVqrY61FysSUcdOC_0xiYCOo_-mq5Js9rAsvWv8-eZOI7wNJJBgS1M0nCbrEdlDiA7YcrzEHdK3hS90&maxdest=https%3A%2F%2Fwww.adobe.com%2Fkr%2Fcreativecloud%2Froc%2Fdesign%2Fall-in-one.html%3Fsdid%3DGR3XXTQS%26mv%3Ddisplay%26mv2%3Ddisplay%26cto_pld%3D0zBE-SK_AQDxcQkV-TwUPg
+                - article [ref=e1293]:
+                  - generic [ref=e1294]:
+                    - generic [ref=e1295]:
+                      - heading "실시간 베스트" [level=3] [ref=e1296]:
+                        - link "실시간 베스트" [ref=e1297] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/board/lists?id=dcbest
+                      - generic [ref=e1298]:
+                        - generic [ref=e1299]:
+                          - strong [ref=e1300]: "1"
+                          - text: /8
+                        - button [ref=e1301] [cursor=pointer]:
+                          - emphasis [ref=e1302]
+                        - button [ref=e1303] [cursor=pointer]:
+                          - emphasis [ref=e1304]
+                    - generic [ref=e1305]:
+                      - generic [ref=e1306]:
+                        - link "MBC) 일본, 국내 나프타 부족해 흑백 감자봉지 출시" [ref=e1308] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/board/view/?id=dcbest&no=428782
+                          - strong [ref=e1311]: MBC) 일본, 국내 나프타 부족해 흑백 감자봉지 출시
+                        - link "싱글벙글 세계 주요 국가 별 지폐 최고액권" [ref=e1313] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/board/view/?id=dcbest&no=428753
+                          - strong [ref=e1316]: 싱글벙글 세계 주요 국가 별 지폐 최고액권
+                      - list [ref=e1317]:
+                        - listitem [ref=e1318]:
+                          - link "싱글벙글 통행료 체납자들이 지불 해야하는 금액" [ref=e1319] [cursor=pointer]:
+                            - /url: https://gall.dcinside.com/board/view/?id=dcbest&no=428768
+                        - listitem [ref=e1320]:
+                          - link "(속.보) 안규백, \"전작권 환수 미국은 온도차가 있었다\"" [ref=e1321] [cursor=pointer]:
+                            - /url: https://gall.dcinside.com/board/view/?id=dcbest&no=428816
+                        - listitem [ref=e1322]:
+                          - link "SBS 키움히어로즈 입갤...news" [ref=e1323] [cursor=pointer]:
+                            - /url: https://gall.dcinside.com/board/view/?id=dcbest&no=428765
+                        - listitem [ref=e1324]:
+                          - link "튼튼머니에 대해서 알아봐요" [ref=e1325] [cursor=pointer]:
+                            - /url: https://gall.dcinside.com/board/view/?id=dcbest&no=428854
+                        - listitem [ref=e1326]:
+                          - link "미-중 정상회담, 세기의 만남 이뤄진다" [ref=e1327] [cursor=pointer]:
+                            - /url: https://gall.dcinside.com/board/view/?id=dcbest&no=428792
+                - article [ref=e1328]:
+                  - generic [ref=e1329]:
+                    - generic [ref=e1330]:
+                      - heading "디시미디어" [level=3] [ref=e1331]:
+                        - link "디시미디어" [ref=e1332] [cursor=pointer]:
+                          - /url: javascript:mediaTabMove('media');
+                      - heading "| 디시이슈" [level=3] [ref=e1333]:
+                        - text: "|"
+                        - link "디시이슈" [ref=e1334] [cursor=pointer]:
+                          - /url: javascript:mediaTabMove('issue');
+                      - generic [ref=e1335]:
+                        - generic [ref=e1336]:
+                          - strong [ref=e1337]: "1"
+                          - text: /4
+                        - button [ref=e1338] [cursor=pointer]:
+                          - emphasis [ref=e1339]
+                        - button [ref=e1340] [cursor=pointer]:
+                          - emphasis [ref=e1341]
+                    - generic [ref=e1342]:
+                      - generic [ref=e1343]:
+                        - link "양상국, '유재석 무례 논란' 결국 사과 \"카메라 앞 과한 설정, 실제론 깍듯\"" [ref=e1345] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/indinews/6457
+                          - strong [ref=e1348]: 양상국, '유재석 무례 논란' 결국 사과 "카메라 앞 과한 설정, 실제론 깍듯"
+                        - link "미국 모든 시장이 2년 안에 블록체인으로 간다? SEC 의장 충격 발언의 의미" [ref=e1350] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/cobak/3299
+                          - strong [ref=e1353]: 미국 모든 시장이 2년 안에 블록체인으로 간다? SEC 의장 충격 발언의 의미
+                      - list [ref=e1354]:
+                        - listitem [ref=e1355]:
+                          - link "'철권'의 '하라다 카츠히로'와 SNK의 만남...신규 개발사 VS 스튜디오 설립" [ref=e1356] [cursor=pointer]:
+                            - /url: https://gall.dcinside.com/gamechosun/2584
+                        - listitem [ref=e1357]:
+                          - link "벨킨, 닌텐도 스위치2 충전 및 거치 기능 통합 케이스 출시" [ref=e1358] [cursor=pointer]:
+                            - /url: https://gall.dcinside.com/khgames/6727
+                        - listitem [ref=e1359]:
+                          - link "[뉴스줌인] 로봇청소기 시장, ‘직배수’ 넘어 ‘빌트인’으로… 드리미도 공식 참전" [ref=e1360] [cursor=pointer]:
+                            - /url: https://gall.dcinside.com/itdonga/7047
+                - article [ref=e1361]:
+                  - generic [ref=e1362]:
+                    - generic [ref=e1363]:
+                      - heading "개념글 [ 교정직 ]" [level=3] [ref=e1364]:
+                        - link "개념글 [ 교정직 ]" [ref=e1365] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/board/view/?id=correction&no=1650437
+                          - text: 개념글
+                          - generic [ref=e1366]:
+                            - text: "["
+                            - emphasis [ref=e1367]: 교정직
+                            - text: "]"
+                      - generic [ref=e1368]:
+                        - generic [ref=e1369]:
+                          - strong [ref=e1370]: "1"
+                          - text: /27
+                        - button [ref=e1371] [cursor=pointer]:
+                          - emphasis [ref=e1372]
+                        - button [ref=e1373] [cursor=pointer]:
+                          - emphasis [ref=e1374]
+                    - list [ref=e1375]:
+                      - listitem [ref=e1376]:
+                        - link "현직분이 일 xx같대서 의욕 떨어짐.." [ref=e1377] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/board/view/?id=correction&no=1650437
+                      - listitem [ref=e1378]:
+                        - link "지인이 교정직 준비한다길래 한번 와봤는데" [ref=e1379] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/board/view/?id=correction&no=1650367
+                      - listitem [ref=e1380]:
+                        - link "왕오달 45 성공 ㅅㅂ" [ref=e1381] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/board/view/?id=correction&no=1650258
+                      - listitem [ref=e1382]:
+                        - link "솔직히 남자는 교정직 만한 직업이없다" [ref=e1383] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/board/view/?id=correction&no=1650120
+                      - listitem [ref=e1384]:
+                        - link "내년 대량채용이라는 직렬의 현실..." [ref=e1385] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/board/view/?id=correction&no=1650110
+                      - listitem [ref=e1386]:
+                        - link "교정직을 지원한 진짜 이유 솔직히 이거잖아" [ref=e1387] [cursor=pointer]:
+                          - /url: https://gall.dcinside.com/board/view/?id=correction&no=1649953
+      - insertion [ref=e1391]:
+        - iframe [ref=e1394]:
+          - iframe [ref=f173e4]:
+            - generic [ref=f175e2] [cursor=pointer]:
+              - link [ref=f175e4]:
+                - /url: https://privacy.as.criteo.com/adchoices?cppv=3&cpp=ZHtKwuVlz_dN__cG2qbcwopEtrRtGGBAWLN2KkdmmEQAEXYIOHDNnzrpzJuPZpTMsbkOalVW62jDXPSqqPXOedB8Fwdyj9Qet_g77meXQctvSw5c-PxvwVR-KKAwxv1kFvu0C0BinOEg5CGdCqz516q8Oj4
+                - img [ref=f175e5]
+              - img [ref=f175e7]
+              - generic [ref=f175e8]:
+                - link [ref=f175e9]:
+                  - /url: https://cat.jp2.as.criteo.com/delivery/ck.php?cppv=3&cpp=Em_xmuoHgjkLRka_SINoNmmihg1hVJRjfePIS6Dueaz1roECKQ_34-ezck1Dp_uF_SEva9VVwkfkpIumCpYVJArbeFlCnUsLRLYR5rd6CX5x_y6dvoDTQjg2T-WK3s3Og2XfJFbvuctvUBeaOZ2WHxNpjKAXgW9_C6VQEI_guh3Eu_e24uUGMZKHrxc8fcD92d18-GEGVv5rBjlzQrR3csaebgYNsDcZBCp8QTjEGTBau3kegFtVwz_5AUgPa1Ly-bZpOLV-dKEqrAegigIESuyzOgwTcstpS_YSxiBydDBNOzTp6sEVhG-EnskMLH18ZBWSnKDkx3GIbjuTj5s0YD_0FzzxQvXrtpttuUKkxKO1LX0E-reijcKmo-pn9TCOwVIjhRzMz1kq-dNHon0JigykzwGGc0YDhpVkPMobwlxOzgtFe3Y0XE92zGUcvLgamFbIIu-FB_ZCaUKgiO_nDQBYRguqFFmkO0_wAgbqatTHKps9wEAzz0kmB04FWlMGnbQwkWhhYMpPihkFLPMHWSHHZKdHKG7vbQ73-yxsRjkPHMCDMF8x8gW09tdeEX0VJIMfi0U-ZtKZNvoQyYnjt8ZWctIgGNL_7_ENbHHqk0WQKA2uSOzIEIhlQaX9gHyEJlAFv6Cqj4w7lgNX2FVelTi-pPQ&maxdest=https%3A%2F%2Fwww.adobe.com%2Fkr%2Fcreativecloud%2Froc%2Fdesign%2Fall-in-one.html%3Fsdid%3DGZKZXL8Q%26mv%3Ddisplay%26mv2%3Ddisplay%26cto_pld%3DscX16iK_AQAWzA6Jf8IG3w
+                  - img [ref=f175e12]
+                - link [ref=f175e13]:
+                  - /url: https://cat.jp2.as.criteo.com/delivery/ck.php?cppv=3&cpp=wYqHi-oHgjkLRka_SINoNmmihg1hVJRjfePIS6Dueaz1roECKQ_34-ezck1Dp_uF_SEva9VVwkfkpIumCpYVJArbeFlCnUsLRLYR5rd6CX5x_y6dvoDTQjg2T-WK3s3Og2XfJFbvuctvUBeaOZ2WHxNpjKAXgW9_C6VQEI_guh3Eu_e24uUGMZKHrxc8fcD92d18-GEGVv5rBjlzQrR3csaebgYNsDcZBCp8QTjEGTBau3kegFtVwz_5AUgPa1Ly-bZpOLV-dKEqrAegigIESuyzOgwTcstpS_YSxiBydDBNOzTp6sEVhG-EnskMLH18ZBWSnKDkx3GIbjuTj5s0YD_0FzzxQvXrtpttuUKkxKO1LX0E-reijcKmo-pn9TCOwVIjhRzMz1kq-dNHon0JigykzwGGc0YDhpVkPMobwlxOzgtFe3Y0XE92zGUcvLgamFbIIu-FB_ZCaUKgiO_nDQBYRguqFFmkO0_wAgbqatTHKps9ApLrInM5V5RWGaHrYz5jwntYB4y_sMnTPi3_ofeLQDWbyUyYJrANGTTBKSDvw5dAO1CuToDmO6Ui8nTs9bjkFxyRKRaMXJcmNQCpgOe8B4fWcOXYxHpBlU7mLqNP32sXYEbALYTlHEaOQ63dLxvjTsZITHJdNxTeQWcl3mhzYnM&maxdest=https%3A%2F%2Fwww.adobe.com%2Fkr%2Fcreativecloud%2Froc%2Fdesign%2Fall-in-one.html%3Fsdid%3DGZKZXL8Q%26mv%3Ddisplay%26mv2%3Ddisplay%26cto_pld%3DSMfMRSK_AQCTceYQamEZZg
+    - contentinfo [ref=e1395]:
+      - generic [ref=e1397]:
+        - generic [ref=e1398]:
+          - generic [ref=e1399]:
+            - term [ref=e1400]: 게임
+            - definition [ref=e1401]:
+              - link "던전앤파이터" [ref=e1402] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=d_fighter_new2
+            - definition [ref=e1403]:
+              - link "리그 오브 레전드" [ref=e1404] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=leagueoflegends6
+            - definition [ref=e1405]:
+              - link "승리의 여신 니케" [ref=e1406] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=projectnike
+            - definition [ref=e1407]:
+              - link "메이플스토리" [ref=e1408] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=maplestory_new
+            - definition [ref=e1409]:
+              - link "아이돌마스터" [ref=e1410] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=idolmaster_new1
+            - definition [ref=e1411]:
+              - link "사운드 볼텍스" [ref=e1412] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=sdvx
+            - definition [ref=e1413]:
+              - link "포켓몬스터" [ref=e1414] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=pokemon
+            - definition [ref=e1415]:
+              - link "FC 온라인" [ref=e1416] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=fifaonline
+            - definition [ref=e1417]:
+              - link "로스트아크" [ref=e1418] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=lostark
+            - definition [ref=e1419]:
+              - link "스타크래프트" [ref=e1420] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=starcraft_new
+          - generic [ref=e1421]:
+            - term [ref=e1422]: 연예/방송
+            - definition [ref=e1423]:
+              - link "남자 연예인" [ref=e1424] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=m_entertainer_new1
+            - definition [ref=e1425]:
+              - link "여자 연예인" [ref=e1426] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=w_entertainer
+            - definition [ref=e1427]:
+              - link "방탄소년단" [ref=e1428] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=bts
+            - definition [ref=e1429]:
+              - link "아이유" [ref=e1430] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=iu_new
+            - definition [ref=e1431]:
+              - link "블랙핑크" [ref=e1432] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=blackpink
+            - definition [ref=e1433]:
+              - link "기타 국내 드라마" [ref=e1434] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=drama_new3
+            - definition [ref=e1435]:
+              - link "나는 솔로" [ref=e1436] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=iamsolo
+            - definition [ref=e1437]:
+              - link "걸스플래닛999" [ref=e1438] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=grsgills
+            - definition [ref=e1439]:
+              - link "미스터 트롯" [ref=e1440] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=mistertrot
+            - definition [ref=e1441]:
+              - link "기타 미국드라마" [ref=e1442] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=f_drama
+          - generic [ref=e1443]:
+            - term [ref=e1444]: 스포츠
+            - definition [ref=e1445]:
+              - link "한화 이글스" [ref=e1446] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=hanwhaeagles_new
+            - definition [ref=e1447]:
+              - link "삼성 라이온즈" [ref=e1448] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=samsunglions_new
+            - definition [ref=e1449]:
+              - link "해외야구" [ref=e1450] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=baseball_ab2
+            - definition [ref=e1451]:
+              - link "LG 트윈스" [ref=e1452] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=lgtwins_new
+            - definition [ref=e1453]:
+              - link "롯데 자이언츠" [ref=e1454] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=giants_new3
+            - definition [ref=e1455]:
+              - link "KIA 타이거즈" [ref=e1456] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=tigers_new2
+            - definition [ref=e1457]:
+              - link "두산 베어스" [ref=e1458] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=doosanbears_new1
+            - definition [ref=e1459]:
+              - link "SSG 랜더스" [ref=e1460] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=skwyverns_new1
+            - definition [ref=e1461]:
+              - link "kt 위즈" [ref=e1462] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=ktwiz
+            - definition [ref=e1463]:
+              - link "국내야구" [ref=e1464] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=baseball_new13
+          - generic [ref=e1465]:
+            - term [ref=e1466]: 교육/금융/IT
+            - definition [ref=e1467]:
+              - link "대출" [ref=e1468] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=loan_new1
+            - definition [ref=e1469]:
+              - link "부동산" [ref=e1470] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=immovables
+            - definition [ref=e1471]:
+              - link "주식" [ref=e1472] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=neostock
+            - definition [ref=e1473]:
+              - link "컴퓨터 본체" [ref=e1474] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=pridepc_new4
+            - definition [ref=e1475]:
+              - link "아이폰" [ref=e1476] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=iphone
+            - definition [ref=e1477]:
+              - link "자격증" [ref=e1478] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=coq
+            - definition [ref=e1479]:
+              - link "토익" [ref=e1480] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=toeic
+            - definition [ref=e1481]:
+              - link "학점은행제" [ref=e1482] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=acbs
+            - definition [ref=e1483]:
+              - link "정치, 사회" [ref=e1484] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=stock_new2
+            - definition [ref=e1485]:
+              - link "의학" [ref=e1486] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=medicalscience
+          - generic [ref=e1487]:
+            - term [ref=e1488]: 여행/음식/생물
+            - definition [ref=e1489]:
+              - link "도시" [ref=e1490] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=city
+            - definition [ref=e1491]:
+              - link "여행-동남아" [ref=e1492] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=travel_asia
+            - definition [ref=e1493]:
+              - link "KFC" [ref=e1494] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=kfc
+            - definition [ref=e1495]:
+              - link "편의점" [ref=e1496] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=cs_new1
+            - definition [ref=e1497]:
+              - link "치킨" [ref=e1498] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=chicken
+            - definition [ref=e1499]:
+              - link "기타음식" [ref=e1500] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=food
+            - definition [ref=e1501]:
+              - link "파충류, 양서류" [ref=e1502] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=reptile
+            - definition [ref=e1503]:
+              - link "식물" [ref=e1504] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=tree
+            - definition [ref=e1505]:
+              - link "야옹이" [ref=e1506] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=cat
+            - definition [ref=e1507]:
+              - link "멍멍이" [ref=e1508] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=dog
+          - generic [ref=e1509]:
+            - term [ref=e1510]: 취미/생활
+            - definition [ref=e1511]:
+              - link "인터넷방송" [ref=e1512] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=ib_new2
+            - definition [ref=e1513]:
+              - link "판타지" [ref=e1514] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=fantasy_new2
+            - definition [ref=e1515]:
+              - link "토이" [ref=e1516] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=toy
+            - definition [ref=e1517]:
+              - link "역학" [ref=e1518] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=divination_new1
+            - definition [ref=e1519]:
+              - link "LGBT" [ref=e1520] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=lgbt
+            - definition [ref=e1521]:
+              - link "미스터리" [ref=e1522] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=mystery
+            - definition [ref=e1523]:
+              - link "만화" [ref=e1524] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=comic_new6
+            - definition [ref=e1525]:
+              - link "카툰-연재" [ref=e1526] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=cartoon
+            - definition [ref=e1527]:
+              - link "향수, 화장품" [ref=e1528] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=cosmetic
+            - definition [ref=e1529]:
+              - link "안경" [ref=e1530] [cursor=pointer]:
+                - /url: https://gall.dcinside.com/board/lists/?id=fashion_acc
+        - generic [ref=e1532]:
+          - link "야간모드" [ref=e1533] [cursor=pointer]:
+            - /url: javascript:;
+            - emphasis [ref=e1534]
+            - text: 야간모드
+          - link "맨위로" [ref=e1535] [cursor=pointer]:
+            - /url: "#top"
+            - emphasis [ref=e1536]
+            - text: 맨위로
+      - generic [ref=e1537]:
+        - link "회사소개" [ref=e1538] [cursor=pointer]:
+          - /url: https://www.dcinside.com/company
+        - link "제휴안내" [ref=e1539] [cursor=pointer]:
+          - /url: https://www.dcinside.com/company#alliance
+        - link "광고안내" [ref=e1540] [cursor=pointer]:
+          - /url: https://nstatic.dcinside.com/dc/dcad/w/index.html
+        - link "이용약관" [ref=e1541] [cursor=pointer]:
+          - /url: https://nstatic.dcinside.com/dc/w/policy/policy_index.html
+        - link "개인정보처리방침" [ref=e1542] [cursor=pointer]:
+          - /url: https://nstatic.dcinside.com/dc/w/policy/privacy_index.html
+        - link "청소년보호정책" [ref=e1543] [cursor=pointer]:
+          - /url: https://nstatic.dcinside.com/dc/w/policy/youth_policy.html
+        - link "마이너 갤러리 운영원칙" [ref=e1544] [cursor=pointer]:
+          - /url: javascript:;
+      - generic [ref=e1545]: Copyright ⓒ 1999 - 2026 dcinside. All rights reserved.
+  - text: "- - - - - -"
+  - textbox [ref=e1546]

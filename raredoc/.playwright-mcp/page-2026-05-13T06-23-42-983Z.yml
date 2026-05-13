@@ -1,0 +1,322 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - link "PokeTrace" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e9]: PokeTrace
+        - navigation [ref=e10]:
+          - link "Why" [ref=e11] [cursor=pointer]:
+            - /url: /why
+          - link "For Developers" [ref=e12] [cursor=pointer]:
+            - /url: /developers
+          - link "Pricing" [ref=e13] [cursor=pointer]:
+            - /url: /pricing
+          - link "FAQ" [ref=e14] [cursor=pointer]:
+            - /url: /faq
+          - link "Catalog" [ref=e15] [cursor=pointer]:
+            - /url: /catalog
+          - link "Docs" [ref=e16] [cursor=pointer]:
+            - /url: /docs
+          - link "Blog" [ref=e17] [cursor=pointer]:
+            - /url: /blog
+          - link "Portfolio" [ref=e18] [cursor=pointer]:
+            - /url: /portfolio
+          - link "Status" [ref=e19] [cursor=pointer]:
+            - /url: https://status.poketrace.com/
+      - generic [ref=e20]:
+        - button "Select language" [ref=e22]:
+          - img [ref=e23]
+          - generic [ref=e26]: EN
+        - link "Sign In" [ref=e27] [cursor=pointer]:
+          - /url: /sign-in
+        - link "Get started with Pokemon Pricing API" [ref=e28] [cursor=pointer]:
+          - /url: /pricing
+          - text: Get Started
+  - heading "Pokemon Card API Pricing | PokeTrace" [level=1] [ref=e29]
+  - generic [ref=e31]:
+    - generic [ref=e32]:
+      - generic [ref=e34]: Pick your plan
+      - heading "Simple, Transparent Pricing" [level=2] [ref=e35]
+      - paragraph [ref=e36]: One request is one request. No confusing credit system. Start free and scale as you grow.
+    - generic [ref=e38]:
+      - link "I collect cards" [ref=e39] [cursor=pointer]:
+        - /url: /pricing?for=collectors
+      - link "I'm building something" [ref=e40] [cursor=pointer]:
+        - /url: /pricing?for=developers
+    - generic [ref=e41]:
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - heading "Free" [level=3] [ref=e44]
+          - paragraph [ref=e45]: Perfect for collectors and developers getting started with Pokemon card pricing.
+        - generic [ref=e47]: Free
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - img [ref=e51]
+            - generic [ref=e53]: 60,000+ cards across 250+ sets
+          - generic [ref=e54]:
+            - img [ref=e56]
+            - generic [ref=e58]: Raw conditions (NM, LP, MP, HP, DMG)
+          - generic [ref=e59]:
+            - img [ref=e61]
+            - generic [ref=e63]: Price data & trends
+          - generic [ref=e64]:
+            - img [ref=e66]
+            - generic [ref=e68]: 250 requests/day + 1 request/2s burst
+          - generic [ref=e69]:
+            - img [ref=e71]
+            - generic [ref=e73]: "US prices: eBay & TCGPlayer"
+        - button "Get Started" [ref=e74]
+      - generic [ref=e75]:
+        - generic [ref=e77]:
+          - img [ref=e78]
+          - text: Most Popular
+        - generic [ref=e80]:
+          - heading "Pro" [level=3] [ref=e81]
+          - paragraph [ref=e82]: For serious traders and apps needing graded prices and EU market data.
+        - generic [ref=e83]:
+          - generic [ref=e84]: $19.99
+          - generic [ref=e85]: /mo
+        - generic [ref=e86]:
+          - generic [ref=e87]: Everything in Free +
+          - generic [ref=e88]:
+            - img [ref=e90]
+            - generic [ref=e92]: US (eBay, TCGPlayer) + EU (Cardmarket)
+          - generic [ref=e93]:
+            - img [ref=e95]
+            - generic [ref=e97]: All grades (15 companies)
+          - generic [ref=e98]:
+            - img [ref=e100]
+            - generic [ref=e102]: Full price history
+          - generic [ref=e103]:
+            - img [ref=e105]
+            - generic [ref=e107]: Commercial usage
+          - generic [ref=e108]:
+            - img [ref=e110]
+            - generic [ref=e112]: 10,000 requests/day + 30 requests/10s burst
+        - button "Get Started" [ref=e113]
+      - generic [ref=e114]:
+        - generic [ref=e115]:
+          - heading "Scale" [level=3] [ref=e116]
+          - paragraph [ref=e117]: For marketplaces and platforms with high-volume needs.
+        - generic [ref=e118]:
+          - generic [ref=e119]: $98
+          - generic [ref=e120]: /mo
+        - generic [ref=e121]:
+          - generic [ref=e122]: Everything in Pro +
+          - generic [ref=e123]:
+            - img [ref=e125]
+            - generic [ref=e127]: 100,000 requests/day + 60 requests/10s burst
+          - generic [ref=e128]:
+            - img [ref=e130]
+            - generic [ref=e132]: WebSocket
+          - generic [ref=e133]:
+            - img [ref=e135]
+            - generic [ref=e137]: Sold Listings
+          - generic [ref=e138]:
+            - img [ref=e140]
+            - generic [ref=e142]: Priority support
+          - generic [ref=e143]:
+            - img [ref=e145]
+            - generic [ref=e147]: Early access to new features
+        - button "Get Started" [ref=e148]
+    - generic [ref=e149]:
+      - generic [ref=e150]:
+        - generic [ref=e151]:
+          - heading "Need More?" [level=3] [ref=e152]
+          - paragraph [ref=e153]: Higher limits, custom integrations, or dedicated infrastructure.
+        - link "Contact Us" [ref=e154] [cursor=pointer]:
+          - /url: mailto:contact@poketrace.com
+          - button "Contact Us" [ref=e155]
+      - generic [ref=e157]:
+        - img [ref=e158]
+        - paragraph [ref=e163]: Interested in a partnership, custom integration, or have a unique use case? We love collaborating with businesses, developers, and communities passionate about Pokemon card data. Reach out — let's build something great together.
+    - generic [ref=e164]:
+      - heading "What's Included in Every Plan" [level=2] [ref=e165]
+      - generic [ref=e166]:
+        - generic [ref=e167]:
+          - img [ref=e169]
+          - heading "60,000+ Cards" [level=3] [ref=e173]
+          - paragraph [ref=e174]: Every Pokemon set from Base Set to the latest releases. Vintage, modern, Japanese exclusives, and promos.
+        - generic [ref=e175]:
+          - img [ref=e177]
+          - heading "Global Markets" [level=3] [ref=e180]
+          - paragraph [ref=e181]: US market data (TCGPlayer, eBay) and EU market data (CardMarket) with proper currency support.
+        - generic [ref=e182]:
+          - img [ref=e184]
+          - heading "Grading Support" [level=3] [ref=e186]
+          - paragraph [ref=e187]: "PSA, BGS, CGC, SGC, ACE, TAG grades 1-10. Plus raw conditions: NM, LP, MP, HP, Damaged."
+        - generic [ref=e188]:
+          - img [ref=e190]
+          - heading "Real-Time Updates" [level=3] [ref=e193]
+          - paragraph [ref=e194]: Prices update multiple times per day for popular cards. Less traded cards update as new sales occur.
+        - generic [ref=e195]:
+          - img [ref=e197]
+          - heading "~200ms Response" [level=3] [ref=e199]
+          - paragraph [ref=e200]: Lightning-fast API responses. Average latency under 200 milliseconds for all endpoints worldwide.
+        - generic [ref=e201]:
+          - img [ref=e203]
+          - heading "99.9% Uptime" [level=3] [ref=e205]
+          - paragraph [ref=e206]: Enterprise-grade reliability. Our infrastructure ensures your apps stay running 24/7.
+        - generic [ref=e207]:
+          - img [ref=e209]
+          - heading "WebSocket" [level=3] [ref=e215]
+          - paragraph [ref=e216]: Real-time price updates streamed to your app. Subscribe to cards and get instant notifications when prices change.
+        - generic [ref=e217]:
+          - img [ref=e219]
+          - heading "REST API" [level=3] [ref=e222]
+          - paragraph [ref=e223]: Simple JSON responses. Easy to integrate with any language or framework.
+        - generic [ref=e224]:
+          - img [ref=e226]
+          - heading "Confidence & Trends" [level=3] [ref=e228]
+          - paragraph [ref=e229]: Price confidence scores and trend indicators over time. Know when to buy or sell.
+    - generic [ref=e230]:
+      - heading "Plan Comparison" [level=2] [ref=e231]
+      - table [ref=e233]:
+        - rowgroup [ref=e234]:
+          - row "Feature Free Pro Scale" [ref=e235]:
+            - columnheader "Feature" [ref=e236]
+            - columnheader "Free" [ref=e237]
+            - columnheader "Pro" [ref=e238]
+            - columnheader "Scale" [ref=e239]
+        - rowgroup [ref=e240]:
+          - row "Cards 60,000+ 60,000+ 60,000+" [ref=e241]:
+            - cell "Cards" [ref=e242]
+            - cell "60,000+" [ref=e243]
+            - cell "60,000+" [ref=e244]
+            - cell "60,000+" [ref=e245]
+          - row "Price Sources eBay, TCGPlayer eBay, TCGPlayer, Cardmarket eBay, TCGPlayer, Cardmarket" [ref=e246]:
+            - cell "Price Sources" [ref=e247]
+            - cell "eBay, TCGPlayer" [ref=e248]
+            - cell "eBay, TCGPlayer, Cardmarket" [ref=e249]
+            - cell "eBay, TCGPlayer, Cardmarket" [ref=e250]
+          - row "Graded Prices —" [ref=e251]:
+            - cell "Graded Prices" [ref=e252]
+            - cell "—" [ref=e253]
+            - cell [ref=e254]:
+              - img [ref=e255]
+            - cell [ref=e257]:
+              - img [ref=e258]
+          - row "Daily Requests 250 10,000 100,000" [ref=e260]:
+            - cell "Daily Requests" [ref=e261]
+            - cell "250" [ref=e262]
+            - cell "10,000" [ref=e263]
+            - cell "100,000" [ref=e264]
+          - row "Burst Limit 1 / 2s 30 / 10s 60 / 10s" [ref=e265]:
+            - cell "Burst Limit" [ref=e266]
+            - cell "1 / 2s" [ref=e267]
+            - cell "30 / 10s" [ref=e268]
+            - cell "60 / 10s" [ref=e269]
+          - row "WebSocket — —" [ref=e270]:
+            - cell "WebSocket" [ref=e271]
+            - cell "—" [ref=e272]
+            - cell "—" [ref=e273]
+            - cell [ref=e274]:
+              - img [ref=e275]
+          - row "Sold Listings — —" [ref=e277]:
+            - cell "Sold Listings" [ref=e278]
+            - cell "—" [ref=e279]
+            - cell "—" [ref=e280]
+            - cell [ref=e281]:
+              - img [ref=e282]
+          - row "Commercial Use —" [ref=e284]:
+            - cell "Commercial Use" [ref=e285]
+            - cell "—" [ref=e286]
+            - cell [ref=e287]:
+              - img [ref=e288]
+            - cell [ref=e290]:
+              - img [ref=e291]
+          - row "Support Community Email Priority" [ref=e293]:
+            - cell "Support" [ref=e294]
+            - cell "Community" [ref=e295]
+            - cell "Email" [ref=e296]
+            - cell "Priority" [ref=e297]
+    - generic [ref=e298]:
+      - heading "Pricing Questions" [level=2] [ref=e299]
+      - generic [ref=e300]:
+        - generic [ref=e301]:
+          - heading "What payment methods do you accept?" [level=3] [ref=e302]
+          - paragraph [ref=e303]: We accept all major credit cards and PayPal through Paddle.com, our payment provider. Payments are secure and PCI compliant.
+        - generic [ref=e304]:
+          - heading "What happens if I exceed my rate limit?" [level=3] [ref=e305]
+          - paragraph [ref=e306]: "You'll receive a 429 error with rate limit headers. Burst limits are plan-based (Free: 1/2s, Pro: 30/10s, Scale: 60/10s) and reset within seconds. Daily limits reset at midnight UTC. We don't charge overage fees—just upgrade if you consistently need more."
+        - generic [ref=e307]:
+          - heading "Can I use the API for commercial projects?" [level=3] [ref=e308]
+          - paragraph [ref=e309]: Free tier is for personal/non-commercial use only. Pro and Scale plans include full commercial usage rights.
+        - generic [ref=e310]:
+          - heading "How do I cancel my subscription?" [level=3] [ref=e311]
+          - paragraph [ref=e312]: You can cancel anytime from your dashboard. Your access continues until the end of your current billing period. No cancellation fees.
+        - generic [ref=e313]:
+          - heading "What's the difference between burst and daily limits?" [level=3] [ref=e314]
+          - paragraph [ref=e315]: "Burst limits are plan-based: Free = 1 request/2 seconds, Pro = 30 requests/10 seconds, Scale = 60 requests/10 seconds. Daily limits reset at midnight UTC. You need to stay within both to avoid 429 errors."
+        - generic [ref=e316]:
+          - heading "Do you offer custom enterprise plans?" [level=3] [ref=e317]
+          - paragraph [ref=e318]: Yes! If you need higher limits, custom integrations, or dedicated infrastructure, contact us at contact@poketrace.com.
+    - generic [ref=e319]:
+      - heading "Ready to Get Started?" [level=2] [ref=e320]
+      - paragraph [ref=e321]: Start with our free plan today. No credit card required. Upgrade anytime as your needs grow.
+      - generic [ref=e322]:
+        - button "Start Free" [ref=e323]
+        - link "View Documentation" [ref=e324] [cursor=pointer]:
+          - /url: /docs
+          - button "View Documentation" [ref=e325]
+  - contentinfo [ref=e326]:
+    - generic [ref=e327]:
+      - generic [ref=e328]:
+        - generic [ref=e329]:
+          - generic [ref=e330]:
+            - generic [ref=e331]: "0"
+            - generic [ref=e332]: PokeTrace
+          - paragraph [ref=e333]: Real-time Pokemon card price tracker API. Track Charizard, Pikachu, and 60,000+ Pokemon TCG cards with PSA, BGS, CGC graded pricing from trusted global marketplaces.
+        - generic [ref=e334]:
+          - navigation "Product navigation" [ref=e335]:
+            - heading "Pokemon Card API" [level=4] [ref=e336]
+            - list [ref=e337]:
+              - listitem [ref=e338]:
+                - link "Features" [ref=e339] [cursor=pointer]:
+                  - /url: /#why
+              - listitem [ref=e340]:
+                - link "API" [ref=e341] [cursor=pointer]:
+                  - /url: /#api
+              - listitem [ref=e342]:
+                - link "API Pricing" [ref=e343] [cursor=pointer]:
+                  - /url: /pricing
+              - listitem [ref=e344]:
+                - link "Pokemon Price FAQ" [ref=e345] [cursor=pointer]:
+                  - /url: /faq
+          - navigation "Resources navigation" [ref=e346]:
+            - heading "Resources" [level=4] [ref=e347]
+            - list [ref=e348]:
+              - listitem [ref=e349]:
+                - link "Blog" [ref=e350] [cursor=pointer]:
+                  - /url: /blog
+              - listitem [ref=e351]:
+                - link "Documentation" [ref=e352] [cursor=pointer]:
+                  - /url: /docs
+              - listitem [ref=e353]:
+                - link "Card Catalog" [ref=e354] [cursor=pointer]:
+                  - /url: /catalog
+              - listitem [ref=e355]:
+                - link "Value Checker" [ref=e356] [cursor=pointer]:
+                  - /url: /value-checker
+              - listitem [ref=e357]:
+                - link "Status" [ref=e358] [cursor=pointer]:
+                  - /url: https://status.poketrace.com/
+          - navigation "Legal navigation" [ref=e359]:
+            - heading "Legal" [level=4] [ref=e360]
+            - list [ref=e361]:
+              - listitem [ref=e362]:
+                - link "Privacy Policy" [ref=e363] [cursor=pointer]:
+                  - /url: /privacy
+              - listitem [ref=e364]:
+                - link "Terms of Service" [ref=e365] [cursor=pointer]:
+                  - /url: /terms
+      - paragraph [ref=e367]: Pokemon card prices • Pokemon TCG API • PSA graded cards • BGS Pokemon • CGC grading • Charizard value • Pikachu card prices • Base Set Pokemon • First Edition prices • Shadowless cards • Pokemon card tracker • Vintage Pokemon values • Pokemon card investing • Japanese Pokemon cards • Alt art Pokemon • Rainbow rare prices • Pokemon price history
+      - generic [ref=e368]:
+        - generic [ref=e369]:
+          - paragraph [ref=e370]: © 2026 PokeTrace — Pokemon Card Price Tracker API. All rights reserved.
+          - link "contact@poketrace.com" [ref=e371] [cursor=pointer]:
+            - /url: mailto:contact@poketrace.com
+        - paragraph [ref=e373]: Pokémon and all respective names are trademark & © of Nintendo 1996-2026. PokeTrace is an independent Pokemon card price tracking service not affiliated with Nintendo, The Pokémon Company, Creatures Inc., PSA, BGS, or CGC. All Pokémon card names and imagery are used solely for trading card identification and price tracking purposes.
+        - paragraph [ref=e375]: "Affiliate Disclosure: This website contains affiliate links to eBay and other retailers. We may receive a commission for purchases made through these links at no additional cost to you. This helps support our work in providing accurate Pokemon card pricing data."
+  - alert [ref=e376]
