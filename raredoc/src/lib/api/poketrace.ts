@@ -27,10 +27,16 @@ export interface PokeTraceCard {
     ebay?: {
       NEAR_MINT?: PokeTracePriceTier;
       LIGHTLY_PLAYED?: PokeTracePriceTier;
+      MODERATELY_PLAYED?: PokeTracePriceTier;
+      HEAVILY_PLAYED?: PokeTracePriceTier;
+      DAMAGED?: PokeTracePriceTier;
     };
     tcgplayer?: {
       NEAR_MINT?: PokeTracePriceTier;
       LIGHTLY_PLAYED?: PokeTracePriceTier;
+      MODERATELY_PLAYED?: PokeTracePriceTier;
+      HEAVILY_PLAYED?: PokeTracePriceTier;
+      DAMAGED?: PokeTracePriceTier;
     };
   };
   topPrice?: number;

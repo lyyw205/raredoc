@@ -4,6 +4,7 @@ import {
   getPokeTracePriceHistory,
   toUsd,
 } from "@/lib/api/poketrace";
+import { getBunjangCardPrices } from "@/lib/api/bunjang";
 import { prisma } from "@/lib/prisma";
 import { RARITY_KO } from "@/lib/constants";
 import { PriceChart, PT_RANGES } from "@/components/cards/PriceChart";
@@ -59,11 +60,12 @@ export default async function CardDetailPage({
   const card = await getCard(cardId);
   if (!card) notFound();
 
-  // DB 히스토리 + PokeTrace 카드 정보 병렬 조회
+  // DB 히스토리 + PokeTrace + 번개장터 병렬 조회
   let priceHistory: { recordedAt: Date; normal: number | null; holofoil: number | null }[] = [];
   let poketraceCard = null;
+  let bunjangPrices = null;
   try {
-    [priceHistory, poketraceCard] = await Promise.all([
+    [priceHistory, poketraceCard, bunjangPrices] = await Promise.all([
       prisma.price
         .findMany({
           where: { cardId },
@@ -72,6 +74,7 @@ export default async function CardDetailPage({
         })
         .catch(() => []),
       findPokeTraceCard(card.name, card.set.name, card.number),
+      getBunjangCardPrices(card.name, card.set.name, card.rarity ?? null),
     ]);
   } catch {}
 
@@ -83,13 +86,17 @@ export default async function CardDetailPage({
   // PokeTrace 각 컨디션 티어 추출
   const ebayNm = poketraceCard?.prices?.ebay?.NEAR_MINT;
   const ebayLp = poketraceCard?.prices?.ebay?.LIGHTLY_PLAYED;
-  const tcgNm = poketraceCard?.prices?.tcgplayer?.NEAR_MINT;
-  const tcgLp = poketraceCard?.prices?.tcgplayer?.LIGHTLY_PLAYED;
+  const ebayMp = poketraceCard?.prices?.ebay?.MODERATELY_PLAYED;
+  const ebayHp = poketraceCard?.prices?.ebay?.HEAVILY_PLAYED;
+  const ebayD  = poketraceCard?.prices?.ebay?.DAMAGED;
+  const tcgNm  = poketraceCard?.prices?.tcgplayer?.NEAR_MINT;
+  const tcgLp  = poketraceCard?.prices?.tcgplayer?.LIGHTLY_PLAYED;
+  const tcgMp  = poketraceCard?.prices?.tcgplayer?.MODERATELY_PLAYED;
+  const tcgHp  = poketraceCard?.prices?.tcgplayer?.HEAVILY_PLAYED;
+  const tcgD   = poketraceCard?.prices?.tcgplayer?.DAMAGED;
 
   const ptEbayNm = ebayNm?.avg ? toUsd(ebayNm.avg) : null;
-  const ptEbayLp = ebayLp?.avg ? toUsd(ebayLp.avg) : null;
-  const ptTcgNm = tcgNm?.avg ? toUsd(tcgNm.avg) : null;
-  const ptTcgLp = tcgLp?.avg ? toUsd(tcgLp.avg) : null;
+  const ptTcgNm  = tcgNm?.avg  ? toUsd(tcgNm.avg)  : null;
 
   const ptEbayNmRange =
     ebayNm && ebayNm.low != null && ebayNm.high != null
@@ -101,10 +108,18 @@ export default async function CardDetailPage({
       : null;
 
   const ptEbayNmTrend = ebayNm ? trendPct(ebayNm.avg, ebayNm.avg7d) : null;
-  const ptTcgNmTrend = tcgNm ? trendPct(tcgNm.avg, tcgNm.avg7d) : null;
+  const ptTcgNmTrend  = tcgNm  ? trendPct(tcgNm.avg,  tcgNm.avg7d)  : null;
 
   const ptEbaySaleCount = ebayNm?.saleCount ?? null;
-  const ptTcgSaleCount = tcgNm?.saleCount ?? null;
+  const ptTcgSaleCount  = tcgNm?.saleCount  ?? null;
+
+  // 하위 컨디션 행 (NM 이외)
+  const otherConditions = [
+    { key: "LP", label: "Lightly Played",   ebay: ebayLp, tcg: tcgLp },
+    { key: "MP", label: "Mod. Played",      ebay: ebayMp, tcg: tcgMp },
+    { key: "HP", label: "Heavily Played",   ebay: ebayHp, tcg: tcgHp },
+    { key: "D",  label: "Damaged",          ebay: ebayD,  tcg: tcgD  },
+  ].filter((c) => c.ebay?.avg || c.tcg?.avg);
 
   const ptTopPrice = poketraceCard?.topPrice ? toUsd(poketraceCard.topPrice) : null;
   const ptTotalSaleCount = poketraceCard?.totalSaleCount ?? null;
@@ -288,6 +303,16 @@ export default async function CardDetailPage({
                           ${ptEbayNm.toFixed(2)}
                         </p>
                         <TrendBadge pct={ptEbayNmTrend} />
+                        {ebayNm?.avg7d != null && (
+                          <p className="text-[11px] text-gray-500">
+                            7일평균 ${toUsd(ebayNm.avg7d).toFixed(2)}
+                          </p>
+                        )}
+                        {ebayNm?.median7d != null && (
+                          <p className="text-[11px] text-gray-500">
+                            중앙값 ${toUsd(ebayNm.median7d).toFixed(2)}
+                          </p>
+                        )}
                         {ptEbayNmRange && ptEbayNmRange.low !== ptEbayNmRange.high && (
                           <p className="text-[11px] text-gray-600">
                             ${ptEbayNmRange.low.toFixed(2)} – ${ptEbayNmRange.high.toFixed(2)}
@@ -310,6 +335,11 @@ export default async function CardDetailPage({
                           ${ptTcgNm.toFixed(2)}
                         </p>
                         <TrendBadge pct={ptTcgNmTrend} />
+                        {tcgNm?.avg7d != null && (
+                          <p className="text-[11px] text-gray-500">
+                            7일평균 ${toUsd(tcgNm.avg7d).toFixed(2)}
+                          </p>
+                        )}
                         {ptTcgNmRange && ptTcgNmRange.low !== ptTcgNmRange.high && (
                           <p className="text-[11px] text-gray-600">
                             ${ptTcgNmRange.low.toFixed(2)} – ${ptTcgNmRange.high.toFixed(2)}
@@ -325,29 +355,32 @@ export default async function CardDetailPage({
                   </div>
                 </div>
 
-                {/* LP 행 — 데이터 있을 때만 */}
-                {(ptEbayLp != null || ptTcgLp != null) && (
-                  <div className="grid grid-cols-[56px_1fr_1fr] gap-x-3 items-center pt-3 border-t border-gray-800">
+                {/* LP / MP / HP / D 행 */}
+                {otherConditions.map(({ key, label, ebay, tcg }) => (
+                  <div
+                    key={key}
+                    className="grid grid-cols-[56px_1fr_1fr] gap-x-3 items-center pt-2 border-t border-gray-800/60"
+                  >
                     <div>
-                      <p className="text-xs font-semibold text-gray-300">LP</p>
-                      <p className="text-[10px] text-gray-600 leading-tight">Lightly Played</p>
+                      <p className="text-xs font-medium text-gray-400">{key}</p>
+                      <p className="text-[10px] text-gray-600 leading-tight">{label}</p>
                     </div>
                     <div className="text-center">
-                      {ptEbayLp != null ? (
-                        <span className="text-sm text-gray-300">${ptEbayLp.toFixed(2)}</span>
+                      {ebay?.avg != null ? (
+                        <span className="text-sm text-gray-300">${toUsd(ebay.avg).toFixed(2)}</span>
                       ) : (
                         <span className="text-sm text-gray-600">—</span>
                       )}
                     </div>
                     <div className="text-center">
-                      {ptTcgLp != null ? (
-                        <span className="text-sm text-gray-300">${ptTcgLp.toFixed(2)}</span>
+                      {tcg?.avg != null ? (
+                        <span className="text-sm text-gray-300">${toUsd(tcg.avg).toFixed(2)}</span>
                       ) : (
                         <span className="text-sm text-gray-600">—</span>
                       )}
                     </div>
                   </div>
-                )}
+                ))}
 
                 {/* 푸터: 집계 + 링크 */}
                 <div className="pt-3 border-t border-gray-800 flex flex-wrap items-center gap-x-4 gap-y-1">
@@ -407,6 +440,34 @@ export default async function CardDetailPage({
               <p className="text-sm text-gray-500">시세 데이터 수집 중</p>
             )}
           </div>
+
+          {/* 번개장터 KRW 시세 */}
+          {bunjangPrices && (
+            <div className="p-4 rounded-xl border border-gray-800 bg-gray-900">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-sm font-semibold text-gray-300">번개장터 시세</h2>
+                <a
+                  href={`https://m.bunjang.co.kr/search/products?q=${encodeURIComponent(bunjangPrices.query)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-orange-500 hover:text-orange-400 transition-colors"
+                >
+                  번개장터 ↗
+                </a>
+              </div>
+              <div className="flex items-baseline gap-2">
+                <span className="text-2xl font-bold text-orange-400">
+                  ₩{bunjangPrices.avg.toLocaleString("ko-KR")}
+                </span>
+                <span className="text-xs text-gray-500">평균</span>
+              </div>
+              <p className="text-xs text-gray-600 mt-1">
+                {bunjangPrices.count}건 · ₩{bunjangPrices.min.toLocaleString("ko-KR")} –{" "}
+                ₩{bunjangPrices.max.toLocaleString("ko-KR")}
+              </p>
+              <p className="text-[11px] text-gray-700 mt-2">검색어: {bunjangPrices.query}</p>
+            </div>
+          )}
 
           {/* 가격 히스토리 차트 */}
           <div className="p-4 rounded-xl border border-gray-800 bg-gray-900">
