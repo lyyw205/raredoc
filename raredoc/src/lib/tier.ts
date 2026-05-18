@@ -25,7 +25,7 @@ export async function loadTierList(setCode: string): Promise<TierList | null> {
 }
 
 export async function loadAllTierLists(): Promise<TierList[]> {
-  const sets = ["sv", "swsh", "sm"];
+  const sets = ["sv3pt5", "sv4pt5", "sv"];
   const results = await Promise.all(sets.map(loadTierList));
   return results.filter(Boolean) as TierList[];
 }
