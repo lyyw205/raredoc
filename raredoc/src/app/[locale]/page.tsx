@@ -52,7 +52,7 @@ const SORTED_CARDS = [...RECENT_CARDS].sort((a, b) => b.valueKrw - a.valueKrw);
 function TopicRow({ topic, locale }: { topic: typeof HOT_TOPICS[number]; locale: string }) {
   return (
     <Link
-      href={`/${locale}/community`}
+      href={`/${locale}/community/${topic.id}`}
       className="flex items-start gap-3 py-3 border-b border-gray-800/60 last:border-0 hover:bg-gray-800/30 -mx-3 px-3 rounded-lg transition-colors group"
     >
       <span className={`shrink-0 text-[10px] font-bold px-1.5 py-0.5 rounded mt-0.5 ${CATEGORY_COLOR[topic.category] ?? "bg-gray-800 text-gray-400"}`}>
@@ -157,11 +157,11 @@ export default async function HomePage({
             <h2 className="text-sm font-semibold text-white mb-3">TCG 정보</h2>
             <div className="space-y-1">
               {[
-                { label: "카드 도감",      emoji: "📖", href: `/dex` },
-                { label: "확장팩 목록",    emoji: "📦", href: `/expansions` },
+                { label: "카드 도감",       emoji: "📖", href: `/dex` },
+                { label: "최근 등록 카드",  emoji: "🆕", href: `/recent` },
                 { label: "투자 티어리스트", emoji: "📊", href: `/tier-list` },
-                { label: "뱃지 도감",      emoji: "🏅", href: `/badges` },
-                { label: "전체 랭킹",      emoji: "🏆", href: `/ranking` },
+                { label: "뱃지 도감",       emoji: "🏅", href: `/badges` },
+                { label: "전체 랭킹",       emoji: "🏆", href: `/ranking` },
               ].map(({ label, emoji, href }) => (
                 <Link
                   key={label}
@@ -188,7 +188,13 @@ export default async function HomePage({
             <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden mb-1">
               <div className="h-full w-[62%] bg-gradient-to-r from-yellow-600 to-yellow-400 rounded-full" />
             </div>
-            <p className="text-[11px] text-gray-600">종료까지 43일</p>
+            <p className="text-[11px] text-gray-600 mb-3">종료까지 43일</p>
+            <Link
+              href={`/${locale}/badges`}
+              className="block w-full text-center text-[11px] font-semibold text-yellow-400 border border-yellow-800/50 rounded-lg py-1.5 hover:bg-yellow-900/30 transition-colors"
+            >
+              뱃지 받으러 가기 →
+            </Link>
           </div>
 
         </div>

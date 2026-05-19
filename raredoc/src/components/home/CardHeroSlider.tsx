@@ -136,7 +136,7 @@ export function CardHeroSlider({
                   zIndex: z,
                   transition:
                     "transform 0.72s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.72s cubic-bezier(0.25, 0.1, 0.25, 1)",
-                  cursor: isActive ? "default" : "pointer",
+                  cursor: "pointer",
                 }}
                 onClick={isActive ? undefined : () => go(i)}
               >
@@ -154,21 +154,27 @@ export function CardHeroSlider({
                     </svg>
                   </div>
                 )}
-                <img
-                  src={c.imageUrl}
-                  alt={c.name}
-                  className="w-full rounded-xl block"
-                  style={
-                    isActive
-                      ? {
-                          boxShadow:
-                            "0 0 52px rgba(234,179,8,0.18), 0 20px 44px rgba(0,0,0,0.7)",
-                          outline: "2px solid rgba(234,179,8,0.22)",
-                          outlineOffset: "2px",
-                        }
-                      : {}
-                  }
-                />
+                {isActive ? (
+                  <Link href={`/${locale}/cards/${c.id}`}>
+                    <img
+                      src={c.imageUrl}
+                      alt={c.name}
+                      className="w-full rounded-xl block"
+                      style={{
+                        boxShadow:
+                          "0 0 52px rgba(234,179,8,0.18), 0 20px 44px rgba(0,0,0,0.7)",
+                        outline: "2px solid rgba(234,179,8,0.22)",
+                        outlineOffset: "2px",
+                      }}
+                    />
+                  </Link>
+                ) : (
+                  <img
+                    src={c.imageUrl}
+                    alt={c.name}
+                    className="w-full rounded-xl block"
+                  />
+                )}
               </div>
             );
           })}
@@ -178,7 +184,12 @@ export function CardHeroSlider({
       {/* Card info */}
       <div className="text-center pt-5 pb-4 px-6">
         <div className="flex items-center justify-center gap-2 mb-0.5">
-          <span className="text-[15px] font-bold text-white">{card.name}</span>
+          <Link
+            href={`/${locale}/cards/${card.id}`}
+            className="text-[15px] font-bold text-white hover:text-yellow-300 transition-colors"
+          >
+            {card.name}
+          </Link>
           <span className="text-[11px] px-1.5 py-0.5 rounded bg-gray-800 text-gray-400 font-medium">
             {card.grade}
           </span>
@@ -198,8 +209,13 @@ export function CardHeroSlider({
           ₩{card.valueKrw.toLocaleString("ko-KR")}
         </p>
         <p className="text-xs text-gray-600 mt-1.5">
-          <span className="text-gray-400 font-medium">{card.collector}</span> ·{" "}
-          {card.addedAt}
+          <Link
+            href={`/${locale}/profile/${card.collector}`}
+            className="text-gray-400 font-medium hover:text-white transition-colors"
+          >
+            {card.collector}
+          </Link>
+          {" "}· {card.addedAt}
         </p>
       </div>
 
