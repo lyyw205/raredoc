@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { BadgeTabs } from "@/components/profile/BadgeTabs";
 import { HighlightGallery } from "@/components/profile/HighlightGallery";
+import { ProfileTabs } from "@/components/profile/ProfileTabs";
 
 // ─── 목업 데이터 (추후 DB로 교체) ───────────────────────────────────────────
 
@@ -108,27 +108,6 @@ function StatItem({ value, label }: { value: string | number; label: string }) {
   );
 }
 
-function CompletionBar({ name, owned, total }: { name: string; owned: number; total: number }) {
-  const pct = Math.round((owned / total) * 100);
-  return (
-    <div>
-      <div className="flex justify-between items-center mb-1.5">
-        <span className="text-sm text-gray-300">{name}</span>
-        <span className="text-sm text-gray-400">
-          {owned}<span className="text-gray-600">/{total}</span>
-          <span className="text-xs text-gray-500 ml-2">({pct}%)</span>
-        </span>
-      </div>
-      <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-        <div
-          className="h-full bg-gradient-to-r from-yellow-600 to-yellow-400 rounded-full transition-all"
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-    </div>
-  );
-}
-
 // ─── 페이지 ─────────────────────────────────────────────────────────────────
 
 export async function generateMetadata({
@@ -147,10 +126,15 @@ export async function generateMetadata({
 
 export default async function ProfilePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ username: string; locale: string }>;
+  searchParams?: Promise<{ tab?: string }>;
 }) {
   const { username, locale } = await params;
+  const sp = (await searchParams) ?? {};
+  const defaultTab: "collection" | "badges" | "ranking" =
+    sp.tab === "badges" || sp.tab === "ranking" ? sp.tab : "collection";
   const user = MOCK_PROFILES[username as keyof typeof MOCK_PROFILES];
   if (!user) notFound();
 
@@ -227,45 +211,8 @@ export default async function ProfilePage({
         isOwnProfile={isOwnProfile}
       />
 
-      {/* ── 뱃지 ── */}
-      <section>
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <h2 className="text-base font-semibold text-white">획득한 뱃지</h2>
-            <p className="text-xs text-gray-500 mt-0.5">
-              {user.badges.filter((b) => b.earned).length}개 획득 ·{" "}
-              {user.badges.filter((b) => !b.earned).length}개 미획득
-            </p>
-          </div>
-        </div>
-        <BadgeTabs badges={user.badges} />
-      </section>
-
-      {/* ── 컬렉션 현황 ── */}
-      <section>
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <h2 className="text-base font-semibold text-white">컬렉션 현황</h2>
-            <p className="text-xs text-gray-500 mt-0.5">세트별 완성도</p>
-          </div>
-          <a
-            href="#"
-            className="text-xs text-gray-500 hover:text-white transition-colors"
-          >
-            컬렉션북 전체보기 →
-          </a>
-        </div>
-        <div className="p-5 rounded-xl bg-gray-900 border border-gray-800 space-y-4">
-          {user.collections.map((col) => (
-            <CompletionBar
-              key={col.setId}
-              name={col.name}
-              owned={col.owned}
-              total={col.total}
-            />
-          ))}
-        </div>
-      </section>
+      {/* ── 탭: 컬렉션 / 뱃지 / 랭킹 ── */}
+      <ProfileTabs defaultTab={defaultTab} />
 
     </div>
   );

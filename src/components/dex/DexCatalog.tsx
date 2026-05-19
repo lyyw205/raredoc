@@ -103,17 +103,34 @@ function ProgressBar({ value }: { value: number }) {
 
 type SelectedCard = DexCard & { setName: string; setId: string };
 
-const MOCK_CARD_OWNERS = [
-  { username: "chaeyeon",    displayName: "채연",   initial: "채", grade: "NM", certified: true,  askingPrice: 280000, offerAvailable: true  },
-  { username: "nari_collect",displayName: "나리",   initial: "나", grade: "LP", certified: false, askingPrice: null,   offerAvailable: true  },
-  { username: "boxseller_k", displayName: "박상자", initial: "박", grade: "NM", certified: true,  askingPrice: 310000, offerAvailable: false },
-  { username: "intl_collector",displayName: "국제",  initial: "국", grade: "MP", certified: false, askingPrice: 180000, offerAvailable: true  },
+// 같은 캐릭터의 다른 팩 카드 (목업)
+const RELATED_VARIANTS = [
+  { set: "포켓몬 151",           number: "025", rarity: "Common",       priceLabel: "₩12,000"  },
+  { set: "스타버스 ex",           number: "043", rarity: "Ultra Rare",   priceLabel: "₩85,000"  },
+  { set: "이브이 히어로즈",        number: "077", rarity: "Hyper Rare",   priceLabel: "₩320,000" },
+  { set: "스칼렛 ex",             number: "215", rarity: "Double Rare",  priceLabel: "₩185,000" },
+  { set: "메가 에볼루션 프로모",   number: "198", rarity: "SAR",          priceLabel: "₩240,000" },
+  { set: "썬앤문 프로모",          number: "012", rarity: "Hyper Rare",   priceLabel: "₩67,000"  },
+  { set: "어둠을 밝힌 달빛",       number: "054", rarity: "Holo Rare",    priceLabel: "₩28,000"  },
 ];
 
-const GRADE_LABEL_COLOR: Record<string, string> = {
-  NM: "bg-green-900/60 text-green-300", LP: "bg-blue-900/60 text-blue-300",
-  MP: "bg-yellow-900/60 text-yellow-300", HP: "bg-orange-900/60 text-orange-300",
-};
+// 카드 id 기반 결정적 목업 시세 (실데이터 연동 전 임시)
+function mockPricesFor(cardId: string) {
+  let hash = 0;
+  for (let i = 0; i < cardId.length; i++) {
+    hash = ((hash << 5) - hash + cardId.charCodeAt(i)) | 0;
+  }
+  hash = Math.abs(hash);
+  const v = (hash % 60) - 30;
+  return {
+    tcgplayer: 35 + v * 0.4,
+    tcgplayerCount: 12 + (hash % 38),
+    ebay: 42 + v * 0.5,
+    ebayCount: 30 + (hash % 50),
+    bunjang: Math.round((245000 + v * 3000) / 1000) * 1000,
+    bunjangCount: 5 + (hash % 20),
+  };
+}
 
 function CardDetailModal({
   card, locale, onClose,
@@ -138,8 +155,6 @@ function CardDetailModal({
   }, [close]);
 
   const largeImageUrl = card.imageSmall.replace(/\.png$/, "_hires.png");
-  const offerOwners   = MOCK_CARD_OWNERS.filter((o) => o.offerAvailable);
-  const allOwners     = MOCK_CARD_OWNERS;
 
   return (
     <div
@@ -179,15 +194,9 @@ function CardDetailModal({
               <img
                 src={largeImageUrl}
                 alt={card.name}
-                className="w-44 rounded-xl shadow-2xl"
+                className="w-72 rounded-xl shadow-2xl"
                 onError={(e) => { (e.currentTarget as HTMLImageElement).src = card.imageSmall; }}
               />
-              <a
-                href={`/${locale}/cards/${card.id}`}
-                className="text-xs text-gray-500 hover:text-white transition-colors"
-              >
-                시세 차트 전체보기 →
-              </a>
             </div>
 
             {/* 우측 */}
@@ -206,21 +215,44 @@ function CardDetailModal({
                 )}
               </div>
 
-              {/* 시세 요약 (목업) */}
+              {/* 시세 (목업) */}
               <div className="rounded-xl bg-gray-900 border border-gray-800 p-4">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wide">번개장터 시세</h3>
+                  <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wide">최근 시세</h3>
                   <a href={`/${locale}/cards/${card.id}`} className="text-[10px] text-gray-500 hover:text-white transition-colors">
                     상세 시세 차트 →
                   </a>
                 </div>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-orange-400">₩245,000</span>
-                  <span className="text-xs text-gray-500">평균 · NM 기준</span>
-                </div>
-                <p className="text-xs text-gray-600 mt-1">12건 · ₩220,000 – ₩290,000</p>
 
-                {/* 가격 알림 */}
+                {(() => {
+                  const p = mockPricesFor(card.id);
+                  const rows: { flag: string; name: string; sub: string; price: string; count: number; color: string }[] = [
+                    { flag: "🇺🇸", name: "TCGplayer", sub: "미국 · NM 기준",        price: `$${p.tcgplayer.toFixed(2)}`,                                        count: p.tcgplayerCount, color: "text-blue-400"    },
+                    { flag: "🌍", name: "eBay",      sub: "글로벌 · Sold listings", price: `$${p.ebay.toFixed(2)}`,                                              count: p.ebayCount,      color: "text-emerald-400" },
+                    { flag: "🇰🇷", name: "번개장터",  sub: "국내 · NM 기준",         price: `₩${p.bunjang.toLocaleString("ko-KR")}`,                              count: p.bunjangCount,   color: "text-orange-400"  },
+                  ];
+                  return (
+                    <div className="divide-y divide-gray-800/60">
+                      {rows.map((r) => (
+                        <div key={r.name} className="flex items-center justify-between py-2">
+                          <div className="flex items-center gap-2">
+                            <span className="text-base">{r.flag}</span>
+                            <div>
+                              <p className="text-xs font-semibold text-gray-300">{r.name}</p>
+                              <p className="text-[10px] text-gray-600">{r.sub}</p>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <p className={`text-base font-bold ${r.color}`}>{r.price}</p>
+                            <p className="text-[10px] text-gray-600">{r.count}건</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })()}
+
+                {/* 가격 알림 (번개장터 기준) */}
                 <div className="mt-3 pt-3 border-t border-gray-800">
                   {alertSaved ? (
                     <div className="flex items-center gap-2 text-xs text-green-400">
@@ -256,68 +288,25 @@ function CardDetailModal({
                 </div>
               </div>
 
-              {/* 이 카드를 보유한 유저 */}
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-bold text-white">이 카드를 보유한 유저</h3>
-                  <span className="text-xs text-gray-600">{allOwners.length}명 보유 · {offerOwners.length}명 제안 가능</span>
-                </div>
+            </div>
+          </div>
 
-                <div className="space-y-2">
-                  {allOwners.map((owner) => (
-                    <div
-                      key={owner.username}
-                      className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl border transition-colors ${
-                        owner.offerAvailable
-                          ? "bg-gray-900 border-gray-800"
-                          : "bg-gray-900/40 border-gray-800/50 opacity-50"
-                      }`}
-                    >
-                      {/* 아바타 */}
-                      <a href={`/${locale}/profile/${owner.username}`} className="shrink-0">
-                        <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-xs font-bold text-white hover:ring-2 hover:ring-gray-500 transition-all">
-                          {owner.initial}
-                        </div>
-                      </a>
-
-                      {/* 유저 정보 */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-1.5 flex-wrap">
-                          <a href={`/${locale}/profile/${owner.username}`} className="text-sm font-medium text-gray-200 hover:text-white transition-colors truncate">
-                            {owner.displayName}
-                          </a>
-                          <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${GRADE_LABEL_COLOR[owner.grade] ?? "bg-gray-800 text-gray-400"}`}>
-                            {owner.grade}
-                          </span>
-                          {owner.certified && (
-                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-green-900/50 text-green-400">PSA인증</span>
-                          )}
-                        </div>
-                        {owner.askingPrice && (
-                          <p className="text-xs text-yellow-400 font-semibold mt-0.5">
-                            ₩{owner.askingPrice.toLocaleString("ko-KR")}
-                          </p>
-                        )}
-                      </div>
-
-                      {/* 제안 버튼 */}
-                      {owner.offerAvailable ? (
-                        <a
-                          href={`/${locale}/messages/c1`}
-                          className="shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-lg bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold transition-colors whitespace-nowrap"
-                        >
-                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                          </svg>
-                          구매 제안
-                        </a>
-                      ) : (
-                        <span className="shrink-0 text-[10px] text-gray-600">제안 불가</span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
+          {/* 같은 포켓몬 · 다른 카드 (목업) */}
+          <div className="px-5 pb-5">
+            <h3 className="text-sm font-bold text-white mb-3">같은 포켓몬 · 다른 카드</h3>
+            <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1">
+              {RELATED_VARIANTS.map((v, i) => (
+                <button key={i} className="shrink-0 w-28 group cursor-pointer text-left">
+                  <div className="rounded-lg overflow-hidden bg-gray-900 border border-gray-800 group-hover:border-gray-600 transition-colors">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={card.imageSmall} alt={card.name} className="w-full block" />
+                  </div>
+                  <p className="mt-1.5 text-[11px] font-medium text-gray-300 truncate">{card.name}</p>
+                  <p className="text-[10px] text-gray-500 truncate">{v.set} · No.{v.number}</p>
+                  <span className="inline-block mt-0.5 text-[9px] px-1.5 py-0.5 rounded bg-gray-800 text-gray-400">{v.rarity}</span>
+                  <p className="text-[11px] font-bold text-orange-400 mt-1">{v.priceLabel}</p>
+                </button>
+              ))}
             </div>
           </div>
         </div>

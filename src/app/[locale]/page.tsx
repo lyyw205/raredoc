@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { CardHeroSlider } from "@/components/home/CardHeroSlider";
+import { CardStageCarousel } from "@/components/home/CardStageCarousel";
 
 export const metadata: Metadata = {
   title: "Raredoc — 수집품 갤러리 & TCG 정보",
@@ -95,8 +95,8 @@ export default async function HomePage({
         </span>
       </div>
 
-      {/* ── 카드 히어로 슬라이더 (전체 너비) ─────────────────────────── */}
-      <CardHeroSlider cards={SORTED_CARDS} locale={locale} />
+      {/* ── 카드 캐러셀 (전체 너비) ─────────────────────────── */}
+      <CardStageCarousel cards={SORTED_CARDS} locale={locale} />
 
       {/* ── 하단 그리드: 커뮤니티 + 사이드바 ──────────────────────────── */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -126,7 +126,7 @@ export default async function HomePage({
           <div className="rounded-xl bg-gray-900 border border-gray-800 p-5">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-sm font-semibold text-white">이달의 TOP 3</h2>
-              <Link href={`/${locale}/ranking`} className="text-xs text-gray-500 hover:text-white transition-colors">
+              <Link href={`/${locale}/profile/yujin?tab=ranking`} className="text-xs text-gray-500 hover:text-white transition-colors">
                 전체 랭킹 →
               </Link>
             </div>
@@ -160,8 +160,8 @@ export default async function HomePage({
                 { label: "카드 도감",       emoji: "📖", href: `/dex` },
                 { label: "최근 등록 카드",  emoji: "🆕", href: `/recent` },
                 { label: "투자 티어리스트", emoji: "📊", href: `/tier-list` },
-                { label: "뱃지 도감",       emoji: "🏅", href: `/badges` },
-                { label: "전체 랭킹",       emoji: "🏆", href: `/ranking` },
+                { label: "뱃지 도감",       emoji: "🏅", href: `/profile/yujin?tab=badges` },
+                { label: "전체 랭킹",       emoji: "🏆", href: `/profile/yujin?tab=ranking` },
               ].map(({ label, emoji, href }) => (
                 <Link
                   key={label}
@@ -190,7 +190,7 @@ export default async function HomePage({
             </div>
             <p className="text-[11px] text-gray-600 mb-3">종료까지 43일</p>
             <Link
-              href={`/${locale}/badges`}
+              href={`/${locale}/profile/yujin?tab=badges`}
               className="block w-full text-center text-[11px] font-semibold text-yellow-400 border border-yellow-800/50 rounded-lg py-1.5 hover:bg-yellow-900/30 transition-colors"
             >
               뱃지 받으러 가기 →

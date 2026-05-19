@@ -53,10 +53,16 @@ export function CardStageCarousel({
     startTimer();
   };
 
-  const prev = (idx - 1 + cards.length) % cards.length;
-  const next = (idx + 1) % cards.length;
+  const VISIBLE_SIDE = 4;
   const card = cards[idx];
   const badge = RANK_BADGE[idx];
+
+  function offset(i: number) {
+    let d = i - idx;
+    if (d > cards.length / 2) d -= cards.length;
+    if (d < -cards.length / 2) d += cards.length;
+    return d;
+  }
 
   return (
     <>
@@ -81,7 +87,7 @@ export function CardStageCarousel({
             <p className="text-xs text-gray-600 mt-0.5">커뮤니티가 오늘 등록한 카드</p>
           </div>
           <Link
-            href={`/${locale}/collection`}
+            href={`/${locale}/profile/yujin?tab=collection`}
             className="text-xs text-gray-500 hover:text-white transition-colors"
           >
             전체보기 →
@@ -99,95 +105,82 @@ export function CardStageCarousel({
           </div>
 
           {/* Cards row */}
-          <div className="flex items-end justify-center">
-            {/* Prev card */}
-            <button
-              aria-label="이전 카드"
-              onClick={() => navigate(prev)}
-              className="shrink-0 cursor-pointer"
-              style={{
-                width: 108,
-                opacity: 0.25,
-                transform: "scale(0.64) translateY(16px)",
-                transformOrigin: "bottom center",
-                transition: "opacity 0.3s",
-              }}
-            >
-              <img
-                src={cards[prev].imageUrl}
-                alt={cards[prev].name}
-                className="w-full rounded-xl"
-              />
-            </button>
+          <div className="relative h-[280px] flex items-center justify-center">
+            {cards.map((c, i) => {
+              const d = offset(i);
+              const abs = Math.abs(d);
+              if (abs > VISIBLE_SIDE) return null;
+              const isActive = d === 0;
+              const scale = isActive ? 1 : Math.max(0.34, 1 - abs * 0.14);
+              const tx = d * 105;
+              const opacity = isActive ? 1 : Math.max(0.18, 0.78 - abs * 0.14);
+              const z = 20 - abs;
 
-            {/* Active center */}
-            <div className="relative shrink-0 z-10" style={{ width: 188 }}>
-              {/* Rank badge */}
-              {badge && (
-                <div
-                  key={`badge-${idx}`}
-                  className="badge-stage-in absolute z-20 flex items-center gap-1 text-[12px] font-bold px-3 py-1 rounded-full shadow-xl"
+              return (
+                <button
+                  key={c.id}
+                  aria-label={isActive ? undefined : `${c.name} 으로 이동`}
+                  onClick={() => !isActive && navigate(i)}
+                  className={isActive ? "absolute cursor-default" : "absolute cursor-pointer"}
                   style={{
-                    top: -22,
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    background: badge.bg,
-                    color: badge.color,
-                    whiteSpace: "nowrap",
-                    boxShadow: `0 4px 16px ${badge.bg}55`,
+                    width: 188,
+                    transform: `translateX(${tx}px) scale(${scale})`,
+                    transformOrigin: "bottom center",
+                    opacity,
+                    zIndex: z,
+                    transition: "transform 0.45s cubic-bezier(.22,1,.36,1), opacity 0.3s",
                   }}
                 >
-                  {badge.emoji} {badge.label}
-                </div>
-              )}
-
-              {/* Certified dot */}
-              {card.certified && (
-                <div className="absolute top-2.5 right-2.5 z-20 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center shadow-md ring-2 ring-gray-900">
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                    <path
-                      d="M2 5l2 2.5 4-4"
-                      stroke="white"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              )}
-
-              <div
-                key={`card-${idx}`}
-                className="card-stage-in w-full rounded-2xl overflow-hidden"
-                style={{
-                  boxShadow: "0 0 52px rgba(234,179,8,0.22), 0 20px 48px rgba(0,0,0,0.6)",
-                  outline: "2px solid rgba(234,179,8,0.28)",
-                  outlineOffset: "2px",
-                }}
-              >
-                <img src={card.imageUrl} alt={card.name} className="w-full block" />
-              </div>
-            </div>
-
-            {/* Next card */}
-            <button
-              aria-label="다음 카드"
-              onClick={() => navigate(next)}
-              className="shrink-0 cursor-pointer"
-              style={{
-                width: 108,
-                opacity: 0.25,
-                transform: "scale(0.64) translateY(16px)",
-                transformOrigin: "bottom center",
-                transition: "opacity 0.3s",
-              }}
-            >
-              <img
-                src={cards[next].imageUrl}
-                alt={cards[next].name}
-                className="w-full rounded-xl"
-              />
-            </button>
+                  <div className="relative">
+                    {isActive && badge && (
+                      <div
+                        key={`badge-${idx}`}
+                        className="badge-stage-in absolute z-20 flex items-center gap-1 text-[12px] font-bold px-3 py-1 rounded-full shadow-xl"
+                        style={{
+                          top: -22,
+                          left: "50%",
+                          transform: "translateX(-50%)",
+                          background: badge.bg,
+                          color: badge.color,
+                          whiteSpace: "nowrap",
+                          boxShadow: `0 4px 16px ${badge.bg}55`,
+                        }}
+                      >
+                        {badge.emoji} {badge.label}
+                      </div>
+                    )}
+                    {isActive && c.certified && (
+                      <div className="absolute top-2.5 right-2.5 z-20 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center shadow-md ring-2 ring-gray-900">
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                          <path
+                            d="M2 5l2 2.5 4-4"
+                            stroke="white"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                    <div
+                      className={`w-full overflow-hidden ${isActive ? "rounded-2xl" : "rounded-xl"}`}
+                      style={
+                        isActive
+                          ? {
+                              boxShadow:
+                                "0 0 52px rgba(234,179,8,0.22), 0 20px 48px rgba(0,0,0,0.6)",
+                              outline: "2px solid rgba(234,179,8,0.28)",
+                              outlineOffset: "2px",
+                            }
+                          : undefined
+                      }
+                    >
+                      <img src={c.imageUrl} alt={c.name} className="w-full block" />
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
           {/* Card info below */}

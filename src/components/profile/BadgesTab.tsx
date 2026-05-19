@@ -1,10 +1,4 @@
-import type { Metadata } from "next";
 import { BadgeCatalog, type Badge } from "@/components/badges/BadgeCatalog";
-
-export const metadata: Metadata = {
-  title: "뱃지 도감",
-  description: "실버 → 골드 → 다이아 등급으로 수집 실력을 증명하세요",
-};
 
 const BADGES: Badge[] = [
   // ── 수집 ──────────────────────────────────────────────────────────────
@@ -154,13 +148,10 @@ const BADGES: Badge[] = [
   },
 ];
 
-export default function BadgesPage() {
+export function BadgesTab() {
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white">뱃지 도감</h1>
-        <p className="text-sm text-gray-500 mt-1">실버 → 골드 → 다이아 등급으로 수집 실력을 증명하세요</p>
-      </div>
+    <div>
+      <p className="text-sm text-gray-500 mb-4">실버 → 골드 → 다이아 등급으로 수집 실력을 증명하세요</p>
       <BadgeCatalog badges={BADGES} />
     </div>
   );

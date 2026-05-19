@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { MessageThread, type Message } from "@/components/messages/MessageThread";
 import type { Conversation } from "@/components/messages/MessageInbox";
+import { prisma } from "@/lib/prisma";
+import { searchCards } from "@/lib/api/pokemontcg";
 
 // ── 목업 데이터 (추후 API/DB로 교체) ─────────────────────────────────────────
 
@@ -202,22 +204,55 @@ export async function generateMetadata({
   return { title: `${conv.partner.displayName}와의 대화 — Raredoc` };
 }
 
+async function getCardRef(cardId: string) {
+  const dbCard = await prisma.card
+    .findUnique({ where: { id: cardId }, include: { set: true } })
+    .catch(() => null);
+  if (dbCard) {
+    return {
+      cardId: dbCard.id,
+      cardName: dbCard.nameKo ?? dbCard.name,
+      setName: dbCard.set.nameKo ?? dbCard.set.name,
+      imageUrl: dbCard.imageSmall ?? "",
+    };
+  }
+  try {
+    const res = await searchCards(`id:${cardId}`, 1);
+    const c = res.data[0];
+    if (!c) return null;
+    return {
+      cardId: c.id,
+      cardName: c.name,
+      setName: c.set.name,
+      imageUrl: c.images.small,
+    };
+  } catch {
+    return null;
+  }
+}
+
 export default async function ConversationPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ conversationId: string }>;
+  searchParams?: Promise<{ cardId?: string }>;
 }) {
   const { conversationId } = await params;
+  const sp = (await searchParams) ?? {};
   const conversation = MOCK_CONVERSATIONS[conversationId];
   const messages = MOCK_MESSAGES[conversationId];
 
   if (!conversation || !messages) notFound();
+
+  const prefilledCardRef = sp.cardId ? (await getCardRef(sp.cardId)) ?? undefined : undefined;
 
   return (
     <MessageThread
       conversation={conversation}
       messages={messages}
       myUserId="me"
+      prefilledCardRef={prefilledCardRef}
     />
   );
 }

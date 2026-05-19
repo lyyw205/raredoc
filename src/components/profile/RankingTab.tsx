@@ -1,10 +1,4 @@
-import type { Metadata } from "next";
 import { RankingBoard } from "@/components/ranking/RankingBoard";
-
-export const metadata: Metadata = {
-  title: "컬렉터 랭킹",
-  description: "컬렉션 가치, 인증 수, 뱃지 기준 전체 컬렉터 랭킹",
-};
 
 const MOCK_USERS = [
   { rank:  1, username: "raymond_tcg",  displayName: "레이먼드",  avatarInitial: "레", tier: "LEGEND"  as const, change:  0, value: 12450000, certified: 45, badges: 23, monthly: 87 },
@@ -20,12 +14,11 @@ const MOCK_USERS = [
   { rank: 43, username: "yujin",        displayName: "유진",      avatarInitial: "유", tier: "GOLD"    as const, change:  2, value:   865000, certified: 12, badges:  8, monthly: 14, isMe: true },
 ];
 
-export default function RankingPage() {
+export function RankingTab() {
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-white">컬렉터 랭킹</h1>
-        <p className="text-sm text-gray-500 mt-1">2026년 5월 기준 · 매일 00시 업데이트</p>
+    <div>
+      <div className="mb-4">
+        <p className="text-sm text-gray-500">2026년 5월 기준 · 매일 00시 업데이트</p>
       </div>
       <RankingBoard users={MOCK_USERS} />
     </div>

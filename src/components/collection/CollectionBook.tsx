@@ -90,7 +90,7 @@ export function CollectionBook({
             <p className="text-xs text-gray-500 mt-0.5">전체 {set.total}장</p>
           </div>
           <Link
-            href={`/${locale}/collection`}
+            href={`/${locale}/profile/yujin?tab=collection`}
             className="ml-auto text-xs text-gray-500 hover:text-white transition-colors"
           >
             ← 컬렉션으로

@@ -105,7 +105,7 @@ function ProgressBar({ value }: { value: number }) {
   );
 }
 
-export default function CollectionPage() {
+export function CollectionTab() {
   const params = useParams();
   const locale = (params?.locale as string) ?? "ko";
 
@@ -121,13 +121,7 @@ export default function CollectionPage() {
   ].sort((a, b) => Number(a.number) - Number(b.number));
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      {/* 페이지 헤더 */}
-      <div className="mb-6">
-        <h1 className="text-xl font-bold text-white">내 컬렉션</h1>
-        <p className="text-sm text-gray-500 mt-0.5">보유 카드 관리 · 세트 완성도 트래커</p>
-      </div>
-
+    <div>
       {/* ── 전체 요약 ── */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
         {[
