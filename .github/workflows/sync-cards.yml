@@ -1,0 +1,39 @@
+name: Sync Cards (weekly)
+
+# 신상 set/카드 메타를 DB 에 반영. 새 set 출시 빈도가 낮아 주간으로 충분.
+on:
+  schedule:
+    - cron: "0 1 * * 0" # 매주 일요일 01:00 UTC = 10:00 KST
+  workflow_dispatch:
+
+concurrency:
+  group: sync-cards
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - run: npm ci
+
+      - run: npx prisma generate
+
+      - name: Seed sets
+        run: npm run seed
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          POKEMONTCG_API_KEY: ${{ secrets.POKEMONTCG_API_KEY }}
+
+      - name: Sync cards
+        run: npm run sync:cards
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          POKEMONTCG_API_KEY: ${{ secrets.POKEMONTCG_API_KEY }}
