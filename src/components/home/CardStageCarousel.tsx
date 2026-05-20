@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import { Card, CardHeader, CardTitle, Tag } from "@/components/toss";
 
 type CardItem = {
   id: string;
@@ -17,10 +18,11 @@ type CardItem = {
   addedAt: string;
 };
 
+// 1위는 강조(warning solid), 2·3위는 약하게 — 토스 단일 톤 정책 (warning 계열만 사용)
 const RANK_BADGE = [
-  { emoji: "👑", label: "1위", bg: "#EAB308", color: "#000" },
-  { emoji: "🥈", label: "2위", bg: "#CBD5E1", color: "#1e293b" },
-  { emoji: "🥉", label: "3위", bg: "#92400E", color: "#fff" },
+  { emoji: "👑", label: "1위", bg: "var(--toss-warning)",      color: "#fff" },
+  { emoji: "🥈", label: "2위", bg: "var(--toss-text-tertiary)", color: "#fff" },
+  { emoji: "🥉", label: "3위", bg: "var(--toss-warning-weak)",  color: "var(--toss-warning)" },
 ];
 
 export function CardStageCarousel({
@@ -79,28 +81,28 @@ export function CardStageCarousel({
         .badge-stage-in { animation: badgeIn  0.35s cubic-bezier(.22,1,.36,1) 0.1s both; }
       `}</style>
 
-      <div className="rounded-xl bg-gray-900 border border-gray-800 overflow-hidden">
+      <Card padding="none" className="overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between px-5 pt-5 pb-1">
+        <CardHeader className="px-5 pt-5 pb-1">
           <div>
-            <h2 className="text-sm font-semibold text-white">최근 등록 · 가격순</h2>
-            <p className="text-xs text-gray-600 mt-0.5">커뮤니티가 오늘 등록한 카드</p>
+            <CardTitle className="text-toss-subtitle">최근 등록 · 가격순</CardTitle>
+            <p className="text-toss-caption text-toss-text-quaternary mt-0.5">커뮤니티가 오늘 등록한 카드</p>
           </div>
           <Link
             href={`/${locale}/profile/yujin?tab=collection`}
-            className="text-xs text-gray-500 hover:text-white transition-colors"
+            className="text-toss-caption text-toss-text-tertiary hover:text-toss-text-primary transition-colors"
           >
             전체보기 →
           </Link>
-        </div>
+        </CardHeader>
 
         {/* Stage */}
         <div className="relative pt-10 pb-6 select-none">
-          {/* Spotlight glow */}
+          {/* Spotlight glow (라이트 모드에서도 살짝 강조) */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div
               className="w-80 h-80 rounded-full blur-[64px]"
-              style={{ background: "radial-gradient(circle, rgba(234,179,8,0.10) 0%, transparent 70%)" }}
+              style={{ background: "radial-gradient(circle, rgba(255,177,52,0.16) 0%, transparent 70%)" }}
             />
           </div>
 
@@ -135,7 +137,7 @@ export function CardStageCarousel({
                     {isActive && badge && (
                       <div
                         key={`badge-${idx}`}
-                        className="badge-stage-in absolute z-20 flex items-center gap-1 text-[12px] font-bold px-3 py-1 rounded-full shadow-xl"
+                        className="badge-stage-in absolute z-20 flex items-center gap-1 text-toss-micro font-bold px-3 py-1 rounded-toss-pill shadow-toss-md"
                         style={{
                           top: -22,
                           left: "50%",
@@ -143,14 +145,13 @@ export function CardStageCarousel({
                           background: badge.bg,
                           color: badge.color,
                           whiteSpace: "nowrap",
-                          boxShadow: `0 4px 16px ${badge.bg}55`,
                         }}
                       >
                         {badge.emoji} {badge.label}
                       </div>
                     )}
                     {isActive && c.certified && (
-                      <div className="absolute top-2.5 right-2.5 z-20 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center shadow-md ring-2 ring-gray-900">
+                      <div className="absolute top-2.5 right-2.5 z-20 w-6 h-6 rounded-full bg-toss-success flex items-center justify-center shadow-toss-md ring-2 ring-toss-bg-base">
                         <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                           <path
                             d="M2 5l2 2.5 4-4"
@@ -163,13 +164,13 @@ export function CardStageCarousel({
                       </div>
                     )}
                     <div
-                      className={`w-full overflow-hidden ${isActive ? "rounded-2xl" : "rounded-xl"}`}
+                      className={`w-full overflow-hidden ${isActive ? "rounded-toss-xl" : "rounded-toss-lg"}`}
                       style={
                         isActive
                           ? {
                               boxShadow:
-                                "0 0 52px rgba(234,179,8,0.22), 0 20px 48px rgba(0,0,0,0.6)",
-                              outline: "2px solid rgba(234,179,8,0.28)",
+                                "0 0 52px rgba(255,177,52,0.20), 0 12px 32px rgba(0,0,0,0.12)",
+                              outline: "2px solid rgba(255,177,52,0.32)",
                               outlineOffset: "2px",
                             }
                           : undefined
@@ -186,27 +187,23 @@ export function CardStageCarousel({
           {/* Card info below */}
           <div className="text-center mt-6 px-6">
             <div className="flex items-center justify-center gap-2 mb-0.5">
-              <span className="text-[15px] font-bold text-white">{card.name}</span>
-              <span className="text-[11px] px-1.5 py-0.5 rounded bg-gray-800 text-gray-400 font-medium">
-                {card.grade}
-              </span>
+              <span className="text-toss-subtitle font-bold text-toss-text-primary">{card.name}</span>
+              <Tag color="neutral" shape="soft" className="text-toss-micro">{card.grade}</Tag>
               {card.certified && (
-                <span className="text-[11px] px-1.5 py-0.5 rounded bg-green-900/40 text-green-400 font-bold">
-                  인증
-                </span>
+                <Tag color="success" shape="soft" className="text-toss-micro">인증</Tag>
               )}
             </div>
-            <p className="text-xs text-gray-500">
+            <p className="text-toss-caption text-toss-text-tertiary">
               {card.set} · No.{card.number}
             </p>
             <p
-              className="font-extrabold text-yellow-400 mt-2 leading-none tracking-tight"
+              className="font-extrabold text-toss-warning mt-2 leading-none tracking-tight toss-numeric"
               style={{ fontSize: 28 }}
             >
               ₩{card.valueKrw.toLocaleString("ko-KR")}
             </p>
-            <p className="text-xs text-gray-600 mt-1.5">
-              <span className="text-gray-400 font-medium">{card.collector}</span>{" "}
+            <p className="text-toss-caption text-toss-text-quaternary mt-1.5">
+              <span className="text-toss-text-tertiary font-medium">{card.collector}</span>{" "}
               · {card.addedAt}
             </p>
           </div>
@@ -217,17 +214,18 @@ export function CardStageCarousel({
               <button
                 key={i}
                 onClick={() => navigate(i)}
+                aria-label={`${i + 1}번 카드`}
                 className="transition-all duration-300 rounded-full"
                 style={{
                   width: i === idx ? 20 : 6,
                   height: 6,
-                  background: i === idx ? "#EAB308" : "#374151",
+                  background: i === idx ? "var(--toss-warning)" : "var(--toss-border-strong)",
                 }}
               />
             ))}
           </div>
         </div>
-      </div>
+      </Card>
     </>
   );
 }

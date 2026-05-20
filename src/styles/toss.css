@@ -1,0 +1,332 @@
+/*
+ * Toss-flavored design tokens for raredoc
+ * Extracted from tossinvest.com (2026-05-20) via Playwright DOM inspection.
+ *
+ * NOTE: All tokens are prefixed `--toss-` so they coexist with the existing
+ * shadcn neutral tokens. Components under `src/components/toss/` consume these.
+ *
+ * Layers:
+ *   primitive  → adaptive (light/dark swap) → semantic (role-based)
+ */
+
+/* =====================================================================
+ * LAYER 1. PRIMITIVE
+ * ===================================================================== */
+:root {
+  /* Brand (Toss Blue) */
+  --toss-blue-50:  #ebf2ff;
+  --toss-blue-100: #d6e4fe;
+  --toss-blue-200: #acd0f8;
+  --toss-blue-300: #74b1f8;
+  --toss-blue-400: #4391ff;
+  --toss-blue-500: #3182f6;
+  --toss-blue-600: #1b64da;
+  --toss-blue-700: #1957b5;
+  --toss-blue-800: #14438c;
+  --toss-blue-900: #0f3066;
+
+  /* Red — KR convention: 상승(positive) / 위험(danger) */
+  --toss-red-50:  #ffeeee;
+  --toss-red-100: #ffd4d6;
+  --toss-red-200: #ff9aad;
+  --toss-red-300: #ff7187;
+  --toss-red-400: #f5445a;
+  --toss-red-500: #f04452;
+  --toss-red-600: #dc2e47;
+  --toss-red-700: #bc1b2a;
+  --toss-red-800: #9a1422;
+  --toss-red-900: #6b0e18;
+
+  /* Green — success */
+  --toss-green-50:  #e6f7ef;
+  --toss-green-500: #02a262;
+  --toss-green-600: #009169;
+  --toss-green-700: #07a978;
+
+  /* Yellow — warning */
+  --toss-yellow-50:  #fff1d4;
+  --toss-yellow-500: #ffb134;
+  --toss-yellow-600: #f29300;
+  --toss-yellow-700: #dd7d02;
+
+  /* Grey */
+  --toss-grey-50:  #f9fafb;
+  --toss-grey-100: #f2f4f6;
+  --toss-grey-200: #e5e8eb;
+  --toss-grey-300: #d1d6db;
+  --toss-grey-400: #b0b8c1;
+  --toss-grey-500: #8b95a1;
+  --toss-grey-600: #6b7684;
+  --toss-grey-700: #4e5968;
+  --toss-grey-800: #333d4b;
+  --toss-grey-900: #191f28;
+
+  /* Grey opacity (위에 무엇이 깔리든 자연스럽게) */
+  --toss-grey-o-50:  rgba(0, 12, 30, 0.04);
+  --toss-grey-o-100: rgba(0, 12, 30, 0.08);
+  --toss-grey-o-200: rgba(0, 12, 30, 0.13);
+  --toss-grey-o-300: rgba(0, 12, 30, 0.19);
+  --toss-grey-o-500: rgba(0, 12, 30, 0.42);
+  --toss-grey-o-700: rgba(0, 12, 30, 0.80);
+  --toss-grey-o-900: rgba(0, 12, 30, 0.96);
+
+  /* Toss-specific observed values */
+  --toss-input-bg:        rgba(2, 32, 71, 0.05);
+  --toss-input-border:    rgba(2, 32, 71, 0.05);
+  --toss-icon-default:    rgba(3, 24, 50, 0.46);
+  --toss-hairline:        rgba(0, 27, 55, 0.10);
+}
+
+/* =====================================================================
+ * LAYER 2 + 3. ADAPTIVE & SEMANTIC — Light (default)
+ * ===================================================================== */
+:root,
+[data-toss-theme="light"] {
+  /* Background */
+  --toss-bg-base:    #ffffff;
+  --toss-bg-subtle:  var(--toss-grey-50);
+  --toss-bg-muted:   var(--toss-grey-100);
+  --toss-bg-overlay: rgba(0, 0, 0, 0.56);
+
+  /* Text */
+  --toss-text-primary:    var(--toss-grey-o-900);   /* 강조 헤드라인 */
+  --toss-text-secondary:  var(--toss-grey-o-700);   /* 본문 */
+  --toss-text-tertiary:   var(--toss-grey-600);     /* 보조 라벨 */
+  --toss-text-quaternary: var(--toss-grey-500);     /* placeholder */
+  --toss-text-disabled:   var(--toss-grey-400);
+  --toss-text-on-brand:   #ffffff;
+
+  /* Brand */
+  --toss-brand:           var(--toss-blue-500);
+  --toss-brand-hover:     var(--toss-blue-600);
+  --toss-brand-pressed:   var(--toss-blue-700);
+  --toss-brand-weak:      var(--toss-blue-50);
+
+  /* Positive (KR: 상승=빨강) */
+  --toss-positive:        var(--toss-red-500);
+  --toss-positive-strong: var(--toss-red-600);
+  --toss-positive-weak:   var(--toss-red-50);
+
+  /* Negative (KR: 하락=파랑) */
+  --toss-negative:        var(--toss-blue-500);
+  --toss-negative-strong: var(--toss-blue-600);
+  --toss-negative-weak:   var(--toss-blue-50);
+
+  /* Roles */
+  --toss-danger:          var(--toss-red-500);
+  --toss-warning:         var(--toss-yellow-700);
+  --toss-warning-weak:    var(--toss-yellow-50);
+  --toss-success:         var(--toss-green-500);
+  --toss-success-weak:    var(--toss-green-50);
+
+  /* Borders */
+  --toss-border:          var(--toss-hairline);
+  --toss-border-strong:   var(--toss-grey-o-300);
+  --toss-divider:         var(--toss-grey-o-100);
+
+  /* Interaction */
+  --toss-hover:           var(--toss-grey-o-50);
+  --toss-pressed:         var(--toss-grey-o-100);
+  --toss-focus-ring:      rgba(49, 130, 246, 0.40);
+}
+
+/* =====================================================================
+ * Dark
+ * ===================================================================== */
+[data-toss-theme="dark"] {
+  --toss-bg-base:    #17171c;
+  --toss-bg-subtle:  #101013;
+  --toss-bg-muted:   #1c1c22;
+  --toss-bg-overlay: rgba(0, 0, 0, 0.72);
+
+  --toss-text-primary:    rgba(255, 255, 255, 0.96);
+  --toss-text-secondary:  rgba(217, 223, 235, 0.80);
+  --toss-text-tertiary:   #888d97;
+  --toss-text-quaternary: #676c77;
+  --toss-text-disabled:   #4f525d;
+
+  --toss-brand:           #3182f6;
+  --toss-brand-hover:     #4391ff;
+  --toss-brand-pressed:   #74b1f8;
+  --toss-brand-weak:      #212b41;
+
+  --toss-positive:        #f5445a;
+  --toss-positive-strong: #ff7187;
+  --toss-positive-weak:   #3e2429;
+
+  --toss-negative:        #4391ff;
+  --toss-negative-strong: #74b1f8;
+  --toss-negative-weak:   #212b41;
+
+  --toss-danger:          #f5445a;
+  --toss-warning:         #fcb50c;
+  --toss-warning-weak:    #312a25;
+  --toss-success:         #07a978;
+  --toss-success-weak:    #212e2e;
+
+  --toss-border:          rgba(214, 224, 239, 0.09);
+  --toss-border-strong:   rgba(212, 223, 248, 0.19);
+  --toss-divider:         rgba(214, 224, 239, 0.09);
+
+  --toss-hover:           rgba(218, 223, 233, 0.04);
+  --toss-pressed:         rgba(214, 224, 239, 0.09);
+
+  --toss-input-bg:        rgba(255, 255, 255, 0.06);
+  --toss-input-border:    rgba(255, 255, 255, 0.04);
+  --toss-icon-default:    rgba(255, 255, 255, 0.55);
+  --toss-hairline:        rgba(255, 255, 255, 0.09);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-toss-theme="light"]) {
+    --toss-bg-base:    #17171c;
+    --toss-bg-subtle:  #101013;
+    --toss-bg-muted:   #1c1c22;
+    --toss-text-primary:    rgba(255, 255, 255, 0.96);
+    --toss-text-secondary:  rgba(217, 223, 235, 0.80);
+    --toss-text-tertiary:   #888d97;
+    --toss-brand-weak:      #212b41;
+    --toss-border:          rgba(214, 224, 239, 0.09);
+    --toss-hairline:        rgba(255, 255, 255, 0.09);
+  }
+}
+
+/* =====================================================================
+ * Shadows
+ * ===================================================================== */
+:root {
+  --toss-shadow-hairline:
+    inset 0 0 0 1px var(--toss-hairline);
+  --toss-shadow-xs:
+    0 1px 3px 0 rgba(0, 27, 55, 0.10);
+  --toss-shadow-md:
+    0 0.6px 0.6px -1.25px rgba(0, 0, 0, 0.12),
+    0 2.2px 2.2px -2.5px rgba(0, 0, 0, 0.10),
+    0 10px 10px -3.75px rgba(0, 0, 0, 0.043);
+  --toss-shadow-lg:
+    0 4px 8px -2px rgba(0, 0, 0, 0.10),
+    0 24px 32px -8px rgba(0, 0, 0, 0.08);
+  --toss-shadow-sidebar:
+    -1px 0 0 0 rgba(2, 32, 71, 0.05),
+    -1px 0 20px 0 rgba(2, 32, 71, 0.05);
+}
+
+/* =====================================================================
+ * Expose to Tailwind v4 @theme so utility classes can resolve
+ * `bg-toss-brand`, `text-toss-positive`, `rounded-toss-pill`, etc.
+ * ===================================================================== */
+@theme inline {
+  /* Colors */
+  --color-toss-bg-base:       var(--toss-bg-base);
+  --color-toss-bg-subtle:     var(--toss-bg-subtle);
+  --color-toss-bg-muted:      var(--toss-bg-muted);
+  --color-toss-bg-overlay:    var(--toss-bg-overlay);
+
+  --color-toss-text-primary:    var(--toss-text-primary);
+  --color-toss-text-secondary:  var(--toss-text-secondary);
+  --color-toss-text-tertiary:   var(--toss-text-tertiary);
+  --color-toss-text-quaternary: var(--toss-text-quaternary);
+  --color-toss-text-disabled:   var(--toss-text-disabled);
+  --color-toss-text-on-brand:   var(--toss-text-on-brand);
+
+  --color-toss-brand:         var(--toss-brand);
+  --color-toss-brand-hover:   var(--toss-brand-hover);
+  --color-toss-brand-pressed: var(--toss-brand-pressed);
+  --color-toss-brand-weak:    var(--toss-brand-weak);
+
+  --color-toss-positive:      var(--toss-positive);
+  --color-toss-positive-weak: var(--toss-positive-weak);
+  --color-toss-negative:      var(--toss-negative);
+  --color-toss-negative-weak: var(--toss-negative-weak);
+  --color-toss-danger:        var(--toss-danger);
+  --color-toss-warning:       var(--toss-warning);
+  --color-toss-warning-weak:  var(--toss-warning-weak);
+  --color-toss-success:       var(--toss-success);
+  --color-toss-success-weak:  var(--toss-success-weak);
+
+  --color-toss-border:        var(--toss-border);
+  --color-toss-divider:       var(--toss-divider);
+  --color-toss-hover:         var(--toss-hover);
+  --color-toss-pressed:       var(--toss-pressed);
+  --color-toss-input-bg:      var(--toss-input-bg);
+  --color-toss-icon:          var(--toss-icon-default);
+
+  /* Radius */
+  --radius-toss-xs:   4px;
+  --radius-toss-sm:   6px;
+  --radius-toss-md:   8px;
+  --radius-toss-lg:   12px;
+  --radius-toss-xl:   16px;
+  --radius-toss-2xl:  20px;
+  --radius-toss-pill: 9999px;
+
+  /* Shadows */
+  --shadow-toss-hairline: var(--toss-shadow-hairline);
+  --shadow-toss-xs:       var(--toss-shadow-xs);
+  --shadow-toss-md:       var(--toss-shadow-md);
+  --shadow-toss-lg:       var(--toss-shadow-lg);
+  --shadow-toss-sidebar:  var(--toss-shadow-sidebar);
+
+  /* Font sizes (size+line-height pair) */
+  --text-toss-display:    24px;
+  --text-toss-display--line-height: 34.8px;
+  --text-toss-title-1:    20px;
+  --text-toss-title-1--line-height: 29px;
+  --text-toss-title-2:    17px;
+  --text-toss-title-2--line-height: 24.65px;
+  --text-toss-subtitle:   15px;
+  --text-toss-subtitle--line-height: 21.75px;
+  --text-toss-body:       15px;
+  --text-toss-body--line-height: 21.75px;
+  --text-toss-label:      14px;
+  --text-toss-label--line-height: 20.3px;
+  --text-toss-caption:    13px;
+  --text-toss-caption--line-height: 18.85px;
+  --text-toss-micro:      12px;
+  --text-toss-micro--line-height: 17.4px;
+  --text-toss-tiny:       10px;
+  --text-toss-tiny--line-height: 14px;
+
+}
+
+/* =====================================================================
+ * Layout dimensions (CSS variables only — Tailwind v4 doesn't auto-generate
+ * `h-toss-header` etc. for named --spacing-* tokens, so use these as raw
+ * CSS variables or arbitrary Tailwind classes like `h-[var(--toss-header)]`.
+ * Components in `layout/*` use the arbitrary `h-[52px]` form directly.
+ * ===================================================================== */
+:root {
+  --toss-header:  52px;
+  --toss-rail:    60px;
+  --toss-sidebar: 344px;
+}
+
+/* =====================================================================
+ * Global base font (Pretendard)
+ * Set explicitly so toss components inherit a known font even outside
+ * Tailwind's `font-sans` utility (e.g. raw HTML or unstyled elements).
+ * ===================================================================== */
+html,
+body {
+  font-family:
+    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Noto Color Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* =====================================================================
+ * Utilities
+ * ===================================================================== */
+.toss-numeric {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" on, "lnum" on;
+}
+
+.toss-focus-ring {
+  outline: 2px solid var(--toss-focus-ring);
+  outline-offset: 2px;
+}

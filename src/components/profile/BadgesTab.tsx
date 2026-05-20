@@ -151,7 +151,9 @@ const BADGES: Badge[] = [
 export function BadgesTab() {
   return (
     <div>
-      <p className="text-sm text-gray-500 mb-4">실버 → 골드 → 다이아 등급으로 수집 실력을 증명하세요</p>
+      <p className="text-toss-caption text-toss-text-tertiary mb-4">
+        실버 · 골드 · 다이아 등급으로 수집 실력을 증명하세요
+      </p>
       <BadgeCatalog badges={BADGES} />
     </div>
   );

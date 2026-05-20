@@ -1,7 +1,19 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Link from "next/link";
+import { Plus, MapPin, MessageCircle, Eye, Heart, Pin } from "lucide-react";
+import {
+  Avatar,
+  Button,
+  Chip,
+  Modal,
+  RankingTable,
+  SearchField,
+  SegmentedControl,
+  Tag,
+  TextField,
+} from "@/components/toss";
+import { cn } from "@/lib/utils";
 
 // ── 타입 ─────────────────────────────────────────────────────────────────
 
@@ -20,6 +32,7 @@ export type Post = {
   hot: boolean;
   pinned?: boolean;
   negotiable?: boolean;     // 거래 글: 가격 네고 가능 여부 (DM 자체는 항상 가능)
+  allowInquiry?: boolean;   // 문의 가능 표시 (구함/직거래 글 등)
 
   // 거래 전용 (category 가 "팝니다" / "삽니다" 일 때만 사용) — 당근마켓 스타일
   imageUrl?: string;
@@ -95,9 +108,28 @@ const TRADE_STATUS_STYLE: Record<string, { label: string; color: string }> = {
 
 type SortKey = "latest" | "hot" | "views";
 
+// ── CAT 단일 톤 매핑 ──────────────────────────────────────────────────────
+
+const CAT_TAG_COLOR: Record<string, "brand" | "warning" | "positive" | "neutral"> = {
+  공지:   "warning",
+  팝니다: "positive",
+  삽니다: "brand",
+};
+
+function catColor(cat: string): "brand" | "warning" | "positive" | "neutral" {
+  return CAT_TAG_COLOR[cat] ?? "neutral";
+}
+
+// TRADE_STATUS → toss 색 매핑
+function tradeStatusColor(status: string): "brand" | "warning" | "neutral" {
+  if (status === "active")    return "brand";
+  if (status === "reserved")  return "warning";
+  return "neutral";
+}
+
 // ── 작성 모달 ─────────────────────────────────────────────────────────────
 
-function WriteModal({ onClose }: { onClose: () => void }) {
+function WriteModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [collectCat, setCollectCat] = useState("포켓몬 TCG");
   const [category, setCategory] = useState("자유");
   const [negotiable, setNegotiable] = useState(false);
@@ -116,98 +148,96 @@ function WriteModal({ onClose }: { onClose: () => void }) {
   const isTrade = category === "팝니다" || category === "삽니다";
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-xl bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl overflow-hidden">
-        {/* 헤더 */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-800">
-          <h2 className="text-sm font-bold text-white">새 글 작성</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-300 text-lg leading-none">✕</button>
-        </div>
+    <Modal.Root open={open} onOpenChange={(o) => !o && onClose()}>
+      <Modal.Content maxWidth="max-w-xl" className="p-0 max-h-[92vh] flex flex-col overflow-hidden">
+        <Modal.Header className="px-5 py-4 mb-0 border-b border-toss-divider">
+          <Modal.Title>새 글 작성</Modal.Title>
+          <Modal.Close />
+        </Modal.Header>
 
-        {/* 폼 */}
-        <div className="p-5 space-y-4">
+        <div className="flex-1 overflow-y-auto p-5 space-y-4">
           {/* 수집 카테고리 */}
           <div>
-            <p className="text-[11px] text-gray-500 mb-1.5 font-semibold">카테고리</p>
+            <p className="text-toss-caption font-semibold text-toss-text-tertiary mb-1.5">카테고리</p>
             <div className="flex flex-wrap gap-1.5">
               {COLLECT_CATS.filter((c) => c.id !== "all").map((c) => (
-                <button
+                <Chip
                   key={c.id}
+                  variant="filter"
+                  size="sm"
+                  selected={collectCat === c.label}
                   onClick={() => setCollectCat(c.label)}
-                  className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold transition-colors ${
-                    collectCat === c.label
-                      ? "bg-yellow-500/20 text-yellow-300 border border-yellow-500/40"
-                      : "bg-gray-800 text-gray-500 border border-transparent hover:text-gray-300"
-                  }`}
                 >
-                  <span>{c.emoji}</span><span>{c.label}</span>
-                </button>
+                  {c.label}
+                </Chip>
               ))}
             </div>
           </div>
 
           {/* 글 유형 */}
           <div>
-            <p className="text-[11px] text-gray-500 mb-1.5 font-semibold">글 유형</p>
+            <p className="text-toss-caption font-semibold text-toss-text-tertiary mb-1.5">글 유형</p>
             <div className="flex flex-wrap gap-1.5">
               {CATS.filter((c) => c.id !== "all").map((c) => (
-                <button
+                <Chip
                   key={c.id}
-                  onClick={() => { setCategory(c.label); if (c.label !== "팝니다" && c.label !== "삽니다") setNegotiable(false); }}
-                  className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-colors ${
-                    category === c.label
-                      ? CAT_STYLE[c.label] + " ring-1 ring-white/20"
-                      : "bg-gray-800 text-gray-500 hover:text-gray-300"
-                  }`}
+                  variant="filter"
+                  size="sm"
+                  selected={category === c.label}
+                  onClick={() => {
+                    setCategory(c.label);
+                    if (c.label !== "팝니다" && c.label !== "삽니다") setNegotiable(false);
+                  }}
                 >
                   {c.label}
-                </button>
+                </Chip>
               ))}
             </div>
           </div>
 
           {/* 거래 글 (팝니다 / 삽니다) 전용 폼 */}
           {isTrade && (
-            <div className="space-y-3 p-3.5 rounded-xl bg-gray-800/40 border border-gray-800">
-              <p className="text-[11px] text-gray-400 font-semibold">거래 정보 <span className="text-gray-600">(모두 필수)</span></p>
+            <div className="space-y-3 p-3.5 rounded-toss-md bg-toss-bg-subtle border border-toss-border">
+              <p className="text-toss-caption font-semibold text-toss-text-secondary">
+                거래 정보 <span className="text-toss-text-quaternary font-normal">(모두 필수)</span>
+              </p>
 
               {/* 카드 선택 */}
               <div>
-                <label className="text-[10px] text-gray-600 mb-1 block">카드 선택 *</label>
-                <input
+                <p className="text-toss-micro text-toss-text-quaternary mb-1">카드 선택 *</p>
+                <TextField
                   type="text"
                   placeholder="예) 리자몽 ex SAR (sv4pt5-191) 또는 카드명 검색"
                   value={selectedCard}
                   onChange={(e) => setSelectedCard(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-500 transition-colors"
+                  size="sm"
                 />
               </div>
 
               {/* 가격 */}
               <div>
-                <label className="text-[10px] text-gray-600 mb-1 block">희망 가격 (₩) *</label>
-                <input
+                <p className="text-toss-micro text-toss-text-quaternary mb-1">희망 가격 (₩) *</p>
+                <TextField
                   type="number"
                   inputMode="numeric"
                   placeholder="예) 250000"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-500 transition-colors"
+                  size="sm"
                 />
               </div>
 
-              {/* 사진 (UI 만) */}
+              {/* 사진 */}
               <div>
-                <label className="text-[10px] text-gray-600 mb-1 block">사진 * <span className="text-gray-700">(최대 5장)</span></label>
+                <p className="text-toss-micro text-toss-text-quaternary mb-1">사진 * <span className="text-toss-text-quaternary">(최대 5장)</span></p>
                 <div className="flex gap-2 flex-wrap">
                   {photos.map((p, i) => (
-                    <div key={i} className="relative w-16 h-16 rounded-lg bg-gray-700 flex items-center justify-center text-xs text-gray-400">
-                      📷
+                    <div key={i} className="relative w-16 h-16 rounded-toss-md bg-toss-bg-muted flex items-center justify-center text-xs text-toss-text-quaternary">
+                      <span className="text-toss-caption text-toss-text-tertiary">사진</span>
                       <button
                         type="button"
                         onClick={() => setPhotos(photos.filter((_, idx) => idx !== i))}
-                        className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-gray-900 text-white text-[10px] border border-gray-700"
+                        className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-toss-bg-base text-toss-text-secondary text-[10px] border border-toss-border"
                       >
                         ×
                       </button>
@@ -217,9 +247,9 @@ function WriteModal({ onClose }: { onClose: () => void }) {
                     <button
                       type="button"
                       onClick={() => setPhotos([...photos, `photo-${photos.length + 1}`])}
-                      className="w-16 h-16 rounded-lg border border-dashed border-gray-700 flex flex-col items-center justify-center text-gray-600 hover:text-gray-400 hover:border-gray-600 transition-colors"
+                      className="w-16 h-16 rounded-toss-md border border-dashed border-toss-border flex flex-col items-center justify-center text-toss-text-quaternary hover:text-toss-text-tertiary hover:border-toss-border-strong transition-colors"
                     >
-                      <span className="text-base leading-none">📷</span>
+                      <Plus size={16} />
                       <span className="text-[9px] mt-0.5">추가</span>
                     </button>
                   )}
@@ -228,28 +258,23 @@ function WriteModal({ onClose }: { onClose: () => void }) {
 
               {/* 상품 등급 */}
               <div>
-                <label className="text-[10px] text-gray-600 mb-1 block">상품 등급 *</label>
-                <div className="flex gap-1.5">
-                  {(["NM", "LP", "MP", "HP"] as const).map((g) => (
-                    <button
-                      key={g}
-                      type="button"
-                      onClick={() => setCondition(g)}
-                      className={`flex-1 px-2 py-1.5 rounded-lg text-[11px] font-bold transition-colors ${
-                        condition === g
-                          ? "bg-white text-black"
-                          : "bg-gray-900 text-gray-500 hover:text-gray-300 border border-gray-700"
-                      }`}
-                    >
-                      {g}
-                    </button>
-                  ))}
-                </div>
+                <p className="text-toss-micro text-toss-text-quaternary mb-1">상품 등급 *</p>
+                <SegmentedControl
+                  size="sm"
+                  value={condition}
+                  onChange={(v) => setCondition(v as "NM" | "LP" | "MP" | "HP")}
+                  options={[
+                    { value: "NM", label: "NM" },
+                    { value: "LP", label: "LP" },
+                    { value: "MP", label: "MP" },
+                    { value: "HP", label: "HP" },
+                  ]}
+                />
               </div>
 
               {/* 등급 인증 (PSA) */}
               <div>
-                <label className="text-[10px] text-gray-600 mb-1 block">등급 인증 *</label>
+                <p className="text-toss-micro text-toss-text-quaternary mb-1">등급 인증 *</p>
                 <div className="grid grid-cols-2 gap-1.5">
                   {([
                     ["none",   "미인증"],
@@ -257,53 +282,46 @@ function WriteModal({ onClose }: { onClose: () => void }) {
                     ["PSA9",   "PSA 9"],
                     ["PSA8-",  "PSA 8 이하"],
                   ] as const).map(([key, label]) => (
-                    <button
+                    <Chip
                       key={key}
-                      type="button"
+                      variant="filter"
+                      size="sm"
+                      selected={certified === key}
                       onClick={() => setCertified(key)}
-                      className={`px-2 py-1.5 rounded-lg text-[11px] font-bold transition-colors ${
-                        certified === key
-                          ? "bg-green-500/20 text-green-300 border border-green-500/40"
-                          : "bg-gray-900 text-gray-500 border border-gray-700 hover:text-gray-300"
-                      }`}
+                      className="justify-center"
                     >
                       {label}
-                    </button>
+                    </Chip>
                   ))}
                 </div>
               </div>
 
               {/* 거래 방식 */}
               <div>
-                <label className="text-[10px] text-gray-600 mb-1 block">거래 방식 *</label>
-                <div className="flex gap-1.5">
-                  {(["direct", "delivery", "both"] as const).map((m) => (
-                    <button
-                      key={m}
-                      type="button"
-                      onClick={() => setDealMethod(m)}
-                      className={`flex-1 px-2 py-1.5 rounded-lg text-[11px] font-bold transition-colors ${
-                        dealMethod === m
-                          ? "bg-white text-black"
-                          : "bg-gray-900 text-gray-500 hover:text-gray-300 border border-gray-700"
-                      }`}
-                    >
-                      {DEAL_METHOD_LABEL[m]}
-                    </button>
-                  ))}
-                </div>
+                <p className="text-toss-micro text-toss-text-quaternary mb-1">거래 방식 *</p>
+                <SegmentedControl
+                  size="sm"
+                  value={dealMethod}
+                  onChange={(v) => setDealMethod(v as "direct" | "delivery" | "both")}
+                  options={[
+                    { value: "direct",   label: "직거래" },
+                    { value: "delivery", label: "택배" },
+                    { value: "both",     label: "직거래·택배" },
+                  ]}
+                />
               </div>
 
               {/* 지역 (직거래/모두 시) */}
               {(dealMethod === "direct" || dealMethod === "both") && (
                 <div>
-                  <label className="text-[10px] text-gray-600 mb-1 block">거래 지역</label>
-                  <input
+                  <p className="text-toss-micro text-toss-text-quaternary mb-1">거래 지역</p>
+                  <TextField
                     type="text"
                     placeholder="예) 서울 강남구"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-700 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-500 transition-colors"
+                    leftIcon={<MapPin size={14} className="text-toss-icon" />}
+                    size="sm"
                   />
                 </div>
               )}
@@ -312,218 +330,173 @@ function WriteModal({ onClose }: { onClose: () => void }) {
               <button
                 type="button"
                 onClick={() => setNegotiable((v) => !v)}
-                className={`flex items-center gap-2.5 w-full px-3 py-2 rounded-lg border transition-all text-left ${
+                className={cn(
+                  "flex items-center gap-2.5 w-full px-3 py-2 rounded-toss-md border transition-all text-left",
                   negotiable
-                    ? "bg-yellow-500/10 border-yellow-500/40 text-yellow-300"
-                    : "bg-gray-900 border-gray-700 text-gray-400 hover:text-gray-300"
-                }`}
+                    ? "bg-toss-brand-weak border-toss-brand/30 text-toss-brand"
+                    : "bg-toss-bg-base border-toss-border text-toss-text-secondary hover:bg-toss-hover"
+                )}
               >
-                <div className={`w-9 h-5 rounded-full flex items-center transition-all duration-200 px-0.5 ${negotiable ? "bg-yellow-500" : "bg-gray-600"}`}>
-                  <div className={`w-4 h-4 rounded-full bg-white shadow transition-transform duration-200 ${negotiable ? "translate-x-4" : "translate-x-0"}`} />
+                <div className={cn(
+                  "w-9 h-5 rounded-full flex items-center transition-all duration-200 px-0.5",
+                  negotiable ? "bg-toss-brand" : "bg-toss-input-bg border border-toss-border"
+                )}>
+                  <div className={cn(
+                    "w-4 h-4 rounded-full bg-white shadow transition-transform duration-200",
+                    negotiable ? "translate-x-4" : "translate-x-0"
+                  )} />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold">가격 네고 가능</p>
-                  <p className="text-[10px] text-gray-500 mt-0.5">꺼두면 "정찰가 · 네고 불가" 로 표시돼서 흥정 DM을 줄일 수 있어요</p>
+                  <p className="text-toss-label font-semibold">가격 네고 가능</p>
+                  <p className="text-toss-micro text-toss-text-quaternary mt-0.5">꺼두면 "정찰가 · 네고 불가" 로 표시돼서 흥정 DM을 줄일 수 있어요</p>
                 </div>
               </button>
             </div>
           )}
 
           {/* 제목 */}
-          <input
+          <TextField
             type="text"
             placeholder="제목을 입력하세요"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             maxLength={100}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-500 transition-colors"
+            size="md"
           />
 
           {/* 본문 */}
           <textarea
-            placeholder="자유롭게 작성해 주세요&#10;직거래 · 공략 · 자랑 · 질문 · 무엇이든 OK"
+            placeholder={"자유롭게 작성해 주세요\n직거래 · 공략 · 자랑 · 질문 · 무엇이든 OK"}
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows={6}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800 border border-gray-700 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-500 transition-colors resize-none"
+            className="w-full px-4 py-3 rounded-toss-md bg-toss-input-bg text-toss-body text-toss-text-primary placeholder:text-toss-text-quaternary focus:outline-none focus:ring-1 focus:ring-toss-brand transition-shadow resize-none"
           />
 
-          <p className="text-[11px] text-gray-600">
+          <p className="text-toss-micro text-toss-text-quaternary">
             허위 직거래 · 욕설 · 도배는 제재 대상입니다.
           </p>
         </div>
 
-        {/* 버튼 */}
-        <div className="flex gap-2 px-5 pb-5">
-          <button
-            onClick={onClose}
-            className="flex-1 py-2.5 rounded-xl border border-gray-700 text-sm text-gray-400 hover:text-white hover:border-gray-500 transition-colors"
-          >
-            취소
-          </button>
-          <button
+        <Modal.Footer className="px-5 py-4 border-t border-toss-divider">
+          <Button variant="ghost" size="md" onClick={onClose}>취소</Button>
+          <Button
+            variant="primary"
+            size="md"
             disabled={!title.trim() || !content.trim()}
-            className="flex-1 py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-400 disabled:opacity-40 disabled:cursor-not-allowed text-sm font-bold text-black transition-colors"
             onClick={onClose}
           >
             작성 완료
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+        </Modal.Footer>
+      </Modal.Content>
+    </Modal.Root>
   );
 }
 
-// ── 거래 게시글 카드 (당근마켓 스타일) ────────────────────────────────────
+// ── 통합 게시글 행 (일반/거래 통합) ───────────────────────────────────────
 
-function TradePostRow({ post, locale }: { post: Post; locale: string }) {
+function PostRow({ post, locale }: { post: Post; locale: string }) {
+  const isTrade = post.category === "팝니다" || post.category === "삽니다";
   const status = post.tradeStatus ?? "active";
   const statusMeta = TRADE_STATUS_STYLE[status];
   const isCompleted = status === "completed";
 
   return (
-    <Link
+    <RankingTable.Row
+      interactive
       href={`/${locale}/community/${post.id}`}
-      className="flex items-stretch gap-3 px-4 py-3 border-b border-gray-800/60 last:border-0 hover:bg-gray-800/30 transition-colors group"
+      className="h-[88px] items-stretch"
     >
-      {/* 썸네일 + 상태 뱃지 */}
-      <div className="relative shrink-0">
-        <div
-          className={`w-24 h-24 rounded-xl overflow-hidden bg-gray-800 ${
-            isCompleted ? "opacity-50" : ""
-          }`}
-        >
-          {post.imageUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={post.imageUrl} alt={post.title} className="w-full h-full object-cover" />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-2xl text-gray-700">🃏</div>
-          )}
-        </div>
-      </div>
-
-      {/* 본문 */}
-      <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
-        <div>
-          {/* 카테고리/뱃지 */}
-          <div className="flex items-center gap-1.5 mb-1 flex-wrap">
-            <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${CAT_STYLE[post.category] ?? "bg-gray-800 text-gray-400"}`}>
-              {post.category}
-            </span>
-            {status !== "active" && (
-              <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${statusMeta.color}`}>
-                {statusMeta.label}
-              </span>
-            )}
-            {post.condition && (
-              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-gray-800 text-gray-300">
-                {post.condition}
-              </span>
-            )}
-            {post.certified && (
-              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-green-900/50 text-green-400">
-                PSA인증
-              </span>
-            )}
-            {post.negotiable === false && (
-              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-gray-700 text-gray-300">
-                네고불가
-              </span>
-            )}
-            {post.hot && <span className="text-[10px] font-bold text-red-400">🔥</span>}
+      {/* 1. 분류 (Pin + 썸네일 + 카테고리 Tag) */}
+      <RankingTable.Cell className="w-[140px] shrink-0 flex-none pl-4 pr-0 items-center gap-2">
+        {post.pinned && (
+          <Pin size={12} className="text-toss-warning shrink-0" />
+        )}
+        {isTrade && post.imageUrl ? (
+          <div className={cn(
+            "w-10 h-14 rounded-toss-sm overflow-hidden bg-toss-bg-muted shrink-0",
+            isCompleted && "opacity-50"
+          )}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={post.imageUrl} alt="" className="w-full h-full object-cover" />
           </div>
+        ) : null}
+        <Tag color={catColor(post.category)} shape="soft" className="shrink-0">{post.category}</Tag>
+      </RankingTable.Cell>
 
-          {/* 제목 */}
-          <p className="text-sm text-gray-100 group-hover:text-white transition-colors font-semibold line-clamp-1">
+      {/* 2. 제목 + 메타 */}
+      <RankingTable.Cell className="flex-1 min-w-0 flex-col items-start gap-1 px-3 justify-center">
+        <div className="flex items-center gap-1.5 min-w-0 max-w-full">
+          {post.hot && (
+            <Tag color="positive" shape="solid" className="shrink-0">HOT</Tag>
+          )}
+          {isTrade && status !== "active" && (
+            <Tag color={tradeStatusColor(status)} shape="soft" className="shrink-0">{statusMeta.label}</Tag>
+          )}
+          {isTrade && post.condition && (
+            <Tag color="neutral" shape="soft" className="shrink-0">{post.condition}</Tag>
+          )}
+          {isTrade && post.certified && (
+            <Tag color="positive" shape="soft" className="shrink-0">PSA</Tag>
+          )}
+          <p className="text-toss-label font-semibold text-toss-text-primary truncate">
             {post.title}
           </p>
-
-          {/* 가격 */}
-          <p className="text-base font-bold text-white mt-0.5">
-            {post.priceKrw != null ? (
-              <>₩{post.priceKrw.toLocaleString("ko-KR")}</>
-            ) : (
-              <span className="text-gray-500 text-sm font-medium">가격 제안 받음</span>
-            )}
-          </p>
         </div>
-
-        {/* 메타 (지역·거래방식·시간 + 통계) */}
-        <div className="flex items-end justify-between gap-2 mt-1">
-          <p className="text-[11px] text-gray-600 truncate">
-            {post.location && <span>{post.location}</span>}
-            {post.location && post.dealMethod && <span className="mx-1.5">·</span>}
-            {post.dealMethod && <span>{DEAL_METHOD_LABEL[post.dealMethod]}</span>}
-            {(post.location || post.dealMethod) && <span className="mx-1.5">·</span>}
-            <span>{post.ago}</span>
-          </p>
-          <div className="flex items-center gap-2 text-[11px] text-gray-600 shrink-0">
-            <span className="flex items-center gap-0.5">❤ {post.likes}</span>
-            <span className="flex items-center gap-0.5">💬 {post.replies}</span>
-          </div>
-        </div>
-      </div>
-    </Link>
-  );
-}
-
-// ── 게시글 행 ─────────────────────────────────────────────────────────────
-
-function PostRow({ post, locale }: { post: Post; locale: string }) {
-  if (post.category === "팝니다" || post.category === "삽니다") {
-    return <TradePostRow post={post} locale={locale} />;
-  }
-  return <CommunityPostRow post={post} locale={locale} />;
-}
-
-function CommunityPostRow({ post, locale }: { post: Post; locale: string }) {
-  return (
-    <div className="flex items-start gap-3 px-4 py-3.5 border-b border-gray-800/60 last:border-0 hover:bg-gray-800/30 transition-colors group">
-      <Link href={`/${locale}/community/${post.id}`} className="flex-1 min-w-0 block">
-        <div className="flex items-center gap-2 mb-1 flex-wrap">
-          {post.pinned && <span className="text-[10px] text-gray-500">📌</span>}
-          <span className={`shrink-0 text-[10px] font-bold px-1.5 py-0.5 rounded ${CAT_STYLE[post.category] ?? "bg-gray-800 text-gray-400"}`}>
-            {post.category}
-          </span>
-          {post.hot && <span className="text-[10px] font-bold text-red-400">🔥 HOT</span>}
-          {post.allowInquiry && (
-            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-green-900/50 text-green-400">
-              문의가능
-            </span>
-          )}
-        </div>
-
-        <p className="text-sm text-gray-200 group-hover:text-white transition-colors leading-snug font-medium line-clamp-1">
-          {post.title}
-        </p>
-
-        {post.preview && (
-          <p className="text-xs text-gray-600 mt-0.5 line-clamp-1">{post.preview}</p>
+        {!isTrade && post.preview && (
+          <p className="text-toss-caption text-toss-text-tertiary line-clamp-1">{post.preview}</p>
         )}
+        {isTrade && (
+          <div className="flex items-center gap-1 text-toss-caption text-toss-text-tertiary min-w-0">
+            {post.location && (
+              <span className="flex items-center gap-0.5 truncate">
+                <MapPin size={11} className="shrink-0" />
+                {post.location}
+              </span>
+            )}
+            {post.location && post.dealMethod && <span>·</span>}
+            {post.dealMethod && <span className="truncate">{DEAL_METHOD_LABEL[post.dealMethod]}</span>}
+            {post.negotiable === false && (
+              <>
+                <span>·</span>
+                <span>네고불가</span>
+              </>
+            )}
+          </div>
+        )}
+      </RankingTable.Cell>
 
-        <div className="flex items-center gap-2 mt-1.5">
-          <span className="w-4 h-4 rounded-full bg-gray-700 flex items-center justify-center text-[9px] font-bold text-gray-300 shrink-0">
-            {post.authorInitial}
-          </span>
-          <span className="text-[11px] text-gray-500">{post.author}</span>
-          <span className="text-[11px] text-gray-700">·</span>
-          <span className="text-[11px] text-gray-600">{post.ago}</span>
-        </div>
-      </Link>
+      {/* 3. 우측 메타 (거래: 가격 / 일반: 작성자) */}
+      <RankingTable.Cell className="w-[160px] shrink-0 flex-none flex-col items-end gap-1 px-3 justify-center">
+        {isTrade ? (
+          <>
+            <p className={cn(
+              "text-toss-subtitle font-bold toss-numeric truncate",
+              isCompleted ? "text-toss-text-tertiary line-through" : "text-toss-text-primary"
+            )}>
+              {post.priceKrw != null ? `₩${post.priceKrw.toLocaleString("ko-KR")}` : "가격 제안"}
+            </p>
+            <span className="text-toss-micro text-toss-text-quaternary">{post.ago}</span>
+          </>
+        ) : (
+          <>
+            <div className="flex items-center gap-1.5 min-w-0">
+              <Avatar name={post.author} size="xs" />
+              <span className="text-toss-caption text-toss-text-secondary font-medium truncate">{post.author}</span>
+            </div>
+            <span className="text-toss-micro text-toss-text-quaternary">{post.ago}</span>
+          </>
+        )}
+      </RankingTable.Cell>
 
-      {/* 오른쪽: 통계 */}
-      <div className="flex items-center gap-3 shrink-0 pt-1">
-        <div className="flex items-center gap-1 text-[11px] text-gray-600">
-          <span>💬</span><span>{post.replies}</span>
-        </div>
-        <div className="flex items-center gap-1 text-[11px] text-gray-600">
-          <span>👁</span><span>{post.views.toLocaleString()}</span>
-        </div>
-        <div className="flex items-center gap-1 text-[11px] text-gray-600">
-          <span>❤️</span><span>{post.likes}</span>
-        </div>
-      </div>
-    </div>
+      {/* 4. 통계 — 가로 한 줄 */}
+      <RankingTable.Cell className="w-[170px] shrink-0 flex-none items-center justify-end gap-3 pr-4 text-toss-caption text-toss-text-tertiary toss-numeric">
+        <span className="flex items-center gap-1"><Eye size={14} />{post.views.toLocaleString()}</span>
+        <span className="flex items-center gap-1"><MessageCircle size={14} />{post.replies}</span>
+        <span className="flex items-center gap-1"><Heart size={14} />{post.likes}</span>
+      </RankingTable.Cell>
+    </RankingTable.Row>
   );
 }
 
@@ -535,13 +508,10 @@ export function CommunityBoard({ posts, locale }: { posts: Post[]; locale: strin
   const [activeCat, setActiveCat]   = useState("all");
   const [sort, setSort]             = useState<SortKey>("latest");
   const [writeOpen, setWriteOpen]   = useState(false);
+  const [search, setSearch]         = useState("");
 
   // 현재 그룹에 표시할 세부 카테고리
   const groupCats = GROUPS.find((g) => g.id === group)?.cats ?? null;
-  const visibleCats = useMemo(() => {
-    if (!groupCats) return CATS;
-    return CATS.filter((c) => c.id === "all" || groupCats.includes(c.id));
-  }, [groupCats]);
 
   // 그룹에 속한 카테고리 라벨 셋 (게시글 필터용)
   const groupCatLabels = useMemo(() => {
@@ -559,7 +529,7 @@ export function CommunityBoard({ posts, locale }: { posts: Post[]; locale: strin
     }
 
     if (groupCatLabels) {
-      list = list.filter((p) => groupCatLabels.has(p.category));
+      list = list.filter((p) => (groupCatLabels as Set<string>).has(p.category));
     }
 
     if (activeCat !== "all") {
@@ -567,199 +537,171 @@ export function CommunityBoard({ posts, locale }: { posts: Post[]; locale: strin
       list = list.filter((p) => cat ? p.category === cat.label : true);
     }
 
+    if (search.trim()) {
+      const q = search.trim().toLowerCase();
+      list = list.filter((p) =>
+        p.title.toLowerCase().includes(q) || p.preview.toLowerCase().includes(q)
+      );
+    }
+
     return [...list].sort((a, b) => {
       if (sort === "hot")   return (b.likes + b.replies * 2) - (a.likes + a.replies * 2);
       if (sort === "views") return b.views - a.views;
       return 0;
     });
-  }, [posts, collectCat, group, groupCatLabels, activeCat, sort]);
+  }, [posts, collectCat, group, groupCatLabels, activeCat, sort, search]);
 
   const pinned  = filtered.filter((p) => p.pinned);
   const regular = filtered.filter((p) => !p.pinned);
 
-  const totalPosts = posts.length;
-  const todayCount = posts.filter((p) => p.ago.includes("분") || p.ago.includes("시간")).length;
+  // 현재 그룹에 속한 사이드바 카테고리
+  const sidebarGroupCats = useMemo(() => {
+    const groupDef = GROUPS.find((g) => g.id === group);
+    if (!groupDef || !groupDef.cats) return CATS;
+    return CATS.filter((c) => c.id === "all" || (groupDef.cats as readonly string[]).includes(c.id));
+  }, [group]);
 
   return (
     <>
-      {writeOpen && <WriteModal onClose={() => setWriteOpen(false)} />}
+      <WriteModal open={writeOpen} onClose={() => setWriteOpen(false)} />
 
-      {/* ── 헤더 ─────────────────────────────────────────────────────── */}
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h1 className="text-xl font-bold text-white">커뮤니티</h1>
-          <p className="text-xs text-gray-500 mt-0.5">
-            전체 {totalPosts.toLocaleString()}개 · 오늘 {todayCount}개 작성
-          </p>
-        </div>
-        <button
-          onClick={() => setWriteOpen(true)}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-sm font-bold text-black transition-colors"
-        >
-          <span>✏️</span> 글쓰기
-        </button>
-      </div>
+      <div className="grid lg:grid-cols-[220px_1fr] gap-8">
+        {/* ── 좌측 사이드바: 수집품 대분류 (포켓몬/유희왕/스니커즈/...) ─── */}
+        <aside className="lg:sticky lg:top-[68px] lg:self-start">
+          <div>
+            <p className="px-4 pt-3 pb-2 text-toss-body text-toss-text-secondary">카테고리</p>
+            <nav>
+              {COLLECT_CATS.map((c) => {
+                const active = collectCat === c.id;
+                const count = c.id === "all"
+                  ? posts.length
+                  : posts.filter((p) => p.collectibleCategory === c.label).length;
+                return (
+                  <button
+                    key={c.id}
+                    onClick={() => { setCollectCat(c.id); setActiveCat("all"); }}
+                    className={cn(
+                      "w-full flex items-center justify-between px-4 py-2.5 h-10 text-toss-body transition-colors rounded-toss-md",
+                      active
+                        ? "bg-toss-brand-weak text-toss-brand font-semibold"
+                        : "text-toss-text-secondary hover:bg-toss-hover"
+                    )}
+                  >
+                    <span>{c.label}</span>
+                    <span className={cn(
+                      "text-toss-caption tabular-nums",
+                      active ? "text-toss-brand" : "text-toss-text-quaternary"
+                    )}>
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </nav>
+          </div>
+        </aside>
 
-      {/* ── 수집 카테고리 필터 ─────────────────────────────────────────── */}
-      <div className="flex items-center gap-2 mb-6 overflow-x-auto no-scrollbar pb-0.5">
-        {COLLECT_CATS.map((c) => {
-          const on = collectCat === c.id;
-          return (
-            <button
-              key={c.id}
-              onClick={() => { setCollectCat(c.id); setActiveCat("all"); }}
-              className={`shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-150 ${
-                on
-                  ? "bg-yellow-500 text-black shadow-md shadow-yellow-500/20"
-                  : "bg-gray-900 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-600"
-              }`}
-            >
-              <span className="text-sm leading-none">{c.emoji}</span>
-              <span>{c.label}</span>
-              {c.id !== "all" && (
-                <span className={`text-[10px] font-bold tabular-nums ${on ? "text-black/60" : "text-gray-600"}`}>
-                  {posts.filter((p) => p.collectibleCategory === c.label).length}
-                </span>
-              )}
-            </button>
-          );
-        })}
-      </div>
+        {/* ── 메인 영역 ────────────────────────────────────────────────── */}
+        <div className="min-w-0">
+          {/* 헤더 */}
+          <header className="flex items-center justify-between mb-6">
+            <div>
+              <h1 className="text-toss-display font-bold text-toss-text-primary">커뮤니티</h1>
+              <p className="text-toss-body text-toss-text-tertiary mt-1">
+                수집가들의 거래 · 정보 · 잡담
+              </p>
+            </div>
+            <Button variant="primary" size="md" onClick={() => setWriteOpen(true)}>
+              새 글 작성
+            </Button>
+          </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* ── 메인 ───────────────────────────────────────────────────── */}
-        <div className="lg:col-span-2 space-y-4">
-
-          {/* 메가 탭: 커뮤니티 / 거래 */}
-          <div className="flex items-center gap-1 p-1 rounded-2xl bg-gray-900 border border-gray-800 w-fit">
+          {/* 메가 탭: 전체/커뮤니티/거래 */}
+          <div className="flex items-center gap-1 mb-4">
             {GROUPS.map((g) => (
               <button
                 key={g.id}
                 onClick={() => { setGroup(g.id); setActiveCat("all"); }}
-                className={`flex items-center gap-1.5 px-4 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                className={cn(
+                  "px-3 py-1.5 rounded-toss-pill text-toss-caption font-semibold transition-all",
                   group === g.id
-                    ? "bg-white text-black shadow"
-                    : "text-gray-400 hover:text-white"
-                }`}
+                    ? "bg-toss-text-primary text-toss-bg-base"
+                    : "text-toss-text-tertiary hover:text-toss-text-secondary hover:bg-toss-hover"
+                )}
               >
-                <span>{g.emoji}</span>
-                <span>{g.label}</span>
+                {g.label}
               </button>
             ))}
           </div>
 
-          {/* 카테고리 탭 (현재 그룹에 속한 것만) */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
-            {visibleCats.map((c) => (
+          {/* 세부 카테고리 탭 */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar mb-4">
+            {sidebarGroupCats.map((c) => (
               <button
                 key={c.id}
                 onClick={() => setActiveCat(c.id)}
-                className={`shrink-0 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-150 ${
+                className={cn(
+                  "shrink-0 px-3 py-1 rounded-toss-pill text-toss-caption font-semibold transition-all duration-150 border",
                   activeCat === c.id
-                    ? "bg-gray-700 text-white shadow"
-                    : "bg-gray-900 border border-gray-800 text-gray-400 hover:text-white"
-                }`}
+                    ? "bg-toss-brand-weak text-toss-brand border-transparent"
+                    : "bg-transparent border-toss-border text-toss-text-tertiary hover:text-toss-text-secondary"
+                )}
               >
                 {c.label}
               </button>
             ))}
           </div>
 
-          {/* 정렬 + 카운트 */}
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-gray-500">{filtered.length}개</span>
-            <div className="flex items-center gap-1 bg-gray-800/60 rounded-xl p-1">
-              {([["latest","최신순"],["hot","인기순"],["views","조회순"]] as [SortKey, string][]).map(([k, label]) => (
-                <button
-                  key={k}
-                  onClick={() => setSort(k)}
-                  className={`px-3 py-1 rounded-lg text-[11px] font-medium transition-colors ${
-                    sort === k ? "bg-gray-700 text-white" : "text-gray-500 hover:text-gray-300"
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
+          {/* 검색 + 정렬 */}
+          <div className="flex items-center gap-3 mb-4">
+            <SearchField
+              placeholder="제목·내용 검색"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="flex-1"
+            />
+            <SegmentedControl
+              size="sm"
+              value={sort}
+              onChange={(v) => setSort(v as SortKey)}
+              options={[
+                { value: "latest", label: "최신" },
+                { value: "hot",    label: "인기" },
+                { value: "views",  label: "조회" },
+              ]}
+            />
           </div>
 
-          {/* 게시글 목록 */}
-          <div className="rounded-xl bg-gray-900 border border-gray-800 overflow-hidden">
-            {pinned.map((p) => <PostRow key={p.id} post={p} locale={locale} />)}
-            {regular.map((p) => <PostRow key={p.id} post={p} locale={locale} />)}
-            {filtered.length === 0 && (
-              <div className="text-center py-16 text-gray-600">
-                <p className="text-2xl mb-2">📭</p>
-                <p className="text-sm">아직 게시글이 없어요</p>
-                <button onClick={() => setWriteOpen(true)} className="mt-3 text-xs text-yellow-500 hover:text-yellow-400 underline underline-offset-2">
-                  첫 글을 작성해보세요
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
+          {/* 게시글 수 */}
+          <p className="text-toss-caption text-toss-text-tertiary mb-2">{filtered.length}개</p>
 
-        {/* ── 사이드바 ────────────────────────────────────────────────── */}
-        <div className="space-y-4">
-          {/* 이주의 인기글 */}
-          <div className="rounded-xl bg-gray-900 border border-gray-800 p-4">
-            <h3 className="text-sm font-bold text-white mb-3">🔥 이주의 인기글</h3>
-            <div className="space-y-2.5">
-              {[...posts].sort((a,b) => b.likes - a.likes).slice(0,5).map((p, i) => (
-                <Link
-                  key={p.id}
-                  href={`/${locale}/community/${p.id}`}
-                  className="flex items-start gap-2.5 group"
-                >
-                  <span className={`text-[13px] font-black shrink-0 ${i === 0 ? "text-yellow-400" : i === 1 ? "text-gray-300" : i === 2 ? "text-amber-700" : "text-gray-600"}`}>
-                    {i + 1}
-                  </span>
-                  <p className="text-xs text-gray-400 group-hover:text-white transition-colors line-clamp-2 leading-relaxed">{p.title}</p>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* 카테고리 안내 */}
-          <div className="rounded-xl bg-gray-900 border border-gray-800 p-4">
-            <h3 className="text-sm font-bold text-white mb-3">📋 게시판 안내</h3>
-            <div className="space-y-2">
-              {[
-                { cat: "직거래", desc: "카드 사고팔기" },
-                { cat: "구함",   desc: "원하는 카드 찾기" },
-                { cat: "공략",   desc: "덱 빌드 · 게임 전략" },
-                { cat: "메타분석", desc: "시세 · 투자 분석" },
-                { cat: "자랑",   desc: "수집품 자랑" },
-                { cat: "질문",   desc: "무엇이든 물어봐요" },
-                { cat: "정보",   desc: "유용한 정보 공유" },
-                { cat: "거래후기", desc: "직거래 완료 후기" },
-              ].map(({ cat, desc }) => (
-                <button
-                  key={cat}
-                  onClick={() => {
-                    const found = CATS.find((c) => c.label === cat);
-                    if (found) setActiveCat(found.id);
-                  }}
-                  className="w-full flex items-center gap-2 hover:bg-gray-800 -mx-1 px-2 py-1.5 rounded-lg transition-colors group"
-                >
-                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${CAT_STYLE[cat]}`}>{cat}</span>
-                  <span className="text-xs text-gray-500 group-hover:text-gray-300">{desc}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* 커뮤니티 규칙 */}
-          <div className="rounded-xl bg-gray-900 border border-gray-800 p-4">
-            <h3 className="text-sm font-bold text-white mb-3">📜 이용 규칙</h3>
-            <ol className="space-y-1.5 text-xs text-gray-500 list-decimal list-inside leading-relaxed">
-              <li>허위 직거래 게시글 금지</li>
-              <li>욕설 · 혐오 표현 금지</li>
-              <li>도배 · 광고성 게시글 금지</li>
-              <li>타인의 개인정보 게시 금지</li>
-              <li>위반 시 제재 없이 삭제됩니다</li>
-            </ol>
-          </div>
+          {/* 글 리스트 */}
+          <RankingTable.Root className="rounded-toss-lg overflow-hidden shadow-toss-hairline">
+            <RankingTable.Head>
+              <RankingTable.HeadRow>
+                <RankingTable.Header className="w-[140px] shrink-0 flex-none pl-4 pr-0">분류</RankingTable.Header>
+                <RankingTable.Header className="flex-1 px-3">제목</RankingTable.Header>
+                <RankingTable.Header className="w-[160px] shrink-0 flex-none px-3" align="right">작성자 · 가격</RankingTable.Header>
+                <RankingTable.Header className="w-[170px] shrink-0 flex-none pr-4" align="right">조회 · 댓글 · 좋아요</RankingTable.Header>
+              </RankingTable.HeadRow>
+            </RankingTable.Head>
+            <RankingTable.Body>
+              {pinned.map((p) => <PostRow key={p.id} post={p} locale={locale} />)}
+              {regular.map((p) => <PostRow key={p.id} post={p} locale={locale} />)}
+              {filtered.length === 0 && (
+                <div className="text-center py-16 text-toss-text-quaternary">
+                  <p className="text-toss-title-2 mb-2">—</p>
+                  <p className="text-toss-body">아직 게시글이 없어요</p>
+                  <button
+                    onClick={() => setWriteOpen(true)}
+                    className="mt-3 text-toss-caption text-toss-brand hover:underline underline-offset-2"
+                  >
+                    첫 글을 작성해보세요
+                  </button>
+                </div>
+              )}
+            </RankingTable.Body>
+          </RankingTable.Root>
         </div>
       </div>
 

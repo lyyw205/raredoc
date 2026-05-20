@@ -1,8 +1,20 @@
 "use client";
 
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
+import { Bell, Search } from "lucide-react";
 import { RARITY_KO } from "@/lib/constants";
+import {
+  Button,
+  Card,
+  Chip,
+  DataRow,
+  EmptyState,
+  Modal,
+  SearchField,
+  SegmentedControl,
+  TextField,
+} from "@/components/toss";
 
 export type DexCard = {
   id: string;
@@ -87,12 +99,12 @@ const SORT_LABELS: { key: SortKey; label: string }[] = [
 // ── 서브 컴포넌트 ─────────────────────────────────────────────────────────
 function ProgressBar({ value }: { value: number }) {
   return (
-    <div className="h-1 bg-gray-800 rounded-full overflow-hidden mt-2 mb-3">
+    <div className="h-1 bg-toss-bg-muted rounded-full overflow-hidden mt-2 mb-3">
       <div
         className="h-full rounded-full transition-all duration-500"
         style={{
           width: `${value}%`,
-          background: value >= 80 ? "#EAB308" : value >= 50 ? "#3B82F6" : "#6B7280",
+          background: "var(--toss-brand)",
         }}
       />
     </div>
@@ -135,7 +147,6 @@ function mockPricesFor(cardId: string) {
 function CardDetailModal({
   card, locale, onClose,
 }: { card: SelectedCard; locale: string; onClose: () => void }) {
-  const close       = useCallback(() => onClose(), [onClose]);
   const [alertOpen, setAlertOpen]   = useState(false);
   const [alertPrice, setAlertPrice] = useState("");
   const [alertSaved, setAlertSaved] = useState(false);
@@ -146,27 +157,14 @@ function CardDetailModal({
     setAlertOpen(false);
   }
 
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") close(); };
-    document.addEventListener("keydown", handler);
-    return () => { document.body.style.overflow = prev; document.removeEventListener("keydown", handler); };
-  }, [close]);
-
   const largeImageUrl = card.imageSmall.replace(/\.png$/, "_hires.png");
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      onClick={(e) => { if (e.target === e.currentTarget) close(); }}
-    >
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
-
-      <div className="relative w-full max-w-3xl max-h-[92vh] flex flex-col rounded-2xl border border-gray-800 bg-gray-950 shadow-2xl overflow-hidden">
+    <Modal.Root open={true} onOpenChange={() => onClose()}>
+      <Modal.Content maxWidth="max-w-3xl" className="max-h-[92vh] flex flex-col p-0 overflow-hidden">
         {/* 헤더 */}
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-800 shrink-0">
-          <div className="flex items-center gap-2 text-xs text-gray-500">
+        <Modal.Header className="px-5 py-3.5 mb-0 border-b border-toss-divider shrink-0">
+          <div className="flex items-center gap-2 text-toss-caption text-toss-text-tertiary">
             <span>{card.setName}</span>
             <span>·</span>
             <span>#{card.number}</span>
@@ -177,13 +175,8 @@ function CardDetailModal({
               </>
             )}
           </div>
-          <button
-            onClick={close}
-            className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white text-lg leading-none transition-colors"
-          >
-            ×
-          </button>
-        </div>
+          <Modal.Close />
+        </Modal.Header>
 
         {/* 본문 */}
         <div className="flex-1 overflow-y-auto">
@@ -194,7 +187,7 @@ function CardDetailModal({
               <img
                 src={largeImageUrl}
                 alt={card.name}
-                className="w-72 rounded-xl shadow-2xl"
+                className="w-72 rounded-toss-lg shadow-toss-lg"
                 onError={(e) => { (e.currentTarget as HTMLImageElement).src = card.imageSmall; }}
               />
             </div>
@@ -203,115 +196,127 @@ function CardDetailModal({
             <div className="flex-1 min-w-0 space-y-5">
               {/* 카드 이름 + 타입 */}
               <div>
-                <h2 className="text-xl font-bold text-white mb-1">{card.name}</h2>
+                <h2 className="text-toss-title-1 font-bold text-toss-text-primary mb-1">{card.name}</h2>
                 {card.types && card.types.length > 0 && (
                   <div className="flex gap-1">
                     {card.types.map((t) => (
-                      <span key={t} className="text-[11px] px-2 py-0.5 rounded-full bg-gray-800 text-gray-400">
+                      <Chip key={t} variant="tag" size="sm">
                         {TYPE_META[t]?.emoji} {TYPE_META[t]?.label ?? t}
-                      </span>
+                      </Chip>
                     ))}
                   </div>
                 )}
               </div>
 
               {/* 시세 (목업) */}
-              <div className="rounded-xl bg-gray-900 border border-gray-800 p-4">
+              <Card padding="md">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wide">최근 시세</h3>
-                  <a href={`/${locale}/cards/${card.id}`} className="text-[10px] text-gray-500 hover:text-white transition-colors">
+                  <h3 className="text-toss-caption font-semibold text-toss-text-tertiary uppercase tracking-wide">최근 시세</h3>
+                  <Link href={`/${locale}/cards/${card.id}`} className="text-toss-micro text-toss-text-tertiary hover:text-toss-text-primary transition-colors">
                     상세 시세 차트 →
-                  </a>
+                  </Link>
                 </div>
 
                 {(() => {
                   const p = mockPricesFor(card.id);
-                  const rows: { flag: string; name: string; sub: string; price: string; count: number; color: string }[] = [
-                    { flag: "🇺🇸", name: "TCGplayer", sub: "미국 · NM 기준",        price: `$${p.tcgplayer.toFixed(2)}`,                                        count: p.tcgplayerCount, color: "text-blue-400"    },
-                    { flag: "🌍", name: "eBay",      sub: "글로벌 · Sold listings", price: `$${p.ebay.toFixed(2)}`,                                              count: p.ebayCount,      color: "text-emerald-400" },
-                    { flag: "🇰🇷", name: "번개장터",  sub: "국내 · NM 기준",         price: `₩${p.bunjang.toLocaleString("ko-KR")}`,                              count: p.bunjangCount,   color: "text-orange-400"  },
+                  const rows: { flag: string; name: string; sub: string; price: string; count: number }[] = [
+                    { flag: "🇺🇸", name: "TCGplayer", sub: "미국 · NM 기준",        price: `$${p.tcgplayer.toFixed(2)}`,               count: p.tcgplayerCount },
+                    { flag: "🌍",  name: "eBay",      sub: "글로벌 · Sold listings", price: `$${p.ebay.toFixed(2)}`,                    count: p.ebayCount      },
+                    { flag: "🇰🇷", name: "번개장터",  sub: "국내 · NM 기준",         price: `₩${p.bunjang.toLocaleString("ko-KR")}`,    count: p.bunjangCount   },
                   ];
                   return (
-                    <div className="divide-y divide-gray-800/60">
-                      {rows.map((r) => (
-                        <div key={r.name} className="flex items-center justify-between py-2">
-                          <div className="flex items-center gap-2">
-                            <span className="text-base">{r.flag}</span>
-                            <div>
-                              <p className="text-xs font-semibold text-gray-300">{r.name}</p>
-                              <p className="text-[10px] text-gray-600">{r.sub}</p>
+                    <div>
+                      {rows.map((r, idx) => (
+                        <DataRow
+                          key={r.name}
+                          divider={idx < rows.length - 1}
+                          label={
+                            <div className="flex items-center gap-2">
+                              <span className="text-base">{r.flag}</span>
+                              <div>
+                                <p className="text-toss-caption font-semibold text-toss-text-secondary">{r.name}</p>
+                                <p className="text-toss-micro text-toss-text-quaternary">{r.sub}</p>
+                              </div>
                             </div>
-                          </div>
-                          <div className="text-right">
-                            <p className={`text-base font-bold ${r.color}`}>{r.price}</p>
-                            <p className="text-[10px] text-gray-600">{r.count}건</p>
-                          </div>
-                        </div>
+                          }
+                          value={
+                            <div className="text-right">
+                              <p className="text-toss-title-2 font-bold text-toss-text-primary toss-numeric">{r.price}</p>
+                              <p className="text-toss-micro text-toss-text-quaternary">{r.count}건</p>
+                            </div>
+                          }
+                        />
                       ))}
                     </div>
                   );
                 })()}
 
                 {/* 가격 알림 (번개장터 기준) */}
-                <div className="mt-3 pt-3 border-t border-gray-800">
+                <div className="mt-3 pt-3 border-t border-toss-divider">
                   {alertSaved ? (
-                    <div className="flex items-center gap-2 text-xs text-green-400">
+                    <div className="flex items-center gap-2 text-toss-caption text-toss-success">
                       <span>🔔</span>
                       <span>₩{Number(alertPrice).toLocaleString("ko-KR")} 이하 알림 설정됨</span>
-                      <button onClick={() => { setAlertSaved(false); setAlertPrice(""); }} className="ml-auto text-gray-600 hover:text-gray-400">취소</button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => { setAlertSaved(false); setAlertPrice(""); }}
+                        className="ml-auto"
+                      >
+                        취소
+                      </Button>
                     </div>
                   ) : alertOpen ? (
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-gray-400 shrink-0">₩</span>
-                      <input
+                      <TextField
                         type="number"
                         placeholder="목표 가격 입력"
                         value={alertPrice}
                         onChange={(e) => setAlertPrice(e.target.value)}
-                        className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-gray-500"
+                        size="sm"
+                        className="flex-1"
                       />
-                      <span className="text-xs text-gray-500 shrink-0">이하 알림</span>
-                      <button onClick={saveAlert} className="shrink-0 px-2.5 py-1.5 rounded-lg bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold transition-colors">설정</button>
-                      <button onClick={() => setAlertOpen(false)} className="shrink-0 text-gray-600 hover:text-gray-400 text-xs">✕</button>
+                      <span className="text-toss-caption text-toss-text-tertiary shrink-0">이하 알림</span>
+                      <Button variant="primary" size="sm" onClick={saveAlert}>설정</Button>
+                      <Button variant="ghost" size="sm" onClick={() => setAlertOpen(false)}>✕</Button>
                     </div>
                   ) : (
-                    <button
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      leftIcon={<Bell size={14} />}
                       onClick={() => setAlertOpen(true)}
-                      className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-white transition-colors"
                     >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-                      </svg>
                       이 가격 이하로 나오면 알림 받기
-                    </button>
+                    </Button>
                   )}
                 </div>
-              </div>
+              </Card>
 
             </div>
           </div>
 
           {/* 같은 포켓몬 · 다른 카드 (목업) */}
           <div className="px-5 pb-5">
-            <h3 className="text-sm font-bold text-white mb-3">같은 포켓몬 · 다른 카드</h3>
-            <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1">
+            <h3 className="text-toss-label font-bold text-toss-text-primary mb-3">같은 포켓몬 · 다른 카드</h3>
+            <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 no-scrollbar">
               {RELATED_VARIANTS.map((v, i) => (
                 <button key={i} className="shrink-0 w-28 group cursor-pointer text-left">
-                  <div className="rounded-lg overflow-hidden bg-gray-900 border border-gray-800 group-hover:border-gray-600 transition-colors">
+                  <div className="rounded-toss-md overflow-hidden bg-toss-bg-base border border-toss-divider shadow-toss-hairline group-hover:border-toss-border transition-colors">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={card.imageSmall} alt={card.name} className="w-full block" />
                   </div>
-                  <p className="mt-1.5 text-[11px] font-medium text-gray-300 truncate">{card.name}</p>
-                  <p className="text-[10px] text-gray-500 truncate">{v.set} · No.{v.number}</p>
-                  <span className="inline-block mt-0.5 text-[9px] px-1.5 py-0.5 rounded bg-gray-800 text-gray-400">{v.rarity}</span>
-                  <p className="text-[11px] font-bold text-orange-400 mt-1">{v.priceLabel}</p>
+                  <p className="mt-1.5 text-toss-micro font-medium text-toss-text-secondary truncate">{card.name}</p>
+                  <p className="text-toss-tiny text-toss-text-tertiary truncate">{v.set} · No.{v.number}</p>
+                  <Chip variant="tag" size="sm" className="mt-0.5">{v.rarity}</Chip>
+                  <p className="text-toss-micro font-bold text-toss-warning toss-numeric mt-1">{v.priceLabel}</p>
                 </button>
               ))}
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </Modal.Content>
+    </Modal.Root>
   );
 }
 
@@ -358,66 +363,38 @@ function SetDetailModal({ set, locale, onClose, onCardClick }: { set: DexSet; lo
     return [...map.entries()].sort(([a], [b]) => rarityRank(a) - rarityRank(b));
   }, [set.cards]);
 
-  const close = useCallback(() => onClose(), [onClose]);
-
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") close(); };
-    document.addEventListener("keydown", handler);
-    return () => {
-      document.body.style.overflow = prev;
-      document.removeEventListener("keydown", handler);
-    };
-  }, [close]);
-
   const logoUrl = set.logoUrl ?? `https://images.pokemontcg.io/${set.id}/logo.png`;
 
-  const GRADE_COLOR: Record<string, string> = {
-    NM: "bg-green-600", LP: "bg-blue-600", MP: "bg-yellow-600",
-    HP: "bg-orange-600", D: "bg-red-700",
-  };
-
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      onClick={(e) => { if (e.target === e.currentTarget) close(); }}
-    >
-      {/* 백드롭 */}
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
-
-      {/* 모달 패널 */}
-      <div className="relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded-2xl border border-gray-800 bg-gray-950 shadow-2xl overflow-hidden">
+    <Modal.Root open={true} onOpenChange={() => onClose()}>
+      <Modal.Content maxWidth="max-w-4xl" className="max-h-[90vh] flex flex-col p-0 overflow-hidden">
         {/* 헤더 */}
-        <div className="flex items-center gap-4 px-6 py-4 border-b border-gray-800 shrink-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={logoUrl} alt="" className="h-8 object-contain" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
-          <div className="flex-1 min-w-0">
-            <h2 className="text-lg font-bold text-white truncate">{set.name}</h2>
-            <p className="text-xs text-gray-500">전체 {total}장</p>
+        <Modal.Header className="px-6 py-4 mb-0 border-b border-toss-divider shrink-0">
+          <div className="flex items-center gap-4 min-w-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={logoUrl} alt="" className="h-8 object-contain shrink-0" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
+            <div className="min-w-0">
+              <Modal.Title className="truncate">{set.name}</Modal.Title>
+              <p className="text-toss-caption text-toss-text-tertiary">전체 {total}장</p>
+            </div>
           </div>
-          <button
-            onClick={close}
-            className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white transition-colors text-lg leading-none"
-          >
-            ×
-          </button>
-        </div>
+          <Modal.Close />
+        </Modal.Header>
 
         {/* 수집 현황 */}
-        <div className="px-6 pt-4 pb-3 border-b border-gray-800 shrink-0 bg-gray-900/50">
+        <div className="px-6 pt-4 pb-3 border-b border-toss-divider shrink-0 bg-toss-bg-subtle">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-gray-400">내 수집 현황</span>
-            <span className={`text-sm font-bold ${pct >= 80 ? "text-yellow-400" : pct >= 50 ? "text-blue-400" : "text-gray-400"}`}>
+            <span className="text-toss-caption text-toss-text-secondary">내 수집 현황</span>
+            <span className="text-toss-caption font-bold text-toss-text-primary">
               {owned} / {total} ({pct}%)
             </span>
           </div>
-          <div className="h-2 bg-gray-800 rounded-full overflow-hidden mb-3">
+          <div className="h-2 bg-toss-bg-muted rounded-full overflow-hidden mb-3">
             <div
               className="h-full rounded-full transition-all duration-500"
               style={{
                 width: `${pct}%`,
-                background: pct >= 80 ? "linear-gradient(to right,#ca8a04,#facc15)" : pct >= 50 ? "linear-gradient(to right,#1d4ed8,#60a5fa)" : "#4b5563",
+                background: "var(--toss-brand)",
               }}
             />
           </div>
@@ -425,8 +402,8 @@ function SetDetailModal({ set, locale, onClose, onCardClick }: { set: DexSet; lo
           <div className="flex flex-wrap gap-x-4 gap-y-1.5">
             {rarityStats.map(([rarity, stats]) => (
               <div key={rarity} className="flex items-center gap-1.5">
-                <span className="text-[11px] text-gray-500">{RARITY_KO[rarity] ?? RARITY_LABEL[rarity] ?? rarity}</span>
-                <span className={`text-[11px] font-semibold ${stats.owned === stats.total ? "text-yellow-400" : "text-gray-300"}`}>
+                <span className="text-toss-micro text-toss-text-tertiary">{RARITY_KO[rarity] ?? RARITY_LABEL[rarity] ?? rarity}</span>
+                <span className={`text-toss-micro font-semibold ${stats.owned === stats.total ? "text-toss-warning" : "text-toss-text-tertiary"}`}>
                   {stats.owned}/{stats.total}
                 </span>
               </div>
@@ -435,36 +412,33 @@ function SetDetailModal({ set, locale, onClose, onCardClick }: { set: DexSet; lo
         </div>
 
         {/* 필터 바 */}
-        <div className="px-6 py-3 border-b border-gray-800 shrink-0 flex items-center gap-2">
-          <div className="flex gap-1 bg-gray-900 p-1 rounded-lg border border-gray-800">
-            {([["all", "전체", total], ["owned", "보유", owned], ["missing", "미보유", total - owned]] as [ModalView, string, number][]).map(([key, label, count]) => (
-              <button
-                key={key}
-                onClick={() => setView(key)}
-                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                  view === key ? "bg-gray-700 text-white" : "text-gray-500 hover:text-gray-300"
-                }`}
-              >
-                {label}
-                <span className={`ml-1 text-[10px] ${view === key ? "text-gray-400" : "text-gray-600"}`}>{count}</span>
-              </button>
-            ))}
-          </div>
+        <div className="px-6 py-3 border-b border-toss-divider shrink-0 flex items-center gap-2">
+          <SegmentedControl
+            options={[
+              { value: "all",     label: `전체 ${total}` },
+              { value: "owned",   label: `보유 ${owned}` },
+              { value: "missing", label: `미보유 ${total - owned}` },
+            ]}
+            value={view}
+            onChange={(v) => setView(v as ModalView)}
+            variant="filled"
+            size="sm"
+          />
         </div>
 
         {/* 카드 그리드 (스크롤 영역) */}
         <div className="flex-1 overflow-y-auto px-6 py-4">
           {grouped.length === 0 ? (
-            <div className="text-center py-20 text-gray-600 text-sm">해당 카드가 없어요</div>
+            <div className="text-center py-20 text-toss-text-tertiary text-toss-caption">해당 카드가 없어요</div>
           ) : (
             <div className="space-y-7">
               {grouped.map(([rarity, groupCards]) => (
                 <div key={rarity}>
                   <div className="flex items-center gap-2 mb-2.5">
-                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wide">
+                    <h3 className="text-toss-micro font-bold text-toss-text-tertiary uppercase tracking-wide">
                       {RARITY_KO[rarity] ?? RARITY_LABEL[rarity] ?? rarity}
                     </h3>
-                    <span className="text-xs text-gray-600">
+                    <span className="text-toss-micro text-toss-text-quaternary">
                       {groupCards.filter((c) => c.owned).length}/{groupCards.length}
                     </span>
                   </div>
@@ -478,10 +452,10 @@ function SetDetailModal({ set, locale, onClose, onCardClick }: { set: DexSet; lo
                           className="relative group block text-left"
                           title={`#${card.number} ${card.name}`}
                         >
-                          <div className={`rounded-lg overflow-hidden border transition-all ${
+                          <div className={`rounded-toss-md overflow-hidden border transition-all ${
                             card.owned
-                              ? "border-gray-700 group-hover:border-yellow-500/60"
-                              : "border-gray-800/50 opacity-30 group-hover:opacity-50"
+                              ? "border-toss-border group-hover:ring-2 group-hover:ring-toss-brand/40"
+                              : "border-toss-border/50 opacity-30 group-hover:opacity-50"
                           }`}>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
@@ -491,14 +465,14 @@ function SetDetailModal({ set, locale, onClose, onCardClick }: { set: DexSet; lo
                             />
                           </div>
                           {card.owned && card.grade && (
-                            <span className={`absolute bottom-[14px] left-[2px] text-[7px] font-bold text-white px-1 py-[1px] rounded ${GRADE_COLOR[card.grade] ?? "bg-gray-600"}`}>
+                            <span className="absolute bottom-[14px] left-[2px] text-[7px] font-bold bg-toss-text-primary text-toss-bg-base px-1 py-[1px] rounded leading-tight">
                               {card.grade}
                             </span>
                           )}
                           {card.owned && card.certified && (
-                            <span className="absolute top-[2px] right-[2px] w-2 h-2 rounded-full bg-green-500 border border-gray-900" />
+                            <span className="absolute top-[2px] right-[2px] w-2 h-2 rounded-full bg-toss-success border border-toss-bg-base" />
                           )}
-                          <p className="text-[9px] text-center text-gray-600 mt-[2px] leading-none truncate">
+                          <p className="text-toss-tiny text-center text-toss-text-quaternary mt-[2px] leading-none truncate">
                             #{card.number}
                           </p>
                         </button>
@@ -509,8 +483,8 @@ function SetDetailModal({ set, locale, onClose, onCardClick }: { set: DexSet; lo
             </div>
           )}
         </div>
-      </div>
-    </div>
+      </Modal.Content>
+    </Modal.Root>
   );
 }
 
@@ -605,8 +579,8 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
       {/* ── 헤더 ────────────────────────────────────────────────────────── */}
       <div className="flex items-center justify-between mb-5 gap-4">
         <div className="shrink-0">
-          <h1 className="text-xl font-bold text-white">카드 도감</h1>
-          <p className="text-xs text-gray-500 mt-0.5">
+          <h1 className="text-toss-title-1 font-bold text-toss-text-primary">카드 도감</h1>
+          <p className="text-toss-caption text-toss-text-tertiary mt-0.5">
             {view === "mine"
               ? `${totalCards.toLocaleString()}장 중 ${ownedCards.toLocaleString()}장 보유 (${Math.round((ownedCards / totalCards) * 100)}%)`
               : hasFilter
@@ -617,8 +591,8 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
 
         <div className="flex items-center gap-3 ml-auto">
           {/* 컬럼 슬라이더 */}
-          <div className="flex items-center gap-2 bg-gray-800/60 rounded-xl px-3 py-2">
-            <span className="text-[11px] text-gray-500 shrink-0">열</span>
+          <div className="flex items-center gap-2 bg-toss-input-bg rounded-toss-md px-3 py-2">
+            <span className="text-toss-micro text-toss-text-tertiary shrink-0">열</span>
             <input
               type="range"
               min={5}
@@ -628,213 +602,179 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
               onChange={(e) => setCols(Number(e.target.value))}
               className="w-24 h-1 rounded-full appearance-none cursor-pointer"
               style={{
-                background: `linear-gradient(to right, #EAB308 0%, #EAB308 ${((cols - 5) / 10) * 100}%, #374151 ${((cols - 5) / 10) * 100}%, #374151 100%)`,
+                background: `linear-gradient(to right, var(--toss-brand) 0%, var(--toss-brand) ${((cols - 5) / 10) * 100}%, var(--toss-bg-muted) ${((cols - 5) / 10) * 100}%, var(--toss-bg-muted) 100%)`,
               }}
             />
-            <span className="text-[11px] font-bold text-yellow-400 w-4 text-right shrink-0">{cols}</span>
+            <span className="text-toss-micro font-semibold text-toss-brand w-4 text-right shrink-0">{cols}</span>
           </div>
 
           {/* 모두/내카드 토글 */}
-          <div className="flex items-center gap-0.5 bg-gray-800/80 rounded-xl p-1 shrink-0">
-            <button
-              onClick={() => setView("all")}
-              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-                view === "all" ? "bg-gray-700 text-white shadow" : "text-gray-400 hover:text-gray-200"
-              }`}
-            >
-              모두보기
-            </button>
-            <button
-              onClick={() => setView("mine")}
-              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-                view === "mine" ? "bg-yellow-500 text-black shadow" : "text-gray-400 hover:text-gray-200"
-              }`}
-            >
-              내카드보기
-            </button>
-          </div>
+          <SegmentedControl
+            options={[
+              { value: "all",  label: "모두보기" },
+              { value: "mine", label: "내카드보기" },
+            ]}
+            value={view}
+            onChange={(v) => setView(v as ViewMode)}
+            variant="filled"
+            size="md"
+            className="shrink-0"
+          />
         </div>
       </div>
 
       {/* ── 필터 영역 ────────────────────────────────────────────────────── */}
-      <div className="rounded-xl bg-gray-900 border border-gray-800 p-4 mb-6 space-y-3">
-        {/* 이름 검색 */}
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-semibold text-gray-500 shrink-0 w-12">검색</span>
-          <div className="relative flex-1">
-            <svg className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-600" width="12" height="12" viewBox="0 0 16 16" fill="none">
-              <circle cx="6.5" cy="6.5" r="5" stroke="currentColor" strokeWidth="1.5"/>
-              <path d="M10.5 10.5l3.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-            <input
-              type="text"
+      <Card padding="md" className="mb-6">
+        <div className="space-y-3">
+          {/* 이름 검색 */}
+          <div className="flex items-center gap-2">
+            <span className="text-toss-micro font-semibold text-toss-text-tertiary shrink-0 w-12">검색</span>
+            <SearchField
               placeholder="카드 이름 검색..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-7 pr-3 py-1.5 rounded-lg bg-gray-800 border border-gray-700 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-gray-500 transition-colors"
+              className="flex-1"
             />
-            {search && (
-              <button
-                onClick={() => setSearch("")}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300"
+          </div>
+
+          {/* 카드팩 */}
+          <div className="flex items-center gap-2">
+            <span className="text-toss-micro font-semibold text-toss-text-tertiary shrink-0 w-12">카드팩</span>
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+              <Chip
+                variant="filter"
+                size="sm"
+                selected={selSets.size === 0}
+                onClick={() => setSelSets(new Set())}
               >
-                ×
-              </button>
-            )}
+                전체
+              </Chip>
+              {sets.map((s) => {
+                const ownedCount = s.cards.filter((c) => c.owned).length;
+                const pct = Math.round((ownedCount / s.cards.length) * 100);
+                const on = selSets.has(s.id);
+                const logoUrl = s.logoUrl ?? `https://images.pokemontcg.io/${s.id}/logo.png`;
+                return (
+                  <Chip
+                    key={s.id}
+                    variant="filter"
+                    size="sm"
+                    selected={on}
+                    onClick={() => toggleSet(s.id)}
+                    leftIcon={
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={logoUrl} alt="" className="h-4 object-contain" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
+                    }
+                  >
+                    <span>{s.name}</span>
+                    {view === "mine" && (
+                      <span className="text-toss-tiny font-bold ml-0.5">{pct}%</span>
+                    )}
+                  </Chip>
+                );
+              })}
+            </div>
           </div>
-        </div>
 
-        {/* 카드팩 */}
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-semibold text-gray-500 shrink-0 w-12">카드팩</span>
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-            <button
-              onClick={() => setSelSets(new Set())}
-              className={`shrink-0 px-2.5 py-1 rounded-lg border text-[11px] font-bold transition-all duration-150 ${
-                selSets.size === 0
-                  ? "bg-yellow-500/20 text-yellow-300 border-yellow-500/50"
-                  : "bg-gray-800 text-gray-500 border-gray-700 hover:text-gray-300 hover:border-gray-600"
-              }`}
-            >
-              전체
-            </button>
-            {sets.map((s) => {
-              const owned = s.cards.filter((c) => c.owned).length;
-              const pct = Math.round((owned / s.cards.length) * 100);
-              const on = selSets.has(s.id);
-              const logoUrl = s.logoUrl ?? `https://images.pokemontcg.io/${s.id}/logo.png`;
-              return (
-                <button
-                  key={s.id}
-                  onClick={() => toggleSet(s.id)}
-                  className={`shrink-0 flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-[11px] font-bold transition-all duration-150 ${
-                    on
-                      ? "bg-yellow-500/20 text-yellow-300 border-yellow-500/50"
-                      : "bg-gray-800 text-gray-500 border-gray-700 hover:text-gray-300 hover:border-gray-600"
-                  }`}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={logoUrl} alt="" className="h-4 object-contain" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
-                  <span>{s.name}</span>
-                  {view === "mine" && (
-                    <span className={`text-[9px] font-bold ${pct >= 80 ? "text-yellow-400" : pct >= 50 ? "text-blue-400" : "text-gray-600"}`}>
-                      {pct}%
-                    </span>
-                  )}
-                </button>
-              );
-            })}
+          {/* 슈퍼타입 */}
+          <div className="flex items-center gap-2">
+            <span className="text-toss-micro font-semibold text-toss-text-tertiary shrink-0 w-12">종류</span>
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+              {Object.entries(SUPERTYPE_META).map(([key, { label, emoji }]) => {
+                const on = selSupertypes.has(key);
+                return (
+                  <Chip
+                    key={key}
+                    variant="filter"
+                    size="sm"
+                    selected={on}
+                    onClick={() => toggleSupertype(key)}
+                  >
+                    <span>{emoji}</span><span>{label}</span>
+                  </Chip>
+                );
+              })}
+            </div>
           </div>
-        </div>
-        {/* 슈퍼타입 */}
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-semibold text-gray-500 shrink-0 w-12">종류</span>
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-            {Object.entries(SUPERTYPE_META).map(([key, { label, emoji }]) => {
-              const on = selSupertypes.has(key);
-              return (
-                <button
-                  key={key}
-                  onClick={() => toggleSupertype(key)}
-                  className={`shrink-0 flex items-center gap-1 px-2.5 py-1 rounded-lg border text-[11px] font-bold transition-all duration-150 ${
-                    on
-                      ? "bg-yellow-500/20 text-yellow-300 border-yellow-500/50"
-                      : "bg-gray-800 text-gray-500 border-gray-700 hover:text-gray-300 hover:border-gray-600"
-                  }`}
-                >
-                  <span>{emoji}</span><span>{label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
 
-        {/* 희귀도 */}
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-semibold text-gray-500 shrink-0 w-12">희귀도</span>
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-            {allRarities.map((r) => {
-              const on = selRarities.has(r);
-              return (
-                <button
-                  key={r}
-                  onClick={() => toggleRarity(r)}
-                  className={`shrink-0 px-2.5 py-1 rounded-lg border text-[11px] font-bold transition-all duration-150 ${
-                    on
-                      ? "bg-yellow-500/20 text-yellow-300 border-yellow-500/50"
-                      : "bg-gray-800 text-gray-500 border-gray-700 hover:text-gray-300 hover:border-gray-600"
-                  }`}
-                >
-                  {RARITY_LABEL[r] ?? r}
-                </button>
-              );
-            })}
+          {/* 희귀도 */}
+          <div className="flex items-center gap-2">
+            <span className="text-toss-micro font-semibold text-toss-text-tertiary shrink-0 w-12">희귀도</span>
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+              {allRarities.map((r) => {
+                const on = selRarities.has(r);
+                return (
+                  <Chip
+                    key={r}
+                    variant="filter"
+                    size="sm"
+                    selected={on}
+                    onClick={() => toggleRarity(r)}
+                  >
+                    {RARITY_LABEL[r] ?? r}
+                  </Chip>
+                );
+              })}
+            </div>
           </div>
-        </div>
 
-        {/* 타입 */}
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-semibold text-gray-500 shrink-0 w-12">타입</span>
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-            {allTypes.map((t) => {
-              const meta = TYPE_META[t];
-              const on = selTypes.has(t);
-              if (!meta) return null;
-              return (
-                <button
-                  key={t}
-                  onClick={() => toggleType(t)}
-                  className={`shrink-0 flex items-center gap-1 px-2.5 py-1 rounded-lg border text-[11px] font-semibold transition-all duration-150 ${
-                    on ? meta.on : `bg-gray-800 ${meta.off} hover:text-gray-300 hover:border-gray-600`
-                  }`}
-                >
-                  <span>{meta.emoji}</span>
-                  <span>{meta.label}</span>
-                </button>
-              );
-            })}
+          {/* 타입 */}
+          <div className="flex items-center gap-2">
+            <span className="text-toss-micro font-semibold text-toss-text-tertiary shrink-0 w-12">타입</span>
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+              {allTypes.map((t) => {
+                const meta = TYPE_META[t];
+                const on = selTypes.has(t);
+                if (!meta) return null;
+                return (
+                  <Chip
+                    key={t}
+                    variant="filter"
+                    size="sm"
+                    selected={on}
+                    onClick={() => toggleType(t)}
+                  >
+                    <span>{meta.emoji}</span>
+                    <span>{meta.label}</span>
+                  </Chip>
+                );
+              })}
+            </div>
           </div>
-        </div>
 
-        {/* 정렬 */}
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-semibold text-gray-500 shrink-0 w-12">정렬</span>
-          <div className="flex items-center gap-1.5">
-            {SORT_LABELS.map(({ key, label }) => (
-              <button
-                key={key}
-                onClick={() => setSortBy(key)}
-                className={`shrink-0 px-2.5 py-1 rounded-lg border text-[11px] font-bold transition-all duration-150 ${
-                  sortBy === key
-                    ? "bg-gray-600 text-white border-gray-500"
-                    : "bg-gray-800 text-gray-500 border-gray-700 hover:text-gray-300 hover:border-gray-600"
-                }`}
+          {/* 정렬 */}
+          <div className="flex items-center gap-2">
+            <span className="text-toss-micro font-semibold text-toss-text-tertiary shrink-0 w-12">정렬</span>
+            <SegmentedControl
+              options={SORT_LABELS.map(({ key, label }) => ({ value: key, label }))}
+              value={sortBy}
+              onChange={(v) => setSortBy(v as SortKey)}
+              size="sm"
+              variant="filled"
+            />
+          </div>
+
+          {/* 필터 초기화 */}
+          {(hasFilter || sortBy !== "number") && (
+            <div className="flex justify-end">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => { setSelRarities(new Set()); setSelTypes(new Set()); setSelSupertypes(new Set()); setSearch(""); setSortBy("number"); }}
               >
-                {label}
-              </button>
-            ))}
-          </div>
+                전체 초기화
+              </Button>
+            </div>
+          )}
         </div>
-
-        {/* 필터 초기화 */}
-        {(hasFilter || sortBy !== "number") && (
-          <div className="flex justify-end">
-            <button
-              onClick={() => { setSelRarities(new Set()); setSelTypes(new Set()); setSelSupertypes(new Set()); setSearch(""); setSortBy("number"); }}
-              className="text-[11px] text-gray-500 hover:text-gray-300 transition-colors underline underline-offset-2"
-            >
-              전체 초기화
-            </button>
-          </div>
-        )}
-      </div>
+      </Card>
 
       {/* ── 카드 섹션 ────────────────────────────────────────────────────── */}
       <div className="space-y-10">
         {visibleSets.map((set) => {
           const totalInSet = sets.find((s) => s.id === set.id)?.cards.length ?? set.cards.length;
-          const owned = sets.find((s) => s.id === set.id)?.cards.filter((c) => c.owned).length ?? 0;
-          const pct = Math.round((owned / totalInSet) * 100);
+          const ownedCount = sets.find((s) => s.id === set.id)?.cards.filter((c) => c.owned).length ?? 0;
+          const pct = Math.round((ownedCount / totalInSet) * 100);
 
           if (set.cards.length === 0) return null;
 
@@ -844,17 +784,17 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
                 <div className="flex items-center gap-3">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={set.logoUrl ?? `https://images.pokemontcg.io/${set.id}/logo.png`} alt="" className="h-5 object-contain" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
-                  <h2 className="text-sm font-bold text-white">{set.name}</h2>
-                  <span className="text-xs text-gray-600">
+                  <h2 className="text-toss-label font-bold text-toss-text-primary">{set.name}</h2>
+                  <span className="text-toss-caption text-toss-text-tertiary">
                     {hasFilter ? `${set.cards.length}/${totalInSet}장` : `${totalInSet}장`}
                   </span>
                   {view === "mine" && (
-                    <span className="text-xs font-semibold text-yellow-400">{owned}/{totalInSet} 보유</span>
+                    <span className="text-toss-caption font-semibold text-toss-warning">{ownedCount}/{totalInSet} 보유</span>
                   )}
                 </div>
                 <button
                   onClick={() => setModalSetId(set.id)}
-                  className="text-xs text-gray-600 hover:text-gray-300 transition-colors"
+                  className="text-toss-caption text-toss-text-tertiary hover:text-toss-text-primary transition-colors"
                 >
                   자세히 보기 →
                 </button>
@@ -876,7 +816,7 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
                       title={`${card.name} · No.${card.number}`}
                     >
                       <div
-                        className="rounded-lg overflow-hidden"
+                        className="rounded-toss-md overflow-hidden group-hover:shadow-toss-md transition-shadow"
                         style={{
                           aspectRatio: "63 / 88",
                           filter: dimmed ? "grayscale(100%)" : "none",
@@ -891,14 +831,14 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
                         />
                       </div>
                       {view === "mine" && card.owned && card.grade && (
-                        <div className="absolute bottom-[14px] left-[2px] text-[7px] font-bold bg-black/75 text-white px-1 py-[1px] rounded leading-tight">
+                        <div className="absolute bottom-[14px] left-[2px] text-[7px] font-bold bg-toss-text-primary text-toss-bg-base px-1 py-[1px] rounded leading-tight">
                           {card.grade}
                         </div>
                       )}
                       {view === "mine" && card.owned && card.certified && (
-                        <div className="absolute top-[2px] right-[2px] w-2.5 h-2.5 rounded-full bg-green-500 ring-1 ring-gray-900 shadow" />
+                        <div className="absolute top-[2px] right-[2px] w-2.5 h-2.5 rounded-full bg-toss-success ring-1 ring-toss-bg-base shadow" />
                       )}
-                      <p className="text-[9px] text-center text-gray-600 mt-[2px] leading-none truncate">
+                      <p className="text-toss-tiny text-center text-toss-text-quaternary mt-[2px] leading-none truncate">
                         {card.number}
                       </p>
                     </button>
@@ -910,16 +850,20 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
         })}
 
         {visibleSets.every((s) => s.cards.length === 0) && (
-          <div className="text-center py-20 text-gray-600">
-            <p className="text-2xl mb-2">🔍</p>
-            <p className="text-sm">해당 조건의 카드가 없어요</p>
-            <button
-              onClick={() => { setSelRarities(new Set()); setSelTypes(new Set()); }}
-              className="mt-3 text-xs text-yellow-500 hover:text-yellow-400 underline underline-offset-2"
-            >
-              필터 초기화
-            </button>
-          </div>
+          <EmptyState
+            icon={<Search />}
+            title="해당 조건의 카드가 없어요"
+            description="필터를 조정해 보세요"
+            action={
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => { setSelRarities(new Set()); setSelTypes(new Set()); }}
+              >
+                필터 초기화
+              </Button>
+            }
+          />
         )}
       </div>
 
@@ -930,17 +874,17 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
           -webkit-appearance: none;
           width: 14px; height: 14px;
           border-radius: 50%;
-          background: #EAB308;
+          background: var(--toss-brand);
           cursor: pointer;
-          box-shadow: 0 0 6px rgba(234,179,8,0.5);
+          box-shadow: 0 0 6px rgba(49,130,246,0.5);
         }
         input[type=range]::-moz-range-thumb {
           width: 14px; height: 14px;
           border-radius: 50%;
-          background: #EAB308;
+          background: var(--toss-brand);
           cursor: pointer;
           border: none;
-          box-shadow: 0 0 6px rgba(234,179,8,0.5);
+          box-shadow: 0 0 6px rgba(49,130,246,0.5);
         }
       `}</style>
 

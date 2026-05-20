@@ -2,7 +2,14 @@
 
 import { useState } from "react";
 import { useParams } from "next/navigation";
-import Link from "next/link";
+import {
+  Container,
+  DeltaBadge,
+  RankingTable,
+  Tag,
+  ToggleGroup,
+} from "@/components/toss";
+import { cn } from "@/lib/utils";
 
 // ── 목업 데이터 ──────────────────────────────────────────────────────────────
 
@@ -92,24 +99,22 @@ const HIGHS = [
 // ── 공통 컴포넌트 ─────────────────────────────────────────────────────────────
 
 function RankBadge({ rank }: { rank: number }) {
-  if (rank === 1) return <span className="w-6 h-6 rounded-full bg-yellow-500 text-black text-[11px] font-black flex items-center justify-center shrink-0">1</span>;
-  if (rank === 2) return <span className="w-6 h-6 rounded-full bg-slate-400 text-slate-900 text-[11px] font-black flex items-center justify-center shrink-0">2</span>;
-  if (rank === 3) return <span className="w-6 h-6 rounded-full bg-amber-700 text-white text-[11px] font-black flex items-center justify-center shrink-0">3</span>;
-  return <span className="w-6 text-center text-xs text-gray-600 font-semibold shrink-0">{rank}</span>;
+  // 토스 패턴: 동그라미 없이 단순 숫자만 (Top 3는 색만 강조)
+  const color = rank <= 3 ? "text-toss-text-primary font-bold" : "text-toss-text-tertiary font-semibold";
+  return <span className={`w-6 text-center text-toss-body shrink-0 ${color}`}>{rank}</span>;
 }
 
 function CardThumb({ card }: { card: Card }) {
   return (
-    <div className="w-10 h-14 rounded-lg overflow-hidden bg-gray-800 shrink-0">
+    <div className="w-12 h-[68px] rounded-toss-md overflow-hidden bg-toss-bg-muted shrink-0">
       <img src={card.imageUrl} alt={card.name} className="w-full h-full object-cover" />
     </div>
   );
 }
 
 function PctBadge({ value, positive = true }: { value: number; positive?: boolean }) {
-  const color = positive ? "text-red-400" : "text-blue-400";
-  const sign = positive ? "+" : "";
-  return <span className={`text-sm font-bold tabular-nums ${color}`}>{sign}{value.toFixed(1)}%</span>;
+  const signed = positive ? Math.abs(value) : -Math.abs(value);
+  return <DeltaBadge percent={signed} mode="text" size="md" decimals={1} />;
 }
 
 // ── 탭별 콘텐츠 ──────────────────────────────────────────────────────────────
@@ -125,38 +130,54 @@ function GainersTab() {
 
   return (
     <div>
-      <div className="flex items-center gap-2 mb-5">
-        <span className="text-xs text-gray-500">기간</span>
-        <div className="flex rounded-lg border border-gray-700 overflow-hidden text-xs">
-          {PERIODS.map((p) => (
-            <button key={p.id} onClick={() => setPeriod(p.id)}
-              className={`px-3 py-1.5 transition-colors ${period === p.id ? "bg-gray-700 text-white font-semibold" : "text-gray-500 hover:text-gray-300"}`}>
-              {p.label}
-            </button>
-          ))}
-        </div>
+      <div className="flex items-center gap-3 mb-4">
+        <span className="text-toss-caption text-toss-text-tertiary">기간</span>
+        <ToggleGroup
+          options={PERIODS.map((p) => ({ value: p.id, label: p.label }))}
+          value={period}
+          onChange={(v) => setPeriod(v as typeof period)}
+          size="sm"
+        />
       </div>
-      <div className="space-y-2">
-        {sorted.map((row, i) => {
-          const card = BASE_CARDS[row.cardId];
-          if (!card) return null;
-          const change = period === "1w" ? row.change1w : period === "1m" ? row.change1m : row.change3m;
-          return (
-            <div key={row.cardId} className="flex items-center gap-3 p-3 rounded-xl bg-gray-900 border border-gray-800 hover:border-gray-700 transition-colors">
-              <RankBadge rank={i + 1} />
-              <CardThumb card={card} />
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-white truncate">{card.name}</p>
-                <p className="text-[11px] text-gray-500 mt-0.5">{card.set}</p>
-              </div>
-              <div className="text-right shrink-0">
-                <PctBadge value={change} />
-                <p className="text-[11px] text-gray-500 mt-0.5">₩{card.currentPrice.toLocaleString("ko-KR")}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <RankingTable.Root>
+          <RankingTable.Head>
+            <RankingTable.HeadRow>
+              <RankingTable.Header align="center" className="w-12 flex-none">순위</RankingTable.Header>
+              <RankingTable.Header>카드</RankingTable.Header>
+              <RankingTable.Header align="right">변동률</RankingTable.Header>
+              <RankingTable.Header align="right">현재가</RankingTable.Header>
+            </RankingTable.HeadRow>
+          </RankingTable.Head>
+          <RankingTable.Body>
+            {sorted.map((row, i) => {
+              const card = BASE_CARDS[row.cardId];
+              if (!card) return null;
+              const change = period === "1w" ? row.change1w : period === "1m" ? row.change1m : row.change3m;
+              return (
+                <RankingTable.Row key={row.cardId} className="h-[72px]">
+                  <RankingTable.Cell align="center" className="w-12 flex-none">
+                    <RankBadge rank={i + 1} />
+                  </RankingTable.Cell>
+                  <RankingTable.Cell>
+                    <div className="flex items-center gap-3 min-w-0">
+                      <CardThumb card={card} />
+                      <div className="min-w-0">
+                        <p className="text-toss-label font-semibold text-toss-text-primary truncate">{card.name}</p>
+                        <p className="text-toss-micro text-toss-text-tertiary truncate">{card.set}</p>
+                      </div>
+                    </div>
+                  </RankingTable.Cell>
+                  <RankingTable.Cell align="right" numeric>
+                    <DeltaBadge percent={change} mode="text" size="md" decimals={1} />
+                  </RankingTable.Cell>
+                  <RankingTable.Cell align="right" numeric>
+                    <span className="text-toss-label font-semibold text-toss-text-primary">₩{card.currentPrice.toLocaleString("ko-KR")}</span>
+                  </RankingTable.Cell>
+                </RankingTable.Row>
+              );
+            })}
+          </RankingTable.Body>
+        </RankingTable.Root>
     </div>
   );
 }
@@ -165,138 +186,198 @@ function VolumeTab() {
   const sorted = [...VOLUME].sort((a, b) => b.txCount - a.txCount);
 
   return (
-    <div>
-      <p className="text-xs text-gray-600 mb-5">최근 30일 거래 횟수 기준</p>
-      <div className="space-y-2">
-        {sorted.map((row, i) => {
-          const card = BASE_CARDS[row.cardId];
-          if (!card) return null;
-          return (
-            <div key={row.cardId} className="flex items-center gap-3 p-3 rounded-xl bg-gray-900 border border-gray-800 hover:border-gray-700 transition-colors">
-              <RankBadge rank={i + 1} />
-              <CardThumb card={card} />
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-white truncate">{card.name}</p>
-                <p className="text-[11px] text-gray-500 mt-0.5">{card.set}</p>
-              </div>
-              <div className="text-right shrink-0">
-                <p className="text-sm font-bold text-white">{row.txCount.toLocaleString()}<span className="text-xs font-normal text-gray-500 ml-0.5">건</span></p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <RankingTable.Root>
+        <RankingTable.Head>
+          <RankingTable.HeadRow>
+            <RankingTable.Header align="center" className="w-12 flex-none">순위</RankingTable.Header>
+            <RankingTable.Header>카드</RankingTable.Header>
+            <RankingTable.Header align="right">거래량</RankingTable.Header>
+          </RankingTable.HeadRow>
+        </RankingTable.Head>
+        <RankingTable.Body>
+          {sorted.map((row, i) => {
+            const card = BASE_CARDS[row.cardId];
+            if (!card) return null;
+            return (
+              <RankingTable.Row key={row.cardId} className="h-[72px]">
+                <RankingTable.Cell align="center" className="w-12 flex-none">
+                  <RankBadge rank={i + 1} />
+                </RankingTable.Cell>
+                <RankingTable.Cell>
+                  <div className="flex items-center gap-3 min-w-0">
+                    <CardThumb card={card} />
+                    <div className="min-w-0">
+                      <p className="text-toss-label font-semibold text-toss-text-primary truncate">{card.name}</p>
+                      <p className="text-toss-micro text-toss-text-tertiary truncate">{card.set}</p>
+                    </div>
+                  </div>
+                </RankingTable.Cell>
+                <RankingTable.Cell align="right" numeric>
+                  <span className="text-toss-label font-semibold text-toss-text-primary">
+                    {row.txCount.toLocaleString()}<span className="text-toss-caption text-toss-text-tertiary ml-0.5 font-normal">건</span>
+                  </span>
+                </RankingTable.Cell>
+              </RankingTable.Row>
+            );
+          })}
+        </RankingTable.Body>
+      </RankingTable.Root>
   );
 }
 
-const TREND_BADGE_COLOR: Record<string, string> = {
-  급등: "bg-red-500/20 text-red-400",
-  인기: "bg-yellow-500/20 text-yellow-400",
-  신흥: "bg-purple-500/20 text-purple-400",
-  상승: "bg-green-500/20 text-green-400",
-};
-
 function TrendingTab() {
   return (
-    <div>
-      <p className="text-xs text-gray-600 mb-5">최근 7일 조회수 급증 카드</p>
-      <div className="space-y-2">
-        {TRENDING.map((row, i) => {
-          const card = BASE_CARDS[row.cardId];
-          if (!card) return null;
-          return (
-            <div key={row.cardId} className="flex items-center gap-3 p-3 rounded-xl bg-gray-900 border border-gray-800 hover:border-gray-700 transition-colors">
-              <RankBadge rank={i + 1} />
-              <CardThumb card={card} />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <p className="text-sm font-semibold text-white truncate">{card.name}</p>
-                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded shrink-0 ${TREND_BADGE_COLOR[row.badge]}`}>{row.badge}</span>
-                </div>
-                <p className="text-[11px] text-gray-500 mt-0.5">{card.set}</p>
-              </div>
-              <div className="text-right shrink-0">
-                <p className="text-sm font-bold text-red-400">+{row.viewChange}%</p>
-                <p className="text-[11px] text-gray-500 mt-0.5">관심 {row.wishlistCount.toLocaleString()}명</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <RankingTable.Root>
+        <RankingTable.Head>
+          <RankingTable.HeadRow>
+            <RankingTable.Header align="center" className="w-12 flex-none">순위</RankingTable.Header>
+            <RankingTable.Header>카드</RankingTable.Header>
+            <RankingTable.Header align="right">변동률</RankingTable.Header>
+            <RankingTable.Header align="right">관심수</RankingTable.Header>
+          </RankingTable.HeadRow>
+        </RankingTable.Head>
+        <RankingTable.Body>
+          {TRENDING.map((row, i) => {
+            const card = BASE_CARDS[row.cardId];
+            if (!card) return null;
+            return (
+              <RankingTable.Row key={row.cardId} className="h-[72px]">
+                <RankingTable.Cell align="center" className="w-12 flex-none">
+                  <RankBadge rank={i + 1} />
+                </RankingTable.Cell>
+                <RankingTable.Cell>
+                  <div className="flex items-center gap-3 min-w-0">
+                    <CardThumb card={card} />
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2">
+                        <p className="text-toss-label font-semibold text-toss-text-primary truncate">{card.name}</p>
+                        <Tag color="brand" shape="soft">{row.badge}</Tag>
+                      </div>
+                      <p className="text-toss-micro text-toss-text-tertiary truncate">{card.set}</p>
+                    </div>
+                  </div>
+                </RankingTable.Cell>
+                <RankingTable.Cell align="right" numeric>
+                  <DeltaBadge percent={row.viewChange} mode="text" size="md" decimals={0} />
+                </RankingTable.Cell>
+                <RankingTable.Cell align="right" numeric>
+                  <span className="text-toss-label font-semibold text-toss-text-primary">{row.wishlistCount.toLocaleString()}</span>
+                </RankingTable.Cell>
+              </RankingTable.Row>
+            );
+          })}
+        </RankingTable.Body>
+      </RankingTable.Root>
   );
 }
 
 function DipsTab() {
   return (
-    <div>
-      <p className="text-xs text-gray-600 mb-5">역대 최고가(ATH) 대비 낙폭 — 저점 매수 후보</p>
-      <div className="space-y-2">
-        {DIPS.map((row, i) => {
-          const card = BASE_CARDS[row.cardId];
-          if (!card) return null;
-          return (
-            <div key={row.cardId} className="flex items-center gap-3 p-3 rounded-xl bg-gray-900 border border-gray-800 hover:border-gray-700 transition-colors">
-              <RankBadge rank={i + 1} />
-              <CardThumb card={card} />
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-white truncate">{card.name}</p>
-                <p className="text-[11px] text-gray-500 mt-0.5">
-                  ATH ₩{row.athPrice.toLocaleString("ko-KR")} → 현재 ₩{row.currentPrice.toLocaleString("ko-KR")}
-                </p>
-              </div>
-              <div className="text-right shrink-0">
-                <PctBadge value={Math.abs(row.dropPct)} positive={false} />
-                <p className="text-[11px] text-blue-400/70 mt-0.5">ATH 대비</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <RankingTable.Root>
+        <RankingTable.Head>
+          <RankingTable.HeadRow>
+            <RankingTable.Header align="center" className="w-12 flex-none">순위</RankingTable.Header>
+            <RankingTable.Header>카드</RankingTable.Header>
+            <RankingTable.Header align="right">낙폭</RankingTable.Header>
+            <RankingTable.Header align="right">비고</RankingTable.Header>
+          </RankingTable.HeadRow>
+        </RankingTable.Head>
+        <RankingTable.Body>
+          {DIPS.map((row, i) => {
+            const card = BASE_CARDS[row.cardId];
+            if (!card) return null;
+            return (
+              <RankingTable.Row key={row.cardId} className="h-[72px]">
+                <RankingTable.Cell align="center" className="w-12 flex-none">
+                  <RankBadge rank={i + 1} />
+                </RankingTable.Cell>
+                <RankingTable.Cell>
+                  <div className="flex items-center gap-3 min-w-0">
+                    <CardThumb card={card} />
+                    <div className="min-w-0">
+                      <p className="text-toss-label font-semibold text-toss-text-primary truncate">{card.name}</p>
+                      <p className="text-toss-micro text-toss-text-tertiary truncate">
+                        ATH ₩{row.athPrice.toLocaleString("ko-KR")} → ₩{row.currentPrice.toLocaleString("ko-KR")}
+                      </p>
+                    </div>
+                  </div>
+                </RankingTable.Cell>
+                <RankingTable.Cell align="right" numeric>
+                  <PctBadge value={Math.abs(row.dropPct)} positive={false} />
+                </RankingTable.Cell>
+                <RankingTable.Cell align="right">
+                  <span className="text-toss-caption text-toss-text-tertiary">ATH 대비</span>
+                </RankingTable.Cell>
+              </RankingTable.Row>
+            );
+          })}
+        </RankingTable.Body>
+      </RankingTable.Root>
   );
 }
 
 function HighsTab() {
   return (
-    <div>
-      <p className="text-xs text-gray-600 mb-5">최근 52주 신고가 달성 카드</p>
-      <div className="space-y-2">
-        {HIGHS.map((row, i) => {
-          const card = BASE_CARDS[row.cardId];
-          if (!card) return null;
-          return (
-            <div key={row.cardId} className="flex items-center gap-3 p-3 rounded-xl bg-gray-900 border border-gray-800 hover:border-gray-700 transition-colors">
-              <RankBadge rank={i + 1} />
-              <CardThumb card={card} />
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-white truncate">{card.name}</p>
-                <p className="text-[11px] text-gray-500 mt-0.5">{card.set} · {row.achievedAt} 달성</p>
-              </div>
-              <div className="text-right shrink-0">
-                <p className="text-sm font-bold text-yellow-400">₩{row.newHigh.toLocaleString("ko-KR")}</p>
-                <p className="text-[11px] text-red-400 mt-0.5">+{row.changePct.toFixed(1)}%</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <RankingTable.Root>
+        <RankingTable.Head>
+          <RankingTable.HeadRow>
+            <RankingTable.Header align="center" className="w-12 flex-none">순위</RankingTable.Header>
+            <RankingTable.Header>카드</RankingTable.Header>
+            <RankingTable.Header align="right">신고가</RankingTable.Header>
+            <RankingTable.Header align="right">변동률</RankingTable.Header>
+          </RankingTable.HeadRow>
+        </RankingTable.Head>
+        <RankingTable.Body>
+          {HIGHS.map((row, i) => {
+            const card = BASE_CARDS[row.cardId];
+            if (!card) return null;
+            return (
+              <RankingTable.Row key={row.cardId} className="h-[72px]">
+                <RankingTable.Cell align="center" className="w-12 flex-none">
+                  <RankBadge rank={i + 1} />
+                </RankingTable.Cell>
+                <RankingTable.Cell>
+                  <div className="flex items-center gap-3 min-w-0">
+                    <CardThumb card={card} />
+                    <div className="min-w-0">
+                      <p className="text-toss-label font-semibold text-toss-text-primary truncate">{card.name}</p>
+                      <p className="text-toss-micro text-toss-text-tertiary truncate">{card.set} · {row.achievedAt} 달성</p>
+                    </div>
+                  </div>
+                </RankingTable.Cell>
+                <RankingTable.Cell align="right" numeric>
+                  <span className="text-toss-label font-semibold text-toss-warning">₩{row.newHigh.toLocaleString("ko-KR")}</span>
+                </RankingTable.Cell>
+                <RankingTable.Cell align="right" numeric>
+                  <DeltaBadge percent={row.changePct} mode="text" size="md" decimals={1} />
+                </RankingTable.Cell>
+              </RankingTable.Row>
+            );
+          })}
+        </RankingTable.Body>
+      </RankingTable.Root>
   );
 }
 
 // ── 페이지 ────────────────────────────────────────────────────────────────────
 
 const TABS = [
-  { id: "gainers",  label: "상승률",     icon: "📈" },
-  { id: "volume",   label: "거래량",     icon: "🔄" },
-  { id: "trending", label: "트렌딩",     icon: "🔥" },
-  { id: "dips",     label: "고점 대비 낙폭", icon: "📉" },
-  { id: "highs",    label: "52주 신고가", icon: "🏆" },
+  { id: "gainers",  label: "상승률",         popular: false },
+  { id: "volume",   label: "거래량",         popular: false },
+  { id: "trending", label: "트렌딩",         popular: true  },
+  { id: "dips",     label: "고점 대비 낙폭", popular: false },
+  { id: "highs",    label: "52주 신고가",    popular: false },
 ] as const;
 
 type TabId = typeof TABS[number]["id"];
+
+const TAB_SUBTITLES: Record<TabId, string> = {
+  gainers:  "기간 내 가격 상승률이 가장 높은 카드",
+  volume:   "최근 30일 거래 횟수 기준",
+  trending: "최근 7일 조회수 급증 카드",
+  dips:     "역대 최고가(ATH) 대비 낙폭 — 저점 매수 후보",
+  highs:    "최근 52주 신고가 달성 카드",
+};
 
 export default function MarketRankingsPage() {
   const params = useParams();
@@ -304,43 +385,59 @@ export default function MarketRankingsPage() {
   const [activeTab, setActiveTab] = useState<TabId>("gainers");
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      {/* Header */}
-      <div className="mb-7">
-        <h1 className="text-xl font-bold text-white">카드 마켓 랭킹</h1>
-        <p className="text-sm text-gray-500 mt-1">시세·거래량·트렌드 기반 카드 순위</p>
-      </div>
+    <Container size="xl" padding="md" className="py-8">
+      <div className="grid lg:grid-cols-[220px_1fr] gap-8">
+        {/* 좌측 사이드바 (토스 screener 패턴) */}
+        <aside className="lg:sticky lg:top-[68px] lg:self-start">
+          <div>
+            <p className="px-4 pt-3 pb-2 text-toss-body text-toss-text-secondary">카드 랭킹</p>
+            <nav>
+              {TABS.map((tab) => {
+                const active = activeTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={cn(
+                      "w-full flex items-center gap-1 px-4 py-2.5 h-10 text-toss-body transition-colors rounded-toss-md",
+                      active
+                        ? "bg-toss-brand-weak text-toss-brand font-semibold"
+                        : "text-toss-text-secondary hover:bg-toss-hover"
+                    )}
+                  >
+                    <span>{tab.label}</span>
+                    {tab.popular && (
+                      <Tag color="brand" shape="soft" className="ml-1">인기</Tag>
+                    )}
+                  </button>
+                );
+              })}
+            </nav>
+          </div>
+        </aside>
 
-      {/* Tab bar */}
-      <div className="flex gap-1 mb-6 overflow-x-auto pb-1 scrollbar-none">
-        {TABS.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-colors shrink-0 ${
-              activeTab === tab.id
-                ? "bg-yellow-500 text-black font-semibold"
-                : "bg-gray-900 border border-gray-800 text-gray-400 hover:text-white hover:border-gray-600"
-            }`}
-          >
-            <span className="text-base leading-none">{tab.icon}</span>
-            {tab.label}
-          </button>
-        ))}
-      </div>
+        {/* 메인 영역 */}
+        <div className="min-w-0">
+          <div className="mb-6">
+            <h1 className="text-toss-display font-bold text-toss-text-primary">
+              {TABS.find((t) => t.id === activeTab)?.label}
+            </h1>
+            <p className="text-toss-body text-toss-text-tertiary mt-1">
+              {TAB_SUBTITLES[activeTab]}
+            </p>
+          </div>
 
-      {/* Tab content */}
-      <div>
-        {activeTab === "gainers"  && <GainersTab />}
-        {activeTab === "volume"   && <VolumeTab />}
-        {activeTab === "trending" && <TrendingTab />}
-        {activeTab === "dips"     && <DipsTab />}
-        {activeTab === "highs"    && <HighsTab />}
-      </div>
+          {activeTab === "gainers"  && <GainersTab />}
+          {activeTab === "volume"   && <VolumeTab />}
+          {activeTab === "trending" && <TrendingTab />}
+          {activeTab === "dips"     && <DipsTab />}
+          {activeTab === "highs"    && <HighsTab />}
 
-      <p className="text-[11px] text-gray-700 mt-8 text-center">
-        시세 데이터는 번개장터·포켓마켓 거래 기반 추정값입니다. 실제 투자 손익을 보장하지 않습니다.
-      </p>
-    </div>
+          <p className="text-toss-micro text-toss-text-quaternary mt-8 text-center">
+            시세 데이터는 번개장터·포켓마켓 거래 기반 추정값입니다. 실제 투자 손익을 보장하지 않습니다.
+          </p>
+        </div>
+      </div>
+    </Container>
   );
 }

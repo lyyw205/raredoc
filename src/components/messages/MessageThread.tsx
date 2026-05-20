@@ -3,40 +3,57 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useLocale } from "next-intl";
+import {
+  ArrowLeft,
+  Calendar,
+  CheckCircle2,
+  MapPin,
+  Send,
+  Star,
+  ThumbsDown,
+  ThumbsUp,
+  X,
+} from "lucide-react";
+import { Avatar, Button, Card, Modal, Tag, TextField } from "@/components/toss";
+import { cn } from "@/lib/utils";
 import type { CardRef, Conversation } from "./MessageInbox";
-
-// ── 타입 ──────────────────────────────────────────────────────────────────────
 
 export type Message = {
   id: string;
-  senderId: string;       // "me" | username
+  senderId: string;
   content: string;
   createdAt: string;
   read: boolean;
-  cardRef?: CardRef;      // 첫 문의 메세지에만 첨부
-  appointment?: {         // 거래 약속 카드
+  cardRef?: CardRef;
+  appointment?: {
     date: string;
     time: string;
     place: string;
   };
-  review?: {              // 거래 완료 후기 카드
-    rating: number;       // 1~5
+  review?: {
+    rating: number;
     manner: "good" | "bad";
     comment: string;
   };
 };
 
-// ── 서브컴포넌트 ──────────────────────────────────────────────────────────────
-
 function CardRefBanner({ card }: { card: CardRef }) {
   return (
-    <div className="flex items-center gap-3 mx-auto max-w-xs bg-gray-800 border border-yellow-500/30 rounded-xl p-3 mb-6">
+    <div className="flex items-center gap-3 mx-auto max-w-xs bg-toss-bg-base border border-toss-brand-weak rounded-toss-lg p-3 mb-6 shadow-toss-hairline">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={card.imageUrl} alt={card.cardName} className="w-10 h-14 object-cover rounded-lg shrink-0" />
+      <img
+        src={card.imageUrl}
+        alt={card.cardName}
+        className="w-10 h-14 object-cover rounded-toss-md shrink-0"
+      />
       <div className="min-w-0">
-        <p className="text-[10px] text-yellow-500/70 font-semibold mb-0.5">{card.setName}</p>
-        <p className="text-sm font-bold text-white leading-snug truncate">{card.cardName}</p>
-        <p className="text-[10px] text-gray-500 mt-0.5">카드 구매 문의로 시작된 대화</p>
+        <p className="text-toss-micro text-toss-brand font-semibold mb-0.5">{card.setName}</p>
+        <p className="text-toss-label font-bold text-toss-text-primary leading-snug truncate">
+          {card.cardName}
+        </p>
+        <p className="text-toss-micro text-toss-text-tertiary mt-0.5">
+          카드 구매 문의로 시작된 대화
+        </p>
       </div>
     </div>
   );
@@ -45,17 +62,22 @@ function CardRefBanner({ card }: { card: CardRef }) {
 function CardReplyAttachment({ card, isMe }: { card: CardRef; isMe: boolean }) {
   return (
     <div
-      className={`flex items-center gap-2 px-2 py-1.5 rounded-xl mb-1 max-w-[260px] ${
-        isMe ? "bg-yellow-400/30 border border-yellow-500/40 ml-auto" : "bg-gray-800/80 border border-gray-700"
-      }`}
+      className={cn(
+        "flex items-center gap-2 px-2 py-1.5 rounded-toss-md mb-1 max-w-[260px] border",
+        isMe
+          ? "bg-toss-brand-weak border-toss-brand/30 ml-auto"
+          : "bg-toss-bg-subtle border-toss-divider"
+      )}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={card.imageUrl} alt={card.cardName} className="w-7 h-10 object-cover rounded shrink-0" />
+      <img
+        src={card.imageUrl}
+        alt={card.cardName}
+        className="w-7 h-10 object-cover rounded-toss-sm shrink-0"
+      />
       <div className="min-w-0">
-        <p className={`text-[10px] font-semibold ${isMe ? "text-yellow-100/80" : "text-yellow-500/80"}`}>
-          {card.setName}
-        </p>
-        <p className={`text-xs font-bold truncate ${isMe ? "text-yellow-50" : "text-white"}`}>
+        <p className="text-toss-micro font-semibold text-toss-brand">{card.setName}</p>
+        <p className="text-toss-caption font-bold truncate text-toss-text-primary">
           {card.cardName}
         </p>
       </div>
@@ -63,39 +85,85 @@ function CardReplyAttachment({ card, isMe }: { card: CardRef; isMe: boolean }) {
   );
 }
 
-function AppointmentCard({ apt, isMe }: { apt: NonNullable<Message["appointment"]>; isMe: boolean }) {
+function AppointmentCard({
+  apt,
+  isMe,
+}: {
+  apt: NonNullable<Message["appointment"]>;
+  isMe: boolean;
+}) {
   return (
-    <div className={`rounded-xl border px-3.5 py-3 mb-1 ${
-      isMe ? "bg-blue-500/15 border-blue-500/40 ml-auto" : "bg-blue-900/30 border-blue-500/30"
-    } max-w-[280px]`}>
+    <div
+      className={cn(
+        "rounded-toss-lg border px-4 py-3 mb-1 max-w-[280px] bg-toss-bg-base",
+        isMe ? "ml-auto" : "",
+        "border-toss-brand/30"
+      )}
+    >
       <div className="flex items-center gap-1.5 mb-2">
-        <span className="text-base leading-none">📅</span>
-        <span className="text-[11px] font-bold text-blue-300">거래 약속</span>
+        <Calendar className="w-3.5 h-3.5 text-toss-brand" strokeWidth={2.4} />
+        <span className="text-toss-micro font-bold text-toss-brand">거래 약속</span>
       </div>
-      <p className="text-sm text-white font-semibold">{apt.date} · {apt.time}</p>
-      <p className="text-xs text-gray-300 mt-0.5">📍 {apt.place}</p>
-      <p className="text-[10px] text-gray-500 mt-1.5">예약이 잡혔어요. 약속을 지켜주세요.</p>
+      <p className="text-toss-label text-toss-text-primary font-semibold toss-numeric">
+        {apt.date} · {apt.time}
+      </p>
+      <p className="text-toss-caption text-toss-text-secondary mt-0.5 flex items-center gap-1">
+        <MapPin className="w-3 h-3" />
+        {apt.place}
+      </p>
+      <p className="text-toss-micro text-toss-text-tertiary mt-2">
+        예약이 잡혔어요. 약속을 지켜주세요.
+      </p>
     </div>
   );
 }
 
 function ReviewCard({ rev, isMe }: { rev: NonNullable<Message["review"]>; isMe: boolean }) {
   return (
-    <div className={`rounded-xl border px-3.5 py-3 mb-1 ${
-      isMe ? "bg-green-500/15 border-green-500/40 ml-auto" : "bg-green-900/30 border-green-500/30"
-    } max-w-[280px]`}>
+    <div
+      className={cn(
+        "rounded-toss-lg border px-4 py-3 mb-1 max-w-[280px] bg-toss-bg-base",
+        isMe ? "ml-auto" : "",
+        "border-toss-positive/30"
+      )}
+    >
       <div className="flex items-center gap-1.5 mb-2">
-        <span className="text-base leading-none">✅</span>
-        <span className="text-[11px] font-bold text-green-300">거래 완료 후기</span>
+        <CheckCircle2 className="w-3.5 h-3.5 text-toss-positive" strokeWidth={2.4} />
+        <span className="text-toss-micro font-bold text-toss-positive">거래 완료 후기</span>
       </div>
       <div className="flex items-center gap-1 mb-1">
         {Array.from({ length: 5 }).map((_, i) => (
-          <span key={i} className={i < rev.rating ? "text-yellow-400" : "text-gray-700"}>★</span>
+          <Star
+            key={i}
+            className={cn(
+              "w-3.5 h-3.5",
+              i < rev.rating
+                ? "fill-toss-warning text-toss-warning"
+                : "text-toss-text-quaternary"
+            )}
+            strokeWidth={1.5}
+          />
         ))}
-        <span className="text-[10px] text-gray-500 ml-1">{rev.rating}/5</span>
+        <span className="text-toss-micro text-toss-text-tertiary ml-1 toss-numeric">
+          {rev.rating}/5
+        </span>
       </div>
-      <p className="text-xs text-white">{rev.manner === "good" ? "👍 매너 좋음" : "👎 아쉬워요"}</p>
-      {rev.comment && <p className="text-xs text-gray-300 mt-1.5 leading-relaxed">"{rev.comment}"</p>}
+      <p className="text-toss-caption text-toss-text-primary flex items-center gap-1">
+        {rev.manner === "good" ? (
+          <>
+            <ThumbsUp className="w-3 h-3 text-toss-positive" /> 매너 좋음
+          </>
+        ) : (
+          <>
+            <ThumbsDown className="w-3 h-3 text-toss-negative" /> 아쉬워요
+          </>
+        )}
+      </p>
+      {rev.comment && (
+        <p className="text-toss-caption text-toss-text-secondary mt-2 leading-relaxed">
+          &ldquo;{rev.comment}&rdquo;
+        </p>
+      )}
     </div>
   );
 }
@@ -103,36 +171,45 @@ function ReviewCard({ rev, isMe }: { rev: NonNullable<Message["review"]>; isMe: 
 function Bubble({ msg, isMe }: { msg: Message; isMe: boolean }) {
   const isSpecial = msg.appointment || msg.review;
   return (
-    <div className={`flex ${isMe ? "justify-end" : "justify-start"}`}>
+    <div className={cn("flex", isMe ? "justify-end" : "justify-start")}>
       <div className="max-w-[72%] space-y-0.5">
         {msg.cardRef && <CardReplyAttachment card={msg.cardRef} isMe={isMe} />}
         {msg.appointment && <AppointmentCard apt={msg.appointment} isMe={isMe} />}
         {msg.review && <ReviewCard rev={msg.review} isMe={isMe} />}
         {msg.content && (
           <div
-            className={`px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${
+            className={cn(
+              "px-3.5 py-2.5 rounded-toss-lg text-toss-body leading-relaxed",
               isMe
-                ? "bg-yellow-500 text-black rounded-br-sm"
-                : "bg-gray-800 text-gray-100 rounded-bl-sm"
-            }`}
+                ? "bg-toss-brand text-white rounded-br-sm"
+                : "bg-toss-bg-subtle text-toss-text-primary rounded-bl-sm"
+            )}
           >
             {msg.content}
           </div>
         )}
-        <p className={`text-[10px] text-gray-600 ${isMe ? "text-right" : "text-left"}`}>
-          {msg.createdAt}{isMe && !isSpecial && <span className="ml-1">{msg.read ? "읽음" : "•"}</span>}
+        <p
+          className={cn(
+            "text-toss-micro text-toss-text-quaternary toss-numeric",
+            isMe ? "text-right" : "text-left"
+          )}
+        >
+          {msg.createdAt}
+          {isMe && !isSpecial && (
+            <span className="ml-1">{msg.read ? "읽음" : "•"}</span>
+          )}
         </p>
       </div>
     </div>
   );
 }
 
-// ── 약속 잡기 모달 ────────────────────────────────────────────────────────────
-
 function AppointmentModal({
+  open,
   onClose,
   onSubmit,
 }: {
+  open: boolean;
   onClose: () => void;
   onSubmit: (apt: NonNullable<Message["appointment"]>) => void;
 }) {
@@ -143,50 +220,69 @@ function AppointmentModal({
   function submit() {
     if (!date || !time || !place.trim()) return;
     onSubmit({ date, time, place: place.trim() });
+    setDate("");
+    setTime("");
+    setPlace("");
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-sm bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-800">
-          <h3 className="text-sm font-bold text-white">📅 거래 약속 잡기</h3>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-300 text-lg leading-none">✕</button>
-        </div>
-        <div className="p-5 space-y-3">
-          <div>
-            <label className="text-[10px] text-gray-500 font-semibold block mb-1">날짜 *</label>
-            <input type="date" value={date} onChange={(e) => setDate(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm text-white focus:outline-none focus:border-gray-500" />
+    <Modal.Root open={open} onOpenChange={(o) => !o && onClose()}>
+      <Modal.Portal>
+        <Modal.Overlay />
+        <Modal.Content className="max-w-sm">
+          <Modal.Header>
+            <Modal.Title className="flex items-center gap-2">
+              <Calendar className="w-4 h-4 text-toss-brand" />
+              거래 약속 잡기
+            </Modal.Title>
+          </Modal.Header>
+          <div className="p-5 space-y-3">
+            <TextField
+              type="date"
+              label="날짜"
+              required
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+            <TextField
+              type="time"
+              label="시간"
+              required
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+            />
+            <TextField
+              label="장소"
+              required
+              placeholder="예) 강남역 11번 출구"
+              value={place}
+              onChange={(e) => setPlace(e.target.value)}
+            />
+            <p className="text-toss-micro text-toss-text-tertiary pt-1">
+              약속을 보내면 거래글이 자동으로{" "}
+              <span className="text-toss-brand font-semibold">예약중</span> 으로 변경됩니다.
+            </p>
           </div>
-          <div>
-            <label className="text-[10px] text-gray-500 font-semibold block mb-1">시간 *</label>
-            <input type="time" value={time} onChange={(e) => setTime(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm text-white focus:outline-none focus:border-gray-500" />
-          </div>
-          <div>
-            <label className="text-[10px] text-gray-500 font-semibold block mb-1">장소 *</label>
-            <input type="text" placeholder="예) 강남역 11번 출구" value={place} onChange={(e) => setPlace(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-500" />
-          </div>
-          <p className="text-[10px] text-gray-600 pt-1">약속을 보내면 거래글이 자동으로 <span className="text-blue-400 font-semibold">예약중</span> 으로 변경됩니다.</p>
-        </div>
-        <div className="flex gap-2 px-5 pb-5">
-          <button onClick={onClose} className="flex-1 py-2 rounded-lg border border-gray-700 text-sm text-gray-400 hover:text-white hover:border-gray-500">취소</button>
-          <button onClick={submit} disabled={!date || !time || !place.trim()}
-            className="flex-1 py-2 rounded-lg bg-blue-500 hover:bg-blue-400 disabled:opacity-40 disabled:cursor-not-allowed text-sm font-bold text-white">약속 보내기</button>
-        </div>
-      </div>
-    </div>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={onClose}>
+              취소
+            </Button>
+            <Button onClick={submit} disabled={!date || !time || !place.trim()}>
+              약속 보내기
+            </Button>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal.Portal>
+    </Modal.Root>
   );
 }
 
-// ── 거래 완료 후기 모달 ───────────────────────────────────────────────────────
-
 function ReviewModal({
+  open,
   onClose,
   onSubmit,
 }: {
+  open: boolean;
   onClose: () => void;
   onSubmit: (rev: NonNullable<Message["review"]>) => void;
 }) {
@@ -196,70 +292,126 @@ function ReviewModal({
 
   function submit() {
     onSubmit({ rating, manner, comment: comment.trim() });
+    setRating(5);
+    setManner("good");
+    setComment("");
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-sm bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-800">
-          <h3 className="text-sm font-bold text-white">✅ 거래 완료 후기</h3>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-300 text-lg leading-none">✕</button>
-        </div>
-        <div className="p-5 space-y-4">
-          <div>
-            <label className="text-[10px] text-gray-500 font-semibold block mb-1.5">별점</label>
-            <div className="flex items-center gap-1.5">
-              {[1, 2, 3, 4, 5].map((n) => (
-                <button key={n} type="button" onClick={() => setRating(n)} className="text-2xl leading-none transition-transform hover:scale-110">
-                  <span className={n <= rating ? "text-yellow-400" : "text-gray-700"}>★</span>
+    <Modal.Root open={open} onOpenChange={(o) => !o && onClose()}>
+      <Modal.Portal>
+        <Modal.Overlay />
+        <Modal.Content className="max-w-sm">
+          <Modal.Header>
+            <Modal.Title className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-toss-positive" />
+              거래 완료 후기
+            </Modal.Title>
+          </Modal.Header>
+          <div className="p-5 space-y-4">
+            <div>
+              <label className="text-toss-caption text-toss-text-secondary font-semibold block mb-2">
+                별점
+              </label>
+              <div className="flex items-center gap-1.5">
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <button
+                    key={n}
+                    type="button"
+                    onClick={() => setRating(n)}
+                    aria-label={`${n}점`}
+                    className="transition-transform hover:scale-110"
+                  >
+                    <Star
+                      className={cn(
+                        "w-7 h-7",
+                        n <= rating
+                          ? "fill-toss-warning text-toss-warning"
+                          : "text-toss-text-quaternary"
+                      )}
+                      strokeWidth={1.5}
+                    />
+                  </button>
+                ))}
+                <span className="text-toss-caption text-toss-text-tertiary ml-1 toss-numeric">
+                  {rating}/5
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <label className="text-toss-caption text-toss-text-secondary font-semibold block mb-2">
+                거래 매너
+              </label>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setManner("good")}
+                  className={cn(
+                    "flex-1 py-2 rounded-toss-md text-toss-caption font-bold transition-colors flex items-center justify-center gap-1.5 border",
+                    manner === "good"
+                      ? "bg-toss-positive-weak text-toss-positive border-toss-positive/40"
+                      : "bg-toss-bg-subtle text-toss-text-tertiary border-toss-divider"
+                  )}
+                >
+                  <ThumbsUp className="w-4 h-4" />
+                  매너 좋음
                 </button>
-              ))}
-              <span className="text-xs text-gray-500 ml-1">{rating}/5</span>
+                <button
+                  type="button"
+                  onClick={() => setManner("bad")}
+                  className={cn(
+                    "flex-1 py-2 rounded-toss-md text-toss-caption font-bold transition-colors flex items-center justify-center gap-1.5 border",
+                    manner === "bad"
+                      ? "bg-toss-negative-weak text-toss-negative border-toss-negative/40"
+                      : "bg-toss-bg-subtle text-toss-text-tertiary border-toss-divider"
+                  )}
+                >
+                  <ThumbsDown className="w-4 h-4" />
+                  아쉬워요
+                </button>
+              </div>
             </div>
-          </div>
-          <div>
-            <label className="text-[10px] text-gray-500 font-semibold block mb-1.5">거래 매너</label>
-            <div className="flex gap-1.5">
-              <button type="button" onClick={() => setManner("good")}
-                className={`flex-1 py-2 rounded-lg text-xs font-bold transition-colors ${manner === "good" ? "bg-green-500/20 text-green-300 border border-green-500/40" : "bg-gray-800 text-gray-500 border border-gray-700"}`}>
-                👍 매너 좋음
-              </button>
-              <button type="button" onClick={() => setManner("bad")}
-                className={`flex-1 py-2 rounded-lg text-xs font-bold transition-colors ${manner === "bad" ? "bg-red-500/20 text-red-300 border border-red-500/40" : "bg-gray-800 text-gray-500 border border-gray-700"}`}>
-                👎 아쉬워요
-              </button>
+
+            <div>
+              <label className="text-toss-caption text-toss-text-secondary font-semibold block mb-2">
+                한줄 후기 (선택)
+              </label>
+              <textarea
+                rows={3}
+                placeholder="거래는 어떠셨나요?"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                className="w-full px-3 py-2 rounded-toss-md bg-toss-input-bg border border-toss-border text-toss-body text-toss-text-primary placeholder:text-toss-text-quaternary focus:outline-none focus:border-toss-brand transition-colors resize-none"
+              />
             </div>
+
+            <p className="text-toss-micro text-toss-text-tertiary">
+              후기를 등록하면 거래글이 자동으로{" "}
+              <span className="text-toss-positive font-semibold">판매완료</span> 로 변경됩니다.
+            </p>
           </div>
-          <div>
-            <label className="text-[10px] text-gray-500 font-semibold block mb-1.5">한줄 후기 (선택)</label>
-            <textarea rows={3} placeholder="거래는 어떠셨나요?" value={comment} onChange={(e) => setComment(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-gray-500 resize-none" />
-          </div>
-          <p className="text-[10px] text-gray-600">후기를 등록하면 거래글이 자동으로 <span className="text-green-400 font-semibold">판매완료</span> 로 변경됩니다.</p>
-        </div>
-        <div className="flex gap-2 px-5 pb-5">
-          <button onClick={onClose} className="flex-1 py-2 rounded-lg border border-gray-700 text-sm text-gray-400 hover:text-white hover:border-gray-500">취소</button>
-          <button onClick={submit} className="flex-1 py-2 rounded-lg bg-green-500 hover:bg-green-400 text-sm font-bold text-black">후기 등록</button>
-        </div>
-      </div>
-    </div>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={onClose}>
+              취소
+            </Button>
+            <Button onClick={submit}>후기 등록</Button>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal.Portal>
+    </Modal.Root>
   );
 }
-
-// ── 날짜 구분선 ───────────────────────────────────────────────────────────────
 
 function DateDivider({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-3 my-4">
-      <div className="flex-1 h-px bg-gray-800" />
-      <span className="text-[10px] text-gray-600 shrink-0">{label}</span>
-      <div className="flex-1 h-px bg-gray-800" />
+      <div className="flex-1 h-px bg-toss-divider" />
+      <span className="text-toss-micro text-toss-text-tertiary shrink-0">{label}</span>
+      <div className="flex-1 h-px bg-toss-divider" />
     </div>
   );
 }
-
-// ── 메인 컴포넌트 ─────────────────────────────────────────────────────────────
 
 export function MessageThread({
   conversation,
@@ -288,27 +440,33 @@ export function MessageThread({
   }
 
   function sendAppointment(apt: NonNullable<Message["appointment"]>) {
-    setMessages((prev) => [...prev, {
-      id: `m-${Date.now()}`,
-      senderId: myUserId,
-      content: "",
-      createdAt: "방금",
-      read: false,
-      appointment: apt,
-    }]);
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `m-${Date.now()}`,
+        senderId: myUserId,
+        content: "",
+        createdAt: "방금",
+        read: false,
+        appointment: apt,
+      },
+    ]);
     setAptOpen(false);
     showToast("거래글이 예약중으로 변경되었습니다");
   }
 
   function sendReview(rev: NonNullable<Message["review"]>) {
-    setMessages((prev) => [...prev, {
-      id: `m-${Date.now()}`,
-      senderId: myUserId,
-      content: "",
-      createdAt: "방금",
-      read: false,
-      review: rev,
-    }]);
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `m-${Date.now()}`,
+        senderId: myUserId,
+        content: "",
+        createdAt: "방금",
+        read: false,
+        review: rev,
+      },
+    ]);
     setReviewOpen(false);
     showToast("거래글이 판매완료로 변경되었습니다");
   }
@@ -348,32 +506,33 @@ export function MessageThread({
   const { partner } = conversation;
 
   return (
-    <div className="flex flex-col h-[calc(100vh-3.5rem)]">
+    <div className="flex flex-col h-[calc(100vh-3.5rem)] bg-toss-bg-base">
       {/* 헤더 */}
-      <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-800 bg-gray-950/80 backdrop-blur shrink-0">
+      <div className="flex items-center gap-3 px-4 py-3 border-b border-toss-divider bg-toss-bg-base/90 backdrop-blur shrink-0">
         <Link
           href={`/${locale}/messages`}
-          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"
+          aria-label="뒤로"
+          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-toss-bg-subtle text-toss-text-secondary hover:text-toss-text-primary transition-colors"
         >
-          ←
+          <ArrowLeft className="w-4 h-4" />
         </Link>
-        <div className="w-9 h-9 rounded-full bg-gray-700 flex items-center justify-center text-sm font-bold text-white shrink-0">
-          {partner.initial}
-        </div>
+        <Avatar name={partner.initial} size="sm" />
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-white truncate">{partner.displayName}</p>
-          <p className="text-[11px] text-gray-500">@{partner.username}</p>
+          <p className="text-toss-label font-semibold text-toss-text-primary truncate">
+            {partner.displayName}
+          </p>
+          <p className="text-toss-micro text-toss-text-tertiary">@{partner.username}</p>
         </div>
         <Link
           href={`/${locale}/profile/${partner.username}`}
-          className="text-xs text-gray-500 hover:text-white transition-colors shrink-0"
+          className="text-toss-caption text-toss-text-tertiary hover:text-toss-brand transition-colors shrink-0"
         >
-          프로필 →
+          프로필
         </Link>
       </div>
 
       {/* 메세지 목록 */}
-      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-2">
+      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-2 bg-toss-bg-subtle">
         {conversation.cardRef && (
           <div className="flex justify-center">
             <CardRefBanner card={conversation.cardRef} />
@@ -387,77 +546,85 @@ export function MessageThread({
       </div>
 
       {/* 거래 액션 바 */}
-      <div className="shrink-0 border-t border-gray-800 px-4 py-2 bg-gray-950 flex items-center gap-2">
+      <div className="shrink-0 border-t border-toss-divider px-4 py-2 bg-toss-bg-base flex items-center gap-2">
         <button
           type="button"
           onClick={() => setAptOpen(true)}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-500/15 hover:bg-blue-500/25 border border-blue-500/30 text-blue-300 text-xs font-semibold transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-toss-md bg-toss-brand-weak hover:bg-toss-brand/15 text-toss-brand text-toss-caption font-semibold transition-colors"
         >
-          <span>📅</span> 거래 약속 잡기
+          <Calendar className="w-3.5 h-3.5" strokeWidth={2.4} />
+          거래 약속
         </button>
         <button
           type="button"
           onClick={() => setReviewOpen(true)}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-500/15 hover:bg-green-500/25 border border-green-500/30 text-green-300 text-xs font-semibold transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-toss-md bg-toss-positive-weak hover:bg-toss-positive/15 text-toss-positive text-toss-caption font-semibold transition-colors"
         >
-          <span>✅</span> 거래 완료
+          <CheckCircle2 className="w-3.5 h-3.5" strokeWidth={2.4} />
+          거래 완료
         </button>
       </div>
 
       {/* 모달 */}
-      {aptOpen && <AppointmentModal onClose={() => setAptOpen(false)} onSubmit={sendAppointment} />}
-      {reviewOpen && <ReviewModal onClose={() => setReviewOpen(false)} onSubmit={sendReview} />}
+      <AppointmentModal open={aptOpen} onClose={() => setAptOpen(false)} onSubmit={sendAppointment} />
+      <ReviewModal open={reviewOpen} onClose={() => setReviewOpen(false)} onSubmit={sendReview} />
 
       {/* 토스트 */}
       {toast && (
-        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 shadow-2xl text-sm text-white z-50">
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 px-4 py-2.5 rounded-toss-lg bg-toss-text-primary text-white shadow-toss-lg text-toss-caption font-medium z-[80]">
           {toast}
         </div>
       )}
 
       {/* 입력창 */}
-      <div className="shrink-0 border-t border-gray-800 px-4 py-3 bg-gray-950">
-        {/* 첨부 카드 미리보기 (인스타 스토리 답장식) */}
+      <div className="shrink-0 border-t border-toss-divider px-4 py-3 bg-toss-bg-base">
+        {/* 첨부 카드 미리보기 */}
         {attachedCard && (
-          <div className="flex items-center gap-2.5 mb-2 px-2.5 py-2 rounded-xl bg-gray-800/80 border border-yellow-500/30">
-            <span className="text-[10px] text-yellow-500/80 font-semibold shrink-0">↪ 답장 카드</span>
+          <div className="flex items-center gap-2.5 mb-2 px-2.5 py-2 rounded-toss-md bg-toss-brand-weak border border-toss-brand/30">
+            <span className="text-toss-micro text-toss-brand font-semibold shrink-0">답장 카드</span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={attachedCard.imageUrl} alt={attachedCard.cardName} className="w-8 h-11 object-cover rounded shrink-0" />
+            <img
+              src={attachedCard.imageUrl}
+              alt={attachedCard.cardName}
+              className="w-8 h-11 object-cover rounded-toss-sm shrink-0"
+            />
             <div className="flex-1 min-w-0">
-              <p className="text-[10px] text-gray-500 truncate">{attachedCard.setName}</p>
-              <p className="text-xs font-bold text-white truncate">{attachedCard.cardName}</p>
+              <p className="text-toss-micro text-toss-text-tertiary truncate">
+                {attachedCard.setName}
+              </p>
+              <p className="text-toss-caption font-bold text-toss-text-primary truncate">
+                {attachedCard.cardName}
+              </p>
             </div>
             <button
               type="button"
               onClick={() => setAttachedCard(undefined)}
               aria-label="첨부 제거"
-              className="shrink-0 w-6 h-6 flex items-center justify-center rounded-full text-gray-500 hover:text-white hover:bg-gray-700 transition-colors"
+              className="shrink-0 w-6 h-6 flex items-center justify-center rounded-full text-toss-text-tertiary hover:text-toss-text-primary hover:bg-toss-bg-subtle transition-colors"
             >
-              ×
+              <X className="w-3.5 h-3.5" />
             </button>
           </div>
         )}
 
         <div className="flex items-end gap-2">
           <textarea
-          ref={inputRef}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKey}
-          placeholder="메세지를 입력하세요... (Enter로 전송)"
-          rows={1}
-          className="flex-1 resize-none rounded-xl bg-gray-800 border border-gray-700 px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-500 transition-colors leading-relaxed max-h-32 overflow-y-auto"
-          style={{ fieldSizing: "content" } as React.CSSProperties}
-        />
+            ref={inputRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKey}
+            placeholder="메세지를 입력하세요 (Enter로 전송)"
+            rows={1}
+            className="flex-1 resize-none rounded-toss-lg bg-toss-input-bg border border-toss-border px-4 py-2.5 text-toss-body text-toss-text-primary placeholder:text-toss-text-quaternary focus:outline-none focus:border-toss-brand transition-colors leading-relaxed max-h-32 overflow-y-auto"
+            style={{ fieldSizing: "content" } as React.CSSProperties}
+          />
           <button
             onClick={send}
             disabled={!input.trim()}
-            className="shrink-0 w-10 h-10 rounded-xl bg-yellow-500 hover:bg-yellow-400 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+            aria-label="전송"
+            className="shrink-0 w-10 h-10 rounded-toss-lg bg-toss-brand hover:bg-toss-brand/90 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center transition-colors text-white"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path d="M22 2L11 13" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <Send className="w-4 h-4" strokeWidth={2.4} />
           </button>
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useParams } from "next/navigation";
+import { Card } from "@/components/toss";
 
 // ── 목업 데이터 ───────────────────────────────────────────────────────────────
 
@@ -96,9 +97,9 @@ const totalCertified = MOCK_SETS.reduce((n, s) => n + s.owned.filter((c) => c.ce
 
 function ProgressBar({ value }: { value: number }) {
   return (
-    <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+    <div className="h-1.5 bg-toss-bg-muted rounded-full overflow-hidden">
       <div
-        className="h-full rounded-full bg-gradient-to-r from-yellow-600 to-yellow-400 transition-all duration-500"
+        className="h-full rounded-full bg-toss-brand transition-all duration-500"
         style={{ width: `${value}%` }}
       />
     </div>
@@ -125,15 +126,15 @@ export function CollectionTab() {
       {/* ── 전체 요약 ── */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
         {[
-          { label: "총 보유 카드", value: `${totalOwned}장`, color: "text-white" },
-          { label: "총 추정가",   value: `₩${(totalValue / 10000).toFixed(0)}만`, color: "text-yellow-400" },
-          { label: "인증 카드",   value: `${totalCertified}장`, color: "text-green-400" },
-          { label: "보유 세트",   value: `${MOCK_SETS.length}세트`, color: "text-blue-400" },
+          { label: "총 보유 카드", value: `${totalOwned}장`,                              colorClass: "text-toss-text-primary" },
+          { label: "총 추정가",   value: `₩${(totalValue / 10000).toFixed(0)}만`,         colorClass: "text-toss-warning" },
+          { label: "인증 카드",   value: `${totalCertified}장`,                            colorClass: "text-toss-positive" },
+          { label: "보유 세트",   value: `${MOCK_SETS.length}세트`,                        colorClass: "text-toss-brand" },
         ].map((stat) => (
-          <div key={stat.label} className="rounded-xl bg-gray-900 border border-gray-800 px-4 py-3">
-            <p className="text-xs text-gray-500 mb-1">{stat.label}</p>
-            <p className={`text-lg font-bold ${stat.color}`}>{stat.value}</p>
-          </div>
+          <Card key={stat.label} padding="sm">
+            <p className="text-toss-caption text-toss-text-tertiary mb-1">{stat.label}</p>
+            <p className={`text-toss-title-2 font-bold toss-numeric ${stat.colorClass}`}>{stat.value}</p>
+          </Card>
         ))}
       </div>
 
@@ -142,7 +143,7 @@ export function CollectionTab() {
 
         {/* 왼쪽: 세트 리스트 */}
         <div className="w-52 shrink-0 space-y-1.5">
-          <p className="text-xs text-gray-600 font-medium px-1 mb-2">보유 세트</p>
+          <p className="text-toss-caption text-toss-text-quaternary font-medium px-1 mb-2">보유 세트</p>
           {MOCK_SETS.map((set) => {
             const pct = Math.round((set.owned.length / set.totalCards) * 100);
             const isSelected = set.setId === selectedSetId;
@@ -150,19 +151,19 @@ export function CollectionTab() {
               <button
                 key={set.setId}
                 onClick={() => setSelectedSetId(set.setId)}
-                className={`w-full text-left px-3 py-3 rounded-xl border transition-colors ${
+                className={`w-full text-left px-3 py-3 rounded-toss-lg border transition-colors ${
                   isSelected
-                    ? "bg-gray-800 border-yellow-500/50"
-                    : "bg-gray-900 border-gray-800 hover:border-gray-700"
+                    ? "bg-toss-bg-subtle border-toss-brand/40"
+                    : "bg-toss-bg-base border-toss-border hover:border-toss-border-strong"
                 }`}
               >
-                <p className={`text-xs font-semibold truncate mb-1.5 ${isSelected ? "text-white" : "text-gray-300"}`}>
+                <p className={`text-toss-caption font-semibold truncate mb-1.5 ${isSelected ? "text-toss-text-primary" : "text-toss-text-secondary"}`}>
                   {set.name}
                 </p>
                 <ProgressBar value={pct} />
                 <div className="flex items-center justify-between mt-1.5">
-                  <span className="text-[10px] text-gray-600">{set.owned.length}/{set.totalCards}장</span>
-                  <span className={`text-[10px] font-bold ${isSelected ? "text-yellow-400" : "text-gray-500"}`}>{pct}%</span>
+                  <span className="text-toss-micro text-toss-text-quaternary">{set.owned.length}/{set.totalCards}장</span>
+                  <span className={`text-toss-micro font-bold ${isSelected ? "text-toss-brand" : "text-toss-text-tertiary"}`}>{pct}%</span>
                 </div>
               </button>
             );
@@ -173,38 +174,38 @@ export function CollectionTab() {
         <div className="flex-1 min-w-0">
 
           {/* 세트 요약 */}
-          <div className="rounded-xl bg-gray-900 border border-gray-800 p-4 mb-4">
+          <Card padding="md" className="mb-4">
             <div className="flex items-start justify-between gap-4 mb-3">
               <div>
-                <h2 className="text-base font-bold text-white">{selectedSet.name}</h2>
-                <p className="text-xs text-gray-500 mt-0.5">{selectedSet.series}</p>
+                <h2 className="text-toss-title-2 font-bold text-toss-text-primary">{selectedSet.name}</h2>
+                <p className="text-toss-caption text-toss-text-tertiary mt-0.5">{selectedSet.series}</p>
               </div>
               <div className="text-right shrink-0">
-                <p className="text-lg font-bold text-yellow-400">₩{setValue.toLocaleString("ko-KR")}</p>
-                <p className="text-[11px] text-gray-500">추정 총가치</p>
+                <p className="text-toss-title-2 font-bold text-toss-warning toss-numeric">₩{setValue.toLocaleString("ko-KR")}</p>
+                <p className="text-toss-micro text-toss-text-tertiary">추정 총가치</p>
               </div>
             </div>
 
             <ProgressBar value={setCompletionPct} />
 
-            <div className="flex items-center gap-4 mt-2.5 text-xs text-gray-500">
-              <span><span className="text-white font-semibold">{selectedSet.owned.length}</span> / {selectedSet.totalCards}장 보유</span>
-              <span><span className="text-green-400 font-semibold">{selectedSet.owned.filter((c) => c.certified).length}</span>장 인증</span>
-              <span className="ml-auto text-yellow-400 font-bold">{setCompletionPct}% 완성</span>
+            <div className="flex items-center gap-4 mt-2.5 text-toss-caption text-toss-text-tertiary">
+              <span><span className="text-toss-text-primary font-semibold toss-numeric">{selectedSet.owned.length}</span> / {selectedSet.totalCards}장 보유</span>
+              <span><span className="text-toss-positive font-semibold toss-numeric">{selectedSet.owned.filter((c) => c.certified).length}</span>장 인증</span>
+              <span className="ml-auto text-toss-brand font-bold toss-numeric">{setCompletionPct}% 완성</span>
             </div>
-          </div>
+          </Card>
 
           {/* 카드 도감 그리드 */}
-          <div className="rounded-xl bg-gray-900 border border-gray-800 p-4">
+          <Card padding="md">
             <div className="flex items-center justify-between mb-3">
-              <p className="text-xs text-gray-500">
-                <span className="text-white font-semibold">{allCards.length}</span>장 표시
-                <span className="ml-2 text-gray-700">·</span>
-                <span className="ml-2">미보유 <span className="text-gray-600">{selectedSet.unowned.length}</span>장</span>
+              <p className="text-toss-caption text-toss-text-tertiary">
+                <span className="text-toss-text-primary font-semibold toss-numeric">{allCards.length}</span>장 표시
+                <span className="mx-2 text-toss-border">·</span>
+                미보유 <span className="text-toss-text-quaternary toss-numeric">{selectedSet.unowned.length}</span>장
               </p>
-              <div className="flex items-center gap-3 text-[10px] text-gray-600">
-                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-500 inline-block" />인증</span>
-                <span className="flex items-center gap-1 opacity-40"><span className="w-2 h-2 rounded-full bg-gray-500 inline-block" />미보유</span>
+              <div className="flex items-center gap-3 text-toss-micro text-toss-text-quaternary">
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-toss-positive inline-block" />인증</span>
+                <span className="flex items-center gap-1 opacity-40"><span className="w-2 h-2 rounded-full bg-toss-text-quaternary inline-block" />미보유</span>
               </div>
             </div>
 
@@ -212,7 +213,7 @@ export function CollectionTab() {
               {allCards.map((card) => (
                 <div key={card.id} className="group relative cursor-pointer" title={`${card.name} · No.${card.number}`}>
                   <div
-                    className="rounded-lg overflow-hidden"
+                    className="rounded-toss-sm overflow-hidden"
                     style={{
                       aspectRatio: "63 / 88",
                       filter: card.isOwned ? "none" : "grayscale(100%)",
@@ -229,7 +230,7 @@ export function CollectionTab() {
 
                   {/* 인증 점 */}
                   {card.isOwned && card.certified && (
-                    <div className="absolute top-[3px] right-[3px] w-2.5 h-2.5 rounded-full bg-green-500 ring-1 ring-gray-900 shadow" />
+                    <div className="absolute top-[3px] right-[3px] w-2.5 h-2.5 rounded-full bg-toss-positive ring-1 ring-toss-bg-base shadow" />
                   )}
 
                   {/* 등급 뱃지 */}
@@ -239,13 +240,13 @@ export function CollectionTab() {
                     </div>
                   )}
 
-                  <p className="text-[9px] text-center text-gray-600 mt-[2px] leading-none truncate">
+                  <p className="text-toss-tiny text-center text-toss-text-quaternary mt-[2px] leading-none truncate">
                     {card.number}
                   </p>
                 </div>
               ))}
             </div>
-          </div>
+          </Card>
         </div>
       </div>
     </div>

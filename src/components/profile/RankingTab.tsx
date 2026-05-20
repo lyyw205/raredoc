@@ -18,7 +18,7 @@ export function RankingTab() {
   return (
     <div>
       <div className="mb-4">
-        <p className="text-sm text-gray-500">2026년 5월 기준 · 매일 00시 업데이트</p>
+        <p className="text-toss-caption text-toss-text-tertiary">2026년 5월 기준 · 매일 00시 업데이트</p>
       </div>
       <RankingBoard users={MOCK_USERS} />
     </div>

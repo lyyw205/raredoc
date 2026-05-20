@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
+import { ToggleGroup } from "@/components/toss";
 
 interface PricePoint {
   recordedAt: string;
@@ -37,6 +38,18 @@ export const PT_RANGES: RangeDef[] = [
   { key: "30d", label: "30일", days: 30 },
 ];
 
+// 토스 토큰 (실제 값) — recharts 가 CSS var() 를 인식하지 않는 경우가 있어 hex 사용
+const COLORS = {
+  grid:         "#E5E8EB",            // toss-grey-200 (옅은 회색)
+  axisTick:     "#6B7684",            // toss-text-tertiary
+  legend:       "#6B7684",            // toss-text-tertiary
+  tooltipBg:    "#FFFFFF",            // toss-bg-base
+  tooltipBorder:"rgba(0,27,55,0.10)", // toss-border
+  tooltipLabel: "#191F28",            // toss-text-primary
+  line1:        "#3182F6",            // toss-brand (파랑)
+  line2:        "#DD7D02",            // toss-warning (오렌지)
+};
+
 export function PriceChart({ history, lineLabels, ranges = DEFAULT_RANGES }: Props) {
   const labels = lineLabels ?? { normal: "노말", holofoil: "홀로포일" };
   const [rangeKey, setRangeKey] = useState(ranges[0].key);
@@ -49,7 +62,7 @@ export function PriceChart({ history, lineLabels, ranges = DEFAULT_RANGES }: Pro
   });
 
   if (!filtered.length) {
-    return <p className="text-sm text-gray-500 py-4">가격 히스토리 데이터가 없습니다.</p>;
+    return <p className="text-toss-caption text-toss-text-tertiary py-4">가격 히스토리 데이터가 없습니다.</p>;
   }
 
   const data = filtered.map((p) => ({
@@ -64,47 +77,45 @@ export function PriceChart({ history, lineLabels, ranges = DEFAULT_RANGES }: Pro
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-sm font-semibold text-gray-300">가격 히스토리</h2>
-        <div className="flex gap-1 bg-gray-800 rounded p-1">
-          {ranges.map((r) => (
-            <button
-              key={r.key}
-              onClick={() => setRangeKey(r.key)}
-              className={`px-2 py-0.5 rounded text-xs font-medium transition-colors ${
-                rangeKey === r.key ? "bg-gray-600 text-white" : "text-gray-400 hover:text-white"
-              }`}
-            >
-              {r.label}
-            </button>
-          ))}
-        </div>
+        <h2 className="text-toss-label font-bold text-toss-text-primary">가격 히스토리</h2>
+        <ToggleGroup
+          options={ranges.map((r) => ({ value: r.key, label: r.label }))}
+          value={rangeKey}
+          onChange={setRangeKey}
+          size="sm"
+        />
       </div>
       <ResponsiveContainer width="100%" height={200}>
         <LineChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-          <XAxis dataKey="date" tick={{ fontSize: 11, fill: "#9CA3AF" }} />
+          <CartesianGrid strokeDasharray="3 3" stroke={COLORS.grid} />
+          <XAxis dataKey="date" tick={{ fontSize: 11, fill: COLORS.axisTick }} stroke={COLORS.grid} />
           <YAxis
-            tick={{ fontSize: 11, fill: "#9CA3AF" }}
+            tick={{ fontSize: 11, fill: COLORS.axisTick }}
+            stroke={COLORS.grid}
             tickFormatter={(v: number) => `$${v}`}
           />
           <Tooltip
             contentStyle={{
-              background: "#111827",
-              border: "1px solid #374151",
+              background: COLORS.tooltipBg,
+              border: `1px solid ${COLORS.tooltipBorder}`,
               borderRadius: 8,
+              boxShadow:
+                "0 0.6px 0.6px -1.25px rgba(0,0,0,0.12), 0 2.2px 2.2px -2.5px rgba(0,0,0,0.10), 0 10px 10px -3.75px rgba(0,0,0,0.043)",
+              fontFamily: "Pretendard Variable, Pretendard, sans-serif",
             }}
-            labelStyle={{ color: "#E5E7EB" }}
+            labelStyle={{ color: COLORS.tooltipLabel, fontWeight: 600 }}
+            itemStyle={{ color: COLORS.tooltipLabel }}
             formatter={(v) => {
               const num = typeof v === "number" ? v : Number(v);
               return [`$${num?.toFixed(2)}`, ""] as [string, string];
             }}
           />
-          <Legend wrapperStyle={{ fontSize: 12, color: "#9CA3AF" }} />
+          <Legend wrapperStyle={{ fontSize: 12, color: COLORS.legend }} />
           <Line
             type="monotone"
             dataKey="normal"
             name={labels.normal}
-            stroke="#60A5FA"
+            stroke={COLORS.line1}
             dot={false}
             strokeWidth={2}
             connectNulls
@@ -113,7 +124,7 @@ export function PriceChart({ history, lineLabels, ranges = DEFAULT_RANGES }: Pro
             type="monotone"
             dataKey="holofoil"
             name={labels.holofoil}
-            stroke="#FBBF24"
+            stroke={COLORS.line2}
             dot={false}
             strokeWidth={2}
             connectNulls

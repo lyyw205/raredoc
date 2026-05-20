@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { RARITY_KO } from "@/lib/constants";
+import { Button, SearchField } from "@/components/toss";
 import type {
   CardSearchHit,
   CardSearchParams,
@@ -19,6 +20,15 @@ interface CardSidebarProps {
   };
   fetcher: (params: CardSearchParams) => Promise<CardSearchHit[]>;
 }
+
+// 토스 톤 native select className
+const SELECT_CLASS =
+  "w-full bg-toss-input-bg rounded-toss-md px-2.5 py-1.5 text-toss-caption " +
+  "text-toss-text-primary border border-transparent " +
+  "focus:outline-none focus:ring-2 focus:ring-toss-brand/30 cursor-pointer " +
+  "appearance-none bg-no-repeat bg-[right_8px_center] " +
+  "[background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'><path d='M1 1l4 4 4-4' stroke='%236B7684' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>\")] " +
+  "pr-7";
 
 export function CardSidebar({
   locale,
@@ -63,22 +73,21 @@ export function CardSidebar({
     q !== "" || type !== "" || rarity !== "" || setId !== "";
 
   return (
-    <div className="flex flex-col max-h-[calc(100vh-72px)]">
+    <div className="flex flex-col max-h-[calc(100vh-72px)] bg-toss-bg-base border border-toss-border rounded-toss-lg overflow-hidden">
       {/* Search + filters */}
-      <div className="p-3 border-b border-gray-800 shrink-0 space-y-2">
-        <input
-          type="text"
+      <div className="p-3 border-b border-toss-divider shrink-0 space-y-2">
+        <SearchField
           placeholder="포켓몬 이름 검색..."
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          className="w-full bg-gray-800 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-600"
+          size="sm"
         />
 
         <div className="grid grid-cols-2 gap-2">
           <select
             value={type}
             onChange={(e) => setType(e.target.value)}
-            className="bg-gray-800 rounded px-2 py-1.5 text-xs text-gray-200 focus:outline-none"
+            className={SELECT_CLASS}
           >
             <option value="">타입 전체</option>
             {filterOptions.types.map((t) => (
@@ -91,7 +100,7 @@ export function CardSidebar({
           <select
             value={rarity}
             onChange={(e) => setRarity(e.target.value)}
-            className="bg-gray-800 rounded px-2 py-1.5 text-xs text-gray-200 focus:outline-none"
+            className={SELECT_CLASS}
           >
             <option value="">희귀도 전체</option>
             {filterOptions.rarities.map((r) => (
@@ -105,7 +114,7 @@ export function CardSidebar({
         <select
           value={setId}
           onChange={(e) => setSetId(e.target.value)}
-          className="w-full bg-gray-800 rounded px-2 py-1.5 text-xs text-gray-200 focus:outline-none"
+          className={SELECT_CLASS}
         >
           <option value="">확장팩 전체</option>
           {filterOptions.sets.map((s) => (
@@ -116,13 +125,14 @@ export function CardSidebar({
         </select>
 
         {hasFilters && (
-          <button
-            type="button"
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={clearAll}
-            className="text-xs text-gray-400 hover:text-white"
+            className="text-toss-caption"
           >
             필터 초기화 ✕
-          </button>
+          </Button>
         )}
       </div>
 
@@ -133,7 +143,7 @@ export function CardSidebar({
         }`}
       >
         {results.length === 0 ? (
-          <p className="text-center text-sm text-gray-500 py-10">
+          <p className="text-center text-toss-caption text-toss-text-tertiary py-10">
             결과 없음
           </p>
         ) : (
@@ -155,11 +165,11 @@ export function CardSidebar({
                 href={`/${locale}/cards/${card.id}`}
                 className={`flex items-center gap-3 px-3 py-2 border-l-2 transition-colors ${
                   isActive
-                    ? "bg-gray-800 border-red-500"
-                    : "border-transparent hover:bg-gray-800/50 hover:border-gray-600"
+                    ? "bg-toss-brand-weak border-toss-brand"
+                    : "border-transparent hover:bg-toss-hover"
                 }`}
               >
-                <div className="w-8 h-11 shrink-0 flex items-center justify-center bg-black/30 rounded overflow-hidden">
+                <div className="w-8 h-11 shrink-0 flex items-center justify-center bg-toss-bg-muted rounded-toss-sm overflow-hidden">
                   {card.imageSmall ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -169,22 +179,24 @@ export function CardSidebar({
                       className="max-w-full max-h-full object-contain"
                     />
                   ) : (
-                    <span className="text-gray-600 text-base">🃏</span>
+                    <span className="text-toss-text-quaternary text-base">🃏</span>
                   )}
                 </div>
 
                 <div className="min-w-0 flex-1">
                   <p
-                    className={`text-sm truncate leading-tight ${
-                      isActive ? "text-white font-medium" : "text-gray-300"
+                    className={`text-toss-label truncate leading-tight ${
+                      isActive
+                        ? "text-toss-brand font-semibold"
+                        : "text-toss-text-secondary"
                     }`}
                   >
                     {displayName}
                   </p>
-                  <p className="text-[11px] text-gray-500 truncate mt-0.5">
+                  <p className="text-toss-micro text-toss-text-tertiary truncate mt-0.5">
                     {setName} · #{card.number}
                     {rarityDisplay && (
-                      <span className="ml-1 text-gray-600">· {rarityDisplay}</span>
+                      <span className="ml-1 text-toss-text-quaternary">· {rarityDisplay}</span>
                     )}
                   </p>
                 </div>
@@ -195,7 +207,7 @@ export function CardSidebar({
       </div>
 
       {/* Count footer */}
-      <div className="border-t border-gray-800 px-3 py-2 text-[11px] text-gray-500 shrink-0">
+      <div className="border-t border-toss-divider px-3 py-2 text-toss-micro text-toss-text-tertiary shrink-0">
         {results.length}건 표시 {results.length >= 200 && "(상위 200건)"}
       </div>
     </div>

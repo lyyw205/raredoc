@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CommunityBoard, type Post } from "@/components/community/CommunityBoard";
+import { Container } from "@/components/toss";
 
 export const metadata: Metadata = { title: "커뮤니티 — Raredoc" };
 
@@ -410,8 +411,8 @@ export default async function CommunityPage({
   const { locale } = await params;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <Container size="xl" padding="md" className="py-8">
       <CommunityBoard posts={POSTS} locale={locale} />
-    </div>
+    </Container>
   );
 }

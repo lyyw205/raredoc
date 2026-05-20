@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { HighlightGallery } from "@/components/profile/HighlightGallery";
 import { ProfileTabs } from "@/components/profile/ProfileTabs";
+import { Container, Card, Avatar, Button, Tag } from "@/components/toss";
 
 // ─── 목업 데이터 (추후 DB로 교체) ───────────────────────────────────────────
 
@@ -102,8 +103,8 @@ const TIER_CONFIG = {
 function StatItem({ value, label }: { value: string | number; label: string }) {
   return (
     <div className="text-center">
-      <p className="text-xl font-bold text-white">{value}</p>
-      <p className="text-xs text-gray-500 mt-0.5">{label}</p>
+      <p className="text-toss-title-1 font-bold text-toss-text-primary toss-numeric">{value}</p>
+      <p className="text-toss-caption text-toss-text-tertiary mt-0.5">{label}</p>
     </div>
   );
 }
@@ -144,64 +145,56 @@ export default async function ProfilePage({
   const tier = TIER_CONFIG[user.tier];
   const totalValue = user.highlights.reduce((acc, h) => acc + h.valueKrw, 0);
   const HIGHLIGHT_SLOTS = 5;
-  const emptySlots = HIGHLIGHT_SLOTS - user.highlights.length;
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8 space-y-10">
+    <Container size="xl" padding="md" className="py-8 space-y-8">
 
       {/* ── 프로필 히어로 ── */}
-      <div className={`rounded-2xl bg-gradient-to-b ${tier.bg} border border-gray-800 p-6`}>
+      <Card padding="lg">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
 
           {/* 아바타 */}
-          <div className={`shrink-0 w-20 h-20 rounded-full bg-gray-700 ring-4 ${tier.ring} flex items-center justify-center text-3xl font-bold text-white`}>
-            {user.avatarInitial}
+          <div className="ring-4 ring-toss-brand rounded-full shrink-0">
+            <Avatar name={user.avatarInitial} size="xl" />
           </div>
 
           {/* 이름 + 소개 */}
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-1">
-              <h1 className="text-xl font-bold text-white">{user.displayName}</h1>
-              <span className="text-sm text-gray-500">@{user.username}</span>
-              <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${tier.accent} border-current bg-current/10`}>
-                {tier.label}
-              </span>
+              <h1 className="text-toss-title-1 font-bold text-toss-text-primary">{user.displayName}</h1>
+              <span className="text-toss-label text-toss-text-tertiary">@{user.username}</span>
+              <Tag color="brand" shape="soft">{tier.label}</Tag>
             </div>
-            <p className="text-sm text-gray-400 mb-1">{user.bio}</p>
-            <p className="text-xs text-gray-600">가입 {user.joinDate}</p>
+            <p className="text-toss-body text-toss-text-secondary mt-1">{user.bio}</p>
+            <p className="text-toss-caption text-toss-text-quaternary mt-1">가입 {user.joinDate}</p>
           </div>
 
           {/* 버튼 */}
           <div className="flex gap-2 shrink-0">
-            <button className="px-4 py-2 text-sm font-medium rounded-lg bg-gray-700 hover:bg-gray-600 text-white transition-colors">
-              팔로우
-            </button>
-            <a
-              href={`/${locale}/messages/c2`}
-              className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg bg-yellow-500 hover:bg-yellow-400 text-black transition-colors"
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-              </svg>
-              메세지
-            </a>
-            <button className="px-4 py-2 text-sm font-medium rounded-lg border border-gray-700 hover:border-gray-500 text-gray-300 hover:text-white transition-colors">
-              공유
-            </button>
+            <Button variant="secondary" size="md">팔로우</Button>
+            <Button variant="primary" size="md" asChild>
+              <a href={`/${locale}/messages/c2`}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                메세지
+              </a>
+            </Button>
+            <Button variant="outline" size="md">공유</Button>
           </div>
         </div>
 
         {/* 통계 */}
-        <div className="mt-6 pt-5 border-t border-gray-800 flex gap-8 justify-center sm:justify-start">
+        <div className="mt-6 pt-5 border-t border-toss-divider flex gap-8 justify-center sm:justify-start">
           <StatItem value={user.stats.cards.toLocaleString()} label="보유 카드" />
-          <div className="w-px bg-gray-800" />
+          <div className="w-px bg-toss-divider" />
           <StatItem value={user.stats.certified} label="인증 완료" />
-          <div className="w-px bg-gray-800" />
+          <div className="w-px bg-toss-divider" />
           <StatItem value={user.stats.badges} label="획득 뱃지" />
-          <div className="w-px bg-gray-800" />
+          <div className="w-px bg-toss-divider" />
           <StatItem value={`#${user.stats.rank}`} label="랭킹" />
         </div>
-      </div>
+      </Card>
 
       {/* ── 하이라이트 갤러리 ── */}
       <HighlightGallery
@@ -214,6 +207,6 @@ export default async function ProfilePage({
       {/* ── 탭: 컬렉션 / 뱃지 / 랭킹 ── */}
       <ProfileTabs defaultTab={defaultTab} />
 
-    </div>
+    </Container>
   );
 }

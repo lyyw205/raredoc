@@ -1,6 +1,17 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { CardStageCarousel } from "@/components/home/CardStageCarousel";
+import {
+  Avatar,
+  Card,
+  CardContent,
+  CardDivider,
+  CardHeader,
+  CardTitle,
+  Container,
+  DeltaBadge,
+  Tag,
+} from "@/components/toss";
 
 export const metadata: Metadata = {
   title: "Raredoc — 수집품 갤러리 & TCG 정보",
@@ -28,21 +39,17 @@ const HOT_TOPICS = [
 ];
 
 const TOP_COLLECTORS = [
-  { rank: 1, username: "raymond_tcg",  displayName: "레이먼드",  avatarInitial: "레", tier: "LEGEND",  valueKrw: 12450000, badge: "👑" },
-  { rank: 2, username: "chaeyeon",     displayName: "채연",      avatarInitial: "채", tier: "DIAMOND", valueKrw:  9870000, badge: "🥈" },
-  { rank: 3, username: "minjun_",      displayName: "민준",      avatarInitial: "민", tier: "DIAMOND", valueKrw:  8320000, badge: "🥉" },
+  { rank: 1, username: "raymond_tcg",  displayName: "레이먼드",  avatarInitial: "레", tier: "LEGEND",  valueKrw: 12450000, monthlyChangePct: +12.3, cardCount: 247, badge: "👑" },
+  { rank: 2, username: "chaeyeon",     displayName: "채연",      avatarInitial: "채", tier: "DIAMOND", valueKrw:  9870000, monthlyChangePct:  +8.7, cardCount: 198, badge: "🥈" },
+  { rank: 3, username: "minjun_",      displayName: "민준",      avatarInitial: "민", tier: "DIAMOND", valueKrw:  8320000, monthlyChangePct:  -3.2, cardCount: 162, badge: "🥉" },
 ];
 
-const TIER_RING: Record<string, string> = {
-  LEGEND: "ring-purple-400", DIAMOND: "ring-cyan-400", GOLD: "ring-yellow-500",
-  SILVER: "ring-slate-400",  BRONZE: "ring-amber-700",
-};
-
-const CATEGORY_COLOR: Record<string, string> = {
-  정보:    "bg-blue-900/50 text-blue-400",
-  질문:    "bg-gray-800 text-gray-400",
-  자랑:    "bg-yellow-900/50 text-yellow-400",
-  거래후기: "bg-green-900/50 text-green-400",
+// 모든 티어가 동일한 brand ring (단일 톤). 등급 구분은 이모지 + displayName 으로.
+const CATEGORY_TAG_COLOR: Record<string, "negative" | "neutral" | "warning" | "success"> = {
+  정보:    "negative",
+  질문:    "neutral",
+  자랑:    "warning",
+  거래후기: "success",
 };
 
 const SORTED_CARDS = [...RECENT_CARDS].sort((a, b) => b.valueKrw - a.valueKrw);
@@ -53,20 +60,20 @@ function TopicRow({ topic, locale }: { topic: typeof HOT_TOPICS[number]; locale:
   return (
     <Link
       href={`/${locale}/community/${topic.id}`}
-      className="flex items-start gap-3 py-3 border-b border-gray-800/60 last:border-0 hover:bg-gray-800/30 -mx-3 px-3 rounded-lg transition-colors group"
+      className="block py-3 border-b border-toss-divider last:border-0 hover:bg-toss-hover -mx-3 px-3 rounded-toss-md transition-colors group"
     >
-      <span className={`shrink-0 text-[10px] font-bold px-1.5 py-0.5 rounded mt-0.5 ${CATEGORY_COLOR[topic.category] ?? "bg-gray-800 text-gray-400"}`}>
-        {topic.category}
-      </span>
-      <div className="flex-1 min-w-0">
-        <p className="text-sm text-gray-300 group-hover:text-white transition-colors leading-snug line-clamp-1">
-          {topic.hot && <span className="text-red-400 mr-1 text-xs font-bold">🔥</span>}
+      <div className="flex items-center gap-2 min-w-0">
+        <Tag color={CATEGORY_TAG_COLOR[topic.category] ?? "neutral"} shape="soft" className="shrink-0">
+          {topic.category}
+        </Tag>
+        <p className="text-toss-label text-toss-text-secondary group-hover:text-toss-text-primary transition-colors leading-snug line-clamp-1 min-w-0">
+          {topic.hot && <span className="text-toss-positive mr-1 text-toss-caption font-bold">🔥</span>}
           {topic.title}
         </p>
-        <p className="text-xs text-gray-600 mt-1">
-          댓글 {topic.replies} · 조회 {topic.views.toLocaleString()} · {topic.ago}
-        </p>
       </div>
+      <p className="text-toss-caption text-toss-text-quaternary mt-1">
+        댓글 {topic.replies} · 조회 {topic.views.toLocaleString()} · {topic.ago}
+      </p>
     </Link>
   );
 }
@@ -81,16 +88,16 @@ export default async function HomePage({
   const { locale } = await params;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-6">
+    <Container size="xl" padding="md" className="py-8 space-y-6">
 
       {/* ── 히어로 헤더 ────────────────────────────────────────────────── */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-white">오늘의 컬렉션</h1>
-          <p className="text-sm text-gray-500 mt-0.5">컬렉터들이 지금 등록하고 있는 카드</p>
+          <h1 className="text-toss-title-1 font-bold text-toss-text-primary">오늘의 컬렉션</h1>
+          <p className="text-toss-label text-toss-text-tertiary mt-0.5">컬렉터들이 지금 등록하고 있는 카드</p>
         </div>
-        <span className="flex items-center gap-1.5 text-xs text-gray-500">
-          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+        <span className="flex items-center gap-1.5 text-toss-caption text-toss-text-tertiary">
+          <span className="w-1.5 h-1.5 rounded-full bg-toss-success animate-pulse" />
           1,247명 온라인
         </span>
       </div>
@@ -103,58 +110,76 @@ export default async function HomePage({
 
         {/* 커뮤니티 핫 토픽 */}
         <div className="lg:col-span-2">
-          <div className="rounded-xl bg-gray-900 border border-gray-800 p-5">
-            <div className="flex items-center justify-between mb-1">
-              <h2 className="text-sm font-semibold text-white">커뮤니티 핫 토픽</h2>
-              <Link href={`/${locale}/community`} className="text-xs text-gray-500 hover:text-white transition-colors">
+          <Card padding="md">
+            <CardHeader>
+              <div>
+                <CardTitle className="text-toss-subtitle">커뮤니티 핫 토픽</CardTitle>
+                <p className="text-toss-caption text-toss-text-quaternary mt-1">지금 가장 많이 읽히는 글</p>
+              </div>
+              <Link
+                href={`/${locale}/community`}
+                className="text-toss-caption text-toss-text-tertiary hover:text-toss-text-primary transition-colors"
+              >
                 전체보기 →
               </Link>
-            </div>
-            <p className="text-xs text-gray-600 mb-4">지금 가장 많이 읽히는 글</p>
-            <div>
+            </CardHeader>
+            <CardDivider className="my-3" />
+            <CardContent>
               {HOT_TOPICS.map((topic) => (
                 <TopicRow key={topic.id} topic={topic} locale={locale} />
               ))}
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* 사이드바 */}
         <div className="space-y-4">
 
           {/* 이달의 TOP 3 */}
-          <div className="rounded-xl bg-gray-900 border border-gray-800 p-5">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-sm font-semibold text-white">이달의 TOP 3</h2>
-              <Link href={`/${locale}/profile/yujin?tab=ranking`} className="text-xs text-gray-500 hover:text-white transition-colors">
+          <Card padding="md">
+            <CardHeader>
+              <CardTitle className="text-toss-subtitle">이달의 TOP 3</CardTitle>
+              <Link
+                href={`/${locale}/profile/yujin?tab=ranking`}
+                className="text-toss-caption text-toss-text-tertiary hover:text-toss-text-primary transition-colors"
+              >
                 전체 랭킹 →
               </Link>
-            </div>
-            <div className="space-y-3">
+            </CardHeader>
+            <CardDivider className="my-3" />
+            <CardContent className="space-y-1">
               {TOP_COLLECTORS.map((col) => (
                 <Link
                   key={col.username}
                   href={`/${locale}/profile/${col.username}`}
-                  className="flex items-center gap-3 hover:bg-gray-800/50 -mx-2 px-2 py-1.5 rounded-lg transition-colors group"
+                  className="flex items-center gap-3 hover:bg-toss-hover -mx-2 px-2 py-2 rounded-toss-md transition-colors group"
                 >
                   <span className="text-base w-5 text-center shrink-0">{col.badge}</span>
-                  <div className={`w-8 h-8 rounded-full bg-gray-700 ring-2 ${TIER_RING[col.tier]} flex items-center justify-center text-xs font-bold text-white shrink-0`}>
-                    {col.avatarInitial}
+                  <div className="ring-2 ring-toss-brand rounded-full shrink-0">
+                    <Avatar name={col.avatarInitial} size="sm" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-200 group-hover:text-white truncate transition-colors">
+                    <p className="text-toss-label font-semibold text-toss-text-primary group-hover:text-toss-text-primary truncate transition-colors">
                       {col.displayName}
                     </p>
-                    <p className="text-xs text-yellow-400">₩{(col.valueKrw / 10000).toFixed(0)}만</p>
+                    <p className="text-toss-caption text-toss-text-quaternary truncate">
+                      {col.cardCount}장 보유
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-end shrink-0">
+                    <p className="text-toss-label font-semibold text-toss-text-primary toss-numeric">
+                      ₩{(col.valueKrw / 10000).toFixed(0)}만
+                    </p>
+                    <DeltaBadge percent={col.monthlyChangePct} mode="text" size="sm" />
                   </div>
                 </Link>
               ))}
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
           {/* TCG 바로가기 */}
-          <div className="rounded-xl bg-gray-900 border border-gray-800 p-5">
-            <h2 className="text-sm font-semibold text-white mb-3">TCG 정보</h2>
+          <Card padding="md">
+            <CardTitle className="text-toss-subtitle mb-3">TCG 정보</CardTitle>
             <div className="space-y-1">
               {[
                 { label: "카드 도감",       emoji: "📖", href: `/dex` },
@@ -166,32 +191,32 @@ export default async function HomePage({
                 <Link
                   key={label}
                   href={`/${locale}${href}`}
-                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg hover:bg-gray-800 text-sm text-gray-400 hover:text-white transition-colors"
+                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-toss-md hover:bg-toss-hover text-toss-label text-toss-text-secondary hover:text-toss-text-primary transition-colors"
                 >
                   <span>{emoji}</span>
                   <span>{label}</span>
                 </Link>
               ))}
             </div>
-          </div>
+          </Card>
 
           {/* 시즌 현황 */}
-          <div className="rounded-xl bg-gradient-to-b from-yellow-950/40 to-gray-900 border border-yellow-800/30 p-5">
+          <div className="rounded-toss-lg bg-gradient-to-b from-toss-warning-weak to-toss-bg-base border border-toss-warning-weak p-5 shadow-toss-hairline">
             <div className="flex items-center gap-2 mb-2">
               <span className="text-base">🎖️</span>
-              <h2 className="text-sm font-semibold text-white">시즌 1 진행 중</h2>
+              <h2 className="text-toss-subtitle font-semibold text-toss-text-primary">시즌 1 진행 중</h2>
             </div>
-            <p className="text-xs text-gray-500 mb-3 leading-relaxed">
+            <p className="text-toss-caption text-toss-text-tertiary mb-3 leading-relaxed">
               시즌 1은 2026년 6월 30일에 종료됩니다.<br />
               지금 참여하면 얼리버드 뱃지를 획득할 수 있어요.
             </p>
-            <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden mb-1">
-              <div className="h-full w-[62%] bg-gradient-to-r from-yellow-600 to-yellow-400 rounded-full" />
+            <div className="h-1.5 bg-toss-bg-muted rounded-full overflow-hidden mb-1">
+              <div className="h-full w-[62%] bg-toss-warning rounded-full" />
             </div>
-            <p className="text-[11px] text-gray-600 mb-3">종료까지 43일</p>
+            <p className="text-toss-micro text-toss-text-quaternary mb-3">종료까지 43일</p>
             <Link
               href={`/${locale}/profile/yujin?tab=badges`}
-              className="block w-full text-center text-[11px] font-semibold text-yellow-400 border border-yellow-800/50 rounded-lg py-1.5 hover:bg-yellow-900/30 transition-colors"
+              className="block w-full text-center text-toss-caption font-semibold text-toss-warning border border-toss-warning-weak rounded-toss-md py-1.5 hover:bg-toss-warning-weak transition-colors"
             >
               뱃지 받으러 가기 →
             </Link>
@@ -199,6 +224,6 @@ export default async function HomePage({
 
         </div>
       </div>
-    </div>
+    </Container>
   );
 }

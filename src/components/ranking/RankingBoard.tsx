@@ -3,6 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useLocale } from "next-intl";
+import {
+  Avatar,
+  Card,
+  RankingTable,
+  SegmentedControl,
+  Tag,
+} from "@/components/toss";
 
 type RankType = "value" | "certified" | "badges" | "monthly";
 
@@ -21,11 +28,11 @@ interface RankUser {
 }
 
 const TIER_CONFIG = {
-  BRONZE:  { label: "브론즈", ring: "ring-amber-700",  text: "text-amber-500"  },
-  SILVER:  { label: "실버",   ring: "ring-slate-400",  text: "text-slate-400"  },
-  GOLD:    { label: "골드",   ring: "ring-yellow-500", text: "text-yellow-400" },
-  DIAMOND: { label: "다이아", ring: "ring-cyan-400",   text: "text-cyan-400"   },
-  LEGEND:  { label: "레전드", ring: "ring-purple-400", text: "text-purple-400" },
+  BRONZE:  { label: "브론즈", ring: "ring-toss-brand", text: "text-toss-brand" },
+  SILVER:  { label: "실버",   ring: "ring-toss-brand", text: "text-toss-brand" },
+  GOLD:    { label: "골드",   ring: "ring-toss-brand", text: "text-toss-brand" },
+  DIAMOND: { label: "다이아", ring: "ring-toss-brand", text: "text-toss-brand" },
+  LEGEND:  { label: "레전드", ring: "ring-toss-brand", text: "text-toss-brand" },
 };
 
 const TABS: { key: RankType; label: string; unit: string; format: (v: number) => string }[] = [
@@ -50,42 +57,49 @@ const MOCK_USERS: RankUser[] = [
 ];
 
 function ChangeChip({ change }: { change: number }) {
-  if (change === 0) return <span className="text-xs text-gray-600">—</span>;
+  if (change === 0) return <span className="text-toss-caption text-toss-text-quaternary">—</span>;
   if (change > 0)
-    return <span className="text-xs text-green-500 font-medium">▲{change}</span>;
-  return <span className="text-xs text-red-500 font-medium">▼{Math.abs(change)}</span>;
+    return <span className="text-toss-caption text-toss-positive font-medium">▲{change}</span>;
+  return <span className="text-toss-caption text-toss-negative font-medium">▼{Math.abs(change)}</span>;
 }
 
 function RankBadge({ rank }: { rank: number }) {
-  if (rank === 1) return <span className="text-lg">🥇</span>;
-  if (rank === 2) return <span className="text-lg">🥈</span>;
-  if (rank === 3) return <span className="text-lg">🥉</span>;
-  return <span className="text-sm font-bold text-gray-400 w-6 text-center tabular-nums">#{rank}</span>;
+  if (rank <= 3) {
+    return (
+      <span className="text-toss-subtitle font-bold text-toss-brand toss-numeric w-6 text-center">
+        {rank}
+      </span>
+    );
+  }
+  return (
+    <span className="text-toss-label font-medium text-toss-text-tertiary toss-numeric w-6 text-center">
+      {rank}
+    </span>
+  );
 }
 
 function Podium({ users, tab }: { users: RankUser[]; tab: typeof TABS[number] }) {
   const top3 = users.slice(0, 3);
   const [second, first, third] = [top3[1], top3[0], top3[2]];
 
-  const card = (user: RankUser, height: string, crown?: boolean) => {
+  const card = (user: RankUser, height: string, isFirst?: boolean) => {
     const tier = TIER_CONFIG[user.tier];
     return (
       <div className={`flex flex-col items-center gap-2 ${height}`}>
-        {crown && <span className="text-2xl">👑</span>}
-        <div className={`w-14 h-14 rounded-full bg-gray-700 ring-4 ${tier.ring} flex items-center justify-center text-xl font-bold text-white`}>
-          {user.avatarInitial}
+        <div className={`${isFirst ? "ring-4" : "ring-2"} ${tier.ring} rounded-full`}>
+          <Avatar name={user.avatarInitial} size={isFirst ? "lg" : "md"} />
         </div>
         <div className="text-center">
-          <p className="text-sm font-semibold text-white">{user.displayName}</p>
-          <p className={`text-xs font-medium ${tier.text}`}>{tier.label}</p>
-          <p className="text-sm font-bold text-yellow-400 mt-1">{tab.format(user[tab.key])}</p>
+          <p className="text-toss-label font-semibold text-toss-text-primary">{user.displayName}</p>
+          <p className={`text-toss-caption font-semibold ${tier.text}`}>{tier.label}</p>
+          <p className="text-toss-label font-bold text-toss-text-primary toss-numeric mt-1">{tab.format(user[tab.key])}</p>
         </div>
-        <div className={`w-full rounded-t-lg flex items-center justify-center py-2 font-bold text-white text-lg ${
-          user.rank === 1 ? "bg-yellow-500/20 border-t-2 border-yellow-500" :
-          user.rank === 2 ? "bg-slate-500/20 border-t-2 border-slate-400" :
-                            "bg-amber-800/20 border-t-2 border-amber-700"
+        <div className={`w-full rounded-t-toss-md flex items-center justify-center py-2 font-bold text-toss-label toss-numeric ${
+          user.rank === 1 ? "bg-toss-brand text-white" :
+          user.rank === 2 ? "bg-toss-brand-weak text-toss-brand" :
+                            "bg-toss-bg-subtle text-toss-text-secondary"
         }`}>
-          {user.rank === 1 ? "1st" : user.rank === 2 ? "2nd" : "3rd"}
+          {user.rank}위
         </div>
       </div>
     );
@@ -117,105 +131,107 @@ export function RankingBoard({ users }: { users: RankUser[] }) {
   return (
     <div>
       {/* 탭 */}
-      <div className="flex gap-1 mb-8 bg-gray-900 p-1 rounded-xl border border-gray-800 w-fit">
-        {TABS.map(({ key, label }) => (
-          <button
-            key={key}
-            onClick={() => setActiveTab(key)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              activeTab === key
-                ? "bg-gray-700 text-white"
-                : "text-gray-500 hover:text-gray-300"
-            }`}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
+      <SegmentedControl
+        options={TABS.map((t) => ({ value: t.key, label: t.label }))}
+        value={activeTab}
+        onChange={(v) => setActiveTab(v as RankType)}
+        size="md"
+        variant="filled"
+        className="mb-8 w-fit"
+      />
 
       {/* 포디엄 */}
       <Podium users={top10} tab={tab} />
 
       {/* 리더보드 테이블 */}
-      <div className="rounded-xl border border-gray-800 overflow-hidden">
-        <div className="grid grid-cols-[48px_1fr_80px_80px] gap-4 px-4 py-2.5 bg-gray-900 text-xs text-gray-500 font-medium border-b border-gray-800">
-          <div className="text-center">순위</div>
-          <div>컬렉터</div>
-          <div className="text-right">변동</div>
-          <div className="text-right">{tab.unit}</div>
-        </div>
-
-        {top10.map((user) => {
-          const tier = TIER_CONFIG[user.tier];
-          return (
-            <Link
-              key={user.username}
-              href={`/${locale}/profile/${user.username}`}
-              className={`grid grid-cols-[48px_1fr_80px_80px] gap-4 px-4 py-3.5 items-center border-b border-gray-800/60 last:border-0 transition-colors ${
-                user.isMe
-                  ? "bg-yellow-500/5 hover:bg-yellow-500/10"
-                  : "hover:bg-gray-800/40"
-              }`}
-            >
-              <div className="flex justify-center">
-                <RankBadge rank={user.rank} />
-              </div>
-              <div className="flex items-center gap-3 min-w-0">
-                <div className={`w-8 h-8 shrink-0 rounded-full bg-gray-700 ring-2 ${tier.ring} flex items-center justify-center text-xs font-bold text-white`}>
-                  {user.avatarInitial}
-                </div>
-                <div className="min-w-0">
-                  <span className="text-sm font-semibold text-white truncate block">
-                    {user.displayName}
-                    {user.isMe && (
-                      <span className="ml-1.5 text-[10px] font-bold text-yellow-500 bg-yellow-500/10 px-1.5 py-0.5 rounded-full">나</span>
-                    )}
-                  </span>
-                  <span className={`text-xs ${tier.text}`}>@{user.username}</span>
-                </div>
-              </div>
-              <div className="text-right">
-                <ChangeChip change={user.change} />
-              </div>
-              <div className="text-right text-sm font-semibold text-white tabular-nums">
-                {tab.format(user[tab.key])}
-              </div>
-            </Link>
-          );
-        })}
-      </div>
+      <Card className="overflow-hidden !p-0">
+        <RankingTable.Root>
+          <RankingTable.Head>
+            <RankingTable.HeadRow>
+              <RankingTable.Header align="center">순위</RankingTable.Header>
+              <RankingTable.Header>컬렉터</RankingTable.Header>
+              <RankingTable.Header align="right">변동</RankingTable.Header>
+              <RankingTable.Header align="right">{tab.unit}</RankingTable.Header>
+            </RankingTable.HeadRow>
+          </RankingTable.Head>
+          <RankingTable.Body>
+            {top10.map((user) => (
+              <RankingTable.Row
+                key={user.username}
+                interactive
+                href={`/${locale}/profile/${user.username}`}
+                className={user.isMe ? "bg-toss-brand-weak hover:bg-toss-brand-weak" : ""}
+              >
+                <RankingTable.Cell align="center">
+                  <RankBadge rank={user.rank} />
+                </RankingTable.Cell>
+                <RankingTable.Cell>
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="ring-2 ring-toss-brand rounded-full shrink-0">
+                      <Avatar name={user.avatarInitial} size="sm" />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-toss-label font-semibold text-toss-text-primary truncate block">
+                        {user.displayName}
+                        {user.isMe && (
+                          <Tag color="brand" shape="soft" className="ml-1.5">나</Tag>
+                        )}
+                      </span>
+                      <span className="text-toss-caption text-toss-text-tertiary">@{user.username}</span>
+                    </div>
+                  </div>
+                </RankingTable.Cell>
+                <RankingTable.Cell align="right">
+                  <ChangeChip change={user.change} />
+                </RankingTable.Cell>
+                <RankingTable.Cell align="right" numeric>
+                  <span className="text-toss-label font-semibold text-toss-text-primary">{tab.format(user[tab.key])}</span>
+                </RankingTable.Cell>
+              </RankingTable.Row>
+            ))}
+          </RankingTable.Body>
+        </RankingTable.Root>
+      </Card>
 
       {/* 내 순위 (top10 밖일 경우) */}
       {me && !top10.find((u) => u.isMe) && (
-        <div className="mt-3 rounded-xl border border-yellow-500/30 bg-yellow-500/5 overflow-hidden">
-          <div className="px-4 py-2 text-xs text-yellow-600 border-b border-yellow-500/20">내 순위</div>
-          <Link
-            href={`/${locale}/profile/${me.username}`}
-            className="grid grid-cols-[48px_1fr_80px_80px] gap-4 px-4 py-3.5 items-center hover:bg-yellow-500/10 transition-colors"
-          >
-            <div className="flex justify-center">
-              <span className="text-sm font-bold text-yellow-400 tabular-nums">#{me.rank}</span>
-            </div>
-            <div className="flex items-center gap-3 min-w-0">
-              <div className={`w-8 h-8 shrink-0 rounded-full bg-gray-700 ring-2 ${TIER_CONFIG[me.tier].ring} flex items-center justify-center text-xs font-bold text-white`}>
-                {me.avatarInitial}
-              </div>
-              <div className="min-w-0">
-                <span className="text-sm font-semibold text-white">
-                  {me.displayName}
-                  <span className="ml-1.5 text-[10px] font-bold text-yellow-500 bg-yellow-500/10 px-1.5 py-0.5 rounded-full">나</span>
-                </span>
-                <span className={`text-xs block ${TIER_CONFIG[me.tier].text}`}>@{me.username}</span>
-              </div>
-            </div>
-            <div className="text-right">
-              <ChangeChip change={me.change} />
-            </div>
-            <div className="text-right text-sm font-semibold text-white tabular-nums">
-              {tab.format(me[tab.key])}
-            </div>
-          </Link>
-        </div>
+        <Card className="mt-3 overflow-hidden ring-2 ring-toss-brand/30 !p-0">
+          <div className="border-b border-toss-divider px-4 py-2 text-toss-caption text-toss-brand font-semibold bg-toss-brand-weak">
+            내 순위
+          </div>
+          <RankingTable.Root>
+            <RankingTable.Body>
+              <RankingTable.Row
+                interactive
+                href={`/${locale}/profile/${me.username}`}
+              >
+                <RankingTable.Cell align="center">
+                  <span className="text-toss-label font-bold text-toss-brand tabular-nums">#{me.rank}</span>
+                </RankingTable.Cell>
+                <RankingTable.Cell>
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="ring-2 ring-toss-brand rounded-full shrink-0">
+                      <Avatar name={me.avatarInitial} size="sm" />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-toss-label font-semibold text-toss-text-primary truncate block">
+                        {me.displayName}
+                        <Tag color="brand" shape="soft" className="ml-1.5">나</Tag>
+                      </span>
+                      <span className="text-toss-caption text-toss-text-tertiary">@{me.username}</span>
+                    </div>
+                  </div>
+                </RankingTable.Cell>
+                <RankingTable.Cell align="right">
+                  <ChangeChip change={me.change} />
+                </RankingTable.Cell>
+                <RankingTable.Cell align="right" numeric>
+                  <span className="text-toss-label font-semibold text-toss-text-primary">{tab.format(me[tab.key])}</span>
+                </RankingTable.Cell>
+              </RankingTable.Row>
+            </RankingTable.Body>
+          </RankingTable.Root>
+        </Card>
       )}
     </div>
   );

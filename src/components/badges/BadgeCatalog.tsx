@@ -1,6 +1,9 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { Award, Lock, CheckCircle2 } from "lucide-react";
+import { Card, Tag, ToggleGroup, SegmentedControl } from "@/components/toss";
+import { cn } from "@/lib/utils";
 
 export type Tier = "SILVER" | "GOLD" | "DIAMOND";
 export type BadgeCategory = "collection" | "ranking" | "cert" | "season";
@@ -26,54 +29,126 @@ export interface Badge {
   rankMode?: boolean;
 }
 
-// ── Visual config per tier ────────────────────────────────────────────────
-
-const TIER_CFG: Record<Tier, {
-  icon: string; label: string;
-  border: string; glow: string;
-  chip: string; bar: string;
-  dotActive: string; emojiBg: string;
-}> = {
-  SILVER: {
-    icon: "🥈", label: "실버",
-    border: "border-gray-400/40 ring-1 ring-gray-400/25",
-    glow: "shadow-md shadow-gray-300/15",
-    chip: "bg-gray-700/80 text-gray-200",
-    bar: "from-gray-400 to-gray-300",
-    dotActive: "bg-gray-600/40 ring-1 ring-gray-400 text-gray-300",
-    emojiBg: "from-gray-700/50 to-gray-800/50",
-  },
-  GOLD: {
-    icon: "🥇", label: "골드",
-    border: "border-yellow-500/50 ring-1 ring-yellow-400/30",
-    glow: "badge-gold",
-    chip: "bg-yellow-900/70 text-yellow-300",
-    bar: "from-yellow-500 to-amber-400",
-    dotActive: "bg-yellow-600/30 ring-1 ring-yellow-400 text-yellow-300",
-    emojiBg: "from-yellow-800/40 to-amber-900/40",
-  },
-  DIAMOND: {
-    icon: "💎", label: "다이아",
-    border: "border-cyan-400/50 ring-1 ring-cyan-400/30",
-    glow: "badge-diamond",
-    chip: "bg-cyan-900/70 text-cyan-300",
-    bar: "from-cyan-500 to-blue-400",
-    dotActive: "bg-cyan-700/30 ring-1 ring-cyan-400 text-cyan-300",
-    emojiBg: "from-cyan-900/40 to-blue-900/40",
-  },
+const TIER_LABEL: Record<Tier, string> = {
+  SILVER: "실버",
+  GOLD: "골드",
+  DIAMOND: "다이아",
 };
 
 const TIER_ORDER: Tier[] = ["SILVER", "GOLD", "DIAMOND"];
 
-const CATS = [
-  { key: "all" as const,        label: "전체", emoji: "🏅" },
-  { key: "collection" as const, label: "수집", emoji: "🃏" },
-  { key: "ranking" as const,    label: "랭킹", emoji: "🏆" },
-  { key: "cert" as const,       label: "인증", emoji: "✅" },
-  { key: "season" as const,     label: "시즌", emoji: "🎖️" },
+const CATS: { key: "all" | BadgeCategory; label: string }[] = [
+  { key: "all", label: "전체" },
+  { key: "collection", label: "수집" },
+  { key: "ranking", label: "랭킹" },
+  { key: "cert", label: "인증" },
+  { key: "season", label: "시즌" },
 ];
 
-// ── Helpers ───────────────────────────────────────────────────────────────
+const CAT_LABEL: Record<BadgeCategory, string> = {
+  collection: "수집",
+  ranking: "랭킹",
+  cert: "인증",
+  season: "시즌",
+};
+
+const TIER_STARS: Record<Tier, number> = { SILVER: 1, GOLD: 2, DIAMOND: 3 };
+
+// SVG 그라데이션 강도 — 단일 brand 톤, 티어가 올라갈수록 진해짐
+const TIER_FILL: Record<Tier, { from: string; to: string; ring: string }> = {
+  SILVER:  { from: "#A9C8FF", to: "#5C97FF", ring: "#3182F6" }, // brand light
+  GOLD:    { from: "#5C97FF", to: "#1E64DA", ring: "#1E64DA" }, // brand mid
+  DIAMOND: { from: "#1E64DA", to: "#0B3FA0", ring: "#0B3FA0" }, // brand deep
+};
+
+function initials(name: string): string {
+  // 한글 이름의 첫 1~2 음절
+  const trimmed = name.replace(/\s+/g, "");
+  return trimmed.slice(0, 2);
+}
+
+function BadgeArtwork({ badge, size = 64 }: { badge: Badge; size?: number }) {
+  const { earnedTier } = badge;
+  const id = `bg-${badge.id}`;
+  const fill = earnedTier ? TIER_FILL[earnedTier] : null;
+  const stars = earnedTier ? TIER_STARS[earnedTier] : 0;
+
+  return (
+    <svg viewBox="0 0 64 64" width={size} height={size} aria-hidden>
+      <defs>
+        <linearGradient id={`${id}-grad`} x1="0" y1="0" x2="0" y2="1">
+          {fill ? (
+            <>
+              <stop offset="0%" stopColor={fill.from} />
+              <stop offset="100%" stopColor={fill.to} />
+            </>
+          ) : (
+            <>
+              <stop offset="0%" stopColor="#E5E8EB" />
+              <stop offset="100%" stopColor="#C9CDD2" />
+            </>
+          )}
+        </linearGradient>
+        <linearGradient id={`${id}-shine`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.45" />
+          <stop offset="60%" stopColor="#FFFFFF" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+
+      {/* Shield shape */}
+      <path
+        d="M32 4 L56 12 L56 30 C56 44 46 54 32 60 C18 54 8 44 8 30 L8 12 Z"
+        fill={`url(#${id}-grad)`}
+        stroke={fill?.ring ?? "#C9CDD2"}
+        strokeWidth="1.5"
+      />
+      {/* Shine overlay */}
+      <path
+        d="M32 4 L56 12 L56 30 C56 44 46 54 32 60 C18 54 8 44 8 30 L8 12 Z"
+        fill={`url(#${id}-shine)`}
+      />
+
+      {/* Inner ring */}
+      <path
+        d="M32 10 L50 16 L50 30 C50 41 42 49 32 54 C22 49 14 41 14 30 L14 16 Z"
+        fill="none"
+        stroke="#FFFFFF"
+        strokeOpacity="0.4"
+        strokeWidth="1"
+      />
+
+      {/* Korean initials */}
+      <text
+        x="32"
+        y="33"
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fontFamily="Pretendard Variable, Pretendard, sans-serif"
+        fontWeight="800"
+        fontSize={initials(badge.name).length > 1 ? "16" : "20"}
+        fill={earnedTier ? "#FFFFFF" : "#8B95A1"}
+      >
+        {initials(badge.name)}
+      </text>
+
+      {/* Tier stars */}
+      {stars > 0 && (
+        <g transform={`translate(${32 - (stars - 1) * 4}, 44)`}>
+          {Array.from({ length: stars }).map((_, i) => (
+            <circle
+              key={i}
+              cx={i * 8}
+              cy={0}
+              r={1.6}
+              fill="#FFFFFF"
+              opacity={0.95}
+            />
+          ))}
+        </g>
+      )}
+    </svg>
+  );
+}
 
 function getNextTier(badge: Badge): TierLevel | null {
   if (!badge.earnedTier) return badge.tiers[0] ?? null;
@@ -87,92 +162,82 @@ function getProgress(badge: Badge): { pct: number; current: number; next: number
   if (!next) return null;
   const prev = badge.earnedTier ? badge.tiers.find((t) => t.tier === badge.earnedTier) : null;
   const from = prev?.threshold ?? 0;
-  const pct = Math.max(0, Math.min(100, Math.round(((badge.currentValue - from) / (next.threshold - from)) * 100)));
+  const pct = Math.max(
+    0,
+    Math.min(100, Math.round(((badge.currentValue - from) / (next.threshold - from)) * 100))
+  );
   return { pct, current: badge.currentValue, next: next.threshold };
 }
 
-// ── Diamond sparkles ──────────────────────────────────────────────────────
-
-function Sparkles() {
-  return (
-    <>
-      <span className="absolute top-2 right-6 text-[9px] text-cyan-300 animate-pulse select-none" style={{ animationDelay: "0s" }}>✦</span>
-      <span className="absolute top-5 right-2 text-[11px] text-blue-300 animate-pulse select-none" style={{ animationDelay: "0.6s" }}>✦</span>
-      <span className="absolute top-1 right-14 text-[7px] text-purple-300 animate-pulse select-none" style={{ animationDelay: "1.2s" }}>✦</span>
-      <span className="absolute bottom-10 right-3 text-[9px] text-cyan-400 animate-pulse select-none" style={{ animationDelay: "1.8s" }}>✦</span>
-      <span className="absolute top-3 left-3 text-[7px] text-blue-400 animate-pulse select-none" style={{ animationDelay: "2.4s" }}>✦</span>
-    </>
-  );
-}
-
-// ── Badge card ────────────────────────────────────────────────────────────
-
 function BadgeCard({ badge }: { badge: Badge }) {
   const { earnedTier } = badge;
-  const cfg = earnedTier ? TIER_CFG[earnedTier] : null;
+  const isUnearned = earnedTier === null;
+  const isMaxed = earnedTier === "DIAMOND";
   const nextTier = getNextTier(badge);
   const progress = getProgress(badge);
-  const isMaxed = earnedTier === "DIAMOND";
-  const isUnearned = earnedTier === null;
 
   return (
-    <div className={`relative rounded-2xl border p-4 flex flex-col gap-2.5 transition-all overflow-hidden ${
-      isUnearned
-        ? "bg-gray-900/50 border-gray-800/40 opacity-50"
-        : `bg-gray-900 ${cfg!.border} ${cfg!.glow}`
-    }`}>
-      {earnedTier === "DIAMOND" && <Sparkles />}
-
+    <Card
+      className={cn(
+        "!p-4 flex flex-col gap-3 transition-all",
+        isUnearned && "opacity-70"
+      )}
+    >
       {/* Tier chip + MAX */}
-      <div className="flex items-center justify-between min-h-[20px]">
+      <div className="flex items-center justify-between min-h-[22px]">
         {earnedTier ? (
-          <span className={`text-[10px] font-black px-2 py-0.5 rounded-full ${cfg!.chip}`}>
-            {cfg!.icon} {cfg!.label}
-          </span>
+          <Tag color="brand" shape="soft" className="text-toss-micro font-bold">
+            {TIER_LABEL[earnedTier]}
+          </Tag>
         ) : (
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-800 text-gray-600">
-            🔒 미획득
-          </span>
+          <Tag color="neutral" shape="soft" className="text-toss-micro font-medium">
+            {CAT_LABEL[badge.category]}
+          </Tag>
         )}
         {isMaxed && (
-          <span className="text-[10px] font-black text-cyan-400 tracking-wider animate-pulse">MAX ✦</span>
+          <span className="text-toss-micro font-bold text-toss-brand tracking-wider">MAX</span>
         )}
       </div>
 
-      {/* Emoji container */}
-      <div className="flex justify-center py-0.5">
-        <div className={`w-[72px] h-[72px] rounded-2xl flex items-center justify-center bg-gradient-to-br ${
-          cfg ? cfg.emojiBg : "from-gray-800/40 to-gray-900/40"
-        }`}>
-          <span className={`select-none ${
-            earnedTier === "DIAMOND" ? "text-5xl" : "text-4xl"
-          } ${isUnearned ? "grayscale opacity-40" : ""}`}>
-            {badge.emoji}
-          </span>
-        </div>
+      {/* Badge artwork */}
+      <div className="flex justify-center py-1">
+        <BadgeArtwork badge={badge} size={72} />
       </div>
 
       {/* Name + desc */}
       <div className="text-center">
-        <p className={`text-sm font-bold leading-tight ${earnedTier ? "text-white" : "text-gray-600"}`}>
+        <p
+          className={cn(
+            "text-toss-label font-bold leading-tight",
+            isUnearned ? "text-toss-text-tertiary" : "text-toss-text-primary"
+          )}
+        >
           {badge.name}
         </p>
-        <p className="text-[11px] text-gray-500 mt-0.5 leading-relaxed line-clamp-2">{badge.desc}</p>
+        <p className="text-toss-caption text-toss-text-tertiary mt-1 leading-snug line-clamp-2">
+          {badge.desc}
+        </p>
       </div>
 
       {/* Tier progression dots */}
-      <div className="flex items-center justify-center gap-1.5">
+      <div className="flex items-center justify-center gap-2">
         {badge.tiers.map((t) => {
-          const lit = earnedTier !== null && TIER_ORDER.indexOf(earnedTier) >= TIER_ORDER.indexOf(t.tier);
+          const lit =
+            earnedTier !== null && TIER_ORDER.indexOf(earnedTier) >= TIER_ORDER.indexOf(t.tier);
           return (
             <div
               key={t.tier}
-              title={`${TIER_CFG[t.tier].label}: ${t.label}`}
-              className={`w-5 h-5 rounded-full flex items-center justify-center text-[9px] transition-all ${
-                lit ? TIER_CFG[t.tier].dotActive : "bg-gray-800 text-gray-700"
-              }`}
+              title={`${TIER_LABEL[t.tier]}: ${t.label}`}
+              className={cn(
+                "w-5 h-5 rounded-full flex items-center justify-center transition-all",
+                lit ? "bg-toss-brand text-white" : "bg-toss-bg-subtle text-toss-text-quaternary"
+              )}
             >
-              {lit ? TIER_CFG[t.tier].icon : "○"}
+              {lit ? (
+                <CheckCircle2 className="w-3 h-3" strokeWidth={3} />
+              ) : (
+                <span className="w-1.5 h-1.5 rounded-full bg-toss-text-quaternary" />
+              )}
             </div>
           );
         })}
@@ -181,54 +246,60 @@ function BadgeCard({ badge }: { badge: Badge }) {
       {/* Progress bar (count-based badges) */}
       {progress && (
         <div>
-          <div className="flex justify-between text-[10px] text-gray-600 mb-1">
-            <span>{badge.currentValue.toLocaleString()}{badge.unit}</span>
-            <span>→ {progress.next.toLocaleString()}{badge.unit}</span>
+          <div className="flex justify-between text-toss-micro text-toss-text-tertiary mb-1 toss-numeric">
+            <span>
+              {badge.currentValue.toLocaleString()}
+              {badge.unit}
+            </span>
+            <span>
+              {progress.next.toLocaleString()}
+              {badge.unit}
+            </span>
           </div>
-          <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+          <div className="h-1.5 bg-toss-bg-subtle rounded-full overflow-hidden">
             <div
-              className={`h-full rounded-full bg-gradient-to-r ${nextTier ? TIER_CFG[nextTier.tier].bar : ""} transition-all`}
+              className="h-full bg-toss-brand rounded-full transition-all"
               style={{ width: `${progress.pct}%` }}
             />
           </div>
         </div>
       )}
 
-      {/* Rank mode next hint */}
+      {/* Rank mode hint */}
       {badge.rankMode && nextTier && !isMaxed && (
-        <p className="text-[11px] text-gray-600 text-center">
-          현재 {badge.currentValue}위 → {TIER_CFG[nextTier.tier].label}: {nextTier.threshold}위 이내
+        <p className="text-toss-caption text-toss-text-tertiary text-center">
+          현재 <span className="font-semibold text-toss-text-secondary toss-numeric">{badge.currentValue}위</span> · 다음{" "}
+          <span className="font-semibold text-toss-text-secondary toss-numeric">{nextTier.threshold}위 이내</span>
         </p>
       )}
 
-      {/* Unearned: show first requirement */}
+      {/* Unearned hint */}
       {isUnearned && badge.tiers[0] && (
-        <p className="text-[11px] text-gray-600 text-center">
-          🔒 {badge.tiers[0].label}
+        <p className="text-toss-caption text-toss-text-tertiary text-center flex items-center justify-center gap-1">
+          <Lock className="w-3 h-3" />
+          {badge.tiers[0].label}
         </p>
       )}
 
       {/* Footer */}
-      <div className="mt-auto pt-2 border-t border-gray-800/60">
+      <div className="mt-auto pt-3 border-t border-toss-divider">
         {isUnearned ? (
-          <p className="text-[11px] text-gray-700">{badge.tiers[0].holders.toLocaleString()}명 보유</p>
+          <p className="text-toss-micro text-toss-text-quaternary toss-numeric">
+            {badge.tiers[0].holders.toLocaleString()}명 보유
+          </p>
         ) : (
-          <p className="text-[11px] text-gray-600">
+          <p className="text-toss-micro text-toss-text-tertiary toss-numeric">
             {badge.tiers.find((t) => t.tier === earnedTier)?.holders.toLocaleString()}명 달성
             {badge.earnedAt && ` · ${badge.earnedAt}`}
           </p>
         )}
       </div>
-    </div>
+    </Card>
   );
 }
 
-// ── Main catalog component ────────────────────────────────────────────────
-
-type CatKey = "all" | BadgeCategory;
-
 export function BadgeCatalog({ badges }: { badges: Badge[] }) {
-  const [activeCat, setActiveCat] = useState<CatKey>("all");
+  const [activeCat, setActiveCat] = useState<"all" | BadgeCategory>("all");
   const [viewMode, setViewMode] = useState<"all" | "earned">("all");
 
   const filtered = useMemo(() => {
@@ -237,112 +308,76 @@ export function BadgeCatalog({ badges }: { badges: Badge[] }) {
     return list;
   }, [badges, activeCat, viewMode]);
 
-  const earnedCount  = badges.filter((b) => b.earnedTier !== null).length;
-  const silverCount  = badges.filter((b) => b.earnedTier === "SILVER").length;
-  const goldCount    = badges.filter((b) => b.earnedTier === "GOLD").length;
+  const earnedCount = badges.filter((b) => b.earnedTier !== null).length;
+  const silverCount = badges.filter((b) => b.earnedTier === "SILVER").length;
+  const goldCount = badges.filter((b) => b.earnedTier === "GOLD").length;
   const diamondCount = badges.filter((b) => b.earnedTier === "DIAMOND").length;
 
-  return (
-    <>
-      <style>{`
-        @keyframes gold-pulse {
-          0%,100% { box-shadow: 0 0 10px 2px rgba(234,179,8,.22); }
-          50%      { box-shadow: 0 0 22px 6px rgba(234,179,8,.38); }
-        }
-        @keyframes diamond-sparkle {
-          0%,100% { box-shadow: 0 0 14px 3px rgba(34,211,238,.32); }
-          33%     { box-shadow: 0 0 26px 8px rgba(139,92,246,.38); }
-          66%     { box-shadow: 0 0 26px 8px rgba(59,130,246,.38); }
-        }
-        .badge-gold    { animation: gold-pulse 2.5s ease-in-out infinite; }
-        .badge-diamond { animation: diamond-sparkle 3s ease-in-out infinite; }
-        .no-scrollbar::-webkit-scrollbar { display:none; }
-        .no-scrollbar { -ms-overflow-style:none; scrollbar-width:none; }
-      `}</style>
+  const catOptions = CATS.map(({ key, label }) => {
+    const total = key === "all" ? badges.length : badges.filter((b) => b.category === key).length;
+    const earned =
+      key === "all" ? earnedCount : badges.filter((b) => b.category === key && b.earnedTier).length;
+    return { value: key, label: `${label} ${earned}/${total}` };
+  });
 
-      {/* ── Status card ─────────────────────────────────────────────────── */}
-      <div className="mb-6 rounded-2xl bg-gray-900 border border-gray-800 p-5">
-        <div className="flex items-start justify-between mb-4">
+  return (
+    <div>
+      {/* Status card */}
+      <Card padding="lg" className="mb-6">
+        <div className="flex items-start justify-between mb-4 gap-4 flex-wrap">
           <div>
-            <p className="text-xs text-gray-500 mb-0.5">보유 뱃지</p>
-            <p className="text-2xl font-black text-white">
+            <p className="text-toss-caption text-toss-text-tertiary mb-1">보유 뱃지</p>
+            <p className="text-toss-title-1 font-bold text-toss-text-primary toss-numeric">
               {earnedCount}
-              <span className="text-sm text-gray-500 font-normal"> / {badges.length}</span>
+              <span className="text-toss-label text-toss-text-tertiary font-normal">
+                {" "}
+                / {badges.length}
+              </span>
             </p>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="text-center">
-              <p className="text-base font-black text-gray-300">🥈 {silverCount}</p>
-              <p className="text-[10px] text-gray-600 mt-0.5">실버</p>
-            </div>
-            <div className="text-center">
-              <p className="text-base font-black text-yellow-400">🥇 {goldCount}</p>
-              <p className="text-[10px] text-gray-600 mt-0.5">골드</p>
-            </div>
-            <div className="text-center">
-              <p className="text-base font-black text-cyan-400">💎 {diamondCount}</p>
-              <p className="text-[10px] text-gray-600 mt-0.5">다이아</p>
-            </div>
+          <div className="flex items-center gap-6">
+            <TierStat label={TIER_LABEL.SILVER} count={silverCount} />
+            <TierStat label={TIER_LABEL.GOLD} count={goldCount} />
+            <TierStat label={TIER_LABEL.DIAMOND} count={diamondCount} />
           </div>
         </div>
-        <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+        <div className="h-2 bg-toss-bg-subtle rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-gray-400 via-yellow-400 to-cyan-400 rounded-full transition-all"
+            className="h-full bg-toss-brand rounded-full transition-all"
             style={{ width: `${(earnedCount / badges.length) * 100}%` }}
           />
         </div>
-        <p className="text-[11px] text-gray-600 mt-1.5">
+        <p className="text-toss-caption text-toss-text-tertiary mt-2 toss-numeric">
           달성률 {Math.round((earnedCount / badges.length) * 100)}%
         </p>
-      </div>
+      </Card>
 
-      {/* ── Filter bar ──────────────────────────────────────────────────── */}
+      {/* Filter bar */}
       <div className="flex items-center justify-between gap-3 mb-5 flex-wrap">
-        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar">
-          {CATS.map(({ key, label, emoji }) => {
-            const total  = key === "all" ? badges.length : badges.filter((b) => b.category === key).length;
-            const earned = key === "all" ? earnedCount  : badges.filter((b) => b.category === key && b.earnedTier).length;
-            return (
-              <button
-                key={key}
-                onClick={() => setActiveCat(key)}
-                className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                  activeCat === key
-                    ? "bg-gray-700 text-white"
-                    : "bg-gray-900 border border-gray-800 text-gray-400 hover:text-white"
-                }`}
-              >
-                <span>{emoji}</span>
-                <span>{label}</span>
-                <span className={`text-[10px] ${activeCat === key ? "text-gray-400" : "text-gray-600"}`}>
-                  {earned}/{total}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="flex items-center gap-1 bg-gray-800/60 rounded-xl p-1 shrink-0">
-          {(["all", "earned"] as const).map((m) => (
-            <button
-              key={m}
-              onClick={() => setViewMode(m)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                viewMode === m ? "bg-gray-700 text-white" : "text-gray-500 hover:text-gray-300"
-              }`}
-            >
-              {m === "all" ? "전체 뱃지" : "획득한 것만"}
-            </button>
-          ))}
-        </div>
+        <ToggleGroup
+          options={catOptions}
+          value={activeCat}
+          onChange={(v) => setActiveCat(v as "all" | BadgeCategory)}
+          size="sm"
+        />
+        <SegmentedControl
+          options={[
+            { value: "all", label: "전체 뱃지" },
+            { value: "earned", label: "획득" },
+          ]}
+          value={viewMode}
+          onChange={(v) => setViewMode(v as "all" | "earned")}
+          size="sm"
+          variant="filled"
+        />
       </div>
 
-      {/* ── Grid ────────────────────────────────────────────────────────── */}
+      {/* Grid */}
       {filtered.length === 0 ? (
-        <div className="text-center py-20 text-gray-600">
-          <p className="text-3xl mb-2">🔒</p>
-          <p className="text-sm">획득한 뱃지가 없어요</p>
-        </div>
+        <Card padding="lg" className="text-center">
+          <Award className="w-8 h-8 text-toss-text-quaternary mx-auto mb-2" strokeWidth={2} />
+          <p className="text-toss-body text-toss-text-tertiary">획득한 뱃지가 없어요</p>
+        </Card>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {filtered.map((b) => (
@@ -350,6 +385,15 @@ export function BadgeCatalog({ badges }: { badges: Badge[] }) {
           ))}
         </div>
       )}
-    </>
+    </div>
+  );
+}
+
+function TierStat({ label, count }: { label: string; count: number }) {
+  return (
+    <div className="text-center">
+      <p className="text-toss-subtitle font-bold text-toss-text-primary toss-numeric">{count}</p>
+      <p className="text-toss-micro text-toss-text-tertiary mt-0.5">{label}</p>
+    </div>
   );
 }

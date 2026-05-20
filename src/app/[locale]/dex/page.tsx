@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getCardsBySet, getAllSets } from "@/lib/api/pokemontcg";
 import { DexCatalog, type DexSet } from "@/components/dex/DexCatalog";
+import { Container } from "@/components/toss";
 
 export const metadata: Metadata = { title: "카드 도감 — Raredoc" };
 export const revalidate = 86400;
@@ -66,8 +67,8 @@ export default async function DexPage({
   });
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <Container size="xl" padding="md" className="py-8">
       <DexCatalog sets={sets} locale={locale} />
-    </div>
+    </Container>
   );
 }

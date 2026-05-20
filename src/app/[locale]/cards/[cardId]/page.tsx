@@ -10,6 +10,13 @@ import { RARITY_KO } from "@/lib/constants";
 import { PriceChart, PT_RANGES } from "@/components/cards/PriceChart";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import {
+  Card,
+  Container,
+  DeltaBadge,
+  Button,
+  RankingTable,
+} from "@/components/toss";
 
 export const revalidate = 3600;
 
@@ -43,11 +50,8 @@ function trendPct(avg: number, avg7d?: number): number | null {
 
 function TrendBadge({ pct }: { pct: number | null }) {
   if (pct === null) return null;
-  if (pct > 2)
-    return <span className="text-xs text-green-400">↑{pct.toFixed(1)}%</span>;
-  if (pct < -2)
-    return <span className="text-xs text-red-400">↓{Math.abs(pct).toFixed(1)}%</span>;
-  return <span className="text-xs text-gray-500">→</span>;
+  if (Math.abs(pct) <= 2) return <span className="text-toss-caption text-toss-text-quaternary">→</span>;
+  return <DeltaBadge percent={pct} mode="text" size="sm" />;
 }
 
 async function getCard(cardId: string) {
@@ -194,105 +198,71 @@ export default async function CardDetailPage({
   } catch {}
   const sameSetOthers = setCards.filter((c) => c.id !== cardId).slice(0, 20);
 
+  // 보유 현황 (목업)
+  const stats = mockOwnerStats(cardId);
+
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
+    <Container size="xl" padding="md" className="py-8">
       {/* 뒤로 가기 */}
       <a
         href={`../../expansions/${card.set.id}`}
-        className="text-sm text-gray-400 hover:text-white transition-colors mb-6 inline-block"
+        className="text-toss-label text-toss-text-tertiary hover:text-toss-text-primary transition-colors mb-6 inline-block"
       >
         ← {card.set.name}
       </a>
 
+      {/* ── 페이지 헤더 (이름 + 메타 한 줄 + 보유 현황 CTA) ───────────── */}
+      {/* C + E */}
+      <header className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
+        <div>
+          <h1 className="text-toss-display font-bold text-toss-text-primary">{card.name}</h1>
+          <p className="text-toss-caption text-toss-text-tertiary mt-1">
+            {card.set.name} · #{card.number}
+            {card.rarity && ` · ${locale === "ko" ? (RARITY_KO[card.rarity] ?? card.rarity) : card.rarity}`}
+            {card.artist && ` · ${card.artist}`}
+            {card.supertype && ` · ${card.supertype}`}
+            {card.types && card.types.length > 0 && ` · ${card.types.join(", ")}`}
+          </p>
+        </div>
+        <div className="flex items-center gap-3 shrink-0">
+          <div className="text-toss-caption text-toss-text-secondary">
+            👥 <span className="text-toss-text-primary font-bold">{stats.total}명</span> 등록
+            <span className="mx-1.5 text-toss-text-quaternary">·</span>
+            💬 <span className="text-toss-brand font-bold">{stats.offerable}명</span> 제안 가능
+          </div>
+          {stats.offerable > 0 && (
+            <Button variant="primary" size="md" asChild>
+              <a href={`/${locale}/cards/${cardId}/owners`}>구매 제안 →</a>
+            </Button>
+          )}
+        </div>
+      </header>
+
+      {/* ── 메인 2-col 그리드 ──────────────────────────────────────── */}
       <div className="grid md:grid-cols-2 gap-8">
-        {/* 카드 이미지 + 캐러셀 */}
-        <div className="flex flex-col gap-4">
+        {/* 좌측: 카드 이미지 (sticky) */}
+        <div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={card.images.large}
             alt={card.name}
-            className="rounded-xl shadow-2xl w-full max-w-xs self-center"
+            className="rounded-toss-lg shadow-toss-lg w-full max-w-xs self-center mx-auto md:sticky md:top-[68px]"
           />
-
-          {/* 같은 카드 · 다른 팩 (목업) */}
-          <div>
-            <h3 className="text-[11px] font-semibold text-gray-400 mb-1.5">같은 카드 · 다른 팩</h3>
-            <div className="flex gap-1.5 overflow-x-auto pb-1">
-              {OTHER_PACK_VARIANTS.map((v, i) => (
-                <a key={i} href="#" className="shrink-0 w-14 group text-left">
-                  <div className="rounded overflow-hidden bg-gray-900 border border-gray-800 group-hover:border-gray-600 transition-colors aspect-[5/7]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={card.images.small} alt={card.name} className="w-full h-full object-cover" />
-                  </div>
-                  <p className="mt-1 text-[9px] text-gray-500 truncate leading-tight">{v.set}</p>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* 같은 팩 · 다른 카드 */}
-          {sameSetOthers.length > 0 && (
-            <div>
-              <h3 className="text-[11px] font-semibold text-gray-400 mb-1.5">같은 팩 · 다른 카드</h3>
-              <div className="flex gap-1.5 overflow-x-auto pb-1">
-                {sameSetOthers.map((c) => (
-                  <a key={c.id} href={`../${c.id}`} className="shrink-0 w-14 group text-left">
-                    <div className="rounded overflow-hidden bg-gray-900 border border-gray-800 group-hover:border-gray-600 transition-colors aspect-[5/7]">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={c.images.small} alt={c.name} className="w-full h-full object-cover" />
-                    </div>
-                    <p className="mt-1 text-[9px] text-gray-500 truncate leading-tight">{c.name}</p>
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
 
-        {/* 카드 정보 */}
+        {/* 우측: 차트 → 시세 → 컨디션 → 푸터 */}
         <div className="space-y-5">
-          <div>
-            <h1 className="text-3xl font-bold text-white">{card.name}</h1>
-            <p className="text-gray-400 mt-1">
-              {card.set.name} · #{card.number}
-            </p>
-          </div>
+          {/* A: 가격 히스토리 (최상단) */}
+          <Card padding="md">
+            <PriceChart history={historyForChart} lineLabels={chartLineLabels} ranges={chartRanges} />
+          </Card>
 
-          {/* 메타 정보 */}
-          <div className="grid grid-cols-2 gap-3 text-sm">
-            {card.rarity && (
-              <div>
-                <p className="text-xs text-gray-500 mb-0.5">희귀도</p>
-                <p className="text-white font-medium">
-                  {locale === "ko" ? (RARITY_KO[card.rarity] ?? card.rarity) : card.rarity}
-                </p>
-              </div>
-            )}
-            {card.artist && (
-              <div>
-                <p className="text-xs text-gray-500 mb-0.5">일러스트레이터</p>
-                <p className="text-white font-medium">{card.artist}</p>
-              </div>
-            )}
-            {card.supertype && (
-              <div>
-                <p className="text-xs text-gray-500 mb-0.5">카드 종류</p>
-                <p className="text-white font-medium">{card.supertype}</p>
-              </div>
-            )}
-            {card.types && card.types.length > 0 && (
-              <div>
-                <p className="text-xs text-gray-500 mb-0.5">속성</p>
-                <p className="text-white font-medium">{card.types.join(", ")}</p>
-              </div>
-            )}
-          </div>
-
-          {/* 시세 — 3출처 등가 (세로 3행) */}
-          <div className="space-y-3">
+          {/* B: 시세 3출처 가로 그리드 */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {/* TCGplayer */}
-            <div className="p-4 rounded-xl border border-gray-800 bg-gray-900">
+            <Card padding="sm">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-xs font-semibold text-gray-300 flex items-center gap-1.5">
+                <h3 className="text-toss-caption font-semibold text-toss-text-secondary flex items-center gap-1.5">
                   <span>🇺🇸</span> TCGplayer
                 </h3>
                 {ptTcgPlayerUrl && (
@@ -300,7 +270,7 @@ export default async function CardDetailPage({
                     href={ptTcgPlayerUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[10px] text-blue-500 hover:text-blue-400 transition-colors"
+                    className="text-toss-tiny text-toss-brand hover:text-toss-brand-hover transition-colors"
                   >
                     ↗
                   </a>
@@ -308,68 +278,68 @@ export default async function CardDetailPage({
               </div>
               {ptTcgNm != null ? (
                 <>
-                  <p className="text-2xl font-bold text-blue-400">${ptTcgNm.toFixed(2)}</p>
+                  <p className="text-toss-title-1 font-bold text-toss-text-primary toss-numeric">${ptTcgNm.toFixed(2)}</p>
                   <div className="flex items-center gap-2 mt-0.5">
-                    <span className="text-[10px] text-gray-600">NM · 미국</span>
+                    <span className="text-toss-tiny text-toss-text-tertiary">NM · 미국</span>
                     <TrendBadge pct={ptTcgNmTrend} />
                   </div>
                   {tcgNm?.avg7d != null && (
-                    <p className="text-[10px] text-gray-500 mt-1.5">7일평균 ${toUsd(tcgNm.avg7d).toFixed(2)}</p>
+                    <p className="text-toss-tiny text-toss-text-tertiary mt-1.5 toss-numeric">7일평균 ${toUsd(tcgNm.avg7d).toFixed(2)}</p>
                   )}
                   {ptTcgNmRange && ptTcgNmRange.low !== ptTcgNmRange.high && (
-                    <p className="text-[10px] text-gray-600">${ptTcgNmRange.low.toFixed(2)} – ${ptTcgNmRange.high.toFixed(2)}</p>
+                    <p className="text-toss-tiny text-toss-text-quaternary toss-numeric">${ptTcgNmRange.low.toFixed(2)} – ${ptTcgNmRange.high.toFixed(2)}</p>
                   )}
                   {ptTcgSaleCount != null && (
-                    <p className="text-[10px] text-gray-600">{ptTcgSaleCount}건</p>
+                    <p className="text-toss-tiny text-toss-text-quaternary toss-numeric">{ptTcgSaleCount}건</p>
                   )}
                 </>
               ) : (
-                <p className="text-sm text-gray-600 py-2">— 데이터 수집 중</p>
+                <p className="text-toss-label text-toss-text-quaternary py-2">— 데이터 수집 중</p>
               )}
-            </div>
+            </Card>
 
             {/* eBay */}
-            <div className="p-4 rounded-xl border border-gray-800 bg-gray-900">
+            <Card padding="sm">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-xs font-semibold text-gray-300 flex items-center gap-1.5">
+                <h3 className="text-toss-caption font-semibold text-toss-text-secondary flex items-center gap-1.5">
                   <span>🌍</span> eBay
                 </h3>
-                <span className="text-[10px] text-gray-600">Sold listings</span>
+                <span className="text-toss-tiny text-toss-text-quaternary">Sold listings</span>
               </div>
               {ptEbayNm != null ? (
                 <>
-                  <p className="text-2xl font-bold text-emerald-400">${ptEbayNm.toFixed(2)}</p>
+                  <p className="text-toss-title-1 font-bold text-toss-text-primary toss-numeric">${ptEbayNm.toFixed(2)}</p>
                   <div className="flex items-center gap-2 mt-0.5">
-                    <span className="text-[10px] text-gray-600">NM · 글로벌</span>
+                    <span className="text-toss-tiny text-toss-text-tertiary">NM · 글로벌</span>
                     <TrendBadge pct={ptEbayNmTrend} />
                   </div>
                   {ebayNm?.avg7d != null && (
-                    <p className="text-[10px] text-gray-500 mt-1.5">7일평균 ${toUsd(ebayNm.avg7d).toFixed(2)}</p>
+                    <p className="text-toss-tiny text-toss-text-tertiary mt-1.5 toss-numeric">7일평균 ${toUsd(ebayNm.avg7d).toFixed(2)}</p>
                   )}
                   {ebayNm?.median7d != null && (
-                    <p className="text-[10px] text-gray-500">중앙값 ${toUsd(ebayNm.median7d).toFixed(2)}</p>
+                    <p className="text-toss-tiny text-toss-text-tertiary toss-numeric">중앙값 ${toUsd(ebayNm.median7d).toFixed(2)}</p>
                   )}
                   {ptEbayNmRange && ptEbayNmRange.low !== ptEbayNmRange.high && (
-                    <p className="text-[10px] text-gray-600">${ptEbayNmRange.low.toFixed(2)} – ${ptEbayNmRange.high.toFixed(2)}</p>
+                    <p className="text-toss-tiny text-toss-text-quaternary toss-numeric">${ptEbayNmRange.low.toFixed(2)} – ${ptEbayNmRange.high.toFixed(2)}</p>
                   )}
                   {ptEbaySaleCount != null && (
-                    <p className="text-[10px] text-gray-600">{ptEbaySaleCount}건</p>
+                    <p className="text-toss-tiny text-toss-text-quaternary toss-numeric">{ptEbaySaleCount}건</p>
                   )}
                 </>
               ) : latest?.normal ? (
                 <>
-                  <p className="text-2xl font-bold text-emerald-400">${latest.normal.toFixed(2)}</p>
-                  <p className="text-[10px] text-gray-600 mt-1.5">노말 · {new Date(priceHistory.at(-1)!.recordedAt).toLocaleDateString("ko-KR")} 기준</p>
+                  <p className="text-toss-title-1 font-bold text-toss-text-primary toss-numeric">${latest.normal.toFixed(2)}</p>
+                  <p className="text-toss-tiny text-toss-text-quaternary mt-1.5">노말 · {new Date(priceHistory.at(-1)!.recordedAt).toLocaleDateString("ko-KR")} 기준</p>
                 </>
               ) : (
-                <p className="text-sm text-gray-600 py-2">— 데이터 수집 중</p>
+                <p className="text-toss-label text-toss-text-quaternary py-2">— 데이터 수집 중</p>
               )}
-            </div>
+            </Card>
 
             {/* 번개장터 */}
-            <div className="p-4 rounded-xl border border-gray-800 bg-gray-900">
+            <Card padding="sm">
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-xs font-semibold text-gray-300 flex items-center gap-1.5">
+                <h3 className="text-toss-caption font-semibold text-toss-text-secondary flex items-center gap-1.5">
                   <span>🇰🇷</span> 번개장터
                 </h3>
                 {bunjangPrices && (
@@ -377,7 +347,7 @@ export default async function CardDetailPage({
                     href={`https://m.bunjang.co.kr/search/products?q=${encodeURIComponent(bunjangPrices.query)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[10px] text-orange-500 hover:text-orange-400 transition-colors"
+                    className="text-toss-tiny text-toss-brand hover:text-toss-brand-hover transition-colors"
                   >
                     ↗
                   </a>
@@ -385,104 +355,114 @@ export default async function CardDetailPage({
               </div>
               {bunjangPrices ? (
                 <>
-                  <p className="text-2xl font-bold text-orange-400">₩{bunjangPrices.avg.toLocaleString("ko-KR")}</p>
-                  <p className="text-[10px] text-gray-600 mt-0.5">평균 · 국내</p>
-                  <p className="text-[10px] text-gray-600 mt-1.5">
+                  <p className="text-toss-title-1 font-bold text-toss-text-primary toss-numeric">₩{bunjangPrices.avg.toLocaleString("ko-KR")}</p>
+                  <p className="text-toss-tiny text-toss-text-tertiary mt-0.5">평균 · 국내</p>
+                  <p className="text-toss-tiny text-toss-text-quaternary mt-1.5 toss-numeric">
                     {bunjangPrices.count}건 · ₩{bunjangPrices.min.toLocaleString("ko-KR")} – ₩{bunjangPrices.max.toLocaleString("ko-KR")}
                   </p>
-                  <p className="text-[10px] text-gray-700 mt-1 truncate">검색어: {bunjangPrices.query}</p>
+                  <p className="text-toss-tiny text-toss-text-quaternary mt-1 truncate">검색어: {bunjangPrices.query}</p>
                 </>
               ) : (
-                <p className="text-sm text-gray-600 py-2">— 데이터 수집 중</p>
+                <p className="text-toss-label text-toss-text-quaternary py-2">— 데이터 수집 중</p>
               )}
-            </div>
+            </Card>
           </div>
 
-          {/* 컨디션별 상세 시세 (LP/MP/HP/D) — 데이터 있을 때만 */}
+          {/* D: 컨디션별 시세 RankingTable */}
           {otherConditions.length > 0 && (
-            <div className="p-4 rounded-xl border border-gray-800 bg-gray-900">
-              <h3 className="text-sm font-semibold text-gray-300 mb-3">컨디션별 시세</h3>
-              <div className="grid grid-cols-[56px_1fr_1fr] gap-x-3 text-xs text-gray-500 pb-1.5 border-b border-gray-800">
-                <div />
-                <div className="text-center">eBay</div>
-                <div className="text-center">TCGplayer</div>
-              </div>
-              {otherConditions.map(({ key, label, ebay, tcg }) => (
-                <div
-                  key={key}
-                  className="grid grid-cols-[56px_1fr_1fr] gap-x-3 items-center pt-2 mt-2 border-t border-gray-800/60 first:border-t-0 first:mt-0"
-                >
-                  <div>
-                    <p className="text-xs font-medium text-gray-400">{key}</p>
-                    <p className="text-[10px] text-gray-600 leading-tight">{label}</p>
-                  </div>
-                  <div className="text-center">
-                    {ebay?.avg != null ? (
-                      <span className="text-sm text-gray-300">${toUsd(ebay.avg).toFixed(2)}</span>
-                    ) : (
-                      <span className="text-sm text-gray-600">—</span>
-                    )}
-                  </div>
-                  <div className="text-center">
-                    {tcg?.avg != null ? (
-                      <span className="text-sm text-gray-300">${toUsd(tcg.avg).toFixed(2)}</span>
-                    ) : (
-                      <span className="text-sm text-gray-600">—</span>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <Card padding="md">
+              <h3 className="text-toss-label font-bold text-toss-text-primary mb-3">컨디션별 시세</h3>
+              <RankingTable.Root className="mt-3">
+                <RankingTable.Head>
+                  <RankingTable.HeadRow>
+                    <RankingTable.Header>컨디션</RankingTable.Header>
+                    <RankingTable.Header align="right">eBay</RankingTable.Header>
+                    <RankingTable.Header align="right">TCGplayer</RankingTable.Header>
+                  </RankingTable.HeadRow>
+                </RankingTable.Head>
+                <RankingTable.Body>
+                  {otherConditions.map(({ key, label, ebay, tcg }) => (
+                    <RankingTable.Row key={key}>
+                      <RankingTable.Cell>
+                        <div>
+                          <p className="text-toss-label font-semibold text-toss-text-primary">{key}</p>
+                          <p className="text-toss-micro text-toss-text-tertiary">{label}</p>
+                        </div>
+                      </RankingTable.Cell>
+                      <RankingTable.Cell align="right" numeric>
+                        {ebay?.avg != null ? (
+                          <span className="text-toss-text-primary">${toUsd(ebay.avg).toFixed(2)}</span>
+                        ) : (
+                          <span className="text-toss-text-quaternary">—</span>
+                        )}
+                      </RankingTable.Cell>
+                      <RankingTable.Cell align="right" numeric>
+                        {tcg?.avg != null ? (
+                          <span className="text-toss-text-primary">${toUsd(tcg.avg).toFixed(2)}</span>
+                        ) : (
+                          <span className="text-toss-text-quaternary">—</span>
+                        )}
+                      </RankingTable.Cell>
+                    </RankingTable.Row>
+                  ))}
+                </RankingTable.Body>
+              </RankingTable.Root>
+            </Card>
           )}
 
           {/* 푸터: 집계 + 출처 */}
           {(ptTopPrice != null || ptTotalSaleCount != null || ptUpdatedAt) && (
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-gray-600 px-1">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-toss-micro text-toss-text-tertiary px-1">
               {ptTopPrice != null && (
-                <span>최고가 <span className="text-gray-400 font-medium">${ptTopPrice.toFixed(2)}</span></span>
+                <span>최고가 <span className="text-toss-text-primary font-semibold toss-numeric">${ptTopPrice.toFixed(2)}</span></span>
               )}
               {ptTotalSaleCount != null && (
-                <span>총 거래 <span className="text-gray-400 font-medium">{ptTotalSaleCount.toLocaleString()}건</span></span>
+                <span>총 거래 <span className="text-toss-text-primary font-semibold toss-numeric">{ptTotalSaleCount.toLocaleString()}건</span></span>
               )}
               {ptUpdatedAt && (
                 <span className="ml-auto">{new Date(ptUpdatedAt).toLocaleDateString("ko-KR")} 기준</span>
               )}
             </div>
           )}
-
-          {/* 가격 히스토리 차트 */}
-          <div className="p-4 rounded-xl border border-gray-800 bg-gray-900">
-            <PriceChart history={historyForChart} lineLabels={chartLineLabels} ranges={chartRanges} />
-          </div>
-
-          {/* 보유 현황 (목업) */}
-          {(() => {
-            const stats = mockOwnerStats(cardId);
-            return (
-              <div className="px-4 py-3 rounded-xl border border-gray-800 bg-gray-900 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3 text-xs">
-                  <span className="text-gray-400">
-                    👥 <span className="text-white font-semibold">{stats.total}명</span> 등록
-                  </span>
-                  <span className="text-gray-700">·</span>
-                  <span className="text-gray-400">
-                    💬 <span className="text-yellow-400 font-semibold">{stats.offerable}명</span> 제안 가능
-                  </span>
-                </div>
-                {stats.offerable > 0 && (
-                  <a
-                    href={`/${locale}/cards/${cardId}/owners`}
-                    className="text-xs text-yellow-500 hover:text-yellow-400 font-medium whitespace-nowrap"
-                  >
-                    구매 제안 →
-                  </a>
-                )}
-              </div>
-            );
-          })()}
         </div>
       </div>
 
-    </div>
+      {/* ── F: 페이지 하단 캐러셀 ───────────────────────────────────── */}
+      <div className="mt-12 space-y-6">
+        {/* 같은 카드 · 다른 팩 */}
+        <section>
+          <h3 className="text-toss-label font-bold text-toss-text-primary mb-3">같은 카드 · 다른 팩</h3>
+          <div className="flex gap-3 overflow-x-auto pb-2">
+            {OTHER_PACK_VARIANTS.map((v, i) => (
+              <a key={i} href="#" className="shrink-0 w-20 group text-left">
+                <div className="rounded-toss-md overflow-hidden bg-toss-bg-base border border-toss-divider shadow-toss-hairline group-hover:ring-2 group-hover:ring-toss-brand/40 transition-all aspect-[5/7]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={card.images.small} alt={card.name} className="w-full h-full object-cover" />
+                </div>
+                <p className="mt-1.5 text-toss-tiny text-toss-text-tertiary truncate">{v.set}</p>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        {/* 같은 팩 · 다른 카드 */}
+        {sameSetOthers.length > 0 && (
+          <section>
+            <h3 className="text-toss-label font-bold text-toss-text-primary mb-3">같은 팩 · 다른 카드</h3>
+            <div className="flex gap-3 overflow-x-auto pb-2">
+              {sameSetOthers.map((c) => (
+                <a key={c.id} href={`../${c.id}`} className="shrink-0 w-20 group text-left">
+                  <div className="rounded-toss-md overflow-hidden bg-toss-bg-base border border-toss-divider shadow-toss-hairline group-hover:ring-2 group-hover:ring-toss-brand/40 transition-all aspect-[5/7]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={c.images.small} alt={c.name} className="w-full h-full object-cover" />
+                  </div>
+                  <p className="mt-1.5 text-toss-tiny text-toss-text-tertiary truncate">{c.name}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+    </Container>
   );
 }
