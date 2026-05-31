@@ -65,7 +65,6 @@ model Price {
   reverseHolo  Float?
   firstEdition Float?
   marketPrice  Float? // 단일값 출처용 일반 시세(등급가·샵 販売/買取·해외 한국판 등). raw 변형 다출처는 normal/holofoil 사용.
-  source       String       @default("ebay") // legacy 문자열(historical). Phase 5 후속에서 priceSource로만.
   currency     String       @default("USD")
   usdToKrw     Float?
   condition    String?
@@ -642,6 +641,7 @@ model LogicalCard {
   rulesKo          String[]
   flavorTextKo     String?
   locales          CardLocale[]
+  texts            CardText[] // Phase 7: 언어별 표시 텍스트 오버레이(옵션 C). 향후 *Ko 컬럼 이관 대상.
   // Phase 5 신규 역관계
   collectionItems  CollectionItem[] @relation("CollectionItemLogicalCard")
   trades           Trade[]          @relation("TradeLogicalCard")
@@ -685,6 +685,36 @@ model CardLocale {
   @@index([logicalCardId])
   @@index([setId])
   @@index([region])
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Phase 7 — 언어별 표시 텍스트 오버레이 (옵션 C)
+//   - "물리 발매판"(CardLocale)과 분리된 "번역/표시 텍스트" 축.
+//   - (logicalCardId, language) 유일. 한국인 기반 사이트라 ko 우선 노출, en/ja 는 "원문 보기" 토글.
+//   - source 로 우선순위 표현: 공식 한국판 > 나무위키/포켓몬도감 > 자동번역.
+//   - KR 발매판 없어도 ko 텍스트 보유 가능(번역으로 채움) → CardLocale 의존 끊음.
+//   - LogicalCard.nameKo/attacksKo/abilitiesKo/rulesKo/flavorTextKo 를 일반화.
+//     백필·읽기 이관 완료 후 그 컬럼들 제거 예정(이번엔 additive, 무중단).
+// ─────────────────────────────────────────────────────────────────────────────
+model CardText {
+  id            String      @id @default(cuid())
+  logicalCardId String
+  logicalCard   LogicalCard @relation(fields: [logicalCardId], references: [id], onDelete: Cascade)
+  language      String // "ko" | "en" | "ja" | (확장: "zh" 등)
+  name          String? // 카드/포켓몬 표시명 (예: "이상해씨")
+  attacks       Json? // [{ name, text, cost?, damage? }] 해당 언어
+  abilities     Json? // [{ name, text, type }] 해당 언어
+  rules         String[] // 룰 텍스트(해당 언어)
+  flavorText    String? // 플레이버(해당 언어)
+  source        String      @default("auto") // "official_kr" | "namuwiki" | "pokemon_dict" | "tcgdex" | "pokemontcg_io" | "auto"
+  confidence    Float       @default(1.0) // 0..1 (공식=1.0, 자동번역/추정 < 1.0)
+  verifiedAt    DateTime?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@unique([logicalCardId, language])
+  @@index([logicalCardId])
+  @@index([language])
 }
 
 model RarityCategory {

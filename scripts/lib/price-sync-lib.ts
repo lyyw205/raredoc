@@ -125,7 +125,6 @@ export async function upsertDailyPrice(
     reverseHolo?: number | null;
     firstEdition?: number | null;
     marketPrice?: number | null;
-    source: string;
     currency: string;
     condition?: string | null;
     gradingCompany?: string | null;

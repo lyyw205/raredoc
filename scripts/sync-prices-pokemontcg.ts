@@ -4,7 +4,7 @@
  * 출처: pokemontcg.io 카드 응답의 tcgplayer(USD) + cardmarket(EUR) 가격.
  * 매핑: EN CardLocale.id === pokemontcg.io card id (직접 1:1).
  *       세트 단위 벌크 호출(getCardsBySet)로 호출 수 최소화.
- * 적재: Price 2행/카드 (source=tcgplayer, source=cardmarket) — 독립 출처 교차검증(B안).
+ * 적재: Price 2행/카드 (sourceId=PriceSource 'tcgplayer' / 'cardmarket') — 독립 출처 교차검증(B안).
  *       시계열 스냅샷이지만 같은 날 재실행 중복은 방지(하루 1행/출처).
  *
  * 실행(단독):
@@ -121,7 +121,6 @@ export async function run(opts: EnOptions = {}): Promise<SyncResult> {
           reverseHolo: tp.reverseHolo ?? null,
           firstEdition: tp.firstEdition ?? null,
           marketPrice: tp.marketPrice ?? null,
-          source: "tcgplayer",
           currency: "USD",
         });
         wrote ? (r.written++, setWritten++) : r.dupSkipped++;
@@ -132,7 +131,6 @@ export async function run(opts: EnOptions = {}): Promise<SyncResult> {
       if (cmPrices && cmVal !== undefined) {
         const wrote = await upsertDailyPrice(card.id, sid.cardmarket, today, {
           marketPrice: cmVal,
-          source: "cardmarket",
           currency: "EUR",
         });
         wrote ? (r.written++, setWritten++) : r.dupSkipped++;

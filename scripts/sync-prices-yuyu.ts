@@ -7,7 +7,7 @@
  * 매핑: 세트 = 큐레이션 SET_MAP(yuyuCode → 우리 setId). 카드 = setId + numberInt.
  *       Set.code 가 인기 JP세트에서 null 이라 자동매칭 불가 → 수동 맵으로 시작(확장 가능).
  *       같은 numberInt 가 복수면 모호 → skip(추측 금지).
- * 적재: Price (source=yuyu_tei_sell / yuyu_tei_buy, currency=JPY, marketPrice=값). 하루 1행/출처(멱등).
+ * 적재: Price (sourceId=PriceSource 'yuyu_tei_sell' / 'yuyu_tei_buy', currency=JPY, marketPrice=값). 하루 1행/출처(멱등).
  *
  * 실행(단독):
  *   npm run sync:prices:jp:yuyu                 # SET_MAP 전체
@@ -229,7 +229,6 @@ async function syncOne(
     }
     const wrote = await upsertDailyPrice(ids[0], sourceId, today, {
       marketPrice: c.priceJpy,
-      source: `yuyu_tei_${kind}`,
       currency: "JPY",
     });
     wrote ? written++ : dup++;

@@ -11,7 +11,7 @@
  *         — 이름 중복(bw1/en-tcg-bw1)은 짧은 ID 우선(pokemontcg.io 호환)
  *   카드: PokeTrace cardNumber("001/102") → numberInt(1) → CardLocale.numberInt
  *         numberInt 고유 1건만 채택, 복수=모호→skip(추측 금지)
- * 적재: Price (source='poketrace', condition='NEAR_MINT', currency='USD', marketPrice=avg)
+ * 적재: Price (sourceId=PriceSource 'poketrace', condition='NEAR_MINT', currency='USD', marketPrice=avg)
  *       같은 (cardLocaleId, sourceId) 오늘자 행 update-or-create (멱등).
  * 매핑 캐시: ExternalIdMapping(sourceId=poketrace ExternalSource.id, externalId=ptSetSlug, setId=rdSetId)
  *
@@ -413,7 +413,6 @@ export async function run(opts: PTOptions = {}): Promise<SyncResult> {
         if (!opts.dryRun) {
           const wrote = await upsertDailyPrice(ids[0], sid.poketrace, today, {
             marketPrice: nmPrice,
-            source: "poketrace",
             currency: "USD",
             condition: "NEAR_MINT",
           });
