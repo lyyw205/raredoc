@@ -1,102 +1,33 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { HighlightGallery } from "@/components/profile/HighlightGallery";
+import { HighlightGallery, type HighlightItem } from "@/components/profile/HighlightGallery";
 import { ProfileTabs } from "@/components/profile/ProfileTabs";
 import { Container, Card, Avatar, Button, Tag } from "@/components/toss";
-
-// ─── 목업 데이터 (추후 DB로 교체) ───────────────────────────────────────────
-
-const MOCK_PROFILES = {
-  yujin: {
-    username: "yujin",
-    displayName: "유진",
-    avatarInitial: "유",
-    tier: "GOLD" as const,
-    joinDate: "2025.09",
-    bio: "포켓몬 카드 5년차 수집가. SV 시리즈 위주 수집 중. 151 완성 도전 중.",
-    stats: { cards: 247, certified: 12, badges: 8, rank: 43 },
-    highlights: [
-      { id: "h1", name: "피카츄 ex SAR",   set: "포켓몬 151",          grade: "NM", certified: true,  imageUrl: "https://images.pokemontcg.io/sv3pt5/215_hires.png", valueKrw: 280000, isLocked: false },
-      { id: "h2", name: "뮤 ex SAR",       set: "포켓몬 151",          grade: "NM", certified: false, imageUrl: "https://images.pokemontcg.io/sv3pt5/205_hires.png", valueKrw: 165000, isLocked: true  },
-      { id: "h3", name: "리자몽 ex SAR",   set: "파라다이스 드래고나", grade: "LP", certified: true,  imageUrl: "https://images.pokemontcg.io/sv4pt5/191_hires.png", valueKrw: 420000, isLocked: false },
-    ],
-    badges: [
-      { id: "first_card", name: "첫 카드 등록", desc: "첫 번째 카드를 등록했습니다", type: "collection", emoji: "🃏", earned: true, earnedAt: "2025.09.15" },
-      { id: "first_cert", name: "첫 인증", desc: "첫 번째 카드 인증을 완료했습니다", type: "cert", emoji: "✅", earned: true, earnedAt: "2025.09.22" },
-      { id: "sar_hunter", name: "SAR 헌터", desc: "SAR 등급 카드 5장 보유", type: "collection", emoji: "⭐", earned: true, earnedAt: "2025.11.03" },
-      { id: "early_bird", name: "얼리버드", desc: "서비스 오픈 초기 가입자", type: "season", emoji: "🐦", earned: true, earnedAt: "2025.09.01" },
-      { id: "top100", name: "Top 100", desc: "컬렉션 가치 랭킹 100위 이내", type: "ranking", emoji: "🏆", earned: true, earnedAt: "2025.12.01" },
-      { id: "holo_50", name: "홀로 컬렉터", desc: "홀로포일 카드 50장 보유", type: "collection", emoji: "✨", earned: true, earnedAt: "2026.01.15" },
-      { id: "season1", name: "시즌 1 완주", desc: "시즌 1 활동을 완료했습니다", type: "season", emoji: "🎖️", earned: true, earnedAt: "2026.03.31" },
-      { id: "cert_master", name: "인증 마스터", desc: "인증된 카드 10장 이상 보유", type: "cert", emoji: "🔐", earned: true, earnedAt: "2026.02.10" },
-      { id: "complete_151", name: "151 완성", desc: "포켓몬 151 세트 완성", type: "collection", emoji: "📚", earned: false },
-      { id: "top10", name: "Top 10", desc: "컬렉션 가치 랭킹 10위 이내", type: "ranking", emoji: "👑", earned: false },
-      { id: "ur_hunter", name: "UR 헌터", desc: "UR 등급 카드 3장 보유", type: "collection", emoji: "💎", earned: false },
-      { id: "monthly_king", name: "이달의 수집왕", desc: "월간 등록 카드 수 1위", type: "ranking", emoji: "🥇", earned: false },
-    ],
-    collections: [
-      { setId: "sv3pt5", name: "포켓몬 151", total: 165, owned: 143 },
-      { setId: "sv4pt5", name: "파라다이스 드래고나", total: 191, owned: 67 },
-      { setId: "sv8", name: "초승달의 섬", total: 193, owned: 12 },
-    ],
-  },
-  chaeyeon: {
-    username: "chaeyeon",
-    displayName: "채연",
-    avatarInitial: "채",
-    tier: "DIAMOND" as const,
-    joinDate: "2025.10",
-    bio: "PSA 감정 전문 수집가. 리자몽 SAR 풀셋 목표 중. 직거래 환영.",
-    stats: { cards: 183, certified: 21, badges: 11, rank: 12 },
-    highlights: [
-      { id: "h1", name: "리자몽 ex SAR",   set: "파라다이스 드래고나", grade: "NM", certified: true,  imageUrl: "https://images.pokemontcg.io/sv4pt5/191_hires.png", valueKrw: 420000, isLocked: true  },
-      { id: "h2", name: "가이오가 ex SAR", set: "파라다이스 드래고나", grade: "NM", certified: true,  imageUrl: "https://images.pokemontcg.io/sv4pt5/187_hires.png", valueKrw: 310000, isLocked: false },
-      { id: "h3", name: "피카츄 ex SAR",   set: "포켓몬 151",          grade: "NM", certified: false, imageUrl: "https://images.pokemontcg.io/sv3pt5/215_hires.png", valueKrw: 270000, isLocked: false },
-    ],
-    badges: [
-      { id: "certifier",    name: "인증자",      desc: "카드 인증 10장 이상", type: "cert",       emoji: "✅", earned: true,  earnedAt: "2025.11.10" },
-      { id: "psa",          name: "PSA 수집가",  desc: "PSA 감정 보유",       type: "cert",       emoji: "🔐", earned: true,  earnedAt: "2025.10.22" },
-      { id: "sar_hunter",   name: "SAR 헌터",    desc: "SAR 5장 보유",        type: "collection", emoji: "⭐", earned: true,  earnedAt: "2025.12.01" },
-      { id: "ranker",       name: "Top 100",     desc: "랭킹 100위 이내",     type: "ranking",    emoji: "🏆", earned: true,  earnedAt: "2026.01.05" },
-      { id: "early_bird",   name: "얼리버드",    desc: "오픈 초기 가입자",    type: "season",     emoji: "🐦", earned: false },
-    ],
-    collections: [
-      { setId: "sv4pt5", name: "파라다이스 드래고나", total: 191, owned: 134 },
-      { setId: "sv3pt5", name: "포켓몬 151",          total: 165, owned: 49  },
-    ],
-  },
-  nari_collect: {
-    username: "nari_collect",
-    displayName: "나리",
-    avatarInitial: "나",
-    tier: "SILVER" as const,
-    joinDate: "2025.11",
-    bio: "151 세트 SAR 풀셋 완성! 이제 드래고나 공략 중. 합리적인 가격에 직거래 가능.",
-    stats: { cards: 312, certified: 6, badges: 7, rank: 87 },
-    highlights: [
-      { id: "h1", name: "이상해꽃 ex SAR", set: "포켓몬 151", grade: "NM", certified: false, imageUrl: "https://images.pokemontcg.io/sv3pt5/198_hires.png", valueKrw: 92000,  isLocked: false },
-      { id: "h2", name: "피카츄 ex SAR",   set: "포켓몬 151", grade: "NM", certified: false, imageUrl: "https://images.pokemontcg.io/sv3pt5/215_hires.png", valueKrw: 265000, isLocked: false },
-      { id: "h3", name: "뮤 ex SAR",       set: "포켓몬 151", grade: "LP", certified: false, imageUrl: "https://images.pokemontcg.io/sv3pt5/205_hires.png", valueKrw: 145000, isLocked: true  },
-    ],
-    badges: [
-      { id: "card_register", name: "카드 등록",  desc: "카드 100장 등록", type: "collection", emoji: "🃏", earned: true,  earnedAt: "2026.01.20" },
-      { id: "set_complete",  name: "세트 완성",  desc: "1세트 완성",      type: "collection", emoji: "📚", earned: true,  earnedAt: "2026.03.15" },
-      { id: "sar_hunter",    name: "SAR 헌터",   desc: "SAR 5장 보유",   type: "collection", emoji: "⭐", earned: true,  earnedAt: "2025.12.20" },
-    ],
-    collections: [
-      { setId: "sv3pt5", name: "포켓몬 151",          total: 165, owned: 165 },
-      { setId: "sv4pt5", name: "파라다이스 드래고나", total: 191, owned: 58  },
-    ],
-  },
-};
+import { prisma } from "@/lib/prisma";
+import { getCurrentUser } from "@/lib/auth/session";
+import {
+  getHighlights,
+  getUserStats,
+  getUserSetProgress,
+  getUserCollection,
+} from "@/lib/services/collection";
+import {
+  getBadgesForUser,
+  getRankings,
+} from "@/lib/services/gamification";
 
 const TIER_CONFIG = {
-  BRONZE: { label: "브론즈 컬렉터", ring: "ring-amber-700", accent: "text-amber-500", bg: "from-amber-950/60 to-gray-950" },
-  SILVER: { label: "실버 컬렉터", ring: "ring-slate-400", accent: "text-slate-400", bg: "from-slate-800/40 to-gray-950" },
-  GOLD: { label: "골드 컬렉터", ring: "ring-yellow-500", accent: "text-yellow-400", bg: "from-yellow-950/50 to-gray-950" },
-  DIAMOND: { label: "다이아 컬렉터", ring: "ring-cyan-400", accent: "text-cyan-400", bg: "from-cyan-950/50 to-gray-950" },
-  LEGEND: { label: "레전드 컬렉터", ring: "ring-purple-400", accent: "text-purple-400", bg: "from-purple-950/50 to-gray-950" },
-};
+  BRONZE: { label: "브론즈 컬렉터" },
+  SILVER: { label: "실버 컬렉터" },
+  GOLD: { label: "골드 컬렉터" },
+  DIAMOND: { label: "다이아 컬렉터" },
+  LEGEND: { label: "레전드 컬렉터" },
+} as const;
+
+function tierLabel(tier: string | null): string {
+  return (TIER_CONFIG as Record<string, { label: string }>)[tier ?? "BRONZE"]?.label
+    ?? TIER_CONFIG.BRONZE.label;
+}
 
 // ─── 컴포넌트 ────────────────────────────────────────────────────────────────
 
@@ -117,12 +48,13 @@ export async function generateMetadata({
   params: Promise<{ username: string }>;
 }): Promise<Metadata> {
   const { username } = await params;
-  const user = MOCK_PROFILES[username as keyof typeof MOCK_PROFILES];
+  const user = await prisma.user.findUnique({
+    where: { username },
+    select: { displayName: true, name: true, bio: true },
+  });
   if (!user) return {};
-  return {
-    title: `${user.displayName}의 컬렉션`,
-    description: user.bio,
-  };
+  const name = user.displayName ?? user.name ?? username;
+  return { title: `${name}의 컬렉션`, description: user.bio ?? undefined };
 }
 
 export default async function ProfilePage({
@@ -136,15 +68,97 @@ export default async function ProfilePage({
   const sp = (await searchParams) ?? {};
   const defaultTab: "collection" | "badges" | "ranking" =
     sp.tab === "badges" || sp.tab === "ranking" ? sp.tab : "collection";
-  const user = MOCK_PROFILES[username as keyof typeof MOCK_PROFILES];
-  if (!user) notFound();
 
-  const MY_USERNAME = "yujin";                    // 추후 auth로 교체
-  const isOwnProfile = username === MY_USERNAME;
+  const userSelect = {
+    id: true,
+    username: true,
+    displayName: true,
+    name: true,
+    avatarInitial: true,
+    bio: true,
+    tier: true,
+    createdAt: true,
+  } as const;
 
-  const tier = TIER_CONFIG[user.tier];
-  const totalValue = user.highlights.reduce((acc, h) => acc + h.valueKrw, 0);
+  // username 으로 조회, 없으면 id 로 재조회 (username 미설정 유저 대응)
+  let profileUser = await prisma.user.findUnique({
+    where: { username },
+    select: userSelect,
+  });
+  if (!profileUser) {
+    profileUser = await prisma.user.findUnique({
+      where: { id: username },
+      select: userSelect,
+    });
+  }
+  if (!profileUser) notFound();
+
+  const viewer = await getCurrentUser();
+  const isOwnProfile = viewer?.id === profileUser.id;
+
+  const [stats, highlightItems, setProgress, collection, badges, rankings] = await Promise.all([
+    getUserStats(profileUser.id),
+    getHighlights(profileUser.id),
+    getUserSetProgress(profileUser.id),
+    getUserCollection(profileUser.id),
+    getBadgesForUser(profileUser.id),
+    getRankings({ sort: "value", viewerId: profileUser.id }),
+  ]);
+
+  const displayName = profileUser.displayName ?? profileUser.name ?? username;
+  const avatarInitial = profileUser.avatarInitial ?? displayName.charAt(0);
+  const joinDate = `${profileUser.createdAt.getFullYear()}.${String(profileUser.createdAt.getMonth() + 1).padStart(2, "0")}`;
+
+  const highlights: HighlightItem[] = highlightItems.map((h) => ({
+    id: h.id,
+    name: h.name,
+    set: h.setName,
+    grade: h.grade,
+    certified: h.certified,
+    imageUrl: h.imageLarge ?? h.imageSmall ?? "",
+    valueKrw: h.estimatedKrw,
+    isLocked: !h.forSale,
+  }));
+
+  const totalValue = highlights.reduce((acc, h) => acc + h.valueKrw, 0);
   const HIGHLIGHT_SLOTS = 5;
+
+  // 하이라이트에 아직 없는 보유 카드 (소유자 본인의 "내 컬렉션에서 추가" 용)
+  const myCollection = isOwnProfile
+    ? collection
+        .filter((c) => c.highlightSlot == null)
+        .map((c) => ({
+          id: c.id,
+          name: c.name,
+          set: c.setName,
+          grade: c.grade,
+          certified: c.certified,
+          imageUrl: c.imageLarge ?? c.imageSmall ?? "",
+          valueKrw: c.estimatedKrw,
+        }))
+    : [];
+
+  // 컬렉션 탭에 넘길 세트별 보유 데이터 (디자인 유지)
+  const collectionSets = setProgress.map((sp) => ({
+    setId: sp.setId,
+    name: sp.name,
+    totalCards: sp.total,
+    estimatedKrw: sp.estimatedKrw,
+    owned: collection
+      .filter((c) => c.setId === sp.setId)
+      .map((c) => ({
+        id: c.id,
+        cardId: c.cardId,
+        name: c.name,
+        number: c.number,
+        imageUrl: c.imageLarge ?? c.imageSmall ?? "",
+        grade: c.grade,
+        certified: c.certified,
+        forSale: c.forSale,
+        highlightSlot: c.highlightSlot,
+        valueKrw: c.estimatedKrw,
+      })),
+  }));
 
   return (
     <Container size="xl" padding="md" className="py-8 space-y-8">
@@ -155,18 +169,20 @@ export default async function ProfilePage({
 
           {/* 아바타 */}
           <div className="ring-4 ring-toss-brand rounded-full shrink-0">
-            <Avatar name={user.avatarInitial} size="xl" />
+            <Avatar name={avatarInitial} size="xl" />
           </div>
 
           {/* 이름 + 소개 */}
           <div className="flex-1 min-w-0">
             <div className="flex flex-wrap items-center gap-2 mb-1">
-              <h1 className="text-toss-title-1 font-bold text-toss-text-primary">{user.displayName}</h1>
-              <span className="text-toss-label text-toss-text-tertiary">@{user.username}</span>
-              <Tag color="brand" shape="soft">{tier.label}</Tag>
+              <h1 className="text-toss-title-1 font-bold text-toss-text-primary">{displayName}</h1>
+              <span className="text-toss-label text-toss-text-tertiary">@{profileUser.username ?? username}</span>
+              <Tag color="brand" shape="soft">{tierLabel(profileUser.tier)}</Tag>
             </div>
-            <p className="text-toss-body text-toss-text-secondary mt-1">{user.bio}</p>
-            <p className="text-toss-caption text-toss-text-quaternary mt-1">가입 {user.joinDate}</p>
+            {profileUser.bio && (
+              <p className="text-toss-body text-toss-text-secondary mt-1">{profileUser.bio}</p>
+            )}
+            <p className="text-toss-caption text-toss-text-quaternary mt-1">가입 {joinDate}</p>
           </div>
 
           {/* 버튼 */}
@@ -186,26 +202,32 @@ export default async function ProfilePage({
 
         {/* 통계 */}
         <div className="mt-6 pt-5 border-t border-toss-divider flex gap-8 justify-center sm:justify-start">
-          <StatItem value={user.stats.cards.toLocaleString()} label="보유 카드" />
+          <StatItem value={stats.cards.toLocaleString()} label="보유 카드" />
           <div className="w-px bg-toss-divider" />
-          <StatItem value={user.stats.certified} label="인증 완료" />
+          <StatItem value={stats.certified} label="인증 완료" />
           <div className="w-px bg-toss-divider" />
-          <StatItem value={user.stats.badges} label="획득 뱃지" />
-          <div className="w-px bg-toss-divider" />
-          <StatItem value={`#${user.stats.rank}`} label="랭킹" />
+          <StatItem value={`₩${(stats.totalKrw / 10000).toFixed(0)}만`} label="추정 총액" />
         </div>
       </Card>
 
       {/* ── 하이라이트 갤러리 ── */}
       <HighlightGallery
-        items={user.highlights}
+        items={highlights}
         totalSlots={HIGHLIGHT_SLOTS}
         totalValue={totalValue}
         isOwnProfile={isOwnProfile}
+        myCollection={myCollection}
       />
 
       {/* ── 탭: 컬렉션 / 뱃지 / 랭킹 ── */}
-      <ProfileTabs defaultTab={defaultTab} />
+      <ProfileTabs
+        defaultTab={defaultTab}
+        sets={collectionSets}
+        isOwnProfile={isOwnProfile}
+        badges={badges}
+        rankings={rankings}
+        viewerId={viewer?.id ?? null}
+      />
 
     </Container>
   );

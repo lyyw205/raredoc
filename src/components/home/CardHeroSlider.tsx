@@ -44,7 +44,7 @@ export function CardHeroSlider({
   locale: string;
 }) {
   const [current, setCurrent] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setInterval>>();
+  const timerRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
 
   const resetTimer = useCallback(() => {
     clearInterval(timerRef.current);
@@ -156,24 +156,32 @@ export function CardHeroSlider({
                 )}
                 {isActive ? (
                   <Link href={`/${locale}/cards/${c.id}`}>
+                    {c.imageUrl ? (
+                      <img
+                        src={c.imageUrl}
+                        alt={c.name}
+                        className="w-full rounded-xl block"
+                        style={{
+                          boxShadow:
+                            "0 0 52px rgba(234,179,8,0.18), 0 20px 44px rgba(0,0,0,0.7)",
+                          outline: "2px solid rgba(234,179,8,0.22)",
+                          outlineOffset: "2px",
+                        }}
+                      />
+                    ) : (
+                      <div className="w-full aspect-[5/7] rounded-xl bg-toss-bg-muted" />
+                    )}
+                  </Link>
+                ) : (
+                  c.imageUrl ? (
                     <img
                       src={c.imageUrl}
                       alt={c.name}
                       className="w-full rounded-xl block"
-                      style={{
-                        boxShadow:
-                          "0 0 52px rgba(234,179,8,0.18), 0 20px 44px rgba(0,0,0,0.7)",
-                        outline: "2px solid rgba(234,179,8,0.22)",
-                        outlineOffset: "2px",
-                      }}
                     />
-                  </Link>
-                ) : (
-                  <img
-                    src={c.imageUrl}
-                    alt={c.name}
-                    className="w-full rounded-xl block"
-                  />
+                  ) : (
+                    <div className="w-full aspect-[5/7] rounded-xl bg-toss-bg-muted" />
+                  )
                 )}
               </div>
             );

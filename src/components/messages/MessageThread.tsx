@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useTransition } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
 import {
   ArrowLeft,
@@ -14,8 +15,13 @@ import {
   ThumbsUp,
   X,
 } from "lucide-react";
-import { Avatar, Button, Card, Modal, Tag, TextField } from "@/components/toss";
+import { Avatar, Button, Modal, TextField } from "@/components/toss";
 import { cn } from "@/lib/utils";
+import {
+  sendMessageAction,
+  proposeAppointmentAction,
+  leaveReviewAction,
+} from "@/lib/actions/messaging";
 import type { CardRef, Conversation } from "./MessageInbox";
 
 export type Message = {
@@ -41,11 +47,15 @@ function CardRefBanner({ card }: { card: CardRef }) {
   return (
     <div className="flex items-center gap-3 mx-auto max-w-xs bg-toss-bg-base border border-toss-brand-weak rounded-toss-lg p-3 mb-6 shadow-toss-hairline">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={card.imageUrl}
-        alt={card.cardName}
-        className="w-10 h-14 object-cover rounded-toss-md shrink-0"
-      />
+      {card.imageUrl ? (
+        <img
+          src={card.imageUrl}
+          alt={card.cardName}
+          className="w-10 h-14 object-cover rounded-toss-md shrink-0"
+        />
+      ) : (
+        <div className="w-10 h-14 rounded-toss-md shrink-0 bg-toss-bg-muted" />
+      )}
       <div className="min-w-0">
         <p className="text-toss-micro text-toss-brand font-semibold mb-0.5">{card.setName}</p>
         <p className="text-toss-label font-bold text-toss-text-primary leading-snug truncate">
@@ -70,11 +80,15 @@ function CardReplyAttachment({ card, isMe }: { card: CardRef; isMe: boolean }) {
       )}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={card.imageUrl}
-        alt={card.cardName}
-        className="w-7 h-10 object-cover rounded-toss-sm shrink-0"
-      />
+      {card.imageUrl ? (
+        <img
+          src={card.imageUrl}
+          alt={card.cardName}
+          className="w-7 h-10 object-cover rounded-toss-sm shrink-0"
+        />
+      ) : (
+        <div className="w-7 h-10 rounded-toss-sm shrink-0 bg-toss-bg-muted" />
+      )}
       <div className="min-w-0">
         <p className="text-toss-micro font-semibold text-toss-brand">{card.setName}</p>
         <p className="text-toss-caption font-bold truncate text-toss-text-primary">
@@ -415,7 +429,7 @@ function DateDivider({ label }: { label: string }) {
 
 export function MessageThread({
   conversation,
-  messages: initialMessages,
+  messages,
   myUserId,
   prefilledCardRef,
 }: {
@@ -425,7 +439,8 @@ export function MessageThread({
   prefilledCardRef?: CardRef;
 }) {
   const locale = useLocale();
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
   const [input, setInput] = useState("");
   const [attachedCard, setAttachedCard] = useState<CardRef | undefined>(prefilledCardRef);
   const [aptOpen, setAptOpen] = useState(false);
@@ -434,41 +449,47 @@ export function MessageThread({
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
+  const conversationId = conversation.id;
+
   function showToast(text: string) {
     setToast(text);
     setTimeout(() => setToast(null), 3000);
   }
 
   function sendAppointment(apt: NonNullable<Message["appointment"]>) {
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: `m-${Date.now()}`,
-        senderId: myUserId,
-        content: "",
-        createdAt: "방금",
-        read: false,
-        appointment: apt,
-      },
-    ]);
     setAptOpen(false);
-    showToast("거래글이 예약중으로 변경되었습니다");
+    startTransition(async () => {
+      const res = await proposeAppointmentAction({
+        conversationId,
+        date: apt.date,
+        time: apt.time,
+        place: apt.place,
+      });
+      if (res.ok) {
+        showToast("거래 약속을 보냈어요");
+        router.refresh();
+      } else {
+        showToast(res.error ?? "약속 전송에 실패했어요");
+      }
+    });
   }
 
   function sendReview(rev: NonNullable<Message["review"]>) {
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: `m-${Date.now()}`,
-        senderId: myUserId,
-        content: "",
-        createdAt: "방금",
-        read: false,
-        review: rev,
-      },
-    ]);
     setReviewOpen(false);
-    showToast("거래글이 판매완료로 변경되었습니다");
+    startTransition(async () => {
+      const res = await leaveReviewAction({
+        conversationId,
+        rating: rev.rating,
+        manner: rev.manner,
+        comment: rev.comment,
+      });
+      if (res.ok) {
+        showToast("거래 완료 후기를 등록했어요");
+        router.refresh();
+      } else {
+        showToast(res.error ?? "후기 등록에 실패했어요");
+      }
+    });
   }
 
   useEffect(() => {
@@ -481,19 +502,25 @@ export function MessageThread({
 
   function send() {
     const text = input.trim();
-    if (!text) return;
-    const newMsg: Message = {
-      id: `m-${Date.now()}`,
-      senderId: myUserId,
-      content: text,
-      createdAt: "방금",
-      read: false,
-      cardRef: attachedCard,
-    };
-    setMessages((prev) => [...prev, newMsg]);
+    if (!text && !attachedCard) return;
+    const card = attachedCard;
     setInput("");
     setAttachedCard(undefined);
     inputRef.current?.focus();
+    startTransition(async () => {
+      const res = await sendMessageAction({
+        conversationId,
+        content: text,
+        attachedCardId: card?.cardId ?? null,
+      });
+      if (res.ok) {
+        router.refresh();
+      } else {
+        setInput(text);
+        if (card) setAttachedCard(card);
+        showToast(res.error ?? "전송에 실패했어요");
+      }
+    });
   }
 
   function handleKey(e: React.KeyboardEvent<HTMLTextAreaElement>) {
@@ -620,7 +647,7 @@ export function MessageThread({
           />
           <button
             onClick={send}
-            disabled={!input.trim()}
+            disabled={pending || (!input.trim() && !attachedCard)}
             aria-label="전송"
             className="shrink-0 w-10 h-10 rounded-toss-lg bg-toss-brand hover:bg-toss-brand/90 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center transition-colors text-white"
           >

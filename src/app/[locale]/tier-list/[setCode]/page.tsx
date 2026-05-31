@@ -1,5 +1,6 @@
 import { loadTierList, loadAllTierLists } from "@/lib/tier";
 import { TIER_LABELS, TIER_COLORS } from "@/lib/constants";
+import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -30,8 +31,32 @@ export default async function SetTierListPage({
   const tl = await loadTierList(setCode);
   if (!tl) notFound();
 
-  const byTier: Record<string, typeof tl.entries> = { S: [], A: [], B: [], C: [], D: [] };
-  tl.entries.forEach((e) => {
+  // 표시 데이터(name/image/rarity)는 DB CardLocale 로 enrich, 미발견 시 YAML 폴백.
+  // tier/reason 은 YAML 큐레이션 그대로 사용.
+  const entryIds = tl.entries.map((e) => e.cardId);
+  const locales = entryIds.length
+    ? await prisma.cardLocale.findMany({
+        where: { id: { in: Array.from(new Set(entryIds)) } },
+        include: { logicalCard: { include: { rarity: true } }, set: true },
+      })
+    : [];
+  const localeById = new Map(locales.map((l) => [l.id, l]));
+  const enrichedEntries = tl.entries.map((e) => {
+    const db = localeById.get(e.cardId);
+    if (!db) return { ...e, rarity: null as string | null };
+    return {
+      ...e,
+      // locale=ko 면 한국어 우선: CardLocale.name 자체가 해당 locale 표시명.
+      // 기존 YAML 의 name/nameKo 는 폴백용으로 유지.
+      name: db.name,
+      nameKo: db.name,
+      imageSmall: db.imageSmall ?? e.imageSmall,
+      rarity: db.logicalCard.rarity?.code ?? null,
+    };
+  });
+
+  const byTier: Record<string, typeof enrichedEntries> = { S: [], A: [], B: [], C: [], D: [] };
+  enrichedEntries.forEach((e) => {
     if (byTier[e.tier]) byTier[e.tier].push(e);
   });
 
@@ -65,12 +90,16 @@ export default async function SetTierListPage({
                     href={`../../cards/${entry.cardId}`}
                     className="flex items-center gap-3 p-3 rounded-lg bg-gray-800/50 hover:bg-gray-800 transition-colors"
                   >
-                    <img
-                      src={entry.imageSmall}
-                      alt={entry.name}
-                      className="h-16 w-12 object-contain flex-shrink-0 rounded"
-                      loading="lazy"
-                    />
+                    {entry.imageSmall ? (
+                      <img
+                        src={entry.imageSmall}
+                        alt={entry.name}
+                        className="h-16 w-12 object-contain flex-shrink-0 rounded"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="h-16 w-12 flex-shrink-0 rounded bg-gray-800" />
+                    )}
                     <div className="min-w-0">
                       <p className="text-sm font-semibold text-white truncate">
                         {locale === "ko" ? (entry.nameKo ?? entry.name) : entry.name}

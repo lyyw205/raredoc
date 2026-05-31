@@ -1,28 +1,38 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { searchCards } from "@/lib/api/pokemontcg";
-import { prisma } from "@/lib/prisma";
+import { loadCardByLocaleId } from "@/lib/cards/queries";
 import { OwnersList, type Owner } from "@/components/cards/OwnersList";
+import { getOwnersForCard } from "@/lib/services/marketplace";
+import { getCurrentUser } from "@/lib/auth/session";
 
-export const revalidate = 3600;
+// 실데이터(보유자/세션) 의존 → 정적 캐시 비활성
+export const dynamic = "force-dynamic";
 
-// ── 카드 조회 (DB-first + pokemontcg.io fallback) ────────────────────────────
+// ── 카드 조회 (새 ERD 우선 + pokemontcg.io fallback) ──────────────────────────
 async function getCard(cardId: string) {
-  const dbCard = await prisma.card
-    .findUnique({ where: { id: cardId }, include: { set: true } })
-    .catch(() => null);
+  const loaded = await loadCardByLocaleId(cardId).catch(() => null);
 
-  if (dbCard) {
+  if (loaded) {
+    const { locale, logicalCard } = loaded;
+    const region = locale.region;
+    const rarityLabel =
+      region === "JP"
+        ? logicalCard.rarityNameJa ?? logicalCard.rarityNameEn ?? logicalCard.rarityCode
+        : region === "KR"
+          ? logicalCard.rarityNameKo ?? logicalCard.rarityNameEn ?? logicalCard.rarityCode
+          : logicalCard.rarityNameEn ?? logicalCard.rarityCode;
     return {
-      id: dbCard.id,
-      name: dbCard.name,
-      nameKo: dbCard.nameKo,
-      number: dbCard.number,
-      rarity: dbCard.rarity,
-      imageSmall: dbCard.imageSmall ?? "",
-      imageLarge: dbCard.imageLarge ?? dbCard.imageSmall ?? "",
-      setName: dbCard.set.name,
-      setNameKo: dbCard.set.nameKo,
+      id: locale.id,
+      name: locale.name,
+      // 한국어명 우선 표시(있을 때만). KR locale 의 name 자체가 한국어.
+      nameKo: region === "KR" ? locale.name : null,
+      number: locale.number,
+      rarity: rarityLabel,
+      imageSmall: locale.imageSmall ?? "",
+      imageLarge: locale.imageLarge ?? locale.imageSmall ?? "",
+      setName: locale.setName,
+      setNameKo: locale.setNameKo,
     };
   }
 
@@ -44,56 +54,6 @@ async function getCard(cardId: string) {
   } catch {
     return null;
   }
-}
-
-// ── 카드 id 기반 결정적 목업 보유자 생성 (실데이터 연동 전) ──────────────────
-const MOCK_PROFILES = [
-  { username: "chaeyeon",      displayName: "채연",     initial: "채", tier: "DIAMOND" as const },
-  { username: "raymond_tcg",   displayName: "레이먼드", initial: "레", tier: "LEGEND"  as const },
-  { username: "minjun_",       displayName: "민준",     initial: "민", tier: "DIAMOND" as const },
-  { username: "sora_cards",    displayName: "소라",     initial: "소", tier: "GOLD"    as const },
-  { username: "jihun99",       displayName: "지훈",     initial: "지", tier: "GOLD"    as const },
-  { username: "nari_collect",  displayName: "나리",     initial: "나", tier: "GOLD"    as const },
-  { username: "taeyang_k",     displayName: "태양",     initial: "태", tier: "GOLD"    as const },
-  { username: "hyunwoo_r",     displayName: "현우",     initial: "현", tier: "SILVER"  as const },
-  { username: "jieun_tcg",     displayName: "지은",     initial: "지", tier: "SILVER"  as const },
-  { username: "wonjae",        displayName: "원재",     initial: "원", tier: "SILVER"  as const },
-  { username: "boxseller_k",   displayName: "박상자",   initial: "박", tier: "GOLD"    as const },
-  { username: "intl_collector",displayName: "국제",     initial: "국", tier: "SILVER"  as const },
-  { username: "yura_psa",      displayName: "유라",     initial: "유", tier: "DIAMOND" as const },
-  { username: "tcg_dad",       displayName: "TCG아빠",   initial: "T", tier: "BRONZE"  as const },
-  { username: "kim_collector", displayName: "김컬렉터", initial: "김", tier: "GOLD"    as const },
-];
-
-const GRADES: Owner["grade"][]    = ["NM", "NM", "NM", "LP", "LP", "MP", "HP"];
-const TIME_BUCKETS = ["방금 전", "5분 전", "30분 전", "1시간 전", "3시간 전", "어제", "2일 전", "1주 전", "2주 전", "1개월 전"];
-
-function mockOwners(cardId: string): Owner[] {
-  let hash = 0;
-  for (let i = 0; i < cardId.length; i++) {
-    hash = ((hash << 5) - hash + cardId.charCodeAt(i)) | 0;
-  }
-  const h = Math.abs(hash);
-  const total = 6 + (h % 9); // 6~14 명
-
-  return MOCK_PROFILES.slice(0, total).map((p, i) => {
-    const seed = h + i * 31;
-    const hasPrice = (seed % 10) < 7;            // 70% 호가 있음
-    const offerAvailable = (seed % 10) < 6;      // 60% DM 수신 허용
-    const grade = GRADES[(seed >> 3) % GRADES.length];
-    const basePrice = 180_000 + ((seed >> 1) % 200) * 1_000; // 18만 ~ 38만
-    return {
-      username: p.username,
-      displayName: p.displayName,
-      initial: p.initial,
-      tier: p.tier,
-      grade,
-      certified: (seed >> 4) % 3 === 0,
-      askingPrice: hasPrice ? Math.round(basePrice / 1000) * 1000 : null,
-      offerAvailable,
-      addedAt: TIME_BUCKETS[(seed >> 6) % TIME_BUCKETS.length],
-    };
-  });
 }
 
 // ── 메타데이터 ───────────────────────────────────────────────────────────────
@@ -119,7 +79,20 @@ export default async function CardOwnersPage({
   const card = await getCard(cardId);
   if (!card) notFound();
 
-  const owners = mockOwners(cardId);
+  const viewer = await getCurrentUser();
+  const ownerRows = await getOwnersForCard(cardId, viewer?.id ?? null);
+  const owners: Owner[] = ownerRows.map((o) => ({
+    listingId: o.listingId,
+    sellerId: o.seller.id,
+    username: o.seller.username,
+    displayName: o.seller.displayName,
+    initial: o.seller.initial,
+    tier: o.seller.tier,
+    grade: o.grade,
+    certified: o.certified,
+    askingPrice: o.askingKrw,
+    offerAvailable: o.offerAvailable,
+  }));
   const totalOfferable = owners.filter((o) => o.offerAvailable).length;
 
   return (
@@ -135,11 +108,15 @@ export default async function CardOwnersPage({
       {/* 카드 헤더 */}
       <div className="flex items-center gap-4 p-4 rounded-2xl border border-gray-800 bg-gray-900">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={card.imageSmall}
-          alt={card.name}
-          className="w-16 rounded-lg shrink-0"
-        />
+        {card.imageSmall ? (
+          <img
+            src={card.imageSmall}
+            alt={card.name}
+            className="w-16 rounded-lg shrink-0"
+          />
+        ) : (
+          <div className="w-16 h-[88px] rounded-lg shrink-0 bg-gray-800" />
+        )}
         <div className="flex-1 min-w-0">
           <h1 className="text-xl font-bold text-white truncate">
             {card.nameKo ?? card.name}
@@ -158,11 +135,22 @@ export default async function CardOwnersPage({
 
       {/* 안내 */}
       <p className="text-[11px] text-gray-600 px-1">
-        ※ DM 수신을 허용한 보유자에게만 구매 제안을 보낼 수 있습니다. 보유자가 컬렉션 등록 시 선택한 옵션입니다.
+        ※ 카드를 판매중으로 등록한 보유자에게 구매 제안을 보낼 수 있습니다.
       </p>
 
       {/* 보유자 리스트 (필터/정렬) */}
-      <OwnersList owners={owners} locale={locale} cardId={cardId} />
+      {owners.length === 0 ? (
+        <div className="p-10 text-center text-sm text-gray-500 rounded-2xl border border-gray-800 bg-gray-900">
+          아직 이 카드를 판매중으로 등록한 보유자가 없습니다.
+        </div>
+      ) : (
+        <OwnersList
+          owners={owners}
+          locale={locale}
+          cardId={cardId}
+          isLoggedIn={!!viewer}
+        />
+      )}
     </div>
   );
 }

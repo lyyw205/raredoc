@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "images.pokemontcg.io" },
+      { protocol: "https", hostname: "archives.bulbagarden.net" },
+      { protocol: "https", hostname: "mzsbvctbgyidbcpeosyn.supabase.co" },
     ],
   },
 };

@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useDeferredValue, useEffect, Fragment } from "react";
 import Link from "next/link";
 import { Bell, Search } from "lucide-react";
 import { RARITY_KO } from "@/lib/constants";
+import { getCardPrices, type CardPriceRow } from "@/lib/actions/getCardPrices";
+import { cardTier, tierFromGroup, categoryTier, categoryTierFromGroup } from "@/lib/cards/rarity";
 import {
   Button,
   Card,
@@ -21,19 +23,54 @@ export type DexCard = {
   name: string;
   number: string;
   rarity?: string;
+  rarityTier?: number | null; // Rarity.tier (0~9). raw 정렬 키.
+  // 카테고리 레이어 (11개 그룹)
+  rarityCategoryCode?: string;
+  rarityCategoryNameKo?: string;
+  rarityCategoryNameJa?: string;
+  rarityCategoryNameEn?: string;
+  rarityCategoryTier?: number | null; // 카테고리 tier — 필터/그룹화 기준
   types?: string[];
   supertype?: string;
-  imageSmall: string;
+  imageSmall: string | null;
+  imageLarge: string | null;
   owned: boolean;
   grade?: string;
   certified?: boolean;
 };
 
+function CardImage({
+  src, alt, className,
+}: { src: string | null; alt: string; className?: string }) {
+  if (!src) {
+    return (
+      <div className={`${className ?? ""} bg-toss-bg-muted flex items-center justify-center`}>
+        <span className="text-toss-micro text-toss-text-quaternary">이미지 없음</span>
+      </div>
+    );
+  }
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src={src} alt={alt} className={className} loading="lazy" decoding="async" />;
+}
+
+export type DexRegionSet = {
+  region: string;
+  name: string;
+  releaseDate: string | null;
+  cardCount: number;
+  code: string | null;
+};
+
 export type DexSet = {
   id: string;
   name: string;
+  era: string;
   logoUrl?: string;
   cards: DexCard[];
+  names: { KR?: string; JA?: string; EN?: string };
+  releaseDate: string | null;
+  regions: string[];
+  regionSets: DexRegionSet[];
 };
 
 type ViewMode = "all" | "mine";
@@ -55,14 +92,6 @@ const RARITY_LABEL: Record<string, string> = {
   "Promo": "프로모",
   "Trainer Gallery Rare Holo": "TG",
 };
-
-// 희귀도 정렬 순서 (낮은 → 높은)
-const RARITY_ORDER = [
-  "Common", "Uncommon", "Rare", "Rare Holo", "Rare Holo EX",
-  "Double Rare", "Trainer Gallery Rare Holo", "Ultra Rare",
-  "Illustration Rare", "Special Illustration Rare", "Hyper Rare",
-  "ACE SPEC Rare", "Rare Secret", "Promo",
-];
 
 // ── 타입 메타 ─────────────────────────────────────────────────────────────
 const TYPE_META: Record<string, { emoji: string; label: string; on: string; off: string }> = {
@@ -89,12 +118,38 @@ const SUPERTYPE_META: Record<string, { label: string; emoji: string }> = {
   "Energy":  { label: "에너지", emoji: "⚡" },
 };
 
+// ── 시리즈(era) 친화 라벨 — 코드만 있는 모던 그룹에 한글 병기 ──────────────
+const ERA_FULL: Record<string, string> = {
+  SV: "SV (스칼렛 & 바이올렛)",
+  MEGA: "MEGA (메가 진화)",
+};
+function eraLabel(era: string) {
+  return ERA_FULL[era] ?? era;
+}
+
+const REGION_LABEL: Record<string, string> = { EN: "영문판", JP: "일본판", KR: "한국판" };
+
 type SortKey = "number" | "name" | "rarity";
 const SORT_LABELS: { key: SortKey; label: string }[] = [
   { key: "number", label: "번호순" },
   { key: "name",   label: "이름순" },
   { key: "rarity", label: "희귀도순" },
 ];
+
+// 카테고리 메타 — 필터 칩 표시용 (tier 오름차순)
+type CategoryMeta = {
+  code: string;
+  nameKo: string;
+  nameJa?: string;
+  nameEn: string;
+  tier: number;
+};
+
+/** 카드 locale에 맞는 카테고리 표시명 */
+function categoryLabel(card: DexCard, locale: string): string {
+  if (locale === "ja" && card.rarityCategoryNameJa) return card.rarityCategoryNameJa;
+  return card.rarityCategoryNameKo ?? card.rarityCategoryNameEn ?? card.rarityCategoryCode ?? "";
+}
 
 // ── 서브 컴포넌트 ─────────────────────────────────────────────────────────
 function ProgressBar({ value }: { value: number }) {
@@ -126,22 +181,28 @@ const RELATED_VARIANTS = [
   { set: "어둠을 밝힌 달빛",       number: "054", rarity: "Holo Rare",    priceLabel: "₩28,000"  },
 ];
 
-// 카드 id 기반 결정적 목업 시세 (실데이터 연동 전 임시)
-function mockPricesFor(cardId: string) {
-  let hash = 0;
-  for (let i = 0; i < cardId.length; i++) {
-    hash = ((hash << 5) - hash + cardId.charCodeAt(i)) | 0;
+// 가격 출처별 표시 메타 (flag + sub label)
+const PRICE_SOURCE_META: Record<string, { flag: string; sub: string }> = {
+  tcgplayer:     { flag: "🇺🇸", sub: "미국 · raw 시세" },
+  cardmarket:    { flag: "🇪🇺", sub: "유럽 · raw 시세" },
+  yuyu_tei_sell: { flag: "🇯🇵", sub: "일본 · 販売(판매가)" },
+  yuyu_tei_buy:  { flag: "🇯🇵", sub: "일본 · 買取(매입가)" },
+  ebay:          { flag: "🌍", sub: "글로벌 · sold listings" },
+  poketrace:     { flag: "🌍", sub: "글로벌 · 등급가" },
+  pricecharting: { flag: "🌍", sub: "글로벌 · 라이브가" },
+  hareruya2:     { flag: "🇯🇵", sub: "일본 · 등급가" },
+  bunjang:       { flag: "🇰🇷", sub: "국내 · 중고" },
+};
+
+function formatPrice(amount: number | null, currency: string): string {
+  if (amount == null) return "—";
+  switch (currency) {
+    case "USD": return `$${amount.toFixed(2)}`;
+    case "EUR": return `€${amount.toFixed(2)}`;
+    case "JPY": return `¥${Math.round(amount).toLocaleString("ja-JP")}`;
+    case "KRW": return `₩${Math.round(amount).toLocaleString("ko-KR")}`;
+    default:    return `${amount.toFixed(2)} ${currency}`;
   }
-  hash = Math.abs(hash);
-  const v = (hash % 60) - 30;
-  return {
-    tcgplayer: 35 + v * 0.4,
-    tcgplayerCount: 12 + (hash % 38),
-    ebay: 42 + v * 0.5,
-    ebayCount: 30 + (hash % 50),
-    bunjang: Math.round((245000 + v * 3000) / 1000) * 1000,
-    bunjangCount: 5 + (hash % 20),
-  };
 }
 
 function CardDetailModal({
@@ -150,6 +211,16 @@ function CardDetailModal({
   const [alertOpen, setAlertOpen]   = useState(false);
   const [alertPrice, setAlertPrice] = useState("");
   const [alertSaved, setAlertSaved] = useState(false);
+  const [prices, setPrices] = useState<CardPriceRow[] | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    setPrices(null);
+    getCardPrices(card.id).then((rows) => {
+      if (!cancelled) setPrices(rows);
+    });
+    return () => { cancelled = true; };
+  }, [card.id]);
 
   function saveAlert() {
     if (!alertPrice) return;
@@ -157,7 +228,8 @@ function CardDetailModal({
     setAlertOpen(false);
   }
 
-  const largeImageUrl = card.imageSmall.replace(/\.png$/, "_hires.png");
+  // imageLarge 가 DB에 있으면 그대로 사용. EN(R2 small만 보유)은 imageLarge 가 pokemontcg.io hires URL, JP/KR 은 R2 large URL.
+  const largeImageUrl = card.imageLarge ?? card.imageSmall;
 
   return (
     <Modal.Root open={true} onOpenChange={() => onClose()}>
@@ -168,10 +240,15 @@ function CardDetailModal({
             <span>{card.setName}</span>
             <span>·</span>
             <span>#{card.number}</span>
-            {card.rarity && (
+            {(card.rarityCategoryNameKo ?? card.rarity) && (
               <>
                 <span>·</span>
-                <span>{RARITY_KO[card.rarity] ?? RARITY_LABEL[card.rarity] ?? card.rarity}</span>
+                <span>
+                  {card.rarityCategoryNameKo ?? card.rarity}
+                  {card.rarity && card.rarityCategoryNameKo && card.rarity !== card.rarityCategoryNameKo && (
+                    <span className="ml-1 text-toss-text-quaternary">({card.rarity})</span>
+                  )}
+                </span>
               </>
             )}
           </div>
@@ -183,12 +260,10 @@ function CardDetailModal({
           <div className="flex flex-col sm:flex-row gap-6 p-5">
             {/* 카드 이미지 */}
             <div className="flex flex-col items-center gap-3 shrink-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={largeImageUrl}
+              <CardImage
+                src={largeImageUrl ?? card.imageSmall}
                 alt={card.name}
-                className="w-72 rounded-toss-lg shadow-toss-lg"
-                onError={(e) => { (e.currentTarget as HTMLImageElement).src = card.imageSmall; }}
+                className="w-72 aspect-[63/88] rounded-toss-lg shadow-toss-lg"
               />
             </div>
 
@@ -217,39 +292,40 @@ function CardDetailModal({
                   </Link>
                 </div>
 
-                {(() => {
-                  const p = mockPricesFor(card.id);
-                  const rows: { flag: string; name: string; sub: string; price: string; count: number }[] = [
-                    { flag: "🇺🇸", name: "TCGplayer", sub: "미국 · NM 기준",        price: `$${p.tcgplayer.toFixed(2)}`,               count: p.tcgplayerCount },
-                    { flag: "🌍",  name: "eBay",      sub: "글로벌 · Sold listings", price: `$${p.ebay.toFixed(2)}`,                    count: p.ebayCount      },
-                    { flag: "🇰🇷", name: "번개장터",  sub: "국내 · NM 기준",         price: `₩${p.bunjang.toLocaleString("ko-KR")}`,    count: p.bunjangCount   },
-                  ];
-                  return (
-                    <div>
-                      {rows.map((r, idx) => (
+                {prices === null ? (
+                  <p className="text-toss-caption text-toss-text-tertiary py-4 text-center">시세 불러오는 중…</p>
+                ) : prices.length === 0 ? (
+                  <p className="text-toss-caption text-toss-text-tertiary py-4 text-center">시세 정보 없음</p>
+                ) : (
+                  <div>
+                    {prices.map((r, idx) => {
+                      const meta = PRICE_SOURCE_META[r.sourceCode] ?? { flag: "🏷️", sub: r.region };
+                      const recDate = new Date(r.recordedAt);
+                      const recLabel = `${recDate.getFullYear()}-${String(recDate.getMonth()+1).padStart(2,"0")}-${String(recDate.getDate()).padStart(2,"0")}`;
+                      return (
                         <DataRow
-                          key={r.name}
-                          divider={idx < rows.length - 1}
+                          key={r.sourceCode}
+                          divider={idx < prices.length - 1}
                           label={
                             <div className="flex items-center gap-2">
-                              <span className="text-base">{r.flag}</span>
+                              <span className="text-base">{meta.flag}</span>
                               <div>
-                                <p className="text-toss-caption font-semibold text-toss-text-secondary">{r.name}</p>
-                                <p className="text-toss-micro text-toss-text-quaternary">{r.sub}</p>
+                                <p className="text-toss-caption font-semibold text-toss-text-secondary">{r.sourceName}</p>
+                                <p className="text-toss-micro text-toss-text-quaternary">{meta.sub}</p>
                               </div>
                             </div>
                           }
                           value={
                             <div className="text-right">
-                              <p className="text-toss-title-2 font-bold text-toss-text-primary toss-numeric">{r.price}</p>
-                              <p className="text-toss-micro text-toss-text-quaternary">{r.count}건</p>
+                              <p className="text-toss-title-2 font-bold text-toss-text-primary toss-numeric">{formatPrice(r.market, r.currency)}</p>
+                              <p className="text-toss-micro text-toss-text-quaternary">{recLabel}</p>
                             </div>
                           }
                         />
-                      ))}
-                    </div>
-                  );
-                })()}
+                      );
+                    })}
+                  </div>
+                )}
 
                 {/* 가격 알림 (번개장터 기준) */}
                 <div className="mt-3 pt-3 border-t border-toss-divider">
@@ -303,8 +379,7 @@ function CardDetailModal({
               {RELATED_VARIANTS.map((v, i) => (
                 <button key={i} className="shrink-0 w-28 group cursor-pointer text-left">
                   <div className="rounded-toss-md overflow-hidden bg-toss-bg-base border border-toss-divider shadow-toss-hairline group-hover:border-toss-border transition-colors">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={card.imageSmall} alt={card.name} className="w-full block" />
+                    <CardImage src={card.imageSmall} alt={card.name} className="w-full block aspect-[63/88]" />
                   </div>
                   <p className="mt-1.5 text-toss-micro font-medium text-toss-text-secondary truncate">{card.name}</p>
                   <p className="text-toss-tiny text-toss-text-tertiary truncate">{v.set} · No.{v.number}</p>
@@ -323,10 +398,6 @@ function CardDetailModal({
 // ── 세트 상세 모달 ────────────────────────────────────────────────────────
 type ModalView = "all" | "owned" | "missing";
 
-function rarityRank(rarity?: string) {
-  const idx = RARITY_ORDER.indexOf(rarity ?? "");
-  return idx === -1 ? 50 : idx;
-}
 
 function SetDetailModal({ set, locale, onClose, onCardClick }: { set: DexSet; locale: string; onClose: () => void; onCardClick: (card: SelectedCard) => void }) {
   const [view, setView] = useState<ModalView>("all");
@@ -343,24 +414,34 @@ function SetDetailModal({ set, locale, onClose, onCardClick }: { set: DexSet; lo
     }),
   [set.cards, view]);
 
+  // 카테고리별 그룹 (카테고리 tier 오름차순)
   const grouped = useMemo(() => {
     const map = new Map<string, DexCard[]>();
     for (const card of filtered) {
-      const key = card.rarity ?? "Unknown";
+      const key = card.rarityCategoryCode ?? card.rarity ?? "Unknown";
       if (!map.has(key)) map.set(key, []);
       map.get(key)!.push(card);
     }
-    return [...map.entries()].sort(([a], [b]) => rarityRank(a) - rarityRank(b));
+    return [...map.entries()].sort(([, a], [, b]) => {
+      const dt = categoryTierFromGroup(a) - categoryTierFromGroup(b);
+      return dt !== 0 ? dt : 0;
+    });
   }, [filtered]);
 
+  // 카테고리별 현황 (tier 오름차순)
   const rarityStats = useMemo(() => {
-    const map = new Map<string, { total: number; owned: number }>();
+    const map = new Map<string, { total: number; owned: number; tier: number; nameKo: string }>();
     for (const c of set.cards) {
-      const key = c.rarity ?? "Unknown";
-      const cur = map.get(key) ?? { total: 0, owned: 0 };
-      map.set(key, { total: cur.total + 1, owned: cur.owned + (c.owned ? 1 : 0) });
+      const key = c.rarityCategoryCode ?? c.rarity ?? "Unknown";
+      const cur = map.get(key) ?? {
+        total: 0,
+        owned: 0,
+        tier: categoryTier(c),
+        nameKo: c.rarityCategoryNameKo ?? c.rarity ?? key,
+      };
+      map.set(key, { total: cur.total + 1, owned: cur.owned + (c.owned ? 1 : 0), tier: cur.tier, nameKo: cur.nameKo });
     }
-    return [...map.entries()].sort(([a], [b]) => rarityRank(a) - rarityRank(b));
+    return [...map.entries()].sort(([, a], [, b]) => a.tier - b.tier);
   }, [set.cards]);
 
   const logoUrl = set.logoUrl ?? `https://images.pokemontcg.io/${set.id}/logo.png`;
@@ -398,11 +479,11 @@ function SetDetailModal({ set, locale, onClose, onCardClick }: { set: DexSet; lo
               }}
             />
           </div>
-          {/* 희귀도별 현황 */}
+          {/* 카테고리별 현황 */}
           <div className="flex flex-wrap gap-x-4 gap-y-1.5">
-            {rarityStats.map(([rarity, stats]) => (
-              <div key={rarity} className="flex items-center gap-1.5">
-                <span className="text-toss-micro text-toss-text-tertiary">{RARITY_KO[rarity] ?? RARITY_LABEL[rarity] ?? rarity}</span>
+            {rarityStats.map(([key, stats]) => (
+              <div key={key} className="flex items-center gap-1.5">
+                <span className="text-toss-micro text-toss-text-tertiary">{stats.nameKo}</span>
                 <span className={`text-toss-micro font-semibold ${stats.owned === stats.total ? "text-toss-warning" : "text-toss-text-tertiary"}`}>
                   {stats.owned}/{stats.total}
                 </span>
@@ -432,13 +513,23 @@ function SetDetailModal({ set, locale, onClose, onCardClick }: { set: DexSet; lo
             <div className="text-center py-20 text-toss-text-tertiary text-toss-caption">해당 카드가 없어요</div>
           ) : (
             <div className="space-y-7">
-              {grouped.map(([rarity, groupCards]) => (
-                <div key={rarity}>
+              {grouped.map(([catCode, groupCards]) => {
+                const rep = groupCards[0];
+                const catNameKo = rep?.rarityCategoryNameKo ?? catCode;
+                // raw rarity names — dedupe
+                const rawRarities = [...new Set(groupCards.map((c) => c.rarity).filter(Boolean))];
+                return (
+                <div key={catCode}>
                   <div className="flex items-center gap-2 mb-2.5">
-                    <h3 className="text-toss-micro font-bold text-toss-text-tertiary uppercase tracking-wide">
-                      {RARITY_KO[rarity] ?? RARITY_LABEL[rarity] ?? rarity}
+                    <h3 className="text-toss-label font-bold text-toss-text-primary">
+                      {catNameKo}
                     </h3>
-                    <span className="text-toss-micro text-toss-text-quaternary">
+                    {rawRarities.length > 0 && rawRarities.length <= 3 && (
+                      <span className="text-toss-micro text-toss-text-quaternary">
+                        ({rawRarities.join(", ")})
+                      </span>
+                    )}
+                    <span className="text-toss-micro text-toss-text-quaternary ml-auto">
                       {groupCards.filter((c) => c.owned).length}/{groupCards.length}
                     </span>
                   </div>
@@ -457,8 +548,7 @@ function SetDetailModal({ set, locale, onClose, onCardClick }: { set: DexSet; lo
                               ? "border-toss-border group-hover:ring-2 group-hover:ring-toss-brand/40"
                               : "border-toss-border/50 opacity-30 group-hover:opacity-50"
                           }`}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
+                            <CardImage
                               src={card.imageSmall}
                               alt={card.name}
                               className={`w-full aspect-[2.5/3.5] object-cover ${card.owned ? "" : "grayscale"}`}
@@ -479,7 +569,8 @@ function SetDetailModal({ set, locale, onClose, onCardClick }: { set: DexSet; lo
                       ))}
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
@@ -490,24 +581,36 @@ function SetDetailModal({ set, locale, onClose, onCardClick }: { set: DexSet; lo
 
 // ── 메인 컴포넌트 ─────────────────────────────────────────────────────────
 export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string }) {
-  const [view, setView]                   = useState<ViewMode>("all");
-  const [selSets, setSelSets]             = useState<Set<string>>(new Set());
-  const [selRarities, setSelRarities]     = useState<Set<string>>(new Set());
-  const [selTypes, setSelTypes]           = useState<Set<string>>(new Set());
-  const [selSupertypes, setSelSupertypes] = useState<Set<string>>(new Set());
-  const [search, setSearch]               = useState("");
-  const [sortBy, setSortBy]               = useState<SortKey>("number");
-  const [cols, setCols]                   = useState(10);
-  const [modalSetId, setModalSetId]       = useState<string | null>(null);
-  const [selectedCard, setSelectedCard]   = useState<SelectedCard | null>(null);
+  const [view, setView]                     = useState<ViewMode>("all");
+  const [selCategories, setSelCategories]   = useState<Set<string>>(new Set());
+  const [selTypes, setSelTypes]             = useState<Set<string>>(new Set());
+  const [selSupertypes, setSelSupertypes]   = useState<Set<string>>(new Set());
+  const [search, setSearch]                 = useState("");
+  const [sortBy, setSortBy]                 = useState<SortKey>("number");
+  const [cols, setCols]                     = useState(10);
+  const [modalSetId, setModalSetId]         = useState<string | null>(null);
+  const [selectedCard, setSelectedCard]     = useState<SelectedCard | null>(null);
+  // 좌측 사이드바에서 선택한 팩 — 이 팩의 카드만 렌더
+  const [selectedSetId, setSelectedSetId]   = useState<string>(sets[0]?.id ?? "");
 
   const modalSet = useMemo(() => sets.find((s) => s.id === modalSetId) ?? null, [sets, modalSetId]);
 
-  // 전체 희귀도·타입 추출 (정렬)
-  const allRarities = useMemo(() => {
-    const s = new Set<string>();
-    sets.forEach((set) => set.cards.forEach((c) => { if (c.rarity) s.add(c.rarity); }));
-    return RARITY_ORDER.filter((r) => s.has(r));
+  // 전체 카테고리 추출 (카테고리 tier 오름차순)
+  const allCategories = useMemo(() => {
+    const map = new Map<string, CategoryMeta>();
+    sets.forEach((set) => set.cards.forEach((c) => {
+      if (!c.rarityCategoryCode) return;
+      if (!map.has(c.rarityCategoryCode)) {
+        map.set(c.rarityCategoryCode, {
+          code: c.rarityCategoryCode,
+          nameKo: c.rarityCategoryNameKo ?? c.rarityCategoryCode,
+          nameJa: c.rarityCategoryNameJa,
+          nameEn: c.rarityCategoryNameEn ?? c.rarityCategoryCode,
+          tier: c.rarityCategoryTier ?? 999,
+        });
+      }
+    }));
+    return [...map.values()].sort((a, b) => a.tier - b.tier);
   }, [sets]);
 
   const allTypes = useMemo(() => {
@@ -524,18 +627,10 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
     });
   }
 
-  function toggleSet(id: string) {
-    setSelSets((prev) => {
+  function toggleCategory(code: string) {
+    setSelCategories((prev) => {
       const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
-      return next;
-    });
-  }
-
-  function toggleRarity(r: string) {
-    setSelRarities((prev) => {
-      const next = new Set(prev);
-      next.has(r) ? next.delete(r) : next.add(r);
+      next.has(code) ? next.delete(code) : next.add(code);
       return next;
     });
   }
@@ -548,31 +643,37 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
     });
   }
 
-  const hasFilter = selRarities.size > 0 || selTypes.size > 0 || selSupertypes.size > 0 || search.trim() !== "";
+  const hasFilter = selCategories.size > 0 || selTypes.size > 0 || selSupertypes.size > 0 || search.trim() !== "";
 
-  const visibleSets = useMemo(() => {
-    const base = selSets.size === 0 ? sets : sets.filter((s) => selSets.has(s.id));
-    return base.map((set) => ({
-      ...set,
-      cards: set.cards
-        .filter((c) => {
-          const rarityOk    = selRarities.size === 0 || (c.rarity && selRarities.has(c.rarity));
-          const typeOk      = selTypes.size === 0 || c.types?.some((t) => selTypes.has(t));
-          const supertypeOk = selSupertypes.size === 0 || (c.supertype && selSupertypes.has(c.supertype));
-          const searchOk    = !search.trim() || c.name.toLowerCase().includes(search.toLowerCase());
-          return rarityOk && typeOk && supertypeOk && searchOk;
-        })
-        .sort((a, b) => {
-          if (sortBy === "name")   return a.name.localeCompare(b.name);
-          if (sortBy === "rarity") return RARITY_ORDER.indexOf(b.rarity ?? "") - RARITY_ORDER.indexOf(a.rarity ?? "");
-          return a.number.localeCompare(b.number, undefined, { numeric: true });
-        }),
-    }));
-  }, [sets, selSets, selRarities, selTypes, selSupertypes, search, sortBy]);
+  // 검색어는 지연값으로 — 입력은 즉시 반영하되 무거운 필터 렌더는 낮은 우선순위로 미룸
+  const deferredSearch = useDeferredValue(search);
+  const isFiltering = deferredSearch !== search;
+
+  // 선택된 팩의 카드만 필터·정렬해서 렌더 (한 번에 한 팩만 그려 렌더 부담 최소화)
+  const activeSet = useMemo(() => {
+    const set = sets.find((s) => s.id === selectedSetId) ?? sets[0] ?? null;
+    if (!set) return null;
+    const q = deferredSearch.trim().toLowerCase();
+    const cards = set.cards
+      .filter((c) => {
+        // 카테고리 필터 (카테고리 code 기준)
+        const catOk       = selCategories.size === 0 || (c.rarityCategoryCode != null && selCategories.has(c.rarityCategoryCode));
+        const typeOk      = selTypes.size === 0 || c.types?.some((t) => selTypes.has(t));
+        const supertypeOk = selSupertypes.size === 0 || (c.supertype && selSupertypes.has(c.supertype));
+        const searchOk    = !q || c.name.toLowerCase().includes(q);
+        return catOk && typeOk && supertypeOk && searchOk;
+      })
+      .sort((a, b) => {
+        if (sortBy === "name")   return a.name.localeCompare(b.name);
+        if (sortBy === "rarity") return categoryTier(b) - categoryTier(a); // 높은 tier 우선
+        return a.number.localeCompare(b.number, undefined, { numeric: true });
+      });
+    return { ...set, cards };
+  }, [sets, selectedSetId, selCategories, selTypes, selSupertypes, deferredSearch, sortBy]);
 
   const totalCards = sets.reduce((n, s) => n + s.cards.length, 0);
   const ownedCards = sets.reduce((n, s) => n + s.cards.filter((c) => c.owned).length, 0);
-  const visibleCount = visibleSets.reduce((n, s) => n + s.cards.length, 0);
+  const visibleCount = activeSet?.cards.length ?? 0;
 
   return (
     <div>
@@ -582,10 +683,10 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
           <h1 className="text-toss-title-1 font-bold text-toss-text-primary">카드 도감</h1>
           <p className="text-toss-caption text-toss-text-tertiary mt-0.5">
             {view === "mine"
-              ? `${totalCards.toLocaleString()}장 중 ${ownedCards.toLocaleString()}장 보유 (${Math.round((ownedCards / totalCards) * 100)}%)`
+              ? `${totalCards.toLocaleString()}장 중 ${ownedCards.toLocaleString()}장 보유 (${totalCards === 0 ? 0 : Math.round((ownedCards / totalCards) * 100)}%)`
               : hasFilter
-              ? `${visibleCount.toLocaleString()}장 표시 중`
-              : `총 ${totalCards.toLocaleString()}장`}
+              ? `${activeSet?.name ?? ""} · ${visibleCount.toLocaleString()}장 표시 중`
+              : `${activeSet?.name ?? ""} · ${visibleCount.toLocaleString()}장`}
           </p>
         </div>
 
@@ -623,6 +724,74 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
         </div>
       </div>
 
+      {/* ── 모바일 카드팩 바 (lg 미만) ──────────────────────────────────── */}
+      <div className="lg:hidden -mx-1 mb-4 flex items-center gap-1.5 overflow-x-auto px-1 pb-1 no-scrollbar">
+        {sets.map((s, i) => (
+          <Fragment key={s.id}>
+            {(i === 0 || sets[i - 1].era !== s.era) && (
+              <span className="shrink-0 pl-1 text-toss-tiny font-bold tracking-wider text-toss-text-quaternary">
+                {eraLabel(s.era)}
+              </span>
+            )}
+            <Chip
+              variant="filter"
+              size="sm"
+              selected={(activeSet?.id ?? "") === s.id}
+              onClick={() => setSelectedSetId(s.id)}
+              className="shrink-0"
+            >
+              {s.name}
+            </Chip>
+          </Fragment>
+        ))}
+      </div>
+
+      <div className="flex gap-6">
+        {/* ── 좌측 카드팩 네비 (lg 이상) ──────────────────────────────────── */}
+        <aside className="hidden lg:block w-52 shrink-0">
+          <div className="sticky top-[68px] max-h-[calc(100vh-88px)] overflow-y-auto no-scrollbar pr-1">
+            <p className="px-2 mb-2 text-toss-micro font-semibold text-toss-text-tertiary uppercase tracking-wide">카드팩</p>
+            <nav className="space-y-0.5">
+              {sets.map((s, i) => {
+                const showEra = i === 0 || sets[i - 1].era !== s.era;
+                const active = (activeSet?.id ?? "") === s.id;
+                const ownedCount = s.cards.filter((c) => c.owned).length;
+                const pct = s.cards.length === 0 ? 0 : Math.round((ownedCount / s.cards.length) * 100);
+                const logoUrl = s.logoUrl ?? `https://images.pokemontcg.io/${s.id}/logo.png`;
+                return (
+                  <Fragment key={s.id}>
+                    {showEra && (
+                      <p className="px-2 pb-1 pt-3 text-toss-tiny font-bold tracking-wider text-toss-text-quaternary first:pt-0">
+                        {eraLabel(s.era)}
+                      </p>
+                    )}
+                    <button
+                      onClick={() => setSelectedSetId(s.id)}
+                      title={s.name}
+                      className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-toss-md text-left transition-colors cursor-pointer ${
+                        active
+                          ? "bg-toss-brand/10 text-toss-brand"
+                          : "text-toss-text-secondary hover:bg-toss-hover"
+                      }`}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={logoUrl} alt="" className="h-4 w-8 object-contain shrink-0" loading="lazy" decoding="async" onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }} />
+                      <span className="flex-1 min-w-0 truncate text-toss-caption font-medium">{s.name}</span>
+                      {view === "mine" ? (
+                        <span className="shrink-0 text-toss-tiny font-bold">{pct}%</span>
+                      ) : (
+                        <span className="shrink-0 text-toss-tiny text-toss-text-quaternary toss-numeric">{s.cards.length}</span>
+                      )}
+                    </button>
+                  </Fragment>
+                );
+              })}
+            </nav>
+          </div>
+        </aside>
+
+        {/* ── 우측 본문 ─────────────────────────────────────────────────── */}
+        <div className="flex-1 min-w-0">
       {/* ── 필터 영역 ────────────────────────────────────────────────────── */}
       <Card padding="md" className="mb-6">
         <div className="space-y-3">
@@ -637,49 +806,10 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
             />
           </div>
 
-          {/* 카드팩 */}
-          <div className="flex items-center gap-2">
-            <span className="text-toss-micro font-semibold text-toss-text-tertiary shrink-0 w-12">카드팩</span>
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-              <Chip
-                variant="filter"
-                size="sm"
-                selected={selSets.size === 0}
-                onClick={() => setSelSets(new Set())}
-              >
-                전체
-              </Chip>
-              {sets.map((s) => {
-                const ownedCount = s.cards.filter((c) => c.owned).length;
-                const pct = Math.round((ownedCount / s.cards.length) * 100);
-                const on = selSets.has(s.id);
-                const logoUrl = s.logoUrl ?? `https://images.pokemontcg.io/${s.id}/logo.png`;
-                return (
-                  <Chip
-                    key={s.id}
-                    variant="filter"
-                    size="sm"
-                    selected={on}
-                    onClick={() => toggleSet(s.id)}
-                    leftIcon={
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={logoUrl} alt="" className="h-4 object-contain" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
-                    }
-                  >
-                    <span>{s.name}</span>
-                    {view === "mine" && (
-                      <span className="text-toss-tiny font-bold ml-0.5">{pct}%</span>
-                    )}
-                  </Chip>
-                );
-              })}
-            </div>
-          </div>
-
           {/* 슈퍼타입 */}
-          <div className="flex items-center gap-2">
-            <span className="text-toss-micro font-semibold text-toss-text-tertiary shrink-0 w-12">종류</span>
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+          <div className="flex items-start gap-2">
+            <span className="text-toss-micro font-semibold text-toss-text-tertiary shrink-0 w-12 pt-1">종류</span>
+            <div className="flex flex-wrap items-center gap-1.5 min-w-0 flex-1">
               {Object.entries(SUPERTYPE_META).map(([key, { label, emoji }]) => {
                 const on = selSupertypes.has(key);
                 return (
@@ -697,21 +827,21 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
             </div>
           </div>
 
-          {/* 희귀도 */}
-          <div className="flex items-center gap-2">
-            <span className="text-toss-micro font-semibold text-toss-text-tertiary shrink-0 w-12">희귀도</span>
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-              {allRarities.map((r) => {
-                const on = selRarities.has(r);
+          {/* 희귀도 카테고리 */}
+          <div className="flex items-start gap-2">
+            <span className="text-toss-micro font-semibold text-toss-text-tertiary shrink-0 w-12 pt-1">희귀도</span>
+            <div className="flex flex-wrap items-center gap-1.5 min-w-0 flex-1">
+              {allCategories.map((cat) => {
+                const on = selCategories.has(cat.code);
                 return (
                   <Chip
-                    key={r}
+                    key={cat.code}
                     variant="filter"
                     size="sm"
                     selected={on}
-                    onClick={() => toggleRarity(r)}
+                    onClick={() => toggleCategory(cat.code)}
                   >
-                    {RARITY_LABEL[r] ?? r}
+                    {locale === "ja" && cat.nameJa ? cat.nameJa : cat.nameKo}
                   </Chip>
                 );
               })}
@@ -719,9 +849,9 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
           </div>
 
           {/* 타입 */}
-          <div className="flex items-center gap-2">
-            <span className="text-toss-micro font-semibold text-toss-text-tertiary shrink-0 w-12">타입</span>
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+          <div className="flex items-start gap-2">
+            <span className="text-toss-micro font-semibold text-toss-text-tertiary shrink-0 w-12 pt-1">타입</span>
+            <div className="flex flex-wrap items-center gap-1.5 min-w-0 flex-1">
               {allTypes.map((t) => {
                 const meta = TYPE_META[t];
                 const on = selTypes.has(t);
@@ -760,7 +890,7 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => { setSelRarities(new Set()); setSelTypes(new Set()); setSelSupertypes(new Set()); setSearch(""); setSortBy("number"); }}
+                onClick={() => { setSelCategories(new Set()); setSelTypes(new Set()); setSelSupertypes(new Set()); setSearch(""); setSortBy("number"); }}
               >
                 전체 초기화
               </Button>
@@ -770,34 +900,114 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
       </Card>
 
       {/* ── 카드 섹션 ────────────────────────────────────────────────────── */}
-      <div className="space-y-10">
-        {visibleSets.map((set) => {
+      <div className={`space-y-10 transition-opacity ${isFiltering ? "opacity-50" : "opacity-100"}`}>
+        {activeSet && activeSet.cards.length > 0 && (() => {
+          const set = activeSet;
           const totalInSet = sets.find((s) => s.id === set.id)?.cards.length ?? set.cards.length;
           const ownedCount = sets.find((s) => s.id === set.id)?.cards.filter((c) => c.owned).length ?? 0;
-          const pct = Math.round((ownedCount / totalInSet) * 100);
-
-          if (set.cards.length === 0) return null;
+          const pct = totalInSet === 0 ? 0 : Math.round((ownedCount / totalInSet) * 100);
 
           return (
-            <section key={set.id}>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={set.logoUrl ?? `https://images.pokemontcg.io/${set.id}/logo.png`} alt="" className="h-5 object-contain" onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
-                  <h2 className="text-toss-label font-bold text-toss-text-primary">{set.name}</h2>
-                  <span className="text-toss-caption text-toss-text-tertiary">
-                    {hasFilter ? `${set.cards.length}/${totalInSet}장` : `${totalInSet}장`}
-                  </span>
-                  {view === "mine" && (
-                    <span className="text-toss-caption font-semibold text-toss-warning">{ownedCount}/{totalInSet} 보유</span>
-                  )}
+            <section key={set.id} className="scroll-mt-16">
+              {/* ── 팩 정보 헤더 (확장팩 메타 통합) ───────────────────────── */}
+              <div className="mb-5 rounded-toss-lg border border-toss-divider bg-toss-bg-base p-5">
+                <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                  {/* 로고 + 이름 + 메타 */}
+                  <div className="flex min-w-0 gap-4">
+                    <div className="flex h-16 w-28 shrink-0 items-center justify-center">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={set.logoUrl ?? `https://images.pokemontcg.io/${set.id}/logo.png`}
+                        alt={set.name}
+                        loading="lazy"
+                        decoding="async"
+                        className="max-h-full max-w-full object-contain"
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      {/* 다국어명 (없으면 대표 name) */}
+                      {set.names.KR || set.names.JA || set.names.EN ? (
+                        <div className="space-y-0.5">
+                          {set.names.KR && (
+                            <p className="truncate text-toss-title-2 font-bold text-toss-text-primary">
+                              <span className="mr-1.5 text-toss-micro font-semibold text-toss-text-quaternary">KR</span>
+                              {set.names.KR}
+                            </p>
+                          )}
+                          {set.names.JA && (
+                            <p className="truncate text-toss-caption text-toss-text-secondary">
+                              <span className="mr-1.5 text-toss-micro font-semibold text-toss-text-quaternary">JA</span>
+                              {set.names.JA}
+                            </p>
+                          )}
+                          {set.names.EN && (
+                            <p className="truncate text-toss-caption text-toss-text-secondary">
+                              <span className="mr-1.5 text-toss-micro font-semibold text-toss-text-quaternary">EN</span>
+                              {set.names.EN}
+                            </p>
+                          )}
+                        </div>
+                      ) : (
+                        <h2 className="truncate text-toss-title-2 font-bold text-toss-text-primary">{set.name}</h2>
+                      )}
+
+                      {/* 메타 행: 시리즈 · 발매일 · 수록종 · 지역 · (보유) */}
+                      <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                        <Chip variant="tag" size="sm">{eraLabel(set.era)}</Chip>
+                        {set.releaseDate && (
+                          <span className="text-toss-caption text-toss-text-tertiary toss-numeric">📅 {set.releaseDate}</span>
+                        )}
+                        <span className="text-toss-caption text-toss-text-tertiary">
+                          {hasFilter ? `${set.cards.length}/${totalInSet}종` : `${totalInSet}종`}
+                        </span>
+                        <div className="flex items-center gap-1">
+                          {set.regions.map((r) => (
+                            <span key={r} className="rounded-toss-sm bg-toss-bg-muted px-1.5 py-0.5 text-toss-micro font-semibold text-toss-text-tertiary">{r}</span>
+                          ))}
+                        </div>
+                        {view === "mine" && (
+                          <span className="text-toss-caption font-semibold text-toss-warning">{ownedCount}/{totalInSet} 보유</span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 우측: 자세히 보기 */}
+                  <div className="flex shrink-0 lg:justify-end">
+                    <button
+                      onClick={() => setModalSetId(set.id)}
+                      className="text-toss-caption text-toss-text-tertiary transition-colors hover:text-toss-text-primary"
+                    >
+                      희귀도·수집 현황 →
+                    </button>
+                  </div>
                 </div>
-                <button
-                  onClick={() => setModalSetId(set.id)}
-                  className="text-toss-caption text-toss-text-tertiary hover:text-toss-text-primary transition-colors"
-                >
-                  자세히 보기 →
-                </button>
+
+                {/* 지역별 발매 상세 (접이식) */}
+                {set.regionSets.length > 0 && (
+                  <details className="mt-4 border-t border-toss-divider pt-3">
+                    <summary className="cursor-pointer list-none text-toss-caption font-semibold text-toss-text-secondary transition-colors hover:text-toss-text-primary [&::-webkit-details-marker]:hidden">
+                      지역별 발매 정보 <span className="text-toss-text-quaternary">({set.regionSets.length})</span>
+                    </summary>
+                    <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                      {set.regionSets.map((rs) => (
+                        <div key={`${rs.region}-${rs.code ?? rs.name}`} className="rounded-toss-md bg-toss-bg-muted p-3">
+                          <div className="mb-1 flex items-center gap-2">
+                            <span className="rounded-toss-sm bg-toss-bg-base px-1.5 py-0.5 text-toss-micro font-semibold text-toss-text-tertiary">{rs.region}</span>
+                            <span className="text-toss-caption text-toss-text-tertiary">{REGION_LABEL[rs.region] ?? rs.region}</span>
+                          </div>
+                          <p className="text-toss-label font-semibold text-toss-text-primary">{rs.name}</p>
+                          <p className="mt-0.5 text-toss-caption text-toss-text-quaternary toss-numeric">
+                            {rs.releaseDate ?? "—"}
+                            {rs.cardCount > 0 ? ` · ${rs.cardCount}종` : ""}
+                            {rs.code ? ` · ${rs.code}` : ""}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </details>
+                )}
               </div>
 
               {view === "mine" && <ProgressBar value={pct} />}
@@ -824,7 +1034,7 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
                           transition: "filter 0.3s, opacity 0.3s",
                         }}
                       >
-                        <img
+                        <CardImage
                           src={card.imageSmall}
                           alt={card.name}
                           className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-200"
@@ -847,9 +1057,9 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
               </div>
             </section>
           );
-        })}
+        })()}
 
-        {visibleSets.every((s) => s.cards.length === 0) && (
+        {(!activeSet || activeSet.cards.length === 0) && (
           <EmptyState
             icon={<Search />}
             title="해당 조건의 카드가 없어요"
@@ -858,13 +1068,15 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => { setSelRarities(new Set()); setSelTypes(new Set()); }}
+                onClick={() => { setSelCategories(new Set()); setSelTypes(new Set()); }}
               >
                 필터 초기화
               </Button>
             }
           />
         )}
+      </div>
+        </div>
       </div>
 
       <style>{`

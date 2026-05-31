@@ -70,11 +70,15 @@ function ConvRow({ conv }: { conv: Conversation }) {
         {conv.cardRef && (
           <div className="flex items-center gap-1.5 mb-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={conv.cardRef.imageUrl}
-              alt=""
-              className="w-5 h-7 object-cover rounded-toss-sm shrink-0"
-            />
+            {conv.cardRef.imageUrl ? (
+              <img
+                src={conv.cardRef.imageUrl}
+                alt=""
+                className="w-5 h-7 object-cover rounded-toss-sm shrink-0"
+              />
+            ) : (
+              <div className="w-5 h-7 rounded-toss-sm shrink-0 bg-toss-bg-muted" />
+            )}
             <span className="text-toss-caption text-toss-brand font-medium truncate">
               {conv.cardRef.cardName}
             </span>

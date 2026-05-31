@@ -1,9 +1,13 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
+import {
+  searchLogicalCards,
+  pickLocale,
+  type LogicalCardSearchFilters,
+} from "@/lib/cards/queries";
 
 export interface CardSearchHit {
-  id: string;
+  id: string; // = CardLocale.id (URL용)
   name: string;
   nameKo: string | null;
   imageSmall: string | null;
@@ -17,56 +21,48 @@ export interface CardSearchHit {
 export interface CardSearchParams {
   q?: string;
   type?: string;
-  rarity?: string;
-  setId?: string;
+  rarity?: string; // Rarity.code
+  setId?: string; // SetGroup.id (그룹 단위 필터)
   limit?: number;
 }
 
 export async function searchCardsAction(
   params: CardSearchParams
 ): Promise<CardSearchHit[]> {
-  const q = (params.q ?? "").trim();
-  const where: Record<string, unknown> = {};
+  const filters: LogicalCardSearchFilters = {
+    q: params.q,
+    type: params.type,
+    rarityCode: params.rarity,
+    setGroupId: params.setId,
+    limit: params.limit,
+  };
 
-  if (q) {
-    where.OR = [
-      { name: { contains: q, mode: "insensitive" } },
-      { nameKo: { contains: q, mode: "insensitive" } },
-    ];
+  // LogicalCard 단위 dedupe 후, KO 우선 locale 1개만 결과로.
+  const rows = await searchLogicalCards(filters);
+
+  const hits: CardSearchHit[] = [];
+  for (const { logicalCard, locales } of rows) {
+    if (locales.length === 0) continue;
+    const primary = pickLocale(locales, "ko") ?? locales[0];
+    const koLocale = locales.find((l) => l.region === "KR") ?? null;
+    const rarity =
+      primary.region === "JP"
+        ? logicalCard.rarityNameJa ?? logicalCard.rarityNameEn ?? logicalCard.rarityCode
+        : primary.region === "KR"
+          ? logicalCard.rarityNameKo ?? logicalCard.rarityNameEn ?? logicalCard.rarityCode
+          : logicalCard.rarityNameEn ?? logicalCard.rarityCode;
+    hits.push({
+      id: primary.id,
+      name: primary.name,
+      nameKo: koLocale?.name ?? null,
+      imageSmall: primary.imageSmall,
+      rarity,
+      number: primary.number,
+      setId: primary.setId,
+      setName: primary.setName,
+      setNameKo: primary.setNameKo,
+    });
   }
-  if (params.type) where.types = { has: params.type };
-  if (params.rarity) where.rarity = params.rarity;
-  if (params.setId) where.setId = params.setId;
 
-  const cards = await prisma.card.findMany({
-    where: where as Parameters<typeof prisma.card.findMany>[0] extends
-      | { where?: infer W }
-      | undefined
-      ? W
-      : never,
-    select: {
-      id: true,
-      name: true,
-      nameKo: true,
-      imageSmall: true,
-      rarity: true,
-      number: true,
-      setId: true,
-      set: { select: { name: true, nameKo: true, releaseDate: true } },
-    },
-    orderBy: [{ set: { releaseDate: "desc" } }, { number: "asc" }],
-    take: Math.min(params.limit ?? 100, 200),
-  });
-
-  return cards.map((c) => ({
-    id: c.id,
-    name: c.name,
-    nameKo: c.nameKo,
-    imageSmall: c.imageSmall,
-    rarity: c.rarity,
-    number: c.number,
-    setId: c.setId,
-    setName: c.set.name,
-    setNameKo: c.set.nameKo,
-  }));
+  return hits;
 }

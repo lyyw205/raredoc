@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { useLocale } from "next-intl";
-import { RARITY_KO, RARITY_ORDER } from "@/lib/constants";
+import { categoryTier } from "@/lib/cards/rarity";
 
 type ViewFilter = "all" | "owned" | "missing";
 
@@ -12,10 +12,19 @@ interface BookCard {
   name: string;
   number: string;
   rarity?: string;
+  rarityTier?: number | null; // Rarity.tier — raw 정렬 키
+  // 카테고리 레이어
+  rarityCategoryCode?: string;
+  rarityCategoryNameKo?: string;
+  rarityCategoryNameJa?: string;
+  rarityCategoryNameEn?: string;
+  rarityCategoryTier?: number | null;
   imageSmall: string;
   owned: boolean;
   grade?: string;
   certified?: boolean;
+  // 새 ERD: 지역(EN/JP/KR).
+  region?: string;
 }
 
 interface SetInfo {
@@ -23,12 +32,6 @@ interface SetInfo {
   name: string;
   total: number;
   logoUrl?: string;
-}
-
-function rarityRank(rarity?: string) {
-  if (!rarity) return 99;
-  const idx = RARITY_ORDER.indexOf(rarity);
-  return idx === -1 ? 50 : idx;
 }
 
 export function CollectionBook({
@@ -40,35 +43,70 @@ export function CollectionBook({
 }) {
   const locale = useLocale();
   const [view, setView] = useState<ViewFilter>("all");
-  const [rarityFilter, setRarityFilter] = useState<string>("all");
+  const [categoryFilter, setCategoryFilter] = useState<string>("all");
 
   const owned = cards.filter((c) => c.owned).length;
   const pct = Math.round((owned / cards.length) * 100);
 
-  // 세트 내 희귀도 목록
-  const rarities = useMemo(() => {
-    const set = new Set(cards.map((c) => c.rarity ?? "Unknown"));
-    return ["all", ...RARITY_ORDER.filter((r) => set.has(r)), ...[...set].filter((r) => !RARITY_ORDER.includes(r))];
+  // 세트 내 카테고리 목록 (카테고리 tier 오름차순)
+  const categories = useMemo(() => {
+    const map = new Map<string, { nameKo: string; nameJa?: string; nameEn: string; tier: number }>();
+    cards.forEach((c) => {
+      const k = c.rarityCategoryCode ?? "unknown";
+      if (!map.has(k)) {
+        map.set(k, {
+          nameKo: c.rarityCategoryNameKo ?? c.rarity ?? k,
+          nameJa: c.rarityCategoryNameJa,
+          nameEn: c.rarityCategoryNameEn ?? k,
+          tier: c.rarityCategoryTier ?? 999,
+        });
+      }
+    });
+    const sorted = [...map.entries()]
+      .sort(([, a], [, b]) => a.tier - b.tier)
+      .map(([code]) => code);
+    return ["all", ...sorted];
+  }, [cards]);
+
+  // 카테고리 메타 (표시명 조회용)
+  const categoryMeta = useMemo(() => {
+    const map = new Map<string, { nameKo: string; nameJa?: string; nameEn: string; tier: number }>();
+    cards.forEach((c) => {
+      const k = c.rarityCategoryCode ?? "unknown";
+      if (!map.has(k)) {
+        map.set(k, {
+          nameKo: c.rarityCategoryNameKo ?? c.rarity ?? k,
+          nameJa: c.rarityCategoryNameJa,
+          nameEn: c.rarityCategoryNameEn ?? k,
+          tier: c.rarityCategoryTier ?? 999,
+        });
+      }
+    });
+    return map;
   }, [cards]);
 
   const filtered = useMemo(() => {
     return cards.filter((c) => {
       if (view === "owned" && !c.owned) return false;
       if (view === "missing" && c.owned) return false;
-      if (rarityFilter !== "all" && c.rarity !== rarityFilter) return false;
+      if (categoryFilter !== "all" && (c.rarityCategoryCode ?? "unknown") !== categoryFilter) return false;
       return true;
     });
-  }, [cards, view, rarityFilter]);
+  }, [cards, view, categoryFilter]);
 
-  // 희귀도별 그룹
+  // 카테고리별 그룹 (카테고리 tier 기준 정렬)
   const grouped = useMemo(() => {
     const map = new Map<string, BookCard[]>();
     for (const card of filtered) {
-      const key = card.rarity ?? "Unknown";
+      const key = card.rarityCategoryCode ?? "unknown";
       if (!map.has(key)) map.set(key, []);
       map.get(key)!.push(card);
     }
-    return [...map.entries()].sort(([a], [b]) => rarityRank(a) - rarityRank(b));
+    return [...map.entries()].sort(([, a], [, b]) => {
+      const ta = a[0] ? categoryTier(a[0]) : 999;
+      const tb = b[0] ? categoryTier(b[0]) : 999;
+      return ta - tb;
+    });
   }, [filtered]);
 
   const GRADE_COLOR: Record<string, string> = {
@@ -119,20 +157,21 @@ export function CollectionBook({
           <div className="text-2xl font-bold text-yellow-400 shrink-0">{pct}%</div>
         </div>
 
-        {/* 희귀도별 현황 */}
+        {/* 카테고리별 현황 */}
         <div className="flex flex-wrap gap-3 mt-3 pt-3 border-t border-gray-800">
-          {[...new Map(cards.map((c) => [c.rarity ?? "Unknown", 0]))]
-            .map(([r]) => ({
-              rarity: r,
-              total: cards.filter((c) => (c.rarity ?? "Unknown") === r).length,
-              owned: cards.filter((c) => (c.rarity ?? "Unknown") === r && c.owned).length,
+          {[...categoryMeta.entries()]
+            .sort(([, a], [, b]) => a.tier - b.tier)
+            .map(([code, meta]) => ({
+              code,
+              meta,
+              total: cards.filter((c) => (c.rarityCategoryCode ?? "unknown") === code).length,
+              ownedCount: cards.filter((c) => (c.rarityCategoryCode ?? "unknown") === code && c.owned).length,
             }))
-            .sort((a, b) => rarityRank(a.rarity) - rarityRank(b.rarity))
-            .map(({ rarity, total, owned: o }) => (
-              <div key={rarity} className="text-center">
-                <p className="text-xs font-bold text-gray-300">{o}/{total}</p>
+            .map(({ code, meta, total, ownedCount }) => (
+              <div key={code} className="text-center">
+                <p className="text-xs font-bold text-gray-300">{ownedCount}/{total}</p>
                 <p className="text-[10px] text-gray-600 mt-0.5">
-                  {locale === "ko" ? (RARITY_KO[rarity] ?? rarity) : rarity}
+                  {locale === "ja" && meta.nameJa ? meta.nameJa : locale === "ko" ? meta.nameKo : meta.nameEn}
                 </p>
               </div>
             ))
@@ -160,33 +199,51 @@ export function CollectionBook({
           ))}
         </div>
 
-        {/* 희귀도 필터 */}
+        {/* 카테고리 필터 */}
         <div className="flex gap-1 flex-wrap">
-          {rarities.map((r) => (
-            <button
-              key={r}
-              onClick={() => setRarityFilter(r)}
-              className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                rarityFilter === r
-                  ? "bg-gray-700 text-white"
-                  : "text-gray-600 hover:text-gray-400 border border-gray-800"
-              }`}
-            >
-              {r === "all" ? "전체 등급" : (locale === "ko" ? (RARITY_KO[r] ?? r) : r)}
-            </button>
-          ))}
+          {categories.map((code) => {
+            const meta = categoryMeta.get(code);
+            const label = code === "all"
+              ? "전체 등급"
+              : (locale === "ja" && meta?.nameJa ? meta.nameJa : locale === "ko" ? (meta?.nameKo ?? code) : (meta?.nameEn ?? code));
+            return (
+              <button
+                key={code}
+                onClick={() => setCategoryFilter(code)}
+                className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                  categoryFilter === code
+                    ? "bg-gray-700 text-white"
+                    : "text-gray-600 hover:text-gray-400 border border-gray-800"
+                }`}
+              >
+                {label}
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* 카드 그리드 (희귀도별 그룹) */}
+      {/* 카드 그리드 (카테고리별 그룹) */}
       <div className="space-y-8">
-        {grouped.map(([rarity, groupCards]) => (
-          <div key={rarity}>
+        {grouped.map(([catCode, groupCards]) => {
+          const meta = categoryMeta.get(catCode);
+          const catLabel = locale === "ja" && meta?.nameJa ? meta.nameJa
+            : locale === "ko" ? (meta?.nameKo ?? catCode)
+            : (meta?.nameEn ?? catCode);
+          // raw rarity names for subtitle (dedupe, max 3)
+          const rawNames = [...new Set(groupCards.map((c) => c.rarity).filter(Boolean))].slice(0, 3);
+          return (
+          <div key={catCode}>
             <div className="flex items-center gap-2 mb-3">
-              <h2 className="text-xs font-bold text-gray-400 uppercase tracking-wide">
-                {locale === "ko" ? (RARITY_KO[rarity] ?? rarity) : rarity}
+              <h2 className="text-sm font-bold text-gray-200">
+                {catLabel}
               </h2>
-              <span className="text-xs text-gray-600">
+              {rawNames.length > 0 && (
+                <span className="text-[10px] text-gray-600">
+                  ({rawNames.join(", ")})
+                </span>
+              )}
+              <span className="text-xs text-gray-600 ml-auto">
                 {groupCards.filter((c) => c.owned).length}/{groupCards.length}
               </span>
             </div>
@@ -207,13 +264,17 @@ export function CollectionBook({
                         : "border-gray-800/50 opacity-30 group-hover:opacity-50"
                     }`}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={card.imageSmall}
-                        alt={card.name}
-                        className={`w-full aspect-[2.5/3.5] object-cover ${
-                          card.owned ? "" : "grayscale"
-                        }`}
-                      />
+                      {card.imageSmall ? (
+                        <img
+                          src={card.imageSmall}
+                          alt={card.name}
+                          className={`w-full aspect-[2.5/3.5] object-cover ${
+                            card.owned ? "" : "grayscale"
+                          }`}
+                        />
+                      ) : (
+                        <div className={`w-full aspect-[2.5/3.5] bg-toss-bg-muted ${card.owned ? "" : "grayscale"}`} />
+                      )}
                     </div>
 
                     {/* 보유 뱃지 */}
@@ -234,7 +295,8 @@ export function CollectionBook({
                 ))}
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

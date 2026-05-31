@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { Plus, MapPin, MessageCircle, Eye, Heart, Pin } from "lucide-react";
+import { createPost } from "@/lib/actions/community";
 import {
   Avatar,
   Button,
@@ -129,12 +131,23 @@ function tradeStatusColor(status: string): "brand" | "warning" | "neutral" {
 
 // ── 작성 모달 ─────────────────────────────────────────────────────────────
 
-function WriteModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+function WriteModal({
+  open,
+  onClose,
+  isLoggedIn,
+}: {
+  open: boolean;
+  onClose: () => void;
+  isLoggedIn: boolean;
+}) {
+  const router = useRouter();
   const [collectCat, setCollectCat] = useState("포켓몬 TCG");
   const [category, setCategory] = useState("자유");
   const [negotiable, setNegotiable] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [submitting, startSubmit] = useTransition();
+  const [error, setError] = useState<string | null>(null);
 
   // 거래 전용 폼 상태
   const [selectedCard, setSelectedCard] = useState("");
@@ -146,6 +159,52 @@ function WriteModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [location, setLocation] = useState("");
 
   const isTrade = category === "팝니다" || category === "삽니다";
+
+  function handleSubmit() {
+    if (!isLoggedIn) {
+      setError("로그인이 필요합니다.");
+      return;
+    }
+    setError(null);
+    startSubmit(async () => {
+      const res = await createPost({
+        collectibleCategory: collectCat as
+          | "포켓몬 TCG"
+          | "유희왕"
+          | "원피스 TCG"
+          | "스니커즈"
+          | "피규어",
+        category: category as
+          | "자유"
+          | "팝니다"
+          | "삽니다"
+          | "공략"
+          | "메타분석"
+          | "자랑"
+          | "질문"
+          | "정보"
+          | "거래후기",
+        title: title.trim(),
+        body: content.trim(),
+        ...(isTrade
+          ? {
+              priceKrw: price ? Number(price) : null,
+              condition: condition || undefined,
+              certified: certified !== "" && certified !== "none",
+              location: location.trim() || undefined,
+              dealMethod: dealMethod || undefined,
+              negotiable,
+            }
+          : {}),
+      });
+      if (!res.ok) {
+        setError(res.error ?? "작성에 실패했습니다.");
+        return;
+      }
+      onClose();
+      router.refresh();
+    });
+  }
 
   return (
     <Modal.Root open={open} onOpenChange={(o) => !o && onClose()}>
@@ -376,6 +435,15 @@ function WriteModal({ open, onClose }: { open: boolean; onClose: () => void }) {
           <p className="text-toss-micro text-toss-text-quaternary">
             허위 직거래 · 욕설 · 도배는 제재 대상입니다.
           </p>
+
+          {!isLoggedIn && (
+            <p className="text-toss-caption text-toss-text-tertiary">
+              글을 작성하려면 로그인이 필요해요.
+            </p>
+          )}
+          {error && (
+            <p className="text-toss-caption text-toss-negative">{error}</p>
+          )}
         </div>
 
         <Modal.Footer className="px-5 py-4 border-t border-toss-divider">
@@ -383,10 +451,10 @@ function WriteModal({ open, onClose }: { open: boolean; onClose: () => void }) {
           <Button
             variant="primary"
             size="md"
-            disabled={!title.trim() || !content.trim()}
-            onClick={onClose}
+            disabled={!title.trim() || !content.trim() || submitting || !isLoggedIn}
+            onClick={handleSubmit}
           >
-            작성 완료
+            {submitting ? "작성 중…" : "작성 완료"}
           </Button>
         </Modal.Footer>
       </Modal.Content>
@@ -502,7 +570,15 @@ function PostRow({ post, locale }: { post: Post; locale: string }) {
 
 // ── 메인 컴포넌트 ─────────────────────────────────────────────────────────
 
-export function CommunityBoard({ posts, locale }: { posts: Post[]; locale: string }) {
+export function CommunityBoard({
+  posts,
+  locale,
+  isLoggedIn = false,
+}: {
+  posts: Post[];
+  locale: string;
+  isLoggedIn?: boolean;
+}) {
   const [collectCat, setCollectCat] = useState("all");
   const [group, setGroup]           = useState<GroupId>("all");
   const [activeCat, setActiveCat]   = useState("all");
@@ -563,7 +639,7 @@ export function CommunityBoard({ posts, locale }: { posts: Post[]; locale: strin
 
   return (
     <>
-      <WriteModal open={writeOpen} onClose={() => setWriteOpen(false)} />
+      <WriteModal open={writeOpen} onClose={() => setWriteOpen(false)} isLoggedIn={isLoggedIn} />
 
       <div className="grid lg:grid-cols-[220px_1fr] gap-8">
         {/* ── 좌측 사이드바: 수집품 대분류 (포켓몬/유희왕/스니커즈/...) ─── */}

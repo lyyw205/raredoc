@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import { Card, CardHeader, CardTitle, Tag } from "@/components/toss";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { CardHeader, CardTitle, Tag } from "@/components/toss";
 
 type CardItem = {
+  uid: string;
   id: string;
   name: string;
   set: string;
@@ -16,14 +18,94 @@ type CardItem = {
   collector: string;
   collectorInitial: string;
   addedAt: string;
+  // 새 ERD: 지역(EN/JP/KR) 정보. 있으면 카드 우상단에 뱃지로 표시.
+  region?: string;
 };
 
-// 1위는 강조(warning solid), 2·3위는 약하게 — 토스 단일 톤 정책 (warning 계열만 사용)
-const RANK_BADGE = [
-  { emoji: "👑", label: "1위", bg: "var(--toss-warning)",      color: "#fff" },
-  { emoji: "🥈", label: "2위", bg: "var(--toss-text-tertiary)", color: "#fff" },
-  { emoji: "🥉", label: "3위", bg: "var(--toss-warning-weak)",  color: "var(--toss-warning)" },
-];
+const AUTO_INTERVAL = 2800;
+
+function CardTile({
+  card,
+  rank,
+  locale,
+}: {
+  card: CardItem;
+  rank: number;
+  locale: string;
+}) {
+  const isTop3 = rank <= 3;
+  const rankEmoji = rank === 1 ? "👑" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : null;
+
+  return (
+    <Link
+      href={`/${locale}/cards/${card.id}`}
+      className="group flex w-[220px] shrink-0 snap-start flex-col overflow-hidden rounded-toss-lg border border-toss-border bg-toss-bg-base transition-shadow hover:shadow-toss-md lg:w-[calc((100%-60px)/6)]"
+    >
+      {/* 이미지 */}
+      <div className="relative aspect-[5/7] overflow-hidden bg-toss-bg-muted">
+        {card.imageUrl ? (
+          <img
+            src={card.imageUrl}
+            alt={card.name}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+          />
+        ) : null}
+        {/* 랭크 뱃지 */}
+        <span
+          className="absolute left-2 top-2 flex items-center gap-0.5 rounded-toss-pill px-2 py-0.5 text-toss-micro font-bold shadow-toss-xs"
+          style={{
+            background: isTop3 ? "var(--toss-warning)" : "rgba(0,0,0,0.55)",
+            color: "#fff",
+          }}
+        >
+          {rankEmoji ?? `#${rank}`}
+        </span>
+        {/* 인증 뱃지 */}
+        {card.certified && (
+          <span className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-toss-success shadow-toss-xs ring-2 ring-toss-bg-base">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+              <path
+                d="M2 5l2 2.5 4-4"
+                stroke="white"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+        )}
+        {/* 지역 뱃지 (EN/JP/KR) — 인증 뱃지가 없을 때만 노출 */}
+        {!card.certified && card.region && (
+          <span className="absolute right-2 top-2 rounded-toss-sm bg-black/55 px-1.5 py-0.5 text-toss-micro font-semibold text-white shadow-toss-xs">
+            {card.region}
+          </span>
+        )}
+      </div>
+
+      {/* 정보 */}
+      <div className="flex flex-1 flex-col p-3">
+        <div className="flex items-center gap-1">
+          <p className="truncate text-toss-label font-semibold text-toss-text-primary">
+            {card.name}
+          </p>
+          <Tag color="neutral" shape="soft" className="shrink-0 text-toss-micro">
+            {card.grade}
+          </Tag>
+        </div>
+        <p className="mt-0.5 truncate text-toss-caption text-toss-text-quaternary">
+          {card.set} · No.{card.number}
+        </p>
+        <p className="mt-2 toss-numeric text-toss-subtitle font-extrabold leading-none text-toss-warning">
+          ₩{card.valueKrw.toLocaleString("ko-KR")}
+        </p>
+        <p className="mt-1.5 truncate text-toss-caption text-toss-text-quaternary">
+          {card.collector} · {card.addedAt}
+        </p>
+      </div>
+    </Link>
+  );
+}
 
 export function CardStageCarousel({
   cards,
@@ -32,200 +114,92 @@ export function CardStageCarousel({
   cards: CardItem[];
   locale: string;
 }) {
-  const [idx, setIdx] = useState(0);
+  const scrollerRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const startTimer = useCallback(() => {
+  // 한 칸(카드 폭 + gap) 단위로 스크롤
+  const step = useCallback((dir: 1 | -1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const first = el.firstElementChild as HTMLElement | null;
+    const gap = parseFloat(getComputedStyle(el).columnGap || "0") || 0;
+    const cardW = first ? first.offsetWidth + gap : el.clientWidth * 0.8;
+    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4;
+
+    if (dir === 1 && atEnd) {
+      el.scrollTo({ left: 0, behavior: "smooth" });
+    } else {
+      el.scrollBy({ left: dir * cardW, behavior: "smooth" });
+    }
+  }, []);
+
+  const startAuto = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(
-      () => setIdx((p) => (p + 1) % cards.length),
-      3200
-    );
-  }, [cards.length]);
+    timerRef.current = setInterval(() => step(1), AUTO_INTERVAL);
+  }, [step]);
+
+  const stopAuto = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = null;
+  }, []);
 
   useEffect(() => {
-    startTimer();
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [startTimer]);
+    startAuto();
+    return stopAuto;
+  }, [startAuto, stopAuto]);
 
-  const navigate = (n: number) => {
-    setIdx((n + cards.length) % cards.length);
-    startTimer();
+  const handleArrow = (dir: 1 | -1) => {
+    step(dir);
+    startAuto(); // 수동 조작 시 타이머 리셋
   };
 
-  const VISIBLE_SIDE = 4;
-  const card = cards[idx];
-  const badge = RANK_BADGE[idx];
-
-  function offset(i: number) {
-    let d = i - idx;
-    if (d > cards.length / 2) d -= cards.length;
-    if (d < -cards.length / 2) d += cards.length;
-    return d;
-  }
-
   return (
-    <>
-      <style>{`
-        @keyframes stageIn {
-          from { opacity: 0; transform: scale(0.91) translateY(8px); }
-          to   { opacity: 1; transform: scale(1)    translateY(0px); }
-        }
-        @keyframes badgeIn {
-          from { opacity: 0; transform: translateX(-50%) scale(0.7) translateY(-4px); }
-          to   { opacity: 1; transform: translateX(-50%) scale(1)   translateY(0); }
-        }
-        .card-stage-in  { animation: stageIn  0.45s cubic-bezier(.22,1,.36,1) both; }
-        .badge-stage-in { animation: badgeIn  0.35s cubic-bezier(.22,1,.36,1) 0.1s both; }
-      `}</style>
-
-      <Card padding="none" className="overflow-hidden">
-        {/* Header */}
-        <CardHeader className="px-5 pt-5 pb-1">
-          <div>
-            <CardTitle className="text-toss-subtitle">최근 등록 · 가격순</CardTitle>
-            <p className="text-toss-caption text-toss-text-quaternary mt-0.5">커뮤니티가 오늘 등록한 카드</p>
+    <section>
+      {/* Header */}
+      <CardHeader className="pb-2">
+        <div>
+          <CardTitle className="text-toss-subtitle">오늘의 컬렉션</CardTitle>
+          <p className="mt-0.5 text-toss-caption text-toss-text-quaternary">
+            컬렉터들이 지금 등록하고 있는 카드
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => handleArrow(-1)}
+              aria-label="이전"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-toss-icon transition-colors hover:bg-toss-hover"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              onClick={() => handleArrow(1)}
+              aria-label="다음"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-toss-icon transition-colors hover:bg-toss-hover"
+            >
+              <ChevronRight size={18} />
+            </button>
           </div>
           <Link
             href={`/${locale}/profile/yujin?tab=collection`}
-            className="text-toss-caption text-toss-text-tertiary hover:text-toss-text-primary transition-colors"
+            className="text-toss-caption text-toss-text-tertiary transition-colors hover:text-toss-text-primary"
           >
             전체보기 →
           </Link>
-        </CardHeader>
-
-        {/* Stage */}
-        <div className="relative pt-10 pb-6 select-none">
-          {/* Spotlight glow (라이트 모드에서도 살짝 강조) */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div
-              className="w-80 h-80 rounded-full blur-[64px]"
-              style={{ background: "radial-gradient(circle, rgba(255,177,52,0.16) 0%, transparent 70%)" }}
-            />
-          </div>
-
-          {/* Cards row */}
-          <div className="relative h-[280px] flex items-center justify-center">
-            {cards.map((c, i) => {
-              const d = offset(i);
-              const abs = Math.abs(d);
-              if (abs > VISIBLE_SIDE) return null;
-              const isActive = d === 0;
-              const scale = isActive ? 1 : Math.max(0.34, 1 - abs * 0.14);
-              const tx = d * 105;
-              const opacity = isActive ? 1 : Math.max(0.18, 0.78 - abs * 0.14);
-              const z = 20 - abs;
-
-              return (
-                <button
-                  key={c.id}
-                  aria-label={isActive ? undefined : `${c.name} 으로 이동`}
-                  onClick={() => !isActive && navigate(i)}
-                  className={isActive ? "absolute cursor-default" : "absolute cursor-pointer"}
-                  style={{
-                    width: 188,
-                    transform: `translateX(${tx}px) scale(${scale})`,
-                    transformOrigin: "bottom center",
-                    opacity,
-                    zIndex: z,
-                    transition: "transform 0.45s cubic-bezier(.22,1,.36,1), opacity 0.3s",
-                  }}
-                >
-                  <div className="relative">
-                    {isActive && badge && (
-                      <div
-                        key={`badge-${idx}`}
-                        className="badge-stage-in absolute z-20 flex items-center gap-1 text-toss-micro font-bold px-3 py-1 rounded-toss-pill shadow-toss-md"
-                        style={{
-                          top: -22,
-                          left: "50%",
-                          transform: "translateX(-50%)",
-                          background: badge.bg,
-                          color: badge.color,
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        {badge.emoji} {badge.label}
-                      </div>
-                    )}
-                    {isActive && c.certified && (
-                      <div className="absolute top-2.5 right-2.5 z-20 w-6 h-6 rounded-full bg-toss-success flex items-center justify-center shadow-toss-md ring-2 ring-toss-bg-base">
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                          <path
-                            d="M2 5l2 2.5 4-4"
-                            stroke="white"
-                            strokeWidth="1.8"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    )}
-                    <div
-                      className={`w-full overflow-hidden ${isActive ? "rounded-toss-xl" : "rounded-toss-lg"}`}
-                      style={
-                        isActive
-                          ? {
-                              boxShadow:
-                                "0 0 52px rgba(255,177,52,0.20), 0 12px 32px rgba(0,0,0,0.12)",
-                              outline: "2px solid rgba(255,177,52,0.32)",
-                              outlineOffset: "2px",
-                            }
-                          : undefined
-                      }
-                    >
-                      <img src={c.imageUrl} alt={c.name} className="w-full block" />
-                    </div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Card info below */}
-          <div className="text-center mt-6 px-6">
-            <div className="flex items-center justify-center gap-2 mb-0.5">
-              <span className="text-toss-subtitle font-bold text-toss-text-primary">{card.name}</span>
-              <Tag color="neutral" shape="soft" className="text-toss-micro">{card.grade}</Tag>
-              {card.certified && (
-                <Tag color="success" shape="soft" className="text-toss-micro">인증</Tag>
-              )}
-            </div>
-            <p className="text-toss-caption text-toss-text-tertiary">
-              {card.set} · No.{card.number}
-            </p>
-            <p
-              className="font-extrabold text-toss-warning mt-2 leading-none tracking-tight toss-numeric"
-              style={{ fontSize: 28 }}
-            >
-              ₩{card.valueKrw.toLocaleString("ko-KR")}
-            </p>
-            <p className="text-toss-caption text-toss-text-quaternary mt-1.5">
-              <span className="text-toss-text-tertiary font-medium">{card.collector}</span>{" "}
-              · {card.addedAt}
-            </p>
-          </div>
-
-          {/* Dot indicators */}
-          <div className="flex items-center justify-center gap-1.5 mt-5">
-            {cards.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => navigate(i)}
-                aria-label={`${i + 1}번 카드`}
-                className="transition-all duration-300 rounded-full"
-                style={{
-                  width: i === idx ? 20 : 6,
-                  height: 6,
-                  background: i === idx ? "var(--toss-warning)" : "var(--toss-border-strong)",
-                }}
-              />
-            ))}
-          </div>
         </div>
-      </Card>
-    </>
+      </CardHeader>
+
+      {/* 가로 슬라이드 행 (op.gg 스타일) */}
+      <div
+        ref={scrollerRef}
+        onMouseEnter={stopAuto}
+        onMouseLeave={startAuto}
+        className="flex snap-x gap-3 overflow-x-auto scroll-smooth pb-2 pt-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {cards.map((c, i) => (
+          <CardTile key={c.uid} card={c} rank={i + 1} locale={locale} />
+        ))}
+      </div>
+    </section>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { useLocale } from "next-intl";
 import {
   Avatar,
@@ -40,20 +39,6 @@ const TABS: { key: RankType; label: string; unit: string; format: (v: number) =>
   { key: "certified", label: "인증 수",        unit: "건",  format: (v) => `${v}건` },
   { key: "badges",    label: "뱃지 수",        unit: "개",  format: (v) => `${v}개` },
   { key: "monthly",   label: "이달의 활동",    unit: "장",  format: (v) => `${v}장` },
-];
-
-const MOCK_USERS: RankUser[] = [
-  { rank:  1, username: "raymond_tcg",  displayName: "레이먼드",  avatarInitial: "레", tier: "LEGEND",  change: 0,  value: 12450000, certified: 45, badges: 23, monthly: 87 },
-  { rank:  2, username: "chaeyeon",     displayName: "채연",      avatarInitial: "채", tier: "DIAMOND", change: 1,  value:  9870000, certified: 38, badges: 19, monthly: 63 },
-  { rank:  3, username: "minjun_",      displayName: "민준",      avatarInitial: "민", tier: "DIAMOND", change: -1, value:  8320000, certified: 31, badges: 17, monthly: 54 },
-  { rank:  4, username: "sora_cards",   displayName: "소라",      avatarInitial: "소", tier: "GOLD",    change: 2,  value:  6180000, certified: 27, badges: 15, monthly: 41 },
-  { rank:  5, username: "jihun99",      displayName: "지훈",      avatarInitial: "지", tier: "GOLD",    change: -1, value:  5420000, certified: 22, badges: 14, monthly: 38 },
-  { rank:  6, username: "nari_collect", displayName: "나리",      avatarInitial: "나", tier: "GOLD",    change: 0,  value:  4750000, certified: 20, badges: 13, monthly: 35 },
-  { rank:  7, username: "taeyang_k",    displayName: "태양",      avatarInitial: "태", tier: "GOLD",    change: 3,  value:  3980000, certified: 18, badges: 12, monthly: 44 },
-  { rank:  8, username: "hyunwoo_r",    displayName: "현우",      avatarInitial: "현", tier: "SILVER",  change: -2, value:  3210000, certified: 15, badges: 11, monthly: 29 },
-  { rank:  9, username: "jieun_tcg",    displayName: "지은",      avatarInitial: "지", tier: "SILVER",  change: 1,  value:  2870000, certified: 13, badges: 10, monthly: 27 },
-  { rank: 10, username: "wonjae",       displayName: "원재",      avatarInitial: "원", tier: "SILVER",  change: -1, value:  2340000, certified: 11, badges:  9, monthly: 23 },
-  { rank: 43, username: "yujin",        displayName: "유진",      avatarInitial: "유", tier: "GOLD",    change: 2,  value:   865000, certified: 12, badges:  8, monthly: 14, isMe: true },
 ];
 
 function ChangeChip({ change }: { change: number }) {

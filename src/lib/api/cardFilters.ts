@@ -25,11 +25,12 @@ export interface FilterOptions {
 }
 
 export async function getFilterOptions(): Promise<FilterOptions> {
+  // Phase 4: prisma.card.groupBy(rarity) → prisma.rarity master 데이터.
+  // 검색 액션(searchCards)이 Rarity.code 로 LogicalCard.rarity 를 매칭하므로 동일 도메인 사용.
   const [rarityRows, sets] = await Promise.all([
-    prisma.card.groupBy({
-      by: ["rarity"],
-      where: { rarity: { not: null } },
-      orderBy: { rarity: "asc" },
+    prisma.rarity.findMany({
+      select: { code: true },
+      orderBy: { code: "asc" },
     }),
     prisma.set.findMany({
       select: { id: true, name: true, nameKo: true, releaseDate: true },
@@ -39,9 +40,7 @@ export async function getFilterOptions(): Promise<FilterOptions> {
 
   return {
     types: [...POKEMON_TYPES],
-    rarities: rarityRows
-      .map((r) => r.rarity)
-      .filter((r): r is string => !!r),
+    rarities: rarityRows.map((r) => r.code),
     sets,
   };
 }

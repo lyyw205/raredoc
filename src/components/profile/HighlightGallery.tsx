@@ -1,66 +1,40 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useTransition } from "react";
 import Link from "next/link";
 import { useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
 import { Card } from "@/components/toss";
+import {
+  setHighlightAction,
+  toggleForSaleAction,
+  certifyItemAction,
+  searchCardsAction,
+  type CardSearchResult,
+} from "@/lib/actions/collection";
 
 
 export interface HighlightItem {
-  id: string;
+  id: string;        // CollectionItem id
   name: string;
   set: string;
   grade: string;
   certified: boolean;
   imageUrl: string;
   valueKrw: number;
-  isLocked?: boolean;
+  isLocked?: boolean; // !forSale
 }
 
-// 이미 등록된 컬렉션 카드 (하이라이트에 없는 것들)
-const MOCK_MY_COLLECTION = [
-  { id: "c1", name: "이상해꽃 ex SAR", set: "포켓몬 151",         grade: "NM", certified: false, imageUrl: "https://images.pokemontcg.io/sv3pt5/198_hires.png", valueKrw:  92000 },
-  { id: "c2", name: "거북왕 ex SAR",   set: "포켓몬 151",         grade: "NM", certified: false, imageUrl: "https://images.pokemontcg.io/sv3pt5/202_hires.png", valueKrw:  88000 },
-  { id: "c3", name: "뮤 ex SAR",       set: "포켓몬 151",         grade: "NM", certified: false, imageUrl: "https://images.pokemontcg.io/sv3pt5/205_hires.png", valueKrw: 165000 },
-  { id: "c4", name: "가이오가 ex SAR", set: "파라다이스 드래고나", grade: "NM", certified: true,  imageUrl: "https://images.pokemontcg.io/sv4pt5/182_hires.png", valueKrw: 380000 },
-  { id: "c5", name: "잠만보 ex SAR",   set: "초승달의 섬",         grade: "LP", certified: false, imageUrl: "https://images.pokemontcg.io/sv8/180_hires.png",   valueKrw:  48000 },
-  { id: "c6", name: "이브이 SAR",      set: "포켓몬 151",         grade: "NM", certified: false, imageUrl: "https://images.pokemontcg.io/sv3pt5/218_hires.png", valueKrw: 220000 },
-];
-
-
-// 도감 전체 카드 목업 (실제 구현 시 API로 교체)
-const MOCK_DEX_CARDS = [
-  // 포켓몬 151
-  { id: "sv3pt5-215", name: "피카츄 ex SAR",    set: "포켓몬 151",         number: "215", imageUrl: "https://images.pokemontcg.io/sv3pt5/215_hires.png" },
-  { id: "sv3pt5-200", name: "리자몽 ex SAR",    set: "포켓몬 151",         number: "200", imageUrl: "https://images.pokemontcg.io/sv3pt5/200_hires.png" },
-  { id: "sv3pt5-198", name: "이상해꽃 ex SAR",  set: "포켓몬 151",         number: "198", imageUrl: "https://images.pokemontcg.io/sv3pt5/198_hires.png" },
-  { id: "sv3pt5-202", name: "거북왕 ex SAR",    set: "포켓몬 151",         number: "202", imageUrl: "https://images.pokemontcg.io/sv3pt5/202_hires.png" },
-  { id: "sv3pt5-205", name: "뮤 ex SAR",        set: "포켓몬 151",         number: "205", imageUrl: "https://images.pokemontcg.io/sv3pt5/205_hires.png" },
-  { id: "sv3pt5-207", name: "뮤츠 ex SAR",      set: "포켓몬 151",         number: "207", imageUrl: "https://images.pokemontcg.io/sv3pt5/207_hires.png" },
-  { id: "sv3pt5-218", name: "이브이 SAR",       set: "포켓몬 151",         number: "218", imageUrl: "https://images.pokemontcg.io/sv3pt5/218_hires.png" },
-  { id: "sv3pt5-201", name: "파이리 ex SAR",    set: "포켓몬 151",         number: "201", imageUrl: "https://images.pokemontcg.io/sv3pt5/201_hires.png" },
-  { id: "sv3pt5-203", name: "꼬부기 ex SAR",    set: "포켓몬 151",         number: "203", imageUrl: "https://images.pokemontcg.io/sv3pt5/203_hires.png" },
-  { id: "sv3pt5-204", name: "이상해씨 ex SAR",  set: "포켓몬 151",         number: "204", imageUrl: "https://images.pokemontcg.io/sv3pt5/204_hires.png" },
-  { id: "sv3pt5-206", name: "잠만보 ex SAR",    set: "포켓몬 151",         number: "206", imageUrl: "https://images.pokemontcg.io/sv3pt5/206_hires.png" },
-  { id: "sv3pt5-208", name: "루기아 ex SAR",    set: "포켓몬 151",         number: "208", imageUrl: "https://images.pokemontcg.io/sv3pt5/208_hires.png" },
-  { id: "sv3pt5-209", name: "나시 ex SAR",      set: "포켓몬 151",         number: "209", imageUrl: "https://images.pokemontcg.io/sv3pt5/209_hires.png" },
-  { id: "sv3pt5-210", name: "팬텀 ex SAR",      set: "포켓몬 151",         number: "210", imageUrl: "https://images.pokemontcg.io/sv3pt5/210_hires.png" },
-  { id: "sv3pt5-211", name: "또가스 ex SAR",    set: "포켓몬 151",         number: "211", imageUrl: "https://images.pokemontcg.io/sv3pt5/211_hires.png" },
-  { id: "sv3pt5-212", name: "강철톤 ex SAR",    set: "포켓몬 151",         number: "212", imageUrl: "https://images.pokemontcg.io/sv3pt5/212_hires.png" },
-  { id: "sv3pt5-213", name: "마임맨 ex SAR",    set: "포켓몬 151",         number: "213", imageUrl: "https://images.pokemontcg.io/sv3pt5/213_hires.png" },
-  { id: "sv3pt5-214", name: "디그다 ex SAR",    set: "포켓몬 151",         number: "214", imageUrl: "https://images.pokemontcg.io/sv3pt5/214_hires.png" },
-  // 파라다이스 드래고나
-  { id: "sv4pt5-191", name: "리자몽 ex SAR",    set: "파라다이스 드래고나", number: "191", imageUrl: "https://images.pokemontcg.io/sv4pt5/191_hires.png" },
-  { id: "sv4pt5-182", name: "가이오가 ex SAR",  set: "파라다이스 드래고나", number: "182", imageUrl: "https://images.pokemontcg.io/sv4pt5/182_hires.png" },
-  { id: "sv4pt5-176", name: "아마루르가 ex SAR",set: "파라다이스 드래고나", number: "176", imageUrl: "https://images.pokemontcg.io/sv4pt5/176_hires.png" },
-  { id: "sv4pt5-180", name: "루카리오 ex SAR",  set: "파라다이스 드래고나", number: "180", imageUrl: "https://images.pokemontcg.io/sv4pt5/180_hires.png" },
-  { id: "sv4pt5-185", name: "뮤 ex SAR",        set: "파라다이스 드래고나", number: "185", imageUrl: "https://images.pokemontcg.io/sv4pt5/185_hires.png" },
-  { id: "sv4pt5-188", name: "피카츄 ex SAR",    set: "파라다이스 드래고나", number: "188", imageUrl: "https://images.pokemontcg.io/sv4pt5/188_hires.png" },
-  // 초승달의 섬
-  { id: "sv8-180",    name: "잠만보 ex SAR",    set: "초승달의 섬",         number: "180", imageUrl: "https://images.pokemontcg.io/sv8/180_hires.png" },
-  { id: "sv8-175",    name: "루나아라 ex SAR",  set: "초승달의 섬",         number: "175", imageUrl: "https://images.pokemontcg.io/sv8/175_hires.png" },
-  { id: "sv8-178",    name: "실버디 ex SAR",    set: "초승달의 섬",         number: "178", imageUrl: "https://images.pokemontcg.io/sv8/178_hires.png" },
-];
+/** 하이라이트에 추가할 수 있는 (아직 하이라이트 아닌) 보유 카드 */
+export interface MyCollectionCard {
+  id: string;        // CollectionItem id
+  name: string;
+  set: string;
+  grade: string;
+  certified: boolean;
+  imageUrl: string;
+  valueKrw: number;
+}
 
 const GRADES = ["NM", "LP", "MP", "HP"];
 
@@ -77,19 +51,23 @@ function LockIcon({ size = 14 }: { size?: number }) {
 
 function AddCardModal({
   onClose,
-  onAdd,
-  highlightIds,
+  myCollection,
+  emptySlot,
 }: {
   onClose: () => void;
-  onAdd: (item: HighlightItem) => void;
-  highlightIds: Set<string>;
+  myCollection: MyCollectionCard[];
+  emptySlot: number;
 }) {
+  const router = useRouter();
   const [tab, setTab] = useState<"collection" | "certify">("collection");
+  const [isPending, startTransition] = useTransition();
 
   // 인증 신청 탭 상태
   const [photo, setPhoto] = useState<string | null>(null);
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [query, setQuery] = useState("");
-  const [selectedDex, setSelectedDex] = useState<typeof MOCK_DEX_CARDS[number] | null>(null);
+  const [dexResults, setDexResults] = useState<CardSearchResult[]>([]);
+  const [selectedDex, setSelectedDex] = useState<CardSearchResult | null>(null);
   const [grade, setGrade] = useState("NM");
   const [submitted, setSubmitted] = useState(false);
 
@@ -107,26 +85,47 @@ function AddCardModal({
     };
   }, [close]);
 
-  const availableCollection = MOCK_MY_COLLECTION.filter((c) => !highlightIds.has(c.id));
-  const dexResults = query.trim().length < 1
-    ? MOCK_DEX_CARDS
-    : MOCK_DEX_CARDS.filter((c) => c.name.includes(query) || c.set.includes(query));
+  // 카드 검색 (debounce)
+  useEffect(() => {
+    const q = query.trim();
+    const t = setTimeout(() => {
+      if (q.length < 1) {
+        setDexResults([]);
+        return;
+      }
+      void searchCardsAction(q).then(setDexResults);
+    }, 350);
+    return () => clearTimeout(t);
+  }, [query]);
 
-  function handleAddFromCollection(card: typeof MOCK_MY_COLLECTION[number]) {
-    onAdd({ ...card, isLocked: false });
-    close();
+  function handleAddFromCollection(card: MyCollectionCard) {
+    startTransition(async () => {
+      await setHighlightAction(card.id, emptySlot);
+      router.refresh();
+      close();
+    });
   }
 
   function handlePhotoChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    const url = URL.createObjectURL(file);
-    setPhoto(url);
+    setPhotoFile(file);
+    setPhoto(URL.createObjectURL(file));
   }
 
   function handleSubmitCertify() {
-    if (!photo || !selectedDex) return;
-    setSubmitted(true);
+    if (!selectedDex) return;
+    const fd = new FormData();
+    fd.set("cardId", selectedDex.id);
+    fd.set("grade", grade);
+    if (photoFile) fd.set("photo", photoFile);
+    startTransition(async () => {
+      const res = await certifyItemAction(fd);
+      if (res.ok) {
+        setSubmitted(true);
+        router.refresh();
+      }
+    });
   }
 
   return (
@@ -168,7 +167,7 @@ function AddCardModal({
 
           {/* ── 내 컬렉션 탭 ── */}
           {tab === "collection" && (
-            availableCollection.length === 0 ? (
+            myCollection.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-16 text-toss-text-quaternary">
                 <p className="text-toss-body">하이라이트에 추가할 수 있는 카드가 없어요</p>
                 <button
@@ -180,18 +179,22 @@ function AddCardModal({
               </div>
             ) : (
               <div className="grid grid-cols-3 gap-3">
-                {availableCollection.map((card) => (
+                {myCollection.map((card) => (
                   <button
                     key={card.id}
+                    disabled={isPending}
                     onClick={() => handleAddFromCollection(card)}
-                    className="group flex flex-col items-center text-left rounded-toss-lg overflow-hidden border border-toss-border hover:border-toss-brand/50 transition-colors bg-toss-bg-subtle"
+                    className="group flex flex-col items-center text-left rounded-toss-lg overflow-hidden border border-toss-border hover:border-toss-brand/50 transition-colors bg-toss-bg-subtle disabled:opacity-50"
                   >
                     <div className="w-full aspect-[63/88] overflow-hidden bg-toss-bg-muted">
-                      <img
-                        src={card.imageUrl}
-                        alt={card.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                      />
+                      {card.imageUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={card.imageUrl}
+                          alt={card.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                        />
+                      ) : null}
                     </div>
                     <div className="p-2 w-full">
                       <p className="text-toss-caption font-semibold text-toss-text-primary truncate">{card.name}</p>
@@ -246,7 +249,7 @@ function AddCardModal({
                     <div className="relative rounded-toss-lg overflow-hidden border border-toss-border bg-toss-bg-subtle h-40">
                       <img src={photo} alt="업로드 사진" className="w-full h-full object-contain" />
                       <button
-                        onClick={() => { setPhoto(null); if (fileInputRef.current) fileInputRef.current.value = ""; }}
+                        onClick={() => { setPhoto(null); setPhotoFile(null); if (fileInputRef.current) fileInputRef.current.value = ""; }}
                         className="absolute top-2 right-2 w-6 h-6 rounded-full bg-toss-bg-base/80 text-toss-text-tertiary hover:text-toss-text-primary flex items-center justify-center transition-colors"
                       >
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -292,7 +295,10 @@ function AddCardModal({
                         }`}
                       >
                         <div className="aspect-[63/88] bg-toss-bg-muted">
-                          <img src={card.imageUrl} alt={card.name} className="w-full h-full object-cover" />
+                          {card.imageUrl ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={card.imageUrl} alt={card.name} className="w-full h-full object-cover" />
+                          ) : null}
                         </div>
                         <p className="text-toss-tiny text-toss-text-tertiary px-1 py-1 text-center leading-tight truncate">{card.name}</p>
                       </button>
@@ -332,7 +338,7 @@ function AddCardModal({
           <div className="px-5 py-4 border-t border-toss-divider shrink-0">
             <button
               onClick={handleSubmitCertify}
-              disabled={!photo || !selectedDex}
+              disabled={!selectedDex || isPending}
               className="w-full py-2.5 rounded-toss-pill text-toss-label font-bold transition-colors disabled:opacity-40 disabled:cursor-not-allowed bg-toss-brand hover:opacity-90 text-white"
             >
               인증 신청하기
@@ -350,11 +356,12 @@ function AddCardModal({
 // ── HighlightCard ──────────────────────────────────────────────────────────
 
 function HighlightCard({
-  item, isOwnProfile, onToggleLock,
+  item, isOwnProfile, onToggleLock, disabled,
 }: {
   item: HighlightItem;
   isOwnProfile: boolean;
-  onToggleLock: (id: string) => void;
+  onToggleLock: (id: string, locked: boolean) => void;
+  disabled: boolean;
 }) {
   const locale = useLocale();
   const locked = item.isLocked ?? false;
@@ -362,12 +369,14 @@ function HighlightCard({
   return (
     <div className="flex flex-col items-center gap-2 group">
       <div className="relative rounded-toss-lg overflow-hidden bg-toss-bg-muted border border-toss-border group-hover:border-toss-border-strong transition-colors w-full aspect-[2.5/3.5]">
-        <img
-          src={item.imageUrl}
-          alt={item.name}
-          className={`w-full h-full object-cover transition-all ${locked ? "brightness-50" : ""}`}
-          onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
-        />
+        {item.imageUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={item.imageUrl}
+            alt={item.name}
+            className={`w-full h-full object-cover transition-all ${locked ? "brightness-50" : ""}`}
+          />
+        ) : null}
         {item.certified && !locked && (
           <span className="absolute top-2 right-2 text-toss-micro font-bold bg-toss-positive text-white px-1.5 py-0.5 rounded-toss-pill">
             인증
@@ -381,8 +390,9 @@ function HighlightCard({
         )}
         {isOwnProfile && (
           <button
-            onClick={() => onToggleLock(item.id)}
-            className={`absolute bottom-2 right-2 w-6 h-6 rounded-full flex items-center justify-center transition-all ${
+            disabled={disabled}
+            onClick={() => onToggleLock(item.id, locked)}
+            className={`absolute bottom-2 right-2 w-6 h-6 rounded-full flex items-center justify-center transition-all disabled:opacity-50 ${
               locked
                 ? "bg-toss-brand text-white hover:opacity-90"
                 : "bg-toss-bg-base/80 text-toss-text-tertiary hover:text-toss-text-primary opacity-0 group-hover:opacity-100"
@@ -428,30 +438,36 @@ function EmptySlot({ onClick }: { onClick?: () => void }) {
 // ── HighlightGallery ───────────────────────────────────────────────────────
 
 export function HighlightGallery({
-  items: initialItems,
+  items,
   totalSlots = 5,
   totalValue,
   isOwnProfile = false,
+  myCollection = [],
 }: {
   items: HighlightItem[];
   totalSlots?: number;
   totalValue: number;
   isOwnProfile?: boolean;
+  myCollection?: MyCollectionCard[];
 }) {
-  const [items, setItems] = useState(initialItems);
+  const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const emptyCount = Math.max(0, totalSlots - items.length);
   const lockedCount = items.filter((i) => i.isLocked).length;
-  const highlightIds = new Set(items.map((i) => i.id));
+  const usedSlots = new Set(items.map((_, idx) => idx + 1));
+  const firstEmptySlot = (() => {
+    for (let s = 1; s <= totalSlots; s++) if (!usedSlots.has(s)) return s;
+    return 1;
+  })();
 
-  function toggleLock(id: string) {
-    setItems((prev) => prev.map((item) => item.id === id ? { ...item, isLocked: !item.isLocked } : item));
-  }
-
-  function handleAdd(item: HighlightItem) {
-    if (items.length >= totalSlots) return;
-    setItems((prev) => [...prev, item]);
+  function toggleLock(id: string, locked: boolean) {
+    // locked = !forSale → 잠금 해제는 판매중(true), 잠금은 판매중지(false)
+    startTransition(async () => {
+      await toggleForSaleAction(id, locked);
+      router.refresh();
+    });
   }
 
   return (
@@ -487,21 +503,27 @@ export function HighlightGallery({
           </p>
         )}
 
-        <div className="grid grid-cols-5 gap-3">
-          {items.map((item) => (
-            <HighlightCard key={item.id} item={item} isOwnProfile={isOwnProfile} onToggleLock={toggleLock} />
-          ))}
-          {isOwnProfile && Array.from({ length: emptyCount }).map((_, i) => (
-            <EmptySlot key={`empty-${i}`} onClick={() => setModalOpen(true)} />
-          ))}
-        </div>
+        {items.length === 0 && !isOwnProfile ? (
+          <div className="py-10 text-center text-toss-text-quaternary text-toss-caption">
+            아직 등록된 대표 소장품이 없어요
+          </div>
+        ) : (
+          <div className="grid grid-cols-5 gap-3">
+            {items.map((item) => (
+              <HighlightCard key={item.id} item={item} isOwnProfile={isOwnProfile} onToggleLock={toggleLock} disabled={isPending} />
+            ))}
+            {isOwnProfile && Array.from({ length: emptyCount }).map((_, i) => (
+              <EmptySlot key={`empty-${i}`} onClick={() => setModalOpen(true)} />
+            ))}
+          </div>
+        )}
       </Card>
 
       {modalOpen && (
         <AddCardModal
           onClose={() => setModalOpen(false)}
-          onAdd={handleAdd}
-          highlightIds={highlightIds}
+          myCollection={myCollection}
+          emptySlot={firstEmptySlot}
         />
       )}
     </>

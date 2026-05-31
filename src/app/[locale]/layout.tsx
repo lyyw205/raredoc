@@ -7,6 +7,8 @@ import Script from "next/script";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WebSiteJsonLd } from "@/components/seo/JsonLd";
+import { getCurrentUser } from "@/lib/auth/session";
+import { getUnreadCount } from "@/lib/services/messaging";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://raredoc.kr";
 const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID ?? "";
@@ -54,6 +56,17 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!routing.locales.includes(locale as "ko" | "en")) notFound();
   const messages = await getMessages();
+  const currentUser = await getCurrentUser();
+  const headerUser = currentUser
+    ? {
+        username: currentUser.username ?? null,
+        displayName: currentUser.displayName ?? null,
+        avatarInitial: currentUser.avatarInitial,
+      }
+    : null;
+  const unreadCount = currentUser
+    ? await getUnreadCount(currentUser.id).catch(() => 0)
+    : 0;
 
   return (
     <NextIntlClientProvider messages={messages}>
@@ -66,7 +79,7 @@ export default async function LocaleLayout({
           strategy="afterInteractive"
         />
       )}
-      <Header />
+      <Header user={headerUser} unread={unreadCount} />
       <main className="flex-1">{children}</main>
       <Footer />
     </NextIntlClientProvider>

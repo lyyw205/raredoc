@@ -1,20 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState } from "react";
 import Link from "next/link";
 import { useLocale } from "next-intl";
 
+import { loginAction, type AuthState } from "@/lib/actions/auth";
+
 export function LoginForm() {
   const locale = useLocale();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    setTimeout(() => setLoading(false), 1200);
-  }
+  const [state, formAction, loading] = useActionState<AuthState | undefined, FormData>(
+    loginAction,
+    undefined,
+  );
 
   return (
     <div className="min-h-[calc(100vh-56px)] flex items-center justify-center px-4 py-12">
@@ -28,13 +25,13 @@ export function LoginForm() {
           <p className="text-sm text-gray-500 mt-2">내 수집품을 기록하고 전시하세요</p>
         </div>
 
-        {/* 소셜 로그인 */}
+        {/* 소셜 로그인 (키 미설정 — 비활성) */}
         <div className="space-y-3 mb-6">
-          <button className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl font-bold text-sm bg-[#FEE500] hover:bg-[#F5DC00] text-[#181600] transition-colors">
+          <button type="button" disabled title="준비 중입니다" className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl font-bold text-sm bg-[#FEE500] hover:bg-[#F5DC00] text-[#181600] transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
             <KakaoIcon />
             카카오로 로그인
           </button>
-          <button className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl font-medium text-sm bg-white hover:bg-gray-100 text-gray-800 transition-colors border border-gray-200">
+          <button type="button" disabled title="준비 중입니다" className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl font-medium text-sm bg-white hover:bg-gray-100 text-gray-800 transition-colors border border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed">
             <GoogleIcon />
             Google로 로그인
           </button>
@@ -48,26 +45,31 @@ export function LoginForm() {
         </div>
 
         {/* 이메일 폼 */}
-        <form onSubmit={handleSubmit} className="space-y-3">
+        <form action={formAction} className="space-y-3">
+          <input type="hidden" name="locale" value={locale} />
           <div>
             <input
               type="email"
+              name="email"
               placeholder="이메일"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-600 transition-colors"
               required
             />
+            {state?.fieldErrors?.email && (
+              <p className="text-xs text-red-500 mt-1.5 ml-1">{state.fieldErrors.email}</p>
+            )}
           </div>
           <div>
             <input
               type="password"
+              name="password"
               placeholder="비밀번호"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-gray-600 transition-colors"
               required
             />
+            {state?.fieldErrors?.password && (
+              <p className="text-xs text-red-500 mt-1.5 ml-1">{state.fieldErrors.password}</p>
+            )}
           </div>
 
           <div className="flex justify-end">
@@ -75,6 +77,10 @@ export function LoginForm() {
               비밀번호 찾기
             </button>
           </div>
+
+          {state?.error && (
+            <p className="text-xs text-red-500 ml-1">{state.error}</p>
+          )}
 
           <button
             type="submit"

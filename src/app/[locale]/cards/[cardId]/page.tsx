@@ -1,4 +1,6 @@
-import { searchCards, getCardsBySet } from "@/lib/api/pokemontcg";
+import { searchCards } from "@/lib/api/pokemontcg";
+import { loadCardByLocaleId, logicalCardToTCG } from "@/lib/cards/queries";
+import { cn } from "@/lib/utils";
 import {
   findPokeTraceCard,
   getPokeTracePriceHistory,
@@ -6,6 +8,9 @@ import {
 } from "@/lib/api/poketrace";
 import { getBunjangCardPrices } from "@/lib/api/bunjang";
 import { prisma } from "@/lib/prisma";
+import { recordCardView } from "@/lib/services/market";
+import { getCardOwnerCounts } from "@/lib/services/marketplace";
+import { CardVersionTabs, type CardVersion } from "@/components/cards/CardVersionTabs";
 import { RARITY_KO } from "@/lib/constants";
 import { PriceChart, PT_RANGES } from "@/components/cards/PriceChart";
 import { notFound } from "next/navigation";
@@ -20,27 +25,54 @@ import {
 
 export const revalidate = 3600;
 
-// 같은 카드 · 다른 팩 목업 (실데이터 연동 전 임시)
-const OTHER_PACK_VARIANTS = [
-  { set: "포켓몬 151",           number: "025", priceLabel: "₩12,000"  },
-  { set: "스타버스 ex",           number: "043", priceLabel: "₩85,000"  },
-  { set: "이브이 히어로즈",        number: "077", priceLabel: "₩320,000" },
-  { set: "스칼렛 ex",             number: "215", priceLabel: "₩185,000" },
-  { set: "메가 에볼루션 프로모",   number: "198", priceLabel: "₩240,000" },
-  { set: "썬앤문 프로모",          number: "012", priceLabel: "₩67,000"  },
-  { set: "어둠을 밝힌 달빛",       number: "054", priceLabel: "₩28,000"  },
-];
+// ── 카드 정보용 라벨/색상 (pokemontcg.io 영문 값 기준) ──────────────────────
+const TYPE_KO: Record<string, string> = {
+  Grass: "풀", Fire: "불꽃", Water: "물", Lightning: "번개", Psychic: "에스퍼",
+  Fighting: "격투", Darkness: "악", Metal: "강철", Dragon: "드래곤",
+  Colorless: "무색", Fairy: "페어리",
+};
 
-// 카드 id 기반 결정적 목업 보유자 통계 (실데이터 연동 전 임시)
-function mockOwnerStats(cardId: string) {
-  let hash = 0;
-  for (let i = 0; i < cardId.length; i++) {
-    hash = ((hash << 5) - hash + cardId.charCodeAt(i)) | 0;
-  }
-  hash = Math.abs(hash);
-  const total = 8 + (hash % 90);
-  const offerable = Math.floor(total * (0.3 + ((hash % 40) / 100)));
-  return { total, offerable };
+const TYPE_BG: Record<string, string> = {
+  Grass: "bg-green-100 text-green-700", Fire: "bg-red-100 text-red-700",
+  Water: "bg-blue-100 text-blue-700", Lightning: "bg-yellow-100 text-yellow-700",
+  Psychic: "bg-purple-100 text-purple-700", Fighting: "bg-orange-100 text-orange-700",
+  Darkness: "bg-gray-800 text-gray-100", Metal: "bg-slate-200 text-slate-700",
+  Dragon: "bg-indigo-100 text-indigo-700", Colorless: "bg-gray-100 text-gray-600",
+  Fairy: "bg-pink-100 text-pink-700",
+};
+
+const SUBTYPE_KO: Record<string, string> = {
+  Basic: "기본", "Stage 1": "1진화", "Stage 2": "2진화",
+  "Mega Evolution": "메가진화", MEGA: "메가진화",
+  ex: "ex", EX: "EX", V: "V", VMAX: "VMAX", VSTAR: "VSTAR",
+  Item: "아이템", Supporter: "서포트", Stadium: "스타디움",
+  "Pokémon Tool": "포켓몬의 도구", Tool: "포켓몬의 도구",
+  Special: "특수 에너지", "Basic Energy": "기본 에너지",
+};
+
+const FORMAT_LABEL: Record<string, string> = {
+  standard: "스탠다드", expanded: "익스텐디드", unlimited: "언리미티드",
+};
+
+function CostPips({ cost }: { cost?: string[] }) {
+  if (!cost || cost.length === 0)
+    return <span className="text-toss-micro text-toss-text-quaternary">—</span>;
+  return (
+    <span className="inline-flex gap-0.5 items-center">
+      {cost.map((c, i) => (
+        <span
+          key={i}
+          title={TYPE_KO[c] ?? c}
+          className={cn(
+            "inline-flex w-4 h-4 rounded-full text-[9px] font-bold items-center justify-center",
+            TYPE_BG[c] ?? "bg-gray-100 text-gray-600"
+          )}
+        >
+          {c.charAt(0)}
+        </span>
+      ))}
+    </span>
+  );
 }
 
 function trendPct(avg: number, avg7d?: number): number | null {
@@ -54,13 +86,25 @@ function TrendBadge({ pct }: { pct: number | null }) {
   return <DeltaBadge percent={pct} mode="text" size="sm" />;
 }
 
+// 새 ERD 우선 + 영문 API 폴백.
+// - CardLocale 존재 && region !== "EN" → 어댑터(JP/KR·일판단독: API 미수록)
+// - 그 외 → 영문 API. API 가 null 인데 DB 가 있으면 DB 로 폴백(EN 누락 보호)
 async function getCard(cardId: string) {
+  const loaded = await loadCardByLocaleId(cardId).catch(() => null);
+
+  if (loaded && loaded.locale.region !== "EN") {
+    return { card: logicalCardToTCG(loaded.logicalCard, loaded.locale), loaded };
+  }
+
   try {
     const res = await searchCards(`id:${cardId}`, 1);
-    return res.data[0] ?? null;
-  } catch {
-    return null;
-  }
+    const apiCard = res.data[0] ?? null;
+    if (apiCard) return { card: apiCard, loaded };
+  } catch {}
+
+  return loaded
+    ? { card: logicalCardToTCG(loaded.logicalCard, loaded.locale), loaded }
+    : null;
 }
 
 export async function generateMetadata({
@@ -69,8 +113,9 @@ export async function generateMetadata({
   params: Promise<{ cardId: string }>;
 }): Promise<Metadata> {
   const { cardId } = await params;
-  const card = await getCard(cardId);
-  if (!card) return {};
+  const got = await getCard(cardId);
+  if (!got) return {};
+  const { card } = got;
   return {
     title: card.name,
     description: `${card.name} 카드 시세 및 정보. ${card.set.name} 수록. 희귀도: ${card.rarity ?? "—"}.`,
@@ -84,22 +129,53 @@ export default async function CardDetailPage({
   params: Promise<{ cardId: string; locale: string }>;
 }) {
   const { cardId, locale } = await params;
-  const card = await getCard(cardId);
-  if (!card) notFound();
+  const got = await getCard(cardId);
+  if (!got) notFound();
+  const { card, loaded } = got;
 
-  // DB 히스토리 + PokeTrace + 번개장터 병렬 조회
-  let priceHistory: { recordedAt: Date; normal: number | null; holofoil: number | null }[] = [];
+  // 가벼운 조회 추적 (fire-and-forget — 렌더를 막지 않음).
+  void recordCardView(cardId);
+
+  // 가격 출처 정보 함께 조회(새 ERD: cardLocaleId + sourceId 우선, 기존 cardId 컬럼도 폴백).
+  type PricePoint = {
+    recordedAt: Date;
+    normal: number | null;
+    holofoil: number | null;
+    source: string;
+    sourceName: string | null;
+    sourceRegion: string | null;
+    condition: string | null;
+  };
+  let priceHistory: PricePoint[] = [];
   let poketraceCard = null;
   let bunjangPrices = null;
   try {
     [priceHistory, poketraceCard, bunjangPrices] = await Promise.all([
       prisma.price
         .findMany({
-          where: { cardId },
+          where: { cardLocaleId: cardId },
           orderBy: { recordedAt: "asc" },
-          select: { recordedAt: true, normal: true, holofoil: true },
+          select: {
+            recordedAt: true,
+            normal: true,
+            holofoil: true,
+            source: true,
+            condition: true,
+            priceSource: { select: { name: true, marketRegion: true } },
+          },
         })
-        .catch(() => []),
+        .then((rows) =>
+          rows.map((r) => ({
+            recordedAt: r.recordedAt,
+            normal: r.normal,
+            holofoil: r.holofoil,
+            source: r.source,
+            sourceName: r.priceSource?.name ?? null,
+            sourceRegion: r.priceSource?.marketRegion ?? null,
+            condition: r.condition,
+          }))
+        )
+        .catch(() => [] as PricePoint[]),
       findPokeTraceCard(card.name, card.set.name, card.number),
       getBunjangCardPrices(card.name, card.set.name, card.rarity ?? null),
     ]);
@@ -191,31 +267,60 @@ export default async function CardDetailPage({
     }));
   }
 
-  // 같은 세트의 다른 카드들 (캐러셀용)
-  let setCards: { id: string; name: string; number: string; images: { small: string } }[] = [];
-  try {
-    setCards = await getCardsBySet(card.set.id);
-  } catch {}
-  const sameSetOthers = setCards.filter((c) => c.id !== cardId).slice(0, 20);
+  // 보유 현황 (실데이터: CollectionItem 기준)
+  const stats = await getCardOwnerCounts(cardId);
 
-  // 보유 현황 (목업)
-  const stats = mockOwnerStats(cardId);
+  // 지역별 발매판(영/일/한) — LogicalCard.locales 기반. 그룹에 있는 지역만 탭으로.
+  let versions: CardVersion[] = [];
+  if (loaded && loaded.allLocales.length > 1) {
+    const artist = loaded.logicalCard.illustrator;
+    versions = loaded.allLocales.map((l) => {
+      const rarityLabel =
+        l.region === "JP"
+          ? loaded.logicalCard.rarityNameJa ??
+            loaded.logicalCard.rarityNameEn ??
+            loaded.logicalCard.rarityCode
+          : l.region === "KR"
+            ? loaded.logicalCard.rarityNameKo ??
+              loaded.logicalCard.rarityNameEn ??
+              loaded.logicalCard.rarityCode
+            : loaded.logicalCard.rarityNameEn ?? loaded.logicalCard.rarityCode;
+      return {
+        region: l.region,
+        name: l.name,
+        nameKo: loaded.logicalCard.nameKo,
+        number: l.number,
+        artist,
+        rarity: rarityLabel,
+        // EN 은 라이브 고해상 이미지 우선, 나머지는 DB 저장값
+        image:
+          l.region === "EN"
+            ? card.images.large ?? l.imageLarge ?? l.imageSmall
+            : l.imageLarge ?? l.imageSmall,
+      };
+    });
+  }
 
   return (
     <Container size="xl" padding="md" className="py-8">
       {/* 뒤로 가기 */}
       <a
-        href={`../../expansions/${card.set.id}`}
+        href={`../../dex`}
         className="text-toss-label text-toss-text-tertiary hover:text-toss-text-primary transition-colors mb-6 inline-block"
       >
-        ← {card.set.name}
+        ← 카드 도감
       </a>
 
       {/* ── 페이지 헤더 (이름 + 메타 한 줄 + 보유 현황 CTA) ───────────── */}
       {/* C + E */}
       <header className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-toss-display font-bold text-toss-text-primary">{card.name}</h1>
+          <h1 className="text-toss-display font-bold text-toss-text-primary">
+            {locale === "ko" && loaded?.logicalCard.nameKo ? loaded.logicalCard.nameKo : card.name}
+          </h1>
+          {locale === "ko" && loaded?.logicalCard.nameKo && (
+            <p className="text-toss-caption text-toss-text-quaternary">{card.name}</p>
+          )}
           <p className="text-toss-caption text-toss-text-tertiary mt-1">
             {card.set.name} · #{card.number}
             {card.rarity && ` · ${locale === "ko" ? (RARITY_KO[card.rarity] ?? card.rarity) : card.rarity}`}
@@ -240,14 +345,22 @@ export default async function CardDetailPage({
 
       {/* ── 메인 2-col 그리드 ──────────────────────────────────────── */}
       <div className="grid md:grid-cols-2 gap-8">
-        {/* 좌측: 카드 이미지 (sticky) */}
+        {/* 좌측: 카드 이미지 (영/일/한 발매판 탭, 그룹 있으면) */}
         <div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={card.images.large}
-            alt={card.name}
-            className="rounded-toss-lg shadow-toss-lg w-full max-w-xs self-center mx-auto md:sticky md:top-[68px]"
-          />
+          {versions.length > 1 ? (
+            <CardVersionTabs versions={versions} locale={locale} />
+          ) : (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            card.images.large ? (
+              <img
+                src={card.images.large}
+                alt={card.name}
+                className="rounded-toss-lg shadow-toss-lg w-full max-w-xs self-center mx-auto md:sticky md:top-[68px]"
+              />
+            ) : (
+              <div className="rounded-toss-lg w-full max-w-xs self-center mx-auto aspect-[5/7] bg-toss-bg-muted md:sticky md:top-[68px]" />
+            )
+          )}
         </div>
 
         {/* 우측: 차트 → 시세 → 컨디션 → 푸터 */}
@@ -427,42 +540,184 @@ export default async function CardDetailPage({
         </div>
       </div>
 
-      {/* ── F: 페이지 하단 캐러셀 ───────────────────────────────────── */}
-      <div className="mt-12 space-y-6">
-        {/* 같은 카드 · 다른 팩 */}
-        <section>
-          <h3 className="text-toss-label font-bold text-toss-text-primary mb-3">같은 카드 · 다른 팩</h3>
-          <div className="flex gap-3 overflow-x-auto pb-2">
-            {OTHER_PACK_VARIANTS.map((v, i) => (
-              <a key={i} href="#" className="shrink-0 w-20 group text-left">
-                <div className="rounded-toss-md overflow-hidden bg-toss-bg-base border border-toss-divider shadow-toss-hairline group-hover:ring-2 group-hover:ring-toss-brand/40 transition-all aspect-[5/7]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={card.images.small} alt={card.name} className="w-full h-full object-cover" />
-                </div>
-                <p className="mt-1.5 text-toss-tiny text-toss-text-tertiary truncate">{v.set}</p>
-              </a>
+      {/* ── F: 카드 기본 정보 (pokemontcg.io 실데이터) ──────────────── */}
+      <section className="mt-12">
+        <h2 className="text-toss-title font-bold text-toss-text-primary mb-4">카드 정보</h2>
+
+        {/* 분류 / 레귤레이션 / 포맷 배지 */}
+        {(card.subtypes?.length || card.regulationMark || card.legalities) && (
+          <div className="flex flex-wrap items-center gap-1.5 mb-5">
+            {card.supertype && (
+              <span className="px-2 py-0.5 rounded text-xs font-semibold bg-toss-bg-muted text-toss-text-secondary">
+                {card.supertype === "Pokémon" ? "포켓몬" : card.supertype === "Trainer" ? "트레이너" : card.supertype === "Energy" ? "에너지" : card.supertype}
+              </span>
+            )}
+            {card.subtypes?.map((st) => (
+              <span key={st} className="px-2 py-0.5 rounded text-xs font-semibold bg-amber-100 text-amber-700">
+                {SUBTYPE_KO[st] ?? st}
+              </span>
+            ))}
+            {card.regulationMark && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-toss-md border border-toss-divider text-toss-caption text-toss-text-secondary">
+                레귤레이션
+                <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-toss-text-primary text-toss-bg-base text-[10px] font-bold">
+                  {card.regulationMark}
+                </span>
+              </span>
+            )}
+            {card.legalities &&
+              (["standard", "expanded"] as const).map((fmt) => {
+                const status = card.legalities?.[fmt];
+                if (!status) return null;
+                const legal = status === "Legal";
+                return (
+                  <span
+                    key={fmt}
+                    className={cn(
+                      "inline-flex items-center gap-1 px-2 py-0.5 rounded-toss-md text-toss-caption font-medium",
+                      legal ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                    )}
+                  >
+                    {FORMAT_LABEL[fmt]} {legal ? "사용 가능" : "사용 금지"}
+                  </span>
+                );
+              })}
+            {card.nationalPokedexNumbers?.length ? (
+              <span className="px-2 py-0.5 rounded-toss-md bg-toss-bg-muted text-toss-caption text-toss-text-tertiary toss-numeric">
+                전국도감 No.{card.nationalPokedexNumbers.map((n) => String(n).padStart(4, "0")).join(", No.")}
+              </span>
+            ) : null}
+          </div>
+        )}
+
+        {/* 진화 라인 */}
+        {(card.evolvesFrom || card.evolvesTo?.length) && (
+          <div className="flex items-center gap-1.5 flex-wrap text-toss-caption mb-5">
+            <span className="text-toss-text-tertiary">진화</span>
+            {card.evolvesFrom && (
+              <>
+                <span className="px-2 py-1 rounded-toss-md bg-toss-bg-muted text-toss-text-secondary">
+                  {card.evolvesFrom}
+                </span>
+                <span className="text-toss-text-quaternary">→</span>
+              </>
+            )}
+            <span className="px-2 py-1 rounded-toss-md bg-toss-brand-weak text-toss-brand font-semibold">
+              {card.name}
+            </span>
+            {card.evolvesTo?.map((to) => (
+              <span key={to} className="flex items-center gap-1.5">
+                <span className="text-toss-text-quaternary">→</span>
+                <span className="px-2 py-1 rounded-toss-md bg-toss-bg-muted text-toss-text-secondary">
+                  {to}
+                </span>
+              </span>
             ))}
           </div>
-        </section>
-
-        {/* 같은 팩 · 다른 카드 */}
-        {sameSetOthers.length > 0 && (
-          <section>
-            <h3 className="text-toss-label font-bold text-toss-text-primary mb-3">같은 팩 · 다른 카드</h3>
-            <div className="flex gap-3 overflow-x-auto pb-2">
-              {sameSetOthers.map((c) => (
-                <a key={c.id} href={`../${c.id}`} className="shrink-0 w-20 group text-left">
-                  <div className="rounded-toss-md overflow-hidden bg-toss-bg-base border border-toss-divider shadow-toss-hairline group-hover:ring-2 group-hover:ring-toss-brand/40 transition-all aspect-[5/7]">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={c.images.small} alt={c.name} className="w-full h-full object-cover" />
-                  </div>
-                  <p className="mt-1.5 text-toss-tiny text-toss-text-tertiary truncate">{c.name}</p>
-                </a>
-              ))}
-            </div>
-          </section>
         )}
-      </div>
+
+        {/* 스탯 그리드 */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-5">
+          {card.hp && (
+            <div className="p-3 bg-toss-bg-muted rounded-toss-md">
+              <p className="text-toss-micro text-toss-text-tertiary">HP</p>
+              <p className="text-toss-title font-bold text-toss-text-primary">{card.hp}</p>
+            </div>
+          )}
+          {card.types?.length ? (
+            <div className="p-3 bg-toss-bg-muted rounded-toss-md">
+              <p className="text-toss-micro text-toss-text-tertiary">타입</p>
+              <div className="flex flex-wrap gap-1 mt-0.5">
+                {card.types.map((t) => (
+                  <span key={t} className={cn("inline-block px-2 py-0.5 rounded text-xs font-semibold", TYPE_BG[t] ?? "bg-gray-100 text-gray-600")}>
+                    {TYPE_KO[t] ?? t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+          {card.weaknesses?.length ? (
+            <div className="p-3 bg-toss-bg-muted rounded-toss-md">
+              <p className="text-toss-micro text-toss-text-tertiary">약점</p>
+              <div className="flex flex-wrap gap-1 mt-0.5">
+                {card.weaknesses.map((w, i) => (
+                  <span key={i} className={cn("inline-block px-2 py-0.5 rounded text-xs font-semibold", TYPE_BG[w.type] ?? "bg-gray-100 text-gray-600")}>
+                    {TYPE_KO[w.type] ?? w.type} {w.value}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+          {card.resistances?.length ? (
+            <div className="p-3 bg-toss-bg-muted rounded-toss-md">
+              <p className="text-toss-micro text-toss-text-tertiary">저항력</p>
+              <div className="flex flex-wrap gap-1 mt-0.5">
+                {card.resistances.map((r, i) => (
+                  <span key={i} className={cn("inline-block px-2 py-0.5 rounded text-xs font-semibold", TYPE_BG[r.type] ?? "bg-gray-100 text-gray-600")}>
+                    {TYPE_KO[r.type] ?? r.type} {r.value}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+          {card.convertedRetreatCost != null && (
+            <div className="p-3 bg-toss-bg-muted rounded-toss-md">
+              <p className="text-toss-micro text-toss-text-tertiary">후퇴비</p>
+              <p className="text-toss-label font-semibold text-toss-text-primary mt-0.5">
+                {card.convertedRetreatCost === 0 ? "0 (무료)" : `${card.convertedRetreatCost}개`}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* 특성 */}
+        {card.abilities?.map((ab, i) => (
+          <div key={i} className="p-3 border border-toss-divider rounded-toss-md bg-toss-bg-base mb-2">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="px-2 py-0.5 rounded text-xs font-semibold bg-toss-brand-weak text-toss-brand">
+                {ab.type === "Ability" ? "특성" : ab.type}
+              </span>
+              <span className="text-toss-label font-semibold text-toss-text-primary">{ab.name}</span>
+            </div>
+            <p className="text-toss-caption text-toss-text-secondary">{ab.text}</p>
+          </div>
+        ))}
+
+        {/* 기술 */}
+        {card.attacks?.map((atk, i) => (
+          <div key={i} className="p-3 border border-toss-divider rounded-toss-md bg-toss-bg-base mb-2">
+            <div className="flex items-center justify-between gap-2 mb-1">
+              <div className="flex items-center gap-2">
+                <CostPips cost={atk.cost} />
+                <span className="text-toss-label font-semibold text-toss-text-primary">{atk.name}</span>
+              </div>
+              {atk.damage && (
+                <span className="text-toss-title font-bold text-toss-text-primary">{atk.damage}</span>
+              )}
+            </div>
+            {atk.text && <p className="text-toss-caption text-toss-text-secondary">{atk.text}</p>}
+          </div>
+        ))}
+
+        {/* 룰 박스 (ex / 메가 등) */}
+        {card.rules?.map((rule, i) => (
+          <div key={i} className="p-3 rounded-toss-md bg-toss-bg-muted border-l-2 border-toss-text-tertiary mb-2">
+            <p className="text-toss-caption text-toss-text-secondary">{rule}</p>
+          </div>
+        ))}
+
+        {/* 도감 설명 */}
+        {card.flavorText && (
+          <p className="text-toss-caption text-toss-text-tertiary italic border-l-2 border-toss-divider pl-3 mt-3">
+            {card.flavorText}
+          </p>
+        )}
+
+        {/* 일러스트레이터 */}
+        {card.artist && (
+          <p className="text-toss-caption text-toss-text-tertiary mt-3">일러스트: {card.artist}</p>
+        )}
+      </section>
     </Container>
   );
 }

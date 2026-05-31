@@ -1,73 +1,55 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 import { MessageInbox, type Conversation } from "@/components/messages/MessageInbox";
+import { getCurrentUser } from "@/lib/auth/session";
+import { getConversations } from "@/lib/services/messaging";
+import { formatRelative } from "@/lib/messaging/format";
 
 export const metadata: Metadata = { title: "메세지 — Raredoc" };
 
-const MOCK_CONVERSATIONS: Conversation[] = [
-  {
-    id: "c1",
-    partner: { username: "raymond_tcg", displayName: "raymond_tcg", initial: "레" },
-    lastMessage: "주말에 강남 직거래 가능한가요?",
-    lastAt: "5분 전",
-    unread: 2,
-    sourceType: "community_post",
-    cardRef: {
-      cardId: "sv3pt5-215",
-      cardName: "피카츄 ex SAR",
-      imageUrl: "https://images.pokemontcg.io/sv3pt5/215_hires.png",
-      setName: "포켓몬 151",
-    },
-  },
-  {
-    id: "c2",
-    partner: { username: "chaeyeon", displayName: "채연", initial: "채" },
-    lastMessage: "PSA 10 리자몽 정말 부럽네요 ㅠㅠ",
-    lastAt: "1시간 전",
-    unread: 0,
-    sourceType: "direct",
-  },
-  {
-    id: "c3",
-    partner: { username: "boxseller_k", displayName: "박상자", initial: "박" },
-    lastMessage: "드래고나 풀박스 아직 있어요?",
-    lastAt: "어제",
-    unread: 1,
-    sourceType: "community_post",
-    cardRef: {
-      cardId: "sv4pt5-box",
-      cardName: "파라다이스 드래고나 풀박스",
-      imageUrl: "https://images.pokemontcg.io/sv4pt5/logo.png",
-      setName: "파라다이스 드래고나",
-    },
-  },
-  {
-    id: "c4",
-    partner: { username: "sneaker_jin", displayName: "진스니커", initial: "진" },
-    lastMessage: "사카이 콜라보 응모 결과 나왔어요?",
-    lastAt: "2일 전",
-    unread: 0,
-    sourceType: "direct",
-  },
-  {
-    id: "c5",
-    partner: { username: "nari_collect", displayName: "나리", initial: "나" },
-    lastMessage: "151 SAR 풀셋 가격이 얼마나 됐어요?",
-    lastAt: "3일 전",
-    unread: 0,
-    sourceType: "card_inquiry",
-    cardRef: {
-      cardId: "sv3pt5-198",
-      cardName: "이상해꽃 ex SAR",
-      imageUrl: "https://images.pokemontcg.io/sv3pt5/198_hires.png",
-      setName: "포켓몬 151",
-    },
-  },
-];
+export default async function MessagesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const user = await getCurrentUser();
+  if (!user) redirect(`/${locale}/login`);
 
-export default function MessagesPage() {
+  const list = await getConversations(user.id);
+  const conversations: Conversation[] = list.map((c) => ({
+    id: c.id,
+    partner: {
+      username: c.partner.username ?? c.partner.id,
+      displayName: c.partner.displayName,
+      initial: c.partner.initial,
+    },
+    lastMessage: c.lastMessage,
+    lastAt: formatRelative(c.lastAt),
+    unread: c.unread,
+    sourceType: c.sourceType,
+    cardRef: c.cardRef,
+  }));
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
-      <MessageInbox conversations={MOCK_CONVERSATIONS} />
+      {conversations.length === 0 ? (
+        <div className="max-w-xl mx-auto">
+          <h1 className="text-toss-title-2 font-bold text-toss-text-primary mb-5">메세지</h1>
+          <div className="rounded-toss-lg border border-toss-divider bg-toss-bg-base text-center py-20 px-6">
+            <p className="text-toss-body text-toss-text-tertiary">아직 주고받은 메세지가 없어요</p>
+            <Link
+              href={`/${locale}/community`}
+              className="inline-block mt-4 text-toss-caption text-toss-brand font-semibold"
+            >
+              커뮤니티에서 거래글 둘러보기 →
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <MessageInbox conversations={conversations} />
+      )}
     </div>
   );
 }

@@ -1,21 +1,4 @@
-export const RARITY_ORDER = [
-  "Common",
-  "Uncommon",
-  "Rare",
-  "Rare Holo",
-  "Rare Holo EX",
-  "Rare Holo GX",
-  "Rare Holo V",
-  "Rare Holo VMAX",
-  "Rare Holo VSTAR",
-  "Rare Ultra",
-  "Rare Rainbow",
-  "Rare Secret",
-  "Amazing Rare",
-  "Illustration Rare",
-  "Special Illustration Rare",
-  "Hyper Rare",
-];
+// RARITY_ORDER 는 Rarity.tier(0~9) 기반 정렬로 대체됨. 정렬 헬퍼: `@/lib/cards/rarity`.
 
 export const RARITY_KO: Record<string, string> = {
   Common: "커먼",

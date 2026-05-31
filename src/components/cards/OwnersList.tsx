@@ -1,20 +1,22 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useTransition } from "react";
+import { useRouter } from "next/navigation";
 
 export type Owner = {
-  username: string;
+  listingId: string;
+  sellerId: string;
+  username: string | null;
   displayName: string;
   initial: string;
-  tier: "LEGEND" | "DIAMOND" | "GOLD" | "SILVER" | "BRONZE";
-  grade: "NM" | "LP" | "MP" | "HP";
+  tier: "LEGEND" | "DIAMOND" | "GOLD" | "SILVER" | "BRONZE" | string;
+  grade: string;
   certified: boolean;
   askingPrice: number | null;
   offerAvailable: boolean;
-  addedAt: string;
 };
 
-const TIER_RING: Record<Owner["tier"], string> = {
+const TIER_RING: Record<string, string> = {
   LEGEND:  "ring-purple-400",
   DIAMOND: "ring-cyan-400",
   GOLD:    "ring-yellow-500",
@@ -22,17 +24,33 @@ const TIER_RING: Record<Owner["tier"], string> = {
   BRONZE:  "ring-amber-700",
 };
 
-const GRADE_COLOR: Record<Owner["grade"], string> = {
+const GRADE_COLOR: Record<string, string> = {
   NM: "bg-green-900/60 text-green-300",
+  VNDS: "bg-green-900/60 text-green-300",
   LP: "bg-blue-900/60 text-blue-300",
   MP: "bg-yellow-900/60 text-yellow-300",
   HP: "bg-orange-900/60 text-orange-300",
 };
 
-type Filter = "all" | "offerable" | "withPrice";
-type Sort = "priceAsc" | "priceDesc" | "gradeBest" | "recent";
+const GRADE_ORDER = ["미개봉", "1착", "NM", "VNDS", "LP", "MP", "HP", "DS", "D"];
 
-export function OwnersList({ owners, locale, cardId }: { owners: Owner[]; locale: string; cardId: string }) {
+type Filter = "all" | "offerable" | "withPrice";
+type Sort = "priceAsc" | "priceDesc" | "gradeBest";
+
+export function OwnersList({
+  owners,
+  locale,
+  cardId,
+  isLoggedIn,
+}: {
+  owners: Owner[];
+  locale: string;
+  cardId: string;
+  isLoggedIn: boolean;
+}) {
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
+  const [pendingId, setPendingId] = useState<string | null>(null);
   const [filter, setFilter] = useState<Filter>("all");
   const [sort, setSort]     = useState<Sort>("priceAsc");
 
@@ -45,11 +63,7 @@ export function OwnersList({ owners, locale, cardId }: { owners: Owner[]; locale
       switch (sort) {
         case "priceAsc":  return (a.askingPrice ?? Infinity) - (b.askingPrice ?? Infinity);
         case "priceDesc": return (b.askingPrice ?? -Infinity) - (a.askingPrice ?? -Infinity);
-        case "gradeBest": {
-          const order: Owner["grade"][] = ["NM", "LP", "MP", "HP"];
-          return order.indexOf(a.grade) - order.indexOf(b.grade);
-        }
-        case "recent":    return a.addedAt.localeCompare(b.addedAt);
+        case "gradeBest": return GRADE_ORDER.indexOf(a.grade) - GRADE_ORDER.indexOf(b.grade);
       }
     });
     return list;
@@ -57,6 +71,22 @@ export function OwnersList({ owners, locale, cardId }: { owners: Owner[]; locale
 
   const totalOfferable = owners.filter((o) => o.offerAvailable).length;
   const totalWithPrice = owners.filter((o) => o.askingPrice != null).length;
+
+  function makeOffer(o: Owner) {
+    if (!isLoggedIn) {
+      router.push(`/${locale}/login`);
+      return;
+    }
+    setPendingId(o.listingId);
+    startTransition(async () => {
+      const { makeOfferAction } = await import("@/lib/actions/marketplace");
+      const res = await makeOfferAction({ listingId: o.listingId, cardId });
+      setPendingId(null);
+      if (res.ok && res.conversationId) {
+        router.push(`/${locale}/messages/${res.conversationId}?cardId=${cardId}`);
+      }
+    });
+  }
 
   return (
     <div className="space-y-4">
@@ -90,7 +120,6 @@ export function OwnersList({ owners, locale, cardId }: { owners: Owner[]; locale
           <option value="priceAsc">호가 낮은 순</option>
           <option value="priceDesc">호가 높은 순</option>
           <option value="gradeBest">등급 좋은 순</option>
-          <option value="recent">최신 등록순</option>
         </select>
       </div>
 
@@ -103,7 +132,7 @@ export function OwnersList({ owners, locale, cardId }: { owners: Owner[]; locale
         ) : (
           filtered.map((o) => (
             <div
-              key={o.username}
+              key={o.listingId}
               className={`flex items-center gap-4 px-4 py-3 rounded-xl border transition-colors ${
                 o.offerAvailable
                   ? "bg-gray-900 border-gray-800"
@@ -111,9 +140,9 @@ export function OwnersList({ owners, locale, cardId }: { owners: Owner[]; locale
               }`}
             >
               {/* 아바타 */}
-              <a href={`/${locale}/profile/${o.username}`} className="shrink-0">
+              <a href={`/${locale}/profile/${o.username ?? o.sellerId}`} className="shrink-0">
                 <div
-                  className={`w-10 h-10 rounded-full bg-gray-700 ring-2 ${TIER_RING[o.tier]} flex items-center justify-center text-sm font-bold text-white hover:ring-offset-2 hover:ring-offset-gray-950 transition-all`}
+                  className={`w-10 h-10 rounded-full bg-gray-700 ring-2 ${TIER_RING[o.tier] ?? "ring-gray-600"} flex items-center justify-center text-sm font-bold text-white hover:ring-offset-2 hover:ring-offset-gray-950 transition-all`}
                 >
                   {o.initial}
                 </div>
@@ -123,12 +152,12 @@ export function OwnersList({ owners, locale, cardId }: { owners: Owner[]; locale
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5 flex-wrap">
                   <a
-                    href={`/${locale}/profile/${o.username}`}
+                    href={`/${locale}/profile/${o.username ?? o.sellerId}`}
                     className="text-sm font-semibold text-gray-100 hover:text-white truncate transition-colors"
                   >
                     {o.displayName}
                   </a>
-                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${GRADE_COLOR[o.grade]}`}>
+                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${GRADE_COLOR[o.grade] ?? "bg-gray-800 text-gray-300"}`}>
                     {o.grade}
                   </span>
                   {o.certified && (
@@ -137,9 +166,11 @@ export function OwnersList({ owners, locale, cardId }: { owners: Owner[]; locale
                     </span>
                   )}
                 </div>
-                <p className="text-[11px] text-gray-500 mt-0.5">
-                  @{o.username} · {o.addedAt}
-                </p>
+                {o.username && (
+                  <p className="text-[11px] text-gray-500 mt-0.5">
+                    @{o.username}
+                  </p>
+                )}
               </div>
 
               {/* 호가 */}
@@ -158,18 +189,19 @@ export function OwnersList({ owners, locale, cardId }: { owners: Owner[]; locale
 
               {/* 제안 버튼 */}
               {o.offerAvailable ? (
-                <a
-                  href={`/${locale}/messages/c1?cardId=${cardId}`}
-                  className="shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold transition-colors whitespace-nowrap"
+                <button
+                  onClick={() => makeOffer(o)}
+                  disabled={pending && pendingId === o.listingId}
+                  className="shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg bg-yellow-500 hover:bg-yellow-400 disabled:opacity-50 text-black text-xs font-bold transition-colors whitespace-nowrap"
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   </svg>
-                  구매 제안
-                </a>
+                  {pending && pendingId === o.listingId ? "..." : "구매 제안"}
+                </button>
               ) : (
                 <span className="shrink-0 text-[10px] text-gray-600 whitespace-nowrap px-2">
-                  제안 불가
+                  내 카드
                 </span>
               )}
             </div>

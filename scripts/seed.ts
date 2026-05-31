@@ -17,7 +17,6 @@ async function seed() {
         id: set.id,
         name: set.name,
         series: set.series,
-        seriesKo: SERIES_KO[set.series] ?? set.series,
         releaseDate: new Date(year, month - 1, day),
         cardCount: set.total || set.printedTotal,
         logoUrl: set.images?.logo ?? null,

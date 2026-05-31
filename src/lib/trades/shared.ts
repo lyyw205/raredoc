@@ -4,6 +4,23 @@
  */
 
 export const USD_KRW = 1400;
+export const JPY_KRW = 9; // 100엔 ≈ 900원
+export const EUR_KRW = 1500;
+
+/** 통화 코드 → KRW 환산. 미지원 통화는 USD로 가정(보수적). */
+export function toKrw(value: number, currency: string | null | undefined): number {
+  switch (currency) {
+    case "JPY":
+      return value * JPY_KRW;
+    case "EUR":
+      return value * EUR_KRW;
+    case "KRW":
+      return value;
+    case "USD":
+    default:
+      return value * USD_KRW;
+  }
+}
 
 export interface PriceBucket {
   id: "tier1" | "tier2" | "tier3" | "tier4";

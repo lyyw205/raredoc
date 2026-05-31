@@ -46,3 +46,7 @@ next-env.d.ts
 /.playwright-mcp
 /.omc
 /.serena
+
+# DB 백업/스키마 백업 (git 추적 제외)
+*.bak
+prisma/backups/

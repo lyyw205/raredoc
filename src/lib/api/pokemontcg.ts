@@ -21,12 +21,46 @@ export interface TCGCard {
   artist?: string;
   set: { id: string; name: string };
   images: { small: string; large: string };
+  // ── 카드 기본 정보 (pokemontcg.io v2 — API 응답에 포함, 타입만 추가) ──
+  hp?: string;
+  evolvesFrom?: string;
+  evolvesTo?: string[];
+  abilities?: { name: string; text: string; type: string }[];
+  attacks?: {
+    name: string;
+    cost?: string[];
+    convertedEnergyCost?: number;
+    damage?: string;
+    text?: string;
+  }[];
+  weaknesses?: { type: string; value: string }[];
+  resistances?: { type: string; value: string }[];
+  retreatCost?: string[];
+  convertedRetreatCost?: number;
+  flavorText?: string;
+  nationalPokedexNumbers?: number[];
+  legalities?: { standard?: string; expanded?: string; unlimited?: string };
+  regulationMark?: string;
+  rules?: string[];
   tcgplayer?: {
+    url?: string;
+    updatedAt?: string;
+    // variant 키(normal/holofoil/reverseHolofoil/1stEdition…)별 가격. low/mid/high/market 모두 응답에 포함.
+    prices?: Record<
+      string,
+      { low?: number; mid?: number; high?: number; market?: number; directLow?: number } | undefined
+    >;
+  };
+  cardmarket?: {
+    url?: string;
+    updatedAt?: string;
     prices?: {
-      normal?: { market?: number };
-      holofoil?: { market?: number };
-      reverseHolofoil?: { market?: number };
-      "1stEdition"?: { market?: number };
+      averageSellPrice?: number;
+      lowPrice?: number;
+      trendPrice?: number;
+      avg1?: number;
+      avg7?: number;
+      avg30?: number;
     };
   };
 }
@@ -67,6 +101,15 @@ export async function getAllSets(): Promise<TCGSet[]> {
     page++;
   }
   return all;
+}
+
+export async function getSet(id: string): Promise<TCGSet | null> {
+  try {
+    const res = await fetchTCG<{ data: TCGSet }>(`/sets/${id}`);
+    return res.data;
+  } catch {
+    return null;
+  }
 }
 
 export async function getCardsBySet(setId: string): Promise<TCGCard[]> {

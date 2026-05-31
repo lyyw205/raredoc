@@ -1,16 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import Link from "next/link";
 import { useLocale } from "next-intl";
+
+import { signupAction, type AuthState } from "@/lib/actions/auth";
 
 export function SignupForm() {
   const locale = useLocale();
   const [step, setStep] = useState<1 | 2>(1);
-  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     email: "", password: "", passwordConfirm: "", nickname: "", agreed: false,
   });
+  const [state, formAction, loading] = useActionState<AuthState | undefined, FormData>(
+    signupAction,
+    undefined,
+  );
 
   const set = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((f) => ({ ...f, [key]: e.target.type === "checkbox" ? e.target.checked : e.target.value }));
@@ -21,13 +26,6 @@ export function SignupForm() {
   function handleStep1(e: React.FormEvent) {
     e.preventDefault();
     if (step1Valid) setStep(2);
-  }
-
-  function handleStep2(e: React.FormEvent) {
-    e.preventDefault();
-    if (!form.nickname || !form.agreed) return;
-    setLoading(true);
-    setTimeout(() => setLoading(false), 1200);
   }
 
   return (
@@ -58,12 +56,12 @@ export function SignupForm() {
         {/* Step 1 — 이메일/비밀번호 */}
         {step === 1 && (
           <>
-            {/* 소셜 로그인 */}
+            {/* 소셜 로그인 (키 미설정 — 비활성) */}
             <div className="space-y-3 mb-6">
-              <button className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl font-bold text-sm bg-[#FEE500] hover:bg-[#F5DC00] text-[#181600] transition-colors">
+              <button type="button" disabled title="준비 중입니다" className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl font-bold text-sm bg-[#FEE500] hover:bg-[#F5DC00] text-[#181600] transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                 <KakaoIcon /> 카카오로 가입
               </button>
-              <button className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl font-medium text-sm bg-white hover:bg-gray-100 text-gray-800 transition-colors border border-gray-200">
+              <button type="button" disabled title="준비 중입니다" className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl font-medium text-sm bg-white hover:bg-gray-100 text-gray-800 transition-colors border border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed">
                 <GoogleIcon /> Google로 가입
               </button>
             </div>
@@ -108,7 +106,11 @@ export function SignupForm() {
 
         {/* Step 2 — 닉네임 + 약관 */}
         {step === 2 && (
-          <form onSubmit={handleStep2} className="space-y-4">
+          <form action={formAction} className="space-y-4">
+            <input type="hidden" name="locale" value={locale} />
+            <input type="hidden" name="email" value={form.email} />
+            <input type="hidden" name="password" value={form.password} />
+            <input type="hidden" name="displayName" value={form.nickname} />
             <div>
               <label className="text-xs text-gray-400 block mb-1.5">닉네임</label>
               <input
@@ -137,6 +139,20 @@ export function SignupForm() {
                 </span>
               </label>
             </div>
+
+            {(state?.error ||
+              state?.fieldErrors?.email ||
+              state?.fieldErrors?.password ||
+              state?.fieldErrors?.displayName ||
+              state?.fieldErrors?.username) && (
+              <p className="text-xs text-red-500 ml-1">
+                {state.error ??
+                  state.fieldErrors?.email ??
+                  state.fieldErrors?.password ??
+                  state.fieldErrors?.displayName ??
+                  state.fieldErrors?.username}
+              </p>
+            )}
 
             <div className="flex gap-2">
               <button

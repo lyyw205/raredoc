@@ -30,7 +30,7 @@ export function WebSiteJsonLd({ locale }: { locale: string }) {
           "@type": "SearchAction",
           target: {
             "@type": "EntryPoint",
-            urlTemplate: `${BASE_URL}/${locale}/expansions?q={search_term_string}`,
+            urlTemplate: `${BASE_URL}/${locale}/dex?q={search_term_string}`,
           },
           "query-input": "required name=search_term_string",
         },

@@ -1,97 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useParams } from "next/navigation";
 import { Card } from "@/components/toss";
+import {
+  deleteItemAction,
+  setHighlightAction,
+  toggleForSaleAction,
+} from "@/lib/actions/collection";
 
-// ── 목업 데이터 ───────────────────────────────────────────────────────────────
+// ── 타입 (서버에서 실데이터 주입) ─────────────────────────────────────────────
 
-type OwnedCard = {
-  id: string;
+export type OwnedCard = {
+  id: string;        // CollectionItem id
+  cardId: string;
   name: string;
   number: string;
   imageUrl: string;
   grade: string;
   certified: boolean;
+  forSale: boolean;
+  highlightSlot: number | null;
   valueKrw: number;
 };
 
-type SetData = {
+export type CollectionSet = {
   setId: string;
   name: string;
-  series: string;
-  logoUrl: string;
   totalCards: number;
+  estimatedKrw: number;
   owned: OwnedCard[];
-  // 미소유 카드 (번호+이미지만)
-  unowned: { id: string; name: string; number: string; imageUrl: string }[];
 };
-
-const MOCK_SETS: SetData[] = [
-  {
-    setId: "sv3pt5",
-    name: "포켓몬 151",
-    series: "스칼렛 & 바이올렛",
-    logoUrl: "https://images.pokemontcg.io/sv3pt5/logo.png",
-    totalCards: 165,
-    owned: [
-      { id: "sv3pt5-215", name: "피카츄 ex SAR",   number: "215", imageUrl: "https://images.pokemontcg.io/sv3pt5/215_hires.png", grade: "NM", certified: true,  valueKrw: 280000 },
-      { id: "sv3pt5-207", name: "뮤츠 ex SAR",     number: "207", imageUrl: "https://images.pokemontcg.io/sv3pt5/207_hires.png", grade: "LP", certified: true,  valueKrw: 310000 },
-      { id: "sv3pt5-205", name: "뮤 ex SAR",       number: "205", imageUrl: "https://images.pokemontcg.io/sv3pt5/205_hires.png", grade: "NM", certified: false, valueKrw: 165000 },
-      { id: "sv3pt5-218", name: "이브이 SAR",      number: "218", imageUrl: "https://images.pokemontcg.io/sv3pt5/218_hires.png", grade: "NM", certified: false, valueKrw: 220000 },
-      { id: "sv3pt5-198", name: "이상해꽃 ex SAR", number: "198", imageUrl: "https://images.pokemontcg.io/sv3pt5/198_hires.png", grade: "NM", certified: false, valueKrw:  92000 },
-      { id: "sv3pt5-200", name: "리자몽 ex SAR",   number: "200", imageUrl: "https://images.pokemontcg.io/sv3pt5/200_hires.png", grade: "NM", certified: false, valueKrw: 195000 },
-      { id: "sv3pt5-202", name: "거북왕 ex SAR",   number: "202", imageUrl: "https://images.pokemontcg.io/sv3pt5/202_hires.png", grade: "NM", certified: false, valueKrw:  88000 },
-    ],
-    unowned: [
-      { id: "sv3pt5-201", name: "파이리 ex SAR",   number: "201", imageUrl: "https://images.pokemontcg.io/sv3pt5/201_hires.png" },
-      { id: "sv3pt5-203", name: "꼬부기 ex SAR",   number: "203", imageUrl: "https://images.pokemontcg.io/sv3pt5/203_hires.png" },
-      { id: "sv3pt5-204", name: "이상해씨 ex SAR", number: "204", imageUrl: "https://images.pokemontcg.io/sv3pt5/204_hires.png" },
-      { id: "sv3pt5-206", name: "잠만보 ex SAR",   number: "206", imageUrl: "https://images.pokemontcg.io/sv3pt5/206_hires.png" },
-      { id: "sv3pt5-208", name: "루기아 ex SAR",   number: "208", imageUrl: "https://images.pokemontcg.io/sv3pt5/208_hires.png" },
-      { id: "sv3pt5-209", name: "나시 ex SAR",     number: "209", imageUrl: "https://images.pokemontcg.io/sv3pt5/209_hires.png" },
-      { id: "sv3pt5-210", name: "팬텀 ex SAR",     number: "210", imageUrl: "https://images.pokemontcg.io/sv3pt5/210_hires.png" },
-      { id: "sv3pt5-211", name: "또가스 ex SAR",   number: "211", imageUrl: "https://images.pokemontcg.io/sv3pt5/211_hires.png" },
-    ],
-  },
-  {
-    setId: "sv4pt5",
-    name: "파라다이스 드래고나",
-    series: "스칼렛 & 바이올렛",
-    logoUrl: "https://images.pokemontcg.io/sv4pt5/logo.png",
-    totalCards: 191,
-    owned: [
-      { id: "sv4pt5-191", name: "리자몽 ex SAR",    number: "191", imageUrl: "https://images.pokemontcg.io/sv4pt5/191_hires.png", grade: "LP", certified: true,  valueKrw: 420000 },
-      { id: "sv4pt5-182", name: "가이오가 ex SAR",  number: "182", imageUrl: "https://images.pokemontcg.io/sv4pt5/182_hires.png", grade: "NM", certified: true,  valueKrw: 380000 },
-      { id: "sv4pt5-176", name: "아마루르가 ex SAR",number: "176", imageUrl: "https://images.pokemontcg.io/sv4pt5/176_hires.png", grade: "NM", certified: false, valueKrw: 195000 },
-    ],
-    unowned: [
-      { id: "sv4pt5-180", name: "루카리오 ex SAR",  number: "180", imageUrl: "https://images.pokemontcg.io/sv4pt5/180_hires.png" },
-      { id: "sv4pt5-185", name: "뮤 ex SAR",        number: "185", imageUrl: "https://images.pokemontcg.io/sv4pt5/185_hires.png" },
-      { id: "sv4pt5-188", name: "피카츄 ex SAR",    number: "188", imageUrl: "https://images.pokemontcg.io/sv4pt5/188_hires.png" },
-    ],
-  },
-  {
-    setId: "sv8",
-    name: "초승달의 섬",
-    series: "스칼렛 & 바이올렛",
-    logoUrl: "https://images.pokemontcg.io/sv8/logo.png",
-    totalCards: 193,
-    owned: [
-      { id: "sv8-180", name: "잠만보 ex SAR", number: "180", imageUrl: "https://images.pokemontcg.io/sv8/180_hires.png", grade: "NM", certified: false, valueKrw: 48000 },
-    ],
-    unowned: [
-      { id: "sv8-175", name: "루나아라 ex SAR", number: "175", imageUrl: "https://images.pokemontcg.io/sv8/175_hires.png" },
-      { id: "sv8-178", name: "실버디 ex SAR",   number: "178", imageUrl: "https://images.pokemontcg.io/sv8/178_hires.png" },
-    ],
-  },
-];
-
-// ── 전체 요약 계산 ────────────────────────────────────────────────────────────
-
-const totalOwned    = MOCK_SETS.reduce((n, s) => n + s.owned.length, 0);
-const totalValue    = MOCK_SETS.reduce((n, s) => n + s.owned.reduce((v, c) => v + c.valueKrw, 0), 0);
-const totalCertified = MOCK_SETS.reduce((n, s) => n + s.owned.filter((c) => c.certified).length, 0);
 
 // ── 컴포넌트 ─────────────────────────────────────────────────────────────────
 
@@ -106,30 +45,63 @@ function ProgressBar({ value }: { value: number }) {
   );
 }
 
-export function CollectionTab() {
+export function CollectionTab({
+  sets = [],
+  isOwnProfile = false,
+}: {
+  sets?: CollectionSet[];
+  isOwnProfile?: boolean;
+}) {
   const params = useParams();
   const locale = (params?.locale as string) ?? "ko";
+  const [isPending, startTransition] = useTransition();
 
-  const [selectedSetId, setSelectedSetId] = useState<string>(MOCK_SETS[0].setId);
-  const selectedSet = MOCK_SETS.find((s) => s.setId === selectedSetId) ?? MOCK_SETS[0];
-  const setCompletionPct = Math.round((selectedSet.owned.length / selectedSet.totalCards) * 100);
-  const setValue = selectedSet.owned.reduce((v, c) => v + c.valueKrw, 0);
+  const totalOwned = sets.reduce((n, s) => n + s.owned.length, 0);
+  const totalValue = sets.reduce((n, s) => n + s.estimatedKrw, 0);
+  const totalCertified = sets.reduce(
+    (n, s) => n + s.owned.filter((c) => c.certified).length,
+    0
+  );
 
-  // 도감용: 소유 + 미소유 합치고 number 순 정렬
-  const allCards = [
-    ...selectedSet.owned.map((c) => ({ ...c, isOwned: true })),
-    ...selectedSet.unowned.map((c) => ({ ...c, grade: "", certified: false, valueKrw: 0, isOwned: false })),
-  ].sort((a, b) => Number(a.number) - Number(b.number));
+  const [selectedSetId, setSelectedSetId] = useState<string>(sets[0]?.setId ?? "");
+  const selectedSet = sets.find((s) => s.setId === selectedSetId) ?? sets[0];
+
+  if (!selectedSet) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 text-toss-text-quaternary">
+        <p className="text-toss-body">아직 등록한 카드가 없어요</p>
+        {isOwnProfile && (
+          <p className="text-toss-caption mt-1">하이라이트 갤러리에서 카드를 등록해 보세요</p>
+        )}
+      </div>
+    );
+  }
+
+  const setCompletionPct =
+    selectedSet.totalCards > 0
+      ? Math.round((selectedSet.owned.length / selectedSet.totalCards) * 100)
+      : 0;
+  const setValue = selectedSet.estimatedKrw;
+
+  const allCards = [...selectedSet.owned].sort(
+    (a, b) => Number(a.number) - Number(b.number)
+  );
+
+  function runAction(fn: () => Promise<unknown>) {
+    startTransition(() => {
+      void fn();
+    });
+  }
 
   return (
     <div>
       {/* ── 전체 요약 ── */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
         {[
-          { label: "총 보유 카드", value: `${totalOwned}장`,                              colorClass: "text-toss-text-primary" },
-          { label: "총 추정가",   value: `₩${(totalValue / 10000).toFixed(0)}만`,         colorClass: "text-toss-warning" },
-          { label: "인증 카드",   value: `${totalCertified}장`,                            colorClass: "text-toss-positive" },
-          { label: "보유 세트",   value: `${MOCK_SETS.length}세트`,                        colorClass: "text-toss-brand" },
+          { label: "총 보유 카드", value: `${totalOwned}장`,                        colorClass: "text-toss-text-primary" },
+          { label: "총 추정가",   value: `₩${(totalValue / 10000).toFixed(0)}만`,   colorClass: "text-toss-warning" },
+          { label: "인증 카드",   value: `${totalCertified}장`,                      colorClass: "text-toss-positive" },
+          { label: "보유 세트",   value: `${sets.length}세트`,                       colorClass: "text-toss-brand" },
         ].map((stat) => (
           <Card key={stat.label} padding="sm">
             <p className="text-toss-caption text-toss-text-tertiary mb-1">{stat.label}</p>
@@ -144,8 +116,8 @@ export function CollectionTab() {
         {/* 왼쪽: 세트 리스트 */}
         <div className="w-52 shrink-0 space-y-1.5">
           <p className="text-toss-caption text-toss-text-quaternary font-medium px-1 mb-2">보유 세트</p>
-          {MOCK_SETS.map((set) => {
-            const pct = Math.round((set.owned.length / set.totalCards) * 100);
+          {sets.map((set) => {
+            const pct = set.totalCards > 0 ? Math.round((set.owned.length / set.totalCards) * 100) : 0;
             const isSelected = set.setId === selectedSetId;
             return (
               <button
@@ -178,7 +150,6 @@ export function CollectionTab() {
             <div className="flex items-start justify-between gap-4 mb-3">
               <div>
                 <h2 className="text-toss-title-2 font-bold text-toss-text-primary">{selectedSet.name}</h2>
-                <p className="text-toss-caption text-toss-text-tertiary mt-0.5">{selectedSet.series}</p>
               </div>
               <div className="text-right shrink-0">
                 <p className="text-toss-title-2 font-bold text-toss-warning toss-numeric">₩{setValue.toLocaleString("ko-KR")}</p>
@@ -199,44 +170,85 @@ export function CollectionTab() {
           <Card padding="md">
             <div className="flex items-center justify-between mb-3">
               <p className="text-toss-caption text-toss-text-tertiary">
-                <span className="text-toss-text-primary font-semibold toss-numeric">{allCards.length}</span>장 표시
-                <span className="mx-2 text-toss-border">·</span>
-                미보유 <span className="text-toss-text-quaternary toss-numeric">{selectedSet.unowned.length}</span>장
+                <span className="text-toss-text-primary font-semibold toss-numeric">{allCards.length}</span>장 보유
               </p>
               <div className="flex items-center gap-3 text-toss-micro text-toss-text-quaternary">
                 <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-toss-positive inline-block" />인증</span>
-                <span className="flex items-center gap-1 opacity-40"><span className="w-2 h-2 rounded-full bg-toss-text-quaternary inline-block" />미보유</span>
+                {isOwnProfile && (
+                  <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-toss-warning inline-block" />판매중</span>
+                )}
               </div>
             </div>
 
             <div className="grid gap-1.5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(62px, 1fr))" }}>
               {allCards.map((card) => (
                 <div key={card.id} className="group relative cursor-pointer" title={`${card.name} · No.${card.number}`}>
-                  <div
-                    className="rounded-toss-sm overflow-hidden"
-                    style={{
-                      aspectRatio: "63 / 88",
-                      filter: card.isOwned ? "none" : "grayscale(100%)",
-                      opacity: card.isOwned ? 1 : 0.25,
-                      transition: "opacity 0.2s",
-                    }}
-                  >
-                    <img
-                      src={card.imageUrl}
-                      alt={card.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                    />
-                  </div>
+                  <a href={`/${locale}/cards/${card.cardId}`} className="block">
+                    <div
+                      className="rounded-toss-sm overflow-hidden"
+                      style={{ aspectRatio: "63 / 88", transition: "opacity 0.2s" }}
+                    >
+                      {card.imageUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={card.imageUrl}
+                          alt={card.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                        />
+                      ) : null}
+                    </div>
+                  </a>
 
                   {/* 인증 점 */}
-                  {card.isOwned && card.certified && (
+                  {card.certified && (
                     <div className="absolute top-[3px] right-[3px] w-2.5 h-2.5 rounded-full bg-toss-positive ring-1 ring-toss-bg-base shadow" />
                   )}
 
+                  {/* 판매중 점 */}
+                  {card.forSale && (
+                    <div className="absolute top-[3px] left-[3px] w-2.5 h-2.5 rounded-full bg-toss-warning ring-1 ring-toss-bg-base shadow" />
+                  )}
+
                   {/* 등급 뱃지 */}
-                  {card.isOwned && card.grade && (
+                  {card.grade && (
                     <div className="absolute bottom-[14px] left-[2px] text-[7px] font-bold bg-black/75 text-white px-1 py-[1px] rounded leading-tight">
                       {card.grade}
+                    </div>
+                  )}
+
+                  {/* 소유자 편집 오버레이 */}
+                  {isOwnProfile && (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-1 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity rounded-toss-sm">
+                      <button
+                        disabled={isPending}
+                        onClick={() =>
+                          runAction(() =>
+                            setHighlightAction(card.id, card.highlightSlot != null ? null : 1)
+                          )
+                        }
+                        className="text-[8px] font-bold text-white px-1.5 py-0.5 rounded bg-toss-brand/90 hover:bg-toss-brand disabled:opacity-50"
+                        title={card.highlightSlot != null ? "하이라이트 해제" : "하이라이트 추가"}
+                      >
+                        {card.highlightSlot != null ? "★해제" : "★대표"}
+                      </button>
+                      <button
+                        disabled={isPending}
+                        onClick={() => runAction(() => toggleForSaleAction(card.id, !card.forSale))}
+                        className="text-[8px] font-bold text-white px-1.5 py-0.5 rounded bg-toss-warning/90 hover:bg-toss-warning disabled:opacity-50"
+                      >
+                        {card.forSale ? "판매중지" : "판매"}
+                      </button>
+                      <button
+                        disabled={isPending}
+                        onClick={() => {
+                          if (confirm(`${card.name} 카드를 삭제할까요?`)) {
+                            runAction(() => deleteItemAction(card.id));
+                          }
+                        }}
+                        className="text-[8px] font-bold text-white px-1.5 py-0.5 rounded bg-red-600/90 hover:bg-red-600 disabled:opacity-50"
+                      >
+                        삭제
+                      </button>
                     </div>
                   )}
 

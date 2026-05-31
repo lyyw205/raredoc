@@ -185,8 +185,9 @@ function RecentRow({ card }: { card: RecentCard }) {
     <div className="flex items-center gap-4 py-3 border-b border-gray-800 last:border-0">
       <div className="w-10 h-14 shrink-0 rounded-lg overflow-hidden bg-gray-800">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={card.imageUrl} alt={card.name} className="w-full h-full object-cover"
-          onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
+        {card.imageUrl ? (
+          <img src={card.imageUrl} alt={card.name} className="w-full h-full object-cover" />
+        ) : null}
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-semibold text-white truncate">{card.name}</p>
