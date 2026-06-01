@@ -4,15 +4,13 @@ import { useState } from "react";
 import { Tab } from "@/components/toss";
 import { CollectionTab, type CollectionSet } from "./CollectionTab";
 import { BadgesTab } from "./BadgesTab";
-import { RankingTab } from "./RankingTab";
-import type { BadgeView, RankUserView } from "@/lib/services/gamification";
+import type { BadgeView } from "@/lib/services/gamification";
 
-type TabKey = "collection" | "badges" | "ranking";
+type TabKey = "collection" | "badges";
 
 const TABS: { key: TabKey; label: string }[] = [
   { key: "collection", label: "컬렉션" },
   { key: "badges",     label: "뱃지" },
-  { key: "ranking",    label: "랭킹" },
 ];
 
 export function ProfileTabs({
@@ -20,15 +18,11 @@ export function ProfileTabs({
   sets = [],
   isOwnProfile = false,
   badges = [],
-  rankings = [],
-  viewerId = null,
 }: {
   defaultTab?: TabKey;
   sets?: CollectionSet[];
   isOwnProfile?: boolean;
   badges?: BadgeView[];
-  rankings?: RankUserView[];
-  viewerId?: string | null;
 }) {
   const [tab, setTab] = useState<TabKey>(defaultTab);
 
@@ -49,9 +43,6 @@ export function ProfileTabs({
           </Tab.Panel>
           <Tab.Panel value="badges">
             <BadgesTab badges={badges} />
-          </Tab.Panel>
-          <Tab.Panel value="ranking">
-            <RankingTab rankings={rankings} viewerId={viewerId} />
           </Tab.Panel>
         </div>
       </Tab.Root>

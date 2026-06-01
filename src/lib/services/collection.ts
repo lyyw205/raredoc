@@ -254,6 +254,96 @@ export async function getUserSetProgress(userId: string): Promise<SetProgress[]>
   return [...bySet.values()].sort((a, b) => b.owned - a.owned);
 }
 
+// ── 컬렉션 탭: 보유 세트의 "전체 카드" 카탈로그 (도감 내카드보기처럼 보유/미보유 표시) ──
+export interface CollectionCatalogCard {
+  cardId: string; // CardLocale.id
+  name: string;
+  number: string;
+  imageUrl: string | null;
+  owned: boolean;
+  // 보유 카드만 채워짐
+  itemId?: string;
+  grade?: string;
+  certified?: boolean;
+  forSale?: boolean;
+  highlightSlot?: number | null;
+  valueKrw?: number;
+}
+
+export interface CollectionCatalogSet {
+  setId: string;
+  name: string;
+  totalCards: number;
+  ownedCount: number;
+  estimatedKrw: number;
+  cards: CollectionCatalogCard[]; // 세트 전체 카드(보유+미보유)
+}
+
+/**
+ * 유저가 보유한 세트마다 그 세트의 "모든 카드"를 반환(보유=실데이터, 미보유=회색용 메타).
+ * 같은 카드 중복 보유(등급 다름)는 카드 1장으로 합치고 첫 항목 기준으로 표시.
+ */
+export async function getUserSetCatalog(userId: string): Promise<CollectionCatalogSet[]> {
+  const items = await getUserCollection(userId);
+  if (items.length === 0) return [];
+
+  const ownedByCardId = new Map<string, CollectionItemView>();
+  for (const it of items) {
+    if (!ownedByCardId.has(it.cardId)) ownedByCardId.set(it.cardId, it);
+  }
+  const setIds = [...new Set(items.map((i) => i.setId))];
+
+  const locales = await prisma.cardLocale.findMany({
+    where: { setId: { in: setIds } },
+    select: {
+      id: true,
+      name: true,
+      number: true,
+      imageSmall: true,
+      imageLarge: true,
+      setId: true,
+      set: { select: { name: true, nameKo: true } },
+    },
+  });
+
+  const bySet = new Map<string, CollectionCatalogSet>();
+  for (const l of locales) {
+    let set = bySet.get(l.setId);
+    if (!set) {
+      set = { setId: l.setId, name: l.set.nameKo ?? l.set.name, totalCards: 0, ownedCount: 0, estimatedKrw: 0, cards: [] };
+      bySet.set(l.setId, set);
+    }
+    const own = ownedByCardId.get(l.id);
+    set.cards.push({
+      cardId: l.id,
+      name: l.name,
+      number: l.number,
+      imageUrl: l.imageSmall ?? l.imageLarge ?? null,
+      owned: !!own,
+      ...(own
+        ? {
+            itemId: own.id,
+            grade: own.grade,
+            certified: own.certified,
+            forSale: own.forSale,
+            highlightSlot: own.highlightSlot,
+            valueKrw: own.estimatedKrw,
+          }
+        : {}),
+    });
+    set.totalCards += 1;
+    if (own) {
+      set.ownedCount += 1;
+      set.estimatedKrw += own.estimatedKrw;
+    }
+  }
+
+  for (const s of bySet.values()) {
+    s.cards.sort((a, b) => a.number.localeCompare(b.number, undefined, { numeric: true }));
+  }
+  return [...bySet.values()].sort((a, b) => b.ownedCount - a.ownedCount);
+}
+
 /** 프로필 하이라이트(슬롯 1~5). slot 오름차순. */
 export async function getHighlights(userId: string): Promise<CollectionItemView[]> {
   const items = await prisma.collectionItem.findMany({

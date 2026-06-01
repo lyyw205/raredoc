@@ -8,13 +8,10 @@ import { getCurrentUser } from "@/lib/auth/session";
 import {
   getHighlights,
   getUserStats,
-  getUserSetProgress,
+  getUserSetCatalog,
   getUserCollection,
 } from "@/lib/services/collection";
-import {
-  getBadgesForUser,
-  getRankings,
-} from "@/lib/services/gamification";
+import { getBadgesForUser } from "@/lib/services/gamification";
 
 const TIER_CONFIG = {
   BRONZE: { label: "브론즈 컬렉터" },
@@ -66,8 +63,8 @@ export default async function ProfilePage({
 }) {
   const { username, locale } = await params;
   const sp = (await searchParams) ?? {};
-  const defaultTab: "collection" | "badges" | "ranking" =
-    sp.tab === "badges" || sp.tab === "ranking" ? sp.tab : "collection";
+  const defaultTab: "collection" | "badges" =
+    sp.tab === "badges" ? "badges" : "collection";
 
   const userSelect = {
     id: true,
@@ -96,13 +93,12 @@ export default async function ProfilePage({
   const viewer = await getCurrentUser();
   const isOwnProfile = viewer?.id === profileUser.id;
 
-  const [stats, highlightItems, setProgress, collection, badges, rankings] = await Promise.all([
+  const [stats, highlightItems, collectionSets, collection, badges] = await Promise.all([
     getUserStats(profileUser.id),
     getHighlights(profileUser.id),
-    getUserSetProgress(profileUser.id),
+    getUserSetCatalog(profileUser.id),
     getUserCollection(profileUser.id),
     getBadgesForUser(profileUser.id),
-    getRankings({ sort: "value", viewerId: profileUser.id }),
   ]);
 
   const displayName = profileUser.displayName ?? profileUser.name ?? username;
@@ -137,28 +133,6 @@ export default async function ProfilePage({
           valueKrw: c.estimatedKrw,
         }))
     : [];
-
-  // 컬렉션 탭에 넘길 세트별 보유 데이터 (디자인 유지)
-  const collectionSets = setProgress.map((sp) => ({
-    setId: sp.setId,
-    name: sp.name,
-    totalCards: sp.total,
-    estimatedKrw: sp.estimatedKrw,
-    owned: collection
-      .filter((c) => c.setId === sp.setId)
-      .map((c) => ({
-        id: c.id,
-        cardId: c.cardId,
-        name: c.name,
-        number: c.number,
-        imageUrl: c.imageLarge ?? c.imageSmall ?? "",
-        grade: c.grade,
-        certified: c.certified,
-        forSale: c.forSale,
-        highlightSlot: c.highlightSlot,
-        valueKrw: c.estimatedKrw,
-      })),
-  }));
 
   return (
     <Container size="xl" padding="md" className="py-8 space-y-8">
@@ -219,14 +193,12 @@ export default async function ProfilePage({
         myCollection={myCollection}
       />
 
-      {/* ── 탭: 컬렉션 / 뱃지 / 랭킹 ── */}
+      {/* ── 탭: 컬렉션 / 뱃지 ── */}
       <ProfileTabs
         defaultTab={defaultTab}
         sets={collectionSets}
         isOwnProfile={isOwnProfile}
         badges={badges}
-        rankings={rankings}
-        viewerId={viewer?.id ?? null}
       />
 
     </Container>

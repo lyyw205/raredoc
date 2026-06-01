@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useMemo, useDeferredValue, useEffect, Fragment } from "react";
+import { useState, useMemo, useDeferredValue, useEffect, Fragment, type ReactNode } from "react";
 import Link from "next/link";
-import { Bell, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { RARITY_KO } from "@/lib/constants";
 import { getCardPrices, type CardPriceRow } from "@/lib/actions/getCardPrices";
+import { getCardDetail, type CardLocaleVariant, type CardInfo } from "@/lib/actions/getCardDetail";
 import { cardTier, tierFromGroup, categoryTier, categoryTierFromGroup } from "@/lib/cards/rarity";
 import {
   Button,
@@ -15,7 +16,7 @@ import {
   Modal,
   SearchField,
   SegmentedControl,
-  TextField,
+  Sheet,
 } from "@/components/toss";
 
 export type DexCard = {
@@ -32,6 +33,7 @@ export type DexCard = {
   rarityCategoryTier?: number | null; // 카테고리 tier — 필터/그룹화 기준
   types?: string[];
   supertype?: string;
+  region?: string; // 대표 locale 의 region (EN | JP | KR) — 상세 패널 지역판 탭 기본값
   imageSmall: string | null;
   imageLarge: string | null;
   owned: boolean;
@@ -168,30 +170,19 @@ function ProgressBar({ value }: { value: number }) {
 
 // ── 카드 상세 모달 ────────────────────────────────────────────────────────
 
-type SelectedCard = DexCard & { setName: string; setId: string };
+type SelectedCard = DexCard & { setName: string; setId: string; setLogoUrl?: string };
 
-// 같은 캐릭터의 다른 팩 카드 (목업)
-const RELATED_VARIANTS = [
-  { set: "포켓몬 151",           number: "025", rarity: "Common",       priceLabel: "₩12,000"  },
-  { set: "스타버스 ex",           number: "043", rarity: "Ultra Rare",   priceLabel: "₩85,000"  },
-  { set: "이브이 히어로즈",        number: "077", rarity: "Hyper Rare",   priceLabel: "₩320,000" },
-  { set: "스칼렛 ex",             number: "215", rarity: "Double Rare",  priceLabel: "₩185,000" },
-  { set: "메가 에볼루션 프로모",   number: "198", rarity: "SAR",          priceLabel: "₩240,000" },
-  { set: "썬앤문 프로모",          number: "012", rarity: "Hyper Rare",   priceLabel: "₩67,000"  },
-  { set: "어둠을 밝힌 달빛",       number: "054", rarity: "Holo Rare",    priceLabel: "₩28,000"  },
-];
-
-// 가격 출처별 표시 메타 (flag + sub label)
-const PRICE_SOURCE_META: Record<string, { flag: string; sub: string }> = {
-  tcgplayer:     { flag: "🇺🇸", sub: "미국 · raw 시세" },
-  cardmarket:    { flag: "🇪🇺", sub: "유럽 · raw 시세" },
-  yuyu_tei_sell: { flag: "🇯🇵", sub: "일본 · 販売(판매가)" },
-  yuyu_tei_buy:  { flag: "🇯🇵", sub: "일본 · 買取(매입가)" },
-  ebay:          { flag: "🌍", sub: "글로벌 · sold listings" },
-  poketrace:     { flag: "🌍", sub: "글로벌 · 등급가" },
-  pricecharting: { flag: "🌍", sub: "글로벌 · 라이브가" },
-  hareruya2:     { flag: "🇯🇵", sub: "일본 · 등급가" },
-  bunjang:       { flag: "🇰🇷", sub: "국내 · 중고" },
+// 가격 출처별 표시 메타 — 한글명(name)을 기본, 일본어/원문(native)은 작게 병기
+const PRICE_SOURCE_META: Record<string, { flag: string; name?: string; native?: string; sub: string }> = {
+  tcgplayer:     { flag: "🇺🇸", name: "TCGplayer",                          sub: "미국 · raw 시세" },
+  cardmarket:    { flag: "🇪🇺", name: "카드마켓",      native: "Cardmarket", sub: "유럽 · raw 시세" },
+  yuyu_tei_sell: { flag: "🇯🇵", name: "유유테이 (판매가)", native: "遊々亭 · 販売", sub: "일본 · 가게가 파는 값" },
+  yuyu_tei_buy:  { flag: "🇯🇵", name: "유유테이 (매입가)", native: "遊々亭 · 買取", sub: "일본 · 가게가 사들이는 값" },
+  ebay:          { flag: "🌍", name: "이베이",        native: "eBay",       sub: "글로벌 · 낙찰가" },
+  poketrace:     { flag: "🌍", name: "포케트레이스",   native: "PokeTrace",  sub: "글로벌 · 등급가" },
+  pricecharting: { flag: "🌍", name: "프라이스차팅",   native: "PriceCharting", sub: "글로벌 · 라이브가" },
+  hareruya2:     { flag: "🇯🇵", name: "하레루야2",     native: "晴れる屋2",   sub: "일본 · 등급가" },
+  bunjang:       { flag: "🇰🇷", name: "번개장터",                            sub: "국내 · 중고" },
 };
 
 function formatPrice(amount: number | null, currency: string): string {
@@ -205,86 +196,339 @@ function formatPrice(amount: number | null, currency: string): string {
   }
 }
 
-function CardDetailModal({
-  card, locale, onClose,
-}: { card: SelectedCard; locale: string; onClose: () => void }) {
-  const [alertOpen, setAlertOpen]   = useState(false);
-  const [alertPrice, setAlertPrice] = useState("");
-  const [alertSaved, setAlertSaved] = useState(false);
-  const [prices, setPrices] = useState<CardPriceRow[] | null>(null);
+// ── 카드 정보 섹션 (상세 패널 하단) ───────────────────────────────────────
+const TYPE_KO: Record<string, string> = {
+  Grass: "풀", Fire: "불꽃", Water: "물", Lightning: "번개", Psychic: "에스퍼",
+  Fighting: "격투", Darkness: "악", Metal: "강철", Dragon: "드래곤",
+  Colorless: "무색", Fairy: "페어리",
+};
+const TYPE_BG: Record<string, string> = {
+  Grass: "bg-green-100 text-green-700", Fire: "bg-red-100 text-red-700",
+  Water: "bg-blue-100 text-blue-700", Lightning: "bg-yellow-100 text-yellow-700",
+  Psychic: "bg-purple-100 text-purple-700", Fighting: "bg-orange-100 text-orange-700",
+  Darkness: "bg-gray-800 text-gray-100", Metal: "bg-slate-200 text-slate-700",
+  Dragon: "bg-indigo-100 text-indigo-700", Colorless: "bg-gray-100 text-gray-600",
+  Fairy: "bg-pink-100 text-pink-700",
+};
+const SUBTYPE_KO: Record<string, string> = {
+  Basic: "기본", "Stage 1": "1진화", "Stage 2": "2진화",
+  "Mega Evolution": "메가진화", MEGA: "메가진화",
+  ex: "ex", EX: "EX", V: "V", VMAX: "VMAX", VSTAR: "VSTAR",
+  Item: "아이템", Supporter: "서포트", Stadium: "스타디움",
+  "Pokémon Tool": "포켓몬의 도구", Tool: "포켓몬의 도구",
+  Special: "특수 에너지", "Basic Energy": "기본 에너지",
+};
+const SUPERTYPE_KO: Record<string, string> = {
+  "Pokémon": "포켓몬", Trainer: "트레이너", Energy: "에너지",
+};
 
+function CostPips({ cost }: { cost?: string[] }) {
+  if (!cost || cost.length === 0) return <span className="text-toss-micro text-toss-text-quaternary">—</span>;
+  return (
+    <span className="inline-flex gap-0.5 items-center">
+      {cost.map((c, i) => (
+        <span
+          key={i}
+          title={TYPE_KO[c] ?? c}
+          className={`inline-flex w-4 h-4 rounded-full text-[9px] font-bold items-center justify-center ${TYPE_BG[c] ?? "bg-gray-100 text-gray-600"}`}
+        >
+          {c.charAt(0)}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+function TypeBadges({ items }: { items: { type: string; value?: string }[] }) {
+  return (
+    <div className="flex flex-wrap gap-1 mt-0.5">
+      {items.map((it, i) => (
+        <span key={i} className={`inline-block px-1.5 py-0.5 rounded text-[10px] font-semibold ${TYPE_BG[it.type] ?? "bg-gray-100 text-gray-600"}`}>
+          {TYPE_KO[it.type] ?? it.type}{it.value ? ` ${it.value}` : ""}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+// 슬라이드 패널 래퍼 — 항상 마운트 상태로 두고 open 만 토글해 열림/닫힘 애니메이션을 살린다.
+// 닫히는 동안에도 직전 카드를 보여주려고 부모가 selectedCard 를 유지(open 만 false)한다.
+function CardDetailPanel({
+  card, open, locale, onClose,
+}: { card: SelectedCard | null; open: boolean; locale: string; onClose: () => void }) {
+  return (
+    <Sheet.Root open={open} onOpenChange={(o) => { if (!o) onClose(); }} side="right" width={480}>
+      {/* card.id 로 key → 다른 카드 선택 시 remount(상태 초기화). 같은 카드 재오픈은 유지 */}
+      {card && <CardDetailContent key={card.id} card={card} locale={locale} />}
+    </Sheet.Root>
+  );
+}
+
+// ── 핵심 정보 (이미지 우측) ───────────────────────────────────────────────
+function KeyRow({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="flex items-start gap-2 py-1.5">
+      <span className="w-14 shrink-0 pt-0.5 text-toss-micro text-toss-text-tertiary">{label}</span>
+      <div className="flex-1 min-w-0 text-toss-caption font-medium text-toss-text-primary">{children}</div>
+    </div>
+  );
+}
+
+function CardKeyInfo({
+  card, info, primaryName, subNames,
+}: { card: SelectedCard; info: CardInfo | null; primaryName: string; subNames: string[] }) {
+  const rarityKo = card.rarityCategoryNameKo ?? card.rarity;
+  const showRawRarity =
+    card.rarity && card.rarityCategoryNameKo && card.rarity !== card.rarityCategoryNameKo;
+
+  const hasEvolution = !!info && (!!info.evolvesFrom || (info.evolvesTo?.length ?? 0) > 0);
+  const hasStats =
+    !!info &&
+    ((info.nationalPokedexNumbers?.length ?? 0) > 0 || !!info.hp || (info.types?.length ?? 0) > 0 ||
+      (info.weaknesses?.length ?? 0) > 0 || (info.resistances?.length ?? 0) > 0 ||
+      info.convertedRetreatCost != null || hasEvolution);
+  const dexNo = (info?.nationalPokedexNumbers ?? [])
+    .map((n) => `No.${String(n).padStart(4, "0")}`)
+    .join(", ");
+  const hasBadges =
+    !!info && (!!info.supertype || (info.subtypes?.length ?? 0) > 0 || !!info.regulationMark);
+
+  return (
+    <div className="space-y-3">
+      {/* 한글명 (일본명/영어명) + 우측 등급 */}
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <h2 className="text-toss-title-2 font-bold text-toss-text-primary leading-tight">{primaryName}</h2>
+          {subNames.length > 0 && (
+            <p className="mt-0.5 text-toss-micro text-toss-text-quaternary truncate">{subNames.join(" · ")}</p>
+          )}
+        </div>
+        {rarityKo && (
+          <div className="shrink-0 flex flex-col items-end gap-0.5">
+            <Chip variant="tag" size="sm">{rarityKo}</Chip>
+            {showRawRarity && <span className="text-toss-micro text-toss-text-quaternary">{card.rarity}</span>}
+          </div>
+        )}
+      </div>
+
+      {/* 분류 / 레귤레이션 */}
+      {hasBadges && (
+        <div className="flex flex-wrap items-center gap-1.5">
+          {info?.supertype && (
+            <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-toss-bg-muted text-toss-text-secondary">
+              {SUPERTYPE_KO[info.supertype] ?? info.supertype}
+            </span>
+          )}
+          {info?.subtypes?.map((st) => (
+            <span key={st} className="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-100 text-amber-700">
+              {SUBTYPE_KO[st] ?? st}
+            </span>
+          ))}
+          {info?.regulationMark && (
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-toss-md border border-toss-divider text-[11px] text-toss-text-secondary">
+              레귤레이션
+              <span className="inline-flex items-center justify-center w-4 h-4 rounded bg-toss-text-primary text-toss-bg-base text-[9px] font-bold">
+                {info.regulationMark}
+              </span>
+            </span>
+          )}
+        </div>
+      )}
+
+      {/* HP / 타입 / 약점 / 저항력 / 후퇴비용 */}
+      {info === null ? (
+        <p className="border-t border-toss-divider pt-2 text-toss-micro text-toss-text-tertiary">정보 불러오는 중…</p>
+      ) : hasStats ? (
+        <div className="border-t border-toss-divider pt-1 divide-y divide-toss-divider/60">
+          {dexNo && <KeyRow label="도감번호"><span className="toss-numeric">{dexNo}</span></KeyRow>}
+          <KeyRow label="HP">{info.hp ?? "—"}</KeyRow>
+          <KeyRow label="타입">
+            {(info.types?.length ?? 0) > 0 ? <TypeBadges items={info.types!.map((t) => ({ type: t }))} /> : "—"}
+          </KeyRow>
+          <KeyRow label="약점">
+            {(info.weaknesses?.length ?? 0) > 0 ? <TypeBadges items={info.weaknesses!} /> : "—"}
+          </KeyRow>
+          <KeyRow label="저항력">
+            {(info.resistances?.length ?? 0) > 0 ? <TypeBadges items={info.resistances!} /> : "—"}
+          </KeyRow>
+          <KeyRow label="후퇴비용">
+            {info.convertedRetreatCost != null
+              ? info.convertedRetreatCost === 0 ? "0 (무료)" : `${info.convertedRetreatCost}개`
+              : "—"}
+          </KeyRow>
+          {hasEvolution && (
+            <KeyRow label="진화">
+              <div className="flex items-center gap-1 flex-wrap">
+                {info.evolvesFrom && (
+                  <>
+                    <span className="px-1.5 py-0.5 rounded-toss-sm bg-toss-bg-muted text-toss-text-secondary">{info.evolvesFrom}</span>
+                    <span className="text-toss-text-quaternary">→</span>
+                  </>
+                )}
+                {info.evolvesTo?.map((to, i) => (
+                  <span key={to} className="flex items-center gap-1">
+                    {(i > 0 || info.evolvesFrom) && <span className="text-toss-text-quaternary">→</span>}
+                    <span className="px-1.5 py-0.5 rounded-toss-sm bg-toss-bg-muted text-toss-text-secondary">{to}</span>
+                  </span>
+                ))}
+              </div>
+            </KeyRow>
+          )}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+// ── 특성 · 기술 · 룰 · 도감설명 (시세 위) ──────────────────────────────────
+function CardMoves({ info }: { info: CardInfo | null }) {
+  if (!info) return null;
+  const hasAny =
+    (info.abilities?.length ?? 0) > 0 || (info.attacks?.length ?? 0) > 0 ||
+    (info.rules?.length ?? 0) > 0 || !!info.flavorText;
+  if (!hasAny) return null;
+  return (
+    <div className="space-y-2">
+      {/* 특성 */}
+      {info.abilities?.map((ab, i) => (
+        <div key={`ab-${i}`} className="p-2.5 border border-toss-divider rounded-toss-md bg-toss-bg-base">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-toss-brand-weak text-toss-brand">
+              {ab.type === "Ability" ? "특성" : ab.type}
+            </span>
+            <span className="text-toss-caption font-semibold text-toss-text-primary">{ab.name}</span>
+          </div>
+          {ab.text && <p className="text-[11px] leading-relaxed text-toss-text-secondary">{ab.text}</p>}
+        </div>
+      ))}
+      {/* 기술 */}
+      {info.attacks?.map((atk, i) => (
+        <div key={`atk-${i}`} className="p-2.5 border border-toss-divider rounded-toss-md bg-toss-bg-base">
+          <div className="flex items-center justify-between gap-2 mb-1">
+            <div className="flex items-center gap-2 min-w-0">
+              <CostPips cost={atk.cost} />
+              <span className="text-toss-caption font-semibold text-toss-text-primary truncate">{atk.name}</span>
+            </div>
+            {atk.damage && <span className="text-toss-label font-bold text-toss-text-primary shrink-0">{atk.damage}</span>}
+          </div>
+          {atk.text && <p className="text-[11px] leading-relaxed text-toss-text-secondary">{atk.text}</p>}
+        </div>
+      ))}
+      {/* 룰 박스 */}
+      {info.rules?.map((rule, i) => (
+        <div key={`rule-${i}`} className="p-2.5 rounded-toss-md bg-toss-bg-muted border-l-2 border-toss-text-tertiary">
+          <p className="text-[11px] leading-relaxed text-toss-text-secondary">{rule}</p>
+        </div>
+      ))}
+      {/* 도감 설명 */}
+      {info.flavorText && (
+        <p className="text-[11px] leading-relaxed text-toss-text-tertiary italic border-l-2 border-toss-divider pl-3">
+          {info.flavorText}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function CardDetailContent({
+  card, locale,
+}: { card: SelectedCard; locale: string }) {
+  const [prices, setPrices] = useState<CardPriceRow[] | null>(null);
+  // 지역판 탭 + 카드 정보 — 같은 LogicalCard 의 한/영/일 이미지 & 메타
+  const [variants, setVariants] = useState<CardLocaleVariant[] | null>(null);
+  const [info, setInfo] = useState<CardInfo | null>(null);
+  const [activeRegion, setActiveRegion] = useState<string>(card.region ?? "");
+
+  // 패널은 카드별로 key 로 remount 되므로(아래 호출부) 초기 state 가 항상 새 카드 기준.
+  // 여기선 비동기 fetch 결과만 채운다.
   useEffect(() => {
     let cancelled = false;
-    setPrices(null);
     getCardPrices(card.id).then((rows) => {
       if (!cancelled) setPrices(rows);
+    });
+    getCardDetail(card.id).then(({ variants, info }) => {
+      if (!cancelled) {
+        setVariants(variants);
+        setInfo(info);
+        // 현재 카드가 속한 region 을 기본 선택(없으면 첫 지역판)
+        const cur = variants.find((r) => r.id === card.id) ?? variants[0];
+        if (cur) setActiveRegion(cur.region);
+      }
     });
     return () => { cancelled = true; };
   }, [card.id]);
 
-  function saveAlert() {
-    if (!alertPrice) return;
-    setAlertSaved(true);
-    setAlertOpen(false);
-  }
 
-  // imageLarge 가 DB에 있으면 그대로 사용. EN(R2 small만 보유)은 imageLarge 가 pokemontcg.io hires URL, JP/KR 은 R2 large URL.
-  const largeImageUrl = card.imageLarge ?? card.imageSmall;
+  // 선택된 지역판의 이미지 — 없으면 현재 카드 이미지로 폴백
+  const activeVariant = variants?.find((v) => v.region === activeRegion) ?? null;
+  const displayLarge =
+    activeVariant?.imageLarge ?? activeVariant?.imageSmall ?? card.imageLarge ?? card.imageSmall;
+  const displayName = activeVariant?.name ?? card.name;
+
+  // 지역판별 이름 — 한글명 기본(KR 지역판 우선, 없으면 nameKo 오버레이), 하단에 영어명/일본명
+  const krName = variants?.find((v) => v.region === "KR")?.name ?? null;
+  const jaName = variants?.find((v) => v.region === "JP")?.name ?? null;
+  const enName = variants?.find((v) => v.region === "EN")?.name ?? null;
+  const koName = krName ?? info?.nameKo ?? null;
+  const primaryName = koName ?? enName ?? jaName ?? card.name;
+  const subNames = [enName, jaName].filter((n): n is string => !!n && n !== primaryName);
 
   return (
-    <Modal.Root open={true} onOpenChange={() => onClose()}>
-      <Modal.Content maxWidth="max-w-3xl" className="max-h-[92vh] flex flex-col p-0 overflow-hidden">
-        {/* 헤더 */}
-        <Modal.Header className="px-5 py-3.5 mb-0 border-b border-toss-divider shrink-0">
-          <div className="flex items-center gap-2 text-toss-caption text-toss-text-tertiary">
-            <span>{card.setName}</span>
-            <span>·</span>
-            <span>#{card.number}</span>
-            {(card.rarityCategoryNameKo ?? card.rarity) && (
-              <>
-                <span>·</span>
-                <span>
-                  {card.rarityCategoryNameKo ?? card.rarity}
-                  {card.rarity && card.rarityCategoryNameKo && card.rarity !== card.rarityCategoryNameKo && (
-                    <span className="ml-1 text-toss-text-quaternary">({card.rarity})</span>
-                  )}
-                </span>
-              </>
+    <>
+      {/* 헤더 — 카드팩 로고 + 한글명 */}
+      <Sheet.Header className="px-5 py-3.5">
+        <div className="min-w-0 flex items-center gap-2.5">
+          {card.setLogoUrl && (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={card.setLogoUrl}
+              alt=""
+              className="h-6 w-auto max-w-[96px] object-contain shrink-0"
+              onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+            />
+          )}
+          <span className="truncate text-toss-label font-semibold text-toss-text-primary">{card.setName}</span>
+        </div>
+        <Sheet.Close />
+      </Sheet.Header>
+
+      {/* 본문 (세로 스택) */}
+      <Sheet.Content className="px-5 py-5 space-y-5">
+        {/* 상단 — 카드 이미지(좌) + 핵심 정보(우) */}
+        <div className="flex gap-4">
+          {/* 좌: 이미지 + 지역판 탭 */}
+          <div className="shrink-0 flex flex-col items-center gap-2.5">
+            <CardImage
+              src={displayLarge}
+              alt={displayName}
+              className="w-[220px] aspect-[63/88] rounded-toss-lg shadow-toss-lg"
+            />
+            {/* 지역판 탭 — 2개 이상 있을 때만 노출 */}
+            {variants && variants.length > 1 && (
+              <SegmentedControl
+                options={variants.map((v) => ({
+                  value: v.region,
+                  label: REGION_LABEL[v.region] ?? v.region,
+                }))}
+                value={activeRegion}
+                onChange={(v) => setActiveRegion(v)}
+                variant="filled"
+                size="sm"
+              />
             )}
           </div>
-          <Modal.Close />
-        </Modal.Header>
 
-        {/* 본문 */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="flex flex-col sm:flex-row gap-6 p-5">
-            {/* 카드 이미지 */}
-            <div className="flex flex-col items-center gap-3 shrink-0">
-              <CardImage
-                src={largeImageUrl ?? card.imageSmall}
-                alt={card.name}
-                className="w-72 aspect-[63/88] rounded-toss-lg shadow-toss-lg"
-              />
-            </div>
+          {/* 우: 한글명/레어도/HP/타입/약점/저항력/후퇴비용 */}
+          <div className="flex-1 min-w-0">
+            <CardKeyInfo card={card} info={info} primaryName={primaryName} subNames={subNames} />
+          </div>
+        </div>
 
-            {/* 우측 */}
-            <div className="flex-1 min-w-0 space-y-5">
-              {/* 카드 이름 + 타입 */}
-              <div>
-                <h2 className="text-toss-title-1 font-bold text-toss-text-primary mb-1">{card.name}</h2>
-                {card.types && card.types.length > 0 && (
-                  <div className="flex gap-1">
-                    {card.types.map((t) => (
-                      <Chip key={t} variant="tag" size="sm">
-                        {TYPE_META[t]?.emoji} {TYPE_META[t]?.label ?? t}
-                      </Chip>
-                    ))}
-                  </div>
-                )}
-              </div>
+        {/* 특성 · 기술 */}
+        <CardMoves info={info} />
 
-              {/* 시세 (목업) */}
-              <Card padding="md">
+        {/* 시세 (목업) */}
+        <Card padding="md">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-toss-caption font-semibold text-toss-text-tertiary uppercase tracking-wide">최근 시세</h3>
                   <Link href={`/${locale}/cards/${card.id}`} className="text-toss-micro text-toss-text-tertiary hover:text-toss-text-primary transition-colors">
@@ -310,7 +554,12 @@ function CardDetailModal({
                             <div className="flex items-center gap-2">
                               <span className="text-base">{meta.flag}</span>
                               <div>
-                                <p className="text-toss-caption font-semibold text-toss-text-secondary">{r.sourceName}</p>
+                                <p className="text-toss-caption font-semibold text-toss-text-secondary">
+                                  {meta.name ?? r.sourceName}
+                                  {meta.native && (
+                                    <span className="ml-1 text-toss-micro font-normal text-toss-text-quaternary">{meta.native}</span>
+                                  )}
+                                </p>
                                 <p className="text-toss-micro text-toss-text-quaternary">{meta.sub}</p>
                               </div>
                             </div>
@@ -326,72 +575,9 @@ function CardDetailModal({
                     })}
                   </div>
                 )}
-
-                {/* 가격 알림 (번개장터 기준) */}
-                <div className="mt-3 pt-3 border-t border-toss-divider">
-                  {alertSaved ? (
-                    <div className="flex items-center gap-2 text-toss-caption text-toss-success">
-                      <span>🔔</span>
-                      <span>₩{Number(alertPrice).toLocaleString("ko-KR")} 이하 알림 설정됨</span>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => { setAlertSaved(false); setAlertPrice(""); }}
-                        className="ml-auto"
-                      >
-                        취소
-                      </Button>
-                    </div>
-                  ) : alertOpen ? (
-                    <div className="flex items-center gap-2">
-                      <TextField
-                        type="number"
-                        placeholder="목표 가격 입력"
-                        value={alertPrice}
-                        onChange={(e) => setAlertPrice(e.target.value)}
-                        size="sm"
-                        className="flex-1"
-                      />
-                      <span className="text-toss-caption text-toss-text-tertiary shrink-0">이하 알림</span>
-                      <Button variant="primary" size="sm" onClick={saveAlert}>설정</Button>
-                      <Button variant="ghost" size="sm" onClick={() => setAlertOpen(false)}>✕</Button>
-                    </div>
-                  ) : (
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      leftIcon={<Bell size={14} />}
-                      onClick={() => setAlertOpen(true)}
-                    >
-                      이 가격 이하로 나오면 알림 받기
-                    </Button>
-                  )}
-                </div>
-              </Card>
-
-            </div>
-          </div>
-
-          {/* 같은 포켓몬 · 다른 카드 (목업) */}
-          <div className="px-5 pb-5">
-            <h3 className="text-toss-label font-bold text-toss-text-primary mb-3">같은 포켓몬 · 다른 카드</h3>
-            <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 no-scrollbar">
-              {RELATED_VARIANTS.map((v, i) => (
-                <button key={i} className="shrink-0 w-28 group cursor-pointer text-left">
-                  <div className="rounded-toss-md overflow-hidden bg-toss-bg-base border border-toss-divider shadow-toss-hairline group-hover:border-toss-border transition-colors">
-                    <CardImage src={card.imageSmall} alt={card.name} className="w-full block aspect-[63/88]" />
-                  </div>
-                  <p className="mt-1.5 text-toss-micro font-medium text-toss-text-secondary truncate">{card.name}</p>
-                  <p className="text-toss-tiny text-toss-text-tertiary truncate">{v.set} · No.{v.number}</p>
-                  <Chip variant="tag" size="sm" className="mt-0.5">{v.rarity}</Chip>
-                  <p className="text-toss-micro font-bold text-toss-warning toss-numeric mt-1">{v.priceLabel}</p>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </Modal.Content>
-    </Modal.Root>
+        </Card>
+      </Sheet.Content>
+    </>
   );
 }
 
@@ -539,7 +725,7 @@ function SetDetailModal({ set, locale, onClose, onCardClick }: { set: DexSet; lo
                       .map((card) => (
                         <button
                           key={card.id}
-                          onClick={() => { onCardClick({ ...card, setName: set.name, setId: set.id }); }}
+                          onClick={() => { onCardClick({ ...card, setName: set.name, setId: set.id, setLogoUrl: set.logoUrl ?? `https://images.pokemontcg.io/${set.id}/logo.png` }); }}
                           className="relative group block text-left"
                           title={`#${card.number} ${card.name}`}
                         >
@@ -590,6 +776,9 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
   const [cols, setCols]                     = useState(10);
   const [modalSetId, setModalSetId]         = useState<string | null>(null);
   const [selectedCard, setSelectedCard]     = useState<SelectedCard | null>(null);
+  // 패널 열림 상태는 카드와 분리 — 닫힐 때 selectedCard 를 유지해 슬라이드 아웃 애니메이션 중 직전 카드를 보여준다.
+  const [panelOpen, setPanelOpen]           = useState(false);
+  const openCard = (card: SelectedCard) => { setSelectedCard(card); setPanelOpen(true); };
   // 좌측 사이드바에서 선택한 팩 — 이 팩의 카드만 렌더
   const [selectedSetId, setSelectedSetId]   = useState<string>(sets[0]?.id ?? "");
 
@@ -1021,7 +1210,7 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
                   return (
                     <button
                       key={card.id}
-                      onClick={() => setSelectedCard({ ...card, setName: set.name, setId: set.id })}
+                      onClick={() => openCard({ ...card, setName: set.name, setId: set.id, setLogoUrl: set.logoUrl ?? `https://images.pokemontcg.io/${set.id}/logo.png` })}
                       className="group relative block text-left"
                       title={`${card.name} · No.${card.number}`}
                     >
@@ -1106,18 +1295,17 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
           set={modalSet}
           locale={locale}
           onClose={() => setModalSetId(null)}
-          onCardClick={(card) => { setModalSetId(null); setSelectedCard(card); }}
+          onCardClick={(card) => { setModalSetId(null); openCard(card); }}
         />
       )}
 
-      {/* 카드 상세 모달 */}
-      {selectedCard && (
-        <CardDetailModal
-          card={selectedCard}
-          locale={locale}
-          onClose={() => setSelectedCard(null)}
-        />
-      )}
+      {/* 카드 상세 슬라이드 패널 (항상 마운트 — open 토글로 슬라이드 인/아웃) */}
+      <CardDetailPanel
+        card={selectedCard}
+        open={panelOpen}
+        locale={locale}
+        onClose={() => setPanelOpen(false)}
+      />
     </div>
   );
 }

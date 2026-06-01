@@ -29,9 +29,9 @@ export function CardVersionTabs({ versions, locale }: { versions: CardVersion[];
   if (!cur) return null;
 
   return (
-    <div className="md:sticky md:top-[68px]">
+    <div>
       {/* 지역 탭 */}
-      <div className="flex gap-1 mb-3 justify-center">
+      <div className="flex gap-1 mb-3 justify-start">
         {versions.map((v) => (
           <button
             key={v.region}
@@ -50,7 +50,7 @@ export function CardVersionTabs({ versions, locale }: { versions: CardVersion[];
       </div>
 
       {/* 활성 판본 이미지 + 메타 */}
-      <div className="w-full max-w-xs mx-auto">
+      <div className="w-full max-w-xs">
         {cur.image ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={cur.image} alt={cur.name} className="rounded-toss-lg shadow-toss-lg w-full" />
@@ -59,7 +59,7 @@ export function CardVersionTabs({ versions, locale }: { versions: CardVersion[];
             <span className="text-toss-caption text-toss-text-quaternary">이미지 없음</span>
           </div>
         )}
-        <div className="mt-3 text-center">
+        <div className="mt-3 text-left">
           <p className="text-toss-label font-bold text-toss-text-primary">
             {locale === "ko" && cur.nameKo ? cur.nameKo : cur.name}
           </p>

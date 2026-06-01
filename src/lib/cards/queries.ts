@@ -88,6 +88,19 @@ function parseTypeValue(
   if (!raw) return undefined;
   const trimmed = raw.trim();
   if (!trimmed) return undefined;
+  // DB 에는 두 형식이 혼재: 평문("Fire x2") 과 JSON([{"type":"Fire","value":"x2"}]).
+  if (trimmed.startsWith("[") || trimmed.startsWith("{")) {
+    try {
+      const parsed = JSON.parse(trimmed);
+      const arr = Array.isArray(parsed) ? parsed : [parsed];
+      const result = arr
+        .filter((e) => e && typeof e === "object" && typeof e.type === "string")
+        .map((e) => ({ type: String(e.type), value: e.value != null ? String(e.value) : "" }));
+      if (result.length > 0) return result;
+    } catch {
+      /* JSON 파싱 실패 시 평문 파싱으로 폴백 */
+    }
+  }
   const m = trimmed.match(/^(.+?)\s*([×x]\s*\d+|[-+]\d+)$/i);
   if (m) return [{ type: m[1].trim(), value: m[2].replace(/\s+/g, "") }];
   return [{ type: trimmed, value: "" }];

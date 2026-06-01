@@ -9,27 +9,30 @@ import {
   toggleForSaleAction,
 } from "@/lib/actions/collection";
 
-// ── 타입 (서버에서 실데이터 주입) ─────────────────────────────────────────────
+// ── 타입 (서버 getUserSetCatalog 와 구조 일치) ───────────────────────────────
 
-export type OwnedCard = {
-  id: string;        // CollectionItem id
-  cardId: string;
+export type CollectionCard = {
+  cardId: string; // CardLocale id
   name: string;
   number: string;
-  imageUrl: string;
-  grade: string;
-  certified: boolean;
-  forSale: boolean;
-  highlightSlot: number | null;
-  valueKrw: number;
+  imageUrl: string | null;
+  owned: boolean;
+  // 보유 카드만 채워짐
+  itemId?: string;
+  grade?: string;
+  certified?: boolean;
+  forSale?: boolean;
+  highlightSlot?: number | null;
+  valueKrw?: number;
 };
 
 export type CollectionSet = {
   setId: string;
   name: string;
   totalCards: number;
+  ownedCount: number;
   estimatedKrw: number;
-  owned: OwnedCard[];
+  cards: CollectionCard[]; // 세트 전체(보유+미보유)
 };
 
 // ── 컴포넌트 ─────────────────────────────────────────────────────────────────
@@ -56,14 +59,15 @@ export function CollectionTab({
   const locale = (params?.locale as string) ?? "ko";
   const [isPending, startTransition] = useTransition();
 
-  const totalOwned = sets.reduce((n, s) => n + s.owned.length, 0);
+  const totalOwned = sets.reduce((n, s) => n + s.ownedCount, 0);
   const totalValue = sets.reduce((n, s) => n + s.estimatedKrw, 0);
   const totalCertified = sets.reduce(
-    (n, s) => n + s.owned.filter((c) => c.certified).length,
+    (n, s) => n + s.cards.filter((c) => c.owned && c.certified).length,
     0
   );
 
   const [selectedSetId, setSelectedSetId] = useState<string>(sets[0]?.setId ?? "");
+  const [cols, setCols] = useState(10); // 한 줄당 카드 수
   const selectedSet = sets.find((s) => s.setId === selectedSetId) ?? sets[0];
 
   if (!selectedSet) {
@@ -79,13 +83,9 @@ export function CollectionTab({
 
   const setCompletionPct =
     selectedSet.totalCards > 0
-      ? Math.round((selectedSet.owned.length / selectedSet.totalCards) * 100)
+      ? Math.round((selectedSet.ownedCount / selectedSet.totalCards) * 100)
       : 0;
   const setValue = selectedSet.estimatedKrw;
-
-  const allCards = [...selectedSet.owned].sort(
-    (a, b) => Number(a.number) - Number(b.number)
-  );
 
   function runAction(fn: () => Promise<unknown>) {
     startTransition(() => {
@@ -117,7 +117,7 @@ export function CollectionTab({
         <div className="w-52 shrink-0 space-y-1.5">
           <p className="text-toss-caption text-toss-text-quaternary font-medium px-1 mb-2">보유 세트</p>
           {sets.map((set) => {
-            const pct = set.totalCards > 0 ? Math.round((set.owned.length / set.totalCards) * 100) : 0;
+            const pct = set.totalCards > 0 ? Math.round((set.ownedCount / set.totalCards) * 100) : 0;
             const isSelected = set.setId === selectedSetId;
             return (
               <button
@@ -134,7 +134,7 @@ export function CollectionTab({
                 </p>
                 <ProgressBar value={pct} />
                 <div className="flex items-center justify-between mt-1.5">
-                  <span className="text-toss-micro text-toss-text-quaternary">{set.owned.length}/{set.totalCards}장</span>
+                  <span className="text-toss-micro text-toss-text-quaternary">{set.ownedCount}/{set.totalCards}장</span>
                   <span className={`text-toss-micro font-bold ${isSelected ? "text-toss-brand" : "text-toss-text-tertiary"}`}>{pct}%</span>
                 </div>
               </button>
@@ -160,19 +160,34 @@ export function CollectionTab({
             <ProgressBar value={setCompletionPct} />
 
             <div className="flex items-center gap-4 mt-2.5 text-toss-caption text-toss-text-tertiary">
-              <span><span className="text-toss-text-primary font-semibold toss-numeric">{selectedSet.owned.length}</span> / {selectedSet.totalCards}장 보유</span>
-              <span><span className="text-toss-positive font-semibold toss-numeric">{selectedSet.owned.filter((c) => c.certified).length}</span>장 인증</span>
+              <span><span className="text-toss-text-primary font-semibold toss-numeric">{selectedSet.ownedCount}</span> / {selectedSet.totalCards}장 보유</span>
+              <span><span className="text-toss-positive font-semibold toss-numeric">{selectedSet.cards.filter((c) => c.owned && c.certified).length}</span>장 인증</span>
               <span className="ml-auto text-toss-brand font-bold toss-numeric">{setCompletionPct}% 완성</span>
             </div>
           </Card>
 
-          {/* 카드 도감 그리드 */}
+          {/* 카드 도감 그리드 — 전체 표시, 보유=컬러 / 미보유=회색 */}
           <Card padding="md">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-toss-caption text-toss-text-tertiary">
-                <span className="text-toss-text-primary font-semibold toss-numeric">{allCards.length}</span>장 보유
+            <div className="flex items-center justify-between gap-3 mb-3">
+              <p className="text-toss-caption text-toss-text-tertiary shrink-0">
+                <span className="text-toss-text-primary font-semibold toss-numeric">{selectedSet.ownedCount}</span>
+                {" / "}{selectedSet.totalCards}장 보유
               </p>
               <div className="flex items-center gap-3 text-toss-micro text-toss-text-quaternary">
+                {/* 열 수 슬라이더 */}
+                <div className="flex items-center gap-1.5">
+                  <span className="text-toss-text-tertiary">열</span>
+                  <input
+                    type="range"
+                    min={5}
+                    max={15}
+                    step={1}
+                    value={cols}
+                    onChange={(e) => setCols(Number(e.target.value))}
+                    className="w-20 cursor-pointer accent-[var(--toss-brand)]"
+                  />
+                  <span className="font-semibold text-toss-brand w-4 text-right">{cols}</span>
+                </div>
                 <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-toss-positive inline-block" />인증</span>
                 {isOwnProfile && (
                   <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-toss-warning inline-block" />판매중</span>
@@ -180,50 +195,57 @@ export function CollectionTab({
               </div>
             </div>
 
-            <div className="grid gap-1.5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(62px, 1fr))" }}>
-              {allCards.map((card) => (
-                <div key={card.id} className="group relative cursor-pointer" title={`${card.name} · No.${card.number}`}>
+            <div className="grid gap-1.5" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}>
+              {selectedSet.cards.map((card) => (
+                <div key={card.cardId} className="group relative cursor-pointer" title={`${card.name} · No.${card.number}`}>
                   <a href={`/${locale}/cards/${card.cardId}`} className="block">
                     <div
                       className="rounded-toss-sm overflow-hidden"
-                      style={{ aspectRatio: "63 / 88", transition: "opacity 0.2s" }}
+                      style={{
+                        aspectRatio: "63 / 88",
+                        filter: card.owned ? "none" : "grayscale(100%)",
+                        opacity: card.owned ? 1 : 0.35,
+                        transition: "opacity 0.2s, filter 0.2s",
+                      }}
                     >
                       {card.imageUrl ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={card.imageUrl}
                           alt={card.name}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                         />
                       ) : null}
                     </div>
                   </a>
 
-                  {/* 인증 점 */}
-                  {card.certified && (
+                  {/* 인증 점 (보유) */}
+                  {card.owned && card.certified && (
                     <div className="absolute top-[3px] right-[3px] w-2.5 h-2.5 rounded-full bg-toss-positive ring-1 ring-toss-bg-base shadow" />
                   )}
 
-                  {/* 판매중 점 */}
-                  {card.forSale && (
+                  {/* 판매중 점 (보유) */}
+                  {card.owned && card.forSale && (
                     <div className="absolute top-[3px] left-[3px] w-2.5 h-2.5 rounded-full bg-toss-warning ring-1 ring-toss-bg-base shadow" />
                   )}
 
-                  {/* 등급 뱃지 */}
-                  {card.grade && (
+                  {/* 등급 뱃지 (보유) */}
+                  {card.owned && card.grade && (
                     <div className="absolute bottom-[14px] left-[2px] text-[7px] font-bold bg-black/75 text-white px-1 py-[1px] rounded leading-tight">
                       {card.grade}
                     </div>
                   )}
 
-                  {/* 소유자 편집 오버레이 */}
-                  {isOwnProfile && (
+                  {/* 소유자 편집 오버레이 (보유 카드만) */}
+                  {isOwnProfile && card.owned && card.itemId && (
                     <div className="absolute inset-0 flex flex-col items-center justify-center gap-1 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity rounded-toss-sm">
                       <button
                         disabled={isPending}
                         onClick={() =>
                           runAction(() =>
-                            setHighlightAction(card.id, card.highlightSlot != null ? null : 1)
+                            setHighlightAction(card.itemId!, card.highlightSlot != null ? null : 1)
                           )
                         }
                         className="text-[8px] font-bold text-white px-1.5 py-0.5 rounded bg-toss-brand/90 hover:bg-toss-brand disabled:opacity-50"
@@ -233,7 +255,7 @@ export function CollectionTab({
                       </button>
                       <button
                         disabled={isPending}
-                        onClick={() => runAction(() => toggleForSaleAction(card.id, !card.forSale))}
+                        onClick={() => runAction(() => toggleForSaleAction(card.itemId!, !card.forSale))}
                         className="text-[8px] font-bold text-white px-1.5 py-0.5 rounded bg-toss-warning/90 hover:bg-toss-warning disabled:opacity-50"
                       >
                         {card.forSale ? "판매중지" : "판매"}
@@ -242,7 +264,7 @@ export function CollectionTab({
                         disabled={isPending}
                         onClick={() => {
                           if (confirm(`${card.name} 카드를 삭제할까요?`)) {
-                            runAction(() => deleteItemAction(card.id));
+                            runAction(() => deleteItemAction(card.itemId!));
                           }
                         }}
                         className="text-[8px] font-bold text-white px-1.5 py-0.5 rounded bg-red-600/90 hover:bg-red-600 disabled:opacity-50"

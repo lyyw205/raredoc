@@ -132,6 +132,7 @@ export default async function DexPage({
           rarityCategoryTier: lc.rarity?.category?.tier ?? null,
           types: lcMeta.types.length > 0 ? lcMeta.types : undefined,
           supertype: lcMeta.supertype ?? undefined,
+          region: primary.region,
           imageSmall: primary.imageSmall ?? primary.imageLarge ?? null,
           imageLarge: primary.imageLarge ?? primary.imageSmall ?? null,
           owned: !!own,

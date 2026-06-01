@@ -86,10 +86,6 @@ export default async function HomePage({
     getCurrentSeason().catch(() => null),
     getHotTopics(6).catch(() => [] as HotTopic[]),
   ]);
-  const rankingHref = topCollectors[0]
-    ? `/${locale}/profile/${topCollectors[0].username}?tab=ranking`
-    : `/${locale}/profile`;
-
   const recentCards = feed
     .map((item) => ({
       uid: item.id,
@@ -165,12 +161,6 @@ export default async function HomePage({
           <Card padding="md">
             <CardHeader>
               <CardTitle className="text-toss-subtitle">이달의 TOP 3</CardTitle>
-              <Link
-                href={rankingHref}
-                className="text-toss-caption text-toss-text-tertiary hover:text-toss-text-primary transition-colors"
-              >
-                전체 랭킹 →
-              </Link>
             </CardHeader>
             <CardDivider className="my-3" />
             <CardContent className="space-y-1">
@@ -215,7 +205,6 @@ export default async function HomePage({
                 { label: "최근 등록 카드",  emoji: "🆕", href: `/recent` },
                 { label: "투자 티어리스트", emoji: "📊", href: `/tier-list` },
                 { label: "뱃지 도감",       emoji: "🏅", href: topCollectors[0] ? `/profile/${topCollectors[0].username}?tab=badges` : `/profile` },
-                { label: "전체 랭킹",       emoji: "🏆", href: topCollectors[0] ? `/profile/${topCollectors[0].username}?tab=ranking` : `/profile` },
               ].map(({ label, emoji, href }) => (
                 <Link
                   key={label}
