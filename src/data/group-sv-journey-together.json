@@ -1,0 +1,3550 @@
+{
+  "group": {
+    "id": "sv-journey-together",
+    "nameKo": "배틀파트너즈",
+    "nameEn": "Journey Together",
+    "crossGroupEN": false
+  },
+  "counts": {
+    "anchors": 132,
+    "enMatched": 114,
+    "krMatched": 132,
+    "enOnly": 52
+  },
+  "anchors": [
+    {
+      "jp": {
+        "number": "001",
+        "name": "キャタピー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/001.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "1",
+        "name": "Caterpie",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/1.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "001",
+        "name": "캐터피",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_001.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 10
+    },
+    {
+      "jp": {
+        "number": "002",
+        "name": "トランセル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/002.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "2",
+        "name": "Metapod",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/2.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "002",
+        "name": "단데기",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_002.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 11
+    },
+    {
+      "jp": {
+        "number": "003",
+        "name": "バタフリー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/003.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "3",
+        "name": "Butterfree",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/3.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "003",
+        "name": "버터플",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_003.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 12
+    },
+    {
+      "jp": {
+        "number": "004",
+        "name": "パラス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/004.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "4",
+        "name": "Paras",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/4.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "004",
+        "name": "파라스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_004.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 46
+    },
+    {
+      "jp": {
+        "number": "005",
+        "name": "パラセクト",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/005.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "5",
+        "name": "Parasect",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/5.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "005",
+        "name": "파라섹트",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_005.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 47
+    },
+    {
+      "jp": {
+        "number": "006",
+        "name": "マラカッチ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/006.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "8",
+        "name": "Maractus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/8.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "006",
+        "name": "마라카치",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_006.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 556
+    },
+    {
+      "jp": {
+        "number": "007",
+        "name": "カブルモ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/007.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "9",
+        "name": "Karrablast",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/9.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "007",
+        "name": "딱정곤",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_007.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 588
+    },
+    {
+      "jp": {
+        "number": "008",
+        "name": "チョボマキ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/008.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "12",
+        "name": "Shelmet",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/12.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "008",
+        "name": "쪼마리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_008.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 616
+    },
+    {
+      "jp": {
+        "number": "009",
+        "name": "アギルダー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/009.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "13",
+        "name": "Accelgor",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/13.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "009",
+        "name": "어지리더",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_009.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 617
+    },
+    {
+      "jp": {
+        "number": "010",
+        "name": "ニャオハ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/010.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "16",
+        "name": "Sprigatito",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/16.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "010",
+        "name": "나오하",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_010.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 906
+    },
+    {
+      "jp": {
+        "number": "011",
+        "name": "ニャローテ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/011.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "17",
+        "name": "Floragato",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/17.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "011",
+        "name": "나로테",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_011.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 907
+    },
+    {
+      "jp": {
+        "number": "012",
+        "name": "マスカーニャ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/012.webp",
+        "rarity": "レア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "18",
+        "name": "Meowscarada",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/18.png",
+        "rarity": "Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "012",
+        "name": "마스카나",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_012.png",
+        "rarity": "레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 908
+    },
+    {
+      "jp": {
+        "number": "013",
+        "name": "ブーバー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/013.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "20",
+        "name": "Magmar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/20.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "013",
+        "name": "마그마",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_013.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 126
+    },
+    {
+      "jp": {
+        "number": "014",
+        "name": "ブーバーン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/014.webp",
+        "rarity": "レア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "21",
+        "name": "Magmortar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/21.png",
+        "rarity": "Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "014",
+        "name": "마그마번",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_014.png",
+        "rarity": "레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 467
+    },
+    {
+      "jp": {
+        "number": "015",
+        "name": "Nのダルマッカ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/015.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "26",
+        "name": "N's Darumaka",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/26.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "015",
+        "name": "N의 달막화",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_015.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 554
+    },
+    {
+      "jp": {
+        "number": "016",
+        "name": "Nのヒヒダルマ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/016.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "27",
+        "name": "N's Darmanitan",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/27.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "016",
+        "name": "N의 불비달마",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_016.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 555
+    },
+    {
+      "jp": {
+        "number": "017",
+        "name": "ボルケニオンex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/017.webp",
+        "rarity": "ダブルレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "31",
+        "name": "Volcanion ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/31.png",
+        "rarity": "Double Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "017",
+        "name": "볼케니온 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_017.png",
+        "rarity": "더블 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 721
+    },
+    {
+      "jp": {
+        "number": "018",
+        "name": "フリーザー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/018.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "32",
+        "name": "Articuno",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/32.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "018",
+        "name": "프리져",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_018.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 144
+    },
+    {
+      "jp": {
+        "number": "019",
+        "name": "テッポウオ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/019.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "33",
+        "name": "Remoraid",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/33.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "019",
+        "name": "총어",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_019.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 223
+    },
+    {
+      "jp": {
+        "number": "020",
+        "name": "オクタン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/020.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "34",
+        "name": "Octillery",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/34.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "020",
+        "name": "대포무노",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_020.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 224
+    },
+    {
+      "jp": {
+        "number": "021",
+        "name": "ハスボー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/021.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "35",
+        "name": "Lotad",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/35.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "021",
+        "name": "연꽃몬",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_021.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 270
+    },
+    {
+      "jp": {
+        "number": "022",
+        "name": "ハスブレロ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/022.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "36",
+        "name": "Lombre",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/36.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "022",
+        "name": "로토스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_022.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 271
+    },
+    {
+      "jp": {
+        "number": "023",
+        "name": "ルンパッパ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/023.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "37",
+        "name": "Ludicolo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/37.png",
+        "rarity": "Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "023",
+        "name": "로파파",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_023.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 272
+    },
+    {
+      "jp": {
+        "number": "024",
+        "name": "ホエルコ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/024.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "40",
+        "name": "Wailmer",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/40.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "024",
+        "name": "고래왕자",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_024.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 320
+    },
+    {
+      "jp": {
+        "number": "025",
+        "name": "ホエルオー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/025.webp",
+        "rarity": "レア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "41",
+        "name": "Wailord",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/41.png",
+        "rarity": "Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "025",
+        "name": "고래왕",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_025.png",
+        "rarity": "레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 321
+    },
+    {
+      "jp": {
+        "number": "026",
+        "name": "ナンジャモのビリリダマ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/026.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "47",
+        "name": "Iono's Voltorb",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/47.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "026",
+        "name": "모야모의 찌리리공",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_026.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 100
+    },
+    {
+      "jp": {
+        "number": "027",
+        "name": "ナンジャモのマルマイン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/027.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "48",
+        "name": "Iono's Electrode",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/48.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "027",
+        "name": "모야모의 붐볼",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_027.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 101
+    },
+    {
+      "jp": {
+        "number": "028",
+        "name": "Nのバチュル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/028.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "49",
+        "name": "N's Joltik",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/49.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "028",
+        "name": "N의 파쪼옥",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_028.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 595
+    },
+    {
+      "jp": {
+        "number": "029",
+        "name": "ナンジャモのズピカ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/029.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "52",
+        "name": "Iono's Tadbulb",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/52.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "029",
+        "name": "모야모의 빈나두",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_029.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 938
+    },
+    {
+      "jp": {
+        "number": "030",
+        "name": "ナンジャモのハラバリーex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/030.webp",
+        "rarity": "ダブルレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "53",
+        "name": "Iono's Bellibolt ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/53.png",
+        "rarity": "Double Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "030",
+        "name": "모야모의 찌리배리 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_030.png",
+        "rarity": "더블 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 939
+    },
+    {
+      "jp": {
+        "number": "031",
+        "name": "ナンジャモのカイデン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/031.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "54",
+        "name": "Iono's Wattrel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/54.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "031",
+        "name": "모야모의 찌리비",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_031.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 940
+    },
+    {
+      "jp": {
+        "number": "032",
+        "name": "ナンジャモのタイカイデン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/032.webp",
+        "rarity": "レア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "55",
+        "name": "Iono's Kilowattrel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/55.png",
+        "rarity": "Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "032",
+        "name": "모야모의 찌리비크",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_032.png",
+        "rarity": "레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 941
+    },
+    {
+      "jp": {
+        "number": "033",
+        "name": "リーリエのピッピex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/033.webp",
+        "rarity": "ダブルレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "56",
+        "name": "Lillie's Clefairy ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/56.png",
+        "rarity": "Double Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "033",
+        "name": "릴리에의 삐삐 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_033.png",
+        "rarity": "더블 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 35
+    },
+    {
+      "jp": {
+        "number": "034",
+        "name": "バリヤード",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/034.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "58",
+        "name": "Mr. Mime",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/58.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "034",
+        "name": "마임맨",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_034.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 122
+    },
+    {
+      "jp": {
+        "number": "035",
+        "name": "カゲボウズ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/035.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "59",
+        "name": "Shuppet",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/59.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "035",
+        "name": "어둠대신",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_035.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 353
+    },
+    {
+      "jp": {
+        "number": "036",
+        "name": "ジュペッタ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/036.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "60",
+        "name": "Banette",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/60.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "036",
+        "name": "다크펫",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_036.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 354
+    },
+    {
+      "jp": {
+        "number": "037",
+        "name": "ダンバル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/037.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "61",
+        "name": "Beldum",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/61.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "037",
+        "name": "메탕",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_037.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 374
+    },
+    {
+      "jp": {
+        "number": "038",
+        "name": "メタング",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/038.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "62",
+        "name": "Metang",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/62.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "038",
+        "name": "메탕구",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_038.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 375
+    },
+    {
+      "jp": {
+        "number": "039",
+        "name": "メタグロス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/039.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "63",
+        "name": "Metagross",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/63.png",
+        "rarity": "Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "039",
+        "name": "메타그로스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_039.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 376
+    },
+    {
+      "jp": {
+        "number": "040",
+        "name": "Nのシンボラー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/040.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "64",
+        "name": "N's Sigilyph",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/64.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "040",
+        "name": "N의 심보러",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_040.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 561
+    },
+    {
+      "jp": {
+        "number": "041",
+        "name": "リーリエのアブリー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/041.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "66",
+        "name": "Lillie's Cutiefly",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/66.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "041",
+        "name": "릴리에의 에블리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_041.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 742
+    },
+    {
+      "jp": {
+        "number": "042",
+        "name": "リーリエのアブリボン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/042.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "67",
+        "name": "Lillie's Ribombee",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/67.png",
+        "rarity": "Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "042",
+        "name": "릴리에의 에리본",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_042.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 743
+    },
+    {
+      "jp": {
+        "number": "043",
+        "name": "リーリエのキュワワー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/043.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "68",
+        "name": "Lillie's Comfey",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/68.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "043",
+        "name": "릴리에의 큐아링",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_043.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 764
+    },
+    {
+      "jp": {
+        "number": "044",
+        "name": "ウリムー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/044.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "77",
+        "name": "Swinub",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/77.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "044",
+        "name": "꾸꾸리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_044.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 220
+    },
+    {
+      "jp": {
+        "number": "045",
+        "name": "イノムー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/045.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "78",
+        "name": "Piloswine",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/78.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "045",
+        "name": "메꾸리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_045.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 221
+    },
+    {
+      "jp": {
+        "number": "046",
+        "name": "マンムーex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/046.webp",
+        "rarity": "ダブルレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "79",
+        "name": "Mamoswine ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/79.png",
+        "rarity": "Double Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "046",
+        "name": "맘모꾸리 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_046.png",
+        "rarity": "더블 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 473
+    },
+    {
+      "jp": {
+        "number": "047",
+        "name": "ヨーギラス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/047.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "80",
+        "name": "Larvitar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/80.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "047",
+        "name": "애버라스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_047.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 246
+    },
+    {
+      "jp": {
+        "number": "048",
+        "name": "サナギラス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/048.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "81",
+        "name": "Pupitar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/81.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "048",
+        "name": "데기라스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_048.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 247
+    },
+    {
+      "jp": {
+        "number": "049",
+        "name": "レジロック",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/049.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "82",
+        "name": "Regirock",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/82.png",
+        "rarity": "Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "049",
+        "name": "레지락",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_049.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 377
+    },
+    {
+      "jp": {
+        "number": "050",
+        "name": "ヤンチャム",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/050.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "83",
+        "name": "Pancham",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/83.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "050",
+        "name": "판짱",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_050.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 674
+    },
+    {
+      "jp": {
+        "number": "051",
+        "name": "イワンコ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/051.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "84",
+        "name": "Rockruff",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/84.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "051",
+        "name": "암멍이",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_051.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 744
+    },
+    {
+      "jp": {
+        "number": "052",
+        "name": "ルガルガン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/052.webp",
+        "rarity": "レア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "85",
+        "name": "Lycanroc",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/85.png",
+        "rarity": "Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "052",
+        "name": "루가루암",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_052.png",
+        "rarity": "레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 745
+    },
+    {
+      "jp": {
+        "number": "053",
+        "name": "ホップのスナヘビ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/053.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "86",
+        "name": "Hop's Silicobra",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/86.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "053",
+        "name": "호브의 모래뱀",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_053.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 843
+    },
+    {
+      "jp": {
+        "number": "054",
+        "name": "ホップのサダイジャ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/054.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "87",
+        "name": "Hop's Sandaconda",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/87.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "054",
+        "name": "호브의 사다이사",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_054.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 844
+    },
+    {
+      "jp": {
+        "number": "055",
+        "name": "ガケガニ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/055.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "90",
+        "name": "Klawf",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/90.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "055",
+        "name": "절벼게",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_055.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 950
+    },
+    {
+      "jp": {
+        "number": "056",
+        "name": "ドガース",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/056.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "91",
+        "name": "Koffing",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/91.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "056",
+        "name": "또가스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_056.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 109
+    },
+    {
+      "jp": {
+        "number": "057",
+        "name": "マタドガス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/057.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "92",
+        "name": "Weezing",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/92.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "057",
+        "name": "또도가스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_057.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 110
+    },
+    {
+      "jp": {
+        "number": "058",
+        "name": "バンギラス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/058.webp",
+        "rarity": "レア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "95",
+        "name": "Tyranitar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/95.png",
+        "rarity": "Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "058",
+        "name": "마기라스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_058.png",
+        "rarity": "레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 248
+    },
+    {
+      "jp": {
+        "number": "059",
+        "name": "Nのチョロネコ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/059.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "96",
+        "name": "N's Purrloin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/96.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "059",
+        "name": "N의 쌔비냥",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_059.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 509
+    },
+    {
+      "jp": {
+        "number": "060",
+        "name": "Nのゾロア",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/060.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "97",
+        "name": "N's Zorua",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/97.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "060",
+        "name": "N의 조로아",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_060.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 570
+    },
+    {
+      "jp": {
+        "number": "061",
+        "name": "Nのゾロアークex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/061.webp",
+        "rarity": "ダブルレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "98",
+        "name": "N's Zoroark ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/98.png",
+        "rarity": "Double Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "061",
+        "name": "N의 조로아크 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_061.png",
+        "rarity": "더블 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 571
+    },
+    {
+      "jp": {
+        "number": "062",
+        "name": "ゴロンダ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/062.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "99",
+        "name": "Pangoro",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/99.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "062",
+        "name": "부란다",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_062.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 675
+    },
+    {
+      "jp": {
+        "number": "063",
+        "name": "シュバルゴ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/063.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "102",
+        "name": "Escavalier",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/102.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "063",
+        "name": "슈바르고",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_063.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 589
+    },
+    {
+      "jp": {
+        "number": "064",
+        "name": "Nのギアル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/064.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "103",
+        "name": "N's Klink",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/103.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "064",
+        "name": "N의 기어르",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_064.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 599
+    },
+    {
+      "jp": {
+        "number": "065",
+        "name": "Nのギギアル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/065.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "104",
+        "name": "N's Klang",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/104.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "065",
+        "name": "N의 기기어르",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_065.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 600
+    },
+    {
+      "jp": {
+        "number": "066",
+        "name": "Nのギギギアル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/066.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "105",
+        "name": "N's Klinklang",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/105.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "066",
+        "name": "N의 기기기어르",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_066.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 601
+    },
+    {
+      "jp": {
+        "number": "067",
+        "name": "マギアナ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/067.webp",
+        "rarity": "レア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "107",
+        "name": "Magearna",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/107.png",
+        "rarity": "Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "067",
+        "name": "마기아나",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_067.png",
+        "rarity": "레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 801
+    },
+    {
+      "jp": {
+        "number": "068",
+        "name": "ホップのアーマーガア",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/068.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "108",
+        "name": "Hop's Corviknight",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/108.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "068",
+        "name": "호브의 아머까오",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_068.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 823
+    },
+    {
+      "jp": {
+        "number": "069",
+        "name": "ホップのザシアンex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/069.webp",
+        "rarity": "ダブルレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "111",
+        "name": "Hop's Zacian ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/111.png",
+        "rarity": "Double Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "069",
+        "name": "호브의 자시안 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_069.png",
+        "rarity": "더블 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 888
+    },
+    {
+      "jp": {
+        "number": "070",
+        "name": "タツベイ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/070.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "112",
+        "name": "Bagon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/112.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "070",
+        "name": "아공이",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_070.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 371
+    },
+    {
+      "jp": {
+        "number": "071",
+        "name": "コモルー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/071.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "113",
+        "name": "Shelgon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/113.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "071",
+        "name": "쉘곤",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_071.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 372
+    },
+    {
+      "jp": {
+        "number": "072",
+        "name": "ボーマンダex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/072.webp",
+        "rarity": "ダブルレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "114",
+        "name": "Salamence ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/114.png",
+        "rarity": "Double Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "072",
+        "name": "보만다 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_072.png",
+        "rarity": "더블 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 373
+    },
+    {
+      "jp": {
+        "number": "073",
+        "name": "クリムガン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/073.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "115",
+        "name": "Druddigon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/115.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "073",
+        "name": "크리만",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_073.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 621
+    },
+    {
+      "jp": {
+        "number": "074",
+        "name": "Nのレシラム",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/074.webp",
+        "rarity": "レア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "116",
+        "name": "N's Reshiram",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/116.png",
+        "rarity": "Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "074",
+        "name": "N의 레시라무",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_074.png",
+        "rarity": "레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 643
+    },
+    {
+      "jp": {
+        "number": "075",
+        "name": "ホップのカビゴン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/075.webp",
+        "rarity": "レア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "117",
+        "name": "Hop's Snorlax",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/117.png",
+        "rarity": "Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "075",
+        "name": "호브의 잠만보",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_075.png",
+        "rarity": "레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 143
+    },
+    {
+      "jp": {
+        "number": "076",
+        "name": "オタチ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/076.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "118",
+        "name": "Sentret",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/118.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "076",
+        "name": "꼬리선",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_076.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 161
+    },
+    {
+      "jp": {
+        "number": "077",
+        "name": "オオタチ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/077.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "119",
+        "name": "Furret",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/119.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "077",
+        "name": "다꼬리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_077.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 162
+    },
+    {
+      "jp": {
+        "number": "078",
+        "name": "ノコッチ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/078.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "120",
+        "name": "Dunsparce",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/120.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "078",
+        "name": "노고치",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_078.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 206
+    },
+    {
+      "jp": {
+        "number": "079",
+        "name": "ノココッチex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/079.webp",
+        "rarity": "ダブルレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "121",
+        "name": "Dudunsparce ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/121.png",
+        "rarity": "Double Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "079",
+        "name": "노고고치 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_079.png",
+        "rarity": "더블 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 982
+    },
+    {
+      "jp": {
+        "number": "080",
+        "name": "オンバット",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/080.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "127",
+        "name": "Noibat",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/127.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "080",
+        "name": "음뱃",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_080.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 714
+    },
+    {
+      "jp": {
+        "number": "081",
+        "name": "オンバーン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/081.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "128",
+        "name": "Noivern",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/128.png",
+        "rarity": "Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "081",
+        "name": "음번",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_081.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 715
+    },
+    {
+      "jp": {
+        "number": "082",
+        "name": "ネッコアラ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/082.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "129",
+        "name": "Komala",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/129.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "082",
+        "name": "자말라",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_082.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 775
+    },
+    {
+      "jp": {
+        "number": "083",
+        "name": "ホップのココガラ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/083.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "133",
+        "name": "Hop's Rookidee",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/133.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "083",
+        "name": "호브의 파라꼬",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_083.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 821
+    },
+    {
+      "jp": {
+        "number": "084",
+        "name": "ホップのアオガラス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/084.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "134",
+        "name": "Hop's Corvisquire",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/134.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "084",
+        "name": "호브의 파크로우",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_084.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 822
+    },
+    {
+      "jp": {
+        "number": "085",
+        "name": "ホップのウールー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/085.webp",
+        "rarity": "コモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "135",
+        "name": "Hop's Wooloo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/135.png",
+        "rarity": "Common",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "085",
+        "name": "호브의 우르",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_085.png",
+        "rarity": "커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 831
+    },
+    {
+      "jp": {
+        "number": "086",
+        "name": "ホップのバイウールー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/086.webp",
+        "rarity": "レア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "136",
+        "name": "Hop's Dubwool",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/136.png",
+        "rarity": "Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "086",
+        "name": "호브의 배우르",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_086.png",
+        "rarity": "레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 832
+    },
+    {
+      "jp": {
+        "number": "087",
+        "name": "ホップのウッウ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/087.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "138",
+        "name": "Hop's Cramorant",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/138.png",
+        "rarity": "Uncommon",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "087",
+        "name": "호브의 윽우지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_087.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": 845
+    },
+    {
+      "jp": {
+        "number": "088",
+        "name": "いいきずぐすり",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/088.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "089",
+        "name": "대체 티켓",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_089.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "089",
+        "name": "Nのポイントアップ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/089.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "088",
+        "name": "N의 포인트업",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_088.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "090",
+        "name": "とりかえチケット",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/090.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "090",
+        "name": "좋은상처약",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_090.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "091",
+        "name": "ホップのバッグ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/091.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "091",
+        "name": "호브의 가방",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_091.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "092",
+        "name": "ホップのこだわりハチマキ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/092.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "093",
+        "name": "호브의 구애머리띠",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_093.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "093",
+        "name": "リーリエのしんじゅ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/093.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "092",
+        "name": "릴리에의 진주",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_092.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "094",
+        "name": "アイリスの闘志",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/094.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "095",
+        "name": "아이리스의 투지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_095.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "095",
+        "name": "怖いお兄さん",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/095.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "094",
+        "name": "무서운 청년",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_094.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "096",
+        "name": "タケシのスカウト",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/096.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "096",
+        "name": "웅의 스카우트",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_096.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "097",
+        "name": "Nの城",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/097.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "097",
+        "name": "N의 성",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_097.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "098",
+        "name": "ハッコウシティ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/098.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "098",
+        "name": "누룩스시티",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_098.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "099",
+        "name": "ハロンタウン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/099.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "099",
+        "name": "펄롱마을",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_099.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "100",
+        "name": "スパイクエネルギー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/100.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "100",
+        "name": "스파이크 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_100.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "101",
+        "name": "マラカッチ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/101.webp",
+        "rarity": "アートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "160",
+        "name": "Maractus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/160.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "101",
+        "name": "마라카치",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_101.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 556
+    },
+    {
+      "jp": {
+        "number": "102",
+        "name": "フリーザー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/102.webp",
+        "rarity": "アートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "161",
+        "name": "Articuno",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/161.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "102",
+        "name": "프리져",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_102.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 144
+    },
+    {
+      "jp": {
+        "number": "103",
+        "name": "ホエルオー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/103.webp",
+        "rarity": "アートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "162",
+        "name": "Wailord",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/162.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "103",
+        "name": "고래왕",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_103.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 321
+    },
+    {
+      "jp": {
+        "number": "104",
+        "name": "ナンジャモのタイカイデン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/104.webp",
+        "rarity": "アートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "163",
+        "name": "Iono's Kilowattrel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/163.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "104",
+        "name": "모야모의 찌리비크",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_104.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 941
+    },
+    {
+      "jp": {
+        "number": "105",
+        "name": "リーリエのアブリボン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/105.webp",
+        "rarity": "None",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "164",
+        "name": "Lillie's Ribombee",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/164.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "105",
+        "name": "릴리에의 에리본",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_105.png",
+        "rarity": "None",
+        "setId": "kr-sv9"
+      },
+      "dex": 743
+    },
+    {
+      "jp": {
+        "number": "106",
+        "name": "ウリムー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/106.webp",
+        "rarity": "アートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "165",
+        "name": "Swinub",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/165.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "106",
+        "name": "꾸꾸리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_106.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 220
+    },
+    {
+      "jp": {
+        "number": "107",
+        "name": "ルガルガン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/107.webp",
+        "rarity": "アートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "166",
+        "name": "Lycanroc",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/166.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "107",
+        "name": "루가루암",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_107.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 745
+    },
+    {
+      "jp": {
+        "number": "108",
+        "name": "Nのゾロア",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/108.webp",
+        "rarity": "アートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "108",
+        "name": "N의 조로아",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_108.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 570
+    },
+    {
+      "jp": {
+        "number": "109",
+        "name": "Nのレシラム",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/109.webp",
+        "rarity": "アートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "167",
+        "name": "N's Reshiram",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/167.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "109",
+        "name": "N의 레시라무",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_109.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 643
+    },
+    {
+      "jp": {
+        "number": "110",
+        "name": "オオタチ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/110.webp",
+        "rarity": "アートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "168",
+        "name": "Furret",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/168.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "110",
+        "name": "다꼬리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_110.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 162
+    },
+    {
+      "jp": {
+        "number": "111",
+        "name": "オンバット",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/111.webp",
+        "rarity": "アートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "169",
+        "name": "Noibat",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/169.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "111",
+        "name": "음뱃",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_111.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 714
+    },
+    {
+      "jp": {
+        "number": "112",
+        "name": "ホップのウールー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/112.webp",
+        "rarity": "アートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "170",
+        "name": "Hop's Wooloo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/170.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "112",
+        "name": "호브의 우르",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_112.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 831
+    },
+    {
+      "jp": {
+        "number": "113",
+        "name": "ボルケニオンex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/113.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "171",
+        "name": "Volcanion ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/171.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "113",
+        "name": "볼케니온 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_113.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 721
+    },
+    {
+      "jp": {
+        "number": "114",
+        "name": "ナンジャモのハラバリーex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/114.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "172",
+        "name": "Iono's Bellibolt ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/172.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "114",
+        "name": "모야모의 찌리배리 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_114.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 939
+    },
+    {
+      "jp": {
+        "number": "115",
+        "name": "リーリエのピッピex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/115.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "173",
+        "name": "Lillie's Clefairy ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/173.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "115",
+        "name": "릴리에의 삐삐 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_115.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 35
+    },
+    {
+      "jp": {
+        "number": "116",
+        "name": "マンムーex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/116.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "174",
+        "name": "Mamoswine ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/174.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "116",
+        "name": "맘모꾸리 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_116.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 473
+    },
+    {
+      "jp": {
+        "number": "117",
+        "name": "Nのゾロアークex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/117.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "175",
+        "name": "N's Zoroark ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/175.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "117",
+        "name": "N의 조로아크 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_117.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 571
+    },
+    {
+      "jp": {
+        "number": "118",
+        "name": "ホップのザシアンex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/118.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "176",
+        "name": "Hop's Zacian ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/176.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "118",
+        "name": "호브의 자시안 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_118.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 888
+    },
+    {
+      "jp": {
+        "number": "119",
+        "name": "ボーマンダex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/119.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "177",
+        "name": "Salamence ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/177.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "119",
+        "name": "보만다 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_119.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 373
+    },
+    {
+      "jp": {
+        "number": "120",
+        "name": "ノココッチex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/120.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "178",
+        "name": "Dudunsparce ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/178.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "120",
+        "name": "노고고치 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_120.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 982
+    },
+    {
+      "jp": {
+        "number": "121",
+        "name": "アイリスの闘志",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/121.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "122",
+        "name": "아이리스의 투지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_122.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "122",
+        "name": "怖いお兄さん",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/122.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "121",
+        "name": "무서운 청년",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_121.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "123",
+        "name": "タケシのスカウト",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/123.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "123",
+        "name": "웅의 스카우트",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_123.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "124",
+        "name": "ボルケニオンex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/124.webp",
+        "rarity": "スペシャルアートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "182",
+        "name": "Volcanion ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/182.png",
+        "rarity": "Special Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "124",
+        "name": "볼케니온 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_124.png",
+        "rarity": "스페셜 아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 721
+    },
+    {
+      "jp": {
+        "number": "125",
+        "name": "ナンジャモのハラバリーex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/125.webp",
+        "rarity": "スペシャルアートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "183",
+        "name": "Iono's Bellibolt ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/183.png",
+        "rarity": "Special Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "125",
+        "name": "모야모의 찌리배리 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_125.png",
+        "rarity": "스페셜 아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 939
+    },
+    {
+      "jp": {
+        "number": "126",
+        "name": "リーリエのピッピex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/126.webp",
+        "rarity": "スペシャルアートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "184",
+        "name": "Lillie's Clefairy ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/184.png",
+        "rarity": "Special Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "126",
+        "name": "릴리에의 삐삐 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_126.png",
+        "rarity": "스페셜 아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 35
+    },
+    {
+      "jp": {
+        "number": "127",
+        "name": "Nのゾロアークex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/127.webp",
+        "rarity": "スペシャルアートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "185",
+        "name": "N's Zoroark ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/185.png",
+        "rarity": "Special Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "127",
+        "name": "N의 조로아크 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_127.png",
+        "rarity": "스페셜 아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 571
+    },
+    {
+      "jp": {
+        "number": "128",
+        "name": "ホップのザシアンex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/128.webp",
+        "rarity": "スペシャルアートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "186",
+        "name": "Hop's Zacian ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/186.png",
+        "rarity": "Special Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "128",
+        "name": "호브의 자시안 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_128.png",
+        "rarity": "스페셜 아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 888
+    },
+    {
+      "jp": {
+        "number": "129",
+        "name": "ボーマンダex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/129.webp",
+        "rarity": "スペシャルアートレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "187",
+        "name": "Salamence ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/187.png",
+        "rarity": "Special Illustration Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "129",
+        "name": "보만다 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_129.png",
+        "rarity": "스페셜 아트 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 373
+    },
+    {
+      "jp": {
+        "number": "130",
+        "name": "ナンジャモのハラバリーex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/130.webp",
+        "rarity": "ウルトラレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "188",
+        "name": "Iono's Bellibolt ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/188.png",
+        "rarity": "Hyper Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "130",
+        "name": "모야모의 찌리배리 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_130.png",
+        "rarity": "울트라 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 939
+    },
+    {
+      "jp": {
+        "number": "131",
+        "name": "Nのゾロアークex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/131.webp",
+        "rarity": "ウルトラレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": {
+        "number": "189",
+        "name": "N's Zoroark ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/189.png",
+        "rarity": "Hyper Rare",
+        "setId": "sv9"
+      },
+      "kr": {
+        "number": "131",
+        "name": "N의 조로아크 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_131.png",
+        "rarity": "울트라 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": 571
+    },
+    {
+      "jp": {
+        "number": "132",
+        "name": "スパイクエネルギー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/ja/small/jp-sv-journey-together/132.webp",
+        "rarity": "ウルトラレア",
+        "setId": "jp-sv-journey-together"
+      },
+      "en": null,
+      "kr": {
+        "number": "132",
+        "name": "스파이크 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV9/SV9_132.png",
+        "rarity": "울트라 레어",
+        "setId": "kr-sv9"
+      },
+      "dex": null
+    }
+  ],
+  "tail": {
+    "enOnly": [
+      {
+        "number": "6",
+        "name": "Petilil",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/6.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 548,
+        "jpElsewhere": true
+      },
+      {
+        "number": "7",
+        "name": "Lilligant",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/7.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 549,
+        "jpElsewhere": true
+      },
+      {
+        "number": "10",
+        "name": "Foongus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/10.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 590,
+        "jpElsewhere": true
+      },
+      {
+        "number": "11",
+        "name": "Amoonguss ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/11.png",
+        "rarity": "Double Rare",
+        "setId": "sv9",
+        "dex": 591,
+        "jpElsewhere": true
+      },
+      {
+        "number": "14",
+        "name": "Durant",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/14.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 632,
+        "jpElsewhere": true
+      },
+      {
+        "number": "15",
+        "name": "Virizion",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/15.png",
+        "rarity": "Uncommon",
+        "setId": "sv9",
+        "dex": 640,
+        "jpElsewhere": true
+      },
+      {
+        "number": "19",
+        "name": "Nymble",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/19.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 919,
+        "jpElsewhere": true
+      },
+      {
+        "number": "22",
+        "name": "Torchic",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/22.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 255,
+        "jpElsewhere": true
+      },
+      {
+        "number": "23",
+        "name": "Combusken",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/23.png",
+        "rarity": "Uncommon",
+        "setId": "sv9",
+        "dex": 256,
+        "jpElsewhere": true
+      },
+      {
+        "number": "24",
+        "name": "Blaziken ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/24.png",
+        "rarity": "Double Rare",
+        "setId": "sv9",
+        "dex": 257,
+        "jpElsewhere": true
+      },
+      {
+        "number": "25",
+        "name": "Torkoal",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/25.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 324,
+        "jpElsewhere": true
+      },
+      {
+        "number": "28",
+        "name": "Larvesta",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/28.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 636,
+        "jpElsewhere": true
+      },
+      {
+        "number": "29",
+        "name": "Volcarona",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/29.png",
+        "rarity": "Uncommon",
+        "setId": "sv9",
+        "dex": 637,
+        "jpElsewhere": true
+      },
+      {
+        "number": "30",
+        "name": "Reshiram ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/30.png",
+        "rarity": "Double Rare",
+        "setId": "sv9",
+        "dex": 643,
+        "jpElsewhere": true
+      },
+      {
+        "number": "38",
+        "name": "Wingull",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/38.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 278,
+        "jpElsewhere": true
+      },
+      {
+        "number": "39",
+        "name": "Pelipper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/39.png",
+        "rarity": "Uncommon",
+        "setId": "sv9",
+        "dex": 279,
+        "jpElsewhere": true
+      },
+      {
+        "number": "42",
+        "name": "Regice",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/42.png",
+        "rarity": "Uncommon",
+        "setId": "sv9",
+        "dex": 378,
+        "jpElsewhere": true
+      },
+      {
+        "number": "43",
+        "name": "Veluza ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/43.png",
+        "rarity": "Double Rare",
+        "setId": "sv9",
+        "dex": 976,
+        "jpElsewhere": true
+      },
+      {
+        "number": "44",
+        "name": "Alolan Geodude",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/44.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 74,
+        "jpElsewhere": true
+      },
+      {
+        "number": "45",
+        "name": "Alolan Graveler",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/45.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 75,
+        "jpElsewhere": true
+      },
+      {
+        "number": "46",
+        "name": "Alolan Golem",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/46.png",
+        "rarity": "Uncommon",
+        "setId": "sv9",
+        "dex": 76,
+        "jpElsewhere": true
+      },
+      {
+        "number": "50",
+        "name": "Togedemaru",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/50.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 777,
+        "jpElsewhere": true
+      },
+      {
+        "number": "51",
+        "name": "Tapu Koko ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/51.png",
+        "rarity": "Double Rare",
+        "setId": "sv9",
+        "dex": 785,
+        "jpElsewhere": true
+      },
+      {
+        "number": "57",
+        "name": "Alolan Marowak",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/57.png",
+        "rarity": "Uncommon",
+        "setId": "sv9",
+        "dex": 105,
+        "jpElsewhere": true
+      },
+      {
+        "number": "65",
+        "name": "Oricorio",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/65.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 741,
+        "jpElsewhere": true
+      },
+      {
+        "number": "69",
+        "name": "Mimikyu ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/69.png",
+        "rarity": "Double Rare",
+        "setId": "sv9",
+        "dex": 778,
+        "jpElsewhere": true
+      },
+      {
+        "number": "70",
+        "name": "Dhelmise",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/70.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 781,
+        "jpElsewhere": true
+      },
+      {
+        "number": "71",
+        "name": "Impidimp",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/71.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 859,
+        "jpElsewhere": true
+      },
+      {
+        "number": "72",
+        "name": "Morgrem",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/72.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 860,
+        "jpElsewhere": true
+      },
+      {
+        "number": "73",
+        "name": "Grimmsnarl",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/73.png",
+        "rarity": "Uncommon",
+        "setId": "sv9",
+        "dex": 861,
+        "jpElsewhere": true
+      },
+      {
+        "number": "74",
+        "name": "Milcery",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/74.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 868,
+        "jpElsewhere": true
+      },
+      {
+        "number": "75",
+        "name": "Alcremie ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/75.png",
+        "rarity": "Double Rare",
+        "setId": "sv9",
+        "dex": 869,
+        "jpElsewhere": true
+      },
+      {
+        "number": "76",
+        "name": "Cubone",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/76.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 104,
+        "jpElsewhere": true
+      },
+      {
+        "number": "88",
+        "name": "Toedscool",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/88.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 948,
+        "jpElsewhere": true
+      },
+      {
+        "number": "89",
+        "name": "Toedscruel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/89.png",
+        "rarity": "Uncommon",
+        "setId": "sv9",
+        "dex": 949,
+        "jpElsewhere": true
+      },
+      {
+        "number": "93",
+        "name": "Paldean Wooper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/93.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 194,
+        "jpElsewhere": true
+      },
+      {
+        "number": "94",
+        "name": "Paldean Clodsire ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/94.png",
+        "rarity": "Double Rare",
+        "setId": "sv9",
+        "dex": 980,
+        "jpElsewhere": true
+      },
+      {
+        "number": "101",
+        "name": "Bombirdier",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/101.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 962,
+        "jpElsewhere": true
+      },
+      {
+        "number": "106",
+        "name": "Galarian Stunfisk",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/106.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 618,
+        "jpElsewhere": true
+      },
+      {
+        "number": "109",
+        "name": "Cufant",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/109.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 878,
+        "jpElsewhere": true
+      },
+      {
+        "number": "110",
+        "name": "Copperajah",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/110.png",
+        "rarity": "Uncommon",
+        "setId": "sv9",
+        "dex": 879,
+        "jpElsewhere": true
+      },
+      {
+        "number": "122",
+        "name": "Kecleon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/122.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 352,
+        "jpElsewhere": true
+      },
+      {
+        "number": "123",
+        "name": "Tropius",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/123.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 357,
+        "jpElsewhere": true
+      },
+      {
+        "number": "124",
+        "name": "Audino",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/124.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 531,
+        "jpElsewhere": true
+      },
+      {
+        "number": "125",
+        "name": "Minccino",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/125.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 572,
+        "jpElsewhere": true
+      },
+      {
+        "number": "126",
+        "name": "Cinccino",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/126.png",
+        "rarity": "Uncommon",
+        "setId": "sv9",
+        "dex": 573,
+        "jpElsewhere": true
+      },
+      {
+        "number": "130",
+        "name": "Drampa",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/130.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 780,
+        "jpElsewhere": true
+      },
+      {
+        "number": "131",
+        "name": "Skwovet",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/131.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 819,
+        "jpElsewhere": true
+      },
+      {
+        "number": "137",
+        "name": "Cramorant",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/137.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 845,
+        "jpElsewhere": true
+      },
+      {
+        "number": "139",
+        "name": "Lechonk",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/139.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 915,
+        "jpElsewhere": true
+      },
+      {
+        "number": "140",
+        "name": "Oinkologne",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/140.png",
+        "rarity": "Uncommon",
+        "setId": "sv9",
+        "dex": 916,
+        "jpElsewhere": true
+      },
+      {
+        "number": "141",
+        "name": "Squawkabilly",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-journey-together/en/small/sv9/141.png",
+        "rarity": "Common",
+        "setId": "sv9",
+        "dex": 931,
+        "jpElsewhere": true
+      }
+    ],
+    "krOnly": [],
+    "enKr": []
+  }
+}

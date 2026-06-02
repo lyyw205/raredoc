@@ -101,6 +101,26 @@ const CONFIG: Record<string, Cfg> = {
     jp: ["jp-sv-prismatic-evolutions"], kr: ["kr-sv8a"],
     krMirror: { "kr-sv8a": "jp-sv-prismatic-evolutions" }, enNative: ["sv8pt5"], krMirrorAll: true,
   },
+  "sv-journey-together": {
+    nameKo: "배틀파트너즈", nameEn: "Journey Together",
+    jp: ["jp-sv-journey-together"], kr: ["kr-sv9"],
+    krMirror: { "kr-sv9": "jp-sv-journey-together" }, enNative: ["sv9"], krMirrorAll: true,
+  },
+  "sv-heatwave-arena": {
+    nameKo: "열풍의 아레나", nameEn: "Heat Wave Arena",
+    jp: ["jp-sv-heatwave-arena"], kr: ["kr-sv9a"],
+    krMirror: { "kr-sv9a": "jp-sv-heatwave-arena" }, enNative: null, krMirrorAll: true, // EN 네이티브 없음 → 교차그룹
+  },
+  "sv-destined-rivals": {
+    nameKo: "로켓단의 영광", nameEn: "Destined Rivals",
+    jp: ["jp-sv-destined-rivals"], kr: ["kr-sv10"],
+    krMirror: { "kr-sv10": "jp-sv-destined-rivals" }, enNative: ["sv10"], krMirrorAll: true,
+  },
+  "sv-black-bolt-white-flare": {
+    nameKo: "블랙볼트 + 화이트플레어", nameEn: "Black Bolt & White Flare",
+    jp: ["jp-tcg-SV11B", "jp-tcg-SV11W"], kr: ["kr-sv11b", "kr-sv11w"],
+    krMirror: { "kr-sv11b": "jp-tcg-SV11B", "kr-sv11w": "jp-tcg-SV11W" }, enNative: ["zsv10pt5", "rsv10pt5"], krMirrorAll: true,
+  },
 };
 
 type Row = {

@@ -17,6 +17,10 @@ import stellarCrown from "@/data/group-sv-stellar-crown.json";
 import paradiseDragona from "@/data/group-sv-paradise-dragona.json";
 import surgingSparks from "@/data/group-sv-surging-sparks.json";
 import prismaticEvolutions from "@/data/group-sv-prismatic-evolutions.json";
+import journeyTogether from "@/data/group-sv-journey-together.json";
+import heatwaveArena from "@/data/group-sv-heatwave-arena.json";
+import destinedRivals from "@/data/group-sv-destined-rivals.json";
+import blackBoltWhiteFlare from "@/data/group-sv-black-bolt-white-flare.json";
 
 // 그룹별 EN/JP/KR 그룹핑 카드 UI — JP 앵커(번호순) + 언어탭 + 영판전용 꼬리.
 // 카드 도감(DexCatalog)에서 해당 그룹 선택 시 인-플레이스로 렌더. 데이터는 확정 그룹핑 JSON.
@@ -37,6 +41,10 @@ const DATA: Record<string, GroupData> = {
   "sv-paradise-dragona": paradiseDragona as unknown as GroupData,
   "sv-surging-sparks": surgingSparks as unknown as GroupData,
   "sv-prismatic-evolutions": prismaticEvolutions as unknown as GroupData,
+  "sv-journey-together": journeyTogether as unknown as GroupData,
+  "sv-heatwave-arena": heatwaveArena as unknown as GroupData,
+  "sv-destined-rivals": destinedRivals as unknown as GroupData,
+  "sv-black-bolt-white-flare": blackBoltWhiteFlare as unknown as GroupData,
 };
 export const GROUPED_GROUP_IDS = new Set(Object.keys(DATA));
 

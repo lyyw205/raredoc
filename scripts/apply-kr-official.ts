@@ -38,6 +38,11 @@ const CFG: Record<string, { jp: string; json: string; maxNum?: number }> = {
   "kr-sv7a": { jp: "jp-sv-paradise-dragona", json: `${DIR}/kr-official-sv7a.json` },
   "kr-sv8": { jp: "jp-sv-surging-sparks", json: `${DIR}/kr-official-sv8.json` },
   "kr-sv8a": { jp: "jp-sv-prismatic-evolutions", json: `${DIR}/kr-official-sv8a.json` },
+  "kr-sv9": { jp: "jp-sv-journey-together", json: `${DIR}/kr-official-sv9.json` },
+  "kr-sv9a": { jp: "jp-sv-heatwave-arena", json: `${DIR}/kr-official-sv9a.json` },
+  "kr-sv10": { jp: "jp-sv-destined-rivals", json: `${DIR}/kr-official-sv10.json` },
+  "kr-sv11b": { jp: "jp-tcg-SV11B", json: `${DIR}/kr-official-sv11b.json` },
+  "kr-sv11w": { jp: "jp-tcg-SV11W", json: `${DIR}/kr-official-sv11w.json` },
 };
 type Off = { number: string; koName: string; illustrator: string | null; image: string | null; numInt: number };
 type Jp = { numInt: number; name: string; lcid: string; illus: string | null; dex: number | null; supertype: string | null };
