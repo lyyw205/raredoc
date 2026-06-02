@@ -92,7 +92,7 @@ async function main() {
   console.log(`  ⚠️  ambiguous (JP형제 2개+ · 심판) : ${buckets.ambiguous.length} (${pct(buckets.ambiguous.length)})`);
   console.log(`  ❌ no_match (형제 없음)           : ${buckets.no_match.length} (${pct(buckets.no_match.length)})`);
   console.log(`  ⛔ unkeyed (setGroup/번호無)      : ${buckets.unkeyed.length} (${pct(buckets.unkeyed.length)})`);
-  buckets.unique = buckets.jp_unique; // 아래 샘플/Top12 재사용
+  // buckets.jp_unique 를 아래 샘플/Top12 에서 직접 사용
 
   // 샘플: unique 매칭이 진짜 맞는지 형제 이름 동반 출력
   async function sampleWithSibling(rs: Row[], label: string, n = 5) {
@@ -106,14 +106,14 @@ async function main() {
       console.log(`KR "${r.kr_name}" #${r.num} [${r.sg}] → ${sib.map(s=>`${s.region}:"${s.name}"`).join(", ")}`);
     }
   }
-  await sampleWithSibling(buckets.unique, "unique(확신)");
+  await sampleWithSibling(buckets.jp_unique, "unique(확신)");
   await sampleWithSibling(buckets.ambiguous, "ambiguous(애매)");
   console.log("\n--- unkeyed 샘플(매칭불가) ---");
   for (const r of buckets.unkeyed.slice(0, 5)) console.log(`KR "${r.kr_name}" #${r.num ?? "?"} sg=${r.sg ?? "null"}`);
 
   // setGroup별 unique 매칭 분포 상위
   const bySg = new Map<string, number>();
-  for (const r of buckets.unique) bySg.set(r.sg!, (bySg.get(r.sg!) ?? 0) + 1);
+  for (const r of buckets.jp_unique) bySg.set(r.sg!, (bySg.get(r.sg!) ?? 0) + 1);
   const top = [...bySg.entries()].sort((a, b) => b[1] - a[1]).slice(0, 12);
   console.log("\n--- unique 매칭 많은 소속카드팩 Top12 ---");
   for (const [sg, c] of top) console.log(`  ${sg.padEnd(20)} ${c}`);

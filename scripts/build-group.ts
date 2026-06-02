@@ -1,0 +1,188 @@
+/**
+ * 그룹 단위 EN/JP/KR 그룹핑 → 렌더용 JSON (읽기전용, DB 무변경). 일반화 빌더.
+ *
+ * 노출 스펙(D1/D2/D3 + 2b):
+ *   - JP 앵커(분할 세트, 번호순) | KR↔JP: 포켓몬=번호 / 트레이너=일러+세트+번호순
+ *   - EN↔JP: 그룹에 EN 네이티브 세트 있으면 그룹내 dex+지문(tier순위),
+ *            없으면 전 EN 세트 교차검색(dex+일러+형태, tier 근접)
+ *   - 미매칭 EN(네이티브만) → 영판전용 꼬리
+ *
+ * 실행: npx tsx scripts/build-group.ts <groupId>   (sv-base | sv-triplet-beat)
+ * 출력: src/data/group-<groupId>.json
+ */
+import "dotenv/config";
+import { prisma } from "../src/lib/prisma";
+import { writeFileSync, mkdirSync } from "node:fs";
+import { join } from "node:path";
+
+const POKE = ["Pokémon", "Pokemon"];
+
+type Cfg = { nameKo: string; nameEn: string; jp: string[]; kr: string[]; krMirror: Record<string, string>; enNative: string[] | null; krMirrorAll?: boolean };
+// krMirrorAll: KR 세트가 JP 정수번호 완전미러(트레이너 포함)일 때 true — 모든 카드 번호로 매칭.
+//   (일반 KR은 트레이너 번호가 JP와 어긋나 일러스트레이터 페어링 필요 → false/미지정)
+const CONFIG: Record<string, Cfg> = {
+  "sv-base": {
+    nameKo: "스칼렛 ex + 바이올렛 ex", nameEn: "Scarlet & Violet",
+    jp: ["jp-tcg-SV1S", "jp-tcg-SV1V"], kr: ["kr-sv1s", "kr-sv1v"],
+    krMirror: { "kr-sv1s": "jp-tcg-SV1S", "kr-sv1v": "jp-tcg-SV1V" }, enNative: ["sv1"],
+  },
+  "sv-triplet-beat": {
+    nameKo: "트리플렛비트", nameEn: "Triplet Beat",
+    jp: ["jp-sv-triplet-beat"], kr: ["kr-sv1a"],
+    krMirror: { "kr-sv1a": "jp-sv-triplet-beat" }, enNative: null, // EN 네이티브 없음 → 교차그룹
+  },
+  "sv-paldea-evolved": {
+    nameKo: "스노해저드 + 클레이버스트", nameEn: "Paldea Evolved",
+    jp: ["jp-tcg-SV2P", "jp-tcg-SV2D"], kr: ["kr-sv2p", "kr-sv2d"],
+    krMirror: { "kr-sv2p": "jp-tcg-SV2P", "kr-sv2d": "jp-tcg-SV2D" }, enNative: ["sv2"], krMirrorAll: true,
+  },
+  "sv-paradox-rift": {
+    nameKo: "고대의 포효 + 미래의 일섬", nameEn: "Paradox Rift",
+    jp: ["jp-tcg-SV4K", "jp-tcg-SV4M"], kr: ["kr-sv4k", "kr-sv4m"],
+    krMirror: { "kr-sv4k": "jp-tcg-SV4K", "kr-sv4m": "jp-tcg-SV4M" }, enNative: ["sv4"], krMirrorAll: true,
+  },
+  "sv-151": {
+    nameKo: "포켓몬 카드 151", nameEn: "151",
+    jp: ["jp-sv-151"], kr: ["kr-sv-151"],
+    krMirror: { "kr-sv-151": "jp-sv-151" }, enNative: ["sv3pt5"], krMirrorAll: true,
+  },
+  "sv-obsidian-flames": {
+    nameKo: "흑염의 지배자", nameEn: "Obsidian Flames",
+    jp: ["jp-sv-obsidian-flames"], kr: ["kr-sv3"],
+    krMirror: { "kr-sv3": "jp-sv-obsidian-flames" }, enNative: ["sv3"], krMirrorAll: true,
+  },
+  "sv-raging-surf": {
+    nameKo: "레이징서프", nameEn: "Raging Surf",
+    jp: ["jp-sv-raging-surf"], kr: ["kr-sv3a"],
+    krMirror: { "kr-sv3a": "jp-sv-raging-surf" }, enNative: null, krMirrorAll: true, // EN 네이티브 없음 → 교차그룹
+  },
+  "sv-paldean-fates": {
+    nameKo: "샤이니트레저 ex", nameEn: "Paldean Fates",
+    jp: ["jp-sv-paldean-fates"], kr: ["kr-sv4a"],
+    krMirror: { "kr-sv4a": "jp-sv-paldean-fates" }, enNative: ["sv4pt5"], krMirrorAll: true,
+  },
+  "sv-temporal-forces": {
+    nameKo: "와일드포스 + 사이버저지", nameEn: "Temporal Forces",
+    jp: ["jp-tcg-SV5K", "jp-tcg-SV5M"], kr: ["kr-sv5k", "kr-sv5m"],
+    krMirror: { "kr-sv5k": "jp-tcg-SV5K", "kr-sv5m": "jp-tcg-SV5M" }, enNative: ["sv5"], krMirrorAll: true,
+  },
+  "sv-crimson-haze": {
+    nameKo: "크림슨헤이즈", nameEn: "Crimson Haze",
+    jp: ["jp-sv-crimson-haze"], kr: ["kr-sv5a"],
+    krMirror: { "kr-sv5a": "jp-sv-crimson-haze" }, enNative: null, krMirrorAll: true, // EN 네이티브 없음 → 교차그룹
+  },
+};
+
+type Row = {
+  cid: string; lcid: string; setId: string; region: string; number: string; numInt: number; name: string;
+  image: string | null; dex: number | null; illus: string | null; tier: number | null; subtypes: string; supertype: string | null; rarity: string | null;
+};
+const sel = {
+  id: true, logicalCardId: true, setId: true, region: true, number: true, numberInt: true, name: true, imageSmall: true, imageLarge: true,
+  logicalCard: { select: { pokedexNumbers: true, illustrator: true, subtypes: true, supertype: true, rarity: { select: { tier: true, nameKo: true, nameJa: true, nameEn: true, code: true } } } },
+} as const;
+function toRow(l: any): Row {
+  return {
+    cid: l.id, lcid: l.logicalCardId, setId: l.setId, region: l.region, number: l.number, numInt: l.numberInt ?? (parseInt(l.number.replace(/\D/g, "")) || 0),
+    name: l.name, image: l.imageSmall ?? l.imageLarge ?? null,
+    dex: l.logicalCard.pokedexNumbers?.[0] ?? null, illus: l.logicalCard.illustrator,
+    tier: l.logicalCard.rarity?.tier ?? null, subtypes: [...(l.logicalCard.subtypes ?? [])].sort().join(","), supertype: l.logicalCard.supertype,
+    rarity: l.region === "JP" ? l.logicalCard.rarity?.nameJa ?? l.logicalCard.rarity?.nameEn ?? l.logicalCard.rarity?.code ?? null
+      : l.region === "KR" ? l.logicalCard.rarity?.nameKo ?? l.logicalCard.rarity?.nameEn ?? l.logicalCard.rarity?.code ?? null
+      : l.logicalCard.rarity?.nameEn ?? l.logicalCard.rarity?.code ?? null,
+  };
+}
+const load = async (setIds: string[]) => (await prisma.cardLocale.findMany({ where: { setId: { in: setIds } }, select: sel })).map(toRow);
+const pub = (r: Row | undefined) => r ? { number: r.number, name: r.name, image: r.image, rarity: r.rarity, setId: r.setId } : null;
+
+const tfp = (r: Row) => `${(r.illus ?? "").trim().toLowerCase()}|${r.tier}|${r.subtypes}`;     // 트레이너 지문
+const fpP = (r: Row) => `${r.dex}|${(r.illus ?? "").trim().toLowerCase()}|${r.subtypes}`;       // 포켓몬 dex버킷(tier 제외)
+const byNum = (a: Row, b: Row) => a.numInt - b.numInt;
+const byTier = (a: Row, b: Row) => (a.tier ?? 0) - (b.tier ?? 0) || a.numInt - b.numInt;
+
+function bucketPair(src: Row[], jp: Row[], srcKey: (r: Row) => string, jpKey: (r: Row) => string, out: Map<string, Row>, cmp: (a: Row, b: Row) => number) {
+  const push = (m: Map<string, Row[]>, k: string, v: Row) => { const a = m.get(k) ?? []; a.push(v); m.set(k, a); };
+  const jb = new Map<string, Row[]>(); for (const j of jp) push(jb, jpKey(j), j);
+  const sb = new Map<string, Row[]>(); for (const s of src) push(sb, srcKey(s), s);
+  for (const [k, sl] of sb) {
+    const jl = (jb.get(k) ?? []).slice().sort(cmp);
+    const ss = sl.slice().sort(cmp);
+    const n = Math.min(ss.length, jl.length);
+    for (let i = 0; i < n; i++) out.set(jl[i].cid, ss[i]);
+  }
+}
+
+async function main() {
+  const groupId = process.argv[2];
+  const cfg = CONFIG[groupId];
+  if (!cfg) { console.error(`알 수 없는 groupId. 가능: ${Object.keys(CONFIG).join(", ")}`); process.exit(1); }
+  const isPoke = (r: Row) => POKE.includes(r.supertype ?? "") && r.dex != null;
+
+  const jp = await load(cfg.jp);
+  const kr = await load(cfg.kr);
+  const crossGroup = !cfg.enNative;
+  let en: Row[];
+  if (cfg.enNative) en = await load(cfg.enNative);
+  else {
+    const dexes = [...new Set(jp.filter(isPoke).map((r) => r.dex))] as number[];
+    en = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE }, pokedexNumbers: { hasSome: dexes } } }, select: sel })).map(toRow);
+  }
+
+  // ── KR ↔ JP ──
+  const krForJp = new Map<string, Row>();
+  if (cfg.krMirrorAll) {
+    // KR 은 DB 에서 JP 앵커 LC 로 병합됨(공식 번호가 JP 와 달라도 정체성으로 매핑 완료) → 공유 logicalCardId 로 읽음
+    const krByLcid = new Map<string, Row>(); for (const k of kr) krByLcid.set(k.lcid, k);
+    for (const j of jp) { const k = krByLcid.get(j.lcid); if (k) krForJp.set(j.cid, k); }
+  } else {
+    const jpByKey = new Map(jp.filter(isPoke).map((r) => [`${r.setId}|${r.number}`, r]));
+    for (const k of kr) if (isPoke(k)) { const j = jpByKey.get(`${cfg.krMirror[k.setId]}|${k.number}`); if (j) krForJp.set(j.cid, k); }
+    bucketPair(kr.filter((r) => !isPoke(r)), jp.filter((r) => !isPoke(r)), (k) => `${cfg.krMirror[k.setId]}|${tfp(k)}`, (j) => `${j.setId}|${tfp(j)}`, krForJp, byNum);
+  }
+
+  // ── EN ↔ JP (포켓몬) ──
+  const enForJp = new Map<string, Row>();
+  const enUnmatched: Row[] = [];
+  if (!crossGroup) {
+    bucketPair(en.filter(isPoke), jp.filter(isPoke), fpP, fpP, enForJp, byTier);
+    const matchedCids = new Set([...enForJp.values()].map((r) => r.cid));
+    const jpDex = new Set(jp.filter(isPoke).map((r) => r.dex));
+    for (const e of en) if (isPoke(e) && !matchedCids.has(e.cid)) { if (jpDex.has(e.dex) || true) enUnmatched.push(e); }
+  } else {
+    // 교차그룹: JP 카드마다 (dex+일러+형태) 같은 EN 중 tier 가장 근접 1장
+    const enByBk = new Map<string, Row[]>(); for (const e of en) if (isPoke(e)) { const k = fpP(e); const a = enByBk.get(k) ?? []; a.push(e); enByBk.set(k, a); }
+    const used = new Set<string>();
+    for (const j of jp.filter(isPoke)) {
+      const cands = (enByBk.get(fpP(j)) ?? []).filter((c) => !used.has(c.cid));
+      if (!cands.length) continue;
+      cands.sort((a, b) => Math.abs((a.tier ?? 0) - (j.tier ?? 0)) - Math.abs((b.tier ?? 0) - (j.tier ?? 0)) || a.setId.localeCompare(b.setId));
+      enForJp.set(j.cid, cands[0]); used.add(cands[0].cid);
+    }
+  }
+
+  // ── 앵커(JP 세트순 → 번호순) ──
+  const setOrder = (s: string) => cfg.jp.indexOf(s);
+  const anchors = jp.slice().sort((a, b) => setOrder(a.setId) - setOrder(b.setId) || a.numInt - b.numInt).map((j) => ({
+    jp: pub(j), en: pub(enForJp.get(j.cid) ?? undefined), kr: pub(krForJp.get(j.cid) ?? undefined), dex: j.dex,
+  }));
+
+  // ── 꼬리(영판전용; 교차그룹은 없음) ──
+  const jpAllDex = crossGroup ? new Set<number>() : new Set((await prisma.cardLocale.findMany({ where: { region: "JP", logicalCard: { supertype: { in: POKE } } }, select: { logicalCard: { select: { pokedexNumbers: true } } } })).flatMap((l) => l.logicalCard.pokedexNumbers ?? []));
+  const seen = new Set<string>();
+  const enOnly = (crossGroup ? [] : enUnmatched).filter((e) => (seen.has(e.cid) ? false : (seen.add(e.cid), true)))
+    .sort((a, b) => a.numInt - b.numInt)
+    .map((e) => ({ ...pub(e), dex: e.dex, jpElsewhere: e.dex != null && jpAllDex.has(e.dex) }));
+
+  const payload = {
+    group: { id: groupId, nameKo: cfg.nameKo, nameEn: cfg.nameEn, crossGroupEN: crossGroup },
+    counts: { anchors: anchors.length, enMatched: enForJp.size, krMatched: krForJp.size, enOnly: enOnly.length },
+    anchors, tail: { enOnly, krOnly: [], enKr: [] },
+  };
+  mkdirSync(join(process.cwd(), "src", "data"), { recursive: true });
+  const out = join(process.cwd(), "src", "data", `group-${groupId}.json`);
+  writeFileSync(out, JSON.stringify(payload, null, 2));
+  console.log(`✅ ${out}`);
+  console.log(`[${groupId}] 앵커 ${anchors.length} | EN매칭 ${enForJp.size}${crossGroup ? "(교차그룹)" : ""} | KR매칭 ${krForJp.size} | 영판전용 ${enOnly.length}`);
+  await prisma.$disconnect();
+}
+main().catch((e) => { console.error(e); process.exit(1); });

@@ -4,6 +4,7 @@ import { useState, useMemo, useDeferredValue, useEffect, Fragment, type ReactNod
 import Link from "next/link";
 import { Search } from "lucide-react";
 import { RARITY_KO } from "@/lib/constants";
+import { GroupCards, GROUPED_GROUP_IDS } from "./GroupCards";
 import { getCardPrices, type CardPriceRow } from "@/lib/actions/getCardPrices";
 import { getCardDetail, type CardLocaleVariant, type CardInfo } from "@/lib/actions/getCardDetail";
 import { cardTier, tierFromGroup, categoryTier, categoryTierFromGroup } from "@/lib/cards/rarity";
@@ -1201,6 +1202,9 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
 
               {view === "mine" && <ProgressBar value={pct} />}
 
+              {GROUPED_GROUP_IDS.has(set.id) ? (
+                <div className="mt-3"><GroupCards groupId={set.id} /></div>
+              ) : (
               <div
                 className={`grid gap-1.5 ${view === "mine" ? "mt-1" : "mt-3"}`}
                 style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
@@ -1244,6 +1248,7 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
                   );
                 })}
               </div>
+              )}
             </section>
           );
         })()}

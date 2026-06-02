@@ -1,0 +1,4903 @@
+{
+  "group": {
+    "id": "sv-temporal-forces",
+    "nameKo": "와일드포스 + 사이버저지",
+    "nameEn": "Temporal Forces",
+    "crossGroupEN": false
+  },
+  "counts": {
+    "anchors": 200,
+    "enMatched": 128,
+    "krMatched": 200,
+    "enOnly": 57
+  },
+  "anchors": [
+    {
+      "jp": {
+        "number": "001",
+        "name": "ロゼリア",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045147_P_ROZERIA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "001",
+        "name": "로젤리아",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_001.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 315
+    },
+    {
+      "jp": {
+        "number": "002",
+        "name": "ロズレイド",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045148_P_ROZUREIDO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "002",
+        "name": "로즈레이드",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_002.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 407
+    },
+    {
+      "jp": {
+        "number": "003",
+        "name": "ナエトル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045149_P_NAETORU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "10",
+        "name": "Turtwig",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/10.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "003",
+        "name": "모부기",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_003.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 387
+    },
+    {
+      "jp": {
+        "number": "004",
+        "name": "ハヤシガメ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045150_P_HAYASHIGAME.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "11",
+        "name": "Grotle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/11.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "004",
+        "name": "수풀부기",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_004.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 388
+    },
+    {
+      "jp": {
+        "number": "005",
+        "name": "ドダイトスex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045151_P_DODAITOSUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "12",
+        "name": "Torterra ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/12.png",
+        "rarity": "Double Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "005",
+        "name": "토대부기 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_005.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 389
+    },
+    {
+      "jp": {
+        "number": "006",
+        "name": "シェイミ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045152_P_SHIEIMI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "13",
+        "name": "Shaymin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/13.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "006",
+        "name": "쉐이미",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_006.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 492
+    },
+    {
+      "jp": {
+        "number": "007",
+        "name": "モンメン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045153_P_MONMEN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "14",
+        "name": "Cottonee",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/14.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "007",
+        "name": "소미안",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_007.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 546
+    },
+    {
+      "jp": {
+        "number": "008",
+        "name": "エルフーン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045154_P_ERUFUN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "15",
+        "name": "Whimsicott",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/15.png",
+        "rarity": "Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "008",
+        "name": "엘풍",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_008.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 547
+    },
+    {
+      "jp": {
+        "number": "009",
+        "name": "クイタラン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045155_P_KUITARAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "31",
+        "name": "Heatmor",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/31.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "009",
+        "name": "앤티골",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_009.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 631
+    },
+    {
+      "jp": {
+        "number": "010",
+        "name": "ヤクデ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045156_P_YAKUDE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "36",
+        "name": "Sizzlipede",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/36.png",
+        "rarity": "Double Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "010",
+        "name": "태우지네",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_010.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 850
+    },
+    {
+      "jp": {
+        "number": "011",
+        "name": "マルヤクデ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045157_P_MARUYAKUDE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "37",
+        "name": "Centiskorch",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/37.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "011",
+        "name": "다태우지네",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_011.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 851
+    },
+    {
+      "jp": {
+        "number": "012",
+        "name": "ウガツホムラex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045158_P_UGATSUHOMURAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "012",
+        "name": "꿰뚫는화염 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_012.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 1020
+    },
+    {
+      "jp": {
+        "number": "013",
+        "name": "ワニノコ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045159_P_WANINOKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "39",
+        "name": "Totodile",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/39.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "013",
+        "name": "리아코",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_013.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 158
+    },
+    {
+      "jp": {
+        "number": "014",
+        "name": "アリゲイツ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045160_P_ARIGEITSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "40",
+        "name": "Croconaw",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/40.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "014",
+        "name": "엘리게이",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_014.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 159
+    },
+    {
+      "jp": {
+        "number": "015",
+        "name": "オーダイル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045161_P_ODAIRU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "41",
+        "name": "Feraligatr",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/41.png",
+        "rarity": "Double Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "015",
+        "name": "장크로다일",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_015.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 160
+    },
+    {
+      "jp": {
+        "number": "016",
+        "name": "キバニア",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045162_P_KIBANIA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "42",
+        "name": "Carvanha",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/42.png",
+        "rarity": "Double Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "016",
+        "name": "샤프니아",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_016.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 318
+    },
+    {
+      "jp": {
+        "number": "017",
+        "name": "サメハダー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045163_P_SAMEHADA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "43",
+        "name": "Sharpedo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/43.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "017",
+        "name": "샤크니아",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_017.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 319
+    },
+    {
+      "jp": {
+        "number": "018",
+        "name": "ケルディオ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045164_P_KERUDEIO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "44",
+        "name": "Keldeo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/44.png",
+        "rarity": "Double Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "018",
+        "name": "케르디오",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_018.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 647
+    },
+    {
+      "jp": {
+        "number": "019",
+        "name": "ユキハミ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045165_P_YUKIHAMI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "45",
+        "name": "Snom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/45.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "019",
+        "name": "누니머기",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_019.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 872
+    },
+    {
+      "jp": {
+        "number": "020",
+        "name": "モスノウ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045166_P_MOSUNOU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "46",
+        "name": "Frosmoth",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/46.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "020",
+        "name": "모스노우",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_020.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 873
+    },
+    {
+      "jp": {
+        "number": "021",
+        "name": "ウミディグダ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045167_P_UMIDEIGUDA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "47",
+        "name": "Wiglett",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/47.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "021",
+        "name": "바다그다",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_021.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 960
+    },
+    {
+      "jp": {
+        "number": "022",
+        "name": "ナミイルカ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045168_P_NAMIIRUKA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "48",
+        "name": "Finizen",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/48.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "022",
+        "name": "맨돌핀",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_022.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 963
+    },
+    {
+      "jp": {
+        "number": "023",
+        "name": "イルカマン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045169_P_IRUKAMAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "49",
+        "name": "Palafin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/49.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "023",
+        "name": "돌핀맨",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_023.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 964
+    },
+    {
+      "jp": {
+        "number": "024",
+        "name": "ウネルミナモex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045170_P_UNERUMINAMOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "024",
+        "name": "굽이치는물결 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_024.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 1009
+    },
+    {
+      "jp": {
+        "number": "025",
+        "name": "ウミトリオex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045171_P_UMITORIOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "025",
+        "name": "바닥트리오 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_025.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 961
+    },
+    {
+      "jp": {
+        "number": "026",
+        "name": "マリル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045172_P_MARIRU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "64",
+        "name": "Marill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/64.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "026",
+        "name": "마릴",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_026.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 183
+    },
+    {
+      "jp": {
+        "number": "027",
+        "name": "マリルリ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045173_P_MARIRURI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "65",
+        "name": "Azumarill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/65.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "027",
+        "name": "마릴리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_027.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 184
+    },
+    {
+      "jp": {
+        "number": "028",
+        "name": "ドーミラー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045174_P_DOMIRA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "68",
+        "name": "Bronzor",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/68.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "028",
+        "name": "동미러",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_028.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 436
+    },
+    {
+      "jp": {
+        "number": "029",
+        "name": "ドータクン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045175_P_DOTAKUN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "69",
+        "name": "Bronzong",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/69.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "029",
+        "name": "동탁군",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_029.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 437
+    },
+    {
+      "jp": {
+        "number": "030",
+        "name": "ユニラン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045176_P_YUNIRAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "70",
+        "name": "Solosis",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/70.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "030",
+        "name": "유니란",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_030.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 577
+    },
+    {
+      "jp": {
+        "number": "031",
+        "name": "ダブラン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045177_P_DABURAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "71",
+        "name": "Duosion",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/71.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "031",
+        "name": "듀란",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_031.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 578
+    },
+    {
+      "jp": {
+        "number": "032",
+        "name": "ランクルス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045178_P_RANKURUSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "72",
+        "name": "Reuniclus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/72.png",
+        "rarity": "Art Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "032",
+        "name": "란쿨루스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_032.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 579
+    },
+    {
+      "jp": {
+        "number": "033",
+        "name": "ハバタクカミ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045179_P_HABATAKUKAMI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "033",
+        "name": "날개치는머리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_033.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 987
+    },
+    {
+      "jp": {
+        "number": "034",
+        "name": "ジーランス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045180_P_JIRANSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "84",
+        "name": "Relicanth",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/84.png",
+        "rarity": "Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "034",
+        "name": "시라칸",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_034.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 369
+    },
+    {
+      "jp": {
+        "number": "035",
+        "name": "ゴビット",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045181_P_GOBITTO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "87",
+        "name": "Golett",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/87.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "035",
+        "name": "골비람",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_035.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 622
+    },
+    {
+      "jp": {
+        "number": "036",
+        "name": "ゴルーグ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045182_P_GORUGU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "88",
+        "name": "Golurk",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/88.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "036",
+        "name": "골루그",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_036.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 623
+    },
+    {
+      "jp": {
+        "number": "037",
+        "name": "ドロバンコ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045183_P_DOROBANKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "91",
+        "name": "Mudbray",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/91.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "037",
+        "name": "머드나기",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_037.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 749
+    },
+    {
+      "jp": {
+        "number": "038",
+        "name": "バンバドロ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045184_P_BANBADORO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "92",
+        "name": "Mudsdale",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/92.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "038",
+        "name": "만마드",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_038.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 750
+    },
+    {
+      "jp": {
+        "number": "039",
+        "name": "タンドン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045185_P_TANDON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "93",
+        "name": "Rolycoly",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/93.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "039",
+        "name": "탄동",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_039.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 837
+    },
+    {
+      "jp": {
+        "number": "040",
+        "name": "トロッゴン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045186_P_TOROGGON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "94",
+        "name": "Carkol",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/94.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "040",
+        "name": "탄차곤",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_040.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 838
+    },
+    {
+      "jp": {
+        "number": "041",
+        "name": "セキタンザン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045187_P_SEKITANZAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "95",
+        "name": "Coalossal",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/95.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "041",
+        "name": "석탄산",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_041.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 839
+    },
+    {
+      "jp": {
+        "number": "042",
+        "name": "イダイナキバ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045188_P_IDAINAKIBA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "042",
+        "name": "위대한엄니",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_042.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 984
+    },
+    {
+      "jp": {
+        "number": "043",
+        "name": "アーボ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045189_P_ABO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "100",
+        "name": "Ekans",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/100.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "043",
+        "name": "아보",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_043.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 23
+    },
+    {
+      "jp": {
+        "number": "044",
+        "name": "アーボック",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045190_P_ABOKKU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "101",
+        "name": "Arbok",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/101.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "044",
+        "name": "아보크",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_044.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 24
+    },
+    {
+      "jp": {
+        "number": "045",
+        "name": "ゴース",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045191_P_GOSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "102",
+        "name": "Gastly",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/102.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "045",
+        "name": "고오스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_045.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 92
+    },
+    {
+      "jp": {
+        "number": "046",
+        "name": "ゴースト",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045192_P_GOSUTO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "103",
+        "name": "Haunter",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/103.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "046",
+        "name": "고우스트",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_046.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 93
+    },
+    {
+      "jp": {
+        "number": "047",
+        "name": "ゲンガーex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045193_P_GENGAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "104",
+        "name": "Gengar ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/104.png",
+        "rarity": "Double Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "047",
+        "name": "팬텀 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_047.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 94
+    },
+    {
+      "jp": {
+        "number": "048",
+        "name": "ポチエナ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045194_P_POCHIENA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "105",
+        "name": "Poochyena",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/105.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "048",
+        "name": "포챠나",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_048.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 261
+    },
+    {
+      "jp": {
+        "number": "049",
+        "name": "グラエナ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045195_P_GURAENA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "106",
+        "name": "Mightyena",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/106.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "049",
+        "name": "그라에나",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_049.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 262
+    },
+    {
+      "jp": {
+        "number": "050",
+        "name": "ヤミラミ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045196_P_YAMIRAMI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "107",
+        "name": "Sableye",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/107.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "050",
+        "name": "깜까미",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_050.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 302
+    },
+    {
+      "jp": {
+        "number": "051",
+        "name": "トドロクツキ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045197_P_TODOROKUTSUKI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "051",
+        "name": "고동치는달",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_051.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 1005
+    },
+    {
+      "jp": {
+        "number": "052",
+        "name": "コライドン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045198_P_KORAIDON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "052",
+        "name": "코라이돈",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_052.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 1007
+    },
+    {
+      "jp": {
+        "number": "053",
+        "name": "タケルライコex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045199_P_TAKERURAIKOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "053",
+        "name": "날뛰는우레 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_053.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 1021
+    },
+    {
+      "jp": {
+        "number": "054",
+        "name": "ホーホー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045200_P_HOHO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "126",
+        "name": "Hoothoot",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/126.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "054",
+        "name": "부우부",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_054.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 163
+    },
+    {
+      "jp": {
+        "number": "055",
+        "name": "ヨルノズク",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045201_P_YORUNOZUKU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "127",
+        "name": "Noctowl",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/127.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "055",
+        "name": "야부엉",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_055.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 164
+    },
+    {
+      "jp": {
+        "number": "056",
+        "name": "ノコッチ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045202_P_NOKOTCHI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "128",
+        "name": "Dunsparce",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/128.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "056",
+        "name": "노고치",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_056.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 206
+    },
+    {
+      "jp": {
+        "number": "057",
+        "name": "ノココッチ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045203_P_NOKOKOTCHI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "129",
+        "name": "Dudunsparce",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/129.png",
+        "rarity": "Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "057",
+        "name": "노고고치",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_057.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 982
+    },
+    {
+      "jp": {
+        "number": "058",
+        "name": "ペラップ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045204_P_PERAPPU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "132",
+        "name": "Chatot",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/132.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "058",
+        "name": "페라페",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_058.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 441
+    },
+    {
+      "jp": {
+        "number": "059",
+        "name": "チラーミィ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045205_P_CHIRAMII.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "136",
+        "name": "Minccino",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/136.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "059",
+        "name": "치라미",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_059.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 572
+    },
+    {
+      "jp": {
+        "number": "060",
+        "name": "チラチーノ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045206_P_CHIRACHINO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "137",
+        "name": "Cinccino",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/137.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "060",
+        "name": "치라치노",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_060.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 573
+    },
+    {
+      "jp": {
+        "number": "061",
+        "name": "おとりよせボックス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045207_T_OTORIYOSEBOKKUSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "063",
+        "name": "주문박스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_063.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "062",
+        "name": "覚醒のドラム",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045208_T_KAKUSEINODORAMU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "061",
+        "name": "각성의 드럼",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_061.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "063",
+        "name": "なかよしポフィン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045209_T_NAKAYOSHIPOFUIN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "062",
+        "name": "절친 포핀",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_062.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "064",
+        "name": "緊急ボード",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045210_T_KINKIXYUUBODO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "064",
+        "name": "긴급 보드",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_064.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "065",
+        "name": "ブーストエナジー 古代",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045211_T_BUSUTOENAJIKODAI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "066",
+        "name": "부스트에너지 고대",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_066.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "066",
+        "name": "マキシマムベルト",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045212_T_MAKISHIMAMUBERUTO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "065",
+        "name": "맥시멈 벨트",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_065.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "067",
+        "name": "探検家の先導",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045213_T_TANKENKANOSENDOU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "069",
+        "name": "탐험가의 선도",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_069.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "068",
+        "name": "ビワ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045214_T_BIWA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "067",
+        "name": "비파",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_067.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "069",
+        "name": "マツバの確信",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045215_T_MATSUBANOKAKUSHIN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "068",
+        "name": "유빈의 확신",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_068.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "070",
+        "name": "危険な密林",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045216_T_KIKENNAMITSURIN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "070",
+        "name": "위험한 밀림",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_070.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "071",
+        "name": "ネオアッパーエネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045217_E_NEOAPPAENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "071",
+        "name": "네오 어퍼 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_071.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "072",
+        "name": "ハヤシガメ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045515_P_HAYASHIGAME.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "164",
+        "name": "Grotle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/164.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "072",
+        "name": "수풀부기",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_072.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 388
+    },
+    {
+      "jp": {
+        "number": "073",
+        "name": "ユキハミ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045516_P_YUKIHAMI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "168",
+        "name": "Snom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/168.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "073",
+        "name": "누니머기",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_073.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 872
+    },
+    {
+      "jp": {
+        "number": "074",
+        "name": "ドーミラー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045517_P_DOMIRA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "170",
+        "name": "Bronzor",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/170.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "074",
+        "name": "동미러",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_074.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 436
+    },
+    {
+      "jp": {
+        "number": "075",
+        "name": "ランクルス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045518_P_RANKURUSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "171",
+        "name": "Reuniclus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/171.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "075",
+        "name": "란쿨루스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_075.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 579
+    },
+    {
+      "jp": {
+        "number": "076",
+        "name": "ハバタクカミ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045519_P_HABATAKUKAMI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "076",
+        "name": "날개치는머리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_076.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 987
+    },
+    {
+      "jp": {
+        "number": "077",
+        "name": "ジーランス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045520_P_JIRANSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "173",
+        "name": "Relicanth",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/173.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "077",
+        "name": "시라칸",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_077.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 369
+    },
+    {
+      "jp": {
+        "number": "078",
+        "name": "バンバドロ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045521_P_BANBADORO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "175",
+        "name": "Mudsdale",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/175.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "078",
+        "name": "만마드",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_078.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 750
+    },
+    {
+      "jp": {
+        "number": "079",
+        "name": "アーボック",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045522_P_ABOKKU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "176",
+        "name": "Arbok",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/176.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "079",
+        "name": "아보크",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_079.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 24
+    },
+    {
+      "jp": {
+        "number": "080",
+        "name": "ゴース",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045523_P_GOSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "177",
+        "name": "Gastly",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/177.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "080",
+        "name": "고오스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_080.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 92
+    },
+    {
+      "jp": {
+        "number": "081",
+        "name": "ペラップ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045524_P_PERAPPU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "181",
+        "name": "Chatot",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/181.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "081",
+        "name": "페라페",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_081.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 441
+    },
+    {
+      "jp": {
+        "number": "082",
+        "name": "チラーミィ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045525_P_CHIRAMII.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "182",
+        "name": "Minccino",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/182.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "082",
+        "name": "치라미",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_082.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 572
+    },
+    {
+      "jp": {
+        "number": "083",
+        "name": "チラチーノ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045526_P_CHIRACHINO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "183",
+        "name": "Cinccino",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/183.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "083",
+        "name": "치라치노",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_083.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 573
+    },
+    {
+      "jp": {
+        "number": "084",
+        "name": "ドダイトスex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045527_P_DODAITOSUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "185",
+        "name": "Torterra ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/185.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "084",
+        "name": "토대부기 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_084.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 389
+    },
+    {
+      "jp": {
+        "number": "085",
+        "name": "ウガツホムラex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045528_P_UGATSUHOMURAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "085",
+        "name": "꿰뚫는화염 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_085.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 1020
+    },
+    {
+      "jp": {
+        "number": "086",
+        "name": "ウネルミナモex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045529_P_UNERUMINAMOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "086",
+        "name": "굽이치는물결 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_086.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 1009
+    },
+    {
+      "jp": {
+        "number": "087",
+        "name": "ウミトリオex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045530_P_UMITORIOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "087",
+        "name": "바닥트리오 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_087.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 961
+    },
+    {
+      "jp": {
+        "number": "088",
+        "name": "ゲンガーex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045531_P_GENGAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": {
+        "number": "193",
+        "name": "Gengar ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/193.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "088",
+        "name": "팬텀 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_088.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 94
+    },
+    {
+      "jp": {
+        "number": "089",
+        "name": "タケルライコex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045532_P_TAKERURAIKOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "089",
+        "name": "날뛰는우레 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_089.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 1021
+    },
+    {
+      "jp": {
+        "number": "090",
+        "name": "探検家の先導",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045533_T_TANKENKANOSENDOU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "092",
+        "name": "탐험가의 선도",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_092.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "091",
+        "name": "ビワ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045534_T_BIWA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "090",
+        "name": "비파",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_090.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "092",
+        "name": "マツバの確信",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045535_T_MATSUBANOKAKUSHIN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "091",
+        "name": "유빈의 확신",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_091.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "093",
+        "name": "ウガツホムラex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045536_P_UGATSUHOMURAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "093",
+        "name": "꿰뚫는화염 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_093.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 1020
+    },
+    {
+      "jp": {
+        "number": "094",
+        "name": "ウネルミナモex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045537_P_UNERUMINAMOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "094",
+        "name": "굽이치는물결 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_094.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 1009
+    },
+    {
+      "jp": {
+        "number": "095",
+        "name": "タケルライコex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045538_P_TAKERURAIKOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "095",
+        "name": "날뛰는우레 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_095.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 1021
+    },
+    {
+      "jp": {
+        "number": "096",
+        "name": "ビワ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045539_T_BIWA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "096",
+        "name": "비파",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_096.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "097",
+        "name": "マツバの確信",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045540_T_MATSUBANOKAKUSHIN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "097",
+        "name": "유빈의 확신",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_097.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "098",
+        "name": "ウガツホムラex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045541_P_UGATSUHOMURAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "098",
+        "name": "꿰뚫는화염 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_098.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 1020
+    },
+    {
+      "jp": {
+        "number": "099",
+        "name": "ウネルミナモex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045542_P_UNERUMINAMOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "099",
+        "name": "굽이치는물결 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_099.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 1009
+    },
+    {
+      "jp": {
+        "number": "100",
+        "name": "タケルライコex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5K/045543_P_TAKERURAIKOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5K"
+      },
+      "en": null,
+      "kr": {
+        "number": "100",
+        "name": "날뛰는우레 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5K/SV5K_100.png",
+        "rarity": null,
+        "setId": "kr-sv5k"
+      },
+      "dex": 1021
+    },
+    {
+      "jp": {
+        "number": "001",
+        "name": "ストライク",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045218_P_SUTORAIKU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "1",
+        "name": "Scyther",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/1.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "001",
+        "name": "스라크",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_001.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 123
+    },
+    {
+      "jp": {
+        "number": "002",
+        "name": "クヌギダマ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045219_P_KUNUGIDAMA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "2",
+        "name": "Pineco",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/2.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "002",
+        "name": "피콘",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_002.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 204
+    },
+    {
+      "jp": {
+        "number": "003",
+        "name": "タネボー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045220_P_TANEBO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "3",
+        "name": "Seedot",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/3.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "003",
+        "name": "도토링",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_003.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 273
+    },
+    {
+      "jp": {
+        "number": "004",
+        "name": "コノハナ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045221_P_KONOHANA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "4",
+        "name": "Nuzleaf",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/4.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "004",
+        "name": "잎새코",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_004.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 274
+    },
+    {
+      "jp": {
+        "number": "005",
+        "name": "ダーテング",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045222_P_DATENGU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "5",
+        "name": "Shiftry",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/5.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "005",
+        "name": "다탱구",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_005.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 275
+    },
+    {
+      "jp": {
+        "number": "006",
+        "name": "キノココ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045223_P_KINOKOKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "6",
+        "name": "Shroomish",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/6.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "006",
+        "name": "버섯꼬",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_006.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 285
+    },
+    {
+      "jp": {
+        "number": "007",
+        "name": "キノガッサ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045224_P_KINOGASSA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "7",
+        "name": "Breloom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/7.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "007",
+        "name": "버섯모",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_007.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 286
+    },
+    {
+      "jp": {
+        "number": "008",
+        "name": "シキジカ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045225_P_SHIKIJIKA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "16",
+        "name": "Deerling",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/16.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "008",
+        "name": "사철록",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_008.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 585
+    },
+    {
+      "jp": {
+        "number": "009",
+        "name": "メブキジカ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045226_P_MEBUKIJIKA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "17",
+        "name": "Sawsbuck",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/17.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "009",
+        "name": "바라철록",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_009.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 586
+    },
+    {
+      "jp": {
+        "number": "010",
+        "name": "アゴジムシ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045227_P_AGOJIMUSHI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "18",
+        "name": "Grubbin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/18.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "010",
+        "name": "턱지충이",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_010.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 736
+    },
+    {
+      "jp": {
+        "number": "011",
+        "name": "ダダリン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045228_P_DADARIN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "19",
+        "name": "Dhelmise",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/19.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "011",
+        "name": "타타륜",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_011.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 781
+    },
+    {
+      "jp": {
+        "number": "012",
+        "name": "アノクサ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045229_P_ANOKUSA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "20",
+        "name": "Bramblin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/20.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "012",
+        "name": "그푸리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_012.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 946
+    },
+    {
+      "jp": {
+        "number": "013",
+        "name": "アノホラグサ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045230_P_ANOHORAGUSA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "21",
+        "name": "Brambleghast",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/21.png",
+        "rarity": "Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "013",
+        "name": "공푸리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_013.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 947
+    },
+    {
+      "jp": {
+        "number": "014",
+        "name": "シガロコ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045231_P_SHIGAROKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "23",
+        "name": "Rellor",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/23.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "014",
+        "name": "구르데",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_014.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 953
+    },
+    {
+      "jp": {
+        "number": "015",
+        "name": "ベラカス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045232_P_BERAKASU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "24",
+        "name": "Rabsca",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/24.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "015",
+        "name": "베라카스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_015.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 954
+    },
+    {
+      "jp": {
+        "number": "016",
+        "name": "テツノイサハex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045233_P_TETSUNOISAHAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "016",
+        "name": "무쇠잎새 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_016.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 1010
+    },
+    {
+      "jp": {
+        "number": "017",
+        "name": "マグマッグ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045234_P_MAGUMAGGU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "28",
+        "name": "Slugma",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/28.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "017",
+        "name": "마그마그",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_017.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 218
+    },
+    {
+      "jp": {
+        "number": "018",
+        "name": "マグカルゴ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045235_P_MAGUKARUGO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "29",
+        "name": "Magcargo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/29.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "018",
+        "name": "마그카르고",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_018.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 219
+    },
+    {
+      "jp": {
+        "number": "019",
+        "name": "ビクティニ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045236_P_BIKUTEINI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "30",
+        "name": "Victini",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/30.png",
+        "rarity": "Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "019",
+        "name": "비크티니",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_019.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 494
+    },
+    {
+      "jp": {
+        "number": "020",
+        "name": "ニャビー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045237_P_NIXYABI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "32",
+        "name": "Litten",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/32.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "020",
+        "name": "냐오불",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_020.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 725
+    },
+    {
+      "jp": {
+        "number": "021",
+        "name": "ニャヒート",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045238_P_NIXYAHITO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "33",
+        "name": "Torracat",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/33.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "021",
+        "name": "냐오히트",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_021.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 726
+    },
+    {
+      "jp": {
+        "number": "022",
+        "name": "ガオガエンex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045239_P_GAOGAENEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "34",
+        "name": "Incineroar ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/34.png",
+        "rarity": "Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "022",
+        "name": "어흥염 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_022.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 727
+    },
+    {
+      "jp": {
+        "number": "023",
+        "name": "ピカチュウ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045240_P_PIKACHIXYUU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "51",
+        "name": "Pikachu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/51.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "023",
+        "name": "피카츄",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_023.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 25
+    },
+    {
+      "jp": {
+        "number": "024",
+        "name": "ライチュウ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045241_P_RAICHIXYUU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "52",
+        "name": "Raichu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/52.png",
+        "rarity": "Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "024",
+        "name": "라이츄",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_024.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 26
+    },
+    {
+      "jp": {
+        "number": "025",
+        "name": "エレブー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045242_P_EREBU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "53",
+        "name": "Electabuzz",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/53.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "025",
+        "name": "에레브",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_025.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 125
+    },
+    {
+      "jp": {
+        "number": "026",
+        "name": "エレキブル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045243_P_EREKIBURU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "54",
+        "name": "Electivire",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/54.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "026",
+        "name": "에레키블",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_026.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 466
+    },
+    {
+      "jp": {
+        "number": "027",
+        "name": "デンヂムシ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045244_P_DENJIMUSHI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "55",
+        "name": "Charjabug",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/55.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "027",
+        "name": "전지충이",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_027.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 737
+    },
+    {
+      "jp": {
+        "number": "028",
+        "name": "クワガノン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045245_P_KUWAGANON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "56",
+        "name": "Vikavolt",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/56.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "028",
+        "name": "투구뿌논",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_028.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 738
+    },
+    {
+      "jp": {
+        "number": "029",
+        "name": "ゼラオラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045246_P_ZERAORA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "57",
+        "name": "Zeraora",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/57.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "029",
+        "name": "제라오라",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_029.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 807
+    },
+    {
+      "jp": {
+        "number": "030",
+        "name": "テツノイバラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045247_P_TETSUNOIBARA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "030",
+        "name": "무쇠가시",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_030.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 995
+    },
+    {
+      "jp": {
+        "number": "031",
+        "name": "バリヤード",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045248_P_BARIYADO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "63",
+        "name": "Mr. Mime",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/63.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "031",
+        "name": "마임맨",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_031.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 122
+    },
+    {
+      "jp": {
+        "number": "032",
+        "name": "キリンリキ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045249_P_KIRINRIKI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "66",
+        "name": "Girafarig",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/66.png",
+        "rarity": "ACE SPEC Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "032",
+        "name": "키링키",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_032.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 203
+    },
+    {
+      "jp": {
+        "number": "033",
+        "name": "アブリー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045250_P_ABURI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "75",
+        "name": "Cutiefly",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/75.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "033",
+        "name": "에블리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_033.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 742
+    },
+    {
+      "jp": {
+        "number": "034",
+        "name": "アブリボン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045251_P_ABURIBON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "76",
+        "name": "Ribombee",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/76.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "034",
+        "name": "에리본",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_034.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 743
+    },
+    {
+      "jp": {
+        "number": "035",
+        "name": "テツノブジン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045252_P_TETSUNOBUJIN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "035",
+        "name": "무쇠무인",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_035.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 1006
+    },
+    {
+      "jp": {
+        "number": "036",
+        "name": "テツノカシラex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045253_P_TETSUNOKASHIRAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "036",
+        "name": "무쇠감투 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_036.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 1023
+    },
+    {
+      "jp": {
+        "number": "037",
+        "name": "アサナン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045254_P_ASANAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "82",
+        "name": "Meditite",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/82.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "037",
+        "name": "요가랑",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_037.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 307
+    },
+    {
+      "jp": {
+        "number": "038",
+        "name": "チャーレム",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045255_P_CHIXYAREMU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "83",
+        "name": "Medicham",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/83.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "038",
+        "name": "요가램",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_038.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 308
+    },
+    {
+      "jp": {
+        "number": "039",
+        "name": "モグリュー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045256_P_MOGURIXYU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "85",
+        "name": "Drilbur",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/85.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "039",
+        "name": "두더류",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_039.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 529
+    },
+    {
+      "jp": {
+        "number": "040",
+        "name": "ドリュウズ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045257_P_DORIXYUUZU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "86",
+        "name": "Excadrill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/86.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "040",
+        "name": "몰드류",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_040.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 530
+    },
+    {
+      "jp": {
+        "number": "041",
+        "name": "テツノイワオex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045258_P_TETSUNOIWAOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "041",
+        "name": "무쇠암석 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_041.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 1022
+    },
+    {
+      "jp": {
+        "number": "042",
+        "name": "リキキリンex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045259_P_RIKIKIRINEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "042",
+        "name": "키키링 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_042.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 981
+    },
+    {
+      "jp": {
+        "number": "043",
+        "name": "フォレトス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045260_P_FUORETOSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "110",
+        "name": "Forretress",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/110.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "043",
+        "name": "쏘콘",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_043.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 205
+    },
+    {
+      "jp": {
+        "number": "044",
+        "name": "ハッサムex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045261_P_HASSAMUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "111",
+        "name": "Scizor ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/111.png",
+        "rarity": "Double Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "044",
+        "name": "핫삼 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_044.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 212
+    },
+    {
+      "jp": {
+        "number": "045",
+        "name": "クチート",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045262_P_KUCHITO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "112",
+        "name": "Mawile",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/112.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "045",
+        "name": "입치트",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_045.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 303
+    },
+    {
+      "jp": {
+        "number": "046",
+        "name": "ダンバル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045263_P_DANBARU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "113",
+        "name": "Beldum",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/113.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "046",
+        "name": "메탕",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_046.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 374
+    },
+    {
+      "jp": {
+        "number": "047",
+        "name": "メタング",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045264_P_METANGU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "114",
+        "name": "Metang",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/114.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "047",
+        "name": "메탕구",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_047.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 375
+    },
+    {
+      "jp": {
+        "number": "048",
+        "name": "メタグロス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045265_P_METAGUROSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "115",
+        "name": "Metagross",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/115.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "048",
+        "name": "메타그로스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_048.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 376
+    },
+    {
+      "jp": {
+        "number": "049",
+        "name": "メルタン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045266_P_MERUTAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "116",
+        "name": "Meltan",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/116.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "049",
+        "name": "멜탄",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_049.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 808
+    },
+    {
+      "jp": {
+        "number": "050",
+        "name": "メルメタル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045267_P_MERUMETARU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "117",
+        "name": "Melmetal",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/117.png",
+        "rarity": "Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "050",
+        "name": "멜메탈",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_050.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 809
+    },
+    {
+      "jp": {
+        "number": "051",
+        "name": "テツノワダチ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045268_P_TETSUNOWADACHI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "051",
+        "name": "무쇠바퀴",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_051.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 990
+    },
+    {
+      "jp": {
+        "number": "052",
+        "name": "ミライドン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045269_P_MIRAIDON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "052",
+        "name": "미라이돈",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_052.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 1008
+    },
+    {
+      "jp": {
+        "number": "053",
+        "name": "ベロリンガ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045270_P_BERORINGA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "124",
+        "name": "Lickitung",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/124.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "053",
+        "name": "내루미",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_053.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 108
+    },
+    {
+      "jp": {
+        "number": "054",
+        "name": "ベロベルト",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045271_P_BEROBERUTO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "125",
+        "name": "Lickilicky",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/125.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "054",
+        "name": "내룸벨트",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_054.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 463
+    },
+    {
+      "jp": {
+        "number": "055",
+        "name": "エネコ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045272_P_ENEKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "130",
+        "name": "Skitty",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/130.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "055",
+        "name": "에나비",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_055.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 300
+    },
+    {
+      "jp": {
+        "number": "056",
+        "name": "エネコロロ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045273_P_ENEKORORO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "131",
+        "name": "Delcatty",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/131.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "056",
+        "name": "델케티",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_056.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 301
+    },
+    {
+      "jp": {
+        "number": "057",
+        "name": "マメパト",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045274_P_MAMEPATO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "133",
+        "name": "Pidove",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/133.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "057",
+        "name": "콩둘기",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_057.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 519
+    },
+    {
+      "jp": {
+        "number": "058",
+        "name": "ハトーボー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045275_P_HATOBO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "134",
+        "name": "Tranquill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/134.png",
+        "rarity": "Common",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "058",
+        "name": "유토브",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_058.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 520
+    },
+    {
+      "jp": {
+        "number": "059",
+        "name": "ケンホロウ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045276_P_KENHOROU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "135",
+        "name": "Unfezant",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/135.png",
+        "rarity": "Uncommon",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "059",
+        "name": "켄호로우",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_059.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 521
+    },
+    {
+      "jp": {
+        "number": "060",
+        "name": "ジジーロン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045277_P_JIJIRON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "138",
+        "name": "Drampa",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/138.png",
+        "rarity": "Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "060",
+        "name": "할비롱",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_060.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 780
+    },
+    {
+      "jp": {
+        "number": "061",
+        "name": "ハンドトリマー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045278_T_HANDOTORIMA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "063",
+        "name": "핸드 트리머",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_063.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "062",
+        "name": "プライムキャッチャー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045279_T_PURAIMUKIXYATCHIXYA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "062",
+        "name": "프라임 캐처",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_062.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "063",
+        "name": "リブートポッド",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045280_T_RIBUTOPODDO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "061",
+        "name": "리부트 포드",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_061.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "064",
+        "name": "ヒーローマント",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045281_T_HIROMANTO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "066",
+        "name": "히어로 망토",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_066.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "065",
+        "name": "ブーストエナジー 未来",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045282_T_BUSUTOENAJIMIRAI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "064",
+        "name": "부스트에너지 미래",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_064.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "066",
+        "name": "ヘビーバトン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045283_T_HEBIBATON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "065",
+        "name": "헤비 배턴",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_065.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "067",
+        "name": "暗号マニアの解読",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045284_T_ANGOUMANIANOKAIDOKU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "069",
+        "name": "암호마니아의 해독",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_069.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "068",
+        "name": "セイジ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045285_T_SEIJI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "068",
+        "name": "세이지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_068.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "069",
+        "name": "ベルのまごころ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045286_T_BERUNOMAGOKORO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "067",
+        "name": "벨의 진심",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_067.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "070",
+        "name": "フルメタルラボ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045287_T_FURUMETARURABO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "070",
+        "name": "풀메탈 랩",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_070.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "071",
+        "name": "ミストエネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045288_E_MISUTOENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "071",
+        "name": "미스트 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_071.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "072",
+        "name": "ダーテング",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045544_P_DATENGU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "163",
+        "name": "Shiftry",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/163.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "072",
+        "name": "다탱구",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_072.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 275
+    },
+    {
+      "jp": {
+        "number": "073",
+        "name": "シキジカ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045545_P_SHIKIJIKA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "165",
+        "name": "Deerling",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/165.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "073",
+        "name": "사철록",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_073.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 585
+    },
+    {
+      "jp": {
+        "number": "074",
+        "name": "メブキジカ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045546_P_MEBUKIJIKA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "166",
+        "name": "Sawsbuck",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/166.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "074",
+        "name": "바라철록",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_074.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 586
+    },
+    {
+      "jp": {
+        "number": "075",
+        "name": "ニャビー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045547_P_NIXYABI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "167",
+        "name": "Litten",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/167.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "075",
+        "name": "냐오불",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_075.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 725
+    },
+    {
+      "jp": {
+        "number": "076",
+        "name": "デンヂムシ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045548_P_DENJIMUSHI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "169",
+        "name": "Charjabug",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/169.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "076",
+        "name": "전지충이",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_076.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 737
+    },
+    {
+      "jp": {
+        "number": "077",
+        "name": "テツノイバラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045549_P_TETSUNOIBARA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "077",
+        "name": "무쇠가시",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_077.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 995
+    },
+    {
+      "jp": {
+        "number": "078",
+        "name": "アブリー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045550_P_ABURI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "172",
+        "name": "Cutiefly",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/172.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "078",
+        "name": "에블리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_078.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 742
+    },
+    {
+      "jp": {
+        "number": "079",
+        "name": "ドリュウズ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045551_P_DORIXYUUZU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "174",
+        "name": "Excadrill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/174.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "079",
+        "name": "몰드류",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_079.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 530
+    },
+    {
+      "jp": {
+        "number": "080",
+        "name": "メタグロス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045552_P_METAGUROSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "178",
+        "name": "Metagross",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/178.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "080",
+        "name": "메타그로스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_080.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 376
+    },
+    {
+      "jp": {
+        "number": "081",
+        "name": "メルタン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045553_P_MERUTAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "179",
+        "name": "Meltan",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/179.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "081",
+        "name": "멜탄",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_081.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 808
+    },
+    {
+      "jp": {
+        "number": "082",
+        "name": "ベロリンガ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045554_P_BERORINGA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "180",
+        "name": "Lickitung",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/180.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "082",
+        "name": "내루미",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_082.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 108
+    },
+    {
+      "jp": {
+        "number": "083",
+        "name": "ジジーロン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045555_P_JIJIRON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "184",
+        "name": "Drampa",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/184.png",
+        "rarity": "Illustration Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "083",
+        "name": "할비롱",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_083.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 780
+    },
+    {
+      "jp": {
+        "number": "084",
+        "name": "テツノイサハex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045556_P_TETSUNOISAHAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "084",
+        "name": "무쇠잎새 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_084.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 1010
+    },
+    {
+      "jp": {
+        "number": "085",
+        "name": "ガオガエンex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045557_P_GAOGAENEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "187",
+        "name": "Incineroar ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/187.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "085",
+        "name": "어흥염 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_085.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 727
+    },
+    {
+      "jp": {
+        "number": "086",
+        "name": "テツノカシラex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045558_P_TETSUNOKASHIRAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "086",
+        "name": "무쇠감투 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_086.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 1023
+    },
+    {
+      "jp": {
+        "number": "087",
+        "name": "テツノイワオex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045559_P_TETSUNOIWAOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "087",
+        "name": "무쇠암석 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_087.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 1022
+    },
+    {
+      "jp": {
+        "number": "088",
+        "name": "リキキリンex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045560_P_RIKIKIRINEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "088",
+        "name": "키키링 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_088.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 981
+    },
+    {
+      "jp": {
+        "number": "089",
+        "name": "ハッサムex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045561_P_HASSAMUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": {
+        "number": "195",
+        "name": "Scizor ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/195.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv5"
+      },
+      "kr": {
+        "number": "089",
+        "name": "핫삼 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_089.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 212
+    },
+    {
+      "jp": {
+        "number": "090",
+        "name": "暗号マニアの解読",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045562_T_ANGOUMANIANOKAIDOKU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "092",
+        "name": "암호마니아의 해독",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_092.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "091",
+        "name": "セイジ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045563_T_SEIJI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "091",
+        "name": "세이지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_091.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "092",
+        "name": "ベルのまごころ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045564_T_BERUNOMAGOKORO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "090",
+        "name": "벨의 진심",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_090.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "093",
+        "name": "テツノイサハex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045565_P_TETSUNOISAHAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "093",
+        "name": "무쇠잎새 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_093.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 1010
+    },
+    {
+      "jp": {
+        "number": "094",
+        "name": "テツノカシラex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045566_P_TETSUNOKASHIRAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "094",
+        "name": "무쇠감투 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_094.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 1023
+    },
+    {
+      "jp": {
+        "number": "095",
+        "name": "テツノイワオex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045567_P_TETSUNOIWAOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "095",
+        "name": "무쇠암석 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_095.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 1022
+    },
+    {
+      "jp": {
+        "number": "096",
+        "name": "セイジ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045568_T_SEIJI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "097",
+        "name": "세이지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_097.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "097",
+        "name": "ベルのまごころ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045569_T_BERUNOMAGOKORO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "096",
+        "name": "벨의 진심",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_096.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "number": "098",
+        "name": "テツノイサハex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045570_P_TETSUNOISAHAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "098",
+        "name": "무쇠잎새 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_098.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 1010
+    },
+    {
+      "jp": {
+        "number": "099",
+        "name": "テツノカシラex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045571_P_TETSUNOKASHIRAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "099",
+        "name": "무쇠감투 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_099.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 1023
+    },
+    {
+      "jp": {
+        "number": "100",
+        "name": "テツノイワオex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SV5M/045572_P_TETSUNOIWAOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SV5M"
+      },
+      "en": null,
+      "kr": {
+        "number": "100",
+        "name": "무쇠암석 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5M/SV5M_100.png",
+        "rarity": null,
+        "setId": "kr-sv5m"
+      },
+      "dex": 1022
+    }
+  ],
+  "tail": {
+    "enOnly": [
+      {
+        "number": "8",
+        "name": "Roselia",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/8.png",
+        "rarity": "Common",
+        "setId": "sv5",
+        "dex": 315,
+        "jpElsewhere": true
+      },
+      {
+        "number": "9",
+        "name": "Roserade",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/9.png",
+        "rarity": "Uncommon",
+        "setId": "sv5",
+        "dex": 407,
+        "jpElsewhere": true
+      },
+      {
+        "number": "22",
+        "name": "Scovillain ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/22.png",
+        "rarity": "Double Rare",
+        "setId": "sv5",
+        "dex": 952,
+        "jpElsewhere": true
+      },
+      {
+        "number": "25",
+        "name": "Iron Leaves ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/25.png",
+        "rarity": "Common",
+        "setId": "sv5",
+        "dex": 1010,
+        "jpElsewhere": true
+      },
+      {
+        "number": "26",
+        "name": "Ponyta",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/26.png",
+        "rarity": "Uncommon",
+        "setId": "sv5",
+        "dex": 77,
+        "jpElsewhere": true
+      },
+      {
+        "number": "27",
+        "name": "Rapidash",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/27.png",
+        "rarity": "Common",
+        "setId": "sv5",
+        "dex": 78,
+        "jpElsewhere": true
+      },
+      {
+        "number": "35",
+        "name": "Turtonator",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/35.png",
+        "rarity": "Rare",
+        "setId": "sv5",
+        "dex": 776,
+        "jpElsewhere": true
+      },
+      {
+        "number": "38",
+        "name": "Gouging Fire ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/38.png",
+        "rarity": "Common",
+        "setId": "sv5",
+        "dex": 1020,
+        "jpElsewhere": true
+      },
+      {
+        "number": "50",
+        "name": "Walking Wake ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/50.png",
+        "rarity": "Rare",
+        "setId": "sv5",
+        "dex": 1009,
+        "jpElsewhere": true
+      },
+      {
+        "number": "58",
+        "name": "Yamper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/58.png",
+        "rarity": "Common",
+        "setId": "sv5",
+        "dex": 835,
+        "jpElsewhere": true
+      },
+      {
+        "number": "59",
+        "name": "Boltund",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/59.png",
+        "rarity": "Common",
+        "setId": "sv5",
+        "dex": 836,
+        "jpElsewhere": true
+      },
+      {
+        "number": "60",
+        "name": "Wugtrio ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/60.png",
+        "rarity": "Rare",
+        "setId": "sv5",
+        "dex": 961,
+        "jpElsewhere": true
+      },
+      {
+        "number": "61",
+        "name": "Iron Hands",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/61.png",
+        "rarity": "ACE SPEC Rare",
+        "setId": "sv5",
+        "dex": 992,
+        "jpElsewhere": true
+      },
+      {
+        "number": "62",
+        "name": "Iron Thorns",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/62.png",
+        "rarity": "ACE SPEC Rare",
+        "setId": "sv5",
+        "dex": 995,
+        "jpElsewhere": true
+      },
+      {
+        "number": "67",
+        "name": "Latias",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/67.png",
+        "rarity": "Uncommon",
+        "setId": "sv5",
+        "dex": 380,
+        "jpElsewhere": true
+      },
+      {
+        "number": "73",
+        "name": "Elgyem",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/73.png",
+        "rarity": "Art Rare",
+        "setId": "sv5",
+        "dex": 605,
+        "jpElsewhere": true
+      },
+      {
+        "number": "74",
+        "name": "Beheeyem",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/74.png",
+        "rarity": "Uncommon",
+        "setId": "sv5",
+        "dex": 606,
+        "jpElsewhere": true
+      },
+      {
+        "number": "77",
+        "name": "Scream Tail",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/77.png",
+        "rarity": "Uncommon",
+        "setId": "sv5",
+        "dex": 985,
+        "jpElsewhere": true
+      },
+      {
+        "number": "78",
+        "name": "Flutter Mane",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/78.png",
+        "rarity": "Rare",
+        "setId": "sv5",
+        "dex": 987,
+        "jpElsewhere": true
+      },
+      {
+        "number": "79",
+        "name": "Iron Valiant",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/79.png",
+        "rarity": "Uncommon",
+        "setId": "sv5",
+        "dex": 1006,
+        "jpElsewhere": true
+      },
+      {
+        "number": "80",
+        "name": "Iron Valiant",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/80.png",
+        "rarity": "Rare",
+        "setId": "sv5",
+        "dex": 1006,
+        "jpElsewhere": true
+      },
+      {
+        "number": "81",
+        "name": "Iron Crown ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/81.png",
+        "rarity": "Double Rare",
+        "setId": "sv5",
+        "dex": 1023,
+        "jpElsewhere": true
+      },
+      {
+        "number": "89",
+        "name": "Rockruff",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/89.png",
+        "rarity": "Common",
+        "setId": "sv5",
+        "dex": 744,
+        "jpElsewhere": true
+      },
+      {
+        "number": "90",
+        "name": "Lycanroc",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/90.png",
+        "rarity": "Uncommon",
+        "setId": "sv5",
+        "dex": 745,
+        "jpElsewhere": true
+      },
+      {
+        "number": "96",
+        "name": "Great Tusk",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/96.png",
+        "rarity": "Uncommon",
+        "setId": "sv5",
+        "dex": 984,
+        "jpElsewhere": true
+      },
+      {
+        "number": "97",
+        "name": "Great Tusk",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/97.png",
+        "rarity": "Uncommon",
+        "setId": "sv5",
+        "dex": 984,
+        "jpElsewhere": true
+      },
+      {
+        "number": "98",
+        "name": "Sandy Shocks",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/98.png",
+        "rarity": "Uncommon",
+        "setId": "sv5",
+        "dex": 989,
+        "jpElsewhere": true
+      },
+      {
+        "number": "99",
+        "name": "Iron Boulder ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/99.png",
+        "rarity": "Double Rare",
+        "setId": "sv5",
+        "dex": 1022,
+        "jpElsewhere": true
+      },
+      {
+        "number": "108",
+        "name": "Farigiraf ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/108.png",
+        "rarity": "Double Rare",
+        "setId": "sv5",
+        "dex": 981,
+        "jpElsewhere": true
+      },
+      {
+        "number": "109",
+        "name": "Roaring Moon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/109.png",
+        "rarity": "Rare",
+        "setId": "sv5",
+        "dex": 1005,
+        "jpElsewhere": true
+      },
+      {
+        "number": "118",
+        "name": "Iron Treads",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/118.png",
+        "rarity": "Uncommon",
+        "setId": "sv5",
+        "dex": 990,
+        "jpElsewhere": true
+      },
+      {
+        "number": "119",
+        "name": "Koraidon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/119.png",
+        "rarity": "Rare",
+        "setId": "sv5",
+        "dex": 1007,
+        "jpElsewhere": true
+      },
+      {
+        "number": "120",
+        "name": "Koraidon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/120.png",
+        "rarity": "Double Rare",
+        "setId": "sv5",
+        "dex": 1007,
+        "jpElsewhere": true
+      },
+      {
+        "number": "121",
+        "name": "Miraidon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/121.png",
+        "rarity": "Rare",
+        "setId": "sv5",
+        "dex": 1008,
+        "jpElsewhere": true
+      },
+      {
+        "number": "122",
+        "name": "Miraidon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/122.png",
+        "rarity": "Double Rare",
+        "setId": "sv5",
+        "dex": 1008,
+        "jpElsewhere": true
+      },
+      {
+        "number": "123",
+        "name": "Raging Bolt ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/123.png",
+        "rarity": "Double Rare",
+        "setId": "sv5",
+        "dex": 1021,
+        "jpElsewhere": true
+      },
+      {
+        "number": "139",
+        "name": "Iron Jugulis",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/139.png",
+        "rarity": "Uncommon",
+        "setId": "sv5",
+        "dex": 993,
+        "jpElsewhere": true
+      },
+      {
+        "number": "186",
+        "name": "Iron Leaves ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/186.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv5",
+        "dex": 1010,
+        "jpElsewhere": true
+      },
+      {
+        "number": "188",
+        "name": "Gouging Fire ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/188.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv5",
+        "dex": 1020,
+        "jpElsewhere": true
+      },
+      {
+        "number": "189",
+        "name": "Walking Wake ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/189.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv5",
+        "dex": 1009,
+        "jpElsewhere": true
+      },
+      {
+        "number": "190",
+        "name": "Wugtrio ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/190.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv5",
+        "dex": 961,
+        "jpElsewhere": true
+      },
+      {
+        "number": "191",
+        "name": "Iron Crown ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/191.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv5",
+        "dex": 1023,
+        "jpElsewhere": true
+      },
+      {
+        "number": "192",
+        "name": "Iron Boulder ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/192.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv5",
+        "dex": 1022,
+        "jpElsewhere": true
+      },
+      {
+        "number": "194",
+        "name": "Farigiraf ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/194.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv5",
+        "dex": 981,
+        "jpElsewhere": true
+      },
+      {
+        "number": "196",
+        "name": "Raging Bolt ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/196.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv5",
+        "dex": 1021,
+        "jpElsewhere": true
+      },
+      {
+        "number": "203",
+        "name": "Iron Leaves ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/203.png",
+        "rarity": "Special Illustration Rare",
+        "setId": "sv5",
+        "dex": 1010,
+        "jpElsewhere": true
+      },
+      {
+        "number": "204",
+        "name": "Gouging Fire ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/204.png",
+        "rarity": "Special Illustration Rare",
+        "setId": "sv5",
+        "dex": 1020,
+        "jpElsewhere": true
+      },
+      {
+        "number": "205",
+        "name": "Walking Wake ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/205.png",
+        "rarity": "Special Illustration Rare",
+        "setId": "sv5",
+        "dex": 1009,
+        "jpElsewhere": true
+      },
+      {
+        "number": "206",
+        "name": "Iron Crown ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/206.png",
+        "rarity": "Special Illustration Rare",
+        "setId": "sv5",
+        "dex": 1023,
+        "jpElsewhere": true
+      },
+      {
+        "number": "207",
+        "name": "Iron Boulder ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/207.png",
+        "rarity": "Special Illustration Rare",
+        "setId": "sv5",
+        "dex": 1022,
+        "jpElsewhere": true
+      },
+      {
+        "number": "208",
+        "name": "Raging Bolt ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/208.png",
+        "rarity": "Special Illustration Rare",
+        "setId": "sv5",
+        "dex": 1021,
+        "jpElsewhere": true
+      },
+      {
+        "number": "213",
+        "name": "Iron Leaves ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/213.png",
+        "rarity": "Hyper Rare",
+        "setId": "sv5",
+        "dex": 1010,
+        "jpElsewhere": true
+      },
+      {
+        "number": "214",
+        "name": "Gouging Fire ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/214.png",
+        "rarity": "Hyper Rare",
+        "setId": "sv5",
+        "dex": 1020,
+        "jpElsewhere": true
+      },
+      {
+        "number": "215",
+        "name": "Walking Wake ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/215.png",
+        "rarity": "Hyper Rare",
+        "setId": "sv5",
+        "dex": 1009,
+        "jpElsewhere": true
+      },
+      {
+        "number": "216",
+        "name": "Iron Crown ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/216.png",
+        "rarity": "Hyper Rare",
+        "setId": "sv5",
+        "dex": 1023,
+        "jpElsewhere": true
+      },
+      {
+        "number": "217",
+        "name": "Iron Boulder ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/217.png",
+        "rarity": "Hyper Rare",
+        "setId": "sv5",
+        "dex": 1022,
+        "jpElsewhere": true
+      },
+      {
+        "number": "218",
+        "name": "Raging Bolt ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/218.png",
+        "rarity": "Hyper Rare",
+        "setId": "sv5",
+        "dex": 1021,
+        "jpElsewhere": true
+      }
+    ],
+    "krOnly": [],
+    "enKr": []
+  }
+}

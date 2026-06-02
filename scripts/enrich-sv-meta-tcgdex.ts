@@ -15,18 +15,21 @@ const execFileP = promisify(execFile);
 
 // tcgdex JP set ID → DB set ID mapping
 // DB JP setIds follow pattern jp-sv-{slug} (not jp-tcg-SV*)
+// ⚠️ 분할(half) 세트는 반드시 분할 DB세트(jp-tcg-SV*)에 매핑할 것. 합본(jp-sv-*)에 매핑하면
+//    같은 번호 2장이 한쪽 tcgId 로만 fetch 돼 dex/일러가 충돌·오염됨(2026-06-02 Paldea/Paradox 사고).
+//    분할 적재는 scripts/recollect-split-jp-tcgdex.ts 사용 권장(번호충돌 원천 불가).
 const TARGET_SETS = [
   // Main series JP sets — tcgdex JP IDs (uppercase) → DB jp-sv-* IDs
-  { tcgId: "SV1S",  dbSetId: "jp-sv-base",               lang: "ja" },   // スカーレットex (half)
-  { tcgId: "SV1V",  dbSetId: "jp-sv-base",               lang: "ja" },   // バイオレットex (half) — same DB set
+  { tcgId: "SV1S",  dbSetId: "jp-tcg-SV1S",              lang: "ja" },   // スカーレットex (half) → 분할
+  { tcgId: "SV1V",  dbSetId: "jp-tcg-SV1V",              lang: "ja" },   // バイオレットex (half) → 분할
   { tcgId: "SV1a",  dbSetId: "jp-sv-triplet-beat",       lang: "ja" },   // トリプレットビート
-  { tcgId: "SV2P",  dbSetId: "jp-sv-paldea-evolved",     lang: "ja" },   // スノーハザード (half)
-  { tcgId: "SV2D",  dbSetId: "jp-sv-paldea-evolved",     lang: "ja" },   // クレイバースト (half)
+  { tcgId: "SV2P",  dbSetId: "jp-tcg-SV2P",              lang: "ja" },   // スノーハザード (half) → 분할
+  { tcgId: "SV2D",  dbSetId: "jp-tcg-SV2D",              lang: "ja" },   // クレイバースト (half) → 분할
   { tcgId: "SV2a",  dbSetId: "jp-sv-151",                lang: "ja" },   // ポケモンカード151
   { tcgId: "SV3",   dbSetId: "jp-sv-obsidian-flames",    lang: "ja" },   // 黒炎の支配者
   { tcgId: "SV3a",  dbSetId: "jp-sv-raging-surf",        lang: "ja" },   // レイジングサーフ
-  { tcgId: "SV4K",  dbSetId: "jp-sv-paradox-rift",       lang: "ja" },   // 古代の咆哮 (half)
-  { tcgId: "SV4M",  dbSetId: "jp-sv-paradox-rift",       lang: "ja" },   // 未来の一閃 (half)
+  { tcgId: "SV4K",  dbSetId: "jp-tcg-SV4K",              lang: "ja" },   // 古代の咆哮 (half) → 분할
+  { tcgId: "SV4M",  dbSetId: "jp-tcg-SV4M",              lang: "ja" },   // 未来の一閃 (half) → 분할
   { tcgId: "SV4a",  dbSetId: "jp-sv-paldean-fates",      lang: "ja" },   // シャイニートレジャーex
   { tcgId: "SV5K",  dbSetId: "jp-sv-temporal-forces",    lang: "ja" },   // ワイルドフォース (half)
   { tcgId: "SV5M",  dbSetId: "jp-sv-temporal-forces",    lang: "ja" },   // サイバージャッジ (half)

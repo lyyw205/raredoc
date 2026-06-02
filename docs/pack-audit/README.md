@@ -35,9 +35,15 @@
 - **합본/컴필레이션 팩**: 합본 JP는 id 접두사(M1L/M1S, SV11B/SV11W)로 서브셋 구분, numberInt 중복. Bulbapedia는 원본세트로 리다이렉트. 스타트덱100/스타터덱 등 별제품이 number-merge로 잘못 묶이면 별도 setGroup 분리.
 - **CardLocale.name이 영문/일어로 남아도** CardText(ko)로 표시 대체(옵션 C 설계).
 
-## 진행 현황 (2026-05-31)
+## 진행 현황 (2026-06-01)
+- **SWSH(소드·실드) 시리즈 39팩 전수 점검 완료 (2026-06-01)**: 최신→과거 역순. namu 정본화 27팩 + EN전용 건강 9팩 + 프로모 재수집대기 1팩. 🔧 RMAP SWSH 표준 8코드 확장(RRR/K/CSR/ASR/AHR/A/S/SSR — SV [P14] 해소). ✅ **구조 정리 S1~S4 완료**: `og-s11`(로스트어비스/오리진) 신설+kr-s11 이전·언머지, EN swsh11→og-s11·swsh12→og-s12 재배치, 서브제품 18+kr-svm 언머지, kr-sc→`og-bw-shiny` 신설 이전. SWSH 본세트 비정상 게스트 0 검증. 각 `docs/pack-audit/swsh-*.md`, 집계 **[swsh-issues-log.md](./swsh-issues-log.md)**.
+- **SM(썬·문) 시리즈 38 setGroup 전수 점검 완료 (2026-06-01)**: 태그올스타즈부터 역순. 제1~12탄+강화확장+페어팩 namu 정본화. 🔧 **파서 헤더인식 개선**(구세대 namu 표 슬래시공백 `001 / 095`·컬럼순서 상이 대응 — 헤더로 컬럼매핑+공백허용, SV/SWSH 회귀無). 보류: og-sm7a·og-kr-sm-promo(namu 부재). [SM-A] 강화확장 다수 KR>JP 초과분 placeholder. kr-smxy(THE BEST OF XY) 오그룹[P8]. 각 `docs/pack-audit/sm-*.md`, 집계 **[sm-issues-log.md](./sm-issues-log.md)**.
 - **MEGA 시리즈 6팩 완료**: M1 brave-symphonia / M2 infernox / M2a dream-ex(스타트덱100=kr-mc 재수집 잔여) / M3 munikisuzero(니힐제로) / M4 ninja-spinner / M5 abyss-eye. (각 `docs/pack-audit/mega-*.md`)
-- **SV 완료**: `sv-black-bolt-white-flare`(블랙볼트+화이트플레어) — 중복 3세트 삭제, EN/KR 682장 JP 그룹화, 나무위키 정본화. 남은공백: JP 이미지 0/348·pokedexNumbers 0·ko 11장 누락.
+- **SV 시리즈 18팩 전수 점검 완료 (2026-05-31)**: black-bolt-white-flare + 아래 17팩. 각 `docs/pack-audit/sv-*.md`, 이슈 집계는 **[sv-issues-log.md](./sv-issues-log.md)**.
+  - 본확장: base / 151 / paldea-evolved / obsidian-flames / paradox-rift / temporal-forces / surging-sparks / journey-together / destined-rivals
+  - 하이클래스·강화: paldean-fates / prismatic-evolutions / shrouded-fable / stellar-crown / crimson-haze / heatwave-arena / raging-surf / paradise-dragona
+  - 공통 안전수정: namu 한글명·레어도 정본화, JP cardCount 0→실수, 빈 KR 껍데기 17개 삭제.
+  - ⚠ **`sync-pack-namu-ko.ts` 다중표 오염 버그 발견·수정**(최대 분모 행만 채택). 이전 세션에 구 파서로 동기화됐던 7팩이 #1부터 "이상해씨/디그다…" 식 오염 → 전부 재동기화 정정. **MEGA/BBWF 등 기존 완료팩도 동일 오염 가능 → 재점검 권장.**
 
 ## 남은 cross-cutting 작업
 1. 스타터덱·스타트덱100(kr-mc, kr-starter-m1) pokemoncard.co.kr 재수집.

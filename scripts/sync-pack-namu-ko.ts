@@ -26,9 +26,12 @@ if (!SET || !TITLE || SET.startsWith("--")) { console.error("usage: <setId> <nam
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
 // Namu 레어도 코드 → 우리 Rarity.code
 const RMAP: Record<string, string> = {
-  C: "Common", U: "Uncommon", R: "Rare", RR: "Double Rare", AR: "Art Rare",
+  C: "Common", U: "Uncommon", R: "Rare", RR: "Double Rare", RRR: "Triple Rare", AR: "Art Rare",
   SR: "Super Rare", SAR: "Special Art Rare", UR: "Ultra Rare", HR: "Hyper Rare",
-  MUR: "Mega Ultra Rare", CHR: "Character Rare", ACE: "ACE SPEC Rare", BWR: "Black White Rare",
+  MUR: "Mega Ultra Rare", CHR: "Character Rare", CSR: "Character Super Rare", ACE: "ACE SPEC Rare", BWR: "Black White Rare",
+  K: "Radiant Rare", // 나무위키 K = かがやく(Radiant) 포켓몬 (SWSH era)
+  ASR: "Super Rare", AHR: "Hyper Rare", // A 접두 = 알터아트 SR/HR (SWSH era, 마스터에 알터아트 구분 없어 SR/HR로 매핑)
+  A: "Amazing Rare", S: "Shiny Rare", SSR: "Shiny Secret Rare", // SWSH era: A=어메이징, S=샤이니, SSR=샤이니 시크릿 (샤이니스타V 기존 데이터로 확정)
 };
 
 async function fetchNamuRows(title: string): Promise<{ num: number; name: string; rarity: string }[]> {
@@ -38,12 +41,34 @@ async function fetchNamuRows(title: string): Promise<{ num: number; name: string
   const trRe = /<tr[^>]*>([\s\S]*?)<\/tr>/g;
   let m: RegExpExecArray | null;
   const strip = (s: string) => s.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ").trim();
+  const NUM_RE = /^(\d{1,3})\s*\/\s*(\d{1,3})/; // "001/095" 또는 "001 / 095"(공백 허용)
+  // 표 레이아웃이 페이지마다 다름(컬럼 순서·이름 위치). 헤더행(카드명/레어도)을 읽어 컬럼 인덱스를 매핑.
+  // 헤더가 없으면 폴백(번호 다음 셀=이름, 마지막 셀=레어도). 여러 표는 분모 최대값(=본세트)만 채택해 서브표 오염 방지.
+  let nameIdx = -1, rarIdx = -1, numIdx = -1; // 현재 표의 컬럼 맵(헤더마다 갱신)
+  const raw: { num: number; den: number; name: string; rarity: string }[] = [];
   while ((m = trRe.exec(stdout)) !== null) {
-    const cells = [...m[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map((c) => strip(c[1]));
-    if (cells.length >= 3 && /^\d{1,3}\//.test(cells[0])) {
-      rows.push({ num: parseInt(cells[0].split("/")[0], 10), name: cells[2], rarity: cells[cells.length - 1] });
+    const cells = [...m[1].matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/g)].map((c) => strip(c[1]));
+    if (!cells.length) continue;
+    // 헤더행 감지 → 컬럼 인덱스 설정
+    const hName = cells.findIndex((c) => /카드\s*명|카드이름|^이름$/.test(c));
+    if (hName >= 0) {
+      nameIdx = hName;
+      rarIdx = cells.findIndex((c) => /레어도|레어리티|희귀도|등급/.test(c));
+      numIdx = cells.findIndex((c) => /컬렉션|넘버|번호|No\.?/.test(c));
+      continue;
     }
+    // 데이터행: 번호 셀 찾기(헤더가 지정한 numIdx 우선, 없으면 패턴 검색)
+    let nIdx = numIdx >= 0 && NUM_RE.test(cells[numIdx] ?? "") ? numIdx : cells.findIndex((c) => NUM_RE.test(c));
+    if (nIdx < 0) continue;
+    const mm = NUM_RE.exec(cells[nIdx])!;
+    const num = parseInt(mm[1], 10), den = parseInt(mm[2], 10);
+    const name = (nameIdx >= 0 ? cells[nameIdx] : cells[nIdx + 1]) ?? "";
+    const rarity = (rarIdx >= 0 ? cells[rarIdx] : cells[cells.length - 1]) ?? "";
+    if (name && !NUM_RE.test(name)) raw.push({ num, den, name, rarity });
   }
+  if (!raw.length) return rows;
+  const maxDen = Math.max(...raw.map((r) => r.den));
+  for (const r of raw) if (r.den === maxDen) rows.push({ num: r.num, name: r.name, rarity: r.rarity });
   return rows;
 }
 

@@ -1,26 +1,25 @@
 /**
  * 팩 단위 PokeAPI 보강 — pokedexNumbers + 한글명(CardText ko, nameKo).
  *
- * 포켓몬 카드(영문명 보유)의 영문명을 PokeAPI species 로 매핑해:
+ * 포켓몬 카드(영문명 보유)의 영문명을 표준 이름 매핑표(PokeAPI CSV)의 종으로 매핑해:
  *   - LogicalCard.pokedexNumbers (비어있을 때만)
  *   - LogicalCard.nameKo (비어있을 때만; 전환기 호환)
  *   - CardText(ko) upsert (source="pokeapi")
  * 확신 없으면 건너뜀(추측 금지) → unmatched 로 리포트.
+ * 출처: data/pokeapi/*.csv (로더 scripts/lib/pokeapi-names.ts). 라이브 API 호출 없음.
  *
  * 실행: npx tsx scripts/fill-pack-pokeapi.ts <setId> [--dry-run]
  *   예: npx tsx scripts/fill-pack-pokeapi.ts jp-mega-abyss-eye --dry-run
  */
 import "dotenv/config";
 import { prisma } from "@/lib/prisma";
+import { getName, resolveDex } from "./lib/pokeapi-names";
 
 const SET = process.argv[2];
 const DRY = process.argv.includes("--dry-run");
 if (!SET || SET.startsWith("--")) { console.error("usage: fill-pack-pokeapi.ts <setId> [--dry-run]"); process.exit(1); }
 
-const UA = "raredoc-meta-enricher/0.1 (non-commercial card metadata)";
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-/** 카드 영문명 → PokeAPI species slug 후보들 (우선순위). */
+/** 카드 영문명 → 종 이름 후보들 (우선순위). resolveDex 가 정규화 후 매핑표에서 도감번호 해석. */
 function speciesCandidates(name: string): string[] {
   let n = name.trim();
   // 접두/접미 메커니즘 토큰 제거
@@ -45,15 +44,6 @@ function speciesCandidates(name: string): string[] {
   return [...out].filter(Boolean);
 }
 
-type Species = { id: number; names: { name: string; language: { name: string } }[] };
-async function fetchSpecies(slug: string): Promise<Species | null> {
-  try {
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${slug}/`, { headers: { "User-Agent": UA } });
-    if (!res.ok) return null;
-    return (await res.json()) as Species;
-  } catch { return null; }
-}
-
 async function main() {
   const cards = await prisma.cardLocale.findMany({
     where: { setId: SET },
@@ -68,16 +58,14 @@ async function main() {
 
   for (const c of pokes) {
     const lc = c.logicalCard;
-    let sp: Species | null = null;
+    let dex: number | undefined;
     for (const cand of speciesCandidates(c.name)) {
-      sp = await fetchSpecies(cand);
-      await sleep(60);
-      if (sp) break;
+      dex = resolveDex(cand, "en");
+      if (dex) break;
     }
-    if (!sp) { unmatched.push(c.name); continue; }
+    if (!dex) { unmatched.push(c.name); continue; }
     matched++;
-    const ko = sp.names.find((x) => x.language.name === "ko")?.name ?? null;
-    const dex = sp.id;
+    const ko = getName(dex, "ko") ?? null;
 
     if (DRY) continue;
     // pokedexNumbers (비어있을 때만)

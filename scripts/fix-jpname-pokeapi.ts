@@ -8,43 +8,13 @@
  * → 1996년 일본 정식 게임이 이미 정한 일본명을 dex# 기반으로 일괄 적용.
  *
  * - 대상: pokedexNumbers 가 있는 LogicalCard 의 연결된 CardLocale (ja language).
- * - 정책: 기존 JP 이름이 PokeAPI 정식과 다르면 교체. 이전 값은 diff 로 로그.
+ * - 출처: 표준 이름 매핑표 data/pokeapi/*.csv (로더의 ja = ja-hrkt 카타카나 = TCG 표준 일본명).
+ * - 정책: 기존 JP 이름이 표준 일본명과 다르면 교체. 이전 값은 diff 로 로그.
  * - Trainer/Energy 는 미대상 (dex# 없음, 각 카드 고유 이름).
- *
- * 호출: 캐시 사용해서 unique dex# 만. ~150 dex# × 200ms.
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
-import { execFile } from "node:child_process";
-import { promisify } from "node:util";
-const execFileP = promisify(execFile);
-
-async function fetchJson<T>(url: string): Promise<T | null> {
-  try {
-    const { stdout } = await execFileP("curl", ["-sSL", "--max-time", "15", url], { maxBuffer: 4 * 1024 * 1024 });
-    if (!stdout) return null;
-    return JSON.parse(stdout) as T;
-  } catch {
-    return null;
-  }
-}
-
-function sleep(ms: number) {
-  return new Promise((r) => setTimeout(r, ms));
-}
-
-type SpeciesResp = {
-  names: { name: string; language: { name: string } }[];
-};
-
-async function getJpName(dexNum: number, cache: Map<number, string | null>): Promise<string | null> {
-  if (cache.has(dexNum)) return cache.get(dexNum)!;
-  const data = await fetchJson<SpeciesResp>(`https://pokeapi.co/api/v2/pokemon-species/${dexNum}/`);
-  await sleep(150);
-  const ja = data?.names.find((n) => n.language.name === "ja")?.name ?? null;
-  cache.set(dexNum, ja);
-  return ja;
-}
+import { getName } from "./lib/pokeapi-names";
 
 async function main() {
   // PMCG1~6 의 Pokemon LogicalCard + 그 ja locale
@@ -70,19 +40,18 @@ async function main() {
   });
   console.log(`대상 ${cards.length} Pokemon LogicalCard\n`);
 
-  const cache = new Map<number, string | null>();
   let changed = 0;
   let alreadyCorrect = 0;
   let noJaLocale = 0;
-  let noPokeApi = 0;
+  let noMapping = 0;
   const changes: { id: string; before: string; after: string; dex: number }[] = [];
 
   for (const c of cards) {
     if (c.locales.length === 0) { noJaLocale++; continue; }
     const ja = c.locales[0];
     const dex = c.pokedexNumbers[0];
-    const correct = await getJpName(dex, cache);
-    if (!correct) { noPokeApi++; continue; }
+    const correct = getName(dex, "ja") ?? null;
+    if (!correct) { noMapping++; continue; }
     if (ja.name === correct) { alreadyCorrect++; continue; }
     changes.push({ id: ja.id, before: ja.name, after: correct, dex });
     await prisma.cardLocale.update({
@@ -96,8 +65,7 @@ async function main() {
   console.log(`  변경: ${changed}`);
   console.log(`  이미 정확: ${alreadyCorrect}`);
   console.log(`  ja locale 없음: ${noJaLocale}`);
-  console.log(`  PokeAPI 무응답: ${noPokeApi}`);
-  console.log(`  unique dex# fetch: ${cache.size}`);
+  console.log(`  매핑표에 없음: ${noMapping}`);
 
   console.log(`\n── 샘플 변경 (앞 20건) ──`);
   for (const ch of changes.slice(0, 20)) {

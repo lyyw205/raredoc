@@ -145,7 +145,7 @@ async function main() {
     done++;
     const en = cleanName(c.name);
     const num = c.numberInt ?? parseInt(c.number, 10);
-    const title = `${en.replace(/\s+/g, "_")}_(${BULBA.replace(/\s+/g, "_")}_${num})`;
+    const title = `${en.replace(/\s+/g, "_")}_(${BULBA!.replace(/\s+/g, "_")}_${num})`;
     const wt = await fetchWikitext(title);
     await sleep(120);
     if (!wt || wt.includes("Wikitext")) { /* noop */ }

@@ -1,45 +1,13 @@
 /**
- * Pokemon 카드의 LogicalCard.nameKo 를 PokeAPI 에서 한국어 이름으로 채움.
+ * Pokemon 카드의 LogicalCard.nameKo 를 표준 이름 매핑표(PokeAPI CSV)에서 한국어 이름으로 채움.
  *
  * - 대상: pokedexNumbers 가 있는 LogicalCard (즉 Pokemon 카드)
- * - PokeAPI /pokemon-species/{id} 의 names 배열에서 ko 추출
- * - 캐싱: pokedex# 별 1회만 fetch (여러 LogicalCard 가 같은 dex# 공유)
+ * - 출처: data/pokeapi/*.csv (로더 scripts/lib/pokeapi-names.ts). 라이브 API 호출 없음.
  * - 정책: nameKo 가 이미 있으면 덮어쓰지 않음
- *
- * 호출: 약 200 unique dex# × 300ms ≈ 1분
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
-import { execFile } from "node:child_process";
-import { promisify } from "node:util";
-const execFileP = promisify(execFile);
-
-async function fetchJson<T>(url: string): Promise<T | null> {
-  try {
-    const { stdout } = await execFileP("curl", ["-sSL", "--max-time", "15", url], { maxBuffer: 4 * 1024 * 1024 });
-    if (!stdout) return null;
-    return JSON.parse(stdout) as T;
-  } catch {
-    return null;
-  }
-}
-
-function sleep(ms: number) {
-  return new Promise((r) => setTimeout(r, ms));
-}
-
-type SpeciesResp = {
-  names: { name: string; language: { name: string } }[];
-};
-
-async function getKoName(dexNum: number, cache: Map<number, string | null>): Promise<string | null> {
-  if (cache.has(dexNum)) return cache.get(dexNum)!;
-  const data = await fetchJson<SpeciesResp>(`https://pokeapi.co/api/v2/pokemon-species/${dexNum}/`);
-  await sleep(150);
-  const ko = data?.names.find((n) => n.language.name === "ko")?.name ?? null;
-  cache.set(dexNum, ko);
-  return ko;
-}
+import { getName } from "./lib/pokeapi-names";
 
 async function main() {
   // PMCG1~6 의 Pokemon 카드만
@@ -61,7 +29,6 @@ async function main() {
   });
   console.log(`대상 ${cards.length} Pokemon 카드 (이미 채워진 nameKo: ${cards.filter(c => c.nameKo).length})\n`);
 
-  const cache = new Map<number, string | null>();
   let updated = 0;
   let skipped = 0;
   let failed = 0;
@@ -69,7 +36,7 @@ async function main() {
   for (const c of cards) {
     if (c.nameKo) { skipped++; continue; }
     const dex = c.pokedexNumbers[0];
-    const ko = await getKoName(dex, cache);
+    const ko = getName(dex, "ko") ?? null;
     if (!ko) {
       console.log(`  ✗ ${c.id}  dex#${dex}  Korean name 없음`);
       failed++;
@@ -86,8 +53,7 @@ async function main() {
   console.log(`\n── 결과 ──`);
   console.log(`  업데이트: ${updated}`);
   console.log(`  이미 있음 (skip): ${skipped}`);
-  console.log(`  실패 (PokeAPI 무응답): ${failed}`);
-  console.log(`  unique dex# fetch: ${cache.size}`);
+  console.log(`  실패 (매핑표에 없음): ${failed}`);
   await prisma.$disconnect();
 }
 
