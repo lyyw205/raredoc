@@ -53,11 +53,15 @@ async function main() {
   if (noDex.length) console.log(`   dex못찾음: ${noDex.slice(0, 10).join(", ")}`);
 
   if (!APPLY) { console.log("\n(dry) 적용: --apply"); await prisma.$disconnect(); return; }
-  if (coll + trade > 0 || otherLoc > 0) { console.log("⚠️ 가드 실패(참조/병합 존재) — 중단. 수동 확인 필요."); await prisma.$disconnect(); return; }
+  if (coll + trade > 0) { console.log("⚠️ 참조 존재(컬렉션/거래) — 중단. 수동 확인 필요."); await prisma.$disconnect(); return; }
 
-  // 덮어쓰기: 기존 JP locale+LC 삭제 후 재생성
+  // 안전 덮어쓰기: JP locale 삭제 → 비워진 옛 JP LC만 삭제(KR/EN 남은 LC는 유지=추후 재병합/정리)
   await prisma.cardLocale.deleteMany({ where: { setId: jpSet } });
-  await prisma.logicalCard.deleteMany({ where: { primarySetId: jpSet } });
+  const oldLcs = await prisma.logicalCard.findMany({ where: { primarySetId: jpSet }, select: { id: true, locales: { select: { id: true } } } });
+  const emptyIds = oldLcs.filter((l) => l.locales.length === 0).map((l) => l.id);
+  if (emptyIds.length) await prisma.logicalCard.deleteMany({ where: { id: { in: emptyIds } } });
+  const keptLc = oldLcs.length - emptyIds.length;
+  if (keptLc > 0) console.log(`  옛 JP LC: 빈것 ${emptyIds.length} 삭제 · KR/EN 잔존 ${keptLc} 유지(KR공식화 후 정리)`);
   let made = 0;
   for (const c of cards) {
     const supertype = supertypeOf(c.category);

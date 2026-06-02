@@ -42,23 +42,24 @@ async function main() {
   console.log(`■ ${jpSet} ← tcgdex:${tcgId}(ja) | ${cards.length}장 ${APPLY ? "★적용" : "(dry)"}`);
   let touched = 0, fail = 0, dexTcg = 0, dexJa = 0, dexNone = 0; const noDex: string[] = []; const sample: string[] = [];
 
+  const OW = process.argv.includes("--overwrite"); // 기존 값이 틀린 경우 tcgdex 로 덮어쓰기
   for (const c of cards) {
     const lc = c.logicalCard;
-    const needs = !lc.supertype || (lc.subtypes?.length ?? 0) === 0 || (lc.pokedexNumbers?.length ?? 0) === 0 || lc.hp == null || (lc.types?.length ?? 0) === 0;
+    const needs = OW || !lc.supertype || (lc.subtypes?.length ?? 0) === 0 || (lc.pokedexNumbers?.length ?? 0) === 0 || lc.hp == null || (lc.types?.length ?? 0) === 0;
     if (!needs) continue;
     let d = await fetchJson(`https://api.tcgdex.net/v2/ja/cards/${tcgId}-${pad(c.number)}`); await sleep(80);
     if (!d) { const ni = parseInt(c.number, 10); if (!isNaN(ni)) { d = await fetchJson(`https://api.tcgdex.net/v2/ja/cards/${tcgId}-${ni}`); await sleep(60); } }
     if (!d) { fail++; continue; }
     const supertype = supertypeOf(d.category);
     const update: Record<string, unknown> = {};
-    if (!lc.supertype && supertype) update.supertype = supertype;
-    if ((lc.subtypes?.length ?? 0) === 0) { const st = subtypesOf(d); if (st.length) update.subtypes = st; }
-    if ((lc.pokedexNumbers?.length ?? 0) === 0 && supertype === "Pokémon") {
+    if (supertype && (OW || !lc.supertype)) update.supertype = supertype;
+    if (OW || (lc.subtypes?.length ?? 0) === 0) { const st = subtypesOf(d); if (st.length || OW) update.subtypes = st; }
+    if (supertype === "Pokémon" && (OW || (lc.pokedexNumbers?.length ?? 0) === 0)) {
       if (d.dexId?.length) { update.pokedexNumbers = d.dexId; dexTcg++; }
       else { const x = dexFromJa(d.name, ja); if (x) { update.pokedexNumbers = [x]; dexJa++; } else { dexNone++; noDex.push(`#${c.number} ${c.name}`); } }
-    }
-    if (lc.hp == null && d.hp != null) update.hp = d.hp;
-    if ((lc.types?.length ?? 0) === 0 && d.types?.length) update.types = d.types;
+    } else if (OW && supertype && supertype !== "Pokémon") update.pokedexNumbers = []; // 비포켓몬 dex 정리
+    if (d.hp != null && (OW || lc.hp == null)) update.hp = d.hp;
+    if (d.types?.length && (OW || (lc.types?.length ?? 0) === 0)) update.types = d.types;
     if (Object.keys(update).length) {
       if (sample.length < 5) sample.push(`#${c.number} ${c.name} ${JSON.stringify(update)}`);
       if (APPLY) await prisma.logicalCard.update({ where: { id: c.logicalCardId }, data: update });

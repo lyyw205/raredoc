@@ -32,12 +32,26 @@ const CFG: Record<string, { jp: string; json: string; maxNum?: number }> = {
   "kr-sv5k": { jp: "jp-tcg-SV5K", json: `${DIR}/kr-official-sv5k.json` },
   "kr-sv5m": { jp: "jp-tcg-SV5M", json: `${DIR}/kr-official-sv5m.json` },
   "kr-sv5a": { jp: "jp-sv-crimson-haze", json: `${DIR}/kr-official-sv5a.json` },
+  "kr-sv6": { jp: "jp-sv-twilight-masquerade", json: `${DIR}/kr-official-sv6.json` },
+  "kr-sv6a": { jp: "jp-sv-shrouded-fable", json: `${DIR}/kr-official-sv6a.json` },
+  "kr-sv7": { jp: "jp-sv-stellar-crown", json: `${DIR}/kr-official-sv7.json` },
+  "kr-sv7a": { jp: "jp-sv-paradise-dragona", json: `${DIR}/kr-official-sv7a.json` },
+  "kr-sv8": { jp: "jp-sv-surging-sparks", json: `${DIR}/kr-official-sv8.json` },
+  "kr-sv8a": { jp: "jp-sv-prismatic-evolutions", json: `${DIR}/kr-official-sv8a.json` },
 };
 type Off = { number: string; koName: string; illustrator: string | null; image: string | null; numInt: number };
 type Jp = { numInt: number; name: string; lcid: string; illus: string | null; dex: number | null; supertype: string | null };
 
 const norm = (s: string | null) => (s ?? "").trim().toLowerCase();
-const koDex = (name: string) => { const d = resolveCardDexes(name, "ko"); return d.length ? d[0] : null; };
+// 한글 폼명 → dex (ja인덱스/resolveCardDexes 가 못 푸는 SV 테라/폼 카드). 우선 적용.
+const KO_FORM: [RegExp, number][] = [
+  [/오거폰/, 1017], [/다투곰/, 901],
+  [/(커트|스핀|프로스트|워시|히트)\s*로토무|로토무/, 479], [/캐스퐁/, 351],
+];
+const koDex = (name: string) => {
+  for (const [re, dex] of KO_FORM) if (re.test(name)) return dex;
+  const d = resolveCardDexes(name, "ko"); return d.length ? d[0] : null;
+};
 
 // official → jp 매칭 (버킷 페어). 반환: Map<officialNum, Jp>
 function match(offs: Off[], jps: Jp[]) {

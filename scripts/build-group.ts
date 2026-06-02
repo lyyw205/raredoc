@@ -71,6 +71,36 @@ const CONFIG: Record<string, Cfg> = {
     jp: ["jp-sv-crimson-haze"], kr: ["kr-sv5a"],
     krMirror: { "kr-sv5a": "jp-sv-crimson-haze" }, enNative: null, krMirrorAll: true, // EN 네이티브 없음 → 교차그룹
   },
+  "sv-twilight-masquerade": {
+    nameKo: "변환의 가면", nameEn: "Twilight Masquerade",
+    jp: ["jp-sv-twilight-masquerade"], kr: ["kr-sv6"],
+    krMirror: { "kr-sv6": "jp-sv-twilight-masquerade" }, enNative: ["sv6"], krMirrorAll: true,
+  },
+  "sv-shrouded-fable": {
+    nameKo: "나이트원더러", nameEn: "Shrouded Fable",
+    jp: ["jp-sv-shrouded-fable"], kr: ["kr-sv6a"],
+    krMirror: { "kr-sv6a": "jp-sv-shrouded-fable" }, enNative: ["sv6pt5"], krMirrorAll: true,
+  },
+  "sv-stellar-crown": {
+    nameKo: "스텔라미라클", nameEn: "Stellar Crown",
+    jp: ["jp-sv-stellar-crown"], kr: ["kr-sv7"],
+    krMirror: { "kr-sv7": "jp-sv-stellar-crown" }, enNative: ["sv7"], krMirrorAll: true,
+  },
+  "sv-paradise-dragona": {
+    nameKo: "낙원드래고나", nameEn: "Paradise Dragona",
+    jp: ["jp-sv-paradise-dragona"], kr: ["kr-sv7a"],
+    krMirror: { "kr-sv7a": "jp-sv-paradise-dragona" }, enNative: null, krMirrorAll: true, // EN 네이티브 없음 → 교차그룹
+  },
+  "sv-surging-sparks": {
+    nameKo: "초전브레이커", nameEn: "Surging Sparks",
+    jp: ["jp-sv-surging-sparks"], kr: ["kr-sv8"],
+    krMirror: { "kr-sv8": "jp-sv-surging-sparks" }, enNative: ["sv8"], krMirrorAll: true,
+  },
+  "sv-prismatic-evolutions": {
+    nameKo: "테라스탈 페스타 ex", nameEn: "Prismatic Evolutions",
+    jp: ["jp-sv-prismatic-evolutions"], kr: ["kr-sv8a"],
+    krMirror: { "kr-sv8a": "jp-sv-prismatic-evolutions" }, enNative: ["sv8pt5"], krMirrorAll: true,
+  },
 };
 
 type Row = {

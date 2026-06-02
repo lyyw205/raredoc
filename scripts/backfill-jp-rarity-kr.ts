@@ -13,7 +13,7 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 const execFileP = promisify(execFile);
 
-const CFG: Record<string, string> = { "kr-sv2p": "sv2p", "kr-sv2d": "sv2d", "kr-sv4k": "sv4k", "kr-sv4m": "sv4m", "kr-sv-151": "sv2a", "kr-sv3": "sv3", "kr-sv3a": "sv3a", "kr-sv4a": "sv4a", "kr-sv5k": "sv5k", "kr-sv5m": "sv5m", "kr-sv5a": "sv5a" };
+const CFG: Record<string, string> = { "kr-sv2p": "sv2p", "kr-sv2d": "sv2d", "kr-sv4k": "sv4k", "kr-sv4m": "sv4m", "kr-sv-151": "sv2a", "kr-sv3": "sv3", "kr-sv3a": "sv3a", "kr-sv4a": "sv4a", "kr-sv5k": "sv5k", "kr-sv5m": "sv5m", "kr-sv5a": "sv5a", "kr-sv6": "sv6", "kr-sv6a": "sv6a", "kr-sv7": "sv7", "kr-sv7a": "sv7a", "kr-sv8": "sv8", "kr-sv8a": "sv8a" };
 // KR/JP 레어도 코드 → Rarity.code (sync-pack-namu-ko.ts 와 동일)
 const RMAP: Record<string, string> = {
   C: "Common", U: "Uncommon", R: "Rare", RR: "Double Rare", RRR: "Triple Rare", AR: "Art Rare",

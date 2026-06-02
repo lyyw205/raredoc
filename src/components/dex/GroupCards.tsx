@@ -11,6 +11,12 @@ import ragingSurf from "@/data/group-sv-raging-surf.json";
 import paldeanFates from "@/data/group-sv-paldean-fates.json";
 import temporalForces from "@/data/group-sv-temporal-forces.json";
 import crimsonHaze from "@/data/group-sv-crimson-haze.json";
+import twilightMasquerade from "@/data/group-sv-twilight-masquerade.json";
+import shroudedFable from "@/data/group-sv-shrouded-fable.json";
+import stellarCrown from "@/data/group-sv-stellar-crown.json";
+import paradiseDragona from "@/data/group-sv-paradise-dragona.json";
+import surgingSparks from "@/data/group-sv-surging-sparks.json";
+import prismaticEvolutions from "@/data/group-sv-prismatic-evolutions.json";
 
 // 그룹별 EN/JP/KR 그룹핑 카드 UI — JP 앵커(번호순) + 언어탭 + 영판전용 꼬리.
 // 카드 도감(DexCatalog)에서 해당 그룹 선택 시 인-플레이스로 렌더. 데이터는 확정 그룹핑 JSON.
@@ -25,6 +31,12 @@ const DATA: Record<string, GroupData> = {
   "sv-paldean-fates": paldeanFates as unknown as GroupData,
   "sv-temporal-forces": temporalForces as unknown as GroupData,
   "sv-crimson-haze": crimsonHaze as unknown as GroupData,
+  "sv-twilight-masquerade": twilightMasquerade as unknown as GroupData,
+  "sv-shrouded-fable": shroudedFable as unknown as GroupData,
+  "sv-stellar-crown": stellarCrown as unknown as GroupData,
+  "sv-paradise-dragona": paradiseDragona as unknown as GroupData,
+  "sv-surging-sparks": surgingSparks as unknown as GroupData,
+  "sv-prismatic-evolutions": prismaticEvolutions as unknown as GroupData,
 };
 export const GROUPED_GROUP_IDS = new Set(Object.keys(DATA));
 
