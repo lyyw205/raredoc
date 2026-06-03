@@ -25,7 +25,7 @@ const CONFIG: Record<string, Cfg> = {
   "sv-base": {
     nameKo: "스칼렛 ex + 바이올렛 ex", nameEn: "Scarlet & Violet",
     jp: ["jp-tcg-SV1S", "jp-tcg-SV1V"], kr: ["kr-sv1s", "kr-sv1v"],
-    krMirror: { "kr-sv1s": "jp-tcg-SV1S", "kr-sv1v": "jp-tcg-SV1V" }, enNative: ["sv1"],
+    krMirror: { "kr-sv1s": "jp-tcg-SV1S", "kr-sv1v": "jp-tcg-SV1V" }, enNative: ["sv1"], krMirrorAll: true, enMerged: true,
   },
   "sv-triplet-beat": {
     nameKo: "트리플렛비트", nameEn: "Triplet Beat",
