@@ -33,6 +33,14 @@ export const TR_JP2EN: Record<string, string> = {
   "ハイダイ": "Kofu",          // 물 체육관장
   "アカマツ": "Crispin",        // 블루베리 사천왕(불꽃)
   "ブライア": "Briar",          // 블루베리학원 교수
+  "タケシのスカウト": "Brock's Scouting",       // 타케시=Brock
+  "アイリスの闘志": "Iris's Fighting Spirit",    // 아이리스=Iris
+  "怖いお兄さん": "Ruffian",
+  "ホップのバッグ": "Hop's Bag",
+  "ホップのこだわりハチマキ": "Hop's Choice Band",
+  "リーリエのしんじゅ": "Lillie's Pearl",        // 리리에=Lillie
+  "Nのポイントアップ": "N's PP Up",
+  "Nの城": "N's Castle",
   // ── 아이템 ──
   "ともだちてちょう": "Pal Pad",
   "ネストボール": "Nest Ball",
@@ -83,6 +91,8 @@ export const TR_JP2EN: Record<string, string> = {
   "古びたねっこの化石": "Antique Root Fossil",
   "オッカのみ": "Occa Berry",
   "ウタンのみ": "Payapa Berry",
+  "いいきずぐすり": "Super Potion",
+  "とりかえチケット": "Redeemable Ticket",
   // ── 스타디움 ──
   "ビーチコート": "Beach Court",
   "テーブルシティ": "Mesagoza",
@@ -92,6 +102,8 @@ export const TR_JP2EN: Record<string, string> = {
   "タウンデパート": "Town Store",
   "ボウルタウン": "Artazon",
   "ゼロの大空洞": "Area Zero Underdepths",
+  "ハッコウシティ": "Levincia",
+  "ハロンタウン": "Postwick",
 };
 
 // 博士の研究(Professor's Research)은 세트별 박사(Sada=고대/스칼렛 · Turo=미래/바이올렛)로 EN명이 갈린다.
