@@ -1203,7 +1203,24 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
               {view === "mine" && <ProgressBar value={pct} />}
 
               {GROUPED_GROUP_IDS.has(set.id) ? (
-                <div className="mt-3"><GroupCards groupId={set.id} /></div>
+                <div className="mt-3">
+                  <GroupCards
+                    groupId={set.id}
+                    onCardClick={(c) => openCard({
+                      id: c.id,
+                      name: c.name,
+                      number: c.number,
+                      rarity: c.rarity ?? undefined,
+                      region: c.region,
+                      imageSmall: c.image,
+                      imageLarge: c.image,
+                      owned: false,
+                      setName: set.name,
+                      setId: set.id,
+                      setLogoUrl: set.logoUrl ?? `https://images.pokemontcg.io/${set.id}/logo.png`,
+                    })}
+                  />
+                </div>
               ) : (
               <div
                 className={`grid gap-1.5 ${view === "mine" ? "mt-1" : "mt-3"}`}

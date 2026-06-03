@@ -48,15 +48,18 @@ const DATA: Record<string, GroupData> = {
 };
 export const GROUPED_GROUP_IDS = new Set(Object.keys(DATA));
 
-type Print = { number: string; name: string; image: string | null; rarity: string | null; setId: string } | null;
+type Print = { id: string; number: string; name: string; image: string | null; rarity: string | null; setId: string; region: string } | null;
 type Anchor = { jp: Print; en: Print; kr: Print; dex: number | null };
-type TailCard = { number: string; name: string; image: string | null; rarity: string | null; dex: number | null; jpElsewhere: boolean };
+type TailCard = { id: string; number: string; name: string; image: string | null; rarity: string | null; setId: string; region: string; dex: number | null; jpElsewhere: boolean };
+
+// 타일 클릭 시 상위(DexCatalog)로 넘기는 카드 식별 정보 — 패널이 id 로 상세를 fetch.
+export type GroupCardClick = { id: string; name: string; number: string; rarity: string | null; image: string | null; region: string; setId: string };
 type GroupData = { group: { id: string; crossGroupEN?: boolean }; counts: { enMatched: number; krMatched: number }; anchors: Anchor[]; tail: { enOnly: TailCard[] } };
 
 const REGION_LABEL: Record<string, string> = { JP: "일본판", EN: "영문판", KR: "한국판" };
 const REGION_COLOR: Record<string, string> = { JP: "#e2504a", EN: "#3182f6", KR: "#1f9d55" };
 
-export function GroupCards({ groupId }: { groupId: string }) {
+export function GroupCards({ groupId, onCardClick }: { groupId: string; onCardClick?: (c: GroupCardClick) => void }) {
   const data = DATA[groupId];
   if (!data) return null;
   const anchors = data.anchors;
@@ -73,7 +76,7 @@ export function GroupCards({ groupId }: { groupId: string }) {
       </p>
 
       <SectionTitle>본문 — 일본판 기준 ({anchors.length})</SectionTitle>
-      <Grid>{anchors.map((a, i) => <AnchorTile key={i} a={a} />)}</Grid>
+      <Grid>{anchors.map((a, i) => <AnchorTile key={i} a={a} onCardClick={onCardClick} />)}</Grid>
 
       {enOnly.length > 0 && (
         <>
@@ -83,7 +86,11 @@ export function GroupCards({ groupId }: { groupId: string }) {
           </SectionTitle>
           <Grid>
             {enOnly.map((c, i) => (
-              <figure key={i} style={tileStyle}>
+              <figure
+                key={i}
+                style={{ ...tileStyle, cursor: onCardClick ? "pointer" : "default" }}
+                onClick={onCardClick ? () => onCardClick({ id: c.id, name: c.name, number: c.number, rarity: c.rarity, image: c.image, region: c.region, setId: c.setId }) : undefined}
+              >
                 <ImgBox src={c.image} alt={c.name} />
                 <figcaption style={capStyle}>
                   <div style={{ ...tagStyle, background: "#fbe9e8", color: REGION_COLOR.EN, marginBottom: 4 }}>영문판</div>
@@ -100,13 +107,18 @@ export function GroupCards({ groupId }: { groupId: string }) {
   );
 }
 
-function AnchorTile({ a }: { a: Anchor }) {
+function AnchorTile({ a, onCardClick }: { a: Anchor; onCardClick?: (c: GroupCardClick) => void }) {
   const avail = (["JP", "EN", "KR"] as const).filter((r) => a[r.toLowerCase() as "jp" | "en" | "kr"]);
   const [active, setActive] = React.useState<"JP" | "EN" | "KR">("JP");
   const cur = a[active.toLowerCase() as "jp" | "en" | "kr"] ?? a.jp;
+  const handle = onCardClick && cur
+    ? () => onCardClick({ id: cur.id, name: cur.name, number: cur.number, rarity: cur.rarity, image: cur.image, region: cur.region, setId: cur.setId })
+    : undefined;
   return (
     <figure style={tileStyle}>
-      <ImgBox src={cur?.image ?? null} alt={cur?.name ?? ""} />
+      <div onClick={handle} style={{ cursor: handle ? "pointer" : "default" }} title={handle ? "카드 정보 보기" : undefined}>
+        <ImgBox src={cur?.image ?? null} alt={cur?.name ?? ""} />
+      </div>
       <figcaption style={capStyle}>
         <div style={{ display: "flex", gap: 4, justifyContent: "center", marginBottom: 5 }}>
           {(["JP", "EN", "KR"] as const).map((r) => {

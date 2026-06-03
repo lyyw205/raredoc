@@ -143,7 +143,7 @@ function toRow(l: any): Row {
   };
 }
 const load = async (setIds: string[]) => (await prisma.cardLocale.findMany({ where: { setId: { in: setIds } }, select: sel })).map(toRow);
-const pub = (r: Row | undefined) => r ? { number: r.number, name: r.name, image: r.image, rarity: r.rarity, setId: r.setId } : null;
+const pub = (r: Row | undefined) => r ? { id: r.cid, number: r.number, name: r.name, image: r.image, rarity: r.rarity, setId: r.setId, region: r.region } : null;
 
 const tfp = (r: Row) => `${(r.illus ?? "").trim().toLowerCase()}|${r.tier}|${r.subtypes}`;     // 트레이너 지문
 const fpP = (r: Row) => `${r.dex}|${(r.illus ?? "").trim().toLowerCase()}|${r.subtypes}`;       // 포켓몬 dex버킷(tier 제외)
