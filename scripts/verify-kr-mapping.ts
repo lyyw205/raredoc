@@ -14,7 +14,7 @@ import { resolveCardDexes } from "./lib/pokeapi-names";
 const POKE = ["Pokémon", "Pokemon"];
 const SETS: [string, string][] = [
   ["kr-sv2p", "sv2p"], ["kr-sv2d", "sv2d"], ["kr-sv4k", "sv4k"], ["kr-sv4m", "sv4m"], ["kr-sv-151", "sv2a"], ["kr-sv3", "sv3"], ["kr-sv3a", "sv3a"], ["kr-sv4a", "sv4a"], ["kr-sv5k", "sv5k"], ["kr-sv5m", "sv5m"], ["kr-sv5a", "sv5a"], ["kr-sv6", "sv6"], ["kr-sv6a", "sv6a"], ["kr-sv7", "sv7"], ["kr-sv7a", "sv7a"], ["kr-sv8", "sv8"], ["kr-sv8a", "sv8a"], ["kr-sv9", "sv9"], ["kr-sv9a", "sv9a"], ["kr-sv10", "sv10"], ["kr-sv11b", "sv11b"], ["kr-sv11w", "sv11w"],
-  ["kr-m1l", "m1l"], ["kr-m1s", "m1s"], ["kr-m2", "m2"], ["kr-m2a", "m2a"], ["kr-m3", "m3"], ["kr-m4", "m4"], ["kr-s12a", "s12a"], ["kr-s12", "s12"], ["kr-s11a", "s11a"], ["kr-s11", "s11"], ["kr-s10b", "s10b"], ["kr-s10a", "s10a"], ["kr-s10", "s10d"], ["kr-s10p", "s10p"],
+  ["kr-m1l", "m1l"], ["kr-m1s", "m1s"], ["kr-m2", "m2"], ["kr-m2a", "m2a"], ["kr-m3", "m3"], ["kr-m4", "m4"], ["kr-s12a", "s12a"], ["kr-s12", "s12"], ["kr-s11a", "s11a"], ["kr-s11", "s11"], ["kr-s10b", "s10b"], ["kr-s10a", "s10a"], ["kr-s10", "s10d"], ["kr-s10p", "s10p"], ["kr-s9a", "s9a"],
 ];
 const norm = (s: string | null) => (s ?? "").trim().toLowerCase();
 
