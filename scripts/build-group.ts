@@ -228,6 +228,16 @@ const CONFIG: Record<string, Cfg> = {
     jp: ["jp-tcg-S7R"], kr: ["kr-s7r"],
     krMirror: { "kr-s7r": "jp-tcg-S7R" }, enNative: [], krMirrorAll: true,
   },
+  "og-s8a": {
+    nameKo: "25th 아니버서리 컬렉션", nameEn: "25th Anniversary Collection",
+    jp: ["jp-tcg-S8a"], kr: ["kr-s8a"],
+    krMirror: { "kr-s8a": "jp-tcg-S8a" }, enNative: [], krMirrorAll: true,
+  },
+  "og-s8a-g": {
+    nameKo: "25th 골든박스", nameEn: "25th Anniversary Golden Box",
+    jp: ["jp-tcg-S8a-G"], kr: ["kr-s8a-g"],
+    krMirror: { "kr-s8a-g": "jp-tcg-S8a-G" }, enNative: [], krMirrorAll: true,
+  },
   "og-s8": {
     nameKo: "퓨전아츠", nameEn: "Fusion Arts",
     jp: ["jp-tcg-S8"], kr: ["kr-s8"],

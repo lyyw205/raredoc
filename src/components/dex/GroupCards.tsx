@@ -38,6 +38,8 @@ import ogS10p from "@/data/group-og-s10p.json";
 import ogS9a from "@/data/group-og-s9a.json";
 import ogS9 from "@/data/group-og-s9.json";
 import ogS8b from "@/data/group-og-s8b.json";
+import ogS8a from "@/data/group-og-s8a.json";
+import ogS8aG from "@/data/group-og-s8a-g.json";
 import ogS8 from "@/data/group-og-s8.json";
 import ogS7d from "@/data/group-og-s7d.json";
 import ogS7r from "@/data/group-og-s7r.json";
@@ -95,6 +97,8 @@ const DATA: Record<string, GroupData> = {
   "og-s9a": ogS9a as unknown as GroupData,
   "og-s9": ogS9 as unknown as GroupData,
   "og-s8b": ogS8b as unknown as GroupData,
+  "og-s8a": ogS8a as unknown as GroupData,
+  "og-s8a-g": ogS8aG as unknown as GroupData,
   "og-s8": ogS8 as unknown as GroupData,
   "og-s7d": ogS7d as unknown as GroupData,
   "og-s7r": ogS7r as unknown as GroupData,
