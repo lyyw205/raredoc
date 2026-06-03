@@ -17,7 +17,8 @@ import { join } from "node:path";
 
 const POKE = ["Pokémon", "Pokemon"];
 
-type Cfg = { nameKo: string; nameEn: string; jp: string[]; kr: string[]; krMirror: Record<string, string>; enNative: string[] | null; krMirrorAll?: boolean };
+type Cfg = { nameKo: string; nameEn: string; jp: string[]; kr: string[]; krMirror: Record<string, string>; enNative: string[] | null; krMirrorAll?: boolean; enMerged?: boolean };
+// enMerged: EN 이 DB 에서 JP LC 로 정체성 병합됨(merge-en-identity) → 공유 lcid 로 읽음, 미병합 EN 은 영판전용 섹션.
 // krMirrorAll: KR 세트가 JP 정수번호 완전미러(트레이너 포함)일 때 true — 모든 카드 번호로 매칭.
 //   (일반 KR은 트레이너 번호가 JP와 어긋나 일러스트레이터 페어링 필요 → false/미지정)
 const CONFIG: Record<string, Cfg> = {
@@ -44,7 +45,7 @@ const CONFIG: Record<string, Cfg> = {
   "sv-151": {
     nameKo: "포켓몬 카드 151", nameEn: "151",
     jp: ["jp-sv-151"], kr: ["kr-sv-151"],
-    krMirror: { "kr-sv-151": "jp-sv-151" }, enNative: ["sv3pt5"], krMirrorAll: true,
+    krMirror: { "kr-sv-151": "jp-sv-151" }, enNative: ["sv3pt5"], krMirrorAll: true, enMerged: true,
   },
   "sv-obsidian-flames": {
     nameKo: "흑염의 지배자", nameEn: "Obsidian Flames",
@@ -370,7 +371,13 @@ async function main() {
   // ── EN ↔ JP (포켓몬) ──
   const enForJp = new Map<string, Row>();
   const enUnmatched: Row[] = [];
-  if (!crossGroup) {
+  if (cfg.enMerged) {
+    // EN 이 JP LC 로 정체성 병합됨 → 공유 lcid 로 읽음(KR 과 동일). 미병합 EN = 영판전용 섹션.
+    const enByLcid = new Map<string, Row>(); for (const e of en) enByLcid.set(e.lcid, e);
+    const jpLcids = new Set(jp.map((j) => j.lcid));
+    for (const j of jp) { const e = enByLcid.get(j.lcid); if (e) enForJp.set(j.cid, e); }
+    for (const e of en) if (!jpLcids.has(e.lcid)) enUnmatched.push(e);
+  } else if (!crossGroup) {
     bucketPair(en.filter(isPoke), jp.filter(isPoke), fpP, fpP, enForJp, byTier);
     // 폴백: EN 일러 결손(null) 등으로 미매칭된 앵커를 dex+subtypes(일러 제외)로 2차 매칭
     const lpP = (r: Row) => `${r.dex}|${r.subtypes}`;
