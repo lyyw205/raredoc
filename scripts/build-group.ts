@@ -35,7 +35,7 @@ const CONFIG: Record<string, Cfg> = {
   "sv-paldea-evolved": {
     nameKo: "스노해저드 + 클레이버스트", nameEn: "Paldea Evolved",
     jp: ["jp-tcg-SV2P", "jp-tcg-SV2D"], kr: ["kr-sv2p", "kr-sv2d"],
-    krMirror: { "kr-sv2p": "jp-tcg-SV2P", "kr-sv2d": "jp-tcg-SV2D" }, enNative: ["sv2"], krMirrorAll: true,
+    krMirror: { "kr-sv2p": "jp-tcg-SV2P", "kr-sv2d": "jp-tcg-SV2D" }, enNative: ["sv2"], krMirrorAll: true, enMerged: true,
   },
   "sv-paradox-rift": {
     nameKo: "고대의 포효 + 미래의 일섬", nameEn: "Paradox Rift",
