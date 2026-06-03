@@ -50,7 +50,7 @@ const CONFIG: Record<string, Cfg> = {
   "sv-obsidian-flames": {
     nameKo: "흑염의 지배자", nameEn: "Obsidian Flames",
     jp: ["jp-sv-obsidian-flames"], kr: ["kr-sv3"],
-    krMirror: { "kr-sv3": "jp-sv-obsidian-flames" }, enNative: ["sv3"], krMirrorAll: true,
+    krMirror: { "kr-sv3": "jp-sv-obsidian-flames" }, enNative: ["sv3"], krMirrorAll: true, enMerged: true,
   },
   "sv-raging-surf": {
     nameKo: "레이징서프", nameEn: "Raging Surf",

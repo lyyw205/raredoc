@@ -24,6 +24,11 @@ export const TR_JP2EN: Record<string, string> = {
   "リップ": "Tulip",           // 사천왕
   "オーリム博士の気迫": "Professor Sada's Vitality",   // 고대 박사
   "フトゥー博士のシナリオ": "Professor Turo's Scenario", // 미래 박사
+  "オモダカ": "Geeta",         // 톱 챔피언
+  "ライム": "Ryme",            // 고스트 체육관장
+  "オルティガ": "Ortega",       // 스타단 포이즌크루 보스
+  "ポピー": "Poppy",           // 사천왕
+  "コルサ": "Brassius",        // 풀 체육관장
   // ── 아이템 ──
   "ともだちてちょう": "Pal Pad",
   "ネストボール": "Nest Ball",
@@ -62,11 +67,17 @@ export const TR_JP2EN: Record<string, string> = {
   "ブーストエナジー 未来": "Future Booster Energy Capsule",
   "ワザマシンデヴォリューション": "Technical Machine: Devolution",
   "ワザマシン エヴォリューション": "Technical Machine: Evolution",
+  "パトロールキャップ": "Patrol Cap",
+  "リベンジパンチ": "Vengeful Punch",
+  "はげましのてがみ": "Letter of Encouragement",
   // ── 스타디움 ──
   "ビーチコート": "Beach Court",
   "テーブルシティ": "Mesagoza",
   "災いの荒野": "Calamitous Wasteland",
   "災いの雪山": "Calamitous Snowy Mountain",
+  "ポケモンリーグ本部": "Pokémon League Headquarters",
+  "タウンデパート": "Town Store",
+  "ボウルタウン": "Artazon",
 };
 
 // 博士の研究(Professor's Research)은 세트별 박사(Sada=고대/스칼렛 · Turo=미래/바이올렛)로 EN명이 갈린다.
