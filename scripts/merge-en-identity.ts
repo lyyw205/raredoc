@@ -20,6 +20,9 @@ const RANK: Record<string, number> = {
   "Hyper Rare": 8, "Rare Rainbow": 8, "Rare Secret": 8, "Black White Rare": 8, "Shiny Ultra Rare": 8, "Shiny Rare": 7,
 };
 const rank = (r?: string | null) => (r ? RANK[r] ?? 5 : 5);
+// ⚠ "Ultra Rare" 는 언어별로 의미가 다름: EN=풀아트(rank6, JP SR 등가) / JP=골드 최고등급(rank8, EN Hyper Rare 등가).
+// JP 카드 등급은 rankJp 로 — JP "Ultra Rare"→8 (한 dex 에 JP SR+골드 공존 시 EN UR/HR 과 올바로 정렬).
+const rankJp = (r?: string | null) => (r === "Ultra Rare" || r === "Rare Ultra" ? 8 : rank(r));
 
 const cleanEn = (n: string) => n.replace(/\s+(ex|EX|V|VMAX|VSTAR|GX)\b.*$/i, "").replace(/\s+ex$/i, "")
   .replace(/^(Paldean|Galarian|Alolan|Hisuian)\s+/, "").replace(/\s+(Sunny|Rainy|Snowy)\s+Form$/, "").trim();
@@ -51,7 +54,7 @@ async function main() {
   let sfix = 0;
   for (const [, rows] of jpByName) {
     if (rows.length < 2) continue;
-    const auth = rows.slice().sort((a, b) => rank(a.logicalCard.rarity?.code) - rank(b.logicalCard.rarity?.code) || (a.numberInt ?? 0) - (b.numberInt ?? 0))[0];
+    const auth = rows.slice().sort((a, b) => rankJp(a.logicalCard.rarity?.code) - rankJp(b.logicalCard.rarity?.code) || (a.numberInt ?? 0) - (b.numberInt ?? 0))[0];
     const authStage = (auth.logicalCard.subtypes ?? []).find((s) => STAGES.includes(s));
     if (!authStage) continue;
     for (const j of rows) {
@@ -67,12 +70,14 @@ async function main() {
   const enRows = await prisma.cardLocale.findMany({ where: { setId: enSet }, select: { id: true, number: true, numberInt: true, name: true, logicalCardId: true } });
 
   // 3) JP 버킷(포켓몬): dex|subtypes → [{lcid, rank, numInt, subs}]
-  //    ⚠ JP DB 는 "Tera"(테라스탈) subtype 을 안 담음 → 버킷키에서 Tera 제외(subN)해 매칭하고, 매칭된 JP LC 에 Tera 백필.
-  const subN = (a?: string[] | null) => [...(a ?? [])].filter((s) => s !== "Tera").sort().join(",");
+  //    ⚠ JP DB 는 EN 메커니즘 subtype(Tera 테라스탈 · Ancient 고대 · Future 미래)을 안 담음
+  //    → 버킷키에서 제외(subN)해 매칭하고, 매칭된 JP LC 에 해당 subtype 백필(JP 데이터 enrich).
+  const ENMECH = ["Tera", "Ancient", "Future"];
+  const subN = (a?: string[] | null) => [...(a ?? [])].filter((s) => !ENMECH.includes(s)).sort().join(",");
   const jpById = new Map(jpRows.map((j) => [j.id, j]));
   const jpPoke = jpRows.filter((j) => POKE.includes(j.logicalCard.supertype ?? "") && (j.logicalCard.pokedexNumbers?.length));
   const jpBucket = new Map<string, { lcid: string; rank: number; numInt: number; subs: string[] }[]>();
-  for (const j of jpPoke) { const dex = jaDex(j.name) ?? j.logicalCard.pokedexNumbers![0]; const k = `${dex}|${subN(j.logicalCard.subtypes)}`; (jpBucket.get(k) ?? jpBucket.set(k, []).get(k))!.push({ lcid: j.logicalCardId, rank: rank(j.logicalCard.rarity?.code), numInt: j.numberInt ?? 0, subs: j.logicalCard.subtypes ?? [] }); }
+  for (const j of jpPoke) { const dex = jaDex(j.name) ?? j.logicalCard.pokedexNumbers![0]; const k = `${dex}|${subN(j.logicalCard.subtypes)}`; (jpBucket.get(k) ?? jpBucket.set(k, []).get(k))!.push({ lcid: j.logicalCardId, rank: rankJp(j.logicalCard.rarity?.code), numInt: j.numberInt ?? 0, subs: j.logicalCard.subtypes ?? [] }); }
   for (const a of jpBucket.values()) a.sort((x, y) => x.rank - y.rank || x.numInt - y.numInt);
 
   // 4) EN 포켓몬 매칭
@@ -82,19 +87,18 @@ async function main() {
   for (const e of enIds) { if (e.dex == null) continue; const k = `${e.dex}|${subN(e.subs)}`; (enByBucket.get(k) ?? enByBucket.set(k, []).get(k))!.push(e); }
 
   const repoint = new Map<string, string>(); // enLocId → jpLcid
-  const teraBackfill = new Map<string, string[]>(); // jpLcid → JP subtypes + Tera (EN 이 Tera 인데 JP 누락 시)
-  // 매칭은 *동일 통합랭크*끼리(EN UltraRare=JP SuperRare=6, EN SIR=JP SAR=7 …). 카드수/랭크분포가 달라도
-  // 같은 랭크끼리 번호순 페어 → 남는건 랭크근접 폴백. (인덱스 zip 은 한쪽에 여분 저랭크가 있으면 전체가 어긋남)
-  const pair = (e: EnId, lcid: string, jsubs: string[]) => { repoint.set(e.loc.id, lcid); if (e.subs.includes("Tera") && !jsubs.includes("Tera")) teraBackfill.set(lcid, [...new Set([...jsubs, "Tera"])]); };
-  for (const [k, el] of enByBucket) {
-    const jl = (jpBucket.get(k) ?? []).slice().sort((a, b) => a.rank - b.rank || a.numInt - b.numInt);
-    const es = el.slice().sort((a, b) => a.rank - b.rank || (a.loc.numberInt ?? 0) - (b.loc.numberInt ?? 0));
-    const usedJ = new Set<number>();
-    // 1차: 동일 랭크 페어(번호순)
-    for (const e of es) { const i = jl.findIndex((j, idx) => !usedJ.has(idx) && j.rank === e.rank); if (i >= 0) { usedJ.add(i); pair(e, jl[i].lcid, jl[i].subs); } }
-    // 2차: 남은 EN ↔ 남은 JP 랭크근접 폴백
-    for (const e of es) { if (repoint.has(e.loc.id)) continue; let bi = -1, bd = Infinity; jl.forEach((j, idx) => { if (usedJ.has(idx)) return; const d = Math.abs(j.rank - e.rank); if (d < bd) { bd = d; bi = idx; } }); if (bi >= 0) { usedJ.add(bi); pair(e, jl[bi].lcid, jl[bi].subs); } }
-  }
+  const subEnrich = new Map<string, string[]>(); // jpLcid → JP subtypes + EN메커니즘(Tera/Ancient/Future)
+  // 랭크-인식 페어링: *동일 통합랭크*끼리(EN UltraRare=JP SuperRare=6, EN SIR=JP SAR=7, EN HyperRare=JP UltraRare골드=8 …)
+  // 번호순 우선 → 남는건 랭크근접 폴백. (단순 인덱스 zip 은 한쪽에 여분 저/고랭크가 있으면 전체가 어긋남)
+  const rankZip = <J extends { rank: number }, E extends { rank: number }>(jlIn: J[], esIn: E[], jnum: (j: J) => number, enum_: (e: E) => number, onPair: (e: E, j: J) => void) => {
+    const jl = jlIn.slice().sort((a, b) => a.rank - b.rank || jnum(a) - jnum(b));
+    const es = esIn.slice().sort((a, b) => a.rank - b.rank || enum_(a) - enum_(b));
+    const usedJ = new Set<number>(); const pairedE = new Set<E>();
+    for (const e of es) { const i = jl.findIndex((j, idx) => !usedJ.has(idx) && j.rank === e.rank); if (i >= 0) { usedJ.add(i); pairedE.add(e); onPair(e, jl[i]); } }
+    for (const e of es) { if (pairedE.has(e)) continue; let bi = -1, bd = Infinity; jl.forEach((j, idx) => { if (usedJ.has(idx)) return; const d = Math.abs(j.rank - e.rank); if (d < bd) { bd = d; bi = idx; } }); if (bi >= 0) { usedJ.add(bi); onPair(e, jl[bi]); } }
+  };
+  const pair = (e: EnId, lcid: string, jsubs: string[]) => { repoint.set(e.loc.id, lcid); const add = ENMECH.filter((m) => e.subs.includes(m) && !jsubs.includes(m)); if (add.length) subEnrich.set(lcid, [...new Set([...jsubs, ...add])]); };
+  for (const [k, el] of enByBucket) rankZip(jpBucket.get(k) ?? [], el, (j) => j.numInt, (e) => e.loc.numberInt ?? 0, (e, j) => pair(e, j.lcid, j.subs));
 
   // 4b) 트레이너/스타디움: JP↔EN *이름 사전*(TR_JP2EN) + 랭크 zip.
   //     일러는 같은 일러에 여러 카드가 섞여 스크램블되므로 이름이 정체성. 사전 미등록 JP명은 경고.
@@ -104,11 +108,11 @@ async function main() {
   const jpTr = jpRows.filter((j) => !POKE.includes(j.logicalCard.supertype ?? "") && j.logicalCard.supertype && j.logicalCard.supertype !== "Energy");
   const jpTrByEn = new Map<string, { lcid: string; rank: number; numInt: number; subs: string[]; jpName: string; num: string }[]>();
   const unmappedJp: string[] = [];
-  for (const j of jpTr) { const en = j.name === "博士の研究" ? profResearchEn(j.setId) : TR_JP2EN[j.name]; if (!en) { unmappedJp.push(`#${j.number} ${j.name}`); continue; } (jpTrByEn.get(en) ?? jpTrByEn.set(en, []).get(en))!.push({ lcid: j.logicalCardId, rank: rank(j.logicalCard.rarity?.code), numInt: j.numberInt ?? 0, subs: j.logicalCard.subtypes ?? [], jpName: j.name, num: j.number }); }
+  for (const j of jpTr) { const en = j.name === "博士の研究" ? profResearchEn(j.setId) : TR_JP2EN[j.name]; if (!en) { unmappedJp.push(`#${j.number} ${j.name}`); continue; } (jpTrByEn.get(en) ?? jpTrByEn.set(en, []).get(en))!.push({ lcid: j.logicalCardId, rank: rankJp(j.logicalCard.rarity?.code), numInt: j.numberInt ?? 0, subs: j.logicalCard.subtypes ?? [], jpName: j.name, num: j.number }); }
   for (const a of jpTrByEn.values()) a.sort((x, y) => x.rank - y.rank || x.numInt - y.numInt);
   const enTrByName = new Map<string, EnId[]>();
   for (const e of enIds) { if (e.dex != null) continue; const c = e.c; if (!c || POKE.includes(c.supertype ?? "") || c.supertype === "Energy") continue; (enTrByName.get(e.loc.name) ?? enTrByName.set(e.loc.name, []).get(e.loc.name))!.push(e); }
-  for (const [en, jl] of jpTrByEn) { const es = (enTrByName.get(en) ?? []).slice().sort((a, b) => a.rank - b.rank || (a.loc.numberInt ?? 0) - (b.loc.numberInt ?? 0)); const n = Math.min(jl.length, es.length); for (let i = 0; i < n; i++) { if (repoint.has(es[i].loc.id)) continue; repoint.set(es[i].loc.id, jl[i].lcid); if (!jl[i].subs.length && es[i].subs.length) subtypeBackfill.set(jl[i].lcid, es[i].subs); } }
+  for (const [en, jl] of jpTrByEn) rankZip(jl, enTrByName.get(en) ?? [], (j) => j.numInt, (e) => e.loc.numberInt ?? 0, (e, j) => { if (repoint.has(e.loc.id)) return; repoint.set(e.loc.id, j.lcid); if (!j.subs.length && e.subs.length) subtypeBackfill.set(j.lcid, e.subs); });
   if (unmappedJp.length) console.log(`  ⚠ 사전 미등록 JP 트레이너 ${unmappedJp.length}장(trainer-names-sv.ts 추가 필요): ${unmappedJp.join(", ")}`);
 
   // 4c) 기본에너지: 에너지타입 매칭(일러 없음). JP 基本X / EN Basic Y Energy
@@ -124,7 +128,7 @@ async function main() {
   let merged = 0, orphaned = 0, sample: string[] = [];
   if (APPLY) {
     for (const [jpLcid, subs] of subtypeBackfill) await prisma.logicalCard.update({ where: { id: jpLcid }, data: { subtypes: subs } });
-    for (const [jpLcid, subs] of teraBackfill) await prisma.logicalCard.update({ where: { id: jpLcid }, data: { subtypes: subs } });
+    for (const [jpLcid, subs] of subEnrich) await prisma.logicalCard.update({ where: { id: jpLcid }, data: { subtypes: subs } });
     for (const [enLocId, jpLcid] of repoint) { await prisma.cardLocale.update({ where: { id: enLocId }, data: { logicalCardId: jpLcid } }); merged++; }
     for (const e of orphan) { const lcId = `lc-orphan-${enSet}-${e.loc.number}`; const data: any = { supertype: e.c?.supertype ?? "Pokémon", subtypes: e.subs, pokedexNumbers: e.dex != null ? [e.dex] : [] }; if (e.c?.artist) data.illustrator = e.c.artist; if (await prisma.logicalCard.findUnique({ where: { id: lcId } })) await prisma.logicalCard.update({ where: { id: lcId }, data }); else await prisma.logicalCard.create({ data: { id: lcId, primarySetId: enSet, primaryNumber: e.loc.number, ...data } }); await prisma.cardLocale.update({ where: { id: e.loc.id }, data: { logicalCardId: lcId } }); orphaned++; }
   } else {
@@ -157,7 +161,7 @@ async function main() {
     console.log(`  ── 트레이너 페어 ${trPairs.length}장(EN명별; ★=한 EN명에 JP명 2종↑=확인필요) ──`);
     for (const [en, ps] of [...byEnName].sort((a, b) => a[0].localeCompare(b[0]))) { const multi = new Set(ps.map((p) => p.jp)).size > 1; ps.sort((a, b) => (parseInt(a.enNum) || 0) - (parseInt(b.enNum) || 0)); console.log(`  ${multi ? "★" : " "} ${en}: ` + ps.map((p) => `EN#${p.enNum}→JP#${p.jpNum}${p.jp}`).join(" | ")); }
   }
-  console.log(`■ ${enSet}→${jpSetArg} ${APPLY ? "★적용" : "(dry)"} | JP dex복구 ${jfix} · subtypes정규화 ${sfix} · EN병합 ${merged} · 영판전용(orphan) ${orphaned}`);
+  console.log(`■ ${enSet}→${jpSetArg} ${APPLY ? "★적용" : "(dry)"} | JP dex복구 ${jfix} · subtypes정규화 ${sfix} · Tera/古代/未来 enrich ${subEnrich.size} · EN병합 ${merged} · 영판전용(orphan) ${orphaned}`);
   if (sample.length) console.log("  예: " + sample.join(" | "));
   await prisma.$disconnect();
 }

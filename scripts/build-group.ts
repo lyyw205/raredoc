@@ -40,7 +40,7 @@ const CONFIG: Record<string, Cfg> = {
   "sv-paradox-rift": {
     nameKo: "고대의 포효 + 미래의 일섬", nameEn: "Paradox Rift",
     jp: ["jp-tcg-SV4K", "jp-tcg-SV4M"], kr: ["kr-sv4k", "kr-sv4m"],
-    krMirror: { "kr-sv4k": "jp-tcg-SV4K", "kr-sv4m": "jp-tcg-SV4M" }, enNative: ["sv4"], krMirrorAll: true,
+    krMirror: { "kr-sv4k": "jp-tcg-SV4K", "kr-sv4m": "jp-tcg-SV4M" }, enNative: ["sv4"], krMirrorAll: true, enMerged: true,
   },
   "sv-151": {
     nameKo: "포켓몬 카드 151", nameEn: "151",

@@ -18,6 +18,12 @@ export const TR_JP2EN: Record<string, string> = {
   "ナンジャモ": "Iono",        // 전기 체육관장
   "グルーシャ": "Grusha",      // 얼음 체육관장
   "ピーニャ": "Giacomo",       // 스타단 보스(일러 교차검증으로 확정 — Dendra 아님)
+  "センリ": "Norman",          // 호엔 체육관장(주인공 아빠)
+  "メロコ": "Mela",            // 스타단 파이어크루 보스
+  "ヒョウタ": "Roark",         // 신오 돌 체육관장
+  "リップ": "Tulip",           // 사천왕
+  "オーリム博士の気迫": "Professor Sada's Vitality",   // 고대 박사
+  "フトゥー博士のシナリオ": "Professor Turo's Scenario", // 미래 박사
   // ── 아이템 ──
   "ともだちてちょう": "Pal Pad",
   "ネストボール": "Nest Ball",
@@ -45,6 +51,17 @@ export const TR_JP2EN: Record<string, string> = {
   "勇気のおまもり": "Bravery Charm",
   "ファイトオレ": "Fighting Au Lait",
   "こだわりベルト": "Choice Belt",
+  "カウンターキャッチャー": "Counter Catcher",
+  "カビゴンドール": "Snorlax Doll",
+  "大地の器": "Earthen Vessel",
+  "まけんきチョッキ": "Defiance Vest",
+  "ゴージャスマント": "Luxurious Cape",
+  "テクノレーダー": "Techno Radar",
+  "のろいのはたき": "Cursed Duster",
+  "ブーストエナジー 古代": "Ancient Booster Energy Capsule",
+  "ブーストエナジー 未来": "Future Booster Energy Capsule",
+  "ワザマシンデヴォリューション": "Technical Machine: Devolution",
+  "ワザマシン エヴォリューション": "Technical Machine: Evolution",
   // ── 스타디움 ──
   "ビーチコート": "Beach Court",
   "テーブルシティ": "Mesagoza",
