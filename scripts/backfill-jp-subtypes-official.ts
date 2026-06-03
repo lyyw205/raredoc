@@ -11,7 +11,12 @@ import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
 import { readFileSync } from "node:fs";
 
-const STAGE: Record<string, string> = { "たね": "Basic", "1進化": "Stage 1", "2進化": "Stage 2" };
+const STAGE: Record<string, string> = {
+  "たね": "Basic", "1進化": "Stage 1", "2進化": "Stage 2",
+  "サポート": "Supporter", "グッズ": "Item", "スタジアム": "Stadium", "ポケモンのどうぐ": "Pokémon Tool",
+  "基本エネルギー": "Basic Energy", "特殊エネルギー": "Special",
+};
+const POKE_STAGE = new Set(["たね", "1進化", "2進化"]);
 
 async function main() {
   const APPLY = process.argv.includes("--apply");
@@ -35,7 +40,7 @@ async function main() {
       const base = o.stageRaw ? STAGE[o.stageRaw] : null;
       if (base) {
         const st = [base];
-        if (/ex$/i.test(o.jaName)) st.push("ex");
+        if (POKE_STAGE.has(o.stageRaw!) && /ex$/i.test(o.jaName)) st.push("ex");
         data.subtypes = st;
       } else noStage++;
     }
