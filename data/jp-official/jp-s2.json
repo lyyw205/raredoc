@@ -1,0 +1,956 @@
+[
+  {
+    "number": "001",
+    "jaName": "ストライク",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Keiichiro Ito",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_1_R_JP_SM.png"
+  },
+  {
+    "number": "002",
+    "jaName": "ヘラクロス",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Otumami",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_2_R_JP_SM.png"
+  },
+  {
+    "number": "003",
+    "jaName": "ハスボー",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Sumiyoshi Kizuki",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_3_R_JP_SM.png"
+  },
+  {
+    "number": "004",
+    "jaName": "ハスブレロ",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Miki Tanaka",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_4_R_JP_SM.png"
+  },
+  {
+    "number": "005",
+    "jaName": "ルンパッパ",
+    "supertype": "Pokémon",
+    "stage": "Stage 2",
+    "illustrator": "Masakazu Fukuda",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_5_R_JP_SM.png"
+  },
+  {
+    "number": "006",
+    "jaName": "アメタマ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Masakazu Fukuda",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_6_R_JP_SM.png"
+  },
+  {
+    "number": "007",
+    "jaName": "アメモース",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Chibi",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_7_R_JP_SM.png"
+  },
+  {
+    "number": "008",
+    "jaName": "ボクレー",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Sui",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_8_R_JP_SM.png"
+  },
+  {
+    "number": "009",
+    "jaName": "オーロット",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Kawayoo",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_9_R_JP_SM.png"
+  },
+  {
+    "number": "010",
+    "jaName": "ワタシラガV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "5Ban Graphics",
+    "rarity": "Double Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_10_R_JP_SM.png"
+  },
+  {
+    "number": "011",
+    "jaName": "カジッチュ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Kagemaru Himeno",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_11_R_JP_SM.png"
+  },
+  {
+    "number": "012",
+    "jaName": "アップリュー",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Shin Nagasawa",
+    "rarity": "Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_12_R_JP_SM.png"
+  },
+  {
+    "number": "013",
+    "jaName": "キュウコンV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Saki Hayashiro",
+    "rarity": "Double Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_13_R_JP_SM.png"
+  },
+  {
+    "number": "014",
+    "jaName": "ブーバー",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Shigenori Negishi",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_14_R_JP_SM.png"
+  },
+  {
+    "number": "015",
+    "jaName": "ブーバーン",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Kazuma Koda",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_15_R_JP_SM.png"
+  },
+  {
+    "number": "016",
+    "jaName": "ヒトモシ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Sekio",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_16_R_JP_SM.png"
+  },
+  {
+    "number": "017",
+    "jaName": "ランプラー",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Kyoko Umemoto",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_17_R_JP_SM.png"
+  },
+  {
+    "number": "018",
+    "jaName": "シャンデラ",
+    "supertype": "Pokémon",
+    "stage": "Stage 2",
+    "illustrator": "Taira Akitsu",
+    "rarity": "Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_18_R_JP_SM.png"
+  },
+  {
+    "number": "019",
+    "jaName": "クイタラン",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Satoshi Shirai",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_19_R_JP_SM.png"
+  },
+  {
+    "number": "020",
+    "jaName": "キャモメ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "0313",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_20_R_JP_SM.png"
+  },
+  {
+    "number": "021",
+    "jaName": "ペリッパー",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Eri Yamaki",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_21_R_JP_SM.png"
+  },
+  {
+    "number": "022",
+    "jaName": "ミロカロスV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Ayaka Yoshida",
+    "rarity": "Double Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_22_R_JP_SM.png"
+  },
+  {
+    "number": "023",
+    "jaName": "オタマロ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Aya Kusube",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_23_R_JP_SM.png"
+  },
+  {
+    "number": "024",
+    "jaName": "ガマガル",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Mahou",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_24_R_JP_SM.png"
+  },
+  {
+    "number": "025",
+    "jaName": "ガマゲロゲ",
+    "supertype": "Pokémon",
+    "stage": "Stage 2",
+    "illustrator": "Satoshi Nakai",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_25_R_JP_SM.png"
+  },
+  {
+    "number": "026",
+    "jaName": "ガラル ダルマッカ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Akira Komayama",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_26_R_JP_SM.png"
+  },
+  {
+    "number": "027",
+    "jaName": "ガラル ヒヒダルマ",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Kouki Saitou",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_27_R_JP_SM.png"
+  },
+  {
+    "number": "028",
+    "jaName": "コオリッポ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Kagemaru Himeno",
+    "rarity": "Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_28_R_JP_SM.png"
+  },
+  {
+    "number": "029",
+    "jaName": "ビリリダマ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Hasegawa Saki",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_29_R_JP_SM.png"
+  },
+  {
+    "number": "030",
+    "jaName": "マルマイン",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Otumami",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_30_R_JP_SM.png"
+  },
+  {
+    "number": "031",
+    "jaName": "エレブー",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Midori Harada",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_31_R_JP_SM.png"
+  },
+  {
+    "number": "032",
+    "jaName": "エレキブル",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Tetsuya Koizumi",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_32_R_JP_SM.png"
+  },
+  {
+    "number": "033",
+    "jaName": "コリンク",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Uta",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_33_R_JP_SM.png"
+  },
+  {
+    "number": "034",
+    "jaName": "ルクシオ",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Ryoma Uratsuka",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_34_R_JP_SM.png"
+  },
+  {
+    "number": "035",
+    "jaName": "レントラー",
+    "supertype": "Pokémon",
+    "stage": "Stage 2",
+    "illustrator": "Hasuno",
+    "rarity": "Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_35_R_JP_SM.png"
+  },
+  {
+    "number": "036",
+    "jaName": "ストリンダーV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "5Ban Graphics",
+    "rarity": "Double Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_36_R_JP_SM.png"
+  },
+  {
+    "number": "037",
+    "jaName": "ストリンダーVMAX",
+    "supertype": "Pokémon",
+    "stage": "VMAX",
+    "illustrator": "5Ban Graphics",
+    "rarity": null,
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_37_R_JP_SM.png"
+  },
+  {
+    "number": "038",
+    "jaName": "モルペコ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Kouki Saitou",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_38_R_JP_SM.png"
+  },
+  {
+    "number": "039",
+    "jaName": "ピッピ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Sowsow",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_39_R_JP_SM.png"
+  },
+  {
+    "number": "040",
+    "jaName": "ピクシー",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Miki Kudo",
+    "rarity": "Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_40_R_JP_SM.png"
+  },
+  {
+    "number": "041",
+    "jaName": "シンボラー",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Naoyo Kimura",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_41_R_JP_SM.png"
+  },
+  {
+    "number": "042",
+    "jaName": "スナバァ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Yuka Morii",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_42_R_JP_SM.png"
+  },
+  {
+    "number": "043",
+    "jaName": "シロデスナ",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Hasuno",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_43_R_JP_SM.png"
+  },
+  {
+    "number": "044",
+    "jaName": "ミブリム",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Mina Nakai",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_44_R_JP_SM.png"
+  },
+  {
+    "number": "045",
+    "jaName": "テブリム",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Kirisaki",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_45_R_JP_SM.png"
+  },
+  {
+    "number": "046",
+    "jaName": "ブリムオン",
+    "supertype": "Pokémon",
+    "stage": "Stage 2",
+    "illustrator": "Kagemaru Himeno",
+    "rarity": "Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_46_R_JP_SM.png"
+  },
+  {
+    "number": "047",
+    "jaName": "マホミル",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Mina Nakai",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_47_R_JP_SM.png"
+  },
+  {
+    "number": "048",
+    "jaName": "マホイップ",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Mizue",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_48_R_JP_SM.png"
+  },
+  {
+    "number": "049",
+    "jaName": "ドラパルトV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Aky Cg Works",
+    "rarity": "Double Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_49_R_JP_SM.png"
+  },
+  {
+    "number": "050",
+    "jaName": "ドラパルトVMAX",
+    "supertype": "Pokémon",
+    "stage": "VMAX",
+    "illustrator": "Aky Cg Works",
+    "rarity": null,
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_50_R_JP_SM.png"
+  },
+  {
+    "number": "051",
+    "jaName": "ノズパス",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Miki Tanaka",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_51_R_JP_SM.png"
+  },
+  {
+    "number": "052",
+    "jaName": "アサナン",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Yukiko Baba",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_52_R_JP_SM.png"
+  },
+  {
+    "number": "053",
+    "jaName": "チャーレム",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Suwama Chiaki",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_53_R_JP_SM.png"
+  },
+  {
+    "number": "054",
+    "jaName": "ドジョッチ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Atsuko Nishida",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_54_R_JP_SM.png"
+  },
+  {
+    "number": "055",
+    "jaName": "ナマズン",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Kawayoo",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_55_R_JP_SM.png"
+  },
+  {
+    "number": "056",
+    "jaName": "ガラル デスマス",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Akira Komayama",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_56_R_JP_SM.png"
+  },
+  {
+    "number": "057",
+    "jaName": "ガラル デスバーン",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Tokiya",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_57_R_JP_SM.png"
+  },
+  {
+    "number": "058",
+    "jaName": "タンドン",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Misa Tsutsui",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_58_R_JP_SM.png"
+  },
+  {
+    "number": "059",
+    "jaName": "トロッゴン",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Mitsuhiro Arita",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_59_R_JP_SM.png"
+  },
+  {
+    "number": "060",
+    "jaName": "セキタンザン",
+    "supertype": "Pokémon",
+    "stage": "Stage 2",
+    "illustrator": "Shin Nagasawa",
+    "rarity": "Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_60_R_JP_SM.png"
+  },
+  {
+    "number": "061",
+    "jaName": "タイレーツV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Aky Cg Works",
+    "rarity": "Double Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_61_R_JP_SM.png"
+  },
+  {
+    "number": "062",
+    "jaName": "イシヘンジン",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Kouki Saitou",
+    "rarity": "Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_62_R_JP_SM.png"
+  },
+  {
+    "number": "063",
+    "jaName": "ドガース",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Kyoko Umemoto",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_63_R_JP_SM.png"
+  },
+  {
+    "number": "064",
+    "jaName": "ガラル マタドガス",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Mitsuhiro Arita",
+    "rarity": "Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_64_R_JP_SM.png"
+  },
+  {
+    "number": "065",
+    "jaName": "ミカルゲ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Tomokazu Komiya",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_65_R_JP_SM.png"
+  },
+  {
+    "number": "066",
+    "jaName": "ヤブクロン",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Hyogonosuke",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_66_R_JP_SM.png"
+  },
+  {
+    "number": "067",
+    "jaName": "ダストダス",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Akira Egawa",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_67_R_JP_SM.png"
+  },
+  {
+    "number": "068",
+    "jaName": "バルチャイ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Shibuzoh.",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_68_R_JP_SM.png"
+  },
+  {
+    "number": "069",
+    "jaName": "バルジーナ",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Kodama",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_69_R_JP_SM.png"
+  },
+  {
+    "number": "070",
+    "jaName": "カラマネロV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Eske Yoshinob",
+    "rarity": "Double Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_70_R_JP_SM.png"
+  },
+  {
+    "number": "071",
+    "jaName": "カラマネロVMAX",
+    "supertype": "Pokémon",
+    "stage": "VMAX",
+    "illustrator": "5Ban Graphics",
+    "rarity": null,
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_71_R_JP_SM.png"
+  },
+  {
+    "number": "072",
+    "jaName": "ハッサム",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Ryuta Fuse",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_72_R_JP_SM.png"
+  },
+  {
+    "number": "073",
+    "jaName": "ダイノーズ",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Anesaki Dynamic",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_73_R_JP_SM.png"
+  },
+  {
+    "number": "074",
+    "jaName": "アイアント",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Hideki Ishikawa",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_74_R_JP_SM.png"
+  },
+  {
+    "number": "075",
+    "jaName": "ダイオウドウV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "5Ban Graphics",
+    "rarity": "Double Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_75_R_JP_SM.png"
+  },
+  {
+    "number": "076",
+    "jaName": "ダイオウドウVMAX",
+    "supertype": "Pokémon",
+    "stage": "VMAX",
+    "illustrator": "5Ban Graphics",
+    "rarity": null,
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_76_R_JP_SM.png"
+  },
+  {
+    "number": "077",
+    "jaName": "カビゴン",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Eri Yamaki",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_77_R_JP_SM.png"
+  },
+  {
+    "number": "078",
+    "jaName": "ペラップ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Ryoma Uratsuka",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_78_R_JP_SM.png"
+  },
+  {
+    "number": "079",
+    "jaName": "マメパト",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Ryota Murayama",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_79_R_JP_SM.png"
+  },
+  {
+    "number": "080",
+    "jaName": "ハトーボー",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Saya Tsuruta",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_80_R_JP_SM.png"
+  },
+  {
+    "number": "081",
+    "jaName": "ケンホロウ",
+    "supertype": "Pokémon",
+    "stage": "Stage 2",
+    "illustrator": "Naoyo Kimura",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_81_R_JP_SM.png"
+  },
+  {
+    "number": "082",
+    "jaName": "ヌイコグマ",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "So-Taro",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_82_R_JP_SM.png"
+  },
+  {
+    "number": "083",
+    "jaName": "キテルグマ",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Ryuta Fuse",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_83_R_JP_SM.png"
+  },
+  {
+    "number": "084",
+    "jaName": "ホシガリス",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Mina Nakai",
+    "rarity": "Common",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_84_R_JP_SM.png"
+  },
+  {
+    "number": "085",
+    "jaName": "ヨクバリス",
+    "supertype": "Pokémon",
+    "stage": "Stage 1",
+    "illustrator": "Kirisaki",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_85_R_JP_SM.png"
+  },
+  {
+    "number": "086",
+    "jaName": "回収ネット",
+    "supertype": "Trainer",
+    "stage": "Item",
+    "illustrator": "Ryo Ueda",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_86_R_JP_SM.png"
+  },
+  {
+    "number": "087",
+    "jaName": "きんのたま",
+    "supertype": "Trainer",
+    "stage": "Item",
+    "illustrator": "Sadaji",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_87_R_JP_SM.png"
+  },
+  {
+    "number": "088",
+    "jaName": "ツールスクラッパー",
+    "supertype": "Trainer",
+    "stage": "Item",
+    "illustrator": "Studio Bora Inc.",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_88_R_JP_SM.png"
+  },
+  {
+    "number": "089",
+    "jaName": "のろいのスコップ",
+    "supertype": "Trainer",
+    "stage": "Pokémon Tool",
+    "illustrator": "Toyste Beach",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_89_R_JP_SM.png"
+  },
+  {
+    "number": "090",
+    "jaName": "オリーヴ",
+    "supertype": "Trainer",
+    "stage": "Supporter",
+    "illustrator": "Yusuke Ohmura",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_90_R_JP_SM.png"
+  },
+  {
+    "number": "091",
+    "jaName": "ダンペイ",
+    "supertype": "Trainer",
+    "stage": "Supporter",
+    "illustrator": "Hitoshi Ariga",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_91_R_JP_SM.png"
+  },
+  {
+    "number": "092",
+    "jaName": "ボスの指令",
+    "supertype": "Trainer",
+    "stage": "Supporter",
+    "illustrator": "Nagimiso",
+    "rarity": "Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_92_R_JP_SM.png"
+  },
+  {
+    "number": "093",
+    "jaName": "ガラル鉱山",
+    "supertype": "Trainer",
+    "stage": "Stadium",
+    "illustrator": "5Ban Graphics",
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_93_R_JP_SM.png"
+  },
+  {
+    "number": "094",
+    "jaName": "スピード雷エネルギー",
+    "supertype": "Energy",
+    "stage": "Special Energy",
+    "illustrator": null,
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_94_R_JP_SM.png"
+  },
+  {
+    "number": "095",
+    "jaName": "ホラー超エネルギー",
+    "supertype": "Energy",
+    "stage": "Special Energy",
+    "illustrator": null,
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_95_R_JP_SM.png"
+  },
+  {
+    "number": "096",
+    "jaName": "キャプチャーエネルギー",
+    "supertype": "Energy",
+    "stage": "Special Energy",
+    "illustrator": null,
+    "rarity": "Uncommon",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_96_R_JP_SM.png"
+  },
+  {
+    "number": "097",
+    "jaName": "ワタシラガV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "5Ban Graphics",
+    "rarity": "Secret Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_97_R_JP_SM.png"
+  },
+  {
+    "number": "098",
+    "jaName": "キュウコンV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Saki Hayashiro",
+    "rarity": "Secret Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_98_R_JP_SM.png"
+  },
+  {
+    "number": "099",
+    "jaName": "ミロカロスV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Ayaka Yoshida",
+    "rarity": "Secret Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_99_R_JP_SM.png"
+  },
+  {
+    "number": "100",
+    "jaName": "ストリンダーV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "5Ban Graphics",
+    "rarity": "Secret Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_100_R_JP_SM.png"
+  },
+  {
+    "number": "101",
+    "jaName": "ドラパルトV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Aky Cg Works",
+    "rarity": "Secret Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_101_R_JP_SM.png"
+  },
+  {
+    "number": "102",
+    "jaName": "タイレーツV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Aky Cg Works",
+    "rarity": "Secret Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_102_R_JP_SM.png"
+  },
+  {
+    "number": "103",
+    "jaName": "カラマネロV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "Eske Yoshinob",
+    "rarity": "Secret Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_103_R_JP_SM.png"
+  },
+  {
+    "number": "104",
+    "jaName": "ダイオウドウV",
+    "supertype": "Pokémon",
+    "stage": "Basic",
+    "illustrator": "5Ban Graphics",
+    "rarity": "Secret Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_104_R_JP_SM.png"
+  },
+  {
+    "number": "105",
+    "jaName": "オリーヴ",
+    "supertype": "Trainer",
+    "stage": "Supporter",
+    "illustrator": "Kirisaki",
+    "rarity": "Secret Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_105_R_JP_SM.png"
+  },
+  {
+    "number": "106",
+    "jaName": "ボスの指令",
+    "supertype": "Trainer",
+    "stage": "Supporter",
+    "illustrator": "Nagimiso",
+    "rarity": "Secret Rare",
+    "image": "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/tpc/S2/S2_106_R_JP_SM.png"
+  }
+]
