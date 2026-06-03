@@ -153,6 +153,16 @@ const CONFIG: Record<string, Cfg> = {
     krMirror: {}, enNative: [], krMirrorAll: true,
   },
   // ── SWSH (역순 진행) ──
+  "og-s7d": {
+    nameKo: "마천퍼펙트", nameEn: "Skyscraping Perfection",
+    jp: ["jp-tcg-S7D"], kr: ["kr-s7"],
+    krMirror: { "kr-s7": "jp-tcg-S7D" }, enNative: [], krMirrorAll: true,
+  },
+  "og-s7r": {
+    nameKo: "창공스트림", nameEn: "Blue Sky Stream",
+    jp: ["jp-tcg-S7R"], kr: ["kr-s7r"],
+    krMirror: { "kr-s7r": "jp-tcg-S7R" }, enNative: [], krMirrorAll: true,
+  },
   "og-s8": {
     nameKo: "퓨전아츠", nameEn: "Fusion Arts",
     jp: ["jp-tcg-S8"], kr: ["kr-s8"],
