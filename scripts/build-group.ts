@@ -121,6 +121,12 @@ const CONFIG: Record<string, Cfg> = {
     jp: ["jp-tcg-SV11B", "jp-tcg-SV11W"], kr: ["kr-sv11b", "kr-sv11w"],
     krMirror: { "kr-sv11b": "jp-tcg-SV11B", "kr-sv11w": "jp-tcg-SV11W" }, enNative: ["zsv10pt5", "rsv10pt5"], krMirrorAll: true,
   },
+  // ── MEGA ──
+  "mega-brave-symphonia": {
+    nameKo: "메가브레이브 + 메가심포니아", nameEn: "Mega Brave & Mega Symphonia",
+    jp: ["jp-tcg-M1L", "jp-tcg-M1S"], kr: ["kr-m1l", "kr-m1s"],
+    krMirror: { "kr-m1l": "jp-tcg-M1L", "kr-m1s": "jp-tcg-M1S" }, enNative: [], krMirrorAll: true,
+  },
 };
 
 type Row = {
