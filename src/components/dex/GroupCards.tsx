@@ -33,6 +33,8 @@ import ogS11a from "@/data/group-og-s11a.json";
 import ogS11 from "@/data/group-og-s11.json";
 import ogS10b from "@/data/group-og-s10b.json";
 import ogS10a from "@/data/group-og-s10a.json";
+import ogS10d from "@/data/group-og-s10d.json";
+import ogS10p from "@/data/group-og-s10p.json";
 
 // 그룹별 EN/JP/KR 그룹핑 카드 UI — JP 앵커(번호순) + 언어탭 + 영판전용 꼬리.
 // 카드 도감(DexCatalog)에서 해당 그룹 선택 시 인-플레이스로 렌더. 데이터는 확정 그룹핑 JSON.
@@ -69,6 +71,8 @@ const DATA: Record<string, GroupData> = {
   "og-s11": ogS11 as unknown as GroupData,
   "og-s10b": ogS10b as unknown as GroupData,
   "og-s10a": ogS10a as unknown as GroupData,
+  "og-s10d": ogS10d as unknown as GroupData,
+  "og-s10p": ogS10p as unknown as GroupData,
 };
 export const GROUPED_GROUP_IDS = new Set(Object.keys(DATA));
 
