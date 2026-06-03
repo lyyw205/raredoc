@@ -27,6 +27,7 @@ import megaDreamEx from "@/data/group-mega-dream-ex.json";
 import megaMunikisuzero from "@/data/group-mega-munikisuzero.json";
 import megaNinjaSpinner from "@/data/group-mega-ninja-spinner.json";
 import megaAbyssEye from "@/data/group-mega-abyss-eye.json";
+import ogS12a from "@/data/group-og-s12a.json";
 
 // 그룹별 EN/JP/KR 그룹핑 카드 UI — JP 앵커(번호순) + 언어탭 + 영판전용 꼬리.
 // 카드 도감(DexCatalog)에서 해당 그룹 선택 시 인-플레이스로 렌더. 데이터는 확정 그룹핑 JSON.
@@ -57,6 +58,7 @@ const DATA: Record<string, GroupData> = {
   "mega-munikisuzero": megaMunikisuzero as unknown as GroupData,
   "mega-ninja-spinner": megaNinjaSpinner as unknown as GroupData,
   "mega-abyss-eye": megaAbyssEye as unknown as GroupData,
+  "og-s12a": ogS12a as unknown as GroupData,
 };
 export const GROUPED_GROUP_IDS = new Set(Object.keys(DATA));
 

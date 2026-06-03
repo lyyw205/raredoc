@@ -38,14 +38,14 @@ async function main() {
   if (!jpSet || !tcgId) { console.error("usage: <jpSetId> <tcgId> [--apply]"); process.exit(1); }
   const ja = buildNameIndex("ja");
   const cards = await prisma.cardLocale.findMany({ where: { setId: jpSet }, orderBy: { numberInt: "asc" },
-    select: { number: true, name: true, logicalCardId: true, logicalCard: { select: { supertype: true, subtypes: true, pokedexNumbers: true, hp: true, types: true } } } });
+    select: { number: true, name: true, logicalCardId: true, logicalCard: { select: { supertype: true, subtypes: true, pokedexNumbers: true, hp: true, types: true, illustrator: true } } } });
   console.log(`■ ${jpSet} ← tcgdex:${tcgId}(ja) | ${cards.length}장 ${APPLY ? "★적용" : "(dry)"}`);
   let touched = 0, fail = 0, dexTcg = 0, dexJa = 0, dexNone = 0; const noDex: string[] = []; const sample: string[] = [];
 
   const OW = process.argv.includes("--overwrite"); // 기존 값이 틀린 경우 tcgdex 로 덮어쓰기
   for (const c of cards) {
     const lc = c.logicalCard;
-    const needs = OW || !lc.supertype || (lc.subtypes?.length ?? 0) === 0 || (lc.pokedexNumbers?.length ?? 0) === 0 || lc.hp == null || (lc.types?.length ?? 0) === 0;
+    const needs = OW || !lc.supertype || (lc.subtypes?.length ?? 0) === 0 || (lc.pokedexNumbers?.length ?? 0) === 0 || lc.hp == null || (lc.types?.length ?? 0) === 0 || !lc.illustrator;
     if (!needs) continue;
     let d = await fetchJson(`https://api.tcgdex.net/v2/ja/cards/${tcgId}-${pad(c.number)}`); await sleep(80);
     if (!d) { const ni = parseInt(c.number, 10); if (!isNaN(ni)) { d = await fetchJson(`https://api.tcgdex.net/v2/ja/cards/${tcgId}-${ni}`); await sleep(60); } }
@@ -60,6 +60,7 @@ async function main() {
     } else if (OW && supertype && supertype !== "Pokémon") update.pokedexNumbers = []; // 비포켓몬 dex 정리
     if (d.hp != null && (OW || lc.hp == null)) update.hp = d.hp;
     if (d.types?.length && (OW || (lc.types?.length ?? 0) === 0)) update.types = d.types;
+    if (d.illustrator && (OW || !lc.illustrator)) update.illustrator = d.illustrator;
     if (Object.keys(update).length) {
       if (sample.length < 5) sample.push(`#${c.number} ${c.name} ${JSON.stringify(update)}`);
       if (APPLY) await prisma.logicalCard.update({ where: { id: c.logicalCardId }, data: update });

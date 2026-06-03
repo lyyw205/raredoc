@@ -152,6 +152,12 @@ const CONFIG: Record<string, Cfg> = {
     jp: ["jp-mega-abyss-eye"], kr: [],
     krMirror: {}, enNative: [], krMirrorAll: true,
   },
+  // ── SWSH (역순 진행) ──
+  "og-s12a": {
+    nameKo: "VSTAR 유니버스", nameEn: "VSTAR Universe",
+    jp: ["jp-tcg-S12a"], kr: ["kr-s12a"],
+    krMirror: { "kr-s12a": "jp-tcg-S12a" }, enNative: [], krMirrorAll: true, // EN(Crown Zenith) 보류 — EN phase에서 enrich 후 연결
+  },
 };
 
 type Row = {
