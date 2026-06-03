@@ -46,6 +46,8 @@ import ogS6k from "@/data/group-og-s6k.json";
 import ogS5i from "@/data/group-og-s5i.json";
 import ogS5r from "@/data/group-og-s5r.json";
 import ogS4 from "@/data/group-og-s4.json";
+import ogS1h from "@/data/group-og-s1h.json";
+import ogS1w from "@/data/group-og-s1w.json";
 import ogS2 from "@/data/group-og-s2.json";
 import ogS2a from "@/data/group-og-s2a.json";
 import ogS3a from "@/data/group-og-s3a.json";
@@ -99,6 +101,8 @@ const DATA: Record<string, GroupData> = {
   "og-s5i": ogS5i as unknown as GroupData,
   "og-s5r": ogS5r as unknown as GroupData,
   "og-s4": ogS4 as unknown as GroupData,
+  "og-s1h": ogS1h as unknown as GroupData,
+  "og-s1w": ogS1w as unknown as GroupData,
   "og-s2": ogS2 as unknown as GroupData,
   "og-s2a": ogS2a as unknown as GroupData,
   "og-s3a": ogS3a as unknown as GroupData,
