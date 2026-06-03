@@ -53,6 +53,7 @@ const CFG: Record<string, { jp: string; json: string; maxNum?: number }> = {
   // ── SWSH ──
   "kr-s12a": { jp: "jp-tcg-S12a", json: `${DIR}/kr-official-s12a.json` },
   "kr-s12": { jp: "jp-tcg-S12", json: `${DIR}/kr-official-s12.json` },
+  "kr-s11a": { jp: "jp-tcg-S11a", json: `${DIR}/kr-official-s11a.json` },
 };
 type Off = { number: string; koName: string; illustrator: string | null; image: string | null; numInt: number };
 type Jp = { numInt: number; name: string; lcid: string; illus: string | null; dex: number | null; supertype: string | null };
