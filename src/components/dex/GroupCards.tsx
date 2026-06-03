@@ -24,6 +24,7 @@ import blackBoltWhiteFlare from "@/data/group-sv-black-bolt-white-flare.json";
 import megaBraveSymphonia from "@/data/group-mega-brave-symphonia.json";
 import megaInfernox from "@/data/group-mega-infernox.json";
 import megaDreamEx from "@/data/group-mega-dream-ex.json";
+import megaMunikisuzero from "@/data/group-mega-munikisuzero.json";
 
 // 그룹별 EN/JP/KR 그룹핑 카드 UI — JP 앵커(번호순) + 언어탭 + 영판전용 꼬리.
 // 카드 도감(DexCatalog)에서 해당 그룹 선택 시 인-플레이스로 렌더. 데이터는 확정 그룹핑 JSON.
@@ -51,6 +52,7 @@ const DATA: Record<string, GroupData> = {
   "mega-brave-symphonia": megaBraveSymphonia as unknown as GroupData,
   "mega-infernox": megaInfernox as unknown as GroupData,
   "mega-dream-ex": megaDreamEx as unknown as GroupData,
+  "mega-munikisuzero": megaMunikisuzero as unknown as GroupData,
 };
 export const GROUPED_GROUP_IDS = new Set(Object.keys(DATA));
 

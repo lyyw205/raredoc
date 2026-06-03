@@ -137,6 +137,11 @@ const CONFIG: Record<string, Cfg> = {
     jp: ["jp-mega-dream-ex"], kr: ["kr-m2a"],
     krMirror: { "kr-m2a": "jp-mega-dream-ex" }, enNative: [], krMirrorAll: true,
   },
+  "mega-munikisuzero": {
+    nameKo: "니힐제로", nameEn: "Nihil Zero",
+    jp: ["jp-mega-munikisuzero"], kr: ["kr-m3"],
+    krMirror: { "kr-m3": "jp-mega-munikisuzero" }, enNative: [], krMirrorAll: true,
+  },
 };
 
 type Row = {
