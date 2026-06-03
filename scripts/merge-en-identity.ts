@@ -92,6 +92,14 @@ async function main() {
   for (const e of enIds) { if (e.dex != null) continue; const c = e.c; if (!c || POKE.includes(c.supertype ?? "")) continue; const il = norm(c.artist); if (!il) continue; (enTrByBucket.get(il) ?? enTrByBucket.set(il, []).get(il))!.push(e); }
   for (const [il, el] of enTrByBucket) { const jl = (jpTrBucket.get(il) ?? []).slice(); const es = el.slice().sort((a, b) => a.rank - b.rank || (a.loc.numberInt ?? 0) - (b.loc.numberInt ?? 0)); const n = Math.min(jl.length, es.length); for (let i = 0; i < n; i++) { if (repoint.has(es[i].loc.id)) continue; repoint.set(es[i].loc.id, jl[i].lcid); if (!jl[i].subs.length && es[i].subs.length) subtypeBackfill.set(jl[i].lcid, es[i].subs); } }
 
+  // 4c) 기본에너지: 에너지타입 매칭(일러 없음). JP 基本X / EN Basic Y Energy
+  const ETYPE: Record<string, string> = { "草": "Grass", "炎": "Fire", "水": "Water", "雷": "Lightning", "超": "Psychic", "闘": "Fighting", "悪": "Darkness", "鋼": "Metal", "フェアリー": "Fairy", "無": "Colorless" };
+  const jpEnergyType = (n: string) => { const m = n.match(/基本(.+?)エネルギー/); return m ? ETYPE[m[1]] ?? null : null; };
+  const enEnergyType = (n: string) => { const m = n.match(/Basic\s+(\w+)\s+Energy/i); return m ? m[1] : null; };
+  const jpBasicE = new Map<string, string>(); // type → jpLcid
+  for (const j of jpRows) { if (j.logicalCard.supertype !== "Energy") continue; const t = jpEnergyType(j.name); if (t) jpBasicE.set(t, j.logicalCardId); }
+  for (const e of enIds) { if (repoint.has(e.loc.id)) continue; if (!e.c || e.c.supertype !== "Energy") continue; const t = enEnergyType(e.loc.name); const lc = t ? jpBasicE.get(t) : null; if (lc) repoint.set(e.loc.id, lc); }
+
   // 5) 미매칭 EN → orphan
   const orphan = enIds.filter((e) => !repoint.has(e.loc.id));
   let merged = 0, orphaned = 0, sample: string[] = [];

@@ -7,9 +7,9 @@
   },
   "counts": {
     "anchors": 210,
-    "enMatched": 206,
+    "enMatched": 207,
     "krMatched": 210,
-    "enOnly": 1
+    "enOnly": 0
   },
   "anchors": [
     {
@@ -4622,10 +4622,10 @@
         "region": "EN"
       },
       "kr": {
-        "id": "kr-sv-151-154",
-        "number": "154",
-        "name": "오래된 껍질화석",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_154.png",
+        "id": "kr-sv-151-156",
+        "number": "156",
+        "name": "오래된 조개화석",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_156.png",
         "rarity": "커먼",
         "setId": "kr-sv-151",
         "region": "KR"
@@ -4652,10 +4652,10 @@
         "region": "EN"
       },
       "kr": {
-        "id": "kr-sv-151-155",
-        "number": "155",
-        "name": "오래된 비밀의호박",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_155.png",
+        "id": "kr-sv-151-154",
+        "number": "154",
+        "name": "오래된 껍질화석",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_154.png",
         "rarity": "커먼",
         "setId": "kr-sv-151",
         "region": "KR"
@@ -4682,10 +4682,10 @@
         "region": "EN"
       },
       "kr": {
-        "id": "kr-sv-151-156",
-        "number": "156",
-        "name": "오래된 조개화석",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_156.png",
+        "id": "kr-sv-151-155",
+        "number": "155",
+        "name": "오래된 비밀의호박",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_155.png",
         "rarity": "커먼",
         "setId": "kr-sv-151",
         "region": "KR"
@@ -6268,7 +6268,15 @@
         "setId": "jp-sv-151",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv3pt5-207",
+        "number": "207",
+        "name": "Basic Psychic Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-151/en/small/sv3pt5/207.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv3pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv-151-210",
         "number": "210",
@@ -6282,19 +6290,7 @@
     }
   ],
   "tail": {
-    "enOnly": [
-      {
-        "id": "sv3pt5-207",
-        "number": "207",
-        "name": "Basic Psychic Energy",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-151/en/small/sv3pt5/207.png",
-        "rarity": null,
-        "setId": "sv3pt5",
-        "region": "EN",
-        "dex": null,
-        "jpElsewhere": false
-      }
-    ],
+    "enOnly": [],
     "krOnly": [],
     "enKr": []
   }
