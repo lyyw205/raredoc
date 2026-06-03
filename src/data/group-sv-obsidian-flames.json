@@ -7,9 +7,9 @@
   },
   "counts": {
     "anchors": 141,
-    "enMatched": 114,
+    "enMatched": 115,
     "krMatched": 141,
-    "enOnly": 96
+    "enOnly": 95
   },
   "anchors": [
     {
@@ -1986,7 +1986,15 @@
         "setId": "jp-sv-obsidian-flames",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv3-126",
+        "number": "126",
+        "name": "Paldean Wooper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-obsidian-flames/en/small/sv3/126.png",
+        "rarity": "Common",
+        "setId": "sv3",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv3-067",
         "number": "067",
@@ -4698,17 +4706,6 @@
         "setId": "sv3",
         "region": "EN",
         "dex": 1007,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv3-126",
-        "number": "126",
-        "name": "Paldean Wooper",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-obsidian-flames/en/small/sv3/126.png",
-        "rarity": "Common",
-        "setId": "sv3",
-        "region": "EN",
-        "dex": 194,
         "jpElsewhere": true
       },
       {

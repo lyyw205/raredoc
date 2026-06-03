@@ -7,9 +7,9 @@
   },
   "counts": {
     "anchors": 198,
-    "enMatched": 152,
+    "enMatched": 153,
     "krMatched": 198,
-    "enOnly": 86
+    "enOnly": 85
   },
   "anchors": [
     {
@@ -3736,7 +3736,15 @@
         "setId": "jp-tcg-SV2D",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv2-100",
+        "number": "100",
+        "name": "Tinkatink",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/100.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv2d-033",
         "number": "033",
@@ -6047,17 +6055,6 @@
         "setId": "sv2",
         "region": "EN",
         "dex": 765,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv2-100",
-        "number": "100",
-        "name": "Tinkatink",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/100.png",
-        "rarity": "Common",
-        "setId": "sv2",
-        "region": "EN",
-        "dex": 957,
         "jpElsewhere": true
       },
       {

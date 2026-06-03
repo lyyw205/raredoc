@@ -7,9 +7,9 @@
   },
   "counts": {
     "anchors": 200,
-    "enMatched": 128,
+    "enMatched": 130,
     "krMatched": 200,
-    "enOnly": 57
+    "enOnly": 55
   },
   "anchors": [
     {
@@ -22,7 +22,15 @@
         "setId": "jp-tcg-SV5K",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv5-8",
+        "number": "8",
+        "name": "Roselia",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/8.png",
+        "rarity": "Common",
+        "setId": "sv5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv5k-001",
         "number": "001",
@@ -44,7 +52,15 @@
         "setId": "jp-tcg-SV5K",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv5-9",
+        "number": "9",
+        "name": "Roserade",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/9.png",
+        "rarity": "Uncommon",
+        "setId": "sv5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv5k-002",
         "number": "002",
@@ -5439,28 +5455,6 @@
   ],
   "tail": {
     "enOnly": [
-      {
-        "id": "sv5-8",
-        "number": "8",
-        "name": "Roselia",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/8.png",
-        "rarity": "Common",
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 315,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv5-9",
-        "number": "9",
-        "name": "Roserade",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/9.png",
-        "rarity": "Uncommon",
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 407,
-        "jpElsewhere": true
-      },
       {
         "id": "sv5-22",
         "number": "22",

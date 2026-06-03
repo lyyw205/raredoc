@@ -372,6 +372,12 @@ async function main() {
   const enUnmatched: Row[] = [];
   if (!crossGroup) {
     bucketPair(en.filter(isPoke), jp.filter(isPoke), fpP, fpP, enForJp, byTier);
+    // 폴백: EN 일러 결손(null) 등으로 미매칭된 앵커를 dex+subtypes(일러 제외)로 2차 매칭
+    const lpP = (r: Row) => `${r.dex}|${r.subtypes}`;
+    const usedEn = new Set([...enForJp.values()].map((r) => r.cid));
+    const jpUnmatched = jp.filter((r) => isPoke(r) && !enForJp.has(r.cid));
+    const enRemain = en.filter((r) => isPoke(r) && !usedEn.has(r.cid));
+    bucketPair(enRemain, jpUnmatched, lpP, lpP, enForJp, byTier);
     const matchedCids = new Set([...enForJp.values()].map((r) => r.cid));
     const jpDex = new Set(jp.filter(isPoke).map((r) => r.dex));
     for (const e of en) if (isPoke(e) && !matchedCids.has(e.cid)) { if (jpDex.has(e.dex) || true) enUnmatched.push(e); }

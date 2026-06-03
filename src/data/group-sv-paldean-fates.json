@@ -7,9 +7,9 @@
   },
   "counts": {
     "anchors": 360,
-    "enMatched": 183,
+    "enMatched": 184,
     "krMatched": 360,
-    "enOnly": 36
+    "enOnly": 35
   },
   "anchors": [
     {
@@ -3218,7 +3218,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-65",
+        "number": "65",
+        "name": "Revavroom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/65.png",
+        "rarity": "Common",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-131",
         "number": "131",
@@ -9738,17 +9746,6 @@
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 560,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv4pt5-65",
-        "number": "65",
-        "name": "Revavroom",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/65.png",
-        "rarity": "Common",
-        "setId": "sv4pt5",
-        "region": "EN",
-        "dex": 966,
         "jpElsewhere": true
       },
       {
