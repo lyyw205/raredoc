@@ -27,7 +27,7 @@ const rankJp = (r?: string | null) => (r === "Ultra Rare" || r === "Rare Ultra" 
 const cleanEn = (n: string) => n.replace(/\s+(ex|EX|V|VMAX|VSTAR|GX)\b.*$/i, "").replace(/\s+ex$/i, "")
   .replace(/^(Paldean|Galarian|Alolan|Hisuian)\s+/, "").replace(/\s+(Sunny|Rainy|Snowy)\s+Form$/, "").trim();
 const enDex = (n: string): number | null => { let d = resolveCardDexes(cleanEn(n), "en"); if (!d.length) d = resolveCardDexes(n, "en"); return d.length ? d[0] : null; };
-const jaDex = (n: string): number | null => { const c = n.replace(/^(なみのり|そらをとぶ|ガラル|アローラ|ヒスイ|パルデア)\s*/, "").replace(/(ex|ＥＸ|V|VMAX|VSTAR|GX)$/i, "").replace(/\s+/g, "").trim(); let d = resolveCardDexes(c, "ja" as "ko"); if (!d.length) d = resolveCardDexes(n.replace(/\s+/g, ""), "ja" as "ko"); return d.length ? d[0] : null; };
+const jaDex = (n: string): number | null => { const c = n.replace(/^(なみのり|そらをとぶ|ガラル|アローラ|ヒスイ|パルデア)\s*/, "").replace(/^(ヒート|ウォッシュ|フロスト|スピン|カット)(?=ロトム)/, "").replace(/(ex|ＥＸ|V|VMAX|VSTAR|GX)$/i, "").replace(/\s+/g, "").trim(); let d = resolveCardDexes(c, "ja" as "ko"); if (!d.length) d = resolveCardDexes(n.replace(/\s+/g, ""), "ja" as "ko"); return d.length ? d[0] : null; };
 const POKE = ["Pokémon", "Pokemon"];
 const sub = (a?: string[] | null) => [...(a ?? [])].sort().join(",");
 

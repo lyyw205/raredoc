@@ -29,6 +29,10 @@ export const TR_JP2EN: Record<string, string> = {
   "オルティガ": "Ortega",       // 스타단 포이즌크루 보스
   "ポピー": "Poppy",           // 사천왕
   "コルサ": "Brassius",        // 풀 체육관장
+  "タロ": "Lacey",             // 블루베리 사천왕(페어리)
+  "ハイダイ": "Kofu",          // 물 체육관장
+  "アカマツ": "Crispin",        // 블루베리 사천왕(불꽃)
+  "ブライア": "Briar",          // 블루베리학원 교수
   // ── 아이템 ──
   "ともだちてちょう": "Pal Pad",
   "ネストボール": "Nest Ball",
@@ -70,6 +74,15 @@ export const TR_JP2EN: Record<string, string> = {
   "パトロールキャップ": "Patrol Cap",
   "リベンジパンチ": "Vengeful Punch",
   "はげましのてがみ": "Letter of Encouragement",
+  "ガラスのラッパ": "Glass Trumpet",
+  "重力玉": "Gravity Gemstone",
+  "きらめく結晶": "Sparkling Crystal",
+  "デラックスボム": "Deluxe Bomb",
+  "偉大な大樹": "Grand Tree",
+  "古びたふたの化石": "Antique Cover Fossil",
+  "古びたねっこの化石": "Antique Root Fossil",
+  "オッカのみ": "Occa Berry",
+  "ウタンのみ": "Payapa Berry",
   // ── 스타디움 ──
   "ビーチコート": "Beach Court",
   "テーブルシティ": "Mesagoza",
@@ -78,6 +91,7 @@ export const TR_JP2EN: Record<string, string> = {
   "ポケモンリーグ本部": "Pokémon League Headquarters",
   "タウンデパート": "Town Store",
   "ボウルタウン": "Artazon",
+  "ゼロの大空洞": "Area Zero Underdepths",
 };
 
 // 博士の研究(Professor's Research)은 세트별 박사(Sada=고대/스칼렛 · Turo=미래/바이올렛)로 EN명이 갈린다.

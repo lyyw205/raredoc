@@ -85,7 +85,7 @@ const CONFIG: Record<string, Cfg> = {
   "sv-stellar-crown": {
     nameKo: "스텔라미라클", nameEn: "Stellar Crown",
     jp: ["jp-sv-stellar-crown"], kr: ["kr-sv7"],
-    krMirror: { "kr-sv7": "jp-sv-stellar-crown" }, enNative: ["sv7"], krMirrorAll: true,
+    krMirror: { "kr-sv7": "jp-sv-stellar-crown" }, enNative: ["sv7"], krMirrorAll: true, enMerged: true,
   },
   "sv-paradise-dragona": {
     nameKo: "낙원드래고나", nameEn: "Paradise Dragona",
