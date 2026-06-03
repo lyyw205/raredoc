@@ -46,6 +46,8 @@ import ogS6k from "@/data/group-og-s6k.json";
 import ogS5i from "@/data/group-og-s5i.json";
 import ogS5r from "@/data/group-og-s5r.json";
 import ogS4 from "@/data/group-og-s4.json";
+import ogS3a from "@/data/group-og-s3a.json";
+import ogS3 from "@/data/group-og-s3.json";
 
 // 그룹별 EN/JP/KR 그룹핑 카드 UI — JP 앵커(번호순) + 언어탭 + 영판전용 꼬리.
 // 카드 도감(DexCatalog)에서 해당 그룹 선택 시 인-플레이스로 렌더. 데이터는 확정 그룹핑 JSON.
@@ -95,6 +97,8 @@ const DATA: Record<string, GroupData> = {
   "og-s5i": ogS5i as unknown as GroupData,
   "og-s5r": ogS5r as unknown as GroupData,
   "og-s4": ogS4 as unknown as GroupData,
+  "og-s3a": ogS3a as unknown as GroupData,
+  "og-s3": ogS3 as unknown as GroupData,
 };
 export const GROUPED_GROUP_IDS = new Set(Object.keys(DATA));
 
