@@ -188,6 +188,11 @@ const CONFIG: Record<string, Cfg> = {
     jp: ["jp-tcg-S3"], kr: ["kr-s3"],
     krMirror: { "kr-s3": "jp-tcg-S3" }, enNative: [], krMirrorAll: true,
   },
+  "og-s4a": {
+    nameKo: "샤이니스타V", nameEn: "Shiny Star V",
+    jp: ["jp-tcg-S4a"], kr: ["kr-s4a"],
+    krMirror: { "kr-s4a": "jp-tcg-S4a" }, enNative: [], krMirrorAll: true,
+  },
   "og-s4": {
     nameKo: "앙천의볼트태클", nameEn: "Amazing Volt Tackle",
     jp: ["jp-tcg-S4"], kr: ["kr-s4"],
