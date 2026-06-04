@@ -100,7 +100,7 @@ const CONFIG: Record<string, Cfg> = {
   "sv-prismatic-evolutions": {
     nameKo: "테라스탈 페스타 ex", nameEn: "Prismatic Evolutions",
     jp: ["jp-sv-prismatic-evolutions"], kr: ["kr-sv8a"],
-    krMirror: { "kr-sv8a": "jp-sv-prismatic-evolutions" }, enNative: ["sv8pt5"], krMirrorAll: true,
+    krMirror: { "kr-sv8a": "jp-sv-prismatic-evolutions" }, enNative: ["sv8pt5"], krMirrorAll: true, enMerged: true,
   },
   "sv-journey-together": {
     nameKo: "배틀파트너즈", nameEn: "Journey Together",

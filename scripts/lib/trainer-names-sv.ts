@@ -35,6 +35,18 @@ export const TR_JP2EN: Record<string, string> = {
   "ブライア": "Briar",          // 블루베리학원 교수
   "タケシのスカウト": "Brock's Scouting",       // 타케시=Brock
   "アイリスの闘志": "Iris's Fighting Spirit",    // 아이리스=Iris
+  "アオキの手際": "Larry's Skill",              // 아오키=Larry
+  "アンズの秘技": "Janine's Secret Art",         // 안즈=Janine
+  "ゼイユ": "Carmine",         // 인디고디스크
+  "ネリネ": "Amarys",          // 인디고디스크
+  "ビワ": "Eri",              // 스타단 다크크루 보스
+  "タイム": "Tyme",            // 아카데미 교사
+  "レホール": "Raifort",        // 아카데미 역사교사
+  "スグリ": "Kieran",          // 인디고디스크
+  "カキツバタ": "Drayton",       // 블루베리 사천왕(드래곤)
+  "暗号マニアの解読": "Ciphermaniac's Codebreaking",
+  "探検家の先導": "Explorer's Guidance",
+  "パルデアの仲間たち": "Friends in Paldea",
   "怖いお兄さん": "Ruffian",
   "ホップのバッグ": "Hop's Bag",
   "ホップのこだわりハチマキ": "Hop's Choice Band",
@@ -93,6 +105,17 @@ export const TR_JP2EN: Record<string, string> = {
   "ウタンのみ": "Payapa Berry",
   "いいきずぐすり": "Super Potion",
   "とりかえチケット": "Redeemable Ticket",
+  "鬼の仮面": "Ogre's Mask",
+  "なかよしポフィン": "Buddy-Buddy Poffin",
+  "プライムキャッチャー": "Prime Catcher",
+  "ポケモン回収サイクロン": "Scoop Up Cyclone",
+  "くさりもち": "Binding Mochi",
+  "ハバンのみ": "Haban Berry",
+  "マキシマムベルト": "Maximum Belt",
+  "トレジャーガジェット": "Treasure Tracker",
+  "緊急ボード": "Rescue Board",
+  "つりざおMAX": "Max Rod",
+  "むしとりセット": "Bug Catching Set",
   // ── 스타디움 ──
   "ビーチコート": "Beach Court",
   "テーブルシティ": "Mesagoza",
@@ -104,6 +127,7 @@ export const TR_JP2EN: Record<string, string> = {
   "ゼロの大空洞": "Area Zero Underdepths",
   "ハッコウシティ": "Levincia",
   "ハロンタウン": "Postwick",
+  "お祭り会場": "Festival Grounds",
 };
 
 // 博士の研究(Professor's Research)은 세트별 박사(Sada=고대/스칼렛 · Turo=미래/바이올렛)로 EN명이 갈린다.
