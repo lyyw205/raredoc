@@ -1,0 +1,59 @@
+{
+  "_note": "공식 메이저 정본(pokedata) ↔ 보강(limitless-web) 조인 레지스트리 (multisource §1). limitlessWebId 는 city+date 자동 후보 — 수기 검증/보강 가능. 한국 개최 메이저도 metaRegion=INTL.",
+  "majors": [
+    {
+      "pokedataId": "0000208",
+      "division": "masters",
+      "name": "2026 Indianapolis Pokémon TCG Regional Championships",
+      "dateEnd": "2026-05-31",
+      "level": "regional",
+      "limitlessWebId": "559",
+      "matchedBy": "auto(city+date±3d)"
+    },
+    {
+      "pokedataId": "0000207",
+      "division": "masters",
+      "name": "2026 Lima Pokémon TCG Special Championships - Masters",
+      "dateEnd": "2026-05-24",
+      "level": "special",
+      "limitlessWebId": "536",
+      "matchedBy": "auto(city+date±3d)"
+    },
+    {
+      "pokedataId": "0000206",
+      "division": "masters",
+      "name": "2026 Melbourne Pokémon TCG Regional Championships",
+      "dateEnd": "2026-05-24",
+      "level": "regional",
+      "limitlessWebId": "550",
+      "matchedBy": "auto(city+date±3d)"
+    },
+    {
+      "pokedataId": "0000205",
+      "division": "masters",
+      "name": "2026 Campinas Pokémon TCG Regional Championships",
+      "dateEnd": "2026-05-17",
+      "level": "regional",
+      "limitlessWebId": "544",
+      "matchedBy": "auto(city+date±3d)"
+    },
+    {
+      "pokedataId": "0000204",
+      "division": "masters",
+      "name": "2026 Utrecht Pokémon TCG Regional Championships",
+      "dateEnd": "2026-05-17",
+      "level": "regional",
+      "limitlessWebId": "535",
+      "matchedBy": "auto(city+date±3d)"
+    },
+    {
+      "pokedataId": "0000203",
+      "division": "masters",
+      "name": "2026 Los Angeles Pokémon TCG Regional Championships",
+      "dateEnd": "2026-05-10",
+      "level": "regional",
+      "limitlessWebId": "558",
+      "matchedBy": "auto(city+date±3d)"
+    }
+  ]
+}

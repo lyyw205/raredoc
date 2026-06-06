@@ -15,6 +15,9 @@ const SOURCE_LABELS: Record<string, string> = {
   ptcglegends: "PTCG Legends",
 };
 
+// 대형 메이저(standings ~2,000행) 페이지 비대화 방지 — 상위 N위만 렌더 (데이터는 전체 보유).
+const STANDINGS_DISPLAY_CAP = 128;
+
 // 국가 코드 → 국기 이모지 (없으면 코드 그대로).
 function flag(country: string | null): string {
   if (!country || country.length !== 2) return country ?? "";
@@ -107,9 +110,16 @@ export default async function TournamentDetailPage({
         </div>
       </div>
 
-      {/* 순위표 */}
+      {/* 순위표 — 대형 메이저(2,000행)는 표시 상한 (데이터는 전체 보유) */}
       <section>
-        <h2 className="text-toss-title font-bold text-toss-text-primary mb-4">순위표</h2>
+        <h2 className="text-toss-title font-bold text-toss-text-primary mb-4">
+          순위표
+          {detail.standings.length > STANDINGS_DISPLAY_CAP && (
+            <span className="ml-2 text-toss-caption font-normal text-toss-text-tertiary">
+              전체 {detail.standings.length}명 중 상위 {STANDINGS_DISPLAY_CAP}위 표시
+            </span>
+          )}
+        </h2>
         {detail.standings.length === 0 ? (
           <EmptyState title="입상 데이터가 없습니다" />
         ) : (
@@ -125,7 +135,7 @@ export default async function TournamentDetailPage({
                 </tr>
               </thead>
               <tbody>
-                {detail.standings.map((s) => (
+                {detail.standings.slice(0, STANDINGS_DISPLAY_CAP).map((s) => (
                   <tr key={s.placing} className="border-b border-toss-divider last:border-0 hover:bg-toss-hover transition-colors">
                     <td className="py-3 px-3 text-center">
                       <span

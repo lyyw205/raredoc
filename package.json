@@ -29,6 +29,8 @@
     "backfill:recipe": "tsx scripts/backfill-recipe-logical.ts",
     "sync:meta:web": "tsx scripts/collect-tournaments-limitless-web.ts",
     "sync:meta:krleague": "tsx scripts/enrich-koreanleague-kr.ts",
+    "sync:meta:major": "tsx scripts/collect-majors-pokedata.ts",
+    "enrich:meta:major": "tsx scripts/enrich-majors-limitless.ts",
     "backfill:eim:kr": "tsx scripts/backfill-eim-kr-bs.ts",
     "rankings:rebuild": "tsx scripts/rebuild-rankings.ts",
     "market:rebuild": "tsx scripts/rebuild-market.ts",

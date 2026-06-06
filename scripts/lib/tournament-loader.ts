@@ -115,13 +115,15 @@ export async function loadNormalizedTournament(
     update: { role: "primary", url: t.externalUrl ?? null },
   });
 
-  // standings upsert — placing 중복 제거 (진행중 placing null 은 호출측에서 걸러서 넘길 것)
+  // standings 적재 — placing 중복 제거 (진행중 placing null 은 호출측에서 걸러서 넘길 것)
   const seen = new Set<number>();
-  let count = 0;
+  const rows = [];
   for (const s of standings) {
     if (s.placing == null || seen.has(s.placing)) continue;
     seen.add(s.placing);
-    const data = {
+    rows.push({
+      tournamentId: t.id,
+      placing: s.placing,
       playerName: s.playerName ?? "Unknown",
       playerUsername: s.playerUsername ?? null,
       country: s.country ?? null,
@@ -135,13 +137,22 @@ export async function loadNormalizedTournament(
       deckCode: s.deckCode ?? null,
       archetypeRaw: s.archetypeRaw ?? null,
       deckSource: s.deckSource ?? null,
-    };
-    await prisma.tournamentStanding.upsert({
-      where: { tournamentId_placing: { tournamentId: t.id, placing: s.placing } },
-      create: { tournamentId: t.id, placing: s.placing, ...data },
-      update: data,
     });
-    count++;
+  }
+  let count = 0;
+  if (!existing) {
+    // 신규 대회 고속 경로 — 메이저(standings ~2,000행)의 row-by-row upsert 회피
+    await prisma.tournamentStanding.createMany({ data: rows, skipDuplicates: true });
+    count = rows.length;
+  } else {
+    for (const { tournamentId, placing, ...data } of rows) {
+      await prisma.tournamentStanding.upsert({
+        where: { tournamentId_placing: { tournamentId, placing } },
+        create: { tournamentId, placing, ...data },
+        update: data,
+      });
+      count++;
+    }
   }
 
   // standings 적재 성공 후에만 syncedAt set (멱등성)

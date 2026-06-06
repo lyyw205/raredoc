@@ -4,20 +4,14 @@
  * 실행: npx tsx scripts/collect-tournaments-limitless-web.ts [--dry-run] [--force] [--limit=N] [--id=567]
  *
  * - 대회 선별은 **시리즈명 기준**("Korean League" prefix) — data-country 단독 선별 금지(리스크 P1-2:
- *   한국 개최 메이저가 KR 메타를 오염). 메이저 enrichment 용도는 후속(P5).
- * - 메인 사이트는 JSON API 없음 → SSR HTML 정규식 파싱 (data-* 속성, sync-pack-namu-ko 관례).
+ *   한국 개최 메이저가 KR 메타를 오염). 메이저는 별도 보강 스크립트(enrich-majors-limitless, P5).
  * - standings 는 사이트 게재분(top cut, 보통 32)만 — usageRate 는 "입상 점유율" 의미 (UI 라벨 구분).
- * - 아키타입: 메인 사이트는 숫자 id(/decks/284)라 정본 슬러그가 아님 → tooltip 이름을
- *   DB(DeckArchetype.nameEn / standings.deckName)와 archetype-aliases.json 으로 슬러그 매핑.
- *   실패 시 deckKey=null + archetypeRaw 보존(P4 분류기로 사후 재분류).
  * - 덱리스트 카드는 EN ptcgoCode 표기(2026-06-06 실측 — standard-jp 대회 포함) → resolver 경로①.
  * - 0건 파싱 시 hard fail (HTML 구조 변경 감지 — 나무위키 다중표 오염 선례).
+ * - 파서/슬러그 매핑은 scripts/lib/limitless-web-parse.ts 공용.
  */
 import "dotenv/config";
-import fs from "node:fs";
 import path from "node:path";
-import { execFile } from "node:child_process";
-import { promisify } from "node:util";
 import { prisma } from "../src/lib/prisma";
 import { CardResolver } from "./lib/resolve-card";
 import {
@@ -25,14 +19,15 @@ import {
   type NormalizedStanding,
   type NormalizedTournament,
 } from "./lib/tournament-loader";
+import {
+  LW_BASE,
+  fetchLwHtml,
+  parseStandings,
+  parseDecklists,
+  buildSlugMap,
+} from "./lib/limitless-web-parse";
 
-const execFileAsync = promisify(execFile);
-const UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36";
-const BASE = "https://limitlesstcg.com";
 const CACHE_DIR = path.join(process.cwd(), "data", "limitless-web");
-const ALIASES_PATH = path.join(process.cwd(), "src", "data", "archetype-aliases.json");
-const THROTTLE_MS = 1000;
 
 type Args = { dryRun: boolean; force: boolean; limit: number; id: string | null };
 function parseArgs(): Args {
@@ -46,109 +41,6 @@ function parseArgs(): Args {
   return a;
 }
 
-let lastFetch = 0;
-async function fetchHtml(url: string, cacheName: string): Promise<string> {
-  const wait = lastFetch + THROTTLE_MS - Date.now();
-  if (wait > 0) await new Promise((r) => setTimeout(r, wait));
-  lastFetch = Date.now();
-  const { stdout } = await execFileAsync(
-    "curl",
-    ["-sSL", "--max-time", "60", "-A", UA, url],
-    { maxBuffer: 32 * 1024 * 1024 },
-  );
-  if (!stdout || stdout.length < 1000) throw new Error(`응답 비정상(${stdout?.length ?? 0}B): ${url}`);
-  fs.mkdirSync(CACHE_DIR, { recursive: true });
-  fs.writeFileSync(path.join(CACHE_DIR, cacheName), stdout);
-  return stdout;
-}
-
-/** "1st Juho Ko" → { placing: 1, player: "Juho Ko" } */
-function parseToggle(text: string): { placing: number; player: string } | null {
-  const m = text.trim().match(/^(\d+)(?:st|nd|rd|th)\s+(.+)$/);
-  return m ? { placing: parseInt(m[1], 10), player: m[2].trim() } : null;
-}
-
-type WebStanding = {
-  placing: number;
-  player: string;
-  country: string | null;
-  archetypeName: string | null; // data-tooltip (예 "Dragapult Dusknoir")
-};
-
-function parseStandings(html: string): WebStanding[] {
-  const out: WebStanding[] = [];
-  for (const tr of html.match(/<tr[^>]*>[\s\S]*?<\/tr>/g) ?? []) {
-    if (!tr.includes("/players/")) continue;
-    const placing = tr.match(/<td>(\d+)<\/td>/)?.[1];
-    const player = tr.match(/<a href="\/players\/\d+">([^<]+)<\/a>/)?.[1];
-    if (!placing || !player) continue;
-    const country = tr.match(/class="flag"[^>]*alt="([A-Z]{2})"/)?.[1] ?? null;
-    const archetypeName = tr.match(/<a href="\/decks\/\d+[^"]*"><span data-tooltip="([^"]+)"/)?.[1] ?? null;
-    out.push({ placing: parseInt(placing, 10), player: player.trim(), country, archetypeName });
-  }
-  return out;
-}
-
-type Bucket = "pokemon" | "trainer" | "energy";
-type DeckEntry = { count: number; set: string; number: string; name: string; logicalCardId?: string | null };
-type ParsedDecklist = { placing: number; player: string; cards: Record<Bucket, DeckEntry[]> };
-
-function parseDecklists(html: string): ParsedDecklist[] {
-  const out: ParsedDecklist[] = [];
-  const sections = html.split('<div class="tournament-decklist">').slice(1);
-  for (const sec of sections) {
-    const toggleText = sec.match(/<div class="decklist-toggle"[^>]*>([^<]+)<\/div>/)?.[1];
-    const head = toggleText ? parseToggle(toggleText) : null;
-    if (!head) continue;
-    const cards: Record<Bucket, DeckEntry[]> = { pokemon: [], trainer: [], energy: [] };
-    // 컬럼 단위: <div class="decklist-column-heading">Pokémon (12)</div> 뒤의 decklist-card 들
-    const cols = sec.split('<div class="decklist-column-heading">').slice(1);
-    for (const col of cols) {
-      const heading = col.slice(0, col.indexOf("<")).toLowerCase();
-      const bucket: Bucket | null = heading.includes("pok")
-        ? "pokemon"
-        : heading.includes("trainer")
-          ? "trainer"
-          : heading.includes("energy")
-            ? "energy"
-            : null;
-      if (!bucket) continue;
-      const cardRe =
-        /<div class="decklist-card"[^>]*data-set="([^"]+)"[^>]*data-number="([^"]+)"[^>]*>[\s\S]*?<span class="card-count">(\d+)<\/span>\s*<span class="card-name">([^<]+)<\/span>/g;
-      let m: RegExpExecArray | null;
-      while ((m = cardRe.exec(col)) !== null) {
-        cards[bucket].push({ set: m[1], number: m[2], count: parseInt(m[3], 10), name: m[4].trim() });
-      }
-    }
-    out.push({ placing: head.placing, player: head.player, cards });
-  }
-  return out;
-}
-
-/** 아키타입 이름 → 정본 슬러그 매핑 사전 구축 (DB + aliases.json) */
-async function buildSlugMap(): Promise<Map<string, string>> {
-  const map = new Map<string, string>();
-  // 1) DeckArchetype.nameEn (집계가 채운 play 원문)
-  for (const a of await prisma.deckArchetype.findMany({ select: { id: true, nameEn: true } })) {
-    if (a.nameEn) map.set(a.nameEn.toLowerCase(), a.id);
-  }
-  // 2) standings 의 (deckName, deckKey) — play 수집분이 더 넓음
-  const rows = await prisma.tournamentStanding.findMany({
-    where: { deckKey: { not: null }, deckName: { not: null } },
-    select: { deckKey: true, deckName: true },
-    distinct: ["deckKey", "deckName"],
-  });
-  for (const r of rows) map.set(r.deckName!.toLowerCase(), r.deckKey!);
-  // 3) aliases.json (수동 보강 — 네임스페이스 limitless-web)
-  if (fs.existsSync(ALIASES_PATH)) {
-    const aliases = JSON.parse(fs.readFileSync(ALIASES_PATH, "utf8"));
-    for (const [name, slug] of Object.entries(aliases["limitless-web"] ?? {})) {
-      map.set(name.toLowerCase(), slug as string);
-    }
-  }
-  return map;
-}
-
 async function main() {
   const args = parseArgs();
   const resolver = await CardResolver.create();
@@ -156,7 +48,7 @@ async function main() {
   console.log(`[lw] 슬러그 매핑 사전 ${slugMap.size}건 (DB nameEn/deckName + aliases.json)`);
 
   // 1. 대회 목록 — 시리즈명 선별
-  const listHtml = await fetchHtml(`${BASE}/tournaments?show=300`, "tournaments-list.html");
+  const listHtml = await fetchLwHtml(`${LW_BASE}/tournaments?show=300`, CACHE_DIR, "tournaments-list.html");
   const rowRe = /<tr[^>]*data-name="(Korean League[^"]*)"[^>]*>[\s\S]*?<\/tr>/g;
   type Row = { name: string; date: string; format: string; players: number; id: string };
   const rows: Row[] = [];
@@ -191,14 +83,14 @@ async function main() {
       }
     }
 
-    const pageHtml = await fetchHtml(`${BASE}/tournaments/${row.id}`, `tournament-${row.id}.html`);
+    const pageHtml = await fetchLwHtml(`${LW_BASE}/tournaments/${row.id}`, CACHE_DIR, `tournament-${row.id}.html`);
     const webStandings = parseStandings(pageHtml);
     if (webStandings.length === 0) throw new Error(`[lw] ${tid} standings 0건 파싱 — 구조 변경 의심, hard fail`);
 
     // 덱리스트 (없는 대회도 있음 — 페이지 404/빈 섹션 허용)
-    let decklists: ParsedDecklist[] = [];
+    let decklists: ReturnType<typeof parseDecklists> = [];
     try {
-      const dlHtml = await fetchHtml(`${BASE}/tournaments/${row.id}/decklists`, `decklists-${row.id}.html`);
+      const dlHtml = await fetchLwHtml(`${LW_BASE}/tournaments/${row.id}/decklists`, CACHE_DIR, `decklists-${row.id}.html`);
       decklists = parseDecklists(dlHtml);
     } catch {
       console.warn(`[lw] ${tid} decklists 페이지 없음/실패 — standings 만 적재`);
@@ -242,7 +134,7 @@ async function main() {
       sourceId: row.id,
       metaRegion: "KR",
       level: "league",
-      externalUrl: `${BASE}/tournaments/${row.id}`,
+      externalUrl: `${LW_BASE}/tournaments/${row.id}`,
       name: `${row.name} ${row.date.slice(0, 4)}`,
       date: new Date(row.date),
       region: "KR",
