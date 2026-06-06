@@ -147,6 +147,12 @@ async function main() {
         platform: details.platform ?? null,
         winnerArchetypeId,
         status: "completed",
+        // 멀티소스 식별 (docs/meta-pipeline-multisource.md §1): 이 수집기는 온라인 그래스루츠 정본
+        source: "limitless-play",
+        sourceId: t.id,
+        metaRegion: "INTL",
+        level: "online",
+        externalUrl: `https://play.limitlesstcg.com/tournament/${t.id}`,
       };
       await prisma.tournament.upsert({
         where: { id: tournamentId },
@@ -173,6 +179,7 @@ async function main() {
             tournamentId,
             placing: s.placing,
             playerName: s.name ?? s.player ?? "Unknown",
+            playerUsername: s.player ?? null, // pairings 매칭 안정화용 username 보존
             country: s.country ?? null,
             deckKey: s.deck?.id ?? null,
             deckName: s.deck?.name ?? null,
@@ -181,9 +188,11 @@ async function main() {
             losses: rec.losses ?? 0,
             ties: rec.ties ?? 0,
             decklist: (s.decklist as object) ?? undefined,
+            deckSource: s.decklist ? "limitless" : null,
           },
           update: {
             playerName: s.name ?? s.player ?? "Unknown",
+            playerUsername: s.player ?? null,
             country: s.country ?? null,
             deckKey: s.deck?.id ?? null,
             deckName: s.deck?.name ?? null,
@@ -192,6 +201,7 @@ async function main() {
             losses: rec.losses ?? 0,
             ties: rec.ties ?? 0,
             decklist: (s.decklist as object) ?? undefined,
+            deckSource: s.decklist ? "limitless" : null,
           },
         });
         stats.standings++;

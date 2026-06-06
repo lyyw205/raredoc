@@ -317,7 +317,8 @@ export async function getArchetypeTrends(): Promise<{
 }> {
   const rows = await prisma.deckArchetype.findMany({
     where: { sampleSize: { gt: 0 } },
-    include: { trends: { select: { week: true, usage: true } } },
+    // region 필터: 본체 화면은 INTL 의미 고정 — JP/KR 트렌드 행 적재 시 혼합 방지 (multisource P0)
+    include: { trends: { where: { region: "INTL" }, select: { week: true, usage: true } } },
   });
   const weekSet = new Set<string>();
   for (const a of rows) for (const t of a.trends) weekSet.add(t.week);
@@ -402,7 +403,8 @@ export type ArchetypeRecipe = {
 export async function getArchetypeRecipe(deckId: string): Promise<ArchetypeRecipe> {
   const [arch, rows] = await Promise.all([
     prisma.deckArchetype.findUnique({ where: { id: deckId }, select: { iconKeys: true } }),
-    prisma.deckRecipeCard.findMany({ where: { archetypeId: deckId } }),
+    // region 필터: INTL 의미 고정 — P2 에서 JP/KR 레시피 행이 생겨도 본체 화면 혼합 방지 (multisource P0)
+    prisma.deckRecipeCard.findMany({ where: { archetypeId: deckId, region: "INTL" } }),
   ]);
   // 핵심 카드 매칭: iconKeys(예 "dragapult") 가 cardName(소문자) 에 포함되면 그 덱의 대표 카드.
   // icon 직접 매칭만 (라인 카드는 제외) — icon slug 가 cardName 에 부분 포함되면 hero.
@@ -469,7 +471,8 @@ export type CardAdoption = {
  */
 export async function getCardAdoption(): Promise<Map<string, CardAdoption>> {
   const rows = await prisma.deckRecipeCard.findMany({
-    where: { logicalCardId: { not: null } },
+    // region 필터: INTL 한정 — region 행 분리 시 deckCount/usageScore 이중계상 방지 (multisource P0)
+    where: { logicalCardId: { not: null }, region: "INTL" },
     select: { logicalCardId: true, adoptionRate: true, avgCount: true },
   });
 
@@ -518,7 +521,8 @@ export async function getRisingDecks(n = 5): Promise<{ rising: RisingDeck[]; fal
       nameKo: true,
       nameEn: true,
       usageRate: true,
-      trends: { select: { week: true, usage: true } },
+      // region 필터: INTL 의미 고정 (multisource P0)
+      trends: { where: { region: "INTL" }, select: { week: true, usage: true } },
     },
   });
 
@@ -582,13 +586,14 @@ export type TournamentRow = {
 export async function getTournaments(opts?: {
   region?: string;
   status?: string;
-  /** true 면 limitlessId 있는 실데이터만. 미지정 시 전체(목업 포함). */
+  /** true 면 정본 소스(source) 있는 실데이터만. 미지정 시 전체(목업 포함). */
   realOnly?: boolean;
 }): Promise<TournamentRow[]> {
-  const where: { region?: string; status?: string; limitlessId?: { not: null } } = {};
+  const where: { region?: string; status?: string; source?: { not: null } } = {};
   if (opts?.region && opts.region !== "all") where.region = opts.region;
   if (opts?.status && opts.status !== "all") where.status = opts.status;
-  if (opts?.realOnly) where.limitlessId = { not: null };
+  // multisource P0: limitlessId → source (신규 소스도 실데이터로 인정)
+  if (opts?.realOnly) where.source = { not: null };
 
   const rows = await prisma.tournament.findMany({ where, orderBy: { date: "desc" } });
   // 우승 덱 이름 환산
@@ -618,7 +623,7 @@ export async function getTournaments(opts?: {
   }));
 }
 
-/** 대회 리스트(실데이터 전용): limitlessId 있는 Tournament + 1위 우승덱 한글명. */
+/** 대회 리스트(실데이터 전용): 정본 소스(source) 있는 Tournament + 1위 우승덱 한글명. */
 export async function getRealTournaments(): Promise<TournamentRow[]> {
   return getTournaments({ realOnly: true });
 }

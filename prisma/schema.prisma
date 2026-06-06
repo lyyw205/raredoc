@@ -502,6 +502,7 @@ model DeckArchetype {
   matchupsA     DeckMatchup[]    @relation("MatchupDeckA")
   matchupsB     DeckMatchup[]    @relation("MatchupDeckB")
   recipe        DeckRecipeCard[]
+  regionStats   ArchetypeRegionStat[]
   updatedAt     DateTime         @updatedAt
 
   @@index([tier])
@@ -513,6 +514,7 @@ model DeckRecipeCard {
   id            String        @id @default(cuid())
   archetypeId   String
   archetype     DeckArchetype @relation(fields: [archetypeId], references: [id], onDelete: Cascade)
+  region        String        @default("INTL") // INTL|JP|KR — region 별 레시피 (unique 교체는 P2 에서 aggregate 키 패치와 원자화)
   cardName      String // Limitless decklist name (영문)
   setCode       String? // decklist set (예: "DRI")
   number        String? // decklist number
@@ -578,23 +580,45 @@ model ArchetypeTrend {
 }
 
 model Tournament {
-  id                String               @id // = "lim-{limitlessId}"
-  limitlessId       String?              @unique // 원본 Limitless API id
+  id                String                @id // = "{소스프리픽스}-{sourceId}" (lim-/lw-/jpc-/pd-...)
+  limitlessId       String?               @unique // 레거시: 원본 Limitless API id (source/sourceId 로 대체)
+  source            String? // 정본 소스: limitless-play|limitless-web|jp-official|pokedata|ptcglegends — null=목업
+  sourceId          String? // 정본 소스의 원본 ID
+  metaRegion        String // INTL|JP|KR — 집계 파티션 (region 과 별개). default 없음: 수집기가 명시 입력 (누락 시 즉시 실패)
+  level             String? // worlds|ic|regional|special|cl|league|city|online — 대회 필터 탭
+  externalUrl       String? // 출처 링크
   nameKo            String
   name              String? // 원문(영문) 대회명
   date              DateTime
-  region            String // 파생: 참가자 country 최빈값 (JP/US/KR/INTL)
-  format            String // STANDARD/EXPANDED (Limitless format)
+  region            String // 파생: 참가자 country 최빈값 (JP/US/KR/INTL) — 표시용 레거시
+  format            String // STANDARD/EXPANDED/STANDARD_JP
   players           Int
   platform          String? // PTCGL/오프라인 등 (details.platform)
   winnerArchetypeId String? // = 1위 standing 의 deckKey
   status            String // upcoming/completed
   syncedAt          DateTime? // 마지막 standings 동기화 시각
   standings         TournamentStanding[]
-  createdAt         DateTime             @default(now())
+  sourceRefs        TournamentSourceRef[]
+  createdAt         DateTime              @default(now())
 
+  @@unique([source, sourceId])
   @@index([date])
   @@index([region])
+  @@index([metaRegion, date])
+}
+
+// 대회-소스 연결 (정본 primary / 보강 enrichment). 같은 원본이 두 Tournament 에 붙으면 DB 에러 → 이중집계 차단.
+model TournamentSourceRef {
+  id           String     @id @default(cuid())
+  tournamentId String
+  tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  source       String // kr-official|pokekameshi|limitless-jp|limitless-web|pokedata|ptcglegends
+  sourceId     String // event_holding_id, pokedata ID 등
+  role         String // primary|enrichment
+  url          String?
+
+  @@unique([source, sourceId])
+  @@index([tournamentId])
 }
 
 // 대회별 입상 1행 (Limitless standings). 집계의 원천 데이터.
@@ -613,11 +637,39 @@ model TournamentStanding {
   losses       Int            @default(0)
   ties         Int            @default(0)
   decklist     Json? // 원본 데클리스트 보존 (레시피/카드매칭/검증용)
+  playerUsername String? // 소스 username (pairings 매칭 안정화 — 표시명 비교 의존 해소)
+  deckCode     String? // JP "XXXXXX-XXXXXX-XXXXXX" | KR recipe code — 복사 버튼 + 재수집 키
+  archetypeRaw String? // 소스 원문 라벨 (ポケカ飯 일어명 등) — 사후 재분류 원천
+  deckSource   String? // decklist provenance: limitless|jp-deckcode|kr-deckcode|pokedata
   createdAt    DateTime       @default(now())
 
   @@unique([tournamentId, placing])
   @@index([deckKey])
   @@index([tournamentId])
+}
+
+// 아키타입 × region 별 집계 (INTL|JP|KR). 본체 DeckArchetype 집계 컬럼은 INTL 미러로 의미 고정.
+model ArchetypeRegionStat {
+  id              String        @id @default(cuid())
+  archetypeId     String
+  archetype       DeckArchetype @relation(fields: [archetypeId], references: [id], onDelete: Cascade)
+  region          String // INTL|JP|KR
+  tier            String // S/A/B/C — sampleSize<30 이면 "—"
+  usageRate       Float         @default(0)
+  winCount        Int           @default(0)
+  avgRank         Float         @default(0)
+  winRate         Float         @default(0)
+  conversion      Float         @default(0)
+  consistency     Float         @default(0)
+  sampleSize      Int           @default(0)
+  tournamentCount Int           @default(0)
+  isUnderdog      Boolean       @default(false)
+  isTrap          Boolean       @default(false)
+  isMetaCounter   Boolean       @default(false)
+  updatedAt       DateTime      @updatedAt
+
+  @@unique([archetypeId, region])
+  @@index([region, tier])
 }
 
 model PlayerRanking {

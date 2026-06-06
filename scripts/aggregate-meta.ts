@@ -121,12 +121,17 @@ async function main() {
   );
 
   // window 내 대회 + standings (deckKey not null)
+  // multisource P0: limitlessId → source not null (신규 소스 수용). pairings 는 limitless-play 전용이라 별도 맵.
   const tournaments = await prisma.tournament.findMany({
-    where: { date: { gte: since }, limitlessId: { not: null } },
-    select: { id: true, limitlessId: true, format: true },
+    where: { date: { gte: since }, source: { not: null } },
+    select: { id: true, source: true, limitlessId: true, format: true },
   });
   const tFormat = new Map(tournaments.map((t) => [t.id, t.format] as const));
-  const tLimitless = new Map(tournaments.map((t) => [t.id, t.limitlessId!] as const));
+  const tLimitless = new Map(
+    tournaments
+      .filter((t) => t.source === "limitless-play" && t.limitlessId)
+      .map((t) => [t.id, t.limitlessId!] as const),
+  );
   const tournamentIds = tournaments.map((t) => t.id);
 
   if (tournamentIds.length === 0) {
@@ -297,10 +302,13 @@ async function main() {
   // pairings 조회는 대회마다 1 API 콜 → rate guard. 큰 대회 위주만(표본).
   for (const t of tournaments) {
     try {
+      // pairings 는 limitless-play 전용 — 타 소스 대회는 skip (multisource P0, rate limit 보호)
+      const limitlessId = tLimitless.get(t.id);
+      if (!limitlessId) continue;
       if (await rateGuard()) {
         /* waited */
       }
-      const pairings = await fetchPairings(tLimitless.get(t.id)!);
+      const pairings = await fetchPairings(limitlessId);
       // 이 대회의 username→deckKey 는 standings(Limitless) 에서. 이미 우리 DB 엔 username 없음.
       // → standings 재조회 대신, 우리 DB standings 의 playerName 으로 매핑 시도(표시명=username 인 경우 多).
       //   매핑 실패 시 해당 pairing skip.
