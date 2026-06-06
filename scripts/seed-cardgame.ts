@@ -124,7 +124,8 @@ async function seedTournaments() {
     };
     await prisma.tournament.upsert({
       where: { id: t.id },
-      create: { id: t.id, ...data },
+      // metaRegion 은 필수(no-default) — 목업은 source=null 이라 realOnly/집계에서 제외되므로 INTL 표기만
+      create: { id: t.id, metaRegion: "INTL", ...data },
       update: data,
     });
   }

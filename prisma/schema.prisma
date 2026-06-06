@@ -514,17 +514,17 @@ model DeckRecipeCard {
   id            String        @id @default(cuid())
   archetypeId   String
   archetype     DeckArchetype @relation(fields: [archetypeId], references: [id], onDelete: Cascade)
-  region        String        @default("INTL") // INTL|JP|KR — region 별 레시피 (unique 교체는 P2 에서 aggregate 키 패치와 원자화)
+  region        String        @default("INTL") // INTL|JP|KR — region 별 레시피 (P2)
   cardName      String // Limitless decklist name (영문)
-  setCode       String? // decklist set (예: "DRI")
-  number        String? // decklist number
+  setCode       String        @default("") // decklist set (예: "DRI") — ""=미상. NULL 금지: Postgres unique 의 NULL-distinct 로 upsert 중복증식 방지
+  number        String        @default("") // decklist number — ""=미상
   category      String // pokemon/trainer/energy
   avgCount      Float // 평균 채용 수
   adoptionRate  Float // 채용률 (이 아키타입 덱 중 % 가 채용)
   logicalCardId String? // 매칭된 우리 카드(시세/이미지용) — null 가능
   isCore        Boolean       @default(false) // 채용률 100% 근처 = 코어
 
-  @@unique([archetypeId, cardName, setCode, number])
+  @@unique([archetypeId, region, cardName, setCode, number])
   @@index([archetypeId])
   @@index([logicalCardId])
 }
