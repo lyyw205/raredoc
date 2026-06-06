@@ -145,11 +145,30 @@ export async function resolveDeckCardMap(cardIds: string[]): Promise<Record<stri
 export type ArchetypeSummary = {
   id: string;
   nameKo: string;
+  /** Limitless deck.name 원문 (한글명 폴백/표시용). */
+  nameEn: string | null;
   tier: string;
   regulation: string;
   usageRate: number;
   winCount: number;
   avgRank: number;
+  /** 승률 (record 집계). 실데이터 전용. */
+  winRate: number;
+  /** 입상률 (Top컷 진출 / 참가). */
+  conversion: number;
+  /** 안정성 (placing 분산 기반). */
+  consistency: number;
+  /** 집계 표본 수 (신뢰도 표시용). 0 이면 목업. */
+  sampleSize: number;
+  /** 사용률↓ + 승률↑ (#9). */
+  isUnderdog: boolean;
+  /** 사용률↑ + 승률→ (#10). */
+  isTrap: boolean;
+  /** 상위덱 종합 우세 (#14). */
+  isMetaCounter: boolean;
+  /** Limitless 아이콘 키 (히어로 카드 식별 — 현재 CDN 미사용). */
+  iconKeys: string[];
+  /** 카드매칭 보류로 빈 배열일 수 있음 (옵셔널 체이닝 필수). */
   heroCardIds: string[];
   cardList: { cardId: string; count: number; role: string | null }[];
   strengths: string[];
@@ -169,11 +188,20 @@ const TIER_ORDER: Record<string, number> = { S: 0, A: 1, B: 2, C: 3 };
 type DbArchetype = {
   id: string;
   nameKo: string;
+  nameEn: string | null;
   tier: string;
   regulation: string;
   usageRate: number;
   winCount: number;
   avgRank: number;
+  winRate: number;
+  conversion: number;
+  consistency: number;
+  sampleSize: number;
+  isUnderdog: boolean;
+  isTrap: boolean;
+  isMetaCounter: boolean;
+  iconKeys: string[];
   description: string;
   strengths: string[];
   weaknesses: string[];
@@ -186,12 +214,22 @@ function toSummary(a: DbArchetype): ArchetypeSummary {
   return {
     id: a.id,
     nameKo: a.nameKo,
+    nameEn: a.nameEn,
     tier: a.tier,
     regulation: a.regulation,
     usageRate: a.usageRate,
     winCount: a.winCount,
     avgRank: a.avgRank,
+    winRate: a.winRate,
+    conversion: a.conversion,
+    consistency: a.consistency,
+    sampleSize: a.sampleSize,
+    isUnderdog: a.isUnderdog,
+    isTrap: a.isTrap,
+    isMetaCounter: a.isMetaCounter,
+    iconKeys: a.iconKeys,
     // heroCardIds: cardList 앞 4장(채용 ✓ 우선) — 화면 썸네일용.
+    // 실데이터 아키타입은 DeckCard 없음 → 빈 배열(폴백 처리는 화면에서).
     heroCardIds: [...a.cards]
       .sort((x, y) => (x.role === "✓" ? 0 : 1) - (y.role === "✓" ? 0 : 1))
       .slice(0, 4)
@@ -211,13 +249,16 @@ const ARCHETYPE_INCLUDE = {
 } as const;
 
 export async function getArchetypes(opts?: {
-  sort?: "usage" | "wins" | "new";
+  sort?: "usage" | "wins" | "new" | "winRate" | "conversion" | "consistency";
   tier?: string;
   regulation?: string;
+  /** true 면 sampleSize>0 실데이터만 (메타/덱뷰). 미지정 시 전체(목업 포함). */
+  realOnly?: boolean;
 }): Promise<ArchetypeSummary[]> {
-  const where: { tier?: string; regulation?: string } = {};
+  const where: { tier?: string; regulation?: string; sampleSize?: { gt: number } } = {};
   if (opts?.tier && opts.tier !== "all") where.tier = opts.tier;
   if (opts?.regulation && opts.regulation !== "all") where.regulation = opts.regulation;
+  if (opts?.realOnly) where.sampleSize = { gt: 0 };
 
   const rows = await prisma.deckArchetype.findMany({ where, include: ARCHETYPE_INCLUDE });
   const list = rows.map(toSummary);
@@ -227,6 +268,12 @@ export async function getArchetypes(opts?: {
     switch (sort) {
       case "wins":
         return b.winCount - a.winCount;
+      case "winRate":
+        return b.winRate - a.winRate;
+      case "conversion":
+        return b.conversion - a.conversion;
+      case "consistency":
+        return b.consistency - a.consistency;
       case "new":
         return a.id.localeCompare(b.id);
       case "usage":
@@ -245,12 +292,15 @@ export async function getArchetype(id: string): Promise<ArchetypeWithCards | nul
   return { ...summary, cards };
 }
 
-/** 홈 추천메타용: 티어순(S→A→B→C) 상위 n개 + 표시용 카드 맵. */
+/** 홈 추천메타용: 티어순(S→A→B→C) 상위 n개 + 표시용 카드 맵. 실데이터(sampleSize>0)만. */
 export async function getRecommendedDecks(n = 4): Promise<{
   decks: ArchetypeSummary[];
   cards: Record<string, ResolvedCard>;
 }> {
-  const rows = await prisma.deckArchetype.findMany({ include: ARCHETYPE_INCLUDE });
+  const rows = await prisma.deckArchetype.findMany({
+    where: { sampleSize: { gt: 0 } },
+    include: ARCHETYPE_INCLUDE,
+  });
   const list = rows.map(toSummary).sort((a, b) => {
     const t = (TIER_ORDER[a.tier] ?? 9) - (TIER_ORDER[b.tier] ?? 9);
     return t !== 0 ? t : b.usageRate - a.usageRate;
@@ -260,12 +310,13 @@ export async function getRecommendedDecks(n = 4): Promise<{
   return { decks, cards };
 }
 
-/** 메타 페이지 사용률 추이 차트용. */
+/** 메타 페이지 사용률 추이 차트용. 실데이터(sampleSize>0)만. */
 export async function getArchetypeTrends(): Promise<{
   weeks: string[];
   series: { archetypeId: string; nameKo: string; points: Record<string, number> }[];
 }> {
   const rows = await prisma.deckArchetype.findMany({
+    where: { sampleSize: { gt: 0 } },
     include: { trends: { select: { week: true, usage: true } } },
   });
   const weekSet = new Set<string>();
@@ -282,15 +333,247 @@ export async function getArchetypeTrends(): Promise<{
   return { weeks, series };
 }
 
+// ── 메타 집중도 / 급상승 / 상성 / 레시피 (실데이터 전용) ──────────────────────
+
+export type ArchetypeMatchup = {
+  opponentId: string;
+  opponentNameKo: string;
+  /** 이 덱(deckId) 기준 승률 (%). */
+  winRate: number;
+  games: number;
+  /** games < 5 면 신뢰도 낮음. */
+  lowSample: boolean;
+};
+
+/** #13 상성: 주어진 덱의 DeckMatchup 양방향 조회 → 이 덱 기준 승률 리스트(승률 내림차순). */
+export async function getArchetypeMatchups(deckId: string): Promise<ArchetypeMatchup[]> {
+  const rows = await prisma.deckMatchup.findMany({
+    where: { OR: [{ deckAId: deckId }, { deckBId: deckId }] },
+  });
+  if (rows.length === 0) return [];
+
+  // 이 덱 기준으로 정규화 (B쪽이면 winRate/wins 반전).
+  const normalized = rows.map((m) => {
+    const isA = m.deckAId === deckId;
+    const opponentId = isA ? m.deckBId : m.deckAId;
+    const winRate = isA ? m.winRateA : 100 - m.winRateA;
+    return { opponentId, winRate, games: m.games };
+  });
+
+  // 상대 한글명 환산.
+  const oppIds = Array.from(new Set(normalized.map((n) => n.opponentId)));
+  const opps = await prisma.deckArchetype.findMany({
+    where: { id: { in: oppIds } },
+    select: { id: true, nameKo: true, nameEn: true },
+  });
+  const nameById = new Map(opps.map((o) => [o.id, o.nameKo || o.nameEn || o.id]));
+
+  return normalized
+    .map((n) => ({
+      opponentId: n.opponentId,
+      opponentNameKo: nameById.get(n.opponentId) ?? n.opponentId,
+      winRate: Math.round(n.winRate * 10) / 10,
+      games: n.games,
+      lowSample: n.games < 5,
+    }))
+    .sort((a, b) => b.winRate - a.winRate);
+}
+
+export type RecipeCard = {
+  cardName: string;
+  setCode: string | null;
+  number: string | null;
+  avgCount: number;
+  adoptionRate: number;
+  isCore: boolean;
+  /** 채용률 30~70% = 테크 카드(옅게 표시). */
+  isTech: boolean;
+  /** 덱 핵심 카드 (archetype.iconKeys 에 해당하는 대표 포켓몬). */
+  isHero: boolean;
+};
+
+export type ArchetypeRecipe = {
+  pokemon: RecipeCard[];
+  trainer: RecipeCard[];
+  energy: RecipeCard[];
+};
+
+/** #16/#17 표준 레시피: DeckRecipeCard 를 category별 그룹 + 코어/테크 구분("핵심 카드 먼저" 정렬). */
+export async function getArchetypeRecipe(deckId: string): Promise<ArchetypeRecipe> {
+  const [arch, rows] = await Promise.all([
+    prisma.deckArchetype.findUnique({ where: { id: deckId }, select: { iconKeys: true } }),
+    prisma.deckRecipeCard.findMany({ where: { archetypeId: deckId } }),
+  ]);
+  // 핵심 카드 매칭: iconKeys(예 "dragapult") 가 cardName(소문자) 에 포함되면 그 덱의 대표 카드.
+  // icon 직접 매칭만 (라인 카드는 제외) — icon slug 가 cardName 에 부분 포함되면 hero.
+  const iconKeys = (arch?.iconKeys ?? []).map((k) => k.toLowerCase());
+  const isHeroCard = (name: string): boolean => {
+    const n = name.toLowerCase();
+    return iconKeys.some((ic) => n.includes(ic));
+  };
+
+  type RankedRow = (typeof rows)[number] & { _hero: boolean };
+  const ranked: RankedRow[] = rows.map((r) => ({ ...r, _hero: isHeroCard(r.cardName) }));
+
+  // 정렬 우선순위:
+  //   1) 핵심 카드(iconKeys 매칭) 먼저
+  //   2) isCore(채용률≥90)
+  //   3) 사용량(채용률 × 평균 장수), 동률은 채용률
+  ranked.sort((a, b) => {
+    if (a._hero !== b._hero) return a._hero ? -1 : 1;
+    if (a.isCore !== b.isCore) return a.isCore ? -1 : 1;
+    const ua = a.adoptionRate * a.avgCount;
+    const ub = b.adoptionRate * b.avgCount;
+    return ub - ua || b.adoptionRate - a.adoptionRate;
+  });
+
+  const toCard = (r: RankedRow): RecipeCard => ({
+    cardName: r.cardName,
+    setCode: r.setCode,
+    number: r.number,
+    avgCount: Math.round(r.avgCount * 10) / 10,
+    adoptionRate: Math.round(r.adoptionRate * 10) / 10,
+    isCore: r.isCore,
+    isTech: !r.isCore && r.adoptionRate >= 30 && r.adoptionRate <= 70,
+    isHero: r._hero,
+  });
+  return {
+    pokemon: ranked.filter((r) => r.category === "pokemon").map(toCard),
+    trainer: ranked.filter((r) => r.category === "trainer").map(toCard),
+    energy: ranked.filter((r) => r.category === "energy").map(toCard),
+  };
+}
+
+// ── 카드 채용률 (카드 탭 정렬·뱃지용) ────────────────────────────────────────
+
+export type CardAdoption = {
+  /** 이 카드가 등장하는 아키타입 수. */
+  deckCount: number;
+  /** 평균 채용률 (등장 아키타입들의 adoptionRate 평균, %). */
+  adoptionRate: number;
+  /** 사용량 점수 Σ(adoptionRate × avgCount). 정렬 키. */
+  usageScore: number;
+};
+
+/**
+ * 작업2: 카드(logicalCardId)별 메타 채용 지표.
+ *
+ * DeckRecipeCard 에서 logicalCardId NOT NULL 인 행을 logicalCardId별 집계.
+ * - deckCount: 등장 아키타입 수
+ * - adoptionRate: 평균 채용률
+ * - usageScore: Σ(adoptionRate × avgCount)
+ *
+ * 현재 DeckRecipeCard.logicalCardId 는 전부 null(카드매칭 미수행) → 빈 Map 반환(정상).
+ * A단계(decklist set/number → CardLocale → LogicalCard 매칭)로 logicalCardId 가 채워지면
+ * 코드 수정 없이 자동으로 채워진다.
+ */
+export async function getCardAdoption(): Promise<Map<string, CardAdoption>> {
+  const rows = await prisma.deckRecipeCard.findMany({
+    where: { logicalCardId: { not: null } },
+    select: { logicalCardId: true, adoptionRate: true, avgCount: true },
+  });
+
+  type Acc = { deckCount: number; rateSum: number; usageScore: number };
+  const acc = new Map<string, Acc>();
+  for (const r of rows) {
+    const id = r.logicalCardId!;
+    let a = acc.get(id);
+    if (!a) {
+      a = { deckCount: 0, rateSum: 0, usageScore: 0 };
+      acc.set(id, a);
+    }
+    a.deckCount++;
+    a.rateSum += r.adoptionRate;
+    a.usageScore += r.adoptionRate * r.avgCount;
+  }
+
+  const map = new Map<string, CardAdoption>();
+  for (const [id, a] of acc) {
+    map.set(id, {
+      deckCount: a.deckCount,
+      adoptionRate: Math.round((a.rateSum / a.deckCount) * 10) / 10,
+      usageScore: Math.round(a.usageScore * 10) / 10,
+    });
+  }
+  return map;
+}
+
+export type RisingDeck = {
+  id: string;
+  nameKo: string;
+  usageRate: number;
+  /** 주간 사용률 델타 (%포인트). 추이 데이터 부족 시 0. */
+  delta: number;
+};
+
+/**
+ * #4/#23 급상승/급하락: ArchetypeTrend 의 최근 2개 주차 비교로 사용률 델타 산출.
+ * 실데이터 추이는 현재 단일 ISO week 만 존재 → 비교 불가하면 usageRate 상위로 폴백(delta=0).
+ */
+export async function getRisingDecks(n = 5): Promise<{ rising: RisingDeck[]; falling: RisingDeck[]; hasTrend: boolean }> {
+  const rows = await prisma.deckArchetype.findMany({
+    where: { sampleSize: { gt: 0 } },
+    select: {
+      id: true,
+      nameKo: true,
+      nameEn: true,
+      usageRate: true,
+      trends: { select: { week: true, usage: true } },
+    },
+  });
+
+  // 실데이터에 등장하는 주차들(ISO week 형식만, 2개 이상)을 모은다.
+  const weekSet = new Set<string>();
+  for (const a of rows) for (const t of a.trends) weekSet.add(t.week);
+  const weeks = Array.from(weekSet).sort();
+  const hasTrend = weeks.length >= 2;
+
+  if (hasTrend) {
+    const last = weeks[weeks.length - 1];
+    const prev = weeks[weeks.length - 2];
+    const withDelta = rows
+      .map((a) => {
+        const lastU = a.trends.find((t) => t.week === last)?.usage ?? 0;
+        const prevU = a.trends.find((t) => t.week === prev)?.usage ?? 0;
+        return {
+          id: a.id,
+          nameKo: a.nameKo || a.nameEn || a.id,
+          usageRate: a.usageRate,
+          delta: Math.round((lastU - prevU) * 10) / 10,
+        };
+      })
+      .filter((d) => d.delta !== 0);
+    const rising = [...withDelta].sort((a, b) => b.delta - a.delta).slice(0, n);
+    const falling = [...withDelta].sort((a, b) => a.delta - b.delta).slice(0, n);
+    return { rising, falling, hasTrend: true };
+  }
+
+  // 폴백: 추이 비교 불가 → 사용률 상위 n개를 "주목 덱"으로 노출(delta=0).
+  const fallback = rows
+    .map((a) => ({
+      id: a.id,
+      nameKo: a.nameKo || a.nameEn || a.id,
+      usageRate: a.usageRate,
+      delta: 0,
+    }))
+    .sort((a, b) => b.usageRate - a.usageRate)
+    .slice(0, n);
+  return { rising: fallback, falling: [], hasTrend: false };
+}
+
 // ── 대회 ───────────────────────────────────────────────────────────────────────
 
 export type TournamentRow = {
   id: string;
   nameKo: string;
+  /** 원문(영문) 대회명. */
+  name: string | null;
   date: string;
   region: string;
   format: string;
   players: number;
+  /** PTCGL/오프라인 등. */
+  platform: string | null;
   winnerArchetypeId: string | null;
   winnerNameKo: string | null;
   status: string;
@@ -299,10 +582,13 @@ export type TournamentRow = {
 export async function getTournaments(opts?: {
   region?: string;
   status?: string;
+  /** true 면 limitlessId 있는 실데이터만. 미지정 시 전체(목업 포함). */
+  realOnly?: boolean;
 }): Promise<TournamentRow[]> {
-  const where: { region?: string; status?: string } = {};
+  const where: { region?: string; status?: string; limitlessId?: { not: null } } = {};
   if (opts?.region && opts.region !== "all") where.region = opts.region;
   if (opts?.status && opts.status !== "all") where.status = opts.status;
+  if (opts?.realOnly) where.limitlessId = { not: null };
 
   const rows = await prisma.tournament.findMany({ where, orderBy: { date: "desc" } });
   // 우승 덱 이름 환산
@@ -312,22 +598,98 @@ export async function getTournaments(opts?: {
   const archs = archIds.length
     ? await prisma.deckArchetype.findMany({
         where: { id: { in: archIds } },
-        select: { id: true, nameKo: true },
+        select: { id: true, nameKo: true, nameEn: true },
       })
     : [];
-  const nameById = new Map(archs.map((a) => [a.id, a.nameKo]));
+  const nameById = new Map(archs.map((a) => [a.id, a.nameKo || a.nameEn || a.id]));
 
   return rows.map((t) => ({
     id: t.id,
     nameKo: t.nameKo,
+    name: t.name,
     date: t.date.toISOString().slice(0, 10),
     region: t.region,
     format: t.format,
     players: t.players,
+    platform: t.platform,
     winnerArchetypeId: t.winnerArchetypeId,
     winnerNameKo: t.winnerArchetypeId ? nameById.get(t.winnerArchetypeId) ?? null : null,
     status: t.status,
   }));
+}
+
+/** 대회 리스트(실데이터 전용): limitlessId 있는 Tournament + 1위 우승덱 한글명. */
+export async function getRealTournaments(): Promise<TournamentRow[]> {
+  return getTournaments({ realOnly: true });
+}
+
+export type StandingRow = {
+  placing: number;
+  playerName: string;
+  country: string | null;
+  deckKey: string | null;
+  /** 덱 한글명 (deckKey → archetype.nameKo, 폴백 deckName/deckKey). */
+  deckNameKo: string | null;
+  /** Limitless 원문(영문) 덱명. */
+  deckName: string | null;
+  wins: number;
+  losses: number;
+  ties: number;
+};
+
+export type TournamentDetail = {
+  id: string;
+  nameKo: string;
+  name: string | null;
+  date: string;
+  region: string;
+  format: string;
+  players: number;
+  platform: string | null;
+  standings: StandingRow[];
+};
+
+/** 대회 상세(실데이터): standings 순위표. deckKey → archetype 한글명 수동 조인. */
+export async function getTournamentStandings(tournamentId: string): Promise<TournamentDetail | null> {
+  const t = await prisma.tournament.findUnique({
+    where: { id: tournamentId },
+    include: { standings: { orderBy: { placing: "asc" } } },
+  });
+  if (!t) return null;
+
+  // deckKey → 한글명 환산 (FK 없으므로 수동 조인).
+  const deckKeys = Array.from(
+    new Set(t.standings.map((s) => s.deckKey).filter((v): v is string => !!v))
+  );
+  const archs = deckKeys.length
+    ? await prisma.deckArchetype.findMany({
+        where: { id: { in: deckKeys } },
+        select: { id: true, nameKo: true, nameEn: true },
+      })
+    : [];
+  const nameByKey = new Map(archs.map((a) => [a.id, a.nameKo || a.nameEn || a.id]));
+
+  return {
+    id: t.id,
+    nameKo: t.nameKo,
+    name: t.name,
+    date: t.date.toISOString().slice(0, 10),
+    region: t.region,
+    format: t.format,
+    players: t.players,
+    platform: t.platform,
+    standings: t.standings.map((s) => ({
+      placing: s.placing,
+      playerName: s.playerName,
+      country: s.country,
+      deckKey: s.deckKey,
+      deckNameKo: s.deckKey ? nameByKey.get(s.deckKey) ?? s.deckName ?? s.deckKey : s.deckName,
+      deckName: s.deckName,
+      wins: s.wins,
+      losses: s.losses,
+      ties: s.ties,
+    })),
+  };
 }
 
 // ── 플레이어 랭킹 ─────────────────────────────────────────────────────────────

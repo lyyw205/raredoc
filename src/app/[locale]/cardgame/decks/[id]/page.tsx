@@ -1,11 +1,15 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { EmptyState } from "@/components/toss";
-import { getArchetype, getArchetypes, getTournaments } from "@/lib/services/cardgame";
+import {
+  getArchetype,
+  getArchetypeRecipe,
+  getArchetypeMatchups,
+  getRealTournaments,
+} from "@/lib/services/cardgame";
 import {
   DeckDetailView,
   type WinnerTournament,
-  type CounterArchetype,
 } from "./DeckDetailView";
 
 export default async function DeckDetailPage({
@@ -39,32 +43,30 @@ export default async function DeckDetailPage({
     );
   }
 
-  // 우승 사례: 이 덱이 우승한 완료 대회
-  const completed = await getTournaments({ status: "completed" });
-  const winnerTournaments: WinnerTournament[] = completed
+  const [recipe, matchups, tournaments] = await Promise.all([
+    getArchetypeRecipe(id),
+    getArchetypeMatchups(id),
+    getRealTournaments(),
+  ]);
+
+  // 우승 사례: 이 덱이 우승한 실데이터 대회.
+  const winnerTournaments: WinnerTournament[] = tournaments
     .filter((t) => t.winnerArchetypeId === archetype.id)
     .map((t) => ({
       id: t.id,
       nameKo: t.nameKo,
       date: t.date,
-      region: t.region,
       format: t.format,
       players: t.players,
     }));
-
-  // 카운터 덱: counters id → 덱 이름/티어 환산
-  const all = await getArchetypes();
-  const counterArchetypes: CounterArchetype[] = archetype.counters
-    .map((cid) => all.find((a) => a.id === cid))
-    .filter((a): a is NonNullable<typeof a> => !!a)
-    .map((a) => ({ id: a.id, nameKo: a.nameKo, tier: a.tier }));
 
   return (
     <DeckDetailView
       locale={locale}
       archetype={archetype}
+      recipe={recipe}
+      matchups={matchups}
       winnerTournaments={winnerTournaments}
-      counterArchetypes={counterArchetypes}
     />
   );
 }

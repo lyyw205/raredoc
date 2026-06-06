@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { cn } from "@/lib/utils";
+import { getCardAdoption, type CardAdoption } from "@/lib/services/cardgame";
 import { CardgameCardsFilters } from "./CardgameCardsFilters";
 
 // ── 희귀도 색상 ───────────────────────────────────────────────────────────────
@@ -31,6 +32,8 @@ type CatalogCard = {
   region: string;
   type: string | null;    // logicalCard.types[0]
   hp: number | null;
+  /** 메타 채용 지표 (logicalCardId 매칭 시에만). 없으면 null → 뱃지 미표시. */
+  adoption: CardAdoption | null;
 };
 
 // ── 데이터 로딩 ───────────────────────────────────────────────────────────────
@@ -40,7 +43,9 @@ async function loadCards(params: {
   type?: string;
   rarity?: string;
   region?: string;
-}): Promise<CatalogCard[]> {
+  sort?: string;
+  adoptionMap: Map<string, CardAdoption>;
+}): Promise<{ cards: CatalogCard[]; adoptionActive: boolean }> {
   const where: Prisma.CardLocaleWhereInput = {};
   if (params.region && params.region !== "all") where.region = params.region;
 
@@ -96,17 +101,32 @@ async function loadCards(params: {
     allByLogical.set(r.logicalCardId, arr);
   }
 
-  // 정렬: set.releaseDate desc, numberInt asc
-  deduped.sort((a, b) => {
-    const da = a.set?.releaseDate?.getTime?.() ?? 0;
-    const db = b.set?.releaseDate?.getTime?.() ?? 0;
-    if (da !== db) return db - da;
-    return (a.numberInt ?? 0) - (b.numberInt ?? 0);
-  });
+  // 채용률 정렬은 데이터(채용 지표 맵)가 있을 때만 활성. 없으면(=현재) 발매일순 폴백.
+  const adoptionActive = params.sort === "adoption" && params.adoptionMap.size > 0;
+
+  if (adoptionActive) {
+    // 채용률순: usageScore 내림차순. 채용 지표 있는 카드 먼저, 동률/미보유는 발매일순.
+    deduped.sort((a, b) => {
+      const sa = params.adoptionMap.get(a.logicalCardId)?.usageScore ?? -1;
+      const sb = params.adoptionMap.get(b.logicalCardId)?.usageScore ?? -1;
+      if (sa !== sb) return sb - sa;
+      const da = a.set?.releaseDate?.getTime?.() ?? 0;
+      const db = b.set?.releaseDate?.getTime?.() ?? 0;
+      return db - da;
+    });
+  } else {
+    // 발매일순 (기본): set.releaseDate desc, numberInt asc
+    deduped.sort((a, b) => {
+      const da = a.set?.releaseDate?.getTime?.() ?? 0;
+      const db = b.set?.releaseDate?.getTime?.() ?? 0;
+      if (da !== db) return db - da;
+      return (a.numberInt ?? 0) - (b.numberInt ?? 0);
+    });
+  }
 
   const top = deduped.slice(0, 200);
 
-  return top.map((r) => {
+  const cards = top.map((r) => {
     const others = allByLogical.get(r.logicalCardId) ?? [];
     const sub = others.find((o) => o.id !== r.id);
     const nameKo = r.logicalCard.nameKo;
@@ -120,8 +140,11 @@ async function loadCards(params: {
       region: r.region,
       type: r.logicalCard.types[0] ?? null,
       hp: r.logicalCard.hp,
+      adoption: params.adoptionMap.get(r.logicalCardId) ?? null,
     };
   });
+
+  return { cards, adoptionActive };
 }
 
 // ── 카드 그리드 아이템 ────────────────────────────────────────────────────────
@@ -157,6 +180,12 @@ function CardGridItem({ card, locale }: { card: CatalogCard; locale: string }) {
         <span className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-black/55 text-white text-[10px] font-semibold">
           {card.region}
         </span>
+        {/* 메타 채용 뱃지 (logicalCardId 매칭 시에만) */}
+        {card.adoption && (
+          <span className="absolute bottom-1.5 left-1.5 px-1.5 py-0.5 rounded bg-toss-brand/90 text-white text-[10px] font-semibold">
+            메타 채용 {card.adoption.adoptionRate}%
+          </span>
+        )}
       </div>
       <div className="mt-1.5 px-0.5">
         <p className="text-toss-caption font-semibold text-toss-text-primary truncate leading-tight">
@@ -179,17 +208,25 @@ export default async function CardgameCardsPage({
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ q?: string; type?: string; rarity?: string; region?: string }>;
+  searchParams: Promise<{ q?: string; type?: string; rarity?: string; region?: string; sort?: string }>;
 }) {
   const { locale } = await params;
   const sp = await searchParams;
 
-  const cards = await loadCards({
+  // 카드 채용 지표 맵 (현재 logicalCardId 미매칭 → 빈 Map). A단계 후 자동 채워짐.
+  const adoptionMap = await getCardAdoption();
+
+  const { cards, adoptionActive } = await loadCards({
     q: sp.q,
     type: sp.type,
     rarity: sp.rarity,
     region: sp.region,
+    sort: sp.sort,
+    adoptionMap,
   });
+
+  // "채용률순" 요청했지만 데이터 미준비 → 안내(발매일순 폴백).
+  const adoptionRequestedButEmpty = sp.sort === "adoption" && !adoptionActive;
 
   return (
     <div>
@@ -203,13 +240,16 @@ export default async function CardgameCardsPage({
 
       {/* 검색 + 필터 (클라이언트 wrapper) */}
       <CardgameCardsFilters
-        initial={{ q: sp.q, type: sp.type, rarity: sp.rarity, region: sp.region }}
+        initial={{ q: sp.q, type: sp.type, rarity: sp.rarity, region: sp.region, sort: sp.sort }}
       />
 
-      {/* 결과 카운트 */}
-      <p className="text-toss-caption text-toss-text-tertiary mb-4">
-        {cards.length}장
-      </p>
+      {/* 결과 카운트 + 채용률 데이터 준비중 안내 */}
+      <div className="flex items-center gap-2 mb-4">
+        <p className="text-toss-caption text-toss-text-tertiary">{cards.length}장</p>
+        {adoptionRequestedButEmpty && (
+          <span className="text-toss-caption text-toss-text-quaternary">· 채용률 데이터 준비 중 (발매일순 표시)</span>
+        )}
+      </div>
 
       {/* 카드 그리드 */}
       {cards.length === 0 ? (

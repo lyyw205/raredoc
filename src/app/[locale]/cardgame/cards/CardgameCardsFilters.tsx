@@ -39,11 +39,17 @@ const REGION_OPTIONS = [
   { value: "EN",  label: "영문" },
 ];
 
+const SORT_OPTIONS = [
+  { value: "new",      label: "발매일순" },
+  { value: "adoption", label: "채용률순" },
+];
+
 export type CardgameCardsFiltersValue = {
   q?: string;
   type?: string;
   rarity?: string;
   region?: string;
+  sort?: string;
 };
 
 export function CardgameCardsFilters({ initial }: { initial: CardgameCardsFiltersValue }) {
@@ -56,11 +62,13 @@ export function CardgameCardsFilters({ initial }: { initial: CardgameCardsFilter
   const [typeFilter, setTypeFilter] = useState(initial.type ?? "all");
   const [rarityFilter, setRarityFilter] = useState(initial.rarity ?? "all");
   const [regionFilter, setRegionFilter] = useState(initial.region ?? "all");
+  const [sortFilter, setSortFilter] = useState(initial.sort ?? "new");
 
   function pushQuery(next: Record<string, string | undefined>) {
     const params = new URLSearchParams(sp?.toString());
     for (const [k, v] of Object.entries(next)) {
-      if (!v || v === "all" || v === "") params.delete(k);
+      // sort 기본값("new")은 URL 에서 제거(클린 URL).
+      if (!v || v === "all" || v === "" || (k === "sort" && v === "new")) params.delete(k);
       else params.set(k, v);
     }
     startTransition(() => {
@@ -116,6 +124,19 @@ export function CardgameCardsFilters({ initial }: { initial: CardgameCardsFilter
             onChange={(v) => {
               setRegionFilter(v);
               pushQuery({ region: v });
+            }}
+            size="sm"
+          />
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="text-toss-caption text-toss-text-tertiary shrink-0">정렬</span>
+          <ToggleGroup
+            options={SORT_OPTIONS}
+            value={sortFilter}
+            onChange={(v) => {
+              setSortFilter(v);
+              pushQuery({ sort: v });
             }}
             size="sm"
           />

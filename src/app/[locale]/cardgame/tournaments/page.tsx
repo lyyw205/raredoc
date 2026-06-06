@@ -1,6 +1,7 @@
-import { getTournaments, getPlayerRankings } from "@/lib/services/cardgame";
+import { getRealTournaments, getPlayerRankings } from "@/lib/services/cardgame";
 import { TournamentsPageView } from "./TournamentsPageView";
 
+// 대회 리스트 — Limitless 실데이터(limitlessId 있는 것)만. region 노출 안 함.
 export default async function CardgameTournamentsPage({
   params,
 }: {
@@ -8,7 +9,7 @@ export default async function CardgameTournamentsPage({
 }) {
   const { locale } = await params;
   const [tournaments, playerRankings] = await Promise.all([
-    getTournaments(),
+    getRealTournaments(),
     getPlayerRankings(2026),
   ]);
 
