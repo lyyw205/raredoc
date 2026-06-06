@@ -5,6 +5,7 @@ import { Card, EmptyState } from "@/components/toss";
 import { cn } from "@/lib/utils";
 import { Trophy, Users } from "lucide-react";
 import type { RegionArchetypeRow } from "@/lib/services/cardgame";
+import { DeckIcon } from "@/components/cardgame/DeckIcon";
 
 // JP/KR 탭 — 소표본(top cut 기준)이라 S/A/B/C 티어보드 대신 입상 점유율 정렬 리스트.
 // (tier "—" 행이 티어보드 하드코딩 필터에서 증발하는 문제 회피 — multisource 리스크 P1-8)
@@ -83,6 +84,7 @@ export function RegionMetaView({
                 >
                   {i + 1}
                 </span>
+                <DeckIcon iconKeys={a.iconKeys} size="md" />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="text-toss-label font-semibold text-toss-text-primary truncate">

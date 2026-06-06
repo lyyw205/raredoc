@@ -432,7 +432,41 @@ export type RecipeCard = {
   isTech: boolean;
   /** 덱 핵심 카드 (archetype.iconKeys 에 해당하는 대표 포켓몬). */
   isHero: boolean;
+  /** 대표 인쇄판 썸네일 (KR>JP>EN locale 우선, 미연결 시 null) — UI-1a. */
+  cardImage: string | null;
+  /** 카드 상세(/cards/[id]) 링크용 대표 locale id. */
+  cardLocaleId: string | null;
 };
+
+/** logicalCardId[] → 대표 locale 이미지/id (KR>JP>EN 우선) — 레시피·리스트 뷰어 공용 (UI-1a). */
+async function resolveLogicalCardImages(
+  ids: string[],
+): Promise<Map<string, { image: string | null; cardLocaleId: string }>> {
+  const unique = [...new Set(ids.filter(Boolean))];
+  if (unique.length === 0) return new Map();
+  const locales = await prisma.cardLocale.findMany({
+    where: { logicalCardId: { in: unique } },
+    select: { id: true, logicalCardId: true, region: true, imageSmall: true, imageLarge: true },
+  });
+  const PRIORITY: Record<string, number> = { KR: 0, JP: 1, EN: 2 };
+  const byLc = new Map<string, typeof locales>();
+  for (const l of locales) {
+    const arr = byLc.get(l.logicalCardId) ?? [];
+    arr.push(l);
+    byLc.set(l.logicalCardId, arr);
+  }
+  const map = new Map<string, { image: string | null; cardLocaleId: string }>();
+  for (const [lcId, arr] of byLc) {
+    // 이미지 보유 우선 → 같은 조건이면 KR>JP>EN
+    const best = [...arr].sort((a, b) => {
+      const ai = a.imageSmall ?? a.imageLarge ? 0 : 1;
+      const bi = b.imageSmall ?? b.imageLarge ? 0 : 1;
+      return ai - bi || (PRIORITY[a.region] ?? 9) - (PRIORITY[b.region] ?? 9);
+    })[0];
+    map.set(lcId, { image: best.imageSmall ?? best.imageLarge ?? null, cardLocaleId: best.id });
+  }
+  return map;
+}
 
 export type ArchetypeRecipe = {
   pokemon: RecipeCard[];
@@ -458,6 +492,9 @@ export async function getArchetypeRecipe(deckId: string): Promise<ArchetypeRecip
   type RankedRow = (typeof rows)[number] & { _hero: boolean };
   const ranked: RankedRow[] = rows.map((r) => ({ ...r, _hero: isHeroCard(r.cardName) }));
 
+  // 대표 인쇄판 썸네일 (UI-1a) — logicalCardId 연결 행만
+  const imageMap = await resolveLogicalCardImages(ranked.map((r) => r.logicalCardId).filter((v): v is string => !!v));
+
   // 정렬 우선순위:
   //   1) 핵심 카드(iconKeys 매칭) 먼저
   //   2) isCore(채용률≥90)
@@ -470,16 +507,21 @@ export async function getArchetypeRecipe(deckId: string): Promise<ArchetypeRecip
     return ub - ua || b.adoptionRate - a.adoptionRate;
   });
 
-  const toCard = (r: RankedRow): RecipeCard => ({
-    cardName: r.cardName,
-    setCode: r.setCode,
-    number: r.number,
-    avgCount: Math.round(r.avgCount * 10) / 10,
-    adoptionRate: Math.round(r.adoptionRate * 10) / 10,
-    isCore: r.isCore,
-    isTech: !r.isCore && r.adoptionRate >= 30 && r.adoptionRate <= 70,
-    isHero: r._hero,
-  });
+  const toCard = (r: RankedRow): RecipeCard => {
+    const resolved = r.logicalCardId ? imageMap.get(r.logicalCardId) : undefined;
+    return {
+      cardName: r.cardName,
+      setCode: r.setCode,
+      number: r.number,
+      avgCount: Math.round(r.avgCount * 10) / 10,
+      adoptionRate: Math.round(r.adoptionRate * 10) / 10,
+      isCore: r.isCore,
+      isTech: !r.isCore && r.adoptionRate >= 30 && r.adoptionRate <= 70,
+      isHero: r._hero,
+      cardImage: resolved?.image ?? null,
+      cardLocaleId: resolved?.cardLocaleId ?? null,
+    };
+  };
   return {
     pokemon: ranked.filter((r) => r.category === "pokemon").map(toCard),
     trainer: ranked.filter((r) => r.category === "trainer").map(toCard),
@@ -681,7 +723,149 @@ export async function getRealTournaments(): Promise<TournamentRow[]> {
   return getTournaments({ realOnly: true });
 }
 
+// ── 덱 입상 타임라인 + 리스트 뷰어 (UI-1a) ──────────────────────────────────────
+
+export type ArchetypeResultRow = {
+  standingId: string;
+  placing: number;
+  playerName: string;
+  hasDecklist: boolean;
+  deckCode: string | null;
+  tournamentId: string;
+  tournamentName: string;
+  date: string;
+  level: string | null;
+  players: number;
+};
+
+/** 덱 상세 §최근 입상 리스트 — 이 아키타입의 최근 입상 행 (대회 컨텍스트 포함, 날짜 내림차순). */
+export async function getArchetypeResults(deckId: string, limit = 12): Promise<ArchetypeResultRow[]> {
+  const rows = await prisma.tournamentStanding.findMany({
+    where: { deckKey: deckId, tournament: { source: { not: null } } },
+    select: {
+      id: true,
+      placing: true,
+      playerName: true,
+      decklist: true,
+      deckCode: true,
+      tournament: { select: { id: true, nameKo: true, date: true, level: true, players: true } },
+    },
+    orderBy: [{ tournament: { date: "desc" } }, { placing: "asc" }],
+    take: limit,
+  });
+  return rows.map((r) => ({
+    standingId: r.id,
+    placing: r.placing,
+    playerName: r.playerName,
+    hasDecklist: r.decklist != null,
+    deckCode: r.deckCode,
+    tournamentId: r.tournament.id,
+    tournamentName: r.tournament.nameKo,
+    date: r.tournament.date.toISOString().slice(0, 10),
+    level: r.tournament.level,
+    players: r.tournament.players,
+  }));
+}
+
+export type DecklistViewCard = {
+  name: string;
+  count: number;
+  image: string | null;
+  cardLocaleId: string | null;
+};
+
+export type StandingDecklist = {
+  standingId: string;
+  placing: number;
+  playerName: string;
+  deckKey: string | null;
+  deckNameKo: string | null;
+  deckCode: string | null;
+  tournament: { id: string; nameKo: string; date: string; players: number; externalUrl: string | null };
+  buckets: { pokemon: DecklistViewCard[]; trainer: DecklistViewCard[]; energy: DecklistViewCard[] };
+  totalCards: number;
+  unresolved: number;
+};
+
+type RawDeckEntry = { name?: string; count?: number; logicalCardId?: string | null };
+type RawDecklist = { pokemon?: RawDeckEntry[]; trainer?: RawDeckEntry[]; energy?: RawDeckEntry[] };
+
+/** 리스트 뷰어 — standing 1건의 덱리스트를 카드 이미지로 해석 (docs/cardgame-ui-plan.md §4-5). */
+export async function getStandingDecklist(standingId: string): Promise<StandingDecklist | null> {
+  const s = await prisma.tournamentStanding.findUnique({
+    where: { id: standingId },
+    select: {
+      id: true,
+      placing: true,
+      playerName: true,
+      deckKey: true,
+      deckName: true,
+      deckCode: true,
+      decklist: true,
+      tournament: { select: { id: true, nameKo: true, date: true, players: true, externalUrl: true } },
+    },
+  });
+  if (!s || s.decklist == null) return null;
+  const dl = s.decklist as RawDecklist;
+
+  const lcIds: string[] = [];
+  for (const b of ["pokemon", "trainer", "energy"] as const) {
+    for (const c of dl[b] ?? []) if (c?.logicalCardId) lcIds.push(c.logicalCardId);
+  }
+  const imageMap = await resolveLogicalCardImages(lcIds);
+
+  let totalCards = 0;
+  let unresolved = 0;
+  const toView = (entries: RawDeckEntry[] | undefined): DecklistViewCard[] =>
+    (entries ?? []).map((c) => {
+      const count = c.count ?? 0;
+      totalCards += count;
+      const resolved = c.logicalCardId ? imageMap.get(c.logicalCardId) : undefined;
+      if (!resolved?.image) unresolved += count;
+      return {
+        name: c.name ?? "?",
+        count,
+        image: resolved?.image ?? null,
+        cardLocaleId: resolved?.cardLocaleId ?? null,
+      };
+    });
+
+  // 덱 한글명 (deckKey → archetype.nameKo)
+  let deckNameKo: string | null = s.deckName;
+  if (s.deckKey) {
+    const arch = await prisma.deckArchetype.findUnique({ where: { id: s.deckKey }, select: { nameKo: true } });
+    deckNameKo = arch?.nameKo ?? s.deckName ?? s.deckKey;
+  }
+
+  return {
+    standingId: s.id,
+    placing: s.placing,
+    playerName: s.playerName,
+    deckKey: s.deckKey,
+    deckNameKo,
+    deckCode: s.deckCode,
+    tournament: {
+      id: s.tournament.id,
+      nameKo: s.tournament.nameKo,
+      date: s.tournament.date.toISOString().slice(0, 10),
+      players: s.tournament.players,
+      externalUrl: s.tournament.externalUrl,
+    },
+    buckets: {
+      pokemon: toView(dl.pokemon),
+      trainer: toView(dl.trainer),
+      energy: toView(dl.energy),
+    },
+    totalCards,
+    unresolved,
+  };
+}
+
 export type StandingRow = {
+  /** 리스트 뷰어 링크용 standing id. */
+  standingId: string;
+  /** 덱리스트 보유 여부 — [리스트 보기] 버튼 노출 조건. */
+  hasDecklist: boolean;
   placing: number;
   playerName: string;
   country: string | null;
@@ -747,6 +931,8 @@ export async function getTournamentStandings(tournamentId: string): Promise<Tour
     externalUrl: t.externalUrl,
     source: t.source,
     standings: t.standings.map((s) => ({
+      standingId: s.id,
+      hasDecklist: s.decklist != null,
       placing: s.placing,
       playerName: s.playerName,
       country: s.country,

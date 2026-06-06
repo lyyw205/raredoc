@@ -8,8 +8,11 @@ import type {
   ArchetypeRecipe,
   RecipeCard,
   ArchetypeMatchup,
+  ArchetypeResultRow,
 } from "@/lib/services/cardgame";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, Trophy, List } from "lucide-react";
+import { DeckIcon } from "@/components/cardgame/DeckIcon";
+import { CardThumb } from "@/components/cardgame/CardThumb";
 
 // ── 상수 ──────────────────────────────────────────────────────────────────────
 
@@ -20,15 +23,6 @@ const TIER_COLORS: Record<string, string> = {
   C: "bg-gray-100 text-gray-600 border border-gray-200",
 };
 
-// 우승 사례 (서버에서 사전 환산 — region 노출 안 함).
-export type WinnerTournament = {
-  id: string;
-  nameKo: string;
-  date: string;
-  format: string;
-  players: number;
-};
-
 // ── 레시피 카테고리 블록 (#16/#17) ────────────────────────────────────────────
 
 const CATEGORY_LABEL: Record<keyof ArchetypeRecipe, string> = {
@@ -37,7 +31,8 @@ const CATEGORY_LABEL: Record<keyof ArchetypeRecipe, string> = {
   energy: "에너지",
 };
 
-function RecipeRow({ card }: { card: RecipeCard }) {
+function RecipeRow({ card, locale }: { card: RecipeCard; locale: string }) {
+  const thumb = <CardThumb src={card.cardImage} alt={card.cardName} className="w-9 shrink-0" />;
   return (
     <div
       className={cn(
@@ -51,6 +46,13 @@ function RecipeRow({ card }: { card: RecipeCard }) {
           : ""
       )}
     >
+      {card.cardLocaleId ? (
+        <Link href={`/${locale}/cards/${card.cardLocaleId}`} className="shrink-0 hover:opacity-90">
+          {thumb}
+        </Link>
+      ) : (
+        thumb
+      )}
       <span className="text-toss-caption font-bold text-toss-text-primary w-9 text-right shrink-0 tabular-nums">
         ×{card.avgCount}
       </span>
@@ -78,7 +80,7 @@ function RecipeRow({ card }: { card: RecipeCard }) {
   );
 }
 
-function RecipeSection({ recipe }: { recipe: ArchetypeRecipe }) {
+function RecipeSection({ recipe, locale }: { recipe: ArchetypeRecipe; locale: string }) {
   const groups = (Object.keys(CATEGORY_LABEL) as (keyof ArchetypeRecipe)[]).filter(
     (k) => recipe[k].length > 0
   );
@@ -98,12 +100,93 @@ function RecipeSection({ recipe }: { recipe: ArchetypeRecipe }) {
             </div>
             <div className="space-y-1">
               {cards.map((c) => (
-                <RecipeRow key={`${c.cardName}-${c.setCode}-${c.number}`} card={c} />
+                <RecipeRow key={`${c.cardName}-${c.setCode}-${c.number}`} card={c} locale={locale} />
               ))}
             </div>
           </Card>
         );
       })}
+    </div>
+  );
+}
+
+// ── 핵심 카드 그리드 (UI-1a — 벤치마크 "Core Cards: 최빈 장수 + 채용률%" 패턴) ──
+
+function CoreCardsSection({ recipe, locale }: { recipe: ArchetypeRecipe; locale: string }) {
+  const all = [...recipe.pokemon, ...recipe.trainer];
+  const picks = all
+    .filter((c) => (c.isHero || c.isCore) && c.cardImage)
+    .sort((a, b) => (a.isHero === b.isHero ? b.adoptionRate - a.adoptionRate : a.isHero ? -1 : 1))
+    .slice(0, 8);
+  if (picks.length === 0) return null;
+  return (
+    <section>
+      <h2 className="text-toss-title font-bold text-toss-text-primary mb-4">핵심 카드</h2>
+      <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-3">
+        {picks.map((c) => (
+          <Link
+            key={`${c.cardName}-${c.setCode}-${c.number}`}
+            href={c.cardLocaleId ? `/${locale}/cards/${c.cardLocaleId}` : "#"}
+            className="block hover:opacity-90 transition-opacity"
+          >
+            <CardThumb src={c.cardImage} alt={c.cardName} count={Math.round(c.avgCount)} />
+            <p className="mt-1 text-toss-micro text-toss-text-tertiary text-center truncate">
+              {c.adoptionRate}% 채용
+            </p>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ── 최근 입상 리스트 타임라인 (UI-1a — 대회 컨텍스트 보존 + 리스트 뷰어 진입) ──
+
+function ResultsTimeline({ results, locale }: { results: ArchetypeResultRow[]; locale: string }) {
+  if (results.length === 0) {
+    return <EmptyState title="입상 기록이 없습니다" description="최근 집계 기간 내 이 덱의 입상 기록이 없습니다." />;
+  }
+  return (
+    <div className="space-y-1.5">
+      {results.map((r) => (
+        <div
+          key={r.standingId}
+          className="flex items-center gap-3 p-2.5 rounded-toss-md hover:bg-toss-hover transition-colors"
+        >
+          <span
+            className={cn(
+              "inline-flex w-7 h-7 rounded-full items-center justify-center text-xs font-bold shrink-0",
+              r.placing === 1
+                ? "bg-yellow-100 text-yellow-700"
+                : r.placing <= 4
+                ? "bg-toss-bg-muted text-toss-text-secondary"
+                : "bg-toss-bg-muted text-toss-text-quaternary"
+            )}
+          >
+            {r.placing === 1 ? <Trophy size={13} /> : r.placing}
+          </span>
+          <div className="flex-1 min-w-0">
+            <Link
+              href={`/${locale}/cardgame/tournaments/${r.tournamentId}`}
+              className="text-toss-caption font-semibold text-toss-text-primary hover:text-toss-brand transition-colors truncate block"
+            >
+              {r.tournamentName}
+            </Link>
+            <p className="text-toss-micro text-toss-text-tertiary">
+              {r.date} · {r.playerName} · {r.players}명
+            </p>
+          </div>
+          {r.hasDecklist && (
+            <Link
+              href={`/${locale}/cardgame/lists/${r.standingId}`}
+              className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-toss-bg-muted text-toss-micro font-medium text-toss-text-tertiary hover:text-toss-brand transition-colors shrink-0"
+            >
+              <List size={11} />
+              리스트
+            </Link>
+          )}
+        </div>
+      ))}
     </div>
   );
 }
@@ -171,13 +254,13 @@ export function DeckDetailView({
   archetype,
   recipe,
   matchups,
-  winnerTournaments,
+  results,
 }: {
   locale: string;
   archetype: ArchetypeWithCards;
   recipe: ArchetypeRecipe;
   matchups: ArchetypeMatchup[];
-  winnerTournaments: WinnerTournament[];
+  results: ArchetypeResultRow[];
 }) {
   const lowSample = archetype.sampleSize < 10;
   const title = archetype.nameKo || archetype.nameEn || archetype.id;
@@ -196,6 +279,7 @@ export function DeckDetailView({
       {/* 헤더 */}
       <div className="mb-6">
         <div className="flex items-center gap-3 flex-wrap mb-2">
+          <DeckIcon iconKeys={archetype.iconKeys} size="lg" />
           <h1 className="text-toss-display font-bold text-toss-text-primary">{title}</h1>
           <span
             className={cn(
@@ -260,15 +344,18 @@ export function DeckDetailView({
       </div>
 
       <div className="space-y-8">
+        {/* 섹션 0: 핵심 카드 (UI-1a) */}
+        <CoreCardsSection recipe={recipe} locale={locale} />
+
         {/* 섹션 1: 표준 레시피 (#16/#17) */}
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-toss-title font-bold text-toss-text-primary">표준 레시피</h2>
             <span className="text-toss-caption text-toss-text-tertiary">평균 채용 · 채용률</span>
           </div>
-          <RecipeSection recipe={recipe} />
+          <RecipeSection recipe={recipe} locale={locale} />
           <p className="text-toss-micro text-toss-text-quaternary mt-2">
-            카드 이미지·시세는 매칭 작업 후 제공 예정 (준비 중).
+            입상 덱리스트 집계 기준 평균 레시피입니다. 카드별 시세는 준비 중.
           </p>
         </section>
 
@@ -307,44 +394,12 @@ export function DeckDetailView({
           </section>
         )}
 
-        {/* 섹션 4: 우승 사례 (실데이터) */}
+        {/* 섹션 4: 최근 입상 리스트 (UI-1a — 우승 사례 흡수 통합) */}
         <section>
-          <h2 className="text-toss-title font-bold text-toss-text-primary mb-4">우승 사례</h2>
-          {winnerTournaments.length === 0 ? (
-            <EmptyState title="우승 기록이 없습니다" description="최근 집계 기간 내 이 덱의 대회 우승 기록이 없습니다." />
-          ) : (
-            <div className="space-y-2">
-              {winnerTournaments.map((t) => (
-                <Card key={t.id} variant="default" padding="md">
-                  <div className="flex items-center justify-between flex-wrap gap-2">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <Link
-                          href={`/${locale}/cardgame/tournaments/${t.id}`}
-                          className="text-toss-label font-semibold text-toss-text-primary hover:text-toss-brand transition-colors"
-                        >
-                          {t.nameKo}
-                        </Link>
-                        <span className="text-toss-micro px-1.5 py-0.5 rounded bg-toss-bg-muted text-toss-text-tertiary">
-                          {t.format}
-                        </span>
-                      </div>
-                      <p className="text-toss-caption text-toss-text-tertiary">
-                        {t.date} · 참가 {t.players}명
-                      </p>
-                    </div>
-                    <Link
-                      href={`/${locale}/cardgame/tournaments/${t.id}`}
-                      className="flex items-center gap-1 text-toss-caption text-toss-brand hover:underline"
-                    >
-                      <ExternalLink size={12} />
-                      대회 상세 →
-                    </Link>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          )}
+          <h2 className="text-toss-title font-bold text-toss-text-primary mb-4">최근 입상 리스트</h2>
+          <Card variant="default" padding="md">
+            <ResultsTimeline results={results} locale={locale} />
+          </Card>
         </section>
 
         {/* 섹션 5: 가격/시세 — 카드 매칭 보류 → 준비중 */}

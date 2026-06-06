@@ -5,12 +5,9 @@ import {
   getArchetype,
   getArchetypeRecipe,
   getArchetypeMatchups,
-  getRealTournaments,
+  getArchetypeResults,
 } from "@/lib/services/cardgame";
-import {
-  DeckDetailView,
-  type WinnerTournament,
-} from "./DeckDetailView";
+import { DeckDetailView } from "./DeckDetailView";
 
 export default async function DeckDetailPage({
   params,
@@ -43,22 +40,12 @@ export default async function DeckDetailPage({
     );
   }
 
-  const [recipe, matchups, tournaments] = await Promise.all([
+  const [recipe, matchups, results] = await Promise.all([
     getArchetypeRecipe(id),
     getArchetypeMatchups(id),
-    getRealTournaments(),
+    // 최근 입상 리스트 (UI-1a) — 우승 사례 섹션을 흡수 통합
+    getArchetypeResults(id, 12),
   ]);
-
-  // 우승 사례: 이 덱이 우승한 실데이터 대회.
-  const winnerTournaments: WinnerTournament[] = tournaments
-    .filter((t) => t.winnerArchetypeId === archetype.id)
-    .map((t) => ({
-      id: t.id,
-      nameKo: t.nameKo,
-      date: t.date,
-      format: t.format,
-      players: t.players,
-    }));
 
   return (
     <DeckDetailView
@@ -66,7 +53,7 @@ export default async function DeckDetailPage({
       archetype={archetype}
       recipe={recipe}
       matchups={matchups}
-      winnerTournaments={winnerTournaments}
+      results={results}
     />
   );
 }

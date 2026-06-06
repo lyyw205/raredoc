@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, Users, ExternalLink } from "lucide-react";
+import { ArrowLeft, Users, ExternalLink, List } from "lucide-react";
 import { Card, CardDivider, EmptyState } from "@/components/toss";
 import { cn } from "@/lib/utils";
 import { getTournamentStandings } from "@/lib/services/cardgame";
@@ -168,6 +168,15 @@ export default async function TournamentDetailPage({
                           <span className="text-toss-text-quaternary">{s.deckNameKo ?? "—"}</span>
                         )}
                         {s.deckCode && <DeckCodeButton code={s.deckCode} />}
+                        {s.hasDecklist && (
+                          <Link
+                            href={`/${locale}/cardgame/lists/${s.standingId}`}
+                            className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-toss-bg-muted text-toss-micro font-medium text-toss-text-tertiary hover:text-toss-brand transition-colors shrink-0"
+                          >
+                            <List size={11} />
+                            리스트
+                          </Link>
+                        )}
                       </div>
                     </td>
                     <td className="py-3 px-3 text-right tabular-nums text-toss-text-secondary whitespace-nowrap">
@@ -184,19 +193,6 @@ export default async function TournamentDetailPage({
         <p className="text-toss-micro text-toss-text-quaternary mt-3">
           덱 명칭은 제출된 데클리스트를 기반으로 Limitless가 자동 분류한 값입니다 (선수 입력 아님).
         </p>
-      </section>
-
-      {/* 데클리스트 — 카드 매칭 보류 → 준비중 */}
-      <section className="mt-8">
-        <Card variant="default" padding="lg">
-          <div className="flex flex-col items-center justify-center py-4 text-center gap-2">
-            <span className="text-toss-label font-semibold text-toss-text-secondary">데클리스트 준비 중</span>
-            <p className="text-toss-caption text-toss-text-tertiary max-w-md">
-              원본 데클리스트는 보존되어 있으나, 카드 이미지·시세 매칭 작업 후 카드별로 표시될
-              예정입니다.
-            </p>
-          </div>
-        </Card>
       </section>
 
       <CardDivider />

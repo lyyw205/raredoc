@@ -6,6 +6,7 @@ import { ToggleGroup, EmptyState } from "@/components/toss";
 import { cn } from "@/lib/utils";
 import type { ArchetypeSummary } from "@/lib/services/cardgame";
 import { BookOpen } from "lucide-react";
+import { DeckIcon } from "@/components/cardgame/DeckIcon";
 
 
 // ── 상수 ──────────────────────────────────────────────────────────────────────
@@ -147,16 +148,19 @@ export function DecksPageView({
                 return (
                   <tr key={a.id} className="border-b border-toss-divider last:border-0 hover:bg-toss-hover transition-colors">
                     <td className="py-3 px-3">
-                      <Link href={`/${locale}/cardgame/decks/${a.id}`} className="block group">
-                        <span className="font-semibold text-toss-text-primary group-hover:text-toss-brand transition-colors">
-                          {deckLabel(a)}
+                      <Link href={`/${locale}/cardgame/decks/${a.id}`} className="group flex items-center gap-2.5">
+                        <DeckIcon iconKeys={a.iconKeys} size="md" />
+                        <span className="min-w-0">
+                          <span className="font-semibold text-toss-text-primary group-hover:text-toss-brand transition-colors">
+                            {deckLabel(a)}
+                          </span>
+                          <span className="flex items-center gap-1.5 mt-1">
+                            <DeckBadges a={a} />
+                            {lowSample && (
+                              <span className="text-[10px] text-toss-text-quaternary">표본 {a.sampleSize} (적음)</span>
+                            )}
+                          </span>
                         </span>
-                        <div className="flex items-center gap-1.5 mt-1">
-                          <DeckBadges a={a} />
-                          {lowSample && (
-                            <span className="text-[10px] text-toss-text-quaternary">표본 {a.sampleSize} (적음)</span>
-                          )}
-                        </div>
                       </Link>
                     </td>
                     <td className="py-3 px-3 text-center">

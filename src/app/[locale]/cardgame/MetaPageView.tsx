@@ -18,6 +18,7 @@ import {
   Legend,
 } from "recharts";
 import { Trophy, TrendingUp, TrendingDown, Flame } from "lucide-react";
+import { DeckIcon } from "@/components/cardgame/DeckIcon";
 import type {
   ArchetypeSummary,
   RisingDeck,
@@ -119,7 +120,8 @@ function TierListSection({ archetypes, locale }: { archetypes: ArchetypeSummary[
             <div className="flex flex-wrap gap-2">
               {items.map((a) => (
                 <Link key={a.id} href={`/${locale}/cardgame/decks/${a.id}`}>
-                  <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-toss-md bg-toss-bg-muted hover:bg-toss-hover text-toss-label text-toss-text-primary transition-colors cursor-pointer border border-toss-divider">
+                  <span className="inline-flex items-center gap-1.5 pl-1.5 pr-3 py-1 rounded-toss-md bg-toss-bg-muted hover:bg-toss-hover text-toss-label text-toss-text-primary transition-colors cursor-pointer border border-toss-divider">
+                    <DeckIcon iconKeys={a.iconKeys} size="sm" />
                     {deckLabel(a)}
                     <span className="text-toss-micro text-toss-text-tertiary ml-1">
                       {a.usageRate.toFixed(1)}%
@@ -151,6 +153,7 @@ function UsageRanking({ archetypes, locale }: { archetypes: ArchetypeSummary[]; 
           <span className="w-5 text-toss-caption text-toss-text-quaternary text-right shrink-0">
             {i + 1}
           </span>
+          <DeckIcon iconKeys={a.iconKeys} size="sm" />
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-1">
               <span className="text-toss-caption font-semibold text-toss-text-primary truncate group-hover:text-toss-brand transition-colors">
