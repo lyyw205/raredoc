@@ -25,6 +25,8 @@
     "sync:meta": "tsx scripts/sync-meta.ts",
     "sync:meta:lim": "tsx scripts/sync-tournaments-limitless.ts",
     "aggregate:meta": "tsx scripts/aggregate-meta.ts",
+    "setmap:limitless": "tsx scripts/build-limitless-setmap.ts",
+    "backfill:recipe": "tsx scripts/backfill-recipe-logical.ts",
     "rankings:rebuild": "tsx scripts/rebuild-rankings.ts",
     "market:rebuild": "tsx scripts/rebuild-market.ts",
     "backfill:logos": "tsx scripts/backfill-logos-pokellector.ts",

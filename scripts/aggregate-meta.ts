@@ -26,6 +26,7 @@ import "dotenv/config";
 import { prisma } from "@/lib/prisma";
 import { fetchPairings, rateGuard, getRemaining, type LimitlessPairing } from "./lib/limitless-api";
 import { ARCHETYPE_KO } from "@/lib/cardgame/archetype-ko";
+import { CardResolver } from "./lib/resolve-card";
 
 type Args = {
   window: number;
@@ -102,17 +103,18 @@ type StandingRow = {
  */
 
 /**
- * TODO(후속): DeckRecipeCard.logicalCardId 매칭.
- * Limitless decklist 의 (set, number) 는 EN 약어(예 "DRI")+번호.
- * CardLocale(region="EN") 의 setId/number 매핑 테이블이 필요(Limitless set약어 ↔ 우리 setId).
- * 매핑 사전 확보 후 이 함수 구현 → DeckRecipeCard.logicalCardId 채움.
+ * DeckRecipeCard.logicalCardId 매칭 — scripts/lib/resolve-card.ts (P1, multisource §4-②).
+ * setmap(data/limitless-setmap.json) 부재 시 경고 후 매칭 없이 진행(기존 동작과 동일).
  */
-// async function matchRecipeToLogicalCard(set?: string, number?: string): Promise<string | null> {
-//   return null;
-// }
 
 async function main() {
   const args = parseArgs();
+  let resolver: CardResolver | null = null;
+  try {
+    resolver = await CardResolver.create();
+  } catch (e) {
+    console.warn(`[agg] resolve-card 비활성 (logicalCardId 매칭 skip): ${(e as Error).message}`);
+  }
   const since = new Date(Date.now() - args.window * 86_400_000);
   const week = isoWeek(new Date());
 
@@ -486,6 +488,9 @@ async function main() {
     for (const acc of cardAcc.values()) {
       const adoptionRate = (acc.decks / deckCount) * 100;
       const avgCount = acc.totalCount / acc.decks; // 채용한 덱 기준 평균
+      // logicalCardId 매칭 (P1): 실패 시 null 유지 — 기존 non-null 을 null 로 덮지 않도록 update 는 조건부
+      const resolved =
+        resolver && acc.set && acc.number ? await resolver.resolveEn(acc.set, acc.number) : null;
       await prisma.deckRecipeCard.upsert({
         where: {
           archetypeId_cardName_setCode_number: {
@@ -503,7 +508,7 @@ async function main() {
           category: acc.category,
           avgCount,
           adoptionRate,
-          logicalCardId: null, // TODO(후속): matchRecipeToLogicalCard
+          logicalCardId: resolved?.logicalCardId ?? null,
           isCore: adoptionRate >= 90,
         },
         update: {
@@ -511,6 +516,7 @@ async function main() {
           avgCount,
           adoptionRate,
           isCore: adoptionRate >= 90,
+          ...(resolved ? { logicalCardId: resolved.logicalCardId } : {}),
         },
       });
       recipeRows++;
