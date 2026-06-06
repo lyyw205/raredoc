@@ -1,0 +1,708 @@
+{
+  "group": {
+    "id": "og-smp2",
+    "nameKo": "명탐정 피카츄",
+    "nameEn": "Detective Pikachu",
+    "crossGroupEN": false
+  },
+  "counts": {
+    "anchors": 25,
+    "enMatched": 18,
+    "krMatched": 24,
+    "enOnly": 0,
+    "krOnly": 0
+  },
+  "anchors": [
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-1",
+        "number": "1",
+        "name": "フシギダネ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/1.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-001",
+        "number": "001",
+        "name": "Bulbasaur",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/001.png",
+        "rarity": "Common",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-001",
+        "number": "001",
+        "name": "이상해씨",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_001.png",
+        "rarity": "커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 1
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-2",
+        "number": "2",
+        "name": "フシギダネ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/2.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-smp2-002",
+        "number": "002",
+        "name": "이상해씨",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_002.png",
+        "rarity": "커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 1
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-3",
+        "number": "3",
+        "name": "ルンパッパ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/3.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-002",
+        "number": "002",
+        "name": "Ludicolo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/002.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-003",
+        "number": "003",
+        "name": "로파파",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_003.png",
+        "rarity": "언커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 272
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-4",
+        "number": "4",
+        "name": "ネマシュ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/4.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-003",
+        "number": "003",
+        "name": "Morelull",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/003.png",
+        "rarity": "Common",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-004",
+        "number": "004",
+        "name": "자마슈",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_004.png",
+        "rarity": "커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 755
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-5",
+        "number": "5",
+        "name": "ヒトカゲ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/5.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-004",
+        "number": "004",
+        "name": "Charmander",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/004.png",
+        "rarity": "Common",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-005",
+        "number": "005",
+        "name": "파이리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_005.png",
+        "rarity": "커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 4
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-6",
+        "number": "6",
+        "name": "リザードン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/6.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-005",
+        "number": "005",
+        "name": "Charizard",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/005.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-006",
+        "number": "006",
+        "name": "리자몽",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_006.png",
+        "rarity": "언커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 6
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-7",
+        "number": "7",
+        "name": "リザードンGX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/7.jpg",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-smp2-007",
+        "number": "007",
+        "name": "리자몽 GX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_007.png",
+        "rarity": "더블 레어",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 6
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-8",
+        "number": "8",
+        "name": "ウインディ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/8.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-006",
+        "number": "006",
+        "name": "Arcanine",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/006.png",
+        "rarity": "Common",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-008",
+        "number": "008",
+        "name": "윈디",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_008.png",
+        "rarity": "커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 59
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-9",
+        "number": "9",
+        "name": "コダック",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/9.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-007",
+        "number": "007",
+        "name": "Psyduck",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/007.png",
+        "rarity": "Common",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-009",
+        "number": "009",
+        "name": "고라파덕",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_009.png",
+        "rarity": "커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 54
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-10",
+        "number": "10",
+        "name": "コダック",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/10.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-smp2-010",
+        "number": "010",
+        "name": "고라파덕",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_010.png",
+        "rarity": "커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 54
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-11",
+        "number": "11",
+        "name": "コイキング",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/11.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-008",
+        "number": "008",
+        "name": "Magikarp",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/008.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-011",
+        "number": "011",
+        "name": "잉어킹",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_011.png",
+        "rarity": "언커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 129
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-12",
+        "number": "12",
+        "name": "ゲッコウガ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/12.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-009",
+        "number": "009",
+        "name": "Greninja",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/009.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-012",
+        "number": "012",
+        "name": "개굴닌자",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_012.png",
+        "rarity": "언커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 658
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-13",
+        "number": "13",
+        "name": "ゲッコウガGX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/13.jpg",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-smp2-013",
+        "number": "013",
+        "name": "개굴닌자 GX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_013.png",
+        "rarity": "더블 레어",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 658
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-14",
+        "number": "14",
+        "name": "名探偵ピカチュウ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/14.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-010",
+        "number": "010",
+        "name": "Detective Pikachu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/010.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-014",
+        "number": "014",
+        "name": "명탐정 피카츄",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_014.png",
+        "rarity": "언커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 25
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-15",
+        "number": "15",
+        "name": "バリヤード",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/15.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-011",
+        "number": "011",
+        "name": "Mr. Mime",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/011.png",
+        "rarity": "Common",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-015",
+        "number": "015",
+        "name": "마임맨",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_015.png",
+        "rarity": "커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 122
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-16",
+        "number": "16",
+        "name": "ミュウツー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/16.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-012",
+        "number": "012",
+        "name": "Mewtwo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/012.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-016",
+        "number": "016",
+        "name": "뮤츠",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_016.png",
+        "rarity": "언커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 150
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-17",
+        "number": "17",
+        "name": "ミュウツーGX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/17.jpg",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-smp2-017",
+        "number": "017",
+        "name": "뮤츠 GX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_017.png",
+        "rarity": "더블 레어",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 150
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-18",
+        "number": "18",
+        "name": "カイリキー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/18.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-013",
+        "number": "013",
+        "name": "Machamp",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/013.png",
+        "rarity": "Common",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-018",
+        "number": "018",
+        "name": "괴력몬",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_018.png",
+        "rarity": "커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 68
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-19",
+        "number": "19",
+        "name": "プリン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/19.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-014",
+        "number": "014",
+        "name": "Jigglypuff",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/014.png",
+        "rarity": "Common",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-019",
+        "number": "019",
+        "name": "푸린",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_019.png",
+        "rarity": "커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 39
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-20",
+        "number": "20",
+        "name": "ブルー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/20.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-015",
+        "number": "015",
+        "name": "Snubbull",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/015.png",
+        "rarity": "Common",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-020",
+        "number": "020",
+        "name": "블루",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_020.png",
+        "rarity": "커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 209
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-21",
+        "number": "21",
+        "name": "ブルー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/21.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-smp2-021",
+        "number": "021",
+        "name": "블루",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_021.png",
+        "rarity": "커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 209
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-22",
+        "number": "22",
+        "name": "ベロリンガ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/22.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-016",
+        "number": "016",
+        "name": "Lickitung",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/016.png",
+        "rarity": "Common",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-022",
+        "number": "022",
+        "name": "내루미",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_022.png",
+        "rarity": "커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 108
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-23",
+        "number": "23",
+        "name": "メタモン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/23.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-017",
+        "number": "017",
+        "name": "Ditto",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/017.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-023",
+        "number": "023",
+        "name": "메타몽",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_023.png",
+        "rarity": "언커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 132
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-24",
+        "number": "24",
+        "name": "ケッキング",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/24.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-det1-018",
+        "number": "018",
+        "name": "Slaking",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/en/small/en-tcg-det1/018.png",
+        "rarity": "Common",
+        "setId": "en-tcg-det1",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-smp2-024",
+        "number": "024",
+        "name": "게을킹",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMP2/SMP2_mirror_024.png",
+        "rarity": "커먼",
+        "setId": "kr-smp2",
+        "region": "KR"
+      },
+      "dex": 289
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SMP2-25",
+        "number": "25",
+        "name": "ヨシダ警部補",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp2/ja/small/jp-tcg-SMP2/25.jpg",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-SMP2",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    }
+  ],
+  "tail": {
+    "enOnly": [],
+    "krOnly": [],
+    "enKr": []
+  }
+}

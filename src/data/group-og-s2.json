@@ -2,14 +2,15 @@
   "group": {
     "id": "og-s2",
     "nameKo": "반역크래시",
-    "nameEn": "Rebellion Crash",
+    "nameEn": "Rebel Clash",
     "crossGroupEN": false
   },
   "counts": {
     "anchors": 115,
-    "enMatched": 0,
+    "enMatched": 111,
     "krMatched": 106,
-    "enOnly": 0
+    "enOnly": 15,
+    "krOnly": 0
   },
   "anchors": [
     {
@@ -22,7 +23,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-004",
+        "number": "004",
+        "name": "Scyther",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/004.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-001",
         "number": "001",
@@ -44,7 +53,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-006",
+        "number": "006",
+        "name": "Heracross",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/006.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-002",
         "number": "002",
@@ -66,7 +83,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-007",
+        "number": "007",
+        "name": "Lotad",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/007.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-003",
         "number": "003",
@@ -88,7 +113,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-008",
+        "number": "008",
+        "name": "Lombre",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/008.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-004",
         "number": "004",
@@ -110,7 +143,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-009",
+        "number": "009",
+        "name": "Ludicolo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/009.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-005",
         "number": "005",
@@ -132,7 +173,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-010",
+        "number": "010",
+        "name": "Surskit",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/010.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-006",
         "number": "006",
@@ -154,7 +203,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-011",
+        "number": "011",
+        "name": "Masquerain",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/011.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-007",
         "number": "007",
@@ -176,7 +233,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-014",
+        "number": "014",
+        "name": "Phantump",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/014.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-008",
         "number": "008",
@@ -198,7 +263,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-015",
+        "number": "015",
+        "name": "Trevenant",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/015.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-009",
         "number": "009",
@@ -220,7 +293,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-019",
+        "number": "019",
+        "name": "Eldegoss V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/019.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-010",
         "number": "010",
@@ -242,7 +323,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-021",
+        "number": "021",
+        "name": "Applin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/021.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-011",
         "number": "011",
@@ -264,7 +353,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-022",
+        "number": "022",
+        "name": "Flapple",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/022.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-012",
         "number": "012",
@@ -286,7 +383,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-026",
+        "number": "026",
+        "name": "Ninetales V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/026.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-013",
         "number": "013",
@@ -308,7 +413,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-029",
+        "number": "029",
+        "name": "Magmar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/029.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-014",
         "number": "014",
@@ -330,7 +443,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-030",
+        "number": "030",
+        "name": "Magmortar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/030.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-015",
         "number": "015",
@@ -352,7 +473,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-031",
+        "number": "031",
+        "name": "Litwick",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/031.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-016",
         "number": "016",
@@ -374,7 +503,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-032",
+        "number": "032",
+        "name": "Lampent",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/032.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-017",
         "number": "017",
@@ -396,7 +533,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-033",
+        "number": "033",
+        "name": "Chandelure",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/033.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-018",
         "number": "018",
@@ -418,7 +563,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-034",
+        "number": "034",
+        "name": "Heatmor",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/034.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-019",
         "number": "019",
@@ -440,7 +593,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-041",
+        "number": "041",
+        "name": "Wingull",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/041.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-020",
         "number": "020",
@@ -462,7 +623,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-042",
+        "number": "042",
+        "name": "Pelipper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/042.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-021",
         "number": "021",
@@ -484,7 +653,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-043",
+        "number": "043",
+        "name": "Milotic V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/043.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-022",
         "number": "022",
@@ -506,7 +683,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-044",
+        "number": "044",
+        "name": "Tympole",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/044.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-023",
         "number": "023",
@@ -528,7 +713,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-045",
+        "number": "045",
+        "name": "Palpitoad",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/045.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-024",
         "number": "024",
@@ -550,7 +743,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-046",
+        "number": "046",
+        "name": "Seismitoad",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/046.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-025",
         "number": "025",
@@ -572,7 +773,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-047",
+        "number": "047",
+        "name": "Galarian Darumaka",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/047.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-026",
         "number": "026",
@@ -594,7 +803,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-048",
+        "number": "048",
+        "name": "Galarian Darmanitan",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/048.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-027",
         "number": "027",
@@ -616,7 +833,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-054",
+        "number": "054",
+        "name": "Eiscue",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/054.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-028",
         "number": "028",
@@ -638,7 +863,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-056",
+        "number": "056",
+        "name": "Voltorb",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/056.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-029",
         "number": "029",
@@ -660,7 +893,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-057",
+        "number": "057",
+        "name": "Electrode",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/057.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-030",
         "number": "030",
@@ -682,7 +923,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-058",
+        "number": "058",
+        "name": "Electabuzz",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/058.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-031",
         "number": "031",
@@ -704,7 +953,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-059",
+        "number": "059",
+        "name": "Electivire",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/059.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-032",
         "number": "032",
@@ -726,7 +983,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-060",
+        "number": "060",
+        "name": "Shinx",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/060.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-033",
         "number": "033",
@@ -748,7 +1013,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-061",
+        "number": "061",
+        "name": "Luxio",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/061.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-034",
         "number": "034",
@@ -770,7 +1043,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-062",
+        "number": "062",
+        "name": "Luxray",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/062.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-035",
         "number": "035",
@@ -792,7 +1073,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-070",
+        "number": "070",
+        "name": "Toxtricity V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/070.png",
+        "rarity": "Triple Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-037",
         "number": "037",
@@ -814,7 +1103,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-196",
+        "number": "196",
+        "name": "Toxtricity VMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/196.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-100",
         "number": "100",
@@ -836,7 +1133,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-073",
+        "number": "073",
+        "name": "Morpeko",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/073.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-038",
         "number": "038",
@@ -858,7 +1163,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-074",
+        "number": "074",
+        "name": "Clefairy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/074.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-039",
         "number": "039",
@@ -880,7 +1193,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-075",
+        "number": "075",
+        "name": "Clefable",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/075.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-040",
         "number": "040",
@@ -902,7 +1223,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-080",
+        "number": "080",
+        "name": "Sigilyph",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/080.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-041",
         "number": "041",
@@ -924,7 +1253,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-081",
+        "number": "081",
+        "name": "Sandygast",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/081.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-042",
         "number": "042",
@@ -946,7 +1283,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-082",
+        "number": "082",
+        "name": "Palossand",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/082.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-043",
         "number": "043",
@@ -968,7 +1313,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-083",
+        "number": "083",
+        "name": "Hatenna",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/083.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-044",
         "number": "044",
@@ -990,7 +1343,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-084",
+        "number": "084",
+        "name": "Hattrem",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/084.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-045",
         "number": "045",
@@ -1012,7 +1373,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-085",
+        "number": "085",
+        "name": "Hatterene",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/085.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-046",
         "number": "046",
@@ -1034,7 +1403,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-086",
+        "number": "086",
+        "name": "Milcery",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/086.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-047",
         "number": "047",
@@ -1056,7 +1433,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-087",
+        "number": "087",
+        "name": "Alcremie",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/087.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-048",
         "number": "048",
@@ -1078,7 +1463,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-092",
+        "number": "092",
+        "name": "Dragapult V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/092.png",
+        "rarity": "Triple Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-050",
         "number": "050",
@@ -1100,7 +1493,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-197",
+        "number": "197",
+        "name": "Dragapult VMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/197.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-101",
         "number": "101",
@@ -1122,7 +1523,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-096",
+        "number": "096",
+        "name": "Nosepass",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/096.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-051",
         "number": "051",
@@ -1144,7 +1553,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-097",
+        "number": "097",
+        "name": "Meditite",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/097.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-052",
         "number": "052",
@@ -1166,7 +1583,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-098",
+        "number": "098",
+        "name": "Medicham",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/098.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-053",
         "number": "053",
@@ -1188,7 +1613,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-099",
+        "number": "099",
+        "name": "Barboach",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/099.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-054",
         "number": "054",
@@ -1210,7 +1643,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-100",
+        "number": "100",
+        "name": "Whiscash",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/100.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-055",
         "number": "055",
@@ -1232,7 +1673,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-101",
+        "number": "101",
+        "name": "Galarian Yamask",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/101.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-056",
         "number": "056",
@@ -1254,7 +1703,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-102",
+        "number": "102",
+        "name": "Galarian Runerigus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/102.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-057",
         "number": "057",
@@ -1276,7 +1733,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-105",
+        "number": "105",
+        "name": "Rolycoly",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/105.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-058",
         "number": "058",
@@ -1298,7 +1763,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-106",
+        "number": "106",
+        "name": "Carkol",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/106.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-059",
         "number": "059",
@@ -1320,7 +1793,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-107",
+        "number": "107",
+        "name": "Coalossal",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/107.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-060",
         "number": "060",
@@ -1342,7 +1823,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-110",
+        "number": "110",
+        "name": "Falinks V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/110.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-061",
         "number": "061",
@@ -1364,7 +1853,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-111",
+        "number": "111",
+        "name": "Stonjourner",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/111.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-062",
         "number": "062",
@@ -1386,7 +1883,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-112",
+        "number": "112",
+        "name": "Koffing",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/112.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-063",
         "number": "063",
@@ -1408,7 +1913,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-113",
+        "number": "113",
+        "name": "Galarian Weezing",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/113.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-064",
         "number": "064",
@@ -1430,7 +1943,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-116",
+        "number": "116",
+        "name": "Spiritomb",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/116.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-065",
         "number": "065",
@@ -1452,7 +1973,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-117",
+        "number": "117",
+        "name": "Trubbish",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/117.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-066",
         "number": "066",
@@ -1474,7 +2003,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-118",
+        "number": "118",
+        "name": "Garbodor",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/118.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-067",
         "number": "067",
@@ -1496,7 +2033,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-119",
+        "number": "119",
+        "name": "Vullaby",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/119.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-068",
         "number": "068",
@@ -1518,7 +2063,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-120",
+        "number": "120",
+        "name": "Mandibuzz",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/120.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-069",
         "number": "069",
@@ -1540,7 +2093,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-186",
+        "number": "186",
+        "name": "Malamar V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/186.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-103",
         "number": "103",
@@ -1562,7 +2123,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-122",
+        "number": "122",
+        "name": "Malamar VMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/122.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-070",
         "number": "070",
@@ -1584,7 +2153,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-128",
+        "number": "128",
+        "name": "Scizor",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/128.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-072",
         "number": "072",
@@ -1606,7 +2183,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-131",
+        "number": "131",
+        "name": "Probopass",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/131.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-073",
         "number": "073",
@@ -1628,7 +2213,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-132",
+        "number": "132",
+        "name": "Durant",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/132.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-074",
         "number": "074",
@@ -1650,7 +2243,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-136",
+        "number": "136",
+        "name": "Copperajah V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/136.png",
+        "rarity": "Triple Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-076",
         "number": "076",
@@ -1672,7 +2273,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-199",
+        "number": "199",
+        "name": "Copperajah VMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/199.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-104",
         "number": "104",
@@ -1694,7 +2303,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-141",
+        "number": "141",
+        "name": "Snorlax",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/141.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-077",
         "number": "077",
@@ -1716,7 +2333,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-142",
+        "number": "142",
+        "name": "Chatot",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/142.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-078",
         "number": "078",
@@ -1738,7 +2363,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-143",
+        "number": "143",
+        "name": "Pidove",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/143.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-079",
         "number": "079",
@@ -1760,7 +2393,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-144",
+        "number": "144",
+        "name": "Tranquill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/144.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-080",
         "number": "080",
@@ -1782,7 +2423,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-145",
+        "number": "145",
+        "name": "Unfezant",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/145.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-081",
         "number": "081",
@@ -1804,7 +2453,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-149",
+        "number": "149",
+        "name": "Stufful",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/149.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-082",
         "number": "082",
@@ -1826,7 +2483,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-150",
+        "number": "150",
+        "name": "Bewear",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/150.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-083",
         "number": "083",
@@ -1848,7 +2513,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-151",
+        "number": "151",
+        "name": "Skwovet",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/151.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-084",
         "number": "084",
@@ -1870,7 +2543,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-152",
+        "number": "152",
+        "name": "Greedent",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/152.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-085",
         "number": "085",
@@ -1892,7 +2573,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-165",
+        "number": "165",
+        "name": "Scoop Up Net",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/165.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-088",
         "number": "088",
@@ -1914,7 +2603,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-162",
+        "number": "162",
+        "name": "Nugget",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/162.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-086",
         "number": "086",
@@ -1936,7 +2633,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-168",
+        "number": "168",
+        "name": "Tool Scrapper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/168.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-087",
         "number": "087",
@@ -1958,7 +2663,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-157",
+        "number": "157",
+        "name": "Cursed Shovel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/157.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-089",
         "number": "089",
@@ -1980,7 +2693,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-163",
+        "number": "163",
+        "name": "Oleana",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/163.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-092",
         "number": "092",
@@ -2002,7 +2723,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-158",
+        "number": "158",
+        "name": "Dan",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/158.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-090",
         "number": "090",
@@ -2024,7 +2753,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-154",
+        "number": "154",
+        "name": "Boss's Orders",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/154.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-091",
         "number": "091",
@@ -2046,7 +2783,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-160",
+        "number": "160",
+        "name": "Galar Mine",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/160.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-093",
         "number": "093",
@@ -2134,7 +2879,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-176",
+        "number": "176",
+        "name": "Eldegoss V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/176.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-097",
         "number": "097",
@@ -2156,7 +2909,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-177",
+        "number": "177",
+        "name": "Ninetales V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/177.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-098",
         "number": "098",
@@ -2178,7 +2939,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-179",
+        "number": "179",
+        "name": "Milotic V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/179.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-099",
         "number": "099",
@@ -2200,7 +2969,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-182",
+        "number": "182",
+        "name": "Toxtricity V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/182.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": null,
       "dex": 849
     },
@@ -2214,7 +2991,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-183",
+        "number": "183",
+        "name": "Dragapult V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/183.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": null,
       "dex": 887
     },
@@ -2228,7 +3013,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-185",
+        "number": "185",
+        "name": "Falinks V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/185.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-102",
         "number": "102",
@@ -2250,7 +3043,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-121",
+        "number": "121",
+        "name": "Malamar V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/121.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": null,
       "dex": 687
     },
@@ -2264,7 +3065,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-187",
+        "number": "187",
+        "name": "Copperajah V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/187.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": null,
       "dex": 879
     },
@@ -2278,7 +3087,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-191",
+        "number": "191",
+        "name": "Oleana",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/191.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-106",
         "number": "106",
@@ -2300,7 +3117,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-189",
+        "number": "189",
+        "name": "Boss's Orders",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/189.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-105",
         "number": "105",
@@ -2322,7 +3147,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-071",
+        "number": "071",
+        "name": "Toxtricity VMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/071.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-036",
         "number": "036",
@@ -2344,7 +3177,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-093",
+        "number": "093",
+        "name": "Dragapult VMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/093.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-049",
         "number": "049",
@@ -2366,7 +3207,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-198",
+        "number": "198",
+        "name": "Malamar VMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/198.png",
+        "rarity": "Triple Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-071",
         "number": "071",
@@ -2388,7 +3237,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-137",
+        "number": "137",
+        "name": "Copperajah VMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/137.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s2-075",
         "number": "075",
@@ -2410,7 +3267,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-202",
+        "number": "202",
+        "name": "Oleana",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/202.png",
+        "rarity": "Hyper Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": null,
       "dex": null
     },
@@ -2424,7 +3289,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-200",
+        "number": "200",
+        "name": "Boss's Orders",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/200.png",
+        "rarity": "Hyper Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": null,
       "dex": null
     },
@@ -2452,7 +3325,15 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-207",
+        "number": "207",
+        "name": "Scoop Up Net",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/207.png",
+        "rarity": "Ultra Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": null,
       "dex": null
     },
@@ -2466,13 +3347,187 @@
         "setId": "jp-tcg-S2",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh2-208",
+        "number": "208",
+        "name": "Tool Scrapper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/208.png",
+        "rarity": "Ultra Rare",
+        "setId": "en-tcg-swsh2",
+        "region": "EN"
+      },
       "kr": null,
       "dex": null
     }
   ],
   "tail": {
-    "enOnly": [],
+    "enOnly": [
+      {
+        "id": "en-tcg-swsh2-055",
+        "number": "055",
+        "name": "Eiscue V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/055.png",
+        "rarity": null,
+        "setId": "en-tcg-swsh2",
+        "region": "EN",
+        "dex": 875,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-swsh2-072",
+        "number": "072",
+        "name": "Pincurchin V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/072.png",
+        "rarity": null,
+        "setId": "en-tcg-swsh2",
+        "region": "EN",
+        "dex": 871,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-swsh2-126",
+        "number": "126",
+        "name": "Galarian Meowth",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/126.png",
+        "rarity": null,
+        "setId": "en-tcg-swsh2",
+        "region": "EN",
+        "dex": 52,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-swsh2-127",
+        "number": "127",
+        "name": "Galarian Perrserker",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/127.png",
+        "rarity": null,
+        "setId": "en-tcg-swsh2",
+        "region": "EN",
+        "dex": 863,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-swsh2-139",
+        "number": "139",
+        "name": "Zacian",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/139.png",
+        "rarity": null,
+        "setId": "en-tcg-swsh2",
+        "region": "EN",
+        "dex": 888,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-swsh2-140",
+        "number": "140",
+        "name": "Zamazenta",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/140.png",
+        "rarity": null,
+        "setId": "en-tcg-swsh2",
+        "region": "EN",
+        "dex": 889,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-swsh2-159",
+        "number": "159",
+        "name": "Full Heal",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/159.png",
+        "rarity": null,
+        "setId": "en-tcg-swsh2",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-swsh2-164",
+        "number": "164",
+        "name": "Poké Ball",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/164.png",
+        "rarity": null,
+        "setId": "en-tcg-swsh2",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-swsh2-171",
+        "number": "171",
+        "name": "Capture Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/171.png",
+        "rarity": null,
+        "setId": "en-tcg-swsh2",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-swsh2-172",
+        "number": "172",
+        "name": "Horror Psychic Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/172.png",
+        "rarity": null,
+        "setId": "en-tcg-swsh2",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-swsh2-173",
+        "number": "173",
+        "name": "Speed Lightning Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/173.png",
+        "rarity": null,
+        "setId": "en-tcg-swsh2",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-swsh2-174",
+        "number": "174",
+        "name": "Twin Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/174.png",
+        "rarity": null,
+        "setId": "en-tcg-swsh2",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-swsh2-204",
+        "number": "204",
+        "name": "Frosmoth",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/204.png",
+        "rarity": null,
+        "setId": "en-tcg-swsh2",
+        "region": "EN",
+        "dex": 873,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-swsh2-205",
+        "number": "205",
+        "name": "Galarian Perrserker",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/205.png",
+        "rarity": null,
+        "setId": "en-tcg-swsh2",
+        "region": "EN",
+        "dex": 863,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-swsh2-209",
+        "number": "209",
+        "name": "Twin Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s2/en/small/en-tcg-swsh2/209.png",
+        "rarity": null,
+        "setId": "en-tcg-swsh2",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      }
+    ],
     "krOnly": [],
     "enKr": []
   }

@@ -1,0 +1,2414 @@
+{
+  "group": {
+    "id": "og-s5a",
+    "nameKo": "쌍벽의 파이터",
+    "nameEn": "Matchless Fighters",
+    "crossGroupEN": false
+  },
+  "counts": {
+    "anchors": 96,
+    "enMatched": 61,
+    "krMatched": 70,
+    "enOnly": 0,
+    "krOnly": 0
+  },
+  "anchors": [
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-1",
+        "number": "1",
+        "name": "ビードル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/1.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-001",
+        "number": "001",
+        "name": "Weedle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/001.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-1",
+        "number": "1",
+        "name": "ビードル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/1.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 13
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-2",
+        "number": "2",
+        "name": "コクーン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/2.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-002",
+        "number": "002",
+        "name": "Kakuna",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/002.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-2",
+        "number": "2",
+        "name": "コクーン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/2.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 14
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-3",
+        "number": "3",
+        "name": "スピアー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/3.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-003",
+        "number": "003",
+        "name": "Beedrill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/003.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-3",
+        "number": "3",
+        "name": "スピアー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/3.png",
+        "rarity": "레어",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 15
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-4",
+        "number": "4",
+        "name": "ヘラクロス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/4.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-006",
+        "number": "006",
+        "name": "Heracross",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/006.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-4",
+        "number": "4",
+        "name": "ヘラクロス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/4.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 214
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-5",
+        "number": "5",
+        "name": "チュリネ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/5.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-5",
+        "number": "5",
+        "name": "チュリネ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/5.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 548
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-6",
+        "number": "6",
+        "name": "ドレディア",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/6.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-6",
+        "number": "6",
+        "name": "ドレディア",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/6.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 549
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-7",
+        "number": "7",
+        "name": "バシャーモV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/7.jpg",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-020",
+        "number": "020",
+        "name": "Blaziken V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/020.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-7",
+        "number": "7",
+        "name": "バシャーモV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/7.png",
+        "rarity": "더블 레어",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 257
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-8",
+        "number": "8",
+        "name": "バシャーモVMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/8.jpg",
+        "rarity": "Triple Rare",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-021",
+        "number": "021",
+        "name": "Blaziken VMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/021.png",
+        "rarity": "Triple Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-8",
+        "number": "8",
+        "name": "バシャーモVMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/8.png",
+        "rarity": "Triple Rare",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 257
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-9",
+        "number": "9",
+        "name": "メラルバ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/9.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-023",
+        "number": "023",
+        "name": "Larvesta",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/023.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-9",
+        "number": "9",
+        "name": "メラルバ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/9.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 636
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-10",
+        "number": "10",
+        "name": "ウルガモス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/10.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-024",
+        "number": "024",
+        "name": "Volcarona",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/024.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-10",
+        "number": "10",
+        "name": "ウルガモス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/10.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 637
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-11",
+        "number": "11",
+        "name": "メノクラゲ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/11.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-11",
+        "number": "11",
+        "name": "メノクラゲ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/11.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 72
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-12",
+        "number": "12",
+        "name": "ドククラゲ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/12.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-12",
+        "number": "12",
+        "name": "ドククラゲ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/12.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 73
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-13",
+        "number": "13",
+        "name": "デリバード",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/13.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-032",
+        "number": "032",
+        "name": "Delibird",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/032.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-13",
+        "number": "13",
+        "name": "デリバード",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/13.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 225
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-14",
+        "number": "14",
+        "name": "キバニア",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/14.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-14",
+        "number": "14",
+        "name": "キバニア",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/14.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 318
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-15",
+        "number": "15",
+        "name": "サメハダー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/15.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-15",
+        "number": "15",
+        "name": "サメハダー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/15.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 319
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-16",
+        "number": "16",
+        "name": "メッソン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/16.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-041",
+        "number": "041",
+        "name": "Sobble",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/041.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-16",
+        "number": "16",
+        "name": "メッソン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/16.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 816
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-17",
+        "number": "17",
+        "name": "ジメレオン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/17.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-042",
+        "number": "042",
+        "name": "Drizzile",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/042.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-17",
+        "number": "17",
+        "name": "ジメレオン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/17.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 817
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-18",
+        "number": "18",
+        "name": "インテレオン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/18.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-043",
+        "number": "043",
+        "name": "Inteleon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/043.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-18",
+        "number": "18",
+        "name": "インテレオン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/18.png",
+        "rarity": "레어",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 818
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-19",
+        "number": "19",
+        "name": "れんげきウーラオス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/19.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-044",
+        "number": "044",
+        "name": "Rapid Strike Urshifu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/044.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-19",
+        "number": "19",
+        "name": "れんげきウーラオス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/19.png",
+        "rarity": "레어",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 892
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-20",
+        "number": "20",
+        "name": "チョンチー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/20.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-20",
+        "number": "20",
+        "name": "チョンチー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/20.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 170
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-21",
+        "number": "21",
+        "name": "ランターン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/21.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-21",
+        "number": "21",
+        "name": "ランターン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/21.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 171
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-22",
+        "number": "22",
+        "name": "ボルトロス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/22.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-052",
+        "number": "052",
+        "name": "Thundurus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/052.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-22",
+        "number": "22",
+        "name": "ボルトロス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/22.png",
+        "rarity": "레어",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 642
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-23",
+        "number": "23",
+        "name": "パッチラゴンV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/23.jpg",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-23",
+        "number": "23",
+        "name": "パッチラゴンV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/23.png",
+        "rarity": "더블 레어",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 880
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-24",
+        "number": "24",
+        "name": "パッチラゴンVMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/24.jpg",
+        "rarity": "Triple Rare",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-24",
+        "number": "24",
+        "name": "パッチラゴンVMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/24.png",
+        "rarity": "Triple Rare",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 880
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-25",
+        "number": "25",
+        "name": "ガラル フリーザーV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/25.jpg",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-058",
+        "number": "058",
+        "name": "Galarian Articuno V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/058.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-25",
+        "number": "25",
+        "name": "ガラル フリーザーV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/25.png",
+        "rarity": "더블 레어",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 144
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-26",
+        "number": "26",
+        "name": "コロモリ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/26.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-26",
+        "number": "26",
+        "name": "コロモリ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/26.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 527
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-27",
+        "number": "27",
+        "name": "ココロモリ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/27.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-27",
+        "number": "27",
+        "name": "ココロモリ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/27.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 528
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-28",
+        "number": "28",
+        "name": "ペロッパフ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/28.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-067",
+        "number": "067",
+        "name": "Swirlix",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/067.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-28",
+        "number": "28",
+        "name": "ペロッパフ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/28.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 684
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-29",
+        "number": "29",
+        "name": "ペロリーム",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/29.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-068",
+        "number": "068",
+        "name": "Slurpuff",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/068.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-29",
+        "number": "29",
+        "name": "ペロリーム",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/29.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 685
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-30",
+        "number": "30",
+        "name": "ミブリム",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/30.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-071",
+        "number": "071",
+        "name": "Hatenna",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/071.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-30",
+        "number": "30",
+        "name": "ミブリム",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/30.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 856
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-31",
+        "number": "31",
+        "name": "テブリム",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/31.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-072",
+        "number": "072",
+        "name": "Hattrem",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/072.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-31",
+        "number": "31",
+        "name": "テブリム",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/31.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 857
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-32",
+        "number": "32",
+        "name": "ブリムオン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/32.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-073",
+        "number": "073",
+        "name": "Hatterene",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/073.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-32",
+        "number": "32",
+        "name": "ブリムオン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/32.png",
+        "rarity": "레어",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 858
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-33",
+        "number": "33",
+        "name": "ディグダ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/33.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-076",
+        "number": "076",
+        "name": "Diglett",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/076.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-33",
+        "number": "33",
+        "name": "ディグダ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/33.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 50
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-34",
+        "number": "34",
+        "name": "ダグトリオ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/34.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-077",
+        "number": "077",
+        "name": "Dugtrio",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/077.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-34",
+        "number": "34",
+        "name": "ダグトリオ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/34.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 51
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-35",
+        "number": "35",
+        "name": "ガラル カモネギ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/35.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-078",
+        "number": "078",
+        "name": "Galarian Farfetch'd",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/078.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-35",
+        "number": "35",
+        "name": "ガラル カモネギ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/35.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 83
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-36",
+        "number": "36",
+        "name": "ガラル ネギガナイト",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/36.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-079",
+        "number": "079",
+        "name": "Galarian Sirfetch'd",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/079.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-36",
+        "number": "36",
+        "name": "ガラル ネギガナイト",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/36.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 865
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-37",
+        "number": "37",
+        "name": "ガラル サンダーV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/37.jpg",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-080",
+        "number": "080",
+        "name": "Galarian Zapdos V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/080.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-37",
+        "number": "37",
+        "name": "ガラル サンダーV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/37.png",
+        "rarity": "더블 레어",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 145
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-38",
+        "number": "38",
+        "name": "ダンゴロ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/38.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-38",
+        "number": "38",
+        "name": "ダンゴロ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/38.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 524
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-39",
+        "number": "39",
+        "name": "ガントル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/39.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-39",
+        "number": "39",
+        "name": "ガントル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/39.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 525
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-40",
+        "number": "40",
+        "name": "ギガイアス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/40.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-40",
+        "number": "40",
+        "name": "ギガイアス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/40.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 526
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-41",
+        "number": "41",
+        "name": "ガラル デスマス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/41.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-082",
+        "number": "082",
+        "name": "Galarian Yamask",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/082.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-41",
+        "number": "41",
+        "name": "ガラル デスマス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/41.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 562
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-42",
+        "number": "42",
+        "name": "ガラル デスバーン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/42.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-083",
+        "number": "083",
+        "name": "Galarian Runerigus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/083.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-42",
+        "number": "42",
+        "name": "ガラル デスバーン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/42.png",
+        "rarity": "레어",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 867
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-43",
+        "number": "43",
+        "name": "ナゲツケサル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/43.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-088",
+        "number": "088",
+        "name": "Passimian",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/088.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-43",
+        "number": "43",
+        "name": "ナゲツケサル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/43.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 766
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-44",
+        "number": "44",
+        "name": "ダクマ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/44.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-093",
+        "number": "093",
+        "name": "Kubfu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/093.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-44",
+        "number": "44",
+        "name": "ダクマ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/44.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 891
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-45",
+        "number": "45",
+        "name": "ガラル ファイヤーV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/45.jpg",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-097",
+        "number": "097",
+        "name": "Galarian Moltres V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/097.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-45",
+        "number": "45",
+        "name": "ガラル ファイヤーV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/45.png",
+        "rarity": "더블 레어",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 146
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-46",
+        "number": "46",
+        "name": "ガラル ヤドキングV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/46.jpg",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-099",
+        "number": "099",
+        "name": "Galarian Slowking V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/099.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-46",
+        "number": "46",
+        "name": "ガラル ヤドキングV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/46.png",
+        "rarity": "더블 레어",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 199
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-47",
+        "number": "47",
+        "name": "ガラル ヤドキングVMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/47.jpg",
+        "rarity": "Triple Rare",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-100",
+        "number": "100",
+        "name": "Galarian Slowking VMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/100.png",
+        "rarity": "Triple Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-47",
+        "number": "47",
+        "name": "ガラル ヤドキングVMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/47.png",
+        "rarity": "Triple Rare",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 199
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-48",
+        "number": "48",
+        "name": "ハブネーク",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/48.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-102",
+        "number": "102",
+        "name": "Seviper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/102.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-48",
+        "number": "48",
+        "name": "ハブネーク",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/48.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 336
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-49",
+        "number": "49",
+        "name": "ミカルゲ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/49.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-103",
+        "number": "103",
+        "name": "Spiritomb",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/103.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-49",
+        "number": "49",
+        "name": "ミカルゲ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/49.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 442
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-50",
+        "number": "50",
+        "name": "フシデ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/50.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-105",
+        "number": "105",
+        "name": "Venipede",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/105.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-50",
+        "number": "50",
+        "name": "フシデ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/50.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 543
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-51",
+        "number": "51",
+        "name": "ホイーガ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/51.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-106",
+        "number": "106",
+        "name": "Whirlipede",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/106.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-51",
+        "number": "51",
+        "name": "ホイーガ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/51.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 544
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-52",
+        "number": "52",
+        "name": "ペンドラー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/52.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-107",
+        "number": "107",
+        "name": "Scolipede",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/107.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-52",
+        "number": "52",
+        "name": "ペンドラー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/52.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 545
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-53",
+        "number": "53",
+        "name": "ズルッグ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/53.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-53",
+        "number": "53",
+        "name": "ズルッグ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/53.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 559
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-54",
+        "number": "54",
+        "name": "ズルズキン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/54.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-54",
+        "number": "54",
+        "name": "ズルズキン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/54.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 560
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-55",
+        "number": "55",
+        "name": "いちげきウーラオス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/55.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-108",
+        "number": "108",
+        "name": "Single Strike Urshifu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/108.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-55",
+        "number": "55",
+        "name": "いちげきウーラオス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/55.png",
+        "rarity": "레어",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 892
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-56",
+        "number": "56",
+        "name": "ザングース",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/56.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-120",
+        "number": "120",
+        "name": "Zangoose",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/120.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-56",
+        "number": "56",
+        "name": "ザングース",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/56.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 335
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-57",
+        "number": "57",
+        "name": "シェイミ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/57.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-123",
+        "number": "123",
+        "name": "Shaymin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/123.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-57",
+        "number": "57",
+        "name": "シェイミ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/57.png",
+        "rarity": "레어",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 492
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-58",
+        "number": "58",
+        "name": "ヨーテリー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/58.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-58",
+        "number": "58",
+        "name": "ヨーテリー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/58.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 506
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-59",
+        "number": "59",
+        "name": "ハーデリア",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/59.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-59",
+        "number": "59",
+        "name": "ハーデリア",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/59.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 507
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-60",
+        "number": "60",
+        "name": "ムーランド",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/60.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-60",
+        "number": "60",
+        "name": "ムーランド",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/60.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 508
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-61",
+        "number": "61",
+        "name": "ワシボン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/61.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-61",
+        "number": "61",
+        "name": "ワシボン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/61.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 627
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-62",
+        "number": "62",
+        "name": "ウォーグル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/62.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-s5a-62",
+        "number": "62",
+        "name": "ウォーグル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/62.png",
+        "rarity": "커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": 628
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-63",
+        "number": "63",
+        "name": "おむかえちょうちん",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/63.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-156",
+        "number": "156",
+        "name": "Welcoming Lantern",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/156.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-63",
+        "number": "63",
+        "name": "おむかえちょうちん",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/63.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-64",
+        "number": "64",
+        "name": "やまびこホーン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/64.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-136",
+        "number": "136",
+        "name": "Echoing Horn",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/136.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-64",
+        "number": "64",
+        "name": "やまびこホーン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/64.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-65",
+        "number": "65",
+        "name": "ガラルのむねあて",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/65.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-141",
+        "number": "141",
+        "name": "Galarian Chestplate",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/141.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-65",
+        "number": "65",
+        "name": "ガラルのむねあて",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/65.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-66",
+        "number": "66",
+        "name": "カリンの信念",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/66.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-144",
+        "number": "144",
+        "name": "Karen's Conviction",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/144.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-66",
+        "number": "66",
+        "name": "カリンの信念",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/66.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-67",
+        "number": "67",
+        "name": "クララ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/67.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-145",
+        "number": "145",
+        "name": "Klara",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/145.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-67",
+        "number": "67",
+        "name": "クララ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/67.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-68",
+        "number": "68",
+        "name": "セイボリー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/68.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-130",
+        "number": "130",
+        "name": "Avery",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/130.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-68",
+        "number": "68",
+        "name": "セイボリー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/68.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-69",
+        "number": "69",
+        "name": "トウキ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/69.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-131",
+        "number": "131",
+        "name": "Brawly",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/131.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-69",
+        "number": "69",
+        "name": "トウキ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/69.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-70",
+        "number": "70",
+        "name": "ダイ木の丘",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/70.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-135",
+        "number": "135",
+        "name": "Dyna Tree Hill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/135.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s5a-70",
+        "number": "70",
+        "name": "ダイ木の丘",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ko/small/kr-s5a/70.png",
+        "rarity": "언커먼",
+        "setId": "kr-s5a",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-71",
+        "number": "71",
+        "name": "バシャーモV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/71.jpg",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-161",
+        "number": "161",
+        "name": "Blaziken V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/161.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 257
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-72",
+        "number": "72",
+        "name": "パッチラゴンV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/72.jpg",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": 880
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-73",
+        "number": "73",
+        "name": "ガラル フリーザーV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/73.jpg",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-169",
+        "number": "169",
+        "name": "Galarian Articuno V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/169.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 144
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-74",
+        "number": "74",
+        "name": "ガラル フリーザーV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/74.jpg",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-170",
+        "number": "170",
+        "name": "Galarian Articuno V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/170.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 144
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-75",
+        "number": "75",
+        "name": "ガラル サンダーV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/75.jpg",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-173",
+        "number": "173",
+        "name": "Galarian Zapdos V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/173.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 145
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-76",
+        "number": "76",
+        "name": "ガラル サンダーV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/76.jpg",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-174",
+        "number": "174",
+        "name": "Galarian Zapdos V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/174.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 145
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-77",
+        "number": "77",
+        "name": "ガラル ファイヤーV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/77.jpg",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-176",
+        "number": "176",
+        "name": "Galarian Moltres V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/176.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 146
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-78",
+        "number": "78",
+        "name": "ガラル ファイヤーV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/78.jpg",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-177",
+        "number": "177",
+        "name": "Galarian Moltres V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/177.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 146
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-79",
+        "number": "79",
+        "name": "ガラル ヤドキングV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/79.jpg",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-178",
+        "number": "178",
+        "name": "Galarian Slowking V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/178.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 199
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-80",
+        "number": "80",
+        "name": "ガラル ヤドキングV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/80.jpg",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-179",
+        "number": "179",
+        "name": "Galarian Slowking V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/179.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 199
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-81",
+        "number": "81",
+        "name": "カリンの信念",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/81.jpg",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-193",
+        "number": "193",
+        "name": "Karen's Conviction",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/193.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-82",
+        "number": "82",
+        "name": "クララ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/82.jpg",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-194",
+        "number": "194",
+        "name": "Klara",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/194.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-83",
+        "number": "83",
+        "name": "セイボリー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/83.jpg",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-187",
+        "number": "187",
+        "name": "Avery",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/187.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-84",
+        "number": "84",
+        "name": "トウキ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/84.jpg",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-swsh6-188",
+        "number": "188",
+        "name": "Brawly",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s6h/en/small/en-tcg-swsh6/188.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh6",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-85",
+        "number": "85",
+        "name": "Blaziken VMAX - 085/070",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/85.jpg",
+        "rarity": "ハイパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": 257
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-86",
+        "number": "86",
+        "name": "Blaziken VMAX - 086/070",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/86.jpg",
+        "rarity": "ハイパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": 257
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-87",
+        "number": "87",
+        "name": "Dracozolt VMAX - 087/070",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/87.jpg",
+        "rarity": "ハイパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": 880
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-88",
+        "number": "88",
+        "name": "Galarian Slowking VMAX - 088/070",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/88.jpg",
+        "rarity": "ハイパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": 199
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-89",
+        "number": "89",
+        "name": "Karen's Conviction - 089/070",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/89.jpg",
+        "rarity": "ハイパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-90",
+        "number": "90",
+        "name": "Klara - 090/070",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/90.jpg",
+        "rarity": "ハイパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-91",
+        "number": "91",
+        "name": "Avery - 091/070",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/91.jpg",
+        "rarity": "ハイパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-92",
+        "number": "92",
+        "name": "Brawly - 092/070",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/92.jpg",
+        "rarity": "ハイパーレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-93",
+        "number": "93",
+        "name": "Snorlax",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/93.jpg",
+        "rarity": "ウルトラレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-94",
+        "number": "94",
+        "name": "Fan of Waves",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/94.jpg",
+        "rarity": "ウルトラレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-95",
+        "number": "95",
+        "name": "Urn of Vitality",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/95.jpg",
+        "rarity": "ウルトラレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S5a-96",
+        "number": "96",
+        "name": "Basic Fighting Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s5a/ja/small/jp-tcg-S5a/96.jpg",
+        "rarity": "ウルトラレア",
+        "setId": "jp-tcg-S5a",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    }
+  ],
+  "tail": {
+    "enOnly": [],
+    "krOnly": [],
+    "enKr": []
+  }
+}

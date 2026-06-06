@@ -1,0 +1,1535 @@
+{
+ "1": {
+  "number": 1,
+  "jaName": "イシズマイ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "からにこもる",
+    "text": "コインを1回投げオモテなら、次の相手の番、このポケモンはワザのダメージを受けない。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Grass",
+     "Colorless"
+    ],
+    "name": "きりさく",
+    "text": "",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "MAHOU"
+ },
+ "2": {
+  "number": 2,
+  "jaName": "イワパレス",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass",
+     "Colorless"
+    ],
+    "name": "シザークロス",
+    "text": "コインを1回投げオモテなら、50ダメージを追加。",
+    "damage": "20＋"
+   },
+   {
+    "cost": [
+     "Grass",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "とつげき",
+    "text": "このポケモンにも10ダメージ。",
+    "damage": "80"
+   }
+  ],
+  "illustrator": "Naoyo Kimura"
+ },
+ "3": {
+  "number": 3,
+  "jaName": "カブルモ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "ふしぎなしんか",
+    "text": "自分または相手の場に「チョボマキ」がいるなら、このポケモンから進化するカードを、自分の山札から1枚選び、このポケモンにのせて進化させる。そして山札を切る。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "みだれづき",
+    "text": "コインを3回投げ、オモテの数×10ダメージ。",
+    "damage": "10×"
+   }
+  ],
+  "illustrator": "sui"
+ },
+ "4": {
+  "number": 4,
+  "jaName": "タマゲタケ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "ころがる",
+    "text": "",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "match"
+ },
+ "5": {
+  "number": 5,
+  "jaName": "モロバレル",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "どくどく",
+    "text": "相手のバトルポケモンをどくにする。ポケモンチェックのとき、このどくでのせるダメカンの数は2個になる。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "のしかかり",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンをマヒにする。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Kagemaru Himeno"
+ },
+ "6": {
+  "number": 6,
+  "jaName": "チョボマキ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "ふしぎなしんか",
+    "text": "自分または相手の場に「カブルモ」がいるなら、このポケモンから進化するカードを、自分の山札から1枚選び、このポケモンにのせて進化させる。そして山札を切る。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "ぶつかる",
+    "text": "",
+    "damage": "10"
+   }
+  ],
+  "illustrator": "Midori Harada"
+ },
+ "7": {
+  "number": 7,
+  "jaName": "アギルダー",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "アシッドボム",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンについているエネルギーを1個選び、トラッシュする。",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "スラッシュダウン",
+    "text": "次の自分の番、このポケモンは「スラッシュダウン」を使えない。",
+    "damage": "60"
+   }
+  ],
+  "illustrator": "Kagemaru Himeno"
+ },
+ "8": {
+  "number": 8,
+  "jaName": "ビリジオン",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "ダブルドロー",
+    "text": "自分の山札を2枚引く。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Grass",
+     "Colorless"
+    ],
+    "name": "リーフスラッガー",
+    "text": "次の自分の番、このポケモンが使う「リーフスラッガー」のダメージは「+40」される。",
+    "damage": "40"
+   }
+  ],
+  "illustrator": "5ban Graphics"
+ },
+ "9": {
+  "number": 9,
+  "jaName": "ビクティニ",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire",
+     "Colorless"
+    ],
+    "name": "アシストパワー",
+    "text": "このポケモンについているエネルギーをすべて、ベンチポケモン1匹につけ替える。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "5ban Graphics"
+ },
+ "10": {
+  "number": 10,
+  "jaName": "クイタラン",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire"
+    ],
+    "name": "こがす",
+    "text": "相手のバトルポケモンをやけどにする。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Fire",
+     "Colorless"
+    ],
+    "name": "やきつくす",
+    "text": "ダメージを与える前に、相手のバトルポケモンについている「ポケモンのどうぐ」をトラッシュする。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Kouki Saitou"
+ },
+ "11": {
+  "number": 11,
+  "jaName": "メラルバ",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire"
+    ],
+    "name": "ひのこ",
+    "text": "コインを1回投げウラなら、このポケモンについているエネルギーを1個選び、トラッシュする。",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Kagemaru Himeno"
+ },
+ "12": {
+  "number": 12,
+  "jaName": "ウルガモス",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire"
+    ],
+    "name": "ほのおのまい",
+    "text": "自分のトラッシュから基本エネルギーを1枚選び、自分のポケモンにつける。",
+    "damage": "30"
+   },
+   {
+    "cost": [
+     "Fire",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ねっぷう",
+    "text": "相手のバトルポケモンをやけどにする。",
+    "damage": "60"
+   }
+  ],
+  "illustrator": "Mitsuhiro Arita"
+ },
+ "13": {
+  "number": 13,
+  "jaName": "オタマロ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "しんどう",
+    "text": "",
+    "damage": "10"
+   },
+   {
+    "cost": [
+     "Water",
+     "Colorless"
+    ],
+    "name": "マッドショット",
+    "text": "",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Atsuko Nishida"
+ },
+ "14": {
+  "number": 14,
+  "jaName": "ガマガル",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water"
+    ],
+    "name": "マッドショット",
+    "text": "",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "りんしょう",
+    "text": "ワザ「りんしょう」を持つ自分のポケモンの数×20ダメージ。",
+    "damage": "20×"
+   }
+  ],
+  "illustrator": "sui"
+ },
+ "15": {
+  "number": 15,
+  "jaName": "ガマゲロゲ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "りんしょう",
+    "text": "ワザ「りんしょう」を持つ自分のポケモンの数×30ダメージ。",
+    "damage": "30×"
+   },
+   {
+    "cost": [
+     "Water",
+     "Water",
+     "Colorless"
+    ],
+    "name": "ハイパーボイス",
+    "text": "",
+    "damage": "70"
+   }
+  ],
+  "illustrator": "Masakazu Fukuda"
+ },
+ "16": {
+  "number": 16,
+  "jaName": "プロトーガ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water",
+     "Colorless"
+    ],
+    "name": "みずでっぽう",
+    "text": "",
+    "damage": "30"
+   },
+   {
+    "cost": [
+     "Water",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "なみのり",
+    "text": "",
+    "damage": "60"
+   }
+  ],
+  "illustrator": "Naoyo Kimura"
+ },
+ "17": {
+  "number": 17,
+  "jaName": "アバゴーラ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water",
+     "Water",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "かみくだく",
+    "text": "相手のバトルポケモンについているエネルギーを1個選び、トラッシュする。",
+    "damage": "80"
+   }
+  ],
+  "illustrator": "match"
+ },
+ "18": {
+  "number": 18,
+  "jaName": "バニプッチ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water"
+    ],
+    "name": "つららバリ",
+    "text": "コインを1回投げオモテなら、10ダメージを追加。",
+    "damage": "10＋"
+   }
+  ],
+  "illustrator": "Atsuko Nishida"
+ },
+ "19": {
+  "number": 19,
+  "jaName": "バニリッチ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water",
+     "Colorless"
+    ],
+    "name": "れいとうビーム",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンをマヒにする。",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Water",
+     "Water"
+    ],
+    "name": "こおりのいぶき",
+    "text": "",
+    "damage": "40"
+   }
+  ],
+  "illustrator": "match"
+ },
+ "20": {
+  "number": 20,
+  "jaName": "バイバニラ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water",
+     "Colorless"
+    ],
+    "name": "ダブルフリーズ",
+    "text": "コインを2回投げ、オモテの数×40ダメージ。1回でもオモテなら、相手のバトルポケモンをマヒにする。",
+    "damage": "40×"
+   },
+   {
+    "cost": [
+     "Water",
+     "Water"
+    ],
+    "name": "こおりのいぶき",
+    "text": "",
+    "damage": "60"
+   }
+  ],
+  "illustrator": "Kagemaru Himeno"
+ },
+ "21": {
+  "number": 21,
+  "jaName": "プルリル",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "みずかけ",
+    "text": "",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Naoyo Kimura"
+ },
+ "22": {
+  "number": 22,
+  "jaName": "ブルンゲル",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ハイドロポンプ",
+    "text": "このポケモンについているエネルギーの数×20ダメージを追加。",
+    "damage": "10＋"
+   }
+  ],
+  "illustrator": "Kagemaru Himeno"
+ },
+ "23": {
+  "number": 23,
+  "jaName": "フリージオ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water"
+    ],
+    "name": "こごえるかぜ",
+    "text": "相手のバトルポケモンをねむりにする。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Water",
+     "Colorless"
+    ],
+    "name": "こおりのつぶて",
+    "text": "相手のバトルポケモンがタイプなら、40ダメージを追加。",
+    "damage": "30＋"
+   }
+  ],
+  "illustrator": "Masakazu Fukuda"
+ },
+ "24": {
+  "number": 24,
+  "jaName": "キュレム",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "げきりん",
+    "text": "このポケモンにのっているダメカンの数×10ダメージを追加。",
+    "damage": "20＋"
+   },
+   {
+    "cost": [
+     "Water",
+     "Water",
+     "Colorless"
+    ],
+    "name": "こごえるせかい",
+    "text": "相手のポケモン全員に、それぞれ30ダメージ。［ベンチへのダメージは弱点・抵抗力の計算をしない。］",
+    "damage": null
+   }
+  ],
+  "illustrator": "5ban Graphics"
+ },
+ "25": {
+  "number": 25,
+  "jaName": "シビシラス",
+  "types": [
+   "Lightning"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Lightning"
+    ],
+    "name": "でんじは",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンをマヒにする。",
+    "damage": "10"
+   }
+  ],
+  "illustrator": "sui"
+ },
+ "26": {
+  "number": 26,
+  "jaName": "シビビール",
+  "types": [
+   "Lightning"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Lightning",
+     "Lightning",
+     "Colorless"
+    ],
+    "name": "ライトニングボール",
+    "text": "",
+    "damage": "50"
+   }
+  ],
+  "illustrator": "MAHOU"
+ },
+ "27": {
+  "number": 27,
+  "jaName": "シビルドン",
+  "types": [
+   "Lightning"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ようかいえき",
+    "text": "次の相手の番、このワザを受けた相手のバトルポケモンは、にげられない。",
+    "damage": "30"
+   },
+   {
+    "cost": [
+     "Lightning",
+     "Lightning",
+     "Colorless"
+    ],
+    "name": "ワイルドボルト",
+    "text": "このポケモンにも10ダメージ。",
+    "damage": "90"
+   }
+  ],
+  "illustrator": "Masakazu Fukuda"
+ },
+ "28": {
+  "number": 28,
+  "jaName": "デスマス",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic"
+    ],
+    "name": "まどわす",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンをこんらんにする。",
+    "damage": "10"
+   }
+  ],
+  "illustrator": "Midori Harada"
+ },
+ "29": {
+  "number": 29,
+  "jaName": "デスカーン",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic",
+     "Colorless"
+    ],
+    "name": "ダメカーン",
+    "text": "自分のベンチポケモンを1匹選び、のっているダメカンをすべて、相手のバトルポケモンにのせ替える。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Psychic",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "まどわす",
+    "text": "相手のバトルポケモンをこんらんにする。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Mitsuhiro Arita"
+ },
+ "30": {
+  "number": 30,
+  "jaName": "ヤブクロン",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "ゴミあつめ",
+    "text": "自分のトラッシュから好きなカードを1枚選び、相手に見せてから、山札の上にもどす。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Psychic",
+     "Colorless"
+    ],
+    "name": "ヘドロばくだん",
+    "text": "",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "MAHOU"
+ },
+ "31": {
+  "number": 31,
+  "jaName": "ダストダス",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic",
+     "Colorless"
+    ],
+    "name": "まとわりつく",
+    "text": "次の相手の番、このワザを受けた相手のバトルポケモンは、にげられない。",
+    "damage": "30"
+   },
+   {
+    "cost": [
+     "Psychic",
+     "Psychic",
+     "Colorless"
+    ],
+    "name": "ダストシュート",
+    "text": "相手のバトルポケモンをどくにする。",
+    "damage": "60"
+   }
+  ],
+  "illustrator": "match"
+ },
+ "32": {
+  "number": 32,
+  "jaName": "リグレー",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "ずつき",
+    "text": "",
+    "damage": "10"
+   },
+   {
+    "cost": [
+     "Psychic"
+    ],
+    "name": "めいそう",
+    "text": "このポケモンのHPを「30」回復する。",
+    "damage": null
+   }
+  ],
+  "illustrator": "sui"
+ },
+ "33": {
+  "number": 33,
+  "jaName": "オーベム",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic"
+    ],
+    "name": "シンクロノイズ",
+    "text": "相手のバトルポケモンと同じタイプの、相手のベンチポケモン全員にも、それぞれ20ダメージ。［ベンチへのダメージは弱点・抵抗力の計算をしない。］",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Psychic",
+     "Colorless"
+    ],
+    "name": "サイコショット",
+    "text": "",
+    "damage": "40"
+   }
+  ],
+  "illustrator": "Kagemaru Himeno"
+ },
+ "34": {
+  "number": 34,
+  "jaName": "ヒトモシ",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "やきこがす",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンをやけどにする。",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Masakazu Fukuda"
+ },
+ "35": {
+  "number": 35,
+  "jaName": "ランプラー",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "さそうともしび",
+    "text": "相手のベンチポケモンを1匹選び、バトルポケモンと入れ替える。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Psychic",
+     "Colorless"
+    ],
+    "name": "おにび",
+    "text": "",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "MAHOU"
+ },
+ "36": {
+  "number": 36,
+  "jaName": "シャンデラ",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic",
+     "Psychic",
+     "Colorless"
+    ],
+    "name": "あやしいともしび",
+    "text": "相手のバトルポケモンをやけどとこんらんにする。",
+    "damage": "50"
+   }
+  ],
+  "illustrator": "Naoyo Kimura"
+ },
+ "37": {
+  "number": 37,
+  "jaName": "ギガイアス",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting"
+    ],
+    "name": "コアキャノン",
+    "text": "相手のポケモンを1匹選び、このポケモンについているエネルギーの数×20ダメージ。［ベンチへのダメージは弱点・抵抗力の計算をしない。］",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "パワージェム",
+    "text": "",
+    "damage": "90"
+   }
+  ],
+  "illustrator": "Mitsuhiro Arita"
+ },
+ "38": {
+  "number": 38,
+  "jaName": "ローブシン",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting"
+    ],
+    "name": "なしくずし",
+    "text": "このワザのダメージは、相手のバトルポケモンにかかっている効果の計算をしない。",
+    "damage": "40"
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "ふりまわす",
+    "text": "コインを2回投げ、オモテの数×30ダメージを追加。",
+    "damage": "60＋"
+   }
+  ],
+  "illustrator": "Kouki Saitou"
+ },
+ "39": {
+  "number": 39,
+  "jaName": "アーケン",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting"
+    ],
+    "name": "いわおとし",
+    "text": "",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "アクロバット",
+    "text": "コインを2回投げ、オモテの数×20ダメージを追加。",
+    "damage": "20＋"
+   }
+  ],
+  "illustrator": "Kagemaru Himeno"
+ },
+ "40": {
+  "number": 40,
+  "jaName": "アーケオス",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting",
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "いわなだれ",
+    "text": "相手のベンチポケモンを2匹選び、そのポケモンにも、それぞれ10ダメージ。［ベンチへのダメージは弱点・抵抗力の計算をしない。］",
+    "damage": "60"
+   }
+  ],
+  "illustrator": "Kouki Saitou"
+ },
+ "41": {
+  "number": 41,
+  "jaName": "マッギョ",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Lightning",
+     "Colorless"
+    ],
+    "name": "びちびち",
+    "text": "コインを2回投げ、オモテの数×30ダメージ。",
+    "damage": "30×"
+   },
+   {
+    "cost": [
+     "Lightning",
+     "Lightning",
+     "Colorless"
+    ],
+    "name": "でんきショック",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンをマヒにする。",
+    "damage": "50"
+   }
+  ],
+  "illustrator": "Midori Harada"
+ },
+ "42": {
+  "number": 42,
+  "jaName": "コジョフー",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "はたく",
+    "text": "",
+    "damage": "10"
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Fighting"
+    ],
+    "name": "とびひざげり",
+    "text": "",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "match"
+ },
+ "43": {
+  "number": 43,
+  "jaName": "コジョンド",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "フェイント",
+    "text": "このワザのダメージは抵抗力の計算をしない。",
+    "damage": "30"
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Fighting"
+    ],
+    "name": "とびひざげり",
+    "text": "",
+    "damage": "50"
+   }
+  ],
+  "illustrator": "Atsuko Nishida"
+ },
+ "44": {
+  "number": 44,
+  "jaName": "ゴビット",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "ばくれつパンチ",
+    "text": "コインを1回投げオモテなら、20ダメージを追加し、相手のバトルポケモンをこんらんにする。",
+    "damage": "20＋"
+   }
+  ],
+  "illustrator": "Masakazu Fukuda"
+ },
+ "45": {
+  "number": 45,
+  "jaName": "ゴルーグ",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting",
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "アームハンマー",
+    "text": "相手の山札を上から1枚トラッシュする。",
+    "damage": "60"
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Fighting",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ハリケーンパンチ",
+    "text": "コインを4回投げオモテの数×50ダメージ。",
+    "damage": "50×"
+   }
+  ],
+  "illustrator": "Kouki Saitou"
+ },
+ "46": {
+  "number": 46,
+  "jaName": "テラキオン",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "かたきうち",
+    "text": "前の相手の番に、ワザのダメージで、自分のポケモンがきぜつしていたなら、60ダメージを追加。",
+    "damage": "30＋"
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "ランドクラッシュ",
+    "text": "",
+    "damage": "90"
+   }
+  ],
+  "illustrator": "5ban Graphics"
+ },
+ "47": {
+  "number": 47,
+  "jaName": "ランドロス",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting"
+    ],
+    "name": "ほうさく",
+    "text": "自分のトラッシュから基本エネルギーを1枚選び、このポケモンにつける。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "ガイアハンマー",
+    "text": "おたがいのベンチポケモン全員にも、それぞれ10ダメージ。［ベンチへのダメージは弱点・抵抗力の計算をしない。］",
+    "damage": "80"
+   }
+  ],
+  "illustrator": "5ban Graphics"
+ },
+ "48": {
+  "number": 48,
+  "jaName": "コマタナ",
+  "types": [
+   "Darkness"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "アイアンヘッド",
+    "text": "ウラが出るまでコインを投げ続け、オモテの数×10ダメージ。",
+    "damage": "10×"
+   }
+  ],
+  "illustrator": "Mitsuhiro Arita"
+ },
+ "49": {
+  "number": 49,
+  "jaName": "キリキザン",
+  "types": [
+   "Darkness"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Darkness"
+    ],
+    "name": "とどめをさす",
+    "text": "ダメージを与えるとき、すでに相手のバトルポケモンにダメカンがのっているなら、50ダメージを追加。",
+    "damage": "20＋"
+   },
+   {
+    "cost": [
+     "Darkness",
+     "Colorless"
+    ],
+    "name": "つじぎり",
+    "text": "このポケモンをベンチポケモンと入れ替える。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Kouki Saitou"
+ },
+ "50": {
+  "number": 50,
+  "jaName": "モノズ",
+  "types": [
+   "Darkness"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "ずつき",
+    "text": "",
+    "damage": "10"
+   },
+   {
+    "cost": [
+     "Darkness",
+     "Colorless"
+    ],
+    "name": "かみつく",
+    "text": "",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Mitsuhiro Arita"
+ },
+ "51": {
+  "number": 51,
+  "jaName": "ジヘッド",
+  "types": [
+   "Darkness"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "ダブルアタック",
+    "text": "コインを2回投げ、オモテの数×20ダメージ。",
+    "damage": "20×"
+   },
+   {
+    "cost": [
+     "Darkness",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "かいりき",
+    "text": "",
+    "damage": "50"
+   }
+  ],
+  "illustrator": "Masakazu Fukuda"
+ },
+ "52": {
+  "number": 52,
+  "jaName": "サザンドラ",
+  "types": [
+   "Darkness"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Darkness",
+     "Darkness",
+     "Darkness",
+     "Darkness"
+    ],
+    "name": "きょうきのやいば",
+    "text": "相手のベンチポケモンを2匹選び、そのポケモンにも、それぞれ40ダメージ。［ベンチへのダメージは弱点・抵抗力の計算をしない。］",
+    "damage": "60"
+   }
+  ],
+  "illustrator": "5ban Graphics"
+ },
+ "53": {
+  "number": 53,
+  "jaName": "シュバルゴ",
+  "types": [
+   "Metal"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Metal",
+     "Colorless"
+    ],
+    "name": "ガードプレス",
+    "text": "次の相手の番、このポケモンが受けるワザのダメージは「-20」される。",
+    "damage": "40"
+   },
+   {
+    "cost": [
+     "Metal",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ダブルニードル",
+    "text": "コインを2回投げ、オモテの数×70ダメージ。",
+    "damage": "70×"
+   }
+  ],
+  "illustrator": "Kouki Saitou"
+ },
+ "54": {
+  "number": 54,
+  "jaName": "アイアント",
+  "types": [
+   "Metal"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Metal"
+    ],
+    "name": "くいあらす",
+    "text": "自分の場にいる「アイアント」の数ぶん、相手の山札を上からトラッシュする。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "はさむ",
+    "text": "",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Masakazu Fukuda"
+ },
+ "55": {
+  "number": 55,
+  "jaName": "コバルオン",
+  "types": [
+   "Metal"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Metal",
+     "Colorless"
+    ],
+    "name": "エナジープレス",
+    "text": "相手のバトルポケモンについているエネルギーの数×20ダメージを追加。",
+    "damage": "20＋"
+   },
+   {
+    "cost": [
+     "Metal",
+     "Metal",
+     "Colorless"
+    ],
+    "name": "アイアンブレイク",
+    "text": "次の相手の番、このワザを受けた相手のバトルポケモンは、ワザを使えない。",
+    "damage": "80"
+   }
+  ],
+  "illustrator": "5ban Graphics"
+ },
+ "56": {
+  "number": 56,
+  "jaName": "キバゴ",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "ダブルチョップ",
+    "text": "コインを2回投げ、オモテの数×10ダメージ。",
+    "damage": "10×"
+   }
+  ],
+  "illustrator": "Atsuko Nishida"
+ },
+ "57": {
+  "number": 57,
+  "jaName": "オノンド",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "ひっかく",
+    "text": "",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ダブルチョップ",
+    "text": "コインを2回投げ、オモテの数×30ダメージ。",
+    "damage": "30×"
+   }
+  ],
+  "illustrator": "Kagemaru Himeno"
+ },
+ "58": {
+  "number": 58,
+  "jaName": "オノノクス",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ダブルチョップ",
+    "text": "コインを2回投げ、オモテの数×50ダメージ。",
+    "damage": "50×"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ギガインパクト",
+    "text": "次の自分の番、このポケモンはワザを使えない。",
+    "damage": "120"
+   }
+  ],
+  "illustrator": "Kouki Saitou"
+ },
+ "59": {
+  "number": 59,
+  "jaName": "クリムガン",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "わしづかみ",
+    "text": "次の相手の番、このワザを受けた相手のバトルポケモンは、にげられない。",
+    "damage": "60"
+   }
+  ],
+  "illustrator": "Masakazu Fukuda"
+ },
+ "60": {
+  "number": 60,
+  "jaName": "すごいつりざお",
+  "types": [],
+  "attacks": [],
+  "illustrator": "5ban Graphics"
+ },
+ "61": {
+  "number": 61,
+  "jaName": "ライブキャスター",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Ryo Ueda"
+ },
+ "62": {
+  "number": 62,
+  "jaName": "はねの化石",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Ryo Ueda"
+ },
+ "63": {
+  "number": 63,
+  "jaName": "ふたの化石",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Ryo Ueda"
+ },
+ "64": {
+  "number": 64,
+  "jaName": "ゴツゴツメット",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Ryo Ueda"
+ },
+ "65": {
+  "number": 65,
+  "jaName": "しんかのきせき",
+  "types": [],
+  "attacks": [],
+  "illustrator": "5ban Graphics"
+ },
+ "66": {
+  "number": 66,
+  "jaName": "N",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Ken Sugimori"
+ }
+}

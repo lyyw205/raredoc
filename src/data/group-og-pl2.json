@@ -1,0 +1,2309 @@
+{
+  "group": {
+    "id": "og-pl2",
+    "nameKo": "시간 끝의 인연",
+    "nameEn": "Bonds to the End of Time",
+    "crossGroupEN": false
+  },
+  "counts": {
+    "anchors": 90,
+    "enMatched": 87,
+    "krMatched": 0,
+    "enOnly": 30,
+    "krOnly": 0
+  },
+  "anchors": [
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-001",
+        "number": "001",
+        "name": "ビードル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022065_P_BIDORU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-086",
+        "number": "086",
+        "name": "Weedle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/086.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 13
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-002",
+        "number": "002",
+        "name": "コクーン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022067_P_KOKUN.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-066",
+        "number": "066",
+        "name": "Kakuna",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/066.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 14
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-003",
+        "number": "003",
+        "name": "スピアー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022069_P_SUPIA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-015",
+        "number": "015",
+        "name": "Beedrill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/015.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 15
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-004",
+        "number": "004",
+        "name": "タネボー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022071_P_TANEBO.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-078",
+        "number": "078",
+        "name": "Seedot",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/078.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 273
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-005",
+        "number": "005",
+        "name": "トロピウス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022073_P_TOROPIUSU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-052",
+        "number": "052",
+        "name": "Tropius",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/052.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 357
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-006",
+        "number": "006",
+        "name": "ナエトルGL［ジムリーダー］",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022076_P_NAETORUGLJIMURIDA.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-085",
+        "number": "085",
+        "name": "Turtwig GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/085.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 387
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-007",
+        "number": "007",
+        "name": "ロズレイドGL［ジムリーダー］",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-012",
+        "number": "012",
+        "name": "Roserade GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/012.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 407
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-008",
+        "number": "008",
+        "name": "リーフィア",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022080_P_RIFIA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-045",
+        "number": "045",
+        "name": "Leafeon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/045.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 470
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-009",
+        "number": "009",
+        "name": "ガーディ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022083_P_GADEI.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-063",
+        "number": "063",
+        "name": "Growlithe",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/063.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 58
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-010",
+        "number": "010",
+        "name": "ウインディ",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-001",
+        "number": "001",
+        "name": "Arcanine",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/001.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 59
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-011",
+        "number": "011",
+        "name": "ブースター",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022088_P_BUSUTA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-019",
+        "number": "019",
+        "name": "Flareon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/019.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 136
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-012",
+        "number": "012",
+        "name": "ヒトデマン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022091_P_HITODEMAN.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-083",
+        "number": "083",
+        "name": "Staryu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/083.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 120
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-013",
+        "number": "013",
+        "name": "スターミー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022093_P_SUTAMI.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-050",
+        "number": "050",
+        "name": "Starmie",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/050.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 121
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-014",
+        "number": "014",
+        "name": "シャワーズ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022096_P_SHAWAZU.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-034",
+        "number": "034",
+        "name": "Vaporeon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/034.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 134
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-015",
+        "number": "015",
+        "name": "ヌオーGL［ジムリーダー］",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022099_P_NUOGLJIMURIDA.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-076",
+        "number": "076",
+        "name": "Quagsire GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/076.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 195
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-016",
+        "number": "016",
+        "name": "タマザラシ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022101_P_TAMAZARASHI.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-082",
+        "number": "082",
+        "name": "Spheal",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/082.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 363
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-017",
+        "number": "017",
+        "name": "トドグラー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022103_P_TODOGURA.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-077",
+        "number": "077",
+        "name": "Sealeo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/077.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 364
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-018",
+        "number": "018",
+        "name": "トドゼルガ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022105_P_TODOZERUGA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-036",
+        "number": "036",
+        "name": "Walrein",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/036.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 365
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-019",
+        "number": "019",
+        "name": "フローゼルGL［ジムリーダー］",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-004",
+        "number": "004",
+        "name": "Floatzel GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/004.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 419
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-020",
+        "number": "020",
+        "name": "フローゼルGL［ジムリーダー］",
+        "image": null,
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-104",
+        "number": "104",
+        "name": "Floatzel GL LV.X",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/104.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 419
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-021",
+        "number": "021",
+        "name": "カラナクシ にしのうみ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022112_P_KARANAKUSHINISHINOUMI.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-079",
+        "number": "079",
+        "name": "Shellos East Sea",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/079.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 422
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-022",
+        "number": "022",
+        "name": "カラナクシ ひがしのうみ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022114_P_KARANAKUSHIHIGASHINOUMI.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-080",
+        "number": "080",
+        "name": "Shellos West Sea",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/080.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 422
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-023",
+        "number": "023",
+        "name": "トリトドン ひがしのうみ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022116_P_TORITODONHIGASHINOUMI.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-021",
+        "number": "021",
+        "name": "Gastrodon East Sea",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/021.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 423
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-024",
+        "number": "024",
+        "name": "グレイシア",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022119_P_GUREISHIA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-041",
+        "number": "041",
+        "name": "Glaceon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/041.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 471
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-025",
+        "number": "025",
+        "name": "マンムーGL［ジムリーダー］",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022122_P_MANMUGLJIMURIDA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-027",
+        "number": "027",
+        "name": "Mamoswine GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/027.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 473
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-026",
+        "number": "026",
+        "name": "ユキメノコGL［ジムリーダー］",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-006",
+        "number": "006",
+        "name": "Froslass GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/006.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 478
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-027",
+        "number": "027",
+        "name": "ライチュウGL［ジムリーダー］",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022126_P_RAICHUUGLJIMURIDA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-031",
+        "number": "031",
+        "name": "Raichu GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/031.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 26
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-028",
+        "number": "028",
+        "name": "サンダース",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022128_P_SANDASU.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-026",
+        "number": "026",
+        "name": "Jolteon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/026.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 135
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-029",
+        "number": "029",
+        "name": "レントラーGL［ジムリーダー］",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-009",
+        "number": "009",
+        "name": "Luxray GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/009.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 405
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-030",
+        "number": "030",
+        "name": "レントラーGL［ジムリーダー］",
+        "image": null,
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-109",
+        "number": "109",
+        "name": "Luxray GL LV.X",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/109.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 405
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-031",
+        "number": "031",
+        "name": "ヒートロトム",
+        "image": null,
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-RT1",
+        "number": "RT1",
+        "name": "Fan Rotom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/RT1.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 479
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-032",
+        "number": "032",
+        "name": "フロストロトム",
+        "image": null,
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-RT2",
+        "number": "RT2",
+        "name": "Frost Rotom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/RT2.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 479
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-033",
+        "number": "033",
+        "name": "ウォッシュロトム",
+        "image": null,
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-RT3",
+        "number": "RT3",
+        "name": "Heat Rotom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/RT3.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 479
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-034",
+        "number": "034",
+        "name": "スピンロトム",
+        "image": null,
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-RT4",
+        "number": "RT4",
+        "name": "Mow Rotom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/RT4.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 479
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-035",
+        "number": "035",
+        "name": "カットロトム",
+        "image": null,
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-RT5",
+        "number": "RT5",
+        "name": "Wash Rotom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/RT5.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 479
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-036",
+        "number": "036",
+        "name": "ニドラン♀",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022151_P_NIDORAN.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-071",
+        "number": "071",
+        "name": "Nidoran ♀",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/071.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 29
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-037",
+        "number": "037",
+        "name": "ニドリーナ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022153_P_NIDORINA.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-073",
+        "number": "073",
+        "name": "Nidorina",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/073.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 30
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-038",
+        "number": "038",
+        "name": "ニドクイン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022155_P_NIDOKUIN.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-030",
+        "number": "030",
+        "name": "Nidoqueen",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/030.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 31
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-039",
+        "number": "039",
+        "name": "ニドラン♂",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022158_P_NIDORAN.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-072",
+        "number": "072",
+        "name": "Nidoran ♂",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/072.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 32
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-040",
+        "number": "040",
+        "name": "ニドリーノ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022160_P_NIDORINO.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-074",
+        "number": "074",
+        "name": "Nidorino",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/074.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 33
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-041",
+        "number": "041",
+        "name": "フーディン四[してんのう]",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022162_P_FUDEINSHISHITENNOU.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-038",
+        "number": "038",
+        "name": "Alakazam E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/038.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 65
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-042",
+        "number": "042",
+        "name": "フーディン四[してんのう]",
+        "image": null,
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-103",
+        "number": "103",
+        "name": "Alakazam E4 LV.X",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/103.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 65
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-043",
+        "number": "043",
+        "name": "ゲンガーGL［ジムリーダー］",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022167_P_GENGAGLJIMURIDA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-040",
+        "number": "040",
+        "name": "Gengar GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/040.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 94
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-044",
+        "number": "044",
+        "name": "ドガース",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022169_P_DOGASU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-068",
+        "number": "068",
+        "name": "Koffing",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/068.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 109
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-045",
+        "number": "045",
+        "name": "マタドガス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022171_P_MATADOGASU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-087",
+        "number": "087",
+        "name": "Weezing",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/087.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 110
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-046",
+        "number": "046",
+        "name": "ムウマージGL［ジムリーダー］",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-010",
+        "number": "010",
+        "name": "Mismagius GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/010.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 429
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-047",
+        "number": "047",
+        "name": "ニドキング",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022176_P_NIDOKINGU.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-029",
+        "number": "029",
+        "name": "Nidoking",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/029.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 34
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-048",
+        "number": "048",
+        "name": "カイリキーGL［ジムリーダー］",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022179_P_KAIRIKIGLJIMURIDA.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-046",
+        "number": "046",
+        "name": "Machamp GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/046.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 68
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-049",
+        "number": "049",
+        "name": "プテラGL［ジムリーダー］",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022181_P_PUTERAGLJIMURIDA.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-055",
+        "number": "055",
+        "name": "Aerodactyl GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/055.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 142
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-050",
+        "number": "050",
+        "name": "ナックラー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022183_P_NAKKURA.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-084",
+        "number": "084",
+        "name": "Trapinch",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/084.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 328
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-051",
+        "number": "051",
+        "name": "ラムパルドGL［ジムリーダー］",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-011",
+        "number": "011",
+        "name": "Rampardos GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/011.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 409
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-052",
+        "number": "052",
+        "name": "トリトドン にしのうみ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022187_P_TORITODONNISHINOUMI.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-022",
+        "number": "022",
+        "name": "Gastrodon West Sea",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/022.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 423
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-053",
+        "number": "053",
+        "name": "ルカリオGL［ジムリーダー］",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-008",
+        "number": "008",
+        "name": "Lucario GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/008.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 448
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-054",
+        "number": "054",
+        "name": "ヒポポタス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022192_P_HIPOPOTASU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-064",
+        "number": "064",
+        "name": "Hippopotas",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/064.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 449
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-055",
+        "number": "055",
+        "name": "カバルドン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022194_P_KABARUDON.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-107",
+        "number": "107",
+        "name": "Hippowdon LV.X",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/107.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 450
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-056",
+        "number": "056",
+        "name": "カバルドン",
+        "image": null,
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": 450
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-057",
+        "number": "057",
+        "name": "コノハナ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022200_P_KONOHANA.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-075",
+        "number": "075",
+        "name": "Nuzleaf",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/075.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 274
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-058",
+        "number": "058",
+        "name": "ダーテング",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-013",
+        "number": "013",
+        "name": "Shiftry",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/013.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 275
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-059",
+        "number": "059",
+        "name": "キバニア",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022205_P_KIBANIA.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-058",
+        "number": "058",
+        "name": "Carvanha",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/058.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 318
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-060",
+        "number": "060",
+        "name": "サメハダー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022207_P_SAMEHADA.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-049",
+        "number": "049",
+        "name": "Sharpedo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/049.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 319
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-061",
+        "number": "061",
+        "name": "フォレトスG［ギンガ］",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022210_P_FORETOSUGGINGA.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-061",
+        "number": "061",
+        "name": "Forretress G",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/061.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 205
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-062",
+        "number": "062",
+        "name": "ハガネールGL［ジムリーダー］",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022212_P_HAGANERUGLJIMURIDA.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-051",
+        "number": "051",
+        "name": "Steelix GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/051.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 208
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-063",
+        "number": "063",
+        "name": "ココドラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022214_P_KOKODORA.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-057",
+        "number": "057",
+        "name": "Aron",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/057.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 304
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-064",
+        "number": "064",
+        "name": "コドラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022216_P_KODORA.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-044",
+        "number": "044",
+        "name": "Lairon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/044.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 305
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-065",
+        "number": "065",
+        "name": "ボスゴドラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022218_P_BOSUGODORA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-014",
+        "number": "014",
+        "name": "Aggron",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/014.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 306
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-066",
+        "number": "066",
+        "name": "ジラーチ",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-007",
+        "number": "007",
+        "name": "Jirachi",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/007.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 385
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-067",
+        "number": "067",
+        "name": "トリデプスGL［ジムリーダー］",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-002",
+        "number": "002",
+        "name": "Bastiodon GL",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/002.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 411
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-068",
+        "number": "068",
+        "name": "イーブイ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022226_P_IBUI.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-059",
+        "number": "059",
+        "name": "Eevee",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/059.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 133
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-069",
+        "number": "069",
+        "name": "ゴンベ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022228_P_GONBE.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-069",
+        "number": "069",
+        "name": "Munchlax",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/069.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 446
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-070",
+        "number": "070",
+        "name": "カビゴン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022230_P_KABIGON.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-081",
+        "number": "081",
+        "name": "Snorlax",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/081.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 143
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-071",
+        "number": "071",
+        "name": "ビブラーバ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022233_P_BIBURABA.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-053",
+        "number": "053",
+        "name": "Vibrava",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/053.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 329
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-072",
+        "number": "072",
+        "name": "フライゴン",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-105",
+        "number": "105",
+        "name": "Flygon LV.X",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/105.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 330
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-073",
+        "number": "073",
+        "name": "フライゴン",
+        "image": null,
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": 330
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-074",
+        "number": "074",
+        "name": "カクレオン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022241_P_KAKUREON.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-067",
+        "number": "067",
+        "name": "Kecleon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/067.png",
+        "rarity": "Common",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 352
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-075",
+        "number": "075",
+        "name": "エテボースG［ギンガ］",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022243_P_ETEBOSUGGINGA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-056",
+        "number": "056",
+        "name": "Ambipom G",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/056.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 424
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-076",
+        "number": "076",
+        "name": "ギンガ団の発明G-109 SPレーダー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022245_T_GINGADANNOHATSUMEIGSPREDA.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-096",
+        "number": "096",
+        "name": "Team Galactic's Invention G-109 SP Radar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/096.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-077",
+        "number": "077",
+        "name": "ギンガ団の発明G-107 ワザマシンG[ギンガ]",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022246_T_GINGADANNOHATSUMEIGWAZAMASHINGGINGA.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-095",
+        "number": "095",
+        "name": "Team Galactic's Invention G-107 Technical Machine G",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/095.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-078",
+        "number": "078",
+        "name": "地底探険隊",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022248_T_CHITEITANKENTAI.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-097",
+        "number": "097",
+        "name": "Underground Expedition",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/097.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-079",
+        "number": "079",
+        "name": "デンジの哲学",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022250_T_DENJINOTETSUGAKU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-098",
+        "number": "098",
+        "name": "Volkner's Philosophy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/098.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-080",
+        "number": "080",
+        "name": "プルートの選択",
+        "image": null,
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-RT6",
+        "number": "RT6",
+        "name": "Charon's Choice",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/RT6.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-081",
+        "number": "081",
+        "name": "ミズキの検索",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022254_T_MIZUKINOKENSAKU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-089",
+        "number": "089",
+        "name": "Bebe's Search",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/089.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-082",
+        "number": "082",
+        "name": "ナギサシティジム",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022256_T_NAGISASHITEIJIMU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-094",
+        "number": "094",
+        "name": "Sunyshore City Gym",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/094.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-083",
+        "number": "083",
+        "name": "ポケモンコンテスト会場",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022258_T_POKEMONKONTESUTOKAIJOU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-093",
+        "number": "093",
+        "name": "Pokémon Contest Hall",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/093.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-084",
+        "number": "084",
+        "name": "アッパーエネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022260_E_APPAENERUGI.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-102",
+        "number": "102",
+        "name": "Upper Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/102.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-085",
+        "number": "085",
+        "name": "SPエネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022261_E_SPENERUGI.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-101",
+        "number": "101",
+        "name": "SP Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/101.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-086",
+        "number": "086",
+        "name": "特殊悪エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022262_E_AKUENERUGI.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-099",
+        "number": "099",
+        "name": "Darkness Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/099.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-087",
+        "number": "087",
+        "name": "特殊鋼エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DPt2-B/022263_E_KOUENERUGI.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-088",
+        "number": "088",
+        "name": "ピカチュウ",
+        "image": null,
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-112",
+        "number": "112",
+        "name": "Pikachu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/112.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 25
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-089",
+        "number": "089",
+        "name": "なみのりピカチュウ",
+        "image": null,
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-113",
+        "number": "113",
+        "name": "Flying Pikachu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/113.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 25
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PT2-090",
+        "number": "090",
+        "name": "そらをとぶピカチュウ",
+        "image": null,
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-PT2",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-pl2-114",
+        "number": "114",
+        "name": "Surfing Pikachu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/114.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-pl2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 25
+    }
+  ],
+  "tail": {
+    "enOnly": [
+      {
+        "id": "en-tcg-pl2-003",
+        "number": "003",
+        "name": "Darkrai G",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/003.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 491,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-016",
+        "number": "016",
+        "name": "Bronzong E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/016.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 437,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-017",
+        "number": "017",
+        "name": "Drapion E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/017.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 452,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-018",
+        "number": "018",
+        "name": "Espeon E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/018.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 196,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-020",
+        "number": "020",
+        "name": "Gallade E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/020.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 475,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-023",
+        "number": "023",
+        "name": "Golem E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/023.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 76,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-024",
+        "number": "024",
+        "name": "Heracross E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/024.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 214,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-028",
+        "number": "028",
+        "name": "Mr. Mime E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/028.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 122,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-032",
+        "number": "032",
+        "name": "Rhyperior E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/032.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 464,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-033",
+        "number": "033",
+        "name": "Snorlax",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/033.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 143,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-035",
+        "number": "035",
+        "name": "Vespiquen E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/035.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 416,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-037",
+        "number": "037",
+        "name": "Yanmega E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/037.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 469,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-039",
+        "number": "039",
+        "name": "Electrode G",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/039.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 101,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-042",
+        "number": "042",
+        "name": "Hippowdon E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/042.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 450,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-043",
+        "number": "043",
+        "name": "Infernape E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/043.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 392,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-047",
+        "number": "047",
+        "name": "Rapidash E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/047.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 78,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-048",
+        "number": "048",
+        "name": "Scizor E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/048.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 212,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-054",
+        "number": "054",
+        "name": "Whiscash E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/054.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 340,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-060",
+        "number": "060",
+        "name": "Flareon E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/060.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 136,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-062",
+        "number": "062",
+        "name": "Gliscor E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/062.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 472,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-065",
+        "number": "065",
+        "name": "Houndoom E4",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/065.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 229,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-070",
+        "number": "070",
+        "name": "Munchlax",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/070.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 446,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-088",
+        "number": "088",
+        "name": "Aaron's Collection",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/088.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-pl2-090",
+        "number": "090",
+        "name": "Bertha's Warmth",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/090.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-pl2-091",
+        "number": "091",
+        "name": "Flint's Willpower",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/091.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-pl2-092",
+        "number": "092",
+        "name": "Lucian's Assignment",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/092.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-pl2-106",
+        "number": "106",
+        "name": "Gallade E4 LV.X",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/106.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 475,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-108",
+        "number": "108",
+        "name": "Infernape E4 LV.X",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/108.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 392,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-110",
+        "number": "110",
+        "name": "Mismagius GL LV.X",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/110.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 429,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-pl2-111",
+        "number": "111",
+        "name": "Snorlax LV.X",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pl2/en/small/en-tcg-pl2/111.png",
+        "rarity": null,
+        "setId": "en-tcg-pl2",
+        "region": "EN",
+        "dex": 143,
+        "jpElsewhere": true
+      }
+    ],
+    "krOnly": [],
+    "enKr": []
+  }
+}

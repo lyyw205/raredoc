@@ -1,0 +1,1733 @@
+{
+  "group": {
+    "id": "og-dp4",
+    "nameKo": "월광의 추적",
+    "nameEn": "Moonlit Pursuit",
+    "crossGroupEN": false
+  },
+  "counts": {
+    "anchors": 78,
+    "enMatched": 69,
+    "krMatched": 0,
+    "enOnly": 6,
+    "krOnly": 0
+  },
+  "anchors": [
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-001",
+        "number": "001",
+        "name": "マニューラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010053_P_MANYURA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp3-040",
+        "number": "040",
+        "name": "Weavile",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp3/en/small/en-tcg-dp3/040.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp3",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 461
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-002",
+        "number": "002",
+        "name": "ダークライ",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-003",
+        "number": "003",
+        "name": "Darkrai",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/003.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 491
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-003",
+        "number": "003",
+        "name": "クレセリア",
+        "image": null,
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-103",
+        "number": "103",
+        "name": "Cresselia LV.X",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/103.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 488
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-004",
+        "number": "004",
+        "name": "ドンカラス",
+        "image": null,
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp3-132",
+        "number": "132",
+        "name": "Honchkrow LV.X",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp3/en/small/en-tcg-dp3/132.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-dp3",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 430
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-005",
+        "number": "005",
+        "name": "ガブリアス",
+        "image": null,
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-097",
+        "number": "097",
+        "name": "Garchomp LV.X",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/097.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 445
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-006",
+        "number": "006",
+        "name": "ビードル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010004_P_BIDORU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-093",
+        "number": "093",
+        "name": "Weedle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/093.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 13
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-007",
+        "number": "007",
+        "name": "コクーン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010005_P_KOKUN.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-073",
+        "number": "073",
+        "name": "Kakuna",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/073.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 14
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-008",
+        "number": "008",
+        "name": "スピアー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010006_P_SUPIA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-013",
+        "number": "013",
+        "name": "Beedrill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/013.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 15
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-009",
+        "number": "009",
+        "name": "オニスズメ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010096_P_ONISUZUME.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-074",
+        "number": "074",
+        "name": "Spearow",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/074.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 21
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-010",
+        "number": "010",
+        "name": "オニドリル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010097_P_ONIDORIRU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-036",
+        "number": "036",
+        "name": "Fearow",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/036.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 22
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-011",
+        "number": "011",
+        "name": "ヤドン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010026_P_YADON.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-082",
+        "number": "082",
+        "name": "Slowpoke",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/082.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 79
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-012",
+        "number": "012",
+        "name": "ヤドラン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010027_P_YADORAN.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-054",
+        "number": "054",
+        "name": "Slowbro",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/054.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 80
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-013",
+        "number": "013",
+        "name": "ヤドキング",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010060_P_YADOKINGU.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-028",
+        "number": "028",
+        "name": "Slowking",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/028.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 199
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-014",
+        "number": "014",
+        "name": "スリープ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010061_P_SURIPU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-065",
+        "number": "065",
+        "name": "Drowzee",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/065.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 96
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-015",
+        "number": "015",
+        "name": "スリーパー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010062_P_SURIPA.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-019",
+        "number": "019",
+        "name": "Hypno",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/019.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 97
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-016",
+        "number": "016",
+        "name": "ドガース",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010063_P_DOGASU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-074",
+        "number": "074",
+        "name": "Koffing",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/074.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 109
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-017",
+        "number": "017",
+        "name": "マタドガス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010064_P_MATADOGASU.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-031",
+        "number": "031",
+        "name": "Weezing",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/031.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 110
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-018",
+        "number": "018",
+        "name": "モンジャラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010007_P_MONJARA.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-087",
+        "number": "087",
+        "name": "Tangela",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/087.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 114
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-019",
+        "number": "019",
+        "name": "モジャンボ",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-010",
+        "number": "010",
+        "name": "Tangrowth",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/010.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 465
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-020",
+        "number": "020",
+        "name": "ガルーラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010101_P_GARURA.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-038",
+        "number": "038",
+        "name": "Kangaskhan",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/038.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 115
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-021",
+        "number": "021",
+        "name": "ストライク",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010009_P_SUTORAIKU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-046",
+        "number": "046",
+        "name": "Scyther",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/046.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 123
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-022",
+        "number": "022",
+        "name": "ハッサム",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010093_P_HASSAMU.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-029",
+        "number": "029",
+        "name": "Scizor",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/029.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 212
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-023",
+        "number": "023",
+        "name": "イーブイ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010102_P_IBUI.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-063",
+        "number": "063",
+        "name": "Eevee",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/063.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 133
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-024",
+        "number": "024",
+        "name": "シャワーズ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010031_P_SHAWAZU.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-034",
+        "number": "034",
+        "name": "Vaporeon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/034.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 134
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-025",
+        "number": "025",
+        "name": "ブラッキー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010088_P_BURAKKI.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-032",
+        "number": "032",
+        "name": "Umbreon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/032.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 197
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-026",
+        "number": "026",
+        "name": "ポリゴン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010103_P_PORIGON.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-081",
+        "number": "081",
+        "name": "Porygon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/081.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 137
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-027",
+        "number": "027",
+        "name": "ポリゴン2",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010104_P_PORIGON.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-049",
+        "number": "049",
+        "name": "Porygon2",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/049.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 233
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-028",
+        "number": "028",
+        "name": "ポリゴンZ",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-006",
+        "number": "006",
+        "name": "Porygon-Z",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/006.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 474
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-029",
+        "number": "029",
+        "name": "オムナイト",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010034_P_OMUNAITO.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-069",
+        "number": "069",
+        "name": "Omanyte",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/069.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 138
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-030",
+        "number": "030",
+        "name": "オムスター",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010035_P_OMUSUTA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-026",
+        "number": "026",
+        "name": "Omastar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/026.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 139
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-031",
+        "number": "031",
+        "name": "サンダー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010055_P_SANDA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-014",
+        "number": "014",
+        "name": "Zapdos",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/014.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 145
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-032",
+        "number": "032",
+        "name": "ミュウツー",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-009",
+        "number": "009",
+        "name": "Mewtwo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/009.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 150
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-033",
+        "number": "033",
+        "name": "アンノーン[F]",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010067_P_ANNONF.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-056",
+        "number": "056",
+        "name": "Unown [F]",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/056.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 201
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-034",
+        "number": "034",
+        "name": "アンノーン[G]",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010068_P_ANNONG.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-057",
+        "number": "057",
+        "name": "Unown [G]",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/057.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 201
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-035",
+        "number": "035",
+        "name": "アンノーン[H]",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010069_P_ANNONH.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-029",
+        "number": "029",
+        "name": "Unown [H]",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/029.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 201
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-036",
+        "number": "036",
+        "name": "ブルー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010110_P_BURU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-084",
+        "number": "084",
+        "name": "Snubbull",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/084.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 209
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-037",
+        "number": "037",
+        "name": "グランブル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010111_P_GURANBURU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-039",
+        "number": "039",
+        "name": "Granbull",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/039.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 210
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-038",
+        "number": "038",
+        "name": "エアームド",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010094_P_EAMUDO.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-053",
+        "number": "053",
+        "name": "Skarmory",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/053.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 227
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-039",
+        "number": "039",
+        "name": "デルビル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010022_P_DERUBIRU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-069",
+        "number": "069",
+        "name": "Houndour",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/069.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 228
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-040",
+        "number": "040",
+        "name": "ヘルガー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010089_P_HERUGA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-018",
+        "number": "018",
+        "name": "Houndoom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/018.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 229
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-041",
+        "number": "041",
+        "name": "アチャモ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010023_P_ACHAMO.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-089",
+        "number": "089",
+        "name": "Torchic",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/089.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 255
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-042",
+        "number": "042",
+        "name": "ワカシャモ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010024_P_WAKASHAMO.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-035",
+        "number": "035",
+        "name": "Combusken",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/035.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 256
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-043",
+        "number": "043",
+        "name": "バシャーモ",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-001",
+        "number": "001",
+        "name": "Blaziken",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/001.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 257
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-044",
+        "number": "044",
+        "name": "ミズゴロウ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010038_P_MIZUGOROU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-080",
+        "number": "080",
+        "name": "Mudkip",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/080.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 258
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-045",
+        "number": "045",
+        "name": "ヌマクロー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010039_P_NUMAKURO.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-046",
+        "number": "046",
+        "name": "Marshtomp",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/046.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 259
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-046",
+        "number": "046",
+        "name": "ラグラージ",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-009",
+        "number": "009",
+        "name": "Swampert",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/009.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 260
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-047",
+        "number": "047",
+        "name": "ゴニョニョ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010114_P_GONYONYO.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-094",
+        "number": "094",
+        "name": "Whismur",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/094.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 293
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-048",
+        "number": "048",
+        "name": "ドゴーム",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010115_P_DOGOMU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-044",
+        "number": "044",
+        "name": "Loudred",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/044.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 294
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-049",
+        "number": "049",
+        "name": "バクオング",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010116_P_BAKUONGU.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-017",
+        "number": "017",
+        "name": "Exploud",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/017.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 295
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-050",
+        "number": "050",
+        "name": "マクノシタ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010082_P_MAKUNOSHITA.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-078",
+        "number": "078",
+        "name": "Makuhita",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/078.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 296
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-051",
+        "number": "051",
+        "name": "ハリテヤマ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010083_P_HARITEYAMA.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-041",
+        "number": "041",
+        "name": "Hariyama",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/041.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 297
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-052",
+        "number": "052",
+        "name": "バルビート",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010015_P_BARUBITO.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-092",
+        "number": "092",
+        "name": "Volbeat",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/092.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 313
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-053",
+        "number": "053",
+        "name": "ホエルコ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010043_P_HOERUKO.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-058",
+        "number": "058",
+        "name": "Wailmer",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/058.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 320
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-054",
+        "number": "054",
+        "name": "ホエルオー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010044_P_HOERUO.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-030",
+        "number": "030",
+        "name": "Wailord",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/030.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 321
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-055",
+        "number": "055",
+        "name": "ハブネーク",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010075_P_HABUNEKU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-052",
+        "number": "052",
+        "name": "Seviper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/052.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 336
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-056",
+        "number": "056",
+        "name": "ルナトーン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010084_P_RUNATON.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-076",
+        "number": "076",
+        "name": "Lunatone",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/076.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 337
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-057",
+        "number": "057",
+        "name": "ヒンバス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010045_P_HINBASU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-067",
+        "number": "067",
+        "name": "Feebas",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/067.png",
+        "rarity": "Common",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 349
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-058",
+        "number": "058",
+        "name": "ミロカロス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010046_P_MIROKAROSU.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-025",
+        "number": "025",
+        "name": "Milotic",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/025.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 350
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-059",
+        "number": "059",
+        "name": "ジーランス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010050_P_JIRANSU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-051",
+        "number": "051",
+        "name": "Relicanth",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/051.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 369
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-060",
+        "number": "060",
+        "name": "ラティオス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010121_P_RATEIOSU.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-023",
+        "number": "023",
+        "name": "Latios",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/023.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 381
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-061",
+        "number": "061",
+        "name": "ロトム",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-007",
+        "number": "007",
+        "name": "Rotom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/007.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 479
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-062",
+        "number": "062",
+        "name": "クレセリア",
+        "image": null,
+        "rarity": "レア",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-002",
+        "number": "002",
+        "name": "Cresselia",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/002.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 488
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-063",
+        "number": "063",
+        "name": "スージーの抽選",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010130_T_SUJINOCHUUSEN.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-064",
+        "number": "064",
+        "name": "かいの化石",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010123_T_KAINOKASEKI.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-091",
+        "number": "091",
+        "name": "Helix Fossil",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/091.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-065",
+        "number": "065",
+        "name": "ふしぎなアメ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010126_T_FUSHIGINAAME.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-102",
+        "number": "102",
+        "name": "Rare Candy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/102.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-066",
+        "number": "066",
+        "name": "プレミアボール",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010127_T_PUREMIABORU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-101",
+        "number": "101",
+        "name": "Premier Ball",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/101.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-067",
+        "number": "067",
+        "name": "おまもりこばん",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010128_T_OMAMORIKOBAN.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-097",
+        "number": "097",
+        "name": "Amulet Coin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/097.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-068",
+        "number": "068",
+        "name": "月光のスタジアム",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010131_T_GEKKOUNOSUTAJIAMU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp4-100",
+        "number": "100",
+        "name": "Moonlight Stadium",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/100.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-069",
+        "number": "069",
+        "name": "基本草エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/000001_E_KUSAENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-070",
+        "number": "070",
+        "name": "基本炎エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/000002_E_HONOOENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-071",
+        "number": "071",
+        "name": "基本水エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/000003_E_MIZUENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-072",
+        "number": "072",
+        "name": "基本雷エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/000004_E_KAMINARIENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-073",
+        "number": "073",
+        "name": "基本超エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/000005_E_CHOUENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-074",
+        "number": "074",
+        "name": "基本闘エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/000006_E_TOUENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-075",
+        "number": "075",
+        "name": "基本悪エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/000007_E_AKUENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-076",
+        "number": "076",
+        "name": "基本鋼エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/000008_E_KOUENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-077",
+        "number": "077",
+        "name": "コール・エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010133_E_KORUENERUGI.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-092",
+        "number": "092",
+        "name": "Call Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/092.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-DP4M-078",
+        "number": "078",
+        "name": "リカバー・エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/DP4/010135_E_RIKABAENERUGI.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-DP4M",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-dp5-096",
+        "number": "096",
+        "name": "Recover Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp5/en/small/en-tcg-dp5/096.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-dp5",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    }
+  ],
+  "tail": {
+    "enOnly": [
+      {
+        "id": "en-tcg-dp4-016",
+        "number": "016",
+        "name": "Dialga",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/016.png",
+        "rarity": null,
+        "setId": "en-tcg-dp4",
+        "region": "EN",
+        "dex": 483,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-dp4-026",
+        "number": "026",
+        "name": "Palkia",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/026.png",
+        "rarity": null,
+        "setId": "en-tcg-dp4",
+        "region": "EN",
+        "dex": 484,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-dp4-037",
+        "number": "037",
+        "name": "Floatzel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/037.png",
+        "rarity": null,
+        "setId": "en-tcg-dp4",
+        "region": "EN",
+        "dex": 419,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-dp4-050",
+        "number": "050",
+        "name": "Purugly",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/050.png",
+        "rarity": null,
+        "setId": "en-tcg-dp4",
+        "region": "EN",
+        "dex": 432,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-dp4-061",
+        "number": "061",
+        "name": "Buizel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/061.png",
+        "rarity": null,
+        "setId": "en-tcg-dp4",
+        "region": "EN",
+        "dex": 418,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-dp4-068",
+        "number": "068",
+        "name": "Glameow",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-dp4/en/small/en-tcg-dp4/068.png",
+        "rarity": null,
+        "setId": "en-tcg-dp4",
+        "region": "EN",
+        "dex": 431,
+        "jpElsewhere": true
+      }
+    ],
+    "krOnly": [],
+    "enKr": []
+  }
+}

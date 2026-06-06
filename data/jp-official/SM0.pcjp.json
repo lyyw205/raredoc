@@ -1,0 +1,85 @@
+{
+ "1": {
+  "number": 1,
+  "jaName": "モクロー",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "みだれづき",
+    "text": "コインを3回投げ、オモテの数×10ダメージ。",
+    "damage": "10×"
+   }
+  ],
+  "illustrator": "Mitsuhiro Arita"
+ },
+ "2": {
+  "number": 2,
+  "jaName": "ニャビー",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire",
+     "Colorless"
+    ],
+    "name": "かえん",
+    "text": "",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Megumi Mizutani"
+ },
+ "3": {
+  "number": 3,
+  "jaName": "アシマリ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water"
+    ],
+    "name": "うたう",
+    "text": "相手のバトルポケモンをねむりにする。",
+    "damage": null
+   }
+  ],
+  "illustrator": "match"
+ },
+ "4": {
+  "number": 4,
+  "jaName": "ピカチュウ",
+  "types": [
+   "Lightning"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Lightning"
+    ],
+    "name": "でんじは",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンをマヒにする。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Lightning",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "エレキボール",
+    "text": "",
+    "damage": "50"
+   }
+  ],
+  "illustrator": "kirisAki"
+ }
+}

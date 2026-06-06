@@ -1,0 +1,1832 @@
+{
+  "group": {
+    "id": "og-bw5",
+    "nameKo": "드래곤 블라스트",
+    "nameEn": "Dragon Blast",
+    "crossGroupEN": false
+  },
+  "counts": {
+    "anchors": 50,
+    "enMatched": 50,
+    "krMatched": 50,
+    "enOnly": 25,
+    "krOnly": 3
+  },
+  "anchors": [
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-001",
+        "number": "001",
+        "name": "ヤンヤンマ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027858_P_YANYANMA.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-004",
+        "number": "004",
+        "name": "Yanma",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/004.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-001",
+        "number": "001",
+        "name": "왕자리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_001.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 193
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-002",
+        "number": "002",
+        "name": "メガヤンマ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027859_P_MEGAYANMA.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-005",
+        "number": "005",
+        "name": "Yanmega",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/005.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-002",
+        "number": "002",
+        "name": "메가자리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_002.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 469
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-003",
+        "number": "003",
+        "name": "ケムッソ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027860_P_KEMUSSO.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-006",
+        "number": "006",
+        "name": "Wurmple",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/006.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-003",
+        "number": "003",
+        "name": "개무소",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_003.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 265
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-004",
+        "number": "004",
+        "name": "カラサリス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027861_P_KARASARISU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-007",
+        "number": "007",
+        "name": "Silcoon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/007.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-004",
+        "number": "004",
+        "name": "실쿤",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_004.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 266
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-005",
+        "number": "005",
+        "name": "アゲハント",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027862_P_AGEHANTO.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-008",
+        "number": "008",
+        "name": "Beautifly",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/008.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-005",
+        "number": "005",
+        "name": "뷰티플라이",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_005.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 267
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-006",
+        "number": "006",
+        "name": "マユルド",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027863_P_MAYURUDO.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-009",
+        "number": "009",
+        "name": "Cascoon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/009.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-006",
+        "number": "006",
+        "name": "카스쿤",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_006.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 268
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-007",
+        "number": "007",
+        "name": "ロゼリア",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027864_P_ROZERIA.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-013",
+        "number": "013",
+        "name": "Roselia",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/013.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-007",
+        "number": "007",
+        "name": "로젤리아",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_007.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 315
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-008",
+        "number": "008",
+        "name": "ロズレイド",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027865_P_ROZUREIDO.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-014",
+        "number": "014",
+        "name": "Roserade",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/014.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-008",
+        "number": "008",
+        "name": "로즈레이드",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_008.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 407
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-009",
+        "number": "009",
+        "name": "ロコン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027866_P_ROKON.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-018",
+        "number": "018",
+        "name": "Vulpix",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/018.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-009",
+        "number": "009",
+        "name": "식스테일",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_009.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 37
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-010",
+        "number": "010",
+        "name": "キュウコン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027867_P_KYUUKON.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-019",
+        "number": "019",
+        "name": "Ninetales",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/019.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-010",
+        "number": "010",
+        "name": "나인테일",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_010.jpg",
+        "rarity": "레어",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 38
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-011",
+        "number": "011",
+        "name": "ホエルコ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027868_P_HOERUKO.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-025",
+        "number": "025",
+        "name": "Wailmer",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/025.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-011",
+        "number": "011",
+        "name": "고래왕자",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_011.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 320
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-012",
+        "number": "012",
+        "name": "ホエルオー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027869_P_HOERUO.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-026",
+        "number": "026",
+        "name": "Wailord",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/026.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-012",
+        "number": "012",
+        "name": "고래왕",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_012.jpg",
+        "rarity": "레어",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 321
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-013",
+        "number": "013",
+        "name": "ブイゼル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027870_P_BUIZERU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-032",
+        "number": "032",
+        "name": "Buizel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/032.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-013",
+        "number": "013",
+        "name": "브이젤",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_013.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 418
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-014",
+        "number": "014",
+        "name": "フローゼル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027871_P_FUROZERU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-033",
+        "number": "033",
+        "name": "Floatzel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/033.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-014",
+        "number": "014",
+        "name": "플로젤",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_014.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 419
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-015",
+        "number": "015",
+        "name": "オタマロ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027872_P_OTAMARO.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-034",
+        "number": "034",
+        "name": "Tympole",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/034.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-015",
+        "number": "015",
+        "name": "동챙이",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_015.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 535
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-016",
+        "number": "016",
+        "name": "ガマガル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027873_P_GAMAGARU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-035",
+        "number": "035",
+        "name": "Palpitoad",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/035.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-016",
+        "number": "016",
+        "name": "두까비",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_016.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 536
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-017",
+        "number": "017",
+        "name": "ガマゲロゲ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027874_P_GAMAGEROGE.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-036",
+        "number": "036",
+        "name": "Seismitoad",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/036.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-017",
+        "number": "017",
+        "name": "두빅굴",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_017.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 537
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-018",
+        "number": "018",
+        "name": "ママンボウ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027875_P_MAMANBOU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-037",
+        "number": "037",
+        "name": "Alomomola",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/037.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-018",
+        "number": "018",
+        "name": "맘복치",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_018.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 594
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-019",
+        "number": "019",
+        "name": "メリープ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027876_P_MERIPU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-038",
+        "number": "038",
+        "name": "Mareep",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/038.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-019",
+        "number": "019",
+        "name": "메리프",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_019.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 179
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-020",
+        "number": "020",
+        "name": "モココ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027877_P_MOKOKO.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-039",
+        "number": "039",
+        "name": "Flaaffy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/039.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-020",
+        "number": "020",
+        "name": "보송송",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_020.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 180
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-021",
+        "number": "021",
+        "name": "デンリュウ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027878_P_DENRYUU.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-040",
+        "number": "040",
+        "name": "Ampharos",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/040.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-021",
+        "number": "021",
+        "name": "전룡",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_021.jpg",
+        "rarity": "레어",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 181
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-022",
+        "number": "022",
+        "name": "ミュウEX",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027879_P_MYUUEX.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-046",
+        "number": "046",
+        "name": "Mew-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/046.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-022",
+        "number": "022",
+        "name": "뮤 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_022.jpg",
+        "rarity": "레어",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 151
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-023",
+        "number": "023",
+        "name": "ドクケイル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027880_P_DOKUKEIRU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-047",
+        "number": "047",
+        "name": "Dustox",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/047.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-023",
+        "number": "023",
+        "name": "독케일",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_023.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 269
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-024",
+        "number": "024",
+        "name": "フワンテ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027881_P_FUWANTE.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-049",
+        "number": "049",
+        "name": "Drifloon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/049.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-024",
+        "number": "024",
+        "name": "흔들풍손",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_024.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 425
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-025",
+        "number": "025",
+        "name": "フワライド",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027882_P_FUWARAIDO.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-051",
+        "number": "051",
+        "name": "Drifblim",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/051.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-025",
+        "number": "025",
+        "name": "둥실라이드",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_025.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 426
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-026",
+        "number": "026",
+        "name": "シンボラー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027883_P_SHINBORA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-052",
+        "number": "052",
+        "name": "Sigilyph",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/052.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-026",
+        "number": "026",
+        "name": "심보러",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_026.jpg",
+        "rarity": "레어",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 561
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-027",
+        "number": "027",
+        "name": "ヤブクロン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027884_P_YABUKURON.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-053",
+        "number": "053",
+        "name": "Trubbish",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/053.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-027",
+        "number": "027",
+        "name": "깨봉이",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_027.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 568
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-028",
+        "number": "028",
+        "name": "ダストダス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027885_P_DASUTODASU.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-054",
+        "number": "054",
+        "name": "Garbodor",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/054.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-028",
+        "number": "028",
+        "name": "더스트나",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_028.jpg",
+        "rarity": "레어",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 569
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-029",
+        "number": "029",
+        "name": "ヤジロン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027886_P_YAJIRON.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-063",
+        "number": "063",
+        "name": "Baltoy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/063.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-029",
+        "number": "029",
+        "name": "오뚝군",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_029.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 343
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-030",
+        "number": "030",
+        "name": "ネンドール",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027887_P_NENDORU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-064",
+        "number": "064",
+        "name": "Claydol",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/064.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-030",
+        "number": "030",
+        "name": "점토도리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_030.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 344
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-031",
+        "number": "031",
+        "name": "マッギョ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027888_P_MAGGYO.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-070",
+        "number": "070",
+        "name": "Stunfisk",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/070.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-031",
+        "number": "031",
+        "name": "메더",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_031.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 618
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-032",
+        "number": "032",
+        "name": "テラキオンEX",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027889_P_TERAKIONEX.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-071",
+        "number": "071",
+        "name": "Terrakion-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/071.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-032",
+        "number": "032",
+        "name": "테라키온 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_032.jpg",
+        "rarity": "레어",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 639
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-033",
+        "number": "033",
+        "name": "ヤミカラス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027890_P_YAMIKARASU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-072",
+        "number": "072",
+        "name": "Murkrow",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/072.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-033",
+        "number": "033",
+        "name": "니로우",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_033.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 198
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-034",
+        "number": "034",
+        "name": "ドンカラス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027891_P_DONKARASU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-073",
+        "number": "073",
+        "name": "Honchkrow",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/073.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-034",
+        "number": "034",
+        "name": "돈크로우",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_034.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 430
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-035",
+        "number": "035",
+        "name": "ココドラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027892_P_KOKODORA.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-078",
+        "number": "078",
+        "name": "Aron",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/078.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-035",
+        "number": "035",
+        "name": "가보리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_035.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 304
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-036",
+        "number": "036",
+        "name": "コドラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027893_P_KODORA.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-079",
+        "number": "079",
+        "name": "Lairon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/079.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-036",
+        "number": "036",
+        "name": "갱도라",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_036.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 305
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-037",
+        "number": "037",
+        "name": "ボスゴドラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027894_P_BOSUGODORA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-080",
+        "number": "080",
+        "name": "Aggron",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/080.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-037",
+        "number": "037",
+        "name": "보스로라",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_037.jpg",
+        "rarity": "레어",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 306
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-038",
+        "number": "038",
+        "name": "アイアント",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027895_P_AIANTO.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-083",
+        "number": "083",
+        "name": "Durant",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/083.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-038",
+        "number": "038",
+        "name": "아이앤트",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_038.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 632
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-039",
+        "number": "039",
+        "name": "ギラティナEX",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027896_P_GIRATEINAEX.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-092",
+        "number": "092",
+        "name": "Giratina-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/092.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-039",
+        "number": "039",
+        "name": "기라티나 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_039.jpg",
+        "rarity": "레어",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 487
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-040",
+        "number": "040",
+        "name": "モノズ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027897_P_MONOZU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-093",
+        "number": "093",
+        "name": "Deino",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/093.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-040",
+        "number": "040",
+        "name": "모노두",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_040.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 633
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-041",
+        "number": "041",
+        "name": "ジヘッド",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027898_P_JIHEDDO.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-095",
+        "number": "095",
+        "name": "Zweilous",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/095.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-041",
+        "number": "041",
+        "name": "디헤드",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_041.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 634
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-042",
+        "number": "042",
+        "name": "サザンドラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027899_P_SAZANDORA.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-097",
+        "number": "097",
+        "name": "Hydreigon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/097.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-042",
+        "number": "042",
+        "name": "삼삼드래",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_042.jpg",
+        "rarity": "레어",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 635
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-043",
+        "number": "043",
+        "name": "エイパム",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027900_P_EIPAMU.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-099",
+        "number": "099",
+        "name": "Aipom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/099.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-043",
+        "number": "043",
+        "name": "에이팜",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_043.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 190
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-044",
+        "number": "044",
+        "name": "エテボース",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027901_P_ETEBOSU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-100",
+        "number": "100",
+        "name": "Ambipom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/100.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-044",
+        "number": "044",
+        "name": "겟핸보숭",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_044.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 424
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-045",
+        "number": "045",
+        "name": "ビッパ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027902_P_BIPPA.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-106",
+        "number": "106",
+        "name": "Bidoof",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/106.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-045",
+        "number": "045",
+        "name": "비버니",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_045.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 399
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-046",
+        "number": "046",
+        "name": "ビーダル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027903_P_BIDARU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-107",
+        "number": "107",
+        "name": "Bibarel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/107.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-046",
+        "number": "046",
+        "name": "비버통",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_046.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 400
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-047",
+        "number": "047",
+        "name": "タブンネ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027904_P_TABUNNE.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-108",
+        "number": "108",
+        "name": "Audino",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/108.png",
+        "rarity": "Common",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-047",
+        "number": "047",
+        "name": "다부니",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_047.jpg",
+        "rarity": "커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": 531
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-048",
+        "number": "048",
+        "name": "退化スプレー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027905_T_TAIKASUPURE.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-113",
+        "number": "113",
+        "name": "Devolution Spray",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/113.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-049",
+        "number": "049",
+        "name": "퇴화 스프레이",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_049.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-049",
+        "number": "049",
+        "name": "レスキュースカーフ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027906_T_RESUKYUSUKAFU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-115",
+        "number": "115",
+        "name": "Rescue Scarf",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/115.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-048",
+        "number": "048",
+        "name": "레스큐 스카프",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_048.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-BW5B-050",
+        "number": "050",
+        "name": "ブレンドエネルギー 草炎超悪",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW5-Brz/027907_E_BURENDOENERUGIKUSAHONOOCHOUAKU.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-BW5B",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw6-117",
+        "number": "117",
+        "name": "Blend Energy GrassFirePsychicDarkness",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/117.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-bw6",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-bw5-050",
+        "number": "050",
+        "name": "블렌드 에너지  풀  불꽃  초  악",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_050.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bw5",
+        "region": "KR"
+      },
+      "dex": null
+    }
+  ],
+  "tail": {
+    "enOnly": [
+      {
+        "id": "en-tcg-bw6-012",
+        "number": "012",
+        "name": "Roselia",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/012.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 315,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-015",
+        "number": "015",
+        "name": "Roserade",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/015.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 407,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-017",
+        "number": "017",
+        "name": "Foongus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/017.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 590,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-023",
+        "number": "023",
+        "name": "Magikarp",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/023.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 129,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-024",
+        "number": "024",
+        "name": "Gyarados",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/024.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 130,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-042",
+        "number": "042",
+        "name": "Electrike",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/042.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 309,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-044",
+        "number": "044",
+        "name": "Manectric",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/044.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 310,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-050",
+        "number": "050",
+        "name": "Drifloon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/050.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 425,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-074",
+        "number": "074",
+        "name": "Houndour",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/074.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 228,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-075",
+        "number": "075",
+        "name": "Houndoom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/075.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 229,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-087",
+        "number": "087",
+        "name": "Gible",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/087.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 443,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-089",
+        "number": "089",
+        "name": "Gabite",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/089.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 444,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-091",
+        "number": "091",
+        "name": "Garchomp",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/091.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 445,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-094",
+        "number": "094",
+        "name": "Deino",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/094.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 633,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-096",
+        "number": "096",
+        "name": "Zweilous",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/096.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 634,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-098",
+        "number": "098",
+        "name": "Hydreigon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/098.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 635,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-104",
+        "number": "104",
+        "name": "Swablu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/104.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 333,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-109",
+        "number": "109",
+        "name": "Minccino",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/109.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 572,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-120",
+        "number": "120",
+        "name": "Mew-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/120.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 151,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-121",
+        "number": "121",
+        "name": "Terrakion-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/121.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 639,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-124",
+        "number": "124",
+        "name": "Giratina-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/124.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 487,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-125",
+        "number": "125",
+        "name": "Serperior",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/125.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 497,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-126",
+        "number": "126",
+        "name": "Reuniclus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/126.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 579,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-127",
+        "number": "127",
+        "name": "Krookodile",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/127.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 553,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw6-128",
+        "number": "128",
+        "name": "Rayquaza",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw6/en/small/en-tcg-bw6/128.png",
+        "rarity": null,
+        "setId": "en-tcg-bw6",
+        "region": "EN",
+        "dex": 384,
+        "jpElsewhere": true
+      }
+    ],
+    "krOnly": [
+      {
+        "id": "kr-bw5-051",
+        "number": "051",
+        "name": "뮤 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_051.jpg",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-bw5",
+        "region": "KR",
+        "dex": 151,
+        "jpElsewhere": true
+      },
+      {
+        "id": "kr-bw5-052",
+        "number": "052",
+        "name": "테라키온 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_052.jpg",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-bw5",
+        "region": "KR",
+        "dex": 639,
+        "jpElsewhere": true
+      },
+      {
+        "id": "kr-bw5-053",
+        "number": "053",
+        "name": "기라티나 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW5/bw5_blast_053.jpg",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-bw5",
+        "region": "KR",
+        "dex": 487,
+        "jpElsewhere": true
+      }
+    ],
+    "enKr": []
+  }
+}

@@ -7,9 +7,10 @@
   },
   "counts": {
     "anchors": 133,
-    "enMatched": 94,
+    "enMatched": 128,
     "krMatched": 133,
-    "enOnly": 91
+    "enOnly": 98,
+    "krOnly": 0
   },
   "anchors": [
     {
@@ -383,10 +384,10 @@
         "region": "JP"
       },
       "en": {
-        "id": "sv6-21",
-        "number": "21",
+        "id": "sv6-20",
+        "number": "20",
         "name": "Poltchageist",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/21.png",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/20.png",
         "rarity": "Common",
         "setId": "sv6",
         "region": "EN"
@@ -472,7 +473,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-25",
+        "number": "25",
+        "name": "Teal Mask Ogerpon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/25.png",
+        "rarity": "Double Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-016",
         "number": "016",
@@ -644,7 +653,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-40",
+        "number": "40",
+        "name": "Hearthflame Mask Ogerpon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/40.png",
+        "rarity": "Double Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-022",
         "number": "022",
@@ -1086,7 +1103,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-62",
+        "number": "62",
+        "name": "Iron Bundle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/62.png",
+        "rarity": "Uncommon",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-037",
         "number": "037",
@@ -1108,7 +1133,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-64",
+        "number": "64",
+        "name": "Wellspring Mask Ogerpon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/64.png",
+        "rarity": "Double Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-038",
         "number": "038",
@@ -1910,7 +1943,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-112",
+        "number": "112",
+        "name": "Cornerstone Mask Ogerpon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/112.png",
+        "rarity": "Double Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-065",
         "number": "065",
@@ -2082,7 +2123,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-118",
+        "number": "118",
+        "name": "Brute Bonnet",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/118.png",
+        "rarity": "Uncommon",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-071",
         "number": "071",
@@ -2374,7 +2423,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-130",
+        "number": "130",
+        "name": "Dragapult ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/130.png",
+        "rarity": "Double Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-081",
         "number": "081",
@@ -2636,7 +2693,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-159",
+        "number": "159",
+        "name": "Ogre's Mask",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/159.png",
+        "rarity": "Uncommon",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-091",
         "number": "091",
@@ -2658,7 +2723,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-142",
+        "number": "142",
+        "name": "Accompanying Flute",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/142.png",
+        "rarity": "Uncommon",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-090",
         "number": "090",
@@ -2680,7 +2753,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-163",
+        "number": "163",
+        "name": "Secret Box",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/163.png",
+        "rarity": "ACE SPEC Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-092",
         "number": "092",
@@ -2702,7 +2783,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-162",
+        "number": "162",
+        "name": "Scoop Up Cyclone",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/162.png",
+        "rarity": "ACE SPEC Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-093",
         "number": "093",
@@ -2724,7 +2813,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-143",
+        "number": "143",
+        "name": "Bug Catching Set",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/143.png",
+        "rarity": "Uncommon",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-094",
         "number": "094",
@@ -2746,7 +2843,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-150",
+        "number": "150",
+        "name": "Handheld Fan",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/150.png",
+        "rarity": "Uncommon",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-095",
         "number": "095",
@@ -2768,7 +2873,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-154",
+        "number": "154",
+        "name": "Kieran",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/154.png",
+        "rarity": "Uncommon",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-097",
         "number": "097",
@@ -2790,7 +2903,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-145",
+        "number": "145",
+        "name": "Carmine",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/145.png",
+        "rarity": "Uncommon",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-096",
         "number": "096",
@@ -2812,7 +2933,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-151",
+        "number": "151",
+        "name": "Hassel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/151.png",
+        "rarity": "Uncommon",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-098",
         "number": "098",
@@ -2834,7 +2963,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-149",
+        "number": "149",
+        "name": "Festival Grounds",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/149.png",
+        "rarity": "Uncommon",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-100",
         "number": "100",
@@ -2856,7 +2993,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-153",
+        "number": "153",
+        "name": "Jamming Tower",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/153.png",
+        "rarity": "Uncommon",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-099",
         "number": "099",
@@ -2905,7 +3050,7 @@
         "number": "169",
         "name": "Sunflora",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/169.png",
-        "rarity": "Illustration Rare",
+        "rarity": "Art Rare",
         "setId": "sv6",
         "region": "EN"
       },
@@ -2935,7 +3080,7 @@
         "number": "170",
         "name": "Dipplin",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/170.png",
-        "rarity": "Illustration Rare",
+        "rarity": "Art Rare",
         "setId": "sv6",
         "region": "EN"
       },
@@ -2965,7 +3110,7 @@
         "number": "174",
         "name": "Froslass",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/174.png",
-        "rarity": "Illustration Rare",
+        "rarity": "Art Rare",
         "setId": "sv6",
         "region": "EN"
       },
@@ -2995,7 +3140,7 @@
         "number": "178",
         "name": "Wattrel",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/178.png",
-        "rarity": "Illustration Rare",
+        "rarity": "Art Rare",
         "setId": "sv6",
         "region": "EN"
       },
@@ -3025,7 +3170,7 @@
         "number": "179",
         "name": "Chimecho",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/179.png",
-        "rarity": "Illustration Rare",
+        "rarity": "Art Rare",
         "setId": "sv6",
         "region": "EN"
       },
@@ -3099,7 +3244,7 @@
         "number": "183",
         "name": "Timburr",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/183.png",
-        "rarity": "Illustration Rare",
+        "rarity": "Art Rare",
         "setId": "sv6",
         "region": "EN"
       },
@@ -3151,7 +3296,7 @@
         "number": "184",
         "name": "Lairon",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/184.png",
-        "rarity": "Illustration Rare",
+        "rarity": "Art Rare",
         "setId": "sv6",
         "region": "EN"
       },
@@ -3181,7 +3326,7 @@
         "number": "186",
         "name": "Tatsugiri",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/186.png",
-        "rarity": "Illustration Rare",
+        "rarity": "Art Rare",
         "setId": "sv6",
         "region": "EN"
       },
@@ -3211,7 +3356,7 @@
         "number": "187",
         "name": "Chansey",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/187.png",
-        "rarity": "Illustration Rare",
+        "rarity": "Art Rare",
         "setId": "sv6",
         "region": "EN"
       },
@@ -3236,7 +3381,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-190",
+        "number": "190",
+        "name": "Teal Mask Ogerpon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/190.png",
+        "rarity": "Super Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-114",
         "number": "114",
@@ -3258,7 +3411,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-192",
+        "number": "192",
+        "name": "Hearthflame Mask Ogerpon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/192.png",
+        "rarity": "Super Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-115",
         "number": "115",
@@ -3285,7 +3446,7 @@
         "number": "193",
         "name": "Palafin ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/193.png",
-        "rarity": "Ultra Rare",
+        "rarity": "Super Rare",
         "setId": "sv6",
         "region": "EN"
       },
@@ -3310,7 +3471,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-194",
+        "number": "194",
+        "name": "Wellspring Mask Ogerpon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/194.png",
+        "rarity": "Super Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-117",
         "number": "117",
@@ -3337,7 +3506,7 @@
         "number": "195",
         "name": "Luxray ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/195.png",
-        "rarity": "Ultra Rare",
+        "rarity": "Super Rare",
         "setId": "sv6",
         "region": "EN"
       },
@@ -3362,7 +3531,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-199",
+        "number": "199",
+        "name": "Cornerstone Mask Ogerpon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/199.png",
+        "rarity": "Super Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-119",
         "number": "119",
@@ -3384,7 +3561,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-200",
+        "number": "200",
+        "name": "Dragapult ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/200.png",
+        "rarity": "Super Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-120",
         "number": "120",
@@ -3411,7 +3596,7 @@
         "number": "201",
         "name": "Blissey ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/201.png",
-        "rarity": "Ultra Rare",
+        "rarity": "Super Rare",
         "setId": "sv6",
         "region": "EN"
       },
@@ -3436,7 +3621,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-206",
+        "number": "206",
+        "name": "Kieran",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/206.png",
+        "rarity": "Super Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-123",
         "number": "123",
@@ -3458,7 +3651,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-204",
+        "number": "204",
+        "name": "Carmine",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/204.png",
+        "rarity": "Super Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-122",
         "number": "122",
@@ -3480,7 +3681,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-205",
+        "number": "205",
+        "name": "Hassel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/205.png",
+        "rarity": "Super Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-124",
         "number": "124",
@@ -3502,7 +3711,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-211",
+        "number": "211",
+        "name": "Teal Mask Ogerpon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/211.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-125",
         "number": "125",
@@ -3524,7 +3741,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-212",
+        "number": "212",
+        "name": "Hearthflame Mask Ogerpon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/212.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-126",
         "number": "126",
@@ -3546,7 +3771,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-213",
+        "number": "213",
+        "name": "Wellspring Mask Ogerpon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/213.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-127",
         "number": "127",
@@ -3568,7 +3801,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-215",
+        "number": "215",
+        "name": "Cornerstone Mask Ogerpon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/215.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-128",
         "number": "128",
@@ -3590,7 +3831,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-218",
+        "number": "218",
+        "name": "Kieran",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/218.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-130",
         "number": "130",
@@ -3612,7 +3861,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-217",
+        "number": "217",
+        "name": "Carmine",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/217.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-129",
         "number": "129",
@@ -3634,7 +3891,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-221",
+        "number": "221",
+        "name": "Teal Mask Ogerpon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/221.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-131",
         "number": "131",
@@ -3678,7 +3943,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-223",
+        "number": "223",
+        "name": "Buddy-Buddy Poffin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/223.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-133",
         "number": "133",
@@ -3771,10 +4044,10 @@
         "jpElsewhere": true
       },
       {
-        "id": "sv6-20",
-        "number": "20",
+        "id": "sv6-21",
+        "number": "21",
         "name": "Poltchageist",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/20.png",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/21.png",
         "rarity": "Common",
         "setId": "sv6",
         "region": "EN",
@@ -3790,17 +4063,6 @@
         "setId": "sv6",
         "region": "EN",
         "dex": 1013,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv6-25",
-        "number": "25",
-        "name": "Teal Mask Ogerpon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/25.png",
-        "rarity": "Double Rare",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 1017,
         "jpElsewhere": true
       },
       {
@@ -3830,7 +4092,7 @@
         "number": "28",
         "name": "Slugma",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/28.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 218,
@@ -3900,17 +4162,6 @@
         "setId": "sv6",
         "region": "EN",
         "dex": 1004,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv6-40",
-        "number": "40",
-        "name": "Hearthflame Mask Ogerpon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/40.png",
-        "rarity": "Double Rare",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 1017,
         "jpElsewhere": true
       },
       {
@@ -3991,17 +4242,6 @@
         "jpElsewhere": true
       },
       {
-        "id": "sv6-62",
-        "number": "62",
-        "name": "Iron Bundle",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/62.png",
-        "rarity": "Uncommon",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 991,
-        "jpElsewhere": true
-      },
-      {
         "id": "sv6-63",
         "number": "63",
         "name": "Walking Wake",
@@ -4010,17 +4250,6 @@
         "setId": "sv6",
         "region": "EN",
         "dex": 1009,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv6-64",
-        "number": "64",
-        "name": "Wellspring Mask Ogerpon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/64.png",
-        "rarity": "Double Rare",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 1017,
         "jpElsewhere": true
       },
       {
@@ -4215,7 +4444,7 @@
         "number": "102",
         "name": "Probopass",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/102.png",
-        "rarity": "Uncommon",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 476,
@@ -4226,7 +4455,7 @@
         "number": "106",
         "name": "Greninja ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/106.png",
-        "rarity": "Double Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 658,
@@ -4237,7 +4466,7 @@
         "number": "107",
         "name": "Hawlucha",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/107.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 701,
@@ -4248,32 +4477,10 @@
         "number": "110",
         "name": "Ting-Lu",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/110.png",
-        "rarity": "Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 1003,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv6-112",
-        "number": "112",
-        "name": "Cornerstone Mask Ogerpon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/112.png",
-        "rarity": "Double Rare",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 1017,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv6-118",
-        "number": "118",
-        "name": "Brute Bonnet",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/118.png",
-        "rarity": "Uncommon",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 986,
         "jpElsewhere": true
       },
       {
@@ -4281,7 +4488,7 @@
         "number": "126",
         "name": "Applin",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/126.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 840,
@@ -4292,21 +4499,10 @@
         "number": "127",
         "name": "Dipplin",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/127.png",
-        "rarity": "Uncommon",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 1011,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv6-130",
-        "number": "130",
-        "name": "Dragapult ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/130.png",
-        "rarity": "Double Rare",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 887,
         "jpElsewhere": true
       },
       {
@@ -4314,7 +4510,7 @@
         "number": "135",
         "name": "Eevee",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/135.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 133,
@@ -4325,7 +4521,7 @@
         "number": "136",
         "name": "Snorlax",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/136.png",
-        "rarity": "Uncommon",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 143,
@@ -4336,18 +4532,183 @@
         "number": "141",
         "name": "Bloodmoon Ursaluna ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/141.png",
-        "rarity": "Double Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 901,
         "jpElsewhere": true
       },
       {
+        "id": "sv6-144",
+        "number": "144",
+        "name": "Caretaker",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/144.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-146",
+        "number": "146",
+        "name": "Community Center",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/146.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-147",
+        "number": "147",
+        "name": "Cook",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/147.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-148",
+        "number": "148",
+        "name": "Enhanced Hammer",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/148.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-152",
+        "number": "152",
+        "name": "Hyper Aroma",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/152.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-155",
+        "number": "155",
+        "name": "Lana's Aid",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/155.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-156",
+        "number": "156",
+        "name": "Love Ball",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/156.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-157",
+        "number": "157",
+        "name": "Lucian",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/157.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-158",
+        "number": "158",
+        "name": "Lucky Helmet",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/158.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-160",
+        "number": "160",
+        "name": "Perrin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/160.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-161",
+        "number": "161",
+        "name": "Raifort",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/161.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-164",
+        "number": "164",
+        "name": "Survival Brace",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/164.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-165",
+        "number": "165",
+        "name": "Unfair Stamp",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/165.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-166",
+        "number": "166",
+        "name": "Boomerang Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/166.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-167",
+        "number": "167",
+        "name": "Legacy Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/167.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
         "id": "sv6-168",
         "number": "168",
         "name": "Pinsir",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/168.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 127,
@@ -4358,7 +4719,7 @@
         "number": "171",
         "name": "Poltchageist",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/171.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 1012,
@@ -4369,7 +4730,7 @@
         "number": "172",
         "name": "Torkoal",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/172.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 324,
@@ -4380,7 +4741,7 @@
         "number": "173",
         "name": "Infernape",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/173.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 392,
@@ -4391,7 +4752,7 @@
         "number": "175",
         "name": "Phione",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/175.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 489,
@@ -4402,7 +4763,7 @@
         "number": "176",
         "name": "Cramorant",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/176.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 845,
@@ -4413,7 +4774,7 @@
         "number": "177",
         "name": "Heliolisk",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/177.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 695,
@@ -4424,7 +4785,7 @@
         "number": "180",
         "name": "Enamorus",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/180.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 905,
@@ -4435,7 +4796,7 @@
         "number": "181",
         "name": "Hisuian Growlithe",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/181.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 58,
@@ -4446,7 +4807,7 @@
         "number": "182",
         "name": "Probopass",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/182.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 476,
@@ -4457,7 +4818,7 @@
         "number": "185",
         "name": "Applin",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/185.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 840,
@@ -4468,7 +4829,7 @@
         "number": "188",
         "name": "Eevee",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/188.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 133,
@@ -4479,21 +4840,10 @@
         "number": "189",
         "name": "Sinistcha ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/189.png",
-        "rarity": "Ultra Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 1013,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv6-190",
-        "number": "190",
-        "name": "Teal Mask Ogerpon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/190.png",
-        "rarity": "Ultra Rare",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 1017,
         "jpElsewhere": true
       },
       {
@@ -4501,32 +4851,10 @@
         "number": "191",
         "name": "Magcargo ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/191.png",
-        "rarity": "Ultra Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 219,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv6-192",
-        "number": "192",
-        "name": "Hearthflame Mask Ogerpon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/192.png",
-        "rarity": "Ultra Rare",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 1017,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv6-194",
-        "number": "194",
-        "name": "Wellspring Mask Ogerpon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/194.png",
-        "rarity": "Ultra Rare",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 1017,
         "jpElsewhere": true
       },
       {
@@ -4534,7 +4862,7 @@
         "number": "196",
         "name": "Iron Thorns ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/196.png",
-        "rarity": "Ultra Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 995,
@@ -4545,7 +4873,7 @@
         "number": "197",
         "name": "Scream Tail ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/197.png",
-        "rarity": "Ultra Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 985,
@@ -4556,32 +4884,10 @@
         "number": "198",
         "name": "Greninja ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/198.png",
-        "rarity": "Ultra Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 658,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv6-199",
-        "number": "199",
-        "name": "Cornerstone Mask Ogerpon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/199.png",
-        "rarity": "Ultra Rare",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 1017,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv6-200",
-        "number": "200",
-        "name": "Dragapult ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/200.png",
-        "rarity": "Ultra Rare",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 887,
         "jpElsewhere": true
       },
       {
@@ -4589,54 +4895,65 @@
         "number": "202",
         "name": "Bloodmoon Ursaluna ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/202.png",
-        "rarity": "Ultra Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 901,
         "jpElsewhere": true
       },
       {
+        "id": "sv6-203",
+        "number": "203",
+        "name": "Caretaker",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/203.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-207",
+        "number": "207",
+        "name": "Lana's Aid",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/207.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-208",
+        "number": "208",
+        "name": "Lucian",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/208.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-209",
+        "number": "209",
+        "name": "Perrin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/209.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
         "id": "sv6-210",
         "number": "210",
         "name": "Sinistcha ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/210.png",
-        "rarity": "Special Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 1013,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv6-211",
-        "number": "211",
-        "name": "Teal Mask Ogerpon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/211.png",
-        "rarity": "Special Illustration Rare",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 1017,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv6-212",
-        "number": "212",
-        "name": "Hearthflame Mask Ogerpon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/212.png",
-        "rarity": "Special Illustration Rare",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 1017,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv6-213",
-        "number": "213",
-        "name": "Wellspring Mask Ogerpon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/213.png",
-        "rarity": "Special Illustration Rare",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 1017,
         "jpElsewhere": true
       },
       {
@@ -4644,21 +4961,10 @@
         "number": "214",
         "name": "Greninja ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/214.png",
-        "rarity": "Special Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 658,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv6-215",
-        "number": "215",
-        "name": "Cornerstone Mask Ogerpon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/215.png",
-        "rarity": "Special Illustration Rare",
-        "setId": "sv6",
-        "region": "EN",
-        "dex": 1017,
         "jpElsewhere": true
       },
       {
@@ -4666,33 +4972,77 @@
         "number": "216",
         "name": "Bloodmoon Ursaluna ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/216.png",
-        "rarity": "Special Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 901,
         "jpElsewhere": true
       },
       {
-        "id": "sv6-221",
-        "number": "221",
-        "name": "Teal Mask Ogerpon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/221.png",
-        "rarity": "Hyper Rare",
+        "id": "sv6-219",
+        "number": "219",
+        "name": "Lana's Aid",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/219.png",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
-        "dex": 1017,
-        "jpElsewhere": true
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-220",
+        "number": "220",
+        "name": "Perrin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/220.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
       },
       {
         "id": "sv6-222",
         "number": "222",
         "name": "Bloodmoon Ursaluna ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/222.png",
-        "rarity": "Hyper Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN",
         "dex": 901,
         "jpElsewhere": true
+      },
+      {
+        "id": "sv6-224",
+        "number": "224",
+        "name": "Enhanced Hammer",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/224.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-225",
+        "number": "225",
+        "name": "Rescue Board",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/225.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv6-226",
+        "number": "226",
+        "name": "Luminous Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/226.png",
+        "rarity": null,
+        "setId": "sv6",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
       }
     ],
     "krOnly": [],

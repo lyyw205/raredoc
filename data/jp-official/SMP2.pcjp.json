@@ -1,0 +1,530 @@
+{
+ "1": {
+  "number": 1,
+  "jaName": "フシギダネ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "ともだちをさがす",
+    "text": "自分の山札にあるポケモンを1枚、相手に見せてから、手札に加える。そして山札を切る。",
+    "damage": null
+   }
+  ],
+  "illustrator": "MPC Film"
+ },
+ "2": {
+  "number": 2,
+  "jaName": "フシギダネ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "ぶつかる",
+    "text": "",
+    "damage": "10"
+   },
+   {
+    "cost": [
+     "Grass",
+     "Grass",
+     "Colorless"
+    ],
+    "name": "つるのムチ",
+    "text": "",
+    "damage": "50"
+   }
+  ],
+  "illustrator": "MPC Film"
+ },
+ "3": {
+  "number": 3,
+  "jaName": "ルンパッパ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "なぐってひっこむ",
+    "text": "このポケモンをベンチポケモンと入れ替える。",
+    "damage": "70"
+   }
+  ],
+  "illustrator": "Framestore"
+ },
+ "4": {
+  "number": 4,
+  "jaName": "ネマシュ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "ねむりのほうし",
+    "text": "相手のバトルポケモンをねむりにする。",
+    "damage": "10"
+   }
+  ],
+  "illustrator": "MPC Film"
+ },
+ "5": {
+  "number": 5,
+  "jaName": "ヒトカゲ",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "とつげき",
+    "text": "このポケモンにも10ダメージ。",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "MPC Film"
+ },
+ "6": {
+  "number": 6,
+  "jaName": "リザードン",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "きりさく",
+    "text": "",
+    "damage": "70"
+   },
+   {
+    "cost": [
+     "Fire",
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ワイルドタックル",
+    "text": "このポケモンにも50ダメージ。",
+    "damage": "180"
+   }
+  ],
+  "illustrator": "Framestore"
+ },
+ "7": {
+  "number": 7,
+  "jaName": "リザードンGX",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire"
+    ],
+    "name": "あばれちらかす",
+    "text": "自分の山札を上から8枚トラッシュし、その中にあるエネルギーをすべて、このポケモンにつける。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Fire",
+     "Fire",
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ばくねつほう",
+    "text": "",
+    "damage": "200"
+   }
+  ],
+  "illustrator": "Framestore"
+ },
+ "8": {
+  "number": 8,
+  "jaName": "ウインディ",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "するどいキバ",
+    "text": "",
+    "damage": "90"
+   }
+  ],
+  "illustrator": "MPC Film"
+ },
+ "9": {
+  "number": 9,
+  "jaName": "コダック",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water",
+     "Colorless"
+    ],
+    "name": "ひっかく",
+    "text": "",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Framestore"
+ },
+ "10": {
+  "number": 10,
+  "jaName": "コダック",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water"
+    ],
+    "name": "パニくる",
+    "text": "このポケモンをこんらんにする。",
+    "damage": "10"
+   }
+  ],
+  "illustrator": "Framestore"
+ },
+ "11": {
+  "number": 11,
+  "jaName": "コイキング",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water"
+    ],
+    "name": "じっとする",
+    "text": "このポケモンのHPを「10」回復する。",
+    "damage": null
+   }
+  ],
+  "illustrator": "Framestore"
+ },
+ "12": {
+  "number": 12,
+  "jaName": "ゲッコウガ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water",
+     "Water"
+    ],
+    "name": "みだれしゅりけん",
+    "text": "相手のポケモン2匹に、それぞれ50ダメージ。［ベンチは弱点・抵抗力を計算しない。］",
+    "damage": null
+   }
+  ],
+  "illustrator": "MPC Film"
+ },
+ "13": {
+  "number": 13,
+  "jaName": "ゲッコウガGX",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water",
+     "Colorless"
+    ],
+    "name": "かすみぎり",
+    "text": "このワザのダメージは、弱点・抵抗力と、相手のバトルポケモンにかかっている効果を計算しない。",
+    "damage": "130"
+   }
+  ],
+  "illustrator": "MPC Film"
+ },
+ "14": {
+  "number": 14,
+  "jaName": "名探偵ピカチュウ",
+  "types": [
+   "Lightning"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Lightning"
+    ],
+    "name": "めいすいり",
+    "text": "自分の山札を上から4枚見て、その中にあるカードを1枚、手札に加える。残りのカードは山札にもどして切る。",
+    "damage": null
+   }
+  ],
+  "illustrator": "MPC Film"
+ },
+ "15": {
+  "number": 15,
+  "jaName": "バリヤード",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic",
+     "Colorless"
+    ],
+    "name": "ジャグリング",
+    "text": "コインを4回投げ、オモテの数×20ダメージ。",
+    "damage": "20×"
+   }
+  ],
+  "illustrator": "MPC Film"
+ },
+ "16": {
+  "number": 16,
+  "jaName": "ミュウツー",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic",
+     "Colorless"
+    ],
+    "name": "サイコジャック",
+    "text": "相手のバトルポケモンが持っているワザを1つ選ぶ。次の相手の番、このワザを受けたポケモンは、選ばれたワザを使えない。",
+    "damage": "30"
+   },
+   {
+    "cost": [
+     "Psychic",
+     "Psychic",
+     "Colorless"
+    ],
+    "name": "ブレイクバーン",
+    "text": "このポケモンについているエネルギーを、2個トラッシュする。",
+    "damage": "130"
+   }
+  ],
+  "illustrator": "MPC Film"
+ },
+ "17": {
+  "number": 17,
+  "jaName": "ミュウツーGX",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic",
+     "Colorless"
+    ],
+    "name": "テレキネシス",
+    "text": "相手のポケモン1匹に、50ダメージ。このワザのダメージは弱点・抵抗力を計算しない。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Psychic",
+     "Psychic",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "しはいのはどう",
+    "text": "相手のバトルポケモンをこんらんにする。",
+    "damage": "120"
+   }
+  ],
+  "illustrator": "MPC Film"
+ },
+ "18": {
+  "number": 18,
+  "jaName": "カイリキー",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting"
+    ],
+    "name": "こうつうせいり",
+    "text": "自分の山札を上から5枚見て、好きな順番に入れ替えて、山札の上にもどす。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Fighting"
+    ],
+    "name": "クロスチョップ",
+    "text": "コインを1回投げオモテなら、60ダメージ追加。",
+    "damage": "80＋"
+   }
+  ],
+  "illustrator": "MPC Film"
+ },
+ "19": {
+  "number": 19,
+  "jaName": "プリン",
+  "types": [
+   "Fairy"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fairy"
+    ],
+    "name": "いやしのうた",
+    "text": "自分のポケモン全員のHPを、それぞれ「10」回復する。",
+    "damage": null
+   }
+  ],
+  "illustrator": "Framestore"
+ },
+ "20": {
+  "number": 20,
+  "jaName": "ブルー",
+  "types": [
+   "Fairy"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fairy"
+    ],
+    "name": "かみつく",
+    "text": "",
+    "damage": "10"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "にらむ",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンをマヒにする。",
+    "damage": null
+   }
+  ],
+  "illustrator": "Framestore"
+ },
+ "21": {
+  "number": 21,
+  "jaName": "ブルー",
+  "types": [
+   "Fairy"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "じゃれつく",
+    "text": "コインを1回投げオモテなら、30ダメージ追加。",
+    "damage": "10＋"
+   }
+  ],
+  "illustrator": "Framestore"
+ },
+ "22": {
+  "number": 22,
+  "jaName": "ベロリンガ",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "れんぞくベロベロ",
+    "text": "ウラが出るまでコインを投げ、オモテの数×20ダメージ。",
+    "damage": "20×"
+   }
+  ],
+  "illustrator": "MPC Film"
+ },
+ "23": {
+  "number": 23,
+  "jaName": "メタモン",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "どこでもコピー",
+    "text": "相手の場のポケモンが持っているワザを1つ選び、このワザとして使う。選んだワザに必要なエネルギーがこのポケモンについていなければ、このワザは失敗。",
+    "damage": null
+   }
+  ],
+  "illustrator": "MPC Film"
+ },
+ "24": {
+  "number": 24,
+  "jaName": "ケッキング",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "なげとばす",
+    "text": "相手のバトルポケモンをベンチポケモンと入れ替える。［バトル場に出すポケモンは相手が選ぶ。］",
+    "damage": "150"
+   }
+  ],
+  "illustrator": "Framestore"
+ },
+ "25": {
+  "number": 25,
+  "jaName": "ヨシダ警部補",
+  "types": [],
+  "attacks": [],
+  "illustrator": null
+ }
+}

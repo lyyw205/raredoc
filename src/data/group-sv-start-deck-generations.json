@@ -1,0 +1,4048 @@
+{
+  "group": {
+    "id": "sv-start-deck-generations",
+    "nameKo": "랜덤 스타트 덱 Generations",
+    "nameEn": "Start Deck Generations",
+    "crossGroupEN": false
+  },
+  "counts": {
+    "anchors": 183,
+    "enMatched": 0,
+    "krMatched": 183,
+    "enOnly": 0,
+    "krOnly": 0
+  },
+  "anchors": [
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-001",
+        "number": "001",
+        "name": "ナゾノクサ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046455_P_NAZONOKUSA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-001",
+        "number": "001",
+        "name": "뚜벅쵸",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_001.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 43
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-002",
+        "number": "002",
+        "name": "クサイハナ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046456_P_KUSAIHANA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-002",
+        "number": "002",
+        "name": "냄새꼬",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_002.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 44
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-003",
+        "number": "003",
+        "name": "ラフレシア",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046457_P_RAFURESHIA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-003",
+        "number": "003",
+        "name": "라플레시아",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_003.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 45
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-004",
+        "number": "004",
+        "name": "タマタマ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046458_P_TAMATAMA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-004",
+        "number": "004",
+        "name": "아라리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_004.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 102
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-005",
+        "number": "005",
+        "name": "ナッシー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046459_P_NASSHI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-005",
+        "number": "005",
+        "name": "나시",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_005.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 103
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-006",
+        "number": "006",
+        "name": "カイロス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046460_P_KAIROSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-006",
+        "number": "006",
+        "name": "쁘사이저",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_006.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 127
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-007",
+        "number": "007",
+        "name": "チュリネ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046461_P_CHIXYURINE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-007",
+        "number": "007",
+        "name": "치릴리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_007.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 548
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-008",
+        "number": "008",
+        "name": "ドレディア",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046462_P_DOREDEIA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-008",
+        "number": "008",
+        "name": "드레디어",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_008.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 549
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-009",
+        "number": "009",
+        "name": "タマゲタケ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046463_P_TAMAGETAKE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-009",
+        "number": "009",
+        "name": "깜놀버슬",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_009.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 590
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-010",
+        "number": "010",
+        "name": "モロバレルex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046464_P_MOROBARERUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-010",
+        "number": "010",
+        "name": "뽀록나 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_010.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 591
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-011",
+        "number": "011",
+        "name": "アイアント",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046465_P_AIANTO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-011",
+        "number": "011",
+        "name": "아이앤트",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_011.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 632
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-012",
+        "number": "012",
+        "name": "ビリジオン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046466_P_BIRIJION.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-012",
+        "number": "012",
+        "name": "비리디온",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_012.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 640
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-013",
+        "number": "013",
+        "name": "マメバッタ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046467_P_MAMEBATTA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-013",
+        "number": "013",
+        "name": "콩알뚜기",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_013.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 919
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-014",
+        "number": "014",
+        "name": "アチャモ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046468_P_ACHIXYAMO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-014",
+        "number": "014",
+        "name": "아차모",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_014.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 255
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-015",
+        "number": "015",
+        "name": "ワカシャモ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046469_P_WAKASHIXYAMO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-015",
+        "number": "015",
+        "name": "영치코",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_015.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 256
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-016",
+        "number": "016",
+        "name": "バシャーモex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046470_P_BASHIXYAMOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-016",
+        "number": "016",
+        "name": "번치코 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_016.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 257
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-017",
+        "number": "017",
+        "name": "コータス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046471_P_KOTASU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-017",
+        "number": "017",
+        "name": "코터스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_017.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 324
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-018",
+        "number": "018",
+        "name": "ビクティニ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046472_P_BIKUTEINI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-018",
+        "number": "018",
+        "name": "비크티니",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_018.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 494
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-019",
+        "number": "019",
+        "name": "クイタラン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046473_P_KUITARAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-019",
+        "number": "019",
+        "name": "앤티골",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_019.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 631
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-020",
+        "number": "020",
+        "name": "メラルバ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046474_P_MERARUBA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-020",
+        "number": "020",
+        "name": "활화르바",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_020.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 636
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-021",
+        "number": "021",
+        "name": "ウルガモス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046475_P_URUGAMOSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-021",
+        "number": "021",
+        "name": "불카모스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_021.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 637
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-022",
+        "number": "022",
+        "name": "レシラムex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046476_P_RESHIRAMUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-022",
+        "number": "022",
+        "name": "레시라무 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_022.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 643
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-023",
+        "number": "023",
+        "name": "ヒノヤコマ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046477_P_HINOYAKOMA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-023",
+        "number": "023",
+        "name": "불화살빈",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_023.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 662
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-024",
+        "number": "024",
+        "name": "ファイアロー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046478_P_FUAIARO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-024",
+        "number": "024",
+        "name": "파이어로",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_024.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 663
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-025",
+        "number": "025",
+        "name": "シシコ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046479_P_SHISHIKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-025",
+        "number": "025",
+        "name": "레오꼬",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_025.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 667
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-026",
+        "number": "026",
+        "name": "カエンジシ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046480_P_KAENJISHI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-026",
+        "number": "026",
+        "name": "화염레오",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_026.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 668
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-027",
+        "number": "027",
+        "name": "ヤドン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046481_P_YADON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-027",
+        "number": "027",
+        "name": "야돈",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_027.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 79
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-028",
+        "number": "028",
+        "name": "ヤドキング",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046482_P_YADOKINGU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-028",
+        "number": "028",
+        "name": "야도킹",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_028.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 199
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-029",
+        "number": "029",
+        "name": "マリル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046483_P_MARIRU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-029",
+        "number": "029",
+        "name": "마릴",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_029.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 183
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-030",
+        "number": "030",
+        "name": "マリルリ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046484_P_MARIRURI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-030",
+        "number": "030",
+        "name": "마릴리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_030.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 184
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-031",
+        "number": "031",
+        "name": "スイクン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046485_P_SUIKUN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-031",
+        "number": "031",
+        "name": "스이쿤",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_031.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 245
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-032",
+        "number": "032",
+        "name": "キャモメ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046486_P_KIXYAMOME.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-032",
+        "number": "032",
+        "name": "갈모매",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_032.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 278
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-033",
+        "number": "033",
+        "name": "ペリッパー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046487_P_PERIPPA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-033",
+        "number": "033",
+        "name": "패리퍼",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_033.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 279
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-034",
+        "number": "034",
+        "name": "ユキワラシ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046488_P_YUKIWARASHI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-034",
+        "number": "034",
+        "name": "눈꼬마",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_034.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 361
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-035",
+        "number": "035",
+        "name": "オニゴーリ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046489_P_ONIGORI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-035",
+        "number": "035",
+        "name": "얼음귀신",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_035.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 362
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-036",
+        "number": "036",
+        "name": "レジアイス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046490_P_REJIAISU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-036",
+        "number": "036",
+        "name": "레지아이스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_036.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 378
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-037",
+        "number": "037",
+        "name": "カイオーガex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046491_P_KAIOGAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-037",
+        "number": "037",
+        "name": "가이오가 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_037.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 382
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-038",
+        "number": "038",
+        "name": "ピカチュウex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046492_P_PIKACHIXYUUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-038",
+        "number": "038",
+        "name": "피카츄 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_038.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 25
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-039",
+        "number": "039",
+        "name": "アローラ イシツブテ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046493_P_ARORAISHITSUBUTE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-039",
+        "number": "039",
+        "name": "알로라 꼬마돌",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_039.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 74
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-040",
+        "number": "040",
+        "name": "アローラ ゴローン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046494_P_ARORAGORON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-040",
+        "number": "040",
+        "name": "알로라 데구리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_040.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 75
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-041",
+        "number": "041",
+        "name": "アローラ ゴローニャ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046495_P_ARORAGORONIXYA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-041",
+        "number": "041",
+        "name": "알로라 딱구리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_041.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 76
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-042",
+        "number": "042",
+        "name": "ビリリダマ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046496_P_BIRIRIDAMA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-042",
+        "number": "042",
+        "name": "찌리리공",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_042.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 100
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-043",
+        "number": "043",
+        "name": "マルマイン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046497_P_MARUMAIN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-043",
+        "number": "043",
+        "name": "붐볼",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_043.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 101
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-044",
+        "number": "044",
+        "name": "サンダー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046498_P_SANDA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-044",
+        "number": "044",
+        "name": "썬더",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_044.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 145
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-045",
+        "number": "045",
+        "name": "トゲデマル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046499_P_TOGEDEMARU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-045",
+        "number": "045",
+        "name": "토게데마루",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_045.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 777
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-046",
+        "number": "046",
+        "name": "カプ・コケコex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046500_P_KAPUKOKEKOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-046",
+        "number": "046",
+        "name": "카푸꼬꼬꼭 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_046.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 785
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-047",
+        "number": "047",
+        "name": "アローラ ガラガラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046501_P_ARORAGARAGARA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-047",
+        "number": "047",
+        "name": "알로라 텅구리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_047.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 105
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-048",
+        "number": "048",
+        "name": "シュシュプ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046502_P_SHIXYUSHIXYUPU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-048",
+        "number": "048",
+        "name": "슈쁘",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_048.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 682
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-049",
+        "number": "049",
+        "name": "フレフワン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046503_P_FUREFUWAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-049",
+        "number": "049",
+        "name": "프레프티르",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_049.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 683
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-050",
+        "number": "050",
+        "name": "ニンフィア",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046504_P_NINFUIA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-050",
+        "number": "050",
+        "name": "님피아",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_050.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 700
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-051",
+        "number": "051",
+        "name": "デデンネ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046505_P_DEDENNE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-051",
+        "number": "051",
+        "name": "데덴네",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_051.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 702
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-052",
+        "number": "052",
+        "name": "ゼルネアスex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046506_P_ZERUNEASUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-052",
+        "number": "052",
+        "name": "제르네아스 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_052.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 716
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-053",
+        "number": "053",
+        "name": "オドリドリ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046507_P_ODORIDORI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-053",
+        "number": "053",
+        "name": "춤추새",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_053.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 741
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-054",
+        "number": "054",
+        "name": "ミミッキュex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046508_P_MIMIKKIXYUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-054",
+        "number": "054",
+        "name": "따라큐 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_054.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 778
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-055",
+        "number": "055",
+        "name": "ダダリン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046509_P_DADARIN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-055",
+        "number": "055",
+        "name": "타타륜",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_055.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 781
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-056",
+        "number": "056",
+        "name": "ベロバー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046510_P_BEROBA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-056",
+        "number": "056",
+        "name": "메롱꿍",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_056.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 859
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-057",
+        "number": "057",
+        "name": "ギモー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046511_P_GIMO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-057",
+        "number": "057",
+        "name": "쏘겨모",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_057.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 860
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-058",
+        "number": "058",
+        "name": "オーロンゲ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046512_P_ORONGE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-058",
+        "number": "058",
+        "name": "오롱털",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_058.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 861
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-059",
+        "number": "059",
+        "name": "マホミル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046513_P_MAHOMIRU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-059",
+        "number": "059",
+        "name": "마빌크",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_059.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 868
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-060",
+        "number": "060",
+        "name": "マホイップex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046514_P_MAHOIPPUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-060",
+        "number": "060",
+        "name": "마휘핑 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_060.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 869
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-061",
+        "number": "061",
+        "name": "カラカラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046515_P_KARAKARA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-061",
+        "number": "061",
+        "name": "탕구리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_061.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 104
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-062",
+        "number": "062",
+        "name": "ヨーギラス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046516_P_YOGIRASU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-062",
+        "number": "062",
+        "name": "애버라스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_062.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 246
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-063",
+        "number": "063",
+        "name": "サナギラス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046517_P_SANAGIRASU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-063",
+        "number": "063",
+        "name": "데기라스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_063.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 247
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-064",
+        "number": "064",
+        "name": "リオル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046518_P_RIORU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-064",
+        "number": "064",
+        "name": "리오르",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_064.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 447
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-065",
+        "number": "065",
+        "name": "ルカリオex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046519_P_RUKARIOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-065",
+        "number": "065",
+        "name": "루카리오 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_065.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 448
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-066",
+        "number": "066",
+        "name": "ヒポポタス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046520_P_HIPOPOTASU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-066",
+        "number": "066",
+        "name": "히포포타스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_066.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 449
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-067",
+        "number": "067",
+        "name": "カバルドン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046521_P_KABARUDON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-067",
+        "number": "067",
+        "name": "하마돈",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_067.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 450
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-068",
+        "number": "068",
+        "name": "グレッグル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046522_P_GUREGGURU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-068",
+        "number": "068",
+        "name": "삐딱구리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_068.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 453
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-069",
+        "number": "069",
+        "name": "ドクロッグ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046523_P_DOKUROGGU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-069",
+        "number": "069",
+        "name": "독개굴",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_069.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 454
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-070",
+        "number": "070",
+        "name": "ノノクラゲ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046524_P_NONOKURAGE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-070",
+        "number": "070",
+        "name": "들눈해",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_070.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 948
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-071",
+        "number": "071",
+        "name": "リククラゲ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046525_P_RIKUKURAGE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-071",
+        "number": "071",
+        "name": "육파리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_071.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 949
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-072",
+        "number": "072",
+        "name": "コライドンex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046526_P_KORAIDONEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-072",
+        "number": "072",
+        "name": "코라이돈 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_072.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 1007
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-073",
+        "number": "073",
+        "name": "パルデア ウパー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046527_P_PARUDEAUPA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-073",
+        "number": "073",
+        "name": "팔데아 우파",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_073.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 194
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-074",
+        "number": "074",
+        "name": "パルデア ドオーex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046528_P_PARUDEADOOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-074",
+        "number": "074",
+        "name": "팔데아 토오 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_074.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 980
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-075",
+        "number": "075",
+        "name": "ニューラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046529_P_NIXYURA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-075",
+        "number": "075",
+        "name": "포푸니",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_075.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 215
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-076",
+        "number": "076",
+        "name": "デルビル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046530_P_DERUBIRU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-076",
+        "number": "076",
+        "name": "델빌",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_076.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 228
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-077",
+        "number": "077",
+        "name": "ヘルガー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046531_P_HERUGA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-077",
+        "number": "077",
+        "name": "헬가",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_077.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 229
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-078",
+        "number": "078",
+        "name": "バンギラスex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046532_P_BANGIRASUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-078",
+        "number": "078",
+        "name": "마기라스 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_078.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 248
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-079",
+        "number": "079",
+        "name": "エクスレッグ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046533_P_EKUSUREGGU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-079",
+        "number": "079",
+        "name": "엑스레그",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_079.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 920
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-080",
+        "number": "080",
+        "name": "オトシドリ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046534_P_OTOSHIDORI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-080",
+        "number": "080",
+        "name": "떨구새",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_080.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 962
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-081",
+        "number": "081",
+        "name": "ドーミラー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046535_P_DOMIRA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-081",
+        "number": "081",
+        "name": "동미러",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_081.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 436
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-082",
+        "number": "082",
+        "name": "ドータクン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046536_P_DOTAKUN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-082",
+        "number": "082",
+        "name": "동탁군",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_082.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 437
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-083",
+        "number": "083",
+        "name": "ディアルガex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046537_P_DEIARUGAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-083",
+        "number": "083",
+        "name": "디아루가 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_083.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 483
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-084",
+        "number": "084",
+        "name": "ヒードラン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046538_P_HIDORAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-084",
+        "number": "084",
+        "name": "히드런",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_084.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 485
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-085",
+        "number": "085",
+        "name": "ガラル マッギョ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046539_P_GARARUMAGGIXYO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-085",
+        "number": "085",
+        "name": "가라르 메더",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_085.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 618
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-086",
+        "number": "086",
+        "name": "ゾウドウ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046540_P_ZOUDOU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-086",
+        "number": "086",
+        "name": "끼리동",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_086.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 878
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-087",
+        "number": "087",
+        "name": "ダイオウドウ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046541_P_DAIOUDOU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-087",
+        "number": "087",
+        "name": "대왕끼리동",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_087.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 879
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-088",
+        "number": "088",
+        "name": "ジュラルドン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046542_P_JIXYURARUDON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-088",
+        "number": "088",
+        "name": "두랄루돈",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_088.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 884
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-089",
+        "number": "089",
+        "name": "ザシアンex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046543_P_ZASHIANEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-089",
+        "number": "089",
+        "name": "자시안 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_089.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 888
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-090",
+        "number": "090",
+        "name": "コラッタ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046544_P_KORATTA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-090",
+        "number": "090",
+        "name": "꼬렛",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_090.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 19
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-091",
+        "number": "091",
+        "name": "ニャース",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046545_P_NIXYASU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-091",
+        "number": "091",
+        "name": "나옹",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_091.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 52
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-092",
+        "number": "092",
+        "name": "ペルシアン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046546_P_PERUSHIAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-092",
+        "number": "092",
+        "name": "페르시온",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_092.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 53
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-093",
+        "number": "093",
+        "name": "イーブイ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046547_P_IBUI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-093",
+        "number": "093",
+        "name": "이브이",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_093.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 133
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-094",
+        "number": "094",
+        "name": "カビゴンex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046548_P_KABIGONEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-094",
+        "number": "094",
+        "name": "잠만보 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_094.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 143
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-095",
+        "number": "095",
+        "name": "ノコッチ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046549_P_NOKOTCHI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-095",
+        "number": "095",
+        "name": "노고치",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_095.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 206
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-096",
+        "number": "096",
+        "name": "ミルタンク",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046550_P_MIRUTANKU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-096",
+        "number": "096",
+        "name": "밀탱크",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_096.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 241
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-097",
+        "number": "097",
+        "name": "ルギアex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046551_P_RUGIAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-097",
+        "number": "097",
+        "name": "루기아 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_097.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 249
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-098",
+        "number": "098",
+        "name": "ジグザグマ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046552_P_JIGUZAGUMA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-098",
+        "number": "098",
+        "name": "지그제구리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_098.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 263
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-099",
+        "number": "099",
+        "name": "マッスグマ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046553_P_MASSUGUMA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-099",
+        "number": "099",
+        "name": "직구리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_099.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 264
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-100",
+        "number": "100",
+        "name": "カクレオン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046554_P_KAKUREON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-100",
+        "number": "100",
+        "name": "켈리몬",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_100.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 352
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-101",
+        "number": "101",
+        "name": "トロピウス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046555_P_TOROPIUSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-101",
+        "number": "101",
+        "name": "트로피우스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_101.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 357
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-102",
+        "number": "102",
+        "name": "ミミロル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046556_P_MIMIRORU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-102",
+        "number": "102",
+        "name": "이어롤",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_102.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 427
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-103",
+        "number": "103",
+        "name": "ミミロップ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046557_P_MIMIROPPU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-103",
+        "number": "103",
+        "name": "이어롭",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_103.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 428
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-104",
+        "number": "104",
+        "name": "ペラップ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046558_P_PERAPPU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-104",
+        "number": "104",
+        "name": "페라페",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_104.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 441
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-105",
+        "number": "105",
+        "name": "シェイミ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046559_P_SHIEIMI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-105",
+        "number": "105",
+        "name": "쉐이미",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_105.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 492
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-106",
+        "number": "106",
+        "name": "タブンネ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046560_P_TABUNNE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-106",
+        "number": "106",
+        "name": "다부니",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_106.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 531
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-107",
+        "number": "107",
+        "name": "チラーミィ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046561_P_CHIRAMII.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-107",
+        "number": "107",
+        "name": "치라미",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_107.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 572
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-108",
+        "number": "108",
+        "name": "チラチーノ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046562_P_CHIRACHINO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-108",
+        "number": "108",
+        "name": "치라치노",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_108.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 573
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-109",
+        "number": "109",
+        "name": "ヤヤコマ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046563_P_YAYAKOMA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-109",
+        "number": "109",
+        "name": "화살꼬빈",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_109.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 661
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-110",
+        "number": "110",
+        "name": "トリミアン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046564_P_TORIMIAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-110",
+        "number": "110",
+        "name": "트리미앙",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_110.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 676
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-111",
+        "number": "111",
+        "name": "ルチャブル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046565_P_RUCHIXYABURU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-111",
+        "number": "111",
+        "name": "루차불",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_111.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 701
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-112",
+        "number": "112",
+        "name": "オンバット",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046566_P_ONBATTO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-112",
+        "number": "112",
+        "name": "음뱃",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_112.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 714
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-113",
+        "number": "113",
+        "name": "オンバーンex",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046567_P_ONBANEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-113",
+        "number": "113",
+        "name": "음번 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_113.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 715
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-114",
+        "number": "114",
+        "name": "ヌイコグマ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046568_P_NUIKOGUMA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-114",
+        "number": "114",
+        "name": "포곰곰",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_114.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 759
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-115",
+        "number": "115",
+        "name": "キテルグマ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046569_P_KITERUGUMA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-115",
+        "number": "115",
+        "name": "이븐곰",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_115.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 760
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-116",
+        "number": "116",
+        "name": "ジジーロン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046570_P_JIJIRON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-116",
+        "number": "116",
+        "name": "할비롱",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_116.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 780
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-117",
+        "number": "117",
+        "name": "ホシガリス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046571_P_HOSHIGARISU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-117",
+        "number": "117",
+        "name": "탐리스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_117.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 819
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-118",
+        "number": "118",
+        "name": "ヨクバリス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046572_P_YOKUBARISU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-118",
+        "number": "118",
+        "name": "요씽리스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_118.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 820
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-119",
+        "number": "119",
+        "name": "ウッウ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046573_P_UUU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-119",
+        "number": "119",
+        "name": "윽우지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_119.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 845
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-120",
+        "number": "120",
+        "name": "イエッサン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046574_P_IESSAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-120",
+        "number": "120",
+        "name": "에써르",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_120.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 876
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-121",
+        "number": "121",
+        "name": "グルトン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046575_P_GURUTON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-121",
+        "number": "121",
+        "name": "맛보돈",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_121.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 915
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-122",
+        "number": "122",
+        "name": "パフュートン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046576_P_PAFUXYUTON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-122",
+        "number": "122",
+        "name": "퍼퓨돈",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_122.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 916
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-123",
+        "number": "123",
+        "name": "イキリンコ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046577_P_IKIRINKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-123",
+        "number": "123",
+        "name": "시비꼬",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_123.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 931
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-124",
+        "number": "124",
+        "name": "モトトカゲ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046578_P_MOTOTOKAGE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-124",
+        "number": "124",
+        "name": "모토마",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_124.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": 967
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-125",
+        "number": "125",
+        "name": "エネルギー回収",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046579_T_ENERUGIKAISHIXYUU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-133",
+        "number": "133",
+        "name": "에너지 회수",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_133.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-126",
+        "number": "126",
+        "name": "エネルギーシール",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046580_T_ENERUGISHIRU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-131",
+        "number": "131",
+        "name": "에너지 스티커",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_131.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-127",
+        "number": "127",
+        "name": "エネルギーつけかえ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046581_T_ENERUGITSUKEKAE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-130",
+        "number": "130",
+        "name": "에너지 갈아 달기",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_130.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-128",
+        "number": "128",
+        "name": "エネルギー転送",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046582_T_ENERUGITENSOU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-132",
+        "number": "132",
+        "name": "에너지 전송",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_132.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-129",
+        "number": "129",
+        "name": "おとどけドローン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046583_T_OTODOKEDORON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-126",
+        "number": "126",
+        "name": "딜리버리드론",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_126.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-130",
+        "number": "130",
+        "name": "きずぐすり",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046584_T_KIZUGUSURI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-128",
+        "number": "128",
+        "name": "상처약",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_128.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-131",
+        "number": "131",
+        "name": "クラッシュハンマー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046585_T_KURASSHIXYUHANMA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-135",
+        "number": "135",
+        "name": "크래시 해머",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_135.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-132",
+        "number": "132",
+        "name": "スーパーボール",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046586_T_SUPABORU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-129",
+        "number": "129",
+        "name": "슈퍼볼",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_129.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-133",
+        "number": "133",
+        "name": "ネストボール",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046587_T_NESUTOBORU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-125",
+        "number": "125",
+        "name": "네스트볼",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_125.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-134",
+        "number": "134",
+        "name": "ハイパーボール",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046588_T_HAIPABORU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-138",
+        "number": "138",
+        "name": "하이퍼볼",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_138.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-135",
+        "number": "135",
+        "name": "ふしぎなアメ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046589_T_FUSHIGINAAME.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-134",
+        "number": "134",
+        "name": "이상한사탕",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_134.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-136",
+        "number": "136",
+        "name": "ポケモンいれかえ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046590_T_POKEMONIREKAE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-136",
+        "number": "136",
+        "name": "포켓몬 교체",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_136.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-137",
+        "number": "137",
+        "name": "ポケモンキャッチャー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046591_T_POKEMONKIXYATCHIXYA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-137",
+        "number": "137",
+        "name": "포켓몬 캐처",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_137.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-138",
+        "number": "138",
+        "name": "モンスターボール",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046592_T_MONSUTABORU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-127",
+        "number": "127",
+        "name": "몬스터볼",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_127.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-139",
+        "number": "139",
+        "name": "ガチガチバンド",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046593_T_GACHIGACHIBANDO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-142",
+        "number": "142",
+        "name": "타이트밴드",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_142.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-140",
+        "number": "140",
+        "name": "げんきのハチマキ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046594_T_GENKINOHACHIMAKI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-139",
+        "number": "139",
+        "name": "기력의머리띠",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_139.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-141",
+        "number": "141",
+        "name": "ゴツゴツメット",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046595_T_GOTSUGOTSUMETTO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-141",
+        "number": "141",
+        "name": "울퉁불퉁멧",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_141.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-142",
+        "number": "142",
+        "name": "勇気のおまもり",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046596_T_YUUKINOOMAMORI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-140",
+        "number": "140",
+        "name": "용기의부적",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_140.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-143",
+        "number": "143",
+        "name": "からておうの稽古",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046597_T_KARATEOUNOKEIKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-166",
+        "number": "166",
+        "name": "태권왕의 수련",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_166.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-144",
+        "number": "144",
+        "name": "からておうの稽古",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046598_T_KARATEOUNOKEIKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-167",
+        "number": "167",
+        "name": "태권왕의 수련",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_167.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-145",
+        "number": "145",
+        "name": "からておうの稽古",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046599_T_KARATEOUNOKEIKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-168",
+        "number": "168",
+        "name": "태권왕의 수련",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_168.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-146",
+        "number": "146",
+        "name": "からておうの稽古",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046600_T_KARATEOUNOKEIKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-169",
+        "number": "169",
+        "name": "태권왕의 수련",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_169.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-147",
+        "number": "147",
+        "name": "からておうの稽古",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046601_T_KARATEOUNOKEIKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-170",
+        "number": "170",
+        "name": "태권왕의 수련",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_170.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-148",
+        "number": "148",
+        "name": "からておうの稽古",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046602_T_KARATEOUNOKEIKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-171",
+        "number": "171",
+        "name": "태권왕의 수련",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_171.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-149",
+        "number": "149",
+        "name": "からておうの稽古",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046603_T_KARATEOUNOKEIKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-172",
+        "number": "172",
+        "name": "태권왕의 수련",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_172.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-150",
+        "number": "150",
+        "name": "からておうの稽古",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046604_T_KARATEOUNOKEIKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-173",
+        "number": "173",
+        "name": "태권왕의 수련",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_173.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-151",
+        "number": "151",
+        "name": "からておうの稽古",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046605_T_KARATEOUNOKEIKO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-174",
+        "number": "174",
+        "name": "태권왕의 수련",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_174.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-152",
+        "number": "152",
+        "name": "コック",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046606_T_KOKKU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-165",
+        "number": "165",
+        "name": "쿡",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_165.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-153",
+        "number": "153",
+        "name": "ゴヨウ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046607_T_GOYOU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-159",
+        "number": "159",
+        "name": "오엽",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_159.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-154",
+        "number": "154",
+        "name": "ジャッジマン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046608_T_JIXYAJJIMAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-162",
+        "number": "162",
+        "name": "저지맨",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_162.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-155",
+        "number": "155",
+        "name": "スター団のしたっぱ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046609_T_SUTADANNOSHITAPPA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-158",
+        "number": "158",
+        "name": "스타단의 조무래기",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_158.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-156",
+        "number": "156",
+        "name": "センリ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046610_T_SENRI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-163",
+        "number": "163",
+        "name": "종길",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_163.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-157",
+        "number": "157",
+        "name": "たんぱんこぞう",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046611_T_TANPANKOZOU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-156",
+        "number": "156",
+        "name": "반바지 꼬마",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_156.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-158",
+        "number": "158",
+        "name": "チリ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046612_T_CHIRI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-164",
+        "number": "164",
+        "name": "칠리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_164.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-159",
+        "number": "159",
+        "name": "ドラセナ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046613_T_DORASENA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-145",
+        "number": "145",
+        "name": "드라세나",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_145.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-160",
+        "number": "160",
+        "name": "ナンジャモ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046614_T_NANJIXYAMO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-146",
+        "number": "146",
+        "name": "모야모",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_146.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-161",
+        "number": "161",
+        "name": "ネモ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046615_T_NEMO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-144",
+        "number": "144",
+        "name": "네모",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_144.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-162",
+        "number": "162",
+        "name": "博士の研究",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046616_T_HAKASENOKENKIXYUU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-147",
+        "number": "147",
+        "name": "박사의 연구",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_147.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-163",
+        "number": "163",
+        "name": "博士の研究",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046617_T_HAKASENOKENKIXYUU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-148",
+        "number": "148",
+        "name": "박사의 연구",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_148.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-164",
+        "number": "164",
+        "name": "博士の研究",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046618_T_HAKASENOKENKIXYUU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-149",
+        "number": "149",
+        "name": "박사의 연구",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_149.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-165",
+        "number": "165",
+        "name": "博士の研究",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046619_T_HAKASENOKENKIXYUU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-150",
+        "number": "150",
+        "name": "박사의 연구",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_150.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-166",
+        "number": "166",
+        "name": "博士の研究",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046620_T_HAKASENOKENKIXYUU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-151",
+        "number": "151",
+        "name": "박사의 연구",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_151.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-167",
+        "number": "167",
+        "name": "博士の研究",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046621_T_HAKASENOKENKIXYUU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-152",
+        "number": "152",
+        "name": "박사의 연구",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_152.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-168",
+        "number": "168",
+        "name": "博士の研究",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046622_T_HAKASENOKENKIXYUU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-153",
+        "number": "153",
+        "name": "박사의 연구",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_153.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-169",
+        "number": "169",
+        "name": "博士の研究",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046623_T_HAKASENOKENKIXYUU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-154",
+        "number": "154",
+        "name": "박사의 연구",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_154.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-170",
+        "number": "170",
+        "name": "博士の研究",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046624_T_HAKASENOKENKIXYUU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-155",
+        "number": "155",
+        "name": "박사의 연구",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_155.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-171",
+        "number": "171",
+        "name": "ヒョウタ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046625_T_HIXYOUTA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-143",
+        "number": "143",
+        "name": "강석",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_143.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-172",
+        "number": "172",
+        "name": "ボスの指令",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046626_T_BOSUNOSHIREI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-157",
+        "number": "157",
+        "name": "보스의 지령",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_157.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-173",
+        "number": "173",
+        "name": "マサキの転送",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046627_T_MASAKINOTENSOU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-161",
+        "number": "161",
+        "name": "이수재의 전송",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_161.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-174",
+        "number": "174",
+        "name": "マツバの確信",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046628_T_MATSUBANOKAKUSHIN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-160",
+        "number": "160",
+        "name": "유빈의 확신",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_160.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-175",
+        "number": "175",
+        "name": "セラピーエネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/SVM/046629_E_SERAPIENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-175",
+        "number": "175",
+        "name": "테라피 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_175.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-176",
+        "number": "176",
+        "name": "基本草エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/046116_E_KIHONKUSAENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-176",
+        "number": "176",
+        "name": "기본 풀 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_176.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-177",
+        "number": "177",
+        "name": "基本炎エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/046117_E_KIHONHONOOENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-177",
+        "number": "177",
+        "name": "기본 불꽃 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_177.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-178",
+        "number": "178",
+        "name": "基本水エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/046118_E_KIHONMIZUENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-178",
+        "number": "178",
+        "name": "기본 물 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_178.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-179",
+        "number": "179",
+        "name": "基本雷エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/046119_E_KIHONKAMINARIENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-179",
+        "number": "179",
+        "name": "기본 번개 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_179.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-180",
+        "number": "180",
+        "name": "基本超エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/046120_E_KIHONCHIXYOUENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-180",
+        "number": "180",
+        "name": "기본 초 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_180.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-181",
+        "number": "181",
+        "name": "基本闘エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/046121_E_KIHONTOUENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-181",
+        "number": "181",
+        "name": "기본 격투 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_181.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-182",
+        "number": "182",
+        "name": "基本悪エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/046122_E_KIHONAKUENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-182",
+        "number": "182",
+        "name": "기본 악 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_182.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SVM-183",
+        "number": "183",
+        "name": "基本鋼エネルギー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/ENE/046123_E_KIHONHAGANEENERUGI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-SVM",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-svm-183",
+        "number": "183",
+        "name": "기본 강철 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVM/SVM_183.png",
+        "rarity": null,
+        "setId": "kr-svm",
+        "region": "KR"
+      },
+      "dex": null
+    }
+  ],
+  "tail": {
+    "enOnly": [],
+    "krOnly": [],
+    "enKr": []
+  }
+}

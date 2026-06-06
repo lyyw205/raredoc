@@ -1,0 +1,2904 @@
+{
+  "group": {
+    "id": "sv-snow-hazard",
+    "nameKo": "스노해저드",
+    "nameEn": "Snow Hazard",
+    "crossGroupEN": false
+  },
+  "counts": {
+    "anchors": 99,
+    "enMatched": 88,
+    "krMatched": 99,
+    "enOnly": 0,
+    "krOnly": 0
+  },
+  "anchors": [
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-001",
+        "number": "001",
+        "name": "アメタマ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/001.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-sv2p-001",
+        "number": "001",
+        "name": "비구술",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_001.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 283
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-002",
+        "number": "002",
+        "name": "アメモース",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/002.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-sv2p-002",
+        "number": "002",
+        "name": "비나방",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_002.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 284
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-003",
+        "number": "003",
+        "name": "ミツハニー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/003.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-8",
+        "number": "8",
+        "name": "Combee",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/8.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-003",
+        "number": "003",
+        "name": "세꿀버리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_003.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 415
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-004",
+        "number": "004",
+        "name": "ビークイン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/004.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-9",
+        "number": "9",
+        "name": "Vespiquen",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/9.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-004",
+        "number": "004",
+        "name": "비퀸",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_004.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 416
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-005",
+        "number": "005",
+        "name": "ユキカブリ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/005.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-10",
+        "number": "10",
+        "name": "Snover",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/10.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-005",
+        "number": "005",
+        "name": "눈쓰개",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_005.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 459
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-006",
+        "number": "006",
+        "name": "ユキノオー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/006.webp",
+        "rarity": "レア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-11",
+        "number": "11",
+        "name": "Abomasnow",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/11.png",
+        "rarity": "Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-006",
+        "number": "006",
+        "name": "눈설왕",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_006.png",
+        "rarity": "레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 460
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-007",
+        "number": "007",
+        "name": "アマカジ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/007.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-sv2p-007",
+        "number": "007",
+        "name": "달콤아",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_007.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 761
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-008",
+        "number": "008",
+        "name": "アママイコ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/008.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-sv2p-008",
+        "number": "008",
+        "name": "달무리나",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_008.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 762
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-009",
+        "number": "009",
+        "name": "アマージョ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/009.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-sv2p-009",
+        "number": "009",
+        "name": "달코퀸",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_009.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 763
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-010",
+        "number": "010",
+        "name": "アノクサ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/010.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-22",
+        "number": "22",
+        "name": "Bramblin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/22.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-010",
+        "number": "010",
+        "name": "그푸리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_010.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 946
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-011",
+        "number": "011",
+        "name": "アノクサ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/011.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-23",
+        "number": "23",
+        "name": "Bramblin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/23.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-011",
+        "number": "011",
+        "name": "그푸리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_011.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 946
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-012",
+        "number": "012",
+        "name": "アノホラグサ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/012.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-24",
+        "number": "24",
+        "name": "Brambleghast",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/24.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-012",
+        "number": "012",
+        "name": "공푸리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_012.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 947
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-013",
+        "number": "013",
+        "name": "シガロコ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/013.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-25",
+        "number": "25",
+        "name": "Rellor",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/25.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-013",
+        "number": "013",
+        "name": "구르데",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_013.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 953
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-014",
+        "number": "014",
+        "name": "シガロコ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/014.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-26",
+        "number": "26",
+        "name": "Rellor",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/26.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-014",
+        "number": "014",
+        "name": "구르데",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_014.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 953
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-015",
+        "number": "015",
+        "name": "チオンジェンex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/015.webp",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-27",
+        "number": "27",
+        "name": "Wo-Chien ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/27.png",
+        "rarity": "Double Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-015",
+        "number": "015",
+        "name": "총지엔 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_015.png",
+        "rarity": "더블 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 1001
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-016",
+        "number": "016",
+        "name": "マリル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/016.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-44",
+        "number": "44",
+        "name": "Marill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/44.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-016",
+        "number": "016",
+        "name": "마릴",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_016.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 183
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-017",
+        "number": "017",
+        "name": "マリルリ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/017.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-45",
+        "number": "45",
+        "name": "Azumarill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/45.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-017",
+        "number": "017",
+        "name": "마릴리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_017.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 184
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-018",
+        "number": "018",
+        "name": "ラブカス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/018.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-47",
+        "number": "47",
+        "name": "Luvdisc",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/47.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-018",
+        "number": "018",
+        "name": "사랑동이",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_018.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 370
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-019",
+        "number": "019",
+        "name": "コオリッポ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/019.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-48",
+        "number": "48",
+        "name": "Eiscue",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/48.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-019",
+        "number": "019",
+        "name": "빙큐보",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_019.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 875
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-020",
+        "number": "020",
+        "name": "アルクジラ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/020.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-53",
+        "number": "53",
+        "name": "Cetoddle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/53.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-020",
+        "number": "020",
+        "name": "터벅고래",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_020.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 974
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-021",
+        "number": "021",
+        "name": "アルクジラ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/021.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-54",
+        "number": "54",
+        "name": "Cetoddle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/54.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-021",
+        "number": "021",
+        "name": "터벅고래",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_021.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 974
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-022",
+        "number": "022",
+        "name": "ハルクジラ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/022.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-55",
+        "number": "55",
+        "name": "Cetitan",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/55.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-022",
+        "number": "022",
+        "name": "우락고래",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_022.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 975
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-023",
+        "number": "023",
+        "name": "ミガルーサ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/023.webp",
+        "rarity": "レア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-56",
+        "number": "56",
+        "name": "Veluza",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/56.png",
+        "rarity": "Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-023",
+        "number": "023",
+        "name": "가비루사",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_023.png",
+        "rarity": "레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 976
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-024",
+        "number": "024",
+        "name": "セビエ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/024.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-57",
+        "number": "57",
+        "name": "Frigibax",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/57.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-024",
+        "number": "024",
+        "name": "드니차",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_024.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 996
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-025",
+        "number": "025",
+        "name": "セビエ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/025.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-58",
+        "number": "58",
+        "name": "Frigibax",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/58.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-025",
+        "number": "025",
+        "name": "드니차",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_025.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 996
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-026",
+        "number": "026",
+        "name": "セゴール",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/026.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-59",
+        "number": "59",
+        "name": "Arctibax",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/59.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-026",
+        "number": "026",
+        "name": "드니꽁",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_026.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 997
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-027",
+        "number": "027",
+        "name": "セグレイブ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/027.webp",
+        "rarity": "レア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-60",
+        "number": "60",
+        "name": "Baxcalibur",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/60.png",
+        "rarity": "Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-027",
+        "number": "027",
+        "name": "드닐레이브",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_027.png",
+        "rarity": "레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 998
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-028",
+        "number": "028",
+        "name": "パオジアンex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/028.webp",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-61",
+        "number": "61",
+        "name": "Chien-Pao ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/61.png",
+        "rarity": "Double Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-028",
+        "number": "028",
+        "name": "파오젠 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_028.png",
+        "rarity": "더블 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 1002
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-029",
+        "number": "029",
+        "name": "ヤドン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/029.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-85",
+        "number": "85",
+        "name": "Slowpoke",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/85.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-029",
+        "number": "029",
+        "name": "야돈",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_029.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 79
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-030",
+        "number": "030",
+        "name": "ヤドキングex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/030.webp",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-86",
+        "number": "86",
+        "name": "Slowking ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/86.png",
+        "rarity": "Double Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-030",
+        "number": "030",
+        "name": "야도킹 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_030.png",
+        "rarity": "더블 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 199
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-031",
+        "number": "031",
+        "name": "ゴチム",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/031.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-90",
+        "number": "90",
+        "name": "Gothita",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/90.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-031",
+        "number": "031",
+        "name": "고디탱",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_031.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 574
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-032",
+        "number": "032",
+        "name": "ゴチミル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/032.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-91",
+        "number": "91",
+        "name": "Gothorita",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/91.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-032",
+        "number": "032",
+        "name": "고디보미",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_032.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 575
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-033",
+        "number": "033",
+        "name": "ゴチルゼル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/033.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-92",
+        "number": "92",
+        "name": "Gothitelle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/92.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-033",
+        "number": "033",
+        "name": "고디모아젤",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_033.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 576
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-034",
+        "number": "034",
+        "name": "ミミッキュ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/034.webp",
+        "rarity": "レア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-97",
+        "number": "97",
+        "name": "Mimikyu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/97.png",
+        "rarity": "Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-034",
+        "number": "034",
+        "name": "따라큐",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_034.png",
+        "rarity": "레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 778
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-035",
+        "number": "035",
+        "name": "ヤバチャ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/035.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-sv2p-035",
+        "number": "035",
+        "name": "데인차",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_035.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 854
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-036",
+        "number": "036",
+        "name": "ポットデス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/036.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-sv2p-036",
+        "number": "036",
+        "name": "포트데스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_036.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 855
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-037",
+        "number": "037",
+        "name": "ベラカス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/037.webp",
+        "rarity": "レア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-99",
+        "number": "99",
+        "name": "Rabsca",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/99.png",
+        "rarity": "Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-037",
+        "number": "037",
+        "name": "베라카스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_037.png",
+        "rarity": "레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 954
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-038",
+        "number": "038",
+        "name": "マンキー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/038.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-106",
+        "number": "106",
+        "name": "Mankey",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/106.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-038",
+        "number": "038",
+        "name": "망키",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_038.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 56
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-039",
+        "number": "039",
+        "name": "オコリザル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/039.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-107",
+        "number": "107",
+        "name": "Primeape",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/107.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-039",
+        "number": "039",
+        "name": "성원숭",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_039.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 57
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-040",
+        "number": "040",
+        "name": "コノヨザルex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/040.webp",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-sv2p-040",
+        "number": "040",
+        "name": "저승갓숭 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_040.png",
+        "rarity": "더블 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 979
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-041",
+        "number": "041",
+        "name": "ウソッキー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/041.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-109",
+        "number": "109",
+        "name": "Sudowoodo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/109.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-041",
+        "number": "041",
+        "name": "꼬지모",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_041.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 185
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-042",
+        "number": "042",
+        "name": "キラーメ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/042.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-124",
+        "number": "124",
+        "name": "Glimmet",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/124.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-042",
+        "number": "042",
+        "name": "초롱순",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_042.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 969
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-043",
+        "number": "043",
+        "name": "キラーメ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/043.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-125",
+        "number": "125",
+        "name": "Glimmet",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/125.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-043",
+        "number": "043",
+        "name": "초롱순",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_043.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 969
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-044",
+        "number": "044",
+        "name": "キラフロル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/044.webp",
+        "rarity": "レア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-126",
+        "number": "126",
+        "name": "Glimmora",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/126.png",
+        "rarity": "Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-044",
+        "number": "044",
+        "name": "킬라플로르",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_044.png",
+        "rarity": "레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 970
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-045",
+        "number": "045",
+        "name": "ヤミカラス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/045.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-131",
+        "number": "131",
+        "name": "Murkrow",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/131.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-045",
+        "number": "045",
+        "name": "니로우",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_045.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 198
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-046",
+        "number": "046",
+        "name": "ドンカラス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/046.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-132",
+        "number": "132",
+        "name": "Honchkrow",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/132.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-046",
+        "number": "046",
+        "name": "돈크로우",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_046.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 430
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-047",
+        "number": "047",
+        "name": "オラチフ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/047.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-141",
+        "number": "141",
+        "name": "Maschiff",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/141.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-047",
+        "number": "047",
+        "name": "오라티프",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_047.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 942
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-048",
+        "number": "048",
+        "name": "オラチフ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/048.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-142",
+        "number": "142",
+        "name": "Maschiff",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/142.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-048",
+        "number": "048",
+        "name": "오라티프",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_048.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 942
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-049",
+        "number": "049",
+        "name": "マフィティフ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/049.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-143",
+        "number": "143",
+        "name": "Mabosstiff",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/143.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-049",
+        "number": "049",
+        "name": "마피티프",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_049.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 943
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-050",
+        "number": "050",
+        "name": "ドーミラー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/050.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-sv2p-050",
+        "number": "050",
+        "name": "동미러",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_050.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 436
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-051",
+        "number": "051",
+        "name": "ドータクン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/051.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-sv2p-051",
+        "number": "051",
+        "name": "동탁군",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_051.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 437
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-052",
+        "number": "052",
+        "name": "アーマーガア",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/052.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-148",
+        "number": "148",
+        "name": "Corviknight",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/148.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-052",
+        "number": "052",
+        "name": "아머까오",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_052.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 823
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-053",
+        "number": "053",
+        "name": "ゾウドウ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/053.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-149",
+        "number": "149",
+        "name": "Cufant",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/149.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-053",
+        "number": "053",
+        "name": "끼리동",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_053.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 878
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-054",
+        "number": "054",
+        "name": "ダイオウドウex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/054.webp",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-150",
+        "number": "150",
+        "name": "Copperajah ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/150.png",
+        "rarity": "Double Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-054",
+        "number": "054",
+        "name": "대왕끼리동 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_054.png",
+        "rarity": "더블 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 879
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-055",
+        "number": "055",
+        "name": "ミミズズ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/055.webp",
+        "rarity": "レア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-151",
+        "number": "151",
+        "name": "Orthworm",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/151.png",
+        "rarity": "Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-055",
+        "number": "055",
+        "name": "꿈트렁",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_055.png",
+        "rarity": "레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 968
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-056",
+        "number": "056",
+        "name": "ノコッチ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/056.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-156",
+        "number": "156",
+        "name": "Dunsparce",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/156.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-056",
+        "number": "056",
+        "name": "노고치",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_056.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 206
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-057",
+        "number": "057",
+        "name": "ノココッチ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/057.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-157",
+        "number": "157",
+        "name": "Dudunsparce",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/157.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-057",
+        "number": "057",
+        "name": "노고고치",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_057.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 982
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-058",
+        "number": "058",
+        "name": "キャモメ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/058.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-158",
+        "number": "158",
+        "name": "Wingull",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/158.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-058",
+        "number": "058",
+        "name": "갈모매",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_058.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 278
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-059",
+        "number": "059",
+        "name": "ペリッパー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/059.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-159",
+        "number": "159",
+        "name": "Pelipper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/159.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-059",
+        "number": "059",
+        "name": "패리퍼",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_059.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 279
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-060",
+        "number": "060",
+        "name": "ナマケロ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/060.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-160",
+        "number": "160",
+        "name": "Slakoth",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/160.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-060",
+        "number": "060",
+        "name": "게을로",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_060.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 287
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-061",
+        "number": "061",
+        "name": "ヤルキモノ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/061.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-161",
+        "number": "161",
+        "name": "Vigoroth",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/161.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-061",
+        "number": "061",
+        "name": "발바로",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_061.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 288
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-062",
+        "number": "062",
+        "name": "ケッキング",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/062.webp",
+        "rarity": "レア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-162",
+        "number": "162",
+        "name": "Slaking",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/162.png",
+        "rarity": "Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-062",
+        "number": "062",
+        "name": "게을킹",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_062.png",
+        "rarity": "레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 289
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-063",
+        "number": "063",
+        "name": "ココガラ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/063.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-164",
+        "number": "164",
+        "name": "Rookidee",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/164.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-063",
+        "number": "063",
+        "name": "파라꼬",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_063.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 821
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-064",
+        "number": "064",
+        "name": "アオガラス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/064.webp",
+        "rarity": "コモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-165",
+        "number": "165",
+        "name": "Corvisquire",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/165.png",
+        "rarity": "Common",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-064",
+        "number": "064",
+        "name": "파크로우",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_064.png",
+        "rarity": "커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 822
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-065",
+        "number": "065",
+        "name": "イキリンコex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/065.webp",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-169",
+        "number": "169",
+        "name": "Squawkabilly ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/169.png",
+        "rarity": "Double Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-065",
+        "number": "065",
+        "name": "시비꼬 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_065.png",
+        "rarity": "더블 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 931
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-066",
+        "number": "066",
+        "name": "すごいつりざお",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/066.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-188",
+        "number": "188",
+        "name": "Super Rod",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/188.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-066",
+        "number": "066",
+        "name": "대단한낚싯대",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_066.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-067",
+        "number": "067",
+        "name": "ファイトオレ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/067.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-181",
+        "number": "181",
+        "name": "Fighting Au Lait",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/181.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-067",
+        "number": "067",
+        "name": "파이팅오레",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_067.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-068",
+        "number": "068",
+        "name": "グルーシャ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/068.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-184",
+        "number": "184",
+        "name": "Grusha",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/184.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-068",
+        "number": "068",
+        "name": "그루샤",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_068.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-069",
+        "number": "069",
+        "name": "ピーニャ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/069.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-182",
+        "number": "182",
+        "name": "Giacomo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/182.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-069",
+        "number": "069",
+        "name": "피나",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_069.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-070",
+        "number": "070",
+        "name": "災いの雪山",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/070.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-174",
+        "number": "174",
+        "name": "Calamitous Snowy Mountain",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/174.png",
+        "rarity": "Uncommon",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-070",
+        "number": "070",
+        "name": "재앙의 설산",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_070.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-071",
+        "number": "071",
+        "name": "リバーサルエネルギー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/071.webp",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": null,
+      "kr": {
+        "id": "kr-sv2p-071",
+        "number": "071",
+        "name": "리버설 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_071.png",
+        "rarity": "언커먼",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-072",
+        "number": "072",
+        "name": "アノクサ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/072.webp",
+        "rarity": "アートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-198",
+        "number": "198",
+        "name": "Bramblin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/198.png",
+        "rarity": "Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-072",
+        "number": "072",
+        "name": "그푸리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_072.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 946
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-073",
+        "number": "073",
+        "name": "マリル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/073.webp",
+        "rarity": "アートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-204",
+        "number": "204",
+        "name": "Marill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/204.png",
+        "rarity": "Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-073",
+        "number": "073",
+        "name": "마릴",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_073.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 183
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-074",
+        "number": "074",
+        "name": "コオリッポ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/074.webp",
+        "rarity": "アートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-205",
+        "number": "205",
+        "name": "Eiscue",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/205.png",
+        "rarity": "Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-074",
+        "number": "074",
+        "name": "빙큐보",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_074.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 875
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-075",
+        "number": "075",
+        "name": "セビエ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/075.webp",
+        "rarity": "アートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-208",
+        "number": "208",
+        "name": "Frigibax",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/208.png",
+        "rarity": "Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-075",
+        "number": "075",
+        "name": "드니차",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_075.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 996
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-076",
+        "number": "076",
+        "name": "セゴール",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/076.webp",
+        "rarity": "アートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-209",
+        "number": "209",
+        "name": "Arctibax",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/209.png",
+        "rarity": "Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-076",
+        "number": "076",
+        "name": "드니꽁",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_076.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 997
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-077",
+        "number": "077",
+        "name": "セグレイブ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/077.webp",
+        "rarity": "アートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-210",
+        "number": "210",
+        "name": "Baxcalibur",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/210.png",
+        "rarity": "Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-077",
+        "number": "077",
+        "name": "드닐레이브",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_077.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 998
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-078",
+        "number": "078",
+        "name": "ゴチミル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/078.webp",
+        "rarity": "アートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-213",
+        "number": "213",
+        "name": "Gothorita",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/213.png",
+        "rarity": "Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-078",
+        "number": "078",
+        "name": "고디보미",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_078.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 575
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-079",
+        "number": "079",
+        "name": "ベラカス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/079.webp",
+        "rarity": "アートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-215",
+        "number": "215",
+        "name": "Rabsca",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/215.png",
+        "rarity": "Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-079",
+        "number": "079",
+        "name": "베라카스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_079.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 954
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-080",
+        "number": "080",
+        "name": "ウソッキー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/080.webp",
+        "rarity": "アートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-219",
+        "number": "219",
+        "name": "Sudowoodo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/219.png",
+        "rarity": "Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-080",
+        "number": "080",
+        "name": "꼬지모",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_080.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 185
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-081",
+        "number": "081",
+        "name": "ミミズズ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/081.webp",
+        "rarity": "アートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-224",
+        "number": "224",
+        "name": "Orthworm",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/224.png",
+        "rarity": "Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-081",
+        "number": "081",
+        "name": "꿈트렁",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_081.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 968
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-082",
+        "number": "082",
+        "name": "ココガラ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/082.webp",
+        "rarity": "アートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-225",
+        "number": "225",
+        "name": "Rookidee",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/225.png",
+        "rarity": "Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-082",
+        "number": "082",
+        "name": "파라꼬",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_082.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 821
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-083",
+        "number": "083",
+        "name": "ノココッチ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/083.webp",
+        "rarity": "アートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-229",
+        "number": "229",
+        "name": "Dudunsparce",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/229.png",
+        "rarity": "Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-083",
+        "number": "083",
+        "name": "노고고치",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_083.png",
+        "rarity": "아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 982
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-084",
+        "number": "084",
+        "name": "チオンジェンex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/084.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-232",
+        "number": "232",
+        "name": "Wo-Chien ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/232.png",
+        "rarity": "Super Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-084",
+        "number": "084",
+        "name": "총지엔 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_084.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 1001
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-085",
+        "number": "085",
+        "name": "パオジアンex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/085.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-236",
+        "number": "236",
+        "name": "Chien-Pao ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/236.png",
+        "rarity": "Super Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-085",
+        "number": "085",
+        "name": "파오젠 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_085.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 1002
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-086",
+        "number": "086",
+        "name": "ヤドキングex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/086.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-238",
+        "number": "238",
+        "name": "Slowking ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/238.png",
+        "rarity": "Super Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-086",
+        "number": "086",
+        "name": "야도킹 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_086.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 199
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-087",
+        "number": "087",
+        "name": "コノヨザルex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/087.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-242",
+        "number": "242",
+        "name": "Annihilape ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/242.png",
+        "rarity": "Super Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-087",
+        "number": "087",
+        "name": "저승갓숭 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_087.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 979
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-088",
+        "number": "088",
+        "name": "ダイオウドウex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/088.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-245",
+        "number": "245",
+        "name": "Copperajah ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/245.png",
+        "rarity": "Super Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-088",
+        "number": "088",
+        "name": "대왕끼리동 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_088.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 879
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-089",
+        "number": "089",
+        "name": "イキリンコex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/089.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-247",
+        "number": "247",
+        "name": "Squawkabilly ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/247.png",
+        "rarity": "Super Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-089",
+        "number": "089",
+        "name": "시비꼬 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_089.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 931
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-090",
+        "number": "090",
+        "name": "グルーシャ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/090.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-253",
+        "number": "253",
+        "name": "Grusha",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/253.png",
+        "rarity": "Super Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-090",
+        "number": "090",
+        "name": "그루샤",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_090.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-091",
+        "number": "091",
+        "name": "ピーニャ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/091.webp",
+        "rarity": "スーパーレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-252",
+        "number": "252",
+        "name": "Giacomo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/252.png",
+        "rarity": "Super Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-091",
+        "number": "091",
+        "name": "피나",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_091.png",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-092",
+        "number": "092",
+        "name": "チオンジェンex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/092.webp",
+        "rarity": "スペシャルアートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-257",
+        "number": "257",
+        "name": "Wo-Chien ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/257.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-092",
+        "number": "092",
+        "name": "총지엔 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_092.png",
+        "rarity": "스페셜 아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 1001
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-093",
+        "number": "093",
+        "name": "パオジアンex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/093.webp",
+        "rarity": "スペシャルアートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-261",
+        "number": "261",
+        "name": "Chien-Pao ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/261.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-093",
+        "number": "093",
+        "name": "파오젠 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_093.png",
+        "rarity": "스페셜 아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 1002
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-094",
+        "number": "094",
+        "name": "イキリンコex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/094.webp",
+        "rarity": "スペシャルアートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-264",
+        "number": "264",
+        "name": "Squawkabilly ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/264.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-094",
+        "number": "094",
+        "name": "시비꼬 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_094.png",
+        "rarity": "스페셜 아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 931
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-095",
+        "number": "095",
+        "name": "グルーシャ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/095.webp",
+        "rarity": "スペシャルアートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-268",
+        "number": "268",
+        "name": "Grusha",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/268.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-095",
+        "number": "095",
+        "name": "그루샤",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_095.png",
+        "rarity": "스페셜 아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-096",
+        "number": "096",
+        "name": "ピーニャ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/096.webp",
+        "rarity": "スペシャルアートレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-267",
+        "number": "267",
+        "name": "Giacomo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/267.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-096",
+        "number": "096",
+        "name": "피나",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_096.png",
+        "rarity": "스페셜 아트 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-097",
+        "number": "097",
+        "name": "パオジアンex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/097.webp",
+        "rarity": "ウルトラレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-274",
+        "number": "274",
+        "name": "Chien-Pao ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/274.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-097",
+        "number": "097",
+        "name": "파오젠 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_097.png",
+        "rarity": "울트라 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": 1002
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-098",
+        "number": "098",
+        "name": "すごいつりざお",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/098.webp",
+        "rarity": "ウルトラレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-276",
+        "number": "276",
+        "name": "Super Rod",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/276.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-098",
+        "number": "098",
+        "name": "대단한낚싯대",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_098.png",
+        "rarity": "울트라 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-SV2P-099",
+        "number": "099",
+        "name": "基本水エネルギー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2P/ja/small/jp-tcg-SV2P/099.webp",
+        "rarity": "ウルトラレア",
+        "setId": "jp-tcg-SV2P",
+        "region": "JP"
+      },
+      "en": {
+        "id": "sv2-279",
+        "number": "279",
+        "name": "Basic Water Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/279.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv2",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-sv2p-099",
+        "number": "099",
+        "name": "기본 물 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2P/SV2P_099.png",
+        "rarity": "울트라 레어",
+        "setId": "kr-sv2p",
+        "region": "KR"
+      },
+      "dex": null
+    }
+  ],
+  "tail": {
+    "enOnly": [],
+    "krOnly": [],
+    "enKr": []
+  }
+}

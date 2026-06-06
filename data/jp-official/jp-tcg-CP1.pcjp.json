@@ -1,0 +1,612 @@
+{
+ "1": {
+  "number": 1,
+  "jaName": "マグマ団のドンメル",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire",
+     "Colorless"
+    ],
+    "name": "ひのこ",
+    "text": "このポケモンについているエネルギーを1個選び、トラッシュする。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Akira Komayama"
+ },
+ "2": {
+  "number": 2,
+  "jaName": "マグマ団のバクーダ",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "かえんだま",
+    "text": "このポケモンについている基本エネルギーを1個選び、ベンチポケモンにつけ替える。",
+    "damage": "60"
+   }
+  ],
+  "illustrator": "Shin Nagasawa"
+ },
+ "3": {
+  "number": 3,
+  "jaName": "アクア団のタマザラシ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water"
+    ],
+    "name": "みずでっぽう",
+    "text": "",
+    "damage": "10"
+   }
+  ],
+  "illustrator": "Sanosuke Sakuma"
+ },
+ "4": {
+  "number": 4,
+  "jaName": "アクア団のトドグラー",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water",
+     "Colorless"
+    ],
+    "name": "みずとばし",
+    "text": "相手のポケモンを1匹選び、20ダメージ。［ベンチは弱点・抵抗力の計算をしない。］",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Water",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ひょうのかぜ",
+    "text": "相手のバトルポケモンが「マグマ団」のポケモンなら、60ダメージを追加。",
+    "damage": "60＋"
+   }
+  ],
+  "illustrator": "Naoki Saito"
+ },
+ "5": {
+  "number": 5,
+  "jaName": "アクア団のトドゼルガ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "パワーブロー",
+    "text": "このポケモンについているエネルギーの数×30ダメージ。",
+    "damage": "30×"
+   },
+   {
+    "cost": [
+     "Water",
+     "Water",
+     "Water",
+     "Colorless"
+    ],
+    "name": "デュアルブリザード",
+    "text": "このポケモンについているエネルギーを2個トラッシュし、相手のポケモンを2匹選び、それぞれに80ダメージ。［ベンチは弱点・抵抗力の計算をしない。］",
+    "damage": null
+   }
+  ],
+  "illustrator": "Hitoshi Ariga"
+ },
+ "6": {
+  "number": 6,
+  "jaName": "アクア団のカイオーガEX",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water",
+     "Water",
+     "Water",
+     "Colorless"
+    ],
+    "name": "アクアインパクト",
+    "text": "相手のバトルポケモンのにげるために必要なエネルギーの数×20ダメージを追加。",
+    "damage": "80＋"
+   }
+  ],
+  "illustrator": "nagimiso"
+ },
+ "7": {
+  "number": 7,
+  "jaName": "アクア団のベトベター",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic"
+    ],
+    "name": "はたく",
+    "text": "",
+    "damage": "10"
+   },
+   {
+    "cost": [
+     "Psychic",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "どろかけ",
+    "text": "",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "kawayoo"
+ },
+ "8": {
+  "number": 8,
+  "jaName": "アクア団のベトベトン",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ついげき",
+    "text": "相手のバトルポケモンが特殊状態なら、60ダメージを追加。",
+    "damage": "60＋"
+   }
+  ],
+  "illustrator": "Kouki Saitou"
+ },
+ "9": {
+  "number": 9,
+  "jaName": "アクア団のハブネーク",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic"
+    ],
+    "name": "どくのキバ",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンをどくにする。",
+    "damage": "10"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ベノムテール",
+    "text": "相手のバトルポケモンが特殊状態なら、そのバトルポケモンについているエネルギーを1個選び、トラッシュする。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Naoki Saito"
+ },
+ "10": {
+  "number": 10,
+  "jaName": "マグマ団のヤジロン",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic",
+     "Colorless"
+    ],
+    "name": "テレキネシス",
+    "text": "相手のポケモンを1匹選び、20ダメージ。このワザのダメージは弱点・抵抗力の計算をしない。",
+    "damage": null
+   }
+  ],
+  "illustrator": "Mitsuhiro Arita"
+ },
+ "11": {
+  "number": 11,
+  "jaName": "マグマ団のネンドール",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "パワービーム",
+    "text": "",
+    "damage": "70"
+   }
+  ],
+  "illustrator": "Masakazu Fukuda"
+ },
+ "12": {
+  "number": 12,
+  "jaName": "マグマ団のココドラ",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting"
+    ],
+    "name": "かじる",
+    "text": "",
+    "damage": "10"
+   }
+  ],
+  "illustrator": "Akira Komayama"
+ },
+ "13": {
+  "number": 13,
+  "jaName": "マグマ団のコドラ",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "かじる",
+    "text": "",
+    "damage": "30"
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "とっしん",
+    "text": "このポケモンにも10ダメージ。",
+    "damage": "60"
+   }
+  ],
+  "illustrator": "Masakazu Fukuda"
+ },
+ "14": {
+  "number": 14,
+  "jaName": "マグマ団のボスゴドラ",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "ロックスタンプ",
+    "text": "自分の場のポケモンについているエネルギーを好きなだけトラッシュし、トラッシュしたエネルギーの数×40ダメージ。",
+    "damage": "40×"
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Fighting",
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "がんせきあらし",
+    "text": "ダメカンがのっている相手のベンチポケモン全員にも、それぞれ20ダメージ。［ベンチは弱点・抵抗力の計算をしない。］",
+    "damage": "120"
+   }
+  ],
+  "illustrator": "TOKIYA"
+ },
+ "15": {
+  "number": 15,
+  "jaName": "マグマ団のグラードンEX",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting",
+     "Fighting",
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "マグマクエイク",
+    "text": "ダメージを与えるとき、すでに相手のバトルポケモンにダメカンがのっているなら、80ダメージを追加。",
+    "damage": "80＋"
+   }
+  ],
+  "illustrator": "nagimiso"
+ },
+ "16": {
+  "number": 16,
+  "jaName": "アクア団のポチエナ",
+  "types": [
+   "Darkness"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "ほえる",
+    "text": "相手のバトルポケモンをベンチポケモンと入れ替える。［バトル場に出すポケモンは相手が選ぶ。］",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Water",
+     "Colorless"
+    ],
+    "name": "かみつく",
+    "text": "",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Kouki Saitou"
+ },
+ "17": {
+  "number": 17,
+  "jaName": "マグマ団のポチエナ",
+  "types": [
+   "Darkness"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "せんにゅう",
+    "text": "相手の手札を見る。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "かみつく",
+    "text": "",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "TOKIYA"
+ },
+ "18": {
+  "number": 18,
+  "jaName": "アクア団のグラエナ",
+  "types": [
+   "Darkness"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water",
+     "Colorless"
+    ],
+    "name": "チームインパクト",
+    "text": "自分の場の「アクア団」のポケモンの数ぶんコインを投げ、オモテの数×30ダメージ。",
+    "damage": "30×"
+   },
+   {
+    "cost": [
+     "Water",
+     "Water",
+     "Colorless"
+    ],
+    "name": "かみくだく",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンについているエネルギーを1個選び、トラッシュする。",
+    "damage": "80"
+   }
+  ],
+  "illustrator": "Mitsuhiro Arita"
+ },
+ "19": {
+  "number": 19,
+  "jaName": "マグマ団のグラエナ",
+  "types": [
+   "Darkness"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "かみつく",
+    "text": "",
+    "damage": "30"
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "てきいのキバ",
+    "text": "相手のバトルポケモンが「アクア団」のポケモンなら、40ダメージを追加。",
+    "damage": "80＋"
+   }
+  ],
+  "illustrator": "Hitoshi Ariga"
+ },
+ "20": {
+  "number": 20,
+  "jaName": "アクア団のキバニア",
+  "types": [
+   "Darkness"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Darkness"
+    ],
+    "name": "ひれビンタ",
+    "text": "コインを2回投げ、オモテの数×10ダメージ。",
+    "damage": "10×"
+   }
+  ],
+  "illustrator": "Sanosuke Sakuma"
+ },
+ "21": {
+  "number": 21,
+  "jaName": "アクア団のサメハダー",
+  "types": [
+   "Darkness"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Darkness",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "するどいキバ",
+    "text": "",
+    "damage": "70"
+   }
+  ],
+  "illustrator": "kawayoo"
+ },
+ "22": {
+  "number": 22,
+  "jaName": "マグマ団のザングース",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "なかまをよぶ",
+    "text": "自分の山札から「マグマ団」のたねポケモンを2枚まで選び、ベンチに出す。そして山札を切る。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "チームプレイ",
+    "text": "自分のベンチの「マグマ団」のポケモンの数×20ダメージ。",
+    "damage": "20×"
+   }
+  ],
+  "illustrator": "Shin Nagasawa"
+ },
+ "23": {
+  "number": 23,
+  "jaName": "アクア団のスーパーボール",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Toyste Beach"
+ },
+ "24": {
+  "number": 24,
+  "jaName": "マグマ団のスーパーボール",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Toyste Beach"
+ },
+ "25": {
+  "number": 25,
+  "jaName": "アクアディフューザー",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Toyste Beach"
+ },
+ "26": {
+  "number": 26,
+  "jaName": "マグマポインター",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Toyste Beach"
+ },
+ "27": {
+  "number": 27,
+  "jaName": "アクア団の幹部",
+  "types": [],
+  "attacks": [],
+  "illustrator": "GAME FREAK inc."
+ },
+ "28": {
+  "number": 28,
+  "jaName": "アクア団のしたっぱ",
+  "types": [],
+  "attacks": [],
+  "illustrator": "GAME FREAK inc."
+ },
+ "29": {
+  "number": 29,
+  "jaName": "マグマ団の幹部",
+  "types": [],
+  "attacks": [],
+  "illustrator": "GAME FREAK inc."
+ },
+ "30": {
+  "number": 30,
+  "jaName": "マグマ団のしたっぱ",
+  "types": [],
+  "attacks": [],
+  "illustrator": "GAME FREAK inc."
+ },
+ "31": {
+  "number": 31,
+  "jaName": "アクア団の秘密基地",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Ryo Ueda"
+ },
+ "32": {
+  "number": 32,
+  "jaName": "マグマ団の秘密基地",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Ryo Ueda"
+ },
+ "33": {
+  "number": 33,
+  "jaName": "ダブルアクアエネルギー",
+  "types": [],
+  "attacks": [],
+  "illustrator": "5ban Graphics"
+ },
+ "34": {
+  "number": 34,
+  "jaName": "ダブルマグマエネルギー",
+  "types": [],
+  "attacks": [],
+  "illustrator": "5ban Graphics"
+ }
+}

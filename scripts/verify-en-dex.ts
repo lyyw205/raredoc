@@ -5,7 +5,7 @@
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
 const POKE = ["Pokémon", "Pokemon"];
-async function fetchSet(sid: string) { const out: any[] = []; for (let pg = 1; pg <= 5; pg++) { const r = await fetch(`https://api.pokemontcg.io/v2/cards?q=set.id:${sid}&pageSize=250&page=${pg}`); const j = await r.json(); if (!j.data?.length) break; out.push(...j.data); if (j.data.length < 250) break; } return out; }
+async function fetchSet(sid: string) { const code = sid.replace(/^en-tcg-/, ""); const out: any[] = []; for (let pg = 1; pg <= 5; pg++) { const r = await fetch(`https://api.pokemontcg.io/v2/cards?q=set.id:${code}&pageSize=250&page=${pg}`); const j = await r.json(); if (!j.data?.length) break; out.push(...j.data); if (j.data.length < 250) break; } return out; }
 async function main() {
   const enSet = process.argv[2], jpSets = process.argv[3].split(",").map((s) => s.trim());
   const enDex = new Map((await fetchSet(enSet)).map((c: any) => [c.number, c.nationalPokedexNumbers?.[0] ?? null]));

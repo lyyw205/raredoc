@@ -7,9 +7,10 @@
   },
   "counts": {
     "anchors": 237,
-    "enMatched": 136,
+    "enMatched": 138,
     "krMatched": 237,
-    "enOnly": 44
+    "enOnly": 42,
+    "krOnly": 0
   },
   "anchors": [
     {
@@ -4938,7 +4939,15 @@
         "setId": "jp-sv-prismatic-evolutions",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv8pt5-133",
+        "number": "133",
+        "name": "Atticus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-prismatic-evolutions/en/small/sv8pt5/133.png",
+        "rarity": "Super Rare",
+        "setId": "sv8pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv8a-194",
         "number": "194",
@@ -4960,7 +4969,15 @@
         "setId": "jp-sv-prismatic-evolutions",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv8pt5-134",
+        "number": "134",
+        "name": "Atticus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-prismatic-evolutions/en/small/sv8pt5/134.png",
+        "rarity": "Super Rare",
+        "setId": "sv8pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv8a-196",
         "number": "196",
@@ -6773,28 +6790,6 @@
         "number": "127",
         "name": "Roto-Stick",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-prismatic-evolutions/en/small/sv8pt5/127.png",
-        "rarity": null,
-        "setId": "sv8pt5",
-        "region": "EN",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "sv8pt5-133",
-        "number": "133",
-        "name": "Atticus",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-prismatic-evolutions/en/small/sv8pt5/133.png",
-        "rarity": null,
-        "setId": "sv8pt5",
-        "region": "EN",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "sv8pt5-134",
-        "number": "134",
-        "name": "Atticus",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-prismatic-evolutions/en/small/sv8pt5/134.png",
         "rarity": null,
         "setId": "sv8pt5",
         "region": "EN",

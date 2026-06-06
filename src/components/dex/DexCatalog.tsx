@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Search } from "lucide-react";
 import { RARITY_KO } from "@/lib/constants";
 import { GroupCards, GROUPED_GROUP_IDS } from "./GroupCards";
+import { eraLabel } from "@/lib/cards/eras";
 import { getCardPrices, type CardPriceRow } from "@/lib/actions/getCardPrices";
 import { getCardDetail, type CardLocaleVariant, type CardInfo } from "@/lib/actions/getCardDetail";
 import { cardTier, tierFromGroup, categoryTier, categoryTierFromGroup } from "@/lib/cards/rarity";
@@ -74,7 +75,18 @@ export type DexSet = {
   releaseDate: string | null;
   regions: string[];
   regionSets: DexRegionSet[];
+  enName?: string | null;   // 대응 영문판 이름 (JP↔EN 매칭 시)
+  isEnOnly?: boolean;       // EN 단독 발매 (JP 원판 없음)
+  isSpecial?: boolean;      // 강화확장팩·덱/굿즈 — era 하단 노출
 };
+
+// 특수상품(덱/굿즈) 사이드바 이름 꼬리표 — "()안에 표시"
+function specialSuffix(set: DexSet): string {
+  if (!set.isSpecial) return "";
+  if (/-goods$/.test(set.id)) return " (굿즈)";
+  if (/-decks$/.test(set.id)) return " (덱)";
+  return " (특수)";
+}
 
 type ViewMode = "all" | "mine";
 
@@ -121,14 +133,8 @@ const SUPERTYPE_META: Record<string, { label: string; emoji: string }> = {
   "Energy":  { label: "에너지", emoji: "⚡" },
 };
 
-// ── 시리즈(era) 친화 라벨 — 코드만 있는 모던 그룹에 한글 병기 ──────────────
-const ERA_FULL: Record<string, string> = {
-  SV: "SV (스칼렛 & 바이올렛)",
-  MEGA: "MEGA (메가 진화)",
-};
-function eraLabel(era: string) {
-  return ERA_FULL[era] ?? era;
-}
+// 시리즈(era) 라벨·정렬은 공용 단일출처 사용 — docs/card-packs-jp-en-guide.md 참고
+// (eraLabel: canonical era → 한글 병기 라벨)
 
 const REGION_LABEL: Record<string, string> = { EN: "영문판", JP: "일본판", KR: "한국판" };
 
@@ -930,7 +936,7 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
               onClick={() => setSelectedSetId(s.id)}
               className="shrink-0"
             >
-              {s.name}
+              {s.name}{specialSuffix(s)}
             </Chip>
           </Fragment>
         ))}
@@ -966,7 +972,7 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={logoUrl} alt="" className="h-4 w-8 object-contain shrink-0" loading="lazy" decoding="async" onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }} />
-                      <span className="flex-1 min-w-0 truncate text-toss-caption font-medium">{s.name}</span>
+                      <span className="flex-1 min-w-0 truncate text-toss-caption font-medium">{s.name}{specialSuffix(s)}</span>
                       {view === "mine" ? (
                         <span className="shrink-0 text-toss-tiny font-bold">{pct}%</span>
                       ) : (
@@ -1145,6 +1151,11 @@ export function DexCatalog({ sets, locale }: { sets: DexSet[]; locale: string })
                       {/* 메타 행: 시리즈 · 발매일 · 수록종 · 지역 · (보유) */}
                       <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5">
                         <Chip variant="tag" size="sm">{eraLabel(set.era)}</Chip>
+                        {set.isEnOnly ? (
+                          <Chip variant="tag" size="sm">EN 단독 발매</Chip>
+                        ) : set.enName ? (
+                          <Chip variant="tag" size="sm">영문판: {set.enName}</Chip>
+                        ) : null}
                         {set.releaseDate && (
                           <span className="text-toss-caption text-toss-text-tertiary toss-numeric">📅 {set.releaseDate}</span>
                         )}

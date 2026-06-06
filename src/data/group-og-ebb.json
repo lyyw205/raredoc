@@ -1,0 +1,3055 @@
+{
+  "group": {
+    "id": "og-ebb",
+    "nameKo": "EX 배틀 부스트",
+    "nameEn": "EX Battle Boost",
+    "crossGroupEN": false
+  },
+  "counts": {
+    "anchors": 93,
+    "enMatched": 93,
+    "krMatched": 93,
+    "enOnly": 22,
+    "krOnly": 0
+  },
+  "anchors": [
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-001",
+        "number": "001",
+        "name": "ツボツボ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028793_P_TSUBOTSUBO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-003",
+        "number": "003",
+        "name": "Shuckle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/003.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-001",
+        "number": "001",
+        "name": "단단지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_001.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 213
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-002",
+        "number": "002",
+        "name": "ツタージャ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028794_P_TSUTAJA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-006",
+        "number": "006",
+        "name": "Snivy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/006.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-002",
+        "number": "002",
+        "name": "주리비얀",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_002.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 495
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-003",
+        "number": "003",
+        "name": "ジャノビー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028795_P_JANOBI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-007",
+        "number": "007",
+        "name": "Servine",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/007.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-003",
+        "number": "003",
+        "name": "샤비",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_003.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 496
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-004",
+        "number": "004",
+        "name": "ジャローダ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028796_P_JARODA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-008",
+        "number": "008",
+        "name": "Serperior",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/008.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-004",
+        "number": "004",
+        "name": "샤로다",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_004.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 497
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-005",
+        "number": "005",
+        "name": "クルミル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028797_P_KURUMIRU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-009",
+        "number": "009",
+        "name": "Sewaddle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/009.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-005",
+        "number": "005",
+        "name": "두르보",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_005.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 540
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-006",
+        "number": "006",
+        "name": "クルマユ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028798_P_KURUMAYU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-011",
+        "number": "011",
+        "name": "Swadloon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/011.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-006",
+        "number": "006",
+        "name": "두르쿤",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_006.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 541
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-007",
+        "number": "007",
+        "name": "ハハコモリ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028799_P_HAHAKOMORI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-012",
+        "number": "012",
+        "name": "Leavanny",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/012.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-007",
+        "number": "007",
+        "name": "모아머",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_007.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 542
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-008",
+        "number": "008",
+        "name": "ビリジオン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028800_P_BIRIJION.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-015",
+        "number": "015",
+        "name": "Virizion",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/015.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-008",
+        "number": "008",
+        "name": "비리디온",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_008.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 640
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-009",
+        "number": "009",
+        "name": "ヒトカゲ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028801_P_HITOKAGE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-017",
+        "number": "017",
+        "name": "Charmander",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/017.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-009",
+        "number": "009",
+        "name": "파이리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_009.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 4
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-010",
+        "number": "010",
+        "name": "リザード",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028802_P_RIZADO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-018",
+        "number": "018",
+        "name": "Charmeleon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/018.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-010",
+        "number": "010",
+        "name": "리자드",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_010.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 5
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-011",
+        "number": "011",
+        "name": "リザードン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028803_P_RIZADON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-019",
+        "number": "019",
+        "name": "Charizard",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/019.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-011",
+        "number": "011",
+        "name": "리자몽",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_011.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 6
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-012",
+        "number": "012",
+        "name": "ロコン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028804_P_ROKON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-020",
+        "number": "020",
+        "name": "Vulpix",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/020.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-012",
+        "number": "012",
+        "name": "식스테일",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_012.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 37
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-013",
+        "number": "013",
+        "name": "キュウコン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028805_P_KYUUKON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-021",
+        "number": "021",
+        "name": "Ninetales",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/021.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-013",
+        "number": "013",
+        "name": "나인테일",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_013.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 38
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-014",
+        "number": "014",
+        "name": "ファイヤー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028806_P_FAIYA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-022",
+        "number": "022",
+        "name": "Moltres",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/022.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-014",
+        "number": "014",
+        "name": "파이어",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_014.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 146
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-015",
+        "number": "015",
+        "name": "ビクティニ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028807_P_BIKUTEINI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-023",
+        "number": "023",
+        "name": "Victini",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/023.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-015",
+        "number": "015",
+        "name": "비크티니",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_015.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 494
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-016",
+        "number": "016",
+        "name": "ビクティニEX",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028808_P_BIKUTEINIEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-024",
+        "number": "024",
+        "name": "Victini-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/024.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-016",
+        "number": "016",
+        "name": "비크티니 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_016.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 494
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-017",
+        "number": "017",
+        "name": "ポカブ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028809_P_POKABU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-025",
+        "number": "025",
+        "name": "Tepig",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/025.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-017",
+        "number": "017",
+        "name": "뚜꾸리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_017.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 498
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-018",
+        "number": "018",
+        "name": "チャオブー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028810_P_CHAOBU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-026",
+        "number": "026",
+        "name": "Pignite",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/026.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-018",
+        "number": "018",
+        "name": "차오꿀",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_018.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 499
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-019",
+        "number": "019",
+        "name": "エンブオー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028811_P_ENBUO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-027",
+        "number": "027",
+        "name": "Emboar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/027.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-019",
+        "number": "019",
+        "name": "염무왕",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_019.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 500
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-020",
+        "number": "020",
+        "name": "レシラム",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028812_P_RESHIRAMU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-028",
+        "number": "028",
+        "name": "Reshiram",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/028.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-020",
+        "number": "020",
+        "name": "레시라무",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_020.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 643
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-021",
+        "number": "021",
+        "name": "レシラムEX",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028813_P_RESHIRAMUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-029",
+        "number": "029",
+        "name": "Reshiram-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/029.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-021",
+        "number": "021",
+        "name": "레시라무 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_021.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 643
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-022",
+        "number": "022",
+        "name": "コイキング",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028814_P_KOIKINGU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-030",
+        "number": "030",
+        "name": "Magikarp",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/030.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-022",
+        "number": "022",
+        "name": "잉어킹",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_022.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 129
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-023",
+        "number": "023",
+        "name": "ギャラドス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028815_P_GYARADOSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-031",
+        "number": "031",
+        "name": "Gyarados",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/031.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-023",
+        "number": "023",
+        "name": "갸라도스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_023.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 130
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-024",
+        "number": "024",
+        "name": "フリーザー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028816_P_FURIZA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-032",
+        "number": "032",
+        "name": "Articuno",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/032.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-024",
+        "number": "024",
+        "name": "프리져",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_024.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 144
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-025",
+        "number": "025",
+        "name": "ポッチャマ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028817_P_POCCHAMA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-RC6",
+        "number": "RC6",
+        "name": "Piplup",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/RC6.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-025",
+        "number": "025",
+        "name": "팽도리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_025.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 393
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-026",
+        "number": "026",
+        "name": "ポッタイシ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028818_P_POTTAISHI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-034",
+        "number": "034",
+        "name": "Prinplup",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/034.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-026",
+        "number": "026",
+        "name": "팽태자",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_026.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 394
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-027",
+        "number": "027",
+        "name": "エンペルト",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028819_P_ENPERUTO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-035",
+        "number": "035",
+        "name": "Empoleon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/035.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-027",
+        "number": "027",
+        "name": "엠페르트",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_027.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 395
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-028",
+        "number": "028",
+        "name": "フィオネ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028820_P_FIONE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-036",
+        "number": "036",
+        "name": "Phione",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/036.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-028",
+        "number": "028",
+        "name": "피오네",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_028.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 489
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-029",
+        "number": "029",
+        "name": "ミジュマル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028821_P_MIJUMARU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-037",
+        "number": "037",
+        "name": "Oshawott",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/037.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-029",
+        "number": "029",
+        "name": "수댕이",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_029.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 501
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-030",
+        "number": "030",
+        "name": "フタチマル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028822_P_FUTACHIMARU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-038",
+        "number": "038",
+        "name": "Dewott",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/038.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-030",
+        "number": "030",
+        "name": "쌍검자비",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_030.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 502
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-031",
+        "number": "031",
+        "name": "ダイケンキ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028823_P_DAIKENKI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-039",
+        "number": "039",
+        "name": "Samurott",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/039.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-031",
+        "number": "031",
+        "name": "대검귀",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_031.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 503
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-032",
+        "number": "032",
+        "name": "オタマロ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028824_P_OTAMARO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-040",
+        "number": "040",
+        "name": "Tympole",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/040.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-032",
+        "number": "032",
+        "name": "동챙이",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_032.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 535
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-033",
+        "number": "033",
+        "name": "ガマガル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028825_P_GAMAGARU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-041",
+        "number": "041",
+        "name": "Palpitoad",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/041.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-033",
+        "number": "033",
+        "name": "두까비",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_033.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 536
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-034",
+        "number": "034",
+        "name": "ガマゲロゲ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028826_P_GAMAGEROGE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-042",
+        "number": "042",
+        "name": "Seismitoad",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/042.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-034",
+        "number": "034",
+        "name": "두빅굴",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_034.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 537
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-035",
+        "number": "035",
+        "name": "キュレム",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028827_P_KYUREMU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-043",
+        "number": "043",
+        "name": "Kyurem",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/043.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-035",
+        "number": "035",
+        "name": "큐레무",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_035.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 646
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-036",
+        "number": "036",
+        "name": "キュレムEX",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028828_P_KYUREMUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-044",
+        "number": "044",
+        "name": "Kyurem-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/044.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-036",
+        "number": "036",
+        "name": "큐레무 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_036.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 646
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-037",
+        "number": "037",
+        "name": "ケルディオEX",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028829_P_KERUDEIOEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-045",
+        "number": "045",
+        "name": "Keldeo-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/045.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-037",
+        "number": "037",
+        "name": "케르디오 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_037.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 647
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-038",
+        "number": "038",
+        "name": "サンダー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028830_P_SANDA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-046",
+        "number": "046",
+        "name": "Zapdos",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/046.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-038",
+        "number": "038",
+        "name": "썬더",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_038.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 145
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-039",
+        "number": "039",
+        "name": "プラスル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028831_P_PURASURU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-047",
+        "number": "047",
+        "name": "Plusle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/047.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-039",
+        "number": "039",
+        "name": "플러시",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_039.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 311
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-040",
+        "number": "040",
+        "name": "マイナン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028832_P_MAINAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-048",
+        "number": "048",
+        "name": "Minun",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/048.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-040",
+        "number": "040",
+        "name": "마이농",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_040.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 312
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-041",
+        "number": "041",
+        "name": "エモンガ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028833_P_EMONGA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-049",
+        "number": "049",
+        "name": "Emolga",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/049.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-041",
+        "number": "041",
+        "name": "에몽가",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_041.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 587
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-042",
+        "number": "042",
+        "name": "ボルトロス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028834_P_BORUTOROSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-050",
+        "number": "050",
+        "name": "Thundurus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/050.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-042",
+        "number": "042",
+        "name": "볼트로스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_042.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 642
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-043",
+        "number": "043",
+        "name": "ゼクロム",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028835_P_ZEKUROMU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-051",
+        "number": "051",
+        "name": "Zekrom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/051.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-043",
+        "number": "043",
+        "name": "제크로무",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_043.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 644
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-044",
+        "number": "044",
+        "name": "ゼクロムEX",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028836_P_ZEKUROMUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-052",
+        "number": "052",
+        "name": "Zekrom-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/052.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-044",
+        "number": "044",
+        "name": "제크로무 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_044.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 644
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-045",
+        "number": "045",
+        "name": "ミュウツーEX",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028837_P_MYUUTSUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-054",
+        "number": "054",
+        "name": "Mewtwo-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/054.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-045",
+        "number": "045",
+        "name": "뮤츠 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_045.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 150
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-046",
+        "number": "046",
+        "name": "ネイティ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028838_P_NEITEI.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-055",
+        "number": "055",
+        "name": "Natu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/055.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-046",
+        "number": "046",
+        "name": "네이티",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_046.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 177
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-047",
+        "number": "047",
+        "name": "ネイティオ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028839_P_NEITEIO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-056",
+        "number": "056",
+        "name": "Xatu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/056.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-047",
+        "number": "047",
+        "name": "네이티오",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_047.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 178
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-048",
+        "number": "048",
+        "name": "ラルトス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028840_P_RARUTOSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-059",
+        "number": "059",
+        "name": "Ralts",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/059.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-048",
+        "number": "048",
+        "name": "랄토스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_048.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 280
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-049",
+        "number": "049",
+        "name": "キルリア",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028841_P_KIRURIA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-060",
+        "number": "060",
+        "name": "Kirlia",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/060.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-049",
+        "number": "049",
+        "name": "킬리아",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_049.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 281
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-050",
+        "number": "050",
+        "name": "グレッグル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028842_P_GUREGGURU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-062",
+        "number": "062",
+        "name": "Croagunk",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/062.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-050",
+        "number": "050",
+        "name": "삐딱구리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_050.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 453
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-051",
+        "number": "051",
+        "name": "ドクロッグ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028843_P_DOKUROGGU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-063",
+        "number": "063",
+        "name": "Toxicroak",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/063.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-051",
+        "number": "051",
+        "name": "독개굴",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_051.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 454
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-052",
+        "number": "052",
+        "name": "シンボラー",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028844_P_SHINBORA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-066",
+        "number": "066",
+        "name": "Sigilyph",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/066.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-052",
+        "number": "052",
+        "name": "심보러",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_052.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 561
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-053",
+        "number": "053",
+        "name": "ヤブクロン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028845_P_YABUKURON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-067",
+        "number": "067",
+        "name": "Trubbish",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/067.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-053",
+        "number": "053",
+        "name": "깨봉이",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_053.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 568
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-054",
+        "number": "054",
+        "name": "ダストダス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028846_P_DASUTODASU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-068",
+        "number": "068",
+        "name": "Garbodor",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/068.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-054",
+        "number": "054",
+        "name": "더스트나",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_054.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 569
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-055",
+        "number": "055",
+        "name": "ゴチム",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028847_P_GOCHIMU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-069",
+        "number": "069",
+        "name": "Gothita",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/069.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-055",
+        "number": "055",
+        "name": "고디탱",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_055.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 574
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-056",
+        "number": "056",
+        "name": "ゴチミル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028848_P_GOCHIMIRU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-071",
+        "number": "071",
+        "name": "Gothorita",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/071.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-056",
+        "number": "056",
+        "name": "고디보미",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_056.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 575
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-057",
+        "number": "057",
+        "name": "ゴチルゼル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028849_P_GOCHIRUZERU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-072",
+        "number": "072",
+        "name": "Gothitelle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/072.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-057",
+        "number": "057",
+        "name": "고디모아젤",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_057.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 576
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-058",
+        "number": "058",
+        "name": "ユニラン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028850_P_YUNIRAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-073",
+        "number": "073",
+        "name": "Solosis",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/073.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-058",
+        "number": "058",
+        "name": "유니란",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_058.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 577
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-059",
+        "number": "059",
+        "name": "ダブラン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028851_P_DABURAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-075",
+        "number": "075",
+        "name": "Duosion",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/075.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-059",
+        "number": "059",
+        "name": "듀란",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_059.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 578
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-060",
+        "number": "060",
+        "name": "ランクルス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028852_P_RANKURUSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-076",
+        "number": "076",
+        "name": "Reuniclus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/076.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-060",
+        "number": "060",
+        "name": "란쿨루스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_060.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 579
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-061",
+        "number": "061",
+        "name": "シャンデラEX",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028853_P_SHANDERAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-077",
+        "number": "077",
+        "name": "Chandelure-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/077.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-061",
+        "number": "061",
+        "name": "샹델라 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_061.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 609
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-062",
+        "number": "062",
+        "name": "メロエッタ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028854_P_MEROETTA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-078",
+        "number": "078",
+        "name": "Meloetta",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/078.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-062",
+        "number": "062",
+        "name": "메로엣타",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_062.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 648
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-063",
+        "number": "063",
+        "name": "リオル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028855_P_RIORU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-079",
+        "number": "079",
+        "name": "Riolu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/079.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-063",
+        "number": "063",
+        "name": "리오르",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_063.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 447
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-064",
+        "number": "064",
+        "name": "ルカリオ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028856_P_RUKARIO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-080",
+        "number": "080",
+        "name": "Lucario",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/080.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-064",
+        "number": "064",
+        "name": "루카리오",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_064.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 448
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-065",
+        "number": "065",
+        "name": "エルレイド",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028857_P_ERUREIDO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-081",
+        "number": "081",
+        "name": "Gallade",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/081.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-065",
+        "number": "065",
+        "name": "엘레이드",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_065.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 475
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-066",
+        "number": "066",
+        "name": "ドリュウズEX",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028858_P_DORYUUZUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-082",
+        "number": "082",
+        "name": "Excadrill-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/082.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-066",
+        "number": "066",
+        "name": "몰드류 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_066.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 530
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-067",
+        "number": "067",
+        "name": "マッギョ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028859_P_MAGGYO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-083",
+        "number": "083",
+        "name": "Stunfisk",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/083.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-067",
+        "number": "067",
+        "name": "메더",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_067.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 618
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-068",
+        "number": "068",
+        "name": "テラキオン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028860_P_TERAKION.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-084",
+        "number": "084",
+        "name": "Terrakion",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/084.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-068",
+        "number": "068",
+        "name": "테라키온",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_068.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 639
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-069",
+        "number": "069",
+        "name": "ランドロス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028861_P_RANDOROSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-085",
+        "number": "085",
+        "name": "Landorus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/085.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-069",
+        "number": "069",
+        "name": "랜드로스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_069.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 645
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-070",
+        "number": "070",
+        "name": "メロエッタ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028862_P_MEROETTA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-086",
+        "number": "086",
+        "name": "Meloetta",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/086.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-070",
+        "number": "070",
+        "name": "메로엣타",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_070.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 648
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-071",
+        "number": "071",
+        "name": "ミカルゲ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028863_P_MIKARUGE.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-087",
+        "number": "087",
+        "name": "Spiritomb",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/087.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-071",
+        "number": "071",
+        "name": "화강돌",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_071.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 442
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-072",
+        "number": "072",
+        "name": "ダークライEX",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028864_P_DAKURAIEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-088",
+        "number": "088",
+        "name": "Darkrai-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/088.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-072",
+        "number": "072",
+        "name": "다크라이 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_072.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 491
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-073",
+        "number": "073",
+        "name": "ゾロア",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028865_P_ZOROA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-089",
+        "number": "089",
+        "name": "Zorua",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/089.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-073",
+        "number": "073",
+        "name": "조로아",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_073.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 570
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-074",
+        "number": "074",
+        "name": "ゾロアーク",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028866_P_ZOROAKU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-090",
+        "number": "090",
+        "name": "Zoroark",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/090.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-074",
+        "number": "074",
+        "name": "조로아크",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_074.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 571
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-075",
+        "number": "075",
+        "name": "コバルオン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028867_P_KOBARUON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-091",
+        "number": "091",
+        "name": "Cobalion",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/091.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-075",
+        "number": "075",
+        "name": "코바르온",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_075.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 638
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-076",
+        "number": "076",
+        "name": "チルタリス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028868_P_CHIRUTARISU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-092",
+        "number": "092",
+        "name": "Altaria",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/092.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-076",
+        "number": "076",
+        "name": "파비코리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_076.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 334
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-077",
+        "number": "077",
+        "name": "レックウザ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028869_P_REKKUUZA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-093",
+        "number": "093",
+        "name": "Rayquaza",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/093.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-077",
+        "number": "077",
+        "name": "레쿠쟈",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_077.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 384
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-078",
+        "number": "078",
+        "name": "フカマル",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028870_P_FUKAMARU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-094",
+        "number": "094",
+        "name": "Gible",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/094.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-078",
+        "number": "078",
+        "name": "딥상어동",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_078.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 443
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-079",
+        "number": "079",
+        "name": "ガバイト",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028871_P_GABAITO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-095",
+        "number": "095",
+        "name": "Gabite",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/095.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-079",
+        "number": "079",
+        "name": "한바이트",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_079.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 444
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-080",
+        "number": "080",
+        "name": "ガブリアス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028872_P_GABURIASU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-096",
+        "number": "096",
+        "name": "Garchomp",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/096.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-080",
+        "number": "080",
+        "name": "한카리아스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_080.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 445
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-081",
+        "number": "081",
+        "name": "モノズ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028873_P_MONOZU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-097",
+        "number": "097",
+        "name": "Deino",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/097.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-081",
+        "number": "081",
+        "name": "모노두",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_081.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 633
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-082",
+        "number": "082",
+        "name": "ジヘッド",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028874_P_JIHEDDO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-098",
+        "number": "098",
+        "name": "Zweilous",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/098.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-082",
+        "number": "082",
+        "name": "디헤드",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_082.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 634
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-083",
+        "number": "083",
+        "name": "サザンドラ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028875_P_SAZANDORA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-099",
+        "number": "099",
+        "name": "Hydreigon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/099.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-083",
+        "number": "083",
+        "name": "삼삼드래",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_083.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 635
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-084",
+        "number": "084",
+        "name": "ブラックキュレムEX",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028876_P_BURAKKUKYUREMUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-100",
+        "number": "100",
+        "name": "Black Kyurem-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/100.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-084",
+        "number": "084",
+        "name": "블랙큐레무 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_084.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 646
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-085",
+        "number": "085",
+        "name": "ホワイトキュレムEX",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028877_P_HOWAITOKYUREMUEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-101",
+        "number": "101",
+        "name": "White Kyurem-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/101.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-085",
+        "number": "085",
+        "name": "화이트큐레무 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_085.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 646
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-086",
+        "number": "086",
+        "name": "ルギアEX",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028878_P_RUGIAEX.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-102",
+        "number": "102",
+        "name": "Lugia-EX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/102.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-086",
+        "number": "086",
+        "name": "루기아 EX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_086.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 249
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-087",
+        "number": "087",
+        "name": "チルット",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028879_P_CHIRUTTO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-103",
+        "number": "103",
+        "name": "Swablu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/103.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-087",
+        "number": "087",
+        "name": "파비코",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_087.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 333
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-088",
+        "number": "088",
+        "name": "チラーミィ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028880_P_CHIRAMII.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-104",
+        "number": "104",
+        "name": "Minccino",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/104.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-088",
+        "number": "088",
+        "name": "치라미",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_088.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 572
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-089",
+        "number": "089",
+        "name": "チラチーノ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028881_P_CHIRACHINO.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-105",
+        "number": "105",
+        "name": "Cinccino",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/105.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-089",
+        "number": "089",
+        "name": "치라치노",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_089.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 573
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-090",
+        "number": "090",
+        "name": "クリムガン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028882_P_KURIMUGAN.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-106",
+        "number": "106",
+        "name": "Druddigon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/106.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-090",
+        "number": "090",
+        "name": "크리만",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_090.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 621
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-091",
+        "number": "091",
+        "name": "バッフロン",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028883_P_BAFFURON.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-107",
+        "number": "107",
+        "name": "Bouffalant",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/107.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-091",
+        "number": "091",
+        "name": "버프론",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_091.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 626
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-092",
+        "number": "092",
+        "name": "トルネロス",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028884_P_TORUNEROSU.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-108",
+        "number": "108",
+        "name": "Tornadus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/108.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-092",
+        "number": "092",
+        "name": "토네로스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_092.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": 641
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-EBB-093",
+        "number": "093",
+        "name": "アララギパパ",
+        "image": "https://www.pokemon-card.com/assets/images/card_images/large/BW10-B/028885_T_ARARAGIPAPA.jpg",
+        "rarity": null,
+        "setId": "jp-tcg-EBB",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-bw11-110",
+        "number": "110",
+        "name": "Cedric Juniper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/110.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-ebb-093",
+        "number": "093",
+        "name": "주누운박사",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/EBB/ebb_093.jpg",
+        "rarity": null,
+        "setId": "kr-ebb",
+        "region": "KR"
+      },
+      "dex": null
+    }
+  ],
+  "tail": {
+    "enOnly": [
+      {
+        "id": "en-tcg-bw11-001",
+        "number": "001",
+        "name": "Tangela",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/001.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 114,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-002",
+        "number": "002",
+        "name": "Tangrowth",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/002.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 465,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-004",
+        "number": "004",
+        "name": "Cherubi",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/004.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 420,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-005",
+        "number": "005",
+        "name": "Carnivine",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/005.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 455,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-010",
+        "number": "010",
+        "name": "Sewaddle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/010.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 540,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-013",
+        "number": "013",
+        "name": "Dwebble",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/013.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 557,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-014",
+        "number": "014",
+        "name": "Crustle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/014.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 558,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-016",
+        "number": "016",
+        "name": "Genesect",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/016.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 649,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-053",
+        "number": "053",
+        "name": "Mewtwo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/053.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 150,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-057",
+        "number": "057",
+        "name": "Misdreavus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/057.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 200,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-058",
+        "number": "058",
+        "name": "Mismagius",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/058.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 429,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-061",
+        "number": "061",
+        "name": "Sableye",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/061.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 302,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-064",
+        "number": "064",
+        "name": "Woobat",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/064.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 527,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-065",
+        "number": "065",
+        "name": "Swoobat",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/065.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 528,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-070",
+        "number": "070",
+        "name": "Gothita",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/070.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 574,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-074",
+        "number": "074",
+        "name": "Solosis",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/074.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 577,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-109",
+        "number": "109",
+        "name": "Bianca",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/109.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-bw11-111",
+        "number": "111",
+        "name": "Crushing Hammer",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/111.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-bw11-112",
+        "number": "112",
+        "name": "Energy Switch",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/112.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-bw11-113",
+        "number": "113",
+        "name": "Double Colorless Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/113.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-bw11-114",
+        "number": "114",
+        "name": "Reshiram",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/114.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 643,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-bw11-115",
+        "number": "115",
+        "name": "Zekrom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-bw11/en/small/en-tcg-bw11/115.png",
+        "rarity": null,
+        "setId": "en-tcg-bw11",
+        "region": "EN",
+        "dex": 644,
+        "jpElsewhere": true
+      }
+    ],
+    "krOnly": [],
+    "enKr": []
+  }
+}

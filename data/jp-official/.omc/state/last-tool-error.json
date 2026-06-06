@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"npx tsx -e \\\"\\nimport 'dotenv/config';\\nimport { prisma } from './src/lib/prisma';\\nasync function main() {\\n  // og-hsp 전례 구조\\n  const g = await prisma.setGroup.findMany({ where: { id: { ...",
+  "error": "Exit code 1\n/home/lyyw205/repos/raredoc/node_modules/tsx/dist/register-D46fvsV_.cjs:3\n`)},\"createLog\"),x=I(g.bgLightYellow(g.black(\" CJS \"))),ae=I(g.bgBlue(\" ESM \")),oe=[\".cts\",\".mts\",\".ts\",\".tsx\",\".jsx\"],ie=[\".js\",\".cjs\",\".mjs\"],k=[\".ts\",\".tsx\",\".jsx\"],F=o((s,e,r,n)=>{const t=Object.getOwnPropertyDescriptor(s,e);t?.set?s[e]=r:(!t||t.configurable)&&Object.defineProperty(s,e,{value:r,enumerable:t?.enumerable||n?.enumerable,writable:n?.writable??(t?t.writable:!0),configurable:n?.configurable??(t?t...",
+  "timestamp": "2026-06-06T04:33:57.732Z",
+  "retry_count": 1
+}

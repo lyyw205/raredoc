@@ -7,9 +7,10 @@
   },
   "counts": {
     "anchors": 360,
-    "enMatched": 184,
+    "enMatched": 213,
     "krMatched": 360,
-    "enOnly": 35
+    "enOnly": 32,
+    "krOnly": 0
   },
   "anchors": [
     {
@@ -181,7 +182,7 @@
         "number": "1",
         "name": "Pineco",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/1.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -206,7 +207,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-2",
+        "number": "2",
+        "name": "Forretress ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/2.png",
+        "rarity": "Double Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-009",
         "number": "009",
@@ -409,7 +418,7 @@
         "number": "4",
         "name": "Toedscool",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/4.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -439,7 +448,7 @@
         "number": "5",
         "name": "Toedscruel ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/5.png",
-        "rarity": "Common",
+        "rarity": "Double Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -530,7 +539,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-6",
+        "number": "6",
+        "name": "Espathra ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/6.png",
+        "rarity": "Double Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-023",
         "number": "023",
@@ -552,15 +569,7 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": {
-        "id": "sv4pt5-240",
-        "number": "240",
-        "name": "Wo-Chien ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/240.png",
-        "rarity": "Hyper Rare",
-        "setId": "sv4pt5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv4a-024",
         "number": "024",
@@ -587,7 +596,7 @@
         "number": "7",
         "name": "Charmander",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/7.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -617,7 +626,7 @@
         "number": "8",
         "name": "Charmeleon",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/8.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -779,7 +788,7 @@
         "number": "14",
         "name": "Charcadet",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/14.png",
-        "rarity": "Double Rare",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -809,7 +818,7 @@
         "number": "15",
         "name": "Armarouge",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/15.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -1054,7 +1063,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-224",
+        "number": "224",
+        "name": "Wugtrio",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/224.png",
+        "rarity": null,
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-045",
         "number": "045",
@@ -1098,7 +1115,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-225",
+        "number": "225",
+        "name": "Palafin",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/225.png",
+        "rarity": null,
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-047",
         "number": "047",
@@ -1191,7 +1216,7 @@
         "number": "17",
         "name": "Frigibax",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/17.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -1216,15 +1241,7 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": {
-        "id": "sv4pt5-129",
-        "number": "129",
-        "name": "Arctibax",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/129.png",
-        "rarity": "Common",
-        "setId": "sv4pt5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv4a-052",
         "number": "052",
@@ -1268,15 +1285,7 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": {
-        "id": "sv4pt5-242",
-        "number": "242",
-        "name": "Chien-Pao ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/242.png",
-        "rarity": "Hyper Rare",
-        "setId": "sv4pt5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv4a-054",
         "number": "054",
@@ -1303,7 +1312,7 @@
         "number": "18",
         "name": "Pikachu",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/18.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -1333,7 +1342,7 @@
         "number": "19",
         "name": "Raichu",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/19.png",
-        "rarity": "Double Rare",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -1556,7 +1565,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-226",
+        "number": "226",
+        "name": "Pawmi",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/226.png",
+        "rarity": null,
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-066",
         "number": "066",
@@ -1649,7 +1666,7 @@
         "number": "22",
         "name": "Kilowattrel",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/22.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -1674,15 +1691,7 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": {
-        "id": "sv4pt5-243",
-        "number": "243",
-        "name": "Miraidon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/243.png",
-        "rarity": "Hyper Rare",
-        "setId": "sv4pt5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv4a-071",
         "number": "071",
@@ -1792,15 +1801,7 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": {
-        "id": "sv4pt5-216",
-        "number": "216",
-        "name": "Mew ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/216.png",
-        "rarity": "Shiny Ultra Rare",
-        "setId": "sv4pt5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv4a-076",
         "number": "076",
@@ -1849,7 +1850,7 @@
         "number": "25",
         "name": "Natu",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/25.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -1879,7 +1880,7 @@
         "number": "26",
         "name": "Xatu",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/26.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -1909,7 +1910,7 @@
         "number": "27",
         "name": "Ralts",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/27.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -1939,7 +1940,7 @@
         "number": "28",
         "name": "Kirlia",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/28.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -1969,7 +1970,7 @@
         "number": "29",
         "name": "Gardevoir ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/29.png",
-        "rarity": "Common",
+        "rarity": "Double Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -2043,7 +2044,7 @@
         "number": "31",
         "name": "Mime Jr.",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/31.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -2117,7 +2118,7 @@
         "number": "37",
         "name": "Mimikyu",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/37.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -2147,7 +2148,7 @@
         "number": "38",
         "name": "Fidough",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/38.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -2177,7 +2178,7 @@
         "number": "39",
         "name": "Dachsbun",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/39.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -2207,7 +2208,7 @@
         "number": "40",
         "name": "Ceruledge",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/40.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -2259,7 +2260,7 @@
         "number": "41",
         "name": "Flittle",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/41.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -2355,7 +2356,7 @@
         "number": "42",
         "name": "Greavard",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/42.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -2385,7 +2386,7 @@
         "number": "43",
         "name": "Houndstone",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/43.png",
-        "rarity": "Double Rare",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -2415,7 +2416,7 @@
         "number": "44",
         "name": "Gimmighoul",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/44.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -2445,7 +2446,7 @@
         "number": "45",
         "name": "Mankey",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/45.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -2475,7 +2476,7 @@
         "number": "46",
         "name": "Primeape",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/46.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -2505,7 +2506,7 @@
         "number": "47",
         "name": "Annihilape",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/47.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -2706,15 +2707,7 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": {
-        "id": "sv4pt5-218",
-        "number": "218",
-        "name": "Glimmora ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/218.png",
-        "rarity": "Shiny Ultra Rare",
-        "setId": "sv4pt5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv4a-111",
         "number": "111",
@@ -2736,7 +2729,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-53",
+        "number": "53",
+        "name": "Great Tusk ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/53.png",
+        "rarity": "Double Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-112",
         "number": "112",
@@ -2758,15 +2759,7 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": {
-        "id": "sv4pt5-244",
-        "number": "244",
-        "name": "Ting-Lu ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/244.png",
-        "rarity": "Hyper Rare",
-        "setId": "sv4pt5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv4a-113",
         "number": "113",
@@ -2788,15 +2781,7 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": {
-        "id": "sv4pt5-245",
-        "number": "245",
-        "name": "Koraidon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/245.png",
-        "rarity": "Hyper Rare",
-        "setId": "sv4pt5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv4a-114",
         "number": "114",
@@ -2818,7 +2803,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-54",
+        "number": "54",
+        "name": "Charizard ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/54.png",
+        "rarity": "Double Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-115",
         "number": "115",
@@ -2845,7 +2838,7 @@
         "number": "58",
         "name": "Paldean Wooper",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/58.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -2875,7 +2868,7 @@
         "number": "59",
         "name": "Paldean Clodsire ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/59.png",
-        "rarity": "Common",
+        "rarity": "Double Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -2922,15 +2915,7 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": {
-        "id": "sv4pt5-182",
-        "number": "182",
-        "name": "Sneasel",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/182.png",
-        "rarity": "Common",
-        "setId": "sv4pt5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv4a-119",
         "number": "119",
@@ -3067,7 +3052,7 @@
         "number": "62",
         "name": "Maschiff",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/62.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -3097,7 +3082,7 @@
         "number": "63",
         "name": "Mabosstiff",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/63.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -3193,7 +3178,7 @@
         "number": "64",
         "name": "Varoom",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/64.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -3223,7 +3208,7 @@
         "number": "65",
         "name": "Revavroom",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/65.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -3248,7 +3233,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-66",
+        "number": "66",
+        "name": "Iron Treads ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/66.png",
+        "rarity": "Double Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-132",
         "number": "132",
@@ -3275,7 +3268,7 @@
         "number": "67",
         "name": "Gholdengo",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/67.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -3305,7 +3298,7 @@
         "number": "68",
         "name": "Noibat",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/68.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -3335,7 +3328,7 @@
         "number": "69",
         "name": "Noivern ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/69.png",
-        "rarity": "Common",
+        "rarity": "Double Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -3365,7 +3358,7 @@
         "number": "70",
         "name": "Cyclizar",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/70.png",
-        "rarity": "Rare",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -3434,15 +3427,7 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": {
-        "id": "sv4pt5-221",
-        "number": "221",
-        "name": "Pidgeot ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/221.png",
-        "rarity": "Shiny Ultra Rare",
-        "setId": "sv4pt5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv4a-139",
         "number": "139",
@@ -3486,15 +3471,7 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": {
-        "id": "sv4pt5-222",
-        "number": "222",
-        "name": "Wigglytuff ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/222.png",
-        "rarity": "Shiny Ultra Rare",
-        "setId": "sv4pt5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv4a-141",
         "number": "141",
@@ -3697,7 +3674,7 @@
         "number": "71",
         "name": "Lechonk",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/71.png",
-        "rarity": "Double Rare",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -3727,7 +3704,7 @@
         "number": "72",
         "name": "Oinkologne",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/72.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -3757,7 +3734,7 @@
         "number": "73",
         "name": "Tandemaus",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/73.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -3787,7 +3764,7 @@
         "number": "74",
         "name": "Maushold",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/74.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -3864,7 +3841,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-79",
+        "number": "79",
+        "name": "Electric Generator",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/79.png",
+        "rarity": null,
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-156",
         "number": "156",
@@ -3930,7 +3915,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-84",
+        "number": "84",
+        "name": "Nest Ball",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/84.png",
+        "rarity": null,
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-159",
         "number": "159",
@@ -3952,7 +3945,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-83",
+        "number": "83",
+        "name": "Nemona's Backpack",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/83.png",
+        "rarity": null,
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-157",
         "number": "157",
@@ -3974,7 +3975,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-91",
+        "number": "91",
+        "name": "Ultra Ball",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/91.png",
+        "rarity": null,
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-163",
         "number": "163",
@@ -4018,7 +4027,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-89",
+        "number": "89",
+        "name": "Rare Candy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/89.png",
+        "rarity": null,
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-161",
         "number": "161",
@@ -4172,7 +4189,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-90",
+        "number": "90",
+        "name": "Technical Machine: Crisis Punch",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/90.png",
+        "rarity": null,
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-165",
         "number": "165",
@@ -4260,7 +4285,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-80",
+        "number": "80",
+        "name": "Iono",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/80.png",
+        "rarity": null,
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-173",
         "number": "173",
@@ -4282,7 +4315,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-78",
+        "number": "78",
+        "name": "Clive",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/78.png",
+        "rarity": null,
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-171",
         "number": "171",
@@ -4348,7 +4389,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-85",
+        "number": "85",
+        "name": "Paldean Student",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/85.png",
+        "rarity": null,
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-180",
         "number": "180",
@@ -4370,7 +4419,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-86",
+        "number": "86",
+        "name": "Paldean Student",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/86.png",
+        "rarity": null,
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-181",
         "number": "181",
@@ -4502,7 +4559,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-76",
+        "number": "76",
+        "name": "Artazon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/76.png",
+        "rarity": null,
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-186",
         "number": "186",
@@ -4639,7 +4704,7 @@
         "number": "92",
         "name": "Oddish",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/92.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -4669,7 +4734,7 @@
         "number": "93",
         "name": "Gloom",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/93.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -4699,7 +4764,7 @@
         "number": "94",
         "name": "Vileplume",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/94.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -4729,7 +4794,7 @@
         "number": "95",
         "name": "Scyther",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/95.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -4759,7 +4824,7 @@
         "number": "96",
         "name": "Hoppip",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/96.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -4789,7 +4854,7 @@
         "number": "97",
         "name": "Skiploom",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/97.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -4819,7 +4884,7 @@
         "number": "98",
         "name": "Jumpluff",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/98.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -4849,7 +4914,7 @@
         "number": "99",
         "name": "Pineco",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/99.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -4879,7 +4944,7 @@
         "number": "100",
         "name": "Snover",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/100.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -4909,7 +4974,7 @@
         "number": "101",
         "name": "Abomasnow",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/101.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -4983,7 +5048,7 @@
         "number": "102",
         "name": "Smoliv",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/102.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5013,7 +5078,7 @@
         "number": "103",
         "name": "Dolliv",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/103.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5043,7 +5108,7 @@
         "number": "104",
         "name": "Arboliva",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/104.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5073,7 +5138,7 @@
         "number": "105",
         "name": "Toedscool",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/105.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5103,7 +5168,7 @@
         "number": "106",
         "name": "Capsakid",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/106.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5133,7 +5198,7 @@
         "number": "107",
         "name": "Scovillain",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/107.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5163,7 +5228,7 @@
         "number": "108",
         "name": "Rellor",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/108.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5193,7 +5258,7 @@
         "number": "109",
         "name": "Charmander",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/109.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5223,7 +5288,7 @@
         "number": "110",
         "name": "Charmeleon",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/110.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5253,7 +5318,7 @@
         "number": "111",
         "name": "Paldean Tauros",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/111.png",
-        "rarity": "Double Rare",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5283,7 +5348,7 @@
         "number": "112",
         "name": "Entei",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/112.png",
-        "rarity": "Double Rare",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5313,7 +5378,7 @@
         "number": "113",
         "name": "Oricorio",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/113.png",
-        "rarity": "Double Rare",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5387,7 +5452,7 @@
         "number": "114",
         "name": "Charcadet",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/114.png",
-        "rarity": "Double Rare",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5417,7 +5482,7 @@
         "number": "115",
         "name": "Armarouge",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/115.png",
-        "rarity": "Double Rare",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5447,7 +5512,7 @@
         "number": "116",
         "name": "Slowpoke",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/116.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5477,7 +5542,7 @@
         "number": "117",
         "name": "Slowbro",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/117.png",
-        "rarity": "Double Rare",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5507,7 +5572,7 @@
         "number": "118",
         "name": "Staryu",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/118.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5537,7 +5602,7 @@
         "number": "119",
         "name": "Starmie",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/119.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5567,7 +5632,7 @@
         "number": "120",
         "name": "Paldean Tauros",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/120.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5641,7 +5706,7 @@
         "number": "121",
         "name": "Wiglett",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/121.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5671,7 +5736,7 @@
         "number": "122",
         "name": "Wugtrio",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/122.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5701,7 +5766,7 @@
         "number": "123",
         "name": "Finizen",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/123.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5731,7 +5796,7 @@
         "number": "124",
         "name": "Palafin",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/124.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5761,7 +5826,7 @@
         "number": "125",
         "name": "Veluza",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/125.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5791,7 +5856,7 @@
         "number": "126",
         "name": "Dondozo",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/126.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5821,7 +5886,7 @@
         "number": "127",
         "name": "Tatsugiri",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/127.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5851,7 +5916,7 @@
         "number": "128",
         "name": "Frigibax",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/128.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5876,7 +5941,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-129",
+        "number": "129",
+        "name": "Arctibax",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/129.png",
+        "rarity": "Shiny Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-234",
         "number": "234",
@@ -5903,7 +5976,7 @@
         "number": "130",
         "name": "Baxcalibur",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/130.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5933,7 +6006,7 @@
         "number": "131",
         "name": "Pikachu",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/131.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5963,7 +6036,7 @@
         "number": "132",
         "name": "Raichu",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/132.png",
-        "rarity": "Double Rare",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -5993,7 +6066,7 @@
         "number": "133",
         "name": "Voltorb",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/133.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6023,7 +6096,7 @@
         "number": "134",
         "name": "Electrode",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/134.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6053,7 +6126,7 @@
         "number": "135",
         "name": "Shinx",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/135.png",
-        "rarity": "Double Rare",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6083,7 +6156,7 @@
         "number": "136",
         "name": "Luxio",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/136.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6113,7 +6186,7 @@
         "number": "137",
         "name": "Luxray",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/137.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6173,7 +6246,7 @@
         "number": "139",
         "name": "Thundurus",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/139.png",
-        "rarity": "Double Rare",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6203,7 +6276,7 @@
         "number": "140",
         "name": "Toxel",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/140.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6233,7 +6306,7 @@
         "number": "141",
         "name": "Toxtricity",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/141.png",
-        "rarity": "Double Rare",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6263,7 +6336,7 @@
         "number": "142",
         "name": "Pawmi",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/142.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6293,7 +6366,7 @@
         "number": "143",
         "name": "Pawmo",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/143.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6323,7 +6396,7 @@
         "number": "144",
         "name": "Pawmot",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/144.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6353,7 +6426,7 @@
         "number": "145",
         "name": "Wattrel",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/145.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6383,7 +6456,7 @@
         "number": "146",
         "name": "Kilowattrel",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/146.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6413,7 +6486,7 @@
         "number": "147",
         "name": "Wigglytuff",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/147.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6443,7 +6516,7 @@
         "number": "148",
         "name": "Abra",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/148.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6473,7 +6546,7 @@
         "number": "149",
         "name": "Kadabra",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/149.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6503,7 +6576,7 @@
         "number": "150",
         "name": "Cleffa",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/150.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6533,7 +6606,7 @@
         "number": "151",
         "name": "Natu",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/151.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6563,7 +6636,7 @@
         "number": "152",
         "name": "Xatu",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/152.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6593,7 +6666,7 @@
         "number": "153",
         "name": "Ralts",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/153.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6623,7 +6696,7 @@
         "number": "154",
         "name": "Kirlia",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/154.png",
-        "rarity": "Double Rare",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6653,7 +6726,7 @@
         "number": "155",
         "name": "Drifloon",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/155.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6683,7 +6756,7 @@
         "number": "156",
         "name": "Drifblim",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/156.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6713,7 +6786,7 @@
         "number": "157",
         "name": "Mime Jr.",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/157.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6743,7 +6816,7 @@
         "number": "158",
         "name": "Spiritomb",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/158.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6773,7 +6846,7 @@
         "number": "159",
         "name": "Klefki",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/159.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6803,7 +6876,7 @@
         "number": "160",
         "name": "Mimikyu",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/160.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6855,7 +6928,7 @@
         "number": "161",
         "name": "Dachsbun",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/161.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6885,7 +6958,7 @@
         "number": "162",
         "name": "Ceruledge",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/162.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6915,7 +6988,7 @@
         "number": "163",
         "name": "Rabsca",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/163.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -6975,7 +7048,7 @@
         "number": "165",
         "name": "Tinkatink",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/165.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7005,7 +7078,7 @@
         "number": "166",
         "name": "Tinkatuff",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/166.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7035,7 +7108,7 @@
         "number": "167",
         "name": "Tinkaton",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/167.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7087,7 +7160,7 @@
         "number": "168",
         "name": "Houndstone",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/168.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7117,7 +7190,7 @@
         "number": "169",
         "name": "Mankey",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/169.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7147,7 +7220,7 @@
         "number": "170",
         "name": "Primeape",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/170.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7177,7 +7250,7 @@
         "number": "171",
         "name": "Annihilape",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/171.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7207,7 +7280,7 @@
         "number": "172",
         "name": "Paldean Tauros",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/172.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7237,7 +7310,7 @@
         "number": "173",
         "name": "Riolu",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/173.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7267,7 +7340,7 @@
         "number": "174",
         "name": "Lucario",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/174.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7297,7 +7370,7 @@
         "number": "175",
         "name": "Hawlucha",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/175.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7327,7 +7400,7 @@
         "number": "176",
         "name": "Nacli",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/176.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7357,7 +7430,7 @@
         "number": "177",
         "name": "Naclstack",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/177.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7387,7 +7460,7 @@
         "number": "178",
         "name": "Garganacl",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/178.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7417,7 +7490,7 @@
         "number": "179",
         "name": "Glimmet",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/179.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7447,7 +7520,7 @@
         "number": "180",
         "name": "Paldean Wooper",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/180.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7477,7 +7550,7 @@
         "number": "181",
         "name": "Murkrow",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/181.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7502,7 +7575,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-182",
+        "number": "182",
+        "name": "Sneasel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/182.png",
+        "rarity": "Shiny Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-289",
         "number": "289",
@@ -7529,7 +7610,7 @@
         "number": "183",
         "name": "Weavile",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/183.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7559,7 +7640,7 @@
         "number": "184",
         "name": "Sableye",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/184.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7589,7 +7670,7 @@
         "number": "185",
         "name": "Pawniard",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/185.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7619,7 +7700,7 @@
         "number": "186",
         "name": "Bisharp",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/186.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7649,7 +7730,7 @@
         "number": "187",
         "name": "Kingambit",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/187.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7701,7 +7782,7 @@
         "number": "188",
         "name": "Mabosstiff",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/188.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7731,7 +7812,7 @@
         "number": "189",
         "name": "Shroodle",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/189.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -7761,7 +7842,7 @@
         "number": "190",
         "name": "Grafaiai",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/190.png",
-        "rarity": "Common",
+        "rarity": "Shiny Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -8416,7 +8497,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-212",
+        "number": "212",
+        "name": "Forretress ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/212.png",
+        "rarity": "Shiny Secret Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-320",
         "number": "320",
@@ -8465,7 +8554,7 @@
         "number": "213",
         "name": "Toedscruel ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/213.png",
-        "rarity": "Shiny Ultra Rare",
+        "rarity": "Shiny Secret Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -8490,7 +8579,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-214",
+        "number": "214",
+        "name": "Espathra ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/214.png",
+        "rarity": "Shiny Secret Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-323",
         "number": "323",
@@ -8561,7 +8658,7 @@
         "number": "215",
         "name": "Alakazam ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/215.png",
-        "rarity": "Shiny Ultra Rare",
+        "rarity": "Shiny Secret Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -8586,7 +8683,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-216",
+        "number": "216",
+        "name": "Mew ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/216.png",
+        "rarity": "Shiny Secret Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-327",
         "number": "327",
@@ -8613,7 +8718,7 @@
         "number": "217",
         "name": "Gardevoir ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/217.png",
-        "rarity": "Shiny Ultra Rare",
+        "rarity": "Shiny Secret Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -8638,7 +8743,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-218",
+        "number": "218",
+        "name": "Glimmora ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/218.png",
+        "rarity": "Shiny Secret Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-329",
         "number": "329",
@@ -8709,7 +8822,7 @@
         "number": "219",
         "name": "Paldean Clodsire ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/219.png",
-        "rarity": "Shiny Ultra Rare",
+        "rarity": "Shiny Secret Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -8761,7 +8874,7 @@
         "number": "220",
         "name": "Noivern ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/220.png",
-        "rarity": "Shiny Ultra Rare",
+        "rarity": "Shiny Secret Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -8786,7 +8899,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-221",
+        "number": "221",
+        "name": "Pidgeot ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/221.png",
+        "rarity": "Shiny Secret Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-335",
         "number": "335",
@@ -8808,7 +8929,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-222",
+        "number": "222",
+        "name": "Wigglytuff ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/222.png",
+        "rarity": "Shiny Secret Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-336",
         "number": "336",
@@ -8835,7 +8964,7 @@
         "number": "223",
         "name": "Squawkabilly ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/223.png",
-        "rarity": "Shiny Ultra Rare",
+        "rarity": "Shiny Secret Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -8860,15 +8989,7 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": {
-        "id": "sv4pt5-224",
-        "number": "224",
-        "name": "Wugtrio",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/224.png",
-        "rarity": "Illustration Rare",
-        "setId": "sv4pt5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv4a-338",
         "number": "338",
@@ -8890,15 +9011,7 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": {
-        "id": "sv4pt5-225",
-        "number": "225",
-        "name": "Palafin",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/225.png",
-        "rarity": "Illustration Rare",
-        "setId": "sv4pt5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv4a-339",
         "number": "339",
@@ -8920,15 +9033,7 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": {
-        "id": "sv4pt5-226",
-        "number": "226",
-        "name": "Pawmi",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/226.png",
-        "rarity": "Illustration Rare",
-        "setId": "sv4pt5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv4a-340",
         "number": "340",
@@ -8972,7 +9077,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-228",
+        "number": "228",
+        "name": "Judge",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/228.png",
+        "rarity": "Super Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-344",
         "number": "344",
@@ -8994,7 +9107,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-229",
+        "number": "229",
+        "name": "Nemona",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/229.png",
+        "rarity": "Super Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-343",
         "number": "343",
@@ -9016,7 +9137,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-227",
+        "number": "227",
+        "name": "Clive",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/227.png",
+        "rarity": "Super Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-342",
         "number": "342",
@@ -9038,7 +9167,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-230",
+        "number": "230",
+        "name": "Paldean Student",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/230.png",
+        "rarity": "Super Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-345",
         "number": "345",
@@ -9060,7 +9197,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-231",
+        "number": "231",
+        "name": "Paldean Student",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/231.png",
+        "rarity": "Super Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-346",
         "number": "346",
@@ -9087,7 +9232,7 @@
         "number": "232",
         "name": "Mew ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/232.png",
-        "rarity": "Special Illustration Rare",
+        "rarity": "Special Art Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -9117,7 +9262,7 @@
         "number": "233",
         "name": "Gardevoir ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/233.png",
-        "rarity": "Special Illustration Rare",
+        "rarity": "Special Art Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -9142,7 +9287,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-234",
+        "number": "234",
+        "name": "Charizard ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/234.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-349",
         "number": "349",
@@ -9164,7 +9317,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-237",
+        "number": "237",
+        "name": "Iono",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/237.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-353",
         "number": "353",
@@ -9186,7 +9347,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-238",
+        "number": "238",
+        "name": "Nemona",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/238.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-351",
         "number": "351",
@@ -9208,7 +9377,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-236",
+        "number": "236",
+        "name": "Clive",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/236.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-350",
         "number": "350",
@@ -9230,7 +9407,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-235",
+        "number": "235",
+        "name": "Arven",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/235.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-352",
         "number": "352",
@@ -9252,7 +9437,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-239",
+        "number": "239",
+        "name": "Penny",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/239.png",
+        "rarity": "Special Art Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-354",
         "number": "354",
@@ -9274,7 +9467,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-240",
+        "number": "240",
+        "name": "Wo-Chien ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/240.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-355",
         "number": "355",
@@ -9301,7 +9502,7 @@
         "number": "241",
         "name": "Chi-Yu ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/241.png",
-        "rarity": "Hyper Rare",
+        "rarity": "Ultra Rare",
         "setId": "sv4pt5",
         "region": "EN"
       },
@@ -9326,7 +9527,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-242",
+        "number": "242",
+        "name": "Chien-Pao ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/242.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-357",
         "number": "357",
@@ -9348,7 +9557,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-243",
+        "number": "243",
+        "name": "Miraidon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/243.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-358",
         "number": "358",
@@ -9370,7 +9587,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-244",
+        "number": "244",
+        "name": "Ting-Lu ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/244.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-359",
         "number": "359",
@@ -9392,7 +9617,15 @@
         "setId": "jp-sv-paldean-fates",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-245",
+        "number": "245",
+        "name": "Koraidon ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/245.png",
+        "rarity": "Ultra Rare",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4a-360",
         "number": "360",
@@ -9408,36 +9641,14 @@
   "tail": {
     "enOnly": [
       {
-        "id": "sv4pt5-2",
-        "number": "2",
-        "name": "Forretress ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/2.png",
-        "rarity": "Common",
-        "setId": "sv4pt5",
-        "region": "EN",
-        "dex": 205,
-        "jpElsewhere": true
-      },
-      {
         "id": "sv4pt5-3",
         "number": "3",
         "name": "Maractus",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/3.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 556,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv4pt5-6",
-        "number": "6",
-        "name": "Espathra ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/6.png",
-        "rarity": "Common",
-        "setId": "sv4pt5",
-        "region": "EN",
-        "dex": 956,
         "jpElsewhere": true
       },
       {
@@ -9445,7 +9656,7 @@
         "number": "9",
         "name": "Magmar",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/9.png",
-        "rarity": "Double Rare",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 126,
@@ -9456,7 +9667,7 @@
         "number": "10",
         "name": "Magmortar",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/10.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 467,
@@ -9467,7 +9678,7 @@
         "number": "11",
         "name": "Numel",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/11.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 322,
@@ -9478,7 +9689,7 @@
         "number": "12",
         "name": "Camerupt",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/12.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 323,
@@ -9489,7 +9700,7 @@
         "number": "13",
         "name": "Heat Rotom",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/13.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 479,
@@ -9500,7 +9711,7 @@
         "number": "16",
         "name": "Lapras",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/16.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 131,
@@ -9511,7 +9722,7 @@
         "number": "20",
         "name": "Chinchou",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/20.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 170,
@@ -9522,7 +9733,7 @@
         "number": "21",
         "name": "Lanturn",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/21.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 171,
@@ -9533,7 +9744,7 @@
         "number": "23",
         "name": "Exeggcute",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/23.png",
-        "rarity": "Double Rare",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 102,
@@ -9544,7 +9755,7 @@
         "number": "24",
         "name": "Exeggutor",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/24.png",
-        "rarity": "Double Rare",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 103,
@@ -9555,7 +9766,7 @@
         "number": "30",
         "name": "Chimecho",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/30.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 358,
@@ -9566,7 +9777,7 @@
         "number": "32",
         "name": "Woobat",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/32.png",
-        "rarity": "Double Rare",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 527,
@@ -9577,7 +9788,7 @@
         "number": "33",
         "name": "Swoobat",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/33.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 528,
@@ -9588,7 +9799,7 @@
         "number": "34",
         "name": "Cottonee",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/34.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 546,
@@ -9599,7 +9810,7 @@
         "number": "35",
         "name": "Whimsicott",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/35.png",
-        "rarity": "Double Rare",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 547,
@@ -9610,7 +9821,7 @@
         "number": "36",
         "name": "Dedenne",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/36.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 702,
@@ -9621,7 +9832,7 @@
         "number": "48",
         "name": "Phanpy",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/48.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 231,
@@ -9632,7 +9843,7 @@
         "number": "49",
         "name": "Donphan",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/49.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 232,
@@ -9643,7 +9854,7 @@
         "number": "50",
         "name": "Barboach",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/50.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 339,
@@ -9654,7 +9865,7 @@
         "number": "51",
         "name": "Clobbopus",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/51.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 852,
@@ -9665,32 +9876,10 @@
         "number": "52",
         "name": "Grapploct",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/52.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 853,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv4pt5-53",
-        "number": "53",
-        "name": "Great Tusk ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/53.png",
-        "rarity": "Common",
-        "setId": "sv4pt5",
-        "region": "EN",
-        "dex": 984,
-        "jpElsewhere": true
-      },
-      {
-        "id": "sv4pt5-54",
-        "number": "54",
-        "name": "Charizard ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/54.png",
-        "rarity": "Double Rare",
-        "setId": "sv4pt5",
-        "region": "EN",
-        "dex": 6,
         "jpElsewhere": true
       },
       {
@@ -9698,7 +9887,7 @@
         "number": "55",
         "name": "Gastly",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/55.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 92,
@@ -9709,7 +9898,7 @@
         "number": "56",
         "name": "Haunter",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/56.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 93,
@@ -9720,7 +9909,7 @@
         "number": "57",
         "name": "Gengar",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/57.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 94,
@@ -9731,7 +9920,7 @@
         "number": "60",
         "name": "Scraggy",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/60.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 559,
@@ -9742,55 +9931,66 @@
         "number": "61",
         "name": "Scrafty",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/61.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
         "dex": 560,
         "jpElsewhere": true
       },
       {
-        "id": "sv4pt5-66",
-        "number": "66",
-        "name": "Iron Treads ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/66.png",
-        "rarity": "Common",
+        "id": "sv4pt5-77",
+        "number": "77",
+        "name": "Atticus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/77.png",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
-        "dex": 990,
-        "jpElsewhere": true
+        "dex": null,
+        "jpElsewhere": false
       },
       {
-        "id": "sv4pt5-212",
-        "number": "212",
-        "name": "Forretress ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/212.png",
-        "rarity": "Shiny Ultra Rare",
+        "id": "sv4pt5-81",
+        "number": "81",
+        "name": "Moonlit Hill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/81.png",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
-        "dex": 205,
-        "jpElsewhere": true
+        "dex": null,
+        "jpElsewhere": false
       },
       {
-        "id": "sv4pt5-214",
-        "number": "214",
-        "name": "Espathra ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/214.png",
-        "rarity": "Shiny Ultra Rare",
+        "id": "sv4pt5-82",
+        "number": "82",
+        "name": "Nemona",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/82.png",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
-        "dex": 956,
-        "jpElsewhere": true
+        "dex": null,
+        "jpElsewhere": false
       },
       {
-        "id": "sv4pt5-234",
-        "number": "234",
-        "name": "Charizard ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/234.png",
-        "rarity": "Special Illustration Rare",
+        "id": "sv4pt5-87",
+        "number": "87",
+        "name": "Professor's Research",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/87.png",
+        "rarity": null,
         "setId": "sv4pt5",
         "region": "EN",
-        "dex": 6,
-        "jpElsewhere": true
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "sv4pt5-88",
+        "number": "88",
+        "name": "Professor's Research",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/88.png",
+        "rarity": null,
+        "setId": "sv4pt5",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
       }
     ],
     "krOnly": [],

@@ -1,0 +1,2190 @@
+{
+  "group": {
+    "id": "og-pcg3",
+    "nameKo": "로켓단의 역습",
+    "nameEn": "Rocket Gang Strikes Back",
+    "crossGroupEN": false
+  },
+  "counts": {
+    "anchors": 85,
+    "enMatched": 85,
+    "krMatched": 0,
+    "enOnly": 27,
+    "krOnly": 0
+  },
+  "anchors": [
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-001",
+        "number": "001",
+        "name": "アーボ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/001.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-55",
+        "number": "55",
+        "name": "Ekans",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/55.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 23
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-002",
+        "number": "002",
+        "name": "ズバット",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/002.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-82",
+        "number": "82",
+        "name": "Zubat",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/82.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 41
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-003",
+        "number": "003",
+        "name": "ベトベター",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/003.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-56",
+        "number": "56",
+        "name": "Grimer",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/56.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 88
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-004",
+        "number": "004",
+        "name": "ドガース",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/004.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-61",
+        "number": "61",
+        "name": "Koffing",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/61.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 109
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-005",
+        "number": "005",
+        "name": "レディバ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/005.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-64",
+        "number": "64",
+        "name": "Ledyba",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/64.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 165
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-006",
+        "number": "006",
+        "name": "レディアン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/006.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-23",
+        "number": "23",
+        "name": "Ledian",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/23.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 166
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-007",
+        "number": "007",
+        "name": "ハネッコ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/007.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-57",
+        "number": "57",
+        "name": "Hoppip",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/57.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 187
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-008",
+        "number": "008",
+        "name": "ポポッコ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/008.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-49",
+        "number": "49",
+        "name": "Skiploom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/49.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 188
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-009",
+        "number": "009",
+        "name": "ワタッコ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/009.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-11",
+        "number": "11",
+        "name": "Jumpluff",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/11.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 189
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-010",
+        "number": "010",
+        "name": "ヤンヤンマ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/010.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-28",
+        "number": "28",
+        "name": "Yanma",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/28.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 193
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-011",
+        "number": "011",
+        "name": "キモリ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/011.jpg",
+        "rarity": "Shiny Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-109",
+        "number": "109",
+        "name": "Treecko ★",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/109.png",
+        "rarity": "Shiny Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 252
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-012",
+        "number": "012",
+        "name": "アーボック",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/012.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-29",
+        "number": "29",
+        "name": "Dark Arbok",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/29.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 24
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-013",
+        "number": "013",
+        "name": "ゴルバット",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/013.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-34",
+        "number": "34",
+        "name": "Dark Golbat",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/34.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 42
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-014",
+        "number": "014",
+        "name": "ベトベトン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/014.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-16",
+        "number": "16",
+        "name": "Dark Muk",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/16.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 89
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-015",
+        "number": "015",
+        "name": "マタドガス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/015.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-42",
+        "number": "42",
+        "name": "Dark Weezing",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/42.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 110
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-016",
+        "number": "016",
+        "name": "クロバット",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/016.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-3",
+        "number": "3",
+        "name": "Dark Crobat",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/3.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 169
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-017",
+        "number": "017",
+        "name": "ブーバー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/017.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-44",
+        "number": "44",
+        "name": "Magmar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/44.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 126
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-018",
+        "number": "018",
+        "name": "デルビル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/018.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-59",
+        "number": "59",
+        "name": "Houndour",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/59.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 228
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-019",
+        "number": "019",
+        "name": "ブビィ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/019.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-24",
+        "number": "24",
+        "name": "Magby",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/24.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 240
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-020",
+        "number": "020",
+        "name": "アチャモ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/020.jpg",
+        "rarity": "Shiny Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-108",
+        "number": "108",
+        "name": "Torchic ★",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/108.png",
+        "rarity": "Shiny Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 255
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-021",
+        "number": "021",
+        "name": "ヘルガー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/021.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-5",
+        "number": "5",
+        "name": "Dark Houndoom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/5.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 229
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-022",
+        "number": "022",
+        "name": "タッツー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/022.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-58",
+        "number": "58",
+        "name": "Horsea",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/58.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 116
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-023",
+        "number": "023",
+        "name": "シードラ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/023.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-48",
+        "number": "48",
+        "name": "Seadra",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/48.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 117
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-024",
+        "number": "024",
+        "name": "マリル",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/024.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-68",
+        "number": "68",
+        "name": "Marill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/68.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 183
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-025",
+        "number": "025",
+        "name": "マリルリ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/025.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-1",
+        "number": "1",
+        "name": "Azumarill",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/1.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 184
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-026",
+        "number": "026",
+        "name": "ウパー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/026.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-81",
+        "number": "81",
+        "name": "Wooper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/81.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 194
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-027",
+        "number": "027",
+        "name": "ヌオー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/027.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-26",
+        "number": "26",
+        "name": "Quagsire",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/26.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 195
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-028",
+        "number": "028",
+        "name": "ハリーセン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/028.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-27",
+        "number": "27",
+        "name": "Qwilfish",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/27.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 211
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-029",
+        "number": "029",
+        "name": "テッポウオ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/029.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-73",
+        "number": "73",
+        "name": "Remoraid",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/73.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 223
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-030",
+        "number": "030",
+        "name": "デリバード",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/030.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-21",
+        "number": "21",
+        "name": "Delibird",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/21.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 225
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-031",
+        "number": "031",
+        "name": "マンタイン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/031.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-45",
+        "number": "45",
+        "name": "Mantine",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/45.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 226
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-032",
+        "number": "032",
+        "name": "キングドラ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/032.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-12",
+        "number": "12",
+        "name": "Kingdra",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/12.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 230
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-033",
+        "number": "033",
+        "name": "ミズゴロウ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/033.jpg",
+        "rarity": "Shiny Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-107",
+        "number": "107",
+        "name": "Mudkip ★",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/107.png",
+        "rarity": "Shiny Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 258
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-034",
+        "number": "034",
+        "name": "オクタン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/034.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-8",
+        "number": "8",
+        "name": "Dark Octillery",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/8.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 224
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-035",
+        "number": "035",
+        "name": "ビリリダマ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/035.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-80",
+        "number": "80",
+        "name": "Voltorb",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/80.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 100
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-036",
+        "number": "036",
+        "name": "メリープ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/036.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-67",
+        "number": "67",
+        "name": "Mareep",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/67.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 179
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-037",
+        "number": "037",
+        "name": "暗い電極",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/037.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-4",
+        "number": "4",
+        "name": "Dark Electrode",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/4.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-038",
+        "number": "038",
+        "name": "暗いフラフィ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/038.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-33",
+        "number": "33",
+        "name": "Dark Flaaffy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/33.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-039",
+        "number": "039",
+        "name": "暗いアンファロ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/039.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-2",
+        "number": "2",
+        "name": "Dark Ampharos",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/2.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-040",
+        "number": "040",
+        "name": "slowpoke",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/040.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-76",
+        "number": "76",
+        "name": "Slowpoke",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/76.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-041",
+        "number": "041",
+        "name": "ドロージー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/041.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-54",
+        "number": "54",
+        "name": "Drowzee",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/54.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-042",
+        "number": "042",
+        "name": "ムウマ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/042.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-25",
+        "number": "25",
+        "name": "Misdreavus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/25.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 200
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-043",
+        "number": "043",
+        "name": "スリーパー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/043.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-6",
+        "number": "6",
+        "name": "Dark Hypno",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/6.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 97
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-044",
+        "number": "044",
+        "name": "ヤドキング",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/044.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-9",
+        "number": "9",
+        "name": "Dark Slowking",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/9.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 199
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-045",
+        "number": "045",
+        "name": "サンド",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/045.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-74",
+        "number": "74",
+        "name": "Sandshrew",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/74.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 27
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-046",
+        "number": "046",
+        "name": "イワーク",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/046.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-69",
+        "number": "69",
+        "name": "Onix",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/69.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 95
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-047",
+        "number": "047",
+        "name": "カラカラ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/047.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-51",
+        "number": "51",
+        "name": "Cubone",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/51.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 104
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-048",
+        "number": "048",
+        "name": "ヘラクロス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/048.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-43",
+        "number": "43",
+        "name": "Heracross",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/43.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 214
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-049",
+        "number": "049",
+        "name": "ウリムー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/049.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-79",
+        "number": "79",
+        "name": "Swinub",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/79.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 220
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-050",
+        "number": "050",
+        "name": "イノムー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/050.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-13",
+        "number": "13",
+        "name": "Piloswine",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/13.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 221
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-051",
+        "number": "051",
+        "name": "サンドパン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/051.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-18",
+        "number": "18",
+        "name": "Dark Sandslash",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/18.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 28
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-052",
+        "number": "052",
+        "name": "ガラガラ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/052.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-7",
+        "number": "7",
+        "name": "Dark Marowak",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/7.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 105
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-053",
+        "number": "053",
+        "name": "コラッタ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/053.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-71",
+        "number": "71",
+        "name": "Rattata",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/71.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 19
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-054",
+        "number": "054",
+        "name": "オタチ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/054.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-75",
+        "number": "75",
+        "name": "Sentret",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/75.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 161
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-055",
+        "number": "055",
+        "name": "オオタチ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/055.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-22",
+        "number": "22",
+        "name": "Furret",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/22.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 162
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-056",
+        "number": "056",
+        "name": "トゲピー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/056.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-50",
+        "number": "50",
+        "name": "Togepi",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/50.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 175
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-057",
+        "number": "057",
+        "name": "トゲチック",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/057.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-14",
+        "number": "14",
+        "name": "Togetic",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/14.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 176
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-058",
+        "number": "058",
+        "name": "ラッタ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/058.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-17",
+        "number": "17",
+        "name": "Dark Raticate",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/17.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 20
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-059",
+        "number": "059",
+        "name": "ニャース",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/059.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-46",
+        "number": "46",
+        "name": "Rocket's Meowth",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/46.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 52
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-060",
+        "number": "060",
+        "name": "エビワラー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/060.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-98",
+        "number": "98",
+        "name": "Rocket's Hitmonchan ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/98.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 107
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-061",
+        "number": "061",
+        "name": "ストライク",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/061.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-102",
+        "number": "102",
+        "name": "Rocket's Scyther ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/102.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 123
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-062",
+        "number": "062",
+        "name": "カビゴン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/062.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-104",
+        "number": "104",
+        "name": "Rocket's Snorlax ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/104.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 143
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-063",
+        "number": "063",
+        "name": "サンダー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/063.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-106",
+        "number": "106",
+        "name": "Rocket's Zapdos ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/106.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 145
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-064",
+        "number": "064",
+        "name": "ミュウツー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/064.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-99",
+        "number": "99",
+        "name": "Rocket's Mewtwo ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/99.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 150
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-065",
+        "number": "065",
+        "name": "ソーナンス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/065.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-47",
+        "number": "47",
+        "name": "Rocket's Wobbuffet",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/47.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 202
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-066",
+        "number": "066",
+        "name": "ハッサム",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/066.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-101",
+        "number": "101",
+        "name": "Rocket's Scizor ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/101.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 212
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-067",
+        "number": "067",
+        "name": "ニューラ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/067.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-103",
+        "number": "103",
+        "name": "Rocket's Sneasel ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/103.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 215
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-068",
+        "number": "068",
+        "name": "エンテイ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/068.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-97",
+        "number": "97",
+        "name": "Rocket's Entei ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/97.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 244
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-069",
+        "number": "069",
+        "name": "スイクン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/069.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-105",
+        "number": "105",
+        "name": "Rocket's Suicune ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/105.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 245
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-070",
+        "number": "070",
+        "name": "バンギラス",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/070.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-19",
+        "number": "19",
+        "name": "Dark Tyranitar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/19.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 248
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-071",
+        "number": "071",
+        "name": "セレビィ",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/071.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex10-117",
+        "number": "117",
+        "name": "Celebi ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex10/en/small/ex10/117.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex10",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 251
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-072",
+        "number": "072",
+        "name": "ハガネール",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/072.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-10",
+        "number": "10",
+        "name": "Dark Steelix",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/10.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 208
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-073",
+        "number": "073",
+        "name": "捕虜！ハンドエクステンション",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/073.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-85",
+        "number": "85",
+        "name": "Pow! Hand Extension",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/85.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-074",
+        "number": "074",
+        "name": "急降下！テレポーター",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/074.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-92",
+        "number": "92",
+        "name": "Swoop! Teleporter",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/92.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-075",
+        "number": "075",
+        "name": "驚き！  タイムマシン",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/075.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-91",
+        "number": "91",
+        "name": "Surprise! Time Machine",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/91.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-076",
+        "number": "076",
+        "name": "ベンチャー爆弾",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/076.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-93",
+        "number": "93",
+        "name": "Venture Bomb",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/93.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-077",
+        "number": "077",
+        "name": "ポケモンレトリバー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/077.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-84",
+        "number": "84",
+        "name": "Pokémon Retriever",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/84.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-078",
+        "number": "078",
+        "name": "模倣",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/078.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-83",
+        "number": "83",
+        "name": "Copycat",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/83.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-079",
+        "number": "079",
+        "name": "ロケットの管理者。",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/079.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-86",
+        "number": "86",
+        "name": "Rocket's Admin.",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/86.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-080",
+        "number": "080",
+        "name": "ロケットの使命",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/080.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-88",
+        "number": "88",
+        "name": "Rocket's Mission",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/88.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-081",
+        "number": "081",
+        "name": "ロケットの隠れ家",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/081.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-87",
+        "number": "87",
+        "name": "Rocket's Hideout",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/87.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-082",
+        "number": "082",
+        "name": "ロケットのトリッキーなジム",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/082.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-90",
+        "number": "90",
+        "name": "Rocket's Tricky Gym",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/90.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-083",
+        "number": "083",
+        "name": "rエネルギー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/083.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-95",
+        "number": "95",
+        "name": "R Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/95.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-084",
+        "number": "084",
+        "name": "ダークメタルエネルギー",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/084.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-94",
+        "number": "94",
+        "name": "Dark Metal Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/94.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-PCG3-085",
+        "number": "085",
+        "name": "これがチームロケットが来ます！",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-pcg3/ja/small/jp-tcg-PCG3/085.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-PCG3",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex7-111",
+        "number": "111",
+        "name": "Here Comes Team Rocket!",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/111.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    }
+  ],
+  "tail": {
+    "enOnly": [
+      {
+        "id": "en-tcg-ex7-15",
+        "number": "15",
+        "name": "Dark Dragonite",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/15.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 149,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-20",
+        "number": "20",
+        "name": "Dark Tyranitar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/20.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 248,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-30",
+        "number": "30",
+        "name": "Dark Ariados",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/30.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 168,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-31",
+        "number": "31",
+        "name": "Dark Dragonair",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/31.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 148,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-32",
+        "number": "32",
+        "name": "Dark Dragonair",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/32.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 148,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-35",
+        "number": "35",
+        "name": "Dark Golduck",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/35.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 55,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-36",
+        "number": "36",
+        "name": "Dark Gyarados",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/36.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 130,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-37",
+        "number": "37",
+        "name": "Dark Houndoom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/37.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 229,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-38",
+        "number": "38",
+        "name": "Dark Magcargo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/38.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 219,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-39",
+        "number": "39",
+        "name": "Dark Magneton",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/39.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 82,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-40",
+        "number": "40",
+        "name": "Dark Pupitar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/40.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 247,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-41",
+        "number": "41",
+        "name": "Dark Pupitar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/41.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 247,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-52",
+        "number": "52",
+        "name": "Dratini",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/52.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 147,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-53",
+        "number": "53",
+        "name": "Dratini",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/53.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 147,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-60",
+        "number": "60",
+        "name": "Houndour",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/60.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 228,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-62",
+        "number": "62",
+        "name": "Larvitar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/62.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 246,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-63",
+        "number": "63",
+        "name": "Larvitar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/63.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 246,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-65",
+        "number": "65",
+        "name": "Magikarp",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/65.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 129,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-66",
+        "number": "66",
+        "name": "Magnemite",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/66.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 81,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-70",
+        "number": "70",
+        "name": "Psyduck",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/70.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 54,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-72",
+        "number": "72",
+        "name": "Rattata",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/72.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 19,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-77",
+        "number": "77",
+        "name": "Slugma",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/77.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 218,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-78",
+        "number": "78",
+        "name": "Spinarak",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/78.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 167,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-89",
+        "number": "89",
+        "name": "Rocket's Poké Ball",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/89.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-ex7-96",
+        "number": "96",
+        "name": "Rocket's Articuno ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/96.png",
+        "rarity": "Rare Holo EX",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 144,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-100",
+        "number": "100",
+        "name": "Rocket's Moltres ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/100.png",
+        "rarity": "Rare Holo EX",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 146,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex7-110",
+        "number": "110",
+        "name": "Charmeleon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex7/en/small/ex7/110.png",
+        "rarity": "Rare Secret",
+        "setId": "en-tcg-ex7",
+        "region": "EN",
+        "dex": 5,
+        "jpElsewhere": true
+      }
+    ],
+    "krOnly": [],
+    "enKr": []
+  }
+}

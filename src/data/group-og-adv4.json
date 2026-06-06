@@ -1,0 +1,2454 @@
+{
+  "group": {
+    "id": "og-adv4",
+    "nameKo": "마그마단VS아쿠아단 두 야망",
+    "nameEn": "Magma VS Aqua: Two Ambitions",
+    "crossGroupEN": false
+  },
+  "counts": {
+    "anchors": 80,
+    "enMatched": 80,
+    "krMatched": 0,
+    "enOnly": 61,
+    "krOnly": 0
+  },
+  "anchors": [
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-1",
+        "number": "1",
+        "name": "Ekans",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/1.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-64",
+        "number": "64",
+        "name": "Ekans",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/64.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 23
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-2",
+        "number": "2",
+        "name": "Arbok",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/2.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-29",
+        "number": "29",
+        "name": "Arbok",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/29.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 24
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-3",
+        "number": "3",
+        "name": "Pineco",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/3.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex3-71",
+        "number": "71",
+        "name": "Pineco",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex3/en/small/ex3/71.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex3",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 204
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-4",
+        "number": "4",
+        "name": "Treecko",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/4.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex3-80",
+        "number": "80",
+        "name": "Treecko",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex3/en/small/ex3/80.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex3",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 252
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-5",
+        "number": "5",
+        "name": "Grovyle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/5.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex3-31",
+        "number": "31",
+        "name": "Grovyle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex3/en/small/ex3/31.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex3",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 253
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-6",
+        "number": "6",
+        "name": "Sceptile ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/6.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-93",
+        "number": "93",
+        "name": "Sceptile ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/93.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 254
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-7",
+        "number": "7",
+        "name": "Cacnea",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/7.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-58",
+        "number": "58",
+        "name": "Cacnea",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/58.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 331
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-8",
+        "number": "8",
+        "name": "Lileep",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/8.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-43",
+        "number": "43",
+        "name": "Lileep",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/43.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 345
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-9",
+        "number": "9",
+        "name": "Cradily ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/9.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-90",
+        "number": "90",
+        "name": "Cradily ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/90.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 346
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-10",
+        "number": "10",
+        "name": "Team Aqua's Seviper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/10.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-17",
+        "number": "17",
+        "name": "Team Aqua's Seviper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/17.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 336
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-11",
+        "number": "11",
+        "name": "Team Aqua's Cacnea",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/11.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-24",
+        "number": "24",
+        "name": "Team Aqua's Cacnea",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/24.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 331
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-12",
+        "number": "12",
+        "name": "Team Aqua's Cacturne",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/12.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-1",
+        "number": "1",
+        "name": "Team Aqua's Cacturne",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/1.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 332
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-13",
+        "number": "13",
+        "name": "Growlithe",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/13.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-65",
+        "number": "65",
+        "name": "Growlithe",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/65.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 58
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-14",
+        "number": "14",
+        "name": "Arcanine",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/14.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-15",
+        "number": "15",
+        "name": "Arcanine",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/15.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 59
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-15",
+        "number": "15",
+        "name": "Flareon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/15.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-5",
+        "number": "5",
+        "name": "Flareon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/5.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 136
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-16",
+        "number": "16",
+        "name": "Torchic",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/16.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex3-77",
+        "number": "77",
+        "name": "Torchic",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex3/en/small/ex3/77.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex3",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 255
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-17",
+        "number": "17",
+        "name": "Combusken",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/17.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex3-25",
+        "number": "25",
+        "name": "Combusken",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex3/en/small/ex3/25.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex3",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 256
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-18",
+        "number": "18",
+        "name": "Blaziken ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/18.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-89",
+        "number": "89",
+        "name": "Blaziken ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/89.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 257
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-19",
+        "number": "19",
+        "name": "Team Magma's Houndour",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/19.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-35",
+        "number": "35",
+        "name": "Team Magma's Houndour",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/35.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 228
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-20",
+        "number": "20",
+        "name": "Team Magma's Houndoom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/20.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-10",
+        "number": "10",
+        "name": "Team Magma's Houndoom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/10.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 229
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-21",
+        "number": "21",
+        "name": "Team Magma's Torkoal",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/21.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-12",
+        "number": "12",
+        "name": "Team Magma's Torkoal",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/12.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 324
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-22",
+        "number": "22",
+        "name": "Vaporeon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/22.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-25",
+        "number": "25",
+        "name": "Vaporeon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/25.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 134
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-23",
+        "number": "23",
+        "name": "Omanyte",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/23.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-70",
+        "number": "70",
+        "name": "Omanyte",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/70.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 138
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-24",
+        "number": "24",
+        "name": "Omastar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/24.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-19",
+        "number": "19",
+        "name": "Omastar",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/19.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 139
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-25",
+        "number": "25",
+        "name": "Kabuto",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/25.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-39",
+        "number": "39",
+        "name": "Kabuto",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/39.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 140
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-26",
+        "number": "26",
+        "name": "Kabutops ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/26.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-97",
+        "number": "97",
+        "name": "Kabutops ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/97.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 141
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-27",
+        "number": "27",
+        "name": "Suicune ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/27.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-94",
+        "number": "94",
+        "name": "Suicune ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/94.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 245
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-28",
+        "number": "28",
+        "name": "Mudkip",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/28.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex3-65",
+        "number": "65",
+        "name": "Mudkip",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex3/en/small/ex3/65.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex3",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 258
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-29",
+        "number": "29",
+        "name": "Marshtomp",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/29.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex3-36",
+        "number": "36",
+        "name": "Marshtomp",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex3/en/small/ex3/36.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex3",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 259
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-30",
+        "number": "30",
+        "name": "Wingull",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/30.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-84",
+        "number": "84",
+        "name": "Wingull",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/84.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 278
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-31",
+        "number": "31",
+        "name": "Pelipper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/31.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-50",
+        "number": "50",
+        "name": "Pelipper",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/50.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 279
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-32",
+        "number": "32",
+        "name": "Wailmer",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/32.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-83",
+        "number": "83",
+        "name": "Wailmer",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/83.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 320
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-33",
+        "number": "33",
+        "name": "Team Aqua's Carvanha",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/33.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-25",
+        "number": "25",
+        "name": "Team Aqua's Carvanha",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/25.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 318
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-34",
+        "number": "34",
+        "name": "Team Aqua's Corphish",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/34.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-26",
+        "number": "26",
+        "name": "Team Aqua's Corphish",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/26.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 341
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-35",
+        "number": "35",
+        "name": "Team Aqua's Sharpedo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/35.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-5",
+        "number": "5",
+        "name": "Team Aqua's Sharpedo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/5.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 319
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-36",
+        "number": "36",
+        "name": "Team Aqua's Crawdaunt",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/36.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-2",
+        "number": "2",
+        "name": "Team Aqua's Crawdaunt",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/2.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 342
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-37",
+        "number": "37",
+        "name": "Jolteon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/37.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-6",
+        "number": "6",
+        "name": "Jolteon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/6.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 135
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-38",
+        "number": "38",
+        "name": "Team Aqua's Electrike",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/38.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-27",
+        "number": "27",
+        "name": "Team Aqua's Electrike",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/27.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 309
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-39",
+        "number": "39",
+        "name": "Team Aqua's Manectric",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/39.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-4",
+        "number": "4",
+        "name": "Team Aqua's Manectric",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/4.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 310
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-40",
+        "number": "40",
+        "name": "Espeon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/40.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-16",
+        "number": "16",
+        "name": "Espeon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/16.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 196
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-41",
+        "number": "41",
+        "name": "Ralts",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/41.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-74",
+        "number": "74",
+        "name": "Ralts",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/74.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 280
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-42",
+        "number": "42",
+        "name": "Kirlia",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/42.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-40",
+        "number": "40",
+        "name": "Kirlia",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/40.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 281
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-43",
+        "number": "43",
+        "name": "Duskull",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/43.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-62",
+        "number": "62",
+        "name": "Duskull",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/62.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 355
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-44",
+        "number": "44",
+        "name": "Team Magma's Baltoy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/44.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-32",
+        "number": "32",
+        "name": "Team Magma's Baltoy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/32.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 343
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-45",
+        "number": "45",
+        "name": "Team Magma's Claydol",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/45.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-8",
+        "number": "8",
+        "name": "Team Magma's Claydol",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/8.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 344
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-46",
+        "number": "46",
+        "name": "Geodude",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/46.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex3-56",
+        "number": "56",
+        "name": "Geodude",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex3/en/small/ex3/56.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex3",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 74
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-47",
+        "number": "47",
+        "name": "Graveler",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/47.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex3-30",
+        "number": "30",
+        "name": "Graveler",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex3/en/small/ex3/30.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex3",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 75
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-48",
+        "number": "48",
+        "name": "Golem ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/48.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex3-91",
+        "number": "91",
+        "name": "Golem ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex3/en/small/ex3/91.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex3",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 76
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-49",
+        "number": "49",
+        "name": "Onix",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/49.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-71",
+        "number": "71",
+        "name": "Onix",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/71.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 95
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-50",
+        "number": "50",
+        "name": "Swampert ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/50.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-95",
+        "number": "95",
+        "name": "Swampert ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/95.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 260
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-51",
+        "number": "51",
+        "name": "Anorith",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/51.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-28",
+        "number": "28",
+        "name": "Anorith",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/28.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 347
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-52",
+        "number": "52",
+        "name": "Team Magma's Rhyhorn",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/52.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-38",
+        "number": "38",
+        "name": "Team Magma's Rhyhorn",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/38.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 111
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-53",
+        "number": "53",
+        "name": "Team Magma's Rhydon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/53.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-11",
+        "number": "11",
+        "name": "Team Magma's Rhydon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/11.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 112
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-54",
+        "number": "54",
+        "name": "Eevee",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/54.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-63",
+        "number": "63",
+        "name": "Eevee",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/63.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 133
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-55",
+        "number": "55",
+        "name": "Aerodactyl ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/55.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-94",
+        "number": "94",
+        "name": "Aerodactyl ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/94.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 142
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-56",
+        "number": "56",
+        "name": "Dunsparce",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/56.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-60",
+        "number": "60",
+        "name": "Dunsparce",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/60.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 206
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-57",
+        "number": "57",
+        "name": "Linoone",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/57.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-44",
+        "number": "44",
+        "name": "Linoone",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/44.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 264
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-58",
+        "number": "58",
+        "name": "Swellow",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/58.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex3-45",
+        "number": "45",
+        "name": "Swellow",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex3/en/small/ex3/45.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex3",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 277
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-59",
+        "number": "59",
+        "name": "Skitty",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/59.jpg",
+        "rarity": "コモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-79",
+        "number": "79",
+        "name": "Skitty",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/79.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 300
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-60",
+        "number": "60",
+        "name": "Delcatty",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/60.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-34",
+        "number": "34",
+        "name": "Delcatty",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/34.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 301
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-61",
+        "number": "61",
+        "name": "Team Magma's Zangoose",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/61.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-23",
+        "number": "23",
+        "name": "Team Magma's Zangoose",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/23.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 335
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-62",
+        "number": "62",
+        "name": "Umbreon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/62.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-24",
+        "number": "24",
+        "name": "Umbreon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/24.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 197
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-63",
+        "number": "63",
+        "name": "Murkrow",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/63.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-47",
+        "number": "47",
+        "name": "Murkrow",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/47.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 198
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-64",
+        "number": "64",
+        "name": "Forretress",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/64.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex3-28",
+        "number": "28",
+        "name": "Forretress",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex3/en/small/ex3/28.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex3",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 205
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-65",
+        "number": "65",
+        "name": "Steelix",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/65.jpg",
+        "rarity": "Holo Rare",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-23",
+        "number": "23",
+        "name": "Steelix",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/23.png",
+        "rarity": "Holo Rare",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 208
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-66",
+        "number": "66",
+        "name": "Dual Ball",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/66.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-72",
+        "number": "72",
+        "name": "Dual Ball",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/72.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-67",
+        "number": "67",
+        "name": "Mysterious Fossil",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/67.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex2-91",
+        "number": "91",
+        "name": "Mysterious Fossil",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex2/en/small/ex2/91.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex2",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-68",
+        "number": "68",
+        "name": "Warp Point",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/68.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-85",
+        "number": "85",
+        "name": "Warp Point",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/85.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-69",
+        "number": "69",
+        "name": "Strength Charm",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/69.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-74",
+        "number": "74",
+        "name": "Strength Charm",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/74.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-70",
+        "number": "70",
+        "name": "Team Magma Belt",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/70.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-81",
+        "number": "81",
+        "name": "Team Magma Belt",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/81.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-71",
+        "number": "71",
+        "name": "Team Aqua Belt",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/71.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-76",
+        "number": "76",
+        "name": "Team Aqua Belt",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/76.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-72",
+        "number": "72",
+        "name": "Team Magma Schemer",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/72.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-70",
+        "number": "70",
+        "name": "Team Magma Schemer",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/70.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-73",
+        "number": "73",
+        "name": "Team Aqua Schemer",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/73.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-69",
+        "number": "69",
+        "name": "Team Aqua Schemer",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/69.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-74",
+        "number": "74",
+        "name": "Maxie",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/74.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-73",
+        "number": "73",
+        "name": "Maxie",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/73.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-75",
+        "number": "75",
+        "name": "Archie",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/75.jpg",
+        "rarity": "レア",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-71",
+        "number": "71",
+        "name": "Archie",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/71.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-76",
+        "number": "76",
+        "name": "Team Magma Technical Machine 01",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/76.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-84",
+        "number": "84",
+        "name": "Team Magma Technical Machine 01",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/84.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-77",
+        "number": "77",
+        "name": "Team Aqua Technical Machine 01",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/77.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-79",
+        "number": "79",
+        "name": "Team Aqua Technical Machine 01",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/79.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-78",
+        "number": "78",
+        "name": "Double Rainbow Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/78.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-88",
+        "number": "88",
+        "name": "Double Rainbow Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/88.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-79",
+        "number": "79",
+        "name": "Magma Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/79.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-87",
+        "number": "87",
+        "name": "Magma Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/87.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-ADV4-80",
+        "number": "80",
+        "name": "Aqua Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-adv4/ja/small/jp-tcg-ADV4/80.jpg",
+        "rarity": "アンコモン",
+        "setId": "jp-tcg-ADV4",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-ex4-86",
+        "number": "86",
+        "name": "Aqua Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/86.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": null
+    }
+  ],
+  "tail": {
+    "enOnly": [
+      {
+        "id": "en-tcg-ex4-3",
+        "number": "3",
+        "name": "Team Aqua's Kyogre",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/3.png",
+        "rarity": "Rare Holo",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 382,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-6",
+        "number": "6",
+        "name": "Team Aqua's Walrein",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/6.png",
+        "rarity": "Rare Holo",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 365,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-7",
+        "number": "7",
+        "name": "Team Magma's Aggron",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/7.png",
+        "rarity": "Rare Holo",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 306,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-9",
+        "number": "9",
+        "name": "Team Magma's Groudon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/9.png",
+        "rarity": "Rare Holo",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 383,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-13",
+        "number": "13",
+        "name": "Raichu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/13.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 26,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-14",
+        "number": "14",
+        "name": "Team Aqua's Crawdaunt",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/14.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 342,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-15",
+        "number": "15",
+        "name": "Team Aqua's Mightyena",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/15.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 262,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-16",
+        "number": "16",
+        "name": "Team Aqua's Sealeo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/16.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 364,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-18",
+        "number": "18",
+        "name": "Team Aqua's Sharpedo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/18.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 319,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-19",
+        "number": "19",
+        "name": "Team Magma's Camerupt",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/19.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 323,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-20",
+        "number": "20",
+        "name": "Team Magma's Lairon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/20.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 305,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-21",
+        "number": "21",
+        "name": "Team Magma's Mightyena",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/21.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 262,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-22",
+        "number": "22",
+        "name": "Team Magma's Rhydon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/22.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 112,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-28",
+        "number": "28",
+        "name": "Team Aqua's Lanturn",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/28.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 171,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-29",
+        "number": "29",
+        "name": "Team Aqua's Manectric",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/29.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 310,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-30",
+        "number": "30",
+        "name": "Team Aqua's Mightyena",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/30.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 262,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-31",
+        "number": "31",
+        "name": "Team Aqua's Sealeo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/31.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 364,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-33",
+        "number": "33",
+        "name": "Team Magma's Claydol",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/33.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 344,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-34",
+        "number": "34",
+        "name": "Team Magma's Houndoom",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/34.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 229,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-36",
+        "number": "36",
+        "name": "Team Magma's Lairon",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/36.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 305,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-37",
+        "number": "37",
+        "name": "Team Magma's Mightyena",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/37.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 262,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-39",
+        "number": "39",
+        "name": "Bulbasaur",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/39.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 1,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-40",
+        "number": "40",
+        "name": "Cubone",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/40.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 104,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-41",
+        "number": "41",
+        "name": "Jigglypuff",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/41.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 39,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-42",
+        "number": "42",
+        "name": "Meowth",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/42.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 52,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-43",
+        "number": "43",
+        "name": "Pikachu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/43.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 25,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-44",
+        "number": "44",
+        "name": "Psyduck",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/44.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 54,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-45",
+        "number": "45",
+        "name": "Slowpoke",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/45.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 79,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-46",
+        "number": "46",
+        "name": "Squirtle",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/46.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 7,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-47",
+        "number": "47",
+        "name": "Team Aqua's Carvanha",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/47.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 318,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-48",
+        "number": "48",
+        "name": "Team Aqua's Carvanha",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/48.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 318,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-49",
+        "number": "49",
+        "name": "Team Aqua's Chinchou",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/49.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 170,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-50",
+        "number": "50",
+        "name": "Team Aqua's Corphish",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/50.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 341,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-51",
+        "number": "51",
+        "name": "Team Aqua's Corphish",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/51.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 341,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-52",
+        "number": "52",
+        "name": "Team Aqua's Electrike",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/52.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 309,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-53",
+        "number": "53",
+        "name": "Team Aqua's Electrike",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/53.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 309,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-54",
+        "number": "54",
+        "name": "Team Aqua's Poochyena",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/54.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 261,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-55",
+        "number": "55",
+        "name": "Team Aqua's Poochyena",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/55.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 261,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-56",
+        "number": "56",
+        "name": "Team Aqua's Spheal",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/56.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 363,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-57",
+        "number": "57",
+        "name": "Team Aqua's Spheal",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/57.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 363,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-58",
+        "number": "58",
+        "name": "Team Magma's Aron",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/58.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 304,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-59",
+        "number": "59",
+        "name": "Team Magma's Aron",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/59.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 304,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-60",
+        "number": "60",
+        "name": "Team Magma's Baltoy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/60.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 343,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-61",
+        "number": "61",
+        "name": "Team Magma's Baltoy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/61.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 343,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-62",
+        "number": "62",
+        "name": "Team Magma's Houndour",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/62.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 228,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-63",
+        "number": "63",
+        "name": "Team Magma's Houndour",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/63.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 228,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-64",
+        "number": "64",
+        "name": "Team Magma's Numel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/64.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 322,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-65",
+        "number": "65",
+        "name": "Team Magma's Poochyena",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/65.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 261,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-66",
+        "number": "66",
+        "name": "Team Magma's Poochyena",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/66.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 261,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-67",
+        "number": "67",
+        "name": "Team Magma's Rhyhorn",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/67.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 111,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-68",
+        "number": "68",
+        "name": "Team Magma's Rhyhorn",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/68.png",
+        "rarity": "Common",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 111,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-75",
+        "number": "75",
+        "name": "Team Aqua Ball",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/75.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-ex4-77",
+        "number": "77",
+        "name": "Team Aqua Conspirator",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/77.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-ex4-78",
+        "number": "78",
+        "name": "Team Aqua Hideout",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/78.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-ex4-80",
+        "number": "80",
+        "name": "Team Magma Ball",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/80.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-ex4-82",
+        "number": "82",
+        "name": "Team Magma Conspirator",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/82.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-ex4-83",
+        "number": "83",
+        "name": "Team Magma Hideout",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/83.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-ex4-91",
+        "number": "91",
+        "name": "Entei ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/91.png",
+        "rarity": "Rare Holo EX",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 244,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-92",
+        "number": "92",
+        "name": "Raikou ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/92.png",
+        "rarity": "Rare Holo EX",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 243,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-96",
+        "number": "96",
+        "name": "Absol",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/96.png",
+        "rarity": "Rare Secret",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 359,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-ex4-97",
+        "number": "97",
+        "name": "Jirachi",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/ex4/en/small/ex4/97.png",
+        "rarity": "Rare Secret",
+        "setId": "en-tcg-ex4",
+        "region": "EN",
+        "dex": 385,
+        "jpElsewhere": true
+      }
+    ],
+    "krOnly": [],
+    "enKr": []
+  }
+}

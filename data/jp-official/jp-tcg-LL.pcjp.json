@@ -1,0 +1,931 @@
+{
+ "1": {
+  "number": 1,
+  "jaName": "コンパン",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "きゅうけつ",
+    "text": "相手のバトルポケモンに与えたダメージぶん、このポケモンのHPを回復する。",
+    "damage": "10"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "たいあたり",
+    "text": "",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Hideaki Hakozaki"
+ },
+ "2": {
+  "number": 2,
+  "jaName": "モルフォン",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass",
+     "Colorless"
+    ],
+    "name": "しびれごな",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンをマヒにする。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Hideaki Hakozaki"
+ },
+ "3": {
+  "number": 3,
+  "jaName": "モンジャラ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "えいようほきゅう",
+    "text": "自分の山札のエネルギーを1枚、自分のポケモンにつける。そして山札を切る。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Grass",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "どくのこな",
+    "text": "相手のバトルポケモンをどくにする。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Hideaki Hakozaki"
+ },
+ "4": {
+  "number": 4,
+  "jaName": "モジャンボ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "おしつぶす",
+    "text": "このポケモンについているエネルギーの数×20ダメージ。",
+    "damage": "20×"
+   },
+   {
+    "cost": [
+     "Grass",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "しばきたおす",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンをマヒにする。ウラなら、相手のバトルポケモンについているエネルギーを1個、ロストゾーンにおく。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Hideaki Hakozaki"
+ },
+ "5": {
+  "number": 5,
+  "jaName": "バルビート",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "とつげきミサイル",
+    "text": "相手のベンチポケモン1匹に、30ダメージ。自分の場に「イルミーゼ」がいないなら、このワザは失敗。［ベンチへのダメージは弱点・抵抗力の計算をしない。］",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Grass",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ほたるび",
+    "text": "相手のバトルポケモンをやけどとこんらんにする。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Kent Kanetsuna"
+ },
+ "6": {
+  "number": 6,
+  "jaName": "イルミーゼ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "あまいかおり",
+    "text": "自分のポケモン1匹のHPを「30」回復する。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "バルカンパンチ",
+    "text": "自分の場の「バルビート」の数ぶんコインを投げ、オモテ×30ダメージ。",
+    "damage": "30×"
+   }
+  ],
+  "illustrator": "Kent Kanetsuna"
+ },
+ "7": {
+  "number": 7,
+  "jaName": "マスキッパ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "だえきでさそう",
+    "text": "相手のベンチポケモンを1匹選び、バトルポケモンと入れ替える。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Grass",
+     "Grass",
+     "Colorless"
+    ],
+    "name": "からめてすいとる",
+    "text": "このポケモンのHPを「30」回復する。次の相手の番、このワザを受けた相手のバトルポケモンは、にげられない。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Ryo Ueda"
+ },
+ "8": {
+  "number": 8,
+  "jaName": "ジーランス",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "たいこのちえ",
+    "text": "自分の手札を1枚、ロストゾーンにおく。その後、自分の山札からカードを3枚引く。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Water",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "いしあたま",
+    "text": "次の相手の番、このポケモンが受けるワザのダメージは「-30」される。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Wataru Kawahara"
+ },
+ "9": {
+  "number": 9,
+  "jaName": "コイル",
+  "types": [
+   "Lightning"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "はんぱつ",
+    "text": "このポケモンをベンチポケモンと入れ替える。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Lightning",
+     "Colorless"
+    ],
+    "name": "でんきショック",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンをマヒにする。",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Noriko Hotta"
+ },
+ "10": {
+  "number": 10,
+  "jaName": "レアコイル",
+  "types": [
+   "Lightning"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Lightning"
+    ],
+    "name": "スピードボール",
+    "text": "",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "トライアタック",
+    "text": "コインを3回投げ、オモテ×20ダメージ。",
+    "damage": "20×"
+   }
+  ],
+  "illustrator": "Noriko Hotta"
+ },
+ "11": {
+  "number": 11,
+  "jaName": "ジバコイル",
+  "types": [
+   "Lightning"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Lightning",
+     "Colorless"
+    ],
+    "name": "ロストバーン",
+    "text": "自分のポケモンについているエネルギーを好きなだけロストゾーンにおき、そのエネルギーの枚数×50ダメージ。",
+    "damage": "50×"
+   }
+  ],
+  "illustrator": "Noriko Hotta"
+ },
+ "12": {
+  "number": 12,
+  "jaName": "パチリス",
+  "types": [
+   "Lightning"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Lightning",
+     "Lightning"
+    ],
+    "name": "ビリビリボルト",
+    "text": "このポケモンについているエネルギーをすべて、ロストゾーンにおく。",
+    "damage": "50"
+   }
+  ],
+  "illustrator": "Noriko Hotta"
+ },
+ "13": {
+  "number": 13,
+  "jaName": "ゴース",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic"
+    ],
+    "name": "そっとのせる",
+    "text": "相手のポケモン1匹に、ダメカンを1個のせる。",
+    "damage": null
+   }
+  ],
+  "illustrator": "Takashi Yamaguchi"
+ },
+ "14": {
+  "number": 14,
+  "jaName": "ゴースト",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic"
+    ],
+    "name": "そっとのせる",
+    "text": "相手のポケモン1匹に、ダメカンを2個のせる。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ねむけどく",
+    "text": "相手のバトルポケモンをどくとねむりにする。",
+    "damage": null
+   }
+  ],
+  "illustrator": "Takashi Yamaguchi"
+ },
+ "15": {
+  "number": 15,
+  "jaName": "ゲンガー",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic"
+    ],
+    "name": "やみにぶちこむ",
+    "text": "相手の手札を見て、その中のポケモンを、このポケモンについているエネルギーの数ぶんまで選び、ロストゾーンにおく。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Psychic",
+     "Colorless"
+    ],
+    "name": "のろいのしずく",
+    "text": "ダメカン4個を、相手のポケモンに好きなようにのせる。",
+    "damage": null
+   }
+  ],
+  "illustrator": "Takashi Yamaguchi"
+ },
+ "16": {
+  "number": 16,
+  "jaName": "マネネ",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [],
+    "name": "ねぼけロスト",
+    "text": "相手の山札を上から1枚、ロストゾーンにおく。このポケモンをねむりにする。",
+    "damage": null
+   }
+  ],
+  "illustrator": "Noriko Hotta"
+ },
+ "17": {
+  "number": 17,
+  "jaName": "バリヤード",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic",
+     "Colorless"
+    ],
+    "name": "ジャグリング",
+    "text": "コインを4回投げ、オモテ×10ダメージ。",
+    "damage": "10×"
+   }
+  ],
+  "illustrator": "Noriko Hotta"
+ },
+ "18": {
+  "number": 18,
+  "jaName": "ミュウ",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic"
+    ],
+    "name": "よみおくり",
+    "text": "自分の山札のポケモンを1枚、ロストゾーンにおく。そして山札を切る。",
+    "damage": null
+   }
+  ],
+  "illustrator": "Hideaki Hakozaki"
+ },
+ "19": {
+  "number": 19,
+  "jaName": "ハブネーク",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "どくをためる",
+    "text": "このポケモンをどくにする。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Psychic",
+     "Colorless"
+    ],
+    "name": "ポイズンエフェクト",
+    "text": "このポケモンがどくなら、60ダメージを追加。その後、このポケモンのどくを回復する。",
+    "damage": "20＋"
+   }
+  ],
+  "illustrator": "Wataru Kawahara"
+ },
+ "20": {
+  "number": 20,
+  "jaName": "カゲボウズ",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "かなしばり",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンのワザを1つ選ぶ。次の相手の番、このワザを受けた相手のバトルポケモンは、選ばれたワザを使えない。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Psychic"
+    ],
+    "name": "のろう",
+    "text": "相手のバトルポケモンに、ダメカンを1個のせる。",
+    "damage": null
+   }
+  ],
+  "illustrator": "Ryo Ueda"
+ },
+ "21": {
+  "number": 21,
+  "jaName": "ジュペッタ",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic"
+    ],
+    "name": "ロストクラッシュ",
+    "text": "コインを1回投げオモテなら、相手のポケモンについているエネルギーを1個、ロストゾーンにおく。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Psychic",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ブレイクダウン",
+    "text": "相手の手札の枚数ぶんのダメカンを、相手のバトルポケモンにのせる。",
+    "damage": null
+   }
+  ],
+  "illustrator": "Ryo Ueda"
+ },
+ "22": {
+  "number": 22,
+  "jaName": "ミカルゲ",
+  "types": [
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Psychic"
+    ],
+    "name": "いろおに",
+    "text": "の中から1つを選び、選ばれたタイプの相手のポケモン全員に、ダメカンをそれぞれ1個ずつのせる。",
+    "damage": null
+   }
+  ],
+  "illustrator": "Shizurow"
+ },
+ "23": {
+  "number": 23,
+  "jaName": "ディグダ",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "すながくれ",
+    "text": "コインを1回投げオモテなら、次の相手の番、このポケモンはワザのダメージや効果を受けない。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "ミニじしん",
+    "text": "自分のベンチポケモン全員にも、それぞれ10ダメージ。［ベンチへのダメージは弱点・抵抗力の計算をしない。］",
+    "damage": "40"
+   }
+  ],
+  "illustrator": "Shizurow"
+ },
+ "24": {
+  "number": 24,
+  "jaName": "ダグトリオ",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting"
+    ],
+    "name": "あなをほる",
+    "text": "",
+    "damage": "30"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "サンドインパクト",
+    "text": "このポケモンについているエネルギーの数ぶんコインを投げ、オモテ×20ダメージを追加。",
+    "damage": "50＋"
+   }
+  ],
+  "illustrator": "Shizurow"
+ },
+ "25": {
+  "number": 25,
+  "jaName": "リオル",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting"
+    ],
+    "name": "ずっこけ",
+    "text": "次の自分の番、このポケモンはワザを使えない。",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Takashi Yamaguchi"
+ },
+ "26": {
+  "number": 26,
+  "jaName": "ルカリオ",
+  "types": [
+   "Fighting"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "じげんだん",
+    "text": "自分のロストゾーンのポケモンの枚数×20ダメージを追加。",
+    "damage": "30＋"
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Fighting",
+     "Colorless"
+    ],
+    "name": "スカイアッパー",
+    "text": "このワザのダメージは抵抗力の計算をしない。",
+    "damage": "70"
+   }
+  ],
+  "illustrator": "Takashi Yamaguchi"
+ },
+ "27": {
+  "number": 27,
+  "jaName": "アブソル",
+  "types": [
+   "Darkness"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Darkness",
+     "Colorless"
+    ],
+    "name": "ブラッディクロー",
+    "text": "自分の手札のポケモンを1枚、ロストゾーンにおく。ロストゾーンにおけないなら、このワザは失敗。",
+    "damage": "70"
+   }
+  ],
+  "illustrator": "Hideaki Hakozaki"
+ },
+ "28": {
+  "number": 28,
+  "jaName": "カビゴン",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "くっちゃね",
+    "text": "このポケモンのHPをすべて回復する。次の自分の番、このポケモンは「くっちゃね」を使えない。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ドコドコドッシン",
+    "text": "このポケモンについているエネルギーを1個、ロストゾーンにおく。",
+    "damage": "80"
+   }
+  ],
+  "illustrator": "Kent Kanetsuna"
+ },
+ "29": {
+  "number": 29,
+  "jaName": "ミニリュウ",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "まとわりつく",
+    "text": "次の相手の番、このワザを受けた相手のバトルポケモンは、にげられない。",
+    "damage": "10"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ぶつかる",
+    "text": "",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Mitsuhiro Arita"
+ },
+ "30": {
+  "number": 30,
+  "jaName": "ハクリュー",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "おさそいサーチ",
+    "text": "自分の山札のポケモンを2枚まで、相手に見せてから、手札に加える。そして山札を切る。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "たたきつける",
+    "text": "コインを2回投げ、オモテ×40ダメージ。",
+    "damage": "40×"
+   }
+  ],
+  "illustrator": "Mitsuhiro Arita"
+ },
+ "31": {
+  "number": 31,
+  "jaName": "カイリュー",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "やすらぎウインド",
+    "text": "このポケモンの特殊状態をすべて回復する。",
+    "damage": "50"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ドラゴンスタンプ",
+    "text": "コインを2回投げ、すべてオモテなら、相手のバトルポケモンをマヒにする。すべてウラなら、このワザは失敗。",
+    "damage": "80"
+   }
+  ],
+  "illustrator": "Mitsuhiro Arita"
+ },
+ "32": {
+  "number": 32,
+  "jaName": "チルット",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "つばさではじく",
+    "text": "相手のバトルポケモンをベンチポケモンと入れ替える。［バトル場に出すポケモンは相手が選ぶ。］",
+    "damage": "10"
+   }
+  ],
+  "illustrator": "Ryo Ueda"
+ },
+ "33": {
+  "number": 33,
+  "jaName": "チルタリス",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "くろいひとみ",
+    "text": "相手のバトルポケモンをねむりにする。",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "スタジアムパワー",
+    "text": "場に「スタジアム」が出ているなら、30ダメージを追加。",
+    "damage": "40＋"
+   }
+  ],
+  "illustrator": "Ryo Ueda"
+ },
+ "34": {
+  "number": 34,
+  "jaName": "ザングース",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "つるぎのまい",
+    "text": "次の自分の番、このポケモンが使う「ロストクロー」のダメージは「60」になる。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ロストクロー",
+    "text": "相手の手札から、オモテを見ないでカードを1枚選び、ロストゾーンにおく。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "Wataru Kawahara"
+ },
+ "35": {
+  "number": 35,
+  "jaName": "ダークライ&クレセリアLEGEND",
+  "types": [
+   "Darkness",
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Darkness",
+     "Darkness",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ロストクライシス",
+    "text": "このポケモンについているエネルギーを2個、ロストゾーンにおく。このワザのダメージできぜつしたポケモンと、ついているすべてのカードは、ロストゾーンにおく。",
+    "damage": "100"
+   },
+   {
+    "cost": [
+     "Psychic"
+    ],
+    "name": "つきのいざない",
+    "text": "相手のポケモンにのっているダメカンを好きなだけ選び、相手のポケモンに好きなようにのせ替える。",
+    "damage": null
+   }
+  ],
+  "illustrator": "Shinji Higuchi"
+ },
+ "36": {
+  "number": 36,
+  "jaName": "ダークライ&クレセリアLEGEND",
+  "types": [
+   "Darkness",
+   "Psychic"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Darkness",
+     "Darkness",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ロストクライシス",
+    "text": "このポケモンについているエネルギーを2個、ロストゾーンにおく。このワザのダメージできぜつしたポケモンと、ついているすべてのカードは、ロストゾーンにおく。",
+    "damage": "100"
+   },
+   {
+    "cost": [
+     "Psychic"
+    ],
+    "name": "つきのいざない",
+    "text": "相手のポケモンにのっているダメカンを好きなだけ選び、相手のポケモンに好きなようにのせ替える。",
+    "damage": null
+   }
+  ],
+  "illustrator": "Shinji Higuchi"
+ },
+ "37": {
+  "number": 37,
+  "jaName": "研究の記録",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Hideaki Hakozaki"
+ },
+ "38": {
+  "number": 38,
+  "jaName": "ロストリムーバー",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Wataru Kawahara"
+ },
+ "39": {
+  "number": 39,
+  "jaName": "探究者",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Wataru Kawahara"
+ },
+ "40": {
+  "number": 40,
+  "jaName": "ロストワールド",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Hideaki Hakozaki"
+ }
+}

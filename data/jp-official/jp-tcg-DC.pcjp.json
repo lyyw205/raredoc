@@ -1,0 +1,468 @@
+{
+ "1": {
+  "number": 1,
+  "jaName": "ミニリュウ",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass",
+     "Lightning"
+    ],
+    "name": "まきつく",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンをマヒにする。",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Masakazu Fukuda"
+ },
+ "2": {
+  "number": 2,
+  "jaName": "ミニリュウ",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "みつめる",
+    "text": "相手のバトルポケモンをねむりにする。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Lightning"
+    ],
+    "name": "しっぽではたく",
+    "text": "",
+    "damage": "10"
+   }
+  ],
+  "illustrator": "Naoki Saito"
+ },
+ "3": {
+  "number": 3,
+  "jaName": "ハクリュー",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "しっぽではたく",
+    "text": "",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Grass",
+     "Lightning",
+     "Colorless"
+    ],
+    "name": "りゅうのはどう",
+    "text": "自分の山札を上から1枚トラッシュする。",
+    "damage": "70"
+   }
+  ],
+  "illustrator": "Hajime Kusajima"
+ },
+ "4": {
+  "number": 4,
+  "jaName": "ハクリュー",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "いやしのうた",
+    "text": "自分のポケモン全員のHPを、それぞれ「10」回復する。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Lightning",
+     "Colorless"
+    ],
+    "name": "たたきつける",
+    "text": "コインを2回投げ、オモテの数×30ダメージ。",
+    "damage": "30×"
+   }
+  ],
+  "illustrator": "Kagemaru Himeno"
+ },
+ "5": {
+  "number": 5,
+  "jaName": "カイリュー",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Lightning",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "はかいこうせん",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンについているエネルギーを1個選び、トラッシュする。",
+    "damage": "50"
+   },
+   {
+    "cost": [
+     "Grass",
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ハリケーンテール",
+    "text": "コインを4回投げ、オモテの数×60ダメージ。",
+    "damage": "60×"
+   }
+  ],
+  "illustrator": "Mitsuhiro Arita"
+ },
+ "6": {
+  "number": 6,
+  "jaName": "タツベイ",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "ずつき",
+    "text": "",
+    "damage": "10"
+   },
+   {
+    "cost": [
+     "Fire",
+     "Water"
+    ],
+    "name": "ドラゴンクロー",
+    "text": "",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Kouki Saitou"
+ },
+ "7": {
+  "number": 7,
+  "jaName": "コモルー",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "はねとばす",
+    "text": "コインを1回投げオモテなら、20ダメージを追加。",
+    "damage": "10＋"
+   },
+   {
+    "cost": [
+     "Fire",
+     "Water",
+     "Colorless"
+    ],
+    "name": "ころがる",
+    "text": "",
+    "damage": "50"
+   }
+  ],
+  "illustrator": "Akira Komayama"
+ },
+ "8": {
+  "number": 8,
+  "jaName": "ボーマンダ",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire",
+     "Water",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ひきさく",
+    "text": "このワザのダメージは、相手のバトルポケモンにかかっている効果の計算をしない。",
+    "damage": "90"
+   }
+  ],
+  "illustrator": "BERUBURI"
+ },
+ "9": {
+  "number": 9,
+  "jaName": "ラティアス",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "エネアシスト",
+    "text": "自分のトラッシュから基本エネルギーを1枚選び、ベンチポケモンにつける。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Fire",
+     "Psychic"
+    ],
+    "name": "スカイゲイン",
+    "text": "自分のベンチに「ラティオス」がいるなら、このポケモンのHPを「20」回復する。",
+    "damage": "40"
+   }
+  ],
+  "illustrator": "Hideaki Hakozaki"
+ },
+ "10": {
+  "number": 10,
+  "jaName": "ラティオス",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water",
+     "Colorless"
+    ],
+    "name": "スカイブレード",
+    "text": "自分のベンチに「ラティアス」がいるなら、20ダメージを追加。",
+    "damage": "20＋"
+   },
+   {
+    "cost": [
+     "Psychic",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "スピードウイング",
+    "text": "",
+    "damage": "60"
+   }
+  ],
+  "illustrator": "Ryo Ueda"
+ },
+ "11": {
+  "number": 11,
+  "jaName": "レックウザ",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Lightning"
+    ],
+    "name": "りゅうのはどう",
+    "text": "自分の山札を上から2枚トラッシュする。",
+    "damage": "40"
+   },
+   {
+    "cost": [
+     "Fire",
+     "Lightning",
+     "Colorless"
+    ],
+    "name": "ひきさく",
+    "text": "このワザのダメージは、相手のバトルポケモンにかかっている効果の計算をしない。",
+    "damage": "90"
+   }
+  ],
+  "illustrator": "5ban Graphics"
+ },
+ "12": {
+  "number": 12,
+  "jaName": "キバゴ",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting"
+    ],
+    "name": "しんかのきざし",
+    "text": "コインを1回投げオモテなら、自分の山札から「オノンド」を1枚選び、相手に見せてから、手札に加える。そして山札を切る。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Metal"
+    ],
+    "name": "ひっかく",
+    "text": "",
+    "damage": "10"
+   }
+  ],
+  "illustrator": "Mizue"
+ },
+ "13": {
+  "number": 13,
+  "jaName": "キバゴ",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting",
+     "Metal"
+    ],
+    "name": "とびかかる",
+    "text": "コインを1回投げウラなら、このワザは失敗。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "TOKIYA"
+ },
+ "14": {
+  "number": 14,
+  "jaName": "オノンド",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fighting",
+     "Metal",
+     "Colorless"
+    ],
+    "name": "ドラゴンクロー",
+    "text": "",
+    "damage": "60"
+   }
+  ],
+  "illustrator": "Shin Nagasawa"
+ },
+ "15": {
+  "number": 15,
+  "jaName": "オノンド",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Metal",
+     "Colorless"
+    ],
+    "name": "ひっかく",
+    "text": "",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "するどいキバ",
+    "text": "",
+    "damage": "40"
+   }
+  ],
+  "illustrator": "match"
+ },
+ "16": {
+  "number": 16,
+  "jaName": "オノノクス",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "アックスラッガー",
+    "text": "相手のバトルポケモンがタイプなら、60ダメージを追加。",
+    "damage": "60＋"
+   },
+   {
+    "cost": [
+     "Fighting",
+     "Metal",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "りゅうのはどう",
+    "text": "自分の山札を上から1枚トラッシュする。",
+    "damage": "100"
+   }
+  ],
+  "illustrator": "Eske Yoshinob"
+ },
+ "17": {
+  "number": 17,
+  "jaName": "クリムガン",
+  "types": [
+   "Dragon"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "にらんでかみつく",
+    "text": "コインを1回投げオモテなら、相手のバトルポケモンをマヒにする。",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Fire",
+     "Water",
+     "Colorless"
+    ],
+    "name": "ドラゴンテール",
+    "text": "コインを2回投げ、オモテの数×80ダメージ。",
+    "damage": "80×"
+   }
+  ],
+  "illustrator": "kawayoo"
+ },
+ "18": {
+  "number": 18,
+  "jaName": "すごいつりざお",
+  "types": [],
+  "attacks": [],
+  "illustrator": "5ban Graphics"
+ },
+ "19": {
+  "number": 19,
+  "jaName": "ファーストチケット",
+  "types": [],
+  "attacks": [],
+  "illustrator": "5ban Graphics"
+ },
+ "20": {
+  "number": 20,
+  "jaName": "学習装置",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Ryo Ueda"
+ }
+}
