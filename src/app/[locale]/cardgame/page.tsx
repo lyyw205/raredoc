@@ -7,6 +7,9 @@ import {
   getRealTournaments,
   getRegionArchetypes,
   getTournaments,
+  getMetaFreshness,
+  getTopAdoptedCards,
+  getNewSetDecks,
 } from "@/lib/services/cardgame";
 import { MetaPageView } from "./MetaPageView";
 import { RegionMetaView } from "./RegionMetaView";
@@ -77,12 +80,15 @@ export default async function CardgameMetaPage({
     );
   }
 
-  // 글로벌(INTL) 탭 — 기존 화면 그대로
-  const [archetypes, trend, rising, tournaments] = await Promise.all([
+  // 글로벌(INTL) 탭
+  const [archetypes, trend, rising, tournaments, freshness, topCards, newSet] = await Promise.all([
     getArchetypes({ realOnly: true }),
     getArchetypeTrends(),
     getRisingDecks(5),
     getRealTournaments(),
+    getMetaFreshness(),
+    getTopAdoptedCards(10),
+    getNewSetDecks(5),
   ]);
 
   return (
@@ -94,6 +100,9 @@ export default async function CardgameMetaPage({
         trend={trend}
         rising={rising}
         tournamentCount={tournaments.length}
+        freshness={freshness}
+        topCards={topCards}
+        newSet={newSet}
       />
     </div>
   );

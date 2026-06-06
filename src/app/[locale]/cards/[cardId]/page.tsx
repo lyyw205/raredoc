@@ -13,6 +13,9 @@ import { getCardOwnerCounts } from "@/lib/services/marketplace";
 import { CardVersionTabs, type CardVersion } from "@/components/cards/CardVersionTabs";
 import { RARITY_KO } from "@/lib/constants";
 import { PriceChart, PT_RANGES } from "@/components/cards/PriceChart";
+import { getDecksUsingCard } from "@/lib/services/cardgame";
+import { DeckIcon } from "@/components/cardgame/DeckIcon";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {
@@ -24,6 +27,42 @@ import {
 } from "@/components/toss";
 
 export const revalidate = 3600;
+
+// "이 카드를 쓰는 덱" 역링크 (UI-2차 — cardgame 채용률 데이터 연동). 채용 덱 없으면 미렌더.
+async function DecksUsingCardSection({ logicalCardId, locale }: { logicalCardId: string; locale: string }) {
+  const decks = await getDecksUsingCard(logicalCardId, 5).catch(() => []);
+  if (decks.length === 0) return null;
+  return (
+    <section className="mt-10 space-y-5">
+      <h2 className="text-toss-title font-bold text-toss-text-primary">이 카드를 쓰는 덱</h2>
+      <Card padding="md">
+        <div className="space-y-1">
+          {decks.map((d) => (
+            <Link
+              key={d.archetypeId}
+              href={`/${locale}/cardgame/decks/${d.archetypeId}`}
+              className="flex items-center gap-3 p-2 rounded-toss-md hover:bg-toss-hover transition-colors"
+            >
+              <DeckIcon iconKeys={d.iconKeys} size="md" />
+              <span className="flex-1 min-w-0 text-toss-caption font-semibold text-toss-text-primary truncate">
+                {d.nameKo}
+              </span>
+              <span className="text-toss-micro text-toss-text-tertiary shrink-0">
+                채용률 {d.adoptionRate}% · 평균 {d.avgCount}장
+              </span>
+              <span className="text-toss-caption font-bold text-toss-text-secondary w-14 text-right tabular-nums shrink-0">
+                {d.usageRate.toFixed(1)}%
+              </span>
+            </Link>
+          ))}
+        </div>
+        <p className="text-toss-micro text-toss-text-quaternary mt-3">
+          글로벌 메타 표준 레시피 기준 채용률 · 우측은 덱 사용률
+        </p>
+      </Card>
+    </section>
+  );
+}
 
 // ── 카드 정보용 라벨/색상 (pokemontcg.io 영문 값 기준) ──────────────────────
 const TYPE_KO: Record<string, string> = {
@@ -159,7 +198,7 @@ export default async function CardDetailPage({
             recordedAt: true,
             normal: true,
             holofoil: true,
-            source: true,
+            sourceId: true,
             condition: true,
             priceSource: { select: { name: true, marketRegion: true } },
           },
@@ -169,7 +208,7 @@ export default async function CardDetailPage({
             recordedAt: r.recordedAt,
             normal: r.normal,
             holofoil: r.holofoil,
-            source: r.source,
+            source: r.sourceId ?? "",
             sourceName: r.priceSource?.name ?? null,
             sourceRegion: r.priceSource?.marketRegion ?? null,
             condition: r.condition,
@@ -550,6 +589,11 @@ export default async function CardDetailPage({
           )}
         </div>
       </div>
+
+      {/* ── 이 카드를 쓰는 덱 (UI-2차 역링크) ─────────────────────── */}
+      {loaded?.logicalCard?.id && (
+        <DecksUsingCardSection logicalCardId={loaded.logicalCard.id} locale={locale} />
+      )}
 
       {/* ── 시세 (전체 폭, 하단) ──────────────────────────────────── */}
       <section className="mt-10 space-y-5">

@@ -17,8 +17,21 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import { Trophy, TrendingUp, TrendingDown, Flame } from "lucide-react";
+import { Trophy, TrendingUp, TrendingDown, Flame, Swords, ChevronRight } from "lucide-react";
 import { DeckIcon } from "@/components/cardgame/DeckIcon";
+import { CardThumb } from "@/components/cardgame/CardThumb";
+import { TierShareButton } from "@/components/cardgame/TierShareButton";
+import type { MetaFreshness, TopCard, NewSetMeta } from "@/lib/services/cardgame";
+
+// 상대 시각 표기 ("3시간 전") — 신선도 헤더용.
+function timeAgo(iso: string | null): string {
+  if (!iso) return "—";
+  const diffMs = Date.now() - new Date(iso).getTime();
+  const h = Math.floor(diffMs / 3_600_000);
+  if (h < 1) return `${Math.max(1, Math.floor(diffMs / 60_000))}분 전`;
+  if (h < 24) return `${h}시간 전`;
+  return `${Math.floor(h / 24)}일 전`;
+}
 import type {
   ArchetypeSummary,
   RisingDeck,
@@ -260,43 +273,92 @@ export function MetaPageView({
   trend,
   rising,
   tournamentCount,
+  freshness,
+  topCards,
+  newSet,
 }: {
   locale: string;
   archetypes: ArchetypeSummary[];
   trend: MetaTrend;
   rising: RisingResult;
   tournamentCount: number;
+  freshness: MetaFreshness;
+  topCards: TopCard[];
+  newSet: NewSetMeta | null;
 }) {
+  // 메타 집중도 (#5) — 상위 5덱 점유 합
+  const top5Share = [...archetypes]
+    .sort((a, b) => b.usageRate - a.usageRate)
+    .slice(0, 5)
+    .reduce((s, a) => s + a.usageRate, 0);
+
   return (
     <div className="space-y-10">
-      {/* 헤더 */}
+      {/* 헤더 + 신선도 (A급 패턴 1·2·3: 신선도·표본·기간 선언 + 산정 기준 한 줄) */}
       <div>
         <h1 className="text-toss-display font-bold text-toss-text-primary flex items-center gap-2">
           <Trophy size={24} className="text-toss-brand" />
           메타 현황
         </h1>
-        <p className="text-toss-body text-toss-text-tertiary mt-1">
-          Limitless 대회 데이터 기반 (최근 14일, {tournamentCount}개 대회)
-        </p>
-        <p className="text-toss-micro text-toss-text-quaternary mt-1">
-          덱 분류는 제출 데클리스트 기반 Limitless 자동 판정 · 주로 온라인(PTCG Live) 대회
+        <div className="flex items-center gap-2 flex-wrap mt-2">
+          <span className="text-toss-micro px-2 py-1 rounded-full bg-toss-bg-muted text-toss-text-tertiary">
+            대회 데이터 {timeAgo(freshness.syncedAt)} 갱신
+          </span>
+          <span className="text-toss-micro px-2 py-1 rounded-full bg-toss-bg-muted text-toss-text-tertiary">
+            최근 {freshness.windowDays}일 · 대회 {tournamentCount}건 · 입상 {freshness.standingCount.toLocaleString()}건
+          </span>
+          <span className="text-toss-micro px-2 py-1 rounded-full bg-toss-bg-muted text-toss-text-tertiary">
+            상위 5덱 점유 {top5Share.toFixed(0)}% · 총 {archetypes.length}덱
+          </span>
+        </div>
+        <p className="text-toss-micro text-toss-text-quaternary mt-2">
+          덱 분류는 제출 데클리스트 기반 Limitless 자동 판정 · 온라인(PTCG Live)+공식 메이저 ·
+          티어 산정: 사용률 15/8/3% 임계
         </p>
       </div>
 
       {/* #23 해외 뜨는 덱 — 최상단 히어로 */}
       <RisingHero rising={rising} locale={locale} />
 
-      {/* #2 티어표 */}
+      {/* #2 티어표 + 이미지 공유 (A급 패턴 12: SNS 유통 단위) */}
       <section>
-        <h2 className="text-toss-title font-bold text-toss-text-primary mb-4">Tier 리스트</h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-toss-title font-bold text-toss-text-primary">Tier 리스트</h2>
+          {archetypes.length > 0 && (
+            <TierShareButton targetId="tier-board" filename={`raredoc-tier-${new Date().toISOString().slice(0, 10)}`} />
+          )}
+        </div>
         {archetypes.length === 0 ? (
           <EmptyState title="티어 데이터가 없습니다" />
         ) : (
-          <Card variant="default" padding="lg">
-            <TierListSection archetypes={archetypes} locale={locale} />
-          </Card>
+          <div id="tier-board">
+            <Card variant="default" padding="lg">
+              <TierListSection archetypes={archetypes} locale={locale} />
+              <p className="text-toss-micro text-toss-text-quaternary mt-4">
+                raredoc.kr · {new Date().toISOString().slice(0, 10)} · 최근 {freshness.windowDays}일 입상 {freshness.standingCount.toLocaleString()}건 기준
+              </p>
+            </Card>
+          </div>
         )}
       </section>
+
+      {/* ⚔️ 상성 바로가기 (UI-2차) */}
+      <Link href={`/${locale}/cardgame/matchups`} className="block">
+        <Card variant="interactive" padding="md">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex w-10 h-10 rounded-toss-md bg-toss-bg-muted items-center justify-center shrink-0">
+              <Swords size={18} className="text-toss-brand" />
+            </span>
+            <div className="flex-1 min-w-0">
+              <p className="text-toss-label font-bold text-toss-text-primary">덱 상성표</p>
+              <p className="text-toss-caption text-toss-text-tertiary">
+                상위 덱 vs 덱 승률 매트릭스 — 표본·산식 명시
+              </p>
+            </div>
+            <ChevronRight size={16} className="text-toss-text-quaternary shrink-0" />
+          </div>
+        </Card>
+      </Link>
 
       {/* #1 인기덱 랭킹 */}
       <section>
@@ -347,19 +409,60 @@ export function MetaPageView({
         </div>
       </section>
 
-      {/* #20 메타 필수 카드 / #25 신팩 메타덱 — 카드 매칭 보류 → 준비중 */}
-      <section>
-        <h2 className="text-toss-title font-bold text-toss-text-primary mb-4">메타 필수 카드 · 신팩 메타덱</h2>
-        <Card variant="default" padding="lg">
-          <div className="flex flex-col items-center justify-center py-6 text-center gap-2">
-            <span className="text-toss-label font-semibold text-toss-text-secondary">카드 데이터 준비 중</span>
-            <p className="text-toss-caption text-toss-text-tertiary max-w-md">
-              덱 레시피의 카드 이미지·시세 매칭 작업이 진행 중입니다. 매칭이 완료되면 메타 필수
-              카드와 신팩 포함 덱이 여기에 표시됩니다.
-            </p>
+      {/* #20 메타 필수 카드 (UI-2차 — placeholder 해소) */}
+      {topCards.length > 0 && (
+        <section>
+          <h2 className="text-toss-title font-bold text-toss-text-primary mb-4">메타 필수 카드</h2>
+          <div className="grid grid-cols-5 sm:grid-cols-6 lg:grid-cols-10 gap-3">
+            {topCards.map((c) => (
+              <Link
+                key={c.logicalCardId}
+                href={c.cardLocaleId ? `/${locale}/cards/${c.cardLocaleId}` : "#"}
+                className="block hover:opacity-90 transition-opacity"
+              >
+                <CardThumb src={c.image} alt={c.name} />
+                <p className="mt-1 text-toss-micro text-toss-text-tertiary text-center truncate" title={c.name}>
+                  {c.deckCount}덱 채용
+                </p>
+              </Link>
+            ))}
           </div>
-        </Card>
-      </section>
+        </section>
+      )}
+
+      {/* #25 신팩 메타덱 (UI-2차 — placeholder 해소) */}
+      {newSet && newSet.decks.length > 0 && (
+        <section>
+          <h2 className="text-toss-title font-bold text-toss-text-primary mb-4">
+            신팩 메타덱
+            <span className="ml-2 text-toss-caption font-normal text-toss-text-tertiary">
+              {newSet.setName} ({newSet.releaseDate})
+            </span>
+          </h2>
+          <Card variant="default" padding="md">
+            <div className="space-y-1">
+              {newSet.decks.map((d) => (
+                <Link
+                  key={d.archetypeId}
+                  href={`/${locale}/cardgame/decks/${d.archetypeId}`}
+                  className="flex items-center gap-3 p-2 rounded-toss-md hover:bg-toss-hover transition-colors"
+                >
+                  <DeckIcon iconKeys={d.iconKeys} size="md" />
+                  <span className="flex-1 min-w-0 text-toss-caption font-semibold text-toss-text-primary truncate">
+                    {d.nameKo}
+                  </span>
+                  <span className="text-toss-micro text-toss-text-tertiary shrink-0">
+                    신팩 카드 {d.newCards}종 채용
+                  </span>
+                  <span className="text-toss-caption font-bold text-toss-text-secondary w-14 text-right tabular-nums shrink-0">
+                    {d.usageRate.toFixed(1)}%
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </Card>
+        </section>
+      )}
 
       <CardDivider />
       <p className="text-toss-micro text-toss-text-quaternary text-center">

@@ -731,6 +731,190 @@ export async function getRealTournaments(): Promise<TournamentRow[]> {
   return getTournaments({ realOnly: true });
 }
 
+// ── UI-2차: 상성 매트릭스 / 신선도 / 필수 카드 / 신팩 / 역링크 ──────────────────
+
+export type MatchupMatrix = {
+  decks: { id: string; nameKo: string; iconKeys: string[] }[];
+  /** key = `${aId}|${bId}` (a 관점) — 양방향 키 모두 채움. */
+  cells: Record<string, { winRate: number; games: number; wins: number; losses: number; ties: number }>;
+};
+
+/** 상위 N덱 상성 매트릭스 — "other"(잡주머니) 제외. 사전 SQL 게이트(2026-06-06) 96% games>=10. */
+export async function getMatchupMatrix(topN = 8): Promise<MatchupMatrix> {
+  const decks = await prisma.deckArchetype.findMany({
+    where: { sampleSize: { gt: 0 }, id: { not: "other" } },
+    orderBy: { usageRate: "desc" },
+    take: topN,
+    select: { id: true, nameKo: true, nameEn: true, iconKeys: true },
+  });
+  const ids = decks.map((d) => d.id);
+  const rows = await prisma.deckMatchup.findMany({
+    where: { deckAId: { in: ids }, deckBId: { in: ids } },
+  });
+  const cells: MatchupMatrix["cells"] = {};
+  for (const m of rows) {
+    const decisive = m.winsA + m.winsB;
+    const rateA = decisive > 0 ? Math.round((m.winsA / decisive) * 100) : 0;
+    cells[`${m.deckAId}|${m.deckBId}`] = { winRate: rateA, games: m.games, wins: m.winsA, losses: m.winsB, ties: m.ties };
+    cells[`${m.deckBId}|${m.deckAId}`] = { winRate: decisive > 0 ? 100 - rateA : 0, games: m.games, wins: m.winsB, losses: m.winsA, ties: m.ties };
+  }
+  return {
+    decks: decks.map((d) => ({ id: d.id, nameKo: d.nameKo || d.nameEn || d.id, iconKeys: d.iconKeys })),
+    cells,
+  };
+}
+
+export type MetaFreshness = {
+  /** 마지막 대회 동기화 시각 (ISO) — "대회 데이터 기준" 한정어와 함께 표기(시세와 별개). */
+  syncedAt: string | null;
+  tournamentCount: number;
+  standingCount: number;
+  windowDays: number;
+};
+
+/** 메타 헤더 신선도 (region 패스의 윈도우와 동일 기준 — INTL 14d). */
+export async function getMetaFreshness(region = "INTL", windowDays = 14): Promise<MetaFreshness> {
+  const since = new Date(Date.now() - windowDays * 86_400_000);
+  const where = { source: { not: null }, metaRegion: region, date: { gte: since } } as const;
+  const [agg, tournamentCount, standingCount] = await Promise.all([
+    prisma.tournament.aggregate({ where: { source: { not: null } }, _max: { syncedAt: true } }),
+    prisma.tournament.count({ where }),
+    prisma.tournamentStanding.count({ where: { deckKey: { not: null }, tournament: where } }),
+  ]);
+  return {
+    syncedAt: agg._max.syncedAt?.toISOString() ?? null,
+    tournamentCount,
+    standingCount,
+    windowDays,
+  };
+}
+
+export type TopCard = {
+  logicalCardId: string;
+  name: string;
+  image: string | null;
+  cardLocaleId: string | null;
+  deckCount: number;
+  avgAdoption: number;
+};
+
+/** #20 메타 필수 카드 — INTL 레시피에서 채용 아키타입 수 상위 (기본 에너지 제외). */
+export async function getTopAdoptedCards(n = 10): Promise<TopCard[]> {
+  const rows = await prisma.deckRecipeCard.findMany({
+    where: { region: "INTL", logicalCardId: { not: null }, category: { not: "energy" } },
+    select: { logicalCardId: true, cardName: true, adoptionRate: true },
+  });
+  const acc = new Map<string, { name: string; decks: number; rateSum: number }>();
+  for (const r of rows) {
+    const a = acc.get(r.logicalCardId!) ?? { name: r.cardName, decks: 0, rateSum: 0 };
+    a.decks++;
+    a.rateSum += r.adoptionRate;
+    acc.set(r.logicalCardId!, a);
+  }
+  const top = [...acc.entries()]
+    .sort((x, y) => y[1].decks - x[1].decks || y[1].rateSum - x[1].rateSum)
+    .slice(0, n);
+  const imageMap = await resolveLogicalCardImages(top.map(([id]) => id));
+  return top.map(([id, a]) => ({
+    logicalCardId: id,
+    name: a.name,
+    image: imageMap.get(id)?.image ?? null,
+    cardLocaleId: imageMap.get(id)?.cardLocaleId ?? null,
+    deckCount: a.decks,
+    avgAdoption: Math.round((a.rateSum / a.decks) * 10) / 10,
+  }));
+}
+
+export type DeckUsingCard = {
+  archetypeId: string;
+  nameKo: string;
+  iconKeys: string[];
+  adoptionRate: number;
+  avgCount: number;
+  usageRate: number;
+};
+
+/** 카드 상세 역링크 — 이 카드를 쓰는 덱 Top N (INTL 채용률순). */
+export async function getDecksUsingCard(logicalCardId: string, n = 5): Promise<DeckUsingCard[]> {
+  const rows = await prisma.deckRecipeCard.findMany({
+    where: { region: "INTL", logicalCardId },
+    select: { archetypeId: true, adoptionRate: true, avgCount: true },
+    orderBy: { adoptionRate: "desc" },
+    take: n * 2, // 인쇄판별 행 중복 대비
+  });
+  if (rows.length === 0) return [];
+  const byArch = new Map<string, { adoptionRate: number; avgCount: number }>();
+  for (const r of rows) {
+    const cur = byArch.get(r.archetypeId);
+    if (!cur || r.adoptionRate > cur.adoptionRate) byArch.set(r.archetypeId, r);
+  }
+  const archs = await prisma.deckArchetype.findMany({
+    where: { id: { in: [...byArch.keys()] }, sampleSize: { gt: 0 } },
+    select: { id: true, nameKo: true, nameEn: true, iconKeys: true, usageRate: true },
+  });
+  return archs
+    .map((a) => ({
+      archetypeId: a.id,
+      nameKo: a.nameKo || a.nameEn || a.id,
+      iconKeys: a.iconKeys,
+      adoptionRate: Math.round(byArch.get(a.id)!.adoptionRate * 10) / 10,
+      avgCount: Math.round(byArch.get(a.id)!.avgCount * 10) / 10,
+      usageRate: a.usageRate,
+    }))
+    .sort((x, y) => y.usageRate - x.usageRate)
+    .slice(0, n);
+}
+
+export type NewSetMeta = {
+  setName: string;
+  releaseDate: string;
+  decks: { archetypeId: string; nameKo: string; iconKeys: string[]; usageRate: number; newCards: number }[];
+};
+
+/** #25 신팩 메타덱 — 레시피에 등장하는 카드 기준 최신 EN 세트와 그 카드를 채용한 덱 Top N. */
+export async function getNewSetDecks(n = 5): Promise<NewSetMeta | null> {
+  const recipes = await prisma.deckRecipeCard.findMany({
+    where: { region: "INTL", logicalCardId: { not: null }, adoptionRate: { gte: 30 } },
+    select: { archetypeId: true, logicalCardId: true },
+  });
+  if (recipes.length === 0) return null;
+  const lcIds = [...new Set(recipes.map((r) => r.logicalCardId!))];
+  const locales = await prisma.cardLocale.findMany({
+    where: { logicalCardId: { in: lcIds }, region: "EN" },
+    select: { logicalCardId: true, set: { select: { id: true, name: true, releaseDate: true } } },
+  });
+  // 최신 세트 (releaseDate 보유) 선정
+  let latest: { id: string; name: string; releaseDate: Date } | null = null;
+  for (const l of locales) {
+    const s = l.set;
+    if (!s?.releaseDate) continue;
+    if (!latest || s.releaseDate > latest.releaseDate) latest = { id: s.id, name: s.name, releaseDate: s.releaseDate };
+  }
+  if (!latest) return null;
+  const latestId = latest.id;
+  const newLcIds = new Set(locales.filter((l) => l.set?.id === latestId).map((l) => l.logicalCardId));
+  const byArch = new Map<string, number>();
+  for (const r of recipes) {
+    if (newLcIds.has(r.logicalCardId!)) byArch.set(r.archetypeId, (byArch.get(r.archetypeId) ?? 0) + 1);
+  }
+  if (byArch.size === 0) return null;
+  const archs = await prisma.deckArchetype.findMany({
+    where: { id: { in: [...byArch.keys()] }, sampleSize: { gt: 0 } },
+    select: { id: true, nameKo: true, nameEn: true, iconKeys: true, usageRate: true },
+  });
+  const decks = archs
+    .map((a) => ({
+      archetypeId: a.id,
+      nameKo: a.nameKo || a.nameEn || a.id,
+      iconKeys: a.iconKeys,
+      usageRate: a.usageRate,
+      newCards: byArch.get(a.id)!,
+    }))
+    .sort((x, y) => y.newCards - x.newCards || y.usageRate - x.usageRate)
+    .slice(0, n);
+  return { setName: latest.name, releaseDate: latest.releaseDate.toISOString().slice(0, 10), decks };
+}
+
 // ── 덱 입상 타임라인 + 리스트 뷰어 (UI-1a) ──────────────────────────────────────
 
 export type ArchetypeResultRow = {
