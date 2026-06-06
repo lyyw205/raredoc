@@ -13,6 +13,8 @@ import type {
 import { ArrowLeft, Trophy, List } from "lucide-react";
 import { DeckIcon } from "@/components/cardgame/DeckIcon";
 import { CardThumb } from "@/components/cardgame/CardThumb";
+import { DeckCostWidget } from "./DeckCostWidget";
+import type { DeckCostResult } from "@/lib/services/deck-pricing";
 
 // ── 상수 ──────────────────────────────────────────────────────────────────────
 
@@ -255,12 +257,14 @@ export function DeckDetailView({
   recipe,
   matchups,
   results,
+  cost,
 }: {
   locale: string;
   archetype: ArchetypeWithCards;
   recipe: ArchetypeRecipe;
   matchups: ArchetypeMatchup[];
   results: ArchetypeResultRow[];
+  cost: DeckCostResult | null;
 }) {
   const lowSample = archetype.sampleSize < 10;
   const title = archetype.nameKo || archetype.nameEn || archetype.id;
@@ -344,6 +348,9 @@ export function DeckDetailView({
       </div>
 
       <div className="space-y-8">
+        {/* 섹션 -1: 💰 견적 (UI-1b — 저레어/고레어 프리캐시 토글) */}
+        {cost && cost.pricedCount > 0 && <DeckCostWidget cost={cost} />}
+
         {/* 섹션 0: 핵심 카드 (UI-1a) */}
         <CoreCardsSection recipe={recipe} locale={locale} />
 
@@ -402,19 +409,21 @@ export function DeckDetailView({
           </Card>
         </section>
 
-        {/* 섹션 5: 가격/시세 — 카드 매칭 보류 → 준비중 */}
-        <section>
-          <h2 className="text-toss-title font-bold text-toss-text-primary mb-4">가격 / 시세</h2>
-          <Card variant="default" padding="lg">
-            <div className="flex flex-col items-center justify-center py-6 text-center gap-2">
-              <span className="text-toss-label font-semibold text-toss-text-secondary">준비 중</span>
-              <p className="text-toss-caption text-toss-text-tertiary max-w-md">
-                레시피 카드의 시세 매칭 작업이 진행 중입니다. 매칭이 완료되면 덱 구축 비용과
-                카드별 시세가 여기에 표시됩니다.
-              </p>
-            </div>
-          </Card>
-        </section>
+        {/* 가격/시세 placeholder 는 견적 위젯(상단)으로 대체 — 견적 불가 덱만 안내 유지 */}
+        {(!cost || cost.pricedCount === 0) && (
+          <section>
+            <h2 className="text-toss-title font-bold text-toss-text-primary mb-4">가격 / 시세</h2>
+            <Card variant="default" padding="lg">
+              <div className="flex flex-col items-center justify-center py-6 text-center gap-2">
+                <span className="text-toss-label font-semibold text-toss-text-secondary">견적 준비 중</span>
+                <p className="text-toss-caption text-toss-text-tertiary max-w-md">
+                  이 덱의 카드 시세가 아직 충분히 수집되지 않았어요. 시세 수집 범위가 늘어나면
+                  자동으로 표시됩니다.
+                </p>
+              </div>
+            </Card>
+          </section>
+        )}
       </div>
     </div>
   );

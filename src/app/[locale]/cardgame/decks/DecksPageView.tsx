@@ -21,7 +21,7 @@ const TIER_COLORS: Record<string, string> = {
 // 표본 적음 임계값.
 const LOW_SAMPLE = 10;
 
-type SortKey = "usage" | "winRate" | "conversion" | "avgRank" | "consistency";
+type SortKey = "usage" | "winRate" | "conversion" | "avgRank" | "consistency" | "cost";
 
 const SORT_OPTIONS: { value: SortKey; label: string }[] = [
   { value: "usage",       label: "사용률"  },
@@ -29,7 +29,18 @@ const SORT_OPTIONS: { value: SortKey; label: string }[] = [
   { value: "conversion",  label: "입상률"  },
   { value: "avgRank",     label: "평균등수" },
   { value: "consistency", label: "안정성"  },
+  { value: "cost",        label: "가격"    },
 ];
+
+/** 견적(KRW) → "6.5만" 표기. null = 견적 전. */
+function formatCost(krw: number | null): string {
+  if (krw == null) return "—";
+  if (krw >= 10000) {
+    const man = krw / 10000;
+    return `${man >= 100 ? Math.round(man).toLocaleString() : man.toFixed(1)}만`;
+  }
+  return `${krw.toLocaleString()}원`;
+}
 
 const TIER_OPTIONS = [
   { value: "all", label: "전체" },
@@ -86,6 +97,9 @@ export function DecksPageView({
           return a.avgRank - b.avgRank; // 낮을수록 좋음
         case "consistency":
           return b.consistency - a.consistency;
+        case "cost":
+          // 저렴한 순 ("싸고 센 덱" 발견) — 견적 없는 덱은 뒤로
+          return (a.deckCostBudget ?? Infinity) - (b.deckCostBudget ?? Infinity);
         case "usage":
         default:
           return b.usageRate - a.usageRate;
@@ -140,6 +154,9 @@ export function DecksPageView({
                 <th className="py-3 px-3 font-semibold text-toss-text-tertiary text-right">입상률</th>
                 <th className="py-3 px-3 font-semibold text-toss-text-tertiary text-right">평균등수</th>
                 <th className="py-3 px-3 font-semibold text-toss-text-tertiary text-right">안정성</th>
+                <th className="py-3 px-3 font-semibold text-toss-text-tertiary text-right" title="저레어 기준 덱 구축 비용(시세 합산 추정)">
+                  💰가격
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -182,6 +199,9 @@ export function DecksPageView({
                     </td>
                     <td className={cn("py-3 px-3 text-right tabular-nums", lowSample ? "text-toss-text-quaternary" : "text-toss-text-secondary")}>
                       {a.consistency.toFixed(1)}
+                    </td>
+                    <td className="py-3 px-3 text-right tabular-nums font-semibold text-toss-text-primary">
+                      {formatCost(a.deckCostBudget)}
                     </td>
                   </tr>
                 );

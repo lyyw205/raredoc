@@ -7,6 +7,7 @@ import {
   getArchetypeMatchups,
   getArchetypeResults,
 } from "@/lib/services/cardgame";
+import { computeDeckCost } from "@/lib/services/deck-pricing";
 import { DeckDetailView } from "./DeckDetailView";
 
 export default async function DeckDetailPage({
@@ -40,11 +41,13 @@ export default async function DeckDetailPage({
     );
   }
 
-  const [recipe, matchups, results] = await Promise.all([
+  const [recipe, matchups, results, cost] = await Promise.all([
     getArchetypeRecipe(id),
     getArchetypeMatchups(id),
     // 최근 입상 리스트 (UI-1a) — 우승 사례 섹션을 흡수 통합
     getArchetypeResults(id, 12),
+    // 견적 (UI-1b) — budget/premium 동시 계산, 토글은 클라 스왑. 실패해도 페이지는 살림.
+    computeDeckCost(id).catch(() => null),
   ]);
 
   return (
@@ -54,6 +57,7 @@ export default async function DeckDetailPage({
       recipe={recipe}
       matchups={matchups}
       results={results}
+      cost={cost}
     />
   );
 }

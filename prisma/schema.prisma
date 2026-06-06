@@ -490,7 +490,11 @@ model DeckArchetype {
   isUnderdog    Boolean          @default(false) // 사용률↓ + 승률↑
   isTrap        Boolean          @default(false) // 사용률↑ + 승률→
   isMetaCounter Boolean          @default(false) // 상위덱 종합 우세
-  deckCostKrw   Int? // #18 표준 레시피 × 시세 DB = 덱 구축 비용
+  deckCostKrw   Int? // (레거시 — deckCostBudget 으로 대체 예정, UI 미사용)
+  // UI-1b 견적 캐시 2필드 — 토글은 프리캐시 스왑(실시간 재계산 금지, 리스크 P1-4). update-deck-costs.ts 갱신.
+  deckCostBudget  Int? // 저레어 기준 합산(KRW)
+  deckCostPremium Int? // 고레어 기준 합산(KRW)
+  deckCostMeta    Json? // { pricedCount, totalCount, basis, asOf, hasExpensiveMissing } — 캡션·정직표기용
   // ── 편집 자산: 집계가 안 건드림 ──
   description   String           @default("")
   strengths     String[]

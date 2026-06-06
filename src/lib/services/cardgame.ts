@@ -168,6 +168,10 @@ export type ArchetypeSummary = {
   isMetaCounter: boolean;
   /** Limitless 아이콘 키 (히어로 카드 식별 — 현재 CDN 미사용). */
   iconKeys: string[];
+  /** 덱 구축 비용 캐시(저레어 기준, KRW) — update-deck-costs 배치 갱신. null=견적 전 (UI-1b). */
+  deckCostBudget: number | null;
+  /** 덱 구축 비용 캐시(고레어 기준, KRW). */
+  deckCostPremium: number | null;
   /** 카드매칭 보류로 빈 배열일 수 있음 (옵셔널 체이닝 필수). */
   heroCardIds: string[];
   cardList: { cardId: string; count: number; role: string | null }[];
@@ -202,6 +206,8 @@ type DbArchetype = {
   isTrap: boolean;
   isMetaCounter: boolean;
   iconKeys: string[];
+  deckCostBudget: number | null;
+  deckCostPremium: number | null;
   description: string;
   strengths: string[];
   weaknesses: string[];
@@ -228,6 +234,8 @@ function toSummary(a: DbArchetype): ArchetypeSummary {
     isTrap: a.isTrap,
     isMetaCounter: a.isMetaCounter,
     iconKeys: a.iconKeys,
+    deckCostBudget: a.deckCostBudget,
+    deckCostPremium: a.deckCostPremium,
     // heroCardIds: cardList 앞 4장(채용 ✓ 우선) — 화면 썸네일용.
     // 실데이터 아키타입은 DeckCard 없음 → 빈 배열(폴백 처리는 화면에서).
     heroCardIds: [...a.cards]
