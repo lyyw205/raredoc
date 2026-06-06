@@ -15,6 +15,9 @@ import { CardResolver } from "./lib/resolve-card";
 const dryRun = process.argv.includes("--dry-run");
 const force = process.argv.includes("--force");
 const doDecklists = process.argv.includes("--decklists");
+// 게이트 미달 시 exit 2 는 --strict 에서만 — meta:weekly 체인(&&)이 잔여 미해석(구세대 EN 병합 미완·프로모,
+// 구조적 수용분) 때문에 끊기는 것 방지. 잔여행 기준 % 라 전체 매칭률과 다름에 유의.
+const strict = process.argv.includes("--strict");
 
 type Bucket = { total: number; matched: number };
 const bump = (m: Map<string, Bucket>, k: string, hit: boolean) => {
@@ -77,15 +80,23 @@ async function backfillRecipes(resolver: CardResolver) {
 type DeckEntry = { count?: number; set?: string; number?: string; name?: string; logicalCardId?: string | null };
 type Decklist = { pokemon?: DeckEntry[]; trainer?: DeckEntry[]; energy?: DeckEntry[] };
 
+/** Tournament.source → standing.deckSource 백필 값 (decklist 보유 행 한정) */
+const DECK_SOURCE_BY_TOURNAMENT: Record<string, string> = {
+  "limitless-play": "limitless",
+  "limitless-web": "limitless",
+  pokedata: "pokedata",
+};
+
 async function enrichDecklists(resolver: CardResolver) {
-  // Json null 필터는 Prisma 시맨틱이 까다로워(JsonNull/DbNull) 전량 조회 후 JS 에서 skip (547행 수준)
+  // Json null 필터는 Prisma 시맨틱이 까다로워(JsonNull/DbNull) 전량 조회 후 JS 에서 skip
   const rows = await prisma.tournamentStanding.findMany({
-    select: { id: true, decklist: true },
+    select: { id: true, decklist: true, deckSource: true, tournament: { select: { source: true } } },
   });
   console.log(`[decklist] 대상 ${rows.length}행`);
   let updated = 0;
   let cards = 0;
   let cardMatched = 0;
+  let sourceFixed = 0;
 
   for (const r of rows) {
     const dl = r.decklist as Decklist | null;
@@ -107,14 +118,24 @@ async function enrichDecklists(resolver: CardResolver) {
         }
       }
     }
-    if (changed && !dryRun) {
-      await prisma.tournamentStanding.update({ where: { id: r.id }, data: { decklist: dl as object } });
+    // deckSource null 백필 (D2 — sync 가 안 채운 구간)
+    const wantSource = r.deckSource ?? DECK_SOURCE_BY_TOURNAMENT[r.tournament?.source ?? ""] ?? null;
+    const needSourceFix = !r.deckSource && wantSource;
+    if ((changed || needSourceFix) && !dryRun) {
+      await prisma.tournamentStanding.update({
+        where: { id: r.id },
+        data: { decklist: dl as object, ...(needSourceFix ? { deckSource: wantSource } : {}) },
+      });
       updated++;
-    } else if (changed) {
+      if (needSourceFix) sourceFixed++;
+    } else if (changed || needSourceFix) {
       updated++;
+      if (needSourceFix) sourceFixed++;
     }
   }
-  console.log(`[decklist] 보강 ${updated}행 · 카드 ${cardMatched}/${cards} 해석${dryRun ? " (dry)" : ""}`);
+  console.log(
+    `[decklist] 보강 ${updated}행 (deckSource 백필 ${sourceFixed}) · 카드 ${cardMatched}/${cards} 해석${dryRun ? " (dry)" : ""}`,
+  );
 }
 
 async function main() {
@@ -122,7 +143,7 @@ async function main() {
   const gate = await backfillRecipes(resolver);
   if (doDecklists) await enrichDecklists(resolver);
   console.log(`\n[미해석 사유]\n${resolver.reportMisses() || "  없음"}`);
-  if (!gate) process.exitCode = 2;
+  if (!gate && strict) process.exitCode = 2;
 }
 
 main()

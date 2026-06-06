@@ -31,7 +31,7 @@
     "sync:meta:krleague": "tsx scripts/enrich-koreanleague-kr.ts",
     "sync:meta:major": "tsx scripts/collect-majors-pokedata.ts",
     "enrich:meta:major": "tsx scripts/enrich-majors-limitless.ts",
-    "meta:weekly": "npm run sync:meta:lim && npm run sync:meta:major && npm run enrich:meta:major && npm run aggregate:meta",
+    "meta:weekly": "npm run sync:meta:lim && npm run sync:meta:major && npm run enrich:meta:major && npm run backfill:recipe -- --decklists && npm run aggregate:meta",
     "backfill:eim:kr": "tsx scripts/backfill-eim-kr-bs.ts",
     "rankings:rebuild": "tsx scripts/rebuild-rankings.ts",
     "market:rebuild": "tsx scripts/rebuild-market.ts",
