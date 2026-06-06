@@ -472,23 +472,77 @@ model ConversationRead {
 // ─────────────────────────────────────────────────────────────────────────────
 
 model DeckArchetype {
-  id          String           @id
-  nameKo      String
-  tier        String // S/A/B/C
-  regulation  String // 스탠다드/익스텐디드/殿堂
-  usageRate   Float            @default(0)
-  winCount    Int              @default(0)
-  avgRank     Float            @default(0)
-  description String
-  strengths   String[]
-  weaknesses  String[]
-  counters    String[]
-  cards       DeckCard[]
-  variants    DeckVariant[]
-  trends      ArchetypeTrend[]
-  updatedAt   DateTime         @updatedAt
+  id            String           @id // = Limitless deck.id (예: "rockets-honchkrow")
+  nameKo        String
+  nameEn        String? // Limitless deck.name 원문
+  iconKeys      String[] // Limitless deck.icons (히어로 카드 식별)
+  region        String           @default("INTL") // 지역별 메타 분리 (현재 글로벌 집계만)
+  tier          String // S/A/B/C — usageRate 임계값 파생 (15/8/3%)
+  regulation    String // 스탠다드/익스텐디드 (殿堂은 Limitless 미제공이라 미사용)
+  // ── 집계(파생) 필드: aggregate-meta 가 덮어씀 ──
+  usageRate     Float            @default(0)
+  winCount      Int              @default(0)
+  avgRank       Float            @default(0)
+  winRate       Float            @default(0) // 승률 (record 집계)
+  conversion    Float            @default(0) // 입상률 (Top컷 진출 / 참가)
+  consistency   Float            @default(0) // 안정성 (placing 분산 기반 지표)
+  sampleSize    Int              @default(0) // 집계 표본 수 (신뢰도)
+  isUnderdog    Boolean          @default(false) // 사용률↓ + 승률↑
+  isTrap        Boolean          @default(false) // 사용률↑ + 승률→
+  isMetaCounter Boolean          @default(false) // 상위덱 종합 우세
+  deckCostKrw   Int? // #18 표준 레시피 × 시세 DB = 덱 구축 비용
+  // ── 편집 자산: 집계가 안 건드림 ──
+  description   String           @default("")
+  strengths     String[]
+  weaknesses    String[]
+  counters      String[]
+  cards         DeckCard[]
+  variants      DeckVariant[]
+  trends        ArchetypeTrend[]
+  matchupsA     DeckMatchup[]    @relation("MatchupDeckA")
+  matchupsB     DeckMatchup[]    @relation("MatchupDeckB")
+  recipe        DeckRecipeCard[]
+  updatedAt     DateTime         @updatedAt
 
   @@index([tier])
+  @@index([region])
+}
+
+// 표준 레시피 — 아키타입별 카드 평균 채용 (decklist 집계). #16/#17
+model DeckRecipeCard {
+  id            String        @id @default(cuid())
+  archetypeId   String
+  archetype     DeckArchetype @relation(fields: [archetypeId], references: [id], onDelete: Cascade)
+  cardName      String // Limitless decklist name (영문)
+  setCode       String? // decklist set (예: "DRI")
+  number        String? // decklist number
+  category      String // pokemon/trainer/energy
+  avgCount      Float // 평균 채용 수
+  adoptionRate  Float // 채용률 (이 아키타입 덱 중 % 가 채용)
+  logicalCardId String? // 매칭된 우리 카드(시세/이미지용) — null 가능
+  isCore        Boolean       @default(false) // 채용률 100% 근처 = 코어
+
+  @@unique([archetypeId, cardName, setCode, number])
+  @@index([archetypeId])
+  @@index([logicalCardId])
+}
+
+// 덱 vs 덱 상성 (pairings 집계). #12/#13/#14
+model DeckMatchup {
+  id        String        @id @default(cuid())
+  deckAId   String
+  deckBId   String
+  deckA     DeckArchetype @relation("MatchupDeckA", fields: [deckAId], references: [id], onDelete: Cascade)
+  deckB     DeckArchetype @relation("MatchupDeckB", fields: [deckBId], references: [id], onDelete: Cascade)
+  winsA     Int           @default(0) // A가 B를 이긴 횟수
+  winsB     Int           @default(0)
+  ties      Int           @default(0)
+  games     Int           @default(0)
+  winRateA  Float         @default(0) // A 기준 승률
+  updatedAt DateTime      @updatedAt
+
+  @@unique([deckAId, deckBId])
+  @@index([deckAId])
 }
 
 model DeckCard {
@@ -514,25 +568,56 @@ model DeckVariant {
 model ArchetypeTrend {
   id          String        @id @default(cuid())
   archetypeId String
-  week        String
+  region      String        @default("INTL") // 지역별 추이
+  week        String // ISO week "2026-W22"
   usage       Float
   archetype   DeckArchetype @relation(fields: [archetypeId], references: [id], onDelete: Cascade)
 
+  @@unique([archetypeId, region, week])
   @@index([archetypeId])
 }
 
 model Tournament {
-  id                String   @id
+  id                String               @id // = "lim-{limitlessId}"
+  limitlessId       String?              @unique // 원본 Limitless API id
   nameKo            String
+  name              String? // 원문(영문) 대회명
   date              DateTime
-  region            String // KR/JP/INTL
-  format            String
+  region            String // 파생: 참가자 country 최빈값 (JP/US/KR/INTL)
+  format            String // STANDARD/EXPANDED (Limitless format)
   players           Int
-  winnerArchetypeId String?
+  platform          String? // PTCGL/오프라인 등 (details.platform)
+  winnerArchetypeId String? // = 1위 standing 의 deckKey
   status            String // upcoming/completed
-  createdAt         DateTime @default(now())
+  syncedAt          DateTime? // 마지막 standings 동기화 시각
+  standings         TournamentStanding[]
+  createdAt         DateTime             @default(now())
 
   @@index([date])
+  @@index([region])
+}
+
+// 대회별 입상 1행 (Limitless standings). 집계의 원천 데이터.
+model TournamentStanding {
+  id           String         @id @default(cuid())
+  tournamentId String
+  tournament   Tournament     @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  placing      Int
+  playerName   String
+  country      String? // standings.country (US/JP/KR...)
+  // deckKey 는 평문(FK 없음): sync 시점엔 archetype 미존재. aggregate 가 deckKey 로 archetype 생성 후 쿼리에서 수동 조인.
+  deckKey      String? // Limitless deck.id (정본 아키타입 키) — 미제출이면 null
+  deckName     String? // Limitless deck.name (영문 원문)
+  deckIcons    String[] // Limitless deck.icons (대표 포켓몬 — 핵심 카드 식별)
+  wins         Int            @default(0)
+  losses       Int            @default(0)
+  ties         Int            @default(0)
+  decklist     Json? // 원본 데클리스트 보존 (레시피/카드매칭/검증용)
+  createdAt    DateTime       @default(now())
+
+  @@unique([tournamentId, placing])
+  @@index([deckKey])
+  @@index([tournamentId])
 }
 
 model PlayerRanking {
