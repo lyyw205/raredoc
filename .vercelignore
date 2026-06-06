@@ -1,0 +1,20 @@
+# 배포 불필요 자산 (gitignore 시맨틱 — 반드시 / 로 루트 고정: 무고정 "data/" 는 src/data, toss/data 까지 매칭해 빌드 파괴)
+# 예외: /data/tier-lists 는 src/lib/tier.ts 가 런타임 동적 import — 제외하면 안 됨
+/data/en-ptcg/
+/data/pokedata/
+/data/limitless-web/
+/data/jp-official/
+/data/kr-official/
+/data/pokeapi/
+/data/collect/
+/data/deck-codes/
+/data/kr-league/
+/designs/
+/docs/
+*.jpeg
+/prisma/backups/
+/prisma/schema.prisma.bak-*
+/.next/
+/.serena/
+/.omc/
+/.playwright-mcp/
