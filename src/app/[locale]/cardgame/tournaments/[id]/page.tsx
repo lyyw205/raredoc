@@ -1,9 +1,19 @@
 import Link from "next/link";
-import { ArrowLeft, Users } from "lucide-react";
+import { ArrowLeft, Users, ExternalLink } from "lucide-react";
 import { Card, CardDivider, EmptyState } from "@/components/toss";
 import { cn } from "@/lib/utils";
 import { getTournamentStandings } from "@/lib/services/cardgame";
 import { platformBadge } from "@/lib/cardgame/platform";
+import { DeckCodeButton } from "./DeckCodeButton";
+
+// 출처 표기 — 정본 소스별 (multisource P3)
+const SOURCE_LABELS: Record<string, string> = {
+  "limitless-play": "Limitless TCG (온라인 대회)",
+  "limitless-web": "Limitless TCG 공식 대회 DB",
+  "jp-official": "포켓몬카드게임 플레이어즈클럽 (일본 공식)",
+  pokedata: "PokeData (공식 메이저)",
+  ptcglegends: "PTCG Legends",
+};
 
 // 국가 코드 → 국기 이모지 (없으면 코드 그대로).
 function flag(country: string | null): string {
@@ -83,6 +93,17 @@ export default async function TournamentDetailPage({
             <Users size={13} className="text-toss-text-tertiary" />
             {detail.players}명
           </span>
+          {detail.externalUrl && (
+            <a
+              href={detail.externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-toss-micro text-toss-text-tertiary hover:text-toss-brand transition-colors"
+            >
+              <ExternalLink size={11} />
+              출처
+            </a>
+          )}
         </div>
       </div>
 
@@ -125,19 +146,24 @@ export default async function TournamentDetailPage({
                     <td className="py-3 px-3 font-semibold text-toss-text-primary">{s.playerName}</td>
                     <td className="py-3 px-3 text-center text-toss-text-tertiary">{flag(s.country)}</td>
                     <td className="py-3 px-3">
-                      {s.deckKey ? (
-                        <Link
-                          href={`/${locale}/cardgame/decks/${s.deckKey}`}
-                          className="text-toss-text-primary hover:text-toss-brand transition-colors"
-                        >
-                          {s.deckNameKo}
-                        </Link>
-                      ) : (
-                        <span className="text-toss-text-quaternary">{s.deckNameKo ?? "—"}</span>
-                      )}
+                      <div className="flex items-center gap-2">
+                        {s.deckKey ? (
+                          <Link
+                            href={`/${locale}/cardgame/decks/${s.deckKey}`}
+                            className="text-toss-text-primary hover:text-toss-brand transition-colors"
+                          >
+                            {s.deckNameKo}
+                          </Link>
+                        ) : (
+                          <span className="text-toss-text-quaternary">{s.deckNameKo ?? "—"}</span>
+                        )}
+                        {s.deckCode && <DeckCodeButton code={s.deckCode} />}
+                      </div>
                     </td>
                     <td className="py-3 px-3 text-right tabular-nums text-toss-text-secondary whitespace-nowrap">
-                      {s.wins}-{s.losses}{s.ties > 0 ? `-${s.ties}` : ""}
+                      {s.wins + s.losses + s.ties > 0
+                        ? `${s.wins}-${s.losses}${s.ties > 0 ? `-${s.ties}` : ""}`
+                        : "—"}
                     </td>
                   </tr>
                 ))}
@@ -165,7 +191,8 @@ export default async function TournamentDetailPage({
 
       <CardDivider />
       <p className="text-toss-micro text-toss-text-quaternary text-center mt-6">
-        Limitless TCG 공식 대회 데이터.
+        {SOURCE_LABELS[detail.source ?? ""] ?? "외부 대회 데이터"}
+        {detail.source === "limitless-web" && " · 입상덱 코드: 포켓몬코리아 공식"}
       </p>
     </div>
   );

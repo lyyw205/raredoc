@@ -41,7 +41,7 @@ export const ARCHETYPE_KO: Record<string, string> = {
   "lopunny-dudunsparce": "메가 이어롭 노고치",
   "dragapult-dudunsparce": "드래펄트 노고치",
   "starmie-froslass": "메가 별가사리 눈여아",
-  "ethan-typhlosion": "金(이슬이/금)의 블레이범", // TODO: Ethan = HGSS 주인공 한국명 확인
+  "ethan-typhlosion": "Ethan의 블레이범", // TODO: KR 공식명 미확인 (sv10 KR=로켓단 분할팩이라 Ethan 계열 미수록) — 수록 팩 KR 수집 후 교정
   "okidogi-barbaracle": "이야후개 거북손",
   "mega-lucario-ex": "메가 루카리오ex",
   "mega-starmie-ex": "메가 별가사리ex",
@@ -52,7 +52,7 @@ export const ARCHETYPE_KO: Record<string, string> = {
   // ── 하위 / 테크 덱 ──
   "joltik-box": "전기왕 박스", // joltik = 전기왕
   "hop-zacian": "호프의 자시안",
-  "ceruledge-ex": "파라블레이즈ex", // TODO: ceruledge 한글명 확인
+  "ceruledge-ex": "파라블레이즈ex", // KR 공식 "파라블레이즈 ex" 확인(2026-06-06, KR CardLocale) — 덱명 컨벤션상 붙여씀
   "clefairy-ogerpon": "삐삐 오거폰",
   "kangaskhan-bouffalant": "메가 캥카 들소밸로",
   "froslass-munkidori": "눈여아 무쿠리",

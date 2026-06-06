@@ -284,6 +284,47 @@ export async function getArchetypes(opts?: {
   return list;
 }
 
+// ── region 메타 (JP/KR 탭 — multisource P3) ──────────────────────────────────
+// 본체 DeckArchetype 집계 컬럼은 INTL 미러 의미 고정 → JP/KR 은 ArchetypeRegionStat 조인.
+// realOnly 판별도 RegionStat.sampleSize 기준 (본체 sampleSize 는 INTL 표본이라 JP/KR-only 덱이 빠짐).
+
+export type RegionArchetypeRow = {
+  id: string;
+  nameKo: string;
+  nameEn: string | null;
+  iconKeys: string[];
+  /** sampleSize<30 이면 "—" (소표본 가드) */
+  tier: string;
+  /** ⚠ 분모 주의: JP/KR 은 게재된 입상권(top cut) 기준 점유율 — INTL(전 참가자)과 다름 */
+  usageRate: number;
+  winCount: number;
+  avgRank: number;
+  conversion: number;
+  sampleSize: number;
+  tournamentCount: number;
+};
+
+export async function getRegionArchetypes(region: "JP" | "KR"): Promise<RegionArchetypeRow[]> {
+  const rows = await prisma.archetypeRegionStat.findMany({
+    where: { region, sampleSize: { gt: 0 } },
+    include: { archetype: { select: { nameKo: true, nameEn: true, iconKeys: true } } },
+    orderBy: { usageRate: "desc" },
+  });
+  return rows.map((r) => ({
+    id: r.archetypeId,
+    nameKo: r.archetype.nameKo,
+    nameEn: r.archetype.nameEn,
+    iconKeys: r.archetype.iconKeys,
+    tier: r.tier,
+    usageRate: r.usageRate,
+    winCount: r.winCount,
+    avgRank: r.avgRank,
+    conversion: r.conversion,
+    sampleSize: r.sampleSize,
+    tournamentCount: r.tournamentCount,
+  }));
+}
+
 export async function getArchetype(id: string): Promise<ArchetypeWithCards | null> {
   const row = await prisma.deckArchetype.findUnique({ where: { id }, include: ARCHETYPE_INCLUDE });
   if (!row) return null;
@@ -574,10 +615,16 @@ export type TournamentRow = {
   name: string | null;
   date: string;
   region: string;
+  /** 집계 파티션 (INTL|JP|KR). */
+  metaRegion: string;
+  /** 대회 격: worlds|ic|regional|special|cl|league|city|online — 필터 탭용. */
+  level: string | null;
   format: string;
   players: number;
   /** PTCGL/오프라인 등. */
   platform: string | null;
+  /** 출처 링크. */
+  externalUrl: string | null;
   winnerArchetypeId: string | null;
   winnerNameKo: string | null;
   status: string;
@@ -586,12 +633,15 @@ export type TournamentRow = {
 export async function getTournaments(opts?: {
   region?: string;
   status?: string;
+  /** 집계 파티션 필터 (INTL|JP|KR) — region(참가자 최빈값)과 별개. */
+  metaRegion?: string;
   /** true 면 정본 소스(source) 있는 실데이터만. 미지정 시 전체(목업 포함). */
   realOnly?: boolean;
 }): Promise<TournamentRow[]> {
-  const where: { region?: string; status?: string; source?: { not: null } } = {};
+  const where: { region?: string; status?: string; metaRegion?: string; source?: { not: null } } = {};
   if (opts?.region && opts.region !== "all") where.region = opts.region;
   if (opts?.status && opts.status !== "all") where.status = opts.status;
+  if (opts?.metaRegion) where.metaRegion = opts.metaRegion;
   // multisource P0: limitlessId → source (신규 소스도 실데이터로 인정)
   if (opts?.realOnly) where.source = { not: null };
 
@@ -614,9 +664,12 @@ export async function getTournaments(opts?: {
     name: t.name,
     date: t.date.toISOString().slice(0, 10),
     region: t.region,
+    metaRegion: t.metaRegion,
+    level: t.level,
     format: t.format,
     players: t.players,
     platform: t.platform,
+    externalUrl: t.externalUrl,
     winnerArchetypeId: t.winnerArchetypeId,
     winnerNameKo: t.winnerArchetypeId ? nameById.get(t.winnerArchetypeId) ?? null : null,
     status: t.status,
@@ -637,6 +690,8 @@ export type StandingRow = {
   deckNameKo: string | null;
   /** Limitless 원문(영문) 덱명. */
   deckName: string | null;
+  /** 공식 덱코드 (JP/KR — 복사해 공식 덱빌더 import). */
+  deckCode: string | null;
   wins: number;
   losses: number;
   ties: number;
@@ -648,9 +703,13 @@ export type TournamentDetail = {
   name: string | null;
   date: string;
   region: string;
+  metaRegion: string;
+  level: string | null;
   format: string;
   players: number;
   platform: string | null;
+  externalUrl: string | null;
+  source: string | null;
   standings: StandingRow[];
 };
 
@@ -680,9 +739,13 @@ export async function getTournamentStandings(tournamentId: string): Promise<Tour
     name: t.name,
     date: t.date.toISOString().slice(0, 10),
     region: t.region,
+    metaRegion: t.metaRegion,
+    level: t.level,
     format: t.format,
     players: t.players,
     platform: t.platform,
+    externalUrl: t.externalUrl,
+    source: t.source,
     standings: t.standings.map((s) => ({
       placing: s.placing,
       playerName: s.playerName,
@@ -690,6 +753,7 @@ export async function getTournamentStandings(tournamentId: string): Promise<Tour
       deckKey: s.deckKey,
       deckNameKo: s.deckKey ? nameByKey.get(s.deckKey) ?? s.deckName ?? s.deckKey : s.deckName,
       deckName: s.deckName,
+      deckCode: s.deckCode,
       wins: s.wins,
       losses: s.losses,
       ties: s.ties,

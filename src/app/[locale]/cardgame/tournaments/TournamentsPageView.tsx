@@ -32,6 +32,11 @@ function TournamentCard({ t, locale }: { t: TournamentRow; locale: string }) {
             <Users size={13} className="text-toss-text-tertiary" />
             <span className="text-toss-caption text-toss-text-secondary">{t.players}명</span>
           </div>
+          {t.level && LEVEL_LABELS[t.level] && (
+            <span className="text-toss-micro px-1.5 py-0.5 rounded bg-toss-bg-muted text-toss-text-tertiary font-medium">
+              {LEVEL_LABELS[t.level]}
+            </span>
+          )}
           <span className="text-toss-micro text-toss-text-tertiary">{t.format}</span>
           {(() => {
             const b = platformBadge(t.platform);
@@ -66,6 +71,18 @@ function TournamentCard({ t, locale }: { t: TournamentRow; locale: string }) {
 
 // ── 페이지 뷰 ──────────────────────────────────────────────────────────────────
 
+// level → 필터 라벨 (multisource P3: 대회 격 필터 — 데이터에 존재하는 level 만 노출)
+const LEVEL_LABELS: Record<string, string> = {
+  online: "온라인",
+  league: "코리안리그",
+  city: "시티리그",
+  cl: "챔피언스리그",
+  regional: "리저널",
+  ic: "인터내셔널",
+  worlds: "월즈",
+  special: "스페셜",
+};
+
 export function TournamentsPageView({
   locale,
   tournaments,
@@ -75,9 +92,21 @@ export function TournamentsPageView({
   tournaments: TournamentRow[];
   playerRankings: PlayerRankingRow[];
 }) {
+  const [levelFilter, setLevelFilter] = useState<string>("all");
+
+  const levels = useMemo(() => {
+    const set = new Set<string>();
+    for (const t of tournaments) if (t.level) set.add(t.level);
+    // LEVEL_LABELS 선언 순서대로 정렬
+    return Object.keys(LEVEL_LABELS).filter((k) => set.has(k));
+  }, [tournaments]);
+
   const sorted = useMemo(
-    () => [...tournaments].sort((a, b) => b.date.localeCompare(a.date)),
-    [tournaments]
+    () =>
+      [...tournaments]
+        .filter((t) => levelFilter === "all" || t.level === levelFilter)
+        .sort((a, b) => b.date.localeCompare(a.date)),
+    [tournaments, levelFilter]
   );
 
   // 월별 그룹화 (YYYY-MM).
@@ -100,9 +129,30 @@ export function TournamentsPageView({
           대회
         </h1>
         <p className="text-toss-body text-toss-text-tertiary mt-1">
-          Limitless TCG 공식 대회 결과 ({sorted.length}개 대회)
+          대회 결과 ({sorted.length}개 대회)
         </p>
       </div>
+
+      {/* level 필터 — 데이터에 존재하는 격만 노출 */}
+      {levels.length > 1 && (
+        <div className="flex items-center gap-2 flex-wrap mb-6">
+          {["all", ...levels].map((lv) => (
+            <button
+              key={lv}
+              type="button"
+              onClick={() => setLevelFilter(lv)}
+              className={cn(
+                "px-3 py-1.5 rounded-full text-toss-caption font-semibold transition-colors",
+                levelFilter === lv
+                  ? "bg-toss-text-primary text-white"
+                  : "bg-toss-bg-muted text-toss-text-tertiary hover:text-toss-text-primary"
+              )}
+            >
+              {lv === "all" ? "전체" : LEVEL_LABELS[lv]}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="space-y-10">
         {/* 최근 대회 카드 그리드 */}
