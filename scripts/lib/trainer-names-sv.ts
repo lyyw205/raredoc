@@ -243,6 +243,23 @@ export const TR_JP2EN: Record<string, string> = {
   "せいなるはい": "Sacred Ash",
   "エネルギーリサイクル": "Energy Recycler",
   "活力の森": "Forest of Vitality",
+  // ── MEGA 드림ex(en-tcg-me2pt5 Ascended Heroes, 2026-06-07 orphan 대조검증) ──
+  // パワープロテイン=Premium Power Pro(닫힌집합 소거 — 잔여 JP 3종(シロナのパワーウエイト/ヒビキの冒険/Ｎの城)은 EN 미수록)
+  "Ｎのポイントアップ": "N's PP Up", // 전각 Ｎ
+  "パワープロテイン": "Premium Power Pro",
+  "ファイトゴング": "Fighting Gong",
+  "メガシグナル": "Mega Signal",
+  "カウンターゲイン": "Counter Gain",
+  "でんきだま": "Light Ball",
+  "ぶあついうろこ": "Thick Scale",
+  "アセロラのいたずら": "Acerola's Mischief",
+  "サーファー": "Surfer",
+  "バーベナとヘレナ": "Anthea & Concordia",
+  "リーリエの決心": "Lillie's Determination",
+  "夜の鉱山": "Nighttime Mine",
+  "カナリィ": "Canari",
+  "からておうの稽古": "Black Belt's Training",
+  "ミステリーガーデン": "Mystery Garden",
 };
 
 // 博士の研究(Professor's Research)은 세트별 박사(Sada=고대/스칼렛 · Turo=미래/바이올렛)로 EN명이 갈린다.
