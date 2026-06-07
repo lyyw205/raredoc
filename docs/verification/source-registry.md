@@ -793,3 +793,11 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **ニャローテ AR(triplet#076) ↔ sv2#197** — merge가 같은 일러(Kouki Saitou) 스타터판 SVAM#005에 오배정(일러동일·아트상이 함정 — 감사 통과했던 건). 이미지 판정으로 AR=IR 동일 확정, 부수로 **sv1#14 ↔ SVAM#005**(과일나무 아트 동일) orphan 해소(sv-base 영판전용 42→41).
 - **キハダ(Katy) 3판(#066 U·#092 SR·#099 SAR) = EN 미수록 잔류** — EN Katy 전 인쇄는 sv1 2장(SV1V 짝, Komayama)뿐으로 일러 불일치, PAL·svp에 無.
 - ⚠ 신규 함정 기록: **같은 일러레이터의 다른 아트**(스타터 일반판 vs 본팩 AR)는 일러 감사(표기 대조)를 통과한다 — IR/AR존 EN이 스타터 JP에 붙어 있으면 의심하고 이미지 판정.
+
+## §39. 스칼렛ex/바이올렛ex — S&V base 스타터 분산 병합 + 감사 18건 교정 (2026-06-08, 사용자 제보)
+- **구조**: EN Scarlet & Violet(sv1, 258) = SV1S+SV1V(기병합) + **1월 스타터(SVAM/SVAW/SVAL)·SVB·SVC 발췌** + svp/SV-P 대응. merge 합본 스코프 41→5(+36).
+- **merge가 깬 기존 판정 복원**: 리오르 #112(Naoyo=SVAM#008)·#113(chibi=SV1S#040) — §35 이미지 확정을 merge가 역행, tcgdex 재확인 후 복원. #215 IR(Nelnal)→SV1S#086 신규. 골드 기본E #257/#258이 스타터 일반판으로 밀렸던 것 복원(SV1V#108/SV1S#108).
+- **전수 감사(tcgdex 252) 적발 12 + diff 6 = 18건 재배정**: Tarountula 3회전(#16↔SVAM#007 Tika·#17↔SV1V#006 Pani·#18↔SV1V#007 Kouki — #199 IR=Miki=SV1V#079)·Growlithe/Rotom/Lechonk 스왑·Flittle 3회전. 전건 tcgdex EN일러↔JP공식 일러 1:1.
+- **Pawmot #209 IR ↔ SV1V#085** 수동 — **ptcg.io dex 오기(923→922)**로 merge 버킷이 갈라졌던 것(Kouki 일러 일치).
+- **잔류 4**: Miraidon #80·Koraidon #124(Kouki) = **SV-P 42818/42820**(재록 WCS23) / Oinkologne #157(kirisAki) = **SV-P 42821**(재록 SVG#028) — 연속 ID 프로모 묶음, 회수 대기 16~18장째 / Poké Ball #185(Studio Bora) = JP 동시기 인쇄 무(SVI 배틀아카데미 2023-07이 최초 — EN 선행, 잔류).
+- 결과: **스칼렛ex(SV1S) 108/108·바이올렛ex(SV1V) 108/108 완전 마감** · sv1 orphan 41→4.
