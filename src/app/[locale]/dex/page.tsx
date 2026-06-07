@@ -9,6 +9,7 @@ import {
   type LogicalCardMeta,
 } from "@/lib/cards/queries";
 import { prisma } from "@/lib/prisma";
+import { canonEra, eraOrderIndex } from "@/lib/cards/eras";
 
 export const metadata: Metadata = { title: "카드 도감 — Raredoc" };
 
@@ -86,7 +87,11 @@ export default async function DexPage({
     .filter((meta) => meta.logicalCards.length > 0)
     .map((meta) => {
     const id = meta.id;
-    const logo = meta.sets.find((s) => s.logoUrl)?.logoUrl ?? undefined;
+    // 그룹 대표 로고: JP 우선(도감 JP 기준) → EN(영판 한정발매) → KR → 없으면 숨김
+    const logo =
+      meta.sets.find((s) => s.region === "JP" && s.logoUrl)?.logoUrl ??
+      meta.sets.find((s) => s.region === "EN" && s.logoUrl)?.logoUrl ??
+      meta.sets.find((s) => s.logoUrl)?.logoUrl ?? undefined;
     const name = meta.nameKo ?? meta.nameEn ?? meta.nameJa ?? id;
 
     const cards = meta.logicalCards
@@ -168,17 +173,37 @@ export default async function DexPage({
         code: s.code ?? null,
       }));
 
+    // EN 단독 발매 = EN 발매판은 있으나 JP 원판이 없는 그룹 (Generations·Champion's Path·Promos 등)
+    const isEnOnly = regions.includes("EN") && !regions.includes("JP");
+    // 강화확장팩·특수상품(덱/굿즈) — 해당 era 하단에 몰아 노출
+    const isSpecial = /-SP$/.test(meta.era) || /-(decks|goods)$/.test(meta.id);
+
     return {
       id,
       name,
-      era: meta.era,
+      era: canonEra(meta.era),
       logoUrl: logo,
       cards,
       names,
       releaseDate: fmtDate(meta.releaseDate),
       regions: [...regions],
       regionSets,
+      enName: names.EN ?? null,
+      isEnOnly,
+      isSpecial,
     };
+  });
+
+  // 카테고리(era) 연대 신→구, 카테고리 내부는 JP 발매 내림차순(최신→base), 특수상품은 하단.
+  sets.sort((a, b) => {
+    const ea = eraOrderIndex(a.era) - eraOrderIndex(b.era);
+    if (ea !== 0) return ea;
+    const sp = (a.isSpecial ? 1 : 0) - (b.isSpecial ? 1 : 0);
+    if (sp !== 0) return sp;
+    if (a.releaseDate && b.releaseDate) return b.releaseDate.localeCompare(a.releaseDate);
+    if (a.releaseDate) return -1; // 날짜 없는 그룹은 항상 하단
+    if (b.releaseDate) return 1;
+    return 0;
   });
 
   return (
