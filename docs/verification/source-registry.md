@@ -743,3 +743,11 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **잔류 정당**: sv6 orphan 1 — **Raifort = レホール SV-P 프로모 확정(cardID 44412, hncl 일치 — SV-P 회수 10장째**, DB의 レホール는 테라페스타 재록판뿐). JP측 2 = 크림슨헤이즈 #056 ポケモンいれかえ·#057 ポケモンキャッチャー(EN 세트 미수록 스테이플).
 - 전수 감사 226장(ptcg.io): **불일치 0**.
 - 결과: **변환의가면 EN 131/133·KR 133/133 / 크림슨헤이즈 EN 94/96·KR / sv6 영판전용 1**.
+
+## §34. 와일드포스/사이버저지 — Temporal Forces 스타터 분산 (SVHK/SVHM 18 + 특수E 2) (2026-06-07, 사용자 제보 — 연쇄 7번째)
+
+- **구조**: EN Temporal Forces(sv5, 218) = JP 와일드포스(SV5K 100)+사이버저지(SV5M 100) 쌍 세트 + **스타터&빌드세트 고대 코라이돈(SVHK)/미래 미라이돈(SVHM) 발췌 18**. 본팩 양쪽은 기병합 상태(각 EN없음 2).
+- 연결 21 = 스타터 17(SVHK 8+SVHM 9, MC 2025 재록 배제) + 특수E 2(Mist=SV5M#071·Neo Upper=SV5K#071) + **Great Tusk #96↔#97 한 칸 오배정 교정 2**(tcgdex: #96=Arita=SVHK#010·#97=GIDORA=SV5K#042 — 스텔라 Meditite §31과 동일 패턴).
+- 전수 감사 218장 → 불일치 2 → **이미지 판정: 둘 다 ptcg.io 일러 오기**(Roselia: 카드 크레딧 Tomomi Ozaki ↔ ptcg.io Kaneko / Roserade: Gapao ↔ matazo) — 연결 유지. 실질 불일치 0.
+- **잔류 정당**: sv5 orphan 2 — Scovillain ex #22(**EN 선행 인쇄** — JP 1쇄가 8개월 후 초전브레이커#023, 그 판은 sv8#37과 기짝. MC#147 재록 연결은 시기 부정확하여 잔류) / Master Ball #153(ACE SPEC — SVHK#032·SVHM#032 동일 인쇄 2곳, 유일쌍 불성립). JP측 — **ハバタクカミ AR #076(제보)·テツノイバラ #077 = EN 미수록**(sv5는 본문판만 수록).
+- 결과: **sv5 영판전용 22→2** · 와일드포스 EN 98/100·사이버저지 EN 98/100.

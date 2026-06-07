@@ -7,9 +7,9 @@
   },
   "counts": {
     "anchors": 100,
-    "enMatched": 98,
+    "enMatched": 99,
     "krMatched": 100,
-    "enOnly": 22,
+    "enOnly": 2,
     "krOnly": 0
   },
   "anchors": [
@@ -1254,10 +1254,10 @@
         "region": "JP"
       },
       "en": {
-        "id": "sv5-96",
-        "number": "96",
+        "id": "sv5-97",
+        "number": "97",
         "name": "Great Tusk",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/96.png",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/97.png",
         "rarity": "Uncommon",
         "setId": "sv5",
         "region": "EN"
@@ -2123,7 +2123,15 @@
         "setId": "jp-tcg-SV5K",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv5-162",
+        "number": "162",
+        "name": "Neo Upper Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/162.png",
+        "rarity": "ACE SPEC Rare",
+        "setId": "sv5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv5k-071",
         "number": "071",
@@ -3018,410 +3026,10 @@
         ]
       },
       {
-        "id": "sv5-26",
-        "number": "26",
-        "name": "Ponyta",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/26.png",
-        "rarity": null,
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 77,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-27",
-        "number": "27",
-        "name": "Rapidash",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/27.png",
-        "rarity": null,
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 78,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-35",
-        "number": "35",
-        "name": "Turtonator",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/35.png",
-        "rarity": null,
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 776,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-58",
-        "number": "58",
-        "name": "Yamper",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/58.png",
-        "rarity": null,
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 835,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-59",
-        "number": "59",
-        "name": "Boltund",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/59.png",
-        "rarity": null,
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 836,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-61",
-        "number": "61",
-        "name": "Iron Hands",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/61.png",
-        "rarity": null,
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 992,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-67",
-        "number": "67",
-        "name": "Latias",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/67.png",
-        "rarity": null,
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 380,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-73",
-        "number": "73",
-        "name": "Elgyem",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/73.png",
-        "rarity": null,
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 605,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-74",
-        "number": "74",
-        "name": "Beheeyem",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/74.png",
-        "rarity": "Uncommon",
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 606,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-77",
-        "number": "77",
-        "name": "Scream Tail",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/77.png",
-        "rarity": "Uncommon",
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 985,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-79",
-        "number": "79",
-        "name": "Iron Valiant",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/79.png",
-        "rarity": "Uncommon",
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 1006,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-89",
-        "number": "89",
-        "name": "Rockruff",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/89.png",
-        "rarity": "Common",
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 744,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-90",
-        "number": "90",
-        "name": "Lycanroc",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/90.png",
-        "rarity": "Uncommon",
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 745,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-97",
-        "number": "97",
-        "name": "Great Tusk",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/97.png",
-        "rarity": "Uncommon",
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 984,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "sv-prismatic-evolutions",
-            "name": "테라스탈 페스타 ex"
-          },
-          {
-            "groupId": "sv-temporal-forces",
-            "name": "와일드포스"
-          }
-        ]
-      },
-      {
-        "id": "sv5-98",
-        "number": "98",
-        "name": "Sandy Shocks",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/98.png",
-        "rarity": "Uncommon",
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 989,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-120",
-        "number": "120",
-        "name": "Koraidon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/120.png",
-        "rarity": null,
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 1007,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-122",
-        "number": "122",
-        "name": "Miraidon ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/122.png",
-        "rarity": null,
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 1008,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
-        "id": "sv5-139",
-        "number": "139",
-        "name": "Iron Jugulis",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/139.png",
-        "rarity": null,
-        "setId": "sv5",
-        "region": "EN",
-        "dex": 993,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "mega-start-deck-100",
-            "name": "스타트 덱 100 배틀컬렉션"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
         "id": "sv5-153",
         "number": "153",
         "name": "Master Ball",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/153.png",
-        "rarity": null,
-        "setId": "sv5",
-        "region": "EN",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "sv5-161",
-        "number": "161",
-        "name": "Mist Energy",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/161.png",
-        "rarity": null,
-        "setId": "sv5",
-        "region": "EN",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "sv5-162",
-        "number": "162",
-        "name": "Neo Upper Energy",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-temporal-forces/en/small/sv5/162.png",
         "rarity": null,
         "setId": "sv5",
         "region": "EN",
