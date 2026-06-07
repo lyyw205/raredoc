@@ -81,6 +81,8 @@ jobs:
             curl -fsS -o /dev/null http://127.0.0.1:3000/ && { echo "health OK"; ok=1; break; } || sleep 3
           done
           [ "${ok:-0}" = 1 ] || { echo "health FAIL"; pm2 logs raredoc --lines 40 --nostream; exit 1; }
+          # nginx 페이지캐시 퍼지 — 구릴리스 청크를 참조하는 캐시 HTML 잔존 방지
+          sudo rm -rf /var/cache/nginx/raredoc/* 2>/dev/null || true
           # 구릴리스 정리 — 최근 3개만 유지
           cd "$BASE/releases" && ls -1dt */ | tail -n +4 | xargs -r rm -rf
           EOS
