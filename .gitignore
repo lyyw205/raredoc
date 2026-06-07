@@ -49,4 +49,12 @@ next-env.d.ts
 
 # DB 백업/스키마 백업 (git 추적 제외)
 *.bak
+*.bak-*
 prisma/backups/
+
+# 세션 작업 산출물 (스크린샷·검토용 스프레드시트 — 루트 한정)
+/*.jpeg
+/*.png
+/*.xlsx
+designs/.omc/
+designs/*.bak
