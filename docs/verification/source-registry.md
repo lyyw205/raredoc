@@ -675,3 +675,14 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **잔류 정당 5**: JP 단독 인쇄 4(ボルトロス IR B#120·ランクルス IR B#125·ゴチルゼル AR W#123·トルネロス AR W#158 — ptcg.io 검증, EN 세트 미수록) + EN 골드 Victini rsv#172(JP BBWF에 동일판 없음).
 - 결과: 블랙볼트 EN 172/174·KR 174/174·영판전용 0 / 화이트플레어 EN 172/174·KR 174/174·영판전용 1(Victini).
 > ⚠ 수칙: **쌍(雙) 세트 EN 발매는 교차 이동 가능** — BBWF처럼 JP 2세트↔EN 2세트 구도면 병합 후 반대 세트 스코프로 잔여 orphan 교차 dry 필수.
+
+## §27. 로켓단의영광 — Destined Rivals 합본 분산 병합 (열풍의아레나 92 + 스타터 19) (2026-06-07, 사용자 제보)
+
+- **발단**: 사용자 제보 "영판전용 114장이 너무 많다 + ロケット団エネルギー EN없음" — 적중. **EN Destined Rivals(sv10, 244장) = JP 로켓단의영광(132) + 열풍의아레나(92) + 스타터 SVOM/SVOD 발췌 합본**인데 로켓단의영광 스코프만 병합돼 있었음(**열풍의아레나 92장 전체 EN 미병합**).
+- **1차: merge-en-identity 합본 전체 스코프 재실행**(`jp-sv-destined-rivals,jp-sv-heatwave-arena sv10`): 병합 130→213. TR_JP2EN +4(ペパーのサンドウィッチ=Arven's Sandwich·MCの盛り上げ=Emcee's Hype·シロナのパワーウエイト=Cynthia's Power Weight·ヒビキの冒険=Ethan's Adventure) 후 재실행 → **220, orphan 24**.
+- **2차: 스타터 출신 수동 19쌍**(tmp-link-sv10-cross.ts — 일러 전건 일치, migrateAndDelete 재사용·덱레시피 참조 39건 이관): **SVOM**(마리 스타터) Marnie's 라인 8 + Energy Recycler(エネルギーリサイクル) + Spikemuth Gym / **SVOD**(다이고 스타터) Steven's 라인 7 + Granite Cave(いしのどうくつ) / ロケット団エネルギー #098↔EN#182(특수E 1:1).
+- **3차: ptcg.io artist 전수 감사**(244장): 정상 234 · 불일치 4 = **Petrel/Proton 작가 교차 — §24와 동일한 ptcg.io 오기 재확인**(JP 공식 권위: ランス=Naoki Saito·ラムダ=GOSSAN, 이름 기반 연결 유지).
+- **build-group crossGroup 버그 수정**: 교차그룹 EN 선별이 dex 기반 포켓몬 전용이라 병합된 트레이너 13장이 빌드 누락 → **LC 공유 EN 우선 로드+매칭 단계 신설**(지문 추정보다 강함, 트레이너 포함). 열풍의아레나 EN 79→90.
+- **잔류 정당**: sv10 영판전용 5(Rellor=초전브레이커 재록·JP 기짝 / Rabsca ex·Hippopotas·Hippowdon·TM Machine = JP 동일판 미식별, 프로모 추정 백로그) + JP측 3(ロケット団のソーナンス AR #103 = EN 미수록 / 열풍 #058 Switch·#059 Catcher = EN 세트 미수록 스테이플).
+- 결과: **로켓단의영광 EN 131/132·KR 132/132·영판전용 5** / **열풍의아레나 EN 90/92·KR 92/92·영판전용 0**.
+> ⚠ §26 수칙 확장 실증: 신팩 합본은 "본팩+강화팩+스타터" 3원 분산까지 가능 — EN 병합 시 동시기 JP 제품 전체를 스코프 후보로.

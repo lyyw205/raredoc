@@ -1153,7 +1153,11 @@ async function main() {
   } else if (cfg.enNative) en = await load(cfg.enNative);
   else {
     const dexes = [...new Set(jp.filter(isPoke).map((r) => r.dex))] as number[];
-    en = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE }, pokedexNumbers: { hasSome: dexes } } }, select: sel })).map(toRow);
+    // LC 공유(정체성 병합된) EN 우선 로드 — 트레이너 포함 (열풍의아레나→sv10 합본 분산처럼 교차그룹인데 병합 완료된 케이스)
+    const sharedEn = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCardId: { in: [...new Set(jp.map((r) => r.lcid))] } }, select: sel })).map(toRow);
+    const dexEn = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE }, pokedexNumbers: { hasSome: dexes } } }, select: sel })).map(toRow);
+    const seenCid = new Set(sharedEn.map((r) => r.cid));
+    en = [...sharedEn, ...dexEn.filter((r) => !seenCid.has(r.cid))];
   }
 
   // ── KR ↔ JP ──
@@ -1193,9 +1197,17 @@ async function main() {
     //   dex+일러는 시대·폼 가로질러 충돌(같은 일러가 2004 우퍼·2023 파르데아우퍼·2007 프로젤·2023 프로젤을 다 그림)
     //   → 폼토큰·타입·HP 일치 필수 + 발매 era 근접(±4년) 컷오프, 그 뒤 발매근접→tier근접 정렬.
     const ERA = 1460 * 86400000; // 4년 (TCG 시대 구분)
-    const enByBk = new Map<string, Row[]>(); for (const e of en) if (isPoke(e)) { const k = fpP(e); const a = enByBk.get(k) ?? []; a.push(e); enByBk.set(k, a); }
     const used = new Set<string>();
+    // 0) LC 공유(정체성 병합된) EN 우선 — 지문 추정 불필요·트레이너 포함 (sv10 합본 분산 등)
+    const enByLcidX = new Map<string, Row[]>();
+    for (const e of en) { const a = enByLcidX.get(e.lcid) ?? []; a.push(e); enByLcidX.set(e.lcid, a); }
+    for (const j of jp) {
+      const arr = (enByLcidX.get(j.lcid) ?? []).filter((c) => !used.has(c.cid)).sort((a, b) => a.numInt - b.numInt);
+      if (arr.length) { enForJp.set(j.cid, arr[0]); used.add(arr[0].cid); }
+    }
+    const enByBk = new Map<string, Row[]>(); for (const e of en) if (isPoke(e)) { const k = fpP(e); const a = enByBk.get(k) ?? []; a.push(e); enByBk.set(k, a); }
     for (const j of jp.filter(isPoke)) {
+      if (enForJp.has(j.cid)) continue; // LC 공유로 이미 확정
       let cands = (enByBk.get(fpP(j)) ?? []).filter((c) => !used.has(c.cid));
       cands = cands.filter((c) => formKey(c.name) === formKey(j.name));                                         // 폼토큰 일치(하드: 파르데아≠일반, 명백)
       cands = cands.filter((c) => !(j.types.length && c.types.length) || j.types.some((t) => c.types.includes(t))); // 타입 교집합(하드: 타입은 불변)
