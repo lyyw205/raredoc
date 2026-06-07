@@ -21,6 +21,36 @@ const KO2JA: Record<string, string> = {
 
 // [jpJsonPath, krJsonPath, 세트dir코드]
 const PAIRS: [string, string, string][] = [
+  // ── BW 덱 (2026-06-07) ──
+  ["jp-bw-fs.json", "kr-official-fs.json", "FS"],
+  ["jp-bw-bgv.json", "kr-official-bg-virizion.json", "BG"],
+  ["jp-bw-bgt.json", "kr-official-bg-terrakion.json", "BG"],
+  ["jp-bw-bgc.json", "kr-official-bg-cobalon.json", "BG"],
+  ["jp-bw-bgrex.json", "kr-official-bgrex.json", "BGR"],
+  ["jp-bw-bgz.json", "kr-official-bgz.json", "BGZ"],
+  ["jp-bw-td.json", "kr-official-td.json", "TD"],
+  ["jp-bw-bd.json", "kr-official-bd.json", "BD"],
+  ["jp-bw-sbd.json", "kr-official-sbd.json", "SBD"],
+  ["jp-bw-gbd.json", "kr-official-gbd.json", "GBD"],
+  ["jp-bw-kd.json", "kr-official-kd.json", "KD"],
+  ["jp-bw-pd.json", "kr-official-pd.json", "PD"],
+  ["jp-bw-bgb.json", "kr-official-bgb.json", "BGB"],
+  ["jp-bw-bgw.json", "kr-official-bgw.json", "BGW"],
+  ["jp-bw-pss.json", "kr-official-pss.json", "PSS"],
+  ["jp-bw-gk.json", "kr-official-gk.json", "GK"],
+  ["jp-bw-mg.json", "kr-official-mg.json", "MG"],
+  // ── XY 덱 (2026-06-07) ──
+  ["jp-xy-xy0.json", "kr-official-fxy.json", "XY0"],
+  ["jp-xy-xy30.json", "kr-official-xy30.json", "XY30"],
+  ["jp-xy-xy30b.json", "kr-official-xy30b.json", "XY30B"],
+  ["jp-xy-xya.json", "kr-official-xya.json", "XYA"],
+  ["jp-xy-xyb.json", "kr-official-xyb.json", "XYB"],
+  ["jp-xy-xyc.json", "kr-official-xyc.json", "XYC"],
+  ["jp-xy-xyd.json", "kr-official-xyd.json", "XYD"],
+  ["jp-xy-xye.json", "kr-official-xye.json", "XYE"],
+  ["jp-xy-xyf.json", "kr-official-xyf.json", "XYF"],
+  ["jp-xy-xyg.json", "kr-official-xyg.json", "XYG"],
+  ["jp-xy-xyh.json", "kr-official-xyh.json", "XYH"],
   // ── SM 덱/굿즈 (2026-06-06) ──
   ["jp-sm-sma.json", "kr-official-sma.json", "SMA"],
   ["jp-sm-smc.json", "kr-official-smc.json", "SMC"],

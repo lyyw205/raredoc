@@ -90,6 +90,41 @@ const CFG: Record<string, { jp: string; json: string; maxNum?: number }> = {
   "kr-m2a": { jp: "jp-mega-dream-ex", json: `${DIR}/kr-official-m2a.json` },
   "kr-m3": { jp: "jp-mega-munikisuzero", json: `${DIR}/kr-official-m3.json` },
   "kr-m4": { jp: "jp-mega-ninja-spinner", json: `${DIR}/kr-official-m4.json` },
+  // ── DP 구축덱 (2026-06-07 정본화) ──
+  // (kr-st1 랜덤구축덱: JP 풀 매칭 시도했으나 verify 일러 불일치 22 → KR 독자 재구성 판정(BS 패턴), KR 전용 재구축 완료 — 재apply 금지)
+  // (kr-st2 펄기아덱·kr-st3 크레세리아덱 = JP 미게재 KR 전용 페어 — 자체 재구축)
+  // ── BW 구축덱 (2026-06-07 정본화) ──
+  "kr-fs": { jp: "jp-tcg-BWFS", json: `${DIR}/kr-official-fs.json` },
+  "kr-bg_virizion": { jp: "jp-tcg-BGV", json: `${DIR}/kr-official-bg-virizion.json` },
+  "kr-bg_terrakion": { jp: "jp-tcg-BGT", json: `${DIR}/kr-official-bg-terrakion.json` },
+  "kr-bg_cobalon": { jp: "jp-tcg-BGC", json: `${DIR}/kr-official-bg-cobalon.json` },
+  "kr-bgrex": { jp: "jp-tcg-BGREX", json: `${DIR}/kr-official-bgrex.json` },
+  "kr-bgz": { jp: "jp-tcg-BGZ2", json: `${DIR}/kr-official-bgz.json` },
+  "kr-td": { jp: "jp-tcg-TD2", json: `${DIR}/kr-official-td.json` },
+  "kr-bd": { jp: "jp-tcg-BD2", json: `${DIR}/kr-official-bd.json` },
+  "kr-sbd": { jp: "jp-tcg-SBD", json: `${DIR}/kr-official-sbd.json` },
+  "kr-gbd": { jp: "jp-tcg-GBD", json: `${DIR}/kr-official-gbd.json` },
+  "kr-kd": { jp: "jp-tcg-KD2", json: `${DIR}/kr-official-kd.json` },
+  "kr-pd": { jp: "jp-tcg-PD2", json: `${DIR}/kr-official-pd.json` },
+  "kr-bgb": { jp: "jp-tcg-BGB2", json: `${DIR}/kr-official-bgb.json` },
+  "kr-bgw": { jp: "jp-tcg-BGW2", json: `${DIR}/kr-official-bgw.json` },
+  "kr-pss": { jp: "jp-tcg-PSS2", json: `${DIR}/kr-official-pss.json` },
+  "kr-g+k": { jp: "jp-tcg-GK", json: `${DIR}/kr-official-gk.json` },
+  "kr-mg": { jp: "jp-tcg-MG", json: `${DIR}/kr-official-mg.json` }, // 공유 6장 — keep-unmatched
+  // ── XY 구축덱 (2026-06-07 정본화) ──
+  "kr-fxy": { jp: "jp-tcg-XY0", json: `${DIR}/kr-official-fxy.json` },   // 퍼스트세트 3덱 합본(42)
+  "kr-xy30": { jp: "jp-tcg-XY30", json: `${DIR}/kr-official-xy30.json` },
+  "kr-xy30b": { jp: "jp-tcg-XY30B", json: `${DIR}/kr-official-xy30b.json` },
+  "kr-xya": { jp: "jp-tcg-XYA", json: `${DIR}/kr-official-xya.json` },
+  "kr-xyb": { jp: "jp-tcg-XYB", json: `${DIR}/kr-official-xyb.json` },
+  "kr-xyc": { jp: "jp-tcg-XYC", json: `${DIR}/kr-official-xyc.json` },
+  "kr-xyd": { jp: "jp-tcg-XYD", json: `${DIR}/kr-official-xyd.json` },
+  "kr-xye": { jp: "jp-tcg-XYE", json: `${DIR}/kr-official-xye.json` },
+  "kr-rbd": { jp: "jp-tcg-RBD", json: `${DIR}/kr-official-rbd.json` },   // KR 30장덱(19) ⊃ JP 진화팩(10) — keep-unmatched
+  "kr-ubd": { jp: "jp-tcg-UBD", json: `${DIR}/kr-official-ubd.json` },   // 동상
+  "kr-xyf": { jp: "jp-tcg-XYF", json: `${DIR}/kr-official-xyf.json` },
+  "kr-xyg": { jp: "jp-tcg-XYG", json: `${DIR}/kr-official-xyg.json` },
+  "kr-xyh": { jp: "jp-tcg-XYH", json: `${DIR}/kr-official-xyh.json` },
   // ── SM 구축덱 (2026-06-06 정본화) ──
   "kr-sma": { jp: "jp-tcg-SMA", json: `${DIR}/kr-official-sma.json` },
   "kr-smc": { jp: "jp-tcg-SMC", json: `${DIR}/kr-official-smc.json` },
@@ -409,9 +444,12 @@ async function main() {
     if (colls.length + trades.length) console.log(`  참조 ${colls.length + trades.length}건 임시 JP 재지정`);
     await prisma.cardLocale.deleteMany({ where: { setId: krSet } });
     let made = 0; const newKrByNum = new Map<number, { id: string; lcid: string }>();
+    const idSeen = new Map<string, number>(); // 동번호 이명(덱 인터리브) id 충돌 방지 — 2장째부터 -b/-c 서픽스
     for (const o of offsF) {
       const j = m.get(o.numInt); if (!j) continue;
-      const id = `${krSet}-${o.number}`;
+      const base = `${krSet}-${o.number}`;
+      const dup = idSeen.get(base) ?? 0; idSeen.set(base, dup + 1);
+      const id = dup === 0 ? base : `${base}-${String.fromCharCode(97 + dup)}`;
       await prisma.cardLocale.create({ data: {
         id, setId: krSet, region: "KR", language: "ko", number: o.number, numberInt: o.numInt,
         name: o.koName, imageSmall: o.image, imageLarge: o.image, logicalCardId: j.lcid,

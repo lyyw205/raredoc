@@ -36,6 +36,9 @@ import megaAbyssEye from "@/data/group-mega-abyss-eye.json";
 import megaStartDeck100 from "@/data/group-mega-start-deck-100.json";
 import megaDecks from "@/data/group-mega-decks.json";
 import megaGoods from "@/data/group-mega-goods.json";
+import dpDecks from "@/data/group-dp-decks.json";
+import bwDecks from "@/data/group-bw-decks.json";
+import xyDecks from "@/data/group-xy-decks.json";
 import smDecks from "@/data/group-sm-decks.json";
 import swshDecks from "@/data/group-swsh-decks.json";
 import swshGoods from "@/data/group-swsh-goods.json";
@@ -209,6 +212,9 @@ const DATA: Record<string, GroupData> = {
   "mega-start-deck-100": megaStartDeck100 as unknown as GroupData,
   "mega-decks": megaDecks as unknown as GroupData,
   "mega-goods": megaGoods as unknown as GroupData,
+  "dp-decks": dpDecks as unknown as GroupData,
+  "bw-decks": bwDecks as unknown as GroupData,
+  "xy-decks": xyDecks as unknown as GroupData,
   "sm-decks": smDecks as unknown as GroupData,
   "swsh-decks": swshDecks as unknown as GroupData,
   "swsh-goods": swshGoods as unknown as GroupData,
