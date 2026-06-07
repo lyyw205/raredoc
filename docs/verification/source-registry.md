@@ -697,3 +697,15 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - 결과: **배틀파트너즈 EN 131/132·KR 132/132·영판전용 3** / 스타트덱 Generations EN 93/183·KR 183/183.
 - 미연결 SVM 트레이너 9장(コック·ゴヨウ·チリ·ドラセナ·たんぱんこぞう·マサキの転送 등)은 EN측 대응 없음(sv9에 미수록) — 사전 추가 불필요, 잔류 정상.
 > 백로그 갱신: SV-P 회수 목록 +1 = ミガルーサex 46126 (누적: ウパー·バチンウニ·ガルーラ·さいみん装置·PCL×2·ミガルーサex).
+
+## §29. 테라스탈페스타 — Prismatic Evolutions 정밀 감사 (SVM 분산 37 + 오연결 11 교정) (2026-06-07, 사용자 제보)
+
+- **발단**: 사용자 제보 "EN 누락 대량 + 영판전용 42장" — 구조 판명: **EN PRE(180) = JP 테라스탈페스타(237) 부분 대응 + SVM(스타트덱 Generations) 발췌 합본**. SVM 분산이 sv9(§28)에 이어 PRE에도 — **SVM은 3개 EN 세트로 갈라진 최초 사례**(sv9 56 + sv8pt5 39 + 재록 지문).
+- **처리**: ①orphan 42 일러 백필(tcgdex sv08.5 — ptcg.io artist 미제공 세트) ②합본 스코프 병합 +37 ③재배정 검증: merge가 기존 연결 4건을 SVM으로 이동 — **1건은 기존 오연결의 자가 교정**(Sylveon EN#40=MINAMINAMI Take→SVM 정짝), 3건(Duraludon·Eevee·Dunsparce)은 tcgdex 일러 판정으로 테라페스타 복귀.
+- **tcgdex 전수 감사 180장 → 불일치 12 → 이미지 정밀 판정**:
+  - **이브이 본문 5(Leafeon·Flareon·Vaporeon·Glaceon·Jolteon) = tcgdex 일러 오기**(이미지 동일 확인 — Leafeon·Flareon 실측) → 연결 유지. ⚠ tcgdex도 ptcg.io처럼 일러 오기 있음(서드파티 공통).
+  - **트레이너 본문↔SIR 스왑 3쌍 = 진짜 교차 오배정**(Amarys EN#93 이미지=JP#173 Komayama 확정): Amarys·Kieran(スグリ)·Lacey(タロ) 각 본문/SIR 맞교환 — 이전 SV7팩 병합의 rankZip 동점 함정 잔존.
+  - **Hawlucha EN#89 오연결**(이미지: ITO HP80 Rising Tackle ↔ 테라페스타#084 GOSSAN HP70 특성형 — 별개 카드) → **SVM#111 정짝 재연결**.
+- **잔류 정당**: PRE 영판전용 5(Professor's Research 4판 — SVM 동일일러 Ishikawa·Teeziro 각 3판 유일쌍 불성립 / Roto-Stick — JP 검색 0건 프로모 추정) · 테라페스타 EN없음 101 = **EN 미수록 인쇄**(JP 하이클래스 237 vs EN 180 구성 차이: JP 전용 AR·재록·마스터볼미러 등 — 사용자 제보 대량 목록이 이것).
+- 결과: **테라페스타 EN 136/237·KR 237/237·영판전용 5** / 스타트덱 Generations EN 127/183.
+> ⚠ 수칙 보강: 일러 출처 우선순위 JP공식 > tcgdex ≈ ptcg.io — 서드파티 불일치는 **이미지 직접 판정**이 최종 권위(이번 12건 중 5건이 tcgdex 오기, 7건이 실제 오배정 — 표기만으론 구분 불가).
