@@ -258,7 +258,7 @@ const CONFIG: Record<string, Cfg> = {
   "sv-start-deck-generations": {
     nameKo: "랜덤 스타트 덱 Generations", nameEn: "Start Deck Generations",
     jp: ["jp-tcg-SVM"], kr: ["kr-svm"],
-    krMirror: { "kr-svm": "jp-tcg-SVM" }, enNative: [], krMirrorAll: true,
+    krMirror: { "kr-svm": "jp-tcg-SVM" }, enNative: null, krMirrorAll: true, // 2026-06-07 신규분 56이 sv9(Journey Together)로 EN 병합 → crossGroup(LC 공유 우선)으로 전환
   },
   // ── MEGA 구축덱/강화상품 (JP·KR 1:1, EN 상품 없음 — 신규분은 me2/me2pt5 분산 수록) ──
   "mega-start-deck-100": {

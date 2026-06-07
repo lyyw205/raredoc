@@ -686,3 +686,14 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **잔류 정당**: sv10 영판전용 5(Rellor=초전브레이커 재록·JP 기짝 / Rabsca ex·Hippopotas·Hippowdon·TM Machine = JP 동일판 미식별, 프로모 추정 백로그) + JP측 3(ロケット団のソーナンス AR #103 = EN 미수록 / 열풍 #058 Switch·#059 Catcher = EN 세트 미수록 스테이플).
 - 결과: **로켓단의영광 EN 131/132·KR 132/132·영판전용 5** / **열풍의아레나 EN 90/92·KR 92/92·영판전용 0**.
 > ⚠ §26 수칙 확장 실증: 신팩 합본은 "본팩+강화팩+스타터" 3원 분산까지 가능 — EN 병합 시 동시기 JP 제품 전체를 스코프 후보로.
+
+## §28. 배틀파트너즈 — Journey Together 합본 분산 병합 (스타트덱 Generations 56) (2026-06-07, 사용자 제보)
+
+- **발단**: 사용자 제보 "스파이크에너지 EN없음 + 영판전용 61장" — 적중. **EN Journey Together(sv9, 190장) = JP 배틀파트너즈(132) + 스타트덱 Generations(SVM 183 중 신규분) 합본** — SVM 183장 전체 EN 미병합 상태(§27과 동일 패턴 연쇄 2번째).
+- **함정(신규): JP SVM subtypes "EX"(대문자) 오기** — ex 7장(Amoonguss·Blaziken·Reshiram·Tapu Koko·Mimikyu·Alcremie·Clodsire)이 지문(subtypes 포함)에서 탈락 → **EX→ex 정규화 18장** 후 재병합. dry의 "subtypes 어긋남 의심" 경고가 정확히 7장을 지목(경고 기능 실효 입증).
+- 병합: 129→**185**(+SVM 56) · Spiky Energy 2판 수동(JP#100 U↔EN#159·JP#132 UR↔EN#190, 특수E 1:1, 덱레시피 9 이관) · ptcg.io 감사 190장 **불일치 0**.
+- **잔류 정당**: sv9 영판전용 3 — **Veluza ex = ミガルーサex SV-P 프로모 확정(cardID 46126, 5ban 일치)** / Billy & O'Nare(JP 검색 0건 — 프로모 추정) / Professor's Research(Taira Akitsu — JP 동일 일러 7판: MA·SV11B·SVM×3·SVN·SVOM, 유일쌍 불성립 → 스테이플 잔류 원칙). JP측 1 = **Nのゾロア AR #108(Mizutani) EN 미수록**(sv9 N's Zorua는 본문 Sasumo판뿐).
+- **sv-start-deck-generations 그룹 enNative:[]→null(crossGroup) 전환**: 신규분 56이 sv9 EN 공유하게 됨 → §27의 LC 공유 우선 매칭으로 EN 93/183 표시(공유 56+재록 지문 37).
+- 결과: **배틀파트너즈 EN 131/132·KR 132/132·영판전용 3** / 스타트덱 Generations EN 93/183·KR 183/183.
+- 미연결 SVM 트레이너 9장(コック·ゴヨウ·チリ·ドラセナ·たんぱんこぞう·マサキの転送 등)은 EN측 대응 없음(sv9에 미수록) — 사전 추가 불필요, 잔류 정상.
+> 백로그 갱신: SV-P 회수 목록 +1 = ミガルーサex 46126 (누적: ウパー·バチンウニ·ガルーラ·さいみん装置·PCL×2·ミガルーサex).
