@@ -163,10 +163,10 @@ const CONFIG: Record<string, Cfg> = {
     jp: ["jp-mega-infernox"], kr: ["kr-m2"],
     krMirror: { "kr-m2": "jp-mega-infernox" }, enNative: [], krMirrorAll: true,
   },
-  "mega-dream-ex": {
+  "mega-dream-ex": { // EN=Ascended Heroes(me2pt5 합본·주귀속) — 메가드림 190 + MC 98 분산 병합(2026-06-07), 영판전용 orphan 여기 귀속
     nameKo: "메가드림 ex", nameEn: "Mega Dream ex",
     jp: ["jp-mega-dream-ex"], kr: ["kr-m2a"],
-    krMirror: { "kr-m2a": "jp-mega-dream-ex" }, enNative: [], krMirrorAll: true,
+    krMirror: { "kr-m2a": "jp-mega-dream-ex" }, enNative: ["en-tcg-me2pt5"], krMirrorAll: true, enMerged: true,
   },
   "mega-munikisuzero": {
     nameKo: "니힐제로", nameEn: "Nihil Zero",
@@ -262,7 +262,7 @@ const CONFIG: Record<string, Cfg> = {
   "mega-start-deck-100": {
     nameKo: "스타트 덱 100 배틀컬렉션", nameEn: "Start Deck 100 Battle Collection",
     jp: ["jp-tcg-MC"], kr: ["kr-mc"],
-    krMirror: { "kr-mc": "jp-tcg-MC" }, enNative: [], krMirrorAll: true,
+    krMirror: { "kr-mc": "jp-tcg-MC" }, enNative: ["en-tcg-me2pt5"], krMirrorAll: true, enMerged: true, // MC 신규분 98이 me2pt5(Ascended Heroes)로 병합 — setGroupId 스코프 로드라 자동 분배
   },
   "mega-decks": {
     nameKo: "MEGA 구축덱", nameEn: "MEGA Starter Sets",
