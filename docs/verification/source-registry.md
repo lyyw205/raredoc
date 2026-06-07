@@ -761,3 +761,11 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **JP EN없음 121 사유 분류**: 재록(원판 기EN — sv1/sv2/sv3/sv3pt5/151 등) 약 75 / 재록(원판 無EN — **트리플렛비트 계 ~20**: 스타터 3라인·クラベル·レッスンスタジオ·スーパーエネルギー回収·ルミナスE 등, 그 그룹 점검 때 EN sv2 orphan들과 연결 예정) / 동일 인쇄 다수(ペパー·ボスの指令 22곳·ネモ·리오르·미라이돈/코라이돈ex) / 에너지 재록 3(セラピー=SV2D#071·リバーサル=SV2P#071·ルミナス=triplet#073 원판).
 - **sv-decks enNative []→null 전환**: EN 연결 누적(SVHK/SVHM 18+SVEL/SVEM/SVAM/SVD 10)을 crossGroup LC 공유로 표시(EN매칭 191).
 - 결과: **PAF 영판전용 32→4** · sv4a EN 239/360 · 빌드 9그룹 갱신(paldean-fates/raging-surf 63·paradox-rift 93·future-flash 93·decks 191·base/paldea-evolved).
+
+## §36. 고대의 포효 — Paradox Rift 레이징서프 대량 미병합 해소 (영판전용 88→0) (2026-06-08, 사용자 제보 — 연쇄 8번째)
+- **구조**: EN Paradox Rift(sv4, 266) = 고대의포효(SV4K)+미래의일섬(SV4M)(기병합) + **레이징서프(sv3a 92) 통째 미병합** + 스타터 테라스탈 SVEL/SVEM 발췌 8 + 특수E 2. 제보 88 = sv4 orphan 88과 정확 일치. 제보 JP측 7장(マラカッチ 등)은 §35에서 PAF 연결 완료된 배포 전 화면.
+- merge 합본 스코프(SV4K+SV4M+RS→sv4): 244→**256**(TR_JP2EN +6: アオキ=Larry·シキミ=Shauntal·チリ=Rika·パラソルおねえさん=Parasol Lady·ワザマシン 2종). **Wimpod #47 자가 교정 1**(SV4K#021→RS#009 — 일러 교차 일치 확인, 기존 한 칸 오배정의 merge 자동 교정).
+- 수동 10: SVEL 4(Volcanion·Fuecoco·Crocalor·Skeledirge ex — Volcanion은 SVEL#004 9월 1쇄 선택, SVG#011은 sv4 동일발매 재록 / Skeledirge는 SVEL#008 선택, triplet#020은 PAL 짝 예약) + SVEM 4(Mewtwo ex·Natu·Xatu·Deoxys — SML#025는 뮤츠**GX** 別카드) + 특수E 2(Medical=RS#062·Reversal 골드=RS#092 UR 인쇄 유일). 이미지 판정 3쌍(Volcanion·Mewtwo ex·Skeledirge ex).
+- **전수 일러 감사(tcgdex 265) 적발 4 → 스왑 교정**: Honedge #130↔#131·Doublade #132↔#133 — merge가 SV4M판·RS판을 교차로 붙임(같은 종 2판 한 칸 오배정 5번째 사례). 이미지 판정: #130=aoki(きる/Cut Up)=RS#045·#131=Nagomi Nijo(とつげき)=SV4M#043·#132=Bun Toujo=RS#046·#133=Negishi=SV4M#044.
+- **잔류 정당**: sv4 orphan **0**. JP측 — RS 2(ふしぎなアメ·ポケモンいれかえ = EN Paradox Rift에 Rare Candy/Switch 미수록 스테이플) / SV4K 2(サケブシッポ AR #071·基本悪 UR #095 = EN 미수록, EN은 base Scream Tail #86뿐·기본E 골드 없음) / SV4M 2(テツノツツミ #071·基本鋼 #095 — 대칭 구조).
+- 결과: **고대의포효 영판전용 88→0** · 레이징서프 EN 90/92 · 고대의포효/미래의일섬 EN 각 93/95.
