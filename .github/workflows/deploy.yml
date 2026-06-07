@@ -24,7 +24,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24 # npm 11 — 로컬 lock 생성 환경과 일치 (npm 10은 동일 lock 검증 실패). 산출물은 node20 서버에서 구동 가능(전치 JS+NAPI)
           cache: npm
 
       - name: Install deps
