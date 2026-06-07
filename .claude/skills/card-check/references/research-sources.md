@@ -40,6 +40,7 @@ curl -s "https://www.pokemon-card.com/card-search/resultAPI.php?keyword=<인코�
 
 - 상세가 정적 HTML: `https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/series/{시리즈}/{번호}/` (예 me03/1). 목록 페이지는 JS 렌더라 못 쓴다.
 - ⚠️ **Incapsula 봇차단**: 단건은 정상(50KB+), 연속 요청 4~5건째부터 HTTP 200인데 1KB대 차단 스텁. **응답 크기 <5KB = 차단**으로 판단하고 즉시 중단, 보조 소스로 폴백. 요청 사이 수 초 간격.
+- ★ **역할: EN 개별 최종 검증의 1순위 권위** — 연결 확정·오연결 교정 등 단건 판정은 여기(공식)로 한다. 대량 스윕(전수 감사)만 ptcg.io/tcgdex 사용. 서드파티끼리 표기가 엇갈리면 공식이 심판.
 
 ## 4. 보조 소스 (공식에서 못 찾을 때 — 구세대·프로모·영문 세트명에 유리)
 
