@@ -727,3 +727,10 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - 전수 감사 175장(tcgdex): **불일치 0** (메타결손 2).
 - **잔류 정당**: 영판전용 3 — **Garganacl ex = キョジオーンex SV-P 프로모 확정(cardID 44410, 5ban 일치 — SV-P 회수 9장째)** / Pansear(0313)·Yamask(aoki) = JP 미검출(최근판은 BBWF 화이트플레어 타일러 — 프로모 추정). JP측 2 = **ヨルノズク AR #114(EN Noctowl은 #115 1판뿐)·テラパゴスex SR #122(EN은 DR/SIR/HR만)** — EN 미수록.
 - 결과: **스텔라미라클 EN 133/135·KR 135/135·영판전용 3**. 제보 42장: 연결 39(SVI 35+SVG 4) · 잔류 3(전건 사유 확정).
+
+## §32. 나이트원더러 — Shrouded Fable 꼬리 5장 (2026-06-07, 사용자 제보)
+
+- **충성스러운 세 독 IR 3장(Munkidori #72·Fezandipiti #73·Okidogi #74) = 변환의 가면(twilight-masquerade) AR #107/#108/#110 출신** — 일러(Teeziro·KEIICHIRO ITO·AKIRA EGAWA) 유일쌍 + Munkidori 이미지 판정(동일 일러·HP110·Adrena-Brain 확인) → 연결 3, 덱레시피 11 이관. orphan 일러 null이라 자동 병합이 못 잡았던 케이스(tcgdex sv06.5 백필).
+- **기본 악/강철 에너지 #98/#99(Hyper rare 골드) = 영판전용 잔류 정당** — JP 세트는 골드 기본E 미수록(기본E 스테이플 잔류 관례).
+- 결과: **나이트원더러 EN 94/94 완전·KR 94/94·영판전용 2**(골드 기본E).
+- ⚠ 후속 관찰: sv-twilight-masquerade 그룹 enOnly 98 — EN Twilight Masquerade(sv6)도 합본 분산(크림슨헤이즈 등) 미병합 의심, 다음 점검 후보.

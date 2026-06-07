@@ -7,7 +7,7 @@
   },
   "counts": {
     "anchors": 133,
-    "enMatched": 128,
+    "enMatched": 131,
     "krMatched": 133,
     "enOnly": 98,
     "krOnly": 0
@@ -3195,7 +3195,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6pt5-72",
+        "number": "72",
+        "name": "Munkidori",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-shrouded-fable/en/small/sv6pt5/72.png",
+        "rarity": "Art Rare",
+        "setId": "sv6pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-107",
         "number": "107",
@@ -3217,7 +3225,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6pt5-73",
+        "number": "73",
+        "name": "Fezandipiti",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-shrouded-fable/en/small/sv6pt5/73.png",
+        "rarity": "Art Rare",
+        "setId": "sv6pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-108",
         "number": "108",
@@ -3269,7 +3285,15 @@
         "setId": "jp-sv-twilight-masquerade",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6pt5-74",
+        "number": "74",
+        "name": "Okidogi",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-shrouded-fable/en/small/sv6pt5/74.png",
+        "rarity": "Art Rare",
+        "setId": "sv6pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv6-110",
         "number": "110",
@@ -5046,7 +5070,21 @@
         "setId": "sv6",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "mega-start-deck-100",
+            "name": "스타트 덱 100 배틀컬렉션"
+          },
+          {
+            "groupId": "sv-goods",
+            "name": "SV 기타 강화상품"
+          },
+          {
+            "groupId": "sv-prismatic-evolutions",
+            "name": "테라스탈 페스타 ex"
+          }
+        ]
       },
       {
         "id": "sv6-156",
@@ -5101,7 +5139,13 @@
         "setId": "sv6",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "sv-prismatic-evolutions",
+            "name": "테라스탈 페스타 ex"
+          }
+        ]
       },
       {
         "id": "sv6-164",
@@ -5501,7 +5545,21 @@
         "setId": "sv6",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "mega-start-deck-100",
+            "name": "스타트 덱 100 배틀컬렉션"
+          },
+          {
+            "groupId": "sv-goods",
+            "name": "SV 기타 강화상품"
+          },
+          {
+            "groupId": "sv-prismatic-evolutions",
+            "name": "테라스탈 페스타 ex"
+          }
+        ]
       },
       {
         "id": "sv6-208",
@@ -5639,7 +5697,21 @@
         "setId": "sv6",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "sv-temporal-forces",
+            "name": "와일드포스"
+          },
+          {
+            "groupId": "sv-goods",
+            "name": "SV 기타 강화상품"
+          },
+          {
+            "groupId": "sv-prismatic-evolutions",
+            "name": "테라스탈 페스타 ex"
+          }
+        ]
       },
       {
         "id": "sv6-226",
