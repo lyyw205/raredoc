@@ -151,6 +151,7 @@ export const TR_JP2EN: Record<string, string> = {
   "スパーク": "Spark",
   "ブランシェ": "Blanche",
   "ボスの指令": "Boss's Orders",
+  "ポケモンセンターのお姉さん": "Pokémon Center Lady",
   "ハッサク": "Hassel",
   "ニュートラルセンター": "Neutralization Zone",
   "クセロシキのたくらみ": "Xerosic's Machinations",

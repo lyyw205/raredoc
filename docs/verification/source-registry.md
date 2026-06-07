@@ -628,3 +628,38 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **타 me 세트 동일 감사**: me2 깨끗(보류 2 정합) · **me4 +1 회수(Mega Gallade ex → M-P#068** — M-P 수집 후 첫 재감사 수확, 닌자스피너 영판전용 3→2) · me3/me1은 ptcg.io artist 미제공으로 감사 불가(등급별 수동 매칭 구조라 동점 함정 없음 — 잔여 리스크 낮음).
 - 빌드: 메가드림 EN 186(+MC 이동분)·enOnly 6 / MC EN 103 / 닌자스피너 enOnly 2.
 > ⚠ 수칙: **합본 EN 병합 후 ptcg.io artist 전수 감사 필수** — rankZip은 동점(동일 dex·동일 등급 다판)에서 신뢰 불가.
+
+## §25. 카드체크 2차 — me2pt5/me2 꼬리 출처 확정 · 인페르노X 결손 판정 (2026-06-07, DB 변경 없음)
+
+사용자 /card-check 연쇄(메가드림 6장 → 인페르노X 5장) — 전건 "정상" 판정, 신규 사실만 기록.
+
+| 카드 | 판정 | 증거 |
+|---|---|---|
+| me2pt5 #68 Hop's Pincurchin ex | 영판전용 정상 — JP 실존·미수집 | JP 공식 cardID **47168, 이미지 디렉터리 SV-P**(일본 프로모) |
+| me2pt5 #162 TR's Kangaskhan ex | 〃 | cardID **47495, SV-P**. 배지 "메가심포니아"는 일반 메가가루라ex(동종·동작가 5ban) 폴백 힌트 — 동일 카드 아님 |
+| me2pt5 #206 TR's Hypnotizer | 〃 | cardID **47497**(ロケット団のさいみん装置 — 가루라 인접 연번, 같은 프로모 시리즈) |
+| me2pt5 #258 Cheren | 〃 (JP 미검출) | REND 일러 — JP 검색 30건 전부 타 일러(BBWF Furusawa 포함). 프로모 추정 |
+| me2pt5 #91 Banette / #125 Mega Gengar ex | 재록판 잔류 정상 | 원본(sv9 ジュペッタ / MBG#003)이 이미 각자 EN 정짝 보유 |
+| me2 #102 Paldean Wooper (IR) | 영판전용 정상 — **JP = SV-P cardID 47161 확정**(일러 OKACHEKE 일치) | "전시대 후보無" 보류 → 출처 구체화 |
+| me2 #106 Meowth (IR, Uninori) | 〃 (JP 미검출 — SV-P 추정) | plain ニャース 최근판은 SVM/SV6a 전부 sui — Uninori판 일본 검색 DB 미등재 |
+| 인페르노X #048 ニューラ(Gunjima)·#049 マニューラ(matazo) | JP+KR 정상, **EN 미발매가 사실** | ptcg.io me2 0건·MEGA 시리즈 전체 0건(me2pt5 Sneasel Krgc/Weavile aspara·Uninori는 별개 인쇄) — 연결 누락 아님 |
+| 인페르노X JP#116 メガリザードンXex (MUR, takuyoa) | JP+EN(me2#130) 정상, **KR 공식 자체 미등재** | search_text_cards 마지막 페이지 M2_090~**115** 끝(전 4페이지) — kr-m2 115장은 출처 충실. 닌자스피너 KR 시크릿(§18②)과 동일 패턴 |
+
+> 백로그: **JP SV-P 수집 시 회수 4장**(47161 ウパー·47168 バチンウニ·47495 ガルーラ·47497 さいみん装置) + 추가로 Uninori ニャース·REND チェレン 등재 여부 재확인 / **kr-m2 #116 KR 등재 시 수집**.
+
+### §25-b. me1(Mega Evolution) 트레이너 꼬리 6장 — 일러 백필·배지 활성화 (2026-06-07)
+
+사용자 /card-check 3차(처음 인페르노X로 오인 — 실제는 **메가브레이브 그룹의 me1 꼬리**: me1 188 중 병합 182 후 잔여 6 = 이 트레이너들). 전건 정상 판정:
+
+| EN# | 카드 | 일러(tcgdex me01) | 판정 |
+|---|---|---|---|
+| 114 | Boss's Orders | NC Empire | 동일 아트 JP 다제품(MA#039·MBD#019·MBG#020 — 전부 EN없음) → 정짝 특정 불가, 잔류 정당 |
+| 115 | Energy Switch | Studio Bora Inc. | 〃 (MA#012·MC#638) |
+| 123 | Pokémon Center Lady | Tomowaka | **JP = SV-P 프로모 확정(cardID 47174·47732, Tomowaka 일치)** — 미수집 잔류 |
+| 125 | Rare Candy | Studio Bora Inc. | 〃 다제품(MA#021·MBG#012·MC#655; M1S#082는 me1#175와 기연결 — 별개 인쇄) |
+| 130 | Switch | Studio Bora Inc. | 〃 (MA#023·MBD#012·MBG#014·MC#663) |
+| 131 | Ultra Ball | Ayaka Yoshida | 〃 (MA#020·MBD#011·MBG#011; MC#651 동일아트는 me2pt5#213 기연결 — 다제품 재록 실증) |
+
+- 조치: ①6장 orphan LC **illustrator 백필**(tcgdex me01 — me1은 ptcg.io artist 미제공) ②TR_JP2EN에 ポケモンセンターのお姉さん=Pokémon Center Lady 추가 ③mega-brave-symphonia·mega-symphonia 재빌드 → **jpPacks 배지 5/6 활성화**(PCL만 null=JP 미수집, 정확). counts 불변(92/91/92/enOnly 6).
+- 스테이플 동일 크레딧 한계: jpPacks가 다수(Switch 13곳) — 렌더는 "외 N" 축약. Rare Candy 배지에 자기 그룹(메가심포니아 M1S#082)도 포함되나 별개 인쇄 힌트로 유용해 유지.
+- 백로그 갱신: **SV-P 회수 후보 5~6장째 = PCL 47174/47732**(영판전용 잔류 회수 목록에 추가).
