@@ -9,7 +9,7 @@
     "anchors": 108,
     "enMatched": 108,
     "krMatched": 108,
-    "enOnly": 43,
+    "enOnly": 42,
     "krOnly": 0
   },
   "anchors": [
@@ -1194,10 +1194,10 @@
         "region": "JP"
       },
       "en": {
-        "id": "sv1-112",
-        "number": "112",
+        "id": "sv1-113",
+        "number": "113",
         "name": "Riolu",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-base/en/small/sv1/112.png",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-base/en/small/sv1/113.png",
         "rarity": "Common",
         "setId": "sv1",
         "region": "EN"
@@ -3624,31 +3624,6 @@
         ]
       },
       {
-        "id": "sv1-113",
-        "number": "113",
-        "name": "Riolu",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-base/en/small/sv1/113.png",
-        "rarity": null,
-        "setId": "sv1",
-        "region": "EN",
-        "dex": 447,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "sv-base",
-            "name": "스칼렛 ex"
-          },
-          {
-            "groupId": "sv-ex-start-deck",
-            "name": "ex 스타트 덱"
-          },
-          {
-            "groupId": "sv-paldean-fates",
-            "name": "샤이니트레저 ex"
-          }
-        ]
-      },
-      {
         "id": "sv1-121",
         "number": "121",
         "name": "Stonjourner",
@@ -3790,7 +3765,25 @@
         "setId": "sv1",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "mega-start-deck-100",
+            "name": "스타트 덱 100 배틀컬렉션"
+          },
+          {
+            "groupId": "sv-ex-start-deck",
+            "name": "ex 스타트 덱"
+          },
+          {
+            "groupId": "sv-start-deck-generations",
+            "name": "랜덤 스타트 덱 Generations"
+          },
+          {
+            "groupId": "sv-decks",
+            "name": "SV 구축덱"
+          }
+        ]
       },
       {
         "id": "sv1-171",
@@ -3801,7 +3794,33 @@
         "setId": "sv1",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "mega-ninja-spinner",
+            "name": "닌자스피너"
+          },
+          {
+            "groupId": "mega-start-deck-100",
+            "name": "스타트 덱 100 배틀컬렉션"
+          },
+          {
+            "groupId": "sv-ex-start-deck",
+            "name": "ex 스타트 덱"
+          },
+          {
+            "groupId": "sv-white-flare",
+            "name": "화이트플레어"
+          },
+          {
+            "groupId": "sv-start-deck-generations",
+            "name": "랜덤 스타트 덱 Generations"
+          },
+          {
+            "groupId": "sv-decks",
+            "name": "SV 구축덱"
+          }
+        ]
       },
       {
         "id": "sv1-172",
@@ -3823,7 +3842,29 @@
         "setId": "sv1",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "mega-goods",
+            "name": "MEGA 기타 강화상품"
+          },
+          {
+            "groupId": "mega-start-deck-100",
+            "name": "스타트 덱 100 배틀컬렉션"
+          },
+          {
+            "groupId": "sv-ex-start-deck",
+            "name": "ex 스타트 덱"
+          },
+          {
+            "groupId": "sv-decks",
+            "name": "SV 구축덱"
+          },
+          {
+            "groupId": "sv-start-deck-generations",
+            "name": "랜덤 스타트 덱 Generations"
+          }
+        ]
       },
       {
         "id": "sv1-176",
@@ -3834,7 +3875,25 @@
         "setId": "sv1",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "sv-paldean-fates",
+            "name": "샤이니트레저 ex"
+          },
+          {
+            "groupId": "sv-ex-start-deck",
+            "name": "ex 스타트 덱"
+          },
+          {
+            "groupId": "sv-start-deck-generations",
+            "name": "랜덤 스타트 덱 Generations"
+          },
+          {
+            "groupId": "sv-decks",
+            "name": "SV 구축덱"
+          }
+        ]
       },
       {
         "id": "sv1-180",
@@ -3845,7 +3904,25 @@
         "setId": "sv1",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "sv-paldean-fates",
+            "name": "샤이니트레저 ex"
+          },
+          {
+            "groupId": "sv-ex-start-deck",
+            "name": "ex 스타트 덱"
+          },
+          {
+            "groupId": "sv-decks",
+            "name": "SV 구축덱"
+          },
+          {
+            "groupId": "sv-start-deck-generations",
+            "name": "랜덤 스타트 덱 Generations"
+          }
+        ]
       },
       {
         "id": "sv1-185",
@@ -3856,7 +3933,29 @@
         "setId": "sv1",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-s8a-g",
+            "name": "25th ANNIVERSARY GOLDEN BOX"
+          },
+          {
+            "groupId": "mega-start-deck-100",
+            "name": "스타트 덱 100 배틀컬렉션"
+          },
+          {
+            "groupId": "sv-start-deck-generations",
+            "name": "랜덤 스타트 덱 Generations"
+          },
+          {
+            "groupId": "sv-decks",
+            "name": "SV 구축덱"
+          },
+          {
+            "groupId": "swsh-start-deck-100",
+            "name": "스타트 덱 100"
+          }
+        ]
       },
       {
         "id": "sv1-186",
@@ -3867,7 +3966,29 @@
         "setId": "sv1",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "mega-start-deck-100",
+            "name": "스타트 덱 100 배틀컬렉션"
+          },
+          {
+            "groupId": "sv-black-bolt-white-flare",
+            "name": "블랙볼트"
+          },
+          {
+            "groupId": "sv-ex-start-deck",
+            "name": "ex 스타트 덱"
+          },
+          {
+            "groupId": "sv-decks",
+            "name": "SV 구축덱"
+          },
+          {
+            "groupId": "sv-goods",
+            "name": "SV 기타 강화상품"
+          }
+        ]
       },
       {
         "id": "sv1-187",
@@ -3878,7 +3999,29 @@
         "setId": "sv1",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "mega-start-deck-100",
+            "name": "스타트 덱 100 배틀컬렉션"
+          },
+          {
+            "groupId": "sv-ex-start-deck",
+            "name": "ex 스타트 덱"
+          },
+          {
+            "groupId": "sv-start-deck-generations",
+            "name": "랜덤 스타트 덱 Generations"
+          },
+          {
+            "groupId": "sv-decks",
+            "name": "SV 구축덱"
+          },
+          {
+            "groupId": "sv-heatwave-arena",
+            "name": "열풍의 아레나"
+          }
+        ]
       },
       {
         "id": "sv1-188",
@@ -3889,7 +4032,25 @@
         "setId": "sv1",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "mega-start-deck-100",
+            "name": "스타트 덱 100 배틀컬렉션"
+          },
+          {
+            "groupId": "sv-ex-start-deck",
+            "name": "ex 스타트 덱"
+          },
+          {
+            "groupId": "sv-start-deck-generations",
+            "name": "랜덤 스타트 덱 Generations"
+          },
+          {
+            "groupId": "sv-decks",
+            "name": "SV 구축덱"
+          }
+        ]
       },
       {
         "id": "sv1-194",
@@ -3900,7 +4061,73 @@
         "setId": "sv1",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "mega-decks",
+            "name": "MEGA 구축덱"
+          },
+          {
+            "groupId": "mega-goods",
+            "name": "MEGA 기타 강화상품"
+          },
+          {
+            "groupId": "sv-heatwave-arena",
+            "name": "열풍의 아레나"
+          },
+          {
+            "groupId": "og-s8a-g",
+            "name": "25th ANNIVERSARY GOLDEN BOX"
+          },
+          {
+            "groupId": "mega-start-deck-100",
+            "name": "스타트 덱 100 배틀컬렉션"
+          },
+          {
+            "groupId": "sv-ex-start-deck",
+            "name": "ex 스타트 덱"
+          },
+          {
+            "groupId": "sv-decks",
+            "name": "SV 구축덱"
+          },
+          {
+            "groupId": "sv-goods",
+            "name": "SV 기타 강화상품"
+          },
+          {
+            "groupId": "sv-start-deck-generations",
+            "name": "랜덤 스타트 덱 Generations"
+          },
+          {
+            "groupId": "swsh-decks",
+            "name": "소드실드 구축덱"
+          },
+          {
+            "groupId": "swsh-start-deck-100",
+            "name": "스타트 덱 100"
+          },
+          {
+            "groupId": "swsh-goods",
+            "name": "소드실드 기타 강화상품"
+          },
+          {
+            "groupId": "sv-151",
+            "name": "포켓몬 카드 151"
+          },
+          {
+            "groupId": "og-s11a",
+            "name": "백열의 아르카나"
+          },
+          {
+            "groupId": "og-s3a",
+            "name": "전설의 고동"
+          },
+          {
+            "groupId": "og-s7r",
+            "name": "창공스트림"
+          }
+        ]
       },
       {
         "id": "sv1-197",
@@ -3911,7 +4138,21 @@
         "setId": "sv1",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "sv-ex-start-deck",
+            "name": "ex 스타트 덱"
+          },
+          {
+            "groupId": "sv-start-deck-generations",
+            "name": "랜덤 스타트 덱 Generations"
+          },
+          {
+            "groupId": "sv-decks",
+            "name": "SV 구축덱"
+          }
+        ]
       },
       {
         "id": "sv1-198",

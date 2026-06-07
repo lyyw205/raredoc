@@ -751,3 +751,13 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - 전수 감사 218장 → 불일치 2 → **이미지 판정: 둘 다 ptcg.io 일러 오기**(Roselia: 카드 크레딧 Tomomi Ozaki ↔ ptcg.io Kaneko / Roserade: Gapao ↔ matazo) — 연결 유지. 실질 불일치 0.
 - **잔류 정당**: sv5 orphan 2 — Scovillain ex #22(**EN 선행 인쇄** — JP 1쇄가 8개월 후 초전브레이커#023, 그 판은 sv8#37과 기짝. MC#147 재록 연결은 시기 부정확하여 잔류) / Master Ball #153(ACE SPEC — SVHK#032·SVHM#032 동일 인쇄 2곳, 유일쌍 불성립). JP측 — **ハバタクカミ AR #076(제보)·テツノイバラ #077 = EN 미수록**(sv5는 본문판만 수록).
 - 결과: **sv5 영판전용 22→2** · 와일드포스 EN 98/100·사이버저지 EN 98/100.
+
+## §35. 샤이니트레저 ex — Paldean Fates 전수 점검 (영판전용 32→4 · svp 프로모 23 · 감사 오연결 4 교정) (2026-06-07, 사용자 제보)
+- **구조**: EN Paldean Fates(sv4pt5, 245) = JP 샤이니트레저(sv4a 360) 발췌 + **타팩 보충**(레이징서프 10·고대의포효 7·미래의일섬 1·SVEL 3·SVEM 5) + EN 오리지널/SV-P 4. 역으로 sv4a 베이스 190은 대부분 기존 SV팩 **재록**(원판 기EN — sv4a판 EN 빈칸이 정상), 샤이니 시크릿 중 EN 미수록분은 **svp 프로모(PAF 프리미엄/틴)**로 발매.
+- 연결 55+4: ①PAF orphan 26(dex+일러 유일쌍, Woobat·Magmar 등 이미지 스팟) ②박사연구 2(sv4a #176=オーリム=Sada↔#87·#177=フトゥー=Turo↔#88 — 이미지 페어링) ③**svp 프로모 23**(svp#6~37=2023 프로모 7, svp#69~84=PAF 프리미엄/틴 16 — 전부 sv4a 유일쌍, 리자돈ex 샤이니는 svp#74(2023)·svp#196(2025 별개) 이미지 구분) ④sv2 잔여 2(Shinx sv2#69↔#059·Tinkatuff sv2#104↔#095 — SV2D판과 별개 아트 이미지 판정).
+- **리오르 오연결 교정**(전수 감사 외 발견): sv1#112 실물=Naoyo Kimura(Jab/Low Kick)인데 ptcg.io 일러 오기(chibi)로 SV1S#040(chibi)에 오연결 → SVAM#008(Naoyo Kimura)로 재배정, sv1#113(chibi 실물)을 SV1S#040으로. chibi 리오르 JP 3쇄(SV1S/SVD/sv4a) — sv4a판은 다수 인쇄 잔류.
+- **전수 일러 감사(tcgdex 241 대조) 적발 4건 교정**: EN#224 Wugtrio·#225 Palafin·#226 Pawmi = **AR 풀그림이 JP base(#045/#047/#066)에 오연결** → JP AR(#338 Tetsu Kayama/#339 akagi/#340 REND)로 재배정(이미지 판정 — PAF #221+ 구간은 AR 대응). EN#65 Revavroom = JP#131(DOM, 별개 아트)에 오연결 → SVD#087(Anesaki, PAF 시점 유일 미연결 재록)로 재배정. ※ base가 EN을 가진 척하던 가짜 매칭이 감사로만 드러남 — 6단계 가치 재입증.
+- **잔류 정당(영판전용 4)**: Barboach #50=**SV-P 43310**(ryoma uratsuka, 미수집) / Atticus #77=**SV-P 43312**(kantaro 1쇄 — SV8a#191 재록은 EN PE판과 기짝) / Moonlit Hill #81=**SV-P 44033**(SV8a#183 재록 無EN이나 원판 우선 잔류) / Nemona #82=구축덱 동일 인쇄 16곳+(SVI#062 아트 — 유일쌍 불성립). → SV-P 회수 대기 +3.
+- **JP EN없음 121 사유 분류**: 재록(원판 기EN — sv1/sv2/sv3/sv3pt5/151 등) 약 75 / 재록(원판 無EN — **트리플렛비트 계 ~20**: 스타터 3라인·クラベル·レッスンスタジオ·スーパーエネルギー回収·ルミナスE 등, 그 그룹 점검 때 EN sv2 orphan들과 연결 예정) / 동일 인쇄 다수(ペパー·ボスの指令 22곳·ネモ·리오르·미라이돈/코라이돈ex) / 에너지 재록 3(セラピー=SV2D#071·リバーサル=SV2P#071·ルミナス=triplet#073 원판).
+- **sv-decks enNative []→null 전환**: EN 연결 누적(SVHK/SVHM 18+SVEL/SVEM/SVAM/SVD 10)을 crossGroup LC 공유로 표시(EN매칭 191).
+- 결과: **PAF 영판전용 32→4** · sv4a EN 239/360 · 빌드 9그룹 갱신(paldean-fates/raging-surf 63·paradox-rift 93·future-flash 93·decks 191·base/paldea-evolved).

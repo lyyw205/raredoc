@@ -7,7 +7,7 @@
   },
   "counts": {
     "anchors": 95,
-    "enMatched": 86,
+    "enMatched": 93,
     "krMatched": 95,
     "enOnly": 88,
     "krOnly": 0
@@ -83,7 +83,15 @@
         "setId": "jp-tcg-SV4K",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-3",
+        "number": "3",
+        "name": "Maractus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/3.png",
+        "rarity": "Common",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4k-003",
         "number": "003",
@@ -315,7 +323,15 @@
         "setId": "jp-tcg-SV4K",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-11",
+        "number": "11",
+        "name": "Numel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/11.png",
+        "rarity": "Common",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4k-011",
         "number": "011",
@@ -337,7 +353,15 @@
         "setId": "jp-tcg-SV4K",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-12",
+        "number": "12",
+        "name": "Camerupt",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/12.png",
+        "rarity": "Uncommon",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4k-012",
         "number": "012",
@@ -809,7 +833,15 @@
         "setId": "jp-tcg-SV4K",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-32",
+        "number": "32",
+        "name": "Woobat",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/32.png",
+        "rarity": "Common",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4k-028",
         "number": "028",
@@ -831,7 +863,15 @@
         "setId": "jp-tcg-SV4K",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-33",
+        "number": "33",
+        "name": "Swoobat",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/33.png",
+        "rarity": "Uncommon",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4k-029",
         "number": "029",
@@ -1003,7 +1043,15 @@
         "setId": "jp-tcg-SV4K",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-51",
+        "number": "51",
+        "name": "Clobbopus",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/51.png",
+        "rarity": "Common",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4k-035",
         "number": "035",
@@ -1025,7 +1073,15 @@
         "setId": "jp-tcg-SV4K",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv4pt5-52",
+        "number": "52",
+        "name": "Grapploct",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldean-fates/en/small/sv4pt5/52.png",
+        "rarity": "Uncommon",
+        "setId": "sv4pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv4k-036",
         "number": "036",
@@ -3055,12 +3111,20 @@
             "name": "스타트 덱 100 배틀컬렉션"
           },
           {
+            "groupId": "og-jp-mega-promo",
+            "name": "JP MEGA 프로모"
+          },
+          {
             "groupId": "sv-destined-rivals",
             "name": "로켓단의 영광"
           },
           {
             "groupId": "sv-decks",
             "name": "SV 구축덱"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
           }
         ]
       },
@@ -3744,7 +3808,17 @@
         "setId": "sv4",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "sv-paradox-rift",
+            "name": "고대의 포효"
+          },
+          {
+            "groupId": "sv-prismatic-evolutions",
+            "name": "테라스탈 페스타 ex"
+          }
+        ]
       },
       {
         "id": "sv4-169",
@@ -4084,6 +4158,10 @@
           {
             "groupId": "sv-raging-surf",
             "name": "레이징서프"
+          },
+          {
+            "groupId": "sv-start-deck-generations",
+            "name": "랜덤 스타트 덱 Generations"
           }
         ]
       },
@@ -4301,7 +4379,25 @@
         "setId": "sv4",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "sv-base",
+            "name": "스칼렛 ex"
+          },
+          {
+            "groupId": "sv-paldean-fates",
+            "name": "샤이니트레저 ex"
+          },
+          {
+            "groupId": "sv-decks",
+            "name": "SV 구축덱"
+          },
+          {
+            "groupId": "sv-goods",
+            "name": "SV 기타 강화상품"
+          }
+        ]
       },
       {
         "id": "sv4-266",

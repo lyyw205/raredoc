@@ -241,7 +241,7 @@ const CONFIG: Record<string, Cfg> = {
     jp: ["jp-tcg-SVAM", "jp-tcg-SVAL", "jp-tcg-SVAW", "jp-tcg-SVC", "jp-tcg-SVEM", "jp-tcg-SVEL", "jp-tcg-SVG", "jp-tcg-SVHK", "jp-tcg-SVHM", "jp-tcg-SVI", "jp-tcg-SVJL", "jp-tcg-SVJP", "jp-tcg-SVLN", "jp-tcg-SVLS", "jp-tcg-SVOM", "jp-tcg-SVOD"],
     kr: ["kr-sva", "kr-sval", "kr-svc", "kr-svem", "kr-svel", "kr-svg", "kr-svhk", "kr-svhm", "kr-svi", "kr-svjl", "kr-svjp", "kr-svln", "kr-svls", "kr-svom", "kr-svod"],
     krMirror: { "kr-sva": "jp-tcg-SVAW", "kr-sval": "jp-tcg-SVAL", "kr-svc": "jp-tcg-SVC", "kr-svem": "jp-tcg-SVEM", "kr-svel": "jp-tcg-SVEL", "kr-svg": "jp-tcg-SVG", "kr-svhk": "jp-tcg-SVHK", "kr-svhm": "jp-tcg-SVHM", "kr-svi": "jp-tcg-SVI", "kr-svjl": "jp-tcg-SVJL", "kr-svjp": "jp-tcg-SVJP", "kr-svln": "jp-tcg-SVLN", "kr-svls": "jp-tcg-SVLS", "kr-svom": "jp-tcg-SVOM", "kr-svod": "jp-tcg-SVOD" },
-    enNative: [], krMirrorAll: true, // JP SVAM 은 KR 미러 없음(KR 미발매 — 꾸왁스·호게타만), SVI=배틀아카데미(JP·KR 동코드)
+    enNative: null, krMirrorAll: true, // JP SVAM 은 KR 미러 없음(KR 미발매 — 꾸왁스·호게타만), SVI=배틀아카데미(JP·KR 동코드). 2026-06-07 []→null 전환: EN 연결 누적(SVHK/SVHM 18 + SVEL/SVEM/SVAM/SVD 10)을 crossGroup LC 공유로 표시
   },
   "sv-goods": {
     nameKo: "SV 기타 강화상품", nameEn: "SV Enhancement Products",
