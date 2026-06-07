@@ -709,3 +709,12 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **잔류 정당**: PRE 영판전용 5(Professor's Research 4판 — SVM 동일일러 Ishikawa·Teeziro 각 3판 유일쌍 불성립 / Roto-Stick — JP 검색 0건 프로모 추정) · 테라페스타 EN없음 101 = **EN 미수록 인쇄**(JP 하이클래스 237 vs EN 180 구성 차이: JP 전용 AR·재록·마스터볼미러 등 — 사용자 제보 대량 목록이 이것).
 - 결과: **테라페스타 EN 136/237·KR 237/237·영판전용 5** / 스타트덱 Generations EN 127/183.
 > ⚠ 수칙 보강: 일러 출처 우선순위 JP공식 > tcgdex ≈ ptcg.io — 서드파티 불일치는 **이미지 직접 판정**이 최종 권위(이번 12건 중 5건이 tcgdex 오기, 7건이 실제 오배정 — 표기만으론 구분 불가).
+
+## §30. 초전브레이커 — Surging Sparks 합본 분산 병합 (드래고나 94 + 테라스탈 스타터 17) (2026-06-07, 사용자 제보 — 연쇄 4번째)
+
+- **구조**: EN Surging Sparks(252) = JP 초전브레이커(138) + **낙원드래고나(94 전체)** + 테라스탈 스타터 SVLS/SVLN 발췌(17) 합본 — 영판전용 116 제보.
+- 처리: ①merge 합본 스코프 116→227 (TR_JP2EN +9: エネルギー転送PRO=Energy Search Pro·メガトンブロアー=Megaton Blower·竜の秘薬=Dragon Elixir·ドラセナ=Drasna·ルチアのアピール=Lisia's Appeal·おたすけベル=Call Bell·ぼうがいレター=Meddling Memo·ダークボール=Dusk Ball·イトケのみ=Passho Berry) ②orphan 23 일러 백필(tcgdex sv08 — ptcg.io artist 미제공) ③스타터·특수E 수동 20쌍(tmp-link-sv8-cross.ts — SVLS 8: パーフェクトミキサー=Brilliant Blender 포함 / SVLN 9: プレシャスキャリー=Precious Trolley 포함 / 드래고나 3: 블랙큐레무 DR·リッチ=Enriching·ジェットE) — 일러 전건 일치, 참조 42건 이관.
+- **전수 감사 252장(tcgdex) → 불일치 2 → 이미지 판정**: Victini "0313" vs "313" = 동일 도트작가 표기차(유지) / **Charcadet #32↔#33 스왑 = 진짜 오배정**(이미지: #32=HP70 Will-O-Wisp=SVLS#005 Kariya와 동일 / #33=HP80 Mékayu=초전#020 정짝) → 교정. 검증: #32→SVLS#005·#33→초전#020 확인.
+- **잔류 정당 4**: Kilowattrel ex(PLANETA Yamashita)·Flamigo ex(N-DESIGN)·Tyme(Komayama) = JP 동일판 미검출(프로모 추정) / Tera Orb = 동일 인쇄가 SVLN·SVLS·SVN·테라페스타·메가드림 5곳(유일쌍 불성립). JP측 2 = **モモワロウ #075(sv8에 Pecharunt 미수록)·レアコイル AR #112(EN Magneton은 본문 #59뿐 — 초전#035와 정상 연결 확인)**.
+- 결과: **초전브레이커 EN 136/138·KR 138/138·영판전용 4** / **낙원드래고나 EN 94/94 완전**(crossGroup LC 공유 — #077 SR 블랙큐레무→sv8#218 포함).
+- 제보 116장 항목별 재검증: 연결 111(드래고나 93+SVLN 9+SVLS 8+초전 1) · 잔류 5(전건 사유 확정 — Charcadet은 스왑 교정으로 #33이 잔류서 회수, 최종 잔류 4).
