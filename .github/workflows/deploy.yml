@@ -1,0 +1,86 @@
+name: Deploy to Lightsail
+
+# master push → CI에서 standalone 빌드 → 산출물만 서버 전송 (서버는 2GB라 빌드 불가)
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - "docs/**"
+      - "*.md"
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-lightsail
+  cancel-in-progress: false # 배포 중단 금지 — 순차 실행
+
+env:
+  SERVER: ubuntu@15.164.246.59
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Write production env # NEXT_PUBLIC_* 은 빌드 시점 인라인 — 빌드 전에 필요
+        env:
+          ENV_PRODUCTION: ${{ secrets.ENV_PRODUCTION }}
+        run: printf '%s\n' "$ENV_PRODUCTION" > .env
+
+      - name: Build (prisma generate + next build standalone)
+        run: npm run build
+
+      - name: Assemble artifact # standalone 은 static/public 미포함 — 수동 복사 (Next 공식 가이드)
+        run: |
+          cp -r .next/static .next/standalone/.next/static
+          cp -r public .next/standalone/public
+          cp .env .next/standalone/.env
+          tar -C .next/standalone -czf release.tar.gz .
+          ls -lh release.tar.gz
+
+      - name: Setup SSH
+        env:
+          SSH_KEY: ${{ secrets.LIGHTSAIL_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H 15.164.246.59 >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Upload release
+        run: scp -i ~/.ssh/deploy_key release.tar.gz "$SERVER":/home/ubuntu/raredoc/app/releases/${GITHUB_SHA}.tar.gz
+
+      - name: Activate release # 압축 해제 → current 심링크 교체 → pm2 reload → 헬스체크 → 구릴리스 정리(3개 유지)
+        run: |
+          ssh -i ~/.ssh/deploy_key "$SERVER" bash -s "$GITHUB_SHA" <<'EOS'
+          set -euo pipefail
+          SHA="$1"
+          BASE=/home/ubuntu/raredoc/app
+          mkdir -p "$BASE/releases/$SHA"
+          tar -xzf "$BASE/releases/$SHA.tar.gz" -C "$BASE/releases/$SHA"
+          rm "$BASE/releases/$SHA.tar.gz"
+          # 런타임 env 정본 = 이번 빌드에 쓰인 .env (GH 시크릿 단일 출처)
+          install -m 600 "$BASE/releases/$SHA/.env" "$BASE/shared/.env"
+          ln -sfn "$BASE/releases/$SHA" "$BASE/current"
+          if pm2 describe raredoc >/dev/null 2>&1; then
+            pm2 reload raredoc --update-env
+          else
+            pm2 start /home/ubuntu/raredoc/run.sh --name raredoc
+          fi
+          pm2 save
+          # 헬스체크 (기동 대기 최대 60초)
+          for i in $(seq 1 20); do
+            curl -fsS -o /dev/null http://127.0.0.1:3000/ && { echo "health OK"; ok=1; break; } || sleep 3
+          done
+          [ "${ok:-0}" = 1 ] || { echo "health FAIL"; pm2 logs raredoc --lines 40 --nostream; exit 1; }
+          # 구릴리스 정리 — 최근 3개만 유지
+          cd "$BASE/releases" && ls -1dt */ | tail -n +4 | xargs -r rm -rf
+          EOS
