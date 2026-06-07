@@ -8,7 +8,7 @@
   "counts": {
     "anchors": 90,
     "enMatched": 87,
-    "krMatched": 0,
+    "krMatched": 1,
     "enOnly": 30,
     "krOnly": 0
   },
@@ -1710,7 +1710,15 @@
         "setId": "en-tcg-pl2",
         "region": "EN"
       },
-      "kr": null,
+      "kr": {
+        "id": "kr-bs8-038",
+        "number": "038",
+        "name": "지하탐험대",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS8/bs8_ko_38.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bs8",
+        "region": "KR"
+      },
       "dex": null
     },
     {

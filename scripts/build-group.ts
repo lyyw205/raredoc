@@ -17,7 +17,8 @@ import { join } from "node:path";
 
 const POKE = ["Pokémon", "Pokemon"];
 
-type Cfg = { nameKo: string; nameEn: string; jp: string[]; kr: string[]; krMirror: Record<string, string>; enNative: string[] | null; krMirrorAll?: boolean; enMerged?: boolean; enAnchor?: boolean };
+type Cfg = { nameKo: string; nameEn: string; jp: string[]; kr: string[]; krMirror: Record<string, string>; enNative: string[] | null; krMirrorAll?: boolean; enMerged?: boolean; enAnchor?: boolean; krMerged?: boolean };
+// krMerged: KR 이 DB 에서 JP/EN 앵커 LC 로 정체성 병합됨(크로스그룹 합본 KR — DP 한국판 kr-bs 등) → setGroupId 스코프로 추가 로드(enMerged 의 KR 대칭).
 // enMerged: EN 이 DB 에서 JP LC 로 정체성 병합됨(merge-en-identity) → 공유 lcid 로 읽음, 미병합 EN 은 영판전용 섹션.
 // krMirrorAll: KR 세트가 JP 정수번호 완전미러(트레이너 포함)일 때 true — 모든 카드 번호로 매칭.
 //   (일반 KR은 트레이너 번호가 JP와 어긋나 일러스트레이터 페어링 필요 → false/미지정)
@@ -187,7 +188,7 @@ const CONFIG: Record<string, Cfg> = {
   "dp-decks": {
     nameKo: "DP 구축덱", nameEn: "DP Starter Decks",
     jp: ["jp-tcg-DPST1"], kr: ["kr-st1", "kr-st2", "kr-st3"],
-    krMirror: {}, enNative: [], krMirrorAll: true, // KR 3종 전부 독자 재구성(BS 패턴) → krOnly 꼬리
+    krMirror: {}, enNative: [], krMirrorAll: true, krMerged: true, // KR 3종 전부 독자 재구성(BS 패턴) → krOnly 꼬리
   },
   // ── BW 구축덱 (2026-06-07 정본화) ──
   "bw-decks": {
@@ -627,6 +628,16 @@ const CONFIG: Record<string, Cfg> = {
     jp: [], kr: [],
     krMirror: {}, enNative: ["en-tcg-smp"], enAnchor: true, // EN 전용 프로모 250장 — JP/KR 앵커 없음, EN 자체 앵커(promo=독립카드, 병합 안 함)
   },
+  "og-dpmd": {
+    nameKo: "마제스틱 던", nameEn: "Majestic Dawn",
+    jp: [], kr: [],
+    krMirror: {}, enNative: ["en-tcg-dp5"], enAnchor: true, // EN 전용 세트(JP 원본=미수집 엔트리팩'08) — KR(DP한국판 kr-bs) 18장이 EN앵커 LC 공유(2026-06-07)
+  },
+  "og-dpp": {
+    nameKo: "DP 블랙스타 프로모", nameEn: "DP Black Star Promos",
+    jp: [], kr: [],
+    krMirror: {}, enNative: ["en-tcg-dpp"], enAnchor: true, // EN 전용 프로모 56장
+  },
   // ── XY (정석 재수집 진행, 배치12) ── EN(XY=en-tcg-xy1)이 XY1a/XY1b 2그룹에 걸침.
   "og-xy1a": {
     nameKo: "콜렉션 X", nameEn: "Collection X",
@@ -908,67 +919,67 @@ const CONFIG: Record<string, Cfg> = {
   "og-dp1": {
     nameKo: "시공의 창조 다이아몬드 컬렉션", nameEn: "Space-Time Creation: Diamond Collection",
     jp: ["jp-tcg-DP1D"], kr: [],
-    krMirror: {}, enNative: ["en-tcg-dp1", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, // pg4; KR DP시대 미카탈로그; 영판전용 여기 귀속
+    krMirror: {}, enNative: ["en-tcg-dp1", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, krMerged: true, // pg4; KR=DP한국판 확장팩(kr-bs 크로스그룹, 2026-06-07 — 미카탈로그 오판 정정); 영판전용 여기 귀속
   },
   "og-dp1p": {
     nameKo: "시공의 창조 펄 컬렉션", nameEn: "Space-Time Creation: Pearl Collection",
     jp: ["jp-tcg-DP1P"], kr: [],
-    krMirror: {}, enNative: ["en-tcg-dp1", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, // pg3
+    krMirror: {}, enNative: ["en-tcg-dp1", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, krMerged: true, // pg3
   },
   "og-dp2": {
     nameKo: "호수의 비밀", nameEn: "Secret of the Lakes",
     jp: ["jp-tcg-DP2"], kr: [],
-    krMirror: {}, enNative: ["en-tcg-dp2", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, // pg7; EN=Mysterious Treasures
+    krMirror: {}, enNative: ["en-tcg-dp2", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, krMerged: true, // pg7; EN=Mysterious Treasures
   },
   "og-dp3": {
     nameKo: "빛나는 어둠", nameEn: "Shining Darkness",
     jp: ["jp-tcg-DP3"], kr: [],
-    krMirror: {}, enNative: ["en-tcg-dp3", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, // pg10; EN=Secret Wonders(가이드의 輝く闇 표기는 오기 — 공식 ひかる闇)
+    krMirror: {}, enNative: ["en-tcg-dp3", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, krMerged: true, // pg10; EN=Secret Wonders(가이드의 輝く闇 표기는 오기 — 공식 ひかる闇)
   },
   "og-dp4": {
     nameKo: "월광의 추적", nameEn: "Moonlit Pursuit",
     jp: ["jp-tcg-DP4M"], kr: [],
-    krMirror: {}, enNative: ["en-tcg-dp4", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, // pg20; EN=Great Encounters(DP4 분할 합본)
+    krMirror: {}, enNative: ["en-tcg-dp4", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, krMerged: true, // pg20; EN=Great Encounters(DP4 분할 합본)
   },
   "og-dp4d": {
     nameKo: "새벽의 질주", nameEn: "Dawn Dash",
     jp: ["jp-tcg-DP4D"], kr: [],
-    krMirror: {}, enNative: ["en-tcg-dp4", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, // pg19
+    krMirror: {}, enNative: ["en-tcg-dp4", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, krMerged: true, // pg19
   },
   "og-dp5": {
     nameKo: "비경의 외침", nameEn: "Cry from the Mysterious",
     jp: ["jp-tcg-DP5H"], kr: [],
-    krMirror: {}, enNative: ["en-tcg-dp6", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, // pg25; EN=Legends Awakened(DP5 분할 합본)
+    krMirror: {}, enNative: ["en-tcg-dp6", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, krMerged: true, // pg25; EN=Legends Awakened(DP5 분할 합본)
   },
   "og-dp5a": {
     nameKo: "분노의 신전", nameEn: "Temple of Anger",
     jp: ["jp-tcg-DP5A"], kr: [],
-    krMirror: {}, enNative: ["en-tcg-dp6", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, // pg26
+    krMirror: {}, enNative: ["en-tcg-dp6", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, krMerged: true, // pg26
   },
   "og-dp6": {
     nameKo: "파공의 격투", nameEn: "Intense Fight in the Destroyed Sky",
     jp: ["jp-tcg-DP6"], kr: [],
-    krMirror: {}, enNative: ["en-tcg-dp7", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, // pg28; EN=Stormfront(가이드의 破空の覇者 표기는 오기 — 공식 破空の激闘)
+    krMirror: {}, enNative: ["en-tcg-dp7", "en-tcg-dp5"], krMirrorAll: false, enMerged: true, krMerged: true, // pg28; EN=Stormfront(가이드의 破空の覇者 표기는 오기 — 공식 破空の激闘)
   },
   "og-pl1": {
     nameKo: "은하의 패도", nameEn: "Galactic's Conquest",
     jp: ["jp-tcg-PT1"], kr: [],
-    krMirror: {}, enNative: ["en-tcg-pl1"], krMirrorAll: false, enMerged: true, // pg105; EN=Platinum
+    krMirror: {}, enNative: ["en-tcg-pl1"], krMirrorAll: false, enMerged: true, krMerged: true, // pg105; EN=Platinum
   },
   "og-pl2": {
     nameKo: "시간 끝의 인연", nameEn: "Bonds to the End of Time",
     jp: ["jp-tcg-PT2"], kr: [],
-    krMirror: {}, enNative: ["en-tcg-pl2"], krMirrorAll: false, enMerged: true, // pg109; EN=Rising Rivals
+    krMirror: {}, enNative: ["en-tcg-pl2"], krMirrorAll: false, enMerged: true, krMerged: true, // pg109; EN=Rising Rivals
   },
   "og-pl3": {
     nameKo: "프론티어의 고동", nameEn: "Beat of the Frontier",
     jp: ["jp-tcg-PT3"], kr: [],
-    krMirror: {}, enNative: ["en-tcg-pl3"], krMirrorAll: false, enMerged: true, // pg113; EN=Supreme Victors
+    krMirror: {}, enNative: ["en-tcg-pl3"], krMirrorAll: false, enMerged: true, krMerged: true, // pg113; EN=Supreme Victors
   },
   "og-pl4": {
     nameKo: "아르세우스 광림", nameEn: "Advent of Arceus",
     jp: ["jp-tcg-PT4"], kr: [],
-    krMirror: {}, enNative: ["en-tcg-pl4"], krMirrorAll: false, enMerged: true, // pg120; EN=Arceus
+    krMirror: {}, enNative: ["en-tcg-pl4"], krMirrorAll: false, enMerged: true, krMerged: true, // pg120; EN=Arceus
   },
   // ── LEGEND (정석 재수집 LHGSS배치, 2026-06-06) — EN: HGSS1↔L1쌍·Undaunted↔L2·Triumphant↔L3 교차dry 확증, Unleashed=잔여 분산 병합 ──
   "og-l1a": {
@@ -1106,10 +1117,14 @@ async function main() {
   if (cfg.enAnchor) {
     const numOf = (s: string) => parseInt((s.match(/\d+/) ?? ["0"])[0], 10);
     const enCards = (await load(cfg.enNative ?? [])).sort((a, b) => numOf(a.number) - numOf(b.number) || a.number.localeCompare(b.number));
-    const anchors = enCards.map((e) => ({ jp: null, en: pub(e), kr: null, dex: e.dex }));
+    // EN 앵커 LC 에 병합된 KR(DP 한국판 kr-bs — JP 미발매·EN 발매 카드의 한국판 등) → KR 탭 노출
+    const krRows = (await prisma.cardLocale.findMany({ where: { region: "KR", logicalCardId: { in: enCards.map((e) => e.lcid) } }, select: sel })).map(toRow);
+    const krByLcidA = new Map(krRows.map((k) => [k.lcid, k]));
+    const anchors = enCards.map((e) => ({ jp: null, en: pub(e), kr: pub(krByLcidA.get(e.lcid)), dex: e.dex }));
+    const krMatchedA = anchors.filter((a) => a.kr).length;
     const payload = {
       group: { id: groupId, nameKo: cfg.nameKo, nameEn: cfg.nameEn, enAnchor: true },
-      counts: { anchors: anchors.length, enMatched: anchors.length, krMatched: 0, enOnly: 0, krOnly: 0 },
+      counts: { anchors: anchors.length, enMatched: anchors.length, krMatched: krMatchedA, enOnly: 0, krOnly: 0 },
       anchors, tail: { enOnly: [], krOnly: [], enKr: [] },
     };
     mkdirSync(join(process.cwd(), "src", "data"), { recursive: true });
@@ -1120,7 +1135,13 @@ async function main() {
   }
 
   const jp = await load(cfg.jp);
-  const kr = await load(cfg.kr);
+  let kr = await load(cfg.kr);
+  if (cfg.krMerged) {
+    // 크로스그룹 합본 KR(kr-bs 등): setGroupId 스코프로 이 그룹 LC 에 병합된 KR 추가 로드 (enMerged 의 KR 대칭)
+    const merged = (await prisma.cardLocale.findMany({ where: { region: "KR", logicalCard: { setGroupId: groupId } }, select: sel })).map(toRow);
+    const seenK = new Set(kr.map((k) => k.cid));
+    kr = [...kr, ...merged.filter((m) => !seenK.has(m.cid))];
+  }
   const crossGroup = !cfg.enNative;
   let en: Row[];
   if (cfg.enMerged) {
@@ -1136,7 +1157,7 @@ async function main() {
 
   // ── KR ↔ JP ──
   const krForJp = new Map<string, Row>();
-  if (cfg.krMirrorAll) {
+  if (cfg.krMirrorAll || cfg.krMerged) {
     // KR 은 DB 에서 JP 앵커 LC 로 병합됨(공식 번호가 JP 와 달라도 정체성으로 매핑 완료) → 공유 logicalCardId 로 읽음
     const krByLcid = new Map<string, Row>(); for (const k of kr) krByLcid.set(k.lcid, k);
     for (const j of jp) { const k = krByLcid.get(j.lcid); if (k) krForJp.set(j.cid, k); }

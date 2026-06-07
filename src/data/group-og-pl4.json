@@ -8,7 +8,7 @@
   "counts": {
     "anchors": 90,
     "enMatched": 88,
-    "krMatched": 0,
+    "krMatched": 3,
     "enOnly": 18,
     "krOnly": 0
   },
@@ -868,7 +868,15 @@
         "setId": "en-tcg-pl4",
         "region": "EN"
       },
-      "kr": null,
+      "kr": {
+        "id": "kr-bs4-018",
+        "number": "018",
+        "name": "렌트라",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS4/bs4_ko_18.jpg",
+        "rarity": "레어",
+        "setId": "kr-bs4",
+        "region": "KR"
+      },
       "dex": 405
     },
     {
@@ -1718,7 +1726,15 @@
         "region": "JP"
       },
       "en": null,
-      "kr": null,
+      "kr": {
+        "id": "kr-bs1-059",
+        "number": "059",
+        "name": "에너지 전송",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS1/bs1_kr_59.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bs1",
+        "region": "KR"
+      },
       "dex": null
     },
     {
@@ -1762,7 +1778,15 @@
         "setId": "en-tcg-pl1",
         "region": "EN"
       },
-      "kr": null,
+      "kr": {
+        "id": "kr-bs6-056",
+        "number": "056",
+        "name": "포켓몬레스큐",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS6/bs6_ko_56.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bs6",
+        "region": "KR"
+      },
       "dex": null
     },
     {

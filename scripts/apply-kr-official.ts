@@ -255,6 +255,18 @@ const CFG: Record<string, { jp: string; json: string; maxNum?: number }> = {
   "kr-sm12": { jp: "jp-tcg-SM12", json: `${DIR}/kr-official-sm12.json` },
   "kr-sm12a": { jp: "jp-tcg-SM12a", json: `${DIR}/kr-official-sm12a.json` }, // Tag All Stars 컴필(210)
   "kr-smp2": { jp: "jp-tcg-SMP2", json: `${DIR}/kr-official-smp2.json` }, // 명탐정 피카츄(영화 스페셜)
+  // ── DP 한국판 확장팩 (2010-05~2011-03 한국 전용 재편집 합본 — DP+Pt 전역 발췌 크로스그룹, 2026-06-07) ──
+  //    JP 스코프 = DP/Pt 확장 13세트 합본. 미매칭(JP 미발매·EN Majestic Dawn 계열 ~38장)은 --keep-unmatched 보존 후 EN 앵커 별도 연결.
+  "kr-bs1": { jp: "jp-tcg-DP1P,jp-tcg-DP1D,jp-tcg-DP2,jp-tcg-DP3,jp-tcg-DP4M,jp-tcg-DP4D,jp-tcg-DP5H,jp-tcg-DP5A,jp-tcg-DP6,jp-tcg-PT1,jp-tcg-PT2,jp-tcg-PT3,jp-tcg-PT4", json: `${DIR}/kr-official-bs1.json` },   // 모험의 시작 (2010-05-13)
+  "kr-bs2": { jp: "jp-tcg-DP1P,jp-tcg-DP1D,jp-tcg-DP2,jp-tcg-DP3,jp-tcg-DP4M,jp-tcg-DP4D,jp-tcg-DP5H,jp-tcg-DP5A,jp-tcg-DP6,jp-tcg-PT1,jp-tcg-PT2,jp-tcg-PT3,jp-tcg-PT4", json: `${DIR}/kr-official-bs2.json` },   // 불꽃 튀는 대결
+  "kr-bs3": { jp: "jp-tcg-DP1P,jp-tcg-DP1D,jp-tcg-DP2,jp-tcg-DP3,jp-tcg-DP4M,jp-tcg-DP4D,jp-tcg-DP5H,jp-tcg-DP5A,jp-tcg-DP6,jp-tcg-PT1,jp-tcg-PT2,jp-tcg-PT3,jp-tcg-PT4", json: `${DIR}/kr-official-bs3.json` },   // 시공의 격돌 (2010-08-26)
+  "kr-bs4": { jp: "jp-tcg-DP1P,jp-tcg-DP1D,jp-tcg-DP2,jp-tcg-DP3,jp-tcg-DP4M,jp-tcg-DP4D,jp-tcg-DP5H,jp-tcg-DP5A,jp-tcg-DP6,jp-tcg-PT1,jp-tcg-PT2,jp-tcg-PT3,jp-tcg-PT4", json: `${DIR}/kr-official-bs4.json` },   // 또 다른 세계
+  "kr-bs5": { jp: "jp-tcg-DP1P,jp-tcg-DP1D,jp-tcg-DP2,jp-tcg-DP3,jp-tcg-DP4M,jp-tcg-DP4D,jp-tcg-DP5H,jp-tcg-DP5A,jp-tcg-DP6,jp-tcg-PT1,jp-tcg-PT2,jp-tcg-PT3,jp-tcg-PT4", json: `${DIR}/kr-official-bs5.json` },   // 7개의 신비
+  "kr-bs6": { jp: "jp-tcg-DP1P,jp-tcg-DP1D,jp-tcg-DP2,jp-tcg-DP3,jp-tcg-DP4M,jp-tcg-DP4D,jp-tcg-DP5H,jp-tcg-DP5A,jp-tcg-DP6,jp-tcg-PT1,jp-tcg-PT2,jp-tcg-PT3,jp-tcg-PT4", json: `${DIR}/kr-official-bs6.json` },   // 암흑의 초승달
+  "kr-bs7": { jp: "jp-tcg-DP1P,jp-tcg-DP1D,jp-tcg-DP2,jp-tcg-DP3,jp-tcg-DP4M,jp-tcg-DP4D,jp-tcg-DP5H,jp-tcg-DP5A,jp-tcg-DP6,jp-tcg-PT1,jp-tcg-PT2,jp-tcg-PT3,jp-tcg-PT4", json: `${DIR}/kr-official-bs7.json` },   // 보이지 않는 힘
+  "kr-bs8": { jp: "jp-tcg-DP1P,jp-tcg-DP1D,jp-tcg-DP2,jp-tcg-DP3,jp-tcg-DP4M,jp-tcg-DP4D,jp-tcg-DP5H,jp-tcg-DP5A,jp-tcg-DP6,jp-tcg-PT1,jp-tcg-PT2,jp-tcg-PT3,jp-tcg-PT4", json: `${DIR}/kr-official-bs8.json` },   // 화려한 전설
+  "kr-bs9": { jp: "jp-tcg-DP1P,jp-tcg-DP1D,jp-tcg-DP2,jp-tcg-DP3,jp-tcg-DP4M,jp-tcg-DP4D,jp-tcg-DP5H,jp-tcg-DP5A,jp-tcg-DP6,jp-tcg-PT1,jp-tcg-PT2,jp-tcg-PT3,jp-tcg-PT4", json: `${DIR}/kr-official-bs9.json` },   // 호수의 기적
+  "kr-bs10": { jp: "jp-tcg-DP1P,jp-tcg-DP1D,jp-tcg-DP2,jp-tcg-DP3,jp-tcg-DP4M,jp-tcg-DP4D,jp-tcg-DP5H,jp-tcg-DP5A,jp-tcg-DP6,jp-tcg-PT1,jp-tcg-PT2,jp-tcg-PT3,jp-tcg-PT4", json: `${DIR}/kr-official-bs10.json` }, // 고대의 수호자 (2011-03-03)
 };
 type Off = { number: string; koName: string; illustrator: string | null; image: string | null; numInt: number };
 type Jp = { numInt: number; name: string; lcid: string; illus: string | null; dex: number | null; supertype: string | null };

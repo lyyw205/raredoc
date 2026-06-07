@@ -146,6 +146,8 @@ import ogL2 from "@/data/group-og-l2.json";
 import ogL3 from "@/data/group-og-l3.json";
 import ogLl from "@/data/group-og-ll.json";
 import ogDp1 from "@/data/group-og-dp1.json";
+import ogDpmd from "@/data/group-og-dpmd.json";
+import ogDpp from "@/data/group-og-dpp.json";
 import ogDp1p from "@/data/group-og-dp1p.json";
 import ogDp2 from "@/data/group-og-dp2.json";
 import ogDp3 from "@/data/group-og-dp3.json";
@@ -322,6 +324,8 @@ const DATA: Record<string, GroupData> = {
   "og-l3": ogL3 as unknown as GroupData,
   "og-ll": ogLl as unknown as GroupData,
   "og-dp1": ogDp1 as unknown as GroupData,
+  "og-dpmd": ogDpmd as unknown as GroupData,
+  "og-dpp": ogDpp as unknown as GroupData,
   "og-dp1p": ogDp1p as unknown as GroupData,
   "og-dp2": ogDp2 as unknown as GroupData,
   "og-dp3": ogDp3 as unknown as GroupData,

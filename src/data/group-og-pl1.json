@@ -8,9 +8,9 @@
   "counts": {
     "anchors": 96,
     "enMatched": 96,
-    "krMatched": 0,
+    "krMatched": 3,
     "enOnly": 36,
-    "krOnly": 0
+    "krOnly": 8
   },
   "anchors": [
     {
@@ -1154,7 +1154,15 @@
         "setId": "en-tcg-pl1",
         "region": "EN"
       },
-      "kr": null,
+      "kr": {
+        "id": "kr-bs4-022",
+        "number": "022",
+        "name": "기라티나 LV.X",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS4/bs4_ko_22.jpg",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-bs4",
+        "region": "KR"
+      },
       "dex": 487
     },
     {
@@ -1924,7 +1932,15 @@
         "setId": "en-tcg-pl1",
         "region": "EN"
       },
-      "kr": null,
+      "kr": {
+        "id": "kr-bs8-036",
+        "number": "036",
+        "name": "추억의 열매",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS8/bs8_ko_36.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bs8",
+        "region": "KR"
+      },
       "dex": null
     },
     {
@@ -2122,7 +2138,15 @@
         "setId": "en-tcg-pl1",
         "region": "EN"
       },
-      "kr": null,
+      "kr": {
+        "id": "kr-bs9-024",
+        "number": "024",
+        "name": "홍수몬",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS9/bs9_ko_24.jpg",
+        "rarity": "슈퍼 레어",
+        "setId": "kr-bs9",
+        "region": "KR"
+      },
       "dex": 107
     }
   ],
@@ -2593,7 +2617,96 @@
         ]
       }
     ],
-    "krOnly": [],
+    "krOnly": [
+      {
+        "id": "kr-bs1-020",
+        "number": "020",
+        "name": "라프라스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS1/bs1_kr_20.jpg",
+        "rarity": null,
+        "setId": "kr-bs1",
+        "region": "KR",
+        "dex": 131,
+        "jpElsewhere": true
+      },
+      {
+        "id": "kr-bs4-021",
+        "number": "021",
+        "name": "기라티나",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS4/bs4_ko_21.jpg",
+        "rarity": null,
+        "setId": "kr-bs4",
+        "region": "KR",
+        "dex": 487,
+        "jpElsewhere": true
+      },
+      {
+        "id": "kr-bs4-026",
+        "number": "026",
+        "name": "대코파스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS4/bs4_ko_26.jpg",
+        "rarity": null,
+        "setId": "kr-bs4",
+        "region": "KR",
+        "dex": 476,
+        "jpElsewhere": true
+      },
+      {
+        "id": "kr-bs4-027",
+        "number": "027",
+        "name": "리오르",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS4/bs4_ko_27.jpg",
+        "rarity": null,
+        "setId": "kr-bs4",
+        "region": "KR",
+        "dex": 447,
+        "jpElsewhere": true
+      },
+      {
+        "id": "kr-bs6-052",
+        "number": "052",
+        "name": "몬스터볼",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS6/bs6_ko_52.jpg",
+        "rarity": null,
+        "setId": "kr-bs6",
+        "region": "KR",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "kr-bs3-053",
+        "number": "053",
+        "name": "몬스터볼",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS3/bs3_ko_53.jpg",
+        "rarity": null,
+        "setId": "kr-bs3",
+        "region": "KR",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "kr-bs3-054",
+        "number": "054",
+        "name": "부활초",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS3/bs3_ko_54.jpg",
+        "rarity": null,
+        "setId": "kr-bs3",
+        "region": "KR",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "kr-bs1-056",
+        "number": "056",
+        "name": "몬스터볼",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS1/bs1_kr_56.jpg",
+        "rarity": null,
+        "setId": "kr-bs1",
+        "region": "KR",
+        "dex": null,
+        "jpElsewhere": false
+      }
+    ],
     "enKr": []
   }
 }

@@ -8,9 +8,9 @@
   "counts": {
     "anchors": 100,
     "enMatched": 98,
-    "krMatched": 0,
+    "krMatched": 2,
     "enOnly": 56,
-    "krOnly": 0
+    "krOnly": 1
   },
   "anchors": [
     {
@@ -780,7 +780,15 @@
         "setId": "en-tcg-pl3",
         "region": "EN"
       },
-      "kr": null,
+      "kr": {
+        "id": "kr-bs1-024",
+        "number": "024",
+        "name": "엠페르트",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS1/bs1_kr_24.jpg",
+        "rarity": "레어",
+        "setId": "kr-bs1",
+        "region": "KR"
+      },
       "dex": 395
     },
     {
@@ -2012,7 +2020,15 @@
         "setId": "en-tcg-pl3",
         "region": "EN"
       },
-      "kr": null,
+      "kr": {
+        "id": "kr-bs7-039",
+        "number": "039",
+        "name": "종수의 공헌",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS7/bs7_ko_39.jpg",
+        "rarity": "언커먼",
+        "setId": "kr-bs7",
+        "region": "KR"
+      },
       "dex": null
     },
     {
@@ -2845,7 +2861,19 @@
         ]
       }
     ],
-    "krOnly": [],
+    "krOnly": [
+      {
+        "id": "kr-bs6-051",
+        "number": "051",
+        "name": "페라페",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/DP/BS6/bs6_ko_51.jpg",
+        "rarity": null,
+        "setId": "kr-bs6",
+        "region": "KR",
+        "dex": 441,
+        "jpElsewhere": true
+      }
+    ],
     "enKr": []
   }
 }
