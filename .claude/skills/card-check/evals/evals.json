@@ -1,0 +1,43 @@
+{
+  "skill_name": "card-check",
+  "evals": [
+    {
+      "id": 0,
+      "eval_name": "db-direct-hit",
+      "prompt": "닌자스피너에 뿔충이 카드 있는지 확인해줘. 한국판도 나왔어?",
+      "expected_output": "DB에서 닌자스피너(mega-ninja-spinner) 그룹의 뿔충이(Weedle/ビードル)를 찾고, KR 로케일(M4 + M-P 특수세트)이 존재함을 보고",
+      "files": [],
+      "assertions": [
+        "닌자스피너에 뿔충이가 DB에 존재한다고 정확히 결론 내림",
+        "한국판 발매 여부 질문에 명시적으로 답함 (KR 로케일 존재 = 한국판 나옴)",
+        "구체적 식별자를 제시함 (세트코드 M4, 번호, logicalCardId 중 하나 이상)",
+        "다국어 명칭 또는 타지역 발매 정보를 부가로 제공함 (ビードル/Weedle/EN Chaos Rising 등)"
+      ]
+    },
+    {
+      "id": 1,
+      "eval_name": "cross-language-research",
+      "prompt": "Poltchageist 카드가 어비스아이에 있는지 DB 확인해줘",
+      "expected_output": "영문명 1차 검색이 어비스아이에서 실패해도, 리서치로 Poltchageist=チャデス(차데스)를 알아내고 2차 DB 검색으로 어비스아이 JP 005/081 チャデス를 찾아 보고 (어비스아이는 JP만 존재, KR/EN 미발매)",
+      "files": [],
+      "assertions": [
+        "Poltchageist의 일본어명 チャデス(또는 한국어명 차데스)를 정확히 식별함",
+        "어비스아이에 해당 카드(JP 005/081 チャデス)가 DB에 존재한다고 결론 내림",
+        "어비스아이는 일본판만 있고 KR/EN 로케일이 없음을 언급함",
+        "영문명 직접 검색 실패 시 추측으로 '없다' 단정하지 않고 교차 언어 확인 과정을 거침"
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "absent-card-nuance",
+      "prompt": "어비스아이에 메가리자몽ex 들어있어?",
+      "expected_output": "어비스아이에는 없음을 확인하되, 메가리자몽X ex가 인페르노X(013/094/110)·MEGA 드림 ex(223) 등 다른 세트에 존재함을 함께 보고",
+      "files": [],
+      "assertions": [
+        "어비스아이에 메가리자몽ex가 없다고 정확히 결론 내림",
+        "메가리자몽X ex가 다른 세트(인페르노X 또는 MEGA 드림 ex)에 존재함을 안내함",
+        "추측이 아닌 DB 검색 근거를 제시함 (검색 결과/수록 카드 확인 언급)"
+      ]
+    }
+  ]
+}
