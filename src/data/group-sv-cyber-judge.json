@@ -7,7 +7,7 @@
   },
   "counts": {
     "anchors": 100,
-    "enMatched": 99,
+    "enMatched": 100,
     "krMatched": 100,
     "enOnly": 0,
     "krOnly": 0
@@ -2303,7 +2303,15 @@
         "setId": "jp-tcg-SV5M",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "svp-98",
+        "number": "98",
+        "name": "Iron Thorns",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/svp/en/small/svp/98.png",
+        "rarity": "Art Rare",
+        "setId": "svp",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sv5m-077",
         "number": "077",
