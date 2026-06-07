@@ -528,3 +528,21 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **Cosmic Eclipse 분산 병합 풀림**: en-tcg-sm12 271장 전원 orphan화 — 배치9의 3세트 합본 병합(SM12 104+SM11a 61+SM11b 68=233)이 어느 시점 **단일 스코프(jp-tcg-SM12) 재실행**으로 풀린 상태(og-sm11a/b EN탭 증발 + og-sm12 enOnly 38→167). 동일 스크립트를 원 스코프(`jp-tcg-SM12,jp-tcg-SM11a,jp-tcg-SM11b en-tcg-sm12`)로 dry→적용: **EN병합 233·orphan 38 — HEAD 시점 수치와 완전 일치 복구**. 비워진 orphan LC 129 삭제(CI 참조 0). ⚠ 합본 EN 세트의 재병합은 **반드시 원 jpSets 전체 스코프로**(단일 스코프 재실행 = 교차그룹분 orphan화). ⚠ 인자 순서 `<jpSets> <enSet>` — 거꾸로 넣으면 JP가 orphan화될 뻔(dry 0/0+영어 "JP 트레이너" 출력이 신호).
 - **og-s11 드라피온 VSTAR KR 스왑**: KR#119가 JP#067(본문)에, KR#067은 기프트 에너지 LC(JP#100)에 오연결 → 번호 1:1 미러+동일명 유일쌍으로 #067↔#067·#119↔#119 교정. krMatched 125→126.
 - crimson-haze 63→62는 회귀 아님: 구 연결 sv6-20↔crimson#008이 일러 불일치(Gunjima≠MINAMINAMI Take) 오연결이었고 현 연결(트와일라잇 JP#013, 일러 일치)이 정답 — 사후 재병합의 교정이 빌드에 늦게 반영된 것. bw6 +8·bw6c +14도 사후 병합 회수 반영(개선).
+
+## §19. 니힐제로 EN 병합 — Perfect Order(me3) 바레 승격 (2026-06-07)
+
+| 항목 | 내용 |
+|---|---|
+| 승격 | 바레 me3(124, 독립 orphan LC·CI 0) → en-tcg-me3 신설(setGroupId 명시) + locale 124 이관 + 바레 삭제 |
+| 병합 | dry 78 → 사전 +15 → **101 자동** → 수동 15 → **총 116/124** · JP 117 중 EN 116 |
+| 수동 15 | 메가 ex 등급별 12(스터미/픽시/지가르데/에어암드 — DR↔본문·SR↔UR·SAR↔SIR·MUR↔MHR 1:1 유일쌍, EN subtypes MEGA 버킷분리 — 닌자스피너 동일) + 특수E 3(グロウ草/テレパス超/ロック闘 직역) |
+| 사전 +15 | TR_SV: エネはたき=Energy Swatter·古びたアゴ/ヒレの化石=Antique Jaw/Sail Fossil(닫힌집합 소거)·ポケパッド·ミアレガレット·コアメモリ·タラゴン·**ピュール=Naveen·ユカリ=Jacinthe**(SAR 2장↔SIR 2장 + メイ=Rosa 기확립 소거 확정)·メイのはげまし·ミアレシティ·ワンダーパッチ·せいなるはい·エネルギーリサイクル·活力の森 |
+| EN 미보유 1 | JP#089 チゴラス AR — EN me3에 Tyrunt 본문 1장뿐(미수록 정답) |
+| 영판전용 8 | Lapras ex(JP 미수집 — 메가엘레이드ex 세트 추정, 닌자스피너 Mega Gallade ex 동류) + EN 재록 스테이플 7(Crushing Hammer/Energy Search/Hole-Digging Shovel/Judge/Poké Ball/Pokémon Catcher/Potion) |
+| 시프트 | 교차dry own 101 : cross(닌자스피너) 2 — 29건째 무시프트 확증 |
+| 빌드 | 앵커 117 · EN 116 · KR 116 · 영판전용 8 |
+
+> ⚠ **수칙 ④ 재실효**: 1차 빌드 영판전용 0 — merge가 만든 orphan LC 8개 setGroupId null(enMerged 로드 스코프 밖) → 백필 후 정상 8. **승격·병합 후 orphan LC setGroupId 확인은 필수 체크리스트.**
+
+### (부수) kr-m3 시크릿 아이템 4장 스왑 교정 — 이미지 판정
+- JP#101~104(エネルギーリサイクル/せいなるはい/ポケパッド/ワンダーパッチ)에 KR#101~104가 **번호 1:1로 오연결** — 실제 KR은 시크릿 아이템 4종을 가나다 재정렬(성스러운분말<에너지 리사이클<원더패치<포켓패드). **이미지 판정**: KR#101 = Sacred Ash 효과문(트래쉬 포켓몬 5장 덱 복귀), KR#103 = Wondrous Patch 효과문(기본 초에너지 패치) → 2쌍 교차 재연결. 인물·스타디움(#105~110)은 양국 동일 순서·이름 전수 일치로 정연결 확인. 레귤러·SR 트레이너 구간의 JP↔KR 번호 불일치 14건은 이름 직역 전수 일치 — KR 자국 정렬 재배열로 정상(닌자스피너 동일 패턴).

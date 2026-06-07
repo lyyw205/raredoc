@@ -226,6 +226,23 @@ export const TR_JP2EN: Record<string, string> = {
   "プリズムタワー": "Prism Tower",
   "ジャンボアイス": "Jumbo Ice Cream",
   "なみのりビーチ": "Surfing Beach",
+  // ── MEGA 니힐제로(en-tcg-me3 Perfect Order, 2026-06-07 orphan 대조검증) ──
+  // 인명 소거: SAR 2장(メイのはげまし·ユカリ) ↔ EN SIR 2장(Rosa's Encouragement·Jacinthe), メイ=Rosa 기확립 → ユカリ=Jacinthe → 잔여 1:1 ピュール=Naveen
+  "エネはたき": "Energy Swatter",
+  "古びたアゴの化石": "Antique Jaw Fossil",
+  "古びたヒレの化石": "Antique Sail Fossil", // 화석 2종 닫힌 집합: アゴ=Jaw 직역 확정 → 소거로 ヒレ=Sail
+  "ポケパッド": "Poké Pad",
+  "ミアレガレット": "Lumiose Galette",
+  "コアメモリ": "Core Memory",
+  "タラゴン": "Tarragon",
+  "ピュール": "Naveen",
+  "メイのはげまし": "Rosa's Encouragement",
+  "ユカリ": "Jacinthe",
+  "ミアレシティ": "Lumiose City",
+  "ワンダーパッチ": "Wondrous Patch",
+  "せいなるはい": "Sacred Ash",
+  "エネルギーリサイクル": "Energy Recycler",
+  "活力の森": "Forest of Vitality",
 };
 
 // 博士の研究(Professor's Research)은 세트별 박사(Sada=고대/스칼렛 · Turo=미래/바이올렛)로 EN명이 갈린다.

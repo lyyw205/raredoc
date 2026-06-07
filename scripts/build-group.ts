@@ -171,7 +171,7 @@ const CONFIG: Record<string, Cfg> = {
   "mega-munikisuzero": {
     nameKo: "니힐제로", nameEn: "Nihil Zero",
     jp: ["jp-mega-munikisuzero"], kr: ["kr-m3"],
-    krMirror: { "kr-m3": "jp-mega-munikisuzero" }, enNative: [], krMirrorAll: true,
+    krMirror: { "kr-m3": "jp-mega-munikisuzero" }, enNative: ["en-tcg-me3"], krMirrorAll: true, enMerged: true, // EN=Perfect Order(바레 me3 승격, 병합 116/124 — 2026-06-07)
   },
   "mega-ninja-spinner": {
     nameKo: "닌자스피너", nameEn: "Ninja Spinner",
@@ -182,6 +182,28 @@ const CONFIG: Record<string, Cfg> = {
     nameKo: "아비스아이", nameEn: "Abyss Eye",
     jp: ["jp-mega-abyss-eye"], kr: [],
     krMirror: {}, enNative: [], krMirrorAll: true,
+  },
+  // ── DP 구축덱 (2026-06-07 정본화; st2/st3 = JP 미게재 KR 전용 페어 → krOnly 꼬리) ──
+  "dp-decks": {
+    nameKo: "DP 구축덱", nameEn: "DP Starter Decks",
+    jp: ["jp-tcg-DPST1"], kr: ["kr-st1", "kr-st2", "kr-st3"],
+    krMirror: {}, enNative: [], krMirrorAll: true, // KR 3종 전부 독자 재구성(BS 패턴) → krOnly 꼬리
+  },
+  // ── BW 구축덱 (2026-06-07 정본화) ──
+  "bw-decks": {
+    nameKo: "BW 구축덱", nameEn: "BW Starter & Battle Decks",
+    jp: ["jp-tcg-BWFS", "jp-tcg-BGV", "jp-tcg-BGT", "jp-tcg-BGC", "jp-tcg-BGREX", "jp-tcg-BGZ2", "jp-tcg-TD2", "jp-tcg-BD2", "jp-tcg-SBD", "jp-tcg-GBD", "jp-tcg-KD2", "jp-tcg-PD2", "jp-tcg-BGB2", "jp-tcg-BGW2", "jp-tcg-PSS2", "jp-tcg-GK", "jp-tcg-MG"],
+    kr: ["kr-fs", "kr-bg_virizion", "kr-bg_terrakion", "kr-bg_cobalon", "kr-bgrex", "kr-bgz", "kr-td", "kr-bd", "kr-sbd", "kr-gbd", "kr-kd", "kr-pd", "kr-bgb", "kr-bgw", "kr-pss", "kr-g+k", "kr-mg"],
+    krMirror: { "kr-fs": "jp-tcg-BWFS", "kr-bg_virizion": "jp-tcg-BGV", "kr-bg_terrakion": "jp-tcg-BGT", "kr-bg_cobalon": "jp-tcg-BGC", "kr-bgrex": "jp-tcg-BGREX", "kr-bgz": "jp-tcg-BGZ2", "kr-td": "jp-tcg-TD2", "kr-bd": "jp-tcg-BD2", "kr-sbd": "jp-tcg-SBD", "kr-gbd": "jp-tcg-GBD", "kr-kd": "jp-tcg-KD2", "kr-pd": "jp-tcg-PD2", "kr-bgb": "jp-tcg-BGB2", "kr-bgw": "jp-tcg-BGW2", "kr-pss": "jp-tcg-PSS2", "kr-g+k": "jp-tcg-GK", "kr-mg": "jp-tcg-MG" },
+    enNative: [], krMirrorAll: true,
+  },
+  // ── XY 구축덱 (2026-06-07 정본화; EN=Kalos Starter(xy0)만 존재 — jp-tcg-XY0에 병합) ──
+  "xy-decks": {
+    nameKo: "XY 구축덱", nameEn: "XY Starter & Battle Decks",
+    jp: ["jp-tcg-XY0", "jp-tcg-XY30", "jp-tcg-XY30B", "jp-tcg-XYA", "jp-tcg-XYB", "jp-tcg-XYC", "jp-tcg-XYD", "jp-tcg-XYE", "jp-tcg-RBD", "jp-tcg-UBD", "jp-tcg-XYF", "jp-tcg-XYG", "jp-tcg-XYH"],
+    kr: ["kr-fxy", "kr-xy30", "kr-xy30b", "kr-xya", "kr-xyb", "kr-xyc", "kr-xyd", "kr-xye", "kr-rbd", "kr-ubd", "kr-xyf", "kr-xyg", "kr-xyh"],
+    krMirror: { "kr-fxy": "jp-tcg-XY0", "kr-xy30": "jp-tcg-XY30", "kr-xy30b": "jp-tcg-XY30B", "kr-xya": "jp-tcg-XYA", "kr-xyb": "jp-tcg-XYB", "kr-xyc": "jp-tcg-XYC", "kr-xyd": "jp-tcg-XYD", "kr-xye": "jp-tcg-XYE", "kr-rbd": "jp-tcg-RBD", "kr-ubd": "jp-tcg-UBD", "kr-xyf": "jp-tcg-XYF", "kr-xyg": "jp-tcg-XYG", "kr-xyh": "jp-tcg-XYH" },
+    enNative: ["en-tcg-xy0"], krMirrorAll: true, enMerged: true,
   },
   // ── SM 구축덱 (2026-06-06 정본화; sm30a/60a/60b = KR 전용 재구성 → krOnly 꼬리) ──
   "sm-decks": {
