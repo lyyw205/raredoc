@@ -663,3 +663,15 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - 조치: ①6장 orphan LC **illustrator 백필**(tcgdex me01 — me1은 ptcg.io artist 미제공) ②TR_JP2EN에 ポケモンセンターのお姉さん=Pokémon Center Lady 추가 ③mega-brave-symphonia·mega-symphonia 재빌드 → **jpPacks 배지 5/6 활성화**(PCL만 null=JP 미수집, 정확). counts 불변(92/91/92/enOnly 6).
 - 스테이플 동일 크레딧 한계: jpPacks가 다수(Switch 13곳) — 렌더는 "외 N" 축약. Rare Candy 배지에 자기 그룹(메가심포니아 M1S#082)도 포함되나 별개 인쇄 힌트로 유용해 유지.
 - 백로그 갱신: **SV-P 회수 후보 5~6장째 = PCL 47174/47732**(영판전용 잔류 회수 목록에 추가).
+
+## §26. BBWF JP↔EN 세트 교차 이동 발견·연결 24쌍 (2026-06-07, 사용자 제보)
+
+- **발단**: 사용자 제보 "블랙볼트 ヒトモシ #015·ランプラー #016·シャンデラ #017 영문판 없음" — 적중. **EN 발매(Black Bolt/White Flare)가 일부 진화 라인을 JP와 반대 세트에 배치**한 구조적 패턴 발견.
+- **교차 이동**: JP 블랙볼트→EN White Flare: ヒトモシ라인(본문 3+IR 3)·バルチャイ라인(본문 2+IR 2) = 10쌍 / JP 화이트플레어→EN Black Bolt: ギアル라인(본문 3+AR 3)·ワシボン라인(본문 2+AR 2) = 10쌍. 페어 전건 이름+dex+일러 양방향 유일쌍.
+- **세트 내 미병합 4**: Escavalier(EN dex누락이 원인)·Professor's Research·Prism Energy·Ignition Energy(에너지/트레이너 매칭 한계).
+- **함정 2**:
+  - **zsv10pt5 #60 중복 = 실물 인쇄 에러**(Antique Cover Fossil이 060/086 오인쇄 — 정상 080, ptcg.io도 그대로 기록 → #80 결번·#60 두 장은 출처 충실). 번호 조회 시 이름 가드 필수.
+  - **orphan LC 삭제 시 사용자 데이터 FK**(Trade 2·DeckRecipeCard 18 참조) → `migrateAndDelete` 패턴 신설(tmp-link-bbwf-cross.ts): Trade/CollectionItem/DeckRecipeCard/DeckCard/Ruling/ExternalIdMapping 이관 + TierEntry·CardText는 유니크 충돌 처리. me1 CI cascade 건의 일반화.
+- **잔류 정당 5**: JP 단독 인쇄 4(ボルトロス IR B#120·ランクルス IR B#125·ゴチルゼル AR W#123·トルネロス AR W#158 — ptcg.io 검증, EN 세트 미수록) + EN 골드 Victini rsv#172(JP BBWF에 동일판 없음).
+- 결과: 블랙볼트 EN 172/174·KR 174/174·영판전용 0 / 화이트플레어 EN 172/174·KR 174/174·영판전용 1(Victini).
+> ⚠ 수칙: **쌍(雙) 세트 EN 발매는 교차 이동 가능** — BBWF처럼 JP 2세트↔EN 2세트 구도면 병합 후 반대 세트 스코프로 잔여 orphan 교차 dry 필수.
