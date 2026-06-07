@@ -270,6 +270,14 @@ export const TR_JP2EN: Record<string, string> = {
   "めまいの谷": "Dizzying Valley",
   "パンクメット": "Punk Helmet",
   "ひふきやろう": "Firebreather",
+  // ── MEGA 브레이브+심포니아(en-tcg-me1 Mega Evolution, 2026-06-07 orphan 대조검증) ──
+  // マチスの取引=Lt. Surge's Bargain(3판↔3판) · ミツルの思いやり=Wally's Compassion(3판↔3판)
+  "むしよけスプレー": "Repel",
+  "マチスの取引": "Lt. Surge's Bargain",
+  "アイアンディフェンダー": "Iron Defender",
+  "危ない廃墟": "Risky Ruins",
+  "あやしい時計": "Strange Timepiece",
+  "ミツルの思いやり": "Wally's Compassion",
 };
 
 // 博士の研究(Professor's Research)은 세트별 박사(Sada=고대/스칼렛 · Turo=미래/바이올렛)로 EN명이 갈린다.

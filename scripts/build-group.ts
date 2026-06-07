@@ -151,12 +151,12 @@ const CONFIG: Record<string, Cfg> = {
   "mega-brave-symphonia": {
     nameKo: "메가브레이브", nameEn: "Mega Brave",
     jp: ["jp-tcg-M1L"], kr: ["kr-m1l"],
-    krMirror: { "kr-m1l": "jp-tcg-M1L" }, enNative: [], krMirrorAll: true, // 2026-06-06 JP단위 분할
+    krMirror: { "kr-m1l": "jp-tcg-M1L" }, enNative: ["en-tcg-me1"], krMirrorAll: true, enMerged: true, // 2026-06-06 JP단위 분할; EN=Mega Evolution(me1 합본·주귀속, 91+91 분산 — 2026-06-07), 영판전용 여기 귀속
   },
   "mega-symphonia": {
     nameKo: "메가심포니아", nameEn: "Mega Symphonia",
     jp: ["jp-tcg-M1S"], kr: ["kr-m1s"],
-    krMirror: { "kr-m1s": "jp-tcg-M1S" }, enNative: [], krMirrorAll: true,
+    krMirror: { "kr-m1s": "jp-tcg-M1S" }, enNative: ["en-tcg-me1"], krMirrorAll: true, enMerged: true, // EN=Mega Evolution(me1 합본)
   },
   "mega-infernox": {
     nameKo: "인페르노X", nameEn: "Inferno X",

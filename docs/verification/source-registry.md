@@ -576,3 +576,19 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 | 영판전용 2 | Paldean Wooper(OKACHEKE)·Meowth(Uninori) — 전 시대 dex+일러 후보 없음(jpPacks 공란), 미수집 JP 출처 보류 |
 | 시프트 | 교차dry own 128 : cross(니힐제로) 5 — **31건째** |
 | 빌드 | mega-infernox 앵커 116·EN 110·KR 115·영판전용 2 / **mega-decks 앵커 46·EN 18**·KR 46 — 합본 분산 2그룹째 |
+
+## §22. 브레이브+심포니아 EN 병합 — Mega Evolution(me1) · 🏁 MEGA 시대 EN 마감 (2026-06-07)
+
+| 항목 | 내용 |
+|---|---|
+| 승격 | 바레 me1(188) → en-tcg-me1 — **CI 1건 최초**(en-tcg-me1-164, localeId cascade 추적 확인 + 병합 후 lcid 재귀속) |
+| 병합 | 합본 dry(M1L,M1S — 양쪽 다 정짝 출처라 Cosmic Eclipse 모델 정당) 144 → 사전 +6 → 154 apply → 수동 28 → **182/188 = 브레이브 91 + 심포니아 91** |
+| 사전 +6 | TR_SV: むしよけスプレー=Repel·**マチスの取引=Lt. Surge's Bargain**(3판↔3판)·アイアンディフェンダー·危ない廃墟=Risky Ruins·あやしい時計=Strange Timepiece·**ミツルの思いやり=Wally's Compassion**(3판↔3판) |
+| 수동 28 | 메가 ex 9종 + ヌケニン 2판 — **EN 일러 전결손**(ptcg.io me1 artist 미제공)이라 dex+등급 유일쌍으로 확정(종별 단일세트·등급별 1판 구조) |
+| **가루라 판정 종료** | M1S 잔여 = 전부 메가가루라ex(일반판), ロケット団のガルーラex 부재 → §20 보류 me2pt5 TR's Kangaskhan ex는 **미수집 출처 보류 유지가 정답** |
+| EN 미수록 | リオル AR(M1L#068)·フーディン AR(M1S#071) |
+| 영판전용 6 | EN 재록 스테이플(Boss's Orders·Energy Switch·Pokémon Center Lady·Rare Candy·Switch·Ultra Ball) |
+| 시프트 | 교차dry own 182 : cross(인페르노X) 2 — **32건째** |
+| 빌드 | mega-brave-symphonia 92·EN 91·영판전용 6 / mega-symphonia 92·EN 91 |
+
+> **🏁 MEGA 시대 EN 페이즈 완전 마감** — me4(닌자스피너 119)→me3(니힐제로 116)→me2pt5(메가드림+MC 288)→me2(인페르노X+MBD/MBG 128)→me1(브레이브+심포니아 182). 합본 분산 3건(me2pt5 2그룹·me2 2그룹·me1 2그룹), TR_SV 누적 +55. 잔여: 어비스아이↔Pitch Black(EN 미발매 대기) · 영판전용 보류 카드들(미수집 JP 출처 — 메가엘레이드ex 세트·프로모).
