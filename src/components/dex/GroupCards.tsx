@@ -348,7 +348,7 @@ export const GROUPED_GROUP_IDS = new Set(Object.keys(DATA));
 
 type Print = { id: string; number: string; name: string; image: string | null; rarity: string | null; setId: string; region: string } | null;
 type Anchor = { jp: Print; en: Print; kr: Print; dex: number | null };
-type TailCard = { id: string; number: string; name: string; image: string | null; rarity: string | null; setId: string; region: string; dex: number | null; jpElsewhere: boolean };
+type TailCard = { id: string; number: string; name: string; image: string | null; rarity: string | null; setId: string; region: string; dex: number | null; jpElsewhere: boolean; jpPacks?: { groupId: string | null; name: string }[] };
 
 // 타일 클릭 시 상위(DexCatalog)로 넘기는 카드 식별 정보 — 패널이 id 로 상세를 fetch.
 export type GroupCardClick = { id: string; name: string; number: string; rarity: string | null; image: string | null; region: string; setId: string };
@@ -400,7 +400,11 @@ export function GroupCards({ groupId, onCardClick }: { groupId: string; onCardCl
                   <div style={{ ...tagStyle, background: "#fbe9e8", color: REGION_COLOR.EN, marginBottom: 4 }}>영문판</div>
                   <div style={nameStyle} title={c.name}>{c.name}</div>
                   <div style={metaStyle}>#{c.number}{c.rarity ? ` · ${c.rarity}` : ""}</div>
-                  {c.jpElsewhere && <div style={{ ...tagStyle, background: "#fff4e6", color: "#d9730d" }}>JP 타팩 수록</div>}
+                  {c.jpPacks?.length
+                    ? <div style={{ ...tagStyle, background: "#fff4e6", color: "#d9730d" }} title={c.jpPacks.map((p) => p.name).join(" · ")}>
+                        JP: {c.jpPacks.length > 2 ? `${c.jpPacks.slice(0, 2).map((p) => p.name).join(" · ")} 외 ${c.jpPacks.length - 2}` : c.jpPacks.map((p) => p.name).join(" · ")}
+                      </div>
+                    : c.jpElsewhere && <div style={{ ...tagStyle, background: "#fff4e6", color: "#d9730d" }}>JP 타팩 수록</div>}
                 </figcaption>
               </figure>
             ))}

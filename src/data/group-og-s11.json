@@ -8,8 +8,9 @@
   "counts": {
     "anchors": 127,
     "enMatched": 0,
-    "krMatched": 125,
-    "enOnly": 0
+    "krMatched": 126,
+    "enOnly": 0,
+    "krOnly": 0
   },
   "anchors": [
     {
@@ -1476,10 +1477,10 @@
       },
       "en": null,
       "kr": {
-        "id": "kr-s11-119",
-        "number": "119",
-        "name": "드래피온 VSTAR",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S11/S11_119.png",
+        "id": "kr-s11-067",
+        "number": "067",
+        "name": "드래피 VSTAR",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S11/S11_067.png",
         "rarity": "하이퍼 레어",
         "setId": "kr-s11",
         "region": "KR"
@@ -2611,7 +2612,15 @@
         "region": "JP"
       },
       "en": null,
-      "kr": null,
+      "kr": {
+        "id": "kr-s11-119",
+        "number": "119",
+        "name": "드래피온 VSTAR",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S11/S11_119.png",
+        "rarity": "Holo Rare",
+        "setId": "kr-s11",
+        "region": "KR"
+      },
       "dex": 452
     },
     {

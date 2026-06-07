@@ -8,9 +8,9 @@
   "counts": {
     "anchors": 120,
     "enMatched": 119,
-    "krMatched": 82,
+    "krMatched": 83,
     "enOnly": 3,
-    "krOnly": 1
+    "krOnly": 0
   },
   "anchors": [
     {
@@ -2402,7 +2402,15 @@
         "setId": "en-tcg-me4",
         "region": "EN"
       },
-      "kr": null,
+      "kr": {
+        "id": "kr-m4-080",
+        "number": "080",
+        "name": "프리즘타워",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/M4/M4_080.png",
+        "rarity": "언커먼",
+        "setId": "kr-m4",
+        "region": "KR"
+      },
       "dex": null
     },
     {
@@ -3338,19 +3346,7 @@
         "jpElsewhere": false
       }
     ],
-    "krOnly": [
-      {
-        "id": "kr-m4-080",
-        "number": "080",
-        "name": "프리즘타워",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/M4/M4_080.png",
-        "rarity": "언커먼",
-        "setId": "kr-m4",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      }
-    ],
+    "krOnly": [],
     "enKr": []
   }
 }

@@ -7,9 +7,10 @@
   },
   "counts": {
     "anchors": 96,
-    "enMatched": 63,
+    "enMatched": 62,
     "krMatched": 96,
-    "enOnly": 0
+    "enOnly": 0,
+    "krOnly": 0
   },
   "anchors": [
     {
@@ -224,15 +225,7 @@
         "setId": "jp-sv-crimson-haze",
         "region": "JP"
       },
-      "en": {
-        "id": "sv6-20",
-        "number": "20",
-        "name": "Poltchageist",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/20.png",
-        "rarity": "Common",
-        "setId": "sv6",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv5a-008",
         "number": "008",
@@ -349,7 +342,7 @@
         "number": "28",
         "name": "Slugma",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/28.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -1277,7 +1270,7 @@
         "number": "102",
         "name": "Probopass",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/102.png",
-        "rarity": "Uncommon",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -1329,7 +1322,7 @@
         "number": "107",
         "name": "Hawlucha",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/107.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -1359,7 +1352,7 @@
         "number": "110",
         "name": "Ting-Lu",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/110.png",
-        "rarity": "Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -1389,7 +1382,7 @@
         "number": "126",
         "name": "Applin",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/126.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -1419,7 +1412,7 @@
         "number": "127",
         "name": "Dipplin",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/127.png",
-        "rarity": "Uncommon",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -1449,7 +1442,7 @@
         "number": "135",
         "name": "Eevee",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/135.png",
-        "rarity": "Common",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -1479,7 +1472,7 @@
         "number": "136",
         "name": "Snorlax",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/136.png",
-        "rarity": "Uncommon",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -1505,11 +1498,11 @@
         "region": "JP"
       },
       "en": {
-        "id": "sv6-141",
-        "number": "141",
+        "id": "sv6-222",
+        "number": "222",
         "name": "Bloodmoon Ursaluna ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/141.png",
-        "rarity": "Double Rare",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/222.png",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -1847,7 +1840,7 @@
         "number": "168",
         "name": "Pinsir",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/168.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -1877,7 +1870,7 @@
         "number": "171",
         "name": "Poltchageist",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/171.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -1907,7 +1900,7 @@
         "number": "172",
         "name": "Torkoal",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/172.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -1937,7 +1930,7 @@
         "number": "173",
         "name": "Infernape",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/173.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -1967,7 +1960,7 @@
         "number": "175",
         "name": "Phione",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/175.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -1997,7 +1990,7 @@
         "number": "176",
         "name": "Cramorant",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/176.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -2027,7 +2020,7 @@
         "number": "177",
         "name": "Heliolisk",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/177.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -2057,7 +2050,7 @@
         "number": "180",
         "name": "Enamorus",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/180.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -2087,7 +2080,7 @@
         "number": "181",
         "name": "Hisuian Growlithe",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/181.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -2117,7 +2110,7 @@
         "number": "182",
         "name": "Probopass",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/182.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -2147,7 +2140,7 @@
         "number": "185",
         "name": "Applin",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/185.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -2177,7 +2170,7 @@
         "number": "188",
         "name": "Eevee",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/188.png",
-        "rarity": "Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -2207,7 +2200,7 @@
         "number": "189",
         "name": "Sinistcha ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/189.png",
-        "rarity": "Ultra Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -2321,11 +2314,11 @@
         "region": "JP"
       },
       "en": {
-        "id": "sv6-222",
-        "number": "222",
+        "id": "sv6-141",
+        "number": "141",
         "name": "Bloodmoon Ursaluna ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/222.png",
-        "rarity": "Hyper Rare",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/141.png",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -2443,7 +2436,7 @@
         "number": "210",
         "name": "Sinistcha ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/210.png",
-        "rarity": "Special Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -2495,7 +2488,7 @@
         "number": "216",
         "name": "Bloodmoon Ursaluna ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/216.png",
-        "rarity": "Special Illustration Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },
@@ -2569,7 +2562,7 @@
         "number": "202",
         "name": "Bloodmoon Ursaluna ex",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/202.png",
-        "rarity": "Ultra Rare",
+        "rarity": null,
         "setId": "sv6",
         "region": "EN"
       },

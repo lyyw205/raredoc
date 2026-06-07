@@ -1172,16 +1172,49 @@ async function main() {
   }));
 
   // ── 꼬리(영판전용; 교차그룹은 없음) ──
-  const jpAllDex = crossGroup ? new Set<number>() : new Set((await prisma.cardLocale.findMany({ where: { region: "JP", logicalCard: { supertype: { in: POKE } } }, select: { logicalCard: { select: { pokedexNumbers: true } } } })).flatMap((l) => l.logicalCard.pokedexNumbers ?? []));
+  // JP 전수 인덱스: ①dex 집합(jpElsewhere 불리언, 기존) ②지문(dex|일러[|subtypes]) → 수록 JP 세트 (jpPacks 팩명 표기용)
+  const jpAll = crossGroup ? [] : await prisma.cardLocale.findMany({
+    where: { region: "JP", logicalCard: { supertype: { in: POKE } } },
+    select: { setId: true, set: { select: { releaseDate: true } }, logicalCard: { select: { pokedexNumbers: true, illustrator: true, subtypes: true } } },
+  });
+  const jpAllDex = new Set(jpAll.flatMap((l) => l.logicalCard.pokedexNumbers ?? []));
+  // setId → 그룹 한국명(231/231 채움) 폴백 Set nameKo/name
+  const setMeta = new Map((await prisma.set.findMany({ where: { region: "JP" }, select: { id: true, name: true, nameKo: true, setGroupId: true, setGroup: { select: { nameKo: true } } } }))
+    .map((s) => [s.id, { groupId: s.setGroupId, name: s.setGroup?.nameKo ?? s.nameKo ?? s.name }]));
+  const fpIndex = new Map<string, { setId: string; rel: number | null }[]>(); // 정확지문·일러지문 양 키 등록
+  for (const l of jpAll) {
+    const dex = l.logicalCard.pokedexNumbers?.[0]; if (dex == null) continue;
+    const il = (l.logicalCard.illustrator ?? "").trim().toLowerCase(); if (!il) continue;
+    const sub = [...(l.logicalCard.subtypes ?? [])].sort().join(",");
+    const ent = { setId: l.setId, rel: l.set?.releaseDate ? +new Date(l.set.releaseDate) : null };
+    for (const k of [`${dex}|${il}|${sub}`, `${dex}|${il}`]) { const a = fpIndex.get(k) ?? []; a.push(ent); fpIndex.set(k, a); }
+  }
+  // 동일 카드(dex+일러 지문)의 JP 수록처 — 정확지문 우선, 없으면 일러지문 폴백(표시 힌트 용도). 트레이너(dex無)는 대상 외.
+  //   ⚠ 같은 dex+일러가 시대를 가로질러 다른 카드를 그림(M Gallade-EX'15 ≠ Mega Gallade ex'26) → 교차그룹과 동일 era ±4년 컷.
+  const FP_ERA = 1460 * 86400000;
+  const jpPacksOf = (e: Row) => {
+    if (e.dex == null) return undefined;
+    const il = (e.illus ?? "").trim().toLowerCase(); if (!il) return undefined;
+    const eraOk = (c: { rel: number | null }) => e.rel == null || c.rel == null || Math.abs(e.rel - c.rel) <= FP_ERA;
+    const cands = (fpIndex.get(`${e.dex}|${il}|${e.subtypes}`) ?? fpIndex.get(`${e.dex}|${il}`) ?? []).filter(eraOk);
+    if (!cands.length) return undefined;
+    const dedup = new Set<string>(); const out: { groupId: string | null; name: string }[] = [];
+    for (const c of cands) {
+      const m = setMeta.get(c.setId); if (!m) continue;
+      const key = m.groupId ?? c.setId; if (dedup.has(key)) continue; dedup.add(key);
+      out.push({ groupId: m.groupId, name: m.name });
+    }
+    return out.length ? out : undefined;
+  };
   const seen = new Set<string>();
   const enOnly = (crossGroup ? [] : enUnmatched).filter((e) => (seen.has(e.cid) ? false : (seen.add(e.cid), true)))
     .sort((a, b) => a.numInt - b.numInt)
-    .map((e) => ({ ...pub(e), dex: e.dex, jpElsewhere: e.dex != null && jpAllDex.has(e.dex) }));
+    .map((e) => { const jpPacks = jpPacksOf(e); return { ...pub(e), dex: e.dex, jpElsewhere: e.dex != null && jpAllDex.has(e.dex), ...(jpPacks ? { jpPacks } : {}) }; });
   // 한국판 전용 꼬리: JP 앵커에 매칭 안 된 KR 카드(KR>JP 초과팩, 예 SM1+ [SM-A] 48장). 정체성 미상 보존본.
   const krMatchedCids = new Set([...krForJp.values()].map((r) => r.cid));
   const krOnly = crossGroup ? [] : kr.filter((k) => !krMatchedCids.has(k.cid))
     .sort((a, b) => a.numInt - b.numInt)
-    .map((k) => ({ ...pub(k), dex: k.dex, jpElsewhere: k.dex != null && jpAllDex.has(k.dex) }));
+    .map((k) => { const jpPacks = jpPacksOf(k); return { ...pub(k), dex: k.dex, jpElsewhere: k.dex != null && jpAllDex.has(k.dex), ...(jpPacks ? { jpPacks } : {}) }; });
 
   const payload = {
     group: { id: groupId, nameKo: cfg.nameKo, nameEn: cfg.nameEn, crossGroupEN: crossGroup },
