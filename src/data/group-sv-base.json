@@ -9,7 +9,7 @@
     "anchors": 108,
     "enMatched": 108,
     "krMatched": 108,
-    "enOnly": 42,
+    "enOnly": 41,
     "krOnly": 0
   },
   "anchors": [
@@ -3325,27 +3325,6 @@
         ]
       },
       {
-        "id": "sv1-14",
-        "number": "14",
-        "name": "Floragato",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-base/en/small/sv1/14.png",
-        "rarity": null,
-        "setId": "sv1",
-        "region": "EN",
-        "dex": 907,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "sv-triplet-beat",
-            "name": "트리플렛비트"
-          },
-          {
-            "groupId": "sv-decks",
-            "name": "SV 구축덱"
-          }
-        ]
-      },
-      {
         "id": "sv1-15",
         "number": "15",
         "name": "Meowscarada",
@@ -3831,7 +3810,25 @@
         "setId": "sv1",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "mega-start-deck-100",
+            "name": "스타트 덱 100 배틀컬렉션"
+          },
+          {
+            "groupId": "sv-ex-start-deck",
+            "name": "ex 스타트 덱"
+          },
+          {
+            "groupId": "sv-start-deck-generations",
+            "name": "랜덤 스타트 덱 Generations"
+          },
+          {
+            "groupId": "sv-decks",
+            "name": "SV 구축덱"
+          }
+        ]
       },
       {
         "id": "sv1-173",
@@ -4163,7 +4160,21 @@
         "setId": "sv1",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "sv-ex-start-deck",
+            "name": "ex 스타트 덱"
+          },
+          {
+            "groupId": "sv-start-deck-generations",
+            "name": "랜덤 스타트 덱 Generations"
+          },
+          {
+            "groupId": "sv-decks",
+            "name": "SV 구축덱"
+          }
+        ]
       },
       {
         "id": "sv1-209",

@@ -786,3 +786,10 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **잔류 정당**: sv2 3 = **Dendra(ミモザ) 3판(yuu·yuu·GIDORA)** — JP 공식 ミモザ 전 인쇄 3건이 전부 SV1V(Sanosuke·Komayama, 기EN)로 일러 불일치 → **JP 미인쇄 EN 전용**(Victini 골드 패턴). sv3 2 = Klawf ex(**SV-P 42918**)·Brassius(**SV-P 42920**, PE#190은 재록 기EN) — 회수 대기 14·15장째. 레이징서프 ふしぎなアメ#053·ポケモンいれかえ#054 = EN Paradox Rift 미수록 + JP 동일인쇄 20곳+(구축덱 스테이플) 유일쌍 불성립 — 잔류 재확인(svp에도 무). SV2D#033 Tinkatink(Kouki)=EN 미수록.
 - **sv-ex-start-deck·sv-goods enNative []→null**: SVD/SVP1 EN 연결 누적을 crossGroup 표시(110/140·28/186).
 - 결과: **흑염 140/141(잔여 #067 우퍼 kirisAki=EN 미수록)·클레이버스트 98/99·151 210/210 완전·트리플렛비트 100/103** · sv2 orphan 98→3 · sv3 orphan 90→2.
+
+### §38 추가 — 스노해저드/트리플렛비트 잔여 5장 (2026-06-08, 사용자 제보)
+- 제보 36장 중 31장 = §38 본문 작업으로 기연결(배포 전 화면). 잔여 5장 처리:
+- **コノヨザルex(SV2P#040) ↔ svp#32** — Tinkaton ex svp#31과 인접 프로모 묶음, 이미지 판정(Angry Grudge 20×/Seismic Toss 150 일치). 스노해저드 **99/99 완전 마감**.
+- **ニャローテ AR(triplet#076) ↔ sv2#197** — merge가 같은 일러(Kouki Saitou) 스타터판 SVAM#005에 오배정(일러동일·아트상이 함정 — 감사 통과했던 건). 이미지 판정으로 AR=IR 동일 확정, 부수로 **sv1#14 ↔ SVAM#005**(과일나무 아트 동일) orphan 해소(sv-base 영판전용 42→41).
+- **キハダ(Katy) 3판(#066 U·#092 SR·#099 SAR) = EN 미수록 잔류** — EN Katy 전 인쇄는 sv1 2장(SV1V 짝, Komayama)뿐으로 일러 불일치, PAL·svp에 無.
+- ⚠ 신규 함정 기록: **같은 일러레이터의 다른 아트**(스타터 일반판 vs 본팩 AR)는 일러 감사(표기 대조)를 통과한다 — IR/AR존 EN이 스타터 JP에 붙어 있으면 의심하고 이미지 판정.
