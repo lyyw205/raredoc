@@ -161,7 +161,7 @@ const CONFIG: Record<string, Cfg> = {
   "mega-infernox": {
     nameKo: "인페르노X", nameEn: "Inferno X",
     jp: ["jp-mega-infernox"], kr: ["kr-m2"],
-    krMirror: { "kr-m2": "jp-mega-infernox" }, enNative: [], krMirrorAll: true,
+    krMirror: { "kr-m2": "jp-mega-infernox" }, enNative: ["en-tcg-me2"], krMirrorAll: true, enMerged: true, // EN=Phantasmal Flames(합본·주귀속) — 인페르노X 110 + MBD/MBG 18 분산 병합(2026-06-07)
   },
   "mega-dream-ex": { // EN=Ascended Heroes(me2pt5 합본·주귀속) — 메가드림 190 + MC 98 분산 병합(2026-06-07), 영판전용 orphan 여기 귀속
     nameKo: "메가드림 ex", nameEn: "Mega Dream ex",
@@ -267,7 +267,7 @@ const CONFIG: Record<string, Cfg> = {
   "mega-decks": {
     nameKo: "MEGA 구축덱", nameEn: "MEGA Starter Sets",
     jp: ["jp-tcg-MBD", "jp-tcg-MBG"], kr: ["kr-mbd", "kr-mbg"],
-    krMirror: { "kr-mbd": "jp-tcg-MBD", "kr-mbg": "jp-tcg-MBG" }, enNative: [], krMirrorAll: true,
+    krMirror: { "kr-mbd": "jp-tcg-MBD", "kr-mbg": "jp-tcg-MBG" }, enNative: ["en-tcg-me2"], krMirrorAll: true, enMerged: true, // MBD/MBG 신규분 18이 me2(Phantasmal Flames)로 병합
   },
   "mega-goods": {
     nameKo: "MEGA 기타 강화상품", nameEn: "MEGA Premium Trainer Box",

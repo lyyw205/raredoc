@@ -260,6 +260,16 @@ export const TR_JP2EN: Record<string, string> = {
   "カナリィ": "Canari",
   "からておうの稽古": "Black Belt's Training",
   "ミステリーガーデン": "Mystery Garden",
+  // ── MEGA 인페르노X(en-tcg-me2 Phantasmal Flames, 2026-06-07 orphan 대조검증) ──
+  // バトルコロシアム=Battle Cage(닫힌집합 소거 — 잔여 1:1) · ヒカリ=Dawn(DP 여주인공 공식 EN명, 3판↔3판 구조 일치)
+  "ヒートバーナー": "Blowtorch",
+  "せいなるおまもり": "Sacred Charm",
+  "ギーマの一手": "Grimsley's Move",
+  "ヒカリ": "Dawn",
+  "バトルコロシアム": "Battle Cage",
+  "めまいの谷": "Dizzying Valley",
+  "パンクメット": "Punk Helmet",
+  "ひふきやろう": "Firebreather",
 };
 
 // 博士の研究(Professor's Research)은 세트별 박사(Sada=고대/스칼렛 · Turo=미래/바이올렛)로 EN명이 갈린다.

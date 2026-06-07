@@ -562,3 +562,17 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 | 빌드 | mega-dream-ex 앵커 250·EN 190·KR 249·영판전용 7 / **mega-start-deck-100 앵커 774·EN 98**·KR 773 — enMerged 그룹스코프 분산 분배(Cosmic Eclipse 동형, 한 EN세트 → 2그룹) |
 
 > ⚠ 합본 EN 신규 병합 수칙: dry에서 합본 스코프 병합수가 (단독+신규분)을 **초과**하면 재록 오배정 신호 — 단독 apply 후 잔여를 양방향 유일쌍으로 회수. ⚠ jpPacks 가 보류 카드의 출처 추적 도구로 실효(배틀파트너즈 재록·MBG·메가심포니아 출처 자동 표기).
+
+## §21. 인페르노X EN 병합 — Phantasmal Flames(me2) 바레 승격 · 겐가 경합 판정 (2026-06-07)
+
+| 항목 | 내용 |
+|---|---|
+| 승격 | 바레 me2(130, 독립 LC·CI 0) → en-tcg-me2 신설 + 130 이관 + 바레 삭제 |
+| 병합 | dry 82 → 사전 +8 → 97 자동 apply → 수동 31 → **128/130 = 인페르노X 110 + MBD/MBG 18** |
+| 사전 +8 | TR_SV: ヒートバーナー=Blowtorch·せいなるおまもり=Sacred Charm·ギーマの一手=Grimsley's Move·**ヒカリ=Dawn**(DP 여주인공, 3판↔3판)·**バトルコロシアム=Battle Cage**(닫힌집합 소거)·めまいの谷=Dizzying Valley·パンクメット=Punk Helmet·ひふきやろう=Firebreather |
+| 수동 31 | 메가 ex 12(헤라크로스/리자몽X/사메하다/미미롭 — DR·SR·SAR·MUR 등급별, **전건 일러 일치**) + Ignition Energy 1(JP#109 — **에너지 LC에 dex 109 오염 발견·제거**, 버킷 미스 원인) + **MBD 신규 9 + MBG 신규 9**(스타터 신규분, 전건 일러 일치 — メロエッタ/ゴースト IR판(MBD#022·MBG#022)은 EN 미수록) |
+| **겐가 경합 판정** | me2 EN#56(5ban)이 **MBG#003 정짝 확정**(MBD/MBG 신규분 EN 행선지=me2 — MC 정본화 기록과 합치). me2pt5 EN#125는 재록판 → 영판전용 잔류 확정(jpPacks 'MEGA 구축덱' 표기) — §20 보류 해소 |
+| EN 미수록 | 인페르노X 6(モンメン/エルフーン/ニューラ/マニューラ/カルボウ/オドリドリex) + MBD/MBG IR 2 |
+| 영판전용 2 | Paldean Wooper(OKACHEKE)·Meowth(Uninori) — 전 시대 dex+일러 후보 없음(jpPacks 공란), 미수집 JP 출처 보류 |
+| 시프트 | 교차dry own 128 : cross(니힐제로) 5 — **31건째** |
+| 빌드 | mega-infernox 앵커 116·EN 110·KR 115·영판전용 2 / **mega-decks 앵커 46·EN 18**·KR 46 — 합본 분산 2그룹째 |
