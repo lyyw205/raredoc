@@ -104,6 +104,7 @@ export const TR_JP2EN: Record<string, string> = {
   "オッカのみ": "Occa Berry",
   "ウタンのみ": "Payapa Berry",
   "いいきずぐすり": "Super Potion",
+  "きずぐすり": "Potion",
   "とりかえチケット": "Redeemable Ticket",
   "鬼の仮面": "Ogre's Mask",
   "なかよしポフィン": "Buddy-Buddy Poffin",
