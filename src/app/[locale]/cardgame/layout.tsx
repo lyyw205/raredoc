@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { emoji: "📕", label: "덱",     segment: "/decks"     },
   { emoji: "🎮", label: "대회",   segment: "/tournaments" },
   { emoji: "📖", label: "가이드", segment: "/guide"     },
+  { emoji: "💬", label: "커뮤니티", segment: "/community" },
 ] as const;
 
 export default function CardgameLayout({

@@ -135,7 +135,7 @@ export default async function HomePage({
                 <p className="text-toss-caption text-toss-text-quaternary mt-1">지금 가장 많이 읽히는 글</p>
               </div>
               <Link
-                href={`/${locale}/community`}
+                href={`/${locale}/cardgame/community`}
                 className="text-toss-caption text-toss-text-tertiary hover:text-toss-text-primary transition-colors"
               >
                 전체보기 →

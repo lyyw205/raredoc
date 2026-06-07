@@ -43,7 +43,7 @@ export default async function MessagesPage({
               href={`/${locale}/community`}
               className="inline-block mt-4 text-toss-caption text-toss-brand font-semibold"
             >
-              커뮤니티에서 거래글 둘러보기 →
+              마켓에서 거래글 둘러보기 →
             </Link>
           </div>
         </div>

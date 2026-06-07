@@ -54,7 +54,7 @@ export function Header({ user, unread = 0 }: { user: HeaderUser | null; unread?:
             카드게임
           </TossHeader.NavItem>
           <TossHeader.NavItem href={link("/community")} active={isActive("/community")}>
-            커뮤니티
+            마켓
           </TossHeader.NavItem>
         </TossHeader.Nav>
 

@@ -363,7 +363,8 @@ model Post {
   category            String // 정보/질문/자랑/팝니다/삽니다/...
   title               String
   body                String
-  imageUrl            String?
+  imageUrl            String? // 호환 유지: images[0] 와 동기화 (목록 썸네일/구코드용)
+  images              String[]  @default([]) // 거래글 다중 이미지 (번개장터식 갤러리)
   // 거래글 전용
   priceKrw            Int?
   condition           String?

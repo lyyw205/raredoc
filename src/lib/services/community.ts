@@ -75,6 +75,7 @@ type PostWithAuthor = {
   title: string;
   body: string;
   imageUrl: string | null;
+  images: string[];
   priceKrw: number | null;
   condition: string | null;
   certified: boolean;
@@ -123,9 +124,10 @@ function toPostView(p: PostWithAuthor): Post {
     hot: p.isHot,
     pinned: p.isPinned,
     negotiable: p.negotiable,
+    imageUrl: p.imageUrl ?? undefined,
+    images: p.images ?? [],
     ...(trade
       ? {
-          imageUrl: p.imageUrl ?? undefined,
           priceKrw: p.priceKrw,
           condition: toCondition(p.condition),
           certified: p.certified,
@@ -220,6 +222,7 @@ function selectAllPostFields() {
     title: true,
     body: true,
     imageUrl: true,
+    images: true,
     priceKrw: true,
     condition: true,
     certified: true,
