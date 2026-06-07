@@ -3,14 +3,14 @@
     "id": "sv-goods",
     "nameKo": "SV 기타 강화상품",
     "nameEn": "SV Enhancement Products",
-    "crossGroupEN": false
+    "crossGroupEN": true
   },
   "counts": {
     "anchors": 186,
-    "enMatched": 0,
+    "enMatched": 28,
     "krMatched": 186,
     "enOnly": 0,
-    "krOnly": 20
+    "krOnly": 0
   },
   "anchors": [
     {
@@ -133,7 +133,15 @@
         "setId": "jp-tcg-SVB",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv2-176",
+        "number": "176",
+        "name": "Choice Belt",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/176.png",
+        "rarity": null,
+        "setId": "sv2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svb-006",
         "number": "006",
@@ -177,7 +185,15 @@
         "setId": "jp-tcg-SVB",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh9-155",
+        "number": "155",
+        "name": "Lumineon V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s9/en/small/en-tcg-swsh9/155.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh9",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svb-008",
         "number": "008",
@@ -199,7 +215,15 @@
         "setId": "jp-tcg-SVB",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh7-054",
+        "number": "054",
+        "name": "Mareep",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s7r/en/small/en-tcg-swsh7/054.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh7",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svb-009",
         "number": "009",
@@ -221,7 +245,15 @@
         "setId": "jp-tcg-SVB",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh7-055",
+        "number": "055",
+        "name": "Flaaffy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s7r/en/small/en-tcg-swsh7/055.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh7",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svb-010",
         "number": "010",
@@ -243,7 +275,15 @@
         "setId": "jp-tcg-SVB",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-cel25-011",
+        "number": "011",
+        "name": "Mew",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/en/small/en-tcg-cel25/011.png",
+        "rarity": "Common",
+        "setId": "en-tcg-cel25",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svb-011",
         "number": "011",
@@ -639,7 +679,15 @@
         "setId": "jp-tcg-SVP1",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv1-24",
+        "number": "24",
+        "name": "Toedscool",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-base/en/small/sv1/24.png",
+        "rarity": "Common",
+        "setId": "sv1",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svp1-001",
         "number": "001",
@@ -661,7 +709,15 @@
         "setId": "jp-tcg-SVP1",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv3-22",
+        "number": "22",
+        "name": "Toedscruel ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-obsidian-flames/en/small/sv3/22.png",
+        "rarity": null,
+        "setId": "sv3",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svp1-002",
         "number": "002",
@@ -683,7 +739,15 @@
         "setId": "jp-tcg-SVP1",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv1-73",
+        "number": "73",
+        "name": "Pawmi",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-base/en/small/sv1/73.png",
+        "rarity": "Common",
+        "setId": "sv1",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svp1-003",
         "number": "003",
@@ -705,7 +769,15 @@
         "setId": "jp-tcg-SVP1",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv1-75",
+        "number": "75",
+        "name": "Pawmo",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-base/en/small/sv1/75.png",
+        "rarity": "Common",
+        "setId": "sv1",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svp1-004",
         "number": "004",
@@ -727,7 +799,15 @@
         "setId": "jp-tcg-SVP1",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv3-73",
+        "number": "73",
+        "name": "Pawmot ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-obsidian-flames/en/small/sv3/73.png",
+        "rarity": null,
+        "setId": "sv3",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svp1-005",
         "number": "005",
@@ -749,7 +829,15 @@
         "setId": "jp-tcg-SVP1",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv1-104",
+        "number": "104",
+        "name": "Greavard",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-base/en/small/sv1/104.png",
+        "rarity": "Common",
+        "setId": "sv1",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svp1-006",
         "number": "006",
@@ -771,7 +859,15 @@
         "setId": "jp-tcg-SVP1",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv3-102",
+        "number": "102",
+        "name": "Houndstone ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-obsidian-flames/en/small/sv3/102.png",
+        "rarity": null,
+        "setId": "sv3",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svp1-007",
         "number": "007",
@@ -815,7 +911,15 @@
         "setId": "jp-tcg-SVF",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "swsh9-40",
+        "number": "40",
+        "name": "Lumineon V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/swsh9/en/small/swsh9/40.png",
+        "rarity": "Rare Holo V",
+        "setId": "swsh9",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svf-002",
         "number": "002",
@@ -837,7 +941,15 @@
         "setId": "jp-tcg-SVF",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "swsh9-41",
+        "number": "41",
+        "name": "Manaphy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/swsh9/en/small/swsh9/41.png",
+        "rarity": "Rare",
+        "setId": "swsh9",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svf-003",
         "number": "003",
@@ -881,7 +993,15 @@
         "setId": "jp-tcg-SVF",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "cel25-11",
+        "number": "11",
+        "name": "Mew",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/cel25/en/small/cel25/11.png",
+        "rarity": "Rare Holo",
+        "setId": "cel25",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svf-005",
         "number": "005",
@@ -903,7 +1023,15 @@
         "setId": "jp-tcg-SVF",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh12-067",
+        "number": "067",
+        "name": "Ralts",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s11a/en/small/en-tcg-swsh12/067.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh12",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svf-006",
         "number": "006",
@@ -925,7 +1053,15 @@
         "setId": "jp-tcg-SVF",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh12-068",
+        "number": "068",
+        "name": "Kirlia",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s11a/en/small/en-tcg-swsh12/068.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh12",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svf-007",
         "number": "007",
@@ -947,7 +1083,15 @@
         "setId": "jp-tcg-SVF",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "swsh12pt5-111",
+        "number": "111",
+        "name": "Bidoof",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/swsh12pt5/en/small/swsh12pt5/111.png",
+        "rarity": "Common",
+        "setId": "swsh12pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svf-008",
         "number": "008",
@@ -969,7 +1113,15 @@
         "setId": "jp-tcg-SVF",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "swsh9-121",
+        "number": "121",
+        "name": "Bibarel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/swsh9/en/small/swsh9/121.png",
+        "rarity": "Rare Holo",
+        "setId": "swsh9",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svf-009",
         "number": "009",
@@ -1827,7 +1979,15 @@
         "setId": "jp-tcg-SVK",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh9-040",
+        "number": "040",
+        "name": "Lumineon V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s9/en/small/en-tcg-swsh9/040.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-swsh9",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svk-002",
         "number": "002",
@@ -1849,7 +2009,15 @@
         "setId": "jp-tcg-SVK",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh9-041",
+        "number": "041",
+        "name": "Manaphy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s9/en/small/en-tcg-swsh9/041.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh9",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svk-003",
         "number": "003",
@@ -1937,7 +2105,15 @@
         "setId": "jp-tcg-SVK",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv3pt5-16",
+        "number": "16",
+        "name": "Pidgey",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-151/en/small/sv3pt5/16.png",
+        "rarity": "Common",
+        "setId": "sv3pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svk-007",
         "number": "007",
@@ -1959,7 +2135,15 @@
         "setId": "jp-tcg-SVK",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv3pt5-17",
+        "number": "17",
+        "name": "Pidgeotto",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-151/en/small/sv3pt5/17.png",
+        "rarity": "Common",
+        "setId": "sv3pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svk-008",
         "number": "008",
@@ -2003,7 +2187,15 @@
         "setId": "jp-tcg-SVK",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh12pt5-111",
+        "number": "111",
+        "name": "Bidoof",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s12a/en/small/en-tcg-swsh12pt5/111.png",
+        "rarity": "Common",
+        "setId": "en-tcg-swsh12pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svk-010",
         "number": "010",
@@ -2025,7 +2217,15 @@
         "setId": "jp-tcg-SVK",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh9-121",
+        "number": "121",
+        "name": "Bibarel",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s9/en/small/en-tcg-swsh9/121.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-swsh9",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svk-011",
         "number": "011",
@@ -2993,7 +3193,15 @@
         "setId": "jp-tcg-SVN",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv6-131",
+        "number": "131",
+        "name": "Tatsugiri",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-twilight-masquerade/en/small/sv6/131.png",
+        "rarity": "Uncommon",
+        "setId": "sv6",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svn-003",
         "number": "003",
@@ -3081,7 +3289,15 @@
         "setId": "jp-tcg-SVN",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv7-114",
+        "number": "114",
+        "name": "Hoothoot",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-stellar-crown/en/small/sv7/114.png",
+        "rarity": "Common",
+        "setId": "sv7",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svn-007",
         "number": "007",
@@ -3103,7 +3319,15 @@
         "setId": "jp-tcg-SVN",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv8pt5-78",
+        "number": "78",
+        "name": "Noctowl",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-prismatic-evolutions/en/small/sv8pt5/78.png",
+        "rarity": "None",
+        "setId": "sv8pt5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svn-008",
         "number": "008",
@@ -4108,228 +4332,7 @@
   ],
   "tail": {
     "enOnly": [],
-    "krOnly": [
-      {
-        "id": "kr-svp2-1",
-        "number": "1",
-        "name": "나오하",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVP2/SVP2_001.png",
-        "rarity": null,
-        "setId": "kr-svp2",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svp2-2",
-        "number": "2",
-        "name": "나로테",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVP2/SVP2_002.png",
-        "rarity": null,
-        "setId": "kr-svp2",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svp2-3",
-        "number": "3",
-        "name": "마스카나 ex",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVP2/SVP2_003.png",
-        "rarity": null,
-        "setId": "kr-svp2",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svp2-4",
-        "number": "4",
-        "name": "피카츄",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVP2/SVP2_004.png",
-        "rarity": null,
-        "setId": "kr-svp2",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svp2-5",
-        "number": "5",
-        "name": "라이츄",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVP2/SVP2_005.png",
-        "rarity": null,
-        "setId": "kr-svp2",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svp2-6",
-        "number": "6",
-        "name": "미라이돈 ex",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVP2/SVP2_006.png",
-        "rarity": null,
-        "setId": "kr-svp2",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svp2-7",
-        "number": "7",
-        "name": "랄토스",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVP2/SVP2_007.png",
-        "rarity": null,
-        "setId": "kr-svp2",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svp2-8",
-        "number": "8",
-        "name": "킬리아",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVP2/SVP2_008.png",
-        "rarity": null,
-        "setId": "kr-svp2",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svp2-9",
-        "number": "9",
-        "name": "가디안 ex",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVP2/SVP2_009.png",
-        "rarity": null,
-        "setId": "kr-svp2",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svp2-10",
-        "number": "10",
-        "name": "기본 풀 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVP2/SVP2_010.png",
-        "rarity": null,
-        "setId": "kr-svp2",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svp2-11",
-        "number": "11",
-        "name": "기본 번개 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVP2/SVP2_011.png",
-        "rarity": null,
-        "setId": "kr-svp2",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svp2-12",
-        "number": "12",
-        "name": "기본 초 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVP2/SVP2_012.png",
-        "rarity": null,
-        "setId": "kr-svp2",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svb-029",
-        "number": "029",
-        "name": "기본 풀 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVB/SVB_029.png",
-        "rarity": null,
-        "setId": "kr-svb",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svb-030",
-        "number": "030",
-        "name": "기본 불꽃 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVB/SVB_030.png",
-        "rarity": null,
-        "setId": "kr-svb",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svb-031",
-        "number": "031",
-        "name": "기본 물 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVB/SVB_031.png",
-        "rarity": null,
-        "setId": "kr-svb",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svb-032",
-        "number": "032",
-        "name": "기본 번개 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVB/SVB_032.png",
-        "rarity": null,
-        "setId": "kr-svb",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svb-033",
-        "number": "033",
-        "name": "기본 초 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVB/SVB_033.png",
-        "rarity": null,
-        "setId": "kr-svb",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svb-034",
-        "number": "034",
-        "name": "기본 격투 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVB/SVB_034.png",
-        "rarity": null,
-        "setId": "kr-svb",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svb-035",
-        "number": "035",
-        "name": "기본 악 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVB/SVB_035.png",
-        "rarity": null,
-        "setId": "kr-svb",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-svb-036",
-        "number": "036",
-        "name": "기본 강철 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVB/SVB_036.png",
-        "rarity": null,
-        "setId": "kr-svb",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      }
-    ],
+    "krOnly": [],
     "enKr": []
   }
 }

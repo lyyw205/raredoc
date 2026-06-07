@@ -248,12 +248,12 @@ const CONFIG: Record<string, Cfg> = {
     jp: ["jp-tcg-SVB", "jp-tcg-SVP1", "jp-tcg-SVF", "jp-tcg-SVK", "jp-tcg-SVN"],
     kr: ["kr-svb", "kr-svp1", "kr-svp2", "kr-svf", "kr-svk", "kr-svn"],
     krMirror: { "kr-svb": "jp-tcg-SVB", "kr-svp1": "jp-tcg-SVP1", "kr-svf": "jp-tcg-SVF", "kr-svk": "jp-tcg-SVK", "kr-svn": "jp-tcg-SVN" },
-    enNative: [], krMirrorAll: true, // kr-svp2 = JP 부재(KR 전용) → 한국판 전용 꼬리
+    enNative: null, krMirrorAll: true, // kr-svp2 = JP 부재(KR 전용) → 한국판 전용 꼬리
   },
   "sv-ex-start-deck": {
     nameKo: "ex 스타트 덱", nameEn: "ex Start Deck",
     jp: ["jp-tcg-SVD"], kr: ["kr-svd"],
-    krMirror: { "kr-svd": "jp-tcg-SVD" }, enNative: [], krMirrorAll: true,
+    krMirror: { "kr-svd": "jp-tcg-SVD" }, enNative: null, krMirrorAll: true, // 2026-06-08 []→null: sv3/svp EN 연결(카르보·즈피카·우퍼·클로드사이어·하운드·바로룸·구르통·Tinkaton ex 등) crossGroup 표시
   },
   "sv-start-deck-generations": {
     nameKo: "랜덤 스타트 덱 Generations", nameEn: "Start Deck Generations",

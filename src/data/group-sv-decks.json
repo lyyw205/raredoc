@@ -7,7 +7,7 @@
   },
   "counts": {
     "anchors": 522,
-    "enMatched": 193,
+    "enMatched": 196,
     "krMatched": 497,
     "enOnly": 0,
     "krOnly": 0
@@ -112,12 +112,12 @@
         "region": "JP"
       },
       "en": {
-        "id": "sv1-14",
-        "number": "14",
+        "id": "sv2-197",
+        "number": "197",
         "name": "Floragato",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-base/en/small/sv1/14.png",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/197.png",
         "rarity": null,
-        "setId": "sv1",
+        "setId": "sv2",
         "region": "EN"
       },
       "kr": null,
@@ -490,12 +490,12 @@
         "region": "JP"
       },
       "en": {
-        "id": "sv1-37",
-        "number": "37",
+        "id": "sv2-202",
+        "number": "202",
         "name": "Crocalor",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-base/en/small/sv1/37.png",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/202.png",
         "rarity": null,
-        "setId": "sv1",
+        "setId": "sv2",
         "region": "EN"
       },
       "kr": {
@@ -1573,7 +1573,15 @@
         "setId": "jp-tcg-SVC",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv2-63",
+        "number": "63",
+        "name": "Pikachu ex",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/63.png",
+        "rarity": null,
+        "setId": "sv2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svc-001",
         "number": "001",
@@ -1685,7 +1693,15 @@
         "setId": "jp-tcg-SVC",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv2-68",
+        "number": "68",
+        "name": "Shinx",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/68.png",
+        "rarity": null,
+        "setId": "sv2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svc-005",
         "number": "005",
@@ -1797,7 +1813,15 @@
         "setId": "jp-tcg-SVC",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "sv2-76",
+        "number": "76",
+        "name": "Pawmot",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/76.png",
+        "rarity": null,
+        "setId": "sv2",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-svc-009",
         "number": "009",
@@ -3290,7 +3314,7 @@
         "number": "7",
         "name": "Tropius",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-paldea-evolved/en/small/sv2/7.png",
-        "rarity": null,
+        "rarity": "Common",
         "setId": "sv2",
         "region": "EN"
       },

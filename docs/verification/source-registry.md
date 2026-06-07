@@ -777,3 +777,12 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **정정**: §34(ハバタクカミ·テツノイバラ "EN 미수록")·§36(サケブシッポ "EN 미수록")·스텔라 ヨルノズク 잔류 판정 → 실은 svp 프로모 존재. **수칙 갱신: JP AR/SR "EN 미수록" 단정 전에 svp(EN 프로모) dex+일러 검색 필수.**
 - **재검토 결과 잔류 유지가 맞는 것**: 기본E 골드 UR(SV4K 悪 #095·SV4M 鋼 #095 — EN은 기본E 골드를 메인 세트에 안 냄, EN 전 세트 부재 확인) / BBWF IR 4(ボルトロス#120·ランクルス#125·ゴチルゼル#123·トルネロス#158 — svp에도 부재) / 스텔라 テラパゴスex SR(5ban 동일구도 기연결 노이즈뿐).
 - 결과: **와일드포스·사이버저지 EN 100/100 완전 마감** · 고대의포효/미래의일섬 각 94/95(잔여=기본E 골드 1) · 스텔라 134/135.
+
+## §38. 흑염/클레이버스트/151 연쇄 — sv2·sv3 합본 재병합 + 감사 오배정 38건 교정 (2026-06-08, 사용자 제보 3연속)
+- **구조**: EN Obsidian Flames(sv3, 230) = 흑염(141) + **ex스타트덱(SVD) 대량** + triplet/SV2D/SV2P 잔여 + SVP1(ex스페셜세트) 3 + svp. EN Paldea Evolved(sv2, 279) = SV2D/SV2P(기병합) + **트리플렛비트 대량** + SVC(스타터 피카츄ex&파모트) 8 + 1월 스타터(SVAM/SVAW/SVAL) 일부.
+- **merge**: sv3 90→6 (사전 +11: Larry·Shauntal·Rika·Parasol Lady·기술머신 2 + Great Ball·Falkner·Katy·Energy Search·Youngster / SVD subtypes EX→ex 10 정규화 — SVM §28 재발). sv2 98→19→수동 19(에너지 4 1쇄: Jet↔triplet#072·Luminous↔#073·Reversal↔SV2P#071·**Therapeutic↔SV2D#071(EN명이 Therapy가 아닌 Therapeutic — §35 세라피 '없음' 판정 정정)** / 게치스 3판 일러 1:1 triplet#069/#095/#100 / SVC 8 / 151 간판 AR·SAR↔svp#51/52/53 §37 패턴·Mew ex 이미지 판정 / Tinkaton ex base↔svp#31).
+- **전수 감사 적발 — sv3 24건 + sv2 13건(+연쇄 2) 재배정**: merge의 rank 동점·번호순 zip이 같은 종 다판(본문/AR/IR/스타터판)을 뒤섞음. tcgdex EN일러 ↔ JP공식 일러 1:1 교차(전건 성립) + 이미지 스팟 6쌍(Combee·Bellibolt IR↔AR·Charcadet·Shinx·Tinkatuff·SV2D#019)으로 확정. **rarity null(스타터) rank=5 = IR/AR rank와 동점 함정** — sv2 IR 5장이 SVAM/SVAW/SVAL에, sv3 IR 4장이 SVD에 오배정됐던 것을 triplet AR존(#074~082)·흑염 AR존으로 복귀.
+- **1쇄 재정정 2(§35 일부 번복)**: sv2#69 Shinx ↔ SV2D#019(1쇄 — sv4a#059는 재록 잔류 복귀) / sv2#104 Tinkatuff ↔ SV2D#034(sowsow 1쇄 — sv4a#095 잔류 복귀). 어제 "sv4a가 유일 짝" 판단은 #68/#103의 숨은 오연결(kurumitsu/Komayama 판이 SV2D 자리를 점유)이 원인 — 감사가 풀어냄.
+- **잔류 정당**: sv2 3 = **Dendra(ミモザ) 3판(yuu·yuu·GIDORA)** — JP 공식 ミモザ 전 인쇄 3건이 전부 SV1V(Sanosuke·Komayama, 기EN)로 일러 불일치 → **JP 미인쇄 EN 전용**(Victini 골드 패턴). sv3 2 = Klawf ex(**SV-P 42918**)·Brassius(**SV-P 42920**, PE#190은 재록 기EN) — 회수 대기 14·15장째. 레이징서프 ふしぎなアメ#053·ポケモンいれかえ#054 = EN Paradox Rift 미수록 + JP 동일인쇄 20곳+(구축덱 스테이플) 유일쌍 불성립 — 잔류 재확인(svp에도 무). SV2D#033 Tinkatink(Kouki)=EN 미수록.
+- **sv-ex-start-deck·sv-goods enNative []→null**: SVD/SVP1 EN 연결 누적을 crossGroup 표시(110/140·28/186).
+- 결과: **흑염 140/141(잔여 #067 우퍼 kirisAki=EN 미수록)·클레이버스트 98/99·151 210/210 완전·트리플렛비트 100/103** · sv2 orphan 98→3 · sv3 orphan 90→2.
