@@ -618,3 +618,13 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - kr-bs 이미지가 apply 재생성으로 wmimages 원본 URL 복귀 — R2 재이관(migrate-images-to-r2) 필요
 - 표기 오기 8건(KR 사이트 일러 시프트)은 이미지 판정으로 확정 가능(백로그) · kr-st1~3·kr-dp-p 발매일 1970 잔존(Bulbapedia: 크레세리아/다크라이 덱 2010-11-04)
 - DP 한국 스타터(랜덤구축덱 4종 — 모험의 시작 동시발매) 미수집 — kr-st1~3과의 관계 점검 백로그
+
+## §24. me2pt5 일러 전수 감사 — rankZip 동점 교차 39건 교정 (2026-06-07, 사용자 제보)
+
+- **발단**: 사용자 제보 "Pikachu ex #277 확인, #276이 잘못 매핑된 듯" — 적중. ptcg.io 원본 EN#276=booota·#277=James Turner(둘 다 SIR, 별개 카드)인데 병합이 반대로(#276↔JP#234 James Turner SAR, #277 orphan). 원인 = **rankZip 동점(같은 레어도 다판)에서 번호순 선택**(Anthea&Concordia 역전과 동일 함정).
+- **전수 감사**(tmp-audit-me-illus.ts — ptcg.io artist vs 연결 LC 일러, dex+일러 재배정·주귀속 우선): me2pt5 불일치 45 → **교정 39**(본문↔AR 쌍 교차 34 + MC판 이동 5: Tepig/Pignite/N's Darmanitan/Sneasel/Pikachu#276→MC#764) + **EN#277→JP#234 회수** + Snorunt EN#227→JP#200(잔여 1:1 소거).
+- ptcg.io 오기 판정(JP 공식 원본 권위 — pg950 재수집으로 완전 검증된 일러): 트레이너 4(Petrel/Proton artist 교차 기록·Giovanni DOM·Nighttime Mine Takashi/Kenichi) + Cascoon Dsuke·Wattrel mingo·me4 철자 3(Mori You/UKUMO viti/Yasukunio) — 전부 연결 유지.
+- 기존 판정 유지: 겐가 #125(SKIP — me2 EN#56이 MBG#003 정짝) · TR's Kangaskhan #162(M-P#086은 일반 메가가루라ex — 로켓단판 여전히 미수집).
+- **타 me 세트 동일 감사**: me2 깨끗(보류 2 정합) · **me4 +1 회수(Mega Gallade ex → M-P#068** — M-P 수집 후 첫 재감사 수확, 닌자스피너 영판전용 3→2) · me3/me1은 ptcg.io artist 미제공으로 감사 불가(등급별 수동 매칭 구조라 동점 함정 없음 — 잔여 리스크 낮음).
+- 빌드: 메가드림 EN 186(+MC 이동분)·enOnly 6 / MC EN 103 / 닌자스피너 enOnly 2.
+> ⚠ 수칙: **합본 EN 병합 후 ptcg.io artist 전수 감사 필수** — rankZip은 동점(동일 dex·동일 등급 다판)에서 신뢰 불가.
