@@ -734,3 +734,12 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **기본 악/강철 에너지 #98/#99(Hyper rare 골드) = 영판전용 잔류 정당** — JP 세트는 골드 기본E 미수록(기본E 스테이플 잔류 관례).
 - 결과: **나이트원더러 EN 94/94 완전·KR 94/94·영판전용 2**(골드 기본E).
 - ⚠ 후속 관찰: sv-twilight-masquerade 그룹 enOnly 98 — EN Twilight Masquerade(sv6)도 합본 분산(크림슨헤이즈 등) 미병합 의심, 다음 점검 후보.
+
+## §33. 변환의 가면 — Twilight Masquerade 합본 분산 병합 (크림슨헤이즈 91 + α) (2026-06-07, 사용자 제보 — 연쇄 6번째)
+
+- **구조**: EN Twilight Masquerade(sv6, 226) = JP 변환의가면(133) + **크림슨헤이즈(sv5a, 96 전체 미병합)** + 배틀아카데미 1(Cook=コック SVI#058). §32에서 예고한 enOnly 98 적중.
+- 병합: 128→219(merge, TR_JP2EN +9: 管理人=Caretaker·公民館=Community Center·サザレ=Perrin·ゴヨウ=Lucian·アンフェアスタンプ=Unfair Stamp·ハイパーアロマ=Hyper Aroma·ラブラブボール=Love Ball·サバイブギプス=Survival Brace·ラッキーメット=Lucky Helmet) + 수동 6(Enhanced Hammer U/UR 2판 분배·Boomerang/Legacy/Luminous 특수E·Cook).
+- 제보 JP 5장 검증: レガシーエネルギー#101→sv6#167 ✅ / AR 3장(§32에서 기연결: 마시마시라→sv6pt5#72 등) ✅ / 改造ハンマー#132 UR→sv6#224 ✅.
+- **잔류 정당**: sv6 orphan 1 — **Raifort = レホール SV-P 프로모 확정(cardID 44412, hncl 일치 — SV-P 회수 10장째**, DB의 レホール는 테라페스타 재록판뿐). JP측 2 = 크림슨헤이즈 #056 ポケモンいれかえ·#057 ポケモンキャッチャー(EN 세트 미수록 스테이플).
+- 전수 감사 226장(ptcg.io): **불일치 0**.
+- 결과: **변환의가면 EN 131/133·KR 133/133 / 크림슨헤이즈 EN 94/96·KR / sv6 영판전용 1**.
