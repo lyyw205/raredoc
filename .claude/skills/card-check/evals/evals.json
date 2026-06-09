@@ -38,6 +38,31 @@
         "메가리자몽X ex가 다른 세트(인페르노X 또는 MEGA 드림 ex)에 존재함을 안내함",
         "추측이 아닌 DB 검색 근거를 제시함 (검색 결과/수록 카드 확인 언급)"
       ]
+    },
+    {
+      "id": 3,
+      "eval_name": "trainer-block-audit-not-single",
+      "prompt": "메가드림ex 카드팩에서 유리나팔이 엉뚱한 카드에 연결된 것 같아. 확인해줘.",
+      "expected_output": "유리나팔 한 장만 보지 않고 트레이너/아이템 정합 분기를 인식해, references/kr-trainer-alignment.md 절차에 따라 audit-kr-trainers.ts(jp-mega-dream-ex/kr-m2a)로 그 세트 트레이너 블록 전체를 전단사 감사해야 함을 안내/수행. (제보 한 장은 블록 스크램블의 일각이라는 인식이 핵심)",
+      "files": [],
+      "assertions": [
+        "제보된 유리나팔 한 장만 보지 않고 그 세트 트레이너/아이템 블록 전체를 감사해야 한다고 인식함",
+        "audit-kr-trainers.ts 번들 스크립트 또는 kr-trainer-alignment.md 절차를 사용/언급함",
+        "스크램블 근본원인(가나다 재정렬 + TR_JA2KO 사전 미등록 → 번호폴백)을 이해하고 있음",
+        "EN 다리로 정체성을 확증하고, EN無 쌍은 이미지로 판정한다는 검증 위계를 따름"
+      ]
+    },
+    {
+      "id": 4,
+      "eval_name": "kr-image-broken-is-r2",
+      "prompt": "스칼렛ex 도감에서 클레스퍼트라 KR 이미지가 깨져서 안 떠. 왜 그런지 봐줘.",
+      "expected_output": "정체성/연결 문제가 아니라 R2 객체 부재(404)임을 진단 — curl -I로 R2 URL이 404인지, 원본(pokemonkorea)이 200인지 확인하고 backfill-kr-images-r2.ts로 복구하는 경로를 제시(DB·빌드 무변경, 프로덕션 즉시 반영)",
+      "files": [],
+      "assertions": [
+        "이미지 깨짐을 식별자/연결 문제가 아니라 R2 객체 부재(404) 가능성으로 우선 진단함",
+        "R2 URL과 원본(pokemonkorea) URL의 HTTP 상태를 대조하는 진단(curl -I 등)을 제안/수행함",
+        "DB가 아니라 R2 백필(backfill-kr-images-r2.ts)이 해법이며 빌드/배포 없이 반영됨을 안내함"
+      ]
     }
   ]
 }
