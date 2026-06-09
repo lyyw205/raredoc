@@ -856,3 +856,10 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - 진단: kr-sv1s#037·kr-sv1v#036/#068/#085 의 imageSmall·imageLarge(R2 URL) 모두 404, 원본(pokemonkorea wmimages)은 200. 과거 R2 백필이 이 4장만 통째로 누락. **DB URL 자체는 정확**(객체만 없음).
 - kr-sv1s/kr-sv1v 전수 HEAD 스캔(216행) → 진짜 깨짐 정확히 4장(부르롱#060 L=ERR은 전송 일시오류 오탐, 재시도 200). 원본에서 받아 R2 small·large 키에 업로드(small=large 동일원본, apply-kr-official 규약). 업로드 후 4장 S=200 L=200, 이미지 시각확인(클레스퍼트라 Espathra·빠르모트 Pawmot 정상).
 - **DB·repo 무변경 — 수정은 R2 객체 업로드로 프로덕션 즉시 반영(빌드/배포 불필요)**. 재사용 스크립트 `scripts/backfill-kr-images-r2.ts` 신설(SETMAP 확장식, 404/NULL만 백필·ERR 제외). ⚠ "KR 이미지 깨짐" 제보 = 식별자 아닌 **R2 객체 부재** 우선 의심 — HEAD 체크로 판별.
+
+### §49. 테라스탈 페스타ex(kr-sv8a) — 트레이너/도구 블록 전체 KR 스크램블 34장 대량 교정 (2026-06-10, 사용자 제보: 낚싯대MAX)
+- 제보 1장(낚싯대MAX)을 단서로 감사하니 **트레이너/에너지 블록 전체(69장 중 34장)가 오링크**. KR이 가나다순 재정렬인데 TR_JA2KO에 이 세트 이름 **40개 미등록** → apply-kr-official 이 번호폴백으로 가나다 블록 통째 스크램블(§45와 동형, 최대규모).
+- EN 다리로 확증된 예: JP#142 つりざおMAX(EN Max Rod)←KR 유리나팔(=Glass Trumpet) / JP#140 ガラスのラッパ(EN Glass Trumpet)←KR 밤의 들것 / JP#147 なかよしポフィン(Buddy Poffin)←KR 대지의 그릇 등.
+- **수정 = 손번역 배제, 기계적 전단사 재매핑**: TR_JA2KO + sv8a 보강 35개(EN 다리·이미지 검증)로 이름→정체성 사전 완성 → 이름그룹 번호순 zip(중복명 ネリネ×3·シュウメイ×2·メロコ×2·パルデアの仲間たち×2 SAR 포함 정확 처리). 전단사 JP 69/69·KR 69/69, issues 0. EN無 불확실쌍 2개(#178 マツバ=유빈·#163 アカマツ=하솔)는 **이미지 직접 판정**(동일 일러·효과)으로 확증.
+- 근본수정: **trainer-names-jako.ts에 35개 영구 등록**(재발 방지) + KR locale 34장 logicalCardId 재배정 + nameKo=KR명. 빌드 237/136/237/5(KR 전수매칭). 멱등 재검증 0 변경.
+- ⚠ **'KR 이름 1장 이상' 제보 + krMirrorAll 세트 = 블록 전체 스크램블 가능성** → 단건 보지 말고 EN 다리로 트레이너 블록 전수 전단사 감사. 사전 미등록이 스크램블의 근본원인.
