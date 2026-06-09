@@ -844,3 +844,9 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **② AR#079 アチゲータ EN 오삽입**: AR#079(kantaro, Art Rare)는 EN 없었고, EN PAL#202 Crocalor(sv2#202, **Illustration Rare, kantaro**)가 SVAL 스타터(lc-jp-tcg-SVAL-003)에 SVI#37과 함께 2개로 붙어 있었음. build는 AR#079에 엉뚱하게 sv1#37(베이스 Uncommon)을 끌어옴.
   - **이미지 직접 판정**(KR AR#079 풀아트 = EN PAL#202 IR: 악뜨거 과일가게 풀아트·HP110·불토하기30/하이퍼보이스70 완전동일) → PAL#202를 AR#079 lcid로 재배치. 스타터는 SVI#37만 유지(정상).
 - 빌드 재생성: sv-triplet-beat 103/EN100(교차)/KR103/영판0, sv-decks 정상. 3국 정합 확인.
+
+### §47. 샤이니트레저 — 박사의 연구 2장 KR 교수 swap (동명+동일일러 최난도) (2026-06-10, 사용자 제보)
+- JP Shiny Treasure ex에 博士の研究 2장(#176 オーリム博士=Sada, #177 フトゥー博士=Turo). **이름 완전동일("박사의 연구")·일러스트레이터도 둘 다 kirisAki**(ptcg.io+tcgdex 양측 확인) → 이름·일러·번호감사 **모두 무력**. 유일 구분 신호 = **카드 이미지의 교수 부제**(オーリム/フトゥー ↔ 올림박사/투로박사 ↔ Sada/Turo).
+- 이미지 직접 판정(JP#176=Sada 4699·JP#177=Turo 4700 / EN PAF#87=Sada·#88=Turo / KR#174=올림=Sada·#175=투로=Turo). EN은 정확, **KR이 swap**: KR#175(투로)가 JP#176(Sada)에, KR#174(올림)가 JP#177(Turo)에 교차.
+- 교정: KR locale 2장 logicalCardId 스왑(#174→lc-176 Sada·#175→lc-177 Turo). nameKo는 양쪽 동일("박사의 연구")이라 무변경 — **이 케이스는 nameKo로도 구분 불가, 오직 KR 번호↔이미지 페어링이 정답**. 빌드 360/237/360/4 유지(§45 무회귀).
+- ⚠ §45에서 같은 kr-sv4a博士↔테사는 잡았으나 **博士 2장 내부 Sada/Turo 스왑은 미적발**(이름+일러 동일이라 §45 이름대조도 못 가름) → 이번에 이미지로만 적발. **동명+동일일러+nameKo동일 3중 함정 = 캠페인 최난도, 이미지가 유일 권위.**
