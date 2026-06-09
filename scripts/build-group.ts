@@ -37,7 +37,7 @@ const CONFIG: Record<string, Cfg> = {
   "sv-triplet-beat": {
     nameKo: "트리플렛비트", nameEn: "Triplet Beat",
     jp: ["jp-sv-triplet-beat"], kr: ["kr-sv1a"],
-    krMirror: { "kr-sv1a": "jp-sv-triplet-beat" }, enNative: null, // EN 네이티브 없음 → 교차그룹
+    krMirror: { "kr-sv1a": "jp-sv-triplet-beat" }, enNative: null, krMirrorAll: true, // EN 네이티브 없음 → 교차그룹. krMirrorAll: KR lcid 공유로 매칭(kr-sv1a 103 전수 JP 병합·미연결0) — 에너지#072/#073 KR번호 JP역순(루미너스/제트)이라 번호-zip이 교차시키던 것 해소(2026-06-10)
   },
   "sv-paldea-evolved": {
     nameKo: "클레이버스트", nameEn: "Clay Burst",

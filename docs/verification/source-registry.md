@@ -836,3 +836,11 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **kr-sv4k 2장**: 대지의 그릇↔잠만보인형(#059/#060 번호 우연일치로 번호감사 통과 — 이름으로만 적발).
 - 이름 일치 정상(수퍼에너지회수·하이퍼볼·이상한사탕·오기머리띠·박사연구1·보스지령·카리스마·모야모·클라벨·페퍼본문·마을백화점·리그본부·레슨스튜디오·리버설E / sv4k 부스트에너지·오기조끼·TM데볼루션·사다기백·종길·멜로코)은 보존.
 - **메모리 [project_sv_pack_audit] kr-sv4a 예고가 실측 확정** — apply-kr-official 가 sv4a 시크릿에서 TR_JA2KO 미등록명을 번호 폴백으로 오매핑한 잔재. 이번에 locale 직접 재배정으로 청산. EN은 정확(영향 없음).
+
+### §46. 트리플렛비트 — 에너지 KR 번호-zip 교차(빌드버그·신종) + AR#079 EN 오삽입 (2026-06-10, 사용자 제보)
+- **① 에너지 2장 — DB는 정상, build-group 렌더가 교차(신종 카테고리)**: JP#072 ジェット=Jet / JP#073 ルミナス=Luminous. KR 공식 실데이터는 **JP역순**(이미지 판정: SV1a_072=루미너스, SV1a_073=제트). DB lcid 링크는 정확(루미너스↔#073↔EN191, 제트↔#072↔EN190)했으나, `sv-triplet-beat`만 `krMirrorAll` 미설정이라 build-group `else` 분기가 non-poke를 **번호순 bucketPair zip**으로 매칭 → KR#072(루미너스)↔JP#072(Jet) 교차 렌더.
+  - **교정 = DB 무변경, build-group.ts에 `krMirrorAll: true` 추가**. kr-sv1a 103 전수 JP lcid 공유(미연결 0) 확인 후 안전 적용 → KR 매칭이 번호-zip 대신 **공유 lcid 기반**으로 전환되어 정확.
+  - ⚠ **§40~45(DB lcid 오링크)와 다른 원인** — 여기는 lcid가 맞는데 빌드 매칭이 무시. SV 팩 중 triplet-beat만 krMirrorAll 누락이었음(나머지 SV는 모두 설정됨 → 동일증상 없음).
+- **② AR#079 アチゲータ EN 오삽입**: AR#079(kantaro, Art Rare)는 EN 없었고, EN PAL#202 Crocalor(sv2#202, **Illustration Rare, kantaro**)가 SVAL 스타터(lc-jp-tcg-SVAL-003)에 SVI#37과 함께 2개로 붙어 있었음. build는 AR#079에 엉뚱하게 sv1#37(베이스 Uncommon)을 끌어옴.
+  - **이미지 직접 판정**(KR AR#079 풀아트 = EN PAL#202 IR: 악뜨거 과일가게 풀아트·HP110·불토하기30/하이퍼보이스70 완전동일) → PAL#202를 AR#079 lcid로 재배치. 스타터는 SVI#37만 유지(정상).
+- 빌드 재생성: sv-triplet-beat 103/EN100(교차)/KR103/영판0, sv-decks 정상. 3국 정합 확인.
