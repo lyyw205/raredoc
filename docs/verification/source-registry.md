@@ -850,3 +850,9 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - 이미지 직접 판정(JP#176=Sada 4699·JP#177=Turo 4700 / EN PAF#87=Sada·#88=Turo / KR#174=올림=Sada·#175=투로=Turo). EN은 정확, **KR이 swap**: KR#175(투로)가 JP#176(Sada)에, KR#174(올림)가 JP#177(Turo)에 교차.
 - 교정: KR locale 2장 logicalCardId 스왑(#174→lc-176 Sada·#175→lc-177 Turo). nameKo는 양쪽 동일("박사의 연구")이라 무변경 — **이 케이스는 nameKo로도 구분 불가, 오직 KR 번호↔이미지 페어링이 정답**. 빌드 360/237/360/4 유지(§45 무회귀).
 - ⚠ §45에서 같은 kr-sv4a博士↔테사는 잡았으나 **博士 2장 내부 Sada/Turo 스왑은 미적발**(이름+일러 동일이라 §45 이름대조도 못 가름) → 이번에 이미지로만 적발. **동명+동일일러+nameKo동일 3중 함정 = 캠페인 최난도, 이미지가 유일 권위.**
+
+### §48. 스칼렛/바이올렛ex — KR 카드 이미지 R2 백필 누락 4장 (이미지 깨짐) (2026-06-10, 사용자 제보)
+- 제보: 클레스퍼트라(스칼렛)·빠르모트×2·모토마(바이올렛) KR 이미지 깨짐. **정체성 문제 아님** — KR 이미지(pokemonkorea 원본을 R2 미러)의 **R2 객체가 부재(404)**한 케이스.
+- 진단: kr-sv1s#037·kr-sv1v#036/#068/#085 의 imageSmall·imageLarge(R2 URL) 모두 404, 원본(pokemonkorea wmimages)은 200. 과거 R2 백필이 이 4장만 통째로 누락. **DB URL 자체는 정확**(객체만 없음).
+- kr-sv1s/kr-sv1v 전수 HEAD 스캔(216행) → 진짜 깨짐 정확히 4장(부르롱#060 L=ERR은 전송 일시오류 오탐, 재시도 200). 원본에서 받아 R2 small·large 키에 업로드(small=large 동일원본, apply-kr-official 규약). 업로드 후 4장 S=200 L=200, 이미지 시각확인(클레스퍼트라 Espathra·빠르모트 Pawmot 정상).
+- **DB·repo 무변경 — 수정은 R2 객체 업로드로 프로덕션 즉시 반영(빌드/배포 불필요)**. 재사용 스크립트 `scripts/backfill-kr-images-r2.ts` 신설(SETMAP 확장식, 404/NULL만 백필·ERR 제외). ⚠ "KR 이미지 깨짐" 제보 = 식별자 아닌 **R2 객체 부재** 우선 의심 — HEAD 체크로 판별.
