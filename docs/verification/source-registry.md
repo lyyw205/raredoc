@@ -801,3 +801,10 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **Pawmot #209 IR ↔ SV1V#085** 수동 — **ptcg.io dex 오기(923→922)**로 merge 버킷이 갈라졌던 것(Kouki 일러 일치).
 - **잔류 4**: Miraidon #80·Koraidon #124(Kouki) = **SV-P 42818/42820**(재록 WCS23) / Oinkologne #157(kirisAki) = **SV-P 42821**(재록 SVG#028) — 연속 ID 프로모 묶음, 회수 대기 16~18장째 / Poké Ball #185(Studio Bora) = JP 동시기 인쇄 무(SVI 배틀아카데미 2023-07이 최초 — EN 선행, 잔류).
 - 결과: **스칼렛ex(SV1S) 108/108·바이올렛ex(SV1V) 108/108 완전 마감** · sv1 orphan 41→4.
+
+### §40. 초전브레이커 KR 트레이너 5장 오매핑 교정 (2026-06-08, 사용자 제보)
+- **증상**: 느긋풀·추리세트·기술머신 플루어라이트·마코열매·바리비열매의 KR 표시명이 카드끼리 어긋남(한 칸 밀림). **EN 연결은 전부 정확**(tcgdex 권위 대조: 推理セット=Deduction Kit·のんびりじゃらし=Chill Teaser Toy·ナモ=Colbur·リリバ=Babiri·フローライト=TM Fluorite). 틀린 건 **KR locale 앵커 + nameKo만**.
+- **원인**: kr-sv4a §29 와 동일 패턴 — KR 트레이너는 가나다순 재정렬돼 JP 五十音 번호와 어긋나는데, apply-kr-official 가 번호 연쇄로 잘못 매핑. kr-sv8 트레이너 블록 전수 감사 → **정확히 5장만 어긋남**(2-swap 094↔096 + 3-cycle 099→101→100). 나머지 트레이너(미라클인터컴·스크램블·희망애뮬렛·시아노·시트론·규리·그래비티·익사이팅)는 정상.
+- **교정**: KR locale 5장 logicalCardId 재배정 + nameKo 정정. kr#094→JP096·kr#097→JP094·kr#098→JP101·kr#099→JP099·kr#100→JP100. 빌드 재생성 후 3국 정합 확인.
+- ⚠ **시스템 리스크**: verify-kr-mapping 은 트레이너를 dex로 못 잡아 이 오매핑에 맹점(메모리 [SM-A]·kr-sv4a 기록). **apply-kr-official 거친 다른 SV 팩(kr-sv5k/sv6/sv7 등) 트레이너 블록도 동일 어긋남 가능 — 전수 KR 감사 백로그.**
+- 잔여 무관: 초전 SR/SAR 트레이너(#127~138) KR 미부착 = KR 시크릿 미수집(별개).
