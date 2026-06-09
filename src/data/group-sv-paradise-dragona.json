@@ -8,7 +8,7 @@
   "counts": {
     "anchors": 94,
     "enMatched": 94,
-    "krMatched": 93,
+    "krMatched": 94,
     "enOnly": 0,
     "krOnly": 0
   },
@@ -332,7 +332,15 @@
         "setId": "sv8",
         "region": "EN"
       },
-      "kr": null,
+      "kr": {
+        "id": "kr-sv7a-011",
+        "number": "011",
+        "name": "블랙큐레무 ex",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV7a/SV7a_011.png",
+        "rarity": "더블 레어",
+        "setId": "kr-sv7a",
+        "region": "KR"
+      },
       "dex": 11
     },
     {
@@ -1555,10 +1563,10 @@
         "region": "EN"
       },
       "kr": {
-        "id": "kr-sv7a-054",
-        "number": "054",
-        "name": "메가톤 블로어",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV7a/SV7a_054.png",
+        "id": "kr-sv7a-056",
+        "number": "056",
+        "name": "에너지 전송 PRO",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV7a/SV7a_056.png",
         "rarity": "ACE SPEC Rare",
         "setId": "kr-sv7a",
         "region": "KR"
@@ -1675,10 +1683,10 @@
         "region": "EN"
       },
       "kr": {
-        "id": "kr-sv7a-056",
-        "number": "056",
-        "name": "에너지 전송 PRO",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV7a/SV7a_056.png",
+        "id": "kr-sv7a-054",
+        "number": "054",
+        "name": "메가톤 블로어",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV7a/SV7a_054.png",
         "rarity": "ACE SPEC Rare",
         "setId": "kr-sv7a",
         "region": "KR"
