@@ -71,7 +71,7 @@ async function loadCards(params: {
     where,
     include: {
       logicalCard: {
-        include: { rarity: { select: { code: true } } },
+        include: { rarity: { select: { code: true } }, texts: { where: { language: "ko" }, select: { name: true } } },
       },
       set: { select: { releaseDate: true } },
     },
@@ -129,7 +129,7 @@ async function loadCards(params: {
   const cards = top.map((r) => {
     const others = allByLogical.get(r.logicalCardId) ?? [];
     const sub = others.find((o) => o.id !== r.id);
-    const nameKo = r.logicalCard.nameKo;
+    const nameKo = r.logicalCard.texts?.[0]?.name ?? r.logicalCard.nameKo; // P8a: CardText(ko) 우선
     return {
       id: r.id,
       logicalCardId: r.logicalCardId,

@@ -235,6 +235,7 @@ function toLogicalCardMeta(lc: {
     types: string[];
     illustrator: string | null;
   } | null;
+  texts?: { name: string | null }[];
 }): LogicalCardMeta {
   const gc = lc.gameCard, ac = lc.artCard;
   return {
@@ -272,7 +273,7 @@ function toLogicalCardMeta(lc: {
     rarityCategoryNameJa: lc.rarity?.category?.nameJa ?? null,
     rarityCategoryNameEn: lc.rarity?.category?.nameEn ?? null,
     rarityCategoryTier: lc.rarity?.category?.tier ?? null,
-    nameKo: lc.nameKo,
+    nameKo: lc.texts?.[0]?.name ?? lc.nameKo, // P8a: CardText(ko) 우선
     attacksKo: lc.attacksKo,
     abilitiesKo: lc.abilitiesKo,
     rulesKo: lc.rulesKo,
@@ -302,6 +303,7 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
           },
           gameCard: { select: { supertype: true, hp: true } },
           artCard: { select: { types: true, illustrator: true } },
+          texts: { where: { language: "ko" }, select: { name: true } },
           locales: {
             include: {
               set: { select: { name: true, nameKo: true, nameJa: true } },
@@ -338,6 +340,7 @@ export async function loadCardByLogicalId(logicalId: string): Promise<{
       rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } } },
       gameCard: { select: { supertype: true, hp: true } },
       artCard: { select: { types: true, illustrator: true } },
+      texts: { where: { language: "ko" }, select: { name: true } },
       locales: {
         include: { set: { select: { name: true, nameKo: true, nameJa: true } }, rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true } } },
       },
@@ -409,6 +412,7 @@ export async function searchLogicalCards(
       rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } } },
       gameCard: { select: { supertype: true, hp: true } },
       artCard: { select: { types: true, illustrator: true } },
+      texts: { where: { language: "ko" }, select: { name: true } },
       locales: {
         include: { set: { select: { name: true, nameKo: true, nameJa: true } }, rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true } } },
       },
