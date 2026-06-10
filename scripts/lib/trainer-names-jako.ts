@@ -423,4 +423,14 @@ export const TR_JA2KO: Record<string, string> = {
   "ハッコウシティ": "누룩스시티",
   "ハロンタウン": "펄롱마을",
   "夜の鉱山": "밤의 광산",
+  // SV3a 레이징서프 (jp-sv-raging-surf ↔ kr-sv3a, 2026-06-10 EN다리+이미지 검증)
+  "ワザマシン エナジーターボ": "기술머신 에너지터보", // EN Turbo Energize
+  "ワザマシン やみうち": "기술머신 암습",            // EN Blindside (암습=暗襲)
+  "アオキ": "청목",                                  // EN Larry (アオキの手際=청목의 수완 일관)
+  "シキミ": "망초",                                  // EN Shauntal (이미지 판정: 망초=고딕 캐릭터)
+  "チリ": "칠리",                                    // EN Rika
+  "パラソルおねえさん": "파라솔 아가씨",             // EN Parasol Lady
+  "メディカルエネルギー": "메디컬 에너지",           // EN Medical Energy
+  "ビーチコート": "비치코트",                        // EN Beach Court
+  "リバーサルエネルギー": "리버설 에너지",           // EN Reversal Energy
 };

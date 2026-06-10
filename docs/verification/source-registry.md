@@ -898,3 +898,12 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **최종**: anchors 125·enMatched **94**·krMatched 125·enOnly **121**·krOnly 0. artist 재감사 불일치 0·EN중복 0.
 - **출처**: ptcg.io(swsh12/tg artist), R2 JP 이미지(webp→PIL), pokemontcg.io hires 육안.
 - **남은 보류팩**: og-s8b·s9a·s10a·s11·s11a (동일 방법). 운영함정: Supabase 세션풀 포화시 "Connection terminated" — 스크립트 연달아 돌리지 말고 $disconnect + 대기.
+
+### §53. 레이징서프(og-sv3a) 기술머신 KR swap 교정 + 서포터 위양성 회피 (2026-06-10, 제보: 기술머신 암습/에너지터보 표기 어긋남)
+- **제보**: #055/#056 기술머신(암습↔에너지터보) KR 표기 어긋남. 트레이너/아이템 KR 정합 분기.
+- **진단**: jp-sv-raging-surf/kr-sv3a 감사 — 사전갭 30(아이템·서포터·E 15종 TR_JA2KO 미등록)으로 "오링크 0"이 사각지대 가림. 블록 read-only 전수조회로 실제 오연결 색출.
+- **실제 오연결 = TM swap 2건뿐**: JP#056 エナジーターボ에 KR 암습(다른 TM)이, JP#057 やみうち에 KR 에너지터보가 붙음(번호폴백 스크램블). EN은 정상(Turbo Energize/Blindside). 암습=暗襲=Blindside, 에너지터보=Turbo Energize.
+- ⚠ **서포터 위양성 회피(중요)**: アオキ#058↔KR청목#059, シキミ#059↔KR망초#058 이 번호 교차라 swap 의심됐으나 — **이미지 판정: 망초=고딕캐릭터(シキミ/Shauntal), 청목=정장남(アオキ/Larry)** → **현재 연결 정상**(번호교차는 KR 가나다정렬 망초ㅁ<청목ㅊ 탓). アオキの手際=청목의 수완 사전기존값도 일관. **번호 추측으로 '교정'했으면 멀쩡한 걸 깨뜨릴 뻔** — EN무 아닌 캐릭터도 동명아닌 교차는 이미지 필수.
+- **교정**: TR_JA2KO에 9종 추가(エナジーターボ/やみうち/アオキ청목/シキミ망초/チリ칠리/パラソル/メディカル/ビーチコート/リバーサル — EN다리+이미지 검증) → audit --apply(locale 재배정 2 + nameKo 18 갱신) → 멱등 재감사 오링크 0·사전갭 0.
+- **출처**: EN 다리(ptcg.io/dex), 이미지(R2 JP webp + pokemonkorea KR png 육안), アオキの手際 기존 사전.
+- ⚠ **병행작업 회피**: og-sv3a는 사용자 병행작업(크로스그룹 EN)이 group JSON 재빌드 중 → **group-sv-raging-surf.json 재빌드/커밋 안 함**(그쪽이 소유). KR 교정은 DB+사전(독립)만, 페이지는 그쪽 재빌드 시 반영.
