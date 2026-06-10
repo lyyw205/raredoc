@@ -28,7 +28,6 @@ export type LocaleSummary = {
 
 export type LogicalCardMeta = {
   id: string;
-  setGroupId: string | null;
   primarySetId: string | null;
   primaryNumber: string | null;
   primaryNumberInt: number | null;
@@ -153,7 +152,6 @@ function toLocaleSummary(l: {
 
 function toLogicalCardMeta(lc: {
   id: string;
-  setGroupId: string | null;
   primarySetId: string | null;
   primaryNumber: string | null;
   primaryNumberInt: number | null;
@@ -196,7 +194,6 @@ function toLogicalCardMeta(lc: {
 }): LogicalCardMeta {
   return {
     id: lc.id,
-    setGroupId: lc.setGroupId,
     primarySetId: lc.primarySetId,
     primaryNumber: lc.primaryNumber,
     primaryNumberInt: lc.primaryNumberInt,
@@ -302,30 +299,22 @@ export async function loadCardByLogicalId(logicalId: string): Promise<{
   return { logicalCard: toLogicalCardMeta(lc), locales };
 }
 
-/** SetGroup id 로 그룹 내 전 CardLocale 조회(LogicalCard 메타 포함) */
-export async function loadCardsByGroup(setGroupId: string): Promise<
-  {
-    logicalCardId: string;
-    locales: LocaleSummary[];
-  }[]
-> {
-  const lcs = await prisma.logicalCard.findMany({
-    where: { setGroupId },
-    include: {
-      locales: {
-        include: { set: { select: { name: true, nameKo: true, nameJa: true } } },
-      },
-    },
-  });
-  return lcs.map((lc) => ({
-    logicalCardId: lc.id,
-    locales: lc.locales
-      .map(toLocaleSummary)
-      .sort(
-        (a, b) =>
-          (REGION_ORDER[a.region] ?? 9) - (REGION_ORDER[b.region] ?? 9)
-      ),
-  }));
+/**
+ * SetGroup(팩) id 로 그 팩에 속한 LogicalCard id 목록 도출.
+ * '도둑질' 방지: 가변·재포인트 대상인 LogicalCard.setGroupId 대신,
+ * 각 LC의 앵커 locale(JP>KR>EN)의 Set.setGroupId(불변 물리관계)로 계산한다.
+ * (setGroupId 컬럼과 전 그룹 diff=0 검증됨 — p7-setgroup-rewire-regression.ts)
+ */
+export async function lcIdsInPack(setGroupId: string): Promise<string[]> {
+  const rows = await prisma.$queryRaw<{ lc: string }[]>`
+    SELECT a.lc FROM (
+      SELECT DISTINCT ON (cl."logicalCardId") cl."logicalCardId" AS lc, s."setGroupId" AS grp
+      FROM "CardLocale" cl JOIN "Set" s ON s.id = cl."setId"
+      WHERE s."setGroupId" IS NOT NULL
+      ORDER BY cl."logicalCardId",
+        CASE cl.region WHEN 'JP' THEN 0 WHEN 'KR' THEN 1 WHEN 'EN' THEN 2 ELSE 3 END
+    ) a WHERE a.grp = ${setGroupId}`;
+  return rows.map((r) => r.lc);
 }
 
 export type LogicalCardSearchFilters = {
@@ -354,7 +343,7 @@ export async function searchLogicalCards(
   if (filters.supertype) where.supertype = filters.supertype;
   if (filters.type) where.types = { has: filters.type };
   if (filters.rarityCode) where.rarity = { code: filters.rarityCode };
-  if (filters.setGroupId) where.setGroupId = filters.setGroupId;
+  if (filters.setGroupId) where.id = { in: await lcIdsInPack(filters.setGroupId) };
   if (q) {
     where.locales = {
       some: { name: { contains: q, mode: "insensitive" } },
