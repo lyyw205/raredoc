@@ -66,7 +66,6 @@ export type LogicalCardMeta = {
   rarityNameKo: string | null;
   rarityNameJa: string | null;
   rarityNameEn: string | null;
-  rarityTier: number | null;
   // 카테고리 레이어 (11개 그룹)
   rarityCategoryCode: string | null;
   rarityCategoryNameKo: string | null;
@@ -75,10 +74,6 @@ export type LogicalCardMeta = {
   rarityCategoryTier: number | null;
   // ── 한국 유저 대상 한글 overlay ──
   nameKo: string | null;
-  attacksKo: Prisma.JsonValue;
-  abilitiesKo: Prisma.JsonValue;
-  rulesKo: string[];
-  flavorTextKo: string | null;
 };
 
 const REGION_ORDER: Record<string, number> = { EN: 0, JP: 1, KR: 2 };
@@ -208,10 +203,6 @@ function toLogicalCardMeta(lc: {
   rules: string[];
   flavorText: string | null;
   nameKo: string | null;
-  attacksKo: Prisma.JsonValue;
-  abilitiesKo: Prisma.JsonValue;
-  rulesKo: string[];
-  flavorTextKo: string | null;
   rarity: {
     code: string;
     nameKo: string | null;
@@ -270,17 +261,12 @@ function toLogicalCardMeta(lc: {
     rarityNameKo: lc.rarity?.nameKo ?? null,
     rarityNameJa: lc.rarity?.nameJa ?? null,
     rarityNameEn: lc.rarity?.nameEn ?? null,
-    rarityTier: lc.rarity?.tier ?? null,
     rarityCategoryCode: lc.rarity?.category?.code ?? null,
     rarityCategoryNameKo: lc.rarity?.category?.nameKo ?? null,
     rarityCategoryNameJa: lc.rarity?.category?.nameJa ?? null,
     rarityCategoryNameEn: lc.rarity?.category?.nameEn ?? null,
     rarityCategoryTier: lc.rarity?.category?.tier ?? null,
     nameKo: lc.texts?.[0]?.name ?? lc.nameKo, // P8a: CardText(ko) 우선
-    attacksKo: lc.attacksKo,
-    abilitiesKo: lc.abilitiesKo,
-    rulesKo: lc.rulesKo,
-    flavorTextKo: lc.flavorTextKo,
   };
 }
 
@@ -330,32 +316,6 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
     logicalCard: toLogicalCardMeta(cl.logicalCard),
     allLocales,
   };
-}
-
-/** LogicalCard.id 로 시작 — 메타 + 모든 locale */
-export async function loadCardByLogicalId(logicalId: string): Promise<{
-  logicalCard: LogicalCardMeta;
-  locales: LocaleSummary[];
-} | null> {
-  const lc = await prisma.logicalCard.findUnique({
-    where: { id: logicalId },
-    include: {
-      rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } } },
-      gameCard: { select: { supertype: true, hp: true } },
-      artCard: { select: { types: true, illustrator: true } },
-      texts: { where: { language: "ko" }, select: { name: true } },
-      locales: {
-        include: { set: { select: { name: true, nameKo: true, nameJa: true } }, rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true } } },
-      },
-    },
-  });
-  if (!lc) return null;
-  const locales = lc.locales
-    .map(toLocaleSummary)
-    .sort(
-      (a, b) => (REGION_ORDER[a.region] ?? 9) - (REGION_ORDER[b.region] ?? 9)
-    );
-  return { logicalCard: toLogicalCardMeta(lc), locales };
 }
 
 /**

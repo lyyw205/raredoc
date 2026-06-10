@@ -1233,22 +1233,3 @@ export async function getGlossary(locale = "ko"): Promise<GlossaryRow[]> {
   const rows = await prisma.glossaryEntry.findMany({ where: { locale }, orderBy: { term: "asc" } });
   return rows.map((g) => ({ term: g.term, definition: g.definition, example: g.example }));
 }
-
-// ── 봉입률 ─────────────────────────────────────────────────────────────────────
-
-export type PullRateRow = {
-  rarity: string;
-  types: number;
-  probability: number;
-  perBox: string;
-};
-
-export async function getPullRates(setId: string): Promise<PullRateRow[]> {
-  const rows = await prisma.pullRate.findMany({ where: { setId } });
-  return rows.map((p) => ({
-    rarity: p.rarity,
-    types: p.types,
-    probability: p.probability,
-    perBox: p.perBox,
-  }));
-}

@@ -6,7 +6,7 @@ import { USD_KRW } from "@/lib/trades/shared";
 //
 // computeUserBadges  : 유저 통계 → 각 뱃지 currentValue/earnedTier 산출 후 UserBadge upsert
 // rebuildRankings    : 전 유저 가치 집계 → RankingSnapshot upsert + rankMode 뱃지 + User.tier 갱신
-// 조회               : getBadgesForUser / getRankings / getTopCollectors / getUserRank / getCurrentSeason
+// 조회               : getBadgesForUser / getTopCollectors / getCurrentSeason
 // ─────────────────────────────────────────────────────────────────────────────
 
 // 시세 계수 (collection.ts 와 동일 기준)
@@ -415,87 +415,10 @@ export async function getBadgesForUser(userId: string): Promise<BadgeView[]> {
   });
 }
 
-export type RankSort = "value" | "certified" | "badges" | "monthly";
-
-export interface RankUserView {
-  rank: number;
-  userId: string;
-  username: string;
-  displayName: string;
-  avatarInitial: string;
-  tier: "BRONZE" | "SILVER" | "GOLD" | "DIAMOND" | "LEGEND";
-  change: number;
-  value: number;
-  certified: number;
-  badges: number;
-  monthly: number;
-  isMe?: boolean;
-}
-
 /** 최신 스냅샷 날짜 반환. 없으면 null. */
 async function latestSnapshotDate(): Promise<Date | null> {
   const latest = await prisma.rankingSnapshot.findFirst({ orderBy: { date: "desc" }, select: { date: true } });
   return latest?.date ?? null;
-}
-
-const SORT_KEY: Record<RankSort, "totalKrw" | "certifiedCount" | "badgeCount" | "monthlyAdded"> = {
-  value: "totalKrw", certified: "certifiedCount", badges: "badgeCount", monthly: "monthlyAdded",
-};
-
-/** 최신 스냅샷 기준 랭킹. sort 별 정렬. 빈 데이터면 []. */
-export async function getRankings(opts?: { sort?: RankSort; limit?: number; viewerId?: string }): Promise<RankUserView[]> {
-  const sort = opts?.sort ?? "value";
-  const limit = opts?.limit ?? 100;
-  const date = await latestSnapshotDate();
-  if (!date) return [];
-
-  const prevDate = await prisma.rankingSnapshot.findFirst({
-    where: { date: { lt: date } },
-    orderBy: { date: "desc" },
-    select: { date: true },
-  });
-
-  const snaps = await prisma.rankingSnapshot.findMany({
-    where: { date },
-    orderBy: { [SORT_KEY[sort]]: "desc" },
-    take: limit,
-  });
-
-  // 변동(이전 스냅샷의 가치순 rank 대비)
-  let prevRankMap = new Map<string, number>();
-  if (prevDate) {
-    const prev = await prisma.rankingSnapshot.findMany({ where: { date: prevDate.date }, select: { userId: true, rank: true } });
-    prevRankMap = new Map(prev.map((p) => [p.userId, p.rank]));
-  }
-
-  const userIds = snaps.map((s) => s.userId);
-  const userRows = await prisma.user.findMany({
-    where: { id: { in: userIds } },
-    select: { id: true, username: true, displayName: true, name: true, avatarInitial: true, tier: true },
-  });
-  const userMap = new Map(userRows.map((u) => [u.id, u]));
-
-  return snaps.map((s, i) => {
-    const u = userMap.get(s.userId);
-    const display = u?.displayName ?? u?.name ?? u?.username ?? "?";
-    const rank = i + 1;
-    const prevRank = prevRankMap.get(s.userId);
-    const change = prevRank != null ? prevRank - rank : 0;
-    return {
-      rank,
-      userId: s.userId,
-      username: u?.username ?? s.userId,
-      displayName: display,
-      avatarInitial: u?.avatarInitial ?? display.charAt(0),
-      tier: (u?.tier as RankUserView["tier"]) ?? "BRONZE",
-      change,
-      value: s.totalKrw,
-      certified: s.certifiedCount,
-      badges: s.badgeCount,
-      monthly: s.monthlyAdded,
-      isMe: opts?.viewerId ? s.userId === opts.viewerId : undefined,
-    };
-  });
 }
 
 export interface TopCollector {
@@ -545,17 +468,6 @@ export async function getTopCollectors(n = 3): Promise<TopCollector[]> {
       monthlyAdded: s.monthlyAdded,
     };
   });
-}
-
-/** 유저의 현재(최신 스냅샷) 가치 순위. 없으면 null. */
-export async function getUserRank(userId: string): Promise<number | null> {
-  const date = await latestSnapshotDate();
-  if (!date) return null;
-  const snap = await prisma.rankingSnapshot.findUnique({
-    where: { userId_date: { userId, date } },
-    select: { rank: true },
-  });
-  return snap?.rank ?? null;
 }
 
 export interface SeasonView {

@@ -217,43 +217,6 @@ export async function getUserCollection(userId: string): Promise<CollectionItemV
   return (items as unknown as RawItem[]).map(toView);
 }
 
-export interface SetProgress {
-  setId: string;
-  name: string;
-  owned: number;
-  total: number;
-  estimatedKrw: number;
-}
-
-/** 세트별 보유/총수/추정합. total 은 Set.cardCount 기준. */
-export async function getUserSetProgress(userId: string): Promise<SetProgress[]> {
-  const items = await getUserCollection(userId);
-  const bySet = new Map<string, SetProgress>();
-  for (const it of items) {
-    const cur = bySet.get(it.setId) ?? {
-      setId: it.setId,
-      name: it.setName,
-      owned: 0,
-      total: 0,
-      estimatedKrw: 0,
-    };
-    cur.owned += 1;
-    cur.estimatedKrw += it.estimatedKrw;
-    bySet.set(it.setId, cur);
-  }
-  if (bySet.size === 0) return [];
-
-  const sets = await prisma.set.findMany({
-    where: { id: { in: [...bySet.keys()] } },
-    select: { id: true, cardCount: true },
-  });
-  for (const s of sets) {
-    const cur = bySet.get(s.id);
-    if (cur) cur.total = s.cardCount;
-  }
-  return [...bySet.values()].sort((a, b) => b.owned - a.owned);
-}
-
 // ── 컬렉션 탭: 보유 세트의 "전체 카드" 카탈로그 (도감 내카드보기처럼 보유/미보유 표시) ──
 export interface CollectionCatalogCard {
   cardId: string; // CardLocale.id
