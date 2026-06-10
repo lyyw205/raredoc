@@ -556,40 +556,54 @@ export type CardAdoption = {
  * - adoptionRate: 평균 채용률
  * - usageScore: Σ(adoptionRate × avgCount)
  *
- * 현재 DeckRecipeCard.logicalCardId 는 전부 null(카드매칭 미수행) → 빈 Map 반환(정상).
- * A단계(decklist set/number → CardLocale → LogicalCard 매칭)로 logicalCardId 가 채워지면
- * 코드 수정 없이 자동으로 채워진다.
+ * ★게임 dedup(P3): 재수록 카드가 여러 logicalCardId 로 쪼개져 채용률이 분산되던 것을
+ *   gameCardId(게임상 같은 카드) 로 통합 집계 후, 그 gameCard 의 모든 인쇄본(LC) 키로 펼침.
+ *   gameCardId 없는 카드(빈-LC 등)는 logicalCardId 자기 키로 무회귀.
+ *   반환 Map 은 여전히 logicalCardId 키 — 소비처(loadCards) 무변경.
  */
 export async function getCardAdoption(): Promise<Map<string, CardAdoption>> {
   const rows = await prisma.deckRecipeCard.findMany({
     // region 필터: INTL 한정 — region 행 분리 시 deckCount/usageScore 이중계상 방지 (multisource P0)
     where: { logicalCardId: { not: null }, region: "INTL" },
-    select: { logicalCardId: true, adoptionRate: true, avgCount: true },
+    select: { logicalCardId: true, archetypeId: true, adoptionRate: true, avgCount: true },
   });
+  if (rows.length === 0) return new Map();
 
-  type Acc = { deckCount: number; rateSum: number; usageScore: number };
+  // logicalCardId → gameCardId (게임상 같은 카드 = 덱 4장 단위)
+  const lcIds = [...new Set(rows.map((r) => r.logicalCardId!))];
+  const lcRows = await prisma.logicalCard.findMany({ where: { id: { in: lcIds } }, select: { id: true, gameCardId: true } });
+  const lcToGc = new Map(lcRows.map((l) => [l.id, l.gameCardId]));
+
+  // 키 = gameCardId ?? logicalCardId 로 집계(dedup)
+  type Acc = { archs: Set<string>; rateSum: number; rowCount: number; usageScore: number };
   const acc = new Map<string, Acc>();
   for (const r of rows) {
-    const id = r.logicalCardId!;
-    let a = acc.get(id);
-    if (!a) {
-      a = { deckCount: 0, rateSum: 0, usageScore: 0 };
-      acc.set(id, a);
-    }
-    a.deckCount++;
+    const key = lcToGc.get(r.logicalCardId!) ?? r.logicalCardId!;
+    let a = acc.get(key);
+    if (!a) { a = { archs: new Set(), rateSum: 0, rowCount: 0, usageScore: 0 }; acc.set(key, a); }
+    a.archs.add(r.archetypeId);
     a.rateSum += r.adoptionRate;
+    a.rowCount++;
     a.usageScore += r.adoptionRate * r.avgCount;
   }
-
-  const map = new Map<string, CardAdoption>();
-  for (const [id, a] of acc) {
-    map.set(id, {
-      deckCount: a.deckCount,
-      adoptionRate: Math.round((a.rateSum / a.deckCount) * 10) / 10,
+  const perKey = new Map<string, CardAdoption>();
+  for (const [key, a] of acc) {
+    perKey.set(key, {
+      deckCount: a.archs.size, // 등장 아키타입 수(중복 인쇄본 이중계상 방지)
+      adoptionRate: Math.round((a.rateSum / a.rowCount) * 10) / 10,
       usageScore: Math.round(a.usageScore * 10) / 10,
     });
   }
-  return map;
+
+  // logicalCardId 키로 펼침 — 메타 gameCard 의 *모든* 인쇄본 LC 가 통합 채용률을 받게 함
+  const gcKeys = [...acc.keys()].filter((k) => k.startsWith("gc_"));
+  const allLcOfGc = gcKeys.length
+    ? await prisma.logicalCard.findMany({ where: { gameCardId: { in: gcKeys } }, select: { id: true, gameCardId: true } })
+    : [];
+  const out = new Map<string, CardAdoption>();
+  for (const lc of allLcOfGc) { const v = perKey.get(lc.gameCardId!); if (v) out.set(lc.id, v); }
+  for (const [key, v] of perKey) if (!key.startsWith("gc_")) out.set(key, v); // gameCardId 없는 카드
+  return out;
 }
 
 export type RisingDeck = {

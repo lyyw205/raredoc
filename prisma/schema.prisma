@@ -791,12 +791,16 @@ model LogicalCard {
   deckCards        DeckCard[]       @relation("DeckCardLogicalCard")
   rulings          Ruling[]         @relation("RulingLogicalCard")
   externalIds      ExternalIdMapping[] @relation("ExternalIdMappingLogicalCard")
+  speciesLinks     LogicalCardSpecies[] @relation("LogicalCardSpeciesLink") // P1: 종(Species) N:M
+  gameCardId       String? // P3: 게임상 같은 카드(oracle) — 덱/메타 dedup 단위
+  gameCard         GameCard?    @relation("LogicalCardGameCard", fields: [gameCardId], references: [id])
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @updatedAt
 
   @@index([setGroupId])
   @@index([rarityId])
   @@index([primarySetId])
+  @@index([gameCardId])
 }
 
 model CardLocale {
@@ -952,4 +956,55 @@ model ExternalIdMapping {
   @@index([logicalCardId])
   @@index([setId])
   @@index([setGroupId])
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// P1 — Species (종) : 도감 네비/언어별 종 이름 전용. ★dedup 에는 절대 사용 안 함.
+//   id = National Pokédex number(1..1025, PokeAPI 권위). data/pokeapi CSV 시드.
+//   LogicalCard(→ 향후 ArtCard) 와 N:M (LogicalCardSpecies). 태그팀/유나이트=복수 dex.
+//   트레이너/에너지는 무종(연결 없음). 메가/리전폼/Gmax 는 종 단위로 미분해(subtypes 유지).
+// ─────────────────────────────────────────────────────────────────────────────
+model Species {
+  id               Int                  @id // National Pokédex number
+  nameEn           String
+  nameJa           String? // ja-hrkt(가나)
+  nameKo           String?
+  genusKo          String? // 분류(예: "씨앗포켓몬")
+  generation       Int?
+  evolvesFromId    Int? // 진화 전 종 id (느슨한 참조, FK 미강제)
+  evolutionChainId Int?
+  cards            LogicalCardSpecies[]
+
+  @@index([nameKo])
+  @@index([evolutionChainId])
+}
+
+// LogicalCard(아트 정체성) ↔ Species 다대다 조인. 태그팀은 한 LC가 복수 Species 행.
+model LogicalCardSpecies {
+  logicalCardId String
+  speciesId     Int
+  logicalCard   LogicalCard @relation("LogicalCardSpeciesLink", fields: [logicalCardId], references: [id], onDelete: Cascade)
+  species       Species     @relation(fields: [speciesId], references: [id], onDelete: Cascade)
+
+  @@id([logicalCardId, speciesId])
+  @@index([speciesId])
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// P3 — GameCard (게임상 같은 카드 = oracle) : 덱 4장 제한·채용률·게임 dedup 의 유일 권위.
+//   묶음키 = [supertype, name, effectSig]. effectSig: 포켓몬=hp+공격damage집합+공격수+특성수,
+//   트레이너/에너지=subtypes. ★빈-LC(로케일 0)는 제외(실물 없음).
+//   ※ 시세/이미지 dedup엔 안 씀 — 그건 ArtCard(같은 그림) 단위.
+//   id 는 결정적('gc_' + sha1(key) 앞 20) → 멱등 재빌드.
+// ─────────────────────────────────────────────────────────────────────────────
+model GameCard {
+  id             String        @id
+  supertype      String?
+  name           String
+  effectKey      String // 묶음에 쓰인 effectSig (추적용)
+  hp             Int? // 대표값
+  regulationMark String?
+  cards          LogicalCard[] @relation("LogicalCardGameCard")
+
+  @@index([supertype, name])
 }
