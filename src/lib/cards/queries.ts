@@ -24,6 +24,14 @@ export type LocaleSummary = {
   setName: string;
   setNameKo: string | null;
   setNameJa: string | null;
+  // P4c: 인쇄본별 표시필드(CardLocale 하강). optional — 일부 호출처는 부분 생성.
+  regulationMark?: string | null;
+  legalities?: Prisma.JsonValue;
+  weakness?: string | null;
+  resistance?: string | null;
+  retreatCost?: number | null;
+  evolvesFrom?: string | null;
+  evolvesTo?: string[];
 };
 
 export type LogicalCardMeta = {
@@ -132,6 +140,13 @@ function toLocaleSummary(l: {
   imageLarge: string | null;
   setId: string;
   set: { name: string; nameKo: string | null; nameJa: string | null };
+  regulationMark?: string | null;
+  legalities?: Prisma.JsonValue;
+  weakness?: string | null;
+  resistance?: string | null;
+  retreatCost?: number | null;
+  evolvesFrom?: string | null;
+  evolvesTo?: string[];
 }): LocaleSummary {
   return {
     id: l.id,
@@ -147,6 +162,13 @@ function toLocaleSummary(l: {
     setName: l.set.name,
     setNameKo: l.set.nameKo,
     setNameJa: l.set.nameJa,
+    regulationMark: l.regulationMark ?? null,
+    legalities: l.legalities ?? null,
+    weakness: l.weakness ?? null,
+    resistance: l.resistance ?? null,
+    retreatCost: l.retreatCost ?? null,
+    evolvesFrom: l.evolvesFrom ?? null,
+    evolvesTo: l.evolvesTo ?? [],
   };
 }
 
@@ -407,7 +429,7 @@ export function logicalCardToTCG(
         ? lc.rarityNameKo ?? lc.rarityNameEn ?? lc.rarityCode ?? undefined
         : lc.rarityNameEn ?? lc.rarityCode ?? undefined;
 
-  const legalitiesObj = asObject(lc.legalities);
+  const legalitiesObj = asObject(primary.legalities ?? lc.legalities); // P4c: 인쇄본별→CL
 
   return {
     id: primary.id,
@@ -424,8 +446,8 @@ export function logicalCardToTCG(
       large: primary.imageLarge ?? primary.imageSmall ?? "",
     },
     hp: lc.hp != null ? String(lc.hp) : undefined,
-    evolvesFrom: lc.evolvesFrom ?? undefined,
-    evolvesTo: lc.evolvesTo.length > 0 ? lc.evolvesTo : undefined,
+    evolvesFrom: (primary.evolvesFrom ?? lc.evolvesFrom) ?? undefined,
+    evolvesTo: (primary.evolvesTo?.length ? primary.evolvesTo : lc.evolvesTo).length > 0 ? (primary.evolvesTo?.length ? primary.evolvesTo : lc.evolvesTo) : undefined,
     abilities: asArray<{ name: string; text: string; type: string }>(
       lc.abilities
     ),
@@ -436,9 +458,9 @@ export function logicalCardToTCG(
       damage?: string;
       text?: string;
     }>(lc.attacks),
-    weaknesses: parseTypeValue(lc.weakness),
-    resistances: parseTypeValue(lc.resistance),
-    convertedRetreatCost: lc.retreatCost ?? undefined,
+    weaknesses: parseTypeValue(primary.weakness ?? lc.weakness),
+    resistances: parseTypeValue(primary.resistance ?? lc.resistance),
+    convertedRetreatCost: (primary.retreatCost ?? lc.retreatCost) ?? undefined,
     flavorText: primary.flavorText ?? lc.flavorText ?? undefined,
     nationalPokedexNumbers:
       lc.pokedexNumbers.length > 0 ? lc.pokedexNumbers : undefined,
@@ -458,7 +480,7 @@ export function logicalCardToTCG(
               : undefined,
         }
       : undefined,
-    regulationMark: lc.regulationMark ?? undefined,
+    regulationMark: (primary.regulationMark ?? lc.regulationMark) ?? undefined,
     rules: lc.rules.length > 0 ? lc.rules : undefined,
   };
 }

@@ -824,6 +824,15 @@ model CardLocale {
   rarityId      String?
   rarity        Rarity?     @relation("RarityLocale", fields: [rarityId], references: [id])
   subtypes      String[]    @default([])
+  // P4c: 인쇄본별 표시필드(regMark/legalities=원천 인쇄본별, weakness/retreat 등=게임값이나
+  //   인쇄본 복제로 GameCard 과병합 회피). LogicalCard 에서 exact copy(diff=0).
+  regulationMark String?
+  legalities     Json?
+  weakness       String?
+  resistance     String?
+  retreatCost    Int?
+  evolvesFrom    String?
+  evolvesTo      String[]   @default([])
   prices        Price[]     @relation("PriceCardLocale")
   // Phase 5 신규 역관계
   collectionItems CollectionItem[] @relation("CollectionItemLocale")
