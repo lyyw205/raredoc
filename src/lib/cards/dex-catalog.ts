@@ -37,6 +37,9 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
             id: true,
             types: true,
             supertype: true,
+            // P7 전환: supertype(oracle)은 GameCard 새층에서 읽고 LC는 전환기 폴백.
+            // types 는 ArtCard 폼변종 over-merge(오거폰 4가면→1 ArtCard) 미해결로 보류 → LC 직독 유지.
+            gameCard: { select: { supertype: true } },
             rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } } },
             locales: {
               select: {
@@ -51,6 +54,8 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
                 imageLarge: true,
                 setId: true,
                 set: { select: { name: true, nameKo: true, nameJa: true } },
+                // P7 전환(P4a): 인쇄본별 rarity 새층. 표시 read 는 picked locale 의 이 값 우선, LC.rarity 폴백.
+                rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } } },
               },
             },
           },
@@ -92,27 +97,31 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
         }));
         const primary = pickLocale(locales, preferred);
         if (!primary) return null;
+        // P7: 표시용 rarity 는 picked 인쇄본(CardLocale)의 rarity 우선 — id 로 raw locale 역참조
+        const primaryRaw = lc.locales.find((l) => l.id === primary.id);
+        const rar = primaryRaw?.rarity ?? lc.rarity; // 새층(CardLocale.rarity) ?? LC 폴백
         const lcMeta: Pick<LogicalCardMeta, "types" | "supertype"> = {
+          // P7 전환: supertype 은 GameCard 새층 우선(diff=0). types 는 ArtCard over-merge 보류 → LC 직독.
           types: lc.types,
-          supertype: lc.supertype,
+          supertype: lc.gameCard?.supertype ?? lc.supertype,
         };
         const rarityLabel =
           primary.region === "JP"
-            ? lc.rarity?.nameJa ?? lc.rarity?.nameEn ?? lc.rarity?.code
+            ? rar?.nameJa ?? rar?.nameEn ?? rar?.code
             : primary.region === "KR"
-              ? lc.rarity?.nameKo ?? lc.rarity?.nameEn ?? lc.rarity?.code
-              : lc.rarity?.nameEn ?? lc.rarity?.code;
+              ? rar?.nameKo ?? rar?.nameEn ?? rar?.code
+              : rar?.nameEn ?? rar?.code;
         return {
           id: primary.id,
           name: primary.name,
           number: primary.number,
           rarity: rarityLabel ?? undefined,
-          rarityTier: lc.rarity?.tier ?? null,
-          rarityCategoryCode: lc.rarity?.category?.code ?? undefined,
-          rarityCategoryNameKo: lc.rarity?.category?.nameKo ?? undefined,
-          rarityCategoryNameJa: lc.rarity?.category?.nameJa ?? undefined,
-          rarityCategoryNameEn: lc.rarity?.category?.nameEn ?? undefined,
-          rarityCategoryTier: lc.rarity?.category?.tier ?? null,
+          rarityTier: rar?.tier ?? null,
+          rarityCategoryCode: rar?.category?.code ?? undefined,
+          rarityCategoryNameKo: rar?.category?.nameKo ?? undefined,
+          rarityCategoryNameJa: rar?.category?.nameJa ?? undefined,
+          rarityCategoryNameEn: rar?.category?.nameEn ?? undefined,
+          rarityCategoryTier: rar?.category?.tier ?? null,
           types: lcMeta.types.length > 0 ? lcMeta.types : undefined,
           supertype: lcMeta.supertype ?? undefined,
           region: primary.region,

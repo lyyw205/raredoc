@@ -49,10 +49,12 @@ async function loadCards(params: {
   const where: Prisma.CardLocaleWhereInput = {};
   if (params.region && params.region !== "all") where.region = params.region;
 
+  // rarity → CardLocale 직접(P4a, diff=0). types/illustrator 는 ArtCard 폼변종 over-merge 미해결로 LC 직독 유지.
+  if (params.rarity && params.rarity !== "all")
+    where.rarity = { code: params.rarity };
+
   const lcWhere: Prisma.LogicalCardWhereInput = {};
   if (params.type && params.type !== "all") lcWhere.types = { has: params.type };
-  if (params.rarity && params.rarity !== "all")
-    lcWhere.rarity = { code: params.rarity };
 
   if (Object.keys(lcWhere).length > 0) {
     where.logicalCard = lcWhere;
@@ -70,8 +72,14 @@ async function loadCards(params: {
   const rows = await prisma.cardLocale.findMany({
     where,
     include: {
+      // P4a: rarity 는 CardLocale 직접(diff=0). 표시는 새층 우선, LC 폴백.
+      rarity: { select: { code: true } },
       logicalCard: {
-        include: { rarity: { select: { code: true } }, texts: { where: { language: "ko" }, select: { name: true } } },
+        include: {
+          rarity: { select: { code: true } }, // 전환기 폴백용
+          gameCard: { select: { hp: true } }, // hp 그룹균일(diff=0)
+          texts: { where: { language: "ko" }, select: { name: true } },
+        },
       },
       set: { select: { releaseDate: true } },
     },
@@ -136,10 +144,10 @@ async function loadCards(params: {
       name: nameKo ?? r.name,
       nameSub: nameKo ? r.name : (sub?.name ?? null),
       imageUrl: r.imageSmall ?? r.imageLarge ?? "",
-      rarity: r.logicalCard.rarity?.code ?? null,
+      rarity: r.rarity?.code ?? r.logicalCard.rarity?.code ?? null,
       region: r.region,
-      type: r.logicalCard.types[0] ?? null,
-      hp: r.logicalCard.hp,
+      type: r.logicalCard.types[0] ?? null, // ArtCard over-merge 보류 → LC 직독
+      hp: r.logicalCard.gameCard?.hp ?? r.logicalCard.hp,
       adoption: params.adoptionMap.get(r.logicalCardId) ?? null,
     };
   });

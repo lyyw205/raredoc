@@ -114,12 +114,20 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
   const allLcIds = [...new Set(deck.flatMap((g) => [...g.lcIds]))];
   const lcs = await prisma.logicalCard.findMany({
     where: { id: { in: allLcIds } },
-    select: { id: true, rarity: { select: { code: true, category: { select: { tier: true } } } } },
+    select: {
+      id: true,
+      // P7: rarity→CardLocale.rarity (P4a 기계복제, diff=0). 전환기: 새층 locales.rarity 우선, LC rarity 폴백.
+      rarity: { select: { code: true, category: { select: { tier: true } } } },
+      locales: { select: { rarity: { select: { code: true, category: { select: { tier: true } } } } } },
+    },
   });
   const printInfo = new Map<string, PrintInfo>(
     lcs.map((l) => [
       l.id,
-      { logicalCardId: l.id, rarityTier: l.rarity?.category?.tier ?? 0, rarityCode: l.rarity?.code ?? null },
+      (() => {
+        const lr = l.locales.find((x) => x.rarity != null)?.rarity ?? l.rarity;
+        return { logicalCardId: l.id, rarityTier: lr?.category?.tier ?? 0, rarityCode: lr?.code ?? null };
+      })(),
     ]),
   );
 
