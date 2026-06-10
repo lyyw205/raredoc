@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { searchCards } from "@/lib/api/pokemontcg";
 import type { CardLocale } from "@/generated/prisma/client";
+import type { Prisma as PrismaTypes } from "@/generated/prisma/client";
 
 /**
  * localeId 에 해당하는 CardLocale 이 DB 에 있으면 반환, 없으면 pokemontcg.io
@@ -54,9 +55,9 @@ export async function ensureLocale(localeId: string): Promise<CardLocale | null>
         illustrator: fetched.artist ?? null,
         evolvesFrom: fetched.evolvesFrom ?? null,
         evolvesTo: fetched.evolvesTo ?? [],
-        abilities: (fetched.abilities ?? undefined) as never,
-        attacks: (fetched.attacks ?? undefined) as never,
-        legalities: (fetched.legalities ?? undefined) as never,
+        abilities: (fetched.abilities ?? undefined) as PrismaTypes.InputJsonValue | undefined,
+        attacks: (fetched.attacks ?? undefined) as PrismaTypes.InputJsonValue | undefined,
+        legalities: (fetched.legalities ?? undefined) as PrismaTypes.InputJsonValue | undefined,
         rules: fetched.rules ?? [],
         flavorText: fetched.flavorText ?? null,
       },

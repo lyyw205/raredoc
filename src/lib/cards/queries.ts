@@ -424,7 +424,7 @@ export function logicalCardToTCG(
     rarity: rarityLabel,
     types: lc.types.length > 0 ? lc.types : undefined,
     supertype: lc.supertype ?? undefined,
-    subtypes: (primary.subtypes?.length ? primary.subtypes : lc.subtypes).length > 0 ? (primary.subtypes?.length ? primary.subtypes : lc.subtypes) : undefined,
+    subtypes: (() => { const v = primary.subtypes?.length ? primary.subtypes : lc.subtypes; return v.length > 0 ? v : undefined; })(),
     artist: lc.illustrator ?? undefined,
     set: { id: primary.setId, name: primary.setName },
     images: {
@@ -433,7 +433,7 @@ export function logicalCardToTCG(
     },
     hp: lc.hp != null ? String(lc.hp) : undefined,
     evolvesFrom: (primary.evolvesFrom ?? lc.evolvesFrom) ?? undefined,
-    evolvesTo: (primary.evolvesTo?.length ? primary.evolvesTo : lc.evolvesTo).length > 0 ? (primary.evolvesTo?.length ? primary.evolvesTo : lc.evolvesTo) : undefined,
+    evolvesTo: (() => { const v = primary.evolvesTo?.length ? primary.evolvesTo : lc.evolvesTo; return v.length > 0 ? v : undefined; })(),
     abilities: asArray<{ name: string; text: string; type: string }>(
       lc.abilities
     ),

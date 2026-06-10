@@ -149,7 +149,7 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
     if (enSet) { const v = enSet.name ?? meta.nameEn ?? undefined; if (v) names.EN = v; }
 
     const regionSets = [...meta.sets]
-      .sort((a, b) => REGION_ORDER.indexOf(a.region as never) - REGION_ORDER.indexOf(b.region as never))
+      .sort((a, b) => REGION_ORDER.indexOf(a.region as (typeof REGION_ORDER)[number]) - REGION_ORDER.indexOf(b.region as (typeof REGION_ORDER)[number]))
       .map((s) => ({
         region: s.region,
         name: s.name,
