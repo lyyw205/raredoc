@@ -18,9 +18,11 @@ async function main() {
   // dex|illust 버킷 키들 — 한 카드가 복수 dex(태그팀)면 첫 dex 로 단순화
   const bk = (dex: number[], ill: string | null) => (dex.length ? dex[0] : 0) + "|" + norm(ill);
 
-  // JP 앵커 버킷
+  // JP 앵커 버킷 — EN 로케일이 아직 없는 앵커만(orphan→미매칭 앵커 입양; 이미 매칭된 앵커에
+  // 2번째 EN을 더하지 않음. Dark Phantasma 처럼 전부 EN-less면 영향 없고, og-s10d 처럼
+  // 일부만 비었으면 그 빈 칸만 채워 알트아트 과잉연결을 막는다.)
   const anchors = await prisma.logicalCard.findMany({
-    where: { setGroupId: groupId, supertype: "Pokémon" },
+    where: { setGroupId: groupId, supertype: "Pokémon", locales: { none: { region: "EN" } } },
     select: { id: true, illustrator: true, pokedexNumbers: true, subtypes: true, nameKo: true,
       locales: { where: { region: "JP" }, select: { number: true, numberInt: true, name: true }, take: 1 } },
   });

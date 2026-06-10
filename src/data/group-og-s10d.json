@@ -7,9 +7,9 @@
   },
   "counts": {
     "anchors": 88,
-    "enMatched": 66,
+    "enMatched": 69,
     "krMatched": 88,
-    "enOnly": 87,
+    "enOnly": 84,
     "krOnly": 0
   },
   "anchors": [
@@ -1829,7 +1829,15 @@
         "setId": "jp-tcg-S10D",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh10-159",
+        "number": "159",
+        "name": "Zisu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s10d/en/small/en-tcg-swsh10/159.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh10",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s10-066",
         "number": "066",
@@ -2203,7 +2211,15 @@
         "setId": "jp-tcg-S10D",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh10-189",
+        "number": "189",
+        "name": "Zisu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s10d/en/small/en-tcg-swsh10/189.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-swsh10",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s10-079",
         "number": "079",
@@ -2375,7 +2391,15 @@
         "setId": "jp-tcg-S10D",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh10-207",
+        "number": "207",
+        "name": "Zisu",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s10d/en/small/en-tcg-swsh10/207.png",
+        "rarity": "Hyper Rare",
+        "setId": "en-tcg-swsh10",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s10-085",
         "number": "085",
@@ -3547,17 +3571,6 @@
         "jpElsewhere": false
       },
       {
-        "id": "en-tcg-swsh10-159",
-        "number": "159",
-        "name": "Zisu",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s10d/en/small/en-tcg-swsh10/159.png",
-        "rarity": null,
-        "setId": "en-tcg-swsh10",
-        "region": "EN",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
         "id": "en-tcg-swsh10-164",
         "number": "164",
         "name": "Virizion V",
@@ -3712,17 +3725,6 @@
         "jpElsewhere": false
       },
       {
-        "id": "en-tcg-swsh10-189",
-        "number": "189",
-        "name": "Zisu",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s10d/en/small/en-tcg-swsh10/189.png",
-        "rarity": null,
-        "setId": "en-tcg-swsh10",
-        "region": "EN",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
         "id": "en-tcg-swsh10-193",
         "number": "193",
         "name": "Hisuian Typhlosion VSTAR",
@@ -3815,17 +3817,6 @@
         "number": "206",
         "name": "Roxanne",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s10d/en/small/en-tcg-swsh10/206.png",
-        "rarity": null,
-        "setId": "en-tcg-swsh10",
-        "region": "EN",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "en-tcg-swsh10-207",
-        "number": "207",
-        "name": "Zisu",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s10d/en/small/en-tcg-swsh10/207.png",
         "rarity": null,
         "setId": "en-tcg-swsh10",
         "region": "EN",

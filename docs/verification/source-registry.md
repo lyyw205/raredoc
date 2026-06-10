@@ -933,3 +933,12 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **EN-less 30 전부 사유확정**: CSR 6(#72-77 캐릭터레어 — EN은 swsh11tg, 형제처럼 자체그룹 og-swsh11tg 유지·미탈취) + 풀아트 V 5(#40/78/83/88/89 — EN 동일일러 트윈 부재, 미연결>오연결) + 트레이너 19(TR_SWSH 사전갭 14 — 아르세우스폰/재앙의상자/야적세자매/억새/성화/월로 등, s11a처럼 후속).
 - **신규 가드 기능**: check-locale-conservation.ts에 `--revert [--apply]` 추가(스냅샷 소유관계로 복원) — 보존검사가 적발만이 아니라 **롤백 소스**가 됨을 실증. ⚠ 개선거리: --compare 가 orphan LC 비워짐을 진짜앵커 손실과 구분 못 해 🔴 위양성(og-s11/s12) 표시 → 출발지 orphan 여부로 필터 보강 예정.
 - **커밋 범위**: group-og-s10a/s11/s12.json 3개 + 레지스트리 + 신규 스크립트(link-en-orphans-by-art.ts, check-locale-conservation.ts) 커밋. build-group.ts(og-s10a enNative 1줄)는 사용자 병행작업과 함께 작업트리 유지.
+
+### §57. 타임게이저(og-s10d) EN 점검 — 대부분 정당 EN-less + ペリーラ↔Zisu 사전갭 병합 (2026-06-10, 제보 "발챙이…#085 EN 비어있음 + #075 일러 섞임")
+- **구조**: og-s10d=Time Gazer 본탄, EN=Astral Radiance(swsh10) S10P+S10D 합본. 이미 EN 거의 완료(JP앵커 88 중 EN 66). EN-less 22 = 포켓몬 18+트레이너 4.
+- **EN-less 대부분 정당(버그 아님)**: 커먼/언커먼 16(발챙이/슈륙챙이/왕구리/스완나/썬더라이볼트/입치트/크레세리아/비조푸도/페이검/아리아도스/탐리스/요씽리스 등)은 **dex가 swsh10에 아예 없음 = Astral Radiance 미수록(JP 본탄 단독)**. #075 오리진 디아루가 V(Arita 알트)도 swsh10엔 5ban판만 있어 **JP단독 알트**. #25 지라치 V 베이스도 EN 트윈 부재. ⚠ 함정: link-en-orphans-by-art 가 #25(베이스)를 swsh10#170(SR, 이미 #71 소유)에 위양성 매칭 → **EN-less 앵커만** 대상으로 링커 가드 추가(이미 EN 있는 앵커엔 2번째 EN 안 붙임).
+- ✅ **유일한 진짜 갭 = 사전갭 트레이너 ペリーラ ×3**: EN(Zisu)이 swsh10에 있으나 TR_SWSH 미등록으로 JP와 안 묶이고 og-s10d 영판전용 꼬리에 EN-only orphan으로 떠 있었음. **이미지로 ペリーラ=Zisu 확정**(같은 캐릭터·포즈, 빨강머리 서포터; 음차만 다름). rarity zip 수동 재포인트: U#66→Zisu#159·SR#79→#189·HR#85→#207. 보존검사 같은그룹 이동 3·타그룹 손실 0. EN매칭 66→69. (#085 제보 해결.)
+- なぞの化石 #62: EN(Unidentified Fossil)이 형제 og-s10p#61에 귀속(공유 아이템 단일 EN) → og-s10d엔 별도 orphan 없어 EN-less 유지. セキ(Adaman)·ナタネ(Gardenia's Vigor)는 이미 EN 연결됨.
+- **#074/#075 "일러 섞임" = 데이터 오류 아님**: #074(5ban)=JP/KR/EN(swsh10#177) 동일 아트, #075(Arita)=JP/KR 동일 아트(footer 일러 표기 일치), EN 미수록. KR#075 동심원은 홀로패턴일 뿐 같은 Arita 구도. 두 SR이 인접해 섞여 보였을 뿐.
+- **빈 LC**: Zisu orphan 3개 비워졌으나 참조(CardText 등) 1건씩 보류 → cleanup 대기(무해, 화면 미노출).
+- **커밋 범위**: group-og-s10d.json + 레지스트리 + link-en-orphans-by-art.ts(EN-less 가드) 커밋. og-s10d config 무변경(build-group.ts 미관여).
