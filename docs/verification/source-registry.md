@@ -916,4 +916,11 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **로스트어비스(og-s11) 사후검증(2026-06-10 제보 "EN 비어있음"=배포前 화면)**: artist 감사 매칭 81/81 일치·불일치0·트레이너갭0(s11a와 달리 깨끗). EN無 JP 46(커먼 45=로스트어비스 단독, dex감사 미소진0 확정 + 특수E 1). **🔧 Gift Energy(ギフトエネルギー s11#100) 특수에너지 수동연결**: dex매칭 비대상이라 자동병합 누락 → swsh11#171 Gift Energy 영판단독으로 떠있던 것 재연결(+nameKo 기프트 에너지). og-s11 81→82.
 - ✅ **TR_SWSH 트레이너 사전갭 후속 완료(2026-06-10)**: s11a 트레이너 6종(エネルギーつけかえ=Energy Switch·キャプチャーアロマ=Capturing Aroma·きんきゅうゼリー=Emergency Jelly·セレナ=Serena·ふりそで=Furisode Girl·ミクリ=Wallace) trainer-names-swsh.ts 등록 → **swsh12만 재병합**(swsh11 미실행=지역폼 더블 재발 회피). s11a EN 47→**59**(+12: 세레나/후리소데/미크리 각3 + 3아이템), og-s12 영판전용 75→63. 전부 EN+KR+nameKo 확인, 중복 0. **ジャッジマン(Judge)/ポケモンいれかえ(Switch)는 swsh12 orphan 없음(s12가 EN 점유)→ steal회피 위해 미등록·s11a EN無 유지**(정상).
 - ⚠ **미결(후속)**: ② swsh11tg(TG)는 자체 그룹 og-swsh11tg 유지. ③ s11a JP 일부 메타(illustrator/image) 결손.
+
+### §55. VMAX 클라이맥스(og-s8b) EN — 크로스그룹 방식 적용 (2026-06-10, 제보 "en 많이 비어있음")
+- **구조**: og-s8b는 순수 JP 하이클래스 컴필레이션(285장). 지정 EN 짝세트 없음 — 포켓몬 dex가 EN swsh1~12·프로모에 광범위 산포(swshp138·swsh6 70·swsh5 48 …). **단일세트 병합 불가** → 사용자 결정으로 **크로스그룹 EN**(enNative null) 적용.
+- **방식(비파괴)**: build-group 크로스그룹 로직(dex+일러+subtypes 버킷 전역매칭, 사용자 병행작업의 2차매칭 포함) — **DB 무변경, 빌드시점 표시**. config enNative []→null만.
+- **결과**: 앵커 285·**EN매칭 204(교차그룹)**·KR 272·crossGroupEN true. 미매칭 81 = 트레이너 59+에너지 14+포켓몬 8(V-UNION 등). 포켓몬은 dex+일러 버킷이라 같은그림만 매칭(오매칭 방지 내장) — ミュウVMAX→Mew VMAX gold·レックウザVMAX→swsh12tg TG 등 고레어 정확.
+- ⚠ **트레이너 한계(알고리즘 개선거리)**: 크로스그룹은 dex기반이라 트레이너/에너지 대부분 미매칭. 매칭된 7장 중 #268 ボスの指令[SR풀아트]가 swsh9#132(일반, #158 common과 중복타깃)에 붙음 — 레어도·일러 구분 약함. 포켓몬 204는 신뢰, 트레이너 정밀화는 후속.
+- **커밋 범위**: group-og-s8b.json만 커밋. build-group.ts(enNative null 1줄)는 사용자 크로스그룹 병행작업과 함께 작업트리 유지.
 - ⚠ **커밋 범위**: build-group.ts에 사용자 병행작업(크로스그룹 2차 매칭)이 섞여 **group JSON 3개+레지스트리만 커밋**, build-group.ts(og-s11/s11a config 2줄)는 병행작업과 함께 커밋되도록 작업트리에 남김.
