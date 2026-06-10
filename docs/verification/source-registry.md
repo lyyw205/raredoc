@@ -907,3 +907,11 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **교정**: TR_JA2KO에 9종 추가(エナジーターボ/やみうち/アオキ청목/シキミ망초/チリ칠리/パラソル/メディカル/ビーチコート/リバーサル — EN다리+이미지 검증) → audit --apply(locale 재배정 2 + nameKo 18 갱신) → 멱등 재감사 오링크 0·사전갭 0.
 - **출처**: EN 다리(ptcg.io/dex), 이미지(R2 JP webp + pokemonkorea KR png 육안), アオキの手際 기존 사전.
 - ⚠ **병행작업 회피**: og-sv3a는 사용자 병행작업(크로스그룹 EN)이 group JSON 재빌드 중 → **group-sv-raging-surf.json 재빌드/커밋 안 함**(그쪽이 소유). KR 교정은 DB+사전(독립)만, 페이지는 그쪽 재빌드 시 반영.
+
+### §54. 후기 SWSH 클러스터(s11·s11a·s12) EN 조정 재병합 — 백열아르카나 EN 마감 (2026-06-10, 제보: 백열아르카나 en 비어있음)
+- **구조 발견**: JP 로스트어비스(s11)·백열아르카나(s11a)·패러다임트리거(s12) 3팩이 EN Lost Origin(swsh11)+Silver Tempest(swsh12) 2세트를 분점. s11a는 깔끔한 EN 세트 없이 흩어짐(swsh12 46·swsh11 4·EN無 ~44).
+- **s12 단독병합의 부작용 교정**: 앞서 s12를 swsh12 단독병합(§52)해 s11a 카드 46장이 og-s12 영판전용에 갇혔던 것 → **swsh12를 [s12+s11a] 다중JP 재병합**으로 재분배(병합 140=s12 94+s11a 46, og-s12 영판전용 121→75). swsh11도 [s11+s11a] 병합(s11 81·s11a 4).
+- ⚠ **지역폼 dex충돌 3건 분리**: 일반/Hisuian이 national dex 동일이라 버킷충돌 — s11a#12 ガーディ(일반)·#13 ウインディ(일반)·#34 ルージュラ에 EN 일반(swsh12)+Hisuian/타세트(swsh11)이 둘 다 붙음. JP명이 일반(ヒスイ 없음)이고 s11엔 해당 dex 부재 → **swsh11판(Hisuian Growlithe/Arcanine·Jynx[Alluring Dance])을 og-s11 영판전용으로 분리**, swsh12판(일반/Selfish Lips Jynx) 유지. Jynx는 이미지로 별개카드 확정.
+- **최종**: og-s11a 앵커94·EN매칭 **47**·영판전용0 / og-s11 81·영판전용135 / og-s12 94·영판전용75. EN중복 0.
+- ⚠ **미결(후속)**: ① **TR_SWSH 트레이너 사전갭** — s11a/s12 트레이너 7종(セレナ/ミクリ/ふりそで/ジャッジマン/キャプチャーアロマ/エネルギーつけかえ/きんきゅうゼリー)이 trainer-names-swsh.ts 미등록 → s11a 트레이너 EN 미매칭(swsh12 영판전용에 잔류). 사전 보강 후 재매칭(재병합 시 지역폼 3더블 재발 → 재분리 필요). ② swsh11tg(TG)는 자체 그룹 og-swsh11tg 유지. ③ s11a JP 일부 메타(illustrator/image) 결손.
+- ⚠ **커밋 범위**: build-group.ts에 사용자 병행작업(크로스그룹 2차 매칭)이 섞여 **group JSON 3개+레지스트리만 커밋**, build-group.ts(og-s11/s11a config 2줄)는 병행작업과 함께 커밋되도록 작업트리에 남김.
