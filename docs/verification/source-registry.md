@@ -942,3 +942,10 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - 🔴 **#074/#075 오리진 디아루가 V 일러 오연결 = 진짜 오류(사용자 지적 정확, 2차턴 정정)**: 1차에 "오류 아님"이라 했으나 **틀림** — 무지개 배경만 보고 크리스탈파편(5ban) vs 안개(Arita)를 구분 못함. **ptcg.io 권위 확정**: swsh10#113=5ban Graphics(Rare Holo V), swsh10#177=**Mitsuhiro Arita**(Rare Ultra). 우리 DB가 #177 일러를 5ban으로 오기 → 합본병합이 #177(Arita)을 JP#74(5ban SR)에 잘못 붙임. 정정: **EN#177(Arita) JP#74→JP#75 재포인트**(보존 같은그룹 1·타손실 0). 결과 JP#74(5ban 풀아트SR)=EN없음(JP단독, EN엔 5ban 풀아트 미수록·#113은 레귤러V=JP#48귀속), JP#75(Arita)=EN#177 ✓. **교훈: 같은 카드 다중아트는 일러표기(서드파티 오기 가능)보다 이미지 모티프(파편/안개)로 판정, 애매하면 ptcg.io artist 교차.**
 - **빈 LC**: Zisu orphan 3개 비워졌으나 참조(CardText 등) 1건씩 보류 → cleanup 대기(무해, 화면 미노출).
 - **커밋 범위**: group-og-s10d.json + 레지스트리 + link-en-orphans-by-art.ts(EN-less 가드) 커밋. og-s10d config 무변경(build-group.ts 미관여).
+
+### §58. 배틀리전(og-s9a) EN 0→68 — 타임게이저 영판전용 꼬리에서 회수 (2026-06-10, 제보 "타임게이저 영판 엄청많음, 이것도 확인")
+- **구조 발견**: Astral Radiance(swsh10)는 여러 JP팩(타임게이저 S10D·스페이스저글러 S10P·**배틀리전 S9a**·VSTAR유니버스·SWSH구축덱)의 EN을 합친 세트. 합본병합이 S10P+S10D만 매칭해서, **배틀리전(S9a) 출신 EN이 og-s10d 영판전용 꼬리에 orphan으로 떠 있었음**(og-s9a는 EN 0/93 완전 비어있었음). 사용자가 그 꼬리(87장, jpPacks 표기 "JP: 배틀리전")를 보고 제보.
+- **회수(사용자 "지금 재배치" 승인)**: og-s10d 꼬리의 lc-orphan EN을 배틀리전 앵커로 입양. ①포켓몬 54 = `link-en-orphans-by-art og-s9a swsh10`(dex+일러 버킷, EN-less 앵커만, 모호 0) ②트레이너 14 = 명시 JP명→EN명 매핑 rarity-zip(コトブキムラ→Jubilife Village·あとだしターボ→Wait and See Turbo·シマボシ→Cyllene·デンボク→Kamado·ツツジ→Roxanne·あまいミツ→Sweet Honey·キャンセルコロン→Canceling Cologne; 일러 전부 정확 대응). **EN 0→68.**
+- **보존검사**: 크로스그룹 이동 68건 전부 `og-s10d orphan꼬리 → og-s9a 진짜앵커`(스라크→S9a#004 등), **진짜앵커(jp-tcg-*) 손실 0**. og-s10d EN 153→85(꼬리 84→16, orphan 회수분이라 진짜앵커 무손실). 3국 연결 샘플 검증(스라크/금경/원규).
+- **잔류 정당**: og-s10d 꼬리 16 = SWSH구축덱 출신(Scyther#004·Lucario V·Darkrai V/VSTAR·Kleavor·Choy·Dark Patch·Gutsy Pickaxe·Supereffective Glasses·Double Turbo Energy 등) — 우리 DB에 해당 JP 구축덱 팩이 없어 회수 불가, EN-only 표시 유지. こだわりベルト(Choice Belt)는 꼬리에 EN 없어 보류.
+- **커밋 범위**: group-og-s9a.json + group-og-s10d.json + 레지스트리 커밋. **build-group.ts(og-s9a enNative swsh10 1줄)는 사용자 병행작업과 함께 작업트리 유지**(HEAD config/JSON 불일치는 사용자 커밋 시 해소).
