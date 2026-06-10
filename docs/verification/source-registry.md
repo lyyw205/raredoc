@@ -949,3 +949,11 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **보존검사**: 크로스그룹 이동 68건 전부 `og-s10d orphan꼬리 → og-s9a 진짜앵커`(스라크→S9a#004 등), **진짜앵커(jp-tcg-*) 손실 0**. og-s10d EN 153→85(꼬리 84→16, orphan 회수분이라 진짜앵커 무손실). 3국 연결 샘플 검증(스라크/금경/원규).
 - **잔류 정당**: og-s10d 꼬리 16 = SWSH구축덱 출신(Scyther#004·Lucario V·Darkrai V/VSTAR·Kleavor·Choy·Dark Patch·Gutsy Pickaxe·Supereffective Glasses·Double Turbo Energy 등) — 우리 DB에 해당 JP 구축덱 팩이 없어 회수 불가, EN-only 표시 유지. こだわりベルト(Choice Belt)는 꼬리에 EN 없어 보류.
 - **커밋 범위**: group-og-s9a.json + group-og-s10d.json + 레지스트리 커밋. **build-group.ts(og-s9a enNative swsh10 1줄)는 사용자 병행작업과 함께 작업트리 유지**(HEAD config/JSON 불일치는 사용자 커밋 시 해소).
+
+### §59. 스페이스 저글러(og-s10p) — Palkia 일러 오연결·글라스 아이템 스왑 교정 + 사전갭 채움 (2026-06-10, 제보 "EN 비어있음 + 펄기아 #070 일러 + ばつぐんグラス #63 아이템")
+- 🔴 **오리진 펄기아 V #070/#071 일러 오연결(디아루가 §57과 동형)**: ptcg.io 확정 swsh10#167=**Oswaldo KATO**(Rare Ultra)·#039=aky CG Works. DB가 #167을 JP#70(aky 5ban SR)에 오연결 → **EN#167 JP#70→JP#71(Oswaldo) 재포인트**. JP#70(aky 풀아트)=EN없음(JP단독, EN엔 #039 레귤러V만=JP#22). 
+- 🔴 **ばつぐんグラス #63 아이템 스왑 오류**: EN이 "Choice Belt"(#211)로 잘못 붙음. 실제 ばつぐんグラス(Ryo Ueda)=**Supereffective Glasses**(#152), Choice Belt(studioborainc.)=**こだわりベルト**. 스왑 교정: #152→ばつぐんグラス(S10P#63), #211→こだわりベルト(og-s9a#092, §58때 EN-less로 남겼던 것 해소).
+- ✅ **사전갭 채움**: タイサイ ×3 = **Choy**(이미지로 확정: 초록머리·기모노 상인, Hitoshi Ariga) — Choy orphan(og-s10d 꼬리)을 rarity-zip 병합 #66/#79/#85. + Double Turbo Energy #88 → swsh10#216. EN 63→67.
+- ⚠ **링커 함정 재확인+롤백**: og-s10p의 LC id가 lc-orphan-jp-tcg-* 라 link-en-orphans-by-art 가 **병합된 base카드(S10P#22 펄기아V·#40/#82 사마자르V/VSTAR·S10D#52 이브이)의 EN을 시크릿 앵커로 도둑질** → 보존검사 적발(JP보유 앵커 4 EN상실), **--revert 후 수동교정만 재적용**. 교훈: lc-orphan-jp-tcg-* 네이밍 그룹엔 자동 링커 금지, 수동 명시매핑만.
+- **결과**: 보존검사 JP보유 앵커 EN상실 1(=Palkia#70 의도)·총 이동 7. 남은 EN-less 포켓몬 21 = JP단독 16(swsh10 dex부재) + 시크릿/베이스경합 5(미연결>오연결 유지). og-s10d 꼬리 16→11.
+- **커밋 범위**: group-og-s10p/s10d/s9a.json + 레지스트리. config 무변경(build-group.ts 미관여).
