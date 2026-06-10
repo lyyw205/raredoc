@@ -191,22 +191,35 @@ function toLogicalCardMeta(lc: {
       tier: number;
     } | null;
   } | null;
+  // P7 키스톤(안전분만): supertype/hp→GameCard, types/illustrator→ArtCard (LC 폴백은 전환기).
+  gameCard?: {
+    supertype: string | null;
+    hp: number | null;
+  } | null;
+  artCard?: {
+    types: string[];
+    illustrator: string | null;
+  } | null;
 }): LogicalCardMeta {
+  const gc = lc.gameCard, ac = lc.artCard;
   return {
     id: lc.id,
     primarySetId: lc.primarySetId,
     primaryNumber: lc.primaryNumber,
     primaryNumberInt: lc.primaryNumberInt,
     pokedexNumbers: lc.pokedexNumbers,
-    supertype: lc.supertype,
+    // 안전 전환(불일치 0/소수): supertype·hp→GameCard, types·illustrator→ArtCard.
+    supertype: gc?.supertype ?? lc.supertype,
     subtypes: lc.subtypes,
-    types: lc.types,
-    hp: lc.hp,
+    types: ac?.types?.length ? ac.types : lc.types,
+    hp: gc?.hp ?? lc.hp,
+    illustrator: ac?.illustrator ?? lc.illustrator,
+    // 아래는 LC 잔류 — regMark/legalities=인쇄본별(→CL 후속), weakness/resist/retreat/
+    //   evolves=GameCard 과병합 노출(effectSig 정련 후), attacks/abilities/rules=언어종속(P8).
     retreatCost: lc.retreatCost,
     weakness: lc.weakness,
     resistance: lc.resistance,
     regulationMark: lc.regulationMark,
-    illustrator: lc.illustrator,
     evolvesFrom: lc.evolvesFrom,
     evolvesTo: lc.evolvesTo,
     abilities: lc.abilities,
@@ -252,6 +265,8 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
           rarity: {
             select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } },
           },
+          gameCard: { select: { supertype: true, hp: true } },
+          artCard: { select: { types: true, illustrator: true } },
           locales: {
             include: {
               set: { select: { name: true, nameKo: true, nameJa: true } },
@@ -285,6 +300,8 @@ export async function loadCardByLogicalId(logicalId: string): Promise<{
     where: { id: logicalId },
     include: {
       rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } } },
+      gameCard: { select: { supertype: true, hp: true } },
+      artCard: { select: { types: true, illustrator: true } },
       locales: {
         include: { set: { select: { name: true, nameKo: true, nameJa: true } } },
       },
@@ -354,6 +371,8 @@ export async function searchLogicalCards(
     where,
     include: {
       rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } } },
+      gameCard: { select: { supertype: true, hp: true } },
+      artCard: { select: { types: true, illustrator: true } },
       locales: {
         include: { set: { select: { name: true, nameKo: true, nameJa: true } } },
       },
