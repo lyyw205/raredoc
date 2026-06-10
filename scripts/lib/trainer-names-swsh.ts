@@ -255,4 +255,11 @@ export const TR_JP2EN: Record<string, string> = {
   "ツールボックス": "Tool Box",
   "ロストシティ": "Lost City",
   "パニックマスク": "Panic Mask",
+  // S11a 백열의 아르카나 트레이너 (2026-06-10, swsh12 영판 orphan 대조 검증; s12와 EN 공유분 제외)
+  "エネルギーつけかえ": "Energy Switch",
+  "キャプチャーアロマ": "Capturing Aroma",
+  "きんきゅうゼリー": "Emergency Jelly",
+  "セレナ": "Serena",
+  "ふりそで": "Furisode Girl",
+  "ミクリ": "Wallace",
 };
