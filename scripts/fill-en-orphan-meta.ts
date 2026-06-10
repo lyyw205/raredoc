@@ -13,8 +13,7 @@
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
-
-const POKE = ["Pokémon", "Pokemon"];
+import { POKE, isPokemonSupertype } from "./lib/supertype";
 const CACHE = "data/en-ptcg";
 
 async function fetchSet(sid: string): Promise<any[]> {
@@ -57,7 +56,7 @@ async function main() {
   // 채울 게 있는 LC 만(attacks null Pokémon, 또는 supertype null, 또는 types 빈 Pokémon)
   const isEmpty = (a: any) => !a || (Array.isArray(a) && a.length === 0);
   const need = lcs.filter((lc) => {
-    const poke = POKE.includes(lc.supertype ?? "");
+    const poke = isPokemonSupertype(lc.supertype);
     return lc.supertype == null || (poke && (isEmpty(lc.attacks) || lc.types.length === 0 || lc.hp == null)) || isEmpty(lc.abilities) && false;
   });
   console.log(`EN-only LC ${lcs.length} · 보강대상 ${need.length}${gid ? ` (${gid})` : " (전체)"}`);
@@ -82,7 +81,7 @@ async function main() {
       const d: any = {};
       if (lc.supertype == null && c.supertype) { d.supertype = c.supertype; fields.supertype++; }
       if (lc.subtypes.length === 0 && c.subtypes?.length) { d.subtypes = c.subtypes; fields.subtypes++; }
-      const poke = POKE.includes(c.supertype ?? "");
+      const poke = isPokemonSupertype(c.supertype);
       if (poke) {
         if (isEmpty(lc.attacks) && c.attacks?.length) { d.attacks = mapAttacks(c.attacks); fields.attacks++; }
         if (isEmpty(lc.abilities) && c.abilities?.length) { d.abilities = mapAbilities(c.abilities); fields.abilities++; }

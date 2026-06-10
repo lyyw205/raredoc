@@ -17,8 +17,7 @@ import { prisma } from "../src/lib/prisma";
 import { readFileSync } from "node:fs";
 import { resolveCardDexes } from "./lib/pokeapi-names";
 import { TR_JA2KO } from "./lib/trainer-names-jako";
-
-const POKE = ["Pokémon", "Pokemon"];
+import { POKE, isPokemonSupertype } from "./lib/supertype";
 const DIR = "data/kr-official";
 // maxNum: 번호 상한(이하만 처리). 샤이니 헤비 팩에서 base 섹션만 먼저 매핑할 때(샤이니 중복 회피).
 const CFG: Record<string, { jp: string; json: string; maxNum?: number }> = {
@@ -335,7 +334,7 @@ function match(offs: Off[], jps: Jp[], jaKoDict?: Map<string, Set<string>>) {
 
   // 1) 포켓몬: dex 버킷 → 일러/번호순 페어
   const offPoke = offs.map((o) => ({ o, dex: koDex(o.koName) })).filter((x) => x.dex != null);
-  const jpPoke = jps.filter((j) => POKE.includes(j.supertype ?? "") && j.dex != null);
+  const jpPoke = jps.filter((j) => isPokemonSupertype(j.supertype) && j.dex != null);
   const ojb = new Map<string, any[]>(), jjb = new Map<string, any[]>();
   for (const x of offPoke) push(ojb, String(x.dex), x);
   for (const j of jpPoke) push(jjb, String(j.dex), j);
@@ -370,7 +369,7 @@ function match(offs: Off[], jps: Jp[], jaKoDict?: Map<string, Set<string>>) {
   // ⚠️ 포켓몬은 phase 1(dex)에서만 매칭. phase 2/3 은 트레이너/에너지 전용(포켓몬 번호/일러 폴백은
   //    다른 종/카드에 오매핑되므로 금지 — 샤이니 헤비 팩에서 포켓몬↔에너지 쓰레기 방지).
   const isPokeOff = (o: Off) => koDex(o.koName) != null;
-  const isPokeJp = (j: Jp) => POKE.includes(j.supertype ?? "");
+  const isPokeJp = (j: Jp) => isPokemonSupertype(j.supertype);
   // 1.5) 트레이너/에너지: DB검증 ja↔ko 사전 직매칭(이름 정체성) — 일러버킷보다 우선
   if (jaKoDict) {
     const dOff = offs.filter((o) => !out.has(o.numInt) && !isPokeOff(o));

@@ -16,12 +16,12 @@
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
 import { resolveCardDexes, loadPokeapiNames } from "./lib/pokeapi-names";
+import { POKE } from "./lib/supertype";
 
 const DRY = process.argv.includes("--dry-run");
 const ONLY = process.argv.find((a) => a.startsWith("--only="))?.split("=")[1] as "fill" | "fix" | undefined;
 const LIMIT = parseInt(process.argv.find((a) => a.startsWith("--limit="))?.split("=")[1] ?? "0", 10);
 const SAMPLES = parseInt(process.argv.find((a) => a.startsWith("--samples="))?.split("=")[1] ?? "20", 10);
-const POKE = ["Pokémon", "Pokemon"];
 
 async function pool<T>(items: T[], n: number, fn: (t: T) => Promise<void>) {
   let idx = 0;
@@ -40,7 +40,7 @@ async function main() {
   loadPokeapiNames();
   console.log(`포켓몬 적재 중... ${DRY ? "[DRY-RUN]" : ""}${ONLY ? ` [only=${ONLY}]` : ""}`);
   const cards = await prisma.logicalCard.findMany({
-    where: { supertype: { in: POKE } },
+    where: { supertype: { in: POKE as unknown as string[] } },
     select: { id: true, pokedexNumbers: true, nameKo: true, locales: { select: { language: true, name: true } } },
   });
   console.log(`적재 ${cards.length}\n`);

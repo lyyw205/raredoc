@@ -16,9 +16,9 @@
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
 import { resolveCardDexes, loadPokeapiNames } from "./lib/pokeapi-names";
+import { POKE } from "./lib/supertype";
 
 const SAMPLES = parseInt(process.argv.find((a) => a.startsWith("--samples="))?.split("=")[1] ?? "25", 10);
-const POKE = ["Pokémon", "Pokemon"];
 
 /** 카드명(다국어) → 도감 집합. EN 우선, 실패 시 KO. (해석기는 로더 공용 resolveCardDexes) */
 function deriveDexes(enName: string | null, koName: string | null): { dexes: number[]; via: "en" | "ko" | null } {
@@ -52,7 +52,7 @@ async function main() {
   loadPokeapiNames(); // 표준표 워밍업
   console.log("포켓몬 LogicalCard 적재 중...");
   const cards = await prisma.logicalCard.findMany({
-    where: { supertype: { in: POKE } },
+    where: { supertype: { in: POKE as unknown as string[] } },
     select: {
       id: true, supertype: true, pokedexNumbers: true, nameKo: true, setGroupId: true,
       locales: { select: { language: true, name: true, setId: true } },

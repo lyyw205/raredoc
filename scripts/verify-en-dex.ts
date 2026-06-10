@@ -4,7 +4,7 @@
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
-const POKE = ["Pokémon", "Pokemon"];
+import { POKE, isPokemonSupertype } from "./lib/supertype";
 async function fetchSet(sid: string) { const code = sid.replace(/^en-tcg-/, ""); const out: any[] = []; for (let pg = 1; pg <= 5; pg++) { const r = await fetch(`https://api.pokemontcg.io/v2/cards?q=set.id:${code}&pageSize=250&page=${pg}`); const j = await r.json(); if (!j.data?.length) break; out.push(...j.data); if (j.data.length < 250) break; } return out; }
 async function main() {
   const enSet = process.argv[2], jpSets = process.argv[3].split(",").map((s) => s.trim());
@@ -12,7 +12,7 @@ async function main() {
   const jpL = new Set((await prisma.cardLocale.findMany({ where: { setId: { in: jpSets } }, select: { logicalCardId: true } })).map((x) => x.logicalCardId));
   const en = await prisma.cardLocale.findMany({ where: { setId: enSet }, select: { number: true, name: true, logicalCardId: true, logicalCard: { select: { supertype: true, pokedexNumbers: true } } } });
   let mism = 0, merged = 0;
-  for (const e of en) { if (!jpL.has(e.logicalCardId)) continue; merged++; if (!POKE.includes(e.logicalCard.supertype ?? "")) continue; const ed = enDex.get(e.number); const ld = e.logicalCard.pokedexNumbers?.[0]; if (ed != null && ld != null && ed !== ld) { mism++; console.log(`⚠ EN#${e.number} ${e.name} enDex=${ed}≠LC ${ld}`); } }
+  for (const e of en) { if (!jpL.has(e.logicalCardId)) continue; merged++; if (!isPokemonSupertype(e.logicalCard.supertype)) continue; const ed = enDex.get(e.number); const ld = e.logicalCard.pokedexNumbers?.[0]; if (ed != null && ld != null && ed !== ld) { mism++; console.log(`⚠ EN#${e.number} ${e.name} enDex=${ed}≠LC ${ld}`); } }
   console.log(`[${enSet}] 병합 ${merged}장 · dex ${mism ? `⚠불일치 ${mism}` : "✔전부 일치"}`);
   await prisma.$disconnect();
 }

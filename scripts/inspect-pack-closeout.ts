@@ -13,8 +13,7 @@ import { prisma } from "../src/lib/prisma";
 import { resolveCardDexes } from "./lib/pokeapi-names";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-
-const POKE = ["Pokémon", "Pokemon"];
+import { POKE, isPokemonSupertype } from "./lib/supertype";
 const norm = (s: string | null) => (s ?? "").trim().toLowerCase();
 const cap = <T,>(a: T[], n = 15) => a.slice(0, n);
 
@@ -73,7 +72,7 @@ async function main() {
   console.log(`\n── Phase 1 JP 앵커 정본화 검증 ──`);
   for (const sid of jpSetIds) {
     const rows = locales.filter((l) => l.setId === sid);
-    const poke = rows.filter((l) => POKE.includes(l.logicalCard.supertype ?? ""));
+    const poke = rows.filter((l) => isPokemonSupertype(l.logicalCard.supertype));
     const stNull = rows.filter((l) => !l.logicalCard.supertype).length;
     const subEmpty = rows.filter((l) => (l.logicalCard.subtypes ?? []).length === 0).length;
     const illNull = rows.filter((l) => !l.logicalCard.illustrator).length;
@@ -94,7 +93,7 @@ async function main() {
   for (const s of g.sets.filter((x) => x.region === "KR")) {
     const rows = locales.filter((l) => l.setId === s.id);
     const merged = rows.filter((l) => lcidHasJp.has(l.logicalCardId)).length;
-    const poke = rows.filter((l) => POKE.includes(l.logicalCard.supertype ?? ""));
+    const poke = rows.filter((l) => isPokemonSupertype(l.logicalCard.supertype));
     const dexBad: string[] = [];
     for (const l of poke) {
       const want = koDex(l.name); const anchor = l.logicalCard.pokedexNumbers ?? [];

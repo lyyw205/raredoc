@@ -20,8 +20,7 @@ const execFileP = promisify(execFile);
 // tcgdex 는 node fetch 가 막힘(curl 만 통과) → JP 전용 curl 헬퍼
 const curlJson = async (url: string) => { try { const { stdout } = await execFileP("curl", ["-sSL", "--max-time", "25", url], { maxBuffer: 16 * 1024 * 1024 }); return JSON.parse(stdout); } catch { return null; } };
 
-const POKE = ["Pokémon", "Pokemon"];
-const isPokeSt = (s?: string | null) => POKE.includes(s ?? "");
+import { POKE, isPokemonSupertype as isPokeSt, supertypeOf } from "./lib/supertype";
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 // 동시성 풀
@@ -70,7 +69,6 @@ function jpSubtypes(d: any): string[] {
   else if (d.category === "Energy") out.push(d.energyType === "Special" ? "Special" : "Basic");
   return out;
 }
-const supertypeOf = (c?: string) => c === "Pokemon" ? "Pokémon" : c === "Trainer" ? "Trainer" : c === "Energy" ? "Energy" : null;
 async function collectJp(sets: { id: string; code: string | null }[]): Promise<Rec[]> {
   const out: Rec[] = [];
   for (const s of sets) {

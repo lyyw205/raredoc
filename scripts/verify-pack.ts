@@ -7,8 +7,7 @@
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
 import { resolveCardDexes } from "./lib/pokeapi-names";
-
-const POKE = ["Pokémon", "Pokemon"];
+import { POKE, isPokemonSupertype } from "./lib/supertype";
 const isAscii = (s: string) => /^[\x00-\x7F]*$/.test(s);
 const hasHangul = (s: string) => /[가-힣]/.test(s);
 const hasKana = (s: string) => /[぀-ヿ一-鿿]/.test(s);
@@ -39,7 +38,7 @@ async function main() {
   let pokeN = 0;
   for (const lc of lcs) {
     st.set(lc.supertype ?? "null", (st.get(lc.supertype ?? "null") ?? 0) + 1);
-    const poke = POKE.includes(lc.supertype ?? "");
+    const poke = isPokemonSupertype(lc.supertype);
     if (poke) pokeN++;
     if (lc.types.length) cov.types++;
     if (lc.hp != null) cov.hp++;
@@ -79,7 +78,7 @@ async function main() {
   // PokeAPI dex 교차 (포켓몬): ko 또는 ja 이름 → dex 가 LC.pokedexNumbers 와 일치?
   let dchk = 0, dbad = 0; const dbadEx: string[] = [];
   for (const lc of lcs) {
-    if (!POKE.includes(lc.supertype ?? "") || !lc.pokedexNumbers.length) continue;
+    if (!isPokemonSupertype(lc.supertype) || !lc.pokedexNumbers.length) continue;
     const kr = lc.locales.find((l) => l.region === "KR"), jp = lc.locales.find((l) => l.region === "JP");
     const nm = kr?.name, lang: "ko" | "ja" = kr ? "ko" : "ja", src = kr ?? jp;
     if (!src) continue; dchk++;

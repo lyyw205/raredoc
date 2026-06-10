@@ -10,10 +10,10 @@
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
 import { getName } from "./lib/pokeapi-names";
+import { POKE, isPokemonSupertype } from "./lib/supertype";
 
 const APPLY = process.argv.includes("--apply");
 const SETS = ["kr-sv2p", "kr-sv2d", "kr-sv4k", "kr-sv4m"];
-const POKE = ["Pokémon", "Pokemon"];
 
 // LC.subtypes → 카드명 접미사 (한국판 표기: 공백 + 접미사, 예 "갸라도스 ex")
 function suffixOf(subtypes: string[]): string {
@@ -38,7 +38,7 @@ async function main() {
 
     for (const c of cards) {
       const lc = c.logicalCard;
-      if (!POKE.includes(lc.supertype ?? "")) { trainer++; continue; }
+      if (!isPokemonSupertype(lc.supertype)) { trainer++; continue; }
       const dexes = lc.pokedexNumbers ?? [];
       const koParts = dexes.map((d) => getName(d, "ko")).filter(Boolean) as string[];
       if (!koParts.length) { pokeNoDexKo++; miss.push(`#${c.number} "${c.name}"(dex[${dexes}])`); continue; }

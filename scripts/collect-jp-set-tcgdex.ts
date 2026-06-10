@@ -12,6 +12,7 @@ import { prisma } from "../src/lib/prisma";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { buildNameIndex } from "./lib/pokeapi-names";
+import { supertypeOf } from "./lib/supertype";
 const execFileP = promisify(execFile);
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -26,7 +27,6 @@ function subtypesOf(d: any): string[] {
   else if (d.category === "Energy") out.push(d.energyType === "Special" ? "Special" : "Basic");
   return out;
 }
-const supertypeOf = (c?: string) => c === "Pokemon" ? "Pokémon" : c === "Trainer" ? "Trainer" : c === "Energy" ? "Energy" : null;
 const fetchJson = async (url: string) => { try { const { stdout } = await execFileP("curl", ["-sSL", "--max-time", "20", url], { maxBuffer: 16 * 1024 * 1024 }); return JSON.parse(stdout); } catch { return null; } };
 function dexFromJa(name: string, ja: Map<string, number>): number | null {
   const clean = name.replace(/(ex|EX|V|VMAX|VSTAR|GX|δ)\s*$/g, "").replace(/[\s　]/g, "").trim().toLowerCase();

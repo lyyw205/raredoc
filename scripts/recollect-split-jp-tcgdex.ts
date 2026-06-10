@@ -21,6 +21,7 @@ import { prisma } from "../src/lib/prisma";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { buildNameIndex } from "./lib/pokeapi-names";
+import { supertypeOf } from "./lib/supertype";
 const execFileP = promisify(execFile);
 
 // DB 분할 setId → tcgdex(ja) set id
@@ -69,9 +70,6 @@ function subtypesOf(d: CardDetail): string[] {
   }
   return out;
 }
-const supertypeOf = (cat?: string): string | null =>
-  cat === "Pokemon" ? "Pokémon" : cat === "Trainer" ? "Trainer" : cat === "Energy" ? "Energy" : null;
-
 // JP 카타카나 이름 → dex (suffix 제거 후 표준 ja 색인)
 function dexFromJaName(name: string, jaIdx: Map<string, number>): number | null {
   const clean = name.replace(/(ex|EX|V|VMAX|VSTAR|GX|δ)\s*$/g, "").replace(/[\s　]/g, "").trim();

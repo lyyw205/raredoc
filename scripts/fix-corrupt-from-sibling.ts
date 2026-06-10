@@ -7,7 +7,7 @@
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
-const POKE = ["Pokémon", "Pokemon"];
+import { POKE } from "./lib/supertype";
 function isCorrupt(a: any): boolean {
   if (!Array.isArray(a) || !a[0]) return false;
   const n = String(a[0].name ?? "");

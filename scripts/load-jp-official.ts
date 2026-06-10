@@ -10,6 +10,7 @@ import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
 import { readFileSync } from "node:fs";
 import { buildNameIndex } from "./lib/pokeapi-names";
+import { supertypeOf } from "./lib/supertype";
 
 const mapStage = (s?: string | null) => { if (!s) return null; const m: Record<string, string> = { Basic: "Basic", Stage1: "Stage 1", Stage2: "Stage 2", "Stage 1": "Stage 1", "Stage 2": "Stage 2", VMAX: "VMAX", VSTAR: "VSTAR" }; return m[s] ?? s; };
 const mapTrainer = (t?: string | null) => { if (!t) return null; const m: Record<string, string> = { Supporter: "Supporter", Item: "Item", Stadium: "Stadium", Tool: "Pokémon Tool", "Pokémon Tool": "Pokémon Tool" }; return m[t] ?? t; };
@@ -22,7 +23,6 @@ function subtypesOf(c: any): string[] {
   else if (c.category === "Energy") out.push("Special");
   return out;
 }
-const supertypeOf = (c?: string) => c === "Pokemon" ? "Pokémon" : c === "Trainer" ? "Trainer" : c === "Energy" ? "Energy" : null;
 // ja인덱스가 못 푸는 특수명/中間폼명(・ 포함 등) 수동 dex.
 const JA_DEX_SPECIAL: [RegExp, number][] = [
   [/カプ・コケコ/, 785], [/カプ・テテフ/, 786], [/カプ・ブルル/, 787], [/カプ・レヒレ/, 788],

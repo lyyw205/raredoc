@@ -10,8 +10,7 @@
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
-
-const POKE = ["Pokémon", "Pokemon"];
+import { POKE, isPokemonSupertype } from "./lib/supertype";
 type Cfg = { jp: string[]; kr: string[]; krMirror: Record<string, string>; enNative: string[] | null; krMirrorAll?: boolean };
 const CONFIG: Record<string, Cfg> = {
   "sv-base": { jp: ["jp-tcg-SV1S", "jp-tcg-SV1V"], kr: ["kr-sv1s", "kr-sv1v"], krMirror: { "kr-sv1s": "jp-tcg-SV1S", "kr-sv1v": "jp-tcg-SV1V" }, enNative: ["sv1"] },
@@ -31,13 +30,13 @@ async function main() {
   const APPLY = process.argv.includes("--apply");
   const LIMIT = parseInt(process.argv.find(a => a.startsWith("--limit="))?.split("=")[1] ?? "10", 10);
   if (!cfg) { console.error("groupId 필요"); process.exit(1); }
-  const isPoke = (r: Row) => POKE.includes(r.supertype ?? "") && r.dex != null;
+  const isPoke = (r: Row) => isPokemonSupertype(r.supertype) && r.dex != null;
   const fpP = (r: Row) => `${r.dex}|${(r.illus ?? "").trim().toLowerCase()}|${r.sub}`;
   const byTier = (a: Row, b: Row) => (a.tier ?? 0) - (b.tier ?? 0) || a.numInt - b.numInt;
 
   const jp = await load(cfg.jp);
   const en = cfg.enNative ? await load(cfg.enNative)
-    : (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE }, pokedexNumbers: { hasSome: [...new Set(jp.filter(isPoke).map(r => r.dex))] as number[] } } }, select: sel })).map(toRow);
+    : (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE as unknown as string[] }, pokedexNumbers: { hasSome: [...new Set(jp.filter(isPoke).map(r => r.dex))] as number[] } } }, select: sel })).map(toRow);
 
   // EN↔JP 매칭 (build-group 과 동일)
   const enForJp = new Map<string, Row>();
