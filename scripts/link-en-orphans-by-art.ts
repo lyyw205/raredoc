@@ -30,10 +30,14 @@ async function main() {
   for (const a of anchors) { const k = bk(a.pokedexNumbers, a.illustrator); (aBuckets.get(k) ?? aBuckets.set(k, []).get(k)!).push(a); }
   for (const arr of aBuckets.values()) arr.sort((x, y) => (x.locales[0]?.numberInt ?? 0) - (y.locales[0]?.numberInt ?? 0));
 
-  // orphan EN 버킷
+  // orphan EN 버킷 — "진짜 미연결"만: logicalCardId 접두사(lc-orphan)로는 부족하다.
+  // 합본 그룹(og-s10p/s10d 등)은 *병합된* 카드도 lc-orphan-jp-tcg-* 네이밍을 써서, 접두사만
+  // 보면 base카드 EN을 orphan으로 착각해 시크릿 앵커로 도둑질한다(§59 실측: S10P#22 펄기아V·
+  // S10D#52 이브이 등 4장 EN 강탈→보존가드 적발·롤백). 그래서 **그 LC 에 JP 로케일이 없는
+  // 진짜 EN-only orphan** 으로 한정한다(JP 보유 = 이미 어떤 JP카드의 EN이므로 건드리면 안 됨).
   const orphans = await prisma.cardLocale.findMany({
-    where: { region: "EN", setId: { in: enSets }, logicalCardId: { startsWith: "lc-orphan" },
-      logicalCard: { supertype: "Pokémon" } },
+    where: { region: "EN", setId: { in: enSets },
+      logicalCard: { supertype: "Pokémon", locales: { none: { region: "JP" } } } },
     select: { id: true, setId: true, number: true, numberInt: true, name: true,
       logicalCard: { select: { illustrator: true, pokedexNumbers: true, subtypes: true } } },
   });
