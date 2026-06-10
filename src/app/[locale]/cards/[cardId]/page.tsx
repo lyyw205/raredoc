@@ -1,5 +1,6 @@
 import { searchCards } from "@/lib/api/pokemontcg";
 import { loadCardByLocaleId, logicalCardToTCG } from "@/lib/cards/queries";
+import { pickRarityLabel } from "@/lib/cards/card-fields";
 import { cn } from "@/lib/utils";
 import {
   findPokeTraceCard,
@@ -314,16 +315,12 @@ export default async function CardDetailPage({
   if (loaded && loaded.allLocales.length > 1) {
     const artist = loaded.logicalCard.illustrator;
     versions = loaded.allLocales.map((l) => {
-      const rarityLabel =
-        l.region === "JP"
-          ? loaded.logicalCard.rarityNameJa ??
-            loaded.logicalCard.rarityNameEn ??
-            loaded.logicalCard.rarityCode
-          : l.region === "KR"
-            ? loaded.logicalCard.rarityNameKo ??
-              loaded.logicalCard.rarityNameEn ??
-              loaded.logicalCard.rarityCode
-            : loaded.logicalCard.rarityNameEn ?? loaded.logicalCard.rarityCode;
+      const rarityLabel = pickRarityLabel(l.region, {
+        nameJa: loaded.logicalCard.rarityNameJa,
+        nameEn: loaded.logicalCard.rarityNameEn,
+        nameKo: loaded.logicalCard.rarityNameKo,
+        code: loaded.logicalCard.rarityCode,
+      }) ?? null;
       return {
         region: l.region,
         name: l.name,

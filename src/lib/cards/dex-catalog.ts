@@ -8,6 +8,7 @@
 import { unstable_cache } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { pickLocale, type LocaleSummary, type LogicalCardMeta } from "./queries";
+import { pickRarityLabel, resolveTypes } from "./card-fields";
 import { canonEra, eraOrderIndex } from "./eras";
 import type { DexSet } from "@/components/dex/DexCatalog";
 
@@ -103,15 +104,10 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
         const lcSupertype = lc.gameCard?.supertype ?? lc.supertype;
         const lcMeta: Pick<LogicalCardMeta, "types" | "supertype"> = {
           // supertype→GameCard(diff=0). types=종류별 분기: Pokémon은 LC우선·AC폴백, Trainer/Energy는 LC직독.
-          types: lcSupertype === "Pokémon" ? (lc.types.length ? lc.types : lc.artCard?.types ?? []) : lc.types,
+          types: resolveTypes(lcSupertype, lc.types, lc.artCard?.types),
           supertype: lcSupertype,
         };
-        const rarityLabel =
-          primary.region === "JP"
-            ? rar?.nameJa ?? rar?.nameEn ?? rar?.code
-            : primary.region === "KR"
-              ? rar?.nameKo ?? rar?.nameEn ?? rar?.code
-              : rar?.nameEn ?? rar?.code;
+        const rarityLabel = pickRarityLabel(primary.region, rar);
         return {
           id: primary.id,
           name: primary.name,

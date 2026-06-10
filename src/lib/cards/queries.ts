@@ -7,6 +7,7 @@
 import type { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import type { TCGCard } from "@/lib/api/pokemontcg";
+import { pickRarityLabel, resolveTypes } from "./card-fields";
 
 // ── 공용 타입 ─────────────────────────────────────────────────────────────────
 
@@ -241,7 +242,7 @@ function toLogicalCardMeta(lc: {
     //   illustrator=LC직독(AC 과병합 비신뢰). 둘 다 artSig 재구성(폼변종 분할) 후 AC 전면전환 예정.
     supertype,
     subtypes: lc.subtypes,
-    types: supertype === "Pokémon" ? (lc.types.length ? lc.types : ac?.types ?? []) : lc.types,
+    types: resolveTypes(supertype, lc.types, ac?.types),
     hp: gc?.hp ?? lc.hp,
     illustrator: lc.illustrator,
     // 아래는 LC 잔류 — regMark/legalities=인쇄본별(→CL 후속), weakness/resist/retreat/
@@ -407,12 +408,12 @@ export function logicalCardToTCG(
   const rKo = primary.rarityNameKo ?? lc.rarityNameKo;
   const rEn = primary.rarityNameEn ?? lc.rarityNameEn;
   const rCode = primary.rarityCode ?? lc.rarityCode;
-  const rarityLabel =
-    primary.region === "JP"
-      ? rJa ?? rEn ?? rCode ?? undefined
-      : primary.region === "KR"
-        ? rKo ?? rEn ?? rCode ?? undefined
-        : rEn ?? rCode ?? undefined;
+  const rarityLabel = pickRarityLabel(primary.region, {
+    nameJa: rJa,
+    nameEn: rEn,
+    nameKo: rKo,
+    code: rCode,
+  });
 
   const legalitiesObj = asObject(primary.legalities ?? lc.legalities); // P4c: 인쇄본별→CL
 

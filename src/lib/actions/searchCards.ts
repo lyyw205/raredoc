@@ -5,6 +5,7 @@ import {
   pickLocale,
   type LogicalCardSearchFilters,
 } from "@/lib/cards/queries";
+import { pickRarityLabel } from "@/lib/cards/card-fields";
 
 export interface CardSearchHit {
   id: string; // = CardLocale.id (URL용)
@@ -45,12 +46,12 @@ export async function searchCardsAction(
     if (locales.length === 0) continue;
     const primary = pickLocale(locales, "ko") ?? locales[0];
     const koLocale = locales.find((l) => l.region === "KR") ?? null;
-    const rarity =
-      primary.region === "JP"
-        ? logicalCard.rarityNameJa ?? logicalCard.rarityNameEn ?? logicalCard.rarityCode
-        : primary.region === "KR"
-          ? logicalCard.rarityNameKo ?? logicalCard.rarityNameEn ?? logicalCard.rarityCode
-          : logicalCard.rarityNameEn ?? logicalCard.rarityCode;
+    const rarity = pickRarityLabel(primary.region, {
+      nameJa: logicalCard.rarityNameJa,
+      nameEn: logicalCard.rarityNameEn,
+      nameKo: logicalCard.rarityNameKo,
+      code: logicalCard.rarityCode,
+    }) ?? null;
     hits.push({
       id: primary.id,
       name: primary.name,

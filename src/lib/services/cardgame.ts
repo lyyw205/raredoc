@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { CARDS } from "@/lib/cardgame/mock";
 import { REAL_TO_MOCK } from "@/lib/cardgame/mockToReal";
+import { resolveTypes } from "@/lib/cards/card-fields";
 
 /**
  * Phase 5 — 카드게임 메타 서비스 (DB 기반).
@@ -130,10 +131,11 @@ export async function resolveDeckCardMap(cardIds: string[]): Promise<Record<stri
         imageSmall: l.imageSmall,
         imageLarge: l.imageLarge,
         // types=종류별 분기 — ArtCard 폼변종 over-merge 회피: Pokémon은 LC우선·AC폴백, Trainer/Energy는 LC직독.
-        types:
-          (l.logicalCard.gameCard?.supertype ?? l.logicalCard.supertype) === "Pokémon"
-            ? (l.logicalCard.types.length ? l.logicalCard.types : l.logicalCard.artCard?.types ?? [])
-            : l.logicalCard.types,
+        types: resolveTypes(
+          l.logicalCard.gameCard?.supertype ?? l.logicalCard.supertype,
+          l.logicalCard.types,
+          l.logicalCard.artCard?.types,
+        ),
         hp: l.logicalCard.gameCard?.hp ?? l.logicalCard.hp,
         setId: l.setId,
         supertype: l.logicalCard.gameCard?.supertype ?? l.logicalCard.supertype,
