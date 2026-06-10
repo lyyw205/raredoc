@@ -75,16 +75,13 @@ async function aggregateUser(userId: string): Promise<UserAgg> {
       locale: {
         select: {
           setId: true,
+          // P7: rarity 를 CardLocale(인쇄본별, P4a 복제)에서 읽음 — 구 logicalCard.rarity 와 동치.
+          rarity: { select: { code: true, nameKo: true, nameEn: true } },
           prices: {
             orderBy: { recordedAt: "desc" },
             take: 1,
             select: { normal: true, holofoil: true, reverseHolo: true, firstEdition: true },
           },
-        },
-      },
-      logicalCard: {
-        select: {
-          rarity: { select: { code: true, nameKo: true, nameEn: true } },
         },
       },
     },
@@ -95,7 +92,7 @@ async function aggregateUser(userId: string): Promise<UserAgg> {
   const ownedBySet = new Map<string, number>();
 
   for (const it of items) {
-    const rarity = it.logicalCard.rarity?.code ?? null;
+    const rarity = it.locale.rarity?.code ?? null;
     if (isSar(rarity)) sar++;
     if (isUr(rarity)) ur++;
     if (isHolo(rarity)) holo++;
