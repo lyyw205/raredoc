@@ -9,7 +9,7 @@
     "anchors": 109,
     "enMatched": 108,
     "krMatched": 109,
-    "enOnly": 39,
+    "enOnly": 42,
     "krOnly": 0
   },
   "anchors": [
@@ -3648,6 +3648,51 @@
         "region": "EN",
         "dex": null,
         "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-sm9-182",
+        "number": "182",
+        "name": "Celebi & Venusaur-GX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm9/en/small/en-tcg-sm9/182.png",
+        "rarity": "Promo",
+        "setId": "en-tcg-sm9",
+        "region": "EN",
+        "dex": 3,
+        "jpElsewhere": true
+      },
+      {
+        "id": "en-tcg-sm9-183",
+        "number": "183",
+        "name": "Magikarp & Wailord-GX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm9/en/small/en-tcg-sm9/183.png",
+        "rarity": "Promo",
+        "setId": "en-tcg-sm9",
+        "region": "EN",
+        "dex": 129,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm9",
+            "name": "태그볼트"
+          }
+        ]
+      },
+      {
+        "id": "en-tcg-sm9-184",
+        "number": "184",
+        "name": "Pikachu & Zekrom-GX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm9/en/small/en-tcg-sm9/184.png",
+        "rarity": "Promo",
+        "setId": "en-tcg-sm9",
+        "region": "EN",
+        "dex": 25,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm9",
+            "name": "태그볼트"
+          }
+        ]
       },
       {
         "id": "en-tcg-sm9-185",
