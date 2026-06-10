@@ -430,7 +430,7 @@ const CONFIG: Record<string, Cfg> = {
   "og-s12a": {
     nameKo: "VSTAR 유니버스", nameEn: "VSTAR Universe",
     jp: ["jp-tcg-S12a"], kr: ["kr-s12a"],
-    krMirror: { "kr-s12a": "jp-tcg-S12a" }, enNative: [], krMirrorAll: true, // EN(Crown Zenith) 보류 — EN phase에서 enrich 후 연결
+    krMirror: { "kr-s12a": "jp-tcg-S12a" }, enNative: ["en-tcg-swsh12pt5", "en-tcg-swsh12pt5gg"], krMirrorAll: true, enMerged: true, // EN=Crown Zenith(swsh12pt5 메인 44 + GG swsh12pt5gg 70 병합·영판전용 116) — 2026-06-10 EN 마감. GG 아트레어→JP SAR 9건 수동교정(rankZip 동점), 피카츄 CZ#160≠JP#205AR 영판전용 분리
   },
   // ── SM (썬·문) ── EN(Sun&Moon=en-tcg-sm1)이 SM1S/SM1M/SM1+ 3그룹에 걸침, EN(Guardians Rising=en-tcg-sm2)이 SM2K/SM2L 2그룹에 걸침.
   //   enMerged → build 가 EN 을 LC.setGroupId 로 그룹스코프 로드(크로스그룹 정확 분배). 영판전용 orphan 은 EN세트의 setGroupId 그룹에 귀속.

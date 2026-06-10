@@ -877,3 +877,14 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
   - 블랙볼트·화이트플레어·니힐제로: 트레이너/에너지 **정상**(0).
 - 전 팩 재감사 오링크 0. 근본수정=trainer-names-jako.ts 74 영구등록 + locale 43장 재배정 + nameKo. 7개 그룹 재빌드.
 - ⚠ **블랙볼트 포켓몬 EN 별건 발견**: ビクティニ JP#097(イラストレア, Amelicart 풍경)에 EN zsv10pt5#171(Rare, 5ban 빨강텍스처)이 오병합 — **일러 다름**(ptcg.io: zsv10pt5에 Amelicart Victini IR 부재, #171=5ban Rare). 블랙볼트 특수카드(IR/SAR) EN은 번호-zip 병합이라 일러단위로 드리프트(JP#097→EN#171, JP#161→EN#172 등). **특수카드 EN을 artist 기준 전수 재감사 필요(별도 과제)** — 단일 카드 미수정, 화석#080 EN은 정상.
+
+### §51. VSTAR 유니버스(og-s12a) EN 마감 — Crown Zenith 병합 104 + artist 감사로 위양성 19 교정 (2026-06-10, 사용자 제보: "EN이 하나도 안붙어있어")
+- **상태 확인**: og-s12a JP 254·KR 253·**EN 0** — config `enNative:[]`("EN 보류")이라 SWSH EN 페이즈(swsh1~9)에서 누락됐던 것. 사용자 제보 정확.
+- **EN 소스**: Crown Zenith = `en-tcg-swsh12pt5`(메인 160) + `en-tcg-swsh12pt5gg`(갤러리언 갤러리 70). ⚠ 바레 `swsh12pt5`/`...gg`는 **스테일 중복**(setGroupId 없는 별도 컬렉션) — 건드리지 않음. 라이브 컨벤션은 `en-tcg-swsh*`(og-s9=swsh9 대조 확인).
+- **병합**: `merge-en-identity.ts jp-tcg-S12a en-tcg-swsh12pt5`(+gg) — 메인 44·GG 70 매칭, 영판전용 116. config에 `enNative:["en-tcg-swsh12pt5","en-tcg-swsh12pt5gg"], enMerged:true` 추가 + orphan EN LC 116개 setGroupId→og-s12a 스코프 백필(전역 null 8264이라 스코프 한정).
+- **핵심 교훈 — VSTAR 유니버스 ↔ Crown Zenith는 다른 컴필레이션**: 같은 포켓몬도 서로 **다른 원본 일러로 재録**. merge의 dex+레어도 매칭이 **위양성**을 냄. JP 일러 vs ptcg.io artist **독립 교차감사**(104 매칭)로 20건 불일치 검출 → 전수 해소:
+  - **GG 9건 = 같은카드·잘못된JP타깃**: GG 아트레어가 rankZip로 JP 베이스(EN무경쟁)에 붙음 → **artist가 JP SAR과 완전일치**라 JP SAR로 이동(§24 동형, 무경쟁이라 중복미검출). GG48→#225자시안·GG44→#221뮤츠VSTAR·GG36→#213엔테이·GG38→#215스이쿤·GG39→#216네오랜트·GG41→#218라이코·GG49→#227드라피온·GG51→#229大剣鬼V·GG52→#230大剣鬼VSTAR·GG56→#234ゾロアークVSTAR. (먼저 발견한 中복 9건 GG48/35/43/47/54/55/37/42 + 피카츄CZ#160↔JP#205AR≠CZ#160콜라주 분리 포함, 총 GG 재배치 다수)
+  - **메인 11건 = 다른 프린팅**: 같은 dex·레어도지만 일러/메커니즘 상이. 이미지 전수 판정 → **10건 EN단독 분리**(Kricketot·Absol·Zacian V[기술상이]·Leafeon V·Dusclops·Riolu·Purrloin·Liepard·Zamazenta V[기술상이]·Raihan), **Mew V CZ#060만 유지**(PLANETA Yamashita↔Igarashi = 같은일러 크레딧차이).
+- **최종**: anchors 254·enMatched **104**·krMatched 253·enOnly **126**·krOnly 0. artist 재감사 불일치 1(Mew V, 의도유지)·EN중복 0.
+- **출처**: ptcg.io(swsh12pt5/gg artist·subtypes·dex), R2 JP 이미지(webp→PIL), pokemontcg.io hires 이미지 육안 대조.
+- **미결(별건)**: ① 빈 GG LC 70개(setGroupId=og-swsh12pt5gg 팬텀, 사이드바 미노출, cardText 60 딸림) §78급 정리 대기. ② 바레 스테일 중복세트(swsh12pt5/12/12tg 등) 정리. ③ 동패턴 보류팩 EN 미병합(og-s8b·s9a·s10a·s11·s11a·s12) — VSTAR 유니버스 방법(artist 감사 필수)으로 후속 가능.
