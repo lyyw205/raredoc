@@ -888,3 +888,13 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - **최종**: anchors 254·enMatched **104**·krMatched 253·enOnly **126**·krOnly 0. artist 재감사 불일치 1(Mew V, 의도유지)·EN중복 0.
 - **출처**: ptcg.io(swsh12pt5/gg artist·subtypes·dex), R2 JP 이미지(webp→PIL), pokemontcg.io hires 이미지 육안 대조.
 - **미결(별건)**: ① 빈 GG LC 70개(setGroupId=og-swsh12pt5gg 팬텀, 사이드바 미노출, cardText 60 딸림) §78급 정리 대기. ② 바레 스테일 중복세트(swsh12pt5/12/12tg 등) 정리. ③ 동패턴 보류팩 EN 미병합(og-s8b·s9a·s10a·s11·s11a·s12) — VSTAR 유니버스 방법(artist 감사 필수)으로 후속 가능.
+
+### §52. 패러다임 트리거(og-s12) EN 마감 — Silver Tempest 본탄 1:1 병합 94, 매우 깨끗 (2026-06-10, 사용자 제보: "이것도 en이 다 비어있어")
+- **상태**: og-s12(jp-tcg-S12) JP 125·KR 125·**EN 0**(보류 그룹). EN=Silver Tempest `en-tcg-swsh12`(본탄 215)+`en-tcg-swsh12tg`(TG 30). 바레 중복(sg=null)은 무시.
+- **VSTAR 대비 핵심 차이 — Silver Tempest는 컴필레이션이 아니라 본탄**(Paradigm Trigger와 동시기 발매, 같은 프린팅). 그래서 dex+레어도 매칭이 **신뢰 가능** → artist 교차감사 95매칭 중 **94 일치, 불일치 단 1건**(VSTAR는 20건). 위양성 거의 없음.
+- **병합**: `merge-en-identity jp-tcg-S12 en-tcg-swsh12`(메인 94·orphan 121) + `... en-tcg-swsh12tg`(매칭 1·orphan 29). 중복 0.
+- **TG 처리 — og-s9 선례 따름**: Silver Tempest TG는 Paradigm Trigger에 없는 타세트 알트아트(Blaziken·Rayquaza·Duraludon 등)라 매칭 거의 0 → **자체 그룹 og-swsh12tg에 유지**(VSTAR GG는 70/70 매칭이라 합쳤지만, TG는 무관하므로 합치지 않음 — og-s9 swsh9tg가 og-swsh9tg에 그대로 둔 것과 동형). enNative=["en-tcg-swsh12"]만(TG 제외).
+- **유일 교정 — TG07 Rockruff 분리**: artist 불일치 1건(JP OKACHEKE vs EN Hideki Ishikawa). 이미지 대조: EN TG07=Rockruff+Mudbray 사막 알트, JP#053=해변 일반 → 별개 프린팅 확정 → EN단독 분리(og-swsh12tg 귀속). 영판전용 orphan setGroupId 백필(메인 121→og-s12, TG 30→og-swsh12tg).
+- **최종**: anchors 125·enMatched **94**·krMatched 125·enOnly **121**·krOnly 0. artist 재감사 불일치 0·EN중복 0.
+- **출처**: ptcg.io(swsh12/tg artist), R2 JP 이미지(webp→PIL), pokemontcg.io hires 육안.
+- **남은 보류팩**: og-s8b·s9a·s10a·s11·s11a (동일 방법). 운영함정: Supabase 세션풀 포화시 "Connection terminated" — 스크립트 연달아 돌리지 말고 $disconnect + 대기.

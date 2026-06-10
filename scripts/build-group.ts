@@ -425,7 +425,7 @@ const CONFIG: Record<string, Cfg> = {
   "og-s12": {
     nameKo: "패러다임 트리거", nameEn: "Paradigm Trigger",
     jp: ["jp-tcg-S12"], kr: ["kr-s12"],
-    krMirror: { "kr-s12": "jp-tcg-S12" }, enNative: [], krMirrorAll: true,
+    krMirror: { "kr-s12": "jp-tcg-S12" }, enNative: ["en-tcg-swsh12"], krMirrorAll: true, enMerged: true, // EN=Silver Tempest(swsh12, 본탄 1:1 병합 94·영판전용 121) — 2026-06-10 EN 마감. TG(swsh12tg)는 Paradigm Trigger 무관 알트아트라 자체 그룹 og-swsh12tg 유지(og-s9 선례), TG07 Rockruff 알트≠JP#053 분리
   },
   "og-s12a": {
     nameKo: "VSTAR 유니버스", nameEn: "VSTAR Universe",
@@ -612,7 +612,7 @@ const CONFIG: Record<string, Cfg> = {
   "og-sm12a": {
     nameKo: "태그 올스타즈", nameEn: "Tag All Stars",
     jp: ["jp-tcg-SM12a"], kr: ["kr-sm12a"],
-    krMirror: { "kr-sm12a": "jp-tcg-SM12a" }, enNative: [], krMirrorAll: true, // JP 전용 하이클래스 컴필 — EN 단일세트 없음(각 EN은 원본세트). JP+KR만
+    krMirror: { "kr-sm12a": "jp-tcg-SM12a" }, enNative: null, krMirrorAll: true, // JP 전용 하이클래스 컴필 — EN 단일세트 없음(각 EN은 원본세트). 2026-06-10 []→null: EN 교차그룹 매칭 활성(각 EN을 원본 SM 세트에서 dex+일러+폼+era 로 찾아 붙임)
   },
   "og-smp2": {
     nameKo: "명탐정 피카츄", nameEn: "Detective Pikachu",
