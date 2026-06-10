@@ -58,3 +58,7 @@ prisma/backups/
 /*.xlsx
 designs/.omc/
 designs/*.bak
+
+# card-check 로케일 보존 스냅샷(임시 4MB 산출물 — 커밋 금지)
+.card-check-locale-snapshot.json
+.card-check-*.json

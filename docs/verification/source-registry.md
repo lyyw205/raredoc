@@ -924,3 +924,12 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - ⚠ **트레이너 한계(알고리즘 개선거리)**: 크로스그룹은 dex기반이라 트레이너/에너지 대부분 미매칭. 매칭된 7장 중 #268 ボスの指令[SR풀아트]가 swsh9#132(일반, #158 common과 중복타깃)에 붙음 — 레어도·일러 구분 약함. 포켓몬 204는 신뢰, 트레이너 정밀화는 후속.
 - **커밋 범위**: group-og-s8b.json만 커밋. build-group.ts(enNative null 1줄)는 사용자 크로스그룹 병행작업과 함께 작업트리 유지.
 - ⚠ **커밋 범위**: build-group.ts에 사용자 병행작업(크로스그룹 2차 매칭)이 섞여 **group JSON 3개+레지스트리만 커밋**, build-group.ts(og-s11/s11a config 2줄)는 병행작업과 함께 커밋되도록 작업트리에 남김.
+
+### §56. 다크 판타스마(og-s10a) EN — 보존가드 첫 실전 적발 → 외과적 orphan 입양 (2026-06-10, 제보 "en이 다 비어있어")
+- **구조**: og-s10a는 SWSH 강화확장팩(99장: 포켓몬 80·트레이너 19), EN 단독세트 없음. EN 분산 실측: swsh11(Lost Origin) 57 + swsh12(Silver Tempest) 12 + swsh11tg 8 — s11a와 동일 **형제 EN세트 공유** 패턴. 매칭 대상 EN은 전부 **미연결 orphan**(형제 og-s11/s12가 자기 카드만 가져가고 다크판타스마 출신은 안 가져감).
+- 🔴 **사고+복구(핵심)**: 처음에 `merge-en-identity jp-tcg-S10a swsh11/swsh12 --apply`(단일 JP)로 돌렸더니 **공유세트를 s10a 전용으로 착각** → s10a와 안 맞는 EN을 형제에서 떼어내 orphan으로 버림. **보존검사가 즉시 적발**: og-s11 EN −145·og-s11a −59(전멸)·og-s12 −50, 크로스그룹 이동 310건. → `check-locale-conservation.ts --revert --apply`(스냅샷에서 311건 소유주 복원)로 **완전 롤백**(이동 0건 확인). **교훈: merge-en-identity 단일JP는 공유 EN세트(여러 JP가 한 EN으로 합쳐진 세트)에 절대 쓰지 말 것 — 독점취급으로 형제를 비운다.**
+- **올바른 방식**: 신규 `scripts/link-en-orphans-by-art.ts` — **logicalCardId가 lc-orphan* 인 EN만** 대상(형제 소유는 구조적으로 못 건드림), dex+정규화일러 버킷 매칭(+ 같은 dex|일러에 V/VSTAR 베이스·시크릿 여럿이면 번호순 zip). 69건 입양, 모호 0.
+- **결과**: 앵커 99·**EN매칭 0→69**(포켓몬)·KR 99·영판전용 0. 보존검사 재실행 **진짜앵커(jp-tcg-*) 손실 0**(이동 69건 전부 orphan 출발; og-s11/s12 🔴는 orphan LC가 그 그룹에 scoping돼 생긴 표시상 감소일 뿐). 형제 og-s11/s12 재빌드로 그만큼 영판전용 꼬리 정리(EN매칭 82/94 불변=진짜앵커 무손실).
+- **EN-less 30 전부 사유확정**: CSR 6(#72-77 캐릭터레어 — EN은 swsh11tg, 형제처럼 자체그룹 og-swsh11tg 유지·미탈취) + 풀아트 V 5(#40/78/83/88/89 — EN 동일일러 트윈 부재, 미연결>오연결) + 트레이너 19(TR_SWSH 사전갭 14 — 아르세우스폰/재앙의상자/야적세자매/억새/성화/월로 등, s11a처럼 후속).
+- **신규 가드 기능**: check-locale-conservation.ts에 `--revert [--apply]` 추가(스냅샷 소유관계로 복원) — 보존검사가 적발만이 아니라 **롤백 소스**가 됨을 실증. ⚠ 개선거리: --compare 가 orphan LC 비워짐을 진짜앵커 손실과 구분 못 해 🔴 위양성(og-s11/s12) 표시 → 출발지 orphan 여부로 필터 보강 예정.
+- **커밋 범위**: group-og-s10a/s11/s12.json 3개 + 레지스트리 + 신규 스크립트(link-en-orphans-by-art.ts, check-locale-conservation.ts) 커밋. build-group.ts(og-s10a enNative 1줄)는 사용자 병행작업과 함께 작업트리 유지.
