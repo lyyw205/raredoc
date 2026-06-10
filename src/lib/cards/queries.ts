@@ -32,6 +32,12 @@ export type LocaleSummary = {
   retreatCost?: number | null;
   evolvesFrom?: string | null;
   evolvesTo?: string[];
+  // P4a: 인쇄본별 art메타(rarity/subtypes).
+  subtypes?: string[];
+  rarityCode?: string | null;
+  rarityNameKo?: string | null;
+  rarityNameJa?: string | null;
+  rarityNameEn?: string | null;
 };
 
 export type LogicalCardMeta = {
@@ -147,6 +153,8 @@ function toLocaleSummary(l: {
   retreatCost?: number | null;
   evolvesFrom?: string | null;
   evolvesTo?: string[];
+  subtypes?: string[];
+  rarity?: { code: string; nameKo: string | null; nameJa: string | null; nameEn: string | null } | null;
 }): LocaleSummary {
   return {
     id: l.id,
@@ -169,6 +177,11 @@ function toLocaleSummary(l: {
     retreatCost: l.retreatCost ?? null,
     evolvesFrom: l.evolvesFrom ?? null,
     evolvesTo: l.evolvesTo ?? [],
+    subtypes: l.subtypes ?? [],
+    rarityCode: l.rarity?.code ?? null,
+    rarityNameKo: l.rarity?.nameKo ?? null,
+    rarityNameJa: l.rarity?.nameJa ?? null,
+    rarityNameEn: l.rarity?.nameEn ?? null,
   };
 }
 
@@ -292,6 +305,7 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
           locales: {
             include: {
               set: { select: { name: true, nameKo: true, nameJa: true } },
+              rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true } },
             },
           },
         },
@@ -325,7 +339,7 @@ export async function loadCardByLogicalId(logicalId: string): Promise<{
       gameCard: { select: { supertype: true, hp: true } },
       artCard: { select: { types: true, illustrator: true } },
       locales: {
-        include: { set: { select: { name: true, nameKo: true, nameJa: true } } },
+        include: { set: { select: { name: true, nameKo: true, nameJa: true } }, rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true } } },
       },
     },
   });
@@ -396,7 +410,7 @@ export async function searchLogicalCards(
       gameCard: { select: { supertype: true, hp: true } },
       artCard: { select: { types: true, illustrator: true } },
       locales: {
-        include: { set: { select: { name: true, nameKo: true, nameJa: true } } },
+        include: { set: { select: { name: true, nameKo: true, nameJa: true } }, rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true } } },
       },
     },
     take: Math.min(filters.limit ?? 100, 200),
@@ -421,13 +435,17 @@ export function logicalCardToTCG(
   lc: LogicalCardMeta,
   primary: LocaleSummary
 ): TCGCard {
-  // 지역별 rarity 표기: 사용자 region 우선, 없으면 EN, 없으면 code.
+  // 지역별 rarity 표기: 사용자 region 우선, 없으면 EN, 없으면 code. P4a: primary(CardLocale) 우선.
+  const rJa = primary.rarityNameJa ?? lc.rarityNameJa;
+  const rKo = primary.rarityNameKo ?? lc.rarityNameKo;
+  const rEn = primary.rarityNameEn ?? lc.rarityNameEn;
+  const rCode = primary.rarityCode ?? lc.rarityCode;
   const rarityLabel =
     primary.region === "JP"
-      ? lc.rarityNameJa ?? lc.rarityNameEn ?? lc.rarityCode ?? undefined
+      ? rJa ?? rEn ?? rCode ?? undefined
       : primary.region === "KR"
-        ? lc.rarityNameKo ?? lc.rarityNameEn ?? lc.rarityCode ?? undefined
-        : lc.rarityNameEn ?? lc.rarityCode ?? undefined;
+        ? rKo ?? rEn ?? rCode ?? undefined
+        : rEn ?? rCode ?? undefined;
 
   const legalitiesObj = asObject(primary.legalities ?? lc.legalities); // P4c: 인쇄본별→CL
 
@@ -438,7 +456,7 @@ export function logicalCardToTCG(
     rarity: rarityLabel,
     types: lc.types.length > 0 ? lc.types : undefined,
     supertype: lc.supertype ?? undefined,
-    subtypes: lc.subtypes.length > 0 ? lc.subtypes : undefined,
+    subtypes: (primary.subtypes?.length ? primary.subtypes : lc.subtypes).length > 0 ? (primary.subtypes?.length ? primary.subtypes : lc.subtypes) : undefined,
     artist: lc.illustrator ?? undefined,
     set: { id: primary.setId, name: primary.setName },
     images: {
