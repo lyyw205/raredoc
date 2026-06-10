@@ -957,3 +957,10 @@ TODO: ①~~illustrator 23장~~ **완료** ②~~types 0/96~~ **완료**(fill-jp-t
 - ⚠ **링커 함정 재확인+롤백**: og-s10p의 LC id가 lc-orphan-jp-tcg-* 라 link-en-orphans-by-art 가 **병합된 base카드(S10P#22 펄기아V·#40/#82 사마자르V/VSTAR·S10D#52 이브이)의 EN을 시크릿 앵커로 도둑질** → 보존검사 적발(JP보유 앵커 4 EN상실), **--revert 후 수동교정만 재적용**. 교훈: lc-orphan-jp-tcg-* 네이밍 그룹엔 자동 링커 금지, 수동 명시매핑만.
 - **결과**: 보존검사 JP보유 앵커 EN상실 1(=Palkia#70 의도)·총 이동 7. 남은 EN-less 포켓몬 21 = JP단독 16(swsh10 dex부재) + 시크릿/베이스경합 5(미연결>오연결 유지). og-s10d 꼬리 16→11.
 - **커밋 범위**: group-og-s10p/s10d/s9a.json + 레지스트리. config 무변경(build-group.ts 미관여).
+
+### §60. 스타버스(og-s9) ダブルターボエネルギー #100 채움 + 영판전용 꼬리→스타트덱100 회수 (2026-06-10, 제보 "더블터보E 비어있음 + 영판전용 60 너무 많음")
+- **더블터보E #100(특수에너지)**: og-s9 자기 카드인데 dex없어 합본병합이 못 잡음 → EN swsh9#151(꼬리 orphan) 수동 재포인트. **og-s9 EN 126→127 = 100% 완성**.
+- **영판전용 60 = 스타트덱100(swsh-start-deck-100) 출신**: Brilliant Stars(swsh9)는 본탄 스타버스 외에 **스타트덱100·VMAX클라이맥스·VSTAR유니버스·쌍벽파이터** 카드 EN까지 합친 세트. 스타트덱100(LC452, EN 0)이 통째로 EN-less라 그 EN들이 og-s9 꼬리에 orphan으로 잔류. 배틀리전 §58과 동일.
+- **회수**: 수정 링커(JP로케일부재 orphan만)로 **포켓몬 38** + **Team Yell's Cheer 1**(이름정확일치) → start-deck-100 EN 0→39. config enNative swsh9·enMerged. 보존검사 JP보유앵커 손실 0. og-s9 꼬리 60→20.
+- **후속**: ①포켓몬 9(VMAX클라이맥스/VSTAR유니버스 등 타팩 출신) ②사전갭 트레이너 ~9(Marnie's Pride·Barry=ジュン·Gloria=ユウリ·Acerola's Premonition 등 — kensugimori 다작화로 일러매칭 모호, TR_SWSH 사전 필요) ③스타트덱100 잔여 EN ~413(타 영문세트 출신, 별도 대공사). 미연결>오연결로 안전 보류.
+- **커밋 범위**: group-og-s9.json + group-swsh-start-deck-100.json + 레지스트리. build-group.ts(start-deck-100 enNative 1줄)는 병행작업과 함께 작업트리 유지.
