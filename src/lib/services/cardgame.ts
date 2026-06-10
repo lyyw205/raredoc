@@ -107,11 +107,14 @@ export async function resolveDeckCardMap(cardIds: string[]): Promise<Record<stri
           imageSmall: true,
           imageLarge: true,
           setId: true,
+          // P7: types→ArtCard, hp/supertype→GameCard(P4b/P6 복제). LC 폴백은 전환기(드롭 시 제거).
           logicalCard: {
             select: {
               types: true,
               hp: true,
               supertype: true,
+              artCard: { select: { types: true } },
+              gameCard: { select: { hp: true, supertype: true } },
             },
           },
         },
@@ -126,10 +129,10 @@ export async function resolveDeckCardMap(cardIds: string[]): Promise<Record<stri
         name: l.name,
         imageSmall: l.imageSmall,
         imageLarge: l.imageLarge,
-        types: l.logicalCard.types,
-        hp: l.logicalCard.hp,
+        types: l.logicalCard.artCard?.types?.length ? l.logicalCard.artCard.types : l.logicalCard.types,
+        hp: l.logicalCard.gameCard?.hp ?? l.logicalCard.hp,
         setId: l.setId,
-        supertype: l.logicalCard.supertype,
+        supertype: l.logicalCard.gameCard?.supertype ?? l.logicalCard.supertype,
       },
     ])
   );
