@@ -794,6 +794,8 @@ model LogicalCard {
   speciesLinks     LogicalCardSpecies[] @relation("LogicalCardSpeciesLink") // P1: 종(Species) N:M
   gameCardId       String? // P3: 게임상 같은 카드(oracle) — 덱/메타 dedup 단위
   gameCard         GameCard?    @relation("LogicalCardGameCard", fields: [gameCardId], references: [id])
+  artCardId        String? // P4: 같은 그림 한 장(아트 정체성) — 시세/이미지 dedup 단위
+  artCard          ArtCard?     @relation("LogicalCardArtCard", fields: [artCardId], references: [id])
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @updatedAt
 
@@ -801,6 +803,7 @@ model LogicalCard {
   @@index([rarityId])
   @@index([primarySetId])
   @@index([gameCardId])
+  @@index([artCardId])
 }
 
 model CardLocale {
@@ -1005,6 +1008,25 @@ model GameCard {
   hp             Int? // 대표값
   regulationMark String?
   cards          LogicalCard[] @relation("LogicalCardGameCard")
+  artCards       ArtCard[]     @relation("ArtCardGameCard")
 
   @@index([supertype, name])
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// P4 — ArtCard (같은 그림 한 장) : 한 아트워크의 cross-pack/cross-region 정체성.
+//   같은 GameCard 안에서 illustrator(아트)별로 묶음 — 같은 그림의 재수록/지역판 통합.
+//   ★시세 비교·이미지 dedup 의 단위(시세 숫자 자체는 CardLocale 에 남음).
+//   id = 결정적('ac_' + sha1(gameCardId|illustrator)). illustrator 없으면 LC 단독.
+//   ※ 최종 same-art 판정은 이미지 pHash 가 권위(작가 같아도 다른 그림 가능) — 후속 정밀화.
+// ─────────────────────────────────────────────────────────────────────────────
+model ArtCard {
+  id          String        @id
+  gameCardId  String?
+  gameCard    GameCard?     @relation("ArtCardGameCard", fields: [gameCardId], references: [id])
+  illustrator String?
+  name        String // 표시명(게임카드명)
+  cards       LogicalCard[] @relation("LogicalCardArtCard")
+
+  @@index([gameCardId])
 }
