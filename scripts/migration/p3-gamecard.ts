@@ -28,7 +28,7 @@ const gcId = (key: string) => "gc_" + crypto.createHash("sha1").update(key).dige
 async function main() {
   const lcs = await prisma.logicalCard.findMany({
     where: { locales: { some: {} } },
-    select: { id: true, supertype: true, regulationMark: true, hp: true, attacks: true, abilities: true, subtypes: true, setGroupId: true, pokedexNumbers: true,
+    select: { id: true, supertype: true, regulationMark: true, hp: true, attacks: true, abilities: true, subtypes: true, types: true, setGroupId: true, pokedexNumbers: true,
       locales: { select: { region: true, name: true } } },
   });
   const reg = (lc: typeof lcs[0], r: string) => lc.locales.find((l) => l.region === r)?.name;
@@ -70,15 +70,38 @@ async function main() {
     let nab = 0; try { const b: any = lc.abilities; if (Array.isArray(b)) nab = b.length; } catch {}
     return `hp${lc.hp ?? "?"}|dmg${dmg.join(",")}|na${natk}|ab${nab}`;
   };
+  const subOf = (lc: typeof lcs[0]) => `sub:${[...(lc.subtypes || [])].sort().join("/")}`;
+  // 포켓몬 키에서 types 슬롯을 뺀 base (빈-types 흡수 판단용)
+  const pkBaseKey = (lc: typeof lcs[0]) => {
+    const cn = canonName(lc);
+    const dexU = [...(nameDex.get(cn) || [])].sort((a, b) => a - b);
+    const dexK = dexU.length ? `dex:${dexU.join(",")}` : `nm:${cn}`;
+    return `${lc.supertype}|${dexK}|nm:${cn}|${subOf(lc)}|${effPart(lc)}`;
+  };
+  // base 그룹별 유일 non-empty types (여러 타입 충돌=cross-era 등이면 null → 흡수불가, 빈채 유지)
+  const baseTypes = new Map<string, string | null>();
+  for (const lc of lcs) if (isPk(lc.supertype) && canonName(lc)) {
+    const t = [...new Set(lc.types || [])].sort().join("/"); if (!t) continue;
+    const bk = pkBaseKey(lc);
+    if (!baseTypes.has(bk)) baseTypes.set(bk, t);
+    else if (baseTypes.get(bk) !== t) baseTypes.set(bk, null);
+  }
+  // strict: 빈 types(데이터결손)는 같은 base 의 유일 non-empty types 로 흡수 → 같은카드 과분할 방지. 충돌/단독이면 빈채.
+  const tyOf = (lc: typeof lcs[0]) => {
+    let t = [...new Set(lc.types || [])].sort().join("/");
+    if (!t) { const bt = baseTypes.get(pkBaseKey(lc)); if (bt) t = bt; }
+    return t;
+  };
   const keyOf = (lc: typeof lcs[0]) => {
     const cn = canonName(lc);
-    const sub = `sub:${[...(lc.subtypes || [])].sort().join("/")}`;
     if (isPk(lc.supertype)) {
       const dexU = [...(nameDex.get(cn) || [])].sort((a, b) => a - b);
       const dexK = dexU.length ? `dex:${dexU.join(",")}` : `nm:${cn}`;
-      return `${lc.supertype}|${dexK}|${sub}|${effPart(lc)}`;
+      // v3: 폼변종 분리 — dex 있어도 버려지던 canonName(폼명) 병기 + types집합(빈건 strict 흡수).
+      //   둘 다 필요: types 단독은 same-types 폼(버드렉스 백/흑마) 놓침, name 단독은 cross-era 재타입(레어코일 L↔M) 놓침.
+      return `${lc.supertype}|${dexK}|nm:${cn}|ty:${tyOf(lc)}|${subOf(lc)}|${effPart(lc)}`;
     }
-    return `${lc.supertype ?? "∅"}|nm:${cn}|${sub}`;
+    return `${lc.supertype ?? "∅"}|nm:${cn}|${subOf(lc)}`;
   };
 
   // 그룹핑
@@ -100,7 +123,25 @@ async function main() {
   const top = [...arr].sort((a, b) => b.n - a.n).slice(0, 6);
   console.log("  최다 재수록 표본:", top.map((g) => `"${g.name}"×${g.n}`).join(" · "));
 
-  if (!APPLY) { console.log("\n  (dry-run)"); await prisma.$disconnect(); return; }
+  if (!APPLY) {
+    const cur = await prisma.gameCard.count();
+    console.log(`  [진단] 현재 DB GameCard ${cur} → 새 키 ${arr.length} (증감 ${arr.length - cur >= 0 ? "+" : ""}${arr.length - cur})`);
+    // 오거폰(dex 1017) 폼별 분리 확인
+    const og = lcs.filter((lc) => (lc.pokedexNumbers || []).includes(1017) && isPk(lc.supertype));
+    const ogG = new Map<string, { n: number; ty: string }>();
+    for (const lc of og) { const k = keyOf(lc); const g = ogG.get(k) ?? ogG.set(k, { n: 0, ty: [...new Set(lc.types || [])].sort().join("/") || "∅" }).get(k)!; g.n++; }
+    console.log(`  [진단] 오거폰 dex1017 → ${ogG.size} GameCard:`, [...ogG.values()].map((g) => `${g.ty}×${g.n}`).join(" · "));
+    // 빈-types 과분할 측정: types 슬롯 제거한 baseKey 로는 한 그룹인데 types 포함시 갈린 포켓몬 그룹 + 그중 빈-types 멤버 보유(=과분할 의심)
+    const baseGroups = new Map<string, typeof lcs>();
+    for (const lc of lcs) { if (!isPk(lc.supertype) || !canonName(lc)) continue; const bk = pkBaseKey(lc); (baseGroups.get(bk) ?? baseGroups.set(bk, []).get(bk)!).push(lc); }
+    let splitByTypes = 0, emptyTypeSplit = 0;
+    for (const [, mem] of baseGroups) {
+      const fullKeys = new Set(mem.map(keyOf));
+      if (fullKeys.size > 1) { splitByTypes++; if (mem.some((lc) => !(lc.types || []).length)) emptyTypeSplit++; }
+    }
+    console.log(`  [진단] types로 추가분리된 포켓몬 그룹(dex+name+sub+eff 동일) ${splitByTypes} · 그중 빈-types 멤버 포함(과분할 의심) ${emptyTypeSplit}`);
+    console.log("\n  (dry-run)"); await prisma.$disconnect(); return;
+  }
 
   let s = 0;
   const rows = arr.map((g) => ({ id: g.id, supertype: g.supertype, name: g.name, effectKey: g.effectKey, hp: g.hp, regulationMark: g.reg }));
