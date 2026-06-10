@@ -7,9 +7,9 @@
   },
   "counts": {
     "anchors": 127,
-    "enMatched": 81,
+    "enMatched": 82,
     "krMatched": 126,
-    "enOnly": 135,
+    "enOnly": 134,
     "krOnly": 0
   },
   "anchors": [
@@ -2633,7 +2633,15 @@
         "setId": "jp-tcg-S11",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh11-171",
+        "number": "171",
+        "name": "Gift Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s10a/en/small/en-tcg-swsh11/171.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh11",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s11-100",
         "number": "100",
@@ -5403,17 +5411,6 @@
         "number": "170",
         "name": "Windup Arm",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s10a/en/small/en-tcg-swsh11/170.png",
-        "rarity": null,
-        "setId": "en-tcg-swsh11",
-        "region": "EN",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "en-tcg-swsh11-171",
-        "number": "171",
-        "name": "Gift Energy",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s10a/en/small/en-tcg-swsh11/171.png",
         "rarity": null,
         "setId": "en-tcg-swsh11",
         "region": "EN",
