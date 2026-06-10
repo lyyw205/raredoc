@@ -14,7 +14,7 @@ import { resolveCardDexes } from "./lib/pokeapi-names";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { POKE, isPokemonSupertype } from "./lib/supertype";
-const norm = (s: string | null) => (s ?? "").trim().toLowerCase();
+import { normLower as norm } from "./lib/text-norm";
 const cap = <T,>(a: T[], n = 15) => a.slice(0, n);
 
 // 폼카드 dex (ja/ko 인덱스가 못 푸는 테라/폼 — verify 사각지대 보정)

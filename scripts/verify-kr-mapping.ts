@@ -11,6 +11,7 @@ import { prisma } from "../src/lib/prisma";
 import { readFileSync } from "node:fs";
 import { resolveCardDexes } from "./lib/pokeapi-names";
 import { POKE, isPokemonSupertype } from "./lib/supertype";
+import { normLower as norm } from "./lib/text-norm";
 const SETS: [string, string][] = [
   ["kr-sv2p", "sv2p"], ["kr-sv2d", "sv2d"], ["kr-sv4k", "sv4k"], ["kr-sv4m", "sv4m"], ["kr-sv-151", "sv2a"], ["kr-sv3", "sv3"], ["kr-sv3a", "sv3a"], ["kr-sv4a", "sv4a"], ["kr-sv5k", "sv5k"], ["kr-sv5m", "sv5m"], ["kr-sv5a", "sv5a"], ["kr-sv6", "sv6"], ["kr-sv6a", "sv6a"], ["kr-sv7", "sv7"], ["kr-sv7a", "sv7a"], ["kr-sv8", "sv8"], ["kr-sv8a", "sv8a"], ["kr-sv9", "sv9"], ["kr-sv9a", "sv9a"], ["kr-sv10", "sv10"], ["kr-sv11b", "sv11b"], ["kr-sv11w", "sv11w"],
   ["kr-m1l", "m1l"], ["kr-m1s", "m1s"], ["kr-m2", "m2"], ["kr-m2a", "m2a"], ["kr-m3", "m3"], ["kr-m4", "m4"],
@@ -42,7 +43,6 @@ const SETS: [string, string][] = [
   ["kr-bw7", "bw7"], ["kr-bw8", "bw8"], ["kr-bw9", "bw9"], ["kr-ebb", "ebb"], ["kr-sc", "sc"], // BW7~9·EBB·샤이니(BW배치4)
   ["kr-bw3p", "bw3p"], ["kr-bw3h", "bw3h"], // BW 제3탄(2026-06-06 발견)
 ];
-const norm = (s: string | null) => (s ?? "").trim().toLowerCase();
 
 async function main() {
   let totDexBad = 0, totIllusBad = 0, totPoke = 0, totChk = 0;

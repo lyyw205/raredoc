@@ -5,10 +5,10 @@
 import "dotenv/config";
 import fs from "fs";
 import { prisma } from "../../src/lib/prisma";
+import { normSpace as norm } from "../lib/text-norm";
 
 const n = (x: any) => Number(x ?? 0);
 const pct = (a: number, b: number) => (b ? ((a / b) * 100).toFixed(1) : "0.0") + "%";
-const norm = (s: string | null | undefined) => (s || "").toLowerCase().replace(/\s+/g, " ").trim();
 const isPkmn = (st: string | null) => st === "Pokémon" || st === "Pokemon";
 
 async function rawCount(sql: string): Promise<number | null> {

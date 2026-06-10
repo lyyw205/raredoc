@@ -18,6 +18,7 @@ import { readFileSync } from "node:fs";
 import { resolveCardDexes } from "./lib/pokeapi-names";
 import { TR_JA2KO } from "./lib/trainer-names-jako";
 import { POKE, isPokemonSupertype } from "./lib/supertype";
+import { normLower as norm } from "./lib/text-norm";
 const DIR = "data/kr-official";
 // maxNum: 번호 상한(이하만 처리). 샤이니 헤비 팩에서 base 섹션만 먼저 매핑할 때(샤이니 중복 회피).
 const CFG: Record<string, { jp: string; json: string; maxNum?: number }> = {
@@ -270,7 +271,6 @@ const CFG: Record<string, { jp: string; json: string; maxNum?: number }> = {
 type Off = { number: string; koName: string; illustrator: string | null; image: string | null; numInt: number };
 type Jp = { numInt: number; name: string; lcid: string; illus: string | null; dex: number | null; supertype: string | null };
 
-const norm = (s: string | null) => (s ?? "").trim().toLowerCase();
 // 이름 비교키: 공백·전각괄호 정규화 (ja↔ko 사전 매칭용)
 const kkey = (s: string | null) => (s ?? "").replace(/[\s　]/g, "").replace(/（/g, "(").replace(/）/g, ")").toLowerCase();
 // DB 전체에서 (JP,KR) locale 동시보유 트레이너/에너지 LC = 이미 정합화된 검증 ja↔ko 번역쌍 → ko키→ja키 사전.

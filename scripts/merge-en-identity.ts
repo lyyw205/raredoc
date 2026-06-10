@@ -18,6 +18,7 @@ import { TR_JP2EN as TR_HGSS } from "./lib/trainer-names-hgss";
 import { TR_JP2EN as TR_DPT } from "./lib/trainer-names-dpt";
 import { TR_JP2EN as TR_EX } from "./lib/trainer-names-ex";
 import { POKE, isPokemonSupertype } from "./lib/supertype";
+import { normLower as norm } from "./lib/text-norm";
 
 const RANK: Record<string, number> = {
   "Common": 1, "Uncommon": 2, "Rare": 3, "Rare Holo": 3, "Holo Rare": 3,
@@ -146,7 +147,6 @@ async function main() {
   // 4b) 트레이너/스타디움: JP↔EN *이름 사전*(TR_JP2EN) + 랭크 zip.
   //     일러는 같은 일러에 여러 카드가 섞여 스크램블되므로 이름이 정체성. 사전 미등록 JP명은 경고.
   //     매칭된 JP LC 에 EN subtype 백필(JP 데이터 교정). subtypeBackfill: jpLcid → EN subtypes
-  const norm = (s?: string | null) => (s ?? "").trim().toLowerCase();
   const subtypeBackfill = new Map<string, string[]>();
   const jpTr = jpRows.filter((j) => !isPokemonSupertype(j.logicalCard.supertype) && j.logicalCard.supertype && j.logicalCard.supertype !== "Energy");
   const jpTrByEn = new Map<string, { lcid: string; rank: number; numInt: number; subs: string[]; jpName: string; num: string }[]>();

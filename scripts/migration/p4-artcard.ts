@@ -5,9 +5,9 @@
 import "dotenv/config";
 import crypto from "crypto";
 import { prisma } from "../../src/lib/prisma";
+import { normSpace as norm } from "../lib/text-norm";
 
 const APPLY = process.argv.includes("--apply");
-const norm = (s: any) => (s || "").toLowerCase().replace(/\s+/g, " ").trim();
 const esc = (s: string) => s.replace(/'/g, "''");
 const acId = (k: string) => "ac_" + crypto.createHash("sha1").update(k).digest("hex").slice(0, 20);
 

@@ -7,20 +7,12 @@
 import "dotenv/config";
 import crypto from "crypto";
 import { prisma } from "../../src/lib/prisma";
-import { TR_JP2EN as TR_SV } from "../lib/trainer-names-sv";
-import { TR_JP2EN as TR_SM } from "../lib/trainer-names-sm";
-import { TR_JP2EN as TR_SWSH } from "../lib/trainer-names-swsh";
-import { TR_JP2EN as TR_XY } from "../lib/trainer-names-xy";
-import { TR_JP2EN as TR_BW } from "../lib/trainer-names-bw";
-import { TR_JP2EN as TR_EX } from "../lib/trainer-names-ex";
-import { TR_JP2EN as TR_HGSS } from "../lib/trainer-names-hgss";
-import { TR_JP2EN as TR_DPT } from "../lib/trainer-names-dpt";
+import { TR_ALL as JA2EN } from "../lib/trainer-names";
+import { normSpace as norm } from "../lib/text-norm";
 // JP 트레이너명 → EN 사전(전 시대 병합) — 언어무관 canonical 다리
-const JA2EN: Record<string, string> = { ...TR_EX, ...TR_HGSS, ...TR_DPT, ...TR_BW, ...TR_XY, ...TR_SM, ...TR_SWSH, ...TR_SV };
 const NFC = (s: string) => (s || "").normalize("NFC");
 
 const APPLY = process.argv.includes("--apply");
-const norm = (s: any) => (s || "").toLowerCase().replace(/\s+/g, " ").trim();
 const isPk = (st: string | null) => st === "Pokémon" || st === "Pokemon";
 const esc = (s: string) => s.replace(/'/g, "''");
 const gcId = (key: string) => "gc_" + crypto.createHash("sha1").update(key).digest("hex").slice(0, 20);
