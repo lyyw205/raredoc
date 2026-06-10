@@ -820,6 +820,10 @@ model CardLocale {
   flavorText    String?
   imageSmall    String?
   imageLarge    String?
+  // P4: art메타 하강(인쇄본별). LogicalCard 에서 기계복제(정정 없음 — region rarity 정정은 P5.5).
+  rarityId      String?
+  rarity        Rarity?     @relation("RarityLocale", fields: [rarityId], references: [id])
+  subtypes      String[]    @default([])
   prices        Price[]     @relation("PriceCardLocale")
   // Phase 5 신규 역관계
   collectionItems CollectionItem[] @relation("CollectionItemLocale")
@@ -834,6 +838,7 @@ model CardLocale {
   @@index([logicalCardId])
   @@index([setId])
   @@index([region])
+  @@index([rarityId])
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -892,6 +897,7 @@ model Rarity {
   categoryId String?
   category   RarityCategory? @relation(fields: [categoryId], references: [id])
   cards      LogicalCard[]
+  localeCards CardLocale[]   @relation("RarityLocale") // P4: art메타 하강(인쇄본별 rarity)
 
   @@index([categoryId])
 }
@@ -1007,6 +1013,16 @@ model GameCard {
   effectKey      String // 묶음에 쓰인 effectSig (추적용)
   hp             Int? // 대표값
   regulationMark String?
+  // P6: oracle 본문(언어무관 게임값). N개 LC→1 GC 형제 권위선택(채워진것 우선) 복제.
+  retreatCost    Int?
+  weakness       String?
+  resistance     String?
+  evolvesFrom    String?
+  evolvesTo      String[]      @default([])
+  abilities      Json?
+  attacks        Json?
+  legalities     Json?
+  rules          String[]      @default([])
   cards          LogicalCard[] @relation("LogicalCardGameCard")
   artCards       ArtCard[]     @relation("ArtCardGameCard")
 
@@ -1026,6 +1042,8 @@ model ArtCard {
   gameCard    GameCard?     @relation("ArtCardGameCard", fields: [gameCardId], references: [id])
   illustrator String?
   name        String // 표시명(게임카드명)
+  types       String[]      @default([]) // P4b: 아트별 메타(같은 그림=같은 카드=같은 타입)
+  flavorText  String? // P4b: EN 폴백(H9 사다리 최하위). 인쇄본별은 CardLocale.flavorText
   cards       LogicalCard[] @relation("LogicalCardArtCard")
 
   @@index([gameCardId])
