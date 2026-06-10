@@ -15,10 +15,13 @@ import { prisma } from "../src/lib/prisma";
 import { writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { TR_JP2EN } from "./lib/trainer-names-sv";
+import { TR_JP2EN as TR_SM } from "./lib/trainer-names-sm";
 
 const POKE = ["Pokémon", "Pokemon"];
 
-type Cfg = { nameKo: string; nameEn: string; jp: string[]; kr: string[]; krMirror: Record<string, string>; enNative: string[] | null; krMirrorAll?: boolean; enMerged?: boolean; enAnchor?: boolean; krMerged?: boolean };
+type Cfg = { nameKo: string; nameEn: string; jp: string[]; kr: string[]; krMirror: Record<string, string>; enNative: string[] | null; krMirrorAll?: boolean; enMerged?: boolean; enAnchor?: boolean; krMerged?: boolean; enCrossFallback?: boolean };
+// enCrossFallback: enMerged 합본 세트의 *재録* JP(native EN 세트엔 없고 타 EN 세트에 있음)를 표시용 교차매칭
+//   (포켓몬=dex+동일일러 reprint·트레이너=이름사전). DB·LC 무변경, 원본 세트 도감 불변 — 그 JP 앵커 en 칸만 채움.
 // krMerged: KR 이 DB 에서 JP/EN 앵커 LC 로 정체성 병합됨(크로스그룹 합본 KR — DP 한국판 kr-bs 등) → setGroupId 스코프로 추가 로드(enMerged 의 KR 대칭).
 // enMerged: EN 이 DB 에서 JP LC 로 정체성 병합됨(merge-en-identity) → 공유 lcid 로 읽음, 미병합 EN 은 영판전용 섹션.
 // krMirrorAll: KR 세트가 JP 정수번호 완전미러(트레이너 포함)일 때 true — 모든 카드 번호로 매칭.
@@ -233,7 +236,7 @@ const CONFIG: Record<string, Cfg> = {
   "swsh-start-deck-100": {
     nameKo: "스타트 덱 100", nameEn: "Start Deck 100",
     jp: ["jp-tcg-SI", "jp-tcg-SN"], kr: ["kr-si", "kr-sn"],
-    krMirror: { "kr-si": "jp-tcg-SI", "kr-sn": "jp-tcg-SN" }, enNative: [], krMirrorAll: true,
+    krMirror: { "kr-si": "jp-tcg-SI", "kr-sn": "jp-tcg-SN" }, enNative: ["en-tcg-swsh9"], krMirrorAll: true, enMerged: true, // EN=Brilliant Stars(swsh9) — 스타버스(og-s9) 영판전용 꼬리의 스타트덱100 출신 EN 회수(2026-06-10): 포켓몬 38 + 트레이너 1(Team Yell's Cheer). 진짜앵커 손실 0. 나머지 EN(타 영문세트)·사전갭 트레이너(Marnie's Pride/Barry/Gloria 등)는 후속
   },
   // ── SV 구축덱/강화상품 (2026-06-06 정본화; EN 상품 없음 — 신규분은 sv3/sv9/sv10/svp 분산 수록) ──
   "sv-decks": {
@@ -380,7 +383,7 @@ const CONFIG: Record<string, Cfg> = {
   "og-s8b": {
     nameKo: "VMAX 클라이맥스", nameEn: "VMAX Climax",
     jp: ["jp-tcg-S8b"], kr: ["kr-s8b"],
-    krMirror: { "kr-s8b": "jp-tcg-S8b" }, enNative: [], krMirrorAll: true,
+    krMirror: { "kr-s8b": "jp-tcg-S8b" }, enNative: null, krMirrorAll: true, // 2026-06-10 []→null: 순수 컴필레이션(지정 EN세트 없음, swsh1~12 흩어짐) → 크로스그룹 EN(dex+일러+폼 전역매칭). 비파괴(DB무변경, 빌드시 표시)
   },
   "og-s9": {
     nameKo: "스타버스", nameEn: "Star Birth",
@@ -390,7 +393,7 @@ const CONFIG: Record<string, Cfg> = {
   "og-s9a": {
     nameKo: "배틀리전", nameEn: "Battle Region",
     jp: ["jp-tcg-S9a"], kr: ["kr-s9a"],
-    krMirror: { "kr-s9a": "jp-tcg-S9a" }, enNative: [], krMirrorAll: true,
+    krMirror: { "kr-s9a": "jp-tcg-S9a" }, enNative: ["en-tcg-swsh10"], krMirrorAll: true, enMerged: true, // EN=Astral Radiance(swsh10) — 배틀리전 카드가 swsh10에 흩어져 og-s10d 꼬리에 orphan으로 떠 있던 것을 회수(2026-06-10): 포켓몬 54(dex+일러) + 트레이너 14(コトブキムラ=Jubilife Village 등 명시매핑 rarity-zip). EN 0→68. 진짜앵커 손실 0. Choy/Dark Patch 등 구축덱 출신은 og-s10d 잔류
   },
   "og-s10p": {
     nameKo: "스페이스저글러", nameEn: "Space Juggler",
@@ -405,7 +408,7 @@ const CONFIG: Record<string, Cfg> = {
   "og-s10a": {
     nameKo: "다크 판타스마", nameEn: "Dark Phantasma",
     jp: ["jp-tcg-S10a"], kr: ["kr-s10a"],
-    krMirror: { "kr-s10a": "jp-tcg-S10a" }, enNative: [], krMirrorAll: true,
+    krMirror: { "kr-s10a": "jp-tcg-S10a" }, enNative: ["en-tcg-swsh11", "en-tcg-swsh12"], krMirrorAll: true, enMerged: true, // EN 흩어짐: swsh11(Lost Origin 57)+swsh12(Silver Tempest 12) 미연결 orphan만 dex+일러 정밀입양 69 — 2026-06-10. ⚠ merge-en-identity 단일JP 는 공유세트(s11+s11a+s10a) 독점취급해 형제 311건 스크램블→롤백, link-en-orphans-by-art.ts 로 대체. CSR 6(→swsh11tg 자체그룹)·풀아트 V 5(EN트윈 없음)·트레이너 19(TR_SWSH 사전갭) EN-less. 보존검사 진짜앵커 손실 0
   },
   "og-s10b": {
     nameKo: "포켓몬 GO", nameEn: "Pokémon GO",
@@ -415,12 +418,12 @@ const CONFIG: Record<string, Cfg> = {
   "og-s11": {
     nameKo: "로스트어비스", nameEn: "Lost Abyss",
     jp: ["jp-tcg-S11"], kr: ["kr-s11"],
-    krMirror: { "kr-s11": "jp-tcg-S11" }, enNative: [], krMirrorAll: true,
+    krMirror: { "kr-s11": "jp-tcg-S11" }, enNative: ["en-tcg-swsh11"], krMirrorAll: true, enMerged: true, // EN=Lost Origin(swsh11) — 2026-06-10 EN 마감. swsh11=s11+s11a 합본분배(s11 81·영판전용 135), TG(swsh11tg)는 자체 그룹 og-swsh11tg 유지
   },
   "og-s11a": {
     nameKo: "백열의 아르카나", nameEn: "Incandescent Arcana",
     jp: ["jp-tcg-S11a"], kr: ["kr-s11a"],
-    krMirror: { "kr-s11a": "jp-tcg-S11a" }, enNative: [], krMirrorAll: true,
+    krMirror: { "kr-s11a": "jp-tcg-S11a" }, enNative: ["en-tcg-swsh11", "en-tcg-swsh12"], krMirrorAll: true, enMerged: true, // EN 흩어짐: swsh12(Silver Tempest 46)+swsh11(Lost Origin 1) 교차세트 병합 47 — 2026-06-10. Hisuian Growlithe/Arcanine·Jynx 지역폼 충돌 3건 분리(og-s11 귀속). 트레이너 사전갭(TR_SWSH) 보강 후속
   },
   "og-s12": {
     nameKo: "패러다임 트리거", nameEn: "Paradigm Trigger",
@@ -562,22 +565,22 @@ const CONFIG: Record<string, Cfg> = {
   "og-sm9": {
     nameKo: "태그볼트", nameEn: "Team Up",
     jp: ["jp-tcg-SM9"], kr: ["kr-sm9"],
-    krMirror: { "kr-sm9": "jp-tcg-SM9" }, enNative: ["en-tcg-sm9"], krMirrorAll: true, enMerged: true, // EN=Team Up(SM8a+SM9 합본 병합)
+    krMirror: { "kr-sm9": "jp-tcg-SM9" }, enNative: ["en-tcg-sm9"], krMirrorAll: true, enMerged: true, enCrossFallback: true, // EN=Team Up(SM8a+SM9 합본 병합). 크로스셋 폴백: JP 단독 SR 트레이너(Cynthia/Judge/Volkner/Ultra Ball 등)는 동일아트 EN이 타팩에 있어 표시용 매칭(DB 무변경)
   },
   "og-sm9a": {
     nameKo: "나이트 유니슨", nameEn: "Night Unison",
     jp: ["jp-tcg-SM9a"], kr: ["kr-sm9a"],
-    krMirror: { "kr-sm9a": "jp-tcg-SM9a" }, enNative: ["en-tcg-sm10"], krMirrorAll: true, enMerged: true, // EN=Unbroken Bonds(SM9b+SM9a+SM10 합본, 배치7 병합)
+    krMirror: { "kr-sm9a": "jp-tcg-SM9a" }, enNative: ["en-tcg-sm10"], krMirrorAll: true, enMerged: true, enCrossFallback: true, // EN=Unbroken Bonds(SM9b+SM9a+SM10 합본, 배치7 병합). 크로스셋 폴백: JP 단독 SR 트레이너(Electropower/Enhanced Hammer/Max Potion/Guzma)는 동일아트 EN이 타팩에 있어 표시용 매칭(DB 무변경)
   },
   "og-sm9b": {
     nameKo: "풀 메탈 월", nameEn: "Full Metal Wall",
     jp: ["jp-tcg-SM9b"], kr: ["kr-sm9b"],
-    krMirror: { "kr-sm9b": "jp-tcg-SM9b" }, enNative: ["en-tcg-sm10"], krMirrorAll: true, enMerged: true, // EN=Unbroken Bonds(배치7 병합)
+    krMirror: { "kr-sm9b": "jp-tcg-SM9b" }, enNative: ["en-tcg-sm10"], krMirrorAll: true, enMerged: true, enCrossFallback: true, // EN=Unbroken Bonds(배치7 병합). 크로스셋 폴백: JP 단독 SR 트레이너(Ultra Ball/Beast Ring/Metal Frying Pan/Acerola)는 동일아트 EN이 타팩에 있어 표시용 매칭(DB 무변경)
   },
   "og-sm10": {
     nameKo: "더블블레이즈", nameEn: "Unbroken Bonds",
     jp: ["jp-tcg-SM10"], kr: ["kr-sm10"],
-    krMirror: { "kr-sm10": "jp-tcg-SM10" }, enNative: ["en-tcg-sm10"], krMirrorAll: true, enMerged: true, // EN=Unbroken Bonds(SM9b+SM9a+SM10 합본 병합)
+    krMirror: { "kr-sm10": "jp-tcg-SM10" }, enNative: ["en-tcg-sm10"], krMirrorAll: true, enMerged: true, enCrossFallback: true, // EN=Unbroken Bonds(SM9b+SM9a+SM10 합본 병합). 크로스셋 폴백: JP 단독 트레이너(Kiawe/Cynthia/Ultra Ball 등)는 동일아트 EN이 타팩(Burning Shadows·Ultra Prism 등)에 있어 표시용 매칭(DB 무변경)
   },
   "og-sn10a": {
     nameKo: "GG 엔드", nameEn: "GG End",
@@ -587,12 +590,12 @@ const CONFIG: Record<string, Cfg> = {
   "og-sm10b": {
     nameKo: "스카이 레전드", nameEn: "Sky Legend",
     jp: ["jp-tcg-SM10b"], kr: ["kr-sm10b"],
-    krMirror: { "kr-sm10b": "jp-tcg-SM10b" }, enNative: ["en-tcg-sm11"], krMirrorAll: true, enMerged: true, // EN=Unified Minds(배치8 병합)
+    krMirror: { "kr-sm10b": "jp-tcg-SM10b" }, enNative: ["en-tcg-sm11"], krMirrorAll: true, enMerged: true, enCrossFallback: true, // EN=Unified Minds(배치8 병합) + 재録분(히든페이츠 등) 교차폴백(2026-06-10)
   },
   "og-sn11": {
     nameKo: "미라클 트윈", nameEn: "Unified Minds",
     jp: ["jp-tcg-sn11"], kr: ["kr-sm11"],
-    krMirror: { "kr-sm11": "jp-tcg-sn11" }, enNative: ["en-tcg-sm11"], krMirrorAll: true, enMerged: true, // EN=Unified Minds(합본 병합). ※그룹/세트ID 'sn' 오타이나 일관
+    krMirror: { "kr-sm11": "jp-tcg-sn11" }, enNative: ["en-tcg-sm11"], krMirrorAll: true, enMerged: true, enCrossFallback: true, // EN=Unified Minds(합본 병합). ※그룹/세트ID 'sn' 오타이나 일관. 재録분 교차폴백(2026-06-10)
   },
   "og-sm11a": {
     nameKo: "리믹스 바우트", nameEn: "Remix Bout",
@@ -1066,7 +1069,7 @@ const CONFIG: Record<string, Cfg> = {
 type Row = {
   cid: string; lcid: string; setId: string; region: string; number: string; numInt: number; name: string;
   image: string | null; dex: number | null; illus: string | null; tier: number | null; subtypes: string; supertype: string | null; rarity: string | null;
-  types: string[]; hp: number | null; rel: number | null;
+  types: string[]; hp: number | null; rel: number | null; dexAll: number[];
 };
 const sel = {
   id: true, logicalCardId: true, setId: true, region: true, number: true, numberInt: true, name: true, imageSmall: true, imageLarge: true,
@@ -1082,7 +1085,7 @@ function toRow(l: any): Row {
     rarity: l.region === "JP" ? l.logicalCard.rarity?.nameJa ?? l.logicalCard.rarity?.nameEn ?? l.logicalCard.rarity?.code ?? null
       : l.region === "KR" ? l.logicalCard.rarity?.nameKo ?? l.logicalCard.rarity?.nameEn ?? l.logicalCard.rarity?.code ?? null
       : l.logicalCard.rarity?.nameEn ?? l.logicalCard.rarity?.code ?? null,
-    types: l.logicalCard.types ?? [], hp: l.logicalCard.hp ?? null, rel: l.set?.releaseDate ? +new Date(l.set.releaseDate) : null,
+    types: l.logicalCard.types ?? [], hp: l.logicalCard.hp ?? null, rel: l.set?.releaseDate ? +new Date(l.set.releaseDate) : null, dexAll: l.logicalCard.pokedexNumbers ?? [],
   };
 }
 const load = async (setIds: string[]) => (await prisma.cardLocale.findMany({ where: { setId: { in: setIds } }, select: sel })).map(toRow);
@@ -1090,6 +1093,11 @@ const pub = (r: Row | undefined) => r ? { id: r.cid, number: r.number, name: r.n
 
 const tfp = (r: Row) => `${(r.illus ?? "").trim().toLowerCase()}|${r.tier}|${r.subtypes}`;     // 트레이너 지문
 const fpP = (r: Row) => `${r.dex}|${(r.illus ?? "").trim().toLowerCase()}|${r.subtypes}`;       // 포켓몬 dex버킷(tier 제외)
+// 교차그룹 2차용: 멀티덱스(TAG TEAM) 정렬키 + 메커니즘 subtype 제외(JP는 TAG TEAM/Prism 등 미보유 → EN과 키 어긋남 방지, merge-en-identity 와 동일 원리)
+const ENMECH = new Set(["Tera", "Ancient", "Future", "Radiant", "Restored", "TAG TEAM", "Prism Star", "Ultra Beast", "Single Strike", "Rapid Strike", "Fusion Strike", "Team Plasma", "Prime", "SP", "Level-Up", "Team Magma", "Team Aqua"]);
+const subN = (s: string) => s.split(",").filter((x) => x && !ENMECH.has(x)).join(",");
+const dexKeyOf = (r: Row) => r.dexAll.length >= 2 ? [...r.dexAll].sort((a, b) => a - b).join("&") : String(r.dex);
+const ampN = (s: string) => (s.match(/[&＆]/g) || []).length; // 합체(TAG TEAM) 정체성: JP·EN 의 & 개수 일치 필수(단일 GX ↔ 태그팀 GX 오매칭 차단)
 // 지역형 폼 토큰(언어중립): 같은 dex+일러라도 폼이 다르면 다른 카드(파르데아 우퍼 ≠ 우퍼).
 const FORM_RE: [RegExp, string][] = [[/パルデア|paldean/i, "paldean"], [/ガラル|galar/i, "galarian"], [/アローラ|alolan/i, "alolan"], [/ヒスイ|hisuian/i, "hisuian"]];
 const formKey = (name: string) => { for (const [re, k] of FORM_RE) if (re.test(name)) return k; return "—"; };
@@ -1152,7 +1160,7 @@ async function main() {
     en = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { setGroupId: groupId } }, select: sel })).map(toRow);
   } else if (cfg.enNative) en = await load(cfg.enNative);
   else {
-    const dexes = [...new Set(jp.filter(isPoke).map((r) => r.dex))] as number[];
+    const dexes = [...new Set(jp.filter(isPoke).flatMap((r) => r.dexAll.length ? r.dexAll : (r.dex != null ? [r.dex] : [])))] as number[];
     // LC 공유(정체성 병합된) EN 우선 로드 — 트레이너 포함 (열풍의아레나→sv10 합본 분산처럼 교차그룹인데 병합 완료된 케이스)
     const sharedEn = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCardId: { in: [...new Set(jp.map((r) => r.lcid))] } }, select: sel })).map(toRow);
     const dexEn = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE }, pokedexNumbers: { hasSome: dexes } } }, select: sel })).map(toRow);
@@ -1181,6 +1189,47 @@ async function main() {
     const jpLcids = new Set(jp.map((j) => j.lcid));
     for (const j of jp) { const e = enByLcid.get(j.lcid); if (e) enForJp.set(j.cid, e); }
     for (const e of en) if (!jpLcids.has(e.lcid)) enUnmatched.push(e);
+    if (cfg.enCrossFallback) {
+      // 재録 JP(native EN 미매칭)를 타 EN 세트에서 정체성 매칭 — 표시용(DB 무변경). 포켓몬=동일일러 필수, 트레이너=이름사전.
+      const ERA = 1460 * 86400000;
+      const used = new Set([...enForJp.values()].map((r) => r.cid));
+      const unP = jp.filter((j) => isPoke(j) && !enForJp.has(j.cid));
+      if (unP.length) {
+        const dexes = [...new Set(unP.flatMap((j) => j.dexAll.length ? j.dexAll : (j.dex != null ? [j.dex] : [])))] as number[];
+        const dexEn = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE }, pokedexNumbers: { hasSome: dexes } } }, select: sel })).map(toRow);
+        const bk = new Map<string, Row[]>();
+        for (const e of dexEn) { const k = `${dexKeyOf(e)}|${subN(e.subtypes)}`; (bk.get(k) ?? bk.set(k, []).get(k))!.push(e); }
+        for (const j of unP) {
+          let cands = (bk.get(`${dexKeyOf(j)}|${subN(j.subtypes)}`) ?? []).filter((c) => !used.has(c.cid));
+          cands = cands.filter((c) => formKey(c.name) === formKey(j.name) && ampN(c.name) === ampN(j.name));
+          cands = cands.filter((c) => !(j.types.length && c.types.length) || j.types.some((t) => c.types.includes(t)));
+          cands = cands.filter((c) => (c.illus ?? "").trim().toLowerCase() === (j.illus ?? "").trim().toLowerCase()); // 재録=동일일러 필수(타세트 오매칭 차단)
+          if (j.rel != null) cands = cands.filter((c) => c.rel == null || Math.abs(j.rel! - c.rel) <= ERA);
+          if (!cands.length) continue;
+          const era = (c: Row) => (c.rel != null && j.rel != null ? Math.abs(j.rel - c.rel) : 9e15);
+          cands.sort((a, b) => era(a) - era(b) || a.setId.localeCompare(b.setId));
+          enForJp.set(j.cid, cands[0]); used.add(cands[0].cid);
+        }
+      }
+      const TR = /jp-tcg-sm/i.test(cfg.jp[0] ?? "") ? TR_SM : TR_JP2EN;
+      const jpTr = jp.filter((j) => !isPoke(j) && j.supertype === "Trainer" && !enForJp.has(j.cid));
+      if (jpTr.length) {
+        const wantEn = [...new Set(jpTr.map((j) => TR[j.name]).filter(Boolean) as string[])];
+        const enTr = wantEn.length ? (await prisma.cardLocale.findMany({ where: { region: "EN", name: { in: wantEn }, logicalCard: { supertype: "Trainer" } }, select: sel })).map(toRow) : [];
+        const byName = new Map<string, Row[]>();
+        for (const e of enTr) (byName.get(e.name) ?? byName.set(e.name, []).get(e.name))!.push(e);
+        for (const j of jpTr) {
+          const enName = TR[j.name]; if (!enName) continue;
+          let cands = (byName.get(enName) ?? []).filter((c) => !used.has(c.cid));
+          cands = cands.filter((c) => (c.illus ?? "").trim().toLowerCase() === (j.illus ?? "").trim().toLowerCase()); // 재録=동일일러 필수(다른 아트=다른 카드=미발매로 둠)
+          if (j.rel != null) cands = cands.filter((c) => c.rel == null || Math.abs(j.rel! - c.rel) <= ERA);
+          if (!cands.length) continue;
+          const era = (c: Row) => (c.rel != null && j.rel != null ? Math.abs(j.rel - c.rel) : 9e15);
+          cands.sort((a, b) => era(a) - era(b) || (Math.abs((a.tier ?? 0) - (j.tier ?? 0)) - Math.abs((b.tier ?? 0) - (j.tier ?? 0))) || a.setId.localeCompare(b.setId));
+          enForJp.set(j.cid, cands[0]); used.add(cands[0].cid);
+        }
+      }
+    }
   } else if (!crossGroup) {
     bucketPair(en.filter(isPoke), jp.filter(isPoke), fpP, fpP, enForJp, byTier);
     // 폴백: EN 일러 결손(null) 등으로 미매칭된 앵커를 dex+subtypes(일러 제외)로 2차 매칭
@@ -1210,6 +1259,7 @@ async function main() {
       if (enForJp.has(j.cid)) continue; // LC 공유로 이미 확정
       let cands = (enByBk.get(fpP(j)) ?? []).filter((c) => !used.has(c.cid));
       cands = cands.filter((c) => formKey(c.name) === formKey(j.name));                                         // 폼토큰 일치(하드: 파르데아≠일반, 명백)
+      cands = cands.filter((c) => ampN(c.name) === ampN(j.name));                                               // 태그팀 정체성(하드: 단일 ≠ 합체GX)
       cands = cands.filter((c) => !(j.types.length && c.types.length) || j.types.some((t) => c.types.includes(t))); // 타입 교집합(하드: 타입은 불변)
       if (j.rel != null) cands = cands.filter((c) => c.rel == null || Math.abs(j.rel! - c.rel) <= ERA);          // 발매 era 근접(하드: 시대 구분)
       // ⚠ HP는 하드 필터 아님 — 우리 EN HP 데이터가 오염·누락 가능(sv2 Tinkatuff 등)이라 같은 카드도 떨굴 위험.
@@ -1218,6 +1268,58 @@ async function main() {
       const era = (c: Row) => (c.rel != null && j.rel != null ? Math.abs(j.rel - c.rel) : 9e15);
       cands.sort((a, b) => era(a) - era(b) || (Math.abs((a.tier ?? 0) - (j.tier ?? 0)) - Math.abs((b.tier ?? 0) - (j.tier ?? 0))) || a.setId.localeCompare(b.setId));
       enForJp.set(j.cid, cands[0]); used.add(cands[0].cid);
+    }
+    // ── 2) 완화 재매칭(추가식): 미매칭 JP 포켓몬을 멀티덱스키 + 메커니즘subtype 제외로 (TAG TEAM·Prism Star 등) ──
+    //     1차(dex|일러|raw subtypes) 결과 보존 — enForJp 기매칭·used EN 제외 → 기존 매칭 불변, 추가만.
+    const enByBk2 = new Map<string, Row[]>();
+    for (const e of en) if (isPoke(e)) { const k = `${dexKeyOf(e)}|${subN(e.subtypes)}`; (enByBk2.get(k) ?? enByBk2.set(k, []).get(k))!.push(e); }
+    for (const j of jp.filter(isPoke)) {
+      if (enForJp.has(j.cid)) continue;
+      let cands = (enByBk2.get(`${dexKeyOf(j)}|${subN(j.subtypes)}`) ?? []).filter((c) => !used.has(c.cid));
+      cands = cands.filter((c) => formKey(c.name) === formKey(j.name));
+      cands = cands.filter((c) => ampN(c.name) === ampN(j.name));
+      cands = cands.filter((c) => !(j.types.length && c.types.length) || j.types.some((t) => c.types.includes(t)));
+      if (j.rel != null) cands = cands.filter((c) => c.rel == null || Math.abs(j.rel! - c.rel) <= ERA);
+      if (!cands.length) continue;
+      const il = (c: Row) => (c.illus ?? "").trim().toLowerCase() === (j.illus ?? "").trim().toLowerCase() ? 0 : 1; // 같은 일러 우선(소프트 — 원본 아트 선별)
+      const era = (c: Row) => (c.rel != null && j.rel != null ? Math.abs(j.rel - c.rel) : 9e15);
+      cands.sort((a, b) => il(a) - il(b) || era(a) - era(b) || (Math.abs((a.tier ?? 0) - (j.tier ?? 0)) - Math.abs((b.tier ?? 0) - (j.tier ?? 0))) || a.setId.localeCompare(b.setId));
+      enForJp.set(j.cid, cands[0]); used.add(cands[0].cid);
+    }
+    // ── 3) 트레이너(추가식): JP↔EN 이름사전(era별) + era/tier 근접. 교차그룹엔 트레이너 매칭이 원래 없었음 ──
+    const TR = /jp-tcg-sm/i.test(cfg.jp[0] ?? "") ? TR_SM : TR_JP2EN; // 현 교차그룹: SM(og-sm12a) / 그외 SV
+    const jpTr = jp.filter((j) => !isPoke(j) && j.supertype === "Trainer" && !enForJp.has(j.cid));
+    if (jpTr.length) {
+      const wantEn = [...new Set(jpTr.map((j) => TR[j.name]).filter(Boolean) as string[])];
+      const enTr = wantEn.length ? (await prisma.cardLocale.findMany({ where: { region: "EN", name: { in: wantEn }, logicalCard: { supertype: "Trainer" } }, select: sel })).map(toRow) : [];
+      const enTrByName = new Map<string, Row[]>();
+      for (const e of enTr) (enTrByName.get(e.name) ?? enTrByName.set(e.name, []).get(e.name))!.push(e);
+      for (const j of jpTr) {
+        const enName = TR[j.name]; if (!enName) continue;
+        let cands = (enTrByName.get(enName) ?? []).filter((c) => !used.has(c.cid));
+        if (j.rel != null) cands = cands.filter((c) => c.rel == null || Math.abs(j.rel! - c.rel) <= ERA);
+        if (!cands.length) continue;
+        const era = (c: Row) => (c.rel != null && j.rel != null ? Math.abs(j.rel - c.rel) : 9e15);
+        cands.sort((a, b) => era(a) - era(b) || (Math.abs((a.tier ?? 0) - (j.tier ?? 0)) - Math.abs((b.tier ?? 0) - (j.tier ?? 0))) || a.setId.localeCompare(b.setId));
+        enForJp.set(j.cid, cands[0]); used.add(cands[0].cid);
+      }
+    }
+    // ── 4) 기본에너지(추가식): JP 基本X ↔ EN Basic X Energy, era 근접 ──
+    const ETYPE: Record<string, string> = { "草": "Grass", "炎": "Fire", "水": "Water", "雷": "Lightning", "超": "Psychic", "闘": "Fighting", "悪": "Darkness", "鋼": "Metal", "フェアリー": "Fairy", "無": "Colorless" };
+    const jpBE = jp.filter((j) => j.supertype === "Energy" && /基本.+エネルギー/.test(j.name) && !enForJp.has(j.cid));
+    if (jpBE.length) {
+      const enBE = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { supertype: "Energy" }, name: { startsWith: "Basic " } }, select: sel })).map(toRow);
+      const enBEByType = new Map<string, Row[]>();
+      for (const e of enBE) { const m = e.name.match(/Basic\s+(\w+)\s+Energy/i); if (m) (enBEByType.get(m[1]) ?? enBEByType.set(m[1], []).get(m[1]))!.push(e); }
+      for (const j of jpBE) {
+        const m = j.name.match(/基本(.+?)エネルギー/); const t = m ? ETYPE[m[1]] : null; if (!t) continue;
+        let cands = (enBEByType.get(t) ?? []).filter((c) => !used.has(c.cid));
+        if (j.rel != null) cands = cands.filter((c) => c.rel == null || Math.abs(j.rel! - c.rel) <= ERA);
+        if (!cands.length) continue;
+        const era = (c: Row) => (c.rel != null && j.rel != null ? Math.abs(j.rel - c.rel) : 9e15);
+        cands.sort((a, b) => era(a) - era(b) || a.setId.localeCompare(b.setId));
+        enForJp.set(j.cid, cands[0]); used.add(cands[0].cid);
+      }
     }
   }
 

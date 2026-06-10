@@ -172,7 +172,7 @@ export const TR_JP2EN: Record<string, string> = {
   "ぼんぐり職人": "Apricorn Maker",                 // Kagemaru Himeno (jp-sm6b #063/#075 → EN sm7 #124/#161)
   "マサキのメンテナンス": "Bill's Maintenance",      // Ken Sugimori / Sanosuke Sakuma (jp-sm6b #064/#076 → EN sm7 #126/#162)
   "モノマネむすめ": "Copycat",                      // Ken Sugimori / Megumi Mizutani (jp-sm6b #065/#077 → EN sm7 #127/#163)
-  "かんこうきゃく": "Hiker",                        // Naoki Saito (jp-sm7a #056 → EN sm7 #133)
+  "かんこうきゃく": "Sightseer",                        // Naoki Saito (jp-sm7a #056 → EN sm7 #133)
 
   // ── en-sm8 예약: SM7a/SM7b EN짝이 Lost Thunder(sm8)로 가는 트레이너(이번 SM7 배치엔 미병합, 향후 sm8용) ──
   // SM7a 발(SM7a 는 SM7 배치에 포함되지만 이 트레이너들의 EN 은 sm8 수록 → sm7 병합엔 미사용)
@@ -324,4 +324,5 @@ export const TR_JP2EN: Record<string, string> = {
   "エーテル財団職員": "Aether Foundation Employee",
   "やまおとこ": "Hiker",
   'ワンダーラビリンス<span class="pcg pcg-prismstar"></span>': "Wondrous Labyrinth ◇",
+  "ウィークガードエネルギー": "Weakness Guard Energy", // 미라클트윈 #090 (사전갭 → EN#213 미매칭, 2026-06-10)
 };

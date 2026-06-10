@@ -7,9 +7,9 @@
   },
   "counts": {
     "anchors": 106,
-    "enMatched": 98,
+    "enMatched": 104,
     "krMatched": 106,
-    "enOnly": 0,
+    "enOnly": 1,
     "krOnly": 0
   },
   "anchors": [
@@ -1613,7 +1613,15 @@
         "setId": "jp-tcg-sn11",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-sm11-126",
+        "number": "126",
+        "name": "Mega Sableye & Tyranitar-GX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm11a/en/small/en-tcg-sm11/126.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-sm11",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sm11-054",
         "number": "054",
@@ -1996,10 +2004,10 @@
         "region": "JP"
       },
       "en": {
-        "id": "en-tcg-sm11-149",
-        "number": "149",
+        "id": "en-tcg-sm11-150",
+        "number": "150",
         "name": "Dragonair",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm11a/en/small/en-tcg-sm11/149.png",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm11a/en/small/en-tcg-sm11/150.png",
         "rarity": "Common",
         "setId": "en-tcg-sm11",
         "region": "EN"
@@ -2685,7 +2693,15 @@
         "setId": "jp-tcg-sn11",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-sm11-213",
+        "number": "213",
+        "name": "Weakness Guard Energy",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm11a/en/small/en-tcg-sm11/213.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-sm11",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sm11-090",
         "number": "090",
@@ -2707,7 +2723,15 @@
         "setId": "jp-tcg-sn11",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-sm5-132",
+        "number": "132",
+        "name": "Pal Pad",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm5s/en/small/en-tcg-sm5/132.png",
+        "rarity": "Common",
+        "setId": "en-tcg-sm5",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sm11-092",
         "number": "092",
@@ -2729,7 +2753,15 @@
         "setId": "jp-tcg-sn11",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-sm10-233",
+        "number": "233",
+        "name": "Pokégear 3.0",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm10/en/small/en-tcg-sm10/233.png",
+        "rarity": null,
+        "setId": "en-tcg-sm10",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sm11-093",
         "number": "093",
@@ -2886,12 +2918,12 @@
         "region": "JP"
       },
       "en": {
-        "id": "en-tcg-sm11-242",
-        "number": "242",
+        "id": "en-tcg-smp-SM191",
+        "number": "SM191",
         "name": "Mewtwo & Mew-GX",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm11a/en/small/en-tcg-sm11/242.png",
-        "rarity": "Super Rare",
-        "setId": "en-tcg-sm11",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-smp/en/small/en-tcg-smp/SM191.png",
+        "rarity": "Promo",
+        "setId": "en-tcg-smp",
         "region": "EN"
       },
       "kr": {
@@ -2975,7 +3007,15 @@
         "setId": "jp-tcg-sn11",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-sm11-225",
+        "number": "225",
+        "name": "Mega Sableye & Tyranitar-GX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm11a/en/small/en-tcg-sm11/225.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-sm11",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sm11-101",
         "number": "101",
@@ -2997,7 +3037,15 @@
         "setId": "jp-tcg-sn11",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-sm11-226",
+        "number": "226",
+        "name": "Mega Sableye & Tyranitar-GX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm11a/en/small/en-tcg-sm11/226.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-sm11",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-sm11-102",
         "number": "102",
@@ -3131,7 +3179,25 @@
     }
   ],
   "tail": {
-    "enOnly": [],
+    "enOnly": [
+      {
+        "id": "en-tcg-sm11-242",
+        "number": "242",
+        "name": "Mewtwo & Mew-GX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm11a/en/small/en-tcg-sm11/242.png",
+        "rarity": null,
+        "setId": "en-tcg-sm11",
+        "region": "EN",
+        "dex": 150,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sn11",
+            "name": "미라클트윈"
+          }
+        ]
+      }
+    ],
     "krOnly": [],
     "enKr": []
   }

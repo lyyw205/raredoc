@@ -433,4 +433,39 @@ export const TR_JA2KO: Record<string, string> = {
   "メディカルエネルギー": "메디컬 에너지",           // EN Medical Energy
   "ビーチコート": "비치코트",                        // EN Beach Court
   "リバーサルエネルギー": "리버설 에너지",           // EN Reversal Energy
+  // ── 얼터제네시스 (jp-tcg-SM12 ↔ kr-sm12, 2026-06-10 EN다리 검증) — 사전갭 16장 → 가나다 폴백 스크램블 교정 ──
+  // ⚠ JP TAG TEAM 서포트명은 DB에 "&amp;"(HTML엔티티)로 저장 — 키도 &amp; 그대로(반각 & 아님)
+  "タッグコール": "태그콜",                           // EN Tag Call
+  "なぞの化石": "수수께끼화석",                       // EN Unidentified Fossil
+  "しまめぐりのあかし": "섬 순례 증표",               // EN Island Challenge Amulet
+  "ビーストナイト": "비스트나이트",                   // EN Beastite
+  "グズマ&amp;ハラ": "구즈마&할라",                    // EN Guzma & Hala
+  "シロナ&amp;カトレア": "난천&카틀레야",              // EN Cynthia & Caitlin
+  "マオ&amp;スイレン": "마오&수련",                    // EN Mallow & Lana
+  "レッド&amp;グリーン": "레드&그린",                  // EN Red & Blue
+  "混沌のうねり": "혼돈의 너울",                       // EN Chaotic Swell
+  "プレシャスボール": "프레셔스볼",                    // EN Cherish Ball (EN無 — KR 음차)
+  "ぼうけんのカバン": "모험가방",                      // Adventure Bag (EN無)
+  "ウツギ博士のレクチャー": "공박사의 강연",           // 공박사=Prof. Elm (EN無)
+  // ── 드림리그 (jp-tcg-SM11b ↔ kr-sm11b, 2026-06-10 EN다리 검증) — 사전갭 11장 교정(명희=메이/Rosa·보미카=ホミカ/Roxie 번호스왑) ──
+  "スイレンのつりざお": "수련의 낚싯대",               // EN Lana's Fishing Rod
+  "リーリエのピッピ人形": "릴리에의 삐삐인형",         // EN Lillie's Poké Doll
+  "イツキ": "일목",                                    // EN Will
+  "Nの覚悟": "N의 각오",                               // EN N's Resolve
+  "ホミカ": "보미카",                                  // EN Roxie
+  "メイ": "명희",                                      // EN Rosa
+  "ヤーコン": "야콘",                                  // EN Clay
+  "リーリエの全力": "릴리에의 전력",                   // EN Lillie's Full Force
+  // ── 스카이레전드 (jp-tcg-SM10b ↔ kr-sm10b, 2026-06-10 EN다리 검증) — 사전갭 11 → 가나다 폴백(릴리에↔루자미네 스왑) 교정 ──
+  "ノーマルZ たいあたり": "노말Z 몸통박치기",          // EN Normalium Z: Tackle
+  "ヒコウZ エアスラッシュ": "비행Z 에어슬래시",        // EN Flyinium Z: Air Slash
+  "Uターンボード": "U턴 보드",                         // EN U-Turn Board
+  "かいじゅうマニア": "포켓몬 매니아",                  // EN Poké Maniac
+  "ムサシとコジロウ": "로사와 로이",                   // EN Jessie & James (로사=Jessie·로이=James)
+  "ブリザードタウン": "블리자드타운",                  // EN Blizzard Town
+  "リサイクルエネルギー": "리사이클 에너지",           // EN Recycle Energy
+  "ネットボール": "넷트볼",                            // EN Net Ball
+  "グラジオ": "글라디오",                              // EN Gladion
+  "リーリエ": "릴리에",                                // EN Lillie
+  "ルザミーネ": "루자미네",                            // EN Lusamine
 };
