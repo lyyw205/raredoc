@@ -129,7 +129,11 @@ export async function resolveDeckCardMap(cardIds: string[]): Promise<Record<stri
         name: l.name,
         imageSmall: l.imageSmall,
         imageLarge: l.imageLarge,
-        types: l.logicalCard.artCard?.types?.length ? l.logicalCard.artCard.types : l.logicalCard.types,
+        // types=종류별 분기 — ArtCard 폼변종 over-merge 회피: Pokémon은 LC우선·AC폴백, Trainer/Energy는 LC직독.
+        types:
+          (l.logicalCard.gameCard?.supertype ?? l.logicalCard.supertype) === "Pokémon"
+            ? (l.logicalCard.types.length ? l.logicalCard.types : l.logicalCard.artCard?.types ?? [])
+            : l.logicalCard.types,
         hp: l.logicalCard.gameCard?.hp ?? l.logicalCard.hp,
         setId: l.setId,
         supertype: l.logicalCard.gameCard?.supertype ?? l.logicalCard.supertype,

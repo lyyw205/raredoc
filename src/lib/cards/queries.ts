@@ -238,18 +238,21 @@ function toLogicalCardMeta(lc: {
   texts?: { name: string | null }[];
 }): LogicalCardMeta {
   const gc = lc.gameCard, ac = lc.artCard;
+  const supertype = gc?.supertype ?? lc.supertype;
   return {
     id: lc.id,
     primarySetId: lc.primarySetId,
     primaryNumber: lc.primaryNumber,
     primaryNumberInt: lc.primaryNumberInt,
     pokedexNumbers: lc.pokedexNumbers,
-    // 안전 전환(불일치 0/소수): supertype·hp→GameCard, types·illustrator→ArtCard.
-    supertype: gc?.supertype ?? lc.supertype,
+    // supertype·hp→GameCard(불일치0). types=종류별 분기 — ArtCard 폼변종 over-merge(오거폰 4가면→1타입) 회피:
+    //   Pokémon 은 LC우선·AC폴백(LC.types 결측분만 AC), Trainer/Energy 는 LC직독({} 보존, AC 오염 차단).
+    //   illustrator=LC직독(AC 과병합 비신뢰). 둘 다 artSig 재구성(폼변종 분할) 후 AC 전면전환 예정.
+    supertype,
     subtypes: lc.subtypes,
-    types: ac?.types?.length ? ac.types : lc.types,
+    types: supertype === "Pokémon" ? (lc.types.length ? lc.types : ac?.types ?? []) : lc.types,
     hp: gc?.hp ?? lc.hp,
-    illustrator: ac?.illustrator ?? lc.illustrator,
+    illustrator: lc.illustrator,
     // 아래는 LC 잔류 — regMark/legalities=인쇄본별(→CL 후속), weakness/resist/retreat/
     //   evolves=GameCard 과병합 노출(effectSig 정련 후), attacks/abilities/rules=언어종속(P8).
     retreatCost: lc.retreatCost,

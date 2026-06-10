@@ -37,8 +37,8 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
             id: true,
             types: true,
             supertype: true,
-            // P7 전환: supertype(oracle)은 GameCard 새층에서 읽고 LC는 전환기 폴백.
-            // types 는 ArtCard 폼변종 over-merge(오거폰 4가면→1 ArtCard) 미해결로 보류 → LC 직독 유지.
+            // supertype→GameCard 새층(diff=0). types=종류별 분기(Pokémon LC우선·AC폴백) — ArtCard 폼변종 over-merge 회피.
+            artCard: { select: { types: true } },
             gameCard: { select: { supertype: true } },
             rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } } },
             locales: {
@@ -100,10 +100,11 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
         // P7: 표시용 rarity 는 picked 인쇄본(CardLocale)의 rarity 우선 — id 로 raw locale 역참조
         const primaryRaw = lc.locales.find((l) => l.id === primary.id);
         const rar = primaryRaw?.rarity ?? lc.rarity; // 새층(CardLocale.rarity) ?? LC 폴백
+        const lcSupertype = lc.gameCard?.supertype ?? lc.supertype;
         const lcMeta: Pick<LogicalCardMeta, "types" | "supertype"> = {
-          // P7 전환: supertype 은 GameCard 새층 우선(diff=0). types 는 ArtCard over-merge 보류 → LC 직독.
-          types: lc.types,
-          supertype: lc.gameCard?.supertype ?? lc.supertype,
+          // supertype→GameCard(diff=0). types=종류별 분기: Pokémon은 LC우선·AC폴백, Trainer/Energy는 LC직독.
+          types: lcSupertype === "Pokémon" ? (lc.types.length ? lc.types : lc.artCard?.types ?? []) : lc.types,
+          supertype: lcSupertype,
         };
         const rarityLabel =
           primary.region === "JP"
