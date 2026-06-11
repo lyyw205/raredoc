@@ -29,13 +29,15 @@ const REGION_TTL_MS = 3_600_000; // 1h
 const ETC_ERA_ORDER = 9_000; // isEtc 는 항상 맨뒤로(eraOrder 큰값)
 
 // ── 팩 목록 (지역별) ────────────────────────────────────────────────────────
-async function buildRegionPacks(region: Region): Promise<RegionPack[]> {
+async function buildRegionPacks(region: Region, preferred: "ko" | "ja" | "en"): Promise<RegionPack[]> {
   const [sets, waveGroups] = await Promise.all([
     prisma.set.findMany({
       where: { region },
       select: {
         id: true,
         name: true,
+        nameKo: true,
+        nameJa: true,
         releaseDate: true,
         logoUrl: true,
         series: true,
@@ -74,7 +76,8 @@ async function buildRegionPacks(region: Region): Promise<RegionPack[]> {
     const wave = mergeMap.get(s.id) ?? 0;
     return {
       setId: s.id,
-      name: s.name,
+      // locale 우선 이름(ko면 nameKo). Set 에 nameEn 없음 → en/폴백은 name(원어·영문판은 영문).
+      name: (preferred === "ja" ? s.nameJa : preferred === "ko" ? s.nameKo : null) || s.name,
       era,
       eraOrder,
       releaseDate: s.releaseDate ? s.releaseDate.toISOString().slice(0, 10) : null,
@@ -85,35 +88,39 @@ async function buildRegionPacks(region: Region): Promise<RegionPack[]> {
     };
   });
 
-  // 정렬: eraOrder(asc, isEtc 는 큰값으로 맨뒤) → releaseDate(asc) → id
+  // 정렬(최신순): eraOrder(asc, 신시대 먼저 — MEGA=0, isEtc 맨뒤) → releaseDate(desc, 최신 팩 먼저) → id(desc)
   packs.sort((a, b) => {
     const oa = a.isEtc ? ETC_ERA_ORDER : a.eraOrder;
     const ob = b.isEtc ? ETC_ERA_ORDER : b.eraOrder;
     if (oa !== ob) return oa - ob;
-    if (a.releaseDate && b.releaseDate) return a.releaseDate.localeCompare(b.releaseDate);
+    if (a.releaseDate && b.releaseDate) return b.releaseDate.localeCompare(a.releaseDate);
     if (a.releaseDate) return -1;
     if (b.releaseDate) return 1;
-    return a.setId.localeCompare(b.setId);
+    return b.setId.localeCompare(a.setId);
   });
 
   return packs;
 }
 
-const packCache = new Map<Region, { at: number; data: RegionPack[] }>();
-const packInflight = new Map<Region, Promise<RegionPack[]>>();
+const packCache = new Map<string, { at: number; data: RegionPack[] }>();
+const packInflight = new Map<string, Promise<RegionPack[]>>();
 
-export async function listRegionPacks(region: Region): Promise<RegionPack[]> {
-  const hit = packCache.get(region);
+export async function listRegionPacks(
+  region: Region,
+  preferred: "ko" | "ja" | "en" = "ko",
+): Promise<RegionPack[]> {
+  const key = `${region}:${preferred}`;
+  const hit = packCache.get(key);
   if (hit && Date.now() - hit.at < REGION_TTL_MS) return hit.data;
-  const inflight = packInflight.get(region);
+  const inflight = packInflight.get(key);
   if (inflight) return inflight;
-  const p = buildRegionPacks(region)
+  const p = buildRegionPacks(region, preferred)
     .then((data) => {
-      if (data.length > 0) packCache.set(region, { at: Date.now(), data });
+      if (data.length > 0) packCache.set(key, { at: Date.now(), data });
       return data;
     })
-    .finally(() => packInflight.delete(region));
-  packInflight.set(region, p);
+    .finally(() => packInflight.delete(key));
+  packInflight.set(key, p);
   return p;
 }
 
