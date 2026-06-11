@@ -9,11 +9,11 @@ async function main() {
   const gid = process.argv[2], APPLY = process.argv.includes("--apply");
   if (!gid) { console.error("usage: <cardPackId> [--apply]"); process.exit(1); }
   const lcs = await prisma.card.findMany({ where: { cardPackId: gid }, select: { id: true,
-    _count: { select: { locales: true, collectionItems: true, trades: true, deckCards: true, tierEntries: true, rulings: true, externalIds: true } } } });
+    _count: { select: { locales: true, collectionItems: true, trades: true, rulings: true, externalIds: true } } } });
   const empty = lcs.filter((l) => l._count.locales === 0);
   const safe: string[] = [], unsafe: string[] = [];
   for (const l of empty) {
-    const refs = l._count.collectionItems + l._count.trades + l._count.deckCards + l._count.tierEntries + l._count.rulings + l._count.externalIds;
+    const refs = l._count.collectionItems + l._count.trades + l._count.rulings + l._count.externalIds;
     if (refs === 0) safe.push(l.id); else unsafe.push(`${l.id}(${refs})`);
   }
   console.log(`${gid} LC ${lcs.length} · 빈 LC ${empty.length} · 삭제안전 ${safe.length} · 참조보류 ${unsafe.length}${unsafe.length ? " " + unsafe.slice(0, 10).join(",") : ""} ${APPLY ? "★APPLY" : "(dry)"}`);

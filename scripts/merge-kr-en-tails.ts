@@ -32,7 +32,7 @@ async function main() {
     where: { cardPackId: gid },
     select: { id: true, supertype: true, subtypes: true, pokedexNumbers: true, nameKo: true,
       locales: { select: { id: true, region: true, name: true, number: true } },
-      _count: { select: { collectionItems: true, trades: true, deckCards: true, tierEntries: true, rulings: true } } },
+      _count: { select: { collectionItems: true, trades: true, rulings: true } } },
   });
   const krOnly = lcs.filter((l) => l.locales.length && l.locales.every((x) => x.region === "KR"));
   const enOnly = lcs.filter((l) => l.locales.length && l.locales.every((x) => x.region === "EN"));
@@ -79,7 +79,7 @@ async function main() {
   let moved = 0;
   for (const p of pairs) {
     const refs = p.kr._count;
-    if (refs.collectionItems + refs.trades + refs.deckCards + refs.tierEntries + refs.rulings > 0) { console.log(`  ⚠ 참조있음 skip: ${p.kr.id}`); continue; }
+    if (refs.collectionItems + refs.trades + refs.rulings > 0) { console.log(`  ⚠ 참조있음 skip: ${p.kr.id}`); continue; }
     for (const loc of p.kr.locales) await prisma.regionCard.update({ where: { id: loc.id }, data: { cardId: p.en.id } });
     const data: any = { nameKo: p.kr.locales[0].name.replace(/\s*-\s*\d+\/\d+$/, "") };
     if (p.via === "basic-energy") { data.supertype = "Energy"; data.subtypes = ["Basic"]; }

@@ -77,8 +77,6 @@ async function main() {
       if (remain === 0) {
         const refs = (await tx.collectionItem.count({ where: { cardId: src.lcid } }))
           + (await tx.trade.count({ where: { cardId: src.lcid } }))
-          + (await tx.tierEntry.count({ where: { cardId: src.lcid } }))
-          + (await tx.deckCard.count({ where: { cardId: src.lcid } }))
           + (await tx.ruling.count({ where: { cardId: src.lcid } }))
           + (await tx.externalIdMapping.count({ where: { cardId: src.lcid } }));
         if (refs === 0) { await tx.card.delete({ where: { id: src.lcid } }); deletedLc++; }
