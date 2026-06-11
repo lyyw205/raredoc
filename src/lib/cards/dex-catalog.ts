@@ -8,7 +8,7 @@
 import { unstable_cache } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { pickLocale, type LocaleSummary, type LogicalCardMeta } from "./queries";
-import { pickRarityLabel, resolveTypes } from "./card-fields";
+import { pickRarityLabel } from "./card-fields";
 import { canonEra, eraOrderIndex } from "./eras";
 import type { DexSet } from "@/components/dex/DexCatalog";
 
@@ -38,8 +38,6 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
             id: true,
             types: true,
             supertype: true,
-            // supertype→GameCard 새층(diff=0). types=종류별 분기(Pokémon LC우선·AC폴백) — ArtCard 폼변종 over-merge 회피.
-            artCard: { select: { types: true } },
             gameCard: { select: { supertype: true } },
             rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } } },
             locales: {
@@ -103,8 +101,7 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
         const rar = primaryRaw?.rarity ?? lc.rarity; // 새층(CardLocale.rarity) ?? LC 폴백
         const lcSupertype = lc.gameCard?.supertype ?? lc.supertype;
         const lcMeta: Pick<LogicalCardMeta, "types" | "supertype"> = {
-          // supertype→GameCard(diff=0). types=종류별 분기: Pokémon은 LC우선·AC폴백, Trainer/Energy는 LC직독.
-          types: resolveTypes(lcSupertype, lc.types, lc.artCard?.types),
+          types: lc.types,
           supertype: lcSupertype,
         };
         const rarityLabel = pickRarityLabel(primary.region, rar);

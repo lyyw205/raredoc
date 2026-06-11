@@ -23,13 +23,3 @@ export function pickRarityLabel(
   return r?.nameEn ?? r?.code ?? undefined;
 }
 
-/**
- * types 표시값 — Pokémon은 LC.types 우선·결측 시 ArtCard 폴백, Trainer/Energy는 LC.types 직독(ArtCard 오염 차단).
- */
-export function resolveTypes(
-  supertype: string | null | undefined,
-  lcTypes: string[],
-  acTypes?: string[] | null
-): string[] {
-  return supertype === "Pokémon" ? (lcTypes.length ? lcTypes : acTypes ?? []) : lcTypes;
-}

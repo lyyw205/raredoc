@@ -7,7 +7,7 @@
 import type { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import type { TCGCard } from "@/lib/api/pokemontcg";
-import { pickRarityLabel, resolveTypes } from "./card-fields";
+import { pickRarityLabel } from "./card-fields";
 
 // ── 공용 타입 ─────────────────────────────────────────────────────────────────
 
@@ -218,18 +218,13 @@ function toLogicalCardMeta(lc: {
       tier: number;
     } | null;
   } | null;
-  // P7 키스톤(안전분만): supertype/hp→GameCard, types/illustrator→ArtCard (LC 폴백은 전환기).
   gameCard?: {
     supertype: string | null;
     hp: number | null;
   } | null;
-  artCard?: {
-    types: string[];
-    illustrator: string | null;
-  } | null;
   texts?: { name: string | null }[];
 }): LogicalCardMeta {
-  const gc = lc.gameCard, ac = lc.artCard;
+  const gc = lc.gameCard;
   const supertype = gc?.supertype ?? lc.supertype;
   return {
     id: lc.id,
@@ -237,12 +232,9 @@ function toLogicalCardMeta(lc: {
     primaryNumber: lc.primaryNumber,
     primaryNumberInt: lc.primaryNumberInt,
     pokedexNumbers: lc.pokedexNumbers,
-    // supertype·hp→GameCard(불일치0). types=종류별 분기 — ArtCard 폼변종 over-merge(오거폰 4가면→1타입) 회피:
-    //   Pokémon 은 LC우선·AC폴백(LC.types 결측분만 AC), Trainer/Energy 는 LC직독({} 보존, AC 오염 차단).
-    //   illustrator=LC직독(AC 과병합 비신뢰). 둘 다 artSig 재구성(폼변종 분할) 후 AC 전면전환 예정.
     supertype,
     subtypes: lc.subtypes,
-    types: resolveTypes(supertype, lc.types, ac?.types),
+    types: lc.types,
     hp: gc?.hp ?? lc.hp,
     illustrator: lc.illustrator,
     // 아래는 LC 잔류 — regMark/legalities=인쇄본별(→CL 후속), weakness/resist/retreat/
@@ -292,7 +284,6 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
             select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } },
           },
           gameCard: { select: { supertype: true, hp: true } },
-          artCard: { select: { types: true, illustrator: true } },
           texts: { where: { language: "ko" }, select: { name: true } },
           locales: {
             include: {
@@ -375,7 +366,6 @@ export async function searchLogicalCards(
     include: {
       rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } } },
       gameCard: { select: { supertype: true, hp: true } },
-      artCard: { select: { types: true, illustrator: true } },
       texts: { where: { language: "ko" }, select: { name: true } },
       locales: {
         include: { set: { select: { name: true, nameKo: true, nameJa: true } }, rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true } } },
