@@ -1010,8 +1010,8 @@ export function DexCatalog({ regionPacks, locale }: { regionPacks: Record<Region
             />
           )}
 
-          {/* 컬럼 슬라이더 */}
-          <div className="flex items-center gap-2 bg-toss-input-bg rounded-toss-md px-3 py-2">
+          {/* 컬럼 슬라이더 — 모바일은 2열 고정이라 데스크톱(sm+)에서만 노출 */}
+          <div className="hidden sm:flex items-center gap-2 bg-toss-input-bg rounded-toss-md px-3 py-2">
             <span className="text-toss-micro text-toss-text-tertiary shrink-0">열</span>
             <input
               type="range"
@@ -1282,8 +1282,8 @@ export function DexCatalog({ regionPacks, locale }: { regionPacks: Record<Region
               {view === "mine" && <ProgressBar value={pct} />}
 
               <div
-                className={`grid gap-1.5 ${view === "mine" ? "mt-1" : "mt-3"}`}
-                style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
+                className={`grid gap-1.5 dex-card-grid ${view === "mine" ? "mt-1" : "mt-3"}`}
+                style={{ "--dex-cols": cols } as React.CSSProperties}
               >
                 {filteredCards.map((card) => (
                   <GridCardTile

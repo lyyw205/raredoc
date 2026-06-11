@@ -135,3 +135,15 @@
     @apply font-sans;
   }
 }
+
+@layer components {
+  /* 카드도감 카드 그리드 — 모바일은 2열 고정, sm(40rem)+ 부터 사용자 '열' 슬라이더(--dex-cols) 적용 */
+  .dex-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (min-width: 40rem) {
+    .dex-card-grid {
+      grid-template-columns: repeat(var(--dex-cols, 10), minmax(0, 1fr));
+    }
+  }
+}
