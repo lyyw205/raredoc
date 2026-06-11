@@ -49,8 +49,7 @@
     "enrich:sm:meta": "tsx scripts/enrich-sm-meta-tcgdex.ts",
     "sync:sm:bulbapedia": "tsx scripts/sync-sm-bulbapedia-jp.ts",
     "scrape:sm:illustrator": "tsx scripts/scrape-sm-illustrator-bulbapedia.ts",
-    "seed:sm:koreanames": "tsx scripts/seed-sm-koreanames.ts",
-    "verify:sm": "tsx scripts/phase-a-verify-sm.ts"
+    "seed:koreanames": "tsx scripts/seed-koreanames.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
