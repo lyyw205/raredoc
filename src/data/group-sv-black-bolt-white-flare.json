@@ -7,9 +7,9 @@
   },
   "counts": {
     "anchors": 174,
-    "enMatched": 172,
+    "enMatched": 171,
     "krMatched": 174,
-    "enOnly": 0,
+    "enOnly": 1,
     "krOnly": 0
   },
   "anchors": [
@@ -2395,9 +2395,9 @@
       },
       "en": {
         "id": "zsv10pt5-80",
-        "number": "60",
+        "number": "80",
         "name": "Antique Cover Fossil",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-black-bolt-white-flare/en/small/zsv10pt5/60.png",
+        "image": "https://images.pokemontcg.io/zsv10pt5/80.png",
         "rarity": "Common",
         "setId": "zsv10pt5",
         "region": "EN"
@@ -2903,15 +2903,7 @@
         "setId": "jp-tcg-SV11B",
         "region": "JP"
       },
-      "en": {
-        "id": "zsv10pt5-171",
-        "number": "171",
-        "name": "Victini",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-black-bolt-white-flare/en/small/zsv10pt5/171.png",
-        "rarity": "Illustration Rare",
-        "setId": "zsv10pt5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sv11b-097",
         "number": "097",
@@ -4808,10 +4800,10 @@
         "region": "JP"
       },
       "en": {
-        "id": "zsv10pt5-172",
-        "number": "172",
+        "id": "zsv10pt5-158",
+        "number": "158",
         "name": "Zekrom ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-black-bolt-white-flare/en/small/zsv10pt5/172.png",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-black-bolt-white-flare/en/small/zsv10pt5/158.png",
         "rarity": "Ultra Rare",
         "setId": "zsv10pt5",
         "region": "EN"
@@ -5198,10 +5190,10 @@
         "region": "JP"
       },
       "en": {
-        "id": "zsv10pt5-158",
-        "number": "158",
+        "id": "zsv10pt5-172",
+        "number": "172",
         "name": "Zekrom ex",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-black-bolt-white-flare/en/small/zsv10pt5/158.png",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-black-bolt-white-flare/en/small/zsv10pt5/172.png",
         "rarity": "Black White Rare",
         "setId": "zsv10pt5",
         "region": "EN"
@@ -5219,7 +5211,19 @@
     }
   ],
   "tail": {
-    "enOnly": [],
+    "enOnly": [
+      {
+        "id": "zsv10pt5-171",
+        "number": "171",
+        "name": "Victini",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/sv-black-bolt-white-flare/en/small/zsv10pt5/171.png",
+        "rarity": null,
+        "setId": "zsv10pt5",
+        "region": "EN",
+        "dex": 494,
+        "jpElsewhere": true
+      }
+    ],
     "krOnly": [],
     "enKr": []
   }
