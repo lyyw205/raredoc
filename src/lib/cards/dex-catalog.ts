@@ -1,11 +1,10 @@
 /**
- * /dex 카탈로그 데이터 빌더 — 유저 무관 부분(CardPack 전체 × LC × locale 쿼리 + 매핑 + 정렬)을
- * unstable_cache(1h, 태그 "dex-catalog")로 캐시한다. 보유(owned) 오버레이는 page 가 요청별로 얹는다.
- *   - 캐시 항목은 같은 프로세스에서 참조 공유될 수 있으므로 호출부에서 절대 변형(mutate) 금지 — 불변 오버레이만.
- *   - 데이터 갱신 직후 즉시 반영이 필요하면 revalidateTag("dex-catalog").
- * 배경: 2GB 셀프호스트에서 매 요청 ~8초 SSR(원격 DB 수만 행) → 캐시 적중 시 DB 0회.
+ * /dex 카탈로그 데이터 빌더 — 유저 무관 부분(CardPack 전체 × Card × locale 쿼리 + 매핑 + 정렬)을
+ * 모듈 인메모리 TTL(1h)로 캐시한다. 보유(owned) 오버레이는 page 가 요청별로 얹는다.
+ *   - 캐시 항목은 같은 프로세스에서 참조 공유되므로 호출부에서 절대 변형(mutate) 금지 — 불변 오버레이만.
+ *   - ~14MB 라 next/cache(unstable_cache) 2MB 한도 초과 → 인메모리로 대체(2026-06-11). 무효화는 clearDexCatalog().
+ * 배경: 셀프호스트(Lightsail 단일 프로세스)에서 매 요청 ~8초 SSR(원격 DB 수만 행) → 캐시 적중 시 DB 0회.
  */
-import { unstable_cache } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { pickLocale, type LocaleSummary, type CardMeta } from "./queries";
 import { pickRarityLabel } from "./card-fields";
@@ -191,7 +190,29 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
   return sets;
 }
 
-export const getDexCatalog = unstable_cache(buildDexCatalog, ["dex-catalog"], {
-  revalidate: 3600,
-  tags: ["dex-catalog"],
-});
+// ── 인메모리 TTL 캐시(1h) ──────────────────────────────────────────────────────
+// 카탈로그(~14MB)는 next/cache(unstable_cache) 2MB 한도 초과로 저장 실패(unhandledRejection)했었다.
+// Lightsail 단일 장수 프로세스 기준 모듈 인메모리로 대체 — 2MB 한도 없음·요청 간 공유·동시요청 합치기.
+const DEX_TTL_MS = 3_600_000; // 1h
+const dexCache = new Map<DexPreferred, { at: number; data: DexSet[] }>();
+const dexInflight = new Map<DexPreferred, Promise<DexSet[]>>();
+
+export async function getDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
+  const hit = dexCache.get(preferred);
+  if (hit && Date.now() - hit.at < DEX_TTL_MS) return hit.data;
+  const inflight = dexInflight.get(preferred);
+  if (inflight) return inflight; // 동시 첫 요청 합치기(thundering herd 방지)
+  const p = buildDexCatalog(preferred)
+    .then((data) => {
+      if (data.length > 0) dexCache.set(preferred, { at: Date.now(), data }); // 빈결과(일시 DB실패)는 캐시 안 함
+      return data;
+    })
+    .finally(() => dexInflight.delete(preferred));
+  dexInflight.set(preferred, p);
+  return p;
+}
+
+/** 데이터 갱신 후 즉시 반영이 필요할 때 호출(전 locale 무효화). */
+export function clearDexCatalog(): void {
+  dexCache.clear();
+}
