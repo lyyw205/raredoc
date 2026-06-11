@@ -6,7 +6,7 @@
  * - Finds JP section by anchor id
  * - Parses JP card rows (number, name, slug)
  * - Creates JP Set row (jp-tcg-{setId})
- * - Creates JP RegionCard (jp-tcg-{setId}-{num}) linked to existing LogicalCard
+ * - Creates JP RegionCard (jp-tcg-{setId}-{num}) linked to existing Card
  * - Creates ExternalIdMapping (source=bulbapedia)
  *
  * Match by card number first, then name fallback.
@@ -276,7 +276,7 @@ async function syncSet(setDef: typeof SET_MAP[number], bulbapediaSourceId: strin
   // Build EN locale lookup maps
   const enLocales = await prisma.regionCard.findMany({
     where: { setId: enSetId },
-    select: { id: true, name: true, logicalCardId: true, number: true },
+    select: { id: true, name: true, cardId: true, number: true },
   });
   function normName(n: string) { return n.toLowerCase().replace(/[^a-z0-9]/g, ""); }
   const byNumber = new Map(enLocales.map(l => [l.number, l]));
@@ -294,8 +294,8 @@ async function syncSet(setDef: typeof SET_MAP[number], bulbapediaSourceId: strin
       fail++;
       continue;
     }
-    if (seenLC.has(enLocale.logicalCardId)) { skip++; continue; }
-    seenLC.add(enLocale.logicalCardId);
+    if (seenLC.has(enLocale.cardId)) { skip++; continue; }
+    seenLC.add(enLocale.cardId);
 
     const jpClId = `jp-tcg-${setId}-${enLocale.number}`;
 
@@ -304,7 +304,7 @@ async function syncSet(setDef: typeof SET_MAP[number], bulbapediaSourceId: strin
         where: { id: jpClId },
         create: {
           id: jpClId,
-          logicalCardId: enLocale.logicalCardId,
+          cardId: enLocale.cardId,
           language: "ja",
           region: "JP",
           setId: jpSetId,
@@ -314,7 +314,7 @@ async function syncSet(setDef: typeof SET_MAP[number], bulbapediaSourceId: strin
           imageSmall: `${WIKI_BASE}/wiki/${jpRow.slug}`,
         },
         update: {
-          logicalCardId: enLocale.logicalCardId,
+          cardId: enLocale.cardId,
           name: jpRow.jpName,
           imageSmall: `${WIKI_BASE}/wiki/${jpRow.slug}`,
         },
@@ -326,12 +326,12 @@ async function syncSet(setDef: typeof SET_MAP[number], bulbapediaSourceId: strin
         where: { sourceId_externalId: { sourceId: bulbapediaSourceId, externalId } },
         create: {
           sourceId: bulbapediaSourceId, externalId,
-          regionCardId: jpClId, logicalCardId: enLocale.logicalCardId,
+          regionCardId: jpClId, cardId: enLocale.cardId,
           url: cardUrl,
           verifiedBy: "auto:sync-bw-bulbapedia-jp", confidence: 0.7,
           notes: `Bulbapedia set list row. Set ${jpSetId}, number ${jpRow.number}.`,
         },
-        update: { regionCardId: jpClId, logicalCardId: enLocale.logicalCardId },
+        update: { regionCardId: jpClId, cardId: enLocale.cardId },
       });
 
       ok++;

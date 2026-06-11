@@ -1,6 +1,6 @@
 // ── P7-S1 회귀 게이트: 앵커 SQL(lcIdsInPack) ≡ 현 cardPackId 컬럼 (전 그룹 diff=0) ───
 // 컬럼 드롭 전 안전 증명. 앵커규칙(JP>KR>EN) DISTINCT ON 으로 도출한 그룹별 LC집합이
-// 현 LogicalCard.cardPackId 와 모든 그룹에서 동일한지 검증.
+// 현 Card.cardPackId 와 모든 그룹에서 동일한지 검증.
 // 실행: npx tsx scripts/migration/p7-setgroup-rewire-regression.ts
 import "dotenv/config";
 import { prisma } from "../../src/lib/prisma";
@@ -22,7 +22,7 @@ async function main() {
   for (const r of anchorRows) anchorOf.set(r.lc, r.grp);
 
   // 구: 현 컬럼 (lc → cardPackId)
-  const cur = await prisma.logicalCard.findMany({ where: { cardPackId: { not: null } }, select: { id: true, cardPackId: true } });
+  const cur = await prisma.card.findMany({ where: { cardPackId: { not: null } }, select: { id: true, cardPackId: true } });
 
   // 그룹별 집합 비교
   const oldByGrp = new Map<string, Set<string>>();

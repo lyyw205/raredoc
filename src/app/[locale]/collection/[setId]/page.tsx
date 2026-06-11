@@ -33,7 +33,7 @@ export default async function CollectionBookPage({
 
   const user = await getCurrentUser();
 
-  // 새 ERD: Set + RegionCard + LogicalCard.rarity 조인.
+  // 새 ERD: Set + RegionCard + Card.rarity 조인.
   const dbSet = await prisma.set
     .findUnique({
       where: { id: setId },
@@ -41,7 +41,7 @@ export default async function CollectionBookPage({
         localeCards: {
           orderBy: { number: "asc" },
           include: {
-            logicalCard: {
+            card: {
               select: {
                 rarity: {
                   select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } },
@@ -68,7 +68,7 @@ export default async function CollectionBookPage({
   if (dbSet && dbSet.localeCards.length > 0) {
     const bookCards = dbSet.localeCards.map((card) => {
       const own = owned.get(card.id);
-      const r = card.logicalCard.rarity;
+      const r = card.card.rarity;
       const rarityLabel =
         card.region === "JP"
           ? r?.nameJa ?? r?.nameEn ?? r?.code

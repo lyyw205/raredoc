@@ -1,10 +1,10 @@
 /**
- * PMCG1~6 (구판, 1996~1999 일본판) 의 LogicalCard 메타를 tcgdex API 에서 보강.
+ * PMCG1~6 (구판, 1996~1999 일본판) 의 Card 메타를 tcgdex API 에서 보강.
  *
  * - 채우는 필드: hp, types, subtypes(stage), attacks(JSON), retreatCost,
  *   pokedexNumbers(dexId), illustrator, legalities, rarityId (Rarity.nameEn 매치).
  * - 정책: 기존 값이 비어있을 때만 채움. 덮어쓰지 않음.
- * - 매핑: ExternalIdMapping(source=tcgdex, externalId=PMCG{n}-{localId}, logicalCardId).
+ * - 매핑: ExternalIdMapping(source=tcgdex, externalId=PMCG{n}-{localId}, cardId).
  *
  * 호출 빈도: 카드당 1 GET. 457 카드 × ~200ms = 약 90초. 사이사이 100ms 슬립.
  *
@@ -121,7 +121,7 @@ async function main() {
       const ourLocaleId = `jp-tcg-${c.id}`;
       const ourLogicalId = `lc-orphan-${ourLocaleId}`;
 
-      const lc = await prisma.logicalCard.findUnique({ where: { id: ourLogicalId } });
+      const lc = await prisma.card.findUnique({ where: { id: ourLogicalId } });
       if (!lc) {
         totalMissingLc++;
         continue;
@@ -164,7 +164,7 @@ async function main() {
       }
 
       if (Object.keys(update).length > 0) {
-        await prisma.logicalCard.update({ where: { id: ourLogicalId }, data: update });
+        await prisma.card.update({ where: { id: ourLogicalId }, data: update });
         totalEnriched++;
       } else {
         totalSkipped++;
@@ -176,22 +176,22 @@ async function main() {
         create: {
           sourceId: source.id,
           externalId: c.id,
-          logicalCardId: ourLogicalId,
+          cardId: ourLogicalId,
           regionCardId: ourLocaleId,
           url: `https://api.tcgdex.net/v2/ja/cards/${c.id}`,
           verifiedBy: "auto:enrich-pmcg-meta-tcgdex",
           confidence: 0.95,
         },
-        update: { logicalCardId: ourLogicalId, regionCardId: ourLocaleId },
+        update: { cardId: ourLogicalId, regionCardId: ourLocaleId },
       });
       totalMappings++;
     }
   }
 
   console.log(`\n── 결과 ──`);
-  console.log(`  업데이트한 LogicalCard: ${totalEnriched}`);
+  console.log(`  업데이트한 Card: ${totalEnriched}`);
   console.log(`  변경 없음 (이미 채워짐): ${totalSkipped}`);
-  console.log(`  LogicalCard 누락: ${totalMissingLc}`);
+  console.log(`  Card 누락: ${totalMissingLc}`);
   console.log(`  ExternalIdMapping 등록/갱신: ${totalMappings}`);
   if (unmatchedRarities.size > 0) {
     console.log(`  ⚠ 매칭 안된 rarity (${unmatchedRarities.size}):`);

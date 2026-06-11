@@ -3,9 +3,9 @@
  *
  * Bulbapedia 카드페이지 wikitext(`{{PokémoncardInfobox}}` + `{{Cardtext/Attack}}`)를 파싱.
  *   - RegionCard.name      = jname (일본어 카드명) — region=JP 정합화
- *   - LogicalCard.illustrator = caption "Illus. [[X]]"
- *   - LogicalCard.attacks  = [{ name, jname, cost:[energy], damage, text }] (구조화)
- *   - LogicalCard.abilities = [{ name, jname, text }]
+ *   - Card.illustrator = caption "Illus. [[X]]"
+ *   - Card.attacks  = [{ name, jname, cost:[energy], damage, text }] (구조화)
+ *   - Card.abilities = [{ name, jname, text }]
  *   - weakness/resistance/retreatCost (비어있을 때만)
  * 확신 없으면(페이지 404 등) 건너뜀(추측 금지).
  *
@@ -133,7 +133,7 @@ async function main() {
   const cards = await prisma.regionCard.findMany({
     where: { setId: SET },
     select: { id: true, name: true, number: true, numberInt: true,
-              logicalCard: { select: { id: true, illustrator: true, weakness: true, resistance: true, retreatCost: true, supertype: true, hp: true } } },
+              card: { select: { id: true, illustrator: true, weakness: true, resistance: true, retreatCost: true, supertype: true, hp: true } } },
     orderBy: { numberInt: "asc" },
   });
   console.log(`[init] ${SET}: ${cards.length}장, bulbaSet="${BULBA}", limit=${LIMIT === Infinity ? "all" : LIMIT}, dry=${DRY}`);
@@ -155,7 +155,7 @@ async function main() {
     ok++;
     console.log(`  ✓ #${num} ${en} → jname=${p.jname ?? "-"} illus=${p.illustrator ?? "-"} atk=${p.attacks.length} abi=${p.abilities.length}`);
     if (DRY) continue;
-    const lc = c.logicalCard;
+    const lc = c.card;
     const data: any = {};
     if (p.illustrator && !lc.illustrator) { data.illustrator = p.illustrator; illF++; }
     if (p.attacks.length) { data.attacks = p.attacks; atkF++; }
@@ -165,7 +165,7 @@ async function main() {
     if (p.retreat != null && lc.retreatCost == null) data.retreatCost = p.retreat;
     // supertype 교정: Bulbapedia가 트레이너/에너지라 하고 hp 없으면(=실제 포켓몬 아님) 정정
     if (p.supertypeHint && lc.hp == null && lc.supertype !== p.supertypeHint) data.supertype = p.supertypeHint;
-    if (Object.keys(data).length) await prisma.logicalCard.update({ where: { id: lc.id }, data });
+    if (Object.keys(data).length) await prisma.card.update({ where: { id: lc.id }, data });
     if (p.jname) { await prisma.regionCard.update({ where: { id: c.id }, data: { name: p.jname } }); jnameF++; }
   }
 

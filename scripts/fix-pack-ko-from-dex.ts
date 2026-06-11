@@ -35,31 +35,31 @@ async function koByDex(dex: number): Promise<string | null> {
 async function main() {
   const cards = await prisma.regionCard.findMany({
     where: { setId: SET },
-    select: { name: true, logicalCard: { select: { id: true, hp: true, pokedexNumbers: true, nameKo: true } } },
+    select: { name: true, card: { select: { id: true, hp: true, pokedexNumbers: true, nameKo: true } } },
   });
-  const pokes = cards.filter((c) => c.logicalCard.hp != null && c.logicalCard.pokedexNumbers?.length);
+  const pokes = cards.filter((c) => c.card.hp != null && c.card.pokedexNumbers?.length);
   console.log(`[init] ${SET}: 포켓몬+도감번호 ${pokes.length} (dry=${DRY})`);
 
   let corrected = 0, ok = 0, miss = 0;
   const seen = new Set<string>();
   const samples: string[] = [];
   for (const c of pokes) {
-    const lc = c.logicalCard;
+    const lc = c.card;
     if (seen.has(lc.id)) continue; seen.add(lc.id);
     const dex = lc.pokedexNumbers[0];
     const ko = await koByDex(dex);
     await sleep(40);
     if (!ko) { miss++; continue; }
-    const cur = await prisma.cardText.findUnique({ where: { logicalCardId_language: { logicalCardId: lc.id, language: "ko" } }, select: { name: true } });
+    const cur = await prisma.cardText.findUnique({ where: { cardId_language: { cardId: lc.id, language: "ko" } }, select: { name: true } });
     if (cur?.name === ko && lc.nameKo === ko) { ok++; continue; }
     if (samples.length < 12) samples.push(`"${c.name}" dex${dex}: "${cur?.name ?? "-"}" → "${ko}"`);
     if (!DRY) {
       await prisma.cardText.upsert({
-        where: { logicalCardId_language: { logicalCardId: lc.id, language: "ko" } },
+        where: { cardId_language: { cardId: lc.id, language: "ko" } },
         update: { name: ko, source: "pokeapi" },
-        create: { logicalCardId: lc.id, language: "ko", name: ko, source: "pokeapi", confidence: 0.95 },
+        create: { cardId: lc.id, language: "ko", name: ko, source: "pokeapi", confidence: 0.95 },
       });
-      await prisma.logicalCard.update({ where: { id: lc.id }, data: { nameKo: ko } });
+      await prisma.card.update({ where: { id: lc.id }, data: { nameKo: ko } });
     }
     corrected++;
   }

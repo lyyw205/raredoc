@@ -6,7 +6,7 @@
  *   2) DB 도감번호 vs 오픈소스(PokeAPI) 도감번호가 어긋나는 값이 있나? (이름→dex 역해석 대조)
  *   3) 앞으로 오픈소스 도감번호로 전부 매핑해도 되나? (해석 가능률/충돌)
  *
- * 방법: 포켓몬 LogicalCard 의 EN(우선)·KO 이름을 표준 이름표로 역해석한 dex 와
+ * 방법: 포켓몬 Card 의 EN(우선)·KO 이름을 표준 이름표로 역해석한 dex 와
  *       저장된 pokedexNumbers 를 비교. 카드명 수식어(ex/GX/V/Mega/지역폼 등)는 stripping.
  *       태그팀("A & B")은 다중 dex 로 처리.
  *
@@ -50,8 +50,8 @@ function eraOf(cardPackId: string | null, anySetId: string | null): string {
 
 async function main() {
   loadPokeapiNames(); // 표준표 워밍업
-  console.log("포켓몬 LogicalCard 적재 중...");
-  const cards = await prisma.logicalCard.findMany({
+  console.log("포켓몬 Card 적재 중...");
+  const cards = await prisma.card.findMany({
     where: { supertype: { in: POKE as unknown as string[] } },
     select: {
       id: true, supertype: true, pokedexNumbers: true, nameKo: true, cardPackId: true,

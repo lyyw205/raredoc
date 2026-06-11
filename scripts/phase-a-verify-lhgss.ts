@@ -86,7 +86,7 @@ interface RegionCardRow {
 interface ImageResult {
   id: string; name: string; setId: string; url: string; status: number; region: "EN" | "JP";
 }
-interface LogicalCardRow {
+interface CardRow {
   id: string; primarySetId: string | null; primaryNumber: string | null;
   cardPackId: string | null;
   hp: number | null; types: string[]; attacks: unknown; abilities: unknown;
@@ -95,7 +95,7 @@ interface LogicalCardRow {
 }
 type FieldKey = "hp" | "types" | "attacks" | "abilities" | "subtypes" | "illustrator" | "rarityId" | "pokedexNumbers" | "supertype" | "nameKo";
 
-function isPresent(card: LogicalCardRow, field: FieldKey): boolean {
+function isPresent(card: CardRow, field: FieldKey): boolean {
   switch (field) {
     case "hp": return card.hp != null;
     case "types": return Array.isArray(card.types) && card.types.length > 0;
@@ -156,8 +156,8 @@ async function sectionA(enLocales: RegionCardRow[], jpLocales: RegionCardRow[]):
 
 interface SetFieldStats { total: number; fields: Record<FieldKey, number>; }
 
-async function sectionB(lcards: LogicalCardRow[]): Promise<Map<string, SetFieldStats>> {
-  console.log(`\n[B] Field completeness — ${lcards.length} LogicalCards...`);
+async function sectionB(lcards: CardRow[]): Promise<Map<string, SetFieldStats>> {
+  console.log(`\n[B] Field completeness — ${lcards.length} Cards...`);
   const FIELDS: FieldKey[] = ["hp","types","attacks","abilities","subtypes","illustrator","rarityId","pokedexNumbers","supertype","nameKo"];
   const perSet = new Map<string, SetFieldStats>();
 
@@ -240,7 +240,7 @@ interface SupertypeStats {
   setKey: string; counts: Map<string, number>; nullCards: { id: string; name: string }[];
 }
 
-async function sectionF(lcards: LogicalCardRow[], locales: RegionCardRow[]): Promise<SupertypeStats[]> {
+async function sectionF(lcards: CardRow[], locales: RegionCardRow[]): Promise<SupertypeStats[]> {
   console.log(`\n[F] Supertype classification...`);
   const nameMap = new Map<string, string>();
   for (const cl of locales) { nameMap.set(cl.id, cl.name); }
@@ -270,7 +270,7 @@ interface LocalePairingResult {
 }
 
 async function sectionG(
-  hgssLcards: LogicalCardRow[],
+  hgssLcards: CardRow[],
   enLocales: RegionCardRow[],
 ): Promise<LocalePairingResult[]> {
   console.log(`\n[G] EN ↔ JP locale pairing (HGSS)...`);
@@ -283,9 +283,9 @@ async function sectionG(
 
   const jpLocalesByLC = await prisma.regionCard.findMany({
     where: { setId: { in: JP_HGSS_SET_IDS } },
-    select: { logicalCardId: true, setId: true },
+    select: { cardId: true, setId: true },
   });
-  const jpLCSet = new Set(jpLocalesByLC.map(r => r.logicalCardId));
+  const jpLCSet = new Set(jpLocalesByLC.map(r => r.cardId));
 
   const bySet = new Map<string, LocalePairingResult>();
   for (const card of hgssLcards) {
@@ -313,18 +313,18 @@ async function sectionG(
 
 interface LocaleStats { setKey: string; patterns: Map<string, number>; }
 
-async function sectionH(allLcards: LogicalCardRow[]): Promise<LocaleStats[]> {
+async function sectionH(allLcards: CardRow[]): Promise<LocaleStats[]> {
   console.log(`\n[H] Version availability...`);
   const lcIds = allLcards.map(c => c.id);
   const localeRows = await prisma.regionCard.findMany({
-    where: { logicalCardId: { in: lcIds } },
-    select: { logicalCardId: true, language: true },
+    where: { cardId: { in: lcIds } },
+    select: { cardId: true, language: true },
   });
 
   const byLcId = new Map<string, string[]>();
   for (const row of localeRows) {
-    if (!byLcId.has(row.logicalCardId)) byLcId.set(row.logicalCardId, []);
-    byLcId.get(row.logicalCardId)!.push(row.language);
+    if (!byLcId.has(row.cardId)) byLcId.set(row.cardId, []);
+    byLcId.get(row.cardId)!.push(row.language);
   }
 
   const bySet = new Map<string, LocaleStats>();
@@ -407,7 +407,7 @@ function buildReport(data: {
 
   // ── Section B ──
   lines.push(`\n## B) 필드 완성도 감사 (Field Completeness)`);
-  lines.push(`\n각 CardPack/Set 의 LogicalCard 필드 채움률.\n`);
+  lines.push(`\n각 CardPack/Set 의 Card 필드 채움률.\n`);
   const bKeys = [...data.sectionB.keys()].sort();
   lines.push(mdTable(
     ["세트","총계",...FIELDS],
@@ -554,14 +554,14 @@ async function main() {
   const allJpLocales = [...jpLLocales, ...jpHgssLocales];
   const allEnLocales = enHgssLocales; // EN only = HGSS EN
 
-  // Fetch L LogicalCards
-  const lLcards = await prisma.logicalCard.findMany({
+  // Fetch L Cards
+  const lLcards = await prisma.card.findMany({
     where: { cardPackId: { in: JP_L_GROUP_IDS } },
     select: { id: true, primarySetId: true, primaryNumber: true, cardPackId: true, hp: true, types: true, attacks: true, abilities: true, subtypes: true, illustrator: true, rarityId: true, pokedexNumbers: true, supertype: true, nameKo: true },
   });
 
-  // Fetch HGSS EN LogicalCards
-  const hgssLcards = await prisma.logicalCard.findMany({
+  // Fetch HGSS EN Cards
+  const hgssLcards = await prisma.card.findMany({
     where: { cardPackId: { in: HGSS_SET_KEYS.map(k => `og-${k}`) } },
     select: { id: true, primarySetId: true, primaryNumber: true, cardPackId: true, hp: true, types: true, attacks: true, abilities: true, subtypes: true, illustrator: true, rarityId: true, pokedexNumbers: true, supertype: true, nameKo: true },
   });

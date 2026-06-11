@@ -2,14 +2,14 @@
  * Phase KR-그룹화 MERGE — 확신 매칭(jp_unique + en_unique)만 실제 연결.
  *
  * 동작:
- *   1) 고아 KR RegionCard 을 형제(JP 우선, 없으면 EN) LogicalCard 로 re-point.
- *   2) 그 결과 자식(RegionCard) 0개가 된 옛 고아 LogicalCard 삭제.
- *      (사전 확인: 고아 KR LogicalCard 의존행 0건 — collection/trade/cardtext/tier/deck/ruling/ext)
+ *   1) 고아 KR RegionCard 을 형제(JP 우선, 없으면 EN) Card 로 re-point.
+ *   2) 그 결과 자식(RegionCard) 0개가 된 옛 고아 Card 삭제.
+ *      (사전 확인: 고아 KR Card 의존행 0건 — collection/trade/cardtext/tier/deck/ruling/ext)
  *
  * 안전:
  *   - --dry-run : 매핑 건수만 출력, 쓰기 없음.
  *   - 멱등: 이미 형제에 연결된 KR(=비고아)은 대상에서 자동 제외 → 재실행 무해.
- *   - 삭제는 "CardLocale 0개 + 의존행 0개" 인 LogicalCard 로 한정(다중 KR locale 보호).
+ *   - 삭제는 "CardLocale 0개 + 의존행 0개" 인 Card 로 한정(다중 KR locale 보호).
  *
  * 실행: npx tsx scripts/group-kr-merge.ts --dry-run
  *       npx tsx scripts/group-kr-merge.ts
@@ -25,7 +25,7 @@ type Map = { kr_locale_id: string; kr_lc: string; target_lc: string };
 async function main() {
   const t0 = Date.now();
 
-  // 확신 매핑(kr_locale_id → target LogicalCard) 산출
+  // 확신 매핑(kr_locale_id → target Card) 산출
   const map = await prisma.$queryRawUnsafe<Map[]>(`
     WITH kr AS (
       SELECT cl.id kr_locale_id, cl."logicalCardId" kr_lc, cl."numberInt" num, s."setGroupId" sg
@@ -86,7 +86,7 @@ async function main() {
     console.log(`  re-point ... ${repointed}/${rows.length}`);
   }
 
-  // 2) 빈 껍데기 LogicalCard 삭제 (RegionCard 0 + 의존행 0 인 것만)
+  // 2) 빈 껍데기 Card 삭제 (RegionCard 0 + 의존행 0 인 것만)
   const oldLcs = [...new Set(rows.map((r) => r.kr_lc))];
   let deleted = 0;
   for (let i = 0; i < oldLcs.length; i += CHUNK) {
@@ -120,7 +120,7 @@ async function main() {
   console.log("\n=== KR MERGE SUMMARY ===");
   console.log({
     durationSec: ((Date.now() - t0) / 1000).toFixed(1),
-    repointed, deletedOrphanLogicalCards: deleted,
+    repointed, deletedOrphanCards: deleted,
     krRegionCard_stillOrphan: Number(orphanLeft[0].c),
     krRegionCard_nowWithGameData: Number(krWithGame[0].c),
   });

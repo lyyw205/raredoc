@@ -18,7 +18,7 @@ const esc = (s: string) => s.replace(/'/g, "''");
 const gcId = (key: string) => "gc_" + crypto.createHash("sha1").update(key).digest("hex").slice(0, 20);
 
 async function main() {
-  const lcs = await prisma.logicalCard.findMany({
+  const lcs = await prisma.card.findMany({
     where: { locales: { some: {} } },
     select: { id: true, supertype: true, hp: true, attacks: true, abilities: true, subtypes: true, types: true, cardPackId: true, pokedexNumbers: true,
       locales: { select: { region: true, name: true } } },

@@ -39,7 +39,7 @@ function deriveDexes(en: string | null, ko: string | null): number[] {
 async function main() {
   loadPokeapiNames();
   console.log(`포켓몬 적재 중... ${DRY ? "[DRY-RUN]" : ""}${ONLY ? ` [only=${ONLY}]` : ""}`);
-  const cards = await prisma.logicalCard.findMany({
+  const cards = await prisma.card.findMany({
     where: { supertype: { in: POKE as unknown as string[] } },
     select: { id: true, pokedexNumbers: true, nameKo: true, locales: { select: { language: true, name: true } } },
   });
@@ -82,7 +82,7 @@ async function main() {
   let done = 0, err = 0;
   await pool(apply, 12, async (p) => {
     try {
-      await prisma.logicalCard.update({ where: { id: p.id }, data: { pokedexNumbers: p.to } });
+      await prisma.card.update({ where: { id: p.id }, data: { pokedexNumbers: p.to } });
       if (++done % 500 === 0) console.log(`  ... ${done}`);
     } catch (e) { err++; console.error(`  ✗ ${p.id}: ${String(e).slice(0, 80)}`); }
   });

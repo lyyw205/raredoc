@@ -29,14 +29,14 @@ async function main() {
   const byNum = new Map<number, typeof off[number]>(off.map((c) => [parseInt(c.number, 10), c]));
 
   const rows = await prisma.regionCard.findMany({ where: { setId }, orderBy: { numberInt: "asc" },
-    select: { numberInt: true, number: true, name: true, logicalCardId: true, logicalCard: { select: { supertype: true, subtypes: true, illustrator: true } } } });
+    select: { numberInt: true, number: true, name: true, cardId: true, card: { select: { supertype: true, subtypes: true, illustrator: true } } } });
 
   let subFilled = 0, illusFilled = 0, noStage = 0; const sample: string[] = [];
   for (const r of rows) {
     const o = byNum.get(r.numberInt!); if (!o) continue;
     const data: Record<string, unknown> = {};
     // subtypes (포켓몬 stage 기반)
-    if (OW || !(r.logicalCard.subtypes?.length)) {
+    if (OW || !(r.card.subtypes?.length)) {
       const base = o.stageRaw ? STAGE[o.stageRaw] : null;
       if (base) {
         const st = [base];
@@ -45,13 +45,13 @@ async function main() {
       } else noStage++;
     }
     // illustrator
-    if (o.illustrator && (OW || !r.logicalCard.illustrator)) data.illustrator = o.illustrator;
+    if (o.illustrator && (OW || !r.card.illustrator)) data.illustrator = o.illustrator;
 
     if (Object.keys(data).length) {
       if (data.subtypes) subFilled++;
       if (data.illustrator) illusFilled++;
       if (sample.length < 5) sample.push(`#${r.number} ${r.name} ${JSON.stringify(data)}`);
-      if (APPLY) await prisma.logicalCard.update({ where: { id: r.logicalCardId }, data });
+      if (APPLY) await prisma.card.update({ where: { id: r.cardId }, data });
     }
   }
   console.log(`■ ${setId} ← ${file}: subtypes채움 ${subFilled} · illus채움 ${illusFilled} · stage없음(트레이너/에너지) ${noStage} ${APPLY ? "★적용" : "(dry)"}`);

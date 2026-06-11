@@ -14,7 +14,7 @@ async function main() {
   const gid = args.find((a) => !a.startsWith("--"));
   const where: any = { subtypes: { has: "VMAX" }, locales: { some: { name: { contains: "VSTAR" } } } };
   if (gid) where.cardPackId = gid;
-  const lcs = await prisma.logicalCard.findMany({
+  const lcs = await prisma.card.findMany({
     where, select: { id: true, subtypes: true, cardPackId: true, locales: { select: { region: true, name: true }, take: 1 } },
   });
   const byG = new Map<string, number>(); const samp: string[] = [];
@@ -28,7 +28,7 @@ async function main() {
   console.log(`VSTAR오저장 ${lcs.length}장 ${gid ? `(${gid})` : "(전역)"} ${APPLY ? "★APPLY" : "(dry)"}`);
   for (const [g, c] of [...byG].sort((a, b) => b[1] - a[1])) console.log(`  ${g}: ${c}`);
   console.log("  " + samp.join(" | "));
-  if (APPLY) { for (const u of upd) await prisma.logicalCard.update({ where: { id: u.id }, data: { subtypes: u.ns } }); console.log(`★적용 ${upd.length}`); }
+  if (APPLY) { for (const u of upd) await prisma.card.update({ where: { id: u.id }, data: { subtypes: u.ns } }); console.log(`★적용 ${upd.length}`); }
   await prisma.$disconnect();
 }
 main().catch((e) => { console.error(e); process.exit(1); });

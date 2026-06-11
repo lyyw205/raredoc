@@ -93,7 +93,7 @@ async function main() {
   for (const p of plan) {
     if (!DRY) {
       await prisma.set.update({ where: { id: p.sid }, data: { cardPackId: p.group } });
-      lc += (await prisma.logicalCard.updateMany({ where: { primarySetId: p.sid }, data: { cardPackId: p.group } })).count;
+      lc += (await prisma.card.updateMany({ where: { primarySetId: p.sid }, data: { cardPackId: p.group } })).count;
     }
     console.log(`  ${p.sid} (${p.region}) → ${p.group} [${p.kind}] | ${p.name}`);
   }

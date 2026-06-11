@@ -4,7 +4,7 @@
  * Sets: hgss1~hgss4, hsp, col1 (HeartGold & SoulSilver series)
  * - Creates CardPack (og-{setId}, era "HGSS")
  * - Creates EN Set (en-tcg-{setId})
- * - Creates LogicalCard (lc-en-tcg-{setId}-{num})
+ * - Creates Card (lc-en-tcg-{setId}-{num})
  * - Creates EN RegionCard (en-tcg-{setId}-{num})
  * - Creates ExternalIdMapping (source=pokemontcg_io)
  *
@@ -136,7 +136,7 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
     const resistance = card.resistances?.[0] ? `${card.resistances[0].type} ${card.resistances[0].value}` : null;
 
     try {
-      await prisma.logicalCard.upsert({
+      await prisma.card.upsert({
         where: { id: lcId },
         create: {
           id: lcId, cardPackId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
@@ -175,14 +175,14 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
       await prisma.regionCard.upsert({
         where: { id: clId },
         create: {
-          id: clId, logicalCardId: lcId, language: "en", region: "EN",
+          id: clId, cardId: lcId, language: "en", region: "EN",
           setId: enSetId, number: numPadded,
           numberInt: parseInt(numPadded, 10) || null,
           name: card.name, flavorText: card.flavorText ?? null,
           imageSmall: card.images.small, imageLarge: card.images.large,
         },
         update: {
-          logicalCardId: lcId, number: numPadded,
+          cardId: lcId, number: numPadded,
           numberInt: parseInt(numPadded, 10) || null,
           name: card.name, flavorText: card.flavorText ?? null,
           imageSmall: card.images.small, imageLarge: card.images.large,
@@ -192,11 +192,11 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
       await prisma.externalIdMapping.upsert({
         where: { sourceId_externalId: { sourceId, externalId: card.id } },
         create: {
-          sourceId, externalId: card.id, regionCardId: clId, logicalCardId: lcId,
+          sourceId, externalId: card.id, regionCardId: clId, cardId: lcId,
           url: `https://pokemontcg.io/cards/${card.id}`,
           verifiedBy: "auto:sync-hgss-pokemontcgio", confidence: 0.95,
         },
-        update: { regionCardId: clId, logicalCardId: lcId },
+        update: { regionCardId: clId, cardId: lcId },
       });
 
       ok++;

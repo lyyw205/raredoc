@@ -416,7 +416,7 @@ export function MetaPageView({
           <div className="grid grid-cols-5 sm:grid-cols-6 lg:grid-cols-10 gap-3">
             {topCards.map((c) => (
               <Link
-                key={c.logicalCardId}
+                key={c.cardId}
                 href={c.regionCardId ? `/${locale}/cards/${c.regionCardId}` : "#"}
                 className="block hover:opacity-90 transition-opacity"
               >

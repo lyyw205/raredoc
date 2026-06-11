@@ -138,7 +138,7 @@ export const MC_PAIRS: Record<string, string> = {
 
 async function main() {
   const kkey = (s: string) => s.replace(/[\s　]/g, "");
-  const lcs = await prisma.logicalCard.findMany({
+  const lcs = await prisma.card.findMany({
     where: { supertype: { in: ["Trainer", "Energy"] }, AND: [{ locales: { some: { region: "JP" } } }, { locales: { some: { region: "KR" } } }] },
     select: { locales: { select: { region: true, name: true } } },
   });

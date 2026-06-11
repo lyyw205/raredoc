@@ -91,12 +91,12 @@ async function scrapeSet(setDef: typeof SETS[number], sourceId: string) {
     const numUnpadded = String(parseInt(card.number, 10));
     const locale = await prisma.regionCard.findFirst({
       where: { setId: `jp-tcg-${setDef.setId}`, number: numUnpadded },
-      select: { id: true, logicalCardId: true, name: true },
+      select: { id: true, cardId: true, name: true },
     });
     if (!locale) { unmatched++; continue; }
 
-    const lc = await prisma.logicalCard.findUnique({
-      where: { id: locale.logicalCardId },
+    const lc = await prisma.card.findUnique({
+      where: { id: locale.cardId },
       select: { id: true, illustrator: true },
     });
     if (!lc) { unmatched++; continue; }
@@ -115,7 +115,7 @@ async function scrapeSet(setDef: typeof SETS[number], sourceId: string) {
 
     const ill = extractIllustrator(cardHtml);
     if (ill) {
-      await prisma.logicalCard.update({ where: { id: lc.id }, data: { illustrator: ill } });
+      await prisma.card.update({ where: { id: lc.id }, data: { illustrator: ill } });
       filled++;
     } else {
       skipped++;
@@ -129,13 +129,13 @@ async function scrapeSet(setDef: typeof SETS[number], sourceId: string) {
         sourceId,
         externalId,
         regionCardId: locale.id,
-        logicalCardId: locale.logicalCardId,
+        cardId: locale.cardId,
         url: cardUrl,
         verifiedBy: "auto:scrape-l-illustrator-bulbapedia",
         confidence: 0.75,
         notes: `Bulbapedia card page. Set jp-tcg-${setDef.setId}, number ${card.number}.`,
       },
-      update: { regionCardId: locale.id, logicalCardId: locale.logicalCardId, url: cardUrl },
+      update: { regionCardId: locale.id, cardId: locale.cardId, url: cardUrl },
     });
   }
 

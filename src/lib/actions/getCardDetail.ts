@@ -4,11 +4,11 @@
  * 상세 슬라이드 패널용 — 카드 한 장(RegionCard)의 지역판 목록 + 풍부한 카드 정보를 한 번에 반환.
  *
  * - 입력: regionCardId (패널이 보여주고 있는 카드)
- * - variants: 같은 LogicalCard 의 한/영/일 이미지(지역판 탭용, region EN→JP→KR 정렬)
+ * - variants: 같은 Card 의 한/영/일 이미지(지역판 탭용, region EN→JP→KR 정렬)
  * - info: HP·타입·약점·기술·특성·룰·일러스트 등 카드 메타 (상세 페이지와 동일 소스)
  */
 
-import { loadCardByLocaleId, logicalCardToTCG } from "@/lib/cards/queries";
+import { loadCardByLocaleId, cardToTCG } from "@/lib/cards/queries";
 
 export type RegionCardVariant = {
   id: string;
@@ -22,7 +22,7 @@ export type RegionCardVariant = {
 };
 
 export type CardInfo = {
-  nameKo?: string; // LogicalCard 한글 오버레이 (KR 지역판이 없어도 한글명 표시용)
+  nameKo?: string; // Card 한글 오버레이 (KR 지역판이 없어도 한글명 표시용)
   supertype?: string;
   subtypes?: string[];
   hp?: string;
@@ -81,9 +81,9 @@ export async function getCardDetail(regionCardId: string): Promise<CardDetail> {
     (a, b) => (REGION_ORDER[a.region] ?? 9) - (REGION_ORDER[b.region] ?? 9)
   );
 
-  const tcg = logicalCardToTCG(loaded.logicalCard, loaded.locale);
+  const tcg = cardToTCG(loaded.card, loaded.locale);
   const info: CardInfo = {
-    nameKo: loaded.logicalCard.nameKo ?? undefined,
+    nameKo: loaded.card.nameKo ?? undefined,
     supertype: tcg.supertype,
     subtypes: tcg.subtypes,
     hp: tcg.hp,

@@ -1,7 +1,7 @@
 /**
  * JP 이미지 백필 — tcgdex 가 이미지를 제공하지 않는 JP 세트(SV11B 등)의 RegionCard 에
  *   pokemon-card.com(일본공식) 이미지 URL 을 번호 매칭으로 채움.
- *   LogicalCard/매핑/KR 은 일절 건드리지 않음. imageSmall/imageLarge 가 비어있는 행만 채움.
+ *   Card/매핑/KR 은 일절 건드리지 않음. imageSmall/imageLarge 가 비어있는 행만 채움.
  *   이미지맵 파일 포맷: [{ number: "001", image: "https://...", jaName, ... }]
  *
  * 실행: npx tsx scripts/backfill-jp-image-official.ts --set=jp-tcg-SV11B --file=data/jp-official/jp-sv11b-images.json [--apply] [--force]

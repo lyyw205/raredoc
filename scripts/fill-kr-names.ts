@@ -1,6 +1,6 @@
 /**
  * KR 분할세트 한글이름 채우기 — 포켓몬은 PokeAPI ko(표준표) by dex.
- *   - LogicalCard.nameKo = 종 한글명(예: 쏘콘)
+ *   - Card.nameKo = 종 한글명(예: 쏘콘)
  *   - KR RegionCard.name = 종명 + suffix(ex/V/VMAX/VSTAR/GX) (예: 쏘콘ex)
  *   - 멀티 dex(태그팀)는 " & " 로 종명 결합.
  * 트레이너/에너지(dex 없음)는 건너뛰고 카운트만 보고 → namu 로 별도 처리.
@@ -32,12 +32,12 @@ async function main() {
 
   for (const setId of targets) {
     const cards = await prisma.regionCard.findMany({ where: { setId }, orderBy: { numberInt: "asc" },
-      select: { id: true, number: true, name: true, logicalCardId: true,
-        logicalCard: { select: { supertype: true, subtypes: true, pokedexNumbers: true, nameKo: true } } } });
+      select: { id: true, number: true, name: true, cardId: true,
+        card: { select: { supertype: true, subtypes: true, pokedexNumbers: true, nameKo: true } } } });
     let pokeOk = 0, pokeNoDexKo = 0, trainer = 0, sample = 0; const miss: string[] = [];
 
     for (const c of cards) {
-      const lc = c.logicalCard;
+      const lc = c.card;
       if (!isPokemonSupertype(lc.supertype)) { trainer++; continue; }
       const dexes = lc.pokedexNumbers ?? [];
       const koParts = dexes.map((d) => getName(d, "ko")).filter(Boolean) as string[];
@@ -49,7 +49,7 @@ async function main() {
       if (sample < 5) { console.log(`  #${c.number} "${c.name}" → "${cardName}" (nameKo 동일)`); sample++; }
       if (APPLY) {
         await prisma.regionCard.update({ where: { id: c.id }, data: { name: cardName } });
-        if (c.logicalCardId) await prisma.logicalCard.update({ where: { id: c.logicalCardId }, data: { nameKo: cardName } });
+        if (c.cardId) await prisma.card.update({ where: { id: c.cardId }, data: { nameKo: cardName } });
       }
       pokeOk++;
     }

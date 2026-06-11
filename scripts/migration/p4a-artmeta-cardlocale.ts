@@ -1,4 +1,4 @@
-// ── P4a: art메타(rarityId·subtypes) LogicalCard → RegionCard 기계복제 ───────────
+// ── P4a: art메타(rarityId·subtypes) Card → RegionCard 기계복제 ───────────
 // 인쇄본별 art메타 하강. 정정 0(region rarity 정정은 P5.5). 1 LC=1 print-family라 한 LC의
 // 모든 locale에 부모 동일값 복사(충돌 없음). 멱등(재실행 무해). 가역(P5 전 컬럼 DROP 가능).
 // 기본 dry-run. 적용 --apply. 실행: npx tsx scripts/migration/p4a-artmeta-cardlocale.ts [--apply]
@@ -23,7 +23,7 @@ async function main() {
     await prisma.$disconnect(); return;
   }
 
-  // 일괄 복제: RegionCard.rarityId/subtypes = 부모 LogicalCard 값
+  // 일괄 복제: RegionCard.rarityId/subtypes = 부모 Card 값
   const n = await prisma.$executeRawUnsafe(
     `UPDATE "CardLocale" cl SET "rarityId" = lc."rarityId", "subtypes" = lc."subtypes"
      FROM "LogicalCard" lc WHERE lc.id = cl."logicalCardId"`);

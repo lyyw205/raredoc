@@ -1,7 +1,7 @@
 /**
  * JP 분할세트 레어도 백필 — tcgdex JP 가 시크릿레어(#68+/#73+ AR/SR/SAR/UR 등)에 rarity 미제공한 분을
  *   pokemoncard.co.kr 공식 상세페이지(p_num 안 no_wrap_by_admin 코드)로 보강.
- *   KR 레어도 척도 = JP 와 동일(C/U/R/RR/AR/SR/SAR/UR/HR/MUR…) → 공유 LogicalCard.rarityId 채움.
+ *   KR 레어도 척도 = JP 와 동일(C/U/R/RR/AR/SR/SAR/UR/HR/MUR…) → 공유 Card.rarityId 채움.
  * rarityId 가 이미 있는 LC 는 건드리지 않음(tcgdex 값 보존). KR locale(=JP 앵커 LC) 기준으로 순회.
  *
  * 실행: npx tsx scripts/backfill-jp-rarity-kr.ts [--set=kr-sv2p] [--apply]
@@ -47,8 +47,8 @@ async function main() {
     const detailByNum = new Map<number, string>(off.map((c: any) => [parseInt(c.number, 10), c.detailId]));
     // KR locale = JP 앵커 LC. rarityId null 인 것만.
     const kr = await prisma.regionCard.findMany({ where: { setId: krSet }, orderBy: { numberInt: "asc" },
-      select: { number: true, numberInt: true, name: true, logicalCardId: true, logicalCard: { select: { rarityId: true } } } });
-    const todo = kr.filter((r) => !r.logicalCard.rarityId);
+      select: { number: true, numberInt: true, name: true, cardId: true, card: { select: { rarityId: true } } } });
+    const todo = kr.filter((r) => !r.card.rarityId);
     console.log(`\n■ ${krSet}: 레어도 null ${todo.length}/${kr.length} ${APPLY ? "★적용" : "(dry)"}`);
     let filled = 0, noDetail = 0, noCode = 0, unmapped = 0; const unm = new Set<string>(); const sample: string[] = [];
 
@@ -61,7 +61,7 @@ async function main() {
       const rarId = rarCode ? rarById.get(rarCode) : undefined;
       if (!rarId) { unmapped++; unm.add(rc); continue; }
       if (sample.length < 6) sample.push(`#${r.number} ${r.name}=${rc}`);
-      if (APPLY) await prisma.logicalCard.update({ where: { id: r.logicalCardId }, data: { rarityId: rarId } });
+      if (APPLY) await prisma.card.update({ where: { id: r.cardId }, data: { rarityId: rarId } });
       filled++;
     }
     console.log(`  채움 ${filled} · detailId없음 ${noDetail} · 코드추출실패 ${noCode} · 미매핑 ${unmapped}`);

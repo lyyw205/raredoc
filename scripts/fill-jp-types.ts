@@ -1,6 +1,6 @@
 /**
  * MEGA/구 JP 팩 포켓몬 타입 백필 — pc-jp(pokemon-card.com) 상세페이지 icon-class 에서 타입 수집해
- * LogicalCard.types 만 외과적으로 채움(다른 필드 무변경). 비어있을 때 채우고, 기존값과 다르면 교정.
+ * Card.types 만 외과적으로 채움(다른 필드 무변경). 비어있을 때 채우고, 기존값과 다르면 교정.
  * 스크랩 결과는 <officialJson>.types.json 캐시 → dry 후 apply 시 재스크랩 안 함.
  *
  * 실행: npx tsx scripts/fill-jp-types.ts <cardPackId> <officialJson> [--apply]
@@ -56,7 +56,7 @@ async function main() {
     console.log(`■ 스크랩 ${off.length}장: 타입보유 ${ok} · 빈값(트레이너/에너지) ${empty} · curl실패 ${fail} → ${cache}`);
   }
 
-  const lcs = await prisma.logicalCard.findMany({ where: { cardPackId: gid }, select: { id: true, supertype: true, types: true, locales: { select: { region: true, numberInt: true } } } });
+  const lcs = await prisma.card.findMany({ where: { cardPackId: gid }, select: { id: true, supertype: true, types: true, locales: { select: { region: true, numberInt: true } } } });
   let fill = 0, diff = 0, already = 0, noScrape = 0; const samples: string[] = []; const updates: { id: string; t: string[] }[] = [];
   for (const lc of lcs) {
     const jp = lc.locales.find((l) => l.region === "JP"); if (!jp || jp.numberInt == null) continue;
@@ -71,7 +71,7 @@ async function main() {
   }
   console.log(`fill ${fill} (기존값 교정 ${diff}) · 이미일치 ${already} · 스크랩없는 포켓몬 ${noScrape} ${APPLY ? "★APPLY" : "(dry)"}`);
   console.log("  " + samples.join(" | "));
-  if (APPLY) { for (const u of updates) await prisma.logicalCard.update({ where: { id: u.id }, data: { types: u.t } }); console.log(`★적용 types ${updates.length}`); }
+  if (APPLY) { for (const u of updates) await prisma.card.update({ where: { id: u.id }, data: { types: u.t } }); console.log(`★적용 types ${updates.length}`); }
   await prisma.$disconnect();
 }
 main().catch((e) => { console.error(e); process.exit(1); });

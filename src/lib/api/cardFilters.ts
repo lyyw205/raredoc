@@ -26,7 +26,7 @@ export interface FilterOptions {
 
 export async function getFilterOptions(): Promise<FilterOptions> {
   // Phase 4: prisma.card.groupBy(rarity) → prisma.rarity master 데이터.
-  // 검색 액션(searchCards)이 Rarity.code 로 LogicalCard.rarity 를 매칭하므로 동일 도메인 사용.
+  // 검색 액션(searchCards)이 Rarity.code 로 Card.rarity 를 매칭하므로 동일 도메인 사용.
   const [rarityRows, sets] = await Promise.all([
     prisma.rarity.findMany({
       select: { code: true },

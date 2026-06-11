@@ -1,9 +1,9 @@
 "use server";
 
 import {
-  searchLogicalCards,
+  searchCards,
   pickLocale,
-  type LogicalCardSearchFilters,
+  type CardSearchFilters,
 } from "@/lib/cards/queries";
 import { pickRarityLabel } from "@/lib/cards/card-fields";
 
@@ -30,7 +30,7 @@ export interface CardSearchParams {
 export async function searchCardsAction(
   params: CardSearchParams
 ): Promise<CardSearchHit[]> {
-  const filters: LogicalCardSearchFilters = {
+  const filters: CardSearchFilters = {
     q: params.q,
     type: params.type,
     rarityCode: params.rarity,
@@ -38,19 +38,19 @@ export async function searchCardsAction(
     limit: params.limit,
   };
 
-  // LogicalCard 단위 dedupe 후, KO 우선 locale 1개만 결과로.
-  const rows = await searchLogicalCards(filters);
+  // Card 단위 dedupe 후, KO 우선 locale 1개만 결과로.
+  const rows = await searchCards(filters);
 
   const hits: CardSearchHit[] = [];
-  for (const { logicalCard, locales } of rows) {
+  for (const { card, locales } of rows) {
     if (locales.length === 0) continue;
     const primary = pickLocale(locales, "ko") ?? locales[0];
     const koLocale = locales.find((l) => l.region === "KR") ?? null;
     const rarity = pickRarityLabel(primary.region, {
-      nameJa: logicalCard.rarityNameJa,
-      nameEn: logicalCard.rarityNameEn,
-      nameKo: logicalCard.rarityNameKo,
-      code: logicalCard.rarityCode,
+      nameJa: card.rarityNameJa,
+      nameEn: card.rarityNameEn,
+      nameKo: card.rarityNameKo,
+      code: card.rarityCode,
     }) ?? null;
     hits.push({
       id: primary.id,

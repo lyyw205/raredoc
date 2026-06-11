@@ -1,11 +1,11 @@
 /**
- * XY era (2013-2016) LogicalCard 메타를 tcgdex EN 엔드포인트에서 보강.
+ * XY era (2013-2016) Card 메타를 tcgdex EN 엔드포인트에서 보강.
  *
  * tcgdex /ja/ 엔드포인트는 XY 카드 목록이 비어있어 /en/ 사용.
  * EN 카드 번호 = JP 카드 번호 (XY2 등 대응 세트는 번호 일치 확인됨).
  * CP 세트는 EN 대응 없으므로 tcgdex EN 에서 별도 처리 안함.
  *
- * 매칭 전략: EN tcgdex localId(number) → JP DB RegionCard.number → LogicalCard
+ * 매칭 전략: EN tcgdex localId(number) → JP DB RegionCard.number → Card
  *
  * Run: npx tsx scripts/enrich-xy-meta-tcgdex.ts [--set=xy2]
  */
@@ -121,7 +121,7 @@ async function main() {
       const ourLocaleId = `${jpSetId}-${number}`;
       const ourLogicalId = `lc-orphan-${ourLocaleId}`;
 
-      const lc = await prisma.logicalCard.findUnique({ where: { id: ourLogicalId } });
+      const lc = await prisma.card.findUnique({ where: { id: ourLogicalId } });
       if (!lc) { missing++; continue; }
 
       const d = await fetchJson<CardDetail>(`https://api.tcgdex.net/v2/en/cards/${c.id}`);
@@ -148,7 +148,7 @@ async function main() {
       }
 
       if (Object.keys(update).length > 0) {
-        await prisma.logicalCard.update({ where: { id: ourLogicalId }, data: update });
+        await prisma.card.update({ where: { id: ourLogicalId }, data: update });
         enriched++;
       } else skipped++;
 
@@ -157,14 +157,14 @@ async function main() {
         create: {
           sourceId: source.id,
           externalId: `${c.id}::jp-${dbCode}`,
-          logicalCardId: ourLogicalId,
+          cardId: ourLogicalId,
           regionCardId: ourLocaleId,
           url: `https://api.tcgdex.net/v2/en/cards/${c.id}`,
           verifiedBy: "auto:enrich-xy-meta-tcgdex",
           confidence: 0.90,
           notes: `EN tcgdex ${c.id} mapped to JP ${dbCode} by number ${number}`,
         },
-        update: { logicalCardId: ourLogicalId, regionCardId: ourLocaleId },
+        update: { cardId: ourLogicalId, regionCardId: ourLocaleId },
       });
       totalMap++;
     }
@@ -174,7 +174,7 @@ async function main() {
   console.log(`\n── 전체 결과 ──`);
   console.log(`  enriched: ${enriched}`);
   console.log(`  already-filled (skipped): ${skipped}`);
-  console.log(`  LogicalCard 누락: ${missing}`);
+  console.log(`  Card 누락: ${missing}`);
   console.log(`  ExternalIdMapping: ${totalMap}`);
   if (unmatched.size > 0) {
     console.log(`  매칭 안된 rarity (${unmatched.size}):`);

@@ -1,5 +1,5 @@
 /**
- * ADV1~5 카드의 LogicalCard.illustrator 를 Bulbapedia 에서 수집.
+ * ADV1~5 카드의 Card.illustrator 를 Bulbapedia 에서 수집.
  * tcgplayer-cdn 403 오류 카드의 이미지를 Supabase 로 대체.
  *
  * 매칭 전략: Bulbapedia 테이블의 "No." 컬럼(예: 001/055) → RegionCard.number
@@ -221,7 +221,7 @@ async function scrapeSet(
 
     const locale = await prisma.regionCard.findFirst({
       where: { setId: `jp-tcg-${set.setId}`, number: cardNumber },
-      select: { id: true, imageSmall: true, logicalCardId: true, name: true },
+      select: { id: true, imageSmall: true, cardId: true, name: true },
     });
 
     if (!locale) {
@@ -232,8 +232,8 @@ async function scrapeSet(
       continue;
     }
 
-    const lc = await prisma.logicalCard.findUnique({
-      where: { id: locale.logicalCardId },
+    const lc = await prisma.card.findUnique({
+      where: { id: locale.cardId },
       select: { id: true, illustrator: true },
     });
     if (!lc) {
@@ -268,7 +268,7 @@ async function scrapeSet(
     if (needIllustrator) {
       const ill = extractIllustrator(cardHtml);
       if (ill) {
-        await prisma.logicalCard.update({
+        await prisma.card.update({
           where: { id: lc.id },
           data: { illustrator: ill },
         });
@@ -286,7 +286,7 @@ async function scrapeSet(
         sourceId: source.id,
         externalId,
         regionCardId: locale.id,
-        logicalCardId: locale.logicalCardId,
+        cardId: locale.cardId,
         url: cardUrl,
         verifiedBy: "auto:scrape-adv",
         confidence: 0.7,
@@ -294,7 +294,7 @@ async function scrapeSet(
       },
       update: {
         regionCardId: locale.id,
-        logicalCardId: locale.logicalCardId,
+        cardId: locale.cardId,
         url: cardUrl,
       },
     });

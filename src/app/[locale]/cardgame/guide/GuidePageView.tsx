@@ -258,9 +258,9 @@ function RulesTab({ locale, rulings }: { locale: string; rulings: RulingRow[] })
                   A. {ruling.answer}
                 </p>
                 <div className="flex items-center gap-3 flex-wrap">
-                  {card && ruling.logicalCardId && (
+                  {card && ruling.cardId && (
                     <Link
-                      href={`/${locale}/cardgame/cards/${ruling.logicalCardId}`}
+                      href={`/${locale}/cardgame/cards/${ruling.cardId}`}
                       className="text-toss-micro text-toss-brand hover:underline"
                     >
                       관련 카드: {card.nameKo} →

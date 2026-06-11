@@ -1,5 +1,5 @@
 /**
- * SwSh JP-only CardPack LogicalCard supertype 보강.
+ * SwSh JP-only CardPack Card supertype 보강.
  *
  * tcgdex JP SwSh 엔드포인트는 cards 배열이 빈 배열을 반환하므로
  * RegionCard.name 기반 규칙으로 supertype 추정.
@@ -85,7 +85,7 @@ async function main() {
   let skipped = 0;
 
   for (const groupId of JP_ONLY_SWSH_GROUPS) {
-    // Get all RegionCard + LogicalCard for this group where supertype is null
+    // Get all RegionCard + Card for this group where supertype is null
     const sets = await prisma.set.findMany({
       where: { cardPackId: groupId },
       select: { id: true, cardCount: true, region: true },
@@ -95,7 +95,7 @@ async function main() {
     const jpSet = sets.find(s => s.region === "JP");
     const officialCount = jpSet?.cardCount ?? 100;
 
-    // Get LogicalCards needing supertype via JP RegionCards
+    // Get Cards needing supertype via JP RegionCards
     const jpSetIds = sets.filter(s => s.region === "JP").map(s => s.id);
     if (jpSetIds.length === 0) {
       console.log(`  ⚠ ${groupId}: JP set 없음 — skip`);
@@ -105,14 +105,14 @@ async function main() {
     const locales = await prisma.regionCard.findMany({
       where: {
         setId: { in: jpSetIds },
-        logicalCard: { supertype: null },
+        card: { supertype: null },
       },
       select: {
         id: true,
         name: true,
         numberInt: true,
-        logicalCardId: true,
-        logicalCard: {
+        cardId: true,
+        card: {
           select: { pokedexNumbers: true },
         },
       },
@@ -129,14 +129,14 @@ async function main() {
     const updates: Map<string, string> = new Map();
 
     for (const cl of locales) {
-      if (!cl.logicalCardId) continue;
+      if (!cl.cardId) continue;
       const st = inferSupertype(
         cl.name,
-        cl.logicalCard?.pokedexNumbers ?? [],
+        cl.card?.pokedexNumbers ?? [],
         cl.numberInt,
         officialCount
       );
-      updates.set(cl.logicalCardId, st);
+      updates.set(cl.cardId, st);
     }
 
     // Batch update
@@ -147,7 +147,7 @@ async function main() {
     console.log(`  분류: Pokémon=${pokemon.length}, Trainer=${trainer.length}, Energy=${energy.length}`);
 
     for (const [lcId, st] of updates) {
-      await prisma.logicalCard.update({
+      await prisma.card.update({
         where: { id: lcId },
         data: { supertype: st },
       });

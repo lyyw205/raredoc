@@ -96,7 +96,7 @@ export function resolveDeckCard(
 /** 주어진 cardId 집합에 대한 표시용 카드 맵을 만든다 (DB 일괄 조회 + mock 폴백). */
 export async function resolveDeckCardMap(cardIds: string[]): Promise<Record<string, ResolvedCard>> {
   const unique = Array.from(new Set(cardIds));
-  // Phase 4: prisma.card → prisma.regionCard (read). 메타(types/hp/supertype)는 LogicalCard 가 보유.
+  // Phase 4: prisma.card → prisma.regionCard (read). 메타(types/hp/supertype)는 Card 가 보유.
   // RegionCard 행이 자체 locale 의 표시명 보유 → resolveDeckCard 입력 호환 위해 nameKo 슬롯에 name 그대로 사용.
   const dbLocales = unique.length
     ? await prisma.regionCard.findMany({
@@ -107,7 +107,7 @@ export async function resolveDeckCardMap(cardIds: string[]): Promise<Record<stri
           imageSmall: true,
           imageLarge: true,
           setId: true,
-          logicalCard: {
+          card: {
             select: {
               types: true,
               hp: true,
@@ -127,10 +127,10 @@ export async function resolveDeckCardMap(cardIds: string[]): Promise<Record<stri
         name: l.name,
         imageSmall: l.imageSmall,
         imageLarge: l.imageLarge,
-        types: l.logicalCard.types,
-        hp: l.logicalCard.gameCard?.hp ?? l.logicalCard.hp,
+        types: l.card.types,
+        hp: l.card.gameCard?.hp ?? l.card.hp,
         setId: l.setId,
-        supertype: l.logicalCard.gameCard?.supertype ?? l.logicalCard.supertype,
+        supertype: l.card.gameCard?.supertype ?? l.card.supertype,
       },
     ])
   );
@@ -213,7 +213,7 @@ type DbArchetype = {
   strengths: string[];
   weaknesses: string[];
   counters: string[];
-  cards: { logicalCardId: string; count: number; role: string | null }[];
+  cards: { cardId: string; count: number; role: string | null }[];
   variants: { id: string; nameKo: string }[];
 };
 
@@ -242,8 +242,8 @@ function toSummary(a: DbArchetype): ArchetypeSummary {
     heroCardIds: [...a.cards]
       .sort((x, y) => (x.role === "✓" ? 0 : 1) - (y.role === "✓" ? 0 : 1))
       .slice(0, 4)
-      .map((c) => c.logicalCardId),
-    cardList: a.cards.map((c) => ({ cardId: c.logicalCardId, count: c.count, role: c.role })),
+      .map((c) => c.cardId),
+    cardList: a.cards.map((c) => ({ cardId: c.cardId, count: c.count, role: c.role })),
     strengths: a.strengths,
     weaknesses: a.weaknesses,
     counters: a.counters,
@@ -253,7 +253,7 @@ function toSummary(a: DbArchetype): ArchetypeSummary {
 }
 
 const ARCHETYPE_INCLUDE = {
-  cards: { select: { logicalCardId: true, count: true, role: true } },
+  cards: { select: { cardId: true, count: true, role: true } },
   variants: { select: { id: true, nameKo: true } },
 } as const;
 
@@ -447,22 +447,22 @@ export type RecipeCard = {
   regionCardId: string | null;
 };
 
-/** logicalCardId[] → 대표 locale 이미지/id (KR>JP>EN 우선) — 레시피·리스트 뷰어 공용 (UI-1a). */
-async function resolveLogicalCardImages(
+/** cardId[] → 대표 locale 이미지/id (KR>JP>EN 우선) — 레시피·리스트 뷰어 공용 (UI-1a). */
+async function resolveCardImages(
   ids: string[],
 ): Promise<Map<string, { image: string | null; regionCardId: string }>> {
   const unique = [...new Set(ids.filter(Boolean))];
   if (unique.length === 0) return new Map();
   const locales = await prisma.regionCard.findMany({
-    where: { logicalCardId: { in: unique } },
-    select: { id: true, logicalCardId: true, region: true, imageSmall: true, imageLarge: true },
+    where: { cardId: { in: unique } },
+    select: { id: true, cardId: true, region: true, imageSmall: true, imageLarge: true },
   });
   const PRIORITY: Record<string, number> = { KR: 0, JP: 1, EN: 2 };
   const byLc = new Map<string, typeof locales>();
   for (const l of locales) {
-    const arr = byLc.get(l.logicalCardId) ?? [];
+    const arr = byLc.get(l.cardId) ?? [];
     arr.push(l);
-    byLc.set(l.logicalCardId, arr);
+    byLc.set(l.cardId, arr);
   }
   const map = new Map<string, { image: string | null; regionCardId: string }>();
   for (const [lcId, arr] of byLc) {
@@ -501,8 +501,8 @@ export async function getArchetypeRecipe(deckId: string): Promise<ArchetypeRecip
   type RankedRow = (typeof rows)[number] & { _hero: boolean };
   const ranked: RankedRow[] = rows.map((r) => ({ ...r, _hero: isHeroCard(r.cardName) }));
 
-  // 대표 인쇄판 썸네일 (UI-1a) — logicalCardId 연결 행만
-  const imageMap = await resolveLogicalCardImages(ranked.map((r) => r.logicalCardId).filter((v): v is string => !!v));
+  // 대표 인쇄판 썸네일 (UI-1a) — cardId 연결 행만
+  const imageMap = await resolveCardImages(ranked.map((r) => r.cardId).filter((v): v is string => !!v));
 
   // 정렬 우선순위:
   //   1) 핵심 카드(iconKeys 매칭) 먼저
@@ -517,7 +517,7 @@ export async function getArchetypeRecipe(deckId: string): Promise<ArchetypeRecip
   });
 
   const toCard = (r: RankedRow): RecipeCard => {
-    const resolved = r.logicalCardId ? imageMap.get(r.logicalCardId) : undefined;
+    const resolved = r.cardId ? imageMap.get(r.cardId) : undefined;
     return {
       cardName: r.cardName,
       setCode: r.setCode,
@@ -550,36 +550,36 @@ export type CardAdoption = {
 };
 
 /**
- * 작업2: 카드(logicalCardId)별 메타 채용 지표.
+ * 작업2: 카드(cardId)별 메타 채용 지표.
  *
- * DeckRecipeCard 에서 logicalCardId NOT NULL 인 행을 logicalCardId별 집계.
+ * DeckRecipeCard 에서 cardId NOT NULL 인 행을 cardId별 집계.
  * - deckCount: 등장 아키타입 수
  * - adoptionRate: 평균 채용률
  * - usageScore: Σ(adoptionRate × avgCount)
  *
- * ★게임 dedup(P3): 재수록 카드가 여러 logicalCardId 로 쪼개져 채용률이 분산되던 것을
+ * ★게임 dedup(P3): 재수록 카드가 여러 cardId 로 쪼개져 채용률이 분산되던 것을
  *   gameCardId(게임상 같은 카드) 로 통합 집계 후, 그 gameCard 의 모든 인쇄본(LC) 키로 펼침.
- *   gameCardId 없는 카드(빈-LC 등)는 logicalCardId 자기 키로 무회귀.
- *   반환 Map 은 여전히 logicalCardId 키 — 소비처(loadCards) 무변경.
+ *   gameCardId 없는 카드(빈-LC 등)는 cardId 자기 키로 무회귀.
+ *   반환 Map 은 여전히 cardId 키 — 소비처(loadCards) 무변경.
  */
 export async function getCardAdoption(): Promise<Map<string, CardAdoption>> {
   const rows = await prisma.deckRecipeCard.findMany({
     // region 필터: INTL 한정 — region 행 분리 시 deckCount/usageScore 이중계상 방지 (multisource P0)
-    where: { logicalCardId: { not: null }, region: "INTL" },
-    select: { logicalCardId: true, archetypeId: true, adoptionRate: true, avgCount: true },
+    where: { cardId: { not: null }, region: "INTL" },
+    select: { cardId: true, archetypeId: true, adoptionRate: true, avgCount: true },
   });
   if (rows.length === 0) return new Map();
 
-  // logicalCardId → gameCardId (게임상 같은 카드 = 덱 4장 단위)
-  const lcIds = [...new Set(rows.map((r) => r.logicalCardId!))];
-  const lcRows = await prisma.logicalCard.findMany({ where: { id: { in: lcIds } }, select: { id: true, gameCardId: true } });
+  // cardId → gameCardId (게임상 같은 카드 = 덱 4장 단위)
+  const lcIds = [...new Set(rows.map((r) => r.cardId!))];
+  const lcRows = await prisma.card.findMany({ where: { id: { in: lcIds } }, select: { id: true, gameCardId: true } });
   const lcToGc = new Map(lcRows.map((l) => [l.id, l.gameCardId]));
 
-  // 키 = gameCardId ?? logicalCardId 로 집계(dedup)
+  // 키 = gameCardId ?? cardId 로 집계(dedup)
   type Acc = { archs: Set<string>; rateSum: number; rowCount: number; usageScore: number };
   const acc = new Map<string, Acc>();
   for (const r of rows) {
-    const key = lcToGc.get(r.logicalCardId!) ?? r.logicalCardId!;
+    const key = lcToGc.get(r.cardId!) ?? r.cardId!;
     let a = acc.get(key);
     if (!a) { a = { archs: new Set(), rateSum: 0, rowCount: 0, usageScore: 0 }; acc.set(key, a); }
     a.archs.add(r.archetypeId);
@@ -596,10 +596,10 @@ export async function getCardAdoption(): Promise<Map<string, CardAdoption>> {
     });
   }
 
-  // logicalCardId 키로 펼침 — 메타 gameCard 의 *모든* 인쇄본 LC 가 통합 채용률을 받게 함
+  // cardId 키로 펼침 — 메타 gameCard 의 *모든* 인쇄본 LC 가 통합 채용률을 받게 함
   const gcKeys = [...acc.keys()].filter((k) => k.startsWith("gc_"));
   const allLcOfGc = gcKeys.length
-    ? await prisma.logicalCard.findMany({ where: { gameCardId: { in: gcKeys } }, select: { id: true, gameCardId: true } })
+    ? await prisma.card.findMany({ where: { gameCardId: { in: gcKeys } }, select: { id: true, gameCardId: true } })
     : [];
   const out = new Map<string, CardAdoption>();
   for (const lc of allLcOfGc) { const v = perKey.get(lc.gameCardId!); if (v) out.set(lc.id, v); }
@@ -805,7 +805,7 @@ export async function getMetaFreshness(region = "INTL", windowDays = 14): Promis
 }
 
 export type TopCard = {
-  logicalCardId: string;
+  cardId: string;
   name: string;
   image: string | null;
   regionCardId: string | null;
@@ -816,22 +816,22 @@ export type TopCard = {
 /** #20 메타 필수 카드 — INTL 레시피에서 채용 아키타입 수 상위 (기본 에너지 제외). */
 export async function getTopAdoptedCards(n = 10): Promise<TopCard[]> {
   const rows = await prisma.deckRecipeCard.findMany({
-    where: { region: "INTL", logicalCardId: { not: null }, category: { not: "energy" } },
-    select: { logicalCardId: true, cardName: true, adoptionRate: true },
+    where: { region: "INTL", cardId: { not: null }, category: { not: "energy" } },
+    select: { cardId: true, cardName: true, adoptionRate: true },
   });
   const acc = new Map<string, { name: string; decks: number; rateSum: number }>();
   for (const r of rows) {
-    const a = acc.get(r.logicalCardId!) ?? { name: r.cardName, decks: 0, rateSum: 0 };
+    const a = acc.get(r.cardId!) ?? { name: r.cardName, decks: 0, rateSum: 0 };
     a.decks++;
     a.rateSum += r.adoptionRate;
-    acc.set(r.logicalCardId!, a);
+    acc.set(r.cardId!, a);
   }
   const top = [...acc.entries()]
     .sort((x, y) => y[1].decks - x[1].decks || y[1].rateSum - x[1].rateSum)
     .slice(0, n);
-  const imageMap = await resolveLogicalCardImages(top.map(([id]) => id));
+  const imageMap = await resolveCardImages(top.map(([id]) => id));
   return top.map(([id, a]) => ({
-    logicalCardId: id,
+    cardId: id,
     name: a.name,
     image: imageMap.get(id)?.image ?? null,
     regionCardId: imageMap.get(id)?.regionCardId ?? null,
@@ -850,9 +850,9 @@ export type DeckUsingCard = {
 };
 
 /** 카드 상세 역링크 — 이 카드를 쓰는 덱 Top N (INTL 채용률순). */
-export async function getDecksUsingCard(logicalCardId: string, n = 5): Promise<DeckUsingCard[]> {
+export async function getDecksUsingCard(cardId: string, n = 5): Promise<DeckUsingCard[]> {
   const rows = await prisma.deckRecipeCard.findMany({
-    where: { region: "INTL", logicalCardId },
+    where: { region: "INTL", cardId },
     select: { archetypeId: true, adoptionRate: true, avgCount: true },
     orderBy: { adoptionRate: "desc" },
     take: n * 2, // 인쇄판별 행 중복 대비
@@ -889,14 +889,14 @@ export type NewSetMeta = {
 /** #25 신팩 메타덱 — 레시피에 등장하는 카드 기준 최신 EN 세트와 그 카드를 채용한 덱 Top N. */
 export async function getNewSetDecks(n = 5): Promise<NewSetMeta | null> {
   const recipes = await prisma.deckRecipeCard.findMany({
-    where: { region: "INTL", logicalCardId: { not: null }, adoptionRate: { gte: 30 } },
-    select: { archetypeId: true, logicalCardId: true },
+    where: { region: "INTL", cardId: { not: null }, adoptionRate: { gte: 30 } },
+    select: { archetypeId: true, cardId: true },
   });
   if (recipes.length === 0) return null;
-  const lcIds = [...new Set(recipes.map((r) => r.logicalCardId!))];
+  const lcIds = [...new Set(recipes.map((r) => r.cardId!))];
   const locales = await prisma.regionCard.findMany({
-    where: { logicalCardId: { in: lcIds }, region: "EN" },
-    select: { logicalCardId: true, set: { select: { id: true, name: true, releaseDate: true } } },
+    where: { cardId: { in: lcIds }, region: "EN" },
+    select: { cardId: true, set: { select: { id: true, name: true, releaseDate: true } } },
   });
   // 최신 세트 (releaseDate 보유) 선정
   let latest: { id: string; name: string; releaseDate: Date } | null = null;
@@ -907,10 +907,10 @@ export async function getNewSetDecks(n = 5): Promise<NewSetMeta | null> {
   }
   if (!latest) return null;
   const latestId = latest.id;
-  const newLcIds = new Set(locales.filter((l) => l.set?.id === latestId).map((l) => l.logicalCardId));
+  const newLcIds = new Set(locales.filter((l) => l.set?.id === latestId).map((l) => l.cardId));
   const byArch = new Map<string, number>();
   for (const r of recipes) {
-    if (newLcIds.has(r.logicalCardId!)) byArch.set(r.archetypeId, (byArch.get(r.archetypeId) ?? 0) + 1);
+    if (newLcIds.has(r.cardId!)) byArch.set(r.archetypeId, (byArch.get(r.archetypeId) ?? 0) + 1);
   }
   if (byArch.size === 0) return null;
   const archs = await prisma.deckArchetype.findMany({
@@ -994,7 +994,7 @@ export type StandingDecklist = {
   unresolved: number;
 };
 
-type RawDeckEntry = { name?: string; count?: number; logicalCardId?: string | null };
+type RawDeckEntry = { name?: string; count?: number; cardId?: string | null };
 type RawDecklist = { pokemon?: RawDeckEntry[]; trainer?: RawDeckEntry[]; energy?: RawDeckEntry[] };
 
 /** 리스트 뷰어 — standing 1건의 덱리스트를 카드 이미지로 해석 (docs/cardgame-ui-plan.md §4-5). */
@@ -1017,9 +1017,9 @@ export async function getStandingDecklist(standingId: string): Promise<StandingD
 
   const lcIds: string[] = [];
   for (const b of ["pokemon", "trainer", "energy"] as const) {
-    for (const c of dl[b] ?? []) if (c?.logicalCardId) lcIds.push(c.logicalCardId);
+    for (const c of dl[b] ?? []) if (c?.cardId) lcIds.push(c.cardId);
   }
-  const imageMap = await resolveLogicalCardImages(lcIds);
+  const imageMap = await resolveCardImages(lcIds);
 
   let totalCards = 0;
   let unresolved = 0;
@@ -1027,7 +1027,7 @@ export async function getStandingDecklist(standingId: string): Promise<StandingD
     (entries ?? []).map((c) => {
       const count = c.count ?? 0;
       totalCards += count;
-      const resolved = c.logicalCardId ? imageMap.get(c.logicalCardId) : undefined;
+      const resolved = c.cardId ? imageMap.get(c.cardId) : undefined;
       if (!resolved?.image) unresolved += count;
       return {
         name: c.name ?? "?",
@@ -1195,27 +1195,27 @@ export async function getPlayerRankings(season = 2026): Promise<PlayerRankingRow
 
 export type RulingRow = {
   id: string;
-  logicalCardId: string | null;
+  cardId: string | null;
   question: string;
   answer: string;
   sourceUrl: string | null;
   card: ResolvedCard | null;
 };
 
-export async function getRulings(logicalCardId?: string): Promise<RulingRow[]> {
+export async function getRulings(cardId?: string): Promise<RulingRow[]> {
   const rows = await prisma.ruling.findMany({
-    where: logicalCardId ? { logicalCardId } : undefined,
+    where: cardId ? { cardId } : undefined,
     orderBy: { id: "asc" },
   });
-  const cardIds = rows.map((r) => r.logicalCardId).filter((v): v is string => !!v);
+  const cardIds = rows.map((r) => r.cardId).filter((v): v is string => !!v);
   const cardMap = await resolveDeckCardMap(cardIds);
   return rows.map((r) => ({
     id: r.id,
-    logicalCardId: r.logicalCardId,
+    cardId: r.cardId,
     question: r.question,
     answer: r.answer,
     sourceUrl: r.sourceUrl,
-    card: r.logicalCardId ? cardMap[r.logicalCardId] ?? null : null,
+    card: r.cardId ? cardMap[r.cardId] ?? null : null,
   }));
 }
 

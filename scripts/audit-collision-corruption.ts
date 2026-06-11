@@ -18,10 +18,10 @@ async function main() {
   // 전 RegionCard 한 번에 (필요 필드만)
   const all = await prisma.regionCard.findMany({
     select: { setId: true, region: true, number: true, name: true,
-      logicalCard: { select: { pokedexNumbers: true, illustrator: true } } },
+      card: { select: { pokedexNumbers: true, illustrator: true } } },
   });
   const rows: L[] = all.map((l) => ({ setId: l.setId, region: l.region, number: l.number, name: l.name,
-    dex: l.logicalCard.pokedexNumbers?.[0] ?? null, illus: l.logicalCard.illustrator ?? null }));
+    dex: l.card.pokedexNumbers?.[0] ?? null, illus: l.card.illustrator ?? null }));
 
   // setId → number → cards
   const bySet = new Map<string, Map<string, L[]>>();

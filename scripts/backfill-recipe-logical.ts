@@ -1,10 +1,10 @@
 /**
- * P1: DeckRecipeCard.logicalCardId 백필 + (옵션) standings decklist JSON 보강
+ * P1: DeckRecipeCard.cardId 백필 + (옵션) standings decklist JSON 보강
  * — docs/meta-pipeline-multisource.md §4-② / 로드맵 P1
  *
  * 실행: npx tsx scripts/backfill-recipe-logical.ts [--dry-run] [--force] [--decklists]
  *   --force     이미 채워진 행도 재해석
- *   --decklists TournamentStanding.decklist JSON 의 각 카드에 logicalCardId 필드 추가(additive)
+ *   --decklists TournamentStanding.decklist JSON 의 각 카드에 cardId 필드 추가(additive)
  *
  * 게이트(P1): EN 매칭률 >=95% — 에너지는 별도 분모 (MEE 세트 부재가 구조적이라 합산 시 왜곡)
  */
@@ -30,7 +30,7 @@ const pct = (b: Bucket) => (b.total ? ((b.matched / b.total) * 100).toFixed(1) :
 
 async function backfillRecipes(resolver: CardResolver) {
   const rows = await prisma.deckRecipeCard.findMany({
-    where: force ? {} : { logicalCardId: null },
+    where: force ? {} : { cardId: null },
     select: { id: true, cardName: true, setCode: true, number: true, category: true },
   });
   console.log(`[recipe] 대상 ${rows.length}행 (force=${force})`);
@@ -50,7 +50,7 @@ async function backfillRecipes(resolver: CardResolver) {
     if (!dryRun) {
       await prisma.deckRecipeCard.update({
         where: { id: r.id },
-        data: { logicalCardId: resolved.logicalCardId },
+        data: { cardId: resolved.cardId },
       });
     }
     updated++;
@@ -77,7 +77,7 @@ async function backfillRecipes(resolver: CardResolver) {
   return gate;
 }
 
-type DeckEntry = { count?: number; set?: string; number?: string; name?: string; logicalCardId?: string | null };
+type DeckEntry = { count?: number; set?: string; number?: string; name?: string; cardId?: string | null };
 type Decklist = { pokemon?: DeckEntry[]; trainer?: DeckEntry[]; energy?: DeckEntry[] };
 
 /** Tournament.source → standing.deckSource 백필 값 (decklist 보유 행 한정) */
@@ -106,13 +106,13 @@ async function enrichDecklists(resolver: CardResolver) {
       for (const c of dl[bucket] ?? []) {
         if (!c || typeof c !== "object") continue;
         cards++;
-        if (c.logicalCardId && !force) {
+        if (c.cardId && !force) {
           cardMatched++;
           continue;
         }
         const resolved = c.set && c.number != null ? await resolver.resolveEn(c.set, String(c.number)) : null;
         if (resolved) {
-          c.logicalCardId = resolved.logicalCardId;
+          c.cardId = resolved.cardId;
           cardMatched++;
           changed = true;
         }

@@ -14,14 +14,14 @@ async function getCard(cardId: string) {
   const loaded = await loadCardByLocaleId(cardId).catch(() => null);
 
   if (loaded) {
-    const { locale, logicalCard } = loaded;
+    const { locale, card } = loaded;
     const region = locale.region;
     const rarityLabel =
       region === "JP"
-        ? logicalCard.rarityNameJa ?? logicalCard.rarityNameEn ?? logicalCard.rarityCode
+        ? card.rarityNameJa ?? card.rarityNameEn ?? card.rarityCode
         : region === "KR"
-          ? logicalCard.rarityNameKo ?? logicalCard.rarityNameEn ?? logicalCard.rarityCode
-          : logicalCard.rarityNameEn ?? logicalCard.rarityCode;
+          ? card.rarityNameKo ?? card.rarityNameEn ?? card.rarityCode
+          : card.rarityNameEn ?? card.rarityCode;
     return {
       id: locale.id,
       name: locale.name,

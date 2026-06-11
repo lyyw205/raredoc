@@ -80,7 +80,7 @@ export function parseStandings(html: string): WebStanding[] {
 }
 
 export type LwBucket = "pokemon" | "trainer" | "energy";
-export type LwDeckEntry = { count: number; set: string; number: string; name: string; logicalCardId?: string | null };
+export type LwDeckEntry = { count: number; set: string; number: string; name: string; cardId?: string | null };
 export type ParsedDecklist = { placing: number; player: string; cards: Record<LwBucket, LwDeckEntry[]> };
 
 /** /tournaments/{id}/decklists 페이지 파싱 — EN ptcgoCode 표기 (2026-06-06 실측) */

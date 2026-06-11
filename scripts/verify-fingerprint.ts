@@ -28,7 +28,7 @@ async function main() {
 
   const ids = [...new Set(anchors.flatMap((a: any) => [a.jp.id, a.en.id]))] as string[];
   const locs = await prisma.regionCard.findMany({ where: { id: { in: ids } },
-    select: { id: true, region: true, setId: true, name: true, number: true, logicalCard: { select: { hp: true, types: true, retreatCost: true, supertype: true } } } });
+    select: { id: true, region: true, setId: true, name: true, number: true, card: { select: { hp: true, types: true, retreatCost: true, supertype: true } } } });
   const byId = new Map(locs.map((l) => [l.id, l]));
   const setIds = [...new Set(locs.map((l) => l.setId))];
   const rel = new Map((await prisma.set.findMany({ where: { id: { in: setIds } }, select: { id: true, releaseDate: true } })).map((s) => [s.id, s.releaseDate]));
@@ -44,10 +44,10 @@ async function main() {
     const fj = formKey(jp.name), fe = formKey(en.name);
     if (fj !== fe) reasons.push(`폼 [${jp.name}=${fj} ≠ ${en.name}=${fe}]`);
     // ② 타입 교집합
-    const tj = jp.logicalCard.types ?? [], te = en.logicalCard.types ?? [];
+    const tj = jp.card.types ?? [], te = en.card.types ?? [];
     if (tj.length && te.length && !tj.some((t) => te.includes(t))) reasons.push(`타입 [JP ${tj} ≠ EN ${te}]`);
     // ③ HP
-    const hj = jp.logicalCard.hp, he = en.logicalCard.hp;
+    const hj = jp.card.hp, he = en.card.hp;
     if (hj != null && he != null && hj !== he) reasons.push(`HP [JP ${hj} ≠ EN ${he}]`);
     // ④ era 근접
     const dd = days(rel.get(jp.setId), rel.get(en.setId));

@@ -13,12 +13,12 @@ async function main() {
     orderBy: [{ releaseDate: "desc" }, { order: "asc" }],
     include: {
       sets: { select: { region: true, name: true, nameKo: true, nameJa: true, releaseDate: true } },
-      _count: { select: { logicalCards: true } },
+      _count: { select: { cards: true } },
     },
   });
 
   const rows = groups
-    .filter((g) => g._count.logicalCards > 0)
+    .filter((g) => g._count.cards > 0)
     .map((g) => {
       const jp = g.sets.find((s) => s.region === "JP");
       const en = g.sets.find((s) => s.region === "EN");

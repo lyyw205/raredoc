@@ -61,11 +61,11 @@ async function main() {
     if (APPLY && !ex) await prisma.cardPack.create({ data: g });
   }
   for (const [krSet, group] of [["kr-si", "swsh-start-deck-100"], ["kr-sn", "swsh-start-deck-100"]] as const) {
-    const lcs = await prisma.logicalCard.findMany({ where: { locales: { some: { setId: krSet } } }, select: { id: true } });
+    const lcs = await prisma.card.findMany({ where: { locales: { some: { setId: krSet } } }, select: { id: true } });
     console.log(`[2] ${krSet} → ${group} (LC ${lcs.length})`);
     if (APPLY) {
       await prisma.set.update({ where: { id: krSet }, data: { cardPackId: group } });
-      await prisma.logicalCard.updateMany({ where: { id: { in: lcs.map((l) => l.id) } }, data: { cardPackId: group } });
+      await prisma.card.updateMany({ where: { id: { in: lcs.map((l) => l.id) } }, data: { cardPackId: group } });
     }
   }
   for (const s of NEW_JP_SETS) {

@@ -24,15 +24,15 @@ const REGION_ORDER: Record<string, number> = { KR: 0, JP: 1, EN: 2 };
 
 type CatalogCard = {
   id: string;             // = RegionCard.id (URL용)
-  logicalCardId: string;  // dedupe용
+  cardId: string;  // dedupe용
   name: string;           // locale 이름 (KR 우선)
   nameSub: string | null; // 보조 이름 (다른 로케일)
   imageUrl: string;
   rarity: string | null;  // rarity.code
   region: string;
-  type: string | null;    // logicalCard.types[0]
+  type: string | null;    // card.types[0]
   hp: number | null;
-  /** 메타 채용 지표 (logicalCardId 매칭 시에만). 없으면 null → 뱃지 미표시. */
+  /** 메타 채용 지표 (cardId 매칭 시에만). 없으면 null → 뱃지 미표시. */
   adoption: CardAdoption | null;
 };
 
@@ -53,18 +53,18 @@ async function loadCards(params: {
   if (params.rarity && params.rarity !== "all")
     where.rarity = { code: params.rarity };
 
-  const lcWhere: Prisma.LogicalCardWhereInput = {};
+  const lcWhere: Prisma.CardWhereInput = {};
   if (params.type && params.type !== "all") lcWhere.types = { has: params.type };
 
   if (Object.keys(lcWhere).length > 0) {
-    where.logicalCard = lcWhere;
+    where.card = lcWhere;
   }
 
   if (params.q && params.q.trim()) {
     const q = params.q.trim();
     where.OR = [
       { name: { contains: q, mode: "insensitive" } },
-      { logicalCard: { illustrator: { contains: q, mode: "insensitive" } } },
+      { card: { illustrator: { contains: q, mode: "insensitive" } } },
     ];
   }
 
@@ -74,7 +74,7 @@ async function loadCards(params: {
     include: {
       // P4a: rarity 는 RegionCard 직접(diff=0). 표시는 새층 우선, LC 폴백.
       rarity: { select: { code: true } },
-      logicalCard: {
+      card: {
         include: {
           rarity: { select: { code: true } }, // 전환기 폴백용
           gameCard: { select: { hp: true } }, // hp 그룹균일(diff=0)
@@ -83,30 +83,30 @@ async function loadCards(params: {
       },
       set: { select: { releaseDate: true } },
     },
-    take: 600, // dedupe 전 여유 — LogicalCard 단위로 200 확보 위함.
+    take: 600, // dedupe 전 여유 — Card 단위로 200 확보 위함.
   });
 
-  // dedupe: 같은 LogicalCard 의 여러 locale → KR > JP > EN 우선 1개.
+  // dedupe: 같은 Card 의 여러 locale → KR > JP > EN 우선 1개.
   const byLogical = new Map<string, (typeof rows)[number]>();
   for (const r of rows) {
-    const cur = byLogical.get(r.logicalCardId);
+    const cur = byLogical.get(r.cardId);
     if (!cur) {
-      byLogical.set(r.logicalCardId, r);
+      byLogical.set(r.cardId, r);
       continue;
     }
     const a = REGION_ORDER[r.region] ?? 9;
     const b = REGION_ORDER[cur.region] ?? 9;
-    if (a < b) byLogical.set(r.logicalCardId, r);
+    if (a < b) byLogical.set(r.cardId, r);
   }
 
   const deduped = [...byLogical.values()];
 
-  // 같은 logicalCard 다른 locale 의 이름을 nameSub 로
+  // 같은 card 다른 locale 의 이름을 nameSub 로
   const allByLogical = new Map<string, typeof rows>();
   for (const r of rows) {
-    const arr = allByLogical.get(r.logicalCardId) ?? [];
+    const arr = allByLogical.get(r.cardId) ?? [];
     arr.push(r);
-    allByLogical.set(r.logicalCardId, arr);
+    allByLogical.set(r.cardId, arr);
   }
 
   // 채용률 정렬은 데이터(채용 지표 맵)가 있을 때만 활성. 없으면(=현재) 발매일순 폴백.
@@ -115,8 +115,8 @@ async function loadCards(params: {
   if (adoptionActive) {
     // 채용률순: usageScore 내림차순. 채용 지표 있는 카드 먼저, 동률/미보유는 발매일순.
     deduped.sort((a, b) => {
-      const sa = params.adoptionMap.get(a.logicalCardId)?.usageScore ?? -1;
-      const sb = params.adoptionMap.get(b.logicalCardId)?.usageScore ?? -1;
+      const sa = params.adoptionMap.get(a.cardId)?.usageScore ?? -1;
+      const sb = params.adoptionMap.get(b.cardId)?.usageScore ?? -1;
       if (sa !== sb) return sb - sa;
       const da = a.set?.releaseDate?.getTime?.() ?? 0;
       const db = b.set?.releaseDate?.getTime?.() ?? 0;
@@ -135,20 +135,20 @@ async function loadCards(params: {
   const top = deduped.slice(0, 200);
 
   const cards = top.map((r) => {
-    const others = allByLogical.get(r.logicalCardId) ?? [];
+    const others = allByLogical.get(r.cardId) ?? [];
     const sub = others.find((o) => o.id !== r.id);
-    const nameKo = r.logicalCard.texts?.[0]?.name ?? r.logicalCard.nameKo; // P8a: CardText(ko) 우선
+    const nameKo = r.card.texts?.[0]?.name ?? r.card.nameKo; // P8a: CardText(ko) 우선
     return {
       id: r.id,
-      logicalCardId: r.logicalCardId,
+      cardId: r.cardId,
       name: nameKo ?? r.name,
       nameSub: nameKo ? r.name : (sub?.name ?? null),
       imageUrl: r.imageSmall ?? r.imageLarge ?? "",
-      rarity: r.rarity?.code ?? r.logicalCard.rarity?.code ?? null,
+      rarity: r.rarity?.code ?? r.card.rarity?.code ?? null,
       region: r.region,
-      type: r.logicalCard.types[0] ?? null, // ArtCard over-merge 보류 → LC 직독
-      hp: r.logicalCard.gameCard?.hp ?? r.logicalCard.hp,
-      adoption: params.adoptionMap.get(r.logicalCardId) ?? null,
+      type: r.card.types[0] ?? null, // ArtCard over-merge 보류 → LC 직독
+      hp: r.card.gameCard?.hp ?? r.card.hp,
+      adoption: params.adoptionMap.get(r.cardId) ?? null,
     };
   });
 
@@ -188,7 +188,7 @@ function CardGridItem({ card, locale }: { card: CatalogCard; locale: string }) {
         <span className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-black/55 text-white text-[10px] font-semibold">
           {card.region}
         </span>
-        {/* 메타 채용 뱃지 (logicalCardId 매칭 시에만) */}
+        {/* 메타 채용 뱃지 (cardId 매칭 시에만) */}
         {card.adoption && (
           <span className="absolute bottom-1.5 left-1.5 px-1.5 py-0.5 rounded bg-toss-brand/90 text-white text-[10px] font-semibold">
             메타 채용 {card.adoption.adoptionRate}%
@@ -221,7 +221,7 @@ export default async function CardgameCardsPage({
   const { locale } = await params;
   const sp = await searchParams;
 
-  // 카드 채용 지표 맵 (현재 logicalCardId 미매칭 → 빈 Map). A단계 후 자동 채워짐.
+  // 카드 채용 지표 맵 (현재 cardId 미매칭 → 빈 Map). A단계 후 자동 채워짐.
   const adoptionMap = await getCardAdoption();
 
   const { cards, adoptionActive } = await loadCards({

@@ -82,7 +82,7 @@ interface RegionCardRow {
 interface ImageResult {
   id: string; name: string; setId: string; url: string; status: number; region: "EN" | "JP";
 }
-interface LogicalCardRow {
+interface CardRow {
   id: string; primarySetId: string | null; primaryNumber: string | null;
   cardPackId: string | null;
   hp: number | null; types: string[]; attacks: unknown; abilities: unknown;
@@ -91,7 +91,7 @@ interface LogicalCardRow {
 }
 type FieldKey = "hp" | "types" | "attacks" | "abilities" | "subtypes" | "illustrator" | "rarityId" | "pokedexNumbers" | "supertype" | "nameKo";
 
-function isPresent(card: LogicalCardRow, field: FieldKey): boolean {
+function isPresent(card: CardRow, field: FieldKey): boolean {
   switch (field) {
     case "hp": return card.hp != null;
     case "types": return Array.isArray(card.types) && card.types.length > 0;
@@ -152,8 +152,8 @@ async function sectionA(enLocales: RegionCardRow[], jpLocales: RegionCardRow[]):
 
 interface SetFieldStats { total: number; fields: Record<FieldKey, number>; }
 
-async function sectionB(lcards: LogicalCardRow[]): Promise<Map<string, SetFieldStats>> {
-  console.log(`\n[B] Field completeness — ${lcards.length} LogicalCards...`);
+async function sectionB(lcards: CardRow[]): Promise<Map<string, SetFieldStats>> {
+  console.log(`\n[B] Field completeness — ${lcards.length} Cards...`);
   const FIELDS: FieldKey[] = ["hp","types","attacks","abilities","subtypes","illustrator","rarityId","pokedexNumbers","supertype","nameKo"];
   const perSet = new Map<string, SetFieldStats>();
 
@@ -235,7 +235,7 @@ interface SupertypeStats {
   setKey: string; counts: Map<string, number>; nullCards: { id: string; name: string }[];
 }
 
-async function sectionF(lcards: LogicalCardRow[], locales: RegionCardRow[]): Promise<SupertypeStats[]> {
+async function sectionF(lcards: CardRow[], locales: RegionCardRow[]): Promise<SupertypeStats[]> {
   console.log(`\n[F] Supertype classification...`);
   const nameMap = new Map<string, string>();
   for (const cl of locales) { nameMap.set(cl.id, cl.name); }
@@ -262,18 +262,18 @@ async function sectionF(lcards: LogicalCardRow[], locales: RegionCardRow[]): Pro
 
 interface LocaleStats { setKey: string; patterns: Map<string, number>; }
 
-async function sectionH(allLcards: LogicalCardRow[]): Promise<LocaleStats[]> {
+async function sectionH(allLcards: CardRow[]): Promise<LocaleStats[]> {
   console.log(`\n[H] Version availability...`);
   const lcIds = allLcards.map(c => c.id);
   const localeRows = await prisma.regionCard.findMany({
-    where: { logicalCardId: { in: lcIds } },
-    select: { logicalCardId: true, language: true },
+    where: { cardId: { in: lcIds } },
+    select: { cardId: true, language: true },
   });
 
   const byLcId = new Map<string, string[]>();
   for (const row of localeRows) {
-    if (!byLcId.has(row.logicalCardId)) byLcId.set(row.logicalCardId, []);
-    byLcId.get(row.logicalCardId)!.push(row.language);
+    if (!byLcId.has(row.cardId)) byLcId.set(row.cardId, []);
+    byLcId.get(row.cardId)!.push(row.language);
   }
 
   const bySet = new Map<string, LocaleStats>();
@@ -377,7 +377,7 @@ function buildReport(data: {
 
   // ── Section B ──
   lines.push(`\n## B) 필드 완성도`);
-  lines.push(`\n각 CardPack 의 LogicalCard 필드 채움률.\n`);
+  lines.push(`\n각 CardPack 의 Card 필드 채움률.\n`);
   const bKeys = [...data.sectionB.keys()].sort();
   lines.push(mdTable(
     ["세트","총계",...FIELDS],
@@ -507,12 +507,12 @@ async function main() {
     select: { id: true, name: true, setId: true, language: true, imageSmall: true },
   });
 
-  const lcards = await prisma.logicalCard.findMany({
+  const lcards = await prisma.card.findMany({
     where: { cardPackId: { in: BW_GROUP_IDS } },
     select: { id: true, primarySetId: true, primaryNumber: true, cardPackId: true, hp: true, types: true, attacks: true, abilities: true, subtypes: true, illustrator: true, rarityId: true, pokedexNumbers: true, supertype: true, nameKo: true },
   });
 
-  console.log(`Loaded: ${enLocales.length} EN locales, ${jpLocales.length} JP locales, ${lcards.length} LogicalCards`);
+  console.log(`Loaded: ${enLocales.length} EN locales, ${jpLocales.length} JP locales, ${lcards.length} Cards`);
 
   const counts = await sectionCounts();
   const resA = await sectionA(enLocales, jpLocales);

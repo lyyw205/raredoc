@@ -47,7 +47,7 @@ async function main() {
   // EN-only LC (모든 locale 이 EN) 로드
   const where: any = { locales: { every: { region: "EN" }, some: {} } };
   if (gid) where.cardPackId = gid;
-  const lcs = await prisma.logicalCard.findMany({
+  const lcs = await prisma.card.findMany({
     where,
     select: { id: true, supertype: true, subtypes: true, types: true, hp: true, attacks: true, abilities: true,
       retreatCost: true, weakness: true, resistance: true, regulationMark: true, flavorText: true,
@@ -99,7 +99,7 @@ async function main() {
   console.log(`보강 ${fill} · 카드없음 ${noCard} | 필드: ${JSON.stringify(fields)} ${APPLY ? "★APPLY" : "(dry)"}`);
   if (APPLY) {
     let n = 0;
-    for (const u of updates) { await prisma.logicalCard.update({ where: { id: u.id }, data: u.data }); if (++n % 500 === 0) console.log(`  …${n}/${updates.length}`); }
+    for (const u of updates) { await prisma.card.update({ where: { id: u.id }, data: u.data }); if (++n % 500 === 0) console.log(`  …${n}/${updates.length}`); }
     console.log(`★적용 ${updates.length}`);
   }
   await prisma.$disconnect();

@@ -50,14 +50,14 @@ async function main() {
     const off = JSON.parse(readFileSync(`data/kr-official/kr-official-${code}.json`, "utf8"));
     const offByNum = new Map<number, any>(off.map((c: any) => [parseInt(c.number, 10), c]));
     const kr = await prisma.regionCard.findMany({ where: { setId: krSet },
-      select: { number: true, numberInt: true, name: true, logicalCard: { select: { pokedexNumbers: true, illustrator: true, supertype: true } } } });
+      select: { number: true, numberInt: true, name: true, card: { select: { pokedexNumbers: true, illustrator: true, supertype: true } } } });
 
     const dexBad: string[] = [], illusBad: string[] = [];
     let poke = 0;
     for (const r of kr) {
       const o = offByNum.get(r.numberInt!);
       if (!o) { illusBad.push(`#${r.number} ${r.name} (공식 번호없음)`); continue; }
-      const lc = r.logicalCard;
+      const lc = r.card;
       // 일러 검증 (공식 일러 존재 시)
       if (o.illustrator && lc.illustrator && norm(o.illustrator) !== norm(lc.illustrator))
         illusBad.push(`#${r.number} ${r.name}: 공식일러"${o.illustrator}" ≠ 앵커"${lc.illustrator}"`);

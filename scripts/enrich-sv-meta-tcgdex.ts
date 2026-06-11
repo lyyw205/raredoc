@@ -1,7 +1,7 @@
 /**
- * SV era LogicalCard 메타를 tcgdex JP 엔드포인트에서 보강.
+ * SV era Card 메타를 tcgdex JP 엔드포인트에서 보강.
  *
- * 대상: supertype이 null인 SV LogicalCard (JP orphan 카드)
+ * 대상: supertype이 null인 SV Card (JP orphan 카드)
  * tcgdex JP 세트: sv1~sv3, sv3a, sv4~sv4a, sv5M/sv5K/sv5a, sv6/sv6a,
  *                sv7/sv7a, sv8/sv8a, sv8a2, sv9/sv9a, sv10, svP, svD
  *
@@ -86,9 +86,9 @@ async function enrichSet(tcgId: string, dbSetId: string, lang: string) {
   const locales = await prisma.regionCard.findMany({
     where: {
       setId: dbSetId,
-      logicalCard: { supertype: null },  // only enrich missing supertype
+      card: { supertype: null },  // only enrich missing supertype
     },
-    select: { id: true, logicalCardId: true, number: true },
+    select: { id: true, cardId: true, number: true },
   });
 
   if (locales.length === 0) {
@@ -100,7 +100,7 @@ async function enrichSet(tcgId: string, dbSetId: string, lang: string) {
   let ok = 0, skip = 0, fail = 0;
 
   for (const cl of locales) {
-    if (!cl.logicalCardId || !cl.number) { skip++; continue; }
+    if (!cl.cardId || !cl.number) { skip++; continue; }
 
     // Fetch card detail from tcgdex using {tcgId}-{localId}
     const detailUrl = `https://api.tcgdex.net/v2/${lang}/cards/${tcgId}-${cl.number}`;
@@ -114,7 +114,7 @@ async function enrichSet(tcgId: string, dbSetId: string, lang: string) {
         const altDetail = await fetchJson<CardDetail>(altUrl);
         await sleep(80);
         if (!altDetail) { fail++; continue; }
-        await applyDetail(cl.logicalCardId, altDetail);
+        await applyDetail(cl.cardId, altDetail);
         ok++;
         if (ok % 100 === 0) console.log(`  ... ${ok} 업데이트됨`);
         continue;
@@ -122,7 +122,7 @@ async function enrichSet(tcgId: string, dbSetId: string, lang: string) {
       fail++; continue;
     }
 
-    await applyDetail(cl.logicalCardId, detail);
+    await applyDetail(cl.cardId, detail);
     ok++;
     if (ok % 100 === 0) console.log(`  ... ${ok} 업데이트됨`);
   }
@@ -131,7 +131,7 @@ async function enrichSet(tcgId: string, dbSetId: string, lang: string) {
   return { ok, skip, fail };
 }
 
-async function applyDetail(logicalCardId: string, detail: CardDetail) {
+async function applyDetail(cardId: string, detail: CardDetail) {
   const category = detail.category;
   const supertype = category === "Pokemon" ? "Pokémon"
     : category === "Trainer" ? "Trainer"
@@ -148,7 +148,7 @@ async function applyDetail(logicalCardId: string, detail: CardDetail) {
   if (detail.evolveFrom) update.evolvesFrom = detail.evolveFrom;
 
   if (Object.keys(update).length > 0) {
-    await prisma.logicalCard.update({ where: { id: logicalCardId }, data: update });
+    await prisma.card.update({ where: { id: cardId }, data: update });
   }
 }
 

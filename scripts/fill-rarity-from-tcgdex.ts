@@ -1,5 +1,5 @@
 /**
- * rarityId=NULL 인 LogicalCard 중 JP-only 카드(EN locale 없음)를 tcgdex JP/EN 로 보강.
+ * rarityId=NULL 인 Card 중 JP-only 카드(EN locale 없음)를 tcgdex JP/EN 로 보강.
  *
  * 실행: npx tsx scripts/fill-rarity-from-tcgdex.ts
  *
@@ -65,7 +65,7 @@ async function appendFollowup(lines: string[]) {
 
 tcgdex 에서 rarity 텍스트를 가져왔으나 Rarity 마스터 매칭 실패 또는 API 응답 없음.
 
-| LogicalCard ID | JP RegionCard | era | rarity 텍스트 |
+| Card ID | JP RegionCard | era | rarity 텍스트 |
 |---|---|---|---|
 ${lines.join("\n")}
 
@@ -76,7 +76,7 @@ ${lines.join("\n")}
 
 async function main() {
   // Before 통계
-  const beforeTotal = await prisma.logicalCard.count({
+  const beforeTotal = await prisma.card.count({
     where: {
       rarityId: null,
       cardPackId: { not: null },
@@ -85,8 +85,8 @@ async function main() {
   });
   console.log(`시작: JP-only rarityId NULL = ${beforeTotal}`);
 
-  // 대상: rarityId NULL && EN locale 없고 JP locale 있는 LogicalCard
-  const targets = await prisma.logicalCard.findMany({
+  // 대상: rarityId NULL && EN locale 없고 JP locale 있는 Card
+  const targets = await prisma.card.findMany({
     where: {
       rarityId: null,
       cardPackId: { not: null },
@@ -179,7 +179,7 @@ async function main() {
         let rarityId = nameEnMap.get(lookupKey) ?? nameJaMap.get(lookupKey) ?? codeMap.get(lookupKey);
 
         if (rarityId) {
-          await prisma.logicalCard.update({ where: { id: lc.id }, data: { rarityId } });
+          await prisma.card.update({ where: { id: lc.id }, data: { rarityId } });
           updated++;
         } else {
           followupLines.push(`| ${lc.id} | ${jpLocaleId} | ${lc.cardPack?.era ?? "-"} | ${rarityText} |`);
@@ -195,7 +195,7 @@ async function main() {
   }
 
   // After 통계
-  const afterTotal = await prisma.logicalCard.count({
+  const afterTotal = await prisma.card.count({
     where: {
       rarityId: null,
       cardPackId: { not: null },

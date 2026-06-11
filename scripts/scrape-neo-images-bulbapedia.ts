@@ -128,11 +128,11 @@ async function scrapeSet(set: typeof SETS[number]) {
       where: { sourceId_externalId: { sourceId: source.id, externalId: `${card.slug}_(${card.suffix})` } },
       create: {
         sourceId: source.id, externalId: `${card.slug}_(${card.suffix})`,
-        regionCardId: ourLocaleId, logicalCardId: ourLogicalId,
+        regionCardId: ourLocaleId, cardId: ourLogicalId,
         url: cardUrl, verifiedBy: "auto:scrape-neo-images-bulbapedia", confidence: 0.7,
         notes: `Bulbapedia EN image proxy. (${set.setId})`,
       },
-      update: { regionCardId: ourLocaleId, logicalCardId: ourLogicalId, url: cardUrl },
+      update: { regionCardId: ourLocaleId, cardId: ourLogicalId, url: cardUrl },
     });
     if (++ok % 20 === 0) console.log(`  ... ${ok} OK`);
   }

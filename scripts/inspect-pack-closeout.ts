@@ -41,14 +41,14 @@ async function main() {
   const locales = await prisma.regionCard.findMany({
     where: { setId: { in: setIds } },
     select: {
-      id: true, setId: true, region: true, number: true, numberInt: true, name: true, imageSmall: true, imageLarge: true, logicalCardId: true,
-      logicalCard: { select: { supertype: true, subtypes: true, pokedexNumbers: true, illustrator: true, cardPackId: true, primarySetId: true, rarity: { select: { code: true, nameJa: true, nameKo: true, nameEn: true, tier: true } } } },
+      id: true, setId: true, region: true, number: true, numberInt: true, name: true, imageSmall: true, imageLarge: true, cardId: true,
+      card: { select: { supertype: true, subtypes: true, pokedexNumbers: true, illustrator: true, cardPackId: true, primarySetId: true, rarity: { select: { code: true, nameJa: true, nameKo: true, nameEn: true, tier: true } } } },
     },
   });
 
   // lcid → region 집합 (병합 판정)
   const byLcid = new Map<string, typeof locales>();
-  for (const l of locales) { const a = byLcid.get(l.logicalCardId) ?? []; a.push(l); byLcid.set(l.logicalCardId, a); }
+  for (const l of locales) { const a = byLcid.get(l.cardId) ?? []; a.push(l); byLcid.set(l.cardId, a); }
   const lcidHasJp = new Set<string>();
   for (const [lcid, ls] of byLcid) if (ls.some((l) => l.region === "JP")) lcidHasJp.add(lcid);
 
@@ -64,7 +64,7 @@ async function main() {
   }
   // rarity 문자열 3국 대조 (RANK 맵 커버 점검용)
   for (const r of ["JP", "KR", "EN"]) {
-    const rs = [...new Set(locales.filter((l) => l.region === r).map((l) => l.logicalCard.rarity?.code ?? "—"))].sort();
+    const rs = [...new Set(locales.filter((l) => l.region === r).map((l) => l.card.rarity?.code ?? "—"))].sort();
     if (rs.length) console.log(`  rarity[${r}] {${rs.join(", ")}}`);
   }
 
@@ -72,14 +72,14 @@ async function main() {
   console.log(`\n── Phase 1 JP 앵커 정본화 검증 ──`);
   for (const sid of jpSetIds) {
     const rows = locales.filter((l) => l.setId === sid);
-    const poke = rows.filter((l) => isPokemonSupertype(l.logicalCard.supertype));
-    const stNull = rows.filter((l) => !l.logicalCard.supertype).length;
-    const subEmpty = rows.filter((l) => (l.logicalCard.subtypes ?? []).length === 0).length;
-    const illNull = rows.filter((l) => !l.logicalCard.illustrator).length;
+    const poke = rows.filter((l) => isPokemonSupertype(l.card.supertype));
+    const stNull = rows.filter((l) => !l.card.supertype).length;
+    const subEmpty = rows.filter((l) => (l.card.subtypes ?? []).length === 0).length;
+    const illNull = rows.filter((l) => !l.card.illustrator).length;
     const imgNull = rows.filter((l) => !l.imageSmall && !l.imageLarge).length;
     const dexMism: string[] = [];
     for (const l of poke) {
-      const want = jaDex(l.name); const have = l.logicalCard.pokedexNumbers?.[0];
+      const want = jaDex(l.name); const have = l.card.pokedexNumbers?.[0];
       if (want.length && have != null && !want.includes(have)) dexMism.push(`#${l.number} ${l.name}: 이름→${want} ≠ 저장 ${have}`);
     }
     console.log(`  ${sid}: 포켓몬 ${poke.length} | supertype=null ${stNull} · subtypes빈 ${subEmpty} · 일러null ${illNull} · 이미지null ${imgNull}`);
@@ -92,11 +92,11 @@ async function main() {
   console.log(`\n── Phase 2 KR 정합 검증 ──`);
   for (const s of g.sets.filter((x) => x.region === "KR")) {
     const rows = locales.filter((l) => l.setId === s.id);
-    const merged = rows.filter((l) => lcidHasJp.has(l.logicalCardId)).length;
-    const poke = rows.filter((l) => isPokemonSupertype(l.logicalCard.supertype));
+    const merged = rows.filter((l) => lcidHasJp.has(l.cardId)).length;
+    const poke = rows.filter((l) => isPokemonSupertype(l.card.supertype));
     const dexBad: string[] = [];
     for (const l of poke) {
-      const want = koDex(l.name); const anchor = l.logicalCard.pokedexNumbers ?? [];
+      const want = koDex(l.name); const anchor = l.card.pokedexNumbers ?? [];
       if (want.length && !want.some((d) => anchor.includes(d))) dexBad.push(`#${l.number} ${l.name}: 이름→${want} ≠ 앵커 [${anchor}]`);
     }
     console.log(`  ${s.id}: locale ${rows.length} · JP앵커 공유(병합) ${merged}/${rows.length} · 포켓몬 ${poke.length}`);
@@ -106,14 +106,14 @@ async function main() {
 
   // ── Phase 4 (정합·표시) ──────────────────────────────
   console.log(`\n── Phase 4 정합·표시 검증 ──`);
-  const sg = (r: string) => { const m = new Map<string, number>(); for (const l of locales.filter((x) => x.region === r)) m.set(l.logicalCard.cardPackId ?? "(null)", (m.get(l.logicalCard.cardPackId ?? "(null)") ?? 0) + 1); return [...m].map(([k, n]) => `${k}=${n}`).join(" "); };
+  const sg = (r: string) => { const m = new Map<string, number>(); for (const l of locales.filter((x) => x.region === r)) m.set(l.card.cardPackId ?? "(null)", (m.get(l.card.cardPackId ?? "(null)") ?? 0) + 1); return [...m].map(([k, n]) => `${k}=${n}`).join(" "); };
   console.log(`  cardPackId 적재 — JP:[${sg("JP")}]  KR:[${sg("KR")}]  EN:[${sg("EN")}]`);
   const enRows = locales.filter((l) => l.region === "EN");
-  const enMerged = enRows.filter((l) => lcidHasJp.has(l.logicalCardId)).length;
+  const enMerged = enRows.filter((l) => lcidHasJp.has(l.cardId)).length;
   console.log(`  EN: 총 ${enRows.length} · JP앵커 병합 ${enMerged} · 고아(영판전용) ${enRows.length - enMerged}`);
   // JP primarySetId 분포(합본 2분할 가능성)
   const prim = new Map<string, number>();
-  for (const [lcid, ls] of byLcid) if (ls.some((l) => l.region === "JP")) { const p = ls[0].logicalCard.primarySetId ?? "(null)"; prim.set(p, (prim.get(p) ?? 0) + 1); }
+  for (const [lcid, ls] of byLcid) if (ls.some((l) => l.region === "JP")) { const p = ls[0].card.primarySetId ?? "(null)"; prim.set(p, (prim.get(p) ?? 0) + 1); }
   console.log(`  JP앵커 LC primarySetId 분포(합본 분할 키): ${[...prim].map(([k, n]) => `${k}=${n}`).join(" ")}`);
   // JSON ↔ DB
   const jsonPath = join(process.cwd(), "src", "data", `group-${groupId}.json`);

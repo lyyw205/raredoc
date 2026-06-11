@@ -17,7 +17,7 @@ async function main() {
   if (!gid) { console.error("usage: verify-pack.ts <cardPackId>"); process.exit(1); }
   const g = await prisma.cardPack.findFirst({ where: { id: gid }, include: { sets: { select: { id: true, region: true, code: true, cardCount: true } } } });
   if (!g) { console.log(`SCORE: 0  (GROUP NOT FOUND: ${gid})`); return; }
-  const lcs = await prisma.logicalCard.findMany({ where: { cardPackId: gid }, include: { rarity: { select: { code: true } }, locales: { select: { region: true, setId: true, numberInt: true, name: true, imageSmall: true } } } });
+  const lcs = await prisma.card.findMany({ where: { cardPackId: gid }, include: { rarity: { select: { code: true } }, locales: { select: { region: true, setId: true, numberInt: true, name: true, imageSmall: true } } } });
   const n = lcs.length || 1;
   const pc = (c: number) => `${((c / n) * 100).toFixed(0)}%`;
 

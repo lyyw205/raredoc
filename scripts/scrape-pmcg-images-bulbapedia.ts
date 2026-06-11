@@ -189,13 +189,13 @@ async function scrapeSet(set: typeof SETS[number]) {
         sourceId: source.id,
         externalId: `${card.slug}_(${card.suffix})`,
         regionCardId: ourLocaleId,
-        logicalCardId: ourLogicalId,
+        cardId: ourLogicalId,
         url: cardUrl,
         verifiedBy: "auto:scrape-pmcg-images-bulbapedia",
         confidence: 0.7,
         notes: `Bulbapedia EN image used as proxy. Image text is English, not Japanese. (${set.setId})`,
       },
-      update: { regionCardId: ourLocaleId, logicalCardId: ourLogicalId, url: cardUrl },
+      update: { regionCardId: ourLocaleId, cardId: ourLogicalId, url: cardUrl },
     });
     console.log(`  [${cardNum}] ${card.name.padEnd(22)} → ✓ ${imgUrl.split("/").pop()}`);
     okCount++;

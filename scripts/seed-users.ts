@@ -170,7 +170,7 @@ async function main() {
           data: {
             userId: user.id,
             localeId: cardId,
-            logicalCardId: locale.logicalCardId,
+            cardId: locale.cardId,
             grade,
             certified,
             forSale,

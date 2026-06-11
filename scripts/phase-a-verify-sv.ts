@@ -94,7 +94,7 @@ function mdTable(headers: string[], rows: string[][]): string {
 
 interface RegionCardRow { id: string; name: string; setId: string; language: string; imageSmall: string | null; }
 interface ImageResult { id: string; name: string; setId: string; url: string; status: number; region: "EN" | "JP"; }
-interface LogicalCardRow {
+interface CardRow {
   id: string; primarySetId: string | null; primaryNumber: string | null; cardPackId: string | null;
   hp: number | null; types: string[]; attacks: unknown; abilities: unknown;
   subtypes: string[]; illustrator: string | null; rarityId: string | null;
@@ -102,7 +102,7 @@ interface LogicalCardRow {
 }
 type FieldKey = "hp" | "types" | "attacks" | "abilities" | "subtypes" | "illustrator" | "rarityId" | "pokedexNumbers" | "supertype" | "nameKo";
 
-function isPresent(card: LogicalCardRow, field: FieldKey): boolean {
+function isPresent(card: CardRow, field: FieldKey): boolean {
   switch (field) {
     case "hp": return card.hp != null;
     case "types": return Array.isArray(card.types) && card.types.length > 0;
@@ -183,7 +183,7 @@ async function sectionA(enLocales: RegionCardRow[], jpLocales: RegionCardRow[]) 
 
 interface SetFieldStats { total: number; fields: Record<FieldKey, number>; }
 
-async function sectionB(lcards: LogicalCardRow[]) {
+async function sectionB(lcards: CardRow[]) {
   const FIELDS: FieldKey[] = ["hp","types","attacks","abilities","subtypes","illustrator","rarityId","pokedexNumbers","supertype","nameKo"];
   const perSet = new Map<string, SetFieldStats>();
 
@@ -195,7 +195,7 @@ async function sectionB(lcards: LogicalCardRow[]) {
     for (const f of FIELDS) { if (isPresent(card, f)) s.fields[f]++; }
   }
 
-  console.log(`\n[B] Field completeness — ${lcards.length} LogicalCards`);
+  console.log(`\n[B] Field completeness — ${lcards.length} Cards`);
   for (const [setKey, stats] of perSet) {
     console.log(`  [B] ${setKey}: ${stats.total} cards, supertype=${pct(stats.fields.supertype, stats.total)}, nameKo=${pct(stats.fields.nameKo, stats.total)}`);
   }
@@ -245,7 +245,7 @@ async function sectionE(enLocales: RegionCardRow[], jpLocales: RegionCardRow[]) 
 
 interface SupertypeStats { setKey: string; counts: Map<string, number>; nullCards: { id: string; name: string }[]; }
 
-async function sectionF(lcards: LogicalCardRow[], locales: RegionCardRow[]) {
+async function sectionF(lcards: CardRow[], locales: RegionCardRow[]) {
   const nameMap = new Map<string, string>();
   for (const cl of locales) { nameMap.set(cl.id, cl.name); }
 
@@ -268,17 +268,17 @@ async function sectionF(lcards: LogicalCardRow[], locales: RegionCardRow[]) {
 
 interface LocaleStats { setKey: string; patterns: Map<string, number>; }
 
-async function sectionH(allLcards: LogicalCardRow[]) {
+async function sectionH(allLcards: CardRow[]) {
   const lcIds = allLcards.map(c => c.id);
   const localeRows = await prisma.regionCard.findMany({
-    where: { logicalCardId: { in: lcIds } },
-    select: { logicalCardId: true, language: true },
+    where: { cardId: { in: lcIds } },
+    select: { cardId: true, language: true },
   });
 
   const byLcId = new Map<string, string[]>();
   for (const row of localeRows) {
-    if (!byLcId.has(row.logicalCardId)) byLcId.set(row.logicalCardId, []);
-    byLcId.get(row.logicalCardId)!.push(row.language);
+    if (!byLcId.has(row.cardId)) byLcId.set(row.cardId, []);
+    byLcId.get(row.cardId)!.push(row.language);
   }
 
   const bySet = new Map<string, LocaleStats>();
@@ -503,8 +503,8 @@ async function main() {
 
   console.log(`Loaded: ${enLocales.length} EN locales, ${jpLocales.length} JP locales`);
 
-  // Load all LogicalCards for SV + MEGA
-  const lcards: LogicalCardRow[] = await prisma.logicalCard.findMany({
+  // Load all Cards for SV + MEGA
+  const lcards: CardRow[] = await prisma.card.findMany({
     where: { cardPackId: { in: ALL_GROUP_IDS } },
     select: {
       id: true, primarySetId: true, primaryNumber: true, cardPackId: true,
@@ -513,7 +513,7 @@ async function main() {
       pokedexNumbers: true, supertype: true, nameKo: true,
     },
   });
-  console.log(`Loaded: ${lcards.length} LogicalCards`);
+  console.log(`Loaded: ${lcards.length} Cards`);
 
   const allSets = await prisma.set.findMany({
     where: { cardPackId: { in: ALL_GROUP_IDS } },

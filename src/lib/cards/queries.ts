@@ -1,8 +1,8 @@
-// Phase 3 어댑터 — 새 ERD(LogicalCard + RegionCard + Rarity + PriceSource)를
+// Phase 3 어댑터 — 새 ERD(Card + RegionCard + Rarity + PriceSource)를
 // 기반으로 페이지가 호출하는 공통 쿼리·변환 헬퍼.
 //
 // 기존 prisma.card / prisma.cardGroup 의존 코드와 공존(Phase 4 에서 제거).
-// 모든 새 쿼리는 LogicalCard/RegionCard/Rarity/PriceSource 만 참조한다.
+// 모든 새 쿼리는 Card/RegionCard/Rarity/PriceSource 만 참조한다.
 
 import type { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
@@ -26,7 +26,7 @@ export type LocaleSummary = {
   setNameKo: string | null;
   setNameJa: string | null;
   // 인쇄본별 표시필드(RegionCard 하강) — regMark/legalities/rarity 만 유지(per-printing/per-region).
-  //   게임필드(weak/resist/retreat/evolves/subtypes)는 diff=0 순수복제라 LogicalCard 직독으로 이관(Stage2 2026-06-11).
+  //   게임필드(weak/resist/retreat/evolves/subtypes)는 diff=0 순수복제라 Card 직독으로 이관(Stage2 2026-06-11).
   regulationMark?: string | null;
   legalities?: Prisma.JsonValue;
   rarityCode?: string | null;
@@ -35,7 +35,7 @@ export type LocaleSummary = {
   rarityNameEn?: string | null;
 };
 
-export type LogicalCardMeta = {
+export type CardMeta = {
   id: string;
   primarySetId: string | null;
   primaryNumber: string | null;
@@ -163,7 +163,7 @@ function toLocaleSummary(l: {
   };
 }
 
-function toLogicalCardMeta(lc: {
+function toCardMeta(lc: {
   id: string;
   primarySetId: string | null;
   primaryNumber: string | null;
@@ -205,7 +205,7 @@ function toLogicalCardMeta(lc: {
     hp: number | null;
   } | null;
   texts?: { name: string | null }[];
-}): LogicalCardMeta {
+}): CardMeta {
   const gc = lc.gameCard;
   const supertype = gc?.supertype ?? lc.supertype;
   return {
@@ -248,19 +248,19 @@ function toLogicalCardMeta(lc: {
 // ── 쿼리 ──────────────────────────────────────────────────────────────────────
 
 /**
- * RegionCard.id 로 시작해 LogicalCard + 같은 LogicalCard 의 모든 locale 을 조회.
+ * RegionCard.id 로 시작해 Card + 같은 Card 의 모든 locale 을 조회.
  * URL `/cards/{cardId}` 진입점.
  */
 export async function loadCardByLocaleId(localeId: string): Promise<{
   locale: LocaleSummary;
-  logicalCard: LogicalCardMeta;
+  card: CardMeta;
   allLocales: LocaleSummary[];
 } | null> {
   const cl = await prisma.regionCard.findUnique({
     where: { id: localeId },
     include: {
       set: { select: { name: true, nameKo: true, nameJa: true } },
-      logicalCard: {
+      card: {
         include: {
           rarity: {
             select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } },
@@ -279,7 +279,7 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
   });
   if (!cl) return null;
 
-  const allLocales = cl.logicalCard.locales
+  const allLocales = cl.card.locales
     .map(toLocaleSummary)
     .sort(
       (a, b) => (REGION_ORDER[a.region] ?? 9) - (REGION_ORDER[b.region] ?? 9)
@@ -287,14 +287,14 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
 
   return {
     locale: toLocaleSummary(cl),
-    logicalCard: toLogicalCardMeta(cl.logicalCard),
+    card: toCardMeta(cl.card),
     allLocales,
   };
 }
 
 /**
- * CardPack(팩) id 로 그 팩에 속한 LogicalCard id 목록 도출.
- * '도둑질' 방지: 가변·재포인트 대상인 LogicalCard.cardPackId 대신,
+ * CardPack(팩) id 로 그 팩에 속한 Card id 목록 도출.
+ * '도둑질' 방지: 가변·재포인트 대상인 Card.cardPackId 대신,
  * 각 LC의 앵커 locale(JP>KR>EN)의 Set.cardPackId(불변 물리관계)로 계산한다.
  * (cardPackId 컬럼과 전 그룹 diff=0 검증됨 — p7-setgroup-rewire-regression.ts)
  */
@@ -310,7 +310,7 @@ export async function lcIdsInPack(cardPackId: string): Promise<string[]> {
   return rows.map((r) => r.lc);
 }
 
-export type LogicalCardSearchFilters = {
+export type CardSearchFilters = {
   q?: string;
   supertype?: string;
   type?: string;
@@ -320,19 +320,19 @@ export type LogicalCardSearchFilters = {
 };
 
 /**
- * LogicalCard 메타 + 모든 locale 조인 검색. dedupe 는 LogicalCard 단위로 보장.
+ * Card 메타 + 모든 locale 조인 검색. dedupe 는 Card 단위로 보장.
  * 결과의 cardId(URL용) = 선택된 locale.id.
  */
-export async function searchLogicalCards(
-  filters: LogicalCardSearchFilters
+export async function searchCards(
+  filters: CardSearchFilters
 ): Promise<
   {
-    logicalCard: LogicalCardMeta;
+    card: CardMeta;
     locales: LocaleSummary[];
   }[]
 > {
   const q = (filters.q ?? "").trim();
-  const where: Prisma.LogicalCardWhereInput = {};
+  const where: Prisma.CardWhereInput = {};
   if (filters.supertype) where.supertype = filters.supertype;
   if (filters.type) where.types = { has: filters.type };
   if (filters.rarityCode) where.rarity = { code: filters.rarityCode };
@@ -343,7 +343,7 @@ export async function searchLogicalCards(
     };
   }
 
-  const lcs = await prisma.logicalCard.findMany({
+  const lcs = await prisma.card.findMany({
     where,
     include: {
       rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } } },
@@ -357,7 +357,7 @@ export async function searchLogicalCards(
   });
 
   return lcs.map((lc) => ({
-    logicalCard: toLogicalCardMeta(lc),
+    card: toCardMeta(lc),
     locales: lc.locales
       .map(toLocaleSummary)
       .sort(
@@ -368,11 +368,11 @@ export async function searchLogicalCards(
 }
 
 /**
- * LogicalCard + 선택된 locale → 기존 TCGCard 형태로 변환.
+ * Card + 선택된 locale → 기존 TCGCard 형태로 변환.
  * 기존 컴포넌트들이 TCGCard 를 받으므로 호환 유지.
  */
-export function logicalCardToTCG(
-  lc: LogicalCardMeta,
+export function cardToTCG(
+  lc: CardMeta,
   primary: LocaleSummary
 ): TCGCard {
   // 지역별 rarity 표기: 사용자 region 우선, 없으면 EN, 없으면 code. P4a: primary(RegionCard) 우선.

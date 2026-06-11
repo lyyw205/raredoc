@@ -138,7 +138,7 @@ async function processSet(setDef: typeof SET_MAP[number], tmpRoot: string) {
     const numUnpadded = String(parseInt(card.number, 10));
     const locale = await prisma.regionCard.findFirst({
       where: { setId: `jp-tcg-${setDef.setId}`, number: numUnpadded },
-      select: { id: true, imageSmall: true, logicalCardId: true },
+      select: { id: true, imageSmall: true, cardId: true },
     });
     if (!locale) { fail++; continue; }
 

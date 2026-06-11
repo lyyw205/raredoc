@@ -19,7 +19,7 @@ function isClean(a: any): boolean {
 async function main() {
   const gid = process.argv[2], APPLY = process.argv.includes("--apply");
   if (!gid) { console.error("usage: <gid> [--apply]"); process.exit(1); }
-  const lcs = await prisma.logicalCard.findMany({
+  const lcs = await prisma.card.findMany({
     where: { cardPackId: gid },
     select: { id: true, attacks: true, types: true, subtypes: true, locales: { select: { region: true, name: true, numberInt: true } } },
   });
@@ -46,8 +46,8 @@ async function main() {
   console.log(`${gid}: 오염잔존 ${fix + noSib + skipUnion} · attacks형제복사 ${fix} · 형제없음 ${noSib} · V-UNION제외 ${skipUnion} · types형제복사 ${tyFix} ${APPLY ? "★APPLY" : "(dry)"}`);
   console.log("  " + samp.join(" | "));
   if (APPLY) {
-    for (const u of upd) await prisma.logicalCard.update({ where: { id: u.id }, data: { attacks: u.a } });
-    for (const u of tUpd) await prisma.logicalCard.update({ where: { id: u.id }, data: { types: u.t } });
+    for (const u of upd) await prisma.card.update({ where: { id: u.id }, data: { attacks: u.a } });
+    for (const u of tUpd) await prisma.card.update({ where: { id: u.id }, data: { types: u.t } });
     console.log(`★복사: attacks ${upd.length} · types ${tUpd.length}`);
   }
   await prisma.$disconnect();

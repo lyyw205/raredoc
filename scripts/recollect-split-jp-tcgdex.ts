@@ -5,7 +5,7 @@
  *   같은 번호 2장이 한쪽 데이터로 덮여 dex/일러가 오염됐음. 이 스크립트는 분할 세트
  *   (jp-tcg-SV2P 등, 한 번호 1장)에 직접 적재하므로 충돌이 원천 불가능.
  *
- * 채우는 LogicalCard 필드: supertype·subtypes·pokedexNumbers·illustrator·hp·types·
+ * 채우는 Card 필드: supertype·subtypes·pokedexNumbers·illustrator·hp·types·
  *   retreatCost·evolvesFrom·rarityId. (RegionCard 의 name/number 는 정확하므로 미변경,
  *   imageLarge/Small 은 비어있을 때만 채움)
  * dex: tcgdex dexId 우선, 없으면 PokeAPI ja(카타카나) 이름→dex 폴백(표준 매핑표).
@@ -92,7 +92,7 @@ async function main() {
   for (const dbSetId of targets) {
     const tcgId = SPLIT[dbSetId];
     const cards = await prisma.regionCard.findMany({ where: { setId: dbSetId }, orderBy: { numberInt: "asc" },
-      select: { id: true, number: true, name: true, logicalCardId: true, imageLarge: true, imageSmall: true } });
+      select: { id: true, number: true, name: true, cardId: true, imageLarge: true, imageSmall: true } });
     console.log(`\n─── ${dbSetId} ← tcgdex:${tcgId}(ja) · ${cards.length}장 · ${APPLY ? "★APPLY" : "dry"} ───`);
     let ok = 0, failFetch = 0, dexTcg = 0, dexJa = 0, dexNone = 0, rarNone = 0, sample = 0;
     const noDex: string[] = [], noRar = new Set<string>();
@@ -125,8 +125,8 @@ async function main() {
 
       if (sample < 5) { console.log(`  #${cl.number} "${cl.name}" st=${supertype} sub=[${subtypes}] dex=[${dex}]${d.dexId?.length ? "" : dex.length ? "(ja폴백)" : "(없음)"} illus=${d.illustrator ?? "∅"} rar=${d.rarity ?? "∅"}${rarityId ? `(t${rtier})` : "(미매칭)"}`); sample++; }
 
-      if (APPLY && cl.logicalCardId && Object.keys(update).length) {
-        await prisma.logicalCard.update({ where: { id: cl.logicalCardId }, data: update });
+      if (APPLY && cl.cardId && Object.keys(update).length) {
+        await prisma.card.update({ where: { id: cl.cardId }, data: update });
         if ((!cl.imageLarge || !cl.imageSmall) && d.image) {
           await prisma.regionCard.update({ where: { id: cl.id }, data: {
             imageLarge: cl.imageLarge ?? `${d.image}/high.webp`, imageSmall: cl.imageSmall ?? `${d.image}/low.webp` } });

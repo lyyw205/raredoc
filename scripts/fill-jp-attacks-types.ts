@@ -1,6 +1,6 @@
 /**
  * pc-jp(pokemon-card.com) 공식 상세에서 구조화 JP attacks + types 를 수집해
- * LogicalCard 의 **오염/누락 attacks 교정** + **빈 types 채움**(외과적, 다른 필드 무변경).
+ * Card 의 **오염/누락 attacks 교정** + **빈 types 채움**(외과적, 다른 필드 무변경).
  *
  * 배경: S10 시대 일부 팩(S10P/S10a/S10b)은 초기 EN소스 적재로 attacks 가 영어+<br>+코스트마커가
  *   name 에 통째로 박힌 오염 상태(tcgdex JP 가 S10 빈껍데기라 보강 경로 막힘). pc-jp 가 유일한 깨끗한 JP 소스.
@@ -129,7 +129,7 @@ async function main() {
     console.log(`■ 스크랩 완료: ${ok}장(실패 ${fail}) · attacks보유 ${wAtk} · types보유 ${wTyp} → ${cache}`);
   }
 
-  const lcs = await prisma.logicalCard.findMany({
+  const lcs = await prisma.card.findMany({
     where: { cardPackId: gid },
     select: { id: true, supertype: true, types: true, attacks: true, illustrator: true, locales: { select: { region: true, numberInt: true, name: true } } },
   });
@@ -163,9 +163,9 @@ async function main() {
   console.log(`illustrator: 빈값채움 ${illFill}`);
   console.log(`매칭없는 포켓몬 ${noMatch} ${APPLY ? "★APPLY" : "(dry)"}`);
   if (APPLY) {
-    for (const u of aUpd) await prisma.logicalCard.update({ where: { id: u.id }, data: { attacks: u.attacks } });
-    for (const u of tUpd) await prisma.logicalCard.update({ where: { id: u.id }, data: { types: u.types } });
-    for (const u of iUpd) await prisma.logicalCard.update({ where: { id: u.id }, data: { illustrator: u.ill } });
+    for (const u of aUpd) await prisma.card.update({ where: { id: u.id }, data: { attacks: u.attacks } });
+    for (const u of tUpd) await prisma.card.update({ where: { id: u.id }, data: { types: u.types } });
+    for (const u of iUpd) await prisma.card.update({ where: { id: u.id }, data: { illustrator: u.ill } });
     console.log(`★적용: attacks ${aUpd.length} · types ${tUpd.length} · illust ${iUpd.length}`);
   }
   await prisma.$disconnect();

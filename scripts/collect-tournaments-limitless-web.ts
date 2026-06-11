@@ -106,11 +106,11 @@ async function main() {
       const dl = dlByPlacing.get(s.placing);
       let decklist: object | null = null;
       if (dl) {
-        // EN ptcgoCode 표기 → resolver 경로① 로 logicalCardId additive 보강
+        // EN ptcgoCode 표기 → resolver 경로① 로 cardId additive 보강
         for (const bucket of ["pokemon", "trainer", "energy"] as const) {
           for (const c of dl.cards[bucket]) {
             const resolved = await resolver.resolveEn(c.set, c.number);
-            if (resolved) c.logicalCardId = resolved.logicalCardId;
+            if (resolved) c.cardId = resolved.cardId;
           }
         }
         decklist = dl.cards;

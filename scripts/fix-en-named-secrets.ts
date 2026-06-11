@@ -12,7 +12,7 @@ import { resolveCardDexes } from "./lib/pokeapi-names";
 async function main() {
   const gid = process.argv[2], APPLY = process.argv.includes("--apply");
   if (!gid) { console.error("usage: <gid> [--apply]"); process.exit(1); }
-  const all = await prisma.logicalCard.findMany({
+  const all = await prisma.card.findMany({
     where: { cardPackId: gid },
     select: { id: true, supertype: true, subtypes: true, types: true, attacks: true, pokedexNumbers: true,
       locales: { select: { id: true, region: true, name: true } } },
@@ -45,7 +45,7 @@ async function main() {
   console.log(`${gid}: 깊은오염 ${broken.length} · 복구 ${fix} · 매칭실패 ${noMatch} ${APPLY ? "★APPLY" : "(dry)"}`);
   samp.forEach((s) => console.log("  " + s));
   if (APPLY) {
-    for (const u of lcUpd) await prisma.logicalCard.update({ where: { id: u.id }, data: u.data });
+    for (const u of lcUpd) await prisma.card.update({ where: { id: u.id }, data: u.data });
     for (const u of locUpd) await prisma.regionCard.update({ where: { id: u.id }, data: { name: u.name } });
     console.log(`★복구: LC ${lcUpd.length} · locale이름 ${locUpd.length}`);
   }

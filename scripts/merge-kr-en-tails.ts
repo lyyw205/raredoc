@@ -28,7 +28,7 @@ const JA2EN: Record<string, string> = { ...TR_SV, ...TR_SM, ...TR_SWSH, ...TR_XY
 async function main() {
   const gid = process.argv[2], APPLY = process.argv.includes("--apply");
   if (!gid) { console.error("usage: <cardPackId> [--apply]"); process.exit(1); }
-  const lcs = await prisma.logicalCard.findMany({
+  const lcs = await prisma.card.findMany({
     where: { cardPackId: gid },
     select: { id: true, supertype: true, subtypes: true, pokedexNumbers: true, nameKo: true,
       locales: { select: { id: true, region: true, name: true, number: true } },
@@ -80,11 +80,11 @@ async function main() {
   for (const p of pairs) {
     const refs = p.kr._count;
     if (refs.collectionItems + refs.trades + refs.deckCards + refs.tierEntries + refs.rulings > 0) { console.log(`  ⚠ 참조있음 skip: ${p.kr.id}`); continue; }
-    for (const loc of p.kr.locales) await prisma.regionCard.update({ where: { id: loc.id }, data: { logicalCardId: p.en.id } });
+    for (const loc of p.kr.locales) await prisma.regionCard.update({ where: { id: loc.id }, data: { cardId: p.en.id } });
     const data: any = { nameKo: p.kr.locales[0].name.replace(/\s*-\s*\d+\/\d+$/, "") };
     if (p.via === "basic-energy") { data.supertype = "Energy"; data.subtypes = ["Basic"]; }
-    await prisma.logicalCard.update({ where: { id: p.en.id }, data });
-    await prisma.logicalCard.delete({ where: { id: p.kr.id } });
+    await prisma.card.update({ where: { id: p.en.id }, data });
+    await prisma.card.delete({ where: { id: p.kr.id } });
     moved++;
   }
   console.log(`★통합 ${moved} (KR locale 이동 + 빈 KR LC 삭제)`);

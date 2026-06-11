@@ -1,5 +1,5 @@
 /**
- * PMCG1~6 카드의 LogicalCard.illustrator 를 Bulbapedia 에서 추출.
+ * PMCG1~6 카드의 Card.illustrator 를 Bulbapedia 에서 추출.
  *
  * - 대상: ExternalIdMapping(source=bulbapedia) 가 있는 카드 (≈339장)
  * - 추출: 페이지 HTML 의 wgCategories 의 "Illus. by {name}" 항목 첫 번째
@@ -49,14 +49,14 @@ async function main() {
     where: {
       sourceId: source.id,
       OR: [
-        { logicalCardId: { startsWith: "lc-orphan-jp-tcg-PMCG" } },
-        { logicalCardId: { startsWith: "lc-orphan-jp-tcg-neo" } },
-        { logicalCardId: { startsWith: "lc-orphan-jp-tcg-E" } },
-        { logicalCardId: { startsWith: "lc-orphan-jp-tcg-VS" } },
-        { logicalCardId: { startsWith: "lc-orphan-jp-tcg-web" } },
+        { cardId: { startsWith: "lc-orphan-jp-tcg-PMCG" } },
+        { cardId: { startsWith: "lc-orphan-jp-tcg-neo" } },
+        { cardId: { startsWith: "lc-orphan-jp-tcg-E" } },
+        { cardId: { startsWith: "lc-orphan-jp-tcg-VS" } },
+        { cardId: { startsWith: "lc-orphan-jp-tcg-web" } },
       ],
     },
-    select: { externalId: true, url: true, logicalCardId: true, regionCardId: true },
+    select: { externalId: true, url: true, cardId: true, regionCardId: true },
   });
   console.log(`대상 ${mappings.length} Bulbapedia 매핑\n`);
 
@@ -68,10 +68,10 @@ async function main() {
 
   for (const m of mappings) {
     if (!m.url) { noUrl++; continue; }
-    if (!m.logicalCardId) continue;
+    if (!m.cardId) continue;
 
-    const lc = await prisma.logicalCard.findUnique({
-      where: { id: m.logicalCardId },
+    const lc = await prisma.card.findUnique({
+      where: { id: m.cardId },
       select: { id: true, illustrator: true },
     });
     if (!lc) continue;
@@ -84,7 +84,7 @@ async function main() {
     const ill = extractIllustrator(html);
     if (!ill) { noMatch++; continue; }
 
-    await prisma.logicalCard.update({
+    await prisma.card.update({
       where: { id: lc.id },
       data: { illustrator: ill },
     });

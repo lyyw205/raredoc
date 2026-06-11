@@ -37,16 +37,16 @@ async function main() {
   // JP 측 인덱스: setId → (dex|illust 집합, dex 집합)
   const jpRows = await prisma.regionCard.findMany({
     where: { setId: { in: JP_SETS } },
-    select: { setId: true, logicalCard: { select: { pokedexNumbers: true, illustrator: true, supertype: true } } },
+    select: { setId: true, card: { select: { pokedexNumbers: true, illustrator: true, supertype: true } } },
   });
   const jpDexIll = new Map<string, Set<string>>();
   const jpDex = new Map<string, Set<number>>();
   for (const s of JP_SETS) { jpDexIll.set(s, new Set()); jpDex.set(s, new Set()); }
   for (const r of jpRows) {
-    const d = r.logicalCard.pokedexNumbers?.[0];
+    const d = r.card.pokedexNumbers?.[0];
     if (d == null) continue;
     jpDex.get(r.setId)!.add(d);
-    if (r.logicalCard.illustrator) jpDexIll.get(r.setId)!.add(`${d}|${r.logicalCard.illustrator}`);
+    if (r.card.illustrator) jpDexIll.get(r.setId)!.add(`${d}|${r.card.illustrator}`);
   }
 
   for (let i = 1; i <= 10; i++) {

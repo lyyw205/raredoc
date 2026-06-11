@@ -7,7 +7,7 @@
  *   — apply-kr-official.ts 가 detailId 를 버리고 적재했던 것을 EIM 으로 복원.
  * 조인: KR RegionCard.imageSmall == record.image (apply 가 image 를 그대로 저장 — 정확 키)
  *   폴백: 이미지 파일명(소문자, 확장자 제외) 매칭.
- * 결과: resolver 경로④(BS코드→logicalCardId) 가동 — KR 덱코드 해석의 기반.
+ * 결과: resolver 경로④(BS코드→cardId) 가동 — KR 덱코드 해석의 기반.
  */
 import "dotenv/config";
 import fs from "node:fs";
@@ -50,7 +50,7 @@ async function main() {
   // 2. KR RegionCard 인덱스
   const locales = await prisma.regionCard.findMany({
     where: { region: "KR" },
-    select: { id: true, imageSmall: true, logicalCardId: true },
+    select: { id: true, imageSmall: true, cardId: true },
   });
   const byImage = new Map<string, (typeof locales)[number]>();
   const byBasename = new Map<string, (typeof locales)[number]>();
@@ -100,11 +100,11 @@ async function main() {
         sourceId: src.id,
         externalId: rec.detailId,
         regionCardId: l.id,
-        logicalCardId: l.logicalCardId,
+        cardId: l.cardId,
         url: `https://pokemoncard.co.kr/cards/detail/${rec.detailId}`,
         verifiedBy: "auto:backfill-eim-kr-bs",
       },
-      update: { regionCardId: l.id, logicalCardId: l.logicalCardId, verifiedBy: "auto:backfill-eim-kr-bs" },
+      update: { regionCardId: l.id, cardId: l.cardId, verifiedBy: "auto:backfill-eim-kr-bs" },
     });
     upserts++;
   }

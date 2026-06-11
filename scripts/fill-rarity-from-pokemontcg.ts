@@ -1,5 +1,5 @@
 /**
- * rarityId=NULL 인 LogicalCard 중 EN RegionCard 보유 카드를 pokemontcg.io API 로 보강.
+ * rarityId=NULL 인 Card 중 EN RegionCard 보유 카드를 pokemontcg.io API 로 보강.
  *
  * 실행: npx tsx scripts/fill-rarity-from-pokemontcg.ts
  *
@@ -67,7 +67,7 @@ async function appendFollowup(lines: string[]) {
 pokemontcg.io 에서 rarity 텍스트를 가져왔으나 Rarity 마스터 매칭 실패 (신규 row 생성 금지 정책).
 수동 검토 후 Rarity 마스터에 row 추가하거나 코드 매핑에 추가 필요.
 
-| LogicalCard ID | EN RegionCard | era | rarity 텍스트 |
+| Card ID | EN RegionCard | era | rarity 텍스트 |
 |---|---|---|---|
 ${lines.join("\n")}
 
@@ -78,7 +78,7 @@ ${lines.join("\n")}
 
 async function main() {
   // Before 통계
-  const beforeTotal = await prisma.logicalCard.count({ where: { rarityId: null, cardPackId: { not: null } } });
+  const beforeTotal = await prisma.card.count({ where: { rarityId: null, cardPackId: { not: null } } });
   const beforeEra = await prisma.$queryRaw<{ era: string; cnt: bigint }[]>`
     SELECT sg.era, COUNT(*) as cnt
     FROM "LogicalCard" lc
@@ -89,8 +89,8 @@ async function main() {
   console.log(`시작: rarityId NULL (era 있는 것) = ${beforeTotal}`);
   beforeEra.forEach((r) => console.log(`  ${r.era}: ${r.cnt}`));
 
-  // 대상: rarityId NULL && EN locale 있는 LogicalCard
-  const targets = await prisma.logicalCard.findMany({
+  // 대상: rarityId NULL && EN locale 있는 Card
+  const targets = await prisma.card.findMany({
     where: {
       rarityId: null,
       cardPackId: { not: null },
@@ -155,7 +155,7 @@ async function main() {
         }
 
         if (rarityId) {
-          await prisma.logicalCard.update({ where: { id: lc.id }, data: { rarityId } });
+          await prisma.card.update({ where: { id: lc.id }, data: { rarityId } });
           updated++;
         } else {
           followupLines.push(
@@ -173,7 +173,7 @@ async function main() {
   }
 
   // After 통계
-  const afterTotal = await prisma.logicalCard.count({ where: { rarityId: null, cardPackId: { not: null } } });
+  const afterTotal = await prisma.card.count({ where: { rarityId: null, cardPackId: { not: null } } });
   const afterEra = await prisma.$queryRaw<{ era: string; cnt: bigint }[]>`
     SELECT sg.era, COUNT(*) as cnt
     FROM "LogicalCard" lc

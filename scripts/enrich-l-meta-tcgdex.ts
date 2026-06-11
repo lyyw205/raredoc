@@ -1,5 +1,5 @@
 /**
- * L1a, L1b, L2, LL, L3 (HGSS era JP) LogicalCard 메타를 tcgdex 에서 보강.
+ * L1a, L1b, L2, LL, L3 (HGSS era JP) Card 메타를 tcgdex 에서 보강.
  * tcgdex 보유: L1a=71, L1b=71, L2=19, LL=40, L3=81 (DB cardCount 기준 부분 커버).
  * 이미지는 tcgplayer-cdn 403이므로 skip. illustrator는 scrape-l-illustrator-bulbapedia.ts 에서.
  *
@@ -85,11 +85,11 @@ async function main() {
       const ourLogicalIdUnpadded = `lc-orphan-${ourLocaleIdUnpadded}`;
 
       // Try padded first, then unpadded
-      let lc = await prisma.logicalCard.findUnique({ where: { id: ourLogicalIdPadded } });
-      if (!lc) lc = await prisma.logicalCard.findUnique({ where: { id: ourLogicalIdUnpadded } });
+      let lc = await prisma.card.findUnique({ where: { id: ourLogicalIdPadded } });
+      if (!lc) lc = await prisma.card.findUnique({ where: { id: ourLogicalIdUnpadded } });
       if (!lc) {
         // Also try without lc-orphan prefix pattern (cards may use different id scheme)
-        lc = await prisma.logicalCard.findFirst({ where: { primarySetId: `jp-tcg-${setId}`, primaryNumber: numPadded } });
+        lc = await prisma.card.findFirst({ where: { primarySetId: `jp-tcg-${setId}`, primaryNumber: numPadded } });
       }
       if (!lc) { missing++; continue; }
 
@@ -117,7 +117,7 @@ async function main() {
       }
 
       if (Object.keys(update).length > 0) {
-        await prisma.logicalCard.update({ where: { id: lc.id }, data: update });
+        await prisma.card.update({ where: { id: lc.id }, data: update });
         enriched++;
       } else {
         skipped++;
@@ -129,12 +129,12 @@ async function main() {
         create: {
           sourceId: source.id,
           externalId: c.id,
-          logicalCardId: lc.id,
+          cardId: lc.id,
           url: `https://api.tcgdex.net/v2/ja/cards/${c.id}`,
           verifiedBy: "auto:enrich-l-meta-tcgdex",
           confidence: 0.9,
         },
-        update: { logicalCardId: lc.id },
+        update: { cardId: lc.id },
       });
     }
 

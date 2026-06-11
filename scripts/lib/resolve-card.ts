@@ -20,7 +20,7 @@ export type ResolveInput = {
   cardId?: string | null;
 };
 
-export type Resolved = { regionCardId: string | null; logicalCardId: string };
+export type Resolved = { regionCardId: string | null; cardId: string };
 
 type SetMap = { en: Record<string, string>; enUnmapped: Record<string, string>; jp: Record<string, string> };
 
@@ -62,20 +62,20 @@ export class CardResolver {
     if (!sourceId) return null;
     const m = await prisma.externalIdMapping.findUnique({
       where: { sourceId_externalId: { sourceId, externalId } },
-      select: { regionCardId: true, logicalCardId: true, regionCard: { select: { logicalCardId: true } } },
+      select: { regionCardId: true, cardId: true, regionCard: { select: { cardId: true } } },
     });
     if (!m) return null;
-    const logicalCardId = m.logicalCardId ?? m.regionCard?.logicalCardId ?? null;
-    if (!logicalCardId) return null;
-    return { regionCardId: m.regionCardId, logicalCardId };
+    const cardId = m.cardId ?? m.regionCard?.cardId ?? null;
+    if (!cardId) return null;
+    return { regionCardId: m.regionCardId, cardId };
   }
 
   private async byLocale(where: object): Promise<Resolved | null> {
     const cl = await prisma.regionCard.findFirst({
       where,
-      select: { id: true, logicalCardId: true },
+      select: { id: true, cardId: true },
     });
-    return cl ? { regionCardId: cl.id, logicalCardId: cl.logicalCardId } : null;
+    return cl ? { regionCardId: cl.id, cardId: cl.cardId } : null;
   }
 
   /** 경로①: EN ptcgoCode + number */

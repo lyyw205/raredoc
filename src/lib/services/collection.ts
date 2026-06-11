@@ -50,7 +50,7 @@ function estimateItemKrw(item: {
   return Math.round(usd * USD_KRW * conditionCoefficient(item.grade));
 }
 
-// CollectionItem + locale(표시 데이터) + logicalCard(rarity) + 최신 Price 공통 include
+// CollectionItem + locale(표시 데이터) + card(rarity) + 최신 Price 공통 include
 const itemInclude = {
   locale: {
     include: {
@@ -67,7 +67,7 @@ const itemInclude = {
       },
     },
   },
-  logicalCard: {
+  card: {
     select: {
       rarity: { select: { code: true, nameKo: true, nameEn: true } },
     },
@@ -102,7 +102,7 @@ export interface CollectionItemView {
 type RawItem = {
   id: string;
   localeId: string;
-  logicalCardId: string;
+  cardId: string;
   grade: string;
   certified: boolean;
   estimatedKrw: number | null;
@@ -118,7 +118,7 @@ type RawItem = {
     set: { id: string; name: string; nameKo: string | null };
     prices: { normal: number | null; holofoil: number | null; reverseHolo: number | null; firstEdition: number | null }[];
   };
-  logicalCard: {
+  card: {
     rarity: { code: string; nameKo: string | null; nameEn: string | null } | null;
   };
   certification: { status: string } | null;
@@ -130,7 +130,7 @@ function toView(item: RawItem): CollectionItemView {
     cardId: item.localeId, // URL 호환: cardId 명은 그대로, 값은 RegionCard.id
     name: item.locale.name,
     number: item.locale.number,
-    rarity: item.logicalCard.rarity?.nameKo ?? item.logicalCard.rarity?.nameEn ?? item.logicalCard.rarity?.code ?? null,
+    rarity: item.card.rarity?.nameKo ?? item.card.rarity?.nameEn ?? item.card.rarity?.code ?? null,
     region: item.locale.region,
     setId: item.locale.set.id,
     setName: item.locale.set.nameKo ?? item.locale.set.name,
@@ -161,7 +161,7 @@ export async function addCollectionItem(input: {
 }) {
   const locale = await prisma.regionCard.findUnique({
     where: { id: input.cardId },
-    select: { id: true, logicalCardId: true },
+    select: { id: true, cardId: true },
   });
   if (!locale) {
     throw new Error(`RegionCard not found: ${input.cardId}`);
@@ -170,7 +170,7 @@ export async function addCollectionItem(input: {
     data: {
       userId: input.userId,
       localeId: locale.id,
-      logicalCardId: locale.logicalCardId,
+      cardId: locale.cardId,
       grade: input.grade,
       estimatedKrw: input.estimatedKrw ?? null,
       forSale: input.forSale ?? false,

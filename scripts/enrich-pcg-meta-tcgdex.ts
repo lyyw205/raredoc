@@ -1,5 +1,5 @@
 /**
- * PCG1~9 (2004~2006) LogicalCard 메타를 tcgdex 에서 보강.
+ * PCG1~9 (2004~2006) Card 메타를 tcgdex 에서 보강.
  * PCG 시리즈는 tcgdex /v2/ja 에 카드 데이터 있음.
  * 이미지는 이미 tcgplayer-cdn 으로 채워져 있어 건너뜀.
  */
@@ -85,7 +85,7 @@ async function main() {
       // tcgdex localId is already padded: "001"
       const ourLocaleId = `jp-tcg-${dbCode}-${c.localId}`;
       const ourLogicalId = `lc-orphan-${ourLocaleId}`;
-      const lc = await prisma.logicalCard.findUnique({ where: { id: ourLogicalId } });
+      const lc = await prisma.card.findUnique({ where: { id: ourLogicalId } });
       if (!lc) { missing++; continue; }
 
       const d = await fetchJson<CardDetail>(`https://api.tcgdex.net/v2/ja/cards/${c.id}`);
@@ -111,7 +111,7 @@ async function main() {
         if (rid) update.rarityId = rid; else unmatched.add(d.rarity);
       }
       if (Object.keys(update).length > 0) {
-        await prisma.logicalCard.update({ where: { id: ourLogicalId }, data: update });
+        await prisma.card.update({ where: { id: ourLogicalId }, data: update });
         enriched++;
       } else skipped++;
 
@@ -119,17 +119,17 @@ async function main() {
         where: { sourceId_externalId: { sourceId: source.id, externalId: c.id } },
         create: {
           sourceId: source.id, externalId: c.id,
-          logicalCardId: ourLogicalId, regionCardId: ourLocaleId,
+          cardId: ourLogicalId, regionCardId: ourLocaleId,
           url: `https://api.tcgdex.net/v2/ja/cards/${c.id}`,
           verifiedBy: "auto:enrich-pcg-meta-tcgdex", confidence: 0.95,
         },
-        update: { logicalCardId: ourLogicalId, regionCardId: ourLocaleId },
+        update: { cardId: ourLogicalId, regionCardId: ourLocaleId },
       });
       totalMap++;
     }
   }
   console.log(`\n── 결과 ──`);
-  console.log(`  enriched: ${enriched}, skipped: ${skipped}, LogicalCard 누락: ${missing}, ExternalIdMapping: ${totalMap}`);
+  console.log(`  enriched: ${enriched}, skipped: ${skipped}, Card 누락: ${missing}, ExternalIdMapping: ${totalMap}`);
   if (unmatched.size > 0) {
     console.log(`  매칭 안된 rarity (${unmatched.size}):`);
     for (const r of unmatched) console.log(`    "${r}"`);

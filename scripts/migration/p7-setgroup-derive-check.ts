@@ -1,4 +1,4 @@
-// ── P7-S1 진단: LogicalCard.cardPackId 가 물리경로(RegionCard.setId→Set.cardPackId)로 도출가능한가 ──
+// ── P7-S1 진단: Card.cardPackId 가 물리경로(RegionCard.setId→Set.cardPackId)로 도출가능한가 ──
 // cardPackId 제거 전제: 각 LC의 cardPackId 가 자기 locale 들의 Set.cardPackId 와 일치해야 함.
 // 불일치 = '도둑질' 잔재(재포인트로 LC.cardPackId 가 물리와 어긋남) → 케이스 분류.
 // 실행: npx tsx scripts/migration/p7-setgroup-derive-check.ts
@@ -10,8 +10,8 @@ async function main() {
   console.log("════ P7-S1: cardPackId 물리경로 도출가능성 ════\n");
 
   // 전체 LC 수 / cardPackId 보유 / locale 보유
-  const totalLC = await prisma.logicalCard.count();
-  const withGrp = await prisma.logicalCard.count({ where: { cardPackId: { not: null } } });
+  const totalLC = await prisma.card.count();
+  const withGrp = await prisma.card.count({ where: { cardPackId: { not: null } } });
   console.log(`LC 총 ${totalLC} · cardPackId 보유 ${withGrp}`);
 
   // 각 LC: 자기 locale들의 Set.cardPackId 집합(distinct, null제외)

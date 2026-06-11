@@ -80,7 +80,7 @@ async function seedArchetypes() {
       await prisma.deckCard.create({
         data: {
           archetypeId: a.id,
-          logicalCardId: resolveCardId(cl.cardId),
+          cardId: resolveCardId(cl.cardId),
           count: cl.count,
           role: cl.role ?? null,
         },

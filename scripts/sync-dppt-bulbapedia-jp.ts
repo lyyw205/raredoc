@@ -6,7 +6,7 @@
  * - Finds JP section by anchor id
  * - Parses JP card rows (number, name, slug)
  * - Creates JP Set row (jp-tcg-{setId})
- * - Creates JP RegionCard (jp-tcg-{setId}-{num}) linked to existing LogicalCard
+ * - Creates JP RegionCard (jp-tcg-{setId}-{num}) linked to existing Card
  * - Fetches each card's Bulbapedia page to extract image URL + illustrator
  * - Creates ExternalIdMapping (source=bulbapedia)
  *
@@ -341,16 +341,16 @@ async function syncSet(
   });
   console.log(`  ✓ JP Set ${jpSetId}`);
 
-  // Build EN name→logicalCardId map for this set (for name-based matching)
+  // Build EN name→cardId map for this set (for name-based matching)
   const enLocales = await prisma.regionCard.findMany({
     where: { setId: enSetId },
-    select: { id: true, name: true, logicalCardId: true, number: true },
+    select: { id: true, name: true, cardId: true, number: true },
   });
   // Normalize names for fuzzy match (lowercase, remove punctuation)
   const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
-  const enNameMap = new Map<string, { localeId: string; logicalCardId: string; number: string }>();
+  const enNameMap = new Map<string, { localeId: string; cardId: string; number: string }>();
   for (const cl of enLocales) {
-    enNameMap.set(normalize(cl.name), { localeId: cl.id, logicalCardId: cl.logicalCardId, number: cl.number });
+    enNameMap.set(normalize(cl.name), { localeId: cl.id, cardId: cl.cardId, number: cl.number });
   }
 
   let ok = 0, skip = 0, fail = 0;
@@ -362,23 +362,23 @@ async function syncSet(
     const normalizedName = normalize(row.jpName);
     const enMatch = enNameMap.get(normalizedName);
 
-    let logicalCardId: string;
+    let cardId: string;
 
     if (enMatch) {
-      logicalCardId = enMatch.logicalCardId;
+      cardId = enMatch.cardId;
     } else {
       // Try number-based fallback for sets where JP numbers align with EN
       const enLocaleId = `en-tcg-${setId}-${row.number}`;
       const enLocale = await prisma.regionCard.findUnique({
         where: { id: enLocaleId },
-        select: { logicalCardId: true },
+        select: { cardId: true },
       });
       if (!enLocale) {
         console.log(`  [${row.number}] ${row.jpName} — no EN match found (name or number) — skip`);
         fail++;
         continue;
       }
-      logicalCardId = enLocale.logicalCardId;
+      cardId = enLocale.cardId;
     }
 
     // Check if JP RegionCard already has an image
@@ -410,7 +410,7 @@ async function syncSet(
         where: { id: jpLocaleId },
         create: {
           id: jpLocaleId,
-          logicalCardId,
+          cardId,
           language: "ja",
           region: "JP",
           setId: jpSetId,
@@ -421,16 +421,16 @@ async function syncSet(
           imageLarge: imageUrl,
         },
         update: {
-          logicalCardId,
+          cardId,
           name: row.jpName || row.slug.split("_")[0],
           ...(imageUrl ? { imageSmall: imageUrl, imageLarge: imageUrl } : {}),
         },
       });
 
-      // Update LogicalCard illustrator if NULL
+      // Update Card illustrator if NULL
       if (illustrator) {
-        await prisma.logicalCard.updateMany({
-          where: { id: logicalCardId, illustrator: null },
+        await prisma.card.updateMany({
+          where: { id: cardId, illustrator: null },
           data: { illustrator },
         });
       }
@@ -442,7 +442,7 @@ async function syncSet(
           sourceId: bulbapediaSourceId,
           externalId: row.slug,
           regionCardId: jpLocaleId,
-          logicalCardId,
+          cardId,
           url: `${WIKI_BASE}/wiki/${encodeURIComponent(row.slug)}`,
           verifiedBy: "auto:sync-dppt-bulbapedia-jp",
           confidence: 0.75,
@@ -450,7 +450,7 @@ async function syncSet(
         },
         update: {
           regionCardId: jpLocaleId,
-          logicalCardId,
+          cardId,
         },
       });
 

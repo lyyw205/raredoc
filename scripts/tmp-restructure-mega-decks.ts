@@ -48,14 +48,14 @@ async function main() {
   if (APPLY && !exists) await prisma.cardPack.create({ data: NEW_GROUP });
 
   // 2) kr-mc 이동 + LC 이동
-  const mcLcs = await prisma.logicalCard.findMany({
+  const mcLcs = await prisma.card.findMany({
     where: { locales: { some: { setId: "kr-mc" } } },
     select: { id: true, cardPackId: true },
   });
   console.log(`[2] kr-mc Set → ${NEW_GROUP.id} 이동, 소속 LC ${mcLcs.length}개 cardPackId 이동`);
   if (APPLY) {
     await prisma.set.update({ where: { id: "kr-mc" }, data: { cardPackId: NEW_GROUP.id } });
-    await prisma.logicalCard.updateMany({
+    await prisma.card.updateMany({
       where: { id: { in: mcLcs.map((l) => l.id) } },
       data: { cardPackId: NEW_GROUP.id },
     });

@@ -96,7 +96,7 @@ async function discover(): Promise<Discovered[]> {
   return out;
 }
 
-type PdCard = { count: number; name: string; number: string; set: string; logicalCardId?: string | null };
+type PdCard = { count: number; name: string; number: string; set: string; cardId?: string | null };
 type PdPlayer = {
   name: string;
   placing: number;
@@ -209,7 +209,7 @@ async function main() {
         for (const bucket of ["pokemon", "trainer", "energy"] as const) {
           for (const c of p.decklist[bucket] ?? []) {
             const resolved = await resolver.resolveEn(c.set, c.number);
-            if (resolved) c.logicalCardId = resolved.logicalCardId;
+            if (resolved) c.cardId = resolved.cardId;
           }
         }
         decklist = p.decklist;

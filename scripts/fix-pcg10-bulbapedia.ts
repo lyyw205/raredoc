@@ -7,7 +7,7 @@
  *
  * - 카드 99장: Bulbapedia /wiki/{CardName}_(World_Champions_Pack_N) 페이지에서
  *   첫 카드 이미지 URL (small 180px / large 360px) + wgCategories의 "Illus. by ..." 추출
- * - 다운로드 → R2 업로드 → RegionCard.imageSmall/imageLarge + LogicalCard.illustrator 갱신
+ * - 다운로드 → R2 업로드 → RegionCard.imageSmall/imageLarge + Card.illustrator 갱신
  * - CardPack: 로고(World_Champions_Pack.jpg) → R2 + Set.logoUrl, nameKo="월드 챔피언스 팩"
  *
  * Run: npx tsx scripts/fix-pcg10-bulbapedia.ts
@@ -126,7 +126,7 @@ async function main() {
   // 4. 기존 RegionCard 모두 로딩 (id로 매칭)
   const locales = await prisma.regionCard.findMany({
     where: { setId: SET_ID, language: "ja" },
-    select: { id: true, number: true, numberInt: true, name: true, logicalCardId: true },
+    select: { id: true, number: true, numberInt: true, name: true, cardId: true },
   });
   const localeByNumber = new Map<number, typeof locales[number]>();
   for (const l of locales) {
@@ -183,7 +183,7 @@ async function main() {
         ...(r2Large ? { imageLarge: r2Large } : {}),
       },
     });
-    if (illus) illustratorByLC.set(loc.logicalCardId, illus);
+    if (illus) illustratorByLC.set(loc.cardId, illus);
 
     ok++;
     if (ok % 10 === 0) console.log(`  진행: ${ok}/${cards.length} ok=${ok} fail=${fail} skip=${skipped}`);
@@ -191,7 +191,7 @@ async function main() {
 
   // 6. illustrator 일괄 업데이트
   for (const [lcId, name] of illustratorByLC) {
-    await prisma.logicalCard.update({ where: { id: lcId }, data: { illustrator: name } });
+    await prisma.card.update({ where: { id: lcId }, data: { illustrator: name } });
   }
   console.log(`illustrator 업데이트: ${illustratorByLC.size}장`);
 

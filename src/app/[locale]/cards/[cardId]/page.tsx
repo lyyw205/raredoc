@@ -1,5 +1,5 @@
 import { searchCards } from "@/lib/api/pokemontcg";
-import { loadCardByLocaleId, logicalCardToTCG } from "@/lib/cards/queries";
+import { loadCardByLocaleId, cardToTCG } from "@/lib/cards/queries";
 import { pickRarityLabel } from "@/lib/cards/card-fields";
 import { cn } from "@/lib/utils";
 import {
@@ -32,8 +32,8 @@ import {
 export const revalidate = 3600;
 
 // "이 카드를 쓰는 덱" 역링크 (UI-2차 — cardgame 채용률 데이터 연동). 채용 덱 없으면 미렌더.
-async function DecksUsingCardSection({ logicalCardId, locale }: { logicalCardId: string; locale: string }) {
-  const decks = await getDecksUsingCard(logicalCardId, 5).catch(() => []);
+async function DecksUsingCardSection({ cardId, locale }: { cardId: string; locale: string }) {
+  const decks = await getDecksUsingCard(cardId, 5).catch(() => []);
   if (decks.length === 0) return null;
   return (
     <section className="mt-10 space-y-5">
@@ -135,7 +135,7 @@ async function getCard(cardId: string) {
   const loaded = await loadCardByLocaleId(cardId).catch(() => null);
 
   if (loaded && loaded.locale.region !== "EN") {
-    return { card: logicalCardToTCG(loaded.logicalCard, loaded.locale), loaded };
+    return { card: cardToTCG(loaded.card, loaded.locale), loaded };
   }
 
   try {
@@ -145,7 +145,7 @@ async function getCard(cardId: string) {
   } catch {}
 
   return loaded
-    ? { card: logicalCardToTCG(loaded.logicalCard, loaded.locale), loaded }
+    ? { card: cardToTCG(loaded.card, loaded.locale), loaded }
     : null;
 }
 
@@ -267,18 +267,18 @@ function buildVersions(
   loaded: NonNullable<Awaited<ReturnType<typeof loadCardByLocaleId>>>,
   card: { images: { large: string } }
 ): import("@/components/cards/CardVersionTabs").CardVersion[] {
-  const artist = loaded.logicalCard.illustrator;
+  const artist = loaded.card.illustrator;
   return loaded.allLocales.map((l) => {
     const rarityLabel = pickRarityLabel(l.region, {
-      nameJa: loaded.logicalCard.rarityNameJa,
-      nameEn: loaded.logicalCard.rarityNameEn,
-      nameKo: loaded.logicalCard.rarityNameKo,
-      code: loaded.logicalCard.rarityCode,
+      nameJa: loaded.card.rarityNameJa,
+      nameEn: loaded.card.rarityNameEn,
+      nameKo: loaded.card.rarityNameKo,
+      code: loaded.card.rarityCode,
     }) ?? null;
     return {
       region: l.region,
       name: l.name,
-      nameKo: loaded.logicalCard.nameKo,
+      nameKo: loaded.card.nameKo,
       number: l.number,
       artist,
       rarity: rarityLabel,
@@ -380,7 +380,7 @@ export default async function CardDetailPage({
   // 보유 현황 (실데이터: CollectionItem 기준)
   const stats = await getCardOwnerCounts(cardId);
 
-  // 지역별 발매판(영/일/한) — LogicalCard.locales 기반. 그룹에 있는 지역만 탭으로.
+  // 지역별 발매판(영/일/한) — Card.locales 기반. 그룹에 있는 지역만 탭으로.
   const versions: CardVersion[] =
     loaded && loaded.allLocales.length > 1 ? buildVersions(loaded, card) : [];
 
@@ -388,12 +388,12 @@ export default async function CardDetailPage({
   const krName = loaded?.allLocales.find((l) => l.region === "KR")?.name ?? null;
   const jaName = loaded?.allLocales.find((l) => l.region === "JP")?.name ?? null;
   const enName = loaded?.allLocales.find((l) => l.region === "EN")?.name ?? null;
-  const koName = locale === "ko" ? (loaded?.logicalCard.nameKo ?? krName) : null;
+  const koName = locale === "ko" ? (loaded?.card.nameKo ?? krName) : null;
   const displayName = koName ?? card.name;
   const subNames = [enName, jaName].filter((n): n is string => !!n && n !== displayName);
   // 등급 — 표준화된 레어도 카테고리(한글) 우선
   const rarityLabel =
-    loaded?.logicalCard.rarityCategoryNameKo ??
+    loaded?.card.rarityCategoryNameKo ??
     (locale === "ko" ? (card.rarity ? RARITY_KO[card.rarity] ?? card.rarity : null) : card.rarity);
 
   return (
@@ -635,8 +635,8 @@ export default async function CardDetailPage({
       </div>
 
       {/* ── 이 카드를 쓰는 덱 (UI-2차 역링크) ─────────────────────── */}
-      {loaded?.logicalCard?.id && (
-        <DecksUsingCardSection logicalCardId={loaded.logicalCard.id} locale={locale} />
+      {loaded?.card?.id && (
+        <DecksUsingCardSection cardId={loaded.card.id} locale={locale} />
       )}
 
       {/* ── 시세 (전체 폭, 하단) ──────────────────────────────────── */}

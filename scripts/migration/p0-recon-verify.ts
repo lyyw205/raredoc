@@ -8,8 +8,8 @@ const c = async (sql: string) => Number(((await prisma.$queryRawUnsafe(sql)) as 
 async function main() {
   console.log("════ reconciliation 종합 검증 ════\n");
 
-  // 1) dangling logicalCardId (존재하지 않는 LC를 가리키면 안 됨)
-  console.log("[1] dangling logicalCardId 참조 (LC 부재):");
+  // 1) dangling cardId (존재하지 않는 LC를 가리키면 안 됨)
+  console.log("[1] dangling cardId 참조 (LC 부재):");
   let d1 = 0;
   for (const t of ["DeckRecipeCard", "CollectionItem", "Trade", "Ruling", "CardText", "ExternalIdMapping", "TierEntry", "DeckCard"]) {
     const n = await c(`SELECT count(*)::int c FROM "${t}" x WHERE x."logicalCardId" IS NOT NULL AND NOT EXISTS (SELECT 1 FROM "LogicalCard" l WHERE l.id=x."logicalCardId")`);
@@ -23,7 +23,7 @@ async function main() {
     d2 += n; console.log(`   ${t}.${col}: ${n}${n ? " 🔴" : ""}`);
   }
   // 3) 빈-LC 잔존 + 패밀리
-  const empties = await prisma.logicalCard.findMany({ where: { locales: { none: {} } }, select: { id: true } });
+  const empties = await prisma.card.findMany({ where: { locales: { none: {} } }, select: { id: true } });
   const fam = new Map<string, number>();
   for (const e of empties) { const k = e.id.replace(/[0-9].*$/, ""); fam.set(k, (fam.get(k) || 0) + 1); }
   console.log(`[3] 빈-LC 잔존: ${empties.length} (${[...fam].sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k}=${v}`).join(" · ")})`);

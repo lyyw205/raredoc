@@ -96,12 +96,12 @@ async function main() {
     const locales = await prisma.regionCard.findMany({
       where: {
         setId: { in: setIds },
-        logicalCard: { supertype: null },
+        card: { supertype: null },
       },
       select: {
         name: true,
         numberInt: true,
-        logicalCardId: true,
+        cardId: true,
       },
     });
 
@@ -117,10 +117,10 @@ async function main() {
     const updates: { id: string; supertype: string }[] = [];
 
     for (const cl of locales) {
-      if (!cl.logicalCardId) continue;
+      if (!cl.cardId) continue;
       const st = inferSupertype(cl.name);
       byType[st]?.push(cl.name);
-      updates.push({ id: cl.logicalCardId, supertype: st });
+      updates.push({ id: cl.cardId, supertype: st });
     }
 
     console.log(`  분류: Pokémon=${byType.Pokémon.length}, Trainer=${byType.Trainer.length}, Energy=${byType.Energy.length}`);
@@ -132,7 +132,7 @@ async function main() {
     }
 
     for (const u of updates) {
-      await prisma.logicalCard.update({
+      await prisma.card.update({
         where: { id: u.id },
         data: { supertype: u.supertype },
       });

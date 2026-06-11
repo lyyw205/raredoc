@@ -1,7 +1,7 @@
 /**
  * JP 팩 rarity 백필 — pc-jp 상세페이지 rarity 아이콘(ic_rare_XXX.gif)에서 수집.
  * 아이콘→Rarity 매핑을 **이미 rarity 있는 카드에서 학습**(self-verify, 추측 없음) 후 null 카드에 적용.
- * 스크랩 캐시 <officialJson>.rarity.json. LogicalCard.rarityId 만 채움(null 인 것만).
+ * 스크랩 캐시 <officialJson>.rarity.json. Card.rarityId 만 채움(null 인 것만).
  * 실행: npx tsx scripts/fill-jp-rarity.ts <cardPackId> <officialJson> [--apply]
  */
 import "dotenv/config";
@@ -35,7 +35,7 @@ async function main() {
     console.log(`■ 스크랩 ${off.length}: 아이콘 ${ok} · 실패 ${fail} → ${cache}`);
   }
 
-  const lcs = await prisma.logicalCard.findMany({ where: { cardPackId: gid }, select: { id: true, locales: { select: { region: true, numberInt: true } }, rarity: { select: { code: true } } } });
+  const lcs = await prisma.card.findMany({ where: { cardPackId: gid }, select: { id: true, locales: { select: { region: true, numberInt: true } }, rarity: { select: { code: true } } } });
   // 학습: icon → 기존 DB rarity.code 집합
   const learn = new Map<string, Map<string, number>>();
   for (const lc of lcs) {
@@ -68,7 +68,7 @@ async function main() {
   }
   console.log(`null rarity 채움 ${fill} · 아이콘없음 ${noIcon} · 미학습아이콘 ${unlearned}${unl.size ? "(" + [...unl] + ")" : ""} ${APPLY ? "★APPLY" : "(dry)"}`);
   console.log("  " + samples.join(" | "));
-  if (APPLY) { for (const u of updates) await prisma.logicalCard.update({ where: { id: u.id }, data: { rarityId: u.rid } }); console.log(`★적용 ${updates.length}`); }
+  if (APPLY) { for (const u of updates) await prisma.card.update({ where: { id: u.id }, data: { rarityId: u.rid } }); console.log(`★적용 ${updates.length}`); }
   await prisma.$disconnect();
 }
 main().catch((e) => { console.error(e); process.exit(1); });

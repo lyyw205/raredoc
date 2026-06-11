@@ -1,5 +1,5 @@
 /**
- * JP 세트 LogicalCard 메타를 tcgdex JP 에서 보강 (additive: null/빈 필드만, 덮어쓰기 안함).
+ * JP 세트 Card 메타를 tcgdex JP 에서 보강 (additive: null/빈 필드만, 덮어쓰기 안함).
  * 언어순수성: attacks·abilities(언어내용) 는 **EN locale 없는 JP단독 카드에만** 채움(EN병합 카드의 EN텍스트 보존).
  *   regulationMark·types·hp·illustrator·supertype(언어중립/JP권위) 은 null 인 모든 카드에 채움.
  * tcgdex 응답은 data/jp-official/tcgdex-<tcgId>.json 캐시 → dry 후 apply 시 재fetch 안함.
@@ -29,8 +29,8 @@ async function fetchCard(tcgId: string, num: string): Promise<Card | null> {
 async function main() {
   const jpSet = process.argv[2], tcgId = process.argv[3], APPLY = process.argv.includes("--apply");
   if (!jpSet || !tcgId) { console.error("usage: <jpSetId> <tcgdexId> [--apply]"); process.exit(1); }
-  const locs = await prisma.regionCard.findMany({ where: { setId: jpSet }, select: { number: true, logicalCardId: true,
-    logicalCard: { select: { supertype: true, types: true, hp: true, attacks: true, abilities: true, regulationMark: true, illustrator: true, locales: { select: { region: true } } } } } });
+  const locs = await prisma.regionCard.findMany({ where: { setId: jpSet }, select: { number: true, cardId: true,
+    card: { select: { supertype: true, types: true, hp: true, attacks: true, abilities: true, regulationMark: true, illustrator: true, locales: { select: { region: true } } } } } });
 
   const cache = `data/jp-official/tcgdex-${tcgId}.json`;
   let byNum: Record<string, Card>;
@@ -46,7 +46,7 @@ async function main() {
   const updates: { id: string; data: any }[] = [];
   for (const l of locs) {
     const c = byNum[String(parseInt(l.number, 10))]; if (!c) continue;
-    const lc = l.logicalCard; const hasEn = lc.locales.some((x) => x.region === "EN"); const data: any = {};
+    const lc = l.card; const hasEn = lc.locales.some((x) => x.region === "EN"); const data: any = {};
     if (!lc.supertype && cat2st(c.category)) { data.supertype = cat2st(c.category); cnt.supertype++; }
     if (!lc.types.length && c.types?.length) { data.types = c.types; cnt.types++; }
     if (lc.hp == null && c.hp != null) { const h = typeof c.hp === "number" ? c.hp : parseInt(String(c.hp), 10); if (!isNaN(h)) { data.hp = h; cnt.hp++; } }
@@ -57,10 +57,10 @@ async function main() {
       if (!lc.attacks && c.attacks?.length) { data.attacks = c.attacks.map((a) => ({ name: a.name, text: a.effect ?? "", cost: a.cost ?? [], damage: a.damage != null ? String(a.damage) : "" })); cnt.attacks++; }
       if (!lc.abilities && c.abilities?.length) { data.abilities = c.abilities.map((a) => ({ name: a.name, text: a.effect ?? "", type: a.type ?? "Ability" })); cnt.abilities++; }
     }
-    if (Object.keys(data).length) updates.push({ id: l.logicalCardId, data });
+    if (Object.keys(data).length) updates.push({ id: l.cardId, data });
   }
   console.log(`채움 LC ${updates.length} | 필드별: ${JSON.stringify(cnt)} (attacks/abilities=JP단독만) ${APPLY ? "★APPLY" : "(dry)"}`);
-  if (APPLY) { for (const u of updates) await prisma.logicalCard.update({ where: { id: u.id }, data: u.data }); console.log(`★적용 LC ${updates.length}`); }
+  if (APPLY) { for (const u of updates) await prisma.card.update({ where: { id: u.id }, data: u.data }); console.log(`★적용 LC ${updates.length}`); }
   await prisma.$disconnect();
 }
 main().catch((e) => { console.error(e); process.exit(1); });

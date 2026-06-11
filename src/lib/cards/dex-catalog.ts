@@ -7,7 +7,7 @@
  */
 import { unstable_cache } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { pickLocale, type LocaleSummary, type LogicalCardMeta } from "./queries";
+import { pickLocale, type LocaleSummary, type CardMeta } from "./queries";
 import { pickRarityLabel } from "./card-fields";
 import { canonEra, eraOrderIndex } from "./eras";
 import type { DexSet } from "@/components/dex/DexCatalog";
@@ -33,7 +33,7 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
             logoUrl: true,
           },
         },
-        logicalCards: {
+        cards: {
           select: {
             id: true,
             types: true,
@@ -67,7 +67,7 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
   const fmtDate = (d: Date | null) => (d ? d.toISOString().slice(0, 10) : null);
 
   const sets: DexSet[] = groupMetas
-    .filter((meta) => meta.logicalCards.length > 0)
+    .filter((meta) => meta.cards.length > 0)
     .map((meta) => {
     const id = meta.id;
     // 그룹 대표 로고: JP 우선(도감 JP 기준) → EN(영판 한정발매) → KR → 없으면 숨김
@@ -77,7 +77,7 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
       meta.sets.find((s) => s.logoUrl)?.logoUrl ?? undefined;
     const name = meta.nameKo ?? meta.nameEn ?? meta.nameJa ?? id;
 
-    const cards = meta.logicalCards
+    const cards = meta.cards
       .map((lc) => {
         const locales: LocaleSummary[] = lc.locales.map((l) => ({
           id: l.id,
@@ -100,7 +100,7 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
         const primaryRaw = lc.locales.find((l) => l.id === primary.id);
         const rar = primaryRaw?.rarity ?? lc.rarity; // 새층(RegionCard.rarity) ?? LC 폴백
         const lcSupertype = lc.gameCard?.supertype ?? lc.supertype;
-        const lcMeta: Pick<LogicalCardMeta, "types" | "supertype"> = {
+        const lcMeta: Pick<CardMeta, "types" | "supertype"> = {
           types: lc.types,
           supertype: lcSupertype,
         };

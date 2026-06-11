@@ -1,5 +1,5 @@
 /**
- * KR official 목록 JSON 의 rarity 필드로 LogicalCard.rarityId 채움(null 인 것만).
+ * KR official 목록 JSON 의 rarity 필드로 Card.rarityId 채움(null 인 것만).
  * KR 사이트는 RR+ 특수레어도만 코드 노출(C/U/R 공백) → 이 스크립트는 특수레어도만 채움. 나머지는 별도.
  * 실행: npx tsx scripts/fill-rarity-from-kr-json.ts <krSetId> <jsonPath> [--apply]
  */
@@ -25,20 +25,20 @@ async function main() {
   const rarities = await prisma.rarity.findMany({ select: { id: true, code: true } });
   const rarId = new Map(rarities.map((r) => [r.code, r.id]));
 
-  const kr = await prisma.regionCard.findMany({ where: { setId: krSet }, select: { numberInt: true, name: true, logicalCardId: true, logicalCard: { select: { rarityId: true } } } });
-  const todo = kr.filter((r) => !r.logicalCard.rarityId);
+  const kr = await prisma.regionCard.findMany({ where: { setId: krSet }, select: { numberInt: true, name: true, cardId: true, card: { select: { rarityId: true } } } });
+  const todo = kr.filter((r) => !r.card.rarityId);
   let fill = 0, noJson = 0, unmapped = 0; const unm = new Set<string>(); const samples: string[] = []; const updates: { id: string; rid: string }[] = [];
   for (const r of todo) {
     const code = rarByNum.get(r.numberInt!);
     if (!code) { noJson++; continue; }
     const rname = RMAP[code], rid = rname ? rarId.get(rname) : undefined;
     if (!rid) { unmapped++; unm.add(code); continue; }
-    updates.push({ id: r.logicalCardId, rid }); fill++;
+    updates.push({ id: r.cardId, rid }); fill++;
     if (samples.length < 10) samples.push(`#${r.numberInt} ${r.name}=${code}`);
   }
   console.log(`rarity null ${todo.length}/${kr.length} · 채울수있음 ${fill} · JSON공백(C/U/R추정) ${noJson} · 미매핑 ${unmapped}${unm.size ? "(" + [...unm] + ")" : ""} ${APPLY ? "★APPLY" : "(dry)"}`);
   console.log("  " + samples.join(" | "));
-  if (APPLY) { for (const u of updates) await prisma.logicalCard.update({ where: { id: u.id }, data: { rarityId: u.rid } }); console.log(`★적용 ${updates.length}`); }
+  if (APPLY) { for (const u of updates) await prisma.card.update({ where: { id: u.id }, data: { rarityId: u.rid } }); console.log(`★적용 ${updates.length}`); }
   await prisma.$disconnect();
 }
 main().catch((e) => { console.error(e); process.exit(1); });

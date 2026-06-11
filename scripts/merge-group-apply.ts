@@ -1,8 +1,8 @@
 /**
- * 그룹 LogicalCard 병합 — 실제 적용 (소량 검증용). 기본은 dry, --apply 로만 DB 변경.
+ * 그룹 Card 병합 — 실제 적용 (소량 검증용). 기본은 dry, --apply 로만 DB 변경.
  *
- * 동작(검증된 매칭대로): EN 인쇄본(RegionCard)을 JP 앵커 LogicalCard 로 재지정하고,
- *   비워진 EN LogicalCard 는 참조 0 확인 후 삭제. 카드당 트랜잭션. (jp-sv-base 중복제거는 별도 단계)
+ * 동작(검증된 매칭대로): EN 인쇄본(RegionCard)을 JP 앵커 Card 로 재지정하고,
+ *   비워진 EN Card 는 참조 0 확인 후 삭제. 카드당 트랜잭션. (jp-sv-base 중복제거는 별도 단계)
  *
  * 실행:
  *   npx tsx scripts/merge-group-apply.ts sv-base --limit=10            # 계획만(dry)
@@ -19,10 +19,10 @@ const CONFIG: Record<string, Cfg> = {
   "sv-paradox-rift": { jp: ["jp-tcg-SV4K", "jp-tcg-SV4M"], kr: ["kr-sv4k", "kr-sv4m"], krMirror: { "kr-sv4k": "jp-tcg-SV4K", "kr-sv4m": "jp-tcg-SV4M" }, enNative: ["sv4"], krMirrorAll: true },
 };
 type Row = { cid: string; lcid: string; setId: string; number: string; numInt: number; dex: number | null; illus: string | null; tier: number | null; sub: string; supertype: string | null; name: string };
-const sel = { id: true, logicalCardId: true, setId: true, number: true, numberInt: true, name: true,
-  logicalCard: { select: { pokedexNumbers: true, illustrator: true, subtypes: true, supertype: true, rarity: { select: { tier: true } } } } } as const;
-const toRow = (l: any): Row => ({ cid: l.id, lcid: l.logicalCardId, setId: l.setId, number: l.number, numInt: l.numberInt ?? (parseInt(l.number.replace(/\D/g, "")) || 0), name: l.name,
-  dex: l.logicalCard.pokedexNumbers?.[0] ?? null, illus: l.logicalCard.illustrator, tier: l.logicalCard.rarity?.tier ?? null, sub: [...(l.logicalCard.subtypes ?? [])].sort().join(","), supertype: l.logicalCard.supertype });
+const sel = { id: true, cardId: true, setId: true, number: true, numberInt: true, name: true,
+  card: { select: { pokedexNumbers: true, illustrator: true, subtypes: true, supertype: true, rarity: { select: { tier: true } } } } } as const;
+const toRow = (l: any): Row => ({ cid: l.id, lcid: l.cardId, setId: l.setId, number: l.number, numInt: l.numberInt ?? (parseInt(l.number.replace(/\D/g, "")) || 0), name: l.name,
+  dex: l.card.pokedexNumbers?.[0] ?? null, illus: l.card.illustrator, tier: l.card.rarity?.tier ?? null, sub: [...(l.card.subtypes ?? [])].sort().join(","), supertype: l.card.supertype });
 const load = async (ids: string[]) => (await prisma.regionCard.findMany({ where: { setId: { in: ids } }, select: sel })).map(toRow);
 
 async function main() {
@@ -36,7 +36,7 @@ async function main() {
 
   const jp = await load(cfg.jp);
   const en = cfg.enNative ? await load(cfg.enNative)
-    : (await prisma.regionCard.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE as unknown as string[] }, pokedexNumbers: { hasSome: [...new Set(jp.filter(isPoke).map(r => r.dex))] as number[] } } }, select: sel })).map(toRow);
+    : (await prisma.regionCard.findMany({ where: { region: "EN", card: { supertype: { in: POKE as unknown as string[] }, pokedexNumbers: { hasSome: [...new Set(jp.filter(isPoke).map(r => r.dex))] as number[] } } }, select: sel })).map(toRow);
 
   // EN↔JP 매칭 (build-group 과 동일)
   const enForJp = new Map<string, Row>();
@@ -72,16 +72,16 @@ async function main() {
     console.log(`  ${j.setId}#${j.number} "${j.name}" ← ${region} "${src.name}"(${src.cid})  [${region} LC ${src.lcid} → 앵커 ${j.lcid}]`);
     if (!APPLY) continue;
     await prisma.$transaction(async (tx) => {
-      await tx.regionCard.update({ where: { id: src.cid }, data: { logicalCardId: j.lcid } });
-      const remain = await tx.regionCard.count({ where: { logicalCardId: src.lcid } });
+      await tx.regionCard.update({ where: { id: src.cid }, data: { cardId: j.lcid } });
+      const remain = await tx.regionCard.count({ where: { cardId: src.lcid } });
       if (remain === 0) {
-        const refs = (await tx.collectionItem.count({ where: { logicalCardId: src.lcid } }))
-          + (await tx.trade.count({ where: { logicalCardId: src.lcid } }))
-          + (await tx.tierEntry.count({ where: { logicalCardId: src.lcid } }))
-          + (await tx.deckCard.count({ where: { logicalCardId: src.lcid } }))
-          + (await tx.ruling.count({ where: { logicalCardId: src.lcid } }))
-          + (await tx.externalIdMapping.count({ where: { logicalCardId: src.lcid } }));
-        if (refs === 0) { await tx.logicalCard.delete({ where: { id: src.lcid } }); deletedLc++; }
+        const refs = (await tx.collectionItem.count({ where: { cardId: src.lcid } }))
+          + (await tx.trade.count({ where: { cardId: src.lcid } }))
+          + (await tx.tierEntry.count({ where: { cardId: src.lcid } }))
+          + (await tx.deckCard.count({ where: { cardId: src.lcid } }))
+          + (await tx.ruling.count({ where: { cardId: src.lcid } }))
+          + (await tx.externalIdMapping.count({ where: { cardId: src.lcid } }));
+        if (refs === 0) { await tx.card.delete({ where: { id: src.lcid } }); deletedLc++; }
         else { skippedDel++; console.log(`    ⚠️ 빈 LC ${src.lcid} 에 참조 ${refs} → 삭제 보류(나중에 재지정)`); }
       }
       done++;

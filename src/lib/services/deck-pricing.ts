@@ -1,7 +1,7 @@
 /**
  * 덱 견적 엔진 — docs/cardgame-ui-plan.md §2-I1 (UI-1b)
  *
- * 레시피(INTL) → cardName 그룹 → 인쇄판 후보(레시피 logicalCardId + EN명 역추적) →
+ * 레시피(INTL) → cardName 그룹 → 인쇄판 후보(레시피 cardId + EN명 역추적) →
  * 모드별 인쇄판 선택(budget=저레어/premium=고레어, RarityCategory.tier 5/6 경계) →
  * 최신 시세 합산(KRW 환산).
  *
@@ -11,7 +11,7 @@
  * - SWSH 병합 LC 의 EN 가격이 orphan LC 에 분열 → EN명 역추적으로 인쇄판 확장
  * - condition 행(tcgplayer 16k) 혼재 → condition null 만
  * - rarity null 24% → tier 0(저레어) 취급
- * - 기본 에너지(logicalCardId null) → 장당 고정 추정가
+ * - 기본 에너지(cardId null) → 장당 고정 추정가
  * - 환율 = src/lib/trades/shared.ts 상수(캡션에 명시 의무)
  *
  * 정확도 가드: missing 에 고레어(tier>=6) 인쇄판만 가진 카드가 있으면 hasExpensiveMissing —
@@ -52,7 +52,7 @@ export type DeckCostResult = {
 };
 
 type PrintInfo = {
-  logicalCardId: string;
+  cardId: string;
   rarityTier: number;
   rarityCode: string | null;
 };
@@ -61,7 +61,7 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
   // ① 레시피 (INTL) — 인쇄판별 행
   const rows = await prisma.deckRecipeCard.findMany({
     where: { archetypeId, region: "INTL" },
-    select: { cardName: true, category: true, avgCount: true, adoptionRate: true, logicalCardId: true },
+    select: { cardName: true, category: true, avgCount: true, adoptionRate: true, cardId: true },
   });
   if (rows.length === 0) return null;
 
@@ -76,7 +76,7 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
     }
     g.qty += r.avgCount;
     g.maxAdoption = Math.max(g.maxAdoption, r.adoptionRate);
-    if (r.logicalCardId) g.lcIds.add(r.logicalCardId);
+    if (r.cardId) g.lcIds.add(r.cardId);
   }
   for (const g of groups.values()) {
     g.qty = Math.max(1, Math.round(g.qty));
@@ -102,17 +102,17 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
   const names = deck.map((g) => g.cardName);
   const enLocales = await prisma.regionCard.findMany({
     where: { region: "EN", name: { in: names } },
-    select: { name: true, logicalCardId: true, setId: true },
+    select: { name: true, cardId: true, setId: true },
   });
   const groupByName = new Map(deck.map((g) => [g.cardName, g]));
   for (const l of enLocales) {
     if (!MODERN_SET_PREFIXES.some((p) => l.setId.startsWith(p))) continue;
-    groupByName.get(l.name)?.lcIds.add(l.logicalCardId);
+    groupByName.get(l.name)?.lcIds.add(l.cardId);
   }
 
   // ④ 인쇄판 레어도 (배치)
   const allLcIds = [...new Set(deck.flatMap((g) => [...g.lcIds]))];
-  const lcs = await prisma.logicalCard.findMany({
+  const lcs = await prisma.card.findMany({
     where: { id: { in: allLcIds } },
     select: {
       id: true,
@@ -126,7 +126,7 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
       l.id,
       (() => {
         const lr = l.locales.find((x) => x.rarity != null)?.rarity ?? l.rarity;
-        return { logicalCardId: l.id, rarityTier: lr?.category?.tier ?? 0, rarityCode: lr?.code ?? null };
+        return { cardId: l.id, rarityTier: lr?.category?.tier ?? 0, rarityCode: lr?.code ?? null };
       })(),
     ]),
   );
@@ -141,7 +141,7 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
     where: {
       sourceId: { in: sources.map((s) => s.id) },
       condition: null,
-      regionCard: { logicalCardId: { in: allLcIds } },
+      regionCard: { cardId: { in: allLcIds } },
     },
     select: {
       sourceId: true,
@@ -153,7 +153,7 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
       firstEdition: true,
       recordedAt: true,
       regionCardId: true,
-      regionCard: { select: { logicalCardId: true } },
+      regionCard: { select: { cardId: true } },
     },
     orderBy: { recordedAt: "desc" },
   });
@@ -171,7 +171,7 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
     if (raw == null || raw <= 0) continue;
     const code = sourceCode.get(p.sourceId!) ?? "?";
     const krw = Math.round(toKrw(raw, p.currency));
-    const lcId = p.regionCard.logicalCardId;
+    const lcId = p.regionCard.cardId;
     const cur = byPrint.get(lcId);
     if (!cur || (SOURCE_PRIORITY[code] ?? 9) < (SOURCE_PRIORITY[cur.source] ?? 9)) {
       byPrint.set(lcId, { krw, source: code, recordedAt: p.recordedAt, regionCardId: p.regionCardId });

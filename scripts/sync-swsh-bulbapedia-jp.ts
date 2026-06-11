@@ -1,7 +1,7 @@
 /**
- * SwSh era JP overlay from Bulbapedia: JP LogicalCard illustrator 보강.
+ * SwSh era JP overlay from Bulbapedia: JP Card illustrator 보강.
  *
- * 매칭: EN set 번호 → EN RegionCard → LogicalCard → illustrator 업데이트
+ * 매칭: EN set 번호 → EN RegionCard → Card → illustrator 업데이트
  * SwSh EN 합본이 많으므로 EN set 번호 기준으로 매핑.
  *
  * Run: npx tsx scripts/sync-swsh-bulbapedia-jp.ts [--set=swsh1]
@@ -135,27 +135,27 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
     const enLocaleId = `${enSetId}-${numPadded}`;
     const enLocale = await prisma.regionCard.findUnique({
       where: { id: enLocaleId },
-      select: { id: true, logicalCardId: true },
+      select: { id: true, cardId: true },
     });
 
     let lcId: string | null = null;
     if (enLocale) {
-      lcId = enLocale.logicalCardId;
+      lcId = enLocale.cardId;
     } else {
       // Try JP sets
       for (const jpSetId of set.jpSetIds) {
         const jpLocaleId = `${jpSetId}-${card.number}`;
         const jpLocale = await prisma.regionCard.findUnique({
           where: { id: jpLocaleId },
-          select: { logicalCardId: true },
+          select: { cardId: true },
         });
-        if (jpLocale) { lcId = jpLocale.logicalCardId; break; }
+        if (jpLocale) { lcId = jpLocale.cardId; break; }
       }
     }
 
     if (!lcId) { result.unmatched++; continue; }
 
-    const lc = await prisma.logicalCard.findUnique({
+    const lc = await prisma.card.findUnique({
       where: { id: lcId },
       select: { id: true, illustrator: true },
     });
@@ -170,12 +170,12 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
         where: { sourceId_externalId: { sourceId: source.id, externalId } },
         create: {
           sourceId: source.id, externalId,
-          regionCardId: enLocale?.id ?? null, logicalCardId: lcId,
+          regionCardId: enLocale?.id ?? null, cardId: lcId,
           url: cardUrl,
           verifiedBy: "auto:sync-swsh-bulbapedia", confidence: 0.75,
           notes: `Bulbapedia card page. Set ${enSetId}, number ${card.number}.`,
         },
-        update: { logicalCardId: lcId },
+        update: { cardId: lcId },
       });
       continue;
     }
@@ -191,7 +191,7 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
 
     const ill = extractIllustrator(cardHtml);
     if (ill) {
-      await prisma.logicalCard.update({ where: { id: lc.id }, data: { illustrator: ill } });
+      await prisma.card.update({ where: { id: lc.id }, data: { illustrator: ill } });
       result.illustratorFilled++;
     }
 
@@ -199,12 +199,12 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
       where: { sourceId_externalId: { sourceId: source.id, externalId } },
       create: {
         sourceId: source.id, externalId,
-        regionCardId: enLocale?.id ?? null, logicalCardId: lcId,
+        regionCardId: enLocale?.id ?? null, cardId: lcId,
         url: cardUrl,
         verifiedBy: "auto:sync-swsh-bulbapedia", confidence: 0.75,
         notes: `Bulbapedia card page. Set ${enSetId}, number ${card.number}.`,
       },
-      update: { logicalCardId: lcId },
+      update: { cardId: lcId },
     });
   }
 

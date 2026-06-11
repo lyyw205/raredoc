@@ -23,7 +23,7 @@ model Set {
   cardPackId  String?     @map("setGroupId")
   cardPack    CardPack?   @relation(fields: [cardPackId], references: [id])
   tierEntries TierEntry[]
-  primarySetForLogical LogicalCard[] @relation("LogicalCardPrimarySet")
+  primarySetForLogical Card[] @relation("LogicalCardPrimarySet")
   localeCards          RegionCard[]  @relation("CardLocaleSet")
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
@@ -46,7 +46,7 @@ model CardPack {
   order       Int       @default(0)
   sets        Set[]
   // Phase 1 추가: 신규 ERD 역방향 relation
-  logicalCards LogicalCard[] @relation("LogicalCardCardPack")
+  cards Card[] @relation("LogicalCardCardPack")
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
@@ -80,26 +80,26 @@ model Price {
 
 model TierEntry {
   id            String      @id @default(cuid())
-  logicalCardId String
+  cardId String @map("logicalCardId")
   setId         String
   tier          String
   reason        String?
   reasonKo      String?
   reasonJa      String?
-  logicalCard   LogicalCard @relation("TierEntryLogicalCard", fields: [logicalCardId], references: [id])
+  card   Card @relation("TierEntryLogicalCard", fields: [cardId], references: [id])
   set           Set         @relation(fields: [setId], references: [id])
   updatedAt     DateTime    @updatedAt
 
-  @@unique([logicalCardId, setId])
+  @@unique([cardId, setId], map: "TierEntry_logicalCardId_setId_key")
   @@index([setId])
-  @@index([logicalCardId])
+  @@index([cardId], map: "TierEntry_logicalCardId_idx")
   @@index([tier])
 }
 
 model Trade {
   id            String      @id @default(cuid())
   localeId      String // RegionCard.id — 실제 거래된 지역판
-  logicalCardId String // LogicalCard.id — 시장 분석 dedupe
+  cardId String @map("logicalCardId") // Card.id — 시장 분석 dedupe
   soldAt        DateTime
   priceHighUsd  Float
   priceLowUsd   Float?
@@ -108,12 +108,12 @@ model Trade {
   tier          String      @default("NEAR_MINT")
   source        String      @default("poketrace")
   locale        RegionCard  @relation("TradeLocale", fields: [localeId], references: [id])
-  logicalCard   LogicalCard @relation("TradeLogicalCard", fields: [logicalCardId], references: [id])
+  card   Card @relation("TradeLogicalCard", fields: [cardId], references: [id])
   createdAt     DateTime    @default(now())
 
   @@unique([localeId, soldAt, tier, source])
   @@index([localeId])
-  @@index([logicalCardId])
+  @@index([cardId], map: "Trade_logicalCardId_idx")
   @@index([soldAt])
   @@index([priceHighUsd])
 }
@@ -194,7 +194,7 @@ model CollectionItem {
   id            String         @id @default(cuid())
   userId        String
   localeId      String // RegionCard.id — 실제 보유 지역판
-  logicalCardId String // LogicalCard.id — SetGroup-level 카운트(랭킹/도감 dedupe)
+  cardId String @map("logicalCardId") // Card.id — SetGroup-level 카운트(랭킹/도감 dedupe)
   grade         String // NM/LP/MP/HP/VNDS/DS/미개봉/1착
   certified     Boolean        @default(false)
   estimatedKrw  Int?
@@ -202,7 +202,7 @@ model CollectionItem {
   highlightSlot Int? // 1..5 (프로필 하이라이트). null = 비표시
   user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   locale        RegionCard     @relation("CollectionItemLocale", fields: [localeId], references: [id])
-  logicalCard   LogicalCard    @relation("CollectionItemLogicalCard", fields: [logicalCardId], references: [id])
+  card   Card    @relation("CollectionItemLogicalCard", fields: [cardId], references: [id])
   certification Certification?
   listing       Listing?
   createdAt     DateTime       @default(now())
@@ -210,7 +210,7 @@ model CollectionItem {
 
   @@index([userId])
   @@index([localeId])
-  @@index([logicalCardId])
+  @@index([cardId], map: "CollectionItem_logicalCardId_idx")
   @@index([userId, forSale])
   @@index([createdAt])
 }
@@ -470,7 +470,7 @@ model ConversationRead {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Phase 5 — Cardgame Meta (큐레이션; DeckCard → LogicalCard 단위)
+// Phase 5 — Cardgame Meta (큐레이션; DeckCard → Card 단위)
 // ─────────────────────────────────────────────────────────────────────────────
 
 model DeckArchetype {
@@ -527,12 +527,12 @@ model DeckRecipeCard {
   category      String // pokemon/trainer/energy
   avgCount      Float // 평균 채용 수
   adoptionRate  Float // 채용률 (이 아키타입 덱 중 % 가 채용)
-  logicalCardId String? // 매칭된 우리 카드(시세/이미지용) — null 가능
+  cardId String? @map("logicalCardId") // 매칭된 우리 카드(시세/이미지용) — null 가능
   isCore        Boolean       @default(false) // 채용률 100% 근처 = 코어
 
   @@unique([archetypeId, region, cardName, setCode, number])
   @@index([archetypeId])
-  @@index([logicalCardId])
+  @@index([cardId], map: "DeckRecipeCard_logicalCardId_idx")
 }
 
 // 덱 vs 덱 상성 (pairings 집계). #12/#13/#14
@@ -556,14 +556,14 @@ model DeckMatchup {
 model DeckCard {
   id            String        @id @default(cuid())
   archetypeId   String
-  logicalCardId String // 덱은 게임플레이라 LogicalCard 단위
+  cardId String @map("logicalCardId") // 덱은 게임플레이라 Card 단위
   count         Int
   role          String? // ✓/⚠/✗
   archetype     DeckArchetype @relation(fields: [archetypeId], references: [id], onDelete: Cascade)
-  logicalCard   LogicalCard   @relation("DeckCardLogicalCard", fields: [logicalCardId], references: [id])
+  card   Card   @relation("DeckCardLogicalCard", fields: [cardId], references: [id])
 
-  @@unique([archetypeId, logicalCardId])
-  @@index([logicalCardId])
+  @@unique([archetypeId, cardId], map: "DeckCard_archetypeId_logicalCardId_key")
+  @@index([cardId], map: "DeckCard_logicalCardId_idx")
 }
 
 model DeckVariant {
@@ -704,13 +704,13 @@ model PullRate {
 
 model Ruling {
   id            String       @id @default(cuid())
-  logicalCardId String? // nullable — 일반 룰링(특정 카드 무관) 허용
+  cardId String? @map("logicalCardId") // nullable — 일반 룰링(특정 카드 무관) 허용
   question      String
   answer        String
   sourceUrl     String?
-  logicalCard   LogicalCard? @relation("RulingLogicalCard", fields: [logicalCardId], references: [id])
+  card   Card? @relation("RulingLogicalCard", fields: [cardId], references: [id])
 
-  @@index([logicalCardId])
+  @@index([cardId], map: "Ruling_logicalCardId_idx")
 }
 
 model GlossaryEntry {
@@ -745,12 +745,12 @@ model MarketStat {
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Phase 1 — 카드 중심 ERD 전환 (additive only; 기존 모델 무변경)
-//   - LogicalCard: 언어 중립 인쇄본 정체성. Phase 4 에서 기존 Card→RegionCard rename 후 이 모델을 Card 로 rename.
+//   - Card: 언어 중립 인쇄본 정체성. Phase 4 에서 기존 Card→RegionCard rename 후 이 모델을 Card 로 rename.
 //   - RegionCard: 지역별(언어/지역) 표시 데이터. Phase 2 에서 기존 Card 행을 복사 백필.
 //   - Rarity / PriceSource: 마스터 데이터.
 // ─────────────────────────────────────────────────────────────────────────────
 
-model LogicalCard {
+model Card {
   id               String       @id @default(cuid())
   cardPackId       String?      @map("setGroupId")
   cardPack         CardPack?    @relation("LogicalCardCardPack", fields: [cardPackId], references: [id])
@@ -792,22 +792,23 @@ model LogicalCard {
   deckCards        DeckCard[]       @relation("DeckCardLogicalCard")
   rulings          Ruling[]         @relation("RulingLogicalCard")
   externalIds      ExternalIdMapping[] @relation("ExternalIdMappingLogicalCard")
-  speciesLinks     LogicalCardSpecies[] @relation("LogicalCardSpeciesLink") // P1: 종(Species) N:M
+  speciesLinks     CardSpecies[] @relation("LogicalCardSpeciesLink") // P1: 종(Species) N:M
   gameCardId       String? // P3: 게임상 같은 카드(oracle) — 덱/메타 dedup 단위
   gameCard         GameCard?    @relation("LogicalCardGameCard", fields: [gameCardId], references: [id])
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @updatedAt
 
   @@index([cardPackId], map: "LogicalCard_setGroupId_idx")
-  @@index([rarityId])
-  @@index([primarySetId])
-  @@index([gameCardId])
+  @@index([rarityId], map: "LogicalCard_rarityId_idx")
+  @@index([primarySetId], map: "LogicalCard_primarySetId_idx")
+  @@index([gameCardId], map: "LogicalCard_gameCardId_idx")
+  @@map("LogicalCard")
 }
 
 model RegionCard {
   id            String      @id // = 기존 Card.id (호환 유지)
-  logicalCardId String
-  logicalCard   LogicalCard @relation(fields: [logicalCardId], references: [id])
+  cardId String @map("logicalCardId")
+  card   Card @relation(fields: [cardId], references: [id])
   language      String // "en" | "ja" | "ko"
   region        String // "EN" | "JP" | "KR"
   setId         String
@@ -818,12 +819,12 @@ model RegionCard {
   flavorText    String?
   imageSmall    String?
   imageLarge    String?
-  // P4: art메타 하강(인쇄본별). LogicalCard 에서 기계복제(정정 없음 — region rarity 정정은 P5.5).
+  // P4: art메타 하강(인쇄본별). Card 에서 기계복제(정정 없음 — region rarity 정정은 P5.5).
   rarityId      String?
   rarity        Rarity?     @relation("RarityLocale", fields: [rarityId], references: [id])
   subtypes      String[]    @default([])
   // P4c: 인쇄본별 표시필드(regMark/legalities=원천 인쇄본별, weakness/retreat 등=게임값이나
-  //   인쇄본 복제로 GameCard 과병합 회피). LogicalCard 에서 exact copy(diff=0).
+  //   인쇄본 복제로 GameCard 과병합 회피). Card 에서 exact copy(diff=0).
   regulationMark String?
   legalities     Json?
   weakness       String?
@@ -842,7 +843,7 @@ model RegionCard {
   // unique 제약 없음 — 같은 (setId, number) 라도 평행팩(SV2D/SV2P) · 레터 서브셋(15_A/15_B) 으로
   // 여러 행이 정당히 존재. 물리적 식별은 primary key(id)가 담당.
   @@index([setId, number, language])
-  @@index([logicalCardId])
+  @@index([cardId], map: "CardLocale_logicalCardId_idx")
   @@index([setId])
   @@index([region])
   @@index([rarityId])
@@ -853,16 +854,16 @@ model RegionCard {
 // ─────────────────────────────────────────────────────────────────────────────
 // Phase 7 — 언어별 표시 텍스트 오버레이 (옵션 C)
 //   - "물리 발매판"(RegionCard)과 분리된 "번역/표시 텍스트" 축.
-//   - (logicalCardId, language) 유일. 한국인 기반 사이트라 ko 우선 노출, en/ja 는 "원문 보기" 토글.
+//   - (cardId, language) 유일. 한국인 기반 사이트라 ko 우선 노출, en/ja 는 "원문 보기" 토글.
 //   - source 로 우선순위 표현: 공식 한국판 > 나무위키/포켓몬도감 > 자동번역.
 //   - KR 발매판 없어도 ko 텍스트 보유 가능(번역으로 채움) → RegionCard 의존 끊음.
-//   - LogicalCard.nameKo/attacksKo/abilitiesKo/rulesKo/flavorTextKo 를 일반화.
+//   - Card.nameKo/attacksKo/abilitiesKo/rulesKo/flavorTextKo 를 일반화.
 //     백필·읽기 이관 완료 후 그 컬럼들 제거 예정(이번엔 additive, 무중단).
 // ─────────────────────────────────────────────────────────────────────────────
 model CardText {
   id            String      @id @default(cuid())
-  logicalCardId String
-  logicalCard   LogicalCard @relation(fields: [logicalCardId], references: [id], onDelete: Cascade)
+  cardId String @map("logicalCardId")
+  card   Card @relation(fields: [cardId], references: [id], onDelete: Cascade)
   language      String // "ko" | "en" | "ja" | (확장: "zh" 등)
   name          String? // 카드/포켓몬 표시명 (예: "이상해씨")
   attacks       Json? // [{ name, text, cost?, damage? }] 해당 언어
@@ -875,8 +876,8 @@ model CardText {
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 
-  @@unique([logicalCardId, language])
-  @@index([logicalCardId])
+  @@unique([cardId, language], map: "CardText_logicalCardId_language_key")
+  @@index([cardId], map: "CardText_logicalCardId_idx")
   @@index([language])
 }
 
@@ -905,7 +906,7 @@ model Rarity {
   color      String?
   categoryId String?
   category   RarityCategory? @relation(fields: [categoryId], references: [id])
-  cards      LogicalCard[]
+  cards      Card[]
   localeCards RegionCard[]   @relation("RarityLocale") // P4: art메타 하강(인쇄본별 rarity)
 
   @@index([categoryId])
@@ -955,7 +956,7 @@ model ExternalIdMapping {
   externalId    String // 사이트 쪽 식별자 (productId/CardNum/poketraceId/…)
   // 매핑 대상 — 정확히 하나만 채움 (앱 레벨 검증)
   regionCardId  String?    @map("cardLocaleId")
-  logicalCardId String?
+  cardId String?    @map("logicalCardId")
   setId         String?
   cardPackId    String?    @map("setGroupId")
   url           String?
@@ -965,13 +966,13 @@ model ExternalIdMapping {
   notes         String?
   source        ExternalSource  @relation(fields: [sourceId], references: [id], onDelete: Cascade)
   regionCard    RegionCard?     @relation("ExternalIdMappingLocale", fields: [regionCardId], references: [id], onDelete: Cascade)
-  logicalCard   LogicalCard?    @relation("ExternalIdMappingLogicalCard", fields: [logicalCardId], references: [id], onDelete: Cascade)
+  card   Card?    @relation("ExternalIdMappingLogicalCard", fields: [cardId], references: [id], onDelete: Cascade)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 
   @@unique([sourceId, externalId])
   @@index([regionCardId], map: "ExternalIdMapping_cardLocaleId_idx")
-  @@index([logicalCardId])
+  @@index([cardId], map: "ExternalIdMapping_logicalCardId_idx")
   @@index([setId])
   @@index([cardPackId], map: "ExternalIdMapping_setGroupId_idx")
 }
@@ -979,7 +980,7 @@ model ExternalIdMapping {
 // ─────────────────────────────────────────────────────────────────────────────
 // P1 — Species (종) : 도감 네비/언어별 종 이름 전용. ★dedup 에는 절대 사용 안 함.
 //   id = National Pokédex number(1..1025, PokeAPI 권위). data/pokeapi CSV 시드.
-//   LogicalCard(→ 향후 ArtCard) 와 N:M (LogicalCardSpecies). 태그팀/유나이트=복수 dex.
+//   Card(→ 향후 ArtCard) 와 N:M (CardSpecies). 태그팀/유나이트=복수 dex.
 //   트레이너/에너지는 무종(연결 없음). 메가/리전폼/Gmax 는 종 단위로 미분해(subtypes 유지).
 // ─────────────────────────────────────────────────────────────────────────────
 model Species {
@@ -991,21 +992,22 @@ model Species {
   generation       Int?
   evolvesFromId    Int? // 진화 전 종 id (느슨한 참조, FK 미강제)
   evolutionChainId Int?
-  cards            LogicalCardSpecies[]
+  cards            CardSpecies[]
 
   @@index([nameKo])
   @@index([evolutionChainId])
 }
 
-// LogicalCard(아트 정체성) ↔ Species 다대다 조인. 태그팀은 한 LC가 복수 Species 행.
-model LogicalCardSpecies {
-  logicalCardId String
+// Card(아트 정체성) ↔ Species 다대다 조인. 태그팀은 한 LC가 복수 Species 행.
+model CardSpecies {
+  cardId String @map("logicalCardId")
   speciesId     Int
-  logicalCard   LogicalCard @relation("LogicalCardSpeciesLink", fields: [logicalCardId], references: [id], onDelete: Cascade)
+  card   Card @relation("LogicalCardSpeciesLink", fields: [cardId], references: [id], onDelete: Cascade)
   species       Species     @relation(fields: [speciesId], references: [id], onDelete: Cascade)
 
-  @@id([logicalCardId, speciesId])
-  @@index([speciesId])
+  @@id([cardId, speciesId])
+  @@index([speciesId], map: "LogicalCardSpecies_speciesId_idx")
+  @@map("LogicalCardSpecies")
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1022,11 +1024,11 @@ model GameCard {
   effectKey      String // 묶음에 쓰인 effectSig (추적용)
   hp             Int? // 대표값
   // (oracle 본문 10컬럼 폐기 2026-06-11 Stage2 — regMark/retreat/weak/resist/evolves/abilities/attacks/legalities/rules.
-  //  앱 read 0(gameCard select=supertype/hp뿐)인 사장복제. 게임값은 LogicalCard(코어) 직독.)
-  cards          LogicalCard[] @relation("LogicalCardGameCard")
+  //  앱 read 0(gameCard select=supertype/hp뿐)인 사장복제. 게임값은 Card(코어) 직독.)
+  cards          Card[] @relation("LogicalCardGameCard")
 
   @@index([supertype, name])
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// (ArtCard 폐기 2026-06-11 — LogicalCard 코어 전환. 같은그림 dedup은 후속 재설계.)
+// (ArtCard 폐기 2026-06-11 — Card 코어 전환. 같은그림 dedup은 후속 재설계.)

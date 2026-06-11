@@ -6,7 +6,7 @@
  * - Finds JP section by anchor id
  * - Parses JP card rows (number, name, slug)
  * - Creates JP Set row (jp-tcg-{setId})
- * - Creates JP RegionCard (jp-tcg-{setId}-{num}) linked to existing LogicalCard
+ * - Creates JP RegionCard (jp-tcg-{setId}-{num}) linked to existing Card
  * - Creates ExternalIdMapping (source=bulbapedia)
  *
  * Match by card number (NOT row index).
@@ -26,7 +26,7 @@ const USER_AGENT = "raredoc-sync/0.1 (https://raredoc.local; non-commercial rese
 // NOTE on JP section matching for HGSS:
 // Bulbapedia EN HGSS pages show JP set lists with JP-native card numbers,
 // not EN card numbers. The JP sections are partial (only ~16-29 rows of
-// rarer cards are shown, not all cards). We match EN LogicalCards by
+// rarer cards are shown, not all cards). We match EN Cards by
 // normalized card name (lowercase) since card numbers don't align.
 //
 // JP section sources:
@@ -204,14 +204,14 @@ async function syncSet(setDef: typeof SET_MAP[number], bulbapediaSourceId: strin
   // so we match by normalised card name. Number match used as fallback only.
   const enLocales = await prisma.regionCard.findMany({
     where: { setId: enSetId },
-    select: { id: true, name: true, logicalCardId: true, number: true },
+    select: { id: true, name: true, cardId: true, number: true },
   });
   function normName(n: string) { return n.toLowerCase().replace(/[^a-z0-9]/g, ""); }
   const byName   = new Map(enLocales.map(l => [normName(l.name), l]));
   const byNumber = new Map(enLocales.map(l => [l.number, l]));
 
   let ok = 0, skip = 0, fail = 0;
-  const seenLC = new Set<string>(); // deduplicate by logicalCardId
+  const seenLC = new Set<string>(); // deduplicate by cardId
 
   for (const jpRow of allJpRows) {
     // Name-based match first; number fallback for cases where names match EN numbering
@@ -223,10 +223,10 @@ async function syncSet(setDef: typeof SET_MAP[number], bulbapediaSourceId: strin
       continue;
     }
     // Deduplicate (hgss1 combines two JP sections; same EN card may appear twice)
-    if (seenLC.has(enLocale.logicalCardId)) continue;
-    seenLC.add(enLocale.logicalCardId);
+    if (seenLC.has(enLocale.cardId)) continue;
+    seenLC.add(enLocale.cardId);
 
-    // Use EN card number for the JP RegionCard ID (ensures 1:1 alignment with EN LogicalCard)
+    // Use EN card number for the JP RegionCard ID (ensures 1:1 alignment with EN Card)
     const jpClId = `jp-tcg-${setId}-${enLocale.number}`;
 
     try {
@@ -234,7 +234,7 @@ async function syncSet(setDef: typeof SET_MAP[number], bulbapediaSourceId: strin
         where: { id: jpClId },
         create: {
           id: jpClId,
-          logicalCardId: enLocale.logicalCardId,
+          cardId: enLocale.cardId,
           language: "ja",
           region: "JP",
           setId: jpSetId,
@@ -243,7 +243,7 @@ async function syncSet(setDef: typeof SET_MAP[number], bulbapediaSourceId: strin
           name: jpRow.jpName,
         },
         update: {
-          logicalCardId: enLocale.logicalCardId,
+          cardId: enLocale.cardId,
           name: jpRow.jpName,
         },
       });
@@ -255,12 +255,12 @@ async function syncSet(setDef: typeof SET_MAP[number], bulbapediaSourceId: strin
         where: { sourceId_externalId: { sourceId: bulbapediaSourceId, externalId } },
         create: {
           sourceId: bulbapediaSourceId, externalId,
-          regionCardId: jpClId, logicalCardId: enLocale.logicalCardId,
+          regionCardId: jpClId, cardId: enLocale.cardId,
           url: cardUrl,
           verifiedBy: "auto:sync-hgss-bulbapedia-jp", confidence: 0.7,
           notes: `Bulbapedia set list row. Set ${jpSetId}, number ${jpRow.number}.`,
         },
-        update: { regionCardId: jpClId, logicalCardId: enLocale.logicalCardId },
+        update: { regionCardId: jpClId, cardId: enLocale.cardId },
       });
 
       ok++;

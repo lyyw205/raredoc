@@ -29,15 +29,15 @@ async function main() {
   const enByDexEx = new Map<string, string[]>();
   for (const c of en) { if (!["Pokémon", "Pokemon"].includes(c.supertype)) continue; const dex = c.nationalPokedexNumbers?.[0]; if (dex == null) continue; const ex = (c.subtypes ?? []).includes("ex"); enByDexEx.set(`${dex}|${ex}`, baseSubs(c.subtypes ?? [])); }
 
-  const jp = await prisma.regionCard.findMany({ where: { setId: JP }, select: { number: true, name: true, logicalCardId: true, logicalCard: { select: { supertype: true } } } });
-  const mis = jp.filter((j) => j.logicalCard.supertype === "Trainer" && jaDex(j.name) != null);
+  const jp = await prisma.regionCard.findMany({ where: { setId: JP }, select: { number: true, name: true, cardId: true, card: { select: { supertype: true } } } });
+  const mis = jp.filter((j) => j.card.supertype === "Trainer" && jaDex(j.name) != null);
   console.log(`오분류 포켓몬 ${mis.length}장 교정 ${APPLY ? "★적용" : "(dry)"}:`);
   for (const j of mis) {
     const dex = jaDex(j.name)!;
     const isEx = /ex$/i.test(j.name.trim());
     const subs = SUB_OVERRIDE[dex] ?? enByDexEx.get(`${dex}|${isEx}`) ?? enByDexEx.get(`${dex}|${!isEx}`) ?? (isEx ? ["Basic", "ex"] : ["Basic"]);
     console.log(`  #${j.number} ${j.name} → Pokémon dex${dex} [${subs}]`);
-    if (APPLY) await prisma.logicalCard.update({ where: { id: j.logicalCardId }, data: { supertype: "Pokémon", pokedexNumbers: [dex], subtypes: subs } });
+    if (APPLY) await prisma.card.update({ where: { id: j.cardId }, data: { supertype: "Pokémon", pokedexNumbers: [dex], subtypes: subs } });
   }
   await prisma.$disconnect();
 }

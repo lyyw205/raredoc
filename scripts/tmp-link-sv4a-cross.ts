@@ -76,37 +76,37 @@ async function main() {
   let ok = 0, skip = 0;
   for (const [jpSet, jpNum, enSet, enNum, memo] of PAIRS) {
     const jp = await prisma.regionCard.findFirst({ where: { setId: jpSet, number: jpNum },
-      select: { name: true, logicalCardId: true, logicalCard: { select: { illustrator: true, locales: { where: { region: "EN" }, select: { id: true } } } } } });
+      select: { name: true, cardId: true, card: { select: { illustrator: true, locales: { where: { region: "EN" }, select: { id: true } } } } } });
     const en = await prisma.regionCard.findFirst({ where: { setId: enSet, number: enNum },
-      select: { id: true, name: true, logicalCardId: true, logicalCard: { select: { illustrator: true, locales: { select: { region: true } } } } } });
+      select: { id: true, name: true, cardId: true, card: { select: { illustrator: true, locales: { select: { region: true } } } } } });
     if (!jp || !en) { console.log(`❌ 누락: ${jpSet}#${jpNum} / ${enSet}#${enNum}`); skip++; continue; }
-    if (jp.logicalCard?.locales.length) { console.log(`⚠ JP 기연결 스킵: ${jpSet}#${jpNum} ${jp.name}`); skip++; continue; }
-    if (!en.logicalCard?.locales.every((l) => l.region === "EN")) { console.log(`⚠ EN 비orphan 스킵: ${enSet}#${enNum} ${en.name}`); skip++; continue; }
-    console.log(`연결 ${jpSet.replace("jp-tcg-", "").replace("jp-sv-", "")}#${jpNum} ${jp.name} [${jp.logicalCard?.illustrator}] ← ${enSet}#${enNum} ${en.name} [${en.logicalCard?.illustrator}] (${memo})`);
+    if (jp.card?.locales.length) { console.log(`⚠ JP 기연결 스킵: ${jpSet}#${jpNum} ${jp.name}`); skip++; continue; }
+    if (!en.card?.locales.every((l) => l.region === "EN")) { console.log(`⚠ EN 비orphan 스킵: ${enSet}#${enNum} ${en.name}`); skip++; continue; }
+    console.log(`연결 ${jpSet.replace("jp-tcg-", "").replace("jp-sv-", "")}#${jpNum} ${jp.name} [${jp.card?.illustrator}] ← ${enSet}#${enNum} ${en.name} [${en.card?.illustrator}] (${memo})`);
     if (APPLY) {
-      const oldLc = en.logicalCardId!;
-      await prisma.regionCard.update({ where: { id: en.id }, data: { logicalCardId: jp.logicalCardId! } });
-      await migrateAndDelete(oldLc, jp.logicalCardId!);
+      const oldLc = en.cardId!;
+      await prisma.regionCard.update({ where: { id: en.id }, data: { cardId: jp.cardId! } });
+      await migrateAndDelete(oldLc, jp.cardId!);
     }
     ok++;
   }
   // D) 리오르 오연결 교정 (registry §35 — sv1#112 실물=Naoyo Kimura, ptcg.io 일러 오기로 chibi LC에 오연결)
   console.log(`\n■ 리오르 교정: sv1#112 → SVAM#008 / sv1#113 → SV1S#040`);
-  const r112 = await prisma.regionCard.findFirst({ where: { setId: "sv1", number: "112" }, select: { id: true, logicalCardId: true } });
-  const r113 = await prisma.regionCard.findFirst({ where: { setId: "sv1", number: "113" }, select: { id: true, logicalCardId: true } });
-  const svam = await prisma.logicalCard.findUnique({ where: { id: "lc-jp-tcg-SVAM-008" }, select: { id: true, locales: { select: { region: true } } } });
-  if (r112?.logicalCardId === "lc-orphan-jp-tcg-SV1S-040" && r113?.logicalCardId === "lc-orphan-sv1-113" && svam && !svam.locales.some(l => l.region === "EN")) {
-    console.log(`  sv1#112 (${r112.logicalCardId} → lc-jp-tcg-SVAM-008)`);
-    console.log(`  sv1#113 (${r113.logicalCardId} → lc-orphan-jp-tcg-SV1S-040)`);
+  const r112 = await prisma.regionCard.findFirst({ where: { setId: "sv1", number: "112" }, select: { id: true, cardId: true } });
+  const r113 = await prisma.regionCard.findFirst({ where: { setId: "sv1", number: "113" }, select: { id: true, cardId: true } });
+  const svam = await prisma.card.findUnique({ where: { id: "lc-jp-tcg-SVAM-008" }, select: { id: true, locales: { select: { region: true } } } });
+  if (r112?.cardId === "lc-orphan-jp-tcg-SV1S-040" && r113?.cardId === "lc-orphan-sv1-113" && svam && !svam.locales.some(l => l.region === "EN")) {
+    console.log(`  sv1#112 (${r112.cardId} → lc-jp-tcg-SVAM-008)`);
+    console.log(`  sv1#113 (${r113.cardId} → lc-orphan-jp-tcg-SV1S-040)`);
     if (APPLY) {
-      await prisma.regionCard.update({ where: { id: r112.id }, data: { logicalCardId: "lc-jp-tcg-SVAM-008" } });
-      await prisma.regionCard.update({ where: { id: r113.id }, data: { logicalCardId: "lc-orphan-jp-tcg-SV1S-040" } });
+      await prisma.regionCard.update({ where: { id: r112.id }, data: { cardId: "lc-jp-tcg-SVAM-008" } });
+      await prisma.regionCard.update({ where: { id: r113.id }, data: { cardId: "lc-orphan-jp-tcg-SV1S-040" } });
       await migrateAndDelete("lc-orphan-sv1-113", "lc-orphan-jp-tcg-SV1S-040");
       console.log("  ✓ 적용");
     }
     ok += 2;
   } else {
-    console.log(`  ⚠ 전제 불일치 스킵: 112=${r112?.logicalCardId} 113=${r113?.logicalCardId} svamEN=${svam?.locales.some(l => l.region === "EN")}`);
+    console.log(`  ⚠ 전제 불일치 스킵: 112=${r112?.cardId} 113=${r113?.cardId} svamEN=${svam?.locales.some(l => l.region === "EN")}`);
     skip += 2;
   }
   console.log(`\n연결 ${ok} · 스킵 ${skip}`);
@@ -114,25 +114,25 @@ async function main() {
 
 // orphan LC 삭제 전 사용자 데이터(Trade/CollectionItem/덱/티어/룰링/외부ID) 참조를 새 LC로 이관.
 async function migrateAndDelete(oldLc: string, newLc: string) {
-  const left = await prisma.regionCard.count({ where: { logicalCardId: oldLc } });
+  const left = await prisma.regionCard.count({ where: { cardId: oldLc } });
   if (left > 0) return;
   for (const model of ["trade", "collectionItem", "deckRecipeCard", "deckCard", "ruling", "externalIdMapping"] as const) {
     // @ts-expect-error 동적 모델 접근
-    const r = await prisma[model].updateMany({ where: { logicalCardId: oldLc }, data: { logicalCardId: newLc } });
+    const r = await prisma[model].updateMany({ where: { cardId: oldLc }, data: { cardId: newLc } });
     if (r.count) console.log(`  참조 이관 ${model}: ${r.count} (${oldLc} → ${newLc})`);
   }
-  const tiers = await prisma.tierEntry.findMany({ where: { logicalCardId: oldLc }, select: { id: true, setId: true } });
+  const tiers = await prisma.tierEntry.findMany({ where: { cardId: oldLc }, select: { id: true, setId: true } });
   for (const t of tiers) {
-    const dup = await prisma.tierEntry.findFirst({ where: { logicalCardId: newLc, setId: t.setId }, select: { id: true } });
+    const dup = await prisma.tierEntry.findFirst({ where: { cardId: newLc, setId: t.setId }, select: { id: true } });
     if (dup) await prisma.tierEntry.delete({ where: { id: t.id } });
-    else await prisma.tierEntry.update({ where: { id: t.id }, data: { logicalCardId: newLc } });
+    else await prisma.tierEntry.update({ where: { id: t.id }, data: { cardId: newLc } });
     console.log(`  참조 이관 tierEntry(${t.setId})${dup ? " — 중복으로 구항목 삭제" : ""}`);
   }
-  const texts = await prisma.cardText.findMany({ where: { logicalCardId: oldLc }, select: { id: true, language: true } });
+  const texts = await prisma.cardText.findMany({ where: { cardId: oldLc }, select: { id: true, language: true } });
   for (const tx of texts) {
-    const dup = await prisma.cardText.findFirst({ where: { logicalCardId: newLc, language: tx.language }, select: { id: true } });
-    if (!dup) { await prisma.cardText.update({ where: { id: tx.id }, data: { logicalCardId: newLc } }); console.log(`  CardText(${tx.language}) 이관`); }
+    const dup = await prisma.cardText.findFirst({ where: { cardId: newLc, language: tx.language }, select: { id: true } });
+    if (!dup) { await prisma.cardText.update({ where: { id: tx.id }, data: { cardId: newLc } }); console.log(`  CardText(${tx.language}) 이관`); }
   }
-  await prisma.logicalCard.delete({ where: { id: oldLc } });
+  await prisma.card.delete({ where: { id: oldLc } });
 }
 main().then(() => process.exit(0)).catch((e) => { console.error(e); process.exit(1); });

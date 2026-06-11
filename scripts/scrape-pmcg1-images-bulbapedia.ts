@@ -170,13 +170,13 @@ async function main() {
         sourceId: source.id,
         externalId: `${card.slug}_(Expansion_Pack)`,
         regionCardId: ourLocaleId,
-        logicalCardId: ourLogicalId,
+        cardId: ourLogicalId,
         url: cardUrl,
         verifiedBy: "auto:scrape-pmcg1-images-bulbapedia",
         confidence: 0.7, // 영문 카드 대체 이미지 — 일본어 텍스트 아님
         notes: "Bulbapedia EN Base Set image used as proxy. Image text is English, not Japanese.",
       },
-      update: { regionCardId: ourLocaleId, logicalCardId: ourLogicalId, url: cardUrl },
+      update: { regionCardId: ourLocaleId, cardId: ourLogicalId, url: cardUrl },
     });
     console.log(`  [${cardNum}] ${card.name.padEnd(20)} → ✓ ${imgUrl.split("/").pop()}`);
     okCount++;

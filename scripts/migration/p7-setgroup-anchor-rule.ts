@@ -6,7 +6,7 @@ import { prisma } from "../../src/lib/prisma";
 
 async function main() {
   console.log("════ P7-S1: 앵커규칙(JP>KR>EN) 도출 검증 ════\n");
-  const lcs = await prisma.logicalCard.findMany({
+  const lcs = await prisma.card.findMany({
     where: { cardPackId: { not: null }, locales: { some: {} } },
     select: { id: true, cardPackId: true,
       locales: { select: { region: true, set: { select: { id: true, cardPackId: true } } } } },

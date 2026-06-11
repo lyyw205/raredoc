@@ -42,16 +42,16 @@ async function main() {
     console.log(`  ${tbl}.${col}: 총 ${tot} · CL.id 아님 ${notCL} · LC.id 매칭 ${inLC}`);
   }
 
-  // ── LogicalCard 전량 로드 (이후 묶음검증 공용) ──
-  console.log("\n  …LogicalCard 로드중");
-  const lcs = await prisma.logicalCard.findMany({
+  // ── Card 전량 로드 (이후 묶음검증 공용) ──
+  console.log("\n  …Card 로드중");
+  const lcs = await prisma.card.findMany({
     select: {
       id: true, supertype: true, pokedexNumbers: true, regulationMark: true,
       illustrator: true, hp: true, attacks: true, rules: true, cardPackId: true,
       locales: { select: { region: true, name: true } },
     },
   });
-  console.log(`  LogicalCard ${lcs.length}개`);
+  console.log(`  Card ${lcs.length}개`);
 
   const canonName = (lc: typeof lcs[0]) => {
     const by = (r: string) => lc.locales.find((l) => l.region === r)?.name;

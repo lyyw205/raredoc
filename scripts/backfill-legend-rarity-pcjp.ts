@@ -20,14 +20,14 @@ async function main() {
   const jpSetId = process.argv[2], listPath = process.argv[3], APPLY = process.argv.includes("--apply");
   if (!jpSetId || !listPath) { console.error("usage: <jpSetId> <listJson> [--apply]"); process.exit(1); }
   const list = JSON.parse(readFileSync(listPath, "utf8"));
-  const locs = await prisma.regionCard.findMany({ where: { setId: jpSetId }, select: { numberInt: true, logicalCardId: true, logicalCard: { select: { rarityId: true } } } });
+  const locs = await prisma.regionCard.findMany({ where: { setId: jpSetId }, select: { numberInt: true, cardId: true, card: { select: { rarityId: true } } } });
   const byNum = new Map(locs.map((l) => [l.numberInt, l]));
   const rarities = await prisma.rarity.findMany({ select: { id: true, code: true } });
   const ridByCode = new Map(rarities.map((r) => [r.code, r.id]));
   let fill = 0, skip = 0, miss = 0; const dist: Record<string, number> = {};
   for (const c of list) {
     const loc = byNum.get(parseInt(c.number, 10));
-    if (!loc || loc.logicalCard.rarityId) { skip++; continue; }
+    if (!loc || loc.card.rarityId) { skip++; continue; }
     let html: string | null = null;
     try { const { stdout } = await execFileP("curl", ["-s", "-A", UA, "--max-time", "20", c.detailUrl], { maxBuffer: 8 * 1024 * 1024 }); html = stdout; } catch {}
     await sleep(130);
@@ -36,7 +36,7 @@ async function main() {
     const rid = code ? ridByCode.get(RMAP[code] ?? "") : null;
     if (!rid) { miss++; console.log("  ✗", c.number, c.jaName, "icon=" + (icon ?? "없음")); continue; }
     dist[code!] = (dist[code!] ?? 0) + 1;
-    if (APPLY) await prisma.logicalCard.update({ where: { id: loc.logicalCardId }, data: { rarityId: rid } });
+    if (APPLY) await prisma.card.update({ where: { id: loc.cardId }, data: { rarityId: rid } });
     fill++;
   }
   console.log(`★ ${jpSetId}: 채움 ${fill} · 기존스킵 ${skip} · 미해결 ${miss} | 분포:`, JSON.stringify(dist), APPLY ? "(APPLY)" : "(dry)");

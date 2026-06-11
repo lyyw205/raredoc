@@ -1,7 +1,7 @@
 /**
- * SwSh era LogicalCard 메타를 tcgdex EN 엔드포인트에서 보강.
+ * SwSh era Card 메타를 tcgdex EN 엔드포인트에서 보강.
  *
- * 매칭 전략: EN tcgdex localId(number) → EN DB RegionCard → LogicalCard
+ * 매칭 전략: EN tcgdex localId(number) → EN DB RegionCard → Card
  * SwSh sets: swsh1~swsh12pt5, swshp, swsh35, swsh45, swsh45sv, cel25, cel25c, pgo
  *            swsh9tg, swsh10tg, swsh11tg, swsh12tg, swsh12pt5gg
  *
@@ -130,14 +130,14 @@ async function main() {
       const enLocaleId = `${dbSetId}-${numPadded}`;
       const lcId = `lc-${enLocaleId}`;
 
-      let lc = await prisma.logicalCard.findUnique({ where: { id: lcId } });
+      let lc = await prisma.card.findUnique({ where: { id: lcId } });
       if (!lc) {
         const locale = await prisma.regionCard.findUnique({
           where: { id: enLocaleId },
-          select: { logicalCardId: true },
+          select: { cardId: true },
         });
         if (locale) {
-          lc = await prisma.logicalCard.findUnique({ where: { id: locale.logicalCardId } });
+          lc = await prisma.card.findUnique({ where: { id: locale.cardId } });
         }
       }
       if (!lc) { missing++; continue; }
@@ -166,7 +166,7 @@ async function main() {
       }
 
       if (Object.keys(update).length > 0) {
-        await prisma.logicalCard.update({ where: { id: lc.id }, data: update });
+        await prisma.card.update({ where: { id: lc.id }, data: update });
         enriched++;
       } else skipped++;
 
@@ -175,14 +175,14 @@ async function main() {
         create: {
           sourceId: source.id,
           externalId: `${c.id}::en-${dbSetId}`,
-          logicalCardId: lc.id,
+          cardId: lc.id,
           regionCardId: enLocaleId,
           url: `https://api.tcgdex.net/v2/en/cards/${c.id}`,
           verifiedBy: "auto:enrich-swsh-meta-tcgdex",
           confidence: 0.90,
           notes: `EN tcgdex ${c.id} mapped to EN ${dbSetId} by number ${c.localId}`,
         },
-        update: { logicalCardId: lc.id, regionCardId: enLocaleId },
+        update: { cardId: lc.id, regionCardId: enLocaleId },
       });
       totalMap++;
     }
@@ -192,7 +192,7 @@ async function main() {
   console.log(`\n── 전체 결과 ──`);
   console.log(`  enriched: ${enriched}`);
   console.log(`  already-filled (skipped): ${skipped}`);
-  console.log(`  LogicalCard 누락: ${missing}`);
+  console.log(`  Card 누락: ${missing}`);
   console.log(`  ExternalIdMapping: ${totalMap}`);
   if (unmatched.size > 0) {
     console.log(`  매칭 안된 rarity (${unmatched.size}):`);

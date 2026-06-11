@@ -61,7 +61,7 @@ async function main() {
 
   // 2) 카드 풀: 이미지 있고 희귀도(category tier>=3) 있는 카드 — 지역/카테고리 다양하게
   const pool = await prisma.$queryRaw<
-    { id: string; logicalCardId: string; region: string; name: string; cat: string | null; imageLarge: string | null; imageSmall: string | null }[]
+    { id: string; cardId: string; region: string; name: string; cat: string | null; imageLarge: string | null; imageSmall: string | null }[]
   >`
     SELECT cl.id, cl."logicalCardId", cl.region, cl.name,
            rc."nameKo" AS cat, cl."imageLarge", cl."imageSmall"
@@ -113,7 +113,7 @@ async function main() {
         data: {
           userId: user.id,
           localeId: c.id,
-          logicalCardId: c.logicalCardId,
+          cardId: c.cardId,
           grade,
           certified,
           forSale,

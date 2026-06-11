@@ -1,5 +1,5 @@
 /**
- * ADV1~5 (2003) LogicalCard 메타를 tcgdex 에서 보강.
+ * ADV1~5 (2003) Card 메타를 tcgdex 에서 보강.
  *
  * NOTE: tcgdex /v2/ja/sets/adv{n} 은 현재 cards 배열이 비어 있어 개별 카드 fetch 불가.
  * → ADV 시리즈 tcgdex 메타 보강은 건너뜀 (데이터 없음).

@@ -2,8 +2,8 @@
  * 팩 단위 PokeAPI 보강 — pokedexNumbers + 한글명(CardText ko, nameKo).
  *
  * 포켓몬 카드(영문명 보유)의 영문명을 표준 이름 매핑표(PokeAPI CSV)의 종으로 매핑해:
- *   - LogicalCard.pokedexNumbers (비어있을 때만)
- *   - LogicalCard.nameKo (비어있을 때만; 전환기 호환)
+ *   - Card.pokedexNumbers (비어있을 때만)
+ *   - Card.nameKo (비어있을 때만; 전환기 호환)
  *   - CardText(ko) upsert (source="pokeapi")
  * 확신 없으면 건너뜀(추측 금지) → unmatched 로 리포트.
  * 출처: data/pokeapi/*.csv (로더 scripts/lib/pokeapi-names.ts). 라이브 API 호출 없음.
@@ -47,17 +47,17 @@ function speciesCandidates(name: string): string[] {
 async function main() {
   const cards = await prisma.regionCard.findMany({
     where: { setId: SET },
-    select: { name: true, logicalCard: { select: { id: true, hp: true, supertype: true, pokedexNumbers: true, nameKo: true } } },
+    select: { name: true, card: { select: { id: true, hp: true, supertype: true, pokedexNumbers: true, nameKo: true } } },
   });
   // 포켓몬 후보 = hp 보유 (트레이너/에너지 제외)
-  const pokes = cards.filter((c) => c.logicalCard.hp != null);
+  const pokes = cards.filter((c) => c.card.hp != null);
   console.log(`[init] ${SET}: 카드 ${cards.length}, 포켓몬 후보 ${pokes.length}`);
 
   let matched = 0, dexFilled = 0, koFilled = 0;
   const unmatched: string[] = [];
 
   for (const c of pokes) {
-    const lc = c.logicalCard;
+    const lc = c.card;
     let dex: number | undefined;
     for (const cand of speciesCandidates(c.name)) {
       dex = resolveDex(cand, "en");
@@ -70,17 +70,17 @@ async function main() {
     if (DRY) continue;
     // pokedexNumbers (비어있을 때만)
     if (!lc.pokedexNumbers || lc.pokedexNumbers.length === 0) {
-      await prisma.logicalCard.update({ where: { id: lc.id }, data: { pokedexNumbers: [dex] } });
+      await prisma.card.update({ where: { id: lc.id }, data: { pokedexNumbers: [dex] } });
       dexFilled++;
     }
     if (ko) {
       // nameKo (전환기 호환, 비어있을 때만)
-      if (!lc.nameKo) await prisma.logicalCard.update({ where: { id: lc.id }, data: { nameKo: ko } });
+      if (!lc.nameKo) await prisma.card.update({ where: { id: lc.id }, data: { nameKo: ko } });
       // CardText(ko) upsert
       await prisma.cardText.upsert({
-        where: { logicalCardId_language: { logicalCardId: lc.id, language: "ko" } },
+        where: { cardId_language: { cardId: lc.id, language: "ko" } },
         update: { name: ko, source: "pokeapi" },
-        create: { logicalCardId: lc.id, language: "ko", name: ko, source: "pokeapi", confidence: 0.95 },
+        create: { cardId: lc.id, language: "ko", name: ko, source: "pokeapi", confidence: 0.95 },
       });
       koFilled++;
     }

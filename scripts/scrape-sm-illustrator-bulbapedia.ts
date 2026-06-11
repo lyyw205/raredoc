@@ -1,5 +1,5 @@
 /**
- * SM era カードの LogicalCard.illustrator を Bulbapedia から収集.
+ * SM era カードの Card.illustrator を Bulbapedia から収集.
  *
  * sync-sm-bulbapedia-jp.ts 가 이미 일러스트레이터를 채우므로 이 스크립트는
  * JP-only 세트 (EN 대응 없는 og-sm* 그룹) 전용으로 보강한다.
@@ -149,7 +149,7 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
     const jpLocaleId = `${set.jpSetId}-${card.number}`;
     const locale = await prisma.regionCard.findUnique({
       where: { id: jpLocaleId },
-      select: { id: true, logicalCardId: true },
+      select: { id: true, cardId: true },
     });
 
     if (!locale) {
@@ -157,8 +157,8 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
       continue;
     }
 
-    const lc = await prisma.logicalCard.findUnique({
-      where: { id: locale.logicalCardId },
+    const lc = await prisma.card.findUnique({
+      where: { id: locale.cardId },
       select: { id: true, illustrator: true },
     });
     if (!lc) { result.unmatched++; continue; }
@@ -172,12 +172,12 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
         where: { sourceId_externalId: { sourceId: source.id, externalId } },
         create: {
           sourceId: source.id, externalId,
-          regionCardId: locale.id, logicalCardId: lc.id,
+          regionCardId: locale.id, cardId: lc.id,
           url: cardUrl,
           verifiedBy: "auto:scrape-sm-bulbapedia", confidence: 0.75,
           notes: `Bulbapedia SM JP-only. Set ${set.jpSetId}, number ${card.number}.`,
         },
-        update: { logicalCardId: lc.id },
+        update: { cardId: lc.id },
       });
       continue;
     }
@@ -192,7 +192,7 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
 
     const ill = extractIllustrator(cardHtml);
     if (ill) {
-      await prisma.logicalCard.update({ where: { id: lc.id }, data: { illustrator: ill } });
+      await prisma.card.update({ where: { id: lc.id }, data: { illustrator: ill } });
       result.illustratorFilled++;
     }
 
@@ -200,12 +200,12 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
       where: { sourceId_externalId: { sourceId: source.id, externalId } },
       create: {
         sourceId: source.id, externalId,
-        regionCardId: locale.id, logicalCardId: lc.id,
+        regionCardId: locale.id, cardId: lc.id,
         url: cardUrl,
         verifiedBy: "auto:scrape-sm-bulbapedia", confidence: 0.75,
         notes: `Bulbapedia SM JP-only. Set ${set.jpSetId}, number ${card.number}.`,
       },
-      update: { logicalCardId: lc.id },
+      update: { cardId: lc.id },
     });
   }
 

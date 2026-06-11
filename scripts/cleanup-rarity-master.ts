@@ -94,7 +94,7 @@ async function main() {
           skipped++;
           continue;
         }
-        await prisma.logicalCard.updateMany({
+        await prisma.card.updateMany({
           where: { rarityId: row.id },
           data: { rarityId: target.id },
         });

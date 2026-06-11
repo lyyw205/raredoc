@@ -1,6 +1,6 @@
 /**
  * JP 세트 subtypes 백필 — tcgdex(ja) stage/suffix/trainerType 에서. (구세션 enrich-sv-meta 가 subtypes 미설정한 분)
- * subtypes 가 비어있는 LogicalCard 만 채움(기존 보존). EN 지문매칭(dex+일러+subtypes) 정합에 필요.
+ * subtypes 가 비어있는 Card 만 채움(기존 보존). EN 지문매칭(dex+일러+subtypes) 정합에 필요.
  *
  * 실행: npx tsx scripts/fill-jp-subtypes-tcgdex.ts <jpSetId> <tcgId> [--apply]
  *   예: npx tsx scripts/fill-jp-subtypes-tcgdex.ts jp-sv-obsidian-flames SV3 --apply
@@ -33,8 +33,8 @@ async function main() {
   const APPLY = process.argv.includes("--apply");
   if (!jpSet || !tcgId) { console.error("usage: <jpSetId> <tcgId> [--apply]"); process.exit(1); }
   const cards = await prisma.regionCard.findMany({ where: { setId: jpSet }, orderBy: { numberInt: "asc" },
-    select: { number: true, name: true, logicalCardId: true, logicalCard: { select: { subtypes: true } } } });
-  const todo = cards.filter((c) => (c.logicalCard.subtypes?.length ?? 0) === 0);
+    select: { number: true, name: true, cardId: true, card: { select: { subtypes: true } } } });
+  const todo = cards.filter((c) => (c.card.subtypes?.length ?? 0) === 0);
   console.log(`■ ${jpSet} ← tcgdex:${tcgId}(ja) | subtypes 누락 ${todo.length}/${cards.length} ${APPLY ? "★적용" : "(dry)"}`);
   let filled = 0, fail = 0, empty = 0; const sample: string[] = [];
   for (const c of todo) {
@@ -44,7 +44,7 @@ async function main() {
     const st = subtypesOf(d);
     if (!st.length) { empty++; continue; }
     if (sample.length < 6) sample.push(`#${c.number} ${c.name}=[${st}]`);
-    if (APPLY) await prisma.logicalCard.update({ where: { id: c.logicalCardId }, data: { subtypes: st } });
+    if (APPLY) await prisma.card.update({ where: { id: c.cardId }, data: { subtypes: st } });
     filled++;
   }
   console.log(`  채움 ${filled} · 빈subtypes ${empty} · fetch실패 ${fail}`);

@@ -4,7 +4,7 @@
  * Sets: dp1~dp7 (Diamond & Pearl), pl1~pl4 (Platinum)
  * - Creates CardPack (og-{setId}, era "DP"/"Pt")
  * - Creates EN Set (en-tcg-{setId})
- * - Creates LogicalCard (lc-en-tcg-{setId}-{num})
+ * - Creates Card (lc-en-tcg-{setId}-{num})
  * - Creates EN RegionCard (en-tcg-{setId}-{num})
  * - Creates ExternalIdMapping (source=pokemontcg_io)
  *
@@ -222,8 +222,8 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
       : null;
 
     try {
-      // 5a. Upsert LogicalCard
-      await prisma.logicalCard.upsert({
+      // 5a. Upsert Card
+      await prisma.card.upsert({
         where: { id: lcId },
         create: {
           id: lcId,
@@ -281,7 +281,7 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
         where: { id: clId },
         create: {
           id: clId,
-          logicalCardId: lcId,
+          cardId: lcId,
           language: "en",
           region: "EN",
           setId: enSetId,
@@ -293,7 +293,7 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
           imageLarge: card.images.large,
         },
         update: {
-          logicalCardId: lcId,
+          cardId: lcId,
           number: numPadded,
           numberInt: parseInt(numPadded, 10) || null,
           name: card.name,
@@ -310,14 +310,14 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
           sourceId,
           externalId: card.id,
           regionCardId: clId,
-          logicalCardId: lcId,
+          cardId: lcId,
           url: `https://pokemontcg.io/cards/${card.id}`,
           verifiedBy: "auto:sync-dppt-pokemontcgio",
           confidence: 0.95,
         },
         update: {
           regionCardId: clId,
-          logicalCardId: lcId,
+          cardId: lcId,
         },
       });
 

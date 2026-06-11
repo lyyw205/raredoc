@@ -5,8 +5,8 @@
  * 이걸 1차 출처로 CardText(ko).name·nameKo·rarity 를 정정한다(덮어쓰기).
  *
  * - 카드명: 표의 카드명 셀 (메가지가르데 ex 등 정식 카드명) → CardText(ko)+nameKo
- * - 레어도: 표의 레어도 코드(C/U/R/RR/AR/SR/SAR/UR/HR/MUR) → 우리 Rarity.code 매핑 → LogicalCard.rarityId
- * - 매칭: Namu 컬렉션넘버 → setId 의 numberInt (한국=일본 번호체계 동일). 공유 LogicalCard 갱신 → KR/JP 동시 반영.
+ * - 레어도: 표의 레어도 코드(C/U/R/RR/AR/SR/SAR/UR/HR/MUR) → 우리 Rarity.code 매핑 → Card.rarityId
+ * - 매칭: Namu 컬렉션넘버 → setId 의 numberInt (한국=일본 번호체계 동일). 공유 Card 갱신 → KR/JP 동시 반영.
  * - supertype/분류는 표 셀구조 불안정으로 다루지 않음.
  *
  * 실행: npx tsx scripts/sync-pack-namu-ko.ts <setId> <namuTitle> [--dry-run]
@@ -81,9 +81,9 @@ async function main() {
   const rarities = await prisma.rarity.findMany({ select: { id: true, code: true } });
   const rarById = new Map(rarities.map((r) => [r.code, r.id]));
 
-  // setId 의 numberInt → logicalCardId
-  const cards = await prisma.regionCard.findMany({ where: { setId: SET }, select: { numberInt: true, logicalCardId: true } });
-  const lcByNum = new Map(cards.map((c) => [c.numberInt, c.logicalCardId]));
+  // setId 의 numberInt → cardId
+  const cards = await prisma.regionCard.findMany({ where: { setId: SET }, select: { numberInt: true, cardId: true } });
+  const lcByNum = new Map(cards.map((c) => [c.numberInt, c.cardId]));
 
   let nameUpd = 0, rarUpd = 0, noCard = 0; const unmappedRar = new Set<string>(); const samples: string[] = [];
   for (const r of rows) {
@@ -96,14 +96,14 @@ async function main() {
     if (DRY) continue;
     if (r.name) {
       await prisma.cardText.upsert({
-        where: { logicalCardId_language: { logicalCardId: lcId, language: "ko" } },
+        where: { cardId_language: { cardId: lcId, language: "ko" } },
         update: { name: r.name, source: "namuwiki" },
-        create: { logicalCardId: lcId, language: "ko", name: r.name, source: "namuwiki", confidence: 1.0 },
+        create: { cardId: lcId, language: "ko", name: r.name, source: "namuwiki", confidence: 1.0 },
       });
-      await prisma.logicalCard.update({ where: { id: lcId }, data: { nameKo: r.name } });
+      await prisma.card.update({ where: { id: lcId }, data: { nameKo: r.name } });
       nameUpd++;
     }
-    if (rarId) { await prisma.logicalCard.update({ where: { id: lcId }, data: { rarityId: rarId } }); rarUpd++; }
+    if (rarId) { await prisma.card.update({ where: { id: lcId }, data: { rarityId: rarId } }); rarUpd++; }
   }
 
   console.log("\n=== NAMU KO SYNC SUMMARY ===");

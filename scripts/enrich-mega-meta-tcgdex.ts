@@ -1,5 +1,5 @@
 /**
- * MEGA era LogicalCard 메타를 tcgdex JP 엔드포인트에서 보강.
+ * MEGA era Card 메타를 tcgdex JP 엔드포인트에서 보강.
  *
  * 커버 가능한 세트:
  *   M1L (メガブレイブ) + M1S (メガシンフォニア) → mega-brave-symphonia
@@ -61,9 +61,9 @@ async function enrichSet(tcgId: string, dbSetId: string, cardIdPrefix: string, l
   const locales = await prisma.regionCard.findMany({
     where: {
       id: { startsWith: cardIdPrefix },
-      logicalCard: { supertype: null },
+      card: { supertype: null },
     },
-    select: { id: true, logicalCardId: true, number: true },
+    select: { id: true, cardId: true, number: true },
   });
 
   if (locales.length === 0) {
@@ -75,7 +75,7 @@ async function enrichSet(tcgId: string, dbSetId: string, cardIdPrefix: string, l
   let ok = 0, skip = 0, fail = 0;
 
   for (const cl of locales) {
-    if (!cl.logicalCardId || !cl.number) { skip++; continue; }
+    if (!cl.cardId || !cl.number) { skip++; continue; }
 
     const numPadded = padNum(cl.number);
     const detailUrl = `https://api.tcgdex.net/v2/${lang}/cards/${tcgId}-${numPadded}`;
@@ -99,7 +99,7 @@ async function enrichSet(tcgId: string, dbSetId: string, cardIdPrefix: string, l
     if (detail.evolveFrom) update.evolvesFrom = detail.evolveFrom;
 
     if (Object.keys(update).length > 0) {
-      await prisma.logicalCard.update({ where: { id: cl.logicalCardId }, data: update });
+      await prisma.card.update({ where: { id: cl.cardId }, data: update });
     }
     ok++;
     if (ok % 50 === 0) console.log(`  ... ${ok} 업데이트됨`);

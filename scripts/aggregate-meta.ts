@@ -118,7 +118,7 @@ type StandingRow = {
 
 /**
  * #18 deckCostKrw: 표준 레시피 × 시세 DB.
- * logicalCardId 매칭은 P1 완료 — 시세 연동(sum(avgCount × 최저시세))은 후속(P6).
+ * cardId 매칭은 P1 완료 — 시세 연동(sum(avgCount × 최저시세))은 후속(P6).
  */
 
 /** region 1패스 집계 + 적재 */
@@ -522,7 +522,7 @@ async function runRegionPass(region: Region, args: Args, resolver: CardResolver 
     for (const acc of cardAcc.values()) {
       const adoptionRate = (acc.decks / deckCount) * 100;
       const avgCount = acc.totalCount / acc.decks; // 채용한 덱 기준 평균
-      // logicalCardId 매칭 (P1): 실패 시 null 유지 — 기존 non-null 을 null 로 덮지 않도록 update 는 조건부
+      // cardId 매칭 (P1): 실패 시 null 유지 — 기존 non-null 을 null 로 덮지 않도록 update 는 조건부
       const resolved =
         resolver && acc.set && acc.number ? await resolver.resolveEn(acc.set, acc.number) : null;
       await prisma.deckRecipeCard.upsert({
@@ -544,7 +544,7 @@ async function runRegionPass(region: Region, args: Args, resolver: CardResolver 
           category: acc.category,
           avgCount,
           adoptionRate,
-          logicalCardId: resolved?.logicalCardId ?? null,
+          cardId: resolved?.cardId ?? null,
           isCore: adoptionRate >= 90,
         },
         update: {
@@ -552,7 +552,7 @@ async function runRegionPass(region: Region, args: Args, resolver: CardResolver 
           avgCount,
           adoptionRate,
           isCore: adoptionRate >= 90,
-          ...(resolved ? { logicalCardId: resolved.logicalCardId } : {}),
+          ...(resolved ? { cardId: resolved.cardId } : {}),
         },
       });
       recipeRows++;
@@ -620,7 +620,7 @@ async function main() {
   try {
     resolver = await CardResolver.create();
   } catch (e) {
-    console.warn(`[agg] resolve-card 비활성 (logicalCardId 매칭 skip): ${(e as Error).message}`);
+    console.warn(`[agg] resolve-card 비활성 (cardId 매칭 skip): ${(e as Error).message}`);
   }
   const week = isoWeek(new Date());
   const regions: Region[] = args.region === "all" ? [...REGIONS] : [args.region as Region];

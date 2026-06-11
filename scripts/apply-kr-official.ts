@@ -4,7 +4,7 @@
  * 사용자 방침: "한국판은 공식 데이터로 넣고, 매핑 번호는 달라도 됨 — 데이터는 각 언어 버전에 맞게,
  *   매핑은 카드 정체성(일러/도감)으로 신경 써서" (sv-base 식). KR 공식 번호는 JP 와 스왑/증감 가능.
  *
- * 매칭(official KR → JP 앵커 LogicalCard):
+ * 매칭(official KR → JP 앵커 Card):
  *   - 포켓몬: koName→dex(PokeAPI ko) 버킷 + 일러스트레이터 → 동일 dex 내 일러/번호순 페어
  *   - 트레이너: 일러스트레이터 버킷 → 번호순 페어
  *   - 에너지/잔여: 번호 근접 폴백
@@ -276,7 +276,7 @@ const kkey = (s: string | null) => (s ?? "").replace(/[\s　]/g, "").replace(/�
 // DB 전체에서 (JP,KR) locale 동시보유 트레이너/에너지 LC = 이미 정합화된 검증 ja↔ko 번역쌍 → ko키→ja키 사전.
 // 언어별 가나다/五十音 정렬 팩(THE BEST OF XY 등)에서 일러버킷 번호순 zip 의 연쇄 오페어 방지.
 async function buildJaKoDict(): Promise<Map<string, Set<string>>> {
-  const rows = await prisma.logicalCard.findMany({
+  const rows = await prisma.card.findMany({
     where: { supertype: { in: ["Trainer", "Energy"] }, locales: { some: { region: "KR" } } },
     select: { locales: { select: { region: true, name: true, numberInt: true } } },
   });
@@ -418,15 +418,15 @@ async function main() {
   for (const krSet of targets) {
     const cfg = CFG[krSet]; if (!cfg) { console.error(`unknown ${krSet}`); continue; }
     const offs: Off[] = JSON.parse(readFileSync(cfg.json, "utf8")).map((c: any) => ({ number: c.number, koName: c.koName, illustrator: c.illustrator ?? null, image: c.image ?? null, numInt: parseInt(c.number, 10) }));
-    const jpRows = await prisma.regionCard.findMany({ where: { setId: { in: cfg.jp.split(",") } }, select: { numberInt: true, name: true, logicalCardId: true, logicalCard: { select: { illustrator: true, pokedexNumbers: true, supertype: true } } } });
-    let jps: Jp[] = jpRows.map((r) => ({ numInt: r.numberInt ?? 0, name: r.name, lcid: r.logicalCardId, illus: r.logicalCard.illustrator, dex: r.logicalCard.pokedexNumbers?.[0] ?? null, supertype: r.logicalCard.supertype }));
+    const jpRows = await prisma.regionCard.findMany({ where: { setId: { in: cfg.jp.split(",") } }, select: { numberInt: true, name: true, cardId: true, card: { select: { illustrator: true, pokedexNumbers: true, supertype: true } } } });
+    let jps: Jp[] = jpRows.map((r) => ({ numInt: r.numberInt ?? 0, name: r.name, lcid: r.cardId, illus: r.card.illustrator, dex: r.card.pokedexNumbers?.[0] ?? null, supertype: r.card.supertype }));
     let offsF = offs;
     if (cfg.maxNum) { offsF = offs.filter((o) => o.numInt <= cfg.maxNum!); jps = jps.filter((j) => j.numInt <= cfg.maxNum!); console.log(`  (maxNum ${cfg.maxNum}: base만 — official ${offsF.length}/${offs.length}, JP앵커 ${jps.length})`); }
 
     const m = match(offsF, jps, jaKoDict);
     // 기존 KR locale (앵커별 1장) — lcid 로 인덱스
-    const krExisting = await prisma.regionCard.findMany({ where: { setId: krSet }, select: { id: true, logicalCardId: true } });
-    const krByLcid = new Map(krExisting.map((k) => [k.logicalCardId, k]));
+    const krExisting = await prisma.regionCard.findMany({ where: { setId: krSet }, select: { id: true, cardId: true } });
+    const krByLcid = new Map(krExisting.map((k) => [k.cardId, k]));
 
     let swaps = 0, creates = 0, updates = 0, unmatched = 0; const unm: string[] = [], swapEx: string[] = [];
     for (const o of offsF) {
@@ -448,10 +448,10 @@ async function main() {
     const krNum = new Map((await prisma.regionCard.findMany({ where: { setId: krSet }, select: { id: true, numberInt: true } })).map((l) => [l.id, l.numberInt]));
     const colls = await prisma.collectionItem.findMany({ where: { localeId: { in: krIds } }, select: { id: true, localeId: true } });
     const trades = await prisma.trade.findMany({ where: { localeId: { in: krIds } }, select: { id: true, localeId: true } });
-    const jpLoc = await prisma.regionCard.findMany({ where: { setId: { in: cfg.jp.split(",") } }, select: { id: true, numberInt: true, logicalCardId: true } });
+    const jpLoc = await prisma.regionCard.findMany({ where: { setId: { in: cfg.jp.split(",") } }, select: { id: true, numberInt: true, cardId: true } });
     const jpByNum = new Map(jpLoc.map((l) => [l.numberInt, l]));
-    for (const c of colls) { const n = krNum.get(c.localeId); const j = n != null ? jpByNum.get(n) : null; if (j) await prisma.collectionItem.update({ where: { id: c.id }, data: { localeId: j.id, logicalCardId: j.logicalCardId } }); }
-    for (const t of trades) { const n = krNum.get(t.localeId); const j = n != null ? jpByNum.get(n) : null; if (j) await prisma.trade.update({ where: { id: t.id }, data: { localeId: j.id, logicalCardId: j.logicalCardId } }); }
+    for (const c of colls) { const n = krNum.get(c.localeId); const j = n != null ? jpByNum.get(n) : null; if (j) await prisma.collectionItem.update({ where: { id: c.id }, data: { localeId: j.id, cardId: j.cardId } }); }
+    for (const t of trades) { const n = krNum.get(t.localeId); const j = n != null ? jpByNum.get(n) : null; if (j) await prisma.trade.update({ where: { id: t.id }, data: { localeId: j.id, cardId: j.cardId } }); }
     if (colls.length + trades.length) console.log(`  참조 ${colls.length + trades.length}건 임시 JP 재지정`);
     await prisma.regionCard.deleteMany({ where: { setId: krSet } });
     let made = 0; const newKrByNum = new Map<number, { id: string; lcid: string }>();
@@ -463,15 +463,15 @@ async function main() {
       const id = dup === 0 ? base : `${base}-${String.fromCharCode(97 + dup)}`;
       await prisma.regionCard.create({ data: {
         id, setId: krSet, region: "KR", language: "ko", number: o.number, numberInt: o.numInt,
-        name: o.koName, imageSmall: o.image, imageLarge: o.image, logicalCardId: j.lcid,
+        name: o.koName, imageSmall: o.image, imageLarge: o.image, cardId: j.lcid,
       } });
-      await prisma.logicalCard.update({ where: { id: j.lcid }, data: { nameKo: o.koName } });
+      await prisma.card.update({ where: { id: j.lcid }, data: { nameKo: o.koName } });
       newKrByNum.set(o.numInt, { id, lcid: j.lcid });
       made++;
     }
     let restored = 0;
-    for (const c of colls) { const n = krNum.get(c.localeId); const nk = n != null ? newKrByNum.get(n) : null; if (nk) { await prisma.collectionItem.update({ where: { id: c.id }, data: { localeId: nk.id, logicalCardId: nk.lcid } }); restored++; } }
-    for (const t of trades) { const n = krNum.get(t.localeId); const nk = n != null ? newKrByNum.get(n) : null; if (nk) { await prisma.trade.update({ where: { id: t.id }, data: { localeId: nk.id, logicalCardId: nk.lcid } }); restored++; } }
+    for (const c of colls) { const n = krNum.get(c.localeId); const nk = n != null ? newKrByNum.get(n) : null; if (nk) { await prisma.collectionItem.update({ where: { id: c.id }, data: { localeId: nk.id, cardId: nk.lcid } }); restored++; } }
+    for (const t of trades) { const n = krNum.get(t.localeId); const nk = n != null ? newKrByNum.get(n) : null; if (nk) { await prisma.trade.update({ where: { id: t.id }, data: { localeId: nk.id, cardId: nk.lcid } }); restored++; } }
     console.log(`  ★적용: KR locale ${made} 재생성${restored ? ` · 참조 ${restored}건 복원` : ""}`);
 
     if (KEEP) {
@@ -481,12 +481,12 @@ async function main() {
         if (m.get(o.numInt)) continue; // 매칭된 건 위에서 처리됨
         const d = koDex(o.koName);
         const lcId = `lc-${krSet}-${o.number}`;
-        await prisma.logicalCard.upsert({
+        await prisma.card.upsert({
           where: { id: lcId },
           update: { nameKo: o.koName, illustrator: o.illustrator ?? undefined },
           create: { id: lcId, cardPackId: sg ?? undefined, supertype: d != null ? "Pokémon" : undefined, pokedexNumbers: d != null ? [d] : [], illustrator: o.illustrator ?? undefined, nameKo: o.koName, primarySetId: krSet, primaryNumber: o.number, primaryNumberInt: o.numInt },
         });
-        await prisma.regionCard.create({ data: { id: `${krSet}-${o.number}`, setId: krSet, region: "KR", language: "ko", number: o.number, numberInt: o.numInt, name: o.koName, imageSmall: o.image, imageLarge: o.image, logicalCardId: lcId } });
+        await prisma.regionCard.create({ data: { id: `${krSet}-${o.number}`, setId: krSet, region: "KR", language: "ko", number: o.number, numberInt: o.numInt, name: o.koName, imageSmall: o.image, imageLarge: o.image, cardId: lcId } });
         tail++;
       }
       if (tail) console.log(`  ★KR-only tail(미매칭 보존): ${tail}장`);

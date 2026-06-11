@@ -28,7 +28,7 @@ export type NormalizedStanding = {
   wins?: number;
   losses?: number;
   ties?: number;
-  decklist?: object | null; // 통일 양식 {pokemon|trainer|energy: [{count,set,number,name,cardId?,logicalCardId?}]}
+  decklist?: object | null; // 통일 양식 {pokemon|trainer|energy: [{count,set,number,name,cardId?,cardId?}]}
   deckCode?: string | null; // JP/KR 공식 덱코드
   archetypeRaw?: string | null; // 소스 원문 라벨 (사후 재분류 원천)
   deckSource?: string | null; // decklist provenance: limitless|jp-deckcode|kr-deckcode|pokedata

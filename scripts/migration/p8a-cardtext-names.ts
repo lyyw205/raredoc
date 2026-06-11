@@ -1,6 +1,6 @@
 // ── P8a: LC.nameKo → CardText(ko, name) 완성 (additive) ───────────────────────
 // 현재 CardText ko 이름이 절반만 적재(11,184/21,781 nameKo). 누락분을 채워 이름축 완성.
-// 축은 현 logicalCardId 유지(gameCard/artCard 재키는 후속 최적화). unique(lcId,lang) → skipDuplicates.
+// 축은 현 cardId 유지(gameCard/artCard 재키는 후속 최적화). unique(lcId,lang) → skipDuplicates.
 // 기본 dry-run. 적용 --apply. 실행: npx tsx scripts/migration/p8a-cardtext-names.ts [--apply]
 import "dotenv/config";
 import { prisma } from "../../src/lib/prisma";
@@ -24,7 +24,7 @@ async function main() {
   let ins = 0;
   for (let i = 0; i < missing.length; i += 2000) {
     const batch = missing.slice(i, i + 2000).map((m) => ({
-      logicalCardId: m.id, language: "ko", name: m.nameKo, source: "lc_nameko", confidence: 1.0,
+      cardId: m.id, language: "ko", name: m.nameKo, source: "lc_nameko", confidence: 1.0,
     }));
     ins += (await prisma.cardText.createMany({ data: batch, skipDuplicates: true })).count;
   }

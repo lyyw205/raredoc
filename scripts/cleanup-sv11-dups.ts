@@ -7,7 +7,7 @@
  * 동작:
  *   1) 의존행(CollectionItem/Trade/CardText/TierEntry/DeckCard/Ruling/ExternalIdMapping) 0 확인
  *      — 참조 있으면 해당 카드 skip+리포트.
- *   2) 안전한 RegionCard 삭제 → 자식 0 + 의존행 0 인 LogicalCard 삭제 → Set 레코드 삭제.
+ *   2) 안전한 RegionCard 삭제 → 자식 0 + 의존행 0 인 Card 삭제 → Set 레코드 삭제.
  *   멱등: 이미 없으면 0건 처리.
  *
  * 실행:
@@ -79,13 +79,13 @@ async function main() {
     ? TARGET_SETS.filter((s) => !withDeps.some((d) => d.set_id === s))
     : TARGET_SETS;
 
-  // RegionCard 의 logicalCardId 수집 (삭제 전)
+  // RegionCard 의 cardId 수집 (삭제 전)
   const lcs = await prisma.$queryRawUnsafe<{ lc: string }[]>(
     `SELECT DISTINCT "logicalCardId" lc FROM "CardLocale" WHERE "setId" = ANY($1::text[])`,
     safeSets
   );
   const lcIds = lcs.map((r) => r.lc);
-  console.log(`  대상 LogicalCard: ${lcIds.length}`);
+  console.log(`  대상 Card: ${lcIds.length}`);
 
   // RegionCard 삭제
   const clDel = await prisma.$executeRawUnsafe(
@@ -94,7 +94,7 @@ async function main() {
   );
   console.log(`  RegionCard 삭제: ${clDel}`);
 
-  // LogicalCard 삭제 (자식 0 + 의존행 0 인 것만)
+  // Card 삭제 (자식 0 + 의존행 0 인 것만)
   let lcDel = 0;
   const CHUNK = 500;
   for (let i = 0; i < lcIds.length; i += CHUNK) {
@@ -114,7 +114,7 @@ async function main() {
     );
     lcDel += n;
   }
-  console.log(`  LogicalCard 삭제: ${lcDel}`);
+  console.log(`  Card 삭제: ${lcDel}`);
 
   // Set 레코드 삭제
   const setDel = await prisma.$executeRawUnsafe(
@@ -128,7 +128,7 @@ async function main() {
     durationSec: ((Date.now() - t0) / 1000).toFixed(1),
     setsDeleted: setDel,
     regionCardsDeleted: clDel,
-    logicalCardsDeleted: lcDel,
+    cardsDeleted: lcDel,
     skippedSets: withDeps.length > 0 ? withDeps.map((d) => d.set_id) : [],
   });
 

@@ -37,7 +37,7 @@ export default async function SetTierListPage({
   const locales = entryIds.length
     ? await prisma.regionCard.findMany({
         where: { id: { in: Array.from(new Set(entryIds)) } },
-        include: { logicalCard: { include: { rarity: true } }, set: true },
+        include: { card: { include: { rarity: true } }, set: true },
       })
     : [];
   const localeById = new Map(locales.map((l) => [l.id, l]));
@@ -51,7 +51,7 @@ export default async function SetTierListPage({
       name: db.name,
       nameKo: db.name,
       imageSmall: db.imageSmall ?? e.imageSmall,
-      rarity: db.logicalCard.rarity?.code ?? null,
+      rarity: db.card.rarity?.code ?? null,
     };
   });
 

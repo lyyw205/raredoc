@@ -1,6 +1,6 @@
 /**
- * 그룹 LogicalCard 병합 dry-run (읽기 전용, DB 무변경).
- * 검증된 매칭(group-match)대로 EN/KR 인쇄본을 JP 앵커 LogicalCard 로 합칠 때
+ * 그룹 Card 병합 dry-run (읽기 전용, DB 무변경).
+ * 검증된 매칭(group-match)대로 EN/KR 인쇄본을 JP 앵커 Card 로 합칠 때
  * 무엇을 재지정/삭제하고 어떤 참조(컬렉션/거래/티어/덱/룰링)를 옮겨야 하는지 계획·영향을 출력.
  *
  * 실행: npx tsx scripts/merge-group-dryrun.ts <groupId>   (sv-base | sv-triplet-beat)
@@ -17,12 +17,12 @@ const CONFIG: Record<string, Cfg> = {
 };
 
 type Row = { cid: string; lcid: string; setId: string; region: string; number: string; numInt: number; dex: number | null; illus: string | null; tier: number | null; sub: string; supertype: string | null };
-const sel = { id: true, logicalCardId: true, setId: true, region: true, number: true, numberInt: true,
-  logicalCard: { select: { pokedexNumbers: true, illustrator: true, subtypes: true, supertype: true, rarity: { select: { tier: true } } } } } as const;
+const sel = { id: true, cardId: true, setId: true, region: true, number: true, numberInt: true,
+  card: { select: { pokedexNumbers: true, illustrator: true, subtypes: true, supertype: true, rarity: { select: { tier: true } } } } } as const;
 const toRow = (l: any): Row => ({
-  cid: l.id, lcid: l.logicalCardId, setId: l.setId, region: l.region, number: l.number, numInt: l.numberInt ?? (parseInt(l.number.replace(/\D/g, "")) || 0),
-  dex: l.logicalCard.pokedexNumbers?.[0] ?? null, illus: l.logicalCard.illustrator, tier: l.logicalCard.rarity?.tier ?? null,
-  sub: [...(l.logicalCard.subtypes ?? [])].sort().join(","), supertype: l.logicalCard.supertype,
+  cid: l.id, lcid: l.cardId, setId: l.setId, region: l.region, number: l.number, numInt: l.numberInt ?? (parseInt(l.number.replace(/\D/g, "")) || 0),
+  dex: l.card.pokedexNumbers?.[0] ?? null, illus: l.card.illustrator, tier: l.card.rarity?.tier ?? null,
+  sub: [...(l.card.subtypes ?? [])].sort().join(","), supertype: l.card.supertype,
 });
 const load = async (ids: string[]) => (await prisma.regionCard.findMany({ where: { setId: { in: ids } }, select: sel })).map(toRow);
 
@@ -36,7 +36,7 @@ async function main() {
 
   const jp = await load(cfg.jp), kr = await load(cfg.kr);
   const en = cfg.enNative ? await load(cfg.enNative)
-    : (await prisma.regionCard.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE as unknown as string[] }, pokedexNumbers: { hasSome: [...new Set(jp.filter(isPoke).map(r => r.dex))] as number[] } } }, select: sel })).map(toRow);
+    : (await prisma.regionCard.findMany({ where: { region: "EN", card: { supertype: { in: POKE as unknown as string[] }, pokedexNumbers: { hasSome: [...new Set(jp.filter(isPoke).map(r => r.dex))] as number[] } } }, select: sel })).map(toRow);
 
   // 매칭 (build-group 과 동일 규칙)
   const enForJp = new Map<string, Row>(), krForJp = new Map<string, Row>();
@@ -72,26 +72,26 @@ async function main() {
   }
   // 흡수 LC 가 이 그룹 밖 locale 도 갖고 있나 (있으면 통삭제 불가, 부분 분리 필요)
   const absorbArr = [...absorbedLCs];
-  const allLocOfAbsorb = await prisma.regionCard.findMany({ where: { logicalCardId: { in: absorbArr } }, select: { logicalCardId: true, setId: true, region: true } });
+  const allLocOfAbsorb = await prisma.regionCard.findMany({ where: { cardId: { in: absorbArr } }, select: { cardId: true, setId: true, region: true } });
   const inScopeSets = new Set([...cfg.jp, ...cfg.kr, ...(cfg.enNative ?? []), ...(cfg.enNative ? [] : ["__cross__"])]);
   const extraLocByLc = new Map<string, number>();
-  for (const l of allLocOfAbsorb) { const inScope = cfg.enNative ? inScopeSets.has(l.setId) : (inScopeSets.has(l.setId) || l.region === "EN"); if (!inScope) extraLocByLc.set(l.logicalCardId, (extraLocByLc.get(l.logicalCardId) ?? 0) + 1); }
+  for (const l of allLocOfAbsorb) { const inScope = cfg.enNative ? inScopeSets.has(l.setId) : (inScopeSets.has(l.setId) || l.region === "EN"); if (!inScope) extraLocByLc.set(l.cardId, (extraLocByLc.get(l.cardId) ?? 0) + 1); }
   const cleanDeletable = absorbArr.filter(lc => !extraLocByLc.has(lc));
   const entangled = absorbArr.filter(lc => extraLocByLc.has(lc));
 
   // 참조 영향 (흡수 LC 를 가리키는 것들 → canonical 재지정 필요)
   const ref = async (model: any, field: string) => model.count({ where: { [field]: { in: absorbArr } } }).catch(() => -1);
-  const coll = await ref(prisma.collectionItem, "logicalCardId");
-  const trade = await ref(prisma.trade, "logicalCardId");
-  const tier = await ref(prisma.tierEntry, "logicalCardId");
-  const deck = await ref(prisma.deckCard, "logicalCardId");
-  const ruling = await ref(prisma.ruling, "logicalCardId");
+  const coll = await ref(prisma.collectionItem, "cardId");
+  const trade = await ref(prisma.trade, "cardId");
+  const tier = await ref(prisma.tierEntry, "cardId");
+  const deck = await ref(prisma.deckCard, "cardId");
+  const ruling = await ref(prisma.ruling, "cardId");
 
   console.log(`■ [${groupId}] 병합 dry-run (DB 무변경)`);
   console.log(`  JP 앵커 ${jp.length} | EN매칭 ${enForJp.size} | KR매칭 ${krForJp.size}`);
-  console.log(`  canonical LogicalCard(앵커 JP의 LC): ${canonicalLCs.size}`);
+  console.log(`  canonical Card(앵커 JP의 LC): ${canonicalLCs.size}`);
   console.log(`  병합 필요(다른 LC에 붙은 지역판): ${mergeNeeded}건 | 재지정할 locale: ${localesRepoint}`);
-  console.log(`  흡수될 LogicalCard: ${absorbedLCs.size}`);
+  console.log(`  흡수될 Card: ${absorbedLCs.size}`);
   console.log(`    ├ 깨끗이 삭제 가능(그룹밖 locale 없음): ${cleanDeletable.length}`);
   console.log(`    └ ⚠️얽힘(그룹밖 locale 보유 → 통삭제 불가, 부분분리): ${entangled.length}`);
   console.log(`  흡수 LC 를 가리키는 참조 → canonical 재지정 필요:`);

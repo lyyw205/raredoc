@@ -1,5 +1,5 @@
 /**
- * JP 세트 from-scratch 수집 — tcgdex(ja) 에서 LogicalCard+RegionCard 신규 생성. (JP 데이터가 통째로 없는 팩용)
+ * JP 세트 from-scratch 수집 — tcgdex(ja) 에서 Card+RegionCard 신규 생성. (JP 데이터가 통째로 없는 팩용)
  * 각 카드: supertype·subtypes(stage+suffix/trainerType)·dex(dexId or PokeAPI ja폴백)·illustrator·hp·types·
  *   retreat·evolveFrom·rarity·image 적재. LC 는 JP 앵커(primarySetId/primaryNumber=이 세트).
  * 멱등: 이미 있는 RegionCard id 는 skip. EN/KR 병합은 이후 단계(merge-group-apply / apply-kr-official)에서.
@@ -68,14 +68,14 @@ async function main() {
     if (sample.length < 5) sample.push(`#${c.localId} ${d.name} st=${supertype} dex=[${dex}] sub=[${subtypes}] rar=${d.rarity ?? "∅"}`);
     if (APPLY) {
       const lcId = `lc-${jpSet}-${c.localId}`;
-      await prisma.logicalCard.create({ data: {
+      await prisma.card.create({ data: {
         id: lcId, supertype: supertype ?? undefined, subtypes, pokedexNumbers: dex,
         illustrator: d.illustrator ?? undefined, hp: d.hp ?? undefined, types: d.types ?? [],
         retreatCost: d.retreat ?? undefined, evolvesFrom: d.evolveFrom ?? undefined, rarityId: rarId,
         primarySetId: jpSet, primaryNumber: c.localId, primaryNumberInt: numInt ?? undefined,
       } });
       await prisma.regionCard.create({ data: {
-        id: cid, logicalCardId: lcId, region: "JP", language: "ja", setId: jpSet,
+        id: cid, cardId: lcId, region: "JP", language: "ja", setId: jpSet,
         number: c.localId, numberInt: numInt ?? undefined, name: d.name, imageSmall: imgS, imageLarge: img,
       } });
     }

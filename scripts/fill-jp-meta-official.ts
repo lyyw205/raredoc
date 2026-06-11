@@ -1,9 +1,9 @@
 /**
- * 기존 JP 세트(이미 적재된 RegionCard + LogicalCard)를 일본공식(pokemon-card.com) 수집 JSON 으로
+ * 기존 JP 세트(이미 적재된 RegionCard + Card)를 일본공식(pokemon-card.com) 수집 JSON 으로
  * **in-place 메타 enrich**. load-jp-official 과 달리 LC 를 재생성하지 않음 → 기존 JP↔KR 병합/ cardPackId 보존,
  * 고아 LC 발생 없음. tcgdex JA 가 빈 SM 시대용(메타만 비어있고 로케일/이미지는 이미 존재할 때).
  *
- * 각 JP RegionCard 의 LogicalCard 에 supertype/pokedexNumbers/subtypes/illustrator/hp/types 를 official 로 덮어씀.
+ * 각 JP RegionCard 의 Card 에 supertype/pokedexNumbers/subtypes/illustrator/hp/types 를 official 로 덮어씀.
  * dex: JSON dexId 우선, 없으면 PokeAPI ja(폼접두어 제거) 폴백. subtypes: stage+suffix/trainerType.
  * --prune: JSON 에 없는 번호의 JP 로케일(EN넘버 리프린트 노이즈행) 삭제 + 비워진 LC 삭제.
  *
@@ -64,7 +64,7 @@ async function main() {
 
   const setRow = await prisma.set.findUnique({ where: { id: jpSet }, select: { cardPackId: true } });
   const sgId = setRow?.cardPackId ?? null;
-  const locs = await prisma.regionCard.findMany({ where: { setId: jpSet }, select: { id: true, number: true, numberInt: true, name: true, logicalCardId: true } });
+  const locs = await prisma.regionCard.findMany({ where: { setId: jpSet }, select: { id: true, number: true, numberInt: true, name: true, cardId: true } });
   const dbNums = new Set(locs.map((l) => l.numberInt ?? numKey(l.number)));
   console.log(`  기존 JP locale ${locs.length} · cardPack ${sgId ?? "—"}`);
 
@@ -82,7 +82,7 @@ async function main() {
       if (!dex.length) { dexNone++; noDex.push(`#${c.number} ${c.jaName}`); }
       else if (c.dexId && dex.length === 1) dexTcg++; else dexJa++;
     } else if (c.dexId) { dex = [c.dexId]; }
-    updates.push({ lcid: l.logicalCardId, data: {
+    updates.push({ lcid: l.cardId, data: {
       supertype: supertype ?? undefined, subtypes, pokedexNumbers: dex,
       illustrator: c.illustrator ?? undefined, hp: c.hp ?? undefined, types: c.types ?? [],
     } });
@@ -94,7 +94,7 @@ async function main() {
 
   if (!APPLY) { console.log("\n(dry) 적용: --apply [--prune]"); await prisma.$disconnect(); return; }
 
-  for (const u of updates) await prisma.logicalCard.update({ where: { id: u.lcid }, data: u.data });
+  for (const u of updates) await prisma.card.update({ where: { id: u.lcid }, data: u.data });
   console.log(`  ★메타 enrich: LC ${updates.length} 갱신`);
 
   // JSON-only(DB 미적재) 카드 생성 — 권위 소스에 있으나 DB 갭(예 SM2L #12). LC+JP locale 신규 + cardPackId 부여.
@@ -107,14 +107,14 @@ async function main() {
     if (supertype === "Pokémon") dex = dexesFromCard(c, ja); else if (c.dexId) dex = [c.dexId];
     const numInt = numKey(c.number) || null;
     const lcId = `lc-${jpSet}-${c.number}`;
-    if (await prisma.logicalCard.findUnique({ where: { id: lcId } })) continue;
-    await prisma.logicalCard.create({ data: {
+    if (await prisma.card.findUnique({ where: { id: lcId } })) continue;
+    await prisma.card.create({ data: {
       id: lcId, cardPackId: sgId ?? undefined, supertype: supertype ?? undefined, subtypes, pokedexNumbers: dex,
       illustrator: c.illustrator ?? undefined, hp: c.hp ?? undefined, types: c.types ?? [],
       primarySetId: jpSet, primaryNumber: c.number, primaryNumberInt: numInt ?? undefined,
     } });
     await prisma.regionCard.create({ data: {
-      id: `${jpSet}-${c.number}`, logicalCardId: lcId, region: "JP", language: "ja", setId: jpSet,
+      id: `${jpSet}-${c.number}`, cardId: lcId, region: "JP", language: "ja", setId: jpSet,
       number: c.number, numberInt: numInt ?? undefined, name: c.jaName, imageSmall: c.image, imageLarge: c.image,
     } });
     created++;
@@ -129,12 +129,12 @@ async function main() {
     const trade = await prisma.trade.count({ where: { localeId: { in: ids } } });
     if (coll + trade > 0) { console.log(`  ⚠️ prune 대상에 참조 ${coll + trade}건 — prune 생략(수동확인)`); }
     else {
-      const lcids = [...new Set(pruneLoc.map((l) => l.logicalCardId))];
+      const lcids = [...new Set(pruneLoc.map((l) => l.cardId))];
       await prisma.regionCard.deleteMany({ where: { id: { in: ids } } });
       // 비워진 LC(다른 지역 locale 없음) 삭제
-      const lcs = await prisma.logicalCard.findMany({ where: { id: { in: lcids } }, select: { id: true, locales: { select: { id: true } } } });
+      const lcs = await prisma.card.findMany({ where: { id: { in: lcids } }, select: { id: true, locales: { select: { id: true } } } });
       const empty = lcs.filter((l) => l.locales.length === 0).map((l) => l.id);
-      if (empty.length) await prisma.logicalCard.deleteMany({ where: { id: { in: empty } } });
+      if (empty.length) await prisma.card.deleteMany({ where: { id: { in: empty } } });
       console.log(`  ★prune: JP 노이즈행 ${ids.length} 삭제 · 비워진 LC ${empty.length} 삭제`);
       await prisma.set.update({ where: { id: jpSet }, data: { cardCount: matched } });
     }

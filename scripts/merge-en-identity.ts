@@ -1,5 +1,5 @@
 /**
- * EN 카드를 JP LogicalCard 에 정체성(identity) 기준으로 병합 — 번호기반 오병합 교정.
+ * EN 카드를 JP Card 에 정체성(identity) 기준으로 병합 — 번호기반 오병합 교정.
  *   매칭키: dex + subtypes + 통합레어도랭크(EN/JP 레어도 체계 차이 흡수), 버킷내 랭크→번호 순 1:1.
  *   매칭된 EN locale → JP lcid 재지정(KR 처럼 공유). 안 묶이는 EN → 자체 orphan LC(영판전용).
  *   EN 메타는 pokemontcg.io(dex/subtypes/rarity/artist), JP dex 는 이름기준 복구(공유LC 오염 방지).
@@ -60,24 +60,24 @@ async function main() {
   const trFile = isEX ? "trainer-names-ex.ts" : isPt ? "trainer-names-dpt.ts" : isHGSS ? "trainer-names-hgss.ts" : isBW ? "trainer-names-bw.ts" : isXY ? "trainer-names-xy.ts" : isSWSH ? "trainer-names-swsh.ts" : isSM ? "trainer-names-sm.ts" : "trainer-names-sv.ts";
 
   // 1) JP dex 복구(이름기준) — 공유LC 를 JP 정체성으로 되돌림
-  const jpRows = await prisma.regionCard.findMany({ where: { setId: { in: jpSets } }, select: { id: true, setId: true, number: true, numberInt: true, name: true, logicalCardId: true, logicalCard: { select: { supertype: true, subtypes: true, pokedexNumbers: true, illustrator: true, rarity: { select: { code: true } } } } } });
+  const jpRows = await prisma.regionCard.findMany({ where: { setId: { in: jpSets } }, select: { id: true, setId: true, number: true, numberInt: true, name: true, cardId: true, card: { select: { supertype: true, subtypes: true, pokedexNumbers: true, illustrator: true, rarity: { select: { code: true } } } } } });
   let jfix = 0;
-  for (const l of jpRows) { if (!isPokemonSupertype(l.logicalCard.supertype)) continue; const d = jaDex(l.name); if (d && l.logicalCard.pokedexNumbers?.[0] !== d) { if (APPLY) await prisma.logicalCard.update({ where: { id: l.logicalCardId }, data: { pokedexNumbers: [d] } }); jfix++; } }
+  for (const l of jpRows) { if (!isPokemonSupertype(l.card.supertype)) continue; const d = jaDex(l.name); if (d && l.card.pokedexNumbers?.[0] !== d) { if (APPLY) await prisma.card.update({ where: { id: l.cardId }, data: { pokedexNumbers: [d] } }); jfix++; } }
 
   // 1b) JP subtypes 일관성 정규화 — 같은이름 포켓몬은 진화단계 동일해야(시크릿 오류 교정, 최저랭크=베이스 권위)
   const STAGES = ["Basic", "Stage 1", "Stage 2"];
   const jpByName = new Map<string, typeof jpRows>();
-  for (const j of jpRows) { if (!isPokemonSupertype(j.logicalCard.supertype)) continue; (jpByName.get(j.name) ?? jpByName.set(j.name, []).get(j.name))!.push(j); }
+  for (const j of jpRows) { if (!isPokemonSupertype(j.card.supertype)) continue; (jpByName.get(j.name) ?? jpByName.set(j.name, []).get(j.name))!.push(j); }
   let sfix = 0;
   for (const [, rows] of jpByName) {
     if (rows.length < 2) continue;
-    const auth = rows.slice().sort((a, b) => rankJp(a.logicalCard.rarity?.code) - rankJp(b.logicalCard.rarity?.code) || (a.numberInt ?? 0) - (b.numberInt ?? 0))[0];
-    const authStage = (auth.logicalCard.subtypes ?? []).find((s) => STAGES.includes(s));
+    const auth = rows.slice().sort((a, b) => rankJp(a.card.rarity?.code) - rankJp(b.card.rarity?.code) || (a.numberInt ?? 0) - (b.numberInt ?? 0))[0];
+    const authStage = (auth.card.subtypes ?? []).find((s) => STAGES.includes(s));
     if (!authStage) continue;
     for (const j of rows) {
-      const subs = j.logicalCard.subtypes ?? [];
+      const subs = j.card.subtypes ?? [];
       const cur = subs.find((s) => STAGES.includes(s));
-      if (cur && cur !== authStage) { const ns = subs.map((s) => STAGES.includes(s) ? authStage : s); if (APPLY) await prisma.logicalCard.update({ where: { id: j.logicalCardId }, data: { subtypes: ns } }); j.logicalCard.subtypes = ns; sfix++; }
+      if (cur && cur !== authStage) { const ns = subs.map((s) => STAGES.includes(s) ? authStage : s); if (APPLY) await prisma.card.update({ where: { id: j.cardId }, data: { subtypes: ns } }); j.card.subtypes = ns; sfix++; }
     }
   }
 
@@ -88,7 +88,7 @@ async function main() {
   //    번호 표기 정규화(DB "001" vs pokemontcg.io "1"): 숫자부 선행 0 제거, 알파벳 접미사 유지("121a").
   const numKey = (n: string) => n.replace(/^0+(?=\d)/, "");
   const byNum = new Map(cards.map((c: any) => [numKey(String(c.number)), c]));
-  const enRows = await prisma.regionCard.findMany({ where: { setId: enSet }, select: { id: true, number: true, numberInt: true, name: true, logicalCardId: true } });
+  const enRows = await prisma.regionCard.findMany({ where: { setId: enSet }, select: { id: true, number: true, numberInt: true, name: true, cardId: true } });
 
   // 3) JP 버킷(포켓몬): dex|subtypes → [{lcid, rank, numInt, subs}]
   //    ⚠ JP DB 는 EN 메커니즘 subtype(Tera 테라스탈 · Ancient 고대 · Future 미래 · Radiant かがやく)을 안 담음
@@ -97,7 +97,7 @@ async function main() {
   const ENMECH = ["Tera", "Ancient", "Future", "Radiant", "Restored", "TAG TEAM", "Prism Star", "Ultra Beast", "Single Strike", "Rapid Strike", "Fusion Strike", "Team Plasma", "Prime", "SP", "Level-Up", "Team Magma", "Team Aqua"]; // SP·Level-Up=DPt 시대(G/GL/四/LV.X) · Team Magma/Aqua=ADV4(ex4, 2026-06-06)
   const subN = (a?: string[] | null) => [...(a ?? [])].filter((s) => !ENMECH.includes(s)).sort().join(",");
   const jpById = new Map(jpRows.map((j) => [j.id, j]));
-  const jpPoke = jpRows.filter((j) => isPokemonSupertype(j.logicalCard.supertype) && (j.logicalCard.pokedexNumbers?.length));
+  const jpPoke = jpRows.filter((j) => isPokemonSupertype(j.card.supertype) && (j.card.pokedexNumbers?.length));
 
   // 1c) JP subtype 결손 백필 — SWSH 일부 JP 세트(S2a 90%·S5a/S6a 100% 등)가 stage·접미어(V/VMAX 등) 누락 → dex|subtype 버킷 어긋나 미매칭.
   //     접미어는 JP 카드 *이름*에서 유도(バシャーモV→V), stage 는 EN 카드(완전)의 dex+접미어→stage 로 보충.
@@ -109,19 +109,19 @@ async function main() {
   for (const c of cards) { if (!isPokemonSupertype(c.supertype)) continue; const st = (c.subtypes ?? []).find((s: string) => STAGES_BF.includes(s)); if (!st) continue; const suf = sufOf(c.subtypes ?? []); for (const d of (c.nationalPokedexNumbers ?? [])) { const k = `${d}|${suf}`; if (!enStageMap.has(k)) enStageMap.set(k, st); } }
   let stageBf = 0;
   for (const j of jpPoke) {
-    const subs = j.logicalCard.subtypes ?? [];
+    const subs = j.card.subtypes ?? [];
     const suf = nameSuf(j.name); // 이름 유도 접미어
     const need: string[] = [];
     if (suf && !subs.some((s) => s.toUpperCase() === suf.toUpperCase())) need.push(suf); // 접미어 결손 보충
     const drop = suf === "VSTAR" ? ["VMAX"] : []; // VSTAR 카드는 VMAX 아님 — JP 오라벨(VMAX) 제거(S9~S12 VSTAR 자동교정)
     const hasStage = subs.some((s) => [...STAGES_BF, "VMAX", "VSTAR", "BREAK"].includes(s)) || suf === "VMAX" || suf === "VSTAR"; // BREAK 은 자체 stage(EN ptcg.io 관례 subtypes:["BREAK"]) — 일반판 stage 주입 금지
-    if (!hasStage) { const dex = j.logicalCard.pokedexNumbers?.[0]; const st = dex != null ? enStageMap.get(`${dex}|${suf}`) : null; if (st) need.push(st); }
-    if (need.length || drop.some((d) => subs.includes(d))) { const ns = [...new Set([...need, ...subs])].filter((s) => !drop.includes(s)); if (APPLY) await prisma.logicalCard.update({ where: { id: j.logicalCardId }, data: { subtypes: ns } }); j.logicalCard.subtypes = ns; stageBf++; }
+    if (!hasStage) { const dex = j.card.pokedexNumbers?.[0]; const st = dex != null ? enStageMap.get(`${dex}|${suf}`) : null; if (st) need.push(st); }
+    if (need.length || drop.some((d) => subs.includes(d))) { const ns = [...new Set([...need, ...subs])].filter((s) => !drop.includes(s)); if (APPLY) await prisma.card.update({ where: { id: j.cardId }, data: { subtypes: ns } }); j.card.subtypes = ns; stageBf++; }
   }
 
   const jpBucket = new Map<string, { lcid: string; rank: number; numInt: number; subs: string[] }[]>();
   // 타그팀(複dex)은 정렬 멀티덱스키("3&251")로 — EN nationalPokedexNumbers 와 JP pokedexNumbers 순서가 달라도 일치. 단일은 jaDex(폼교정)/첫dex.
-  for (const j of jpPoke) { const pn = j.logicalCard.pokedexNumbers!; const dexKey = pn.length >= 2 ? [...pn].sort((a, b) => a - b).join("&") : String(jaDex(j.name) ?? pn[0]); const k = `${dexKey}|${subN(j.logicalCard.subtypes)}`; (jpBucket.get(k) ?? jpBucket.set(k, []).get(k))!.push({ lcid: j.logicalCardId, rank: rankJp(j.logicalCard.rarity?.code), numInt: j.numberInt ?? 0, subs: j.logicalCard.subtypes ?? [] }); }
+  for (const j of jpPoke) { const pn = j.card.pokedexNumbers!; const dexKey = pn.length >= 2 ? [...pn].sort((a, b) => a - b).join("&") : String(jaDex(j.name) ?? pn[0]); const k = `${dexKey}|${subN(j.card.subtypes)}`; (jpBucket.get(k) ?? jpBucket.set(k, []).get(k))!.push({ lcid: j.cardId, rank: rankJp(j.card.rarity?.code), numInt: j.numberInt ?? 0, subs: j.card.subtypes ?? [] }); }
   for (const a of jpBucket.values()) a.sort((x, y) => x.rank - y.rank || x.numInt - y.numInt);
 
   // 4) EN 포켓몬 매칭
@@ -148,10 +148,10 @@ async function main() {
   //     일러는 같은 일러에 여러 카드가 섞여 스크램블되므로 이름이 정체성. 사전 미등록 JP명은 경고.
   //     매칭된 JP LC 에 EN subtype 백필(JP 데이터 교정). subtypeBackfill: jpLcid → EN subtypes
   const subtypeBackfill = new Map<string, string[]>();
-  const jpTr = jpRows.filter((j) => !isPokemonSupertype(j.logicalCard.supertype) && j.logicalCard.supertype && j.logicalCard.supertype !== "Energy");
+  const jpTr = jpRows.filter((j) => !isPokemonSupertype(j.card.supertype) && j.card.supertype && j.card.supertype !== "Energy");
   const jpTrByEn = new Map<string, { lcid: string; rank: number; numInt: number; subs: string[]; jpName: string; num: string }[]>();
   const unmappedJp: string[] = [];
-  for (const j of jpTr) { const en = (j.name === "博士の研究" && !TR_JP2EN["博士の研究"]) ? profResearchEn(j.setId) : TR_JP2EN[j.name]; if (!en) { unmappedJp.push(`#${j.number} ${j.name}`); continue; } (jpTrByEn.get(en) ?? jpTrByEn.set(en, []).get(en))!.push({ lcid: j.logicalCardId, rank: rankJp(j.logicalCard.rarity?.code), numInt: j.numberInt ?? 0, subs: j.logicalCard.subtypes ?? [], jpName: j.name, num: j.number }); }
+  for (const j of jpTr) { const en = (j.name === "博士の研究" && !TR_JP2EN["博士の研究"]) ? profResearchEn(j.setId) : TR_JP2EN[j.name]; if (!en) { unmappedJp.push(`#${j.number} ${j.name}`); continue; } (jpTrByEn.get(en) ?? jpTrByEn.set(en, []).get(en))!.push({ lcid: j.cardId, rank: rankJp(j.card.rarity?.code), numInt: j.numberInt ?? 0, subs: j.card.subtypes ?? [], jpName: j.name, num: j.number }); }
   for (const a of jpTrByEn.values()) a.sort((x, y) => x.rank - y.rank || x.numInt - y.numInt);
   const enTrByName = new Map<string, EnId[]>();
   for (const e of enIds) { if (e.dex != null) continue; const c = e.c; if (!c || isPokemonSupertype(c.supertype) || c.supertype === "Energy") continue; (enTrByName.get(e.loc.name) ?? enTrByName.set(e.loc.name, []).get(e.loc.name))!.push(e); }
@@ -163,26 +163,26 @@ async function main() {
   const jpEnergyType = (n: string) => { const m = n.match(/基本(.+?)エネルギー/); return m ? ETYPE[m[1]] ?? null : null; };
   const enEnergyType = (n: string) => { const m = n.match(/Basic\s+(\w+)\s+Energy/i); return m ? m[1] : null; };
   const jpBasicE = new Map<string, string>(); // type → jpLcid
-  for (const j of jpRows) { if (j.logicalCard.supertype !== "Energy") continue; const t = jpEnergyType(j.name); if (t) jpBasicE.set(t, j.logicalCardId); }
+  for (const j of jpRows) { if (j.card.supertype !== "Energy") continue; const t = jpEnergyType(j.name); if (t) jpBasicE.set(t, j.cardId); }
   // EN 메타없음(c=null)이어도 이름이 "... Energy" 면 에너지로 간주(ptcg.io 가 에너지 메타 누락하는 세트: xy12 등)
   for (const e of enIds) { if (repoint.has(e.loc.id)) continue; const isE = e.c ? e.c.supertype === "Energy" : /\sEnergy$/.test(e.loc.name); if (!isE) continue; const t = enEnergyType(e.loc.name); const lc = t ? jpBasicE.get(t) : null; if (lc) repoint.set(e.loc.id, lc); }
   // 특수에너지: EN명↔JP명 검증쌍 직매칭 (기본에너지 패턴 밖)
   const SPECIAL_E: Record<string, string> = { "Double Colorless Energy": "ダブル無色エネルギー", "Double Aqua Energy": "ダブルアクアエネルギー", "Double Magma Energy": "ダブルマグマエネルギー", "Blend Energy GrassFirePsychicDarkness": "ブレンドエネルギー 草炎超悪", "Blend Energy WaterLightningFightingMetal": "ブレンドエネルギー 水雷闘鋼", "Plasma Energy": "プラズマエネルギー", "Rainbow Energy": "レインボーエネルギー", "Rescue Energy": "レスキューエネルギー", "SP Energy": "SPエネルギー", "Upper Energy": "アッパーエネルギー" };
   const jpEnergyByName = new Map<string, string>();
-  for (const j of jpRows) { if (j.logicalCard.supertype === "Energy") jpEnergyByName.set(j.name.split(/<span/)[0].trim(), j.logicalCardId); }
+  for (const j of jpRows) { if (j.card.supertype === "Energy") jpEnergyByName.set(j.name.split(/<span/)[0].trim(), j.cardId); }
   for (const e of enIds) { if (repoint.has(e.loc.id)) continue; const ja = SPECIAL_E[e.loc.name]; const lc = ja ? jpEnergyByName.get(ja) : null; if (lc) repoint.set(e.loc.id, lc); }
 
   // 5) 미매칭 EN → orphan
   const orphan = enIds.filter((e) => !repoint.has(e.loc.id));
   let merged = 0, orphaned = 0, sample: string[] = [];
   if (APPLY) {
-    for (const [jpLcid, subs] of subtypeBackfill) await prisma.logicalCard.update({ where: { id: jpLcid }, data: { subtypes: subs } });
-    for (const [jpLcid, subs] of subEnrich) await prisma.logicalCard.update({ where: { id: jpLcid }, data: { subtypes: subs } });
-    for (const [enLocId, jpLcid] of repoint) { await prisma.regionCard.update({ where: { id: enLocId }, data: { logicalCardId: jpLcid } }); merged++; }
-    for (const e of orphan) { const lcId = `lc-orphan-${enSet}-${e.loc.number}`; const data: any = { supertype: e.c?.supertype ?? "Pokémon", subtypes: e.subs, pokedexNumbers: e.dex != null ? [e.dex] : [] }; if (e.c?.artist) data.illustrator = e.c.artist; if (await prisma.logicalCard.findUnique({ where: { id: lcId } })) await prisma.logicalCard.update({ where: { id: lcId }, data }); else await prisma.logicalCard.create({ data: { id: lcId, primarySetId: enSet, primaryNumber: e.loc.number, ...data } }); await prisma.regionCard.update({ where: { id: e.loc.id }, data: { logicalCardId: lcId } }); orphaned++; }
+    for (const [jpLcid, subs] of subtypeBackfill) await prisma.card.update({ where: { id: jpLcid }, data: { subtypes: subs } });
+    for (const [jpLcid, subs] of subEnrich) await prisma.card.update({ where: { id: jpLcid }, data: { subtypes: subs } });
+    for (const [enLocId, jpLcid] of repoint) { await prisma.regionCard.update({ where: { id: enLocId }, data: { cardId: jpLcid } }); merged++; }
+    for (const e of orphan) { const lcId = `lc-orphan-${enSet}-${e.loc.number}`; const data: any = { supertype: e.c?.supertype ?? "Pokémon", subtypes: e.subs, pokedexNumbers: e.dex != null ? [e.dex] : [] }; if (e.c?.artist) data.illustrator = e.c.artist; if (await prisma.card.findUnique({ where: { id: lcId } })) await prisma.card.update({ where: { id: lcId }, data }); else await prisma.card.create({ data: { id: lcId, primarySetId: enSet, primaryNumber: e.loc.number, ...data } }); await prisma.regionCard.update({ where: { id: e.loc.id }, data: { cardId: lcId } }); orphaned++; }
   } else {
     merged = repoint.size; orphaned = orphan.length;
-    for (const [enLocId, jpLcid] of [...repoint].slice(0, 6)) { const e = enRows.find((x) => x.id === enLocId)!; const j = jpById.get([...jpRows].find((r) => r.logicalCardId === jpLcid)?.id ?? ""); sample.push(`EN#${e.number}${e.name} → JP#${j?.number}${j?.name}`); }
+    for (const [enLocId, jpLcid] of [...repoint].slice(0, 6)) { const e = enRows.find((x) => x.id === enLocId)!; const j = jpById.get([...jpRows].find((r) => r.cardId === jpLcid)?.id ?? ""); sample.push(`EN#${e.number}${e.name} → JP#${j?.number}${j?.name}`); }
     // orphan 진단: 같은 정체성 버킷에 *미소진* JP(EN짝 없는 JP)가 남아있으면 ⚠의심(매칭누락) — 검증게이트 ②
     // 버킷의 JP 가 모두 소진됐는데 EN 이 더 많은 경우(잉여)는 ✔단독(같은 포켓몬의 추가 레어도 등).
     const matchedJp = new Set(repoint.values());
@@ -199,11 +199,11 @@ async function main() {
     const orphanDexSubs = new Map<number, Set<string>>();
     for (const e of orphan) if (e.dex != null) (orphanDexSubs.get(e.dex) ?? orphanDexSubs.set(e.dex, new Set()).get(e.dex))!.add(sub(e.subs));
     const jpUnmatchedSameDex: string[] = [];
-    for (const j of jpPoke) { if (matchedJp.has(j.logicalCardId)) continue; const dex = jaDex(j.name) ?? j.logicalCard.pokedexNumbers![0]; if (orphanDexSubs.has(dex)) jpUnmatchedSameDex.push(`JP#${j.number} ${j.name} [dex${dex} ${sub(j.logicalCard.subtypes)}] ↔ orphanEN subtypes:{${[...orphanDexSubs.get(dex)!].join(" / ")}}`); }
+    for (const j of jpPoke) { if (matchedJp.has(j.cardId)) continue; const dex = jaDex(j.name) ?? j.card.pokedexNumbers![0]; if (orphanDexSubs.has(dex)) jpUnmatchedSameDex.push(`JP#${j.number} ${j.name} [dex${dex} ${sub(j.card.subtypes)}] ↔ orphanEN subtypes:{${[...orphanDexSubs.get(dex)!].join(" / ")}}`); }
     if (jpUnmatchedSameDex.length) { console.log(`  ⚠ subtypes 어긋남 의심(EN짝없는 JP 인데 같은dex orphan EN 존재) ${jpUnmatchedSameDex.length}장:`); jpUnmatchedSameDex.forEach((s) => console.log("    " + s)); }
     else console.log(`  → subtypes 어긋남 의심 0장(EN짝없는 JP 중 orphan과 같은 dex 없음)`);
     // 트레이너 페어 덤프(이름사전 매칭 결과 — EN명별로 JP명이 일관되는지 눈으로 검증)
-    const jpByLcid2 = new Map(jpRows.map((r) => [r.logicalCardId, r]));
+    const jpByLcid2 = new Map(jpRows.map((r) => [r.cardId, r]));
     const trPairs: { en: string; enNum: string; jp: string; jpNum: string }[] = [];
     for (const [enLocId, jpLcid] of repoint) { const e = enRows.find((x) => x.id === enLocId)!; const c = byNum.get(numKey(e.number)); if (!c || isPokemonSupertype(c.supertype) || c.supertype === "Energy") continue; const j = jpByLcid2.get(jpLcid); if (j) trPairs.push({ en: e.name, enNum: e.number, jp: j.name, jpNum: j.number }); }
     const byEnName = new Map<string, typeof trPairs>(); for (const p of trPairs) { const base = p.en.replace(/\s*\(.*\)$/, ""); (byEnName.get(base) ?? byEnName.set(base, []).get(base))!.push(p); }

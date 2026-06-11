@@ -441,7 +441,7 @@ function CardDetailContent({
   card, locale,
 }: { card: SelectedCard; locale: string }) {
   const [prices, setPrices] = useState<CardPriceRow[] | null>(null);
-  // 지역판 탭 + 카드 정보 — 같은 LogicalCard 의 한/영/일 이미지 & 메타
+  // 지역판 탭 + 카드 정보 — 같은 Card 의 한/영/일 이미지 & 메타
   const [variants, setVariants] = useState<RegionCardVariant[] | null>(null);
   const [info, setInfo] = useState<CardInfo | null>(null);
   const [activeRegion, setActiveRegion] = useState<string>(card.region ?? "");

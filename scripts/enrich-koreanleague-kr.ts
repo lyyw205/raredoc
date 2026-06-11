@@ -8,9 +8,9 @@
  * - 입상덱: pokemonkorea.co.kr/koreanleague_2026/menu700 (시즌×부문×성적×선수+덱코드 48)
  * - 덱코드 해석: POST pokemoncard.co.kr/v2/ajax2 (action=get_dec_detail)
  *   ⚠ 헤더 3종 필수: Referer + Origin + X-Requested-With (없으면 "접근불가")
- *   → BS코드 → resolver 경로④ → logicalCardId
+ *   → BS코드 → resolver 경로④ → cardId
  * - 부착 검증: 이름(한글↔로마자 자동대조 불가) 대신 **덱 핑거프린트** —
- *   KR 덱 logicalCard 집합 ↔ standing 의 limitless decklist 집합 일치율 ≥0.8 이면 검증 부착.
+ *   KR 덱 card 집합 ↔ standing 의 limitless decklist 집합 일치율 ≥0.8 이면 검증 부착.
  *   TOP4(placing 3·4 동순위)는 핑거프린트가 높은 쪽에 부착(모호성 해소).
  * - 마스터 부문만 부착 가능(정본 standings 가 마스터 게재) — 주니어/시니어는 사유 로그.
  * - 덱코드 JSON 은 data/deck-codes/kr/{code}.json 영구 캐시(재조회 0).
@@ -123,7 +123,7 @@ function bucketOf(cardType?: string): Bucket {
 
 /**
  * 종(dex) 핑거프린트 — 포켓몬 카드명 → 도감번호 멀티셋 (count 가중).
- * LogicalCard 는 인쇄판 단위라 같은 덱도 등록 인쇄판이 다르면 어긋남(재록/프로모) →
+ * Card 는 인쇄판 단위라 같은 덱도 등록 인쇄판이 다르면 어긋남(재록/프로모) →
  * 인쇄판 불변·교차언어(ko/en) 동일성은 종 단위가 정답 (PokeAPI 이름표 활용).
  */
 function dexFingerprint(cards: Array<{ name: string; count: number }>, lang: "ko" | "en"): Map<number, number> {
@@ -182,9 +182,9 @@ async function main() {
     }
 
     try {
-      // 덱코드 해석 → 통일 양식 + logicalCardId
+      // 덱코드 해석 → 통일 양식 + cardId
       const krCards = await fetchDeckCode(e.code);
-      const buckets: Record<Bucket, Array<{ count: number; set: string; number: string; name: string; cardId: string; logicalCardId?: string | null }>> = {
+      const buckets: Record<Bucket, Array<{ count: number; set: string; number: string; name: string; cardNum: string; cardId?: string | null }>> = {
         pokemon: [],
         trainer: [],
         energy: [],
@@ -196,8 +196,8 @@ async function main() {
           set: "",
           number: "",
           name: c.cardName,
-          cardId: c.cardNum,
-          logicalCardId: resolved?.logicalCardId ?? null,
+          cardNum: c.cardNum,
+          cardId: resolved?.cardId ?? null,
         });
       }
       const krFp = dexFingerprint(buckets.pokemon, "ko");

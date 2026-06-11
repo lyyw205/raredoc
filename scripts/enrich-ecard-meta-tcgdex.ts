@@ -1,5 +1,5 @@
 /**
- * E1~5, VS1, web1 (e-Card era + 그 전후, 2001~2002) LogicalCard 메타를 tcgdex 에서 보강.
+ * E1~5, VS1, web1 (e-Card era + 그 전후, 2001~2002) Card 메타를 tcgdex 에서 보강.
  * 이미지는 이미 tcgplayer-cdn 으로 채워져 있어 건너뜀.
  */
 import "dotenv/config";
@@ -65,13 +65,13 @@ async function main() {
 
     for (const c of sum.cards) {
       // DB 의 setId 는 uppercase (E1, VS1, web1). tcgdex c.id 는 lowercase (e1-001).
-      // 우리 LogicalCard id 패턴: lc-orphan-jp-tcg-{DB SetId}-{localId} 인지 확인 필요.
+      // 우리 Card id 패턴: lc-orphan-jp-tcg-{DB SetId}-{localId} 인지 확인 필요.
       // PMCG/NEO 패턴 따라가면 cardPack 의 DB setId 와 일치해야 함.
       // 실제 DB 카드 ID 패턴: jp-tcg-E1-001 (uppercase). 그래서 setId 변환.
       const dbSetCode = setId === "vs1" ? "VS1" : setId === "web1" ? "web1" : setId.toUpperCase();
       const ourLocaleId = `jp-tcg-${dbSetCode}-${c.localId.padStart(3, "0")}`;
       const ourLogicalId = `lc-orphan-${ourLocaleId}`;
-      const lc = await prisma.logicalCard.findUnique({ where: { id: ourLogicalId } });
+      const lc = await prisma.card.findUnique({ where: { id: ourLogicalId } });
       if (!lc) { missing++; continue; }
 
       const d = await fetchJson<CardDetail>(`https://api.tcgdex.net/v2/ja/cards/${c.id}`);
@@ -97,7 +97,7 @@ async function main() {
         if (rid) update.rarityId = rid; else unmatched.add(d.rarity);
       }
       if (Object.keys(update).length > 0) {
-        await prisma.logicalCard.update({ where: { id: ourLogicalId }, data: update });
+        await prisma.card.update({ where: { id: ourLogicalId }, data: update });
         enriched++;
       } else skipped++;
 
@@ -105,17 +105,17 @@ async function main() {
         where: { sourceId_externalId: { sourceId: source.id, externalId: c.id } },
         create: {
           sourceId: source.id, externalId: c.id,
-          logicalCardId: ourLogicalId, regionCardId: ourLocaleId,
+          cardId: ourLogicalId, regionCardId: ourLocaleId,
           url: `https://api.tcgdex.net/v2/ja/cards/${c.id}`,
           verifiedBy: "auto:enrich-ecard-meta-tcgdex", confidence: 0.95,
         },
-        update: { logicalCardId: ourLogicalId, regionCardId: ourLocaleId },
+        update: { cardId: ourLogicalId, regionCardId: ourLocaleId },
       });
       totalMap++;
     }
   }
   console.log(`\n── 결과 ──`);
-  console.log(`  enriched: ${enriched}, skipped: ${skipped}, LogicalCard 누락: ${missing}, ExternalIdMapping: ${totalMap}`);
+  console.log(`  enriched: ${enriched}, skipped: ${skipped}, Card 누락: ${missing}, ExternalIdMapping: ${totalMap}`);
   if (unmatched.size > 0) {
     console.log(`  매칭 안된 rarity (${unmatched.size}):`);
     for (const r of unmatched) console.log(`    "${r}"`);
