@@ -9,7 +9,7 @@
 import { prisma } from "@/lib/prisma";
 import { pickRarityLabel } from "./card-fields";
 import { canonEra, eraOrderIndex } from "./eras";
-import type { DexCard } from "@/components/dex/DexCatalog";
+import type { DexCard, DexCardVariant } from "@/components/dex/DexCatalog";
 
 export type Region = "JP" | "EN" | "KR";
 
@@ -154,14 +154,45 @@ async function buildSetCards(setId: string): Promise<DexCard[]> {
               category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } },
             },
           },
+          // 임시: 카드별 지역 형제(JP/EN/KR 인라인 토글용). 매핑 검증 후 제거 예정.
+          locales: {
+            select: {
+              id: true, region: true, name: true, number: true, imageSmall: true,
+              rarity: {
+                select: {
+                  code: true, nameKo: true, nameJa: true, nameEn: true, tier: true,
+                  category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } },
+                },
+              },
+            },
+          },
         },
       },
     },
     orderBy: [{ numberInt: "asc" }, { number: "asc" }],
   });
 
+  const REGS = ["JP", "EN", "KR"] as const;
   return rcs.map((rc): DexCard => {
     const rar = rc.rarity ?? rc.card.rarity; // 인쇄본별 rarity 우선, LC 폴백
+    // 임시: 카드별 지역 형제(variants) — 현재 region 은 rc 자신, 그 외는 같은 Card 의 첫 형제 1개씩.
+    const byRegion = new Map<string, DexCardVariant>();
+    byRegion.set(rc.region, {
+      id: rc.id, region: rc.region, name: rc.name, number: rc.number,
+      imageSmall: rc.imageSmall ?? rc.imageLarge ?? null,
+      rarity: pickRarityLabel(rc.region, rar) ?? undefined,
+      rarityCategoryNameKo: rar?.category?.nameKo ?? undefined,
+    });
+    for (const v of rc.card.locales) {
+      if (byRegion.has(v.region)) continue;
+      const vr = v.rarity ?? rc.card.rarity;
+      byRegion.set(v.region, {
+        id: v.id, region: v.region, name: v.name, number: v.number, imageSmall: v.imageSmall,
+        rarity: pickRarityLabel(v.region, vr) ?? undefined,
+        rarityCategoryNameKo: vr?.category?.nameKo ?? undefined,
+      });
+    }
+    const variants = REGS.flatMap((reg) => { const v = byRegion.get(reg); return v ? [v] : []; });
     return {
       id: rc.id,
       name: rc.name,
@@ -182,6 +213,7 @@ async function buildSetCards(setId: string): Promise<DexCard[]> {
       owned: false,
       grade: undefined,
       certified: false,
+      variants,
     };
   });
 }

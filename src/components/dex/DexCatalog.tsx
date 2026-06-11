@@ -21,6 +21,16 @@ import {
   Sheet,
 } from "@/components/toss";
 
+export type DexCardVariant = {
+  id: string;
+  region: string;
+  name: string;
+  number: string;
+  imageSmall: string | null;
+  rarity?: string;
+  rarityCategoryNameKo?: string;
+};
+
 export type DexCard = {
   id: string;
   name: string;
@@ -41,6 +51,7 @@ export type DexCard = {
   owned: boolean;
   grade?: string;
   certified?: boolean;
+  variants?: DexCardVariant[]; // 임시: 지역 형제(JP/EN/KR 인라인 토글). 매핑 검증 후 제거.
 };
 
 function CardImage({
@@ -777,6 +788,64 @@ function SetDetailModal({ set, locale, onClose, onCardClick }: { set: ModalSet; 
 // ── 메인 컴포넌트 ─────────────────────────────────────────────────────────
 const REGION_ORDER: Region[] = ["JP", "EN", "KR"];
 
+// 임시: 지역 형제 인라인 토글(옛 GroupCards/AnchorTile 느낌)이 달린 격자 카드 타일. 매핑 검증 후 제거 예정.
+function GridCardTile({ card, dimmed, showOwned, onOpen }: {
+  card: DexCard;
+  dimmed: boolean;
+  showOwned: boolean;
+  onOpen: (v: DexCardVariant) => void;
+}) {
+  const variants = card.variants ?? [];
+  const present = (["JP", "EN", "KR"] as const).filter((r) => variants.some((v) => v.region === r));
+  const [active, setActive] = useState<string>(card.region ?? present[0] ?? "");
+  const cur: DexCardVariant =
+    variants.find((v) => v.region === active) ??
+    variants.find((v) => v.region === card.region) ??
+    variants[0] ??
+    { id: card.id, region: card.region ?? "", name: card.name, number: card.number, imageSmall: card.imageSmall, rarity: card.rarity, rarityCategoryNameKo: card.rarityCategoryNameKo };
+  const rarLabel = cur.rarityCategoryNameKo ?? cur.rarity;
+  return (
+    <div className="group relative block text-left">
+      <button type="button" onClick={() => onOpen(cur)} className="block w-full" title={`${cur.name} · No.${cur.number}`}>
+        <div
+          className="relative rounded-toss-md overflow-hidden group-hover:shadow-toss-md transition-shadow"
+          style={{ aspectRatio: "63 / 88", filter: dimmed ? "grayscale(100%)" : "none", opacity: dimmed ? 0.3 : 1, transition: "filter 0.3s, opacity 0.3s" }}
+        >
+          <CardImage src={cur.imageSmall} alt={cur.name} className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-200" />
+          {showOwned && card.owned && card.grade && (
+            <div className="absolute bottom-[2px] left-[2px] text-[7px] font-bold bg-toss-text-primary text-toss-bg-base px-1 py-[1px] rounded leading-tight">{card.grade}</div>
+          )}
+          {showOwned && card.owned && card.certified && (
+            <div className="absolute top-[2px] right-[2px] w-2.5 h-2.5 rounded-full bg-toss-success ring-1 ring-toss-bg-base shadow" />
+          )}
+        </div>
+      </button>
+      {/* 임시 인라인 지역 토글 */}
+      <div className="mt-1 flex justify-center gap-0.5">
+        {(["JP", "EN", "KR"] as const).map((r) => {
+          const has = present.includes(r);
+          const on = active === r && has;
+          return (
+            <button
+              key={r}
+              type="button"
+              disabled={!has}
+              onClick={() => { if (has) setActive(r); }}
+              className={`text-[8px] font-bold leading-none px-1 py-[2px] rounded ${on ? "bg-toss-text-primary text-toss-bg-base" : has ? "bg-toss-bg-muted text-toss-text-secondary hover:text-toss-text-primary" : "text-toss-text-quaternary cursor-default"}`}
+            >
+              {r}
+            </button>
+          );
+        })}
+      </div>
+      <p className="mt-0.5 text-toss-micro text-center text-toss-text-secondary leading-tight truncate" title={cur.name}>{cur.name}</p>
+      <p className="text-toss-tiny text-center text-toss-text-quaternary leading-none truncate">
+        #{cur.number}{rarLabel ? ` · ${rarLabel}` : ""}
+      </p>
+    </div>
+  );
+}
+
 export function DexCatalog({ regionPacks, locale }: { regionPacks: Record<Region, RegionPack[]>; locale: string }) {
   // 노출 지역 = 팩이 1개 이상 있는 지역(JP/EN/KR 순). 기본은 JP 있으면 JP, 없으면 첫째.
   const availableRegions = useMemo(
@@ -1216,50 +1285,21 @@ export function DexCatalog({ regionPacks, locale }: { regionPacks: Record<Region
                 className={`grid gap-1.5 ${view === "mine" ? "mt-1" : "mt-3"}`}
                 style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
               >
-                {filteredCards.map((card) => {
-                  const dimmed = view === "mine" && !card.owned;
-                  return (
-                    <button
-                      key={card.id}
-                      onClick={() => openCard({ ...card, setName: activePack.name, setId: activePack.setId, setLogoUrl: activePack.logoUrl ?? `https://images.pokemontcg.io/${activePack.setId}/logo.png` })}
-                      className="group relative block text-left"
-                      title={`${card.name} · No.${card.number}`}
-                    >
-                      <div
-                        className="rounded-toss-md overflow-hidden group-hover:shadow-toss-md transition-shadow"
-                        style={{
-                          aspectRatio: "63 / 88",
-                          filter: dimmed ? "grayscale(100%)" : "none",
-                          opacity: dimmed ? 0.3 : 1,
-                          transition: "filter 0.3s, opacity 0.3s",
-                        }}
-                      >
-                        <CardImage
-                          src={card.imageSmall}
-                          alt={card.name}
-                          className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-200"
-                        />
-                      </div>
-                      {view === "mine" && card.owned && card.grade && (
-                        <div className="absolute bottom-[14px] left-[2px] text-[7px] font-bold bg-toss-text-primary text-toss-bg-base px-1 py-[1px] rounded leading-tight">
-                          {card.grade}
-                        </div>
-                      )}
-                      {view === "mine" && card.owned && card.certified && (
-                        <div className="absolute top-[2px] right-[2px] w-2.5 h-2.5 rounded-full bg-toss-success ring-1 ring-toss-bg-base shadow" />
-                      )}
-                      <div className="mt-[3px] px-0.5">
-                        <p className="text-toss-micro text-center text-toss-text-secondary leading-tight truncate" title={card.name}>
-                          {card.name}
-                        </p>
-                        <p className="text-toss-tiny text-center text-toss-text-quaternary leading-none truncate">
-                          #{card.number}
-                          {(card.rarityCategoryNameKo ?? card.rarity) ? ` · ${card.rarityCategoryNameKo ?? card.rarity}` : ""}
-                        </p>
-                      </div>
-                    </button>
-                  );
-                })}
+                {filteredCards.map((card) => (
+                  <GridCardTile
+                    key={card.id}
+                    card={card}
+                    dimmed={view === "mine" && !card.owned}
+                    showOwned={view === "mine"}
+                    onOpen={(v) => openCard({
+                      ...card,
+                      id: v.id, region: v.region, name: v.name, number: v.number,
+                      imageSmall: v.imageSmall, rarity: v.rarity, rarityCategoryNameKo: v.rarityCategoryNameKo,
+                      setName: activePack.name, setId: activePack.setId,
+                      setLogoUrl: activePack.logoUrl ?? `https://images.pokemontcg.io/${activePack.setId}/logo.png`,
+                    })}
+                  />
+                ))}
               </div>
             </section>
           );
