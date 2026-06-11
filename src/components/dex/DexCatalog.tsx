@@ -821,7 +821,7 @@ function GridCardTile({ card, dimmed, showOwned, onOpen }: {
         </div>
       </button>
       {/* 임시 인라인 지역 토글 */}
-      <div className="mt-1 flex justify-center gap-0.5">
+      <div className="mt-1.5 flex justify-center gap-1">
         {(["JP", "EN", "KR"] as const).map((r) => {
           const has = present.includes(r);
           const on = active === r && has;
@@ -831,7 +831,7 @@ function GridCardTile({ card, dimmed, showOwned, onOpen }: {
               type="button"
               disabled={!has}
               onClick={() => { if (has) setActive(r); }}
-              className={`text-[8px] font-bold leading-none px-1 py-[2px] rounded ${on ? "bg-toss-text-primary text-toss-bg-base" : has ? "bg-toss-bg-muted text-toss-text-secondary hover:text-toss-text-primary" : "text-toss-text-quaternary cursor-default"}`}
+              className={`text-[11px] font-bold leading-none px-2 py-1 rounded-toss-sm border transition-colors ${on ? "bg-toss-text-primary text-toss-bg-base border-toss-text-primary" : has ? "bg-toss-bg-base text-toss-text-secondary border-toss-divider hover:border-toss-text-tertiary hover:text-toss-text-primary" : "bg-toss-bg-muted text-toss-text-quaternary border-transparent cursor-default"}`}
             >
               {r}
             </button>
