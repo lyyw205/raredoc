@@ -39,7 +39,7 @@ async function main() {
     if (args.set)
       and.push({
         OR: [
-          { setGroupId: { contains: args.set, mode: "insensitive" } },
+          { cardPackId: { contains: args.set, mode: "insensitive" } },
           { locales: { some: { set: { OR: [
             { code: { contains: args.set, mode: "insensitive" } },
             { id: { contains: args.set, mode: "insensitive" } },
@@ -62,13 +62,13 @@ async function main() {
       process.exit(1);
     }
 
-    const cards = await prisma.logicalCard.findMany({
+    const cards = await prisma.card.findMany({
       where: { AND: and },
       take: args.limit,
-      orderBy: [{ setGroupId: "asc" }, { primaryNumberInt: "asc" }],
+      orderBy: [{ cardPackId: "asc" }, { primaryNumberInt: "asc" }],
       include: {
         rarity: { select: { code: true } },
-        setGroup: { select: { id: true, era: true, nameKo: true, nameJa: true, releaseDate: true } },
+        cardPack: { select: { id: true, era: true, nameKo: true, nameJa: true, releaseDate: true } },
         locales: {
           select: { region: true, language: true, number: true, name: true, setId: true,
                     set: { select: { code: true, name: true } } },
@@ -84,7 +84,7 @@ async function main() {
       truncated: cards.length === args.limit,
       matches: cards.map((c) => ({
         logicalCardId: c.id,
-        setGroup: c.setGroup ? { id: c.setGroup.id, era: c.setGroup.era, name: c.setGroup.nameKo ?? c.setGroup.nameJa } : null,
+        setGroup: c.cardPack ? { id: c.cardPack.id, era: c.cardPack.era, name: c.cardPack.nameKo ?? c.cardPack.nameJa } : null,
         primaryNumber: c.primaryNumber,
         rarity: c.rarity?.code ?? null,
         pokedexNumbers: c.pokedexNumbers,
