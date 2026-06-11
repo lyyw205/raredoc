@@ -1248,9 +1248,15 @@ export function DexCatalog({ regionPacks, locale }: { regionPacks: Record<Region
                       {view === "mine" && card.owned && card.certified && (
                         <div className="absolute top-[2px] right-[2px] w-2.5 h-2.5 rounded-full bg-toss-success ring-1 ring-toss-bg-base shadow" />
                       )}
-                      <p className="text-toss-tiny text-center text-toss-text-quaternary mt-[2px] leading-none truncate">
-                        {card.number}
-                      </p>
+                      <div className="mt-[3px] px-0.5">
+                        <p className="text-toss-micro text-center text-toss-text-secondary leading-tight truncate" title={card.name}>
+                          {card.name}
+                        </p>
+                        <p className="text-toss-tiny text-center text-toss-text-quaternary leading-none truncate">
+                          #{card.number}
+                          {(card.rarityCategoryNameKo ?? card.rarity) ? ` · ${card.rarityCategoryNameKo ?? card.rarity}` : ""}
+                        </p>
+                      </div>
                     </button>
                   );
                 })}
