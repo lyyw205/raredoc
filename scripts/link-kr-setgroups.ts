@@ -149,7 +149,7 @@ const EXPLICIT_MAP: Record<string, string> = {
   "kr-ma":   "mega-dream-ex",  // 프리미엄 트레이너박스 MEGA
   "kr-mbd":  "mega-brave-symphonia",
   "kr-mbg":  "mega-brave-symphonia",
-  "kr-m-p":  "mega-ninja-spinner",
+  "kr-m-p":  "og-jp-mega-promo", // MEGA 스페셜 카드 세트 「메가엘레이드 ex」 = JP MEGA 프로모(jp-tcg-M-P) 의 KR판. 번호 不일치라 정체성(dex+이름)으로 매칭 — 번호 미러 금지. (이전 mega-ninja-spinner 오매핑 2026-06-12 교정)
 };
 
 // ── PROMO 그룹: CardPack이 없으면 신규 생성 ────────────────────────────────────
