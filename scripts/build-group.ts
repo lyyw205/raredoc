@@ -18,14 +18,14 @@ import { TR_JP2EN } from "./lib/trainer-names-sv";
 import { TR_JP2EN as TR_SM } from "./lib/trainer-names-sm";
 import { POKE, isPokemonSupertype } from "./lib/supertype";
 
-type Cfg = { nameKo: string; nameEn: string; jp: string[]; kr: string[]; krMirror: Record<string, string>; enNative: string[] | null; krMirrorAll?: boolean; enMerged?: boolean; enAnchor?: boolean; krMerged?: boolean; enCrossFallback?: boolean };
+export type Cfg = { nameKo: string; nameEn: string; jp: string[]; kr: string[]; krMirror: Record<string, string>; enNative: string[] | null; krMirrorAll?: boolean; enMerged?: boolean; enAnchor?: boolean; krMerged?: boolean; enCrossFallback?: boolean };
 // enCrossFallback: enMerged 합본 세트의 *재録* JP(native EN 세트엔 없고 타 EN 세트에 있음)를 표시용 교차매칭
 //   (포켓몬=dex+동일일러 reprint·트레이너=이름사전). DB·LC 무변경, 원본 세트 도감 불변 — 그 JP 앵커 en 칸만 채움.
 // krMerged: KR 이 DB 에서 JP/EN 앵커 LC 로 정체성 병합됨(크로스그룹 합본 KR — DP 한국판 kr-bs 등) → cardPackId 스코프로 추가 로드(enMerged 의 KR 대칭).
 // enMerged: EN 이 DB 에서 JP LC 로 정체성 병합됨(merge-en-identity) → 공유 lcid 로 읽음, 미병합 EN 은 영판전용 섹션.
 // krMirrorAll: KR 세트가 JP 정수번호 완전미러(트레이너 포함)일 때 true — 모든 카드 번호로 매칭.
 //   (일반 KR은 트레이너 번호가 JP와 어긋나 일러스트레이터 페어링 필요 → false/미지정)
-const CONFIG: Record<string, Cfg> = {
+export const CONFIG: Record<string, Cfg> = {
   "sv-base": {
     nameKo: "스칼렛 ex", nameEn: "Scarlet ex",
     jp: ["jp-tcg-SV1S"], kr: ["kr-sv1s"],
@@ -1398,4 +1398,7 @@ async function main() {
   console.log(`[${groupId}] 앵커 ${anchors.length} | EN매칭 ${enForJp.size}${crossGroup ? "(교차그룹)" : ""} | KR매칭 ${krForJp.size} | 영판전용 ${enOnly.length}`);
   await prisma.$disconnect();
 }
-main().catch((e) => { console.error(e); process.exit(1); });
+// 직접 실행 시에만 main 호출. (CONFIG 만 import 하는 모듈은 빌드를 트리거하지 않음)
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((e) => { console.error(e); process.exit(1); });
+}

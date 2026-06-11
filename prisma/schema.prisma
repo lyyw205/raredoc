@@ -25,6 +25,9 @@ model Set {
   tierEntries TierEntry[]
   primarySetForLogical Card[] @relation("LogicalCardPrimarySet")
   localeCards          RegionCard[]  @relation("CardLocaleSet")
+  // Stage 4(ident): 팩 대응표 역관계 (CardPackLink) — additive
+  packsAsSet    CardPackLink[] @relation("PackSet")
+  packsAsMirror CardPackLink[] @relation("PackMirror")
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 
@@ -38,7 +41,7 @@ model Set {
 // 부분 그룹 허용: JP/KR 만 있고 EN 이 없을 수도 있음(예: MEGA 시리즈) — 억지 매핑 금지.
 model CardPack {
   id          String    @id // slug 예: "sv-151", "sv-base", "mega-abysseye"
-  era         String // SV | MEGA | ...
+  era         String // SV | MEGA | ... (raw, 보존)
   nameEn      String?
   nameJa      String?
   nameKo      String?
@@ -47,12 +50,48 @@ model CardPack {
   sets        Set[]
   // Phase 1 추가: 신규 ERD 역방향 relation
   cards Card[] @relation("LogicalCardCardPack")
+  // Stage 4(ident): canonical era FK + 팩 대응표 — additive (era raw 필드는 보존)
+  eraKey      String?
+  eraRef      Era?           @relation(fields: [eraKey], references: [key])
+  packs       CardPackLink[]
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
   @@index([era])
   @@index([order])
+  @@index([eraKey])
   @@map("SetGroup")
+}
+
+// Stage 4(ident): canonical era 사전 (eras.ts ERA_ORDER/ERA_LABEL 단일출처를 DB 1급화)
+model Era {
+  key     String     @id // "MEGA","SV",... (ERA_ORDER 값)
+  order   Int        @unique // ERA_ORDER 내 인덱스(노출 순서, 신→구)
+  labelKo String // ERA_LABEL[key]
+  waves   CardPack[]
+}
+
+// Stage 4(ident): 팩(wave=CardPack) ↔ 지역 Set 대응표. build-group.ts CONFIG 의 DB 1급화.
+// CONFIG 키 = CardPack.id = waveId. region/role/mirror 로 jp/kr/enNative/krMirror 인코딩.
+model CardPackLink {
+  id            String   @id @default(cuid())
+  waveId        String // = CardPack.id (CONFIG 키)
+  wave          CardPack @relation(fields: [waveId], references: [id], onDelete: Cascade)
+  region        String // "JP"|"EN"|"KR"
+  setId         String? // → Set.id. CROSS(enNative=null)·JP_ONLY 마커는 NULL
+  set           Set?     @relation("PackSet", fields: [setId], references: [id])
+  role          String // ANCHOR|NATIVE|MIRROR|CROSS|EN_ONLY|JP_ONLY 등
+  relationType  String // ONE_TO_ONE|MERGE_N_TO_1|SPLIT_1_TO_N|CROSS|JP_ONLY|EN_ONLY 등
+  mirrorOfSetId String? // krMirror{krSet→jpSet} 의 jpSet
+  mirrorOfSet   Set?     @relation("PackMirror", fields: [mirrorOfSetId], references: [id])
+  numberMirrors Boolean  @default(false) // krMirrorAll
+  note          String?
+  createdAt     DateTime @default(now())
+
+  @@unique([waveId, region, setId])
+  @@index([waveId])
+  @@index([setId])
+  @@index([region, role])
 }
 
 model Price {
