@@ -1018,17 +1018,8 @@ model GameCard {
   name           String
   effectKey      String // 묶음에 쓰인 effectSig (추적용)
   hp             Int? // 대표값
-  regulationMark String?
-  // P6: oracle 본문(언어무관 게임값). N개 LC→1 GC 형제 권위선택(채워진것 우선) 복제.
-  retreatCost    Int?
-  weakness       String?
-  resistance     String?
-  evolvesFrom    String?
-  evolvesTo      String[]      @default([])
-  abilities      Json?
-  attacks        Json?
-  legalities     Json?
-  rules          String[]      @default([])
+  // (oracle 본문 10컬럼 폐기 2026-06-11 Stage2 — regMark/retreat/weak/resist/evolves/abilities/attacks/legalities/rules.
+  //  앱 read 0(gameCard select=supertype/hp뿐)인 사장복제. 게임값은 LogicalCard(코어) 직독.)
   cards          LogicalCard[] @relation("LogicalCardGameCard")
 
   @@index([supertype, name])
