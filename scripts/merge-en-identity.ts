@@ -9,6 +9,7 @@
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
 import { resolveCardDexes } from "./lib/pokeapi-names";
+import { assertWritable, hasAllowProtectedFlag } from "./lib/protected-groups";
 import { TR_JP2EN as TR_SV, profResearchEn } from "./lib/trainer-names-sv";
 import { TR_JP2EN as TR_SM } from "./lib/trainer-names-sm";
 import { TR_JP2EN as TR_SWSH } from "./lib/trainer-names-swsh";
@@ -49,6 +50,14 @@ async function main() {
   const jpSetArg = process.argv[2], enSet = process.argv[3], APPLY = process.argv.includes("--apply");
   if (!jpSetArg || !enSet) { console.error("usage: <jpSetId[,jpSetId2]> <enSetId> [--apply]"); process.exit(1); }
   const jpSets = jpSetArg.split(",").map((s) => s.trim()).filter(Boolean); // 합본 EN ↔ 분할 JP 다중세트 지원
+
+  // 동결 카드팩 가드 — jpSet 의 그룹 + enSet EN 의 현재 소유 그룹(크로스그룹 탈취 방지)에 보호 그룹이 있으면 차단.
+  {
+    const jpSetRows = await prisma.set.findMany({ where: { id: { in: jpSets } }, select: { cardPackId: true } });
+    const enOwners = await prisma.regionCard.findMany({ where: { region: "EN", setId: enSet }, select: { card: { select: { cardPackId: true } } } });
+    const affected = [...jpSetRows.map((s) => s.cardPackId), ...enOwners.map((e) => e.card.cardPackId)];
+    assertWritable(affected, { allow: hasAllowProtectedFlag(), dryRun: !APPLY, tool: "merge-en-identity" });
+  }
   const isSWSH = /^en-tcg-swsh/.test(enSet); // SWSH(en-tcg-swsh*)
   const isSM = /^en-tcg-(sm|det)/.test(enSet); // SM(en-tcg-sm*, 프로모 sma/smp, det1 명탐정 포함)
   const isXY = /^en-tcg-(xy|dc|g\d)/.test(enSet); // XY(en-tcg-xy*, dc1 더블크라이시스, g1 제너레이션즈)
