@@ -11,6 +11,9 @@ export const PROTECTED_GROUPS: ReadonlySet<string> = new Set([
   "mega-infernox",       // 인페르노X / インフェルノX
   "mega-brave-symphonia", // 메가브레이브 / メガブレイブ
   "mega-symphonia",      // 메가심포니아 / メガシンフォニア
+  "sv-black-bolt-white-flare", // 블랙볼트 / Black Bolt (id는 합본명이지만 실 그룹=Black Bolt)
+  "sv-white-flare",      // 화이트플레어 / White Flare
+  "mega-ninja-spinner",  // 닌자스피너 / ニンジャスピナー
 ]);
 
 export function hasAllowProtectedFlag(argv: string[] = process.argv): boolean {

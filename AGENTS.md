@@ -9,6 +9,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 아래 setGroup 들은 EN/KR 연결이 전수 검증 완료되어 **동결**됨. 이 팩들의 EN/KR 매칭(RegionCard 연결, 트레이너 이름 사전 대응 등)을 바꾸는 작업은 **사용자에게 먼저 확인받기 전까지 절대 수행하지 않는다.**
 
 - `mega-munikisuzero` (니힐제로) · `mega-dream-ex` (메가드림 ex) · `mega-infernox` (인페르노X) · `mega-brave-symphonia` (메가브레이브) · `mega-symphonia` (메가심포니아)
+- `sv-black-bolt-white-flare` (블랙볼트 Black Bolt) · `sv-white-flare` (화이트플레어 White Flare) · `mega-ninja-spinner` (닌자스피너 Ninja Spinner)
 
 규칙:
 - 단일 출처는 `scripts/lib/protected-groups.ts`의 `PROTECTED_GROUPS`. 목록 추가/해제는 거기만 고친다(이 문서·메모리는 그걸 가리킬 뿐).
