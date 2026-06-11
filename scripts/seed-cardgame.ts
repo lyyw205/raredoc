@@ -40,8 +40,6 @@ function resolveCardId(mockId: string): string {
 }
 
 async function seedArchetypes() {
-  let cardCount = 0;
-  let variantCount = 0;
   let trendCount = 0;
 
   for (const a of ARCHETYPES) {
@@ -75,27 +73,6 @@ async function seedArchetypes() {
     });
 
     // child 완전 동기화 (멱등)
-    await prisma.deckCard.deleteMany({ where: { archetypeId: a.id } });
-    for (const cl of a.cardList) {
-      await prisma.deckCard.create({
-        data: {
-          archetypeId: a.id,
-          cardId: resolveCardId(cl.cardId),
-          count: cl.count,
-          role: cl.role ?? null,
-        },
-      });
-      cardCount++;
-    }
-
-    await prisma.deckVariant.deleteMany({ where: { archetypeId: a.id } });
-    for (const v of a.variants) {
-      await prisma.deckVariant.create({
-        data: { id: v.id, archetypeId: a.id, nameKo: v.nameKo },
-      });
-      variantCount++;
-    }
-
     await prisma.archetypeTrend.deleteMany({ where: { archetypeId: a.id } });
     const trends = TIER_TREND.filter((t) => t.archetypeId === a.id);
     for (const t of trends) {
@@ -107,7 +84,7 @@ async function seedArchetypes() {
   }
 
   console.log(
-    `[seed-cardgame] DeckArchetype ${ARCHETYPES.length}개, DeckCard ${cardCount}개, DeckVariant ${variantCount}개, ArchetypeTrend ${trendCount}개`
+    `[seed-cardgame] DeckArchetype ${ARCHETYPES.length}개, ArchetypeTrend ${trendCount}개`
   );
 }
 

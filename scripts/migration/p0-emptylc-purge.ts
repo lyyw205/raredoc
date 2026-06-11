@@ -25,8 +25,8 @@ async function main() {
   const ids = empties.map((e) => e.id);
   // FK 참조 점검 (cardId 가진 전 모델)
   const refModels: [string, any][] = [
-    ["CollectionItem", prisma.collectionItem], ["Trade", prisma.trade], ["TierEntry", prisma.tierEntry],
-    ["DeckCard", prisma.deckCard], ["DeckRecipeCard", prisma.deckRecipeCard], ["Ruling", prisma.ruling],
+    ["CollectionItem", prisma.collectionItem], ["Trade", prisma.trade],
+    ["DeckRecipeCard", prisma.deckRecipeCard], ["Ruling", prisma.ruling],
     ["CardText", prisma.cardText], ["ExternalIdMapping", prisma.externalIdMapping],
   ];
   let totalRefs = 0;

@@ -22,7 +22,6 @@ model Set {
   code        String? // 지역 팩 코드 (EN ptcgoCode / JP sv2a / KR 사이트ID 등)
   cardPackId  String?     @map("setGroupId")
   cardPack    CardPack?   @relation(fields: [cardPackId], references: [id])
-  tierEntries TierEntry[]
   primarySetForLogical Card[] @relation("LogicalCardPrimarySet")
   localeCards          RegionCard[]  @relation("CardLocaleSet")
   // Stage 4(ident): 팩 대응표 역관계 (CardPackLink) — additive
@@ -115,24 +114,6 @@ model Price {
   @@index([regionCardId], map: "Price_cardLocaleId_idx")
   @@index([recordedAt])
   @@index([sourceId])
-}
-
-model TierEntry {
-  id            String      @id @default(cuid())
-  cardId String @map("logicalCardId")
-  setId         String
-  tier          String
-  reason        String?
-  reasonKo      String?
-  reasonJa      String?
-  card   Card @relation("TierEntryLogicalCard", fields: [cardId], references: [id])
-  set           Set         @relation(fields: [setId], references: [id])
-  updatedAt     DateTime    @updatedAt
-
-  @@unique([cardId, setId], map: "TierEntry_logicalCardId_setId_key")
-  @@index([setId])
-  @@index([cardId], map: "TierEntry_logicalCardId_idx")
-  @@index([tier])
 }
 
 model Trade {
@@ -531,7 +512,7 @@ model DeckArchetype {
   isUnderdog    Boolean          @default(false) // 사용률↓ + 승률↑
   isTrap        Boolean          @default(false) // 사용률↑ + 승률→
   isMetaCounter Boolean          @default(false) // 상위덱 종합 우세
-  deckCostKrw   Int? // (레거시 — deckCostBudget 으로 대체 예정, UI 미사용)
+  // deckCostKrw 제거(2026-06-11 DB정리) — 0행·코드0참조, deckCostBudget/Premium 으로 대체
   // UI-1b 견적 캐시 2필드 — 토글은 프리캐시 스왑(실시간 재계산 금지, 리스크 P1-4). update-deck-costs.ts 갱신.
   deckCostBudget  Int? // 저레어 기준 합산(KRW)
   deckCostPremium Int? // 고레어 기준 합산(KRW)
@@ -541,8 +522,6 @@ model DeckArchetype {
   strengths     String[]
   weaknesses    String[]
   counters      String[]
-  cards         DeckCard[]
-  variants      DeckVariant[]
   trends        ArchetypeTrend[]
   matchupsA     DeckMatchup[]    @relation("MatchupDeckA")
   matchupsB     DeckMatchup[]    @relation("MatchupDeckB")
@@ -592,26 +571,6 @@ model DeckMatchup {
   @@index([deckAId])
 }
 
-model DeckCard {
-  id            String        @id @default(cuid())
-  archetypeId   String
-  cardId String @map("logicalCardId") // 덱은 게임플레이라 Card 단위
-  count         Int
-  role          String? // ✓/⚠/✗
-  archetype     DeckArchetype @relation(fields: [archetypeId], references: [id], onDelete: Cascade)
-  card   Card   @relation("DeckCardLogicalCard", fields: [cardId], references: [id])
-
-  @@unique([archetypeId, cardId], map: "DeckCard_archetypeId_logicalCardId_key")
-  @@index([cardId], map: "DeckCard_logicalCardId_idx")
-}
-
-model DeckVariant {
-  id          String        @id @default(cuid())
-  archetypeId String
-  nameKo      String
-  archetype   DeckArchetype @relation(fields: [archetypeId], references: [id], onDelete: Cascade)
-}
-
 model ArchetypeTrend {
   id          String        @id @default(cuid())
   archetypeId String
@@ -626,7 +585,6 @@ model ArchetypeTrend {
 
 model Tournament {
   id                String                @id // = "{소스프리픽스}-{sourceId}" (lim-/lw-/jpc-/pd-...)
-  limitlessId       String?               @unique // 레거시: 원본 Limitless API id (source/sourceId 로 대체)
   source            String? // 정본 소스: limitless-play|limitless-web|jp-official|pokedata|ptcglegends — null=목업
   sourceId          String? // 정본 소스의 원본 ID
   metaRegion        String // INTL|JP|KR — 집계 파티션 (region 과 별개). default 없음: 수집기가 명시 입력 (누락 시 즉시 실패)
@@ -816,19 +774,16 @@ model Card {
   flavorText       String? // 영문 정규(폴백)
   rarityId         String?
   rarity           Rarity?      @relation(fields: [rarityId], references: [id])
-  // ── 한국 유저 대상 한글 overlay (포켓몬코리아 공식 또는 번역 데이터) ──
-  nameKo           String? // 카드/포켓몬 한국 공식 이름 (예: "이상해씨")
-  attacksKo        Json? // [{ name, text, cost?, damage? }] 한국어
-  abilitiesKo      Json? // [{ name, text, type }] 한국어
-  rulesKo          String[]
-  flavorTextKo     String?
+  // ── 한국 유저 대상 한글 overlay (포켓몬코리아 공식 또는 번역 데이터) — CardText 로 일원화 중 ──
+  nameKo           String? // 한국 공식 이름 — 41파일 읽음, CardText 읽기이관 후 제거(Phase7)
+  attacksKo        Json? // 한국어 — Tier2: CardText.attacks 백필(1169 누락) 후 제거 예정
+  abilitiesKo      Json? // 한국어 — Tier2: CardText.abilities 백필(1169 누락) 후 제거 예정
+  // rulesKo/flavorTextKo 제거(2026-06-11 DB정리) — CardText.ko 100% 커버·코드/스크립트 0참조
   locales          RegionCard[]
   texts            CardText[] // Phase 7: 언어별 표시 텍스트 오버레이(옵션 C). 향후 *Ko 컬럼 이관 대상.
   // Phase 5 신규 역관계
   collectionItems  CollectionItem[] @relation("CollectionItemLogicalCard")
   trades           Trade[]          @relation("TradeLogicalCard")
-  tierEntries      TierEntry[]      @relation("TierEntryLogicalCard")
-  deckCards        DeckCard[]       @relation("DeckCardLogicalCard")
   rulings          Ruling[]         @relation("RulingLogicalCard")
   externalIds      ExternalIdMapping[] @relation("ExternalIdMappingLogicalCard")
   speciesLinks     CardSpecies[] @relation("LogicalCardSpeciesLink") // P1: 종(Species) N:M
@@ -861,16 +816,11 @@ model RegionCard {
   // P4: art메타 하강(인쇄본별). Card 에서 기계복제(정정 없음 — region rarity 정정은 P5.5).
   rarityId      String?
   rarity        Rarity?     @relation("RarityLocale", fields: [rarityId], references: [id])
-  subtypes      String[]    @default([])
-  // P4c: 인쇄본별 표시필드(regMark/legalities=원천 인쇄본별, weakness/retreat 등=게임값이나
-  //   인쇄본 복제로 GameCard 과병합 회피). Card 에서 exact copy(diff=0).
+  // P4c: 인쇄본별 표시필드 — regMark/legalities 는 지역마다 갈릴 수 있어 RegionCard 유지(읽기 Card 폴백).
+  //   게임필드(subtypes/weakness/resistance/retreatCost/evolvesFrom/evolvesTo)는 DB 전수 diff=0 순수복제라
+  //   Card 직독으로 이관 후 제거(Stage A, 2026-06-11) — 게임값은 인쇄본 무관 = Card 단일소스.
   regulationMark String?
   legalities     Json?
-  weakness       String?
-  resistance     String?
-  retreatCost    Int?
-  evolvesFrom    String?
-  evolvesTo      String[]   @default([])
   prices        Price[]     @relation("PriceCardLocale")
   // Phase 5 신규 역관계
   collectionItems CollectionItem[] @relation("CollectionItemLocale")
@@ -1060,7 +1010,6 @@ model GameCard {
   id             String        @id
   supertype      String?
   name           String
-  effectKey      String // 묶음에 쓰인 effectSig (추적용)
   hp             Int? // 대표값
   // (oracle 본문 10컬럼 폐기 2026-06-11 Stage2 — regMark/retreat/weak/resist/evolves/abilities/attacks/legalities/rules.
   //  앱 read 0(gameCard select=supertype/hp뿐)인 사장복제. 게임값은 Card(코어) 직독.)

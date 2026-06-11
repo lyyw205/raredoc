@@ -97,14 +97,14 @@ async function main() {
   };
 
   // 그룹핑
-  const groups = new Map<string, { id: string; supertype: string | null; name: string; effectKey: string; hp: number | null; n: number }>();
+  const groups = new Map<string, { id: string; supertype: string | null; name: string; hp: number | null; n: number }>();
   const lcToGc: [string, string][] = [];
   let noName = 0;
   for (const lc of lcs) {
     if (!canonName(lc)) { noName++; continue; }
     const key = keyOf(lc); const id = gcId(key);
     let g = groups.get(key);
-    if (!g) { g = { id, supertype: lc.supertype, name: origBest(lc), effectKey: key.split("|").slice(1).join("|"), hp: isPk(lc.supertype) ? lc.hp : null, n: 0 }; groups.set(key, g); }
+    if (!g) { g = { id, supertype: lc.supertype, name: origBest(lc), hp: isPk(lc.supertype) ? lc.hp : null, n: 0 }; groups.set(key, g); }
     if (reg(lc, "EN") && /[ぁ-んァ-ヶ一-龯가-힣]/.test(g.name)) g.name = reg(lc, "EN")!; // JP/KR 표시명 → EN 으로 업그레이드
     g.n++; lcToGc.push([lc.id, id]);
   }
@@ -136,7 +136,7 @@ async function main() {
   }
 
   let s = 0;
-  const rows = arr.map((g) => ({ id: g.id, supertype: g.supertype, name: g.name, effectKey: g.effectKey, hp: g.hp }));
+  const rows = arr.map((g) => ({ id: g.id, supertype: g.supertype, name: g.name, hp: g.hp }));
   for (let i = 0; i < rows.length; i += 3000) s += (await prisma.gameCard.createMany({ data: rows.slice(i, i + 3000), skipDuplicates: true })).count;
   let u = 0;
   for (let i = 0; i < lcToGc.length; i += 1000) {

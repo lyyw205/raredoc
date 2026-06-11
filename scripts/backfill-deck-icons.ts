@@ -5,7 +5,7 @@
  *       DeckArchetype.iconKeys 가 채워지지 않는다(핵심 카드 식별 불가).
  *
  * 흐름:
- *   1. limitlessId 있는 Tournament 조회
+ *   1. limitless-play 소스 Tournament(sourceId 있음) 조회
  *   2. 각 대회: /standings 재조회 (rate guard) → placing 별 deck.icons 추출
  *   3. 해당 standing 의 deckIcons 만 update (다른 필드 불변)
  *   4. 이후 aggregate-meta 를 재실행하면 iconKeys 가 채워짐(별도 실행)
@@ -30,8 +30,8 @@ async function main() {
   const { dryRun } = parseArgs();
 
   const tournaments = await prisma.tournament.findMany({
-    where: { limitlessId: { not: null } },
-    select: { id: true, limitlessId: true, nameKo: true },
+    where: { source: "limitless-play", sourceId: { not: null } },
+    select: { id: true, sourceId: true, nameKo: true },
     orderBy: { date: "desc" },
   });
 
@@ -42,7 +42,7 @@ async function main() {
   for (const t of tournaments) {
     try {
       if (await rateGuard()) stats.rateWaits++;
-      const standings = await fetchStandings(t.limitlessId!);
+      const standings = await fetchStandings(t.sourceId!);
 
       // placing → icons 매핑
       const iconsByPlacing = new Map<number, string[]>();

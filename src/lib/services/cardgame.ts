@@ -213,8 +213,6 @@ type DbArchetype = {
   strengths: string[];
   weaknesses: string[];
   counters: string[];
-  cards: { cardId: string; count: number; role: string | null }[];
-  variants: { id: string; nameKo: string }[];
 };
 
 function toSummary(a: DbArchetype): ArchetypeSummary {
@@ -237,25 +235,16 @@ function toSummary(a: DbArchetype): ArchetypeSummary {
     iconKeys: a.iconKeys,
     deckCostBudget: a.deckCostBudget,
     deckCostPremium: a.deckCostPremium,
-    // heroCardIds: cardList 앞 4장(채용 ✓ 우선) — 화면 썸네일용.
-    // 실데이터 아키타입은 DeckCard 없음 → 빈 배열(폴백 처리는 화면에서).
-    heroCardIds: [...a.cards]
-      .sort((x, y) => (x.role === "✓" ? 0 : 1) - (y.role === "✓" ? 0 : 1))
-      .slice(0, 4)
-      .map((c) => c.cardId),
-    cardList: a.cards.map((c) => ({ cardId: c.cardId, count: c.count, role: c.role })),
+    // DeckCard/DeckVariant 테이블 드롭(2026-06-11 DB정리) — 항상 빈 배열(폴백은 화면에서).
+    heroCardIds: [],
+    cardList: [],
     strengths: a.strengths,
     weaknesses: a.weaknesses,
     counters: a.counters,
     description: a.description,
-    variants: a.variants.map((v) => ({ id: v.id, nameKo: v.nameKo })),
+    variants: [],
   };
 }
-
-const ARCHETYPE_INCLUDE = {
-  cards: { select: { cardId: true, count: true, role: true } },
-  variants: { select: { id: true, nameKo: true } },
-} as const;
 
 export async function getArchetypes(opts?: {
   sort?: "usage" | "wins" | "new" | "winRate" | "conversion" | "consistency";
@@ -269,7 +258,7 @@ export async function getArchetypes(opts?: {
   if (opts?.regulation && opts.regulation !== "all") where.regulation = opts.regulation;
   if (opts?.realOnly) where.sampleSize = { gt: 0 };
 
-  const rows = await prisma.deckArchetype.findMany({ where, include: ARCHETYPE_INCLUDE });
+  const rows = await prisma.deckArchetype.findMany({ where });
   const list = rows.map(toSummary);
 
   const sort = opts?.sort ?? "usage";
@@ -335,7 +324,7 @@ export async function getRegionArchetypes(region: "JP" | "KR"): Promise<RegionAr
 }
 
 export async function getArchetype(id: string): Promise<ArchetypeWithCards | null> {
-  const row = await prisma.deckArchetype.findUnique({ where: { id }, include: ARCHETYPE_INCLUDE });
+  const row = await prisma.deckArchetype.findUnique({ where: { id } });
   if (!row) return null;
   const summary = toSummary(row);
   const cards = await resolveDeckCardMap([...summary.cardList.map((c) => c.cardId), ...summary.heroCardIds]);
@@ -349,7 +338,6 @@ export async function getRecommendedDecks(n = 4): Promise<{
 }> {
   const rows = await prisma.deckArchetype.findMany({
     where: { sampleSize: { gt: 0 } },
-    include: ARCHETYPE_INCLUDE,
   });
   const list = rows.map(toSummary).sort((a, b) => {
     const t = (TIER_ORDER[a.tier] ?? 9) - (TIER_ORDER[b.tier] ?? 9);
@@ -707,7 +695,7 @@ export async function getTournaments(opts?: {
   if (opts?.region && opts.region !== "all") where.region = opts.region;
   if (opts?.status && opts.status !== "all") where.status = opts.status;
   if (opts?.metaRegion) where.metaRegion = opts.metaRegion;
-  // multisource P0: limitlessId → source (신규 소스도 실데이터로 인정)
+  // multisource P0: source 기준 (신규 소스도 실데이터로 인정)
   if (opts?.realOnly) where.source = { not: null };
 
   const rows = await prisma.tournament.findMany({ where, orderBy: { date: "desc" } });

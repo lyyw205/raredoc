@@ -133,13 +133,13 @@ async function runRegionPass(region: Region, args: Args, resolver: CardResolver 
   // pairings 는 limitless-play 전용 — source 필터로 별도 맵 (rate limit 보호)
   const tournaments = await prisma.tournament.findMany({
     where: { date: { gte: since }, source: { not: null }, metaRegion: region },
-    select: { id: true, source: true, limitlessId: true, format: true },
+    select: { id: true, source: true, sourceId: true, format: true },
   });
   const tFormat = new Map(tournaments.map((t) => [t.id, t.format] as const));
   const tLimitless = new Map(
     tournaments
-      .filter((t) => t.source === "limitless-play" && t.limitlessId)
-      .map((t) => [t.id, t.limitlessId!] as const),
+      .filter((t) => t.source === "limitless-play" && t.sourceId)
+      .map((t) => [t.id, t.sourceId!] as const),
   );
   const tournamentIds = tournaments.map((t) => t.id);
 
@@ -304,12 +304,12 @@ async function runRegionPass(region: Region, args: Args, resolver: CardResolver 
   if (region === "INTL") {
     for (const t of tournaments) {
       try {
-        const limitlessId = tLimitless.get(t.id);
-        if (!limitlessId) continue;
+        const limitlessSourceId = tLimitless.get(t.id);
+        if (!limitlessSourceId) continue;
         if (await rateGuard()) {
           /* waited */
         }
-        const pairings = await fetchPairings(limitlessId);
+        const pairings = await fetchPairings(limitlessSourceId);
         // username→deckKey: playerUsername(소문자 username, P0 보존) 우선, 표시명 lowercase 폴백
         const deckByPlayer = new Map<string, string>();
         const dbStandings = await prisma.tournamentStanding.findMany({

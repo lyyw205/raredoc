@@ -83,8 +83,6 @@ async function main() {
   const ref = async (model: any, field: string) => model.count({ where: { [field]: { in: absorbArr } } }).catch(() => -1);
   const coll = await ref(prisma.collectionItem, "cardId");
   const trade = await ref(prisma.trade, "cardId");
-  const tier = await ref(prisma.tierEntry, "cardId");
-  const deck = await ref(prisma.deckCard, "cardId");
   const ruling = await ref(prisma.ruling, "cardId");
 
   console.log(`■ [${groupId}] 병합 dry-run (DB 무변경)`);
@@ -95,7 +93,7 @@ async function main() {
   console.log(`    ├ 깨끗이 삭제 가능(그룹밖 locale 없음): ${cleanDeletable.length}`);
   console.log(`    └ ⚠️얽힘(그룹밖 locale 보유 → 통삭제 불가, 부분분리): ${entangled.length}`);
   console.log(`  흡수 LC 를 가리키는 참조 → canonical 재지정 필요:`);
-  console.log(`    컬렉션 ${coll} · 거래 ${trade} · 티어 ${tier} · 덱 ${deck} · 룰링 ${ruling}`);
+  console.log(`    컬렉션 ${coll} · 거래 ${trade} · 룰링 ${ruling}`);
   if (entangled.length) console.log(`  얽힘 LC 샘플:`, entangled.slice(0, 6).join(", "));
   await prisma.$disconnect();
 }

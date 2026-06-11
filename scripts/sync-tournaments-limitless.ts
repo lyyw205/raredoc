@@ -158,11 +158,10 @@ async function main() {
         where: { id: tournamentId },
         create: {
           id: tournamentId,
-          limitlessId: t.id,
           nameKo: t.name, // 대회명은 번역 대상 아님 → 원문 유지(편집 시 수동)
           ...tournamentFields,
         },
-        update: { limitlessId: t.id, ...tournamentFields },
+        update: { ...tournamentFields },
       });
 
       // standings upsert (tournamentId+placing). 동일 placing 충돌 방지 위해 placing 중복 제거.

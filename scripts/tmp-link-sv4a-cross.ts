@@ -116,17 +116,10 @@ async function main() {
 async function migrateAndDelete(oldLc: string, newLc: string) {
   const left = await prisma.regionCard.count({ where: { cardId: oldLc } });
   if (left > 0) return;
-  for (const model of ["trade", "collectionItem", "deckRecipeCard", "deckCard", "ruling", "externalIdMapping"] as const) {
+  for (const model of ["trade", "collectionItem", "deckRecipeCard", "ruling", "externalIdMapping"] as const) {
     // @ts-expect-error 동적 모델 접근
     const r = await prisma[model].updateMany({ where: { cardId: oldLc }, data: { cardId: newLc } });
     if (r.count) console.log(`  참조 이관 ${model}: ${r.count} (${oldLc} → ${newLc})`);
-  }
-  const tiers = await prisma.tierEntry.findMany({ where: { cardId: oldLc }, select: { id: true, setId: true } });
-  for (const t of tiers) {
-    const dup = await prisma.tierEntry.findFirst({ where: { cardId: newLc, setId: t.setId }, select: { id: true } });
-    if (dup) await prisma.tierEntry.delete({ where: { id: t.id } });
-    else await prisma.tierEntry.update({ where: { id: t.id }, data: { cardId: newLc } });
-    console.log(`  참조 이관 tierEntry(${t.setId})${dup ? " — 중복으로 구항목 삭제" : ""}`);
   }
   const texts = await prisma.cardText.findMany({ where: { cardId: oldLc }, select: { id: true, language: true } });
   for (const tx of texts) {
