@@ -46,7 +46,7 @@
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
     "sync:sm:en": "tsx scripts/sync-sm-pokemontcgio.ts",
-    "enrich:sm:meta": "tsx scripts/enrich-sm-meta-tcgdex.ts",
+    "enrich:sm:meta": "tsx scripts/enrich-era-meta-tcgdex.ts --era=sm",
     "sync:sm:bulbapedia": "tsx scripts/sync-sm-bulbapedia-jp.ts",
     "scrape:sm:illustrator": "tsx scripts/scrape-sm-illustrator-bulbapedia.ts",
     "seed:koreanames": "tsx scripts/seed-koreanames.ts"
