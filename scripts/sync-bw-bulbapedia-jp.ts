@@ -261,14 +261,14 @@ async function syncSet(setDef: typeof SET_MAP[number], bulbapediaSourceId: strin
       cardCount: allJpRows.length,
       logoUrl: enSet?.logoUrl ?? null,
       symbolUrl: enSet?.symbolUrl ?? null,
-      region: "JP", setGroupId: groupId,
+      region: "JP", cardPackId: groupId,
     },
     update: {
       nameJa: setDef.jpSetNameJa,
       cardCount: allJpRows.length,
       logoUrl: enSet?.logoUrl ?? null,
       symbolUrl: enSet?.symbolUrl ?? null,
-      setGroupId: groupId,
+      cardPackId: groupId,
     },
   });
   console.log(`  ✓ JP Set ${jpSetId}`);

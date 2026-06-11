@@ -21,7 +21,7 @@ import { POKE, isPokemonSupertype } from "./lib/supertype";
 type Cfg = { nameKo: string; nameEn: string; jp: string[]; kr: string[]; krMirror: Record<string, string>; enNative: string[] | null; krMirrorAll?: boolean; enMerged?: boolean; enAnchor?: boolean; krMerged?: boolean; enCrossFallback?: boolean };
 // enCrossFallback: enMerged 합본 세트의 *재録* JP(native EN 세트엔 없고 타 EN 세트에 있음)를 표시용 교차매칭
 //   (포켓몬=dex+동일일러 reprint·트레이너=이름사전). DB·LC 무변경, 원본 세트 도감 불변 — 그 JP 앵커 en 칸만 채움.
-// krMerged: KR 이 DB 에서 JP/EN 앵커 LC 로 정체성 병합됨(크로스그룹 합본 KR — DP 한국판 kr-bs 등) → setGroupId 스코프로 추가 로드(enMerged 의 KR 대칭).
+// krMerged: KR 이 DB 에서 JP/EN 앵커 LC 로 정체성 병합됨(크로스그룹 합본 KR — DP 한국판 kr-bs 등) → cardPackId 스코프로 추가 로드(enMerged 의 KR 대칭).
 // enMerged: EN 이 DB 에서 JP LC 로 정체성 병합됨(merge-en-identity) → 공유 lcid 로 읽음, 미병합 EN 은 영판전용 섹션.
 // krMirrorAll: KR 세트가 JP 정수번호 완전미러(트레이너 포함)일 때 true — 모든 카드 번호로 매칭.
 //   (일반 KR은 트레이너 번호가 JP와 어긋나 일러스트레이터 페어링 필요 → false/미지정)
@@ -266,7 +266,7 @@ const CONFIG: Record<string, Cfg> = {
   "mega-start-deck-100": {
     nameKo: "스타트 덱 100 배틀컬렉션", nameEn: "Start Deck 100 Battle Collection",
     jp: ["jp-tcg-MC"], kr: ["kr-mc"],
-    krMirror: { "kr-mc": "jp-tcg-MC" }, enNative: ["en-tcg-me2pt5"], krMirrorAll: true, enMerged: true, // MC 신규분 98이 me2pt5(Ascended Heroes)로 병합 — setGroupId 스코프 로드라 자동 분배
+    krMirror: { "kr-mc": "jp-tcg-MC" }, enNative: ["en-tcg-me2pt5"], krMirrorAll: true, enMerged: true, // MC 신규분 98이 me2pt5(Ascended Heroes)로 병합 — cardPackId 스코프 로드라 자동 분배
   },
   "mega-decks": {
     nameKo: "MEGA 구축덱", nameEn: "MEGA Starter Sets",
@@ -435,7 +435,7 @@ const CONFIG: Record<string, Cfg> = {
     krMirror: { "kr-s12a": "jp-tcg-S12a" }, enNative: ["en-tcg-swsh12pt5", "en-tcg-swsh12pt5gg"], krMirrorAll: true, enMerged: true, // EN=Crown Zenith(swsh12pt5 메인 44 + GG swsh12pt5gg 70 병합·영판전용 116) — 2026-06-10 EN 마감. GG 아트레어→JP SAR 9건 수동교정(rankZip 동점), 피카츄 CZ#160≠JP#205AR 영판전용 분리
   },
   // ── SM (썬·문) ── EN(Sun&Moon=en-tcg-sm1)이 SM1S/SM1M/SM1+ 3그룹에 걸침, EN(Guardians Rising=en-tcg-sm2)이 SM2K/SM2L 2그룹에 걸침.
-  //   enMerged → build 가 EN 을 LC.setGroupId 로 그룹스코프 로드(크로스그룹 정확 분배). 영판전용 orphan 은 EN세트의 setGroupId 그룹에 귀속.
+  //   enMerged → build 가 EN 을 LC.cardPackId 로 그룹스코프 로드(크로스그룹 정확 분배). 영판전용 orphan 은 EN세트의 cardPackId 그룹에 귀속.
   "og-sm1s": {
     nameKo: "썬 컬렉션", nameEn: "Sun Collection",
     jp: ["jp-tcg-SM1S"], kr: ["kr-sm1s"],
@@ -599,7 +599,7 @@ const CONFIG: Record<string, Cfg> = {
   "og-sm11a": {
     nameKo: "리믹스 바우트", nameEn: "Remix Bout",
     jp: ["jp-tcg-SM11a"], kr: ["kr-sm11a"],
-    krMirror: { "kr-sm11a": "jp-tcg-SM11a" }, enNative: ["en-tcg-sm11", "en-tcg-sm12"], krMirrorAll: true, enMerged: true, // SM11a JP의 EN=Cosmic Eclipse(sm12, 배치9 병합). + en-tcg-sm11(UM)이 이 그룹 소속이라 UM 영판전용 tail 도 노출(enMerged는 setGroupId 스코프라 둘 다 로드)
+    krMirror: { "kr-sm11a": "jp-tcg-SM11a" }, enNative: ["en-tcg-sm11", "en-tcg-sm12"], krMirrorAll: true, enMerged: true, // SM11a JP의 EN=Cosmic Eclipse(sm12, 배치9 병합). + en-tcg-sm11(UM)이 이 그룹 소속이라 UM 영판전용 tail 도 노출(enMerged는 cardPackId 스코프라 둘 다 로드)
   },
   "og-sm11b": {
     nameKo: "드림 리그", nameEn: "Dream League",
@@ -1145,18 +1145,18 @@ async function main() {
   const jp = await load(cfg.jp);
   let kr = await load(cfg.kr);
   if (cfg.krMerged) {
-    // 크로스그룹 합본 KR(kr-bs 등): setGroupId 스코프로 이 그룹 LC 에 병합된 KR 추가 로드 (enMerged 의 KR 대칭)
-    const merged = (await prisma.cardLocale.findMany({ where: { region: "KR", logicalCard: { setGroupId: groupId } }, select: sel })).map(toRow);
+    // 크로스그룹 합본 KR(kr-bs 등): cardPackId 스코프로 이 그룹 LC 에 병합된 KR 추가 로드 (enMerged 의 KR 대칭)
+    const merged = (await prisma.cardLocale.findMany({ where: { region: "KR", logicalCard: { cardPackId: groupId } }, select: sel })).map(toRow);
     const seenK = new Set(kr.map((k) => k.cid));
     kr = [...kr, ...merged.filter((m) => !seenK.has(m.cid))];
   }
   const crossGroup = !cfg.enNative;
   let en: Row[];
   if (cfg.enMerged) {
-    // EN 은 DB 에서 JP 앵커 LC(매칭) + 영판전용 orphan 으로 병합되며 setGroupId 를 가짐 → **그룹 단위로 스코프** 로드.
+    // EN 은 DB 에서 JP 앵커 LC(매칭) + 영판전용 orphan 으로 병합되며 cardPackId 를 가짐 → **그룹 단위로 스코프** 로드.
     //   한 EN 세트가 여러 JP 그룹에 걸친 경우(SM Sun&Moon en-tcg-sm1 → SM1S/SM1M/SM1+)에도 그룹별로 정확히 분배.
     //   (단일그룹 EN 세트(sv-base 등)는 결과 동일 — 하위호환.)
-    en = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { setGroupId: groupId } }, select: sel })).map(toRow);
+    en = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { cardPackId: groupId } }, select: sel })).map(toRow);
   } else if (cfg.enNative) en = await load(cfg.enNative);
   else {
     const dexes = [...new Set(jp.filter(isPoke).flatMap((r) => r.dexAll.length ? r.dexAll : (r.dex != null ? [r.dex] : [])))] as number[];
@@ -1336,8 +1336,8 @@ async function main() {
   });
   const jpAllDex = new Set(jpAll.flatMap((l) => l.logicalCard.pokedexNumbers ?? []));
   // setId → 그룹 한국명(231/231 채움) 폴백 Set nameKo/name
-  const setMeta = new Map((await prisma.set.findMany({ where: { region: "JP" }, select: { id: true, name: true, nameKo: true, setGroupId: true, setGroup: { select: { nameKo: true } } } }))
-    .map((s) => [s.id, { groupId: s.setGroupId, name: s.setGroup?.nameKo ?? s.nameKo ?? s.name }]));
+  const setMeta = new Map((await prisma.set.findMany({ where: { region: "JP" }, select: { id: true, name: true, nameKo: true, cardPackId: true, cardPack: { select: { nameKo: true } } } }))
+    .map((s) => [s.id, { groupId: s.cardPackId, name: s.cardPack?.nameKo ?? s.nameKo ?? s.name }]));
   const fpIndex = new Map<string, { setId: string; rel: number | null }[]>(); // 정확지문·일러지문 양 키 등록
   // 1970 = 발매일 미상 관례(프로모 등) — 지문 era 컷에서 실연도로 오인하지 않게 null(미상) 처리
   const relOf = (d: Date | string | null | undefined) => { if (!d) return null; const t = +new Date(d); return t <= 31536000000 ? null : t; };

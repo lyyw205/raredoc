@@ -3,7 +3,7 @@
  *
  * Sets (18): sm1~sm12, smp, sma, sm35, sm75, sm115, det1
  *
- * EN → JP SetGroup mapping:
+ * EN → JP CardPack mapping:
  *   sm1   → og-sm1s  (Sun & Moon EN 합본: JP コレクションサン+コレクションムーン+サン&ムーン)
  *           attach to og-sm1s (first JP group of the trilogy)
  *   sm2   → og-sm2k  (Guardians Rising 합본: JP アローラの月光+キミを待つ島々 → attach to og-sm2k)
@@ -17,13 +17,13 @@
  *   sm7   → og-sm7   (Celestial Storm = JP 裂空のカリスマ)
  *   sm8   → og-sm8   (Lost Thunder = JP 超爆インパクト)
  *   sm115 → og-sm8b  (Hidden Fates = JP GXウルトラシャイニ)
- *   sma   → og-sma   (Hidden Fates Shiny Vault — EN-only, new SetGroup)
+ *   sma   → og-sma   (Hidden Fates Shiny Vault — EN-only, new CardPack)
  *   sm9   → og-sm9   (Team Up = JP タッグボルト)
  *   det1  → og-smp2  (Detective Pikachu = JP 名探偵ピカチュウ)
  *   sm10  → og-sm10  (Unbroken Bonds = JP ダブルブレイズ)
  *   sm11  → og-sm11a (Unified Minds 합본: JP リミックスバウト+ドリームリーグ → attach to og-sm11a)
  *   sm12  → og-sm12  (Cosmic Eclipse = JP オルタージェネシス)
- *   smp   → og-smp   (SM Black Star Promos — EN-only, new SetGroup)
+ *   smp   → og-smp   (SM Black Star Promos — EN-only, new CardPack)
  *
  * Run: npx tsx scripts/sync-sm-pokemontcgio.ts [--set=sm1]
  */
@@ -138,7 +138,7 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
   const setData = apiSet.data;
 
   if (createGroup) {
-    await prisma.setGroup.upsert({
+    await prisma.cardPack.upsert({
       where: { id: groupId },
       create: {
         id: groupId, era: setDef.era,
@@ -154,11 +154,11 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
         order: setDef.order,
       },
     });
-    console.log(`  ✓ SetGroup ${groupId} (new)`);
+    console.log(`  ✓ CardPack ${groupId} (new)`);
   } else {
-    const grp = await prisma.setGroup.findUnique({ where: { id: groupId } });
-    if (!grp) { console.log(`  ✗ SetGroup ${groupId} 없음 — skip`); return { ok: 0, skip: 0, fail: 1 }; }
-    console.log(`  ✓ SetGroup ${groupId} (existing)`);
+    const grp = await prisma.cardPack.findUnique({ where: { id: groupId } });
+    if (!grp) { console.log(`  ✗ CardPack ${groupId} 없음 — skip`); return { ok: 0, skip: 0, fail: 1 }; }
+    console.log(`  ✓ CardPack ${groupId} (existing)`);
   }
 
   await prisma.set.upsert({
@@ -167,13 +167,13 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
       id: enSetId, name: setDef.name, series: setDef.series,
       releaseDate: new Date(setDef.release), cardCount: setData.total,
       logoUrl: setData.images.logo, symbolUrl: setData.images.symbol,
-      region: "EN", setGroupId: groupId,
+      region: "EN", cardPackId: groupId,
     },
     update: {
       name: setDef.name, series: setDef.series,
       releaseDate: new Date(setDef.release), cardCount: setData.total,
       logoUrl: setData.images.logo, symbolUrl: setData.images.symbol,
-      region: "EN", setGroupId: groupId,
+      region: "EN", cardPackId: groupId,
     },
   });
   console.log(`  ✓ Set ${enSetId} (${setData.total} cards total, logo hotlinked)`);
@@ -198,7 +198,7 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
       await prisma.logicalCard.upsert({
         where: { id: lcId },
         create: {
-          id: lcId, setGroupId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
+          id: lcId, cardPackId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
           primaryNumberInt: parseInt(numPadded, 10) || null,
           hp: card.hp ? parseInt(card.hp, 10) || null : null,
           types: card.types ?? [], subtypes: card.subtypes ?? [],
@@ -214,7 +214,7 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
           ...(card.legalities ? { legalities: card.legalities as never } : {}),
         },
         update: {
-          setGroupId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
+          cardPackId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
           primaryNumberInt: parseInt(numPadded, 10) || null,
           hp: card.hp ? parseInt(card.hp, 10) || null : null,
           types: card.types ?? [], subtypes: card.subtypes ?? [],

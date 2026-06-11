@@ -1,14 +1,14 @@
 /**
- * setGroup 의 빈 LogicalCard(locale 0개) 정리 — 병합 후 남은 고아 LC.
+ * cardPack 의 빈 LogicalCard(locale 0개) 정리 — 병합 후 남은 고아 LC.
  * 참조(CollectionItem/Trade/DeckCard/TierEntry/Ruling/ExternalIdMapping) 0 인 것만 삭제.
- * 실행: npx tsx scripts/cleanup-empty-lc.ts <setGroupId> [--apply]
+ * 실행: npx tsx scripts/cleanup-empty-lc.ts <cardPackId> [--apply]
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
 async function main() {
   const gid = process.argv[2], APPLY = process.argv.includes("--apply");
-  if (!gid) { console.error("usage: <setGroupId> [--apply]"); process.exit(1); }
-  const lcs = await prisma.logicalCard.findMany({ where: { setGroupId: gid }, select: { id: true,
+  if (!gid) { console.error("usage: <cardPackId> [--apply]"); process.exit(1); }
+  const lcs = await prisma.logicalCard.findMany({ where: { cardPackId: gid }, select: { id: true,
     _count: { select: { locales: true, collectionItems: true, trades: true, deckCards: true, tierEntries: true, rulings: true, externalIds: true } } } });
   const empty = lcs.filter((l) => l._count.locales === 0);
   const safe: string[] = [], unsafe: string[] = [];

@@ -79,7 +79,7 @@ async function main() {
   const beforeTotal = await prisma.logicalCard.count({
     where: {
       rarityId: null,
-      setGroupId: { not: null },
+      cardPackId: { not: null },
       locales: { none: { region: "EN" } },
     },
   });
@@ -89,12 +89,12 @@ async function main() {
   const targets = await prisma.logicalCard.findMany({
     where: {
       rarityId: null,
-      setGroupId: { not: null },
+      cardPackId: { not: null },
       locales: { none: { region: "EN" }, some: { region: "JP" } },
     },
     select: {
       id: true,
-      setGroup: { select: { era: true } },
+      cardPack: { select: { era: true } },
       locales: {
         where: { region: "JP" },
         select: { id: true },
@@ -166,7 +166,7 @@ async function main() {
 
         const rarityText = card.rarity;
         if (!rarityText) {
-          followupLines.push(`| ${lc.id} | ${jpLocaleId} | ${lc.setGroup?.era ?? "-"} | (없음) |`);
+          followupLines.push(`| ${lc.id} | ${jpLocaleId} | ${lc.cardPack?.era ?? "-"} | (없음) |`);
           notFound++;
           return;
         }
@@ -182,7 +182,7 @@ async function main() {
           await prisma.logicalCard.update({ where: { id: lc.id }, data: { rarityId } });
           updated++;
         } else {
-          followupLines.push(`| ${lc.id} | ${jpLocaleId} | ${lc.setGroup?.era ?? "-"} | ${rarityText} |`);
+          followupLines.push(`| ${lc.id} | ${jpLocaleId} | ${lc.cardPack?.era ?? "-"} | ${rarityText} |`);
           notFound++;
         }
       }),
@@ -198,7 +198,7 @@ async function main() {
   const afterTotal = await prisma.logicalCard.count({
     where: {
       rarityId: null,
-      setGroupId: { not: null },
+      cardPackId: { not: null },
       locales: { none: { region: "EN" } },
     },
   });

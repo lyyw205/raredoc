@@ -1,5 +1,5 @@
 /**
- * SV + MEGA era SetGroup nameEn / nameKo 정비.
+ * SV + MEGA era CardPack nameEn / nameKo 정비.
  *
  * - og-svk / og-svln / og-svls: Deck Build Box / Starter Set — JP-only, 한국 출시 없음
  * - MEGA 6개: JP-only, EN 발매 없음
@@ -71,7 +71,7 @@ async function main() {
   let skipped = 0;
 
   for (const e of ENTRIES) {
-    const grp = await prisma.setGroup.findUnique({ where: { id: e.id } });
+    const grp = await prisma.cardPack.findUnique({ where: { id: e.id } });
     if (!grp) {
       console.log(`  ⚠ ${e.id} 없음 — skip`);
       skipped++;
@@ -88,7 +88,7 @@ async function main() {
       continue;
     }
 
-    await prisma.setGroup.update({ where: { id: e.id }, data });
+    await prisma.cardPack.update({ where: { id: e.id }, data });
     console.log(`  ✓ ${e.id}: ${JSON.stringify(data)}`);
     updated++;
   }

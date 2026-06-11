@@ -15,15 +15,15 @@ async function main() {
   const outI = process.argv.indexOf("--out");
   const outPath = outI >= 0 ? process.argv[outI + 1] : null;
 
-  const groups = await prisma.setGroup.findMany({ select: { id: true } });
+  const groups = await prisma.cardPack.findMany({ select: { id: true } });
   // jpName → Map(enName → count)  (일관성 추적)
   const cand = new Map<string, Map<string, number>>();
   let pairs = 0, ambig = 0;
   for (const g of groups) {
-    const hasEn = await prisma.cardLocale.count({ where: { logicalCard: { setGroupId: g.id }, region: "EN" } });
+    const hasEn = await prisma.cardLocale.count({ where: { logicalCard: { cardPackId: g.id }, region: "EN" } });
     if (!hasEn) continue;
     const lcs = await prisma.logicalCard.findMany({
-      where: { setGroupId: g.id, supertype: "Trainer" },
+      where: { cardPackId: g.id, supertype: "Trainer" },
       select: { illustrator: true, subtypes: true, locales: { select: { region: true, name: true } } },
     });
     const jpOnly = lcs.filter((l) => l.locales.some((x) => x.region === "JP") && !l.locales.some((x) => x.region === "EN") && l.illustrator);

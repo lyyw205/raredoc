@@ -12,7 +12,7 @@ import { prisma } from "../src/lib/prisma";
 type L = { setId: string; region: string; number: string; name: string; dex: number | null; illus: string | null };
 
 async function main() {
-  const sets = await prisma.set.findMany({ select: { id: true, region: true, nameKo: true, name: true, setGroupId: true } });
+  const sets = await prisma.set.findMany({ select: { id: true, region: true, nameKo: true, name: true, cardPackId: true } });
   const setMeta = new Map(sets.map((s) => [s.id, s]));
 
   // 전 CardLocale 한 번에 (필요 필드만)
@@ -46,7 +46,7 @@ async function main() {
     }
     if (dupNums === 0) continue;
     const m = setMeta.get(setId)!;
-    reps.push({ setId, region: m.region, nameKo: m.nameKo ?? m.name, total, dupNums, dexShared, illusShared, grouped: !!m.setGroupId, sample });
+    reps.push({ setId, region: m.region, nameKo: m.nameKo ?? m.name, total, dupNums, dexShared, illusShared, grouped: !!m.cardPackId, sample });
   }
 
   reps.sort((a, b) => (b.dexShared + b.illusShared) - (a.dexShared + a.illusShared) || b.dupNums - a.dupNums);

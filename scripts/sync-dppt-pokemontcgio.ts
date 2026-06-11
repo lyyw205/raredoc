@@ -2,7 +2,7 @@
  * Phase 1: DP + Platinum EN card sync from pokemontcg.io
  *
  * Sets: dp1~dp7 (Diamond & Pearl), pl1~pl4 (Platinum)
- * - Creates SetGroup (og-{setId}, era "DP"/"Pt")
+ * - Creates CardPack (og-{setId}, era "DP"/"Pt")
  * - Creates EN Set (en-tcg-{setId})
  * - Creates LogicalCard (lc-en-tcg-{setId}-{num})
  * - Creates EN CardLocale (en-tcg-{setId}-{num})
@@ -152,8 +152,8 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
   }
   const setData = apiSet.data;
 
-  // 2. Upsert SetGroup
-  await prisma.setGroup.upsert({
+  // 2. Upsert CardPack
+  await prisma.cardPack.upsert({
     where: { id: groupId },
     create: {
       id: groupId,
@@ -169,7 +169,7 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
       order: setDef.order,
     },
   });
-  console.log(`  ✓ SetGroup ${groupId}`);
+  console.log(`  ✓ CardPack ${groupId}`);
 
   // 3. Upsert EN Set
   await prisma.set.upsert({
@@ -183,7 +183,7 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
       logoUrl: setData.images.logo,
       symbolUrl: setData.images.symbol,
       region: "EN",
-      setGroupId: groupId,
+      cardPackId: groupId,
     },
     update: {
       name: setDef.name,
@@ -193,7 +193,7 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
       logoUrl: setData.images.logo,
       symbolUrl: setData.images.symbol,
       region: "EN",
-      setGroupId: groupId,
+      cardPackId: groupId,
     },
   });
   console.log(`  ✓ Set ${enSetId} (${setData.total} cards total)`);
@@ -227,7 +227,7 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
         where: { id: lcId },
         create: {
           id: lcId,
-          setGroupId: groupId,
+          cardPackId: groupId,
           primarySetId: enSetId,
           primaryNumber: numPadded,
           primaryNumberInt: parseInt(numPadded, 10) || null,
@@ -251,7 +251,7 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
           ...(card.legalities ? { legalities: card.legalities as never } : {}),
         },
         update: {
-          setGroupId: groupId,
+          cardPackId: groupId,
           primarySetId: enSetId,
           primaryNumber: numPadded,
           primaryNumberInt: parseInt(numPadded, 10) || null,

@@ -1,17 +1,17 @@
 /**
- * 미연결 일본판 구시대 세트(jp-tcg-*, setGroupId=null)를 SetGroup 에 연결 (멱등).
+ * 미연결 일본판 구시대 세트(jp-tcg-*, cardPackId=null)를 CardPack 에 연결 (멱등).
  *
  * 실행: npm run link:jp:setgroups
  *
  * 무엇을 하나:
- *   1) region="JP" & id startsWith "jp-tcg-" & setGroupId=null 인 Set 로드 (이미 연결된 건 건드리지 않음).
- *   2) 세트당 1:1 로 JP 단독 SetGroup upsert (구시대는 합칠 EN/KR 짝이 없음).
+ *   1) region="JP" & id startsWith "jp-tcg-" & cardPackId=null 인 Set 로드 (이미 연결된 건 건드리지 않음).
+ *   2) 세트당 1:1 로 JP 단독 CardPack upsert (구시대는 합칠 EN/KR 짝이 없음).
  *      - id: `jp-tcg-{CODE}` → `og-{code소문자}` (old-group, 결정적·충돌 없는 접두사)
  *      - nameJa = Set.name(일본어), nameEn/nameKo = null (추측 금지)
  *      - releaseDate = Set.releaseDate
  *      - era = 세트 코드 접두사 → 사람이 읽을 라벨 (아래 ERA_RULES)
  *      - order = 기존 그룹 max(order) 뒤에 붙임. releaseDate 내림차순(최신 구시대 먼저, PMCG 마지막).
- *   3) 각 Set 의 setGroupId 를 새 그룹으로 update.
+ *   3) 각 Set 의 cardPackId 를 새 그룹으로 update.
  *
  * 기존 SV/MEGA 그룹의 order 는 변경하지 않는다.
  */
@@ -70,7 +70,7 @@ const EXCLUDE_CODES = new Set(
 async function main() {
   // 1) 대상 로드 (합본 중복 코드는 제외)
   const allSets = await prisma.set.findMany({
-    where: { region: "JP", id: { startsWith: "jp-tcg-" }, setGroupId: null },
+    where: { region: "JP", id: { startsWith: "jp-tcg-" }, cardPackId: null },
     select: { id: true, name: true, releaseDate: true },
   });
   const sets = allSets.filter(
@@ -84,7 +84,7 @@ async function main() {
   }
 
   // 기존 그룹 max(order) — SV/MEGA 순서는 건드리지 않는다.
-  const agg = await prisma.setGroup.aggregate({ _max: { order: true } });
+  const agg = await prisma.cardPack.aggregate({ _max: { order: true } });
   const baseOrder = (agg._max.order ?? -1) + 1;
 
   // releaseDate 내림차순 정렬(최신 구시대 먼저). 동일자는 id 로 안정 정렬.
@@ -115,28 +115,28 @@ async function main() {
       order: baseOrder + i,
     };
 
-    await prisma.setGroup.upsert({
+    await prisma.cardPack.upsert({
       where: { id: groupId },
       create: { id: groupId, ...groupData },
       update: groupData,
     });
     groupCount++;
 
-    await prisma.set.update({ where: { id: s.id }, data: { setGroupId: groupId } });
+    await prisma.set.update({ where: { id: s.id }, data: { cardPackId: groupId } });
     linkCount++;
   }
 
   console.log("─".repeat(50));
-  console.log(`SetGroup upsert: ${groupCount}`);
+  console.log(`CardPack upsert: ${groupCount}`);
   console.log(`Set 연결: ${linkCount}`);
   console.log("era별 분포:");
   for (const [era, n] of Object.entries(eraDist).sort((a, b) => b[1] - a[1])) {
     console.log(`  ${era}: ${n}`);
   }
 
-  const totalGroups = await prisma.setGroup.count();
-  const linkedSets = await prisma.set.count({ where: { setGroupId: { not: null } } });
-  console.log(`전체 SetGroup: ${totalGroups}, setGroupId 연결된 Set: ${linkedSets}`);
+  const totalGroups = await prisma.cardPack.count();
+  const linkedSets = await prisma.set.count({ where: { cardPackId: { not: null } } });
+  console.log(`전체 CardPack: ${totalGroups}, cardPackId 연결된 Set: ${linkedSets}`);
 
   await prisma.$disconnect();
 }

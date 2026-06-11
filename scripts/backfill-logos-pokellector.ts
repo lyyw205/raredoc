@@ -1,6 +1,6 @@
 /**
  * 로고가 없는 JP 세트(Set.logoUrl == null)를 pokellector(jp.pokellector.com) 로고로 백필하고,
- * 같은 SetGroup 의 KR 세트에 JP 로고를 재사용한다 (KR 전용 로고는 없음).
+ * 같은 CardPack 의 KR 세트에 JP 로고를 재사용한다 (KR 전용 로고는 없음).
  *
  * 출처(리서치로 검증, 팩트):
  *   - JP 세트 목록 + 인라인 로고: https://jp.pokellector.com/sets  (전 시대 커버, 단 개별 로고는 202세트만)
@@ -17,7 +17,7 @@
  *      (a) 정규화된 코드 일치(우리 code ↔ pk name), (b) 구세대 코드체계 차이는 CODE_OVERRIDE 로 명시 매핑.
  *      복수후보·모호하면 매칭 안 함(null 유지). 잘못된 로고 < 빈 로고.
  *   3. 매칭된 로고 URL 을 저장 전 HTTP 200 확인. 200 아니면 스킵+보고.
- *   4. 매칭된 JP 세트의 logoUrl 저장(멱등: null 인 것만). 같은 SetGroup 의 KR 세트도 동일 URL 재사용.
+ *   4. 매칭된 JP 세트의 logoUrl 저장(멱등: null 인 것만). 같은 CardPack 의 KR 세트도 동일 URL 재사용.
  *
  * 제약:
  *   - 추측 금지. 200 확인된 URL·실제 스크래핑 결과만.
@@ -211,7 +211,7 @@ async function setLogoIfNull(setId: string, logoUrl: string, retries = 5): Promi
 
 async function main() {
   console.log("[backfill-logos-pokellector] 시작");
-  console.log(`  출처: ${SETS_URL} (JP 로고) — KR 은 동일 SetGroup 의 JP 로고 재사용\n`);
+  console.log(`  출처: ${SETS_URL} (JP 로고) — KR 은 동일 CardPack 의 JP 로고 재사용\n`);
 
   // 0. 현재 상태(이전값 보고용)
   const beforeWithLogo = await prisma.set.count({ where: { logoUrl: { not: null } } });
@@ -238,7 +238,7 @@ async function main() {
   // 2. JP 로고없는 세트 조회
   const jpSets = await prisma.set.findMany({
     where: { region: "JP", logoUrl: null },
-    select: { id: true, code: true, name: true, releaseDate: true, setGroupId: true },
+    select: { id: true, code: true, name: true, releaseDate: true, cardPackId: true },
     orderBy: { releaseDate: "asc" },
   });
   console.log(`=== JP 로고없는 세트: ${jpSets.length}개 ===\n`);
@@ -320,18 +320,18 @@ async function main() {
     console.log(`  [JP] ${mt.setId} (${mt.ourCode} ${mt.via}→${mt.pkCode}) ← ${mt.logoUrl}${updated ? "" : " (이미 있음/0건)"}`);
   }
 
-  // 5. KR 재사용: 같은 SetGroup 에 200확인된 JP 로고가 있으면 KR(logoUrl=null) 에 동일 적용.
+  // 5. KR 재사용: 같은 CardPack 에 200확인된 JP 로고가 있으면 KR(logoUrl=null) 에 동일 적용.
   //    그룹 내 JP 세트가 여러 개(합본+개별)면, 200확인된 것 중 하나를 결정적으로 선택(setId 사전순 첫 항목).
   const krSets = await prisma.set.findMany({
-    where: { region: "KR", logoUrl: null, setGroupId: { not: null } },
-    select: { id: true, code: true, name: true, setGroupId: true },
+    where: { region: "KR", logoUrl: null, cardPackId: { not: null } },
+    select: { id: true, code: true, name: true, cardPackId: true },
   });
 
   // 그룹 → 그 그룹의 JP 세트 중 검증된 로고(결정적 선택)
   const groupLogo = new Map<string, string>();
   const jpById = new Map(jpSets.map((s) => [s.id, s]));
   for (const [setId, logoUrl] of verifiedLogoBySet) {
-    const gid = jpById.get(setId)?.setGroupId;
+    const gid = jpById.get(setId)?.cardPackId;
     if (!gid) continue;
     const cur = groupLogo.get(gid);
     // 결정적: 같은 그룹에 여러 JP 로고가 있으면 setId 사전순 우선
@@ -341,7 +341,7 @@ async function main() {
   let krFilled = 0;
   const krUnmatched: { id: string; code: string | null; name: string; reason: string }[] = [];
   for (const s of krSets) {
-    const logoUrl = s.setGroupId ? groupLogo.get(s.setGroupId) : undefined;
+    const logoUrl = s.cardPackId ? groupLogo.get(s.cardPackId) : undefined;
     if (!logoUrl) {
       krUnmatched.push({ id: s.id, code: s.code, name: s.name, reason: "그룹에 검증된 JP 로고 없음" });
       continue;
@@ -349,7 +349,7 @@ async function main() {
     const updated = await setLogoIfNull(s.id, logoUrl);
     if (updated) {
       krFilled++;
-      console.log(`  [KR] ${s.id} (grp=${s.setGroupId}) ← ${logoUrl} (JP 재사용)`);
+      console.log(`  [KR] ${s.id} (grp=${s.cardPackId}) ← ${logoUrl} (JP 재사용)`);
     }
   }
 
@@ -366,12 +366,12 @@ async function main() {
     console.log(`    ${u.id} (code=${u.code}) — ${u.reason}`);
   }
 
-  const ungroupedKr = await prisma.set.count({ where: { region: "KR", logoUrl: null, setGroupId: null } });
+  const ungroupedKr = await prisma.set.count({ where: { region: "KR", logoUrl: null, cardPackId: null } });
   console.log(`\n  [KR 그룹내 미매칭: ${krUnmatched.length}개]`);
   for (const u of krUnmatched) {
     console.log(`    ${u.id} (code=${u.code}) — ${u.reason}`);
   }
-  console.log(`  [KR 미그룹(setGroupId=null) — 재사용 불가: ${ungroupedKr}개] (KR 전용 코드, 대응 JP 그룹 없음)`);
+  console.log(`  [KR 미그룹(cardPackId=null) — 재사용 불가: ${ungroupedKr}개] (KR 전용 코드, 대응 JP 그룹 없음)`);
 }
 
 main()

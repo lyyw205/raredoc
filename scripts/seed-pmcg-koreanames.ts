@@ -1,5 +1,5 @@
 /**
- * PMCG1~6 SetGroup + Set 의 한글/일본어 공식명 입력.
+ * PMCG1~6 CardPack + Set 의 한글/일본어 공식명 입력.
  *
  * 사용자가 알려준 한글 패명 (역사적으로 한국 미발매라 raredoc 표준):
  *   PMCG1: 확장팩 제1탄  (拡張パック)
@@ -23,7 +23,7 @@ const PMCG = [
 
 async function main() {
   for (const p of PMCG) {
-    const sg = await prisma.setGroup.update({
+    const sg = await prisma.cardPack.update({
       where: { id: p.groupId },
       data: { nameKo: p.nameKo, nameJa: p.nameJa },
     });

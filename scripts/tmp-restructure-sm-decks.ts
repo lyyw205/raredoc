@@ -29,10 +29,10 @@ async function main() {
   for (const s of NEW_JP_SETS) {
     const ex = await prisma.set.findUnique({ where: { id: s.id } });
     console.log(`[1] ${s.id}: ${ex ? "존재(스킵)" : "생성"} — ${s.name}`);
-    if (APPLY && !ex) await prisma.set.create({ data: { id: s.id, code: s.code, name: s.name, series: JP_SERIES, region: "JP", releaseDate: new Date(s.rel ?? "1970-01-01"), cardCount: 0, setGroupId: "sm-decks" } });
+    if (APPLY && !ex) await prisma.set.create({ data: { id: s.id, code: s.code, name: s.name, series: JP_SERIES, region: "JP", releaseDate: new Date(s.rel ?? "1970-01-01"), cardCount: 0, cardPackId: "sm-decks" } });
   }
   console.log(`[2] Group sm-decks: releaseDate → 2016-12-09`);
-  if (APPLY) await prisma.setGroup.update({ where: { id: "sm-decks" }, data: { releaseDate: new Date("2016-12-09") } });
+  if (APPLY) await prisma.cardPack.update({ where: { id: "sm-decks" }, data: { releaseDate: new Date("2016-12-09") } });
   if (!APPLY) console.log("\n(dry-run — --apply)");
   await prisma.$disconnect();
 }

@@ -1,5 +1,5 @@
 /**
- * HGSS SetGroup + EN Set 의 한글명 입력.
+ * HGSS CardPack + EN Set 의 한글명 입력.
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
@@ -15,7 +15,7 @@ const HGSS = [
 
 async function main() {
   for (const n of HGSS) {
-    const sg = await prisma.setGroup.update({
+    const sg = await prisma.cardPack.update({
       where: { id: n.groupId },
       data: { nameKo: n.nameKo },
     });

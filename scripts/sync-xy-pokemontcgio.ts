@@ -42,7 +42,7 @@ interface SetDef {
   cards: number;
   order: number;
   groupId: string;           // og-* to attach to
-  createGroup: boolean;      // true = create new SetGroup
+  createGroup: boolean;      // true = create new CardPack
   groupNameEn?: string;      // only if createGroup
   groupNameJa?: string;
 }
@@ -132,9 +132,9 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
   if (!apiSet?.data) { console.log("  ✗ Failed to fetch set details"); return { ok: 0, skip: 0, fail: 1 }; }
   const setData = apiSet.data;
 
-  // Upsert SetGroup only if new
+  // Upsert CardPack only if new
   if (createGroup) {
-    await prisma.setGroup.upsert({
+    await prisma.cardPack.upsert({
       where: { id: groupId },
       create: {
         id: groupId, era: setDef.era,
@@ -150,12 +150,12 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
         order: setDef.order,
       },
     });
-    console.log(`  ✓ SetGroup ${groupId} (new)`);
+    console.log(`  ✓ CardPack ${groupId} (new)`);
   } else {
     // Verify existing group exists
-    const grp = await prisma.setGroup.findUnique({ where: { id: groupId } });
-    if (!grp) { console.log(`  ✗ SetGroup ${groupId} 없음 — skip`); return { ok: 0, skip: 0, fail: 1 }; }
-    console.log(`  ✓ SetGroup ${groupId} (existing)`);
+    const grp = await prisma.cardPack.findUnique({ where: { id: groupId } });
+    if (!grp) { console.log(`  ✗ CardPack ${groupId} 없음 — skip`); return { ok: 0, skip: 0, fail: 1 }; }
+    console.log(`  ✓ CardPack ${groupId} (existing)`);
   }
 
   // Upsert EN Set (hotlink logos — no Supabase upload for EN)
@@ -165,13 +165,13 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
       id: enSetId, name: setDef.name, series: setDef.series,
       releaseDate: new Date(setDef.release), cardCount: setData.total,
       logoUrl: setData.images.logo, symbolUrl: setData.images.symbol,
-      region: "EN", setGroupId: groupId,
+      region: "EN", cardPackId: groupId,
     },
     update: {
       name: setDef.name, series: setDef.series,
       releaseDate: new Date(setDef.release), cardCount: setData.total,
       logoUrl: setData.images.logo, symbolUrl: setData.images.symbol,
-      region: "EN", setGroupId: groupId,
+      region: "EN", cardPackId: groupId,
     },
   });
   console.log(`  ✓ Set ${enSetId} (${setData.total} cards total, logo hotlinked)`);
@@ -197,7 +197,7 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
       await prisma.logicalCard.upsert({
         where: { id: lcId },
         create: {
-          id: lcId, setGroupId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
+          id: lcId, cardPackId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
           primaryNumberInt: parseInt(numPadded, 10) || null,
           hp: card.hp ? parseInt(card.hp, 10) || null : null,
           types: card.types ?? [], subtypes: card.subtypes ?? [],
@@ -213,7 +213,7 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
           ...(card.legalities ? { legalities: card.legalities as never } : {}),
         },
         update: {
-          setGroupId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
+          cardPackId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
           primaryNumberInt: parseInt(numPadded, 10) || null,
           hp: card.hp ? parseInt(card.hp, 10) || null : null,
           types: card.types ?? [], subtypes: card.subtypes ?? [],

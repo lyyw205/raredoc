@@ -475,7 +475,7 @@ async function main() {
     console.log(`  ★적용: KR locale ${made} 재생성${restored ? ` · 참조 ${restored}건 복원` : ""}`);
 
     if (KEEP) {
-      const sg = (await prisma.set.findUnique({ where: { id: krSet }, select: { setGroupId: true } }))?.setGroupId ?? null;
+      const sg = (await prisma.set.findUnique({ where: { id: krSet }, select: { cardPackId: true } }))?.cardPackId ?? null;
       let tail = 0;
       for (const o of offsF) {
         if (m.get(o.numInt)) continue; // 매칭된 건 위에서 처리됨
@@ -484,7 +484,7 @@ async function main() {
         await prisma.logicalCard.upsert({
           where: { id: lcId },
           update: { nameKo: o.koName, illustrator: o.illustrator ?? undefined },
-          create: { id: lcId, setGroupId: sg ?? undefined, supertype: d != null ? "Pokémon" : undefined, pokedexNumbers: d != null ? [d] : [], illustrator: o.illustrator ?? undefined, nameKo: o.koName, primarySetId: krSet, primaryNumber: o.number, primaryNumberInt: o.numInt },
+          create: { id: lcId, cardPackId: sg ?? undefined, supertype: d != null ? "Pokémon" : undefined, pokedexNumbers: d != null ? [d] : [], illustrator: o.illustrator ?? undefined, nameKo: o.koName, primarySetId: krSet, primaryNumber: o.number, primaryNumberInt: o.numInt },
         });
         await prisma.cardLocale.create({ data: { id: `${krSet}-${o.number}`, setId: krSet, region: "KR", language: "ko", number: o.number, numberInt: o.numInt, name: o.koName, imageSmall: o.image, imageLarge: o.image, logicalCardId: lcId } });
         tail++;

@@ -1,5 +1,5 @@
 /**
- * /dex 카탈로그 데이터 빌더 — 유저 무관 부분(SetGroup 전체 × LC × locale 쿼리 + 매핑 + 정렬)을
+ * /dex 카탈로그 데이터 빌더 — 유저 무관 부분(CardPack 전체 × LC × locale 쿼리 + 매핑 + 정렬)을
  * unstable_cache(1h, 태그 "dex-catalog")로 캐시한다. 보유(owned) 오버레이는 page 가 요청별로 얹는다.
  *   - 캐시 항목은 같은 프로세스에서 참조 공유될 수 있으므로 호출부에서 절대 변형(mutate) 금지 — 불변 오버레이만.
  *   - 데이터 갱신 직후 즉시 반영이 필요하면 revalidateTag("dex-catalog").
@@ -15,8 +15,8 @@ import type { DexSet } from "@/components/dex/DexCatalog";
 export type DexPreferred = "ko" | "ja" | "en";
 
 async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
-  // SetGroup 전체(출시일 desc) — 카드 메타는 가벼운 select 로(JSON/큰 배열 제외)
-  const groupMetas = await prisma.setGroup
+  // CardPack 전체(출시일 desc) — 카드 메타는 가벼운 select 로(JSON/큰 배열 제외)
+  const groupMetas = await prisma.cardPack
     .findMany({
       orderBy: [{ releaseDate: "desc" }, { order: "asc" }],
       include: {

@@ -8,7 +8,7 @@
  * - 카드 99장: Bulbapedia /wiki/{CardName}_(World_Champions_Pack_N) 페이지에서
  *   첫 카드 이미지 URL (small 180px / large 360px) + wgCategories의 "Illus. by ..." 추출
  * - 다운로드 → R2 업로드 → CardLocale.imageSmall/imageLarge + LogicalCard.illustrator 갱신
- * - SetGroup: 로고(World_Champions_Pack.jpg) → R2 + Set.logoUrl, nameKo="월드 챔피언스 팩"
+ * - CardPack: 로고(World_Champions_Pack.jpg) → R2 + Set.logoUrl, nameKo="월드 챔피언스 팩"
  *
  * Run: npx tsx scripts/fix-pcg10-bulbapedia.ts
  */
@@ -119,9 +119,9 @@ async function main() {
     console.log("로고 다운로드 실패");
   }
 
-  // 3. SetGroup nameKo
-  await prisma.setGroup.update({ where: { id: SET_GROUP_ID }, data: { nameKo: "월드 챔피언스 팩" } });
-  console.log(`SetGroup.nameKo = "월드 챔피언스 팩"`);
+  // 3. CardPack nameKo
+  await prisma.cardPack.update({ where: { id: SET_GROUP_ID }, data: { nameKo: "월드 챔피언스 팩" } });
+  console.log(`CardPack.nameKo = "월드 챔피언스 팩"`);
 
   // 4. 기존 CardLocale 모두 로딩 (id로 매칭)
   const locales = await prisma.cardLocale.findMany({

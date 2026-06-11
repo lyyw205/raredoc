@@ -2,7 +2,7 @@
  * Phase 1: HGSS EN card sync from pokemontcg.io
  *
  * Sets: hgss1~hgss4, hsp, col1 (HeartGold & SoulSilver series)
- * - Creates SetGroup (og-{setId}, era "HGSS")
+ * - Creates CardPack (og-{setId}, era "HGSS")
  * - Creates EN Set (en-tcg-{setId})
  * - Creates LogicalCard (lc-en-tcg-{setId}-{num})
  * - Creates EN CardLocale (en-tcg-{setId}-{num})
@@ -93,13 +93,13 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
   if (!apiSet?.data) { console.log("  ✗ Failed to fetch set details"); return { ok: 0, skip: 0, fail: 1 }; }
   const setData = apiSet.data;
 
-  // Upsert SetGroup
-  await prisma.setGroup.upsert({
+  // Upsert CardPack
+  await prisma.cardPack.upsert({
     where: { id: groupId },
     create: { id: groupId, era: setDef.era, nameEn: setDef.name, releaseDate: new Date(setDef.release), order: setDef.order },
     update: { era: setDef.era, nameEn: setDef.name, releaseDate: new Date(setDef.release), order: setDef.order },
   });
-  console.log(`  ✓ SetGroup ${groupId}`);
+  console.log(`  ✓ CardPack ${groupId}`);
 
   // Upsert EN Set
   await prisma.set.upsert({
@@ -108,13 +108,13 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
       id: enSetId, name: setDef.name, series: setDef.series,
       releaseDate: new Date(setDef.release), cardCount: setData.total,
       logoUrl: setData.images.logo, symbolUrl: setData.images.symbol,
-      region: "EN", setGroupId: groupId,
+      region: "EN", cardPackId: groupId,
     },
     update: {
       name: setDef.name, series: setDef.series,
       releaseDate: new Date(setDef.release), cardCount: setData.total,
       logoUrl: setData.images.logo, symbolUrl: setData.images.symbol,
-      region: "EN", setGroupId: groupId,
+      region: "EN", cardPackId: groupId,
     },
   });
   console.log(`  ✓ Set ${enSetId} (${setData.total} cards total)`);
@@ -139,7 +139,7 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
       await prisma.logicalCard.upsert({
         where: { id: lcId },
         create: {
-          id: lcId, setGroupId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
+          id: lcId, cardPackId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
           primaryNumberInt: parseInt(numPadded, 10) || null,
           hp: card.hp ? parseInt(card.hp, 10) || null : null,
           types: card.types ?? [], subtypes: card.subtypes ?? [],
@@ -155,7 +155,7 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
           ...(card.legalities ? { legalities: card.legalities as never } : {}),
         },
         update: {
-          setGroupId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
+          cardPackId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
           primaryNumberInt: parseInt(numPadded, 10) || null,
           hp: card.hp ? parseInt(card.hp, 10) || null : null,
           types: card.types ?? [], subtypes: card.subtypes ?? [],

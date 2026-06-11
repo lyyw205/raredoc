@@ -88,7 +88,7 @@ async function main() {
 
   for (const groupId of TARGET_GROUPS) {
     const sets = await prisma.set.findMany({
-      where: { setGroupId: groupId },
+      where: { cardPackId: groupId },
       select: { id: true },
     });
     const setIds = sets.map(s => s.id);

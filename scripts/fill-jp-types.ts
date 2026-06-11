@@ -3,7 +3,7 @@
  * LogicalCard.types 만 외과적으로 채움(다른 필드 무변경). 비어있을 때 채우고, 기존값과 다르면 교정.
  * 스크랩 결과는 <officialJson>.types.json 캐시 → dry 후 apply 시 재스크랩 안 함.
  *
- * 실행: npx tsx scripts/fill-jp-types.ts <setGroupId> <officialJson> [--apply]
+ * 실행: npx tsx scripts/fill-jp-types.ts <cardPackId> <officialJson> [--apply]
  *   예: npx tsx scripts/fill-jp-types.ts mega-ninja-spinner data/jp-official/jp-m4.json
  */
 import "dotenv/config";
@@ -37,7 +37,7 @@ async function fetchTypes(cardID: string): Promise<string[] | null> {
 
 async function main() {
   const gid = process.argv[2], officialJson = process.argv[3], APPLY = process.argv.includes("--apply");
-  if (!gid || !officialJson) { console.error("usage: <setGroupId> <officialJson> [--apply]"); process.exit(1); }
+  if (!gid || !officialJson) { console.error("usage: <cardPackId> <officialJson> [--apply]"); process.exit(1); }
   const cache = officialJson.replace(/\.json$/, ".types.json");
   const off: any[] = JSON.parse(readFileSync(officialJson, "utf8"));
 
@@ -56,7 +56,7 @@ async function main() {
     console.log(`■ 스크랩 ${off.length}장: 타입보유 ${ok} · 빈값(트레이너/에너지) ${empty} · curl실패 ${fail} → ${cache}`);
   }
 
-  const lcs = await prisma.logicalCard.findMany({ where: { setGroupId: gid }, select: { id: true, supertype: true, types: true, locales: { select: { region: true, numberInt: true } } } });
+  const lcs = await prisma.logicalCard.findMany({ where: { cardPackId: gid }, select: { id: true, supertype: true, types: true, locales: { select: { region: true, numberInt: true } } } });
   let fill = 0, diff = 0, already = 0, noScrape = 0; const samples: string[] = []; const updates: { id: string; t: string[] }[] = [];
   for (const lc of lcs) {
     const jp = lc.locales.find((l) => l.region === "JP"); if (!jp || jp.numberInt == null) continue;

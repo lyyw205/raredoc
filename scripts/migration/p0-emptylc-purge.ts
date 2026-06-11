@@ -11,7 +11,7 @@ const SNAP = ".migration-snapshots/p0-emptylc-purge.json";
 async function main() {
   const empties = await prisma.logicalCard.findMany({
     where: { locales: { none: {} } },
-    select: { id: true, supertype: true, regulationMark: true, pokedexNumbers: true, setGroupId: true },
+    select: { id: true, supertype: true, regulationMark: true, pokedexNumbers: true, cardPackId: true },
   });
   console.log(`【빈-LC 청소】${APPLY ? " ★APPLY" : " (dry-run)"}`);
   console.log(`  로케일 0개 LC: ${empties.length}`);

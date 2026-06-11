@@ -1,5 +1,5 @@
 /**
- * NEO1~4 SetGroup + Set 의 한글/일본어 공식명 입력.
+ * NEO1~4 CardPack + Set 의 한글/일본어 공식명 입력.
  * 사용자 제공 한글 패명 (한국 미발매라 raredoc 표준).
  */
 import "dotenv/config";
@@ -14,7 +14,7 @@ const NEO = [
 
 async function main() {
   for (const n of NEO) {
-    const sg = await prisma.setGroup.update({
+    const sg = await prisma.cardPack.update({
       where: { id: n.groupId },
       data: { nameKo: n.nameKo, nameJa: n.nameJa },
     });

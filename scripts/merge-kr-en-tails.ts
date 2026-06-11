@@ -8,7 +8,7 @@
  *   4) 트레이너: ko→ja(TR_JA2KO 역) → ja→EN(시대 사전) 체인 일치
  * 통합: KR locale 을 EN LC 로 이동(+nameKo, 에너지 supertype 보강) → 빈 KR LC 삭제(참조 0 확인).
  *
- * 실행: npx tsx scripts/merge-kr-en-tails.ts <setGroupId> [--apply]
+ * 실행: npx tsx scripts/merge-kr-en-tails.ts <cardPackId> [--apply]
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
@@ -27,9 +27,9 @@ const JA2EN: Record<string, string> = { ...TR_SV, ...TR_SM, ...TR_SWSH, ...TR_XY
 
 async function main() {
   const gid = process.argv[2], APPLY = process.argv.includes("--apply");
-  if (!gid) { console.error("usage: <setGroupId> [--apply]"); process.exit(1); }
+  if (!gid) { console.error("usage: <cardPackId> [--apply]"); process.exit(1); }
   const lcs = await prisma.logicalCard.findMany({
-    where: { setGroupId: gid },
+    where: { cardPackId: gid },
     select: { id: true, supertype: true, subtypes: true, pokedexNumbers: true, nameKo: true,
       locales: { select: { id: true, region: true, name: true, number: true } },
       _count: { select: { collectionItems: true, trades: true, deckCards: true, tierEntries: true, rulings: true } } },

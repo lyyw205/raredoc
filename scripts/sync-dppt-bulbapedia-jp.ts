@@ -320,7 +320,7 @@ async function syncSet(
     return { ok: 0, skip: 0, fail: 0, anchorFound: true };
   }
 
-  // Upsert JP Set (reuses same SetGroup as EN)
+  // Upsert JP Set (reuses same CardPack as EN)
   await prisma.set.upsert({
     where: { id: jpSetId },
     create: {
@@ -331,12 +331,12 @@ async function syncSet(
       releaseDate: new Date("2007-01-01"), // approximate — will be refined
       cardCount: jpRows.length,
       region: "JP",
-      setGroupId: groupId,
+      cardPackId: groupId,
     },
     update: {
       nameJa: setDef.jpSetNameJa,
       cardCount: jpRows.length,
-      setGroupId: groupId,
+      cardPackId: groupId,
     },
   });
   console.log(`  ✓ JP Set ${jpSetId}`);

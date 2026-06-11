@@ -130,7 +130,7 @@ async function main() {
   }
 
   const lcs = await prisma.logicalCard.findMany({
-    where: { setGroupId: gid },
+    where: { cardPackId: gid },
     select: { id: true, supertype: true, types: true, attacks: true, illustrator: true, locales: { select: { region: true, numberInt: true, name: true } } },
   });
   let atkFix = 0, atkFill = 0, typFill = 0, illFill = 0, corruptNoSrc = 0, noMatch = 0;

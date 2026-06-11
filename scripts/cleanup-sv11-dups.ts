@@ -2,7 +2,7 @@
  * SV11 중복 세트 정리 — jp-tcg-SV11B · jp-tcg-SV11W · kr-sv-black-bolt-white-flare
  *
  * 이 세 세트는 jp-sv-black-bolt-white-flare 합본에 의해 대체된 이전 import 잔재.
- * 데이터 0(게임데이터 없음), setGroupId=null 또는 빈 KR 껍데기.
+ * 데이터 0(게임데이터 없음), cardPackId=null 또는 빈 KR 껍데기.
  *
  * 동작:
  *   1) 의존행(CollectionItem/Trade/CardText/TierEntry/DeckCard/Ruling/ExternalIdMapping) 0 확인

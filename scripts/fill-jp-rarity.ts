@@ -2,7 +2,7 @@
  * JP 팩 rarity 백필 — pc-jp 상세페이지 rarity 아이콘(ic_rare_XXX.gif)에서 수집.
  * 아이콘→Rarity 매핑을 **이미 rarity 있는 카드에서 학습**(self-verify, 추측 없음) 후 null 카드에 적용.
  * 스크랩 캐시 <officialJson>.rarity.json. LogicalCard.rarityId 만 채움(null 인 것만).
- * 실행: npx tsx scripts/fill-jp-rarity.ts <setGroupId> <officialJson> [--apply]
+ * 실행: npx tsx scripts/fill-jp-rarity.ts <cardPackId> <officialJson> [--apply]
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
@@ -23,7 +23,7 @@ async function fetchRarityIcon(cardID: string): Promise<string | null> {
 
 async function main() {
   const gid = process.argv[2], officialJson = process.argv[3], APPLY = process.argv.includes("--apply");
-  if (!gid || !officialJson) { console.error("usage: <setGroupId> <officialJson> [--apply]"); process.exit(1); }
+  if (!gid || !officialJson) { console.error("usage: <cardPackId> <officialJson> [--apply]"); process.exit(1); }
   const cache = officialJson.replace(/\.json$/, ".rarity.json");
   const off: any[] = JSON.parse(readFileSync(officialJson, "utf8"));
   let iconByNum: Record<string, string>;
@@ -35,7 +35,7 @@ async function main() {
     console.log(`■ 스크랩 ${off.length}: 아이콘 ${ok} · 실패 ${fail} → ${cache}`);
   }
 
-  const lcs = await prisma.logicalCard.findMany({ where: { setGroupId: gid }, select: { id: true, locales: { select: { region: true, numberInt: true } }, rarity: { select: { code: true } } } });
+  const lcs = await prisma.logicalCard.findMany({ where: { cardPackId: gid }, select: { id: true, locales: { select: { region: true, numberInt: true } }, rarity: { select: { code: true } } } });
   // 학습: icon → 기존 DB rarity.code 집합
   const learn = new Map<string, Map<string, number>>();
   for (const lc of lcs) {

@@ -2,7 +2,7 @@
  * 카드팩 단위 검증 (DB-only, 읽기전용). docs/verification/playbook.md Phase B/E 의 자동 점검 백본.
  * 필드 완전성·구조·지역미러·EN-dex 정합·이름누수·dex 교차(PokeAPI)·Set.code 를 점검하고 score 산출.
  *
- * 실행: npx tsx scripts/verify-pack.ts <setGroupId>
+ * 실행: npx tsx scripts/verify-pack.ts <cardPackId>
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
@@ -14,10 +14,10 @@ const hasKana = (s: string) => /[぀-ヿ一-鿿]/.test(s);
 
 async function main() {
   const gid = process.argv[2];
-  if (!gid) { console.error("usage: verify-pack.ts <setGroupId>"); process.exit(1); }
-  const g = await prisma.setGroup.findFirst({ where: { id: gid }, include: { sets: { select: { id: true, region: true, code: true, cardCount: true } } } });
+  if (!gid) { console.error("usage: verify-pack.ts <cardPackId>"); process.exit(1); }
+  const g = await prisma.cardPack.findFirst({ where: { id: gid }, include: { sets: { select: { id: true, region: true, code: true, cardCount: true } } } });
   if (!g) { console.log(`SCORE: 0  (GROUP NOT FOUND: ${gid})`); return; }
-  const lcs = await prisma.logicalCard.findMany({ where: { setGroupId: gid }, include: { rarity: { select: { code: true } }, locales: { select: { region: true, setId: true, numberInt: true, name: true, imageSmall: true } } } });
+  const lcs = await prisma.logicalCard.findMany({ where: { cardPackId: gid }, include: { rarity: { select: { code: true } }, locales: { select: { region: true, setId: true, numberInt: true, name: true, imageSmall: true } } } });
   const n = lcs.length || 1;
   const pc = (c: number) => `${((c / n) * 100).toFixed(0)}%`;
 

@@ -39,21 +39,21 @@ async function main() {
   for (const s of NEW_JP_SETS) {
     const ex = await prisma.set.findUnique({ where: { id: s.id } });
     console.log(`[1] ${s.id}: ${ex ? "존재(스킵)" : "생성"}`);
-    if (APPLY && !ex) await prisma.set.create({ data: { id: s.id, code: s.code, name: s.name, series: JP_SERIES, region: "JP", releaseDate: new Date(s.rel ?? "1970-01-01"), cardCount: 0, setGroupId: "bw-decks" } });
+    if (APPLY && !ex) await prisma.set.create({ data: { id: s.id, code: s.code, name: s.name, series: JP_SERIES, region: "JP", releaseDate: new Date(s.rel ?? "1970-01-01"), cardCount: 0, cardPackId: "bw-decks" } });
   }
   for (const s of NEW_KR_SETS) {
     const ex = await prisma.set.findUnique({ where: { id: s.id } });
     console.log(`[2] ${s.id}: ${ex ? "존재(스킵)" : "생성"} — ${s.name}`);
-    if (APPLY && !ex) await prisma.set.create({ data: { id: s.id, code: s.code, name: s.name, series: "KR", region: "KR", releaseDate: new Date("1970-01-01"), cardCount: 0, setGroupId: s.group } });
+    if (APPLY && !ex) await prisma.set.create({ data: { id: s.id, code: s.code, name: s.name, series: "KR", region: "KR", releaseDate: new Date("1970-01-01"), cardCount: 0, cardPackId: s.group } });
   }
-  const exG = await prisma.setGroup.findUnique({ where: { id: "og-kr-bw-promo" } });
-  console.log(`[3] SetGroup og-kr-bw-promo: ${exG ? "존재(스킵)" : "생성"}`);
-  if (APPLY && !exG) await prisma.setGroup.create({ data: { id: "og-kr-bw-promo", era: "BW", nameKo: "KR BW 프로모", releaseDate: new Date("2011-01-01") } });
+  const exG = await prisma.cardPack.findUnique({ where: { id: "og-kr-bw-promo" } });
+  console.log(`[3] CardPack og-kr-bw-promo: ${exG ? "존재(스킵)" : "생성"}`);
+  if (APPLY && !exG) await prisma.cardPack.create({ data: { id: "og-kr-bw-promo", era: "BW", nameKo: "KR BW 프로모", releaseDate: new Date("2011-01-01") } });
   const exP = await prisma.set.findUnique({ where: { id: "kr-bw-p" } });
   console.log(`[4] kr-bw-p: ${exP ? "존재(스킵)" : "생성"}`);
-  if (APPLY && !exP) await prisma.set.create({ data: { id: "kr-bw-p", code: "PROMO", name: "BW 프로모", series: "KR", region: "KR", releaseDate: new Date("1970-01-01"), cardCount: 0, setGroupId: "og-kr-bw-promo" } });
+  if (APPLY && !exP) await prisma.set.create({ data: { id: "kr-bw-p", code: "PROMO", name: "BW 프로모", series: "KR", region: "KR", releaseDate: new Date("1970-01-01"), cardCount: 0, cardPackId: "og-kr-bw-promo" } });
   console.log(`[5] Group bw-decks: releaseDate → 2010-10-29`);
-  if (APPLY) await prisma.setGroup.update({ where: { id: "bw-decks" }, data: { releaseDate: new Date("2010-10-29") } });
+  if (APPLY) await prisma.cardPack.update({ where: { id: "bw-decks" }, data: { releaseDate: new Date("2010-10-29") } });
   if (!APPLY) console.log("\n(dry-run — --apply)");
   await prisma.$disconnect();
 }

@@ -4,32 +4,32 @@
  * Sets (25): swsh1~swsh12pt5, swshp, swsh35, swsh45, swsh45sv, swsh9tg, swsh10tg,
  *            swsh11tg, swsh12tg, swsh12pt5gg, cel25, cel25c, pgo
  *
- * EN → JP SetGroup mapping:
+ * EN → JP CardPack mapping:
  *   swsh1       → og-s1w   (Sword & Shield EN 합본: JP ソード+シールド)
  *   swsh2       → og-s2    (Rebel Clash = JP 反逆クラッシュ, 1:1)
  *   swsh3       → og-s2a   (Darkness Ablaze 합본: JP 爆炎ウォーカー+ムゲンゾーン)
- *   swsh35      → og-swsh35 (Champion's Path — JP 対応なし, new SetGroup)
+ *   swsh35      → og-swsh35 (Champion's Path — JP 対応なし, new CardPack)
  *   swsh4       → og-s3a   (Vivid Voltage 합본: JP 仰天のボルテッカー+伝説の鼓動)
  *   swsh45      → og-s4a   (Shining Fates = JP シャイニースターV, 1:1)
- *   swsh45sv    → og-swsh45sv (Shining Fates Shiny Vault — EN-only, new SetGroup)
+ *   swsh45sv    → og-swsh45sv (Shining Fates Shiny Vault — EN-only, new CardPack)
  *   swsh5       → og-s5i   (Battle Styles 합본: JP 一撃マスター+連撃マスター)
  *   swsh6       → og-s6h   (Chilling Reign 합본: JP 白銀のランス+漆黒のガイスト)
  *   swsh7       → og-s7r   (Evolving Skies 합본: JP 蒼空ストリーム+摩天パーフェクト+双璧のファイター+イーブイヒーローズ)
  *   cel25       → og-s8a   (Celebrations = JP 25th アニバーサリーコレクション, 1:1)
- *   cel25c      → og-cel25c (Celebrations: Classic Collection — EN-only, new SetGroup)
+ *   cel25c      → og-cel25c (Celebrations: Classic Collection — EN-only, new CardPack)
  *   swsh8       → og-s8    (Fusion Strike = JP フュージョンアーツ, 1:1)
  *   swsh9       → og-s9    (Brilliant Stars = JP スターバース, 1:1)
- *   swsh9tg     → og-swsh9tg (Brilliant Stars Trainer Gallery — EN-only, new SetGroup)
+ *   swsh9tg     → og-swsh9tg (Brilliant Stars Trainer Gallery — EN-only, new CardPack)
  *   swsh10      → og-s10d  (Astral Radiance 합본: JP タイムゲイザー+スペースジャグラー)
- *   swsh10tg    → og-swsh10tg (Astral Radiance Trainer Gallery — EN-only, new SetGroup)
+ *   swsh10tg    → og-swsh10tg (Astral Radiance Trainer Gallery — EN-only, new CardPack)
  *   pgo         → og-s10b  (Pokémon GO = JP Pokémon GO, 1:1)
  *   swsh11      → og-s10a  (Lost Origin 합본: JP ダークファンタズマ+バトルリージョン+...)
- *   swsh11tg    → og-swsh11tg (Lost Origin Trainer Gallery — EN-only, new SetGroup)
+ *   swsh11tg    → og-swsh11tg (Lost Origin Trainer Gallery — EN-only, new CardPack)
  *   swsh12      → og-s11a  (Silver Tempest 합본: JP 白熱のアルカナ+パラダイムトリガー)
- *   swsh12tg    → og-swsh12tg (Silver Tempest Trainer Gallery — EN-only, new SetGroup)
+ *   swsh12tg    → og-swsh12tg (Silver Tempest Trainer Gallery — EN-only, new CardPack)
  *   swsh12pt5   → og-s12a  (Crown Zenith = JP VSTARユニバース, 1:1)
- *   swsh12pt5gg → og-swsh12pt5gg (Crown Zenith Galarian Gallery — EN-only, new SetGroup)
- *   swshp       → og-swshp (SWSH Black Star Promos — EN-only, new SetGroup)
+ *   swsh12pt5gg → og-swsh12pt5gg (Crown Zenith Galarian Gallery — EN-only, new CardPack)
+ *   swshp       → og-swshp (SWSH Black Star Promos — EN-only, new CardPack)
  *
  * Run: npx tsx scripts/sync-swsh-pokemontcgio.ts [--set=swsh1]
  */
@@ -153,7 +153,7 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
   const setData = apiSet.data;
 
   if (createGroup) {
-    await prisma.setGroup.upsert({
+    await prisma.cardPack.upsert({
       where: { id: groupId },
       create: {
         id: groupId, era: setDef.era,
@@ -169,11 +169,11 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
         order: setDef.order,
       },
     });
-    console.log(`  ✓ SetGroup ${groupId} (new)`);
+    console.log(`  ✓ CardPack ${groupId} (new)`);
   } else {
-    const grp = await prisma.setGroup.findUnique({ where: { id: groupId } });
-    if (!grp) { console.log(`  ✗ SetGroup ${groupId} 없음 — skip`); return { ok: 0, skip: 0, fail: 1 }; }
-    console.log(`  ✓ SetGroup ${groupId} (existing)`);
+    const grp = await prisma.cardPack.findUnique({ where: { id: groupId } });
+    if (!grp) { console.log(`  ✗ CardPack ${groupId} 없음 — skip`); return { ok: 0, skip: 0, fail: 1 }; }
+    console.log(`  ✓ CardPack ${groupId} (existing)`);
   }
 
   await prisma.set.upsert({
@@ -182,13 +182,13 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
       id: enSetId, name: setDef.name, series: setDef.series,
       releaseDate: new Date(setDef.release), cardCount: setData.total,
       logoUrl: setData.images.logo, symbolUrl: setData.images.symbol,
-      region: "EN", setGroupId: groupId,
+      region: "EN", cardPackId: groupId,
     },
     update: {
       name: setDef.name, series: setDef.series,
       releaseDate: new Date(setDef.release), cardCount: setData.total,
       logoUrl: setData.images.logo, symbolUrl: setData.images.symbol,
-      region: "EN", setGroupId: groupId,
+      region: "EN", cardPackId: groupId,
     },
   });
   console.log(`  ✓ Set ${enSetId} (${setData.total} cards total, logo hotlinked)`);
@@ -213,7 +213,7 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
       await prisma.logicalCard.upsert({
         where: { id: lcId },
         create: {
-          id: lcId, setGroupId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
+          id: lcId, cardPackId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
           primaryNumberInt: parseInt(numPadded, 10) || null,
           hp: card.hp ? parseInt(card.hp, 10) || null : null,
           types: card.types ?? [], subtypes: card.subtypes ?? [],
@@ -229,7 +229,7 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
           ...(card.legalities ? { legalities: card.legalities as never } : {}),
         },
         update: {
-          setGroupId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
+          cardPackId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
           primaryNumberInt: parseInt(numPadded, 10) || null,
           hp: card.hp ? parseInt(card.hp, 10) || null : null,
           types: card.types ?? [], subtypes: card.subtypes ?? [],

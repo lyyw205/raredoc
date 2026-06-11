@@ -1,5 +1,5 @@
 /**
- * L (HGSS era JP) SetGroup + Set 의 한글명/일본명 입력.
+ * L (HGSS era JP) CardPack + Set 의 한글명/일본명 입력.
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
@@ -14,7 +14,7 @@ const L_SETS = [
 
 async function main() {
   for (const n of L_SETS) {
-    const sg = await prisma.setGroup.update({
+    const sg = await prisma.cardPack.update({
       where: { id: n.groupId },
       data: { nameKo: n.nameKo, nameJa: n.nameJa },
     });

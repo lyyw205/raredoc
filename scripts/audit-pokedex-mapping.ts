@@ -27,9 +27,9 @@ function deriveDexes(enName: string | null, koName: string | null): { dexes: num
   return { dexes: [], via: null };
 }
 
-/** setGroupId / setId 에서 거친 era 라벨. */
-function eraOf(setGroupId: string | null, anySetId: string | null): string {
-  const s = (setGroupId ?? anySetId ?? "").toLowerCase();
+/** cardPackId / setId 에서 거친 era 라벨. */
+function eraOf(cardPackId: string | null, anySetId: string | null): string {
+  const s = (cardPackId ?? anySetId ?? "").toLowerCase();
   const tok = s.replace(/^og-/, "").replace(/^(en-tcg-|jp-tcg-|kr-)/, "");
   const rules: [RegExp, string][] = [
     [/^(base|gym|neo|jungle|fossil|si1|bp|np)/, "01·WOTC/Neo"],
@@ -54,7 +54,7 @@ async function main() {
   const cards = await prisma.logicalCard.findMany({
     where: { supertype: { in: POKE as unknown as string[] } },
     select: {
-      id: true, supertype: true, pokedexNumbers: true, nameKo: true, setGroupId: true,
+      id: true, supertype: true, pokedexNumbers: true, nameKo: true, cardPackId: true,
       locales: { select: { language: true, name: true, setId: true } },
     },
   });
@@ -71,7 +71,7 @@ async function main() {
     const en = c.locales.find((l) => l.language === "en")?.name ?? null;
     const ko = c.nameKo ?? c.locales.find((l) => l.language === "ko")?.name ?? null;
     const anySetId = c.locales[0]?.setId ?? null;
-    const era = eraOf(c.setGroupId, anySetId);
+    const era = eraOf(c.cardPackId, anySetId);
     const e = E(era);
     e.total++;
 

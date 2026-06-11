@@ -66,7 +66,7 @@ interface CardRow {
   language: string;
   setId: string;
   number: string;
-  setGroupId: string | null;
+  cardPackId: string | null;
   imageSmall: string | null;
   imageLarge: string | null;
 }
@@ -239,9 +239,9 @@ async function processOne(
 
   stats.tried++;
 
-  const setGroupId = card.setGroupId ?? card.setId; // fallback if no group
+  const cardPackId = card.cardPackId ?? card.setId; // fallback if no group
   const ext = extFromUrl(originalUrl);
-  const key = r2KeyFor(setGroupId, card.language, size, card.setId, card.number, ext);
+  const key = r2KeyFor(cardPackId, card.language, size, card.setId, card.number, ext);
 
   try {
     // Check R2 existence

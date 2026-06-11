@@ -1,5 +1,5 @@
 /**
- * PL1~4 SetGroup + Set 의 한글명 입력.
+ * PL1~4 CardPack + Set 의 한글명 입력.
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
@@ -13,7 +13,7 @@ const PL = [
 
 async function main() {
   for (const n of PL) {
-    const sg = await prisma.setGroup.update({
+    const sg = await prisma.cardPack.update({
       where: { id: n.groupId },
       data: { nameKo: n.nameKo },
     });

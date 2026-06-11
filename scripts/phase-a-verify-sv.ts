@@ -4,10 +4,10 @@
  * Sections:
  *   0) Per-set card counts & logo status
  *   A) Image liveness sample
- *   B) Field completeness audit per SetGroup
+ *   B) Field completeness audit per CardPack
  *   C) ID contiguity check
  *   E) Missing cards (NULL imageSmall)
- *   F) Supertype classification per SetGroup
+ *   F) Supertype classification per CardPack
  *   H) Version availability (language breakdown)
  *
  * Run: npx tsx scripts/phase-a-verify-sv.ts
@@ -95,7 +95,7 @@ function mdTable(headers: string[], rows: string[][]): string {
 interface CardLocaleRow { id: string; name: string; setId: string; language: string; imageSmall: string | null; }
 interface ImageResult { id: string; name: string; setId: string; url: string; status: number; region: "EN" | "JP"; }
 interface LogicalCardRow {
-  id: string; primarySetId: string | null; primaryNumber: string | null; setGroupId: string | null;
+  id: string; primarySetId: string | null; primaryNumber: string | null; cardPackId: string | null;
   hp: number | null; types: string[]; attacks: unknown; abilities: unknown;
   subtypes: string[]; illustrator: string | null; rarityId: string | null;
   pokedexNumbers: number[]; supertype: string | null; nameKo: string | null;
@@ -188,7 +188,7 @@ async function sectionB(lcards: LogicalCardRow[]) {
   const perSet = new Map<string, SetFieldStats>();
 
   for (const card of lcards) {
-    const setKey = card.setGroupId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
+    const setKey = card.cardPackId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
     if (!perSet.has(setKey)) perSet.set(setKey, { total: 0, fields: Object.fromEntries(FIELDS.map(f => [f, 0])) as Record<FieldKey, number> });
     const s = perSet.get(setKey)!;
     s.total++;
@@ -251,7 +251,7 @@ async function sectionF(lcards: LogicalCardRow[], locales: CardLocaleRow[]) {
 
   const bySet = new Map<string, SupertypeStats>();
   for (const card of lcards) {
-    const setKey = card.setGroupId ?? (card.primarySetId ?? "").replace(/^[a-z]+-tcg-/, "");
+    const setKey = card.cardPackId ?? (card.primarySetId ?? "").replace(/^[a-z]+-tcg-/, "");
     if (!bySet.has(setKey)) bySet.set(setKey, { setKey, counts: new Map(), nullCards: [] });
     const s = bySet.get(setKey)!;
     const st = card.supertype ?? "(null)";
@@ -283,7 +283,7 @@ async function sectionH(allLcards: LogicalCardRow[]) {
 
   const bySet = new Map<string, LocaleStats>();
   for (const card of allLcards) {
-    const setKey = card.setGroupId ?? (card.primarySetId ?? "").replace(/^[a-z]+-tcg-/, "");
+    const setKey = card.cardPackId ?? (card.primarySetId ?? "").replace(/^[a-z]+-tcg-/, "");
     if (!bySet.has(setKey)) bySet.set(setKey, { setKey, patterns: new Map() });
     const s = bySet.get(setKey)!;
     const langs = (byLcId.get(card.id) ?? []).sort().join("+") || "(none)";
@@ -304,7 +304,7 @@ async function sectionH(allLcards: LogicalCardRow[]) {
 }
 
 async function sectionGroups() {
-  const groups = await prisma.setGroup.findMany({
+  const groups = await prisma.cardPack.findMany({
     where: { id: { in: ALL_GROUP_IDS } },
     include: { sets: { select: { id: true, region: true, cardCount: true, logoUrl: true, symbolUrl: true, nameKo: true } } },
     orderBy: { releaseDate: "asc" },
@@ -327,10 +327,10 @@ function buildReport(data: {
   const now = new Date().toISOString().replace("T", " ").substring(0, 19);
   lines.push(`# Phase A Verification: SV + MEGA Sets\n`);
   lines.push(`생성 일시: ${now} UTC\n`);
-  lines.push(`대상: SV era (스칼렛·바이올렛, 2023~) ${SV_GROUP_IDS.length}개 + MEGA era ${MEGA_GROUP_IDS.length}개 SetGroup.\n`);
+  lines.push(`대상: SV era (스칼렛·바이올렛, 2023~) ${SV_GROUP_IDS.length}개 + MEGA era ${MEGA_GROUP_IDS.length}개 CardPack.\n`);
 
   // Section 0
-  lines.push(`## 0) SetGroup 커버리지`);
+  lines.push(`## 0) CardPack 커버리지`);
   const grpRows = data.groups.map(sg => {
     const sets = sg.sets.map(s => {
       const count = data.counts0.find(r => r.setId === `EN:${s.id}` || r.setId === `JP:${s.id}`)?.count ?? "?";
@@ -474,7 +474,7 @@ function buildReport(data: {
   if (data.imgData.jpMissingImg > 0) actions.push(["P2", `JP imageSmall 누락 ${data.imgData.jpMissingImg}건`]);
   if (data.imgData.enMissingImg > 0) actions.push(["P2", `EN imageSmall 누락 ${data.imgData.enMissingImg}건`]);
   const missingNameKo = data.groups.filter(sg => !sg.nameKo);
-  if (missingNameKo.length > 0) actions.push(["P2", `nameKo 미설정 SetGroup ${missingNameKo.length}개: ${missingNameKo.map(sg=>sg.id).join(", ")}`]);
+  if (missingNameKo.length > 0) actions.push(["P2", `nameKo 미설정 CardPack ${missingNameKo.length}개: ${missingNameKo.map(sg=>sg.id).join(", ")}`]);
   const gapSets = data.contiguity.filter(r => r.gaps.length > 0);
   if (gapSets.length > 0) actions.push(["P2", `ID 갭: ${gapSets.map(r=>`${r.region} ${r.setKey}(${r.gaps.length})`).join(", ")}`]);
   if (actions.length === 0) actions.push(["P0", "모든 검증 통과 — 추가 액션 없음"]);
@@ -505,9 +505,9 @@ async function main() {
 
   // Load all LogicalCards for SV + MEGA
   const lcards: LogicalCardRow[] = await prisma.logicalCard.findMany({
-    where: { setGroupId: { in: ALL_GROUP_IDS } },
+    where: { cardPackId: { in: ALL_GROUP_IDS } },
     select: {
-      id: true, primarySetId: true, primaryNumber: true, setGroupId: true,
+      id: true, primarySetId: true, primaryNumber: true, cardPackId: true,
       hp: true, types: true, attacks: true, abilities: true,
       subtypes: true, illustrator: true, rarityId: true,
       pokedexNumbers: true, supertype: true, nameKo: true,
@@ -516,7 +516,7 @@ async function main() {
   console.log(`Loaded: ${lcards.length} LogicalCards`);
 
   const allSets = await prisma.set.findMany({
-    where: { setGroupId: { in: ALL_GROUP_IDS } },
+    where: { cardPackId: { in: ALL_GROUP_IDS } },
     select: { id: true, cardCount: true },
   });
 

@@ -2,7 +2,7 @@
  * SM era JP overlay from Bulbapedia: JP 정식명/조명/일러스트레이터 등 보강.
  * JP/KR 이미지는 다운로드하지 않고 source URL만 기록 (XY 정책).
  *
- * 매칭: EN set번호 → JP LogicalCard (EN setGroup에 붙은 JP cards도 커버)
+ * 매칭: EN set번호 → JP LogicalCard (EN cardPack에 붙은 JP cards도 커버)
  * SM은 EN합본 패턴이 많으므로 JP set 기준으로 한번 더 확인.
  *
  * Bulbapedia wikitext API: /w/api.php?action=parse&page=PAGE&prop=wikitext

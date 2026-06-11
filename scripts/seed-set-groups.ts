@@ -4,8 +4,8 @@
  * 실행: npm run seed:setgroups
  *
  * 무엇을 하나:
- *   1) 검증된 SetGroup 27개(SV/MEGA) upsert (order=배열 순서, releaseDate=JP 최초 발매일).
- *   2) EN Set: 이미 DB에 있는 행의 setGroupId 만 연결(없으면 skip + 로그).
+ *   1) 검증된 CardPack 27개(SV/MEGA) upsert (order=배열 순서, releaseDate=JP 최초 발매일).
+ *   2) EN Set: 이미 DB에 있는 행의 cardPackId 만 연결(없으면 skip + 로그).
  *   3) JP/KR Set: 새 행 생성/갱신(id 충돌 방지 prefix — jp-<slug>, kr-<slug>).
  *
  * ⚠️ 데이터 출처: 4개 독립 출처 교차검증된 "검증된 매핑"만 사용(추측 금지).
@@ -178,7 +178,7 @@ async function main() {
     const g = GROUPS[i];
     const jpDate = new Date(`${g.jp!.releaseDate}T00:00:00Z`);
 
-    // 1) SetGroup upsert
+    // 1) CardPack upsert
     const groupData = {
       era: g.era,
       nameEn: g.nameEn ?? null,
@@ -187,7 +187,7 @@ async function main() {
       releaseDate: jpDate,
       order: i,
     };
-    await prisma.setGroup.upsert({
+    await prisma.cardPack.upsert({
       where: { id: g.slug },
       create: { id: g.slug, ...groupData },
       update: groupData,
@@ -202,7 +202,7 @@ async function main() {
         enMissing++;
         continue;
       }
-      await prisma.set.update({ where: { id: enId }, data: { setGroupId: g.slug } });
+      await prisma.set.update({ where: { id: enId }, data: { cardPackId: g.slug } });
       enLinked++;
     }
 
@@ -220,7 +220,7 @@ async function main() {
         region: "JP",
         logoUrl: null,
         symbolUrl: null,
-        setGroupId: g.slug,
+        cardPackId: g.slug,
       };
       await prisma.set.upsert({ where: { id: jpId }, create: { id: jpId, ...data }, update: data });
       jpCount++;
@@ -240,7 +240,7 @@ async function main() {
         region: "KR",
         logoUrl: null,
         symbolUrl: null,
-        setGroupId: g.slug,
+        cardPackId: g.slug,
       };
       await prisma.set.upsert({ where: { id: krId }, create: { id: krId, ...data }, update: data });
       krCount++;
@@ -248,15 +248,15 @@ async function main() {
   }
 
   console.log("─".repeat(50));
-  console.log(`SetGroup upsert: ${groupCount}`);
+  console.log(`CardPack upsert: ${groupCount}`);
   console.log(`EN Set 연결: ${enLinked} (skip ${enMissing})`);
   console.log(`JP Set: ${jpCount}, KR Set: ${krCount}`);
 
   // 최종 집계
   const byRegion = await prisma.set.groupBy({ by: ["region"], _count: true });
-  const linked = await prisma.set.count({ where: { setGroupId: { not: null } } });
+  const linked = await prisma.set.count({ where: { cardPackId: { not: null } } });
   console.log(`region별 Set:`, JSON.stringify(byRegion));
-  console.log(`setGroupId 연결된 Set 총: ${linked}`);
+  console.log(`cardPackId 연결된 Set 총: ${linked}`);
 
   await prisma.$disconnect();
 }

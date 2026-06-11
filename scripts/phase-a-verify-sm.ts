@@ -4,10 +4,10 @@
  * Sections:
  *   0) Per-set card counts & logo status
  *   A) Image liveness — EN (pokemontcg.io URLs), JP
- *   B) Field completeness audit per SetGroup
+ *   B) Field completeness audit per CardPack
  *   C) ID contiguity check (gaps/duplicates)
  *   E) Missing cards (NULL imageSmall)
- *   F) Supertype classification per SetGroup
+ *   F) Supertype classification per CardPack
  *   H) Version availability (CardLocale language breakdown)
  *
  * Run: npx tsx scripts/phase-a-verify-sm.ts
@@ -100,7 +100,7 @@ function mdTable(headers: string[], rows: string[][]): string {
 interface CardLocaleRow { id: string; name: string; setId: string; language: string; imageSmall: string | null; }
 interface ImageResult { id: string; name: string; setId: string; url: string; status: number; region: "EN" | "JP"; }
 interface LogicalCardRow {
-  id: string; primarySetId: string | null; primaryNumber: string | null; setGroupId: string | null;
+  id: string; primarySetId: string | null; primaryNumber: string | null; cardPackId: string | null;
   hp: number | null; types: string[]; attacks: unknown; abilities: unknown;
   subtypes: string[]; illustrator: string | null; rarityId: string | null;
   pokedexNumbers: number[]; supertype: string | null; nameKo: string | null;
@@ -195,7 +195,7 @@ async function sectionB(lcards: LogicalCardRow[]) {
   const perSet = new Map<string, SetFieldStats>();
 
   for (const card of lcards) {
-    const setKey = card.setGroupId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
+    const setKey = card.cardPackId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
     if (!perSet.has(setKey)) perSet.set(setKey, { total: 0, fields: Object.fromEntries(FIELDS.map(f => [f, 0])) as Record<FieldKey, number> });
     const s = perSet.get(setKey)!;
     s.total++;
@@ -258,7 +258,7 @@ async function sectionF(lcards: LogicalCardRow[], locales: CardLocaleRow[]) {
 
   const bySet = new Map<string, SupertypeStats>();
   for (const card of lcards) {
-    const setKey = card.setGroupId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
+    const setKey = card.cardPackId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
     if (!bySet.has(setKey)) bySet.set(setKey, { setKey, counts: new Map(), nullCards: [] });
     const s = bySet.get(setKey)!;
     const st = card.supertype ?? "(null)";
@@ -290,7 +290,7 @@ async function sectionH(allLcards: LogicalCardRow[]) {
 
   const bySet = new Map<string, LocaleStats>();
   for (const card of allLcards) {
-    const setKey = card.setGroupId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
+    const setKey = card.cardPackId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
     if (!bySet.has(setKey)) bySet.set(setKey, { setKey, patterns: new Map() });
     const s = bySet.get(setKey)!;
     const langs = (byLcId.get(card.id) ?? []).sort().join("+") || "(none)";
@@ -305,7 +305,7 @@ async function sectionH(allLcards: LogicalCardRow[]) {
 }
 
 async function sectionGroups() {
-  const groups = await prisma.setGroup.findMany({
+  const groups = await prisma.cardPack.findMany({
     where: { id: { in: SM_GROUP_IDS } },
     include: { sets: { select: { id: true, region: true, cardCount: true, logoUrl: true, symbolUrl: true, nameKo: true } } },
     orderBy: { order: "asc" },
@@ -332,7 +332,7 @@ function buildReport(data: {
   lines.push(`\n생성 일시: ${now}\n`);
   lines.push(`대상: SM era (썬·문, 2017~2019) — ${SM_GROUP_IDS.length} SetGroups.\n`);
 
-  lines.push(`## 0) SetGroup 커버리지`);
+  lines.push(`## 0) CardPack 커버리지`);
   lines.push(mdTable(
     ["SetGroup", "nameJa", "nameKo", "Sets (region:count)"],
     data.groups.map(g => [
@@ -443,9 +443,9 @@ function buildReport(data: {
 
   lines.push(`\n## I) EN↔JP 매핑 결정 요약`);
   lines.push(`
-| EN Set | JP SetGroup | 비고 |
+| EN Set | JP CardPack | 비고 |
 |--------|------------|------|
-| en-tcg-sm1   | og-sm1s  | EN 합본(173) → JP SM1s+SM1m+SM1+. SM1m/SM1+ 별도 SetGroup 유지. |
+| en-tcg-sm1   | og-sm1s  | EN 합본(173) → JP SM1s+SM1m+SM1+. SM1m/SM1+ 별도 CardPack 유지. |
 | en-tcg-sm2   | og-sm2k  | EN 합본(180) → JP SM2K+SM2L |
 | en-tcg-sm3   | og-sm3h  | EN 합본(177) → JP SM3H+SM3N |
 | en-tcg-sm35  | og-sm3+  | Shining Legends = JP ひかる伝説 |
@@ -456,19 +456,19 @@ function buildReport(data: {
 | en-tcg-sm7   | og-sm7   | 1:1 매핑 |
 | en-tcg-sm8   | og-sm8   | 1:1 매핑 |
 | en-tcg-sm115 | og-sm8b  | Hidden Fates = JP GXウルトラシャイニ |
-| en-tcg-sma   | og-sma   | Shiny Vault — EN-only 신규 SetGroup |
+| en-tcg-sma   | og-sma   | Shiny Vault — EN-only 신규 CardPack |
 | en-tcg-sm9   | og-sm9   | 1:1 매핑 |
 | en-tcg-det1  | og-smp2  | Detective Pikachu = JP 名探偵ピカチュウ |
 | en-tcg-sm10  | og-sm10  | 1:1 매핑 |
 | en-tcg-sm11  | og-sm11a | EN 합본(260) → JP SM11a+SM11b |
 | en-tcg-sm12  | og-sm12  | 1:1 매핑 |
-| en-tcg-smp   | og-smp   | SM Black Star Promos — EN-only 신규 SetGroup |
+| en-tcg-smp   | og-smp   | SM Black Star Promos — EN-only 신규 CardPack |
 `);
 
-  lines.push(`\n## SetGroup nameKo 커버리지`);
+  lines.push(`\n## CardPack nameKo 커버리지`);
   const noNameKo = data.groups.filter(g => !g.nameKo);
   if (noNameKo.length === 0) {
-    lines.push(`\n> 전체 ${data.groups.length}개 SetGroup nameKo 완비.`);
+    lines.push(`\n> 전체 ${data.groups.length}개 CardPack nameKo 완비.`);
   } else {
     lines.push(`\n> nameKo 미설정 ${noNameKo.length}개: ${noNameKo.map(g=>g.id).join(", ")}`);
   }
@@ -494,7 +494,7 @@ function buildReport(data: {
   }
   if (lowIll.length>0) actions.push({ priority: "P3", action: `illustrator 50% 미만: ${lowIll.join(", ")}` });
   const noKo = data.groups.filter(g => !g.nameKo);
-  if (noKo.length > 0) actions.push({ priority: "P2", action: `nameKo 미설정 SetGroup ${noKo.length}개: ${noKo.map(g=>g.id).join(", ")}` });
+  if (noKo.length > 0) actions.push({ priority: "P2", action: `nameKo 미설정 CardPack ${noKo.length}개: ${noKo.map(g=>g.id).join(", ")}` });
 
   if (actions.length === 0) {
     lines.push(`\n> 권장 액션 없음.`);
@@ -524,8 +524,8 @@ async function main() {
   });
 
   const lcards = await prisma.logicalCard.findMany({
-    where: { setGroupId: { in: SM_GROUP_IDS } },
-    select: { id: true, primarySetId: true, primaryNumber: true, setGroupId: true, hp: true, types: true, attacks: true, abilities: true, subtypes: true, illustrator: true, rarityId: true, pokedexNumbers: true, supertype: true, nameKo: true },
+    where: { cardPackId: { in: SM_GROUP_IDS } },
+    select: { id: true, primarySetId: true, primaryNumber: true, cardPackId: true, hp: true, types: true, attacks: true, abilities: true, subtypes: true, illustrator: true, rarityId: true, pokedexNumbers: true, supertype: true, nameKo: true },
   });
 
   console.log(`Loaded: ${enLocales.length} EN locales, ${jpLocales.length} JP locales, ${lcards.length} LogicalCards`);

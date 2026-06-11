@@ -55,7 +55,7 @@ async function main() {
   if (noDex.length) console.log("  dex미해결:", noDex.join(", "));
 
   if (APPLY) {
-    await prisma.set.create({ data: { id: setId, name, nameKo: nameKo ?? null, nameJa: name, series: "剣と盾", ...(release ? { releaseDate: new Date(release + "T00:00:00.000Z") } : {}), cardCount: cards.length, region: "JP", code: code ?? null, setGroupId: group } as any });
+    await prisma.set.create({ data: { id: setId, name, nameKo: nameKo ?? null, nameJa: name, series: "剣と盾", ...(release ? { releaseDate: new Date(release + "T00:00:00.000Z") } : {}), cardCount: cards.length, region: "JP", code: code ?? null, cardPackId: group } as any });
     for (const o of ops) {
       await prisma.logicalCard.create({ data: { id: o.lcId, primarySetId: setId, primaryNumber: o.NNN, supertype: o.c.supertype, subtypes: o.subtypes, pokedexNumbers: o.dex != null ? [o.dex] : [], illustrator: o.c.illustrator ?? null, rarityId: o.rarId } });
       await prisma.cardLocale.create({ data: { id: o.locId, setId, region: "JP", language: "ja", number: o.NNN, numberInt: o.numInt, name: o.c.jaName, imageSmall: o.c.image ?? null, imageLarge: o.c.image ?? null, logicalCardId: o.lcId } });

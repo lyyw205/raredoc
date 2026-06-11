@@ -1,5 +1,5 @@
 /**
- * XY era SetGroup + EN Set + JP Set + KR Set 의 한글명 입력.
+ * XY era CardPack + EN Set + JP Set + KR Set 의 한글명 입력.
  *
  * Run: npx tsx scripts/seed-xy-koreanames.ts
  */
@@ -37,10 +37,10 @@ async function main() {
   let updated = 0, skipped = 0;
 
   for (const n of XY) {
-    // Update SetGroup
-    const grp = await prisma.setGroup.findUnique({ where: { id: n.groupId } });
-    if (!grp) { console.log(`  ⚠ SetGroup ${n.groupId} 없음 — skip`); skipped++; continue; }
-    await prisma.setGroup.update({ where: { id: n.groupId }, data: { nameKo: n.nameKo } });
+    // Update CardPack
+    const grp = await prisma.cardPack.findUnique({ where: { id: n.groupId } });
+    if (!grp) { console.log(`  ⚠ CardPack ${n.groupId} 없음 — skip`); skipped++; continue; }
+    await prisma.cardPack.update({ where: { id: n.groupId }, data: { nameKo: n.nameKo } });
 
     // Update EN sets
     for (const enId of n.enSetIds) {

@@ -1,9 +1,9 @@
-// 공유 EN 세트의 "미연결 orphan" EN 카드를 특정 setGroup 의 JP 앵커에 dex+일러(아트 단위)로
+// 공유 EN 세트의 "미연결 orphan" EN 카드를 특정 cardPack 의 JP 앵커에 dex+일러(아트 단위)로
 // 정밀 연결한다. merge-en-identity 가 공유 EN 세트를 단일 JP 전용으로 착각해 형제 팩을 비우는
 // 사고(다크판타스마 s10a→swsh11 311건 스크램블)를 피하기 위한 외과적 대안:
 //   - 대상은 logicalCardId 가 lc-orphan* 인 EN 로케일뿐 → 형제 소유 카드는 구조적으로 못 건드림.
 //   - 매칭 키는 dex + 정규화 일러(+ 충돌 시 subtypes) → 같은 그림만 붙어 오매칭 방지(레어도/번호 무관).
-// 사용: npx tsx scripts/link-en-orphans-by-art.ts <setGroupId> <enSet1,enSet2,...> [--apply]
+// 사용: npx tsx scripts/link-en-orphans-by-art.ts <cardPackId> <enSet1,enSet2,...> [--apply]
 import "dotenv/config"; import { prisma } from "../src/lib/prisma";
 
 const [groupId, enSetsArg] = process.argv.slice(2);
@@ -12,7 +12,7 @@ const norm = (s: string | null) => (s || "").toLowerCase().replace(/\s+/g, "").t
 const subKey = (a: string[]) => [...a].sort().join(",");
 
 async function main() {
-  if (!groupId || !enSetsArg) { console.error("사용: <setGroupId> <enSet1,enSet2> [--apply]"); return; }
+  if (!groupId || !enSetsArg) { console.error("사용: <cardPackId> <enSet1,enSet2> [--apply]"); return; }
   const enSets = enSetsArg.split(",");
 
   // dex|illust 버킷 키들 — 한 카드가 복수 dex(태그팀)면 첫 dex 로 단순화
@@ -22,7 +22,7 @@ async function main() {
   // 2번째 EN을 더하지 않음. Dark Phantasma 처럼 전부 EN-less면 영향 없고, og-s10d 처럼
   // 일부만 비었으면 그 빈 칸만 채워 알트아트 과잉연결을 막는다.)
   const anchors = await prisma.logicalCard.findMany({
-    where: { setGroupId: groupId, supertype: "Pokémon", locales: { none: { region: "EN" } } },
+    where: { cardPackId: groupId, supertype: "Pokémon", locales: { none: { region: "EN" } } },
     select: { id: true, illustrator: true, pokedexNumbers: true, subtypes: true, nameKo: true,
       locales: { where: { region: "JP" }, select: { number: true, numberInt: true, name: true }, take: 1 } },
   });

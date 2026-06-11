@@ -13,14 +13,14 @@ async function main() {
   const APPLY = args.includes("--apply");
   const gid = args.find((a) => !a.startsWith("--"));
   const where: any = { subtypes: { has: "VMAX" }, locales: { some: { name: { contains: "VSTAR" } } } };
-  if (gid) where.setGroupId = gid;
+  if (gid) where.cardPackId = gid;
   const lcs = await prisma.logicalCard.findMany({
-    where, select: { id: true, subtypes: true, setGroupId: true, locales: { select: { region: true, name: true }, take: 1 } },
+    where, select: { id: true, subtypes: true, cardPackId: true, locales: { select: { region: true, name: true }, take: 1 } },
   });
   const byG = new Map<string, number>(); const samp: string[] = [];
   const upd: { id: string; ns: string[] }[] = [];
   for (const lc of lcs) {
-    byG.set(lc.setGroupId ?? "null", (byG.get(lc.setGroupId ?? "null") ?? 0) + 1);
+    byG.set(lc.cardPackId ?? "null", (byG.get(lc.cardPackId ?? "null") ?? 0) + 1);
     const ns = [...new Set(lc.subtypes.map((s) => (s === "VMAX" ? "VSTAR" : s)))];
     upd.push({ id: lc.id, ns });
     if (samp.length < 8) samp.push(`${lc.locales[0]?.name} [${lc.subtypes.join(",")}]→[${ns.join(",")}]`);

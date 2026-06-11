@@ -1,7 +1,7 @@
 /**
- * SwSh era SetGroup + Set 한글명 입력.
+ * SwSh era CardPack + Set 한글명 입력.
  *
- * - KR set 있는 그룹: KR set.nameKo → SetGroup.nameKo 복사 (자동)
+ * - KR set 있는 그룹: KR set.nameKo → CardPack.nameKo 복사 (자동)
  * - JP-only / EN-only: 음역/직역 하드코딩
  *
  * Run: npx tsx scripts/seed-swsh-koreanames.ts
@@ -65,8 +65,8 @@ async function main() {
   let updated = 0, skipped = 0;
 
   for (const n of SWSH) {
-    const grp = await prisma.setGroup.findUnique({ where: { id: n.groupId } });
-    if (!grp) { console.log(`  ⚠ SetGroup ${n.groupId} 없음 — skip`); skipped++; continue; }
+    const grp = await prisma.cardPack.findUnique({ where: { id: n.groupId } });
+    if (!grp) { console.log(`  ⚠ CardPack ${n.groupId} 없음 — skip`); skipped++; continue; }
 
     // Determine nameKo: KR set first, then hardcoded
     let nameKo = n.nameKo;
@@ -84,7 +84,7 @@ async function main() {
       continue;
     }
 
-    await prisma.setGroup.update({ where: { id: n.groupId }, data: { nameKo } });
+    await prisma.cardPack.update({ where: { id: n.groupId }, data: { nameKo } });
 
     for (const enId of n.enSetIds) {
       await prisma.set.update({ where: { id: enId }, data: { nameKo } }).catch(() => {});

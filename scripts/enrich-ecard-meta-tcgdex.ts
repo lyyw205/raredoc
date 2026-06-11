@@ -66,7 +66,7 @@ async function main() {
     for (const c of sum.cards) {
       // DB 의 setId 는 uppercase (E1, VS1, web1). tcgdex c.id 는 lowercase (e1-001).
       // 우리 LogicalCard id 패턴: lc-orphan-jp-tcg-{DB SetId}-{localId} 인지 확인 필요.
-      // PMCG/NEO 패턴 따라가면 setGroup 의 DB setId 와 일치해야 함.
+      // PMCG/NEO 패턴 따라가면 cardPack 의 DB setId 와 일치해야 함.
       // 실제 DB 카드 ID 패턴: jp-tcg-E1-001 (uppercase). 그래서 setId 변환.
       const dbSetCode = setId === "vs1" ? "VS1" : setId === "web1" ? "web1" : setId.toUpperCase();
       const ourLocaleId = `jp-tcg-${dbSetCode}-${c.localId.padStart(3, "0")}`;

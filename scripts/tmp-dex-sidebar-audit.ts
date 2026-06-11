@@ -9,7 +9,7 @@ import { canonEra, eraOrderIndex } from "../src/lib/cards/eras";
 const fmt = (d: Date | null) => (d ? d.toISOString().slice(0, 10) : null);
 
 async function main() {
-  const groups = await prisma.setGroup.findMany({
+  const groups = await prisma.cardPack.findMany({
     orderBy: [{ releaseDate: "desc" }, { order: "asc" }],
     include: {
       sets: { select: { region: true, name: true, nameKo: true, nameJa: true, releaseDate: true } },

@@ -56,34 +56,34 @@ const KR_DATES: Record<string, string> = {
 async function main() {
   console.log(`=== SWSH A안 구조 개편 (${APPLY ? "APPLY" : "dry-run"}) ===`);
   for (const g of NEW_GROUPS) {
-    const ex = await prisma.setGroup.findUnique({ where: { id: g.id } });
-    console.log(`[1] SetGroup ${g.id}: ${ex ? "존재(스킵)" : "생성"} — ${g.nameKo}`);
-    if (APPLY && !ex) await prisma.setGroup.create({ data: g });
+    const ex = await prisma.cardPack.findUnique({ where: { id: g.id } });
+    console.log(`[1] CardPack ${g.id}: ${ex ? "존재(스킵)" : "생성"} — ${g.nameKo}`);
+    if (APPLY && !ex) await prisma.cardPack.create({ data: g });
   }
   for (const [krSet, group] of [["kr-si", "swsh-start-deck-100"], ["kr-sn", "swsh-start-deck-100"]] as const) {
     const lcs = await prisma.logicalCard.findMany({ where: { locales: { some: { setId: krSet } } }, select: { id: true } });
     console.log(`[2] ${krSet} → ${group} (LC ${lcs.length})`);
     if (APPLY) {
-      await prisma.set.update({ where: { id: krSet }, data: { setGroupId: group } });
-      await prisma.logicalCard.updateMany({ where: { id: { in: lcs.map((l) => l.id) } }, data: { setGroupId: group } });
+      await prisma.set.update({ where: { id: krSet }, data: { cardPackId: group } });
+      await prisma.logicalCard.updateMany({ where: { id: { in: lcs.map((l) => l.id) } }, data: { cardPackId: group } });
     }
   }
   for (const s of NEW_JP_SETS) {
     const ex = await prisma.set.findUnique({ where: { id: s.id } });
     console.log(`[3] ${s.id} (${s.code} → ${s.group}): ${ex ? "존재(스킵)" : "생성"}`);
-    if (APPLY && !ex) await prisma.set.create({ data: { id: s.id, code: s.code, name: s.name, series: JP_SERIES, region: "JP", releaseDate: new Date(s.rel ?? "1970-01-01"), cardCount: 0, setGroupId: s.group } });
+    if (APPLY && !ex) await prisma.set.create({ data: { id: s.id, code: s.code, name: s.name, series: JP_SERIES, region: "JP", releaseDate: new Date(s.rel ?? "1970-01-01"), cardCount: 0, cardPackId: s.group } });
   }
   for (const s of NEW_KR_SETS) {
     const ex = await prisma.set.findUnique({ where: { id: s.id } });
     console.log(`[4] ${s.id} (${s.code} → ${s.group}): ${ex ? "존재(스킵)" : "생성"} — ${s.name}`);
-    if (APPLY && !ex) await prisma.set.create({ data: { id: s.id, code: s.code, name: s.name, series: "KR", region: "KR", releaseDate: new Date(s.rel ?? "1970-01-01"), cardCount: 0, setGroupId: s.group } });
+    if (APPLY && !ex) await prisma.set.create({ data: { id: s.id, code: s.code, name: s.name, series: "KR", region: "KR", releaseDate: new Date(s.rel ?? "1970-01-01"), cardCount: 0, cardPackId: s.group } });
   }
   for (const [id, d] of Object.entries(KR_DATES)) {
     console.log(`[5] ${id}: releaseDate → ${d}`);
     if (APPLY) await prisma.set.update({ where: { id }, data: { releaseDate: new Date(d) } });
   }
   // 그룹 날짜: decks=스타터V JP 최초
-  if (APPLY) await prisma.setGroup.update({ where: { id: "swsh-decks" }, data: { releaseDate: new Date("2019-11-29") } });
+  if (APPLY) await prisma.cardPack.update({ where: { id: "swsh-decks" }, data: { releaseDate: new Date("2019-11-29") } });
   console.log(`[5] Group swsh-decks: releaseDate → 2019-11-29`);
   if (!APPLY) console.log("\n(dry-run — --apply)");
   await prisma.$disconnect();

@@ -13,7 +13,7 @@ async function main() {
   const groups = (process.argv[2] ?? "").split(",").map((s) => s.trim()).filter(Boolean);
   if (!groups.length) { console.error("usage: <groupId,...> [--apply]"); process.exit(1); }
 
-  const lcs = await prisma.logicalCard.findMany({ where: { setGroupId: { in: groups } }, select: { id: true, locales: { select: { id: true } } } });
+  const lcs = await prisma.logicalCard.findMany({ where: { cardPackId: { in: groups } }, select: { id: true, locales: { select: { id: true } } } });
   const emptyIds = lcs.filter((l) => l.locales.length === 0).map((l) => l.id);
   if (!emptyIds.length) { console.log("빈 LC 없음"); await prisma.$disconnect(); return; }
 

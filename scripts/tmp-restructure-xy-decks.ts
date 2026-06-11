@@ -29,21 +29,21 @@ async function main() {
   for (const s of NEW_JP_SETS) {
     const ex = await prisma.set.findUnique({ where: { id: s.id } });
     console.log(`[1] ${s.id}: ${ex ? "존재(스킵)" : "생성"}`);
-    if (APPLY && !ex) await prisma.set.create({ data: { id: s.id, code: s.code, name: s.name, series: JP_SERIES, region: "JP", releaseDate: new Date(s.rel ?? "1970-01-01"), cardCount: 0, setGroupId: "xy-decks" } });
+    if (APPLY && !ex) await prisma.set.create({ data: { id: s.id, code: s.code, name: s.name, series: JP_SERIES, region: "JP", releaseDate: new Date(s.rel ?? "1970-01-01"), cardCount: 0, cardPackId: "xy-decks" } });
   }
   // KR 이벨타르 덱
   const exB = await prisma.set.findUnique({ where: { id: "kr-xy30b" } });
   console.log(`[2] kr-xy30b: ${exB ? "존재(스킵)" : "생성"} — XY 「이벨타르 덱」`);
-  if (APPLY && !exB) await prisma.set.create({ data: { id: "kr-xy30b", code: "XY30", name: "XY 「이벨타르 덱」", series: "KR", region: "KR", releaseDate: new Date("1970-01-01"), cardCount: 14, setGroupId: "xy-decks" } });
+  if (APPLY && !exB) await prisma.set.create({ data: { id: "kr-xy30b", code: "XY30", name: "XY 「이벨타르 덱」", series: "KR", region: "KR", releaseDate: new Date("1970-01-01"), cardCount: 14, cardPackId: "xy-decks" } });
   // XY KR 프로모 그룹+세트
-  const exG = await prisma.setGroup.findUnique({ where: { id: "og-kr-xy-promo" } });
-  console.log(`[3] SetGroup og-kr-xy-promo: ${exG ? "존재(스킵)" : "생성"}`);
-  if (APPLY && !exG) await prisma.setGroup.create({ data: { id: "og-kr-xy-promo", era: "XY", nameKo: "KR XY 프로모", releaseDate: new Date("2013-11-01") } });
+  const exG = await prisma.cardPack.findUnique({ where: { id: "og-kr-xy-promo" } });
+  console.log(`[3] CardPack og-kr-xy-promo: ${exG ? "존재(스킵)" : "생성"}`);
+  if (APPLY && !exG) await prisma.cardPack.create({ data: { id: "og-kr-xy-promo", era: "XY", nameKo: "KR XY 프로모", releaseDate: new Date("2013-11-01") } });
   const exP = await prisma.set.findUnique({ where: { id: "kr-xy-p" } });
   console.log(`[4] kr-xy-p: ${exP ? "존재(스킵)" : "생성"} — XY 프로모 (169)`);
-  if (APPLY && !exP) await prisma.set.create({ data: { id: "kr-xy-p", code: "XY-P", name: "XY 프로모", series: "KR", region: "KR", releaseDate: new Date("1970-01-01"), cardCount: 169, setGroupId: "og-kr-xy-promo" } });
+  if (APPLY && !exP) await prisma.set.create({ data: { id: "kr-xy-p", code: "XY-P", name: "XY 프로모", series: "KR", region: "KR", releaseDate: new Date("1970-01-01"), cardCount: 169, cardPackId: "og-kr-xy-promo" } });
   console.log(`[5] Group xy-decks: releaseDate → 2013-11-08`);
-  if (APPLY) await prisma.setGroup.update({ where: { id: "xy-decks" }, data: { releaseDate: new Date("2013-11-08") } });
+  if (APPLY) await prisma.cardPack.update({ where: { id: "xy-decks" }, data: { releaseDate: new Date("2013-11-08") } });
   if (!APPLY) console.log("\n(dry-run — --apply)");
   await prisma.$disconnect();
 }

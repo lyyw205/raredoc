@@ -1,6 +1,6 @@
 /**
  * 기존 JP 세트(이미 적재된 CardLocale + LogicalCard)를 일본공식(pokemon-card.com) 수집 JSON 으로
- * **in-place 메타 enrich**. load-jp-official 과 달리 LC 를 재생성하지 않음 → 기존 JP↔KR 병합/ setGroupId 보존,
+ * **in-place 메타 enrich**. load-jp-official 과 달리 LC 를 재생성하지 않음 → 기존 JP↔KR 병합/ cardPackId 보존,
  * 고아 LC 발생 없음. tcgdex JA 가 빈 SM 시대용(메타만 비어있고 로케일/이미지는 이미 존재할 때).
  *
  * 각 JP CardLocale 의 LogicalCard 에 supertype/pokedexNumbers/subtypes/illustrator/hp/types 를 official 로 덮어씀.
@@ -62,11 +62,11 @@ async function main() {
   const ja = buildNameIndex("ja");
   console.log(`■ ${jpSet} ← ${jsonPath} | JSON ${cards.length}장 ${APPLY ? "★APPLY" : "(dry)"}${PRUNE ? " +prune" : ""}`);
 
-  const setRow = await prisma.set.findUnique({ where: { id: jpSet }, select: { setGroupId: true } });
-  const sgId = setRow?.setGroupId ?? null;
+  const setRow = await prisma.set.findUnique({ where: { id: jpSet }, select: { cardPackId: true } });
+  const sgId = setRow?.cardPackId ?? null;
   const locs = await prisma.cardLocale.findMany({ where: { setId: jpSet }, select: { id: true, number: true, numberInt: true, name: true, logicalCardId: true } });
   const dbNums = new Set(locs.map((l) => l.numberInt ?? numKey(l.number)));
-  console.log(`  기존 JP locale ${locs.length} · setGroup ${sgId ?? "—"}`);
+  console.log(`  기존 JP locale ${locs.length} · cardPack ${sgId ?? "—"}`);
 
   let dexTcg = 0, dexJa = 0, dexNone = 0, matched = 0; const noDex: string[] = [], noJson: string[] = [];
   const updates: { lcid: string; data: any }[] = [];
@@ -97,7 +97,7 @@ async function main() {
   for (const u of updates) await prisma.logicalCard.update({ where: { id: u.lcid }, data: u.data });
   console.log(`  ★메타 enrich: LC ${updates.length} 갱신`);
 
-  // JSON-only(DB 미적재) 카드 생성 — 권위 소스에 있으나 DB 갭(예 SM2L #12). LC+JP locale 신규 + setGroupId 부여.
+  // JSON-only(DB 미적재) 카드 생성 — 권위 소스에 있으나 DB 갭(예 SM2L #12). LC+JP locale 신규 + cardPackId 부여.
   const jsonOnly = cards.filter((c) => !dbNums.has(numKey(c.number)));
   let created = 0;
   for (const c of jsonOnly) {
@@ -109,7 +109,7 @@ async function main() {
     const lcId = `lc-${jpSet}-${c.number}`;
     if (await prisma.logicalCard.findUnique({ where: { id: lcId } })) continue;
     await prisma.logicalCard.create({ data: {
-      id: lcId, setGroupId: sgId ?? undefined, supertype: supertype ?? undefined, subtypes, pokedexNumbers: dex,
+      id: lcId, cardPackId: sgId ?? undefined, supertype: supertype ?? undefined, subtypes, pokedexNumbers: dex,
       illustrator: c.illustrator ?? undefined, hp: c.hp ?? undefined, types: c.types ?? [],
       primarySetId: jpSet, primaryNumber: c.number, primaryNumberInt: numInt ?? undefined,
     } });

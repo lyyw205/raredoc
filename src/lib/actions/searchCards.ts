@@ -23,7 +23,7 @@ export interface CardSearchParams {
   q?: string;
   type?: string;
   rarity?: string; // Rarity.code
-  setId?: string; // SetGroup.id (그룹 단위 필터)
+  setId?: string; // CardPack.id (그룹 단위 필터)
   limit?: number;
 }
 
@@ -34,7 +34,7 @@ export async function searchCardsAction(
     q: params.q,
     type: params.type,
     rarityCode: params.rarity,
-    setGroupId: params.setId,
+    cardPackId: params.setId,
     limit: params.limit,
   };
 

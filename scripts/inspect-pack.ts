@@ -1,7 +1,7 @@
 /**
  * 카드팩 단위 표준 점검 (읽기 전용, DB 변경 없음).
  *
- * 사용: npx tsx scripts/inspect-pack.ts <setGroupId | setId>
+ * 사용: npx tsx scripts/inspect-pack.ts <cardPackId | setId>
  *   예:  npx tsx scripts/inspect-pack.ts mega-abyss-eye
  *        npx tsx scripts/inspect-pack.ts jp-mega-abyss-eye
  *
@@ -21,7 +21,7 @@ import "dotenv/config";
 import { prisma } from "@/lib/prisma";
 
 const ARG = process.argv[2];
-if (!ARG) { console.error("usage: inspect-pack.ts <setGroupId | setId>"); process.exit(1); }
+if (!ARG) { console.error("usage: inspect-pack.ts <cardPackId | setId>"); process.exit(1); }
 
 const q = <T = any>(sql: string, ...p: any[]) => prisma.$queryRawUnsafe<T[]>(sql, ...p);
 const n = (v: any) => Number(v);
@@ -97,14 +97,14 @@ async function inspectSet(setId: string, region: string) {
 }
 
 async function main() {
-  const sg = await prisma.setGroup.findUnique({ where: { id: ARG }, select: { id: true, era: true, nameJa: true, nameEn: true, nameKo: true } });
+  const sg = await prisma.cardPack.findUnique({ where: { id: ARG }, select: { id: true, era: true, nameJa: true, nameEn: true, nameKo: true } });
   let sets: { id: string; region: string }[];
   if (sg) {
     console.log(`\n======== PACK: ${sg.id} [${sg.era}] ${sg.nameJa ?? ""} / ${sg.nameEn ?? ""} / ${sg.nameKo ?? ""} ========`);
-    sets = await prisma.set.findMany({ where: { setGroupId: sg.id }, select: { id: true, region: true }, orderBy: { region: "asc" } });
+    sets = await prisma.set.findMany({ where: { cardPackId: sg.id }, select: { id: true, region: true }, orderBy: { region: "asc" } });
   } else {
     const s = await prisma.set.findUnique({ where: { id: ARG }, select: { id: true, region: true } });
-    if (!s) { console.error(`'${ARG}' 는 SetGroup/Set 어느쪽도 아님`); process.exit(1); }
+    if (!s) { console.error(`'${ARG}' 는 CardPack/Set 어느쪽도 아님`); process.exit(1); }
     sets = [s];
   }
 

@@ -1,5 +1,5 @@
 /**
- * ADV1~5 (2003) SetGroup + Set 한글/일본어 공식명 입력.
+ * ADV1~5 (2003) CardPack + Set 한글/일본어 공식명 입력.
  *
  * 한국 미발매 → raredoc 표준명 (사용자 결정).
  */
@@ -16,7 +16,7 @@ const SETS = [
 
 async function main() {
   for (const s of SETS) {
-    const sg = await prisma.setGroup.update({
+    const sg = await prisma.cardPack.update({
       where: { id: s.groupId },
       data: { nameKo: s.nameKo, nameJa: s.nameJa },
     });

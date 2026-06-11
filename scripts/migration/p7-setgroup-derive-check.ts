@@ -1,25 +1,25 @@
-// ── P7-S1 진단: LogicalCard.setGroupId 가 물리경로(CardLocale.setId→Set.setGroupId)로 도출가능한가 ──
-// setGroupId 제거 전제: 각 LC의 setGroupId 가 자기 locale 들의 Set.setGroupId 와 일치해야 함.
-// 불일치 = '도둑질' 잔재(재포인트로 LC.setGroupId 가 물리와 어긋남) → 케이스 분류.
+// ── P7-S1 진단: LogicalCard.cardPackId 가 물리경로(CardLocale.setId→Set.cardPackId)로 도출가능한가 ──
+// cardPackId 제거 전제: 각 LC의 cardPackId 가 자기 locale 들의 Set.cardPackId 와 일치해야 함.
+// 불일치 = '도둑질' 잔재(재포인트로 LC.cardPackId 가 물리와 어긋남) → 케이스 분류.
 // 실행: npx tsx scripts/migration/p7-setgroup-derive-check.ts
 import "dotenv/config";
 import { prisma } from "../../src/lib/prisma";
 const n = (x: any) => Number(x ?? 0);
 
 async function main() {
-  console.log("════ P7-S1: setGroupId 물리경로 도출가능성 ════\n");
+  console.log("════ P7-S1: cardPackId 물리경로 도출가능성 ════\n");
 
-  // 전체 LC 수 / setGroupId 보유 / locale 보유
+  // 전체 LC 수 / cardPackId 보유 / locale 보유
   const totalLC = await prisma.logicalCard.count();
-  const withGrp = await prisma.logicalCard.count({ where: { setGroupId: { not: null } } });
-  console.log(`LC 총 ${totalLC} · setGroupId 보유 ${withGrp}`);
+  const withGrp = await prisma.logicalCard.count({ where: { cardPackId: { not: null } } });
+  console.log(`LC 총 ${totalLC} · cardPackId 보유 ${withGrp}`);
 
-  // 각 LC: 자기 locale들의 Set.setGroupId 집합(distinct, null제외)
-  // 분류: ①물리도출 setGroup이 정확히 1개이고 LC.setGroupId와 일치(=안전)
-  //       ②물리 setGroup 0개(locale의 Set이 setGroupId null=고아세트) — LC.setGroupId만 있음
-  //       ③물리 setGroup 여러개(한 LC가 여러 팩 set에 걸침) — 직교화 핵심 케이스
-  //       ④LC.setGroupId ≠ 물리 단일 setGroup (불일치=도둑질 잔재)
-  //       ⑤LC.setGroupId null인데 물리 setGroup 있음(역)
+  // 각 LC: 자기 locale들의 Set.cardPackId 집합(distinct, null제외)
+  // 분류: ①물리도출 cardPack이 정확히 1개이고 LC.cardPackId와 일치(=안전)
+  //       ②물리 cardPack 0개(locale의 Set이 cardPackId null=고아세트) — LC.cardPackId만 있음
+  //       ③물리 cardPack 여러개(한 LC가 여러 팩 set에 걸침) — 직교화 핵심 케이스
+  //       ④LC.cardPackId ≠ 물리 단일 cardPack (불일치=도둑질 잔재)
+  //       ⑤LC.cardPackId null인데 물리 cardPack 있음(역)
   const rows: any[] = await prisma.$queryRawUnsafe(`
     SELECT lc.id, lc."setGroupId" lcg,
            array_remove(array_agg(DISTINCT s."setGroupId"), NULL) phys
@@ -49,17 +49,17 @@ async function main() {
   }
 
   console.log(`\n── 분류 (총 ${rows.length} LC) ──`);
-  console.log(`  ① 안전(물리단일=LC.setGroupId 일치): ${safe}`);
-  console.log(`  ② 물리 setGroup 0(고아세트 locale, LC.setGroupId만): ${physNone}`);
-  console.log(`  ③ 물리 setGroup 복수(한 LC 여러 팩 걸침): ${physMulti}`);
-  console.log(`  ④ 불일치(LC.setGroupId ≠ 물리단일): ${mismatch}`);
-  console.log(`  ⑤ LC.setGroupId=null 인데 물리 있음: ${lcgNullPhys}`);
+  console.log(`  ① 안전(물리단일=LC.cardPackId 일치): ${safe}`);
+  console.log(`  ② 물리 cardPack 0(고아세트 locale, LC.cardPackId만): ${physNone}`);
+  console.log(`  ③ 물리 cardPack 복수(한 LC 여러 팩 걸침): ${physMulti}`);
+  console.log(`  ④ 불일치(LC.cardPackId ≠ 물리단일): ${mismatch}`);
+  console.log(`  ⑤ LC.cardPackId=null 인데 물리 있음: ${lcgNullPhys}`);
   console.log(`  ⑥ 둘다 없음(locale 0 등): ${bothNull}`);
-  console.log(`\n  도출안전 비율: ${safe}/${withGrp} (${((safe / withGrp) * 100).toFixed(1)}% of setGroupId보유)`);
+  console.log(`\n  도출안전 비율: ${safe}/${withGrp} (${((safe / withGrp) * 100).toFixed(1)}% of cardPackId보유)`);
   if (mmSamples.length) console.log("\n  ④ 불일치 표본:\n    " + mmSamples.join("\n    "));
   if (multiSamples.length) console.log("\n  ③ 복수 표본:\n    " + multiSamples.join("\n    "));
 
-  // ②·⑤ 추가 진단: 물리 setGroup 0인 LC의 locale 세트가 어떤건지(고아세트인지 locale0인지)
+  // ②·⑤ 추가 진단: 물리 cardPack 0인 LC의 locale 세트가 어떤건지(고아세트인지 locale0인지)
   if (physNone > 0) {
     const ex: any[] = await prisma.$queryRawUnsafe(`
       SELECT lc.id, lc."setGroupId" lcg, array_agg(DISTINCT cl."setId") sets
@@ -69,7 +69,7 @@ async function main() {
       GROUP BY lc.id, lc."setGroupId"
       HAVING count(DISTINCT s."setGroupId") FILTER (WHERE s."setGroupId" IS NOT NULL)=0
       LIMIT 6`);
-    console.log("\n  ② 표본(물리 setGroup 없는 LC — locale의 Set이 setGroupId null):");
+    console.log("\n  ② 표본(물리 cardPack 없는 LC — locale의 Set이 cardPackId null):");
     for (const e of ex) console.log(`    ${e.id} lcg=${e.lcg} sets=[${(e.sets || []).join(",")}]`);
   }
   await prisma.$disconnect();

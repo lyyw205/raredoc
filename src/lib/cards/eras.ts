@@ -3,7 +3,7 @@
 //
 // - ERA_ORDER:  카테고리(canonical era) 노출 순서 (신→구)
 // - ERA_LABEL:  사이드바/헤더 표시 라벨 (한글 병기)
-// - canonEra(): DB 의 raw SetGroup.era → canonical era 로 정규화
+// - canonEra(): DB 의 raw CardPack.era → canonical era 로 정규화
 //               (예: "XY (컨셉팩)"·"XY-SP" → "XY", "L (레전드)" → "LEGEND")
 
 export const ERA_ORDER = [

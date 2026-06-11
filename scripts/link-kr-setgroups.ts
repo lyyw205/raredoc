@@ -1,5 +1,5 @@
 /**
- * KR Set → SetGroup 연결 (setGroupId=null 인 KR Set 전부 처리, 멱등).
+ * KR Set → CardPack 연결 (cardPackId=null 인 KR Set 전부 처리, 멱등).
  *
  * 실행: npx tsx scripts/link-kr-setgroups.ts
  *
@@ -15,9 +15,9 @@ import { prisma } from "@/lib/prisma";
 import * as fs from "fs";
 import * as path from "path";
 
-// ── 명시적 KR set code → SetGroup id 매핑 ────────────────────────────────────
+// ── 명시적 KR set code → CardPack id 매핑 ────────────────────────────────────
 // code 는 Set.code 필드(대소문자 그대로) 또는 kr-{suffix} 형식 중 하나
-// 키: Set.id (kr-xxx)  값: SetGroup.id
+// 키: Set.id (kr-xxx)  값: CardPack.id
 const EXPLICIT_MAP: Record<string, string> = {
   // ── SV era ──
   "kr-sv1s": "sv-base",        // SV1S 스칼렛 ex → sv-base (스칼렛ex+바이올렛ex)
@@ -152,8 +152,8 @@ const EXPLICIT_MAP: Record<string, string> = {
   "kr-m-p":  "mega-ninja-spinner",
 };
 
-// ── PROMO 그룹: SetGroup이 없으면 신규 생성 ────────────────────────────────────
-// promo set 들은 era-specific promo SetGroup으로 묶음
+// ── PROMO 그룹: CardPack이 없으면 신규 생성 ────────────────────────────────────
+// promo set 들은 era-specific promo CardPack으로 묶음
 const PROMO_SETS: Record<string, string> = {
   "kr-promo":  "og-kr-sm-promo",   // 썬&문 강화확장팩/프로모 계열 모음
   "kr-sv-p":   "og-kr-sv-promo",   // SV 프로모
@@ -173,7 +173,7 @@ async function appendFollowup(lines: string[]) {
   const section = `
 ---
 
-## KR SetGroup 미매핑 잔여 (link-kr-setgroups.ts, ${new Date().toISOString().slice(0, 10)})
+## KR CardPack 미매핑 잔여 (link-kr-setgroups.ts, ${new Date().toISOString().slice(0, 10)})
 
 다음 KR Set 들은 자동 매핑 실패. 사람이 검토 후 EXPLICIT_MAP에 추가 필요.
 
@@ -187,29 +187,29 @@ ${lines.join("\n")}
 }
 
 async function main() {
-  const before = await prisma.set.count({ where: { region: "KR", setGroupId: null } });
+  const before = await prisma.set.count({ where: { region: "KR", cardPackId: null } });
   console.log(`시작: KR orphan set 수 = ${before}`);
 
   const allOrphan = await prisma.set.findMany({
-    where: { region: "KR", setGroupId: null },
+    where: { region: "KR", cardPackId: null },
     select: { id: true, name: true, code: true, releaseDate: true, _count: { select: { localeCards: true } } },
   });
 
   // 기존 max(order) 확인 (프로모 그룹 생성 시 order 붙이기 위해)
-  const agg = await prisma.setGroup.aggregate({ _max: { order: true } });
+  const agg = await prisma.cardPack.aggregate({ _max: { order: true } });
   let nextOrder = (agg._max.order ?? -1) + 1;
 
   const stats = { mapped: 0, promo: 0, unmapped: 0 };
   const unmappedLines: string[] = [];
 
-  // --- 1) 프로모 SetGroup 미리 upsert ---
+  // --- 1) 프로모 CardPack 미리 upsert ---
   for (const [groupId, def] of Object.entries(PROMO_GROUP_DEFS)) {
-    const exists = await prisma.setGroup.findUnique({ where: { id: groupId } });
+    const exists = await prisma.cardPack.findUnique({ where: { id: groupId } });
     if (!exists) {
-      await prisma.setGroup.create({
+      await prisma.cardPack.create({
         data: { id: groupId, era: def.era, nameKo: def.nameKo, order: nextOrder++ },
       });
-      console.log(`  [신규] SetGroup 생성: ${groupId} (${def.nameKo})`);
+      console.log(`  [신규] CardPack 생성: ${groupId} (${def.nameKo})`);
     }
   }
 
@@ -220,15 +220,15 @@ async function main() {
     const targetGroupId = explicit ?? promo ?? null;
 
     if (targetGroupId) {
-      // SetGroup 존재 확인
-      const grp = await prisma.setGroup.findUnique({ where: { id: targetGroupId } });
+      // CardPack 존재 확인
+      const grp = await prisma.cardPack.findUnique({ where: { id: targetGroupId } });
       if (!grp) {
-        console.warn(`  [경고] SetGroup 없음: ${targetGroupId} (for ${s.id}) — followup 처리`);
+        console.warn(`  [경고] CardPack 없음: ${targetGroupId} (for ${s.id}) — followup 처리`);
         unmappedLines.push(`| ${s.id} | ${s.code} | ${s._count.localeCards} | ${s.name} | ${targetGroupId} (없음) |`);
         stats.unmapped++;
         continue;
       }
-      await prisma.set.update({ where: { id: s.id }, data: { setGroupId: targetGroupId } });
+      await prisma.set.update({ where: { id: s.id }, data: { cardPackId: targetGroupId } });
       if (promo && !explicit) stats.promo++;
       else stats.mapped++;
       console.log(`  [OK] ${s.id} → ${targetGroupId}`);
@@ -236,7 +236,7 @@ async function main() {
       // 자동 매칭 실패: 후보 로그
       // 이름 기반 후보 탐색
       const kw = s.name.replace(/[「」『』\[\]【】]/g, "").slice(0, 10);
-      const candidates = await prisma.setGroup.findMany({
+      const candidates = await prisma.cardPack.findMany({
         where: { OR: [{ nameKo: { contains: kw } }, { nameJa: { contains: kw } }] },
         select: { id: true, nameKo: true },
         take: 3,
@@ -252,7 +252,7 @@ async function main() {
   await appendFollowup(unmappedLines);
 
   // --- 4) 결과 통계 ---
-  const after = await prisma.set.count({ where: { region: "KR", setGroupId: null } });
+  const after = await prisma.set.count({ where: { region: "KR", cardPackId: null } });
   console.log("─".repeat(50));
   console.log(`KR orphan before: ${before} → after: ${after}`);
   console.log(`  명시 매핑: ${stats.mapped}건`);

@@ -38,15 +38,15 @@ export function getR2Client(): S3Client {
 /**
  * Build R2 object key.
  *
- * Normal:    {setGroupId}/{language}/{size}/{setId}/{number}.{ext}
- * Collision: {setGroupId}/{language}/{size}/{setId}/{number}__{hash8}.{ext}
+ * Normal:    {cardPackId}/{language}/{size}/{setId}/{number}.{ext}
+ * Collision: {cardPackId}/{language}/{size}/{setId}/{number}__{hash8}.{ext}
  *
  * Collision occurs when (setId, number) is shared across multiple CardLocale
  * rows (e.g. parallel packs SV2D/SV2P both stored under the same logical set).
  * In that case pass cardLocaleId; hash = SHA-1(cardLocaleId)[0..7].
  */
 export function r2KeyFor(
-  setGroupId: string,
+  cardPackId: string,
   language: string,
   size: "small" | "large",
   setId: string,
@@ -54,7 +54,7 @@ export function r2KeyFor(
   ext: string,
   cardLocaleId?: string // supply only when collision handling is needed
 ): string {
-  const safeGroup = setGroupId.replace(/[^a-zA-Z0-9_\-]/g, "_");
+  const safeGroup = cardPackId.replace(/[^a-zA-Z0-9_\-]/g, "_");
   const safeSet = setId.replace(/[^a-zA-Z0-9_\-]/g, "_");
   const safeLang = language.toLowerCase();
   const safeNum = number.replace(/[^a-zA-Z0-9_\-]/g, "_");

@@ -293,12 +293,12 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
 }
 
 /**
- * SetGroup(팩) id 로 그 팩에 속한 LogicalCard id 목록 도출.
- * '도둑질' 방지: 가변·재포인트 대상인 LogicalCard.setGroupId 대신,
- * 각 LC의 앵커 locale(JP>KR>EN)의 Set.setGroupId(불변 물리관계)로 계산한다.
- * (setGroupId 컬럼과 전 그룹 diff=0 검증됨 — p7-setgroup-rewire-regression.ts)
+ * CardPack(팩) id 로 그 팩에 속한 LogicalCard id 목록 도출.
+ * '도둑질' 방지: 가변·재포인트 대상인 LogicalCard.cardPackId 대신,
+ * 각 LC의 앵커 locale(JP>KR>EN)의 Set.cardPackId(불변 물리관계)로 계산한다.
+ * (cardPackId 컬럼과 전 그룹 diff=0 검증됨 — p7-setgroup-rewire-regression.ts)
  */
-export async function lcIdsInPack(setGroupId: string): Promise<string[]> {
+export async function lcIdsInPack(cardPackId: string): Promise<string[]> {
   const rows = await prisma.$queryRaw<{ lc: string }[]>`
     SELECT a.lc FROM (
       SELECT DISTINCT ON (cl."logicalCardId") cl."logicalCardId" AS lc, s."setGroupId" AS grp
@@ -306,7 +306,7 @@ export async function lcIdsInPack(setGroupId: string): Promise<string[]> {
       WHERE s."setGroupId" IS NOT NULL
       ORDER BY cl."logicalCardId",
         CASE cl.region WHEN 'JP' THEN 0 WHEN 'KR' THEN 1 WHEN 'EN' THEN 2 ELSE 3 END
-    ) a WHERE a.grp = ${setGroupId}`;
+    ) a WHERE a.grp = ${cardPackId}`;
   return rows.map((r) => r.lc);
 }
 
@@ -315,7 +315,7 @@ export type LogicalCardSearchFilters = {
   supertype?: string;
   type?: string;
   rarityCode?: string;
-  setGroupId?: string;
+  cardPackId?: string;
   limit?: number;
 };
 
@@ -336,7 +336,7 @@ export async function searchLogicalCards(
   if (filters.supertype) where.supertype = filters.supertype;
   if (filters.type) where.types = { has: filters.type };
   if (filters.rarityCode) where.rarity = { code: filters.rarityCode };
-  if (filters.setGroupId) where.id = { in: await lcIdsInPack(filters.setGroupId) };
+  if (filters.cardPackId) where.id = { in: await lcIdsInPack(filters.cardPackId) };
   if (q) {
     where.locales = {
       some: { name: { contains: q, mode: "insensitive" } },

@@ -47,7 +47,7 @@ async function main() {
   const lcs = await prisma.logicalCard.findMany({
     select: {
       id: true, supertype: true, pokedexNumbers: true, regulationMark: true,
-      illustrator: true, hp: true, attacks: true, rules: true, setGroupId: true,
+      illustrator: true, hp: true, attacks: true, rules: true, cardPackId: true,
       locales: { select: { region: true, name: true } },
     },
   });
@@ -90,14 +90,14 @@ async function main() {
   for (const [key, ms] of gcMap) {
     if (ms.length < 2) continue;
     multi++; multiLcs += ms.length;
-    const groups = new Set(ms.map((m) => m.setGroupId));
+    const groups = new Set(ms.map((m) => m.cardPackId));
     if (groups.size > 1) reprintGroups++;
     const sigs = new Set(ms.map(effectSig));
     if (sigs.size > 1) { mixedGroups++; if (mixedEx.length < 12) mixedEx.push(`    "${key.split("|")[1]}" [${key.split("|")[0]}/${key.split("|")[2]}]: ${ms.length}장, 효과 ${sigs.size}종 → 동명이카드 의심`); }
   }
   console.log(`  총 그룹 ${gcMap.size} (단일 ${gcMap.size - multi} · 복수멤버 ${multi})`);
   console.log(`  복수멤버 그룹의 LC ${multiLcs}장 — 이들이 GameCard 1개로 합쳐짐(재수록·알트아트 통합)`);
-  console.log(`  └ 여러 setGroup에 걸친 그룹(진짜 재수록 통합): ${reprintGroups}`);
+  console.log(`  └ 여러 cardPack에 걸친 그룹(진짜 재수록 통합): ${reprintGroups}`);
   console.log(`  └ ★효과 불일치 그룹(같은 이름인데 효과 2종+ = 오병합 위험): ${mixedGroups} (${pct(mixedGroups, multi)})`);
   mixedEx.forEach((e) => console.log(e));
   console.log(`  ⇒ 판정: 오병합 위험 그룹이 적으면 3키 OK / 많으면 U3대로 'rules 해시' 키 추가 필요`);
@@ -119,7 +119,7 @@ async function main() {
   }
 
   // ── 묶음검증 B: ArtCard cross-pack 후보 [dex, illustrator, name] ──
-  console.log("\n【B】 ArtCard 묶음 검증 — 같은 그림이 여러 setGroup에 분산(cross-pack 후보)");
+  console.log("\n【B】 ArtCard 묶음 검증 — 같은 그림이 여러 cardPack에 분산(cross-pack 후보)");
   const acMap = new Map<string, typeof lcs>();
   for (const lc of lcs) {
     if (!isPkmn(lc.supertype)) continue; // 우선 포켓몬만(트레이너는 dex 없음)
@@ -132,10 +132,10 @@ async function main() {
   for (const [, ms] of acMap) {
     if (ms.length < 2) continue;
     acMerge++; acLcs += ms.length;
-    if (new Set(ms.map((m) => m.setGroupId)).size > 1) acCrossPack++;
+    if (new Set(ms.map((m) => m.cardPackId)).size > 1) acCrossPack++;
   }
   console.log(`  (dex+작가+이름) 동일 ArtCard 후보 그룹 ${acMerge}개 — LC ${acLcs}장이 ArtCard ${acMerge}개로 통합`);
-  console.log(`  └ 여러 setGroup에 걸친(진짜 cross-pack 재수록) 그룹: ${acCrossPack}`);
+  console.log(`  └ 여러 cardPack에 걸친(진짜 cross-pack 재수록) 그룹: ${acCrossPack}`);
   console.log(`  ⚠ 최종 same-art 판정은 이미지 pHash(U4) — 여기선 후보 규모만. 작가 같아도 다른그림 가능(디아루가/펄기아 함정)`);
 
   // ── 묶음검증 C: Species dex 커버리지 ──

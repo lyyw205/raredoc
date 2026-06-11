@@ -4,10 +4,10 @@
  * Sections:
  *   0) Per-set card counts & logo status
  *   A) Image liveness — EN (pokemontcg.io URLs), JP (tcgplayer/Supabase)
- *   B) Field completeness audit per SetGroup
+ *   B) Field completeness audit per CardPack
  *   C) ID contiguity check (gaps/duplicates)
  *   E) Missing cards (NULL imageSmall)
- *   F) Supertype classification per SetGroup
+ *   F) Supertype classification per CardPack
  *   H) Version availability (CardLocale language breakdown)
  *
  * Run: npx tsx scripts/phase-a-verify-xy.ts
@@ -87,7 +87,7 @@ function mdTable(headers: string[], rows: string[][]): string {
 interface CardLocaleRow { id: string; name: string; setId: string; language: string; imageSmall: string | null; }
 interface ImageResult { id: string; name: string; setId: string; url: string; status: number; region: "EN" | "JP"; }
 interface LogicalCardRow {
-  id: string; primarySetId: string | null; primaryNumber: string | null; setGroupId: string | null;
+  id: string; primarySetId: string | null; primaryNumber: string | null; cardPackId: string | null;
   hp: number | null; types: string[]; attacks: unknown; abilities: unknown;
   subtypes: string[]; illustrator: string | null; rarityId: string | null;
   pokedexNumbers: number[]; supertype: string | null; nameKo: string | null;
@@ -185,7 +185,7 @@ async function sectionB(lcards: LogicalCardRow[]) {
   const perSet = new Map<string, SetFieldStats>();
 
   for (const card of lcards) {
-    const setKey = card.setGroupId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
+    const setKey = card.cardPackId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
     if (!perSet.has(setKey)) perSet.set(setKey, { total: 0, fields: Object.fromEntries(FIELDS.map(f => [f, 0])) as Record<FieldKey, number> });
     const s = perSet.get(setKey)!;
     s.total++;
@@ -260,7 +260,7 @@ async function sectionF(lcards: LogicalCardRow[], locales: CardLocaleRow[]) {
 
   const bySet = new Map<string, SupertypeStats>();
   for (const card of lcards) {
-    const setKey = card.setGroupId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
+    const setKey = card.cardPackId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
     if (!bySet.has(setKey)) bySet.set(setKey, { setKey, counts: new Map(), nullCards: [] });
     const s = bySet.get(setKey)!;
     const st = card.supertype ?? "(null)";
@@ -296,7 +296,7 @@ async function sectionH(allLcards: LogicalCardRow[]) {
 
   const bySet = new Map<string, LocaleStats>();
   for (const card of allLcards) {
-    const setKey = card.setGroupId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
+    const setKey = card.cardPackId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
     if (!bySet.has(setKey)) bySet.set(setKey, { setKey, patterns: new Map() });
     const s = bySet.get(setKey)!;
     const langs = (byLcId.get(card.id) ?? []).sort().join("+") || "(none)";
@@ -311,11 +311,11 @@ async function sectionH(allLcards: LogicalCardRow[]) {
 }
 
 // ---------------------------------------------------------------------------
-// SetGroup coverage check
+// CardPack coverage check
 // ---------------------------------------------------------------------------
 
 async function sectionGroups() {
-  const groups = await prisma.setGroup.findMany({
+  const groups = await prisma.cardPack.findMany({
     where: { id: { in: XY_GROUP_IDS } },
     include: { sets: { select: { id: true, region: true, cardCount: true, logoUrl: true, symbolUrl: true, nameKo: true } } },
     orderBy: { order: "asc" },
@@ -346,8 +346,8 @@ function buildReport(data: {
   lines.push(`\n생성 일시: ${now}\n`);
   lines.push(`대상: XY era (og-xy1a ~ og-cp6, og-xyp, og-xy0, og-g1) — 22 SetGroups.\n`);
 
-  // ── Section 0: SetGroup coverage ──
-  lines.push(`## 0) SetGroup 커버리지`);
+  // ── Section 0: CardPack coverage ──
+  lines.push(`## 0) CardPack 커버리지`);
   lines.push(mdTable(
     ["SetGroup", "nameJa", "nameKo", "Sets (region:count)"],
     data.groups.map(g => [
@@ -473,9 +473,9 @@ function buildReport(data: {
   // ── EN↔JP Mapping summary ──
   lines.push(`\n## I) EN↔JP 매핑 결정 요약`);
   lines.push(`
-| EN Set | JP SetGroup | 비고 |
+| EN Set | JP CardPack | 비고 |
 |--------|------------|------|
-| en-tcg-xy1 | og-xy1a | EN 합본(146) → JP XY1a+XY1b(63+63). XY1b는 별도 SetGroup 유지. |
+| en-tcg-xy1 | og-xy1a | EN 합본(146) → JP XY1a+XY1b(63+63). XY1b는 별도 CardPack 유지. |
 | en-tcg-xy2 | og-xy2 | 1:1 매핑 |
 | en-tcg-xy3 | og-xy3 | 1:1 매핑 |
 | en-tcg-xy4 | og-xy4 | 1:1 매핑 |
@@ -483,14 +483,14 @@ function buildReport(data: {
 | en-tcg-dc1 | og-cp1 | Double Crisis → ダブルクライシス |
 | en-tcg-xy6 | og-xy6 | 1:1 매핑 |
 | en-tcg-xy7 | og-xy7 | 1:1 매핑 |
-| en-tcg-xy8 | og-xy8a | EN 합본(162) → JP XY8a+XY8b. XY8b 별도 SetGroup 유지. |
+| en-tcg-xy8 | og-xy8a | EN 합본(162) → JP XY8a+XY8b. XY8b 별도 CardPack 유지. |
 | en-tcg-xy9 | og-xy9 | 1:1 매핑 |
 | en-tcg-xy10 | og-xy10 | 1:1 매핑 |
 | en-tcg-xy11 | og-xy11a | EN Steam Siege → JP 冷酷の反逆者. CP5(재출시)는 og-cp5 별도. |
 | en-tcg-xy12 | og-cp6 | EN Evolutions → JP 20th Anniversary |
-| en-tcg-xyp | og-xyp | EN 전용 신규 SetGroup |
-| en-tcg-xy0 | og-xy0 | EN 전용 신규 SetGroup |
-| en-tcg-g1 | og-g1 | Generations ≠ ポケキュンコレクション → 별도 SetGroup |
+| en-tcg-xyp | og-xyp | EN 전용 신규 CardPack |
+| en-tcg-xy0 | og-xy0 | EN 전용 신규 CardPack |
+| en-tcg-g1 | og-g1 | Generations ≠ ポケキュンコレクション → 별도 CardPack |
 `);
 
   // ── Actions ──
@@ -546,8 +546,8 @@ async function main() {
   });
 
   const lcards = await prisma.logicalCard.findMany({
-    where: { setGroupId: { in: XY_GROUP_IDS } },
-    select: { id: true, primarySetId: true, primaryNumber: true, setGroupId: true, hp: true, types: true, attacks: true, abilities: true, subtypes: true, illustrator: true, rarityId: true, pokedexNumbers: true, supertype: true, nameKo: true },
+    where: { cardPackId: { in: XY_GROUP_IDS } },
+    select: { id: true, primarySetId: true, primaryNumber: true, cardPackId: true, hp: true, types: true, attacks: true, abilities: true, subtypes: true, illustrator: true, rarityId: true, pokedexNumbers: true, supertype: true, nameKo: true },
   });
 
   console.log(`Loaded: ${enLocales.length} EN locales, ${jpLocales.length} JP locales, ${lcards.length} LogicalCards`);

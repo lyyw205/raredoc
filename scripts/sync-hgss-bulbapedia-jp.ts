@@ -189,12 +189,12 @@ async function syncSet(setDef: typeof SET_MAP[number], bulbapediaSourceId: strin
       series: "HeartGold & SoulSilver",
       releaseDate: new Date(setDef.jpRelease),
       cardCount: allJpRows.length,
-      region: "JP", setGroupId: groupId,
+      region: "JP", cardPackId: groupId,
     },
     update: {
       nameJa: setDef.jpSetNameJa,
       cardCount: allJpRows.length,
-      setGroupId: groupId,
+      cardPackId: groupId,
     },
   });
   console.log(`  ✓ JP Set ${jpSetId}`);

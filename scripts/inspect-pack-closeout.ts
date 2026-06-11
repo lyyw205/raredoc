@@ -1,9 +1,9 @@
 /**
- * 팩 마감 인스펙터 (읽기전용) — 한 SetGroup의 JP/KR/EN을 0~4단계 한 번에 진단·검증.
+ * 팩 마감 인스펙터 (읽기전용) — 한 CardPack의 JP/KR/EN을 0~4단계 한 번에 진단·검증.
  *   Phase 0: 구조(region별 카드수·번호중복·rarity 문자열 3국 대조)
  *   Phase 1: JP 정본화 검증(ja이름→dex 독립신호·supertype/subtypes/일러/이미지 커버리지)
  *   Phase 2: KR 정합(공유 lcid 병합 여부·koName→dex == 앵커 dex; 폼카드 KO_FORM 반영)
- *   Phase 4: 정합(JP앵커/KR/EN/orphan setGroupId 적재·EN 병합/고아·JSON↔DB 카드수)
+ *   Phase 4: 정합(JP앵커/KR/EN/orphan cardPackId 적재·EN 병합/고아·JSON↔DB 카드수)
  *   ※ Phase 3(EN 매칭 dry)은 pokemontcg.io 필요 → merge-en-identity/verify-en-dex 별도 실행.
  *
  * 실행: npx tsx scripts/inspect-pack-closeout.ts <groupId>
@@ -33,7 +33,7 @@ const koDex = (n: string): number[] => { for (const [re, d] of KO_FORM) if (re.t
 async function main() {
   const groupId = process.argv[2];
   if (!groupId) { console.error("usage: inspect-pack-closeout.ts <groupId>"); process.exit(1); }
-  const g = await prisma.setGroup.findUnique({ where: { id: groupId }, include: { sets: { select: { id: true, region: true, code: true, name: true, cardCount: true } } } });
+  const g = await prisma.cardPack.findUnique({ where: { id: groupId }, include: { sets: { select: { id: true, region: true, code: true, name: true, cardCount: true } } } });
   if (!g) { console.error(`그룹 없음: ${groupId}`); process.exit(1); }
 
   const setIds = g.sets.map((s) => s.id);
@@ -42,7 +42,7 @@ async function main() {
     where: { setId: { in: setIds } },
     select: {
       id: true, setId: true, region: true, number: true, numberInt: true, name: true, imageSmall: true, imageLarge: true, logicalCardId: true,
-      logicalCard: { select: { supertype: true, subtypes: true, pokedexNumbers: true, illustrator: true, setGroupId: true, primarySetId: true, rarity: { select: { code: true, nameJa: true, nameKo: true, nameEn: true, tier: true } } } },
+      logicalCard: { select: { supertype: true, subtypes: true, pokedexNumbers: true, illustrator: true, cardPackId: true, primarySetId: true, rarity: { select: { code: true, nameJa: true, nameKo: true, nameEn: true, tier: true } } } },
     },
   });
 
@@ -106,8 +106,8 @@ async function main() {
 
   // ── Phase 4 (정합·표시) ──────────────────────────────
   console.log(`\n── Phase 4 정합·표시 검증 ──`);
-  const sg = (r: string) => { const m = new Map<string, number>(); for (const l of locales.filter((x) => x.region === r)) m.set(l.logicalCard.setGroupId ?? "(null)", (m.get(l.logicalCard.setGroupId ?? "(null)") ?? 0) + 1); return [...m].map(([k, n]) => `${k}=${n}`).join(" "); };
-  console.log(`  setGroupId 적재 — JP:[${sg("JP")}]  KR:[${sg("KR")}]  EN:[${sg("EN")}]`);
+  const sg = (r: string) => { const m = new Map<string, number>(); for (const l of locales.filter((x) => x.region === r)) m.set(l.logicalCard.cardPackId ?? "(null)", (m.get(l.logicalCard.cardPackId ?? "(null)") ?? 0) + 1); return [...m].map(([k, n]) => `${k}=${n}`).join(" "); };
+  console.log(`  cardPackId 적재 — JP:[${sg("JP")}]  KR:[${sg("KR")}]  EN:[${sg("EN")}]`);
   const enRows = locales.filter((l) => l.region === "EN");
   const enMerged = enRows.filter((l) => lcidHasJp.has(l.logicalCardId)).length;
   console.log(`  EN: 총 ${enRows.length} · JP앵커 병합 ${enMerged} · 고아(영판전용) ${enRows.length - enMerged}`);

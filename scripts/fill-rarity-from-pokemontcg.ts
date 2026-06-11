@@ -78,7 +78,7 @@ ${lines.join("\n")}
 
 async function main() {
   // Before 통계
-  const beforeTotal = await prisma.logicalCard.count({ where: { rarityId: null, setGroupId: { not: null } } });
+  const beforeTotal = await prisma.logicalCard.count({ where: { rarityId: null, cardPackId: { not: null } } });
   const beforeEra = await prisma.$queryRaw<{ era: string; cnt: bigint }[]>`
     SELECT sg.era, COUNT(*) as cnt
     FROM "LogicalCard" lc
@@ -93,12 +93,12 @@ async function main() {
   const targets = await prisma.logicalCard.findMany({
     where: {
       rarityId: null,
-      setGroupId: { not: null },
+      cardPackId: { not: null },
       locales: { some: { region: "EN" } },
     },
     select: {
       id: true,
-      setGroup: { select: { era: true } },
+      cardPack: { select: { era: true } },
       locales: {
         where: { region: "EN" },
         select: { id: true },
@@ -141,7 +141,7 @@ async function main() {
         if (!rarityText) {
           // API 응답에 rarity 없음 → followup
           followupLines.push(
-            `| ${lc.id} | ${enLocaleId} | ${lc.setGroup?.era ?? "-"} | (없음) |`,
+            `| ${lc.id} | ${enLocaleId} | ${lc.cardPack?.era ?? "-"} | (없음) |`,
           );
           notFound++;
           return;
@@ -159,7 +159,7 @@ async function main() {
           updated++;
         } else {
           followupLines.push(
-            `| ${lc.id} | ${enLocaleId} | ${lc.setGroup?.era ?? "-"} | ${rarityText} |`,
+            `| ${lc.id} | ${enLocaleId} | ${lc.cardPack?.era ?? "-"} | ${rarityText} |`,
           );
           notFound++;
         }
@@ -173,7 +173,7 @@ async function main() {
   }
 
   // After 통계
-  const afterTotal = await prisma.logicalCard.count({ where: { rarityId: null, setGroupId: { not: null } } });
+  const afterTotal = await prisma.logicalCard.count({ where: { rarityId: null, cardPackId: { not: null } } });
   const afterEra = await prisma.$queryRaw<{ era: string; cnt: bigint }[]>`
     SELECT sg.era, COUNT(*) as cnt
     FROM "LogicalCard" lc

@@ -12,7 +12,7 @@
  * 동작:
  *   1. 화이트리스트의 각 (setId, fileTitle) 을 MediaWiki API(action=query&prop=imageinfo)로 실URL 조회.
  *   2. HTTP 200 확인 후, Set.logoUrl=null 인 경우에만 저장(멱등).
- *   3. 같은 SetGroup 의 KR 세트(logoUrl=null) 에도 동일 URL 재사용(기존 패턴 일치).
+ *   3. 같은 CardPack 의 KR 세트(logoUrl=null) 에도 동일 URL 재사용(기존 패턴 일치).
  *
  * 제약:
  *   - 추측 금지. 실제 페이지 wikitext 확인된 파일명만 사용.
@@ -118,7 +118,7 @@ async function setLogoIfNull(setId: string, logoUrl: string, retries = 5): Promi
 
 async function main() {
   console.log("[backfill-logos-bulbapedia] 시작");
-  console.log(`  출처: ${ARCHIVES_API} (JP 로고) — KR 은 동일 SetGroup 의 JP 로고 재사용`);
+  console.log(`  출처: ${ARCHIVES_API} (JP 로고) — KR 은 동일 CardPack 의 JP 로고 재사용`);
   console.log(`  화이트리스트 크기: ${Object.keys(FILE_BY_SET).length}\n`);
 
   const beforeWithLogo = await prisma.set.count({ where: { logoUrl: { not: null } } });
@@ -157,14 +157,14 @@ async function main() {
     console.log(`  [JP] ${r.setId} ← ${r.url}${updated ? "" : " (이미 있음/0건)"}`);
   }
 
-  // 3. KR 재사용: 같은 SetGroup
-  const groupBy = new Map<string, string>(); // setGroupId → JP logo url
+  // 3. KR 재사용: 같은 CardPack
+  const groupBy = new Map<string, string>(); // cardPackId → JP logo url
   if (resolved.length > 0) {
     const jpSets = await prisma.set.findMany({
       where: { id: { in: resolved.map((r) => r.setId) } },
-      select: { id: true, setGroupId: true },
+      select: { id: true, cardPackId: true },
     });
-    const sgById = new Map(jpSets.map((s) => [s.id, s.setGroupId]));
+    const sgById = new Map(jpSets.map((s) => [s.id, s.cardPackId]));
     for (const r of resolved) {
       const sg = sgById.get(r.setId);
       if (sg && !groupBy.has(sg)) groupBy.set(sg, r.url);
@@ -177,17 +177,17 @@ async function main() {
       where: {
         region: "KR",
         logoUrl: null,
-        setGroupId: { in: Array.from(groupBy.keys()) },
+        cardPackId: { in: Array.from(groupBy.keys()) },
       },
-      select: { id: true, setGroupId: true },
+      select: { id: true, cardPackId: true },
     });
     for (const s of krSets) {
-      const url = s.setGroupId ? groupBy.get(s.setGroupId) : undefined;
+      const url = s.cardPackId ? groupBy.get(s.cardPackId) : undefined;
       if (!url) continue;
       const updated = await setLogoIfNull(s.id, url);
       if (updated) {
         krFilled++;
-        console.log(`  [KR] ${s.id} (grp=${s.setGroupId}) ← ${url} (JP 재사용)`);
+        console.log(`  [KR] ${s.id} (grp=${s.cardPackId}) ← ${url} (JP 재사용)`);
       }
     }
   }

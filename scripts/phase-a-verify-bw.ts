@@ -84,7 +84,7 @@ interface ImageResult {
 }
 interface LogicalCardRow {
   id: string; primarySetId: string | null; primaryNumber: string | null;
-  setGroupId: string | null;
+  cardPackId: string | null;
   hp: number | null; types: string[]; attacks: unknown; abilities: unknown;
   subtypes: string[]; illustrator: string | null; rarityId: string | null;
   pokedexNumbers: number[]; supertype: string | null; nameKo: string | null;
@@ -158,7 +158,7 @@ async function sectionB(lcards: LogicalCardRow[]): Promise<Map<string, SetFieldS
   const perSet = new Map<string, SetFieldStats>();
 
   for (const card of lcards) {
-    const setKey = card.setGroupId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
+    const setKey = card.cardPackId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
     if (!perSet.has(setKey)) {
       perSet.set(setKey, { total: 0, fields: Object.fromEntries(FIELDS.map(f => [f, 0])) as Record<FieldKey, number> });
     }
@@ -242,7 +242,7 @@ async function sectionF(lcards: LogicalCardRow[], locales: CardLocaleRow[]): Pro
 
   const bySet = new Map<string, SupertypeStats>();
   for (const card of lcards) {
-    const setKey = card.setGroupId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
+    const setKey = card.cardPackId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
     if (!bySet.has(setKey)) bySet.set(setKey, { setKey, counts: new Map(), nullCards: [] });
     const s = bySet.get(setKey)!;
     const st = card.supertype ?? "(null)";
@@ -278,7 +278,7 @@ async function sectionH(allLcards: LogicalCardRow[]): Promise<LocaleStats[]> {
 
   const bySet = new Map<string, LocaleStats>();
   for (const card of allLcards) {
-    const setKey = card.setGroupId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
+    const setKey = card.cardPackId ?? (card.primarySetId ?? "").replace(/^en-tcg-/, "");
     if (!bySet.has(setKey)) bySet.set(setKey, { setKey, patterns: new Map() });
     const s = bySet.get(setKey)!;
     const langs = (byLcId.get(card.id) ?? []).sort().join("+") || "(none)";
@@ -377,7 +377,7 @@ function buildReport(data: {
 
   // ── Section B ──
   lines.push(`\n## B) 필드 완성도`);
-  lines.push(`\n각 SetGroup 의 LogicalCard 필드 채움률.\n`);
+  lines.push(`\n각 CardPack 의 LogicalCard 필드 채움률.\n`);
   const bKeys = [...data.sectionB.keys()].sort();
   lines.push(mdTable(
     ["세트","총계",...FIELDS],
@@ -508,8 +508,8 @@ async function main() {
   });
 
   const lcards = await prisma.logicalCard.findMany({
-    where: { setGroupId: { in: BW_GROUP_IDS } },
-    select: { id: true, primarySetId: true, primaryNumber: true, setGroupId: true, hp: true, types: true, attacks: true, abilities: true, subtypes: true, illustrator: true, rarityId: true, pokedexNumbers: true, supertype: true, nameKo: true },
+    where: { cardPackId: { in: BW_GROUP_IDS } },
+    select: { id: true, primarySetId: true, primaryNumber: true, cardPackId: true, hp: true, types: true, attacks: true, abilities: true, subtypes: true, illustrator: true, rarityId: true, pokedexNumbers: true, supertype: true, nameKo: true },
   });
 
   console.log(`Loaded: ${enLocales.length} EN locales, ${jpLocales.length} JP locales, ${lcards.length} LogicalCards`);

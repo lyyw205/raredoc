@@ -20,8 +20,8 @@ model Set {
   symbolUrl   String?
   region      String      @default("EN") // EN | JP | KR
   code        String? // 지역 팩 코드 (EN ptcgoCode / JP sv2a / KR 사이트ID 등)
-  setGroupId  String?
-  setGroup    SetGroup?   @relation(fields: [setGroupId], references: [id])
+  cardPackId  String?     @map("setGroupId")
+  cardPack    CardPack?   @relation(fields: [cardPackId], references: [id])
   tierEntries TierEntry[]
   primarySetForLogical LogicalCard[] @relation("LogicalCardPrimarySet")
   localeCards          CardLocale[]  @relation("CardLocaleSet")
@@ -31,12 +31,12 @@ model Set {
   @@index([series])
   @@index([releaseDate])
   @@index([region])
-  @@index([setGroupId])
+  @@index([cardPackId], map: "Set_setGroupId_idx")
 }
 
 // 논리적 확장팩(예: "151"). 한 그룹에 지역별 Set 이 1~여러 개(EN이 JP 2팩을 합본하기도 함).
 // 부분 그룹 허용: JP/KR 만 있고 EN 이 없을 수도 있음(예: MEGA 시리즈) — 억지 매핑 금지.
-model SetGroup {
+model CardPack {
   id          String    @id // slug 예: "sv-151", "sv-base", "mega-abysseye"
   era         String // SV | MEGA | ...
   nameEn      String?
@@ -46,12 +46,13 @@ model SetGroup {
   order       Int       @default(0)
   sets        Set[]
   // Phase 1 추가: 신규 ERD 역방향 relation
-  logicalCards LogicalCard[] @relation("LogicalCardSetGroup")
+  logicalCards LogicalCard[] @relation("LogicalCardCardPack")
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
   @@index([era])
   @@index([order])
+  @@map("SetGroup")
 }
 
 model Price {
@@ -751,8 +752,8 @@ model MarketStat {
 
 model LogicalCard {
   id               String       @id @default(cuid())
-  setGroupId       String?
-  setGroup         SetGroup?    @relation("LogicalCardSetGroup", fields: [setGroupId], references: [id])
+  cardPackId       String?      @map("setGroupId")
+  cardPack         CardPack?    @relation("LogicalCardCardPack", fields: [cardPackId], references: [id])
   primarySetId     String? // JP 원조 세트(있으면)
   primarySet       Set?         @relation("LogicalCardPrimarySet", fields: [primarySetId], references: [id])
   primaryNumber    String? // 원조 번호
@@ -797,7 +798,7 @@ model LogicalCard {
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @updatedAt
 
-  @@index([setGroupId])
+  @@index([cardPackId], map: "LogicalCard_setGroupId_idx")
   @@index([rarityId])
   @@index([primarySetId])
   @@index([gameCardId])
@@ -954,7 +955,7 @@ model ExternalIdMapping {
   cardLocaleId  String?
   logicalCardId String?
   setId         String?
-  setGroupId    String?
+  cardPackId    String?    @map("setGroupId")
   url           String?
   verifiedAt    DateTime?
   verifiedBy    String? // userId or "auto:scriptname"
@@ -970,7 +971,7 @@ model ExternalIdMapping {
   @@index([cardLocaleId])
   @@index([logicalCardId])
   @@index([setId])
-  @@index([setGroupId])
+  @@index([cardPackId], map: "ExternalIdMapping_setGroupId_idx")
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

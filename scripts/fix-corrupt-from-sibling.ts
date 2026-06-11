@@ -20,7 +20,7 @@ async function main() {
   const gid = process.argv[2], APPLY = process.argv.includes("--apply");
   if (!gid) { console.error("usage: <gid> [--apply]"); process.exit(1); }
   const lcs = await prisma.logicalCard.findMany({
-    where: { setGroupId: gid },
+    where: { cardPackId: gid },
     select: { id: true, attacks: true, types: true, subtypes: true, locales: { select: { region: true, name: true, numberInt: true } } },
   });
   const jpName = (lc: typeof lcs[0]) => lc.locales.find((l) => l.region === "JP")?.name ?? "";

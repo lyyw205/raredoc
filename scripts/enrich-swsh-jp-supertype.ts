@@ -1,5 +1,5 @@
 /**
- * SwSh JP-only SetGroup LogicalCard supertype 보강.
+ * SwSh JP-only CardPack LogicalCard supertype 보강.
  *
  * tcgdex JP SwSh 엔드포인트는 cards 배열이 빈 배열을 반환하므로
  * CardLocale.name 기반 규칙으로 supertype 추정.
@@ -87,7 +87,7 @@ async function main() {
   for (const groupId of JP_ONLY_SWSH_GROUPS) {
     // Get all CardLocale + LogicalCard for this group where supertype is null
     const sets = await prisma.set.findMany({
-      where: { setGroupId: groupId },
+      where: { cardPackId: groupId },
       select: { id: true, cardCount: true, region: true },
     });
 

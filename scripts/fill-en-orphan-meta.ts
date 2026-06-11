@@ -46,7 +46,7 @@ async function main() {
 
   // EN-only LC (모든 locale 이 EN) 로드
   const where: any = { locales: { every: { region: "EN" }, some: {} } };
-  if (gid) where.setGroupId = gid;
+  if (gid) where.cardPackId = gid;
   const lcs = await prisma.logicalCard.findMany({
     where,
     select: { id: true, supertype: true, subtypes: true, types: true, hp: true, attacks: true, abilities: true,

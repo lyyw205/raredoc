@@ -155,7 +155,7 @@ function verify(region: string, recs: Rec[], expected: number, statsExpected: bo
 async function main() {
   const gid = process.argv[2];
   if (!gid) { console.error("usage: collect-pack.ts <groupId>"); process.exit(1); }
-  const g = await prisma.setGroup.findUnique({ where: { id: gid }, include: { sets: { select: { id: true, region: true, code: true, nameKo: true, cardCount: true } } } });
+  const g = await prisma.cardPack.findUnique({ where: { id: gid }, include: { sets: { select: { id: true, region: true, code: true, nameKo: true, cardCount: true } } } });
   if (!g) { console.error(`그룹 없음: ${gid}`); process.exit(1); }
   const jpS = g.sets.filter((s) => s.region === "JP"), krS = g.sets.filter((s) => s.region === "KR"), enS = g.sets.filter((s) => s.region === "EN");
   const exp = (ss: typeof g.sets) => ss.reduce((n, s) => n + s.cardCount, 0);

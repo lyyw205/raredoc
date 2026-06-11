@@ -13,7 +13,7 @@ async function main() {
   const gid = process.argv[2], APPLY = process.argv.includes("--apply");
   if (!gid) { console.error("usage: <gid> [--apply]"); process.exit(1); }
   const all = await prisma.logicalCard.findMany({
-    where: { setGroupId: gid },
+    where: { cardPackId: gid },
     select: { id: true, supertype: true, subtypes: true, types: true, attacks: true, pokedexNumbers: true,
       locales: { select: { id: true, region: true, name: true } } },
   });

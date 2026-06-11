@@ -3,7 +3,7 @@
  *
  * 대상(전수조사 결정, docs 참고):
  *   - EN 전량: id(en-tcg- 제거, 소문자) = ptcg-assets 폴더명 → 직접 대체(투명·고품질)
- *   - KR/JP 형제공유: logoUrl 없고 같은 setGroup 에 ptcg 매칭되는 EN 형제가 있으면 그 로고로 채움
+ *   - KR/JP 형제공유: logoUrl 없고 같은 cardPack 에 ptcg 매칭되는 EN 형제가 있으면 그 로고로 채움
  * (KR 구형/JP 잔여 등 ptcg-assets 로 못 푸는 건 이 스크립트가 건드리지 않음 → 기존 유지)
  *
  * 저장: GitHub raw 핫링크 대신 R2 미러링(개인 레포 의존 제거). key = set-assets/logo/{setId}.png
@@ -49,20 +49,20 @@ async function pool<T>(items: T[], n: number, fn: (t: T, i: number) => Promise<v
 type Target = { setId: string; region: string; sourceFolder: string; reason: "en-replace" | "sibling-fill" };
 
 async function main() {
-  const sets = await prisma.set.findMany({ select: { id: true, region: true, setGroupId: true, logoUrl: true } });
+  const sets = await prisma.set.findMany({ select: { id: true, region: true, cardPackId: true, logoUrl: true } });
 
-  // setGroup → EN 형제(있으면) 의 ptcg 폴더키
+  // cardPack → EN 형제(있으면) 의 ptcg 폴더키
   const enByGroup = new Map<string, string>();
   for (const s of sets) {
-    if (s.region === "EN" && s.setGroupId && !enByGroup.has(s.setGroupId)) enByGroup.set(s.setGroupId, enKey(s.id));
+    if (s.region === "EN" && s.cardPackId && !enByGroup.has(s.cardPackId)) enByGroup.set(s.cardPackId, enKey(s.id));
   }
 
   const targets: Target[] = [];
   for (const s of sets) {
     if (s.region === "EN") {
       targets.push({ setId: s.id, region: "EN", sourceFolder: enKey(s.id), reason: "en-replace" });
-    } else if (!s.logoUrl && s.setGroupId && enByGroup.has(s.setGroupId)) {
-      targets.push({ setId: s.id, region: s.region, sourceFolder: enByGroup.get(s.setGroupId)!, reason: "sibling-fill" });
+    } else if (!s.logoUrl && s.cardPackId && enByGroup.has(s.cardPackId)) {
+      targets.push({ setId: s.id, region: s.region, sourceFolder: enByGroup.get(s.cardPackId)!, reason: "sibling-fill" });
     }
   }
   const limited = LIMIT > 0 ? targets.slice(0, LIMIT) : targets;
