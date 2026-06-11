@@ -25,9 +25,9 @@ async function loadCardRefs(cardIds: string[]): Promise<Map<string, CardRefView>
   const ids = [...new Set(cardIds.filter(Boolean))];
   const map = new Map<string, CardRefView>();
   if (ids.length === 0) return map;
-  // Phase 4: prisma.card → prisma.cardLocale. CardLocale.id == 기존 Card.id.
-  // CardLocale 행은 이미 해당 locale 의 표시명을 갖고 있으므로 .name 그대로 사용.
-  const cards = await prisma.cardLocale.findMany({
+  // Phase 4: prisma.card → prisma.regionCard. RegionCard.id == 기존 Card.id.
+  // RegionCard 행은 이미 해당 locale 의 표시명을 갖고 있으므로 .name 그대로 사용.
+  const cards = await prisma.regionCard.findMany({
     where: { id: { in: ids } },
     select: {
       id: true,

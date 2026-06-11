@@ -4,7 +4,7 @@
  * 실행: npx tsx scripts/fill-rarity-from-tcgdex.ts
  *
  * 전략:
- *   1) JP CardLocale.id (예: jp-tcg-SM8b-001) → tcgdex /v2/ja/cards/{id} 또는 /v2/en/cards/{id}
+ *   1) JP RegionCard.id (예: jp-tcg-SM8b-001) → tcgdex /v2/ja/cards/{id} 또는 /v2/en/cards/{id}
  *   2) card.rarity 텍스트 → Rarity.nameEn / nameJa ILIKE 매칭 → rarityId update
  *   3) 실패 → followup-plans.md append
  *   4) imageSmall/imageLarge 절대 건드리지 않음
@@ -26,10 +26,10 @@ const DELAY = 200;
 //   jp-tcg-SM8b-001 → setId=SM8b, num=001
 //   jp-tcg-XY1a-012 → setId=XY1a, num=012
 // 비 jp-tcg- 형식(jp-mega-dream-ex-1 등)은 tcgdex 미수록 → null 반환
-function toTcgdexId(cardLocaleId: string): { setId: string; num: string } | null {
+function toTcgdexId(regionCardId: string): { setId: string; num: string } | null {
   // jp-tcg- 접두사가 없으면 tcgdex 미수록 세트
-  if (!cardLocaleId.startsWith("jp-tcg-")) return null;
-  const rest = cardLocaleId.replace(/^jp-tcg-/, "");
+  if (!regionCardId.startsWith("jp-tcg-")) return null;
+  const rest = regionCardId.replace(/^jp-tcg-/, "");
   // 마지막 -숫자[알파] 세그먼트를 num으로, 나머지를 setId로
   const m = rest.match(/^(.+)-(\d+[A-Za-z]?)$/);
   if (!m) return null;
@@ -65,7 +65,7 @@ async function appendFollowup(lines: string[]) {
 
 tcgdex 에서 rarity 텍스트를 가져왔으나 Rarity 마스터 매칭 실패 또는 API 응답 없음.
 
-| LogicalCard ID | JP CardLocale | era | rarity 텍스트 |
+| LogicalCard ID | JP RegionCard | era | rarity 텍스트 |
 |---|---|---|---|
 ${lines.join("\n")}
 

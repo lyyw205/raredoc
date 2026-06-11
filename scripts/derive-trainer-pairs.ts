@@ -20,7 +20,7 @@ async function main() {
   const cand = new Map<string, Map<string, number>>();
   let pairs = 0, ambig = 0;
   for (const g of groups) {
-    const hasEn = await prisma.cardLocale.count({ where: { logicalCard: { cardPackId: g.id }, region: "EN" } });
+    const hasEn = await prisma.regionCard.count({ where: { logicalCard: { cardPackId: g.id }, region: "EN" } });
     if (!hasEn) continue;
     const lcs = await prisma.logicalCard.findMany({
       where: { cardPackId: g.id, supertype: "Trainer" },

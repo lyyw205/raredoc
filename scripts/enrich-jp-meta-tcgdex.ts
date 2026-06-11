@@ -29,7 +29,7 @@ async function fetchCard(tcgId: string, num: string): Promise<Card | null> {
 async function main() {
   const jpSet = process.argv[2], tcgId = process.argv[3], APPLY = process.argv.includes("--apply");
   if (!jpSet || !tcgId) { console.error("usage: <jpSetId> <tcgdexId> [--apply]"); process.exit(1); }
-  const locs = await prisma.cardLocale.findMany({ where: { setId: jpSet }, select: { number: true, logicalCardId: true,
+  const locs = await prisma.regionCard.findMany({ where: { setId: jpSet }, select: { number: true, logicalCardId: true,
     logicalCard: { select: { supertype: true, types: true, hp: true, attacks: true, abilities: true, regulationMark: true, illustrator: true, locales: { select: { region: true } } } } } });
 
   const cache = `data/jp-official/tcgdex-${tcgId}.json`;

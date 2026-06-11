@@ -1,12 +1,12 @@
 /**
  * PMCG1 (拡張パック, 1996) 카드 102장의 이미지를 Bulbapedia 에서 수집해
- * CardLocale.imageSmall/imageLarge 에 기록.
+ * RegionCard.imageSmall/imageLarge 에 기록.
  *
  * 전략:
  *   1) https://bulbapedia.bulbagarden.net/wiki/Expansion_Pack_(TCG) 의
  *      "Expansion Pack" (Japanese) 테이블에서 102개 카드 순서대로 영문 슬러그 추출
  *   2) 각 카드 페이지 fetch → 첫 non-UI 이미지 URL 추출
- *   3) CardLocale.{imageSmall,imageLarge} 업데이트, ExternalIdMapping 등록
+ *   3) RegionCard.{imageSmall,imageLarge} 업데이트, ExternalIdMapping 등록
  *
  * 라이선스: Bulbapedia 콘텐츠 CC BY-NC-SA 2.5 — 출처 표시 필수, 상업 사용 제한.
  *
@@ -130,7 +130,7 @@ async function main() {
     const ourLocaleId = `jp-tcg-PMCG1-${cardNum}`;
     const ourLogicalId = `lc-orphan-${ourLocaleId}`;
 
-    const locale = await prisma.cardLocale.findUnique({
+    const locale = await prisma.regionCard.findUnique({
       where: { id: ourLocaleId },
       select: { id: true, imageSmall: true, name: true },
     });
@@ -160,7 +160,7 @@ async function main() {
       continue;
     }
 
-    await prisma.cardLocale.update({
+    await prisma.regionCard.update({
       where: { id: ourLocaleId },
       data: { imageSmall: imgUrl, imageLarge: imgUrl },
     });
@@ -169,14 +169,14 @@ async function main() {
       create: {
         sourceId: source.id,
         externalId: `${card.slug}_(Expansion_Pack)`,
-        cardLocaleId: ourLocaleId,
+        regionCardId: ourLocaleId,
         logicalCardId: ourLogicalId,
         url: cardUrl,
         verifiedBy: "auto:scrape-pmcg1-images-bulbapedia",
         confidence: 0.7, // 영문 카드 대체 이미지 — 일본어 텍스트 아님
         notes: "Bulbapedia EN Base Set image used as proxy. Image text is English, not Japanese.",
       },
-      update: { cardLocaleId: ourLocaleId, logicalCardId: ourLogicalId, url: cardUrl },
+      update: { regionCardId: ourLocaleId, logicalCardId: ourLogicalId, url: cardUrl },
     });
     console.log(`  [${cardNum}] ${card.name.padEnd(20)} → ✓ ${imgUrl.split("/").pop()}`);
     okCount++;

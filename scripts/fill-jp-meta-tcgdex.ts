@@ -37,7 +37,7 @@ async function main() {
   const APPLY = process.argv.includes("--apply");
   if (!jpSet || !tcgId) { console.error("usage: <jpSetId> <tcgId> [--apply]"); process.exit(1); }
   const ja = buildNameIndex("ja");
-  const cards = await prisma.cardLocale.findMany({ where: { setId: jpSet }, orderBy: { numberInt: "asc" },
+  const cards = await prisma.regionCard.findMany({ where: { setId: jpSet }, orderBy: { numberInt: "asc" },
     select: { number: true, name: true, logicalCardId: true, logicalCard: { select: { supertype: true, subtypes: true, pokedexNumbers: true, hp: true, types: true, illustrator: true } } } });
   console.log(`■ ${jpSet} ← tcgdex:${tcgId}(ja) | ${cards.length}장 ${APPLY ? "★적용" : "(dry)"}`);
   let touched = 0, fail = 0, dexTcg = 0, dexJa = 0, dexNone = 0; const noDex: string[] = []; const sample: string[] = [];

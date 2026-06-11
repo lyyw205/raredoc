@@ -112,11 +112,11 @@ export async function fetchJsonWithRetry<T>(
 }
 
 /**
- * Price 멱등 스냅샷: 같은 (cardLocaleId, sourceId)의 오늘자 행이 있으면 update, 없으면 create.
+ * Price 멱등 스냅샷: 같은 (regionCardId, sourceId)의 오늘자 행이 있으면 update, 없으면 create.
  * @returns true=새로 생성, false=기존 갱신(dup)
  */
 export async function upsertDailyPrice(
-  cardLocaleId: string,
+  regionCardId: string,
   sourceId: string,
   today: Date,
   data: {
@@ -132,14 +132,14 @@ export async function upsertDailyPrice(
   }
 ): Promise<boolean> {
   const existing = await prisma.price.findFirst({
-    where: { cardLocaleId, sourceId, recordedAt: { gte: today } },
+    where: { regionCardId, sourceId, recordedAt: { gte: today } },
     select: { id: true },
   });
   if (existing) {
     await prisma.price.update({ where: { id: existing.id }, data });
     return false;
   }
-  await prisma.price.create({ data: { cardLocaleId, sourceId, ...data } });
+  await prisma.price.create({ data: { regionCardId, sourceId, ...data } });
   return true;
 }
 

@@ -56,7 +56,7 @@ type TradeRow = {
 };
 
 type PriceRow = {
-  cardLocaleId?: string;
+  regionCardId?: string;
   recordedAt: Date;
   marketPrice: number | null;
   normal: number | null;
@@ -213,7 +213,7 @@ export async function rebuildMarketStats(date?: Date): Promise<{ cards: number; 
   const pricesByCard = new Map<string, PriceRow[]>();
   const allPrices = await prisma.price.findMany({
     select: {
-      cardLocaleId: true,
+      regionCardId: true,
       recordedAt: true,
       marketPrice: true,
       normal: true,
@@ -224,9 +224,9 @@ export async function rebuildMarketStats(date?: Date): Promise<{ cards: number; 
     },
   });
   for (const p of allPrices) {
-    const arr = pricesByCard.get(p.cardLocaleId) ?? [];
+    const arr = pricesByCard.get(p.regionCardId) ?? [];
     arr.push(p);
-    pricesByCard.set(p.cardLocaleId, arr);
+    pricesByCard.set(p.regionCardId, arr);
   }
 
   // 대상 카드 = Trade ∪ Price (둘 중 하나라도 있으면 집계)
@@ -341,9 +341,9 @@ const STAT_SELECT = {
 async function joinCards(stats: MarketStatRow[]): Promise<MarketRankItem[]> {
   if (stats.length === 0) return [];
   const cardIds = stats.map((s) => s.cardId);
-  // Phase 4: prisma.card → prisma.cardLocale. MarketStat.cardId == CardLocale.id.
-  // CardLocale 행은 자체 locale 의 표시명을 보유하므로 nameKo 는 별도 컬럼 없이 동일값으로 채워 호환 유지.
-  const cards = await prisma.cardLocale.findMany({
+  // Phase 4: prisma.card → prisma.regionCard. MarketStat.cardId == RegionCard.id.
+  // RegionCard 행은 자체 locale 의 표시명을 보유하므로 nameKo 는 별도 컬럼 없이 동일값으로 채워 호환 유지.
+  const cards = await prisma.regionCard.findMany({
     where: { id: { in: cardIds } },
     select: {
       id: true,

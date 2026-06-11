@@ -177,12 +177,12 @@ async function main() {
           sourceId: source.id,
           externalId: c.id,
           logicalCardId: ourLogicalId,
-          cardLocaleId: ourLocaleId,
+          regionCardId: ourLocaleId,
           url: `https://api.tcgdex.net/v2/ja/cards/${c.id}`,
           verifiedBy: "auto:enrich-pmcg-meta-tcgdex",
           confidence: 0.95,
         },
-        update: { logicalCardId: ourLogicalId, cardLocaleId: ourLocaleId },
+        update: { logicalCardId: ourLogicalId, regionCardId: ourLocaleId },
       });
       totalMappings++;
     }

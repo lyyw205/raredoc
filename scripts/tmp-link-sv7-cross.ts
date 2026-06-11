@@ -22,8 +22,8 @@ const PAIRS: [string, string, string][] = [
 async function main() {
   let ok = 0, skip = 0;
   for (const [jpSet, jpNum, enNum] of PAIRS) {
-    const jp = await prisma.cardLocale.findFirst({ where: { setId: jpSet, number: jpNum }, select: { name: true, logicalCardId: true, logicalCard: { select: { illustrator: true, locales: { where: { region: "EN" }, select: { id: true } } } } } });
-    const en = await prisma.cardLocale.findFirst({ where: { setId: "sv7", number: enNum }, select: { id: true, name: true, logicalCardId: true, logicalCard: { select: { illustrator: true, locales: { select: { region: true } } } } } });
+    const jp = await prisma.regionCard.findFirst({ where: { setId: jpSet, number: jpNum }, select: { name: true, logicalCardId: true, logicalCard: { select: { illustrator: true, locales: { where: { region: "EN" }, select: { id: true } } } } } });
+    const en = await prisma.regionCard.findFirst({ where: { setId: "sv7", number: enNum }, select: { id: true, name: true, logicalCardId: true, logicalCard: { select: { illustrator: true, locales: { select: { region: true } } } } } });
     if (!jp || !en) { console.log(`❌ 누락 ${jpSet}#${jpNum}/${enNum}`); skip++; continue; }
     if (jp.logicalCard?.locales.length) { console.log(`⚠ JP 기연결 ${jpSet}#${jpNum}`); skip++; continue; }
     if (!en.logicalCard?.locales.every((l) => l.region === "EN")) { console.log(`⚠ EN 비orphan #${enNum}`); skip++; continue; }
@@ -34,7 +34,7 @@ async function main() {
     console.log(`연결 ${jpSet.replace("jp-tcg-", "")}#${jpNum} ${jp.name} [${jp.logicalCard?.illustrator}] ← sv7#${enNum} ${en.name}`);
     if (APPLY) {
       const oldLc = en.logicalCardId!;
-      await prisma.cardLocale.update({ where: { id: en.id }, data: { logicalCardId: jp.logicalCardId! } });
+      await prisma.regionCard.update({ where: { id: en.id }, data: { logicalCardId: jp.logicalCardId! } });
       await migrateAndDelete(oldLc, jp.logicalCardId!);
     }
     ok++;
@@ -42,7 +42,7 @@ async function main() {
   console.log(`\n연결 ${ok} · 스킵 ${skip}`);
 }
 async function migrateAndDelete(oldLc: string, newLc: string) {
-  const left = await prisma.cardLocale.count({ where: { logicalCardId: oldLc } });
+  const left = await prisma.regionCard.count({ where: { logicalCardId: oldLc } });
   if (left > 0) return;
   for (const model of ["trade", "collectionItem", "deckRecipeCard", "deckCard", "ruling", "externalIdMapping"] as const) {
     // @ts-expect-error 동적

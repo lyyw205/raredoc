@@ -1,17 +1,17 @@
 import { prisma } from "@/lib/prisma";
 import { searchCards } from "@/lib/api/pokemontcg";
-import type { CardLocale } from "@/generated/prisma/client";
+import type { RegionCard } from "@/generated/prisma/client";
 import type { Prisma as PrismaTypes } from "@/generated/prisma/client";
 
 /**
- * localeId 에 해당하는 CardLocale 이 DB 에 있으면 반환, 없으면 pokemontcg.io
- * 에서 가져와 LogicalCard + CardLocale 로 upsert 후 반환한다. 실패 시 null.
+ * localeId 에 해당하는 RegionCard 이 DB 에 있으면 반환, 없으면 pokemontcg.io
+ * 에서 가져와 LogicalCard + RegionCard 로 upsert 후 반환한다. 실패 시 null.
  *
  * CollectionItem 등록 전에 호출해 FK 무결성을 보장한다.
  * (이전 ensureCard 의 후속 — Card 모델 제거 후 단일 경로로 통일)
  */
-export async function ensureLocale(localeId: string): Promise<CardLocale | null> {
-  const existing = await prisma.cardLocale.findUnique({ where: { id: localeId } });
+export async function ensureLocale(localeId: string): Promise<RegionCard | null> {
+  const existing = await prisma.regionCard.findUnique({ where: { id: localeId } });
   if (existing) return existing;
 
   let fetched;
@@ -63,7 +63,7 @@ export async function ensureLocale(localeId: string): Promise<CardLocale | null>
       },
     });
 
-    return await prisma.cardLocale.create({
+    return await prisma.regionCard.create({
       data: {
         id: fetched.id, // URL/외부 FK 호환
         logicalCardId: logical.id,

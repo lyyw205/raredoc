@@ -48,8 +48,8 @@ function RecipeRow({ card, locale }: { card: RecipeCard; locale: string }) {
           : ""
       )}
     >
-      {card.cardLocaleId ? (
-        <Link href={`/${locale}/cards/${card.cardLocaleId}`} className="shrink-0 hover:opacity-90">
+      {card.regionCardId ? (
+        <Link href={`/${locale}/cards/${card.regionCardId}`} className="shrink-0 hover:opacity-90">
           {thumb}
         </Link>
       ) : (
@@ -128,7 +128,7 @@ function CoreCardsSection({ recipe, locale }: { recipe: ArchetypeRecipe; locale:
         {picks.map((c) => (
           <Link
             key={`${c.cardName}-${c.setCode}-${c.number}`}
-            href={c.cardLocaleId ? `/${locale}/cards/${c.cardLocaleId}` : "#"}
+            href={c.regionCardId ? `/${locale}/cards/${c.regionCardId}` : "#"}
             className="block hover:opacity-90 transition-opacity"
           >
             <CardThumb src={c.cardImage} alt={c.cardName} count={Math.round(c.avgCount)} />

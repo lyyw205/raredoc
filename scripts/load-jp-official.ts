@@ -1,6 +1,6 @@
 /**
  * JP 세트를 일본공식(pokemon-card.com) 수집 JSON 으로 적재(덮어쓰기). tcgdex 불완전 팩용.
- * 기존 JP CardLocale+LC(primarySetId=이세트) 통삭제 후 JSON 으로 재생성. rarity 는 KR 백필로(여기선 미설정).
+ * 기존 JP RegionCard+LC(primarySetId=이세트) 통삭제 후 JSON 으로 재생성. rarity 는 KR 백필로(여기선 미설정).
  * dex: JSON dexId 우선, 없으면 PokeAPI ja(폼접두어 제거) 폴백. subtypes: stage+suffix/trainerType.
  *
  * 실행: npx tsx scripts/load-jp-official.ts <jpSetId> <jsonPath> [--apply]
@@ -59,12 +59,12 @@ async function main() {
   console.log(`■ ${jpSet} ← ${jsonPath} | ${cards.length}장 ${APPLY ? "★APPLY(덮어쓰기)" : "(dry)"}`);
 
   // 가드: 기존 JP LC 에 그룹밖 참조(컬렉션/거래) 없어야
-  const oldLoc = await prisma.cardLocale.findMany({ where: { setId: jpSet }, select: { id: true, logicalCardId: true } });
+  const oldLoc = await prisma.regionCard.findMany({ where: { setId: jpSet }, select: { id: true, logicalCardId: true } });
   const oldLcids = [...new Set(oldLoc.map((l) => l.logicalCardId))];
   const coll = await prisma.collectionItem.count({ where: { localeId: { in: oldLoc.map((l) => l.id) } } });
   const trade = await prisma.trade.count({ where: { localeId: { in: oldLoc.map((l) => l.id) } } });
   // 기존 LC 가 JP 외 다른 지역 locale 도 갖나(=병합됨, 그러면 통삭제 위험)
-  const otherLoc = await prisma.cardLocale.count({ where: { logicalCardId: { in: oldLcids }, NOT: { setId: jpSet } } });
+  const otherLoc = await prisma.regionCard.count({ where: { logicalCardId: { in: oldLcids }, NOT: { setId: jpSet } } });
   console.log(`  기존 JP locale ${oldLoc.length} · LC ${oldLcids.length} | 참조 컬렉션 ${coll}·거래 ${trade} | JP외 locale 보유 ${otherLoc}`);
 
   let dexTcg = 0, dexJa = 0, dexNone = 0; const noDex: string[] = [];
@@ -79,7 +79,7 @@ async function main() {
   if (coll + trade > 0) { console.log("⚠️ 참조 존재(컬렉션/거래) — 중단. 수동 확인 필요."); await prisma.$disconnect(); return; }
 
   // 안전 덮어쓰기: JP locale 삭제 → 비워진 옛 JP LC만 삭제(KR/EN 남은 LC는 유지=추후 재병합/정리)
-  await prisma.cardLocale.deleteMany({ where: { setId: jpSet } });
+  await prisma.regionCard.deleteMany({ where: { setId: jpSet } });
   const oldLcs = await prisma.logicalCard.findMany({ where: { primarySetId: jpSet }, select: { id: true, locales: { select: { id: true } } } });
   const emptyIds = oldLcs.filter((l) => l.locales.length === 0).map((l) => l.id);
   if (emptyIds.length) await prisma.logicalCard.deleteMany({ where: { id: { in: emptyIds } } });
@@ -98,7 +98,7 @@ async function main() {
       illustrator: c.illustrator ?? undefined, hp: c.hp ?? undefined, types: c.types ?? [],
       primarySetId: jpSet, primaryNumber: c.number, primaryNumberInt: numInt ?? undefined,
     } });
-    await prisma.cardLocale.create({ data: {
+    await prisma.regionCard.create({ data: {
       id: `${jpSet}-${c.number}`, logicalCardId: lcId, region: "JP", language: "ja", setId: jpSet,
       number: c.number, numberInt: numInt ?? undefined, name: c.jaName, imageSmall: c.image, imageLarge: c.image,
     } });

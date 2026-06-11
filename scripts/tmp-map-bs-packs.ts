@@ -35,7 +35,7 @@ function koDex(raw: string): number | null {
 
 async function main() {
   // JP 측 인덱스: setId → (dex|illust 집합, dex 집합)
-  const jpRows = await prisma.cardLocale.findMany({
+  const jpRows = await prisma.regionCard.findMany({
     where: { setId: { in: JP_SETS } },
     select: { setId: true, logicalCard: { select: { pokedexNumbers: true, illustrator: true, supertype: true } } },
   });

@@ -1,10 +1,10 @@
 "use server";
 
 /**
- * 카드 한 장(CardLocale)의 시세를 출처별 최신 1건씩 반환.
+ * 카드 한 장(RegionCard)의 시세를 출처별 최신 1건씩 반환.
  *
- * - 입력: cardLocaleId (모달이 보여주고 있는 카드)
- * - 묶음 단위: 해당 LogicalCard에 매달린 모든 region(EN/JP/KR) CardLocale의 Price를 통합
+ * - 입력: regionCardId (모달이 보여주고 있는 카드)
+ * - 묶음 단위: 해당 LogicalCard에 매달린 모든 region(EN/JP/KR) RegionCard의 Price를 통합
  *   (예: 같은 카드라도 EN은 tcgplayer, JP는 yuyu-tei에서 가격이 들어옴 → 같은 카드의 한 모달에 4개 출처 행 표시)
  * - 출처별 dedup: PriceSource.code 기준 가장 최근 1건만
  * - 정렬: PriceSource.priority asc (낮은 숫자 우선)
@@ -25,21 +25,21 @@ export type CardPriceRow = {
   recordedAt: string;
 };
 
-export async function getCardPrices(cardLocaleId: string): Promise<CardPriceRow[]> {
-  const me = await prisma.cardLocale.findUnique({
-    where: { id: cardLocaleId },
+export async function getCardPrices(regionCardId: string): Promise<CardPriceRow[]> {
+  const me = await prisma.regionCard.findUnique({
+    where: { id: regionCardId },
     select: { logicalCardId: true },
   });
   if (!me) return [];
 
-  const localeIds = await prisma.cardLocale.findMany({
+  const localeIds = await prisma.regionCard.findMany({
     where: { logicalCardId: me.logicalCardId },
     select: { id: true },
   });
   if (localeIds.length === 0) return [];
 
   const prices = await prisma.price.findMany({
-    where: { cardLocaleId: { in: localeIds.map((l) => l.id) }, sourceId: { not: null } },
+    where: { regionCardId: { in: localeIds.map((l) => l.id) }, sourceId: { not: null } },
     orderBy: { recordedAt: "desc" },
     include: { priceSource: true },
   });

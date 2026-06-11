@@ -1,6 +1,6 @@
 /**
  * PMCG2~6 (구판 일본판, 1997~1999) 의 이미지를 Bulbapedia 에서 수집해
- * CardLocale.imageSmall/imageLarge 에 기록.
+ * RegionCard.imageSmall/imageLarge 에 기록.
  *
  * - PMCG2 ポケモンジャングル → Pokémon_Jungle_(TCG), section "Pokémon_Jungle"
  * - PMCG3 化石の秘密         → Fossil_(TCG),         section "Mystery_of_the_Fossils"
@@ -150,7 +150,7 @@ async function scrapeSet(set: typeof SETS[number]) {
     const ourLocaleId = `jp-tcg-${set.setId}-${cardNum}`;
     const ourLogicalId = `lc-orphan-${ourLocaleId}`;
 
-    const locale = await prisma.cardLocale.findUnique({
+    const locale = await prisma.regionCard.findUnique({
       where: { id: ourLocaleId },
       select: { id: true, imageSmall: true, name: true },
     });
@@ -179,7 +179,7 @@ async function scrapeSet(set: typeof SETS[number]) {
       continue;
     }
 
-    await prisma.cardLocale.update({
+    await prisma.regionCard.update({
       where: { id: ourLocaleId },
       data: { imageSmall: imgUrl, imageLarge: imgUrl },
     });
@@ -188,14 +188,14 @@ async function scrapeSet(set: typeof SETS[number]) {
       create: {
         sourceId: source.id,
         externalId: `${card.slug}_(${card.suffix})`,
-        cardLocaleId: ourLocaleId,
+        regionCardId: ourLocaleId,
         logicalCardId: ourLogicalId,
         url: cardUrl,
         verifiedBy: "auto:scrape-pmcg-images-bulbapedia",
         confidence: 0.7,
         notes: `Bulbapedia EN image used as proxy. Image text is English, not Japanese. (${set.setId})`,
       },
-      update: { cardLocaleId: ourLocaleId, logicalCardId: ourLogicalId, url: cardUrl },
+      update: { regionCardId: ourLocaleId, logicalCardId: ourLogicalId, url: cardUrl },
     });
     console.log(`  [${cardNum}] ${card.name.padEnd(22)} → ✓ ${imgUrl.split("/").pop()}`);
     okCount++;

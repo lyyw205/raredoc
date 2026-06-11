@@ -96,9 +96,9 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
         }));
         const primary = pickLocale(locales, preferred);
         if (!primary) return null;
-        // P7: 표시용 rarity 는 picked 인쇄본(CardLocale)의 rarity 우선 — id 로 raw locale 역참조
+        // P7: 표시용 rarity 는 picked 인쇄본(RegionCard)의 rarity 우선 — id 로 raw locale 역참조
         const primaryRaw = lc.locales.find((l) => l.id === primary.id);
-        const rar = primaryRaw?.rarity ?? lc.rarity; // 새층(CardLocale.rarity) ?? LC 폴백
+        const rar = primaryRaw?.rarity ?? lc.rarity; // 새층(RegionCard.rarity) ?? LC 폴백
         const lcSupertype = lc.gameCard?.supertype ?? lc.supertype;
         const lcMeta: Pick<LogicalCardMeta, "types" | "supertype"> = {
           types: lc.types,

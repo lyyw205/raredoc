@@ -20,7 +20,7 @@ async function main() {
   const jpSetId = process.argv[2], listPath = process.argv[3], APPLY = process.argv.includes("--apply");
   if (!jpSetId || !listPath) { console.error("usage: <jpSetId> <listJson> [--apply]"); process.exit(1); }
   const list = JSON.parse(readFileSync(listPath, "utf8"));
-  const locs = await prisma.cardLocale.findMany({ where: { setId: jpSetId }, select: { numberInt: true, logicalCardId: true, logicalCard: { select: { rarityId: true } } } });
+  const locs = await prisma.regionCard.findMany({ where: { setId: jpSetId }, select: { numberInt: true, logicalCardId: true, logicalCard: { select: { rarityId: true } } } });
   const byNum = new Map(locs.map((l) => [l.numberInt, l]));
   const rarities = await prisma.rarity.findMany({ select: { id: true, code: true } });
   const ridByCode = new Map(rarities.map((r) => [r.code, r.id]));

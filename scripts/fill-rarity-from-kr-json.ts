@@ -25,7 +25,7 @@ async function main() {
   const rarities = await prisma.rarity.findMany({ select: { id: true, code: true } });
   const rarId = new Map(rarities.map((r) => [r.code, r.id]));
 
-  const kr = await prisma.cardLocale.findMany({ where: { setId: krSet }, select: { numberInt: true, name: true, logicalCardId: true, logicalCard: { select: { rarityId: true } } } });
+  const kr = await prisma.regionCard.findMany({ where: { setId: krSet }, select: { numberInt: true, name: true, logicalCardId: true, logicalCard: { select: { rarityId: true } } } });
   const todo = kr.filter((r) => !r.logicalCard.rarityId);
   let fill = 0, noJson = 0, unmapped = 0; const unm = new Set<string>(); const samples: string[] = []; const updates: { id: string; rid: string }[] = [];
   for (const r of todo) {

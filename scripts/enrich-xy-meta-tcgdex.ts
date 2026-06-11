@@ -5,7 +5,7 @@
  * EN 카드 번호 = JP 카드 번호 (XY2 등 대응 세트는 번호 일치 확인됨).
  * CP 세트는 EN 대응 없으므로 tcgdex EN 에서 별도 처리 안함.
  *
- * 매칭 전략: EN tcgdex localId(number) → JP DB CardLocale.number → LogicalCard
+ * 매칭 전략: EN tcgdex localId(number) → JP DB RegionCard.number → LogicalCard
  *
  * Run: npx tsx scripts/enrich-xy-meta-tcgdex.ts [--set=xy2]
  */
@@ -158,13 +158,13 @@ async function main() {
           sourceId: source.id,
           externalId: `${c.id}::jp-${dbCode}`,
           logicalCardId: ourLogicalId,
-          cardLocaleId: ourLocaleId,
+          regionCardId: ourLocaleId,
           url: `https://api.tcgdex.net/v2/en/cards/${c.id}`,
           verifiedBy: "auto:enrich-xy-meta-tcgdex",
           confidence: 0.90,
           notes: `EN tcgdex ${c.id} mapped to JP ${dbCode} by number ${number}`,
         },
-        update: { logicalCardId: ourLogicalId, cardLocaleId: ourLocaleId },
+        update: { logicalCardId: ourLogicalId, regionCardId: ourLocaleId },
       });
       totalMap++;
     }

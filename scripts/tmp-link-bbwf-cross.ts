@@ -45,10 +45,10 @@ async function main() {
   console.log(`■ BBWF 교차 연결 ${PAIRS.length}쌍 ${APPLY ? "★적용" : "(dry)"}`);
   let ok = 0, skip = 0;
   for (const [jpSet, jpNum, enSet, enNum, memo] of PAIRS) {
-    const jp = await prisma.cardLocale.findFirst({ where: { setId: jpSet, number: jpNum },
+    const jp = await prisma.regionCard.findFirst({ where: { setId: jpSet, number: jpNum },
       select: { name: true, logicalCardId: true, logicalCard: { select: { illustrator: true, locales: { where: { region: "EN" }, select: { id: true } } } } } });
     const [enNumOnly, enNameGuard] = enNum.split("|");
-    const en = await prisma.cardLocale.findFirst({ where: { setId: enSet, number: enNumOnly, ...(enNameGuard ? { name: enNameGuard } : {}) },
+    const en = await prisma.regionCard.findFirst({ where: { setId: enSet, number: enNumOnly, ...(enNameGuard ? { name: enNameGuard } : {}) },
       select: { id: true, name: true, logicalCardId: true, logicalCard: { select: { illustrator: true, locales: { select: { region: true } } } } } });
     if (!jp || !en) { console.log(`❌ 누락: ${jpSet}#${jpNum} / ${enSet}#${enNum}`); skip++; continue; }
     // 가드: JP에 이미 EN 있으면 스킵 / EN이 orphan(EN로케일만) 아니면 스킵
@@ -57,7 +57,7 @@ async function main() {
     console.log(`연결 ${jpSet.replace("jp-tcg-", "")}#${jpNum} ${jp.name} [${jp.logicalCard?.illustrator}] ← ${enSet}#${enNum} ${en.name} [${en.logicalCard?.illustrator}] (${memo})`);
     if (APPLY) {
       const oldLc = en.logicalCardId!;
-      await prisma.cardLocale.update({ where: { id: en.id }, data: { logicalCardId: jp.logicalCardId! } });
+      await prisma.regionCard.update({ where: { id: en.id }, data: { logicalCardId: jp.logicalCardId! } });
       await migrateAndDelete(oldLc, jp.logicalCardId!);
     }
     ok++;
@@ -68,7 +68,7 @@ async function main() {
       const oldId = `lc-orphan-${enSet}-${enNum.split("|")[0]}`;
       const lc = await prisma.logicalCard.findUnique({ where: { id: oldId }, select: { id: true, locales: { select: { id: true } } } });
       if (lc && lc.locales.length === 0) {
-        const enLoc = await prisma.cardLocale.findFirst({ where: { setId: enSet, number: enNum.split("|")[0] }, select: { logicalCardId: true } });
+        const enLoc = await prisma.regionCard.findFirst({ where: { setId: enSet, number: enNum.split("|")[0] }, select: { logicalCardId: true } });
         if (enLoc?.logicalCardId) { console.log(`잔여 빈 orphan 청소: ${oldId} → 참조 ${enLoc.logicalCardId} 이관`); await migrateAndDelete(oldId, enLoc.logicalCardId); }
       }
     }
@@ -79,7 +79,7 @@ async function main() {
 // orphan LC 삭제 전 사용자 데이터(Trade/CollectionItem/덱/티어/룰링/외부ID) 참조를 새 LC로 이관.
 // CardText는 (lcid,language) 유니크 — 새 LC에 같은 언어 있으면 cascade 삭제에 맡김, 없으면 이관.
 async function migrateAndDelete(oldLc: string, newLc: string) {
-  const left = await prisma.cardLocale.count({ where: { logicalCardId: oldLc } });
+  const left = await prisma.regionCard.count({ where: { logicalCardId: oldLc } });
   if (left > 0) return;
   for (const model of ["trade", "collectionItem", "deckRecipeCard", "deckCard", "ruling", "externalIdMapping"] as const) {
     // @ts-expect-error 동적 모델 접근

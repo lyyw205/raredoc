@@ -52,7 +52,7 @@ export const ARCHETYPE_KO: Record<string, string> = {
   // ── 하위 / 테크 덱 ──
   "joltik-box": "전기왕 박스", // joltik = 전기왕
   "hop-zacian": "호프의 자시안",
-  "ceruledge-ex": "파라블레이즈ex", // KR 공식 "파라블레이즈 ex" 확인(2026-06-06, KR CardLocale) — 덱명 컨벤션상 붙여씀
+  "ceruledge-ex": "파라블레이즈ex", // KR 공식 "파라블레이즈 ex" 확인(2026-06-06, KR RegionCard) — 덱명 컨벤션상 붙여씀
   "clefairy-ogerpon": "삐삐 오거폰",
   "kangaskhan-bouffalant": "메가 캥카 들소밸로",
   "froslass-munkidori": "눈여아 무쿠리",

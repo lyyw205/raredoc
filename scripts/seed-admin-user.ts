@@ -4,7 +4,7 @@
  * 계정: test@admin.com / test1234
  *
  * - bcrypt 해시 비번
- * - DB에 이미 적재된 CardLocale 에서 직접 카드 선별 (pokemontcg.io API 미사용 — WSL 안전)
+ * - DB에 이미 적재된 RegionCard 에서 직접 카드 선별 (pokemontcg.io API 미사용 — WSL 안전)
  * - 다양한 카테고리(홀로~하이퍼)·지역(EN/JP/KR)·등급(NM~MP)·인증·하이라이트 포함
  *
  * 멱등: user 는 email upsert, collectionItem 은 (userId, localeId, grade) 기준 중복 방지.

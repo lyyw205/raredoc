@@ -8,7 +8,7 @@
  *   E) Missing cards (NULL imageSmall) — tcgdex probe (NOTE: ADV has no tcgdex data, probes will return 404)
  *   F) supertype classification per set
  *   G) EN cross-check — deferred
- *   H) Version availability (CardLocale language breakdown)
+ *   H) Version availability (RegionCard language breakdown)
  *
  * Run: npx tsx scripts/phase-a-verify-adv.ts
  * Output: docs/phase-a-verification-adv.md
@@ -87,7 +87,7 @@ function mdTable(headers: string[], rows: string[][]): string {
 // Section A: Image liveness
 // ---------------------------------------------------------------------------
 
-interface CardLocaleRow {
+interface RegionCardRow {
   id: string;
   name: string;
   setId: string;
@@ -102,7 +102,7 @@ interface ImageResult {
   status: number;
 }
 
-async function sectionA(cards: CardLocaleRow[]): Promise<{
+async function sectionA(cards: RegionCardRow[]): Promise<{
   perSet: Map<string, { ok: number; fail: number }>;
   failures: ImageResult[];
 }> {
@@ -211,7 +211,7 @@ interface ContiguityResult {
   duplicates: number[];
 }
 
-async function sectionC(cards: CardLocaleRow[], sets: { id: string; cardCount: number | null }[]): Promise<ContiguityResult[]> {
+async function sectionC(cards: RegionCardRow[], sets: { id: string; cardCount: number | null }[]): Promise<ContiguityResult[]> {
   console.log(`\n[C] ID contiguity...`);
   const results: ContiguityResult[] = [];
 
@@ -220,7 +220,7 @@ async function sectionC(cards: CardLocaleRow[], sets: { id: string; cardCount: n
   const bySet = new Map<string, number[]>();
   for (const card of cards) {
     const setKey = card.setId.replace("jp-tcg-", "");
-    // ADV CardLocale IDs: jp-tcg-ADV1-1 (unpadded)
+    // ADV RegionCard IDs: jp-tcg-ADV1-1 (unpadded)
     const numMatch = card.id.match(/-(\d+)$/);
     if (!numMatch) continue;
     const num = parseInt(numMatch[1], 10);
@@ -261,7 +261,7 @@ interface MissingCardProbe {
   inDb: boolean;
 }
 
-async function sectionE(locales: CardLocaleRow[], lcards: LogicalCardRow[]): Promise<MissingCardProbe[]> {
+async function sectionE(locales: RegionCardRow[], lcards: LogicalCardRow[]): Promise<MissingCardProbe[]> {
   const missing = locales.filter(c => !c.imageSmall);
   console.log(`\n[E] Missing imageSmall — ${missing.length} cards — tcgdex probe (ADV: expected all 404)...`);
 
@@ -304,7 +304,7 @@ interface SupertypeStats {
   nullCards: { id: string; name: string }[];
 }
 
-async function sectionF(lcards: LogicalCardRow[], locales: CardLocaleRow[]): Promise<SupertypeStats[]> {
+async function sectionF(lcards: LogicalCardRow[], locales: RegionCardRow[]): Promise<SupertypeStats[]> {
   console.log(`\n[F] supertype classification...`);
 
   const nameMap = new Map<string, string>();
@@ -344,10 +344,10 @@ interface LocaleStats {
 }
 
 async function sectionH(lcards: LogicalCardRow[]): Promise<LocaleStats[]> {
-  console.log(`\n[H] Version availability (CardLocale language breakdown)...`);
+  console.log(`\n[H] Version availability (RegionCard language breakdown)...`);
 
   const lcIds = lcards.map(c => c.id);
-  const localeRows = await prisma.cardLocale.findMany({
+  const localeRows = await prisma.regionCard.findMany({
     where: { logicalCardId: { in: lcIds } },
     select: { logicalCardId: true, language: true, setId: true },
   });
@@ -511,8 +511,8 @@ function buildReport(data: {
   lines.push(`\n> **사유:** ADV 시리즈(adv1~5)는 EN EX 시리즈와 카드 구성이 상이하여 단순 ID 매핑 불가. 별도 대응 테이블 작성 후 진행 예정.\n`);
 
   // Section H
-  lines.push(`## H) 버전 가용성 (CardLocale 언어 분포)`);
-  lines.push(`\n각 LogicalCard의 CardLocale 언어 조합. ADV는 한국 미발매이므로 ja only 예상.\n`);
+  lines.push(`## H) 버전 가용성 (RegionCard 언어 분포)`);
+  lines.push(`\n각 LogicalCard의 RegionCard 언어 조합. ADV는 한국 미발매이므로 ja only 예상.\n`);
 
   const allPatterns = new Set<string>();
   for (const stats of data.sectionH) for (const k of stats.patterns.keys()) allPatterns.add(k);
@@ -527,7 +527,7 @@ function buildReport(data: {
 
   const allMulti = data.sectionH.flatMap(s => s.multiLocale);
   if (allMulti.length > 0) {
-    lines.push(`\n### 다중 언어 CardLocale 보유 카드 (${allMulti.length}건)`);
+    lines.push(`\n### 다중 언어 RegionCard 보유 카드 (${allMulti.length}건)`);
     lines.push(mdTable(["LogicalCard ID", "언어"], allMulti.map(c => [c.id, c.langs.join(", ")])));
   } else {
     lines.push(`\n> 모든 ADV 카드가 ja 단일 언어 — 정상.`);
@@ -603,7 +603,7 @@ async function main() {
     orderBy: { id: "asc" },
   });
 
-  const locales = await prisma.cardLocale.findMany({
+  const locales = await prisma.regionCard.findMany({
     where: { setId: { in: ADV_SET_IDS } },
     select: { id: true, name: true, setId: true, imageSmall: true },
     orderBy: { id: "asc" },
@@ -620,7 +620,7 @@ async function main() {
     orderBy: { id: "asc" },
   });
 
-  console.log(`Loaded: ${sets.length} sets, ${locales.length} CardLocale, ${lcards.length} LogicalCard`);
+  console.log(`Loaded: ${sets.length} sets, ${locales.length} RegionCard, ${lcards.length} LogicalCard`);
 
   const resA = await sectionA(locales);
   const resB = await sectionB(lcards);

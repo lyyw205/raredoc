@@ -1,5 +1,5 @@
 /**
- * PMCG1~6 Pokemon 카드의 CardLocale.name (일본어) 을 PokeAPI 정식 일본명으로 교체.
+ * PMCG1~6 Pokemon 카드의 RegionCard.name (일본어) 을 PokeAPI 정식 일본명으로 교체.
  *
  * 배경: tcgcsv/tcgdex 의 1996년 카드 JP 이름 데이터에 오류 다수
  *   - "ブルバサウルス" (영문 음역) → 정식 "フシギダネ"
@@ -7,7 +7,7 @@
  *   - "mewtwo", "Vulpix" (영문 그대로) → 정식 "ミュウツー", "ロコン"
  * → 1996년 일본 정식 게임이 이미 정한 일본명을 dex# 기반으로 일괄 적용.
  *
- * - 대상: pokedexNumbers 가 있는 LogicalCard 의 연결된 CardLocale (ja language).
+ * - 대상: pokedexNumbers 가 있는 LogicalCard 의 연결된 RegionCard (ja language).
  * - 출처: 표준 이름 매핑표 data/pokeapi/*.csv (로더의 ja = ja-hrkt 카타카나 = TCG 표준 일본명).
  * - 정책: 기존 JP 이름이 표준 일본명과 다르면 교체. 이전 값은 diff 로 로그.
  * - Trainer/Energy 는 미대상 (dex# 없음, 각 카드 고유 이름).
@@ -54,7 +54,7 @@ async function main() {
     if (!correct) { noMapping++; continue; }
     if (ja.name === correct) { alreadyCorrect++; continue; }
     changes.push({ id: ja.id, before: ja.name, after: correct, dex });
-    await prisma.cardLocale.update({
+    await prisma.regionCard.update({
       where: { id: ja.id },
       data: { name: correct },
     });

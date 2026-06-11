@@ -65,7 +65,7 @@ function bigVariant(smallUrl: string): string {
 }
 
 async function processSet(setId: string, tmpRoot: string): Promise<{ ok: number; fail: number; skip: number }> {
-  const cards = await prisma.cardLocale.findMany({
+  const cards = await prisma.regionCard.findMany({
     where: { setId, imageSmall: { contains: "tcgplayer" } },
     select: { id: true, imageSmall: true, name: true },
     orderBy: { id: "asc" },
@@ -97,7 +97,7 @@ async function processSet(setId: string, tmpRoot: string): Promise<{ ok: number;
       continue;
     }
 
-    await prisma.cardLocale.update({
+    await prisma.regionCard.update({
       where: { id: c.id },
       data: { imageSmall: publicUrl, imageLarge: publicUrl },
     });

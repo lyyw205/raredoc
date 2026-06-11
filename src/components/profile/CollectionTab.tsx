@@ -12,7 +12,7 @@ import {
 // ── 타입 (서버 getUserSetCatalog 와 구조 일치) ───────────────────────────────
 
 export type CollectionCard = {
-  cardId: string; // CardLocale id
+  cardId: string; // RegionCard id
   name: string;
   number: string;
   imageUrl: string | null;

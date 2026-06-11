@@ -1,7 +1,7 @@
 /**
  * 그룹 LogicalCard 병합 — 실제 적용 (소량 검증용). 기본은 dry, --apply 로만 DB 변경.
  *
- * 동작(검증된 매칭대로): EN 인쇄본(CardLocale)을 JP 앵커 LogicalCard 로 재지정하고,
+ * 동작(검증된 매칭대로): EN 인쇄본(RegionCard)을 JP 앵커 LogicalCard 로 재지정하고,
  *   비워진 EN LogicalCard 는 참조 0 확인 후 삭제. 카드당 트랜잭션. (jp-sv-base 중복제거는 별도 단계)
  *
  * 실행:
@@ -23,7 +23,7 @@ const sel = { id: true, logicalCardId: true, setId: true, number: true, numberIn
   logicalCard: { select: { pokedexNumbers: true, illustrator: true, subtypes: true, supertype: true, rarity: { select: { tier: true } } } } } as const;
 const toRow = (l: any): Row => ({ cid: l.id, lcid: l.logicalCardId, setId: l.setId, number: l.number, numInt: l.numberInt ?? (parseInt(l.number.replace(/\D/g, "")) || 0), name: l.name,
   dex: l.logicalCard.pokedexNumbers?.[0] ?? null, illus: l.logicalCard.illustrator, tier: l.logicalCard.rarity?.tier ?? null, sub: [...(l.logicalCard.subtypes ?? [])].sort().join(","), supertype: l.logicalCard.supertype });
-const load = async (ids: string[]) => (await prisma.cardLocale.findMany({ where: { setId: { in: ids } }, select: sel })).map(toRow);
+const load = async (ids: string[]) => (await prisma.regionCard.findMany({ where: { setId: { in: ids } }, select: sel })).map(toRow);
 
 async function main() {
   const groupId = process.argv[2]; const cfg = CONFIG[groupId];
@@ -36,7 +36,7 @@ async function main() {
 
   const jp = await load(cfg.jp);
   const en = cfg.enNative ? await load(cfg.enNative)
-    : (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE as unknown as string[] }, pokedexNumbers: { hasSome: [...new Set(jp.filter(isPoke).map(r => r.dex))] as number[] } } }, select: sel })).map(toRow);
+    : (await prisma.regionCard.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE as unknown as string[] }, pokedexNumbers: { hasSome: [...new Set(jp.filter(isPoke).map(r => r.dex))] as number[] } } }, select: sel })).map(toRow);
 
   // EN↔JP 매칭 (build-group 과 동일)
   const enForJp = new Map<string, Row>();
@@ -72,8 +72,8 @@ async function main() {
     console.log(`  ${j.setId}#${j.number} "${j.name}" ← ${region} "${src.name}"(${src.cid})  [${region} LC ${src.lcid} → 앵커 ${j.lcid}]`);
     if (!APPLY) continue;
     await prisma.$transaction(async (tx) => {
-      await tx.cardLocale.update({ where: { id: src.cid }, data: { logicalCardId: j.lcid } });
-      const remain = await tx.cardLocale.count({ where: { logicalCardId: src.lcid } });
+      await tx.regionCard.update({ where: { id: src.cid }, data: { logicalCardId: j.lcid } });
+      const remain = await tx.regionCard.count({ where: { logicalCardId: src.lcid } });
       if (remain === 0) {
         const refs = (await tx.collectionItem.count({ where: { logicalCardId: src.lcid } }))
           + (await tx.trade.count({ where: { logicalCardId: src.lcid } }))

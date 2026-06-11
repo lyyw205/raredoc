@@ -24,7 +24,7 @@ const toRow = (l: any): Row => ({
   dex: l.logicalCard.pokedexNumbers?.[0] ?? null, illus: l.logicalCard.illustrator, tier: l.logicalCard.rarity?.tier ?? null,
   sub: [...(l.logicalCard.subtypes ?? [])].sort().join(","), supertype: l.logicalCard.supertype,
 });
-const load = async (ids: string[]) => (await prisma.cardLocale.findMany({ where: { setId: { in: ids } }, select: sel })).map(toRow);
+const load = async (ids: string[]) => (await prisma.regionCard.findMany({ where: { setId: { in: ids } }, select: sel })).map(toRow);
 
 async function main() {
   const groupId = process.argv[2]; const cfg = CONFIG[groupId];
@@ -36,7 +36,7 @@ async function main() {
 
   const jp = await load(cfg.jp), kr = await load(cfg.kr);
   const en = cfg.enNative ? await load(cfg.enNative)
-    : (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE as unknown as string[] }, pokedexNumbers: { hasSome: [...new Set(jp.filter(isPoke).map(r => r.dex))] as number[] } } }, select: sel })).map(toRow);
+    : (await prisma.regionCard.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE as unknown as string[] }, pokedexNumbers: { hasSome: [...new Set(jp.filter(isPoke).map(r => r.dex))] as number[] } } }, select: sel })).map(toRow);
 
   // 매칭 (build-group 과 동일 규칙)
   const enForJp = new Map<string, Row>(), krForJp = new Map<string, Row>();
@@ -72,7 +72,7 @@ async function main() {
   }
   // 흡수 LC 가 이 그룹 밖 locale 도 갖고 있나 (있으면 통삭제 불가, 부분 분리 필요)
   const absorbArr = [...absorbedLCs];
-  const allLocOfAbsorb = await prisma.cardLocale.findMany({ where: { logicalCardId: { in: absorbArr } }, select: { logicalCardId: true, setId: true, region: true } });
+  const allLocOfAbsorb = await prisma.regionCard.findMany({ where: { logicalCardId: { in: absorbArr } }, select: { logicalCardId: true, setId: true, region: true } });
   const inScopeSets = new Set([...cfg.jp, ...cfg.kr, ...(cfg.enNative ?? []), ...(cfg.enNative ? [] : ["__cross__"])]);
   const extraLocByLc = new Map<string, number>();
   for (const l of allLocOfAbsorb) { const inScope = cfg.enNative ? inScopeSets.has(l.setId) : (inScopeSets.has(l.setId) || l.region === "EN"); if (!inScope) extraLocByLc.set(l.logicalCardId, (extraLocByLc.get(l.logicalCardId) ?? 0) + 1); }

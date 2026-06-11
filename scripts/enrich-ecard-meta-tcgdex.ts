@@ -105,11 +105,11 @@ async function main() {
         where: { sourceId_externalId: { sourceId: source.id, externalId: c.id } },
         create: {
           sourceId: source.id, externalId: c.id,
-          logicalCardId: ourLogicalId, cardLocaleId: ourLocaleId,
+          logicalCardId: ourLogicalId, regionCardId: ourLocaleId,
           url: `https://api.tcgdex.net/v2/ja/cards/${c.id}`,
           verifiedBy: "auto:enrich-ecard-meta-tcgdex", confidence: 0.95,
         },
-        update: { logicalCardId: ourLogicalId, cardLocaleId: ourLocaleId },
+        update: { logicalCardId: ourLogicalId, regionCardId: ourLocaleId },
       });
       totalMap++;
     }

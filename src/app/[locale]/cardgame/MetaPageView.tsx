@@ -417,7 +417,7 @@ export function MetaPageView({
             {topCards.map((c) => (
               <Link
                 key={c.logicalCardId}
-                href={c.cardLocaleId ? `/${locale}/cards/${c.cardLocaleId}` : "#"}
+                href={c.regionCardId ? `/${locale}/cards/${c.regionCardId}` : "#"}
                 className="block hover:opacity-90 transition-opacity"
               >
                 <CardThumb src={c.image} alt={c.name} />

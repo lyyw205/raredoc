@@ -32,7 +32,7 @@ async function main() {
   const jpSet = process.argv[2], tcgId = process.argv[3];
   const APPLY = process.argv.includes("--apply");
   if (!jpSet || !tcgId) { console.error("usage: <jpSetId> <tcgId> [--apply]"); process.exit(1); }
-  const cards = await prisma.cardLocale.findMany({ where: { setId: jpSet }, orderBy: { numberInt: "asc" },
+  const cards = await prisma.regionCard.findMany({ where: { setId: jpSet }, orderBy: { numberInt: "asc" },
     select: { number: true, name: true, logicalCardId: true, logicalCard: { select: { subtypes: true } } } });
   const todo = cards.filter((c) => (c.logicalCard.subtypes?.length ?? 0) === 0);
   console.log(`■ ${jpSet} ← tcgdex:${tcgId}(ja) | subtypes 누락 ${todo.length}/${cards.length} ${APPLY ? "★적용" : "(dry)"}`);

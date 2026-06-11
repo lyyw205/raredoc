@@ -80,7 +80,7 @@ async function main() {
   for (const p of pairs) {
     const refs = p.kr._count;
     if (refs.collectionItems + refs.trades + refs.deckCards + refs.tierEntries + refs.rulings > 0) { console.log(`  ⚠ 참조있음 skip: ${p.kr.id}`); continue; }
-    for (const loc of p.kr.locales) await prisma.cardLocale.update({ where: { id: loc.id }, data: { logicalCardId: p.en.id } });
+    for (const loc of p.kr.locales) await prisma.regionCard.update({ where: { id: loc.id }, data: { logicalCardId: p.en.id } });
     const data: any = { nameKo: p.kr.locales[0].name.replace(/\s*-\s*\d+\/\d+$/, "") };
     if (p.via === "basic-energy") { data.supertype = "Energy"; data.subtypes = ["Basic"]; }
     await prisma.logicalCard.update({ where: { id: p.en.id }, data });

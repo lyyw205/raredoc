@@ -72,7 +72,7 @@ interface CardRow {
 }
 
 interface FailEntry {
-  cardLocaleId: string;
+  regionCardId: string;
   size: "small" | "large";
   originalUrl: string;
   error: string;
@@ -264,7 +264,7 @@ async function processOne(
     // DB update
     const publicUrl = r2PublicUrl(key);
     if (!DRY_RUN) {
-      await prisma.cardLocale.update({
+      await prisma.regionCard.update({
         where: { id: card.id },
         data: size === "small" ? { imageSmall: publicUrl } : { imageLarge: publicUrl },
       });
@@ -273,7 +273,7 @@ async function processOne(
   } catch (err) {
     stats.failed++;
     appendFailed({
-      cardLocaleId: card.id,
+      regionCardId: card.id,
       size,
       originalUrl,
       error: String(err),

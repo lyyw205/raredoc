@@ -2,8 +2,8 @@
  * Phase KR-그룹화 MERGE — 확신 매칭(jp_unique + en_unique)만 실제 연결.
  *
  * 동작:
- *   1) 고아 KR CardLocale 을 형제(JP 우선, 없으면 EN) LogicalCard 로 re-point.
- *   2) 그 결과 자식(CardLocale) 0개가 된 옛 고아 LogicalCard 삭제.
+ *   1) 고아 KR RegionCard 을 형제(JP 우선, 없으면 EN) LogicalCard 로 re-point.
+ *   2) 그 결과 자식(RegionCard) 0개가 된 옛 고아 LogicalCard 삭제.
  *      (사전 확인: 고아 KR LogicalCard 의존행 0건 — collection/trade/cardtext/tier/deck/ruling/ext)
  *
  * 안전:
@@ -61,7 +61,7 @@ async function main() {
 
   // target 이 자기자신이면(이론상) 제외
   const rows = map.filter((m) => m.target_lc && m.target_lc !== m.kr_lc);
-  console.log(`[plan] 확신 연결 대상 KR CardLocale: ${rows.length}`);
+  console.log(`[plan] 확신 연결 대상 KR RegionCard: ${rows.length}`);
 
   if (DRY) {
     console.log("[dry-run] 쓰기 없음. 샘플 5건:");
@@ -86,7 +86,7 @@ async function main() {
     console.log(`  re-point ... ${repointed}/${rows.length}`);
   }
 
-  // 2) 빈 껍데기 LogicalCard 삭제 (CardLocale 0 + 의존행 0 인 것만)
+  // 2) 빈 껍데기 LogicalCard 삭제 (RegionCard 0 + 의존행 0 인 것만)
   const oldLcs = [...new Set(rows.map((r) => r.kr_lc))];
   let deleted = 0;
   for (let i = 0; i < oldLcs.length; i += CHUNK) {
@@ -121,8 +121,8 @@ async function main() {
   console.log({
     durationSec: ((Date.now() - t0) / 1000).toFixed(1),
     repointed, deletedOrphanLogicalCards: deleted,
-    krCardLocale_stillOrphan: Number(orphanLeft[0].c),
-    krCardLocale_nowWithGameData: Number(krWithGame[0].c),
+    krRegionCard_stillOrphan: Number(orphanLeft[0].c),
+    krRegionCard_nowWithGameData: Number(krWithGame[0].c),
   });
   await prisma.$disconnect();
 }

@@ -57,7 +57,7 @@ async function main() {
   let ok=0, fail=0;
 
   for (const set of SETS) {
-    const cards = await prisma.cardLocale.findMany({
+    const cards = await prisma.regionCard.findMany({
       where: { setId: `jp-tcg-${set}`, imageSmall: { contains: "tcgplayer" } },
       select: { id: true, imageSmall: true, name: true },
       orderBy: { id: "asc" },
@@ -74,7 +74,7 @@ async function main() {
       if (!dlOk) { console.log(`  [${c.id}] ${c.name.slice(0,15).padEnd(15)} ✗ dl`); fail++; continue; }
       const publicUrl = await uploadToSupabase(local, remote, ct);
       if (!publicUrl) { console.log(`  [${c.id}] ${c.name.slice(0,15).padEnd(15)} ✗ up`); fail++; await unlink(local).catch(()=>{}); continue; }
-      await prisma.cardLocale.update({ where: { id: c.id }, data: { imageSmall: publicUrl, imageLarge: publicUrl } });
+      await prisma.regionCard.update({ where: { id: c.id }, data: { imageSmall: publicUrl, imageLarge: publicUrl } });
       await unlink(local).catch(()=>{});
       ok++;
       if (ok % 50 === 0) console.log(`  ... ${ok} OK`);

@@ -7,7 +7,7 @@
  *
  * - 카드 99장: Bulbapedia /wiki/{CardName}_(World_Champions_Pack_N) 페이지에서
  *   첫 카드 이미지 URL (small 180px / large 360px) + wgCategories의 "Illus. by ..." 추출
- * - 다운로드 → R2 업로드 → CardLocale.imageSmall/imageLarge + LogicalCard.illustrator 갱신
+ * - 다운로드 → R2 업로드 → RegionCard.imageSmall/imageLarge + LogicalCard.illustrator 갱신
  * - CardPack: 로고(World_Champions_Pack.jpg) → R2 + Set.logoUrl, nameKo="월드 챔피언스 팩"
  *
  * Run: npx tsx scripts/fix-pcg10-bulbapedia.ts
@@ -123,8 +123,8 @@ async function main() {
   await prisma.cardPack.update({ where: { id: SET_GROUP_ID }, data: { nameKo: "월드 챔피언스 팩" } });
   console.log(`CardPack.nameKo = "월드 챔피언스 팩"`);
 
-  // 4. 기존 CardLocale 모두 로딩 (id로 매칭)
-  const locales = await prisma.cardLocale.findMany({
+  // 4. 기존 RegionCard 모두 로딩 (id로 매칭)
+  const locales = await prisma.regionCard.findMany({
     where: { setId: SET_ID, language: "ja" },
     select: { id: true, number: true, numberInt: true, name: true, logicalCardId: true },
   });
@@ -133,7 +133,7 @@ async function main() {
     const n = l.numberInt ?? parseInt(l.number, 10);
     if (!isNaN(n)) localeByNumber.set(n, l);
   }
-  console.log(`DB CardLocale ${locales.length}장 (jp)`);
+  console.log(`DB RegionCard ${locales.length}장 (jp)`);
 
   // 5. 각 카드 페이지 순회
   let ok = 0, fail = 0, skipped = 0;
@@ -176,7 +176,7 @@ async function main() {
     const r2Large = largeOk ? await uploadR2(largeKey, largeBuf!, ct, true) : null;
 
     // DB 업데이트
-    await prisma.cardLocale.update({
+    await prisma.regionCard.update({
       where: { id: loc.id },
       data: {
         imageSmall: r2Small,

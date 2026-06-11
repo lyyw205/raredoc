@@ -6,7 +6,7 @@
  * - Finds JP section by anchor id
  * - Parses JP card rows (number, name, slug)
  * - Creates JP Set row (jp-tcg-{setId})
- * - Creates JP CardLocale (jp-tcg-{setId}-{num}) linked to existing LogicalCard
+ * - Creates JP RegionCard (jp-tcg-{setId}-{num}) linked to existing LogicalCard
  * - Fetches each card's Bulbapedia page to extract image URL + illustrator
  * - Creates ExternalIdMapping (source=bulbapedia)
  *
@@ -342,7 +342,7 @@ async function syncSet(
   console.log(`  ✓ JP Set ${jpSetId}`);
 
   // Build EN name→logicalCardId map for this set (for name-based matching)
-  const enLocales = await prisma.cardLocale.findMany({
+  const enLocales = await prisma.regionCard.findMany({
     where: { setId: enSetId },
     select: { id: true, name: true, logicalCardId: true, number: true },
   });
@@ -369,7 +369,7 @@ async function syncSet(
     } else {
       // Try number-based fallback for sets where JP numbers align with EN
       const enLocaleId = `en-tcg-${setId}-${row.number}`;
-      const enLocale = await prisma.cardLocale.findUnique({
+      const enLocale = await prisma.regionCard.findUnique({
         where: { id: enLocaleId },
         select: { logicalCardId: true },
       });
@@ -381,8 +381,8 @@ async function syncSet(
       logicalCardId = enLocale.logicalCardId;
     }
 
-    // Check if JP CardLocale already has an image
-    const existingJpLocale = await prisma.cardLocale.findUnique({
+    // Check if JP RegionCard already has an image
+    const existingJpLocale = await prisma.regionCard.findUnique({
       where: { id: jpLocaleId },
       select: { imageSmall: true },
     });
@@ -405,8 +405,8 @@ async function syncSet(
     }
 
     try {
-      // Upsert JP CardLocale
-      await prisma.cardLocale.upsert({
+      // Upsert JP RegionCard
+      await prisma.regionCard.upsert({
         where: { id: jpLocaleId },
         create: {
           id: jpLocaleId,
@@ -441,7 +441,7 @@ async function syncSet(
         create: {
           sourceId: bulbapediaSourceId,
           externalId: row.slug,
-          cardLocaleId: jpLocaleId,
+          regionCardId: jpLocaleId,
           logicalCardId,
           url: `${WIKI_BASE}/wiki/${encodeURIComponent(row.slug)}`,
           verifiedBy: "auto:sync-dppt-bulbapedia-jp",
@@ -449,7 +449,7 @@ async function syncSet(
           notes: `JP overlay for ${setId} #${row.number}`,
         },
         update: {
-          cardLocaleId: jpLocaleId,
+          regionCardId: jpLocaleId,
           logicalCardId,
         },
       });

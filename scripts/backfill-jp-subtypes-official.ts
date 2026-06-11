@@ -28,7 +28,7 @@ async function main() {
   const off = JSON.parse(readFileSync(file, "utf8")) as { number: string; stageRaw: string | null; illustrator: string | null; jaName: string }[];
   const byNum = new Map<number, typeof off[number]>(off.map((c) => [parseInt(c.number, 10), c]));
 
-  const rows = await prisma.cardLocale.findMany({ where: { setId }, orderBy: { numberInt: "asc" },
+  const rows = await prisma.regionCard.findMany({ where: { setId }, orderBy: { numberInt: "asc" },
     select: { numberInt: true, number: true, name: true, logicalCardId: true, logicalCard: { select: { supertype: true, subtypes: true, illustrator: true } } } });
 
   let subFilled = 0, illusFilled = 0, noStage = 0; const sample: string[] = [];

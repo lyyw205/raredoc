@@ -64,9 +64,9 @@ export async function getRecentTrades(
 
     return trades.map((t) => ({
       id: t.id,
-      cardId: t.localeId, // URL 호환: shape 이름은 cardId 유지, 값은 CardLocale.id
+      cardId: t.localeId, // URL 호환: shape 이름은 cardId 유지, 값은 RegionCard.id
       cardName: t.locale.name,
-      cardNameKo: null, // CardLocale 은 단일 name. ko 표시는 language=ko locale 선택으로 처리
+      cardNameKo: null, // RegionCard 은 단일 name. ko 표시는 language=ko locale 선택으로 처리
       setId: t.locale.setId,
       setName: t.locale.set.name,
       setNameKo: t.locale.set.nameKo,

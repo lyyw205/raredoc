@@ -136,7 +136,7 @@ async function processSet(setDef: typeof SET_MAP[number], tmpRoot: string) {
   for (const card of cardRows) {
     // DB stores numbers unpadded ("1", "2"…); Bulbapedia gives zero-padded ("001").
     const numUnpadded = String(parseInt(card.number, 10));
-    const locale = await prisma.cardLocale.findFirst({
+    const locale = await prisma.regionCard.findFirst({
       where: { setId: `jp-tcg-${setDef.setId}`, number: numUnpadded },
       select: { id: true, imageSmall: true, logicalCardId: true },
     });
@@ -169,7 +169,7 @@ async function processSet(setDef: typeof SET_MAP[number], tmpRoot: string) {
 
     if (!publicUrl) { fail++; console.log(`  [${card.number}] upload fail`); continue; }
 
-    await prisma.cardLocale.update({
+    await prisma.regionCard.update({
       where: { id: locale.id },
       data: { imageSmall: publicUrl, imageLarge: publicUrl },
     });

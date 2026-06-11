@@ -2,7 +2,7 @@
  * EN 시세 수집 — pokemontcg.io 벌크 (Layer 1, 결정적 스크립트)
  *
  * 출처: pokemontcg.io 카드 응답의 tcgplayer(USD) + cardmarket(EUR) 가격.
- * 매핑: EN CardLocale.id === pokemontcg.io card id (직접 1:1).
+ * 매핑: EN RegionCard.id === pokemontcg.io card id (직접 1:1).
  *       세트 단위 벌크 호출(getCardsBySet)로 호출 수 최소화.
  * 적재: Price 2행/카드 (sourceId=PriceSource 'tcgplayer' / 'cardmarket') — 독립 출처 교차검증(B안).
  *       시계열 스냅샷이지만 같은 날 재실행 중복은 방지(하루 1행/출처).
@@ -70,7 +70,7 @@ export async function run(opts: EnOptions = {}): Promise<SyncResult> {
   if (opts.set) {
     setIds = [opts.set];
   } else {
-    const grouped = await prisma.cardLocale.groupBy({ by: ["setId"], where: { region: "EN" } });
+    const grouped = await prisma.regionCard.groupBy({ by: ["setId"], where: { region: "EN" } });
     setIds = grouped.map((g) => g.setId).sort();
     if (opts.limit && opts.limit > 0) setIds = setIds.slice(0, opts.limit);
   }
@@ -94,7 +94,7 @@ export async function run(opts: EnOptions = {}): Promise<SyncResult> {
     }
     r.units++;
 
-    const locales = await prisma.cardLocale.findMany({
+    const locales = await prisma.regionCard.findMany({
       where: { setId, region: "EN" },
       select: { id: true },
     });

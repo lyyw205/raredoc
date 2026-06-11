@@ -60,7 +60,7 @@ async function main() {
   const trFile = isEX ? "trainer-names-ex.ts" : isPt ? "trainer-names-dpt.ts" : isHGSS ? "trainer-names-hgss.ts" : isBW ? "trainer-names-bw.ts" : isXY ? "trainer-names-xy.ts" : isSWSH ? "trainer-names-swsh.ts" : isSM ? "trainer-names-sm.ts" : "trainer-names-sv.ts";
 
   // 1) JP dex 복구(이름기준) — 공유LC 를 JP 정체성으로 되돌림
-  const jpRows = await prisma.cardLocale.findMany({ where: { setId: { in: jpSets } }, select: { id: true, setId: true, number: true, numberInt: true, name: true, logicalCardId: true, logicalCard: { select: { supertype: true, subtypes: true, pokedexNumbers: true, illustrator: true, rarity: { select: { code: true } } } } } });
+  const jpRows = await prisma.regionCard.findMany({ where: { setId: { in: jpSets } }, select: { id: true, setId: true, number: true, numberInt: true, name: true, logicalCardId: true, logicalCard: { select: { supertype: true, subtypes: true, pokedexNumbers: true, illustrator: true, rarity: { select: { code: true } } } } } });
   let jfix = 0;
   for (const l of jpRows) { if (!isPokemonSupertype(l.logicalCard.supertype)) continue; const d = jaDex(l.name); if (d && l.logicalCard.pokedexNumbers?.[0] !== d) { if (APPLY) await prisma.logicalCard.update({ where: { id: l.logicalCardId }, data: { pokedexNumbers: [d] } }); jfix++; } }
 
@@ -88,7 +88,7 @@ async function main() {
   //    번호 표기 정규화(DB "001" vs pokemontcg.io "1"): 숫자부 선행 0 제거, 알파벳 접미사 유지("121a").
   const numKey = (n: string) => n.replace(/^0+(?=\d)/, "");
   const byNum = new Map(cards.map((c: any) => [numKey(String(c.number)), c]));
-  const enRows = await prisma.cardLocale.findMany({ where: { setId: enSet }, select: { id: true, number: true, numberInt: true, name: true, logicalCardId: true } });
+  const enRows = await prisma.regionCard.findMany({ where: { setId: enSet }, select: { id: true, number: true, numberInt: true, name: true, logicalCardId: true } });
 
   // 3) JP 버킷(포켓몬): dex|subtypes → [{lcid, rank, numInt, subs}]
   //    ⚠ JP DB 는 EN 메커니즘 subtype(Tera 테라스탈 · Ancient 고대 · Future 미래 · Radiant かがやく)을 안 담음
@@ -178,8 +178,8 @@ async function main() {
   if (APPLY) {
     for (const [jpLcid, subs] of subtypeBackfill) await prisma.logicalCard.update({ where: { id: jpLcid }, data: { subtypes: subs } });
     for (const [jpLcid, subs] of subEnrich) await prisma.logicalCard.update({ where: { id: jpLcid }, data: { subtypes: subs } });
-    for (const [enLocId, jpLcid] of repoint) { await prisma.cardLocale.update({ where: { id: enLocId }, data: { logicalCardId: jpLcid } }); merged++; }
-    for (const e of orphan) { const lcId = `lc-orphan-${enSet}-${e.loc.number}`; const data: any = { supertype: e.c?.supertype ?? "Pokémon", subtypes: e.subs, pokedexNumbers: e.dex != null ? [e.dex] : [] }; if (e.c?.artist) data.illustrator = e.c.artist; if (await prisma.logicalCard.findUnique({ where: { id: lcId } })) await prisma.logicalCard.update({ where: { id: lcId }, data }); else await prisma.logicalCard.create({ data: { id: lcId, primarySetId: enSet, primaryNumber: e.loc.number, ...data } }); await prisma.cardLocale.update({ where: { id: e.loc.id }, data: { logicalCardId: lcId } }); orphaned++; }
+    for (const [enLocId, jpLcid] of repoint) { await prisma.regionCard.update({ where: { id: enLocId }, data: { logicalCardId: jpLcid } }); merged++; }
+    for (const e of orphan) { const lcId = `lc-orphan-${enSet}-${e.loc.number}`; const data: any = { supertype: e.c?.supertype ?? "Pokémon", subtypes: e.subs, pokedexNumbers: e.dex != null ? [e.dex] : [] }; if (e.c?.artist) data.illustrator = e.c.artist; if (await prisma.logicalCard.findUnique({ where: { id: lcId } })) await prisma.logicalCard.update({ where: { id: lcId }, data }); else await prisma.logicalCard.create({ data: { id: lcId, primarySetId: enSet, primaryNumber: e.loc.number, ...data } }); await prisma.regionCard.update({ where: { id: e.loc.id }, data: { logicalCardId: lcId } }); orphaned++; }
   } else {
     merged = repoint.size; orphaned = orphan.length;
     for (const [enLocId, jpLcid] of [...repoint].slice(0, 6)) { const e = enRows.find((x) => x.id === enLocId)!; const j = jpById.get([...jpRows].find((r) => r.logicalCardId === jpLcid)?.id ?? ""); sample.push(`EN#${e.number}${e.name} → JP#${j?.number}${j?.name}`); }

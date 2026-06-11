@@ -1,7 +1,7 @@
 /**
  * EN 정체성 병합(merge-en-identity) 후 정리: EN 로케일이 JP 앵커로 옮겨지며 비워진 옛 EN-only LogicalCard 제거.
  * 단, 그 LC 에 매달린 ExternalIdMapping(시세연동 등 외부ID)을 잃지 않도록 **매핑의 logicalCardId 를
- * 로케일(cardLocaleId)의 현재 LC 로 재지정** 후 빈 LC 삭제. 참조(컬렉션/거래/티어/덱/룰링) 있으면 중단.
+ * 로케일(regionCardId)의 현재 LC 로 재지정** 후 빈 LC 삭제. 참조(컬렉션/거래/티어/덱/룰링) 있으면 중단.
  *
  * 실행: npx tsx scripts/cleanup-merged-empty-lc.ts <groupId,groupId,...> [--apply]
  */
@@ -24,11 +24,11 @@ async function main() {
     prisma.deckCard.count({ where: { logicalCardId: { in: emptyIds } } }),
     prisma.ruling.count({ where: { logicalCardId: { in: emptyIds } } }),
   ]);
-  const ext = await prisma.externalIdMapping.findMany({ where: { logicalCardId: { in: emptyIds } }, select: { id: true, cardLocaleId: true, logicalCardId: true } });
+  const ext = await prisma.externalIdMapping.findMany({ where: { logicalCardId: { in: emptyIds } }, select: { id: true, regionCardId: true, logicalCardId: true } });
   const cit = await prisma.collectionItem.findMany({ where: { logicalCardId: { in: emptyIds } }, select: { id: true, localeId: true } });
   const trd = await prisma.trade.findMany({ where: { logicalCardId: { in: emptyIds } }, select: { id: true, localeId: true } });
-  const allLoc = [...new Set([...ext.map((m) => m.cardLocaleId), ...cit.map((m) => m.localeId), ...trd.map((m) => m.localeId)].filter(Boolean) as string[])];
-  const locs = await prisma.cardLocale.findMany({ where: { id: { in: allLoc } }, select: { id: true, logicalCardId: true } });
+  const allLoc = [...new Set([...ext.map((m) => m.regionCardId), ...cit.map((m) => m.localeId), ...trd.map((m) => m.localeId)].filter(Boolean) as string[])];
+  const locs = await prisma.regionCard.findMany({ where: { id: { in: allLoc } }, select: { id: true, logicalCardId: true } });
   const locLc = new Map(locs.map((l) => [l.id, l.logicalCardId]));
   const resolve = (locId: string | null | undefined): string | null => { if (!locId) return null; const cur = locLc.get(locId); return cur && !emptyIds.includes(cur) ? cur : null; };
   const citBad = cit.filter((m) => !resolve(m.localeId)), trdBad = trd.filter((m) => !resolve(m.localeId));
@@ -36,7 +36,7 @@ async function main() {
   if (tier + deck + ruling > 0 || citBad.length + trdBad.length > 0) { console.log("⚠️ 재홈 불가 참조(LC전용/localeId없음) — 중단(수동확인)"); await prisma.$disconnect(); return; }
   if (!APPLY) { console.log("(dry) --apply"); await prisma.$disconnect(); return; }
 
-  for (const m of ext) { const to = resolve(m.cardLocaleId); if (to) await prisma.externalIdMapping.update({ where: { id: m.id }, data: { logicalCardId: to } }); }
+  for (const m of ext) { const to = resolve(m.regionCardId); if (to) await prisma.externalIdMapping.update({ where: { id: m.id }, data: { logicalCardId: to } }); }
   for (const m of cit) { const to = resolve(m.localeId); if (to) await prisma.collectionItem.update({ where: { id: m.id }, data: { logicalCardId: to } }); }
   for (const m of trd) { const to = resolve(m.localeId); if (to) await prisma.trade.update({ where: { id: m.id }, data: { logicalCardId: to } }); }
   const r = await prisma.logicalCard.deleteMany({ where: { id: { in: emptyIds } } }); // 잔여 매핑은 onDelete:Cascade 로 정리

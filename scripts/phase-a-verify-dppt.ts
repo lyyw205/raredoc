@@ -8,7 +8,7 @@
  *   E) Missing cards (NULL imageSmall)
  *   F) Supertype classification per set
  *   G) EN ↔ JP cross-check (locale pairing)
- *   H) Version availability (CardLocale language breakdown)
+ *   H) Version availability (RegionCard language breakdown)
  *
  * Run: npx tsx scripts/phase-a-verify-dppt.ts
  * Output: docs/phase-a-verification-dppt.md
@@ -81,7 +81,7 @@ const ALL_SET_IDS = [...EN_SET_IDS, ...JP_SET_IDS];
 // Types
 // ---------------------------------------------------------------------------
 
-interface CardLocaleRow {
+interface RegionCardRow {
   id: string;
   name: string;
   setId: string;
@@ -135,7 +135,7 @@ function isPresent(card: LogicalCardRow, field: FieldKey): boolean {
 // Section A: Image liveness (EN + JP separate)
 // ---------------------------------------------------------------------------
 
-async function sectionA(enLocales: CardLocaleRow[], jpLocales: CardLocaleRow[]): Promise<{
+async function sectionA(enLocales: RegionCardRow[], jpLocales: RegionCardRow[]): Promise<{
   perSet: Map<string, { enOk: number; enFail: number; jpOk: number; jpFail: number }>;
   failures: ImageResult[];
 }> {
@@ -218,15 +218,15 @@ interface ContiguityResult {
 }
 
 async function sectionC(
-  enLocales: CardLocaleRow[],
-  jpLocales: CardLocaleRow[],
+  enLocales: RegionCardRow[],
+  jpLocales: RegionCardRow[],
   sets: { id: string; cardCount: number | null }[]
 ): Promise<ContiguityResult[]> {
   console.log(`\n[C] ID contiguity...`);
   const results: ContiguityResult[] = [];
   const setCountMap = new Map(sets.map(s => [s.id, s.cardCount ?? 0]));
 
-  function check(locales: CardLocaleRow[], region: string): void {
+  function check(locales: RegionCardRow[], region: string): void {
     const bySet = new Map<string, number[]>();
     for (const card of locales) {
       const setKey = card.setId;
@@ -264,9 +264,9 @@ async function sectionC(
 // Section E: Missing imageSmall
 // ---------------------------------------------------------------------------
 
-async function sectionE(enLocales: CardLocaleRow[], jpLocales: CardLocaleRow[]): Promise<{
-  enMissing: CardLocaleRow[];
-  jpMissing: CardLocaleRow[];
+async function sectionE(enLocales: RegionCardRow[], jpLocales: RegionCardRow[]): Promise<{
+  enMissing: RegionCardRow[];
+  jpMissing: RegionCardRow[];
 }> {
   const enMissing = enLocales.filter(c => !c.imageSmall);
   const jpMissing = jpLocales.filter(c => !c.imageSmall);
@@ -284,7 +284,7 @@ interface SupertypeStats {
   nullCards: { id: string; name: string }[];
 }
 
-async function sectionF(lcards: LogicalCardRow[], locales: CardLocaleRow[]): Promise<SupertypeStats[]> {
+async function sectionF(lcards: LogicalCardRow[], locales: RegionCardRow[]): Promise<SupertypeStats[]> {
   console.log(`\n[F] supertype classification...`);
   const nameMap = new Map<string, string>();
   for (const cl of locales) {
@@ -322,8 +322,8 @@ interface LocalePairingResult {
 
 async function sectionG(
   lcards: LogicalCardRow[],
-  enLocales: CardLocaleRow[],
-  jpLocales: CardLocaleRow[]
+  enLocales: RegionCardRow[],
+  jpLocales: RegionCardRow[]
 ): Promise<LocalePairingResult[]> {
   console.log(`\n[G] EN ↔ JP locale pairing...`);
 
@@ -338,8 +338,8 @@ async function sectionG(
     jpByLC.set(cl.id, cl.id);
   }
 
-  // Get all JP CardLocale logicalCardIds
-  const jpLocalesByLC = await prisma.cardLocale.findMany({
+  // Get all JP RegionCard logicalCardIds
+  const jpLocalesByLC = await prisma.regionCard.findMany({
     where: { setId: { in: JP_SET_IDS } },
     select: { logicalCardId: true, setId: true },
   });
@@ -380,7 +380,7 @@ interface LocaleStats {
 async function sectionH(lcards: LogicalCardRow[]): Promise<LocaleStats[]> {
   console.log(`\n[H] Version availability...`);
   const lcIds = lcards.map(c => c.id);
-  const localeRows = await prisma.cardLocale.findMany({
+  const localeRows = await prisma.regionCard.findMany({
     where: { logicalCardId: { in: lcIds } },
     select: { logicalCardId: true, language: true },
   });
@@ -415,7 +415,7 @@ function buildReport(data: {
   sectionA: { perSet: Map<string, { enOk: number; enFail: number; jpOk: number; jpFail: number }>; failures: ImageResult[] };
   sectionB: Map<string, SetFieldStats>;
   sectionC: ContiguityResult[];
-  sectionE: { enMissing: CardLocaleRow[]; jpMissing: CardLocaleRow[] };
+  sectionE: { enMissing: RegionCardRow[]; jpMissing: RegionCardRow[] };
   sectionF: SupertypeStats[];
   sectionG: LocalePairingResult[];
   sectionH: LocaleStats[];
@@ -472,7 +472,7 @@ function buildReport(data: {
 
   // ── Section C ──
   lines.push(`\n## C) 인덱스 연속성 (ID Contiguity)`);
-  lines.push(`\n각 세트의 CardLocale ID가 001부터 N까지 연속되는지 점검.\n`);
+  lines.push(`\n각 세트의 RegionCard ID가 001부터 N까지 연속되는지 점검.\n`);
   const cHeaders = ["세트","Region","cardCount","실제","갭","중복","상태"];
   const cRows = data.sectionC.map(r => {
     const status = r.gaps.length === 0 && r.duplicates.length === 0 ? "✓" : "!";
@@ -490,7 +490,7 @@ function buildReport(data: {
 
   // ── Section E ──
   lines.push(`\n## E) 누락 이미지 카드`);
-  lines.push(`\nimageSmall이 NULL인 CardLocale.\n`);
+  lines.push(`\nimageSmall이 NULL인 RegionCard.\n`);
   if (data.sectionE.enMissing.length === 0 && data.sectionE.jpMissing.length === 0) {
     lines.push(`> 누락 이미지 없음 — 모든 카드에 imageSmall URL 존재.`);
   } else {
@@ -525,7 +525,7 @@ function buildReport(data: {
 
   // ── Section G ──
   lines.push(`\n## G) EN ↔ JP 로케일 대응`);
-  lines.push(`\n각 LogicalCard의 EN/JP CardLocale 보유 현황.\n`);
+  lines.push(`\n각 LogicalCard의 EN/JP RegionCard 보유 현황.\n`);
   lines.push(mdTable(
     ["세트","EN 카드","JP 카드","EN+JP 양쪽","EN만","JP만"],
     data.sectionG.map(r=>[r.setKey,String(r.enCount),String(r.jpCount),String(r.paired),String(r.enOnly),String(r.jpOnly)])
@@ -535,8 +535,8 @@ function buildReport(data: {
   lines.push(`\n**전체 양쪽 보유:** ${totalPaired} / EN만: ${totalEnOnly}`);
 
   // ── Section H ──
-  lines.push(`\n## H) 버전 가용성 (CardLocale 언어 분포)`);
-  lines.push(`\n각 LogicalCard의 CardLocale 언어 조합.\n`);
+  lines.push(`\n## H) 버전 가용성 (RegionCard 언어 분포)`);
+  lines.push(`\n각 LogicalCard의 RegionCard 언어 조합.\n`);
   const allPatterns = new Set<string>();
   for (const s of data.sectionH) for (const k of s.patterns.keys()) allPatterns.add(k);
   const patterns = [...allPatterns].sort();
@@ -603,17 +603,17 @@ async function main() {
   });
   console.log(`Loaded: ${sets.length} sets`);
 
-  const enLocales = await prisma.cardLocale.findMany({
+  const enLocales = await prisma.regionCard.findMany({
     where: { setId: { in: EN_SET_IDS } },
     select: { id: true, name: true, setId: true, language: true, imageSmall: true },
     orderBy: { id: "asc" },
   });
-  const jpLocales = await prisma.cardLocale.findMany({
+  const jpLocales = await prisma.regionCard.findMany({
     where: { setId: { in: JP_SET_IDS } },
     select: { id: true, name: true, setId: true, language: true, imageSmall: true },
     orderBy: { id: "asc" },
   });
-  console.log(`CardLocale: ${enLocales.length} EN, ${jpLocales.length} JP`);
+  console.log(`RegionCard: ${enLocales.length} EN, ${jpLocales.length} JP`);
 
   const lcards = await prisma.logicalCard.findMany({
     where: { primarySetId: { in: EN_SET_IDS } },

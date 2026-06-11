@@ -8,7 +8,7 @@ import {
 import { pickRarityLabel } from "@/lib/cards/card-fields";
 
 export interface CardSearchHit {
-  id: string; // = CardLocale.id (URL용)
+  id: string; // = RegionCard.id (URL용)
   name: string;
   nameKo: string | null;
   imageSmall: string | null;

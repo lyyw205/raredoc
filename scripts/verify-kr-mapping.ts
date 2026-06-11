@@ -49,7 +49,7 @@ async function main() {
   for (const [krSet, code] of SETS) {
     const off = JSON.parse(readFileSync(`data/kr-official/kr-official-${code}.json`, "utf8"));
     const offByNum = new Map<number, any>(off.map((c: any) => [parseInt(c.number, 10), c]));
-    const kr = await prisma.cardLocale.findMany({ where: { setId: krSet },
+    const kr = await prisma.regionCard.findMany({ where: { setId: krSet },
       select: { number: true, numberInt: true, name: true, logicalCard: { select: { pokedexNumbers: true, illustrator: true, supertype: true } } } });
 
     const dexBad: string[] = [], illusBad: string[] = [];

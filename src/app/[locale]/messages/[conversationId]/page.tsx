@@ -14,8 +14,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 /** searchParams.cardId → 답장 첨부용 CardRef (DB-first + pokemontcg.io fallback). */
 async function getCardRef(cardId: string): Promise<CardRefView | null> {
-  // Phase 4: prisma.card → prisma.cardLocale. CardLocale.id == 기존 Card.id 호환.
-  const dbCard = await prisma.cardLocale
+  // Phase 4: prisma.card → prisma.regionCard. RegionCard.id == 기존 Card.id 호환.
+  const dbCard = await prisma.regionCard
     .findUnique({ where: { id: cardId }, include: { set: true } })
     .catch(() => null);
   if (dbCard) {

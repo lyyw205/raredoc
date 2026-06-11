@@ -1,7 +1,7 @@
 /**
  * KR 분할세트 한글이름 채우기 — 포켓몬은 PokeAPI ko(표준표) by dex.
  *   - LogicalCard.nameKo = 종 한글명(예: 쏘콘)
- *   - KR CardLocale.name = 종명 + suffix(ex/V/VMAX/VSTAR/GX) (예: 쏘콘ex)
+ *   - KR RegionCard.name = 종명 + suffix(ex/V/VMAX/VSTAR/GX) (예: 쏘콘ex)
  *   - 멀티 dex(태그팀)는 " & " 로 종명 결합.
  * 트레이너/에너지(dex 없음)는 건너뛰고 카운트만 보고 → namu 로 별도 처리.
  *
@@ -31,7 +31,7 @@ async function main() {
   const targets = setArg ? [setArg] : SETS;
 
   for (const setId of targets) {
-    const cards = await prisma.cardLocale.findMany({ where: { setId }, orderBy: { numberInt: "asc" },
+    const cards = await prisma.regionCard.findMany({ where: { setId }, orderBy: { numberInt: "asc" },
       select: { id: true, number: true, name: true, logicalCardId: true,
         logicalCard: { select: { supertype: true, subtypes: true, pokedexNumbers: true, nameKo: true } } } });
     let pokeOk = 0, pokeNoDexKo = 0, trainer = 0, sample = 0; const miss: string[] = [];
@@ -44,11 +44,11 @@ async function main() {
       if (!koParts.length) { pokeNoDexKo++; miss.push(`#${c.number} "${c.name}"(dex[${dexes}])`); continue; }
       const species = koParts.join(" & ");
       const suffix = suffixOf(lc.subtypes ?? []);
-      const cardName = species + suffix; // 풀 카드명 (예: "쏘콘 ex") — kr-sv1s 컨벤션: CardLocale.name == nameKo
+      const cardName = species + suffix; // 풀 카드명 (예: "쏘콘 ex") — kr-sv1s 컨벤션: RegionCard.name == nameKo
 
       if (sample < 5) { console.log(`  #${c.number} "${c.name}" → "${cardName}" (nameKo 동일)`); sample++; }
       if (APPLY) {
-        await prisma.cardLocale.update({ where: { id: c.id }, data: { name: cardName } });
+        await prisma.regionCard.update({ where: { id: c.id }, data: { name: cardName } });
         if (c.logicalCardId) await prisma.logicalCard.update({ where: { id: c.logicalCardId }, data: { nameKo: cardName } });
       }
       pokeOk++;

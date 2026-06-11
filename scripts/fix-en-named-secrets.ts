@@ -46,7 +46,7 @@ async function main() {
   samp.forEach((s) => console.log("  " + s));
   if (APPLY) {
     for (const u of lcUpd) await prisma.logicalCard.update({ where: { id: u.id }, data: u.data });
-    for (const u of locUpd) await prisma.cardLocale.update({ where: { id: u.id }, data: { name: u.name } });
+    for (const u of locUpd) await prisma.regionCard.update({ where: { id: u.id }, data: { name: u.name } });
     console.log(`★복구: LC ${lcUpd.length} · locale이름 ${locUpd.length}`);
   }
   await prisma.$disconnect();

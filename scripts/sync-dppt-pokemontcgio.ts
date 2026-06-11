@@ -5,7 +5,7 @@
  * - Creates CardPack (og-{setId}, era "DP"/"Pt")
  * - Creates EN Set (en-tcg-{setId})
  * - Creates LogicalCard (lc-en-tcg-{setId}-{num})
- * - Creates EN CardLocale (en-tcg-{setId}-{num})
+ * - Creates EN RegionCard (en-tcg-{setId}-{num})
  * - Creates ExternalIdMapping (source=pokemontcg_io)
  *
  * Uses curl for HTTP (WSL ETIMEDOUT safe). Rate: 5 req/sec.
@@ -276,8 +276,8 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
         },
       });
 
-      // 5b. Upsert EN CardLocale
-      await prisma.cardLocale.upsert({
+      // 5b. Upsert EN RegionCard
+      await prisma.regionCard.upsert({
         where: { id: clId },
         create: {
           id: clId,
@@ -309,14 +309,14 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
         create: {
           sourceId,
           externalId: card.id,
-          cardLocaleId: clId,
+          regionCardId: clId,
           logicalCardId: lcId,
           url: `https://pokemontcg.io/cards/${card.id}`,
           verifiedBy: "auto:sync-dppt-pokemontcgio",
           confidence: 0.95,
         },
         update: {
-          cardLocaleId: clId,
+          regionCardId: clId,
           logicalCardId: lcId,
         },
       });

@@ -147,7 +147,7 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
 
   for (const card of cards) {
     const jpLocaleId = `${set.jpSetId}-${card.number}`;
-    const locale = await prisma.cardLocale.findUnique({
+    const locale = await prisma.regionCard.findUnique({
       where: { id: jpLocaleId },
       select: { id: true, logicalCardId: true },
     });
@@ -172,7 +172,7 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
         where: { sourceId_externalId: { sourceId: source.id, externalId } },
         create: {
           sourceId: source.id, externalId,
-          cardLocaleId: locale.id, logicalCardId: lc.id,
+          regionCardId: locale.id, logicalCardId: lc.id,
           url: cardUrl,
           verifiedBy: "auto:scrape-sm-bulbapedia", confidence: 0.75,
           notes: `Bulbapedia SM JP-only. Set ${set.jpSetId}, number ${card.number}.`,
@@ -200,7 +200,7 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
       where: { sourceId_externalId: { sourceId: source.id, externalId } },
       create: {
         sourceId: source.id, externalId,
-        cardLocaleId: locale.id, logicalCardId: lc.id,
+        regionCardId: locale.id, logicalCardId: lc.id,
         url: cardUrl,
         verifiedBy: "auto:scrape-sm-bulbapedia", confidence: 0.75,
         notes: `Bulbapedia SM JP-only. Set ${set.jpSetId}, number ${card.number}.`,

@@ -1,5 +1,5 @@
 /**
- * NEO1~4 이미지 URL 을 Bulbapedia 의 JP 섹션에서 추출 → CardLocale.imageSmall/imageLarge 저장.
+ * NEO1~4 이미지 URL 을 Bulbapedia 의 JP 섹션에서 추출 → RegionCard.imageSmall/imageLarge 저장.
  * (이 시점에선 archives.bulbagarden.net URL 만. 다음 단계에서 Supabase 로 이전.)
  *
  * - NEO1 → Neo_Genesis_(TCG), section "Gold,_Silver,_to_a_New_World..."
@@ -112,7 +112,7 @@ async function scrapeSet(set: typeof SETS[number]) {
     const ourLocaleId = `jp-tcg-${set.setId}-${cardNum}`;
     const ourLogicalId = `lc-orphan-${ourLocaleId}`;
 
-    const locale = await prisma.cardLocale.findUnique({ where: { id: ourLocaleId }, select: { id: true, imageSmall: true } });
+    const locale = await prisma.regionCard.findUnique({ where: { id: ourLocaleId }, select: { id: true, imageSmall: true } });
     if (!locale) { console.log(`  [${cardNum}] ${card.name.padEnd(20)} → DB row 없음`); fail++; continue; }
     if (locale.imageSmall) { skip++; continue; }
 
@@ -123,16 +123,16 @@ async function scrapeSet(set: typeof SETS[number]) {
     const imgUrl = extractCardImage(html);
     if (!imgUrl) { console.log(`  [${cardNum}] ✗ image 추출 실패`); fail++; continue; }
 
-    await prisma.cardLocale.update({ where: { id: ourLocaleId }, data: { imageSmall: imgUrl, imageLarge: imgUrl } });
+    await prisma.regionCard.update({ where: { id: ourLocaleId }, data: { imageSmall: imgUrl, imageLarge: imgUrl } });
     await prisma.externalIdMapping.upsert({
       where: { sourceId_externalId: { sourceId: source.id, externalId: `${card.slug}_(${card.suffix})` } },
       create: {
         sourceId: source.id, externalId: `${card.slug}_(${card.suffix})`,
-        cardLocaleId: ourLocaleId, logicalCardId: ourLogicalId,
+        regionCardId: ourLocaleId, logicalCardId: ourLogicalId,
         url: cardUrl, verifiedBy: "auto:scrape-neo-images-bulbapedia", confidence: 0.7,
         notes: `Bulbapedia EN image proxy. (${set.setId})`,
       },
-      update: { cardLocaleId: ourLocaleId, logicalCardId: ourLogicalId, url: cardUrl },
+      update: { regionCardId: ourLocaleId, logicalCardId: ourLogicalId, url: cardUrl },
     });
     if (++ok % 20 === 0) console.log(`  ... ${ok} OK`);
   }

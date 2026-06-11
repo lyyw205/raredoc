@@ -1,9 +1,9 @@
 /**
- * 기존 JP 세트(이미 적재된 CardLocale + LogicalCard)를 일본공식(pokemon-card.com) 수집 JSON 으로
+ * 기존 JP 세트(이미 적재된 RegionCard + LogicalCard)를 일본공식(pokemon-card.com) 수집 JSON 으로
  * **in-place 메타 enrich**. load-jp-official 과 달리 LC 를 재생성하지 않음 → 기존 JP↔KR 병합/ cardPackId 보존,
  * 고아 LC 발생 없음. tcgdex JA 가 빈 SM 시대용(메타만 비어있고 로케일/이미지는 이미 존재할 때).
  *
- * 각 JP CardLocale 의 LogicalCard 에 supertype/pokedexNumbers/subtypes/illustrator/hp/types 를 official 로 덮어씀.
+ * 각 JP RegionCard 의 LogicalCard 에 supertype/pokedexNumbers/subtypes/illustrator/hp/types 를 official 로 덮어씀.
  * dex: JSON dexId 우선, 없으면 PokeAPI ja(폼접두어 제거) 폴백. subtypes: stage+suffix/trainerType.
  * --prune: JSON 에 없는 번호의 JP 로케일(EN넘버 리프린트 노이즈행) 삭제 + 비워진 LC 삭제.
  *
@@ -64,7 +64,7 @@ async function main() {
 
   const setRow = await prisma.set.findUnique({ where: { id: jpSet }, select: { cardPackId: true } });
   const sgId = setRow?.cardPackId ?? null;
-  const locs = await prisma.cardLocale.findMany({ where: { setId: jpSet }, select: { id: true, number: true, numberInt: true, name: true, logicalCardId: true } });
+  const locs = await prisma.regionCard.findMany({ where: { setId: jpSet }, select: { id: true, number: true, numberInt: true, name: true, logicalCardId: true } });
   const dbNums = new Set(locs.map((l) => l.numberInt ?? numKey(l.number)));
   console.log(`  기존 JP locale ${locs.length} · cardPack ${sgId ?? "—"}`);
 
@@ -113,7 +113,7 @@ async function main() {
       illustrator: c.illustrator ?? undefined, hp: c.hp ?? undefined, types: c.types ?? [],
       primarySetId: jpSet, primaryNumber: c.number, primaryNumberInt: numInt ?? undefined,
     } });
-    await prisma.cardLocale.create({ data: {
+    await prisma.regionCard.create({ data: {
       id: `${jpSet}-${c.number}`, logicalCardId: lcId, region: "JP", language: "ja", setId: jpSet,
       number: c.number, numberInt: numInt ?? undefined, name: c.jaName, imageSmall: c.image, imageLarge: c.image,
     } });
@@ -130,7 +130,7 @@ async function main() {
     if (coll + trade > 0) { console.log(`  ⚠️ prune 대상에 참조 ${coll + trade}건 — prune 생략(수동확인)`); }
     else {
       const lcids = [...new Set(pruneLoc.map((l) => l.logicalCardId))];
-      await prisma.cardLocale.deleteMany({ where: { id: { in: ids } } });
+      await prisma.regionCard.deleteMany({ where: { id: { in: ids } } });
       // 비워진 LC(다른 지역 locale 없음) 삭제
       const lcs = await prisma.logicalCard.findMany({ where: { id: { in: lcids } }, select: { id: true, locales: { select: { id: true } } } });
       const empty = lcs.filter((l) => l.locales.length === 0).map((l) => l.id);

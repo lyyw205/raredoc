@@ -20,7 +20,7 @@
  *   - xy12 → existing og-cp6   (Evolutions = 20th Anniversary JP)
  *
  * LogicalCard ID: lc-en-tcg-{setId}-{paddedNum}
- * CardLocale ID:  en-tcg-{setId}-{paddedNum}
+ * RegionCard ID:  en-tcg-{setId}-{paddedNum}
  *
  * Run: npx tsx scripts/sync-xy-pokemontcgio.ts [--set=xy2]
  */
@@ -230,7 +230,7 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
         },
       });
 
-      await prisma.cardLocale.upsert({
+      await prisma.regionCard.upsert({
         where: { id: clId },
         create: {
           id: clId, logicalCardId: lcId, language: "en", region: "EN",
@@ -250,11 +250,11 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
       await prisma.externalIdMapping.upsert({
         where: { sourceId_externalId: { sourceId, externalId: card.id } },
         create: {
-          sourceId, externalId: card.id, cardLocaleId: clId, logicalCardId: lcId,
+          sourceId, externalId: card.id, regionCardId: clId, logicalCardId: lcId,
           url: `https://pokemontcg.io/cards/${card.id}`,
           verifiedBy: "auto:sync-xy-pokemontcgio", confidence: 0.95,
         },
-        update: { cardLocaleId: clId, logicalCardId: lcId },
+        update: { regionCardId: clId, logicalCardId: lcId },
       });
 
       ok++;

@@ -15,8 +15,8 @@ async function main() {
   const sets = await prisma.set.findMany({ select: { id: true, region: true, nameKo: true, name: true, cardPackId: true } });
   const setMeta = new Map(sets.map((s) => [s.id, s]));
 
-  // 전 CardLocale 한 번에 (필요 필드만)
-  const all = await prisma.cardLocale.findMany({
+  // 전 RegionCard 한 번에 (필요 필드만)
+  const all = await prisma.regionCard.findMany({
     select: { setId: true, region: true, number: true, name: true,
       logicalCard: { select: { pokedexNumbers: true, illustrator: true } } },
   });
@@ -50,7 +50,7 @@ async function main() {
   }
 
   reps.sort((a, b) => (b.dexShared + b.illusShared) - (a.dexShared + a.illusShared) || b.dupNums - a.dupNums);
-  console.log(`■ 번호충돌 오염 감사 — 의심 세트 ${reps.length}개 (전 세트 ${sets.length} / CardLocale ${rows.length})\n`);
+  console.log(`■ 번호충돌 오염 감사 — 의심 세트 ${reps.length}개 (전 세트 ${sets.length} / RegionCard ${rows.length})\n`);
   console.log(`${"setId".padEnd(26)} ${"지역".padEnd(4)} 카드 다른이름공유번호 dex오염 일러오염 그룹  예시`);
   for (const r of reps) {
     console.log(`${r.setId.padEnd(26)} ${r.region.padEnd(4)} ${String(r.total).padStart(4)} ${String(r.dupNums).padStart(10)} ${String(r.dexShared).padStart(7)} ${String(r.illusShared).padStart(7)}  ${r.grouped ? "○" : "·"}   ${r.sample}`);

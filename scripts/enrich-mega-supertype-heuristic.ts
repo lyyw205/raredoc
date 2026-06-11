@@ -93,7 +93,7 @@ async function main() {
     });
     const setIds = sets.map(s => s.id);
 
-    const locales = await prisma.cardLocale.findMany({
+    const locales = await prisma.regionCard.findMany({
       where: {
         setId: { in: setIds },
         logicalCard: { supertype: null },

@@ -1,4 +1,4 @@
-// ── P7-S1 진단: LogicalCard.cardPackId 가 물리경로(CardLocale.setId→Set.cardPackId)로 도출가능한가 ──
+// ── P7-S1 진단: LogicalCard.cardPackId 가 물리경로(RegionCard.setId→Set.cardPackId)로 도출가능한가 ──
 // cardPackId 제거 전제: 각 LC의 cardPackId 가 자기 locale 들의 Set.cardPackId 와 일치해야 함.
 // 불일치 = '도둑질' 잔재(재포인트로 LC.cardPackId 가 물리와 어긋남) → 케이스 분류.
 // 실행: npx tsx scripts/migration/p7-setgroup-derive-check.ts

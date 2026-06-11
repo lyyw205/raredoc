@@ -81,7 +81,7 @@ async function main() {
     }
 
     for (const c of sum.cards) {
-      // PCG CardLocale IDs use padded numbers: jp-tcg-PCG1-001
+      // PCG RegionCard IDs use padded numbers: jp-tcg-PCG1-001
       // tcgdex localId is already padded: "001"
       const ourLocaleId = `jp-tcg-${dbCode}-${c.localId}`;
       const ourLogicalId = `lc-orphan-${ourLocaleId}`;
@@ -119,11 +119,11 @@ async function main() {
         where: { sourceId_externalId: { sourceId: source.id, externalId: c.id } },
         create: {
           sourceId: source.id, externalId: c.id,
-          logicalCardId: ourLogicalId, cardLocaleId: ourLocaleId,
+          logicalCardId: ourLogicalId, regionCardId: ourLocaleId,
           url: `https://api.tcgdex.net/v2/ja/cards/${c.id}`,
           verifiedBy: "auto:enrich-pcg-meta-tcgdex", confidence: 0.95,
         },
-        update: { logicalCardId: ourLogicalId, cardLocaleId: ourLocaleId },
+        update: { logicalCardId: ourLogicalId, regionCardId: ourLocaleId },
       });
       totalMap++;
     }

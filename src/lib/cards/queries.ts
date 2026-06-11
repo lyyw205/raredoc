@@ -1,8 +1,8 @@
-// Phase 3 어댑터 — 새 ERD(LogicalCard + CardLocale + Rarity + PriceSource)를
+// Phase 3 어댑터 — 새 ERD(LogicalCard + RegionCard + Rarity + PriceSource)를
 // 기반으로 페이지가 호출하는 공통 쿼리·변환 헬퍼.
 //
 // 기존 prisma.card / prisma.cardGroup 의존 코드와 공존(Phase 4 에서 제거).
-// 모든 새 쿼리는 LogicalCard/CardLocale/Rarity/PriceSource 만 참조한다.
+// 모든 새 쿼리는 LogicalCard/RegionCard/Rarity/PriceSource 만 참조한다.
 
 import type { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
@@ -25,7 +25,7 @@ export type LocaleSummary = {
   setName: string;
   setNameKo: string | null;
   setNameJa: string | null;
-  // 인쇄본별 표시필드(CardLocale 하강) — regMark/legalities/rarity 만 유지(per-printing/per-region).
+  // 인쇄본별 표시필드(RegionCard 하강) — regMark/legalities/rarity 만 유지(per-printing/per-region).
   //   게임필드(weak/resist/retreat/evolves/subtypes)는 diff=0 순수복제라 LogicalCard 직독으로 이관(Stage2 2026-06-11).
   regulationMark?: string | null;
   legalities?: Prisma.JsonValue;
@@ -109,7 +109,7 @@ function parseTypeValue(
   return [{ type: trimmed, value: "" }];
 }
 
-// 사용자 locale 우선의 CardLocale 선택. 없으면 EN > JP > KR 순.
+// 사용자 locale 우선의 RegionCard 선택. 없으면 EN > JP > KR 순.
 export function pickLocale<T extends { language: string; region: string }>(
   locales: T[],
   preferred: "en" | "ja" | "ko"
@@ -248,7 +248,7 @@ function toLogicalCardMeta(lc: {
 // ── 쿼리 ──────────────────────────────────────────────────────────────────────
 
 /**
- * CardLocale.id 로 시작해 LogicalCard + 같은 LogicalCard 의 모든 locale 을 조회.
+ * RegionCard.id 로 시작해 LogicalCard + 같은 LogicalCard 의 모든 locale 을 조회.
  * URL `/cards/{cardId}` 진입점.
  */
 export async function loadCardByLocaleId(localeId: string): Promise<{
@@ -256,7 +256,7 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
   logicalCard: LogicalCardMeta;
   allLocales: LocaleSummary[];
 } | null> {
-  const cl = await prisma.cardLocale.findUnique({
+  const cl = await prisma.regionCard.findUnique({
     where: { id: localeId },
     include: {
       set: { select: { name: true, nameKo: true, nameJa: true } },
@@ -375,7 +375,7 @@ export function logicalCardToTCG(
   lc: LogicalCardMeta,
   primary: LocaleSummary
 ): TCGCard {
-  // 지역별 rarity 표기: 사용자 region 우선, 없으면 EN, 없으면 code. P4a: primary(CardLocale) 우선.
+  // 지역별 rarity 표기: 사용자 region 우선, 없으면 EN, 없으면 code. P4a: primary(RegionCard) 우선.
   const rJa = primary.rarityNameJa ?? lc.rarityNameJa;
   const rKo = primary.rarityNameKo ?? lc.rarityNameKo;
   const rEn = primary.rarityNameEn ?? lc.rarityNameEn;

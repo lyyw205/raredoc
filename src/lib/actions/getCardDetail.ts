@@ -1,16 +1,16 @@
 "use server";
 
 /**
- * 상세 슬라이드 패널용 — 카드 한 장(CardLocale)의 지역판 목록 + 풍부한 카드 정보를 한 번에 반환.
+ * 상세 슬라이드 패널용 — 카드 한 장(RegionCard)의 지역판 목록 + 풍부한 카드 정보를 한 번에 반환.
  *
- * - 입력: cardLocaleId (패널이 보여주고 있는 카드)
+ * - 입력: regionCardId (패널이 보여주고 있는 카드)
  * - variants: 같은 LogicalCard 의 한/영/일 이미지(지역판 탭용, region EN→JP→KR 정렬)
  * - info: HP·타입·약점·기술·특성·룰·일러스트 등 카드 메타 (상세 페이지와 동일 소스)
  */
 
 import { loadCardByLocaleId, logicalCardToTCG } from "@/lib/cards/queries";
 
-export type CardLocaleVariant = {
+export type RegionCardVariant = {
   id: string;
   region: string; // EN | JP | KR
   language: string; // en | ja | ko
@@ -43,17 +43,17 @@ export type CardInfo = {
 };
 
 export type CardDetail = {
-  variants: CardLocaleVariant[];
+  variants: RegionCardVariant[];
   info: CardInfo | null;
 };
 
 const REGION_ORDER: Record<string, number> = { EN: 0, JP: 1, KR: 2 };
 
-export async function getCardDetail(cardLocaleId: string): Promise<CardDetail> {
-  const loaded = await loadCardByLocaleId(cardLocaleId).catch(() => null);
+export async function getCardDetail(regionCardId: string): Promise<CardDetail> {
+  const loaded = await loadCardByLocaleId(regionCardId).catch(() => null);
   if (!loaded) return { variants: [], info: null };
 
-  const mapped: CardLocaleVariant[] = loaded.allLocales.map((l) => ({
+  const mapped: RegionCardVariant[] = loaded.allLocales.map((l) => ({
     id: l.id,
     region: l.region,
     language: l.language,
@@ -70,14 +70,14 @@ export async function getCardDetail(cardLocaleId: string): Promise<CardDetail> {
   }));
 
   // region 당 1장만(탭 key 중복 방지). 같은 region 이 여러 장이면 이미지 있는 쪽 우선.
-  const byRegion = new Map<string, CardLocaleVariant>();
+  const byRegion = new Map<string, RegionCardVariant>();
   for (const v of mapped) {
     const cur = byRegion.get(v.region);
     if (!cur || (!(cur.imageSmall || cur.imageLarge) && (v.imageSmall || v.imageLarge))) {
       byRegion.set(v.region, v);
     }
   }
-  const variants: CardLocaleVariant[] = [...byRegion.values()].sort(
+  const variants: RegionCardVariant[] = [...byRegion.values()].sort(
     (a, b) => (REGION_ORDER[a.region] ?? 9) - (REGION_ORDER[b.region] ?? 9)
   );
 

@@ -22,8 +22,8 @@ function Bucket({ title, cards, locale }: { title: string; cards: DecklistViewCa
       </h2>
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
         {cards.map((c, i) =>
-          c.cardLocaleId ? (
-            <Link key={`${c.name}-${i}`} href={`/${locale}/cards/${c.cardLocaleId}`} className="block hover:opacity-90 transition-opacity">
+          c.regionCardId ? (
+            <Link key={`${c.name}-${i}`} href={`/${locale}/cards/${c.regionCardId}`} className="block hover:opacity-90 transition-opacity">
               <CardThumb src={c.image} alt={c.name} count={c.count} />
               <p className="mt-1 text-toss-micro text-toss-text-tertiary truncate text-center">{c.name}</p>
             </Link>

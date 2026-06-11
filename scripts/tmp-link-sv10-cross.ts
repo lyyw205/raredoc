@@ -33,9 +33,9 @@ async function main() {
   console.log(`■ sv10 잔여 연결 ${PAIRS.length}쌍 ${APPLY ? "★적용" : "(dry)"}`);
   let ok = 0, skip = 0;
   for (const [jpSet, jpNum, enSet, enNum, memo] of PAIRS) {
-    const jp = await prisma.cardLocale.findFirst({ where: { setId: jpSet, number: jpNum },
+    const jp = await prisma.regionCard.findFirst({ where: { setId: jpSet, number: jpNum },
       select: { name: true, logicalCardId: true, logicalCard: { select: { illustrator: true, locales: { where: { region: "EN" }, select: { id: true } } } } } });
-    const en = await prisma.cardLocale.findFirst({ where: { setId: enSet, number: enNum },
+    const en = await prisma.regionCard.findFirst({ where: { setId: enSet, number: enNum },
       select: { id: true, name: true, logicalCardId: true, logicalCard: { select: { illustrator: true, locales: { select: { region: true } } } } } });
     if (!jp || !en) { console.log(`❌ 누락: ${jpSet}#${jpNum} / ${enSet}#${enNum}`); skip++; continue; }
     if (jp.logicalCard?.locales.length) { console.log(`⚠ JP 기연결 스킵: ${jpSet}#${jpNum} ${jp.name}`); skip++; continue; }
@@ -43,7 +43,7 @@ async function main() {
     console.log(`연결 ${jpSet.replace("jp-tcg-", "").replace("jp-sv-", "")}#${jpNum} ${jp.name} [${jp.logicalCard?.illustrator}] ← ${enSet}#${enNum} ${en.name} [${en.logicalCard?.illustrator}] (${memo})`);
     if (APPLY) {
       const oldLc = en.logicalCardId!;
-      await prisma.cardLocale.update({ where: { id: en.id }, data: { logicalCardId: jp.logicalCardId! } });
+      await prisma.regionCard.update({ where: { id: en.id }, data: { logicalCardId: jp.logicalCardId! } });
       await migrateAndDelete(oldLc, jp.logicalCardId!);
     }
     ok++;
@@ -53,7 +53,7 @@ async function main() {
 
 // tmp-link-bbwf-cross.ts와 동일한 사용자 데이터 FK 이관 패턴
 async function migrateAndDelete(oldLc: string, newLc: string) {
-  const left = await prisma.cardLocale.count({ where: { logicalCardId: oldLc } });
+  const left = await prisma.regionCard.count({ where: { logicalCardId: oldLc } });
   if (left > 0) return;
   for (const model of ["trade", "collectionItem", "deckRecipeCard", "deckCard", "ruling", "externalIdMapping"] as const) {
     // @ts-expect-error 동적 모델 접근

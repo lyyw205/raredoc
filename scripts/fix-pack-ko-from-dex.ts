@@ -33,7 +33,7 @@ async function koByDex(dex: number): Promise<string | null> {
 }
 
 async function main() {
-  const cards = await prisma.cardLocale.findMany({
+  const cards = await prisma.regionCard.findMany({
     where: { setId: SET },
     select: { name: true, logicalCard: { select: { id: true, hp: true, pokedexNumbers: true, nameKo: true } } },
   });

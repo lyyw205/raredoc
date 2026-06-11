@@ -82,8 +82,8 @@ function padNum(n: string): string {
 async function enrichSet(tcgId: string, dbSetId: string, lang: string) {
   console.log(`\n─── tcgdex:${tcgId}(${lang}) → DB:${dbSetId} ───`);
 
-  // Load all CardLocales for this DB set that need enrichment
-  const locales = await prisma.cardLocale.findMany({
+  // Load all RegionCards for this DB set that need enrichment
+  const locales = await prisma.regionCard.findMany({
     where: {
       setId: dbSetId,
       logicalCard: { supertype: null },  // only enrich missing supertype

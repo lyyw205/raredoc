@@ -45,7 +45,7 @@ function speciesCandidates(name: string): string[] {
 }
 
 async function main() {
-  const cards = await prisma.cardLocale.findMany({
+  const cards = await prisma.regionCard.findMany({
     where: { setId: SET },
     select: { name: true, logicalCard: { select: { id: true, hp: true, supertype: true, pokedexNumbers: true, nameKo: true } } },
   });

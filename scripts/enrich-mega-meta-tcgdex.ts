@@ -18,7 +18,7 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 const execFileP = promisify(execFile);
 
-// tcgdex JP set ID → DB CardLocale setId mapping
+// tcgdex JP set ID → DB RegionCard setId mapping
 // mega-brave-symphonia has sub-IDs: M1L-### and M1S-###
 const TARGET_SETS = [
   { tcgId: "M1L", dbSetId: "jp-mega-brave-symphonia", cardIdPrefix: "jp-mega-brave-symphonia-M1L-", lang: "ja" },
@@ -58,7 +58,7 @@ async function enrichSet(tcgId: string, dbSetId: string, cardIdPrefix: string, l
   console.log(`\n─── tcgdex:${tcgId} → DB prefix:${cardIdPrefix} ───`);
 
   // Get cards from DB that use this prefix and need supertype
-  const locales = await prisma.cardLocale.findMany({
+  const locales = await prisma.regionCard.findMany({
     where: {
       id: { startsWith: cardIdPrefix },
       logicalCard: { supertype: null },

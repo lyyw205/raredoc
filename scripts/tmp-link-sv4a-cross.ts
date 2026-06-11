@@ -75,9 +75,9 @@ async function main() {
   console.log(`■ sv4a/PAF 교차 연결 ${PAIRS.length}쌍 + 리오르 교정 ${APPLY ? "★적용" : "(dry)"}`);
   let ok = 0, skip = 0;
   for (const [jpSet, jpNum, enSet, enNum, memo] of PAIRS) {
-    const jp = await prisma.cardLocale.findFirst({ where: { setId: jpSet, number: jpNum },
+    const jp = await prisma.regionCard.findFirst({ where: { setId: jpSet, number: jpNum },
       select: { name: true, logicalCardId: true, logicalCard: { select: { illustrator: true, locales: { where: { region: "EN" }, select: { id: true } } } } } });
-    const en = await prisma.cardLocale.findFirst({ where: { setId: enSet, number: enNum },
+    const en = await prisma.regionCard.findFirst({ where: { setId: enSet, number: enNum },
       select: { id: true, name: true, logicalCardId: true, logicalCard: { select: { illustrator: true, locales: { select: { region: true } } } } } });
     if (!jp || !en) { console.log(`❌ 누락: ${jpSet}#${jpNum} / ${enSet}#${enNum}`); skip++; continue; }
     if (jp.logicalCard?.locales.length) { console.log(`⚠ JP 기연결 스킵: ${jpSet}#${jpNum} ${jp.name}`); skip++; continue; }
@@ -85,22 +85,22 @@ async function main() {
     console.log(`연결 ${jpSet.replace("jp-tcg-", "").replace("jp-sv-", "")}#${jpNum} ${jp.name} [${jp.logicalCard?.illustrator}] ← ${enSet}#${enNum} ${en.name} [${en.logicalCard?.illustrator}] (${memo})`);
     if (APPLY) {
       const oldLc = en.logicalCardId!;
-      await prisma.cardLocale.update({ where: { id: en.id }, data: { logicalCardId: jp.logicalCardId! } });
+      await prisma.regionCard.update({ where: { id: en.id }, data: { logicalCardId: jp.logicalCardId! } });
       await migrateAndDelete(oldLc, jp.logicalCardId!);
     }
     ok++;
   }
   // D) 리오르 오연결 교정 (registry §35 — sv1#112 실물=Naoyo Kimura, ptcg.io 일러 오기로 chibi LC에 오연결)
   console.log(`\n■ 리오르 교정: sv1#112 → SVAM#008 / sv1#113 → SV1S#040`);
-  const r112 = await prisma.cardLocale.findFirst({ where: { setId: "sv1", number: "112" }, select: { id: true, logicalCardId: true } });
-  const r113 = await prisma.cardLocale.findFirst({ where: { setId: "sv1", number: "113" }, select: { id: true, logicalCardId: true } });
+  const r112 = await prisma.regionCard.findFirst({ where: { setId: "sv1", number: "112" }, select: { id: true, logicalCardId: true } });
+  const r113 = await prisma.regionCard.findFirst({ where: { setId: "sv1", number: "113" }, select: { id: true, logicalCardId: true } });
   const svam = await prisma.logicalCard.findUnique({ where: { id: "lc-jp-tcg-SVAM-008" }, select: { id: true, locales: { select: { region: true } } } });
   if (r112?.logicalCardId === "lc-orphan-jp-tcg-SV1S-040" && r113?.logicalCardId === "lc-orphan-sv1-113" && svam && !svam.locales.some(l => l.region === "EN")) {
     console.log(`  sv1#112 (${r112.logicalCardId} → lc-jp-tcg-SVAM-008)`);
     console.log(`  sv1#113 (${r113.logicalCardId} → lc-orphan-jp-tcg-SV1S-040)`);
     if (APPLY) {
-      await prisma.cardLocale.update({ where: { id: r112.id }, data: { logicalCardId: "lc-jp-tcg-SVAM-008" } });
-      await prisma.cardLocale.update({ where: { id: r113.id }, data: { logicalCardId: "lc-orphan-jp-tcg-SV1S-040" } });
+      await prisma.regionCard.update({ where: { id: r112.id }, data: { logicalCardId: "lc-jp-tcg-SVAM-008" } });
+      await prisma.regionCard.update({ where: { id: r113.id }, data: { logicalCardId: "lc-orphan-jp-tcg-SV1S-040" } });
       await migrateAndDelete("lc-orphan-sv1-113", "lc-orphan-jp-tcg-SV1S-040");
       console.log("  ✓ 적용");
     }
@@ -114,7 +114,7 @@ async function main() {
 
 // orphan LC 삭제 전 사용자 데이터(Trade/CollectionItem/덱/티어/룰링/외부ID) 참조를 새 LC로 이관.
 async function migrateAndDelete(oldLc: string, newLc: string) {
-  const left = await prisma.cardLocale.count({ where: { logicalCardId: oldLc } });
+  const left = await prisma.regionCard.count({ where: { logicalCardId: oldLc } });
   if (left > 0) return;
   for (const model of ["trade", "collectionItem", "deckRecipeCard", "deckCard", "ruling", "externalIdMapping"] as const) {
     // @ts-expect-error 동적 모델 접근

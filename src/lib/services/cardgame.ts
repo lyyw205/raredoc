@@ -96,10 +96,10 @@ export function resolveDeckCard(
 /** 주어진 cardId 집합에 대한 표시용 카드 맵을 만든다 (DB 일괄 조회 + mock 폴백). */
 export async function resolveDeckCardMap(cardIds: string[]): Promise<Record<string, ResolvedCard>> {
   const unique = Array.from(new Set(cardIds));
-  // Phase 4: prisma.card → prisma.cardLocale (read). 메타(types/hp/supertype)는 LogicalCard 가 보유.
-  // CardLocale 행이 자체 locale 의 표시명 보유 → resolveDeckCard 입력 호환 위해 nameKo 슬롯에 name 그대로 사용.
+  // Phase 4: prisma.card → prisma.regionCard (read). 메타(types/hp/supertype)는 LogicalCard 가 보유.
+  // RegionCard 행이 자체 locale 의 표시명 보유 → resolveDeckCard 입력 호환 위해 nameKo 슬롯에 name 그대로 사용.
   const dbLocales = unique.length
-    ? await prisma.cardLocale.findMany({
+    ? await prisma.regionCard.findMany({
         where: { id: { in: unique } },
         select: {
           id: true,
@@ -444,16 +444,16 @@ export type RecipeCard = {
   /** 대표 인쇄판 썸네일 (KR>JP>EN locale 우선, 미연결 시 null) — UI-1a. */
   cardImage: string | null;
   /** 카드 상세(/cards/[id]) 링크용 대표 locale id. */
-  cardLocaleId: string | null;
+  regionCardId: string | null;
 };
 
 /** logicalCardId[] → 대표 locale 이미지/id (KR>JP>EN 우선) — 레시피·리스트 뷰어 공용 (UI-1a). */
 async function resolveLogicalCardImages(
   ids: string[],
-): Promise<Map<string, { image: string | null; cardLocaleId: string }>> {
+): Promise<Map<string, { image: string | null; regionCardId: string }>> {
   const unique = [...new Set(ids.filter(Boolean))];
   if (unique.length === 0) return new Map();
-  const locales = await prisma.cardLocale.findMany({
+  const locales = await prisma.regionCard.findMany({
     where: { logicalCardId: { in: unique } },
     select: { id: true, logicalCardId: true, region: true, imageSmall: true, imageLarge: true },
   });
@@ -464,7 +464,7 @@ async function resolveLogicalCardImages(
     arr.push(l);
     byLc.set(l.logicalCardId, arr);
   }
-  const map = new Map<string, { image: string | null; cardLocaleId: string }>();
+  const map = new Map<string, { image: string | null; regionCardId: string }>();
   for (const [lcId, arr] of byLc) {
     // 이미지 보유 우선 → 같은 조건이면 KR>JP>EN
     const best = [...arr].sort((a, b) => {
@@ -472,7 +472,7 @@ async function resolveLogicalCardImages(
       const bi = b.imageSmall ?? b.imageLarge ? 0 : 1;
       return ai - bi || (PRIORITY[a.region] ?? 9) - (PRIORITY[b.region] ?? 9);
     })[0];
-    map.set(lcId, { image: best.imageSmall ?? best.imageLarge ?? null, cardLocaleId: best.id });
+    map.set(lcId, { image: best.imageSmall ?? best.imageLarge ?? null, regionCardId: best.id });
   }
   return map;
 }
@@ -528,7 +528,7 @@ export async function getArchetypeRecipe(deckId: string): Promise<ArchetypeRecip
       isTech: !r.isCore && r.adoptionRate >= 30 && r.adoptionRate <= 70,
       isHero: r._hero,
       cardImage: resolved?.image ?? null,
-      cardLocaleId: resolved?.cardLocaleId ?? null,
+      regionCardId: resolved?.regionCardId ?? null,
     };
   };
   return {
@@ -808,7 +808,7 @@ export type TopCard = {
   logicalCardId: string;
   name: string;
   image: string | null;
-  cardLocaleId: string | null;
+  regionCardId: string | null;
   deckCount: number;
   avgAdoption: number;
 };
@@ -834,7 +834,7 @@ export async function getTopAdoptedCards(n = 10): Promise<TopCard[]> {
     logicalCardId: id,
     name: a.name,
     image: imageMap.get(id)?.image ?? null,
-    cardLocaleId: imageMap.get(id)?.cardLocaleId ?? null,
+    regionCardId: imageMap.get(id)?.regionCardId ?? null,
     deckCount: a.decks,
     avgAdoption: Math.round((a.rateSum / a.decks) * 10) / 10,
   }));
@@ -894,7 +894,7 @@ export async function getNewSetDecks(n = 5): Promise<NewSetMeta | null> {
   });
   if (recipes.length === 0) return null;
   const lcIds = [...new Set(recipes.map((r) => r.logicalCardId!))];
-  const locales = await prisma.cardLocale.findMany({
+  const locales = await prisma.regionCard.findMany({
     where: { logicalCardId: { in: lcIds }, region: "EN" },
     select: { logicalCardId: true, set: { select: { id: true, name: true, releaseDate: true } } },
   });
@@ -978,7 +978,7 @@ export type DecklistViewCard = {
   name: string;
   count: number;
   image: string | null;
-  cardLocaleId: string | null;
+  regionCardId: string | null;
 };
 
 export type StandingDecklist = {
@@ -1033,7 +1033,7 @@ export async function getStandingDecklist(standingId: string): Promise<StandingD
         name: c.name ?? "?",
         count,
         image: resolved?.image ?? null,
-        cardLocaleId: resolved?.cardLocaleId ?? null,
+        regionCardId: resolved?.regionCardId ?? null,
       };
     });
 

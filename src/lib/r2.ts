@@ -41,9 +41,9 @@ export function getR2Client(): S3Client {
  * Normal:    {cardPackId}/{language}/{size}/{setId}/{number}.{ext}
  * Collision: {cardPackId}/{language}/{size}/{setId}/{number}__{hash8}.{ext}
  *
- * Collision occurs when (setId, number) is shared across multiple CardLocale
+ * Collision occurs when (setId, number) is shared across multiple RegionCard
  * rows (e.g. parallel packs SV2D/SV2P both stored under the same logical set).
- * In that case pass cardLocaleId; hash = SHA-1(cardLocaleId)[0..7].
+ * In that case pass regionCardId; hash = SHA-1(regionCardId)[0..7].
  */
 export function r2KeyFor(
   cardPackId: string,
@@ -52,7 +52,7 @@ export function r2KeyFor(
   setId: string,
   number: string,
   ext: string,
-  cardLocaleId?: string // supply only when collision handling is needed
+  regionCardId?: string // supply only when collision handling is needed
 ): string {
   const safeGroup = cardPackId.replace(/[^a-zA-Z0-9_\-]/g, "_");
   const safeSet = setId.replace(/[^a-zA-Z0-9_\-]/g, "_");
@@ -60,8 +60,8 @@ export function r2KeyFor(
   const safeNum = number.replace(/[^a-zA-Z0-9_\-]/g, "_");
   const safeExt = ext.replace(/^\./, "").toLowerCase();
 
-  const numberPart = cardLocaleId
-    ? `${safeNum}__${sha1Prefix8(cardLocaleId)}`
+  const numberPart = regionCardId
+    ? `${safeNum}__${sha1Prefix8(regionCardId)}`
     : safeNum;
 
   return `${safeGroup}/${safeLang}/${size}/${safeSet}/${numberPart}.${safeExt}`;

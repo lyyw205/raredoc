@@ -1,5 +1,5 @@
 /**
- * JP 이미지 백필 — tcgdex 가 이미지를 제공하지 않는 JP 세트(SV11B 등)의 CardLocale 에
+ * JP 이미지 백필 — tcgdex 가 이미지를 제공하지 않는 JP 세트(SV11B 등)의 RegionCard 에
  *   pokemon-card.com(일본공식) 이미지 URL 을 번호 매칭으로 채움.
  *   LogicalCard/매핑/KR 은 일절 건드리지 않음. imageSmall/imageLarge 가 비어있는 행만 채움.
  *   이미지맵 파일 포맷: [{ number: "001", image: "https://...", jaName, ... }]
@@ -21,7 +21,7 @@ async function main() {
   const map = JSON.parse(readFileSync(file, "utf8")) as { number: string; image: string; jaName?: string }[];
   const imgByNum = new Map<number, string>(map.map((c) => [parseInt(c.number, 10), c.image]));
 
-  const rows = await prisma.cardLocale.findMany({ where: { setId },
+  const rows = await prisma.regionCard.findMany({ where: { setId },
     orderBy: { numberInt: "asc" }, select: { id: true, number: true, numberInt: true, name: true, imageSmall: true, imageLarge: true } });
   console.log(`■ ${setId}: locale ${rows.length} | 이미지맵 ${imgByNum.size} | ${APPLY ? "★적용" : "(dry)"}${FORCE ? " [force]" : ""}`);
 
@@ -31,7 +31,7 @@ async function main() {
     const img = imgByNum.get(r.numberInt!);
     if (!img) { noImg++; console.log(`  ⚠️ 이미지없음 #${r.number} ${r.name}`); continue; }
     if (sample.length < 4) sample.push(`#${r.number} ${r.name} → …/${img.split("/").pop()}`);
-    if (APPLY) await prisma.cardLocale.update({ where: { id: r.id }, data: { imageSmall: img, imageLarge: img } });
+    if (APPLY) await prisma.regionCard.update({ where: { id: r.id }, data: { imageSmall: img, imageLarge: img } });
     filled++;
   }
   console.log(`  채움 ${filled} · 이미지이미있음(skip) ${skipHas} · 맵에없음 ${noImg}`);

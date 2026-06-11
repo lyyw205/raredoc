@@ -89,7 +89,7 @@ async function scrapeSet(setDef: typeof SETS[number], sourceId: string) {
     // DB stores numbers unpadded ("1", "2"…); Bulbapedia gives zero-padded ("001").
     // Strip leading zeros for the lookup.
     const numUnpadded = String(parseInt(card.number, 10));
-    const locale = await prisma.cardLocale.findFirst({
+    const locale = await prisma.regionCard.findFirst({
       where: { setId: `jp-tcg-${setDef.setId}`, number: numUnpadded },
       select: { id: true, logicalCardId: true, name: true },
     });
@@ -128,14 +128,14 @@ async function scrapeSet(setDef: typeof SETS[number], sourceId: string) {
       create: {
         sourceId,
         externalId,
-        cardLocaleId: locale.id,
+        regionCardId: locale.id,
         logicalCardId: locale.logicalCardId,
         url: cardUrl,
         verifiedBy: "auto:scrape-l-illustrator-bulbapedia",
         confidence: 0.75,
         notes: `Bulbapedia card page. Set jp-tcg-${setDef.setId}, number ${card.number}.`,
       },
-      update: { cardLocaleId: locale.id, logicalCardId: locale.logicalCardId, url: cardUrl },
+      update: { regionCardId: locale.id, logicalCardId: locale.logicalCardId, url: cardUrl },
     });
   }
 

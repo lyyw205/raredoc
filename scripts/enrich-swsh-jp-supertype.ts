@@ -2,7 +2,7 @@
  * SwSh JP-only CardPack LogicalCard supertype 보강.
  *
  * tcgdex JP SwSh 엔드포인트는 cards 배열이 빈 배열을 반환하므로
- * CardLocale.name 기반 규칙으로 supertype 추정.
+ * RegionCard.name 기반 규칙으로 supertype 추정.
  *
  * 규칙:
  *   - name에 "エネルギー" 또는 "Energy" 포함 → Energy
@@ -85,7 +85,7 @@ async function main() {
   let skipped = 0;
 
   for (const groupId of JP_ONLY_SWSH_GROUPS) {
-    // Get all CardLocale + LogicalCard for this group where supertype is null
+    // Get all RegionCard + LogicalCard for this group where supertype is null
     const sets = await prisma.set.findMany({
       where: { cardPackId: groupId },
       select: { id: true, cardCount: true, region: true },
@@ -95,14 +95,14 @@ async function main() {
     const jpSet = sets.find(s => s.region === "JP");
     const officialCount = jpSet?.cardCount ?? 100;
 
-    // Get LogicalCards needing supertype via JP CardLocales
+    // Get LogicalCards needing supertype via JP RegionCards
     const jpSetIds = sets.filter(s => s.region === "JP").map(s => s.id);
     if (jpSetIds.length === 0) {
       console.log(`  ⚠ ${groupId}: JP set 없음 — skip`);
       continue;
     }
 
-    const locales = await prisma.cardLocale.findMany({
+    const locales = await prisma.regionCard.findMany({
       where: {
         setId: { in: jpSetIds },
         logicalCard: { supertype: null },

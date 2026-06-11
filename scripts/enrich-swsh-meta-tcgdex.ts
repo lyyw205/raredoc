@@ -1,7 +1,7 @@
 /**
  * SwSh era LogicalCard 메타를 tcgdex EN 엔드포인트에서 보강.
  *
- * 매칭 전략: EN tcgdex localId(number) → EN DB CardLocale → LogicalCard
+ * 매칭 전략: EN tcgdex localId(number) → EN DB RegionCard → LogicalCard
  * SwSh sets: swsh1~swsh12pt5, swshp, swsh35, swsh45, swsh45sv, cel25, cel25c, pgo
  *            swsh9tg, swsh10tg, swsh11tg, swsh12tg, swsh12pt5gg
  *
@@ -132,7 +132,7 @@ async function main() {
 
       let lc = await prisma.logicalCard.findUnique({ where: { id: lcId } });
       if (!lc) {
-        const locale = await prisma.cardLocale.findUnique({
+        const locale = await prisma.regionCard.findUnique({
           where: { id: enLocaleId },
           select: { logicalCardId: true },
         });
@@ -176,13 +176,13 @@ async function main() {
           sourceId: source.id,
           externalId: `${c.id}::en-${dbSetId}`,
           logicalCardId: lc.id,
-          cardLocaleId: enLocaleId,
+          regionCardId: enLocaleId,
           url: `https://api.tcgdex.net/v2/en/cards/${c.id}`,
           verifiedBy: "auto:enrich-swsh-meta-tcgdex",
           confidence: 0.90,
           notes: `EN tcgdex ${c.id} mapped to EN ${dbSetId} by number ${c.localId}`,
         },
-        update: { logicalCardId: lc.id, cardLocaleId: enLocaleId },
+        update: { logicalCardId: lc.id, regionCardId: enLocaleId },
       });
       totalMap++;
     }

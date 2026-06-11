@@ -33,7 +33,7 @@ export default async function CollectionBookPage({
 
   const user = await getCurrentUser();
 
-  // 새 ERD: Set + CardLocale + LogicalCard.rarity 조인.
+  // 새 ERD: Set + RegionCard + LogicalCard.rarity 조인.
   const dbSet = await prisma.set
     .findUnique({
       where: { id: setId },
@@ -64,7 +64,7 @@ export default async function CollectionBookPage({
     }
   }
 
-  // ── DB 경로: CardLocale 이 있으면 새 ERD 로 렌더 ──
+  // ── DB 경로: RegionCard 이 있으면 새 ERD 로 렌더 ──
   if (dbSet && dbSet.localeCards.length > 0) {
     const bookCards = dbSet.localeCards.map((card) => {
       const own = owned.get(card.id);

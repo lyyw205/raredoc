@@ -24,7 +24,7 @@ model Set {
   cardPack    CardPack?   @relation(fields: [cardPackId], references: [id])
   tierEntries TierEntry[]
   primarySetForLogical LogicalCard[] @relation("LogicalCardPrimarySet")
-  localeCards          CardLocale[]  @relation("CardLocaleSet")
+  localeCards          RegionCard[]  @relation("CardLocaleSet")
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 
@@ -57,8 +57,8 @@ model CardPack {
 
 model Price {
   id           String       @id @default(cuid())
-  cardLocaleId String
-  cardLocale   CardLocale   @relation("PriceCardLocale", fields: [cardLocaleId], references: [id], onDelete: Cascade)
+  regionCardId String       @map("cardLocaleId")
+  regionCard   RegionCard   @relation("PriceCardLocale", fields: [regionCardId], references: [id], onDelete: Cascade)
   sourceId     String?
   priceSource  PriceSource? @relation("PricePriceSource", fields: [sourceId], references: [id])
   normal       Float?
@@ -73,7 +73,7 @@ model Price {
   grade        Int?
   recordedAt   DateTime     @default(now())
 
-  @@index([cardLocaleId])
+  @@index([regionCardId], map: "Price_cardLocaleId_idx")
   @@index([recordedAt])
   @@index([sourceId])
 }
@@ -98,7 +98,7 @@ model TierEntry {
 
 model Trade {
   id            String      @id @default(cuid())
-  localeId      String // CardLocale.id — 실제 거래된 지역판
+  localeId      String // RegionCard.id — 실제 거래된 지역판
   logicalCardId String // LogicalCard.id — 시장 분석 dedupe
   soldAt        DateTime
   priceHighUsd  Float
@@ -107,7 +107,7 @@ model Trade {
   saleCount     Int         @default(1)
   tier          String      @default("NEAR_MINT")
   source        String      @default("poketrace")
-  locale        CardLocale  @relation("TradeLocale", fields: [localeId], references: [id])
+  locale        RegionCard  @relation("TradeLocale", fields: [localeId], references: [id])
   logicalCard   LogicalCard @relation("TradeLogicalCard", fields: [logicalCardId], references: [id])
   createdAt     DateTime    @default(now())
 
@@ -193,7 +193,7 @@ model VerificationToken {
 model CollectionItem {
   id            String         @id @default(cuid())
   userId        String
-  localeId      String // CardLocale.id — 실제 보유 지역판
+  localeId      String // RegionCard.id — 실제 보유 지역판
   logicalCardId String // LogicalCard.id — SetGroup-level 카운트(랭킹/도감 dedupe)
   grade         String // NM/LP/MP/HP/VNDS/DS/미개봉/1착
   certified     Boolean        @default(false)
@@ -201,7 +201,7 @@ model CollectionItem {
   forSale       Boolean        @default(false)
   highlightSlot Int? // 1..5 (프로필 하이라이트). null = 비표시
   user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  locale        CardLocale     @relation("CollectionItemLocale", fields: [localeId], references: [id])
+  locale        RegionCard     @relation("CollectionItemLocale", fields: [localeId], references: [id])
   logicalCard   LogicalCard    @relation("CollectionItemLogicalCard", fields: [logicalCardId], references: [id])
   certification Certification?
   listing       Listing?
@@ -745,8 +745,8 @@ model MarketStat {
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Phase 1 — 카드 중심 ERD 전환 (additive only; 기존 모델 무변경)
-//   - LogicalCard: 언어 중립 인쇄본 정체성. Phase 4 에서 기존 Card→CardLocale rename 후 이 모델을 Card 로 rename.
-//   - CardLocale: 지역별(언어/지역) 표시 데이터. Phase 2 에서 기존 Card 행을 복사 백필.
+//   - LogicalCard: 언어 중립 인쇄본 정체성. Phase 4 에서 기존 Card→RegionCard rename 후 이 모델을 Card 로 rename.
+//   - RegionCard: 지역별(언어/지역) 표시 데이터. Phase 2 에서 기존 Card 행을 복사 백필.
 //   - Rarity / PriceSource: 마스터 데이터.
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -783,7 +783,7 @@ model LogicalCard {
   abilitiesKo      Json? // [{ name, text, type }] 한국어
   rulesKo          String[]
   flavorTextKo     String?
-  locales          CardLocale[]
+  locales          RegionCard[]
   texts            CardText[] // Phase 7: 언어별 표시 텍스트 오버레이(옵션 C). 향후 *Ko 컬럼 이관 대상.
   // Phase 5 신규 역관계
   collectionItems  CollectionItem[] @relation("CollectionItemLogicalCard")
@@ -804,7 +804,7 @@ model LogicalCard {
   @@index([gameCardId])
 }
 
-model CardLocale {
+model RegionCard {
   id            String      @id // = 기존 Card.id (호환 유지)
   logicalCardId String
   logicalCard   LogicalCard @relation(fields: [logicalCardId], references: [id])
@@ -846,14 +846,16 @@ model CardLocale {
   @@index([setId])
   @@index([region])
   @@index([rarityId])
+
+  @@map("CardLocale")
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Phase 7 — 언어별 표시 텍스트 오버레이 (옵션 C)
-//   - "물리 발매판"(CardLocale)과 분리된 "번역/표시 텍스트" 축.
+//   - "물리 발매판"(RegionCard)과 분리된 "번역/표시 텍스트" 축.
 //   - (logicalCardId, language) 유일. 한국인 기반 사이트라 ko 우선 노출, en/ja 는 "원문 보기" 토글.
 //   - source 로 우선순위 표현: 공식 한국판 > 나무위키/포켓몬도감 > 자동번역.
-//   - KR 발매판 없어도 ko 텍스트 보유 가능(번역으로 채움) → CardLocale 의존 끊음.
+//   - KR 발매판 없어도 ko 텍스트 보유 가능(번역으로 채움) → RegionCard 의존 끊음.
 //   - LogicalCard.nameKo/attacksKo/abilitiesKo/rulesKo/flavorTextKo 를 일반화.
 //     백필·읽기 이관 완료 후 그 컬럼들 제거 예정(이번엔 additive, 무중단).
 // ─────────────────────────────────────────────────────────────────────────────
@@ -904,7 +906,7 @@ model Rarity {
   categoryId String?
   category   RarityCategory? @relation(fields: [categoryId], references: [id])
   cards      LogicalCard[]
-  localeCards CardLocale[]   @relation("RarityLocale") // P4: art메타 하강(인쇄본별 rarity)
+  localeCards RegionCard[]   @relation("RarityLocale") // P4: art메타 하강(인쇄본별 rarity)
 
   @@index([categoryId])
 }
@@ -952,7 +954,7 @@ model ExternalIdMapping {
   sourceId      String
   externalId    String // 사이트 쪽 식별자 (productId/CardNum/poketraceId/…)
   // 매핑 대상 — 정확히 하나만 채움 (앱 레벨 검증)
-  cardLocaleId  String?
+  regionCardId  String?    @map("cardLocaleId")
   logicalCardId String?
   setId         String?
   cardPackId    String?    @map("setGroupId")
@@ -962,13 +964,13 @@ model ExternalIdMapping {
   confidence    Float           @default(1.0) // 0..1
   notes         String?
   source        ExternalSource  @relation(fields: [sourceId], references: [id], onDelete: Cascade)
-  cardLocale    CardLocale?     @relation("ExternalIdMappingLocale", fields: [cardLocaleId], references: [id], onDelete: Cascade)
+  regionCard    RegionCard?     @relation("ExternalIdMappingLocale", fields: [regionCardId], references: [id], onDelete: Cascade)
   logicalCard   LogicalCard?    @relation("ExternalIdMappingLogicalCard", fields: [logicalCardId], references: [id], onDelete: Cascade)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
 
   @@unique([sourceId, externalId])
-  @@index([cardLocaleId])
+  @@index([regionCardId], map: "ExternalIdMapping_cardLocaleId_idx")
   @@index([logicalCardId])
   @@index([setId])
   @@index([cardPackId], map: "ExternalIdMapping_setGroupId_idx")

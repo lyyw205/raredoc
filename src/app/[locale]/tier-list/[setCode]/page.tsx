@@ -31,11 +31,11 @@ export default async function SetTierListPage({
   const tl = await loadTierList(setCode);
   if (!tl) notFound();
 
-  // 표시 데이터(name/image/rarity)는 DB CardLocale 로 enrich, 미발견 시 YAML 폴백.
+  // 표시 데이터(name/image/rarity)는 DB RegionCard 로 enrich, 미발견 시 YAML 폴백.
   // tier/reason 은 YAML 큐레이션 그대로 사용.
   const entryIds = tl.entries.map((e) => e.cardId);
   const locales = entryIds.length
-    ? await prisma.cardLocale.findMany({
+    ? await prisma.regionCard.findMany({
         where: { id: { in: Array.from(new Set(entryIds)) } },
         include: { logicalCard: { include: { rarity: true } }, set: true },
       })
@@ -46,7 +46,7 @@ export default async function SetTierListPage({
     if (!db) return { ...e, rarity: null as string | null };
     return {
       ...e,
-      // locale=ko 면 한국어 우선: CardLocale.name 자체가 해당 locale 표시명.
+      // locale=ko 면 한국어 우선: RegionCard.name 자체가 해당 locale 표시명.
       // 기존 YAML 의 name/nameKo 는 폴백용으로 유지.
       name: db.name,
       nameKo: db.name,

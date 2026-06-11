@@ -45,7 +45,7 @@ async function main() {
   const unknown = setIds.filter((s) => !SETMAP[s]);
   if (unknown.length) { console.error("SETMAP 미등록:", unknown.join(", ")); process.exit(1); }
 
-  const rows = await prisma.cardLocale.findMany({
+  const rows = await prisma.regionCard.findMany({
     where: { setId: { in: setIds } },
     select: { id: true, setId: true, number: true, name: true, imageSmall: true, imageLarge: true },
     orderBy: [{ setId: "asc" }, { numberInt: "asc" }],

@@ -16,7 +16,7 @@ async function main() {
   console.log(`fill-jp-image-urls start${DRY_RUN ? " [DRY RUN]" : ""}`);
 
   // 대상 카드: imageSmall NULL, imageLarge NOT NULL
-  const cards = await prisma.cardLocale.findMany({
+  const cards = await prisma.regionCard.findMany({
     where: {
       language: "ja",
       imageSmall: null,
@@ -49,7 +49,7 @@ async function main() {
       continue;
     }
 
-    await prisma.cardLocale.update({
+    await prisma.regionCard.update({
       where: { id: card.id },
       data: { imageSmall: smallUrl },
     });
@@ -63,7 +63,7 @@ async function main() {
 
   // Final count check
   if (!DRY_RUN) {
-    const stillMissing = await prisma.cardLocale.count({
+    const stillMissing = await prisma.regionCard.count({
       where: { language: "ja", imageSmall: null },
     });
     console.log(`\nJP imageSmall still NULL after update: ${stillMissing}`);

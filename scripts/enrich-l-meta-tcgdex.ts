@@ -77,7 +77,7 @@ async function main() {
 
     for (const c of sum.cards) {
       // DB setId is uppercase: L1a, L1b, L2, LL, L3
-      // tcgdex localId e.g. "001" — our CardLocale id: jp-tcg-L1a-001 or jp-tcg-L1a-1
+      // tcgdex localId e.g. "001" — our RegionCard id: jp-tcg-L1a-001 or jp-tcg-L1a-1
       const numPadded = c.localId.padStart(3, "0");
       const ourLocaleIdPadded = `jp-tcg-${setId}-${numPadded}`;
       const ourLocaleIdUnpadded = `jp-tcg-${setId}-${parseInt(c.localId, 10)}`;

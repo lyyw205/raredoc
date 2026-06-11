@@ -35,7 +35,7 @@ async function main() {
   // 보면 base카드 EN을 orphan으로 착각해 시크릿 앵커로 도둑질한다(§59 실측: S10P#22 펄기아V·
   // S10D#52 이브이 등 4장 EN 강탈→보존가드 적발·롤백). 그래서 **그 LC 에 JP 로케일이 없는
   // 진짜 EN-only orphan** 으로 한정한다(JP 보유 = 이미 어떤 JP카드의 EN이므로 건드리면 안 됨).
-  const orphans = await prisma.cardLocale.findMany({
+  const orphans = await prisma.regionCard.findMany({
     where: { region: "EN", setId: { in: enSets },
       logicalCard: { supertype: "Pokémon", locales: { none: { region: "JP" } } } },
     select: { id: true, setId: true, number: true, numberInt: true, name: true,
@@ -75,7 +75,7 @@ async function main() {
 
   if (APPLY) {
     let n = 0;
-    for (const l of links) { await prisma.cardLocale.update({ where: { id: l.id }, data: { logicalCardId: l.to } }); if (++n % 25 === 0) console.log(`  …${n}/${links.length}`); }
+    for (const l of links) { await prisma.regionCard.update({ where: { id: l.id }, data: { logicalCardId: l.to } }); if (++n % 25 === 0) console.log(`  …${n}/${links.length}`); }
     console.log(`★ ${n}건 연결 적용 완료.`);
   } else console.log("(dry — --apply 로 적용)");
   await prisma.$disconnect();

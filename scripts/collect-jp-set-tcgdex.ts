@@ -1,8 +1,8 @@
 /**
- * JP 세트 from-scratch 수집 — tcgdex(ja) 에서 LogicalCard+CardLocale 신규 생성. (JP 데이터가 통째로 없는 팩용)
+ * JP 세트 from-scratch 수집 — tcgdex(ja) 에서 LogicalCard+RegionCard 신규 생성. (JP 데이터가 통째로 없는 팩용)
  * 각 카드: supertype·subtypes(stage+suffix/trainerType)·dex(dexId or PokeAPI ja폴백)·illustrator·hp·types·
  *   retreat·evolveFrom·rarity·image 적재. LC 는 JP 앵커(primarySetId/primaryNumber=이 세트).
- * 멱등: 이미 있는 CardLocale id 는 skip. EN/KR 병합은 이후 단계(merge-group-apply / apply-kr-official)에서.
+ * 멱등: 이미 있는 RegionCard id 는 skip. EN/KR 병합은 이후 단계(merge-group-apply / apply-kr-official)에서.
  *
  * 실행: npx tsx scripts/collect-jp-set-tcgdex.ts <jpSetId> <tcgId> [--apply]
  *   예: npx tsx scripts/collect-jp-set-tcgdex.ts jp-sv-paldean-fates SV4a --apply
@@ -49,7 +49,7 @@ async function main() {
   console.log(`■ ${jpSet} ← tcgdex:${tcgId}(ja) | 카드목록 ${list.length} ${APPLY ? "★APPLY" : "(dry)"}`);
   if (!list.length) { console.error("카드목록 비어있음"); await prisma.$disconnect(); return; }
 
-  const existing = new Set((await prisma.cardLocale.findMany({ where: { setId: jpSet }, select: { id: true } })).map((r) => r.id));
+  const existing = new Set((await prisma.regionCard.findMany({ where: { setId: jpSet }, select: { id: true } })).map((r) => r.id));
   let made = 0, skip = 0, fail = 0, dexTcg = 0, dexJa = 0, dexNone = 0, rarNone = 0; const sample: string[] = [];
   for (const c of list) {
     const cid = `${jpSet}-${c.localId}`;
@@ -74,7 +74,7 @@ async function main() {
         retreatCost: d.retreat ?? undefined, evolvesFrom: d.evolveFrom ?? undefined, rarityId: rarId,
         primarySetId: jpSet, primaryNumber: c.localId, primaryNumberInt: numInt ?? undefined,
       } });
-      await prisma.cardLocale.create({ data: {
+      await prisma.regionCard.create({ data: {
         id: cid, logicalCardId: lcId, region: "JP", language: "ja", setId: jpSet,
         number: c.localId, numberInt: numInt ?? undefined, name: d.name, imageSmall: imgS, imageLarge: img,
       } });

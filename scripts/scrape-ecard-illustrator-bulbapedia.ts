@@ -2,7 +2,7 @@
  * E1~5 + VS1 + web1 카드의 LogicalCard.illustrator 를 Bulbapedia 에서 수집.
  * VS1 은 tcgplayer-cdn 403 오류 카드의 이미지를 Supabase 로 대체.
  *
- * 매칭 전략: Bulbapedia 테이블의 "No." 컬럼(예: 001/128) → CardLocale.number
+ * 매칭 전략: Bulbapedia 테이블의 "No." 컬럼(예: 001/128) → RegionCard.number
  * (row-index 매칭은 PMCG5/6 오염 사고를 재현하므로 금지)
  *
  * 라이선스: Bulbapedia CC BY-NC-SA 2.5 — 출처 표시 필수, 상업 사용 제한.
@@ -211,7 +211,7 @@ async function scrapeSet(
 
   for (const card of cards) {
     // Match by set + number (safe, avoids row-index misalignment)
-    const locale = await prisma.cardLocale.findFirst({
+    const locale = await prisma.regionCard.findFirst({
       where: { setId: `jp-tcg-${set.setId}`, number: card.number },
       select: { id: true, imageSmall: true, logicalCardId: true, name: true },
     });
@@ -278,7 +278,7 @@ async function scrapeSet(
       create: {
         sourceId: source.id,
         externalId,
-        cardLocaleId: locale.id,
+        regionCardId: locale.id,
         logicalCardId: locale.logicalCardId,
         url: cardUrl,
         verifiedBy: "auto:scrape-ecard",
@@ -286,7 +286,7 @@ async function scrapeSet(
         notes: `Bulbapedia card page. Set jp-tcg-${set.setId}, number ${card.number}.`,
       },
       update: {
-        cardLocaleId: locale.id,
+        regionCardId: locale.id,
         logicalCardId: locale.logicalCardId,
         url: cardUrl,
       },
@@ -329,7 +329,7 @@ async function scrapeSet(
         continue;
       }
 
-      await prisma.cardLocale.update({
+      await prisma.regionCard.update({
         where: { id: locale.id },
         data: { imageSmall: publicUrl, imageLarge: publicUrl },
       });

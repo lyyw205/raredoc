@@ -23,7 +23,7 @@ const REGION_ORDER: Record<string, number> = { KR: 0, JP: 1, EN: 2 };
 // ── 카탈로그 카드 타입 (DB → 그리드 표시용) ──────────────────────────────────
 
 type CatalogCard = {
-  id: string;             // = CardLocale.id (URL용)
+  id: string;             // = RegionCard.id (URL용)
   logicalCardId: string;  // dedupe용
   name: string;           // locale 이름 (KR 우선)
   nameSub: string | null; // 보조 이름 (다른 로케일)
@@ -46,10 +46,10 @@ async function loadCards(params: {
   sort?: string;
   adoptionMap: Map<string, CardAdoption>;
 }): Promise<{ cards: CatalogCard[]; adoptionActive: boolean }> {
-  const where: Prisma.CardLocaleWhereInput = {};
+  const where: Prisma.RegionCardWhereInput = {};
   if (params.region && params.region !== "all") where.region = params.region;
 
-  // rarity → CardLocale 직접(P4a, diff=0). types/illustrator 는 ArtCard 폼변종 over-merge 미해결로 LC 직독 유지.
+  // rarity → RegionCard 직접(P4a, diff=0). types/illustrator 는 ArtCard 폼변종 over-merge 미해결로 LC 직독 유지.
   if (params.rarity && params.rarity !== "all")
     where.rarity = { code: params.rarity };
 
@@ -69,10 +69,10 @@ async function loadCards(params: {
   }
 
   // DB 조회 — 메타 조인. 정렬은 후처리(set.releaseDate, locale.numberInt).
-  const rows = await prisma.cardLocale.findMany({
+  const rows = await prisma.regionCard.findMany({
     where,
     include: {
-      // P4a: rarity 는 CardLocale 직접(diff=0). 표시는 새층 우선, LC 폴백.
+      // P4a: rarity 는 RegionCard 직접(diff=0). 표시는 새층 우선, LC 폴백.
       rarity: { select: { code: true } },
       logicalCard: {
         include: {

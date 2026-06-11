@@ -84,7 +84,7 @@ async function main() {
 
   let totalOk = 0, totalSkip = 0, totalFail = 0;
   for (const setId of setsToRun) {
-    const cards = await prisma.cardLocale.findMany({
+    const cards = await prisma.regionCard.findMany({
       where: {
         id: { startsWith: `jp-tcg-${setId}-` },
         imageSmall: { startsWith: "https://archives.bulbagarden.net/" },
@@ -113,7 +113,7 @@ async function main() {
         await unlink(localPath).catch(() => {});
         continue;
       }
-      await prisma.cardLocale.update({
+      await prisma.regionCard.update({
         where: { id: card.id },
         data: { imageSmall: publicUrl, imageLarge: publicUrl },
       });

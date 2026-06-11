@@ -1,7 +1,7 @@
 /**
  * LimitlessTCG 수집 JSON 으로 JP 세트를 신규 생성 — tcgdex·pokemon-card.com 둘 다 없는 구 SWSH 본세트용
- *   (예 로스트어비스 jp-tcg-S11). Set + CardLocale(JP) + LogicalCard(orphan) 생성.
- *   기존 jp-tcg-* 규칙: CardLocale id=`{setId}-{NNN}`, LC id=`lc-orphan-{setId}-{NNN}`, primarySetId=setId.
+ *   (예 로스트어비스 jp-tcg-S11). Set + RegionCard(JP) + LogicalCard(orphan) 생성.
+ *   기존 jp-tcg-* 규칙: RegionCard id=`{setId}-{NNN}`, LC id=`lc-orphan-{setId}-{NNN}`, primarySetId=setId.
  *   supertype/subtypes(stage)/dex(jaName)/illustrator/rarity/image 채움. dex 폼접두어(かがやく/ヒスイ/ガラル/アローラ/パルデア) strip.
  *   rarity: limitless 영문명=Rarity.code 직매핑, "Secret Rare"는 null(KR backfill 로 정밀화).
  *
@@ -58,9 +58,9 @@ async function main() {
     await prisma.set.create({ data: { id: setId, name, nameKo: nameKo ?? null, nameJa: name, series: "剣と盾", ...(release ? { releaseDate: new Date(release + "T00:00:00.000Z") } : {}), cardCount: cards.length, region: "JP", code: code ?? null, cardPackId: group } as any });
     for (const o of ops) {
       await prisma.logicalCard.create({ data: { id: o.lcId, primarySetId: setId, primaryNumber: o.NNN, supertype: o.c.supertype, subtypes: o.subtypes, pokedexNumbers: o.dex != null ? [o.dex] : [], illustrator: o.c.illustrator ?? null, rarityId: o.rarId } });
-      await prisma.cardLocale.create({ data: { id: o.locId, setId, region: "JP", language: "ja", number: o.NNN, numberInt: o.numInt, name: o.c.jaName, imageSmall: o.c.image ?? null, imageLarge: o.c.image ?? null, logicalCardId: o.lcId } });
+      await prisma.regionCard.create({ data: { id: o.locId, setId, region: "JP", language: "ja", number: o.NNN, numberInt: o.numInt, name: o.c.jaName, imageSmall: o.c.image ?? null, imageLarge: o.c.image ?? null, logicalCardId: o.lcId } });
     }
-    console.log(`  ✅ Set + ${ops.length} LC + ${ops.length} CardLocale 생성`);
+    console.log(`  ✅ Set + ${ops.length} LC + ${ops.length} RegionCard 생성`);
   } else console.log("(dry) 적용: --apply");
   await prisma.$disconnect();
 }

@@ -3,16 +3,16 @@
  *
  * 출처: api.poketrace.com — TCGPlayer NEAR_MINT avg (USD).
  * 매핑:
- *   세트: PokeTrace set.slug → raredoc Set.id (EN CardLocale 있는 세트만 대상)
+ *   세트: PokeTrace set.slug → raredoc Set.id (EN RegionCard 있는 세트만 대상)
  *         1순위: ExternalIdMapping 캐시(sourceCode='poketrace', setId)
  *         2순위: slug 직접 Set.id 조회
  *         3순위: slug 정규화 vs Set.id 정규화 일치
  *         4순위: name fuzzy (소문자 normalize, 양방향 포함)
  *         — 이름 중복(bw1/en-tcg-bw1)은 짧은 ID 우선(pokemontcg.io 호환)
- *   카드: PokeTrace cardNumber("001/102") → numberInt(1) → CardLocale.numberInt
+ *   카드: PokeTrace cardNumber("001/102") → numberInt(1) → RegionCard.numberInt
  *         numberInt 고유 1건만 채택, 복수=모호→skip(추측 금지)
  * 적재: Price (sourceId=PriceSource 'poketrace', condition='NEAR_MINT', currency='USD', marketPrice=avg)
- *       같은 (cardLocaleId, sourceId) 오늘자 행 update-or-create (멱등).
+ *       같은 (regionCardId, sourceId) 오늘자 행 update-or-create (멱등).
  * 매핑 캐시: ExternalIdMapping(sourceId=poketrace ExternalSource.id, externalId=ptSetSlug, setId=rdSetId)
  *
  * 실행(단독):
@@ -148,7 +148,7 @@ async function buildRdSetIndex(): Promise<{
   byNormId: Map<string, RdSetEntry>;
   byNormName: Map<string, RdSetEntry>;
 }> {
-  const enGroups = await prisma.cardLocale.groupBy({
+  const enGroups = await prisma.regionCard.groupBy({
     by: ["setId"],
     where: { region: "EN" },
   });
@@ -347,13 +347,13 @@ export async function run(opts: PTOptions = {}): Promise<SyncResult> {
     }
     setsMapped++;
 
-    // raredoc EN cardLocale 조회
-    const locales = await prisma.cardLocale.findMany({
+    // raredoc EN regionCard 조회
+    const locales = await prisma.regionCard.findMany({
       where: { setId: rdSetId, region: "EN" },
       select: { id: true, numberInt: true },
     });
     if (!locales.length) {
-      r.warnings.push(`[${ptSet.slug}→${rdSetId}] EN CardLocale 0건 — skip`);
+      r.warnings.push(`[${ptSet.slug}→${rdSetId}] EN RegionCard 0건 — skip`);
       continue;
     }
 

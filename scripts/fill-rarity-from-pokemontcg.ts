@@ -1,10 +1,10 @@
 /**
- * rarityId=NULL 인 LogicalCard 중 EN CardLocale 보유 카드를 pokemontcg.io API 로 보강.
+ * rarityId=NULL 인 LogicalCard 중 EN RegionCard 보유 카드를 pokemontcg.io API 로 보강.
  *
  * 실행: npx tsx scripts/fill-rarity-from-pokemontcg.ts
  *
  * 전략:
- *   1) EN CardLocale.id → pokemontcg.io GET /v2/cards/{id}
+ *   1) EN RegionCard.id → pokemontcg.io GET /v2/cards/{id}
  *   2) card.rarity 텍스트 → Rarity.nameEn ILIKE 매칭 → rarityId update
  *   3) 실패 시 Rarity.code ILIKE 매칭 재시도
  *   4) 둘 다 실패 → followup-plans.md append (신규 Rarity 생성 금지)
@@ -26,16 +26,16 @@ const BATCH = 20;   // pokemontcg.io rate-limit 대비 배치 크기
 const DELAY = 300;  // ms between batches
 
 // en-tcg-xy0-001 → xy0-1 (pokemontcg.io 형식)
-function toApiId(cardLocaleId: string): string {
+function toApiId(regionCardId: string): string {
   // 접두사 en-tcg- 제거
-  let id = cardLocaleId.replace(/^en-tcg-/, "");
+  let id = regionCardId.replace(/^en-tcg-/, "");
   // 마지막 숫자 세그먼트의 leading zero 제거: xy0-001 → xy0-1
   id = id.replace(/-0*(\d+[A-Za-z]?)$/, (_, n) => `-${n}`);
   return id;
 }
 
-async function fetchCard(cardLocaleId: string): Promise<{ rarity?: string } | null> {
-  const apiId = toApiId(cardLocaleId);
+async function fetchCard(regionCardId: string): Promise<{ rarity?: string } | null> {
+  const apiId = toApiId(regionCardId);
   const args = [
     "-s", "-m", "10",
     ...(API_KEY ? ["-H", `X-Api-Key: ${API_KEY}`] : []),
@@ -67,7 +67,7 @@ async function appendFollowup(lines: string[]) {
 pokemontcg.io 에서 rarity 텍스트를 가져왔으나 Rarity 마스터 매칭 실패 (신규 row 생성 금지 정책).
 수동 검토 후 Rarity 마스터에 row 추가하거나 코드 매핑에 추가 필요.
 
-| LogicalCard ID | EN CardLocale | era | rarity 텍스트 |
+| LogicalCard ID | EN RegionCard | era | rarity 텍스트 |
 |---|---|---|---|
 ${lines.join("\n")}
 

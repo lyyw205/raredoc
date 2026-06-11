@@ -46,7 +46,7 @@ async function main() {
     const off = JSON.parse(readFileSync(`data/kr-official/kr-official-${code}.json`, "utf8"));
     const detailByNum = new Map<number, string>(off.map((c: any) => [parseInt(c.number, 10), c.detailId]));
     // KR locale = JP 앵커 LC. rarityId null 인 것만.
-    const kr = await prisma.cardLocale.findMany({ where: { setId: krSet }, orderBy: { numberInt: "asc" },
+    const kr = await prisma.regionCard.findMany({ where: { setId: krSet }, orderBy: { numberInt: "asc" },
       select: { number: true, numberInt: true, name: true, logicalCardId: true, logicalCard: { select: { rarityId: true } } } });
     const todo = kr.filter((r) => !r.logicalCard.rarityId);
     console.log(`\n■ ${krSet}: 레어도 null ${todo.length}/${kr.length} ${APPLY ? "★적용" : "(dry)"}`);

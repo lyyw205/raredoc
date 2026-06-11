@@ -27,7 +27,7 @@ async function main() {
   const anchors = d.anchors.filter((a: any) => a.en); // EN 붙은 앵커만 검증
 
   const ids = [...new Set(anchors.flatMap((a: any) => [a.jp.id, a.en.id]))] as string[];
-  const locs = await prisma.cardLocale.findMany({ where: { id: { in: ids } },
+  const locs = await prisma.regionCard.findMany({ where: { id: { in: ids } },
     select: { id: true, region: true, setId: true, name: true, number: true, logicalCard: { select: { hp: true, types: true, retreatCost: true, supertype: true } } } });
   const byId = new Map(locs.map((l) => [l.id, l]));
   const setIds = [...new Set(locs.map((l) => l.setId))];

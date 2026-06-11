@@ -16,7 +16,7 @@ async function main() {
     d1 += n; console.log(`   ${t}: ${n}${n ? " 🔴" : ""}`);
   }
   // 2) dangling locale 참조
-  console.log("[2] dangling locale 참조 (CardLocale 부재):");
+  console.log("[2] dangling locale 참조 (RegionCard 부재):");
   let d2 = 0;
   for (const [t, col] of [["Price", "cardLocaleId"], ["Trade", "localeId"], ["CollectionItem", "localeId"], ["ExternalIdMapping", "cardLocaleId"]] as [string, string][]) {
     const n = await c(`SELECT count(*)::int c FROM "${t}" x WHERE x."${col}" IS NOT NULL AND NOT EXISTS (SELECT 1 FROM "CardLocale" l WHERE l.id=x."${col}")`);
@@ -46,7 +46,7 @@ async function main() {
   const pr = await c(`SELECT count(*)::int c FROM "Price"`);
   const gc = await c(`SELECT count(*)::int c FROM "GameCard"`);
   const ac = await c(`SELECT count(*)::int c FROM "ArtCard"`);
-  console.log(`[6] 총계 — LC ${lc} · CardLocale ${cl} · Price ${pr} · GameCard ${gc} · ArtCard ${ac}`);
+  console.log(`[6] 총계 — LC ${lc} · RegionCard ${cl} · Price ${pr} · GameCard ${gc} · ArtCard ${ac}`);
 
   console.log(`\n${d1 + orphanGC + orphanAC + d2 === 0 ? "✅ 무결성 통과 (dangling/고아 0)" : "🔴 무결성 위반 발견"}`);
   await prisma.$disconnect();

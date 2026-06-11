@@ -75,7 +75,7 @@ async function aggregateUser(userId: string): Promise<UserAgg> {
       locale: {
         select: {
           setId: true,
-          // P7: rarity 를 CardLocale(인쇄본별, P4a 복제)에서 읽음 — 구 logicalCard.rarity 와 동치.
+          // P7: rarity 를 RegionCard(인쇄본별, P4a 복제)에서 읽음 — 구 logicalCard.rarity 와 동치.
           rarity: { select: { code: true, nameKo: true, nameEn: true } },
           prices: {
             orderBy: { recordedAt: "desc" },

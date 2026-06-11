@@ -6,7 +6,7 @@
  *   (jp-tcg-SV2P 등, 한 번호 1장)에 직접 적재하므로 충돌이 원천 불가능.
  *
  * 채우는 LogicalCard 필드: supertype·subtypes·pokedexNumbers·illustrator·hp·types·
- *   retreatCost·evolvesFrom·rarityId. (CardLocale 의 name/number 는 정확하므로 미변경,
+ *   retreatCost·evolvesFrom·rarityId. (RegionCard 의 name/number 는 정확하므로 미변경,
  *   imageLarge/Small 은 비어있을 때만 채움)
  * dex: tcgdex dexId 우선, 없으면 PokeAPI ja(카타카나) 이름→dex 폴백(표준 매핑표).
  * rarity: tcgdex rarity 텍스트(영문) → Rarity.nameEn/nameJa 매칭.
@@ -91,7 +91,7 @@ async function main() {
 
   for (const dbSetId of targets) {
     const tcgId = SPLIT[dbSetId];
-    const cards = await prisma.cardLocale.findMany({ where: { setId: dbSetId }, orderBy: { numberInt: "asc" },
+    const cards = await prisma.regionCard.findMany({ where: { setId: dbSetId }, orderBy: { numberInt: "asc" },
       select: { id: true, number: true, name: true, logicalCardId: true, imageLarge: true, imageSmall: true } });
     console.log(`\n─── ${dbSetId} ← tcgdex:${tcgId}(ja) · ${cards.length}장 · ${APPLY ? "★APPLY" : "dry"} ───`);
     let ok = 0, failFetch = 0, dexTcg = 0, dexJa = 0, dexNone = 0, rarNone = 0, sample = 0;
@@ -128,7 +128,7 @@ async function main() {
       if (APPLY && cl.logicalCardId && Object.keys(update).length) {
         await prisma.logicalCard.update({ where: { id: cl.logicalCardId }, data: update });
         if ((!cl.imageLarge || !cl.imageSmall) && d.image) {
-          await prisma.cardLocale.update({ where: { id: cl.id }, data: {
+          await prisma.regionCard.update({ where: { id: cl.id }, data: {
             imageLarge: cl.imageLarge ?? `${d.image}/high.webp`, imageSmall: cl.imageSmall ?? `${d.image}/low.webp` } });
         }
       }

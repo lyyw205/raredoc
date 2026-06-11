@@ -129,7 +129,7 @@ function TrendBadge({ pct }: { pct: number | null }) {
 }
 
 // 새 ERD 우선 + 영문 API 폴백.
-// - CardLocale 존재 && region !== "EN" → 어댑터(JP/KR·일판단독: API 미수록)
+// - RegionCard 존재 && region !== "EN" → 어댑터(JP/KR·일판단독: API 미수록)
 // - 그 외 → 영문 API. API 가 null 인데 DB 가 있으면 DB 로 폴백(EN 누락 보호)
 async function getCard(cardId: string) {
   const loaded = await loadCardByLocaleId(cardId).catch(() => null);
@@ -319,7 +319,7 @@ export default async function CardDetailPage({
   // 가벼운 조회 추적 (fire-and-forget — 렌더를 막지 않음).
   void recordCardView(cardId);
 
-  // 가격 출처 정보 함께 조회(새 ERD: cardLocaleId + sourceId 우선, 기존 cardId 컬럼도 폴백).
+  // 가격 출처 정보 함께 조회(새 ERD: regionCardId + sourceId 우선, 기존 cardId 컬럼도 폴백).
   let priceHistory: PricePoint[] = [];
   let poketraceCard = null;
   let bunjangPrices = null;
@@ -327,7 +327,7 @@ export default async function CardDetailPage({
     [priceHistory, poketraceCard, bunjangPrices] = await Promise.all([
       prisma.price
         .findMany({
-          where: { cardLocaleId: cardId },
+          where: { regionCardId: cardId },
           orderBy: { recordedAt: "asc" },
           select: {
             recordedAt: true,

@@ -6,7 +6,7 @@
  * - Finds JP section by anchor id
  * - Parses JP card rows (number, name, slug)
  * - Creates JP Set row (jp-tcg-{setId})
- * - Creates JP CardLocale (jp-tcg-{setId}-{num}) linked to existing LogicalCard
+ * - Creates JP RegionCard (jp-tcg-{setId}-{num}) linked to existing LogicalCard
  * - Creates ExternalIdMapping (source=bulbapedia)
  *
  * Match by card number first, then name fallback.
@@ -274,7 +274,7 @@ async function syncSet(setDef: typeof SET_MAP[number], bulbapediaSourceId: strin
   console.log(`  ✓ JP Set ${jpSetId}`);
 
   // Build EN locale lookup maps
-  const enLocales = await prisma.cardLocale.findMany({
+  const enLocales = await prisma.regionCard.findMany({
     where: { setId: enSetId },
     select: { id: true, name: true, logicalCardId: true, number: true },
   });
@@ -300,7 +300,7 @@ async function syncSet(setDef: typeof SET_MAP[number], bulbapediaSourceId: strin
     const jpClId = `jp-tcg-${setId}-${enLocale.number}`;
 
     try {
-      await prisma.cardLocale.upsert({
+      await prisma.regionCard.upsert({
         where: { id: jpClId },
         create: {
           id: jpClId,
@@ -326,12 +326,12 @@ async function syncSet(setDef: typeof SET_MAP[number], bulbapediaSourceId: strin
         where: { sourceId_externalId: { sourceId: bulbapediaSourceId, externalId } },
         create: {
           sourceId: bulbapediaSourceId, externalId,
-          cardLocaleId: jpClId, logicalCardId: enLocale.logicalCardId,
+          regionCardId: jpClId, logicalCardId: enLocale.logicalCardId,
           url: cardUrl,
           verifiedBy: "auto:sync-bw-bulbapedia-jp", confidence: 0.7,
           notes: `Bulbapedia set list row. Set ${jpSetId}, number ${jpRow.number}.`,
         },
-        update: { cardLocaleId: jpClId, logicalCardId: enLocale.logicalCardId },
+        update: { regionCardId: jpClId, logicalCardId: enLocale.logicalCardId },
       });
 
       ok++;

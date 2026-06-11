@@ -82,7 +82,7 @@ async function main() {
   const rarById = new Map(rarities.map((r) => [r.code, r.id]));
 
   // setId 의 numberInt → logicalCardId
-  const cards = await prisma.cardLocale.findMany({ where: { setId: SET }, select: { numberInt: true, logicalCardId: true } });
+  const cards = await prisma.regionCard.findMany({ where: { setId: SET }, select: { numberInt: true, logicalCardId: true } });
   const lcByNum = new Map(cards.map((c) => [c.numberInt, c.logicalCardId]));
 
   let nameUpd = 0, rarUpd = 0, noCard = 0; const unmappedRar = new Set<string>(); const samples: string[] = [];

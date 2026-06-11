@@ -2,7 +2,7 @@
  * PCG1~9 카드의 LogicalCard.illustrator 를 Bulbapedia 에서 수집.
  * tcgplayer-cdn 403/404 오류 카드의 이미지를 Supabase 로 대체.
  *
- * 매칭 전략: Bulbapedia 테이블의 "No." 컬럼(예: 001/082) → CardLocale.number
+ * 매칭 전략: Bulbapedia 테이블의 "No." 컬럼(예: 001/082) → RegionCard.number
  * (row-index 매칭 금지 — PMCG5/6 오염 사고 재현 방지)
  *
  * Verified section anchors (probed 2026-05-29):
@@ -223,8 +223,8 @@ async function scrapeSet(
   };
 
   for (const card of cards) {
-    // PCG CardLocale IDs use padded numbers: jp-tcg-PCG1-001 (number field = "001")
-    const locale = await prisma.cardLocale.findFirst({
+    // PCG RegionCard IDs use padded numbers: jp-tcg-PCG1-001 (number field = "001")
+    const locale = await prisma.regionCard.findFirst({
       where: { setId: `jp-tcg-${set.setId}`, number: card.number },
       select: { id: true, imageSmall: true, logicalCardId: true, name: true },
     });
@@ -290,7 +290,7 @@ async function scrapeSet(
       create: {
         sourceId: source.id,
         externalId,
-        cardLocaleId: locale.id,
+        regionCardId: locale.id,
         logicalCardId: locale.logicalCardId,
         url: cardUrl,
         verifiedBy: "auto:scrape-pcg",
@@ -298,7 +298,7 @@ async function scrapeSet(
         notes: `Bulbapedia card page. Set jp-tcg-${set.setId}, number ${card.number}.`,
       },
       update: {
-        cardLocaleId: locale.id,
+        regionCardId: locale.id,
         logicalCardId: locale.logicalCardId,
         url: cardUrl,
       },
@@ -339,7 +339,7 @@ async function scrapeSet(
         continue;
       }
 
-      await prisma.cardLocale.update({
+      await prisma.regionCard.update({
         where: { id: locale.id },
         data: { imageSmall: publicUrl, imageLarge: publicUrl },
       });

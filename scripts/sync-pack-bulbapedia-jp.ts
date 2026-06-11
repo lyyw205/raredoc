@@ -2,7 +2,7 @@
  * 팩 단위 Bulbapedia 카드페이지 스크래퍼 — JP명·일러스트레이터·attacks·abilities 보강.
  *
  * Bulbapedia 카드페이지 wikitext(`{{PokémoncardInfobox}}` + `{{Cardtext/Attack}}`)를 파싱.
- *   - CardLocale.name      = jname (일본어 카드명) — region=JP 정합화
+ *   - RegionCard.name      = jname (일본어 카드명) — region=JP 정합화
  *   - LogicalCard.illustrator = caption "Illus. [[X]]"
  *   - LogicalCard.attacks  = [{ name, jname, cost:[energy], damage, text }] (구조화)
  *   - LogicalCard.abilities = [{ name, jname, text }]
@@ -130,7 +130,7 @@ function cleanName(name: string): string {
 }
 
 async function main() {
-  const cards = await prisma.cardLocale.findMany({
+  const cards = await prisma.regionCard.findMany({
     where: { setId: SET },
     select: { id: true, name: true, number: true, numberInt: true,
               logicalCard: { select: { id: true, illustrator: true, weakness: true, resistance: true, retreatCost: true, supertype: true, hp: true } } },
@@ -166,7 +166,7 @@ async function main() {
     // supertype 교정: Bulbapedia가 트레이너/에너지라 하고 hp 없으면(=실제 포켓몬 아님) 정정
     if (p.supertypeHint && lc.hp == null && lc.supertype !== p.supertypeHint) data.supertype = p.supertypeHint;
     if (Object.keys(data).length) await prisma.logicalCard.update({ where: { id: lc.id }, data });
-    if (p.jname) { await prisma.cardLocale.update({ where: { id: c.id }, data: { name: p.jname } }); jnameF++; }
+    if (p.jname) { await prisma.regionCard.update({ where: { id: c.id }, data: { name: p.jname } }); jnameF++; }
   }
 
   console.log("\n=== BULBAPEDIA SYNC SUMMARY ===");

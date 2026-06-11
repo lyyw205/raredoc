@@ -5,7 +5,7 @@
  * - Creates CardPack (og-{setId}, era "HGSS")
  * - Creates EN Set (en-tcg-{setId})
  * - Creates LogicalCard (lc-en-tcg-{setId}-{num})
- * - Creates EN CardLocale (en-tcg-{setId}-{num})
+ * - Creates EN RegionCard (en-tcg-{setId}-{num})
  * - Creates ExternalIdMapping (source=pokemontcg_io)
  *
  * Uses curl for HTTP. Rate: 5 req/sec.
@@ -172,7 +172,7 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
         },
       });
 
-      await prisma.cardLocale.upsert({
+      await prisma.regionCard.upsert({
         where: { id: clId },
         create: {
           id: clId, logicalCardId: lcId, language: "en", region: "EN",
@@ -192,11 +192,11 @@ async function syncSet(setDef: typeof SETS[number], rarityMap: Map<string, strin
       await prisma.externalIdMapping.upsert({
         where: { sourceId_externalId: { sourceId, externalId: card.id } },
         create: {
-          sourceId, externalId: card.id, cardLocaleId: clId, logicalCardId: lcId,
+          sourceId, externalId: card.id, regionCardId: clId, logicalCardId: lcId,
           url: `https://pokemontcg.io/cards/${card.id}`,
           verifiedBy: "auto:sync-hgss-pokemontcgio", confidence: 0.95,
         },
-        update: { cardLocaleId: clId, logicalCardId: lcId },
+        update: { regionCardId: clId, logicalCardId: lcId },
       });
 
       ok++;

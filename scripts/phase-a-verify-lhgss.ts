@@ -8,7 +8,7 @@
  *   E) Missing cards (NULL imageSmall)
  *   F) Supertype classification per set
  *   G) EN ↔ JP cross-check (locale pairing) — HGSS only
- *   H) Version availability (CardLocale language breakdown)
+ *   H) Version availability (RegionCard language breakdown)
  *
  * Run: npx tsx scripts/phase-a-verify-lhgss.ts
  * Output: docs/phase-a-verification-lhgss.md
@@ -80,7 +80,7 @@ const JP_HGSS_SET_IDS = HGSS_SET_KEYS.filter(k => k !== "hsp").map(k => `jp-tcg-
 // Types
 // ---------------------------------------------------------------------------
 
-interface CardLocaleRow {
+interface RegionCardRow {
   id: string; name: string; setId: string; language: string; imageSmall: string | null;
 }
 interface ImageResult {
@@ -114,7 +114,7 @@ function isPresent(card: LogicalCardRow, field: FieldKey): boolean {
 // Section A: Image liveness
 // ---------------------------------------------------------------------------
 
-async function sectionA(enLocales: CardLocaleRow[], jpLocales: CardLocaleRow[]): Promise<{
+async function sectionA(enLocales: RegionCardRow[], jpLocales: RegionCardRow[]): Promise<{
   perSet: Map<string, { enOk: number; enFail: number; jpOk: number; jpFail: number }>;
   failures: ImageResult[];
 }> {
@@ -187,14 +187,14 @@ interface ContiguityResult {
 }
 
 async function sectionC(
-  enLocales: CardLocaleRow[], jpLocales: CardLocaleRow[],
+  enLocales: RegionCardRow[], jpLocales: RegionCardRow[],
   sets: { id: string; cardCount: number | null }[]
 ): Promise<ContiguityResult[]> {
   console.log(`\n[C] ID contiguity...`);
   const results: ContiguityResult[] = [];
   const setCountMap = new Map(sets.map(s => [s.id, s.cardCount ?? 0]));
 
-  function check(locales: CardLocaleRow[], region: string): void {
+  function check(locales: RegionCardRow[], region: string): void {
     const bySet = new Map<string, number[]>();
     for (const card of locales) {
       const numMatch = card.id.match(/-(\d+)$/);
@@ -225,7 +225,7 @@ async function sectionC(
 // Section E: Missing imageSmall
 // ---------------------------------------------------------------------------
 
-async function sectionE(enLocales: CardLocaleRow[], jpLocales: CardLocaleRow[]) {
+async function sectionE(enLocales: RegionCardRow[], jpLocales: RegionCardRow[]) {
   const enMissing = enLocales.filter(c => !c.imageSmall);
   const jpMissing = jpLocales.filter(c => !c.imageSmall);
   console.log(`\n[E] Missing imageSmall — EN: ${enMissing.length}, JP: ${jpMissing.length}`);
@@ -240,7 +240,7 @@ interface SupertypeStats {
   setKey: string; counts: Map<string, number>; nullCards: { id: string; name: string }[];
 }
 
-async function sectionF(lcards: LogicalCardRow[], locales: CardLocaleRow[]): Promise<SupertypeStats[]> {
+async function sectionF(lcards: LogicalCardRow[], locales: RegionCardRow[]): Promise<SupertypeStats[]> {
   console.log(`\n[F] Supertype classification...`);
   const nameMap = new Map<string, string>();
   for (const cl of locales) { nameMap.set(cl.id, cl.name); }
@@ -271,7 +271,7 @@ interface LocalePairingResult {
 
 async function sectionG(
   hgssLcards: LogicalCardRow[],
-  enLocales: CardLocaleRow[],
+  enLocales: RegionCardRow[],
 ): Promise<LocalePairingResult[]> {
   console.log(`\n[G] EN ↔ JP locale pairing (HGSS)...`);
 
@@ -281,7 +281,7 @@ async function sectionG(
     enByLC.set(lc, cl.id);
   }
 
-  const jpLocalesByLC = await prisma.cardLocale.findMany({
+  const jpLocalesByLC = await prisma.regionCard.findMany({
     where: { setId: { in: JP_HGSS_SET_IDS } },
     select: { logicalCardId: true, setId: true },
   });
@@ -316,7 +316,7 @@ interface LocaleStats { setKey: string; patterns: Map<string, number>; }
 async function sectionH(allLcards: LogicalCardRow[]): Promise<LocaleStats[]> {
   console.log(`\n[H] Version availability...`);
   const lcIds = allLcards.map(c => c.id);
-  const localeRows = await prisma.cardLocale.findMany({
+  const localeRows = await prisma.regionCard.findMany({
     where: { logicalCardId: { in: lcIds } },
     select: { logicalCardId: true, language: true },
   });
@@ -351,7 +351,7 @@ function buildReport(data: {
   sectionA: { perSet: Map<string, { enOk: number; enFail: number; jpOk: number; jpFail: number }>; failures: ImageResult[] };
   sectionB: Map<string, SetFieldStats>;
   sectionC: ContiguityResult[];
-  sectionE: { enMissing: CardLocaleRow[]; jpMissing: CardLocaleRow[] };
+  sectionE: { enMissing: RegionCardRow[]; jpMissing: RegionCardRow[] };
   sectionF: SupertypeStats[];
   sectionG: LocalePairingResult[];
   sectionH: LocaleStats[];
@@ -419,7 +419,7 @@ function buildReport(data: {
 
   // ── Section C ──
   lines.push(`\n## C) 인덱스 연속성 (ID Contiguity)`);
-  lines.push(`\nCardLocale ID 가 1~N 연속인지 점검.\n`);
+  lines.push(`\nRegionCard ID 가 1~N 연속인지 점검.\n`);
   lines.push(mdTable(
     ["세트","Region","cardCount","실제","갭","중복","상태"],
     data.sectionC.map(r => {
@@ -437,7 +437,7 @@ function buildReport(data: {
 
   // ── Section E ──
   lines.push(`\n## E) 누락 이미지 카드`);
-  lines.push(`\nimageSmall 이 NULL 인 CardLocale.\n`);
+  lines.push(`\nimageSmall 이 NULL 인 RegionCard.\n`);
   if (data.sectionE.enMissing.length === 0 && data.sectionE.jpMissing.length === 0) {
     lines.push(`> 누락 이미지 없음.`);
   } else {
@@ -534,19 +534,19 @@ async function main() {
   });
 
   // Fetch JP L locales
-  const jpLLocales = await prisma.cardLocale.findMany({
+  const jpLLocales = await prisma.regionCard.findMany({
     where: { setId: { in: JP_L_SET_IDS } },
     select: { id: true, name: true, setId: true, language: true, imageSmall: true },
   });
 
   // Fetch HGSS EN locales
-  const enHgssLocales = await prisma.cardLocale.findMany({
+  const enHgssLocales = await prisma.regionCard.findMany({
     where: { setId: { in: EN_HGSS_SET_IDS } },
     select: { id: true, name: true, setId: true, language: true, imageSmall: true },
   });
 
   // Fetch HGSS JP locales
-  const jpHgssLocales = await prisma.cardLocale.findMany({
+  const jpHgssLocales = await prisma.regionCard.findMany({
     where: { setId: { in: JP_HGSS_SET_IDS } },
     select: { id: true, name: true, setId: true, language: true, imageSmall: true },
   });

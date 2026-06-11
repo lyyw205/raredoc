@@ -29,7 +29,7 @@ async function main() {
   const enByDexEx = new Map<string, string[]>();
   for (const c of en) { if (!["Pokémon", "Pokemon"].includes(c.supertype)) continue; const dex = c.nationalPokedexNumbers?.[0]; if (dex == null) continue; const ex = (c.subtypes ?? []).includes("ex"); enByDexEx.set(`${dex}|${ex}`, baseSubs(c.subtypes ?? [])); }
 
-  const jp = await prisma.cardLocale.findMany({ where: { setId: JP }, select: { number: true, name: true, logicalCardId: true, logicalCard: { select: { supertype: true } } } });
+  const jp = await prisma.regionCard.findMany({ where: { setId: JP }, select: { number: true, name: true, logicalCardId: true, logicalCard: { select: { supertype: true } } } });
   const mis = jp.filter((j) => j.logicalCard.supertype === "Trainer" && jaDex(j.name) != null);
   console.log(`오분류 포켓몬 ${mis.length}장 교정 ${APPLY ? "★적용" : "(dry)"}:`);
   for (const j of mis) {

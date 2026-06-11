@@ -32,7 +32,7 @@ export type DeckCostLine = {
   unitKrw: number;
   rarity: string | null; // 선택 인쇄판 레어도 코드
   source: string; // yuyu_tei_sell | tcgplayer | cardmarket | estimate
-  cardLocaleId: string | null;
+  regionCardId: string | null;
 };
 
 export type DeckCostSide = {
@@ -100,7 +100,7 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
   //   왜곡을 만들었음(실측) → 현행 시대 setId prefix 로 한정. 시대 내 가격 없으면 missing(정직).
   const MODERN_SET_PREFIXES = ["sv", "me", "zsv", "rsv", "swsh", "en-tcg-swsh"];
   const names = deck.map((g) => g.cardName);
-  const enLocales = await prisma.cardLocale.findMany({
+  const enLocales = await prisma.regionCard.findMany({
     where: { region: "EN", name: { in: names } },
     select: { name: true, logicalCardId: true, setId: true },
   });
@@ -116,7 +116,7 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
     where: { id: { in: allLcIds } },
     select: {
       id: true,
-      // P7: rarity→CardLocale.rarity (P4a 기계복제, diff=0). 전환기: 새층 locales.rarity 우선, LC rarity 폴백.
+      // P7: rarity→RegionCard.rarity (P4a 기계복제, diff=0). 전환기: 새층 locales.rarity 우선, LC rarity 폴백.
       rarity: { select: { code: true, category: { select: { tier: true } } } },
       locales: { select: { rarity: { select: { code: true, category: { select: { tier: true } } } } } },
     },
@@ -141,7 +141,7 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
     where: {
       sourceId: { in: sources.map((s) => s.id) },
       condition: null,
-      cardLocale: { logicalCardId: { in: allLcIds } },
+      regionCard: { logicalCardId: { in: allLcIds } },
     },
     select: {
       sourceId: true,
@@ -152,29 +152,29 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
       reverseHolo: true,
       firstEdition: true,
       recordedAt: true,
-      cardLocaleId: true,
-      cardLocale: { select: { logicalCardId: true } },
+      regionCardId: true,
+      regionCard: { select: { logicalCardId: true } },
     },
     orderBy: { recordedAt: "desc" },
   });
 
   // (locale,source) 최신 1행 → 인쇄판(LC)별 최우선 소스 가격
-  type PricePick = { krw: number; source: string; recordedAt: Date; cardLocaleId: string };
+  type PricePick = { krw: number; source: string; recordedAt: Date; regionCardId: string };
   const seen = new Set<string>();
   const byPrint = new Map<string, PricePick>();
   let latest: Date | null = null;
   for (const p of priceRows) {
-    const key = `${p.cardLocaleId}|${p.sourceId}`;
+    const key = `${p.regionCardId}|${p.sourceId}`;
     if (seen.has(key)) continue; // recordedAt desc 정렬 → 첫 행이 최신
     seen.add(key);
     const raw = p.marketPrice ?? p.holofoil ?? p.normal ?? p.reverseHolo ?? p.firstEdition;
     if (raw == null || raw <= 0) continue;
     const code = sourceCode.get(p.sourceId!) ?? "?";
     const krw = Math.round(toKrw(raw, p.currency));
-    const lcId = p.cardLocale.logicalCardId;
+    const lcId = p.regionCard.logicalCardId;
     const cur = byPrint.get(lcId);
     if (!cur || (SOURCE_PRIORITY[code] ?? 9) < (SOURCE_PRIORITY[cur.source] ?? 9)) {
-      byPrint.set(lcId, { krw, source: code, recordedAt: p.recordedAt, cardLocaleId: p.cardLocaleId });
+      byPrint.set(lcId, { krw, source: code, recordedAt: p.recordedAt, regionCardId: p.regionCardId });
     }
     if (!latest || p.recordedAt > latest) latest = p.recordedAt;
   }
@@ -201,7 +201,7 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
         unitKrw: ENERGY_ESTIMATE_KRW,
         rarity: null,
         source: "estimate",
-        cardLocaleId: null,
+        regionCardId: null,
       };
       budget.totalKrw += ENERGY_ESTIMATE_KRW * g.qty;
       premium.totalKrw += ENERGY_ESTIMATE_KRW * g.qty;
@@ -241,7 +241,7 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
         unitKrw: pick.price.krw,
         rarity: pick.info.rarityCode,
         source: pick.price.source,
-        cardLocaleId: pick.price.cardLocaleId,
+        regionCardId: pick.price.regionCardId,
       });
     }
   }

@@ -1087,7 +1087,7 @@ function toRow(l: any): Row {
     types: l.logicalCard.types ?? [], hp: l.logicalCard.hp ?? null, rel: l.set?.releaseDate ? +new Date(l.set.releaseDate) : null, dexAll: l.logicalCard.pokedexNumbers ?? [],
   };
 }
-const load = async (setIds: string[]) => (await prisma.cardLocale.findMany({ where: { setId: { in: setIds } }, select: sel })).map(toRow);
+const load = async (setIds: string[]) => (await prisma.regionCard.findMany({ where: { setId: { in: setIds } }, select: sel })).map(toRow);
 const pub = (r: Row | undefined) => r ? { id: r.cid, number: r.number, name: r.name, image: r.image, rarity: r.rarity, setId: r.setId, region: r.region } : null;
 
 const tfp = (r: Row) => `${(r.illus ?? "").trim().toLowerCase()}|${r.tier}|${r.subtypes}`;     // 트레이너 지문
@@ -1126,7 +1126,7 @@ async function main() {
     const numOf = (s: string) => parseInt((s.match(/\d+/) ?? ["0"])[0], 10);
     const enCards = (await load(cfg.enNative ?? [])).sort((a, b) => numOf(a.number) - numOf(b.number) || a.number.localeCompare(b.number));
     // EN 앵커 LC 에 병합된 KR(DP 한국판 kr-bs — JP 미발매·EN 발매 카드의 한국판 등) → KR 탭 노출
-    const krRows = (await prisma.cardLocale.findMany({ where: { region: "KR", logicalCardId: { in: enCards.map((e) => e.lcid) } }, select: sel })).map(toRow);
+    const krRows = (await prisma.regionCard.findMany({ where: { region: "KR", logicalCardId: { in: enCards.map((e) => e.lcid) } }, select: sel })).map(toRow);
     const krByLcidA = new Map(krRows.map((k) => [k.lcid, k]));
     const anchors = enCards.map((e) => ({ jp: null, en: pub(e), kr: pub(krByLcidA.get(e.lcid)), dex: e.dex }));
     const krMatchedA = anchors.filter((a) => a.kr).length;
@@ -1146,7 +1146,7 @@ async function main() {
   let kr = await load(cfg.kr);
   if (cfg.krMerged) {
     // 크로스그룹 합본 KR(kr-bs 등): cardPackId 스코프로 이 그룹 LC 에 병합된 KR 추가 로드 (enMerged 의 KR 대칭)
-    const merged = (await prisma.cardLocale.findMany({ where: { region: "KR", logicalCard: { cardPackId: groupId } }, select: sel })).map(toRow);
+    const merged = (await prisma.regionCard.findMany({ where: { region: "KR", logicalCard: { cardPackId: groupId } }, select: sel })).map(toRow);
     const seenK = new Set(kr.map((k) => k.cid));
     kr = [...kr, ...merged.filter((m) => !seenK.has(m.cid))];
   }
@@ -1156,13 +1156,13 @@ async function main() {
     // EN 은 DB 에서 JP 앵커 LC(매칭) + 영판전용 orphan 으로 병합되며 cardPackId 를 가짐 → **그룹 단위로 스코프** 로드.
     //   한 EN 세트가 여러 JP 그룹에 걸친 경우(SM Sun&Moon en-tcg-sm1 → SM1S/SM1M/SM1+)에도 그룹별로 정확히 분배.
     //   (단일그룹 EN 세트(sv-base 등)는 결과 동일 — 하위호환.)
-    en = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { cardPackId: groupId } }, select: sel })).map(toRow);
+    en = (await prisma.regionCard.findMany({ where: { region: "EN", logicalCard: { cardPackId: groupId } }, select: sel })).map(toRow);
   } else if (cfg.enNative) en = await load(cfg.enNative);
   else {
     const dexes = [...new Set(jp.filter(isPoke).flatMap((r) => r.dexAll.length ? r.dexAll : (r.dex != null ? [r.dex] : [])))] as number[];
     // LC 공유(정체성 병합된) EN 우선 로드 — 트레이너 포함 (열풍의아레나→sv10 합본 분산처럼 교차그룹인데 병합 완료된 케이스)
-    const sharedEn = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCardId: { in: [...new Set(jp.map((r) => r.lcid))] } }, select: sel })).map(toRow);
-    const dexEn = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE as unknown as string[] }, pokedexNumbers: { hasSome: dexes } } }, select: sel })).map(toRow);
+    const sharedEn = (await prisma.regionCard.findMany({ where: { region: "EN", logicalCardId: { in: [...new Set(jp.map((r) => r.lcid))] } }, select: sel })).map(toRow);
+    const dexEn = (await prisma.regionCard.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE as unknown as string[] }, pokedexNumbers: { hasSome: dexes } } }, select: sel })).map(toRow);
     const seenCid = new Set(sharedEn.map((r) => r.cid));
     en = [...sharedEn, ...dexEn.filter((r) => !seenCid.has(r.cid))];
   }
@@ -1195,7 +1195,7 @@ async function main() {
       const unP = jp.filter((j) => isPoke(j) && !enForJp.has(j.cid));
       if (unP.length) {
         const dexes = [...new Set(unP.flatMap((j) => j.dexAll.length ? j.dexAll : (j.dex != null ? [j.dex] : [])))] as number[];
-        const dexEn = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE as unknown as string[] }, pokedexNumbers: { hasSome: dexes } } }, select: sel })).map(toRow);
+        const dexEn = (await prisma.regionCard.findMany({ where: { region: "EN", logicalCard: { supertype: { in: POKE as unknown as string[] }, pokedexNumbers: { hasSome: dexes } } }, select: sel })).map(toRow);
         const bk = new Map<string, Row[]>();
         for (const e of dexEn) { const k = `${dexKeyOf(e)}|${subN(e.subtypes)}`; (bk.get(k) ?? bk.set(k, []).get(k))!.push(e); }
         for (const j of unP) {
@@ -1214,7 +1214,7 @@ async function main() {
       const jpTr = jp.filter((j) => !isPoke(j) && j.supertype === "Trainer" && !enForJp.has(j.cid));
       if (jpTr.length) {
         const wantEn = [...new Set(jpTr.map((j) => TR[j.name]).filter(Boolean) as string[])];
-        const enTr = wantEn.length ? (await prisma.cardLocale.findMany({ where: { region: "EN", name: { in: wantEn }, logicalCard: { supertype: "Trainer" } }, select: sel })).map(toRow) : [];
+        const enTr = wantEn.length ? (await prisma.regionCard.findMany({ where: { region: "EN", name: { in: wantEn }, logicalCard: { supertype: "Trainer" } }, select: sel })).map(toRow) : [];
         const byName = new Map<string, Row[]>();
         for (const e of enTr) (byName.get(e.name) ?? byName.set(e.name, []).get(e.name))!.push(e);
         for (const j of jpTr) {
@@ -1290,7 +1290,7 @@ async function main() {
     const jpTr = jp.filter((j) => !isPoke(j) && j.supertype === "Trainer" && !enForJp.has(j.cid));
     if (jpTr.length) {
       const wantEn = [...new Set(jpTr.map((j) => TR[j.name]).filter(Boolean) as string[])];
-      const enTr = wantEn.length ? (await prisma.cardLocale.findMany({ where: { region: "EN", name: { in: wantEn }, logicalCard: { supertype: "Trainer" } }, select: sel })).map(toRow) : [];
+      const enTr = wantEn.length ? (await prisma.regionCard.findMany({ where: { region: "EN", name: { in: wantEn }, logicalCard: { supertype: "Trainer" } }, select: sel })).map(toRow) : [];
       const enTrByName = new Map<string, Row[]>();
       for (const e of enTr) (enTrByName.get(e.name) ?? enTrByName.set(e.name, []).get(e.name))!.push(e);
       for (const j of jpTr) {
@@ -1307,7 +1307,7 @@ async function main() {
     const ETYPE: Record<string, string> = { "草": "Grass", "炎": "Fire", "水": "Water", "雷": "Lightning", "超": "Psychic", "闘": "Fighting", "悪": "Darkness", "鋼": "Metal", "フェアリー": "Fairy", "無": "Colorless" };
     const jpBE = jp.filter((j) => j.supertype === "Energy" && /基本.+エネルギー/.test(j.name) && !enForJp.has(j.cid));
     if (jpBE.length) {
-      const enBE = (await prisma.cardLocale.findMany({ where: { region: "EN", logicalCard: { supertype: "Energy" }, name: { startsWith: "Basic " } }, select: sel })).map(toRow);
+      const enBE = (await prisma.regionCard.findMany({ where: { region: "EN", logicalCard: { supertype: "Energy" }, name: { startsWith: "Basic " } }, select: sel })).map(toRow);
       const enBEByType = new Map<string, Row[]>();
       for (const e of enBE) { const m = e.name.match(/Basic\s+(\w+)\s+Energy/i); if (m) (enBEByType.get(m[1]) ?? enBEByType.set(m[1], []).get(m[1]))!.push(e); }
       for (const j of jpBE) {
@@ -1330,7 +1330,7 @@ async function main() {
 
   // ── 꼬리(영판전용; 교차그룹은 없음) ──
   // JP 전수 인덱스: ①dex 집합(jpElsewhere 불리언, 기존) ②지문(dex|일러[|subtypes]) → 수록 JP 세트 (jpPacks 팩명 표기용)
-  const jpAll = crossGroup ? [] : await prisma.cardLocale.findMany({
+  const jpAll = crossGroup ? [] : await prisma.regionCard.findMany({
     where: { region: "JP", logicalCard: { supertype: { in: [...POKE, "Trainer"] } } },
     select: { setId: true, name: true, set: { select: { releaseDate: true } }, logicalCard: { select: { pokedexNumbers: true, illustrator: true, subtypes: true, supertype: true } } },
   });

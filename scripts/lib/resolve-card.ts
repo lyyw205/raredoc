@@ -1,7 +1,7 @@
 /**
  * 덱리스트 카드 → raredoc 카드 단일 해석기 (4경로) — docs/meta-pipeline-multisource.md §4-②
  *
- * 경로① EN 약어:    setmap.en[ptcgoCode] → setId → CardLocale 직결({setId}-{number}) → EIM pokemontcg_io → (setId,number) 폴백
+ * 경로① EN 약어:    setmap.en[ptcgoCode] → setId → RegionCard 직결({setId}-{number}) → EIM pokemontcg_io → (setId,number) 폴백
  * 경로② JP 세트코드: setmap.jp[code] → jp-tcg-* setId → (setId, numberInt) 조회   [limitless standard-jp — P3]
  * 경로③ JP cardID:  EIM pokemoncard_jp (인쇄판 1:1 — 재록 안전)                   [jp-official 덱코드 — P4]
  * 경로④ KR BS코드:  EIM pokemoncard_kr                                            [kr-official 덱코드 — P3]
@@ -20,7 +20,7 @@ export type ResolveInput = {
   cardId?: string | null;
 };
 
-export type Resolved = { cardLocaleId: string | null; logicalCardId: string };
+export type Resolved = { regionCardId: string | null; logicalCardId: string };
 
 type SetMap = { en: Record<string, string>; enUnmapped: Record<string, string>; jp: Record<string, string> };
 
@@ -62,20 +62,20 @@ export class CardResolver {
     if (!sourceId) return null;
     const m = await prisma.externalIdMapping.findUnique({
       where: { sourceId_externalId: { sourceId, externalId } },
-      select: { cardLocaleId: true, logicalCardId: true, cardLocale: { select: { logicalCardId: true } } },
+      select: { regionCardId: true, logicalCardId: true, regionCard: { select: { logicalCardId: true } } },
     });
     if (!m) return null;
-    const logicalCardId = m.logicalCardId ?? m.cardLocale?.logicalCardId ?? null;
+    const logicalCardId = m.logicalCardId ?? m.regionCard?.logicalCardId ?? null;
     if (!logicalCardId) return null;
-    return { cardLocaleId: m.cardLocaleId, logicalCardId };
+    return { regionCardId: m.regionCardId, logicalCardId };
   }
 
   private async byLocale(where: object): Promise<Resolved | null> {
-    const cl = await prisma.cardLocale.findFirst({
+    const cl = await prisma.regionCard.findFirst({
       where,
       select: { id: true, logicalCardId: true },
     });
-    return cl ? { cardLocaleId: cl.id, logicalCardId: cl.logicalCardId } : null;
+    return cl ? { regionCardId: cl.id, logicalCardId: cl.logicalCardId } : null;
   }
 
   /** 경로①: EN ptcgoCode + number */
@@ -89,9 +89,9 @@ export class CardResolver {
       this.memo.set(key, null);
       return this.miss(this.setmap.enUnmapped[set] ? `set-unmappable:${set}` : `set-unknown:${set}`);
     }
-    // a) SV/me 시대: CardLocale.id = "{setId}-{number}" (pokemontcg.io 원시 id, 비패딩)
+    // a) SV/me 시대: RegionCard.id = "{setId}-{number}" (pokemontcg.io 원시 id, 비패딩)
     out = await this.byLocale({ id: `${setId}-${number}` });
-    // b) SWSH 이전: EIM pokemontcg_io ("{setId}-{number}" → cardLocale)
+    // b) SWSH 이전: EIM pokemontcg_io ("{setId}-{number}" → regionCard)
     if (!out) out = await this.byEim("pokemontcg_io", `${setId}-${number}`);
     // c) 폴백: (setId, number|numberInt) — en-tcg-* id 의 패딩 차이 흡수
     if (!out) {

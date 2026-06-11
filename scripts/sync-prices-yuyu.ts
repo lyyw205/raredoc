@@ -201,7 +201,7 @@ async function syncOne(
   }
   r.units++;
 
-  const locales = await prisma.cardLocale.findMany({
+  const locales = await prisma.regionCard.findMany({
     where: { setId },
     select: { id: true, numberInt: true },
   });

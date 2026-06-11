@@ -7,7 +7,7 @@ import { RARITY_KO } from "@/lib/constants";
 import { GroupCards, GROUPED_GROUP_IDS } from "./GroupCards";
 import { eraLabel } from "@/lib/cards/eras";
 import { getCardPrices, type CardPriceRow } from "@/lib/actions/getCardPrices";
-import { getCardDetail, type CardLocaleVariant, type CardInfo } from "@/lib/actions/getCardDetail";
+import { getCardDetail, type RegionCardVariant, type CardInfo } from "@/lib/actions/getCardDetail";
 import { cardTier, tierFromGroup, categoryTier, categoryTierFromGroup } from "@/lib/cards/rarity";
 import {
   Button,
@@ -442,7 +442,7 @@ function CardDetailContent({
 }: { card: SelectedCard; locale: string }) {
   const [prices, setPrices] = useState<CardPriceRow[] | null>(null);
   // 지역판 탭 + 카드 정보 — 같은 LogicalCard 의 한/영/일 이미지 & 메타
-  const [variants, setVariants] = useState<CardLocaleVariant[] | null>(null);
+  const [variants, setVariants] = useState<RegionCardVariant[] | null>(null);
   const [info, setInfo] = useState<CardInfo | null>(null);
   const [activeRegion, setActiveRegion] = useState<string>(card.region ?? "");
 

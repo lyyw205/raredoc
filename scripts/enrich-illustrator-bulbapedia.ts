@@ -56,7 +56,7 @@ async function main() {
         { logicalCardId: { startsWith: "lc-orphan-jp-tcg-web" } },
       ],
     },
-    select: { externalId: true, url: true, logicalCardId: true, cardLocaleId: true },
+    select: { externalId: true, url: true, logicalCardId: true, regionCardId: true },
   });
   console.log(`대상 ${mappings.length} Bulbapedia 매핑\n`);
 

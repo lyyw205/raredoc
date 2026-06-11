@@ -1,7 +1,7 @@
 /**
  * SwSh era JP overlay from Bulbapedia: JP LogicalCard illustrator 보강.
  *
- * 매칭: EN set 번호 → EN CardLocale → LogicalCard → illustrator 업데이트
+ * 매칭: EN set 번호 → EN RegionCard → LogicalCard → illustrator 업데이트
  * SwSh EN 합본이 많으므로 EN set 번호 기준으로 매핑.
  *
  * Run: npx tsx scripts/sync-swsh-bulbapedia-jp.ts [--set=swsh1]
@@ -133,7 +133,7 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
 
     // Try EN locale first
     const enLocaleId = `${enSetId}-${numPadded}`;
-    const enLocale = await prisma.cardLocale.findUnique({
+    const enLocale = await prisma.regionCard.findUnique({
       where: { id: enLocaleId },
       select: { id: true, logicalCardId: true },
     });
@@ -145,7 +145,7 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
       // Try JP sets
       for (const jpSetId of set.jpSetIds) {
         const jpLocaleId = `${jpSetId}-${card.number}`;
-        const jpLocale = await prisma.cardLocale.findUnique({
+        const jpLocale = await prisma.regionCard.findUnique({
           where: { id: jpLocaleId },
           select: { logicalCardId: true },
         });
@@ -170,7 +170,7 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
         where: { sourceId_externalId: { sourceId: source.id, externalId } },
         create: {
           sourceId: source.id, externalId,
-          cardLocaleId: enLocale?.id ?? null, logicalCardId: lcId,
+          regionCardId: enLocale?.id ?? null, logicalCardId: lcId,
           url: cardUrl,
           verifiedBy: "auto:sync-swsh-bulbapedia", confidence: 0.75,
           notes: `Bulbapedia card page. Set ${enSetId}, number ${card.number}.`,
@@ -199,7 +199,7 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
       where: { sourceId_externalId: { sourceId: source.id, externalId } },
       create: {
         sourceId: source.id, externalId,
-        cardLocaleId: enLocale?.id ?? null, logicalCardId: lcId,
+        regionCardId: enLocale?.id ?? null, logicalCardId: lcId,
         url: cardUrl,
         verifiedBy: "auto:sync-swsh-bulbapedia", confidence: 0.75,
         notes: `Bulbapedia card page. Set ${enSetId}, number ${card.number}.`,

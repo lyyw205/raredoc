@@ -38,7 +38,7 @@ async function main() {
 
   const setIds = g.sets.map((s) => s.id);
   const jpSetIds = g.sets.filter((s) => s.region === "JP").map((s) => s.id);
-  const locales = await prisma.cardLocale.findMany({
+  const locales = await prisma.regionCard.findMany({
     where: { setId: { in: setIds } },
     select: {
       id: true, setId: true, region: true, number: true, numberInt: true, name: true, imageSmall: true, imageLarge: true, logicalCardId: true,

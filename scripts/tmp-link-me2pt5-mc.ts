@@ -10,7 +10,7 @@ const APPLY = process.argv.includes("--apply");
 
 async function main() {
   // 1) MC: EN짝 없는 JP locale
-  const mcAll = await prisma.cardLocale.findMany({
+  const mcAll = await prisma.regionCard.findMany({
     where: { setId: "jp-tcg-MC" },
     select: { id: true, number: true, name: true, logicalCardId: true,
       logicalCard: { select: { supertype: true, pokedexNumbers: true, illustrator: true, locales: { where: { region: "EN" }, select: { id: true } } } } },
@@ -18,7 +18,7 @@ async function main() {
   const mc = mcAll.filter(m => !m.logicalCard?.locales.length);
 
   // 2) me2pt5 orphan
-  const en = await prisma.cardLocale.findMany({
+  const en = await prisma.regionCard.findMany({
     where: { setId: "en-tcg-me2pt5", logicalCardId: { startsWith: "lc-orphan-en-tcg-me2pt5-" } },
     select: { id: true, number: true, name: true, logicalCardId: true,
       logicalCard: { select: { supertype: true, pokedexNumbers: true, illustrator: true } } },
@@ -81,10 +81,10 @@ async function main() {
 
   if (APPLY) {
     for (const p of pairs) {
-      const cur = await prisma.cardLocale.findUnique({ where: { id: p.enId }, select: { logicalCardId: true } });
-      await prisma.cardLocale.update({ where: { id: p.enId }, data: { logicalCardId: p.lcid } });
+      const cur = await prisma.regionCard.findUnique({ where: { id: p.enId }, select: { logicalCardId: true } });
+      await prisma.regionCard.update({ where: { id: p.enId }, data: { logicalCardId: p.lcid } });
       if (cur?.logicalCardId?.startsWith("lc-orphan-en-tcg-me2pt5")) {
-        const left = await prisma.cardLocale.count({ where: { logicalCardId: cur.logicalCardId } });
+        const left = await prisma.regionCard.count({ where: { logicalCardId: cur.logicalCardId } });
         if (left === 0) await prisma.logicalCard.delete({ where: { id: cur.logicalCardId } });
       }
     }

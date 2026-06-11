@@ -8,7 +8,7 @@
  *   E) PMCG5/6 missing 18 cards — tcgdex probe
  *   F) supertype classification per set
  *   G) EN Base Set cross-check (PMCG1 only)
- *   H) Version availability (CardLocale language breakdown)
+ *   H) Version availability (RegionCard language breakdown)
  *
  * Run: npx tsx scripts/phase-a-verify-pmcg.ts
  * Output: docs/phase-a-verification-pmcg.md
@@ -89,7 +89,7 @@ function mdTable(headers: string[], rows: string[][]): string {
 // Section A: Image liveness
 // ---------------------------------------------------------------------------
 
-interface CardLocaleRow {
+interface RegionCardRow {
   id: string;
   name: string;
   setId: string;
@@ -104,7 +104,7 @@ interface ImageResult {
   status: number;
 }
 
-async function sectionA(cards: CardLocaleRow[]): Promise<{
+async function sectionA(cards: RegionCardRow[]): Promise<{
   perSet: Map<string, { ok: number; fail: number }>;
   failures: ImageResult[];
 }> {
@@ -213,7 +213,7 @@ interface ContiguityResult {
   duplicates: number[];
 }
 
-async function sectionC(cards: CardLocaleRow[], sets: { id: string; cardCount: number | null }[]): Promise<ContiguityResult[]> {
+async function sectionC(cards: RegionCardRow[], sets: { id: string; cardCount: number | null }[]): Promise<ContiguityResult[]> {
   console.log(`\n[C] ID contiguity...`);
   const results: ContiguityResult[] = [];
 
@@ -328,13 +328,13 @@ interface SupertypeStats {
   nullCards: { id: string; name: string }[];
 }
 
-async function sectionF(lcards: LogicalCardRow[], locales: CardLocaleRow[]): Promise<SupertypeStats[]> {
+async function sectionF(lcards: LogicalCardRow[], locales: RegionCardRow[]): Promise<SupertypeStats[]> {
   console.log(`\n[F] supertype classification...`);
 
-  // Build LC id -> name map from CardLocale
+  // Build LC id -> name map from RegionCard
   const nameMap = new Map<string, string>();
   for (const cl of locales) {
-    // CardLocale id format: jp-tcg-PMCG1-001, LC id: lc-orphan-jp-tcg-PMCG1-001
+    // RegionCard id format: jp-tcg-PMCG1-001, LC id: lc-orphan-jp-tcg-PMCG1-001
     const lcId = `lc-orphan-${cl.id}`;
     nameMap.set(lcId, cl.name);
   }
@@ -464,11 +464,11 @@ interface LocaleStats {
 }
 
 async function sectionH(lcards: LogicalCardRow[]): Promise<LocaleStats[]> {
-  console.log(`\n[H] Version availability (CardLocale language breakdown)...`);
+  console.log(`\n[H] Version availability (RegionCard language breakdown)...`);
 
-  // Fetch CardLocale rows for all PMCG logicalCardIds
+  // Fetch RegionCard rows for all PMCG logicalCardIds
   const lcIds = lcards.map(c => c.id);
-  const localeRows = await prisma.cardLocale.findMany({
+  const localeRows = await prisma.regionCard.findMany({
     where: { logicalCardId: { in: lcIds } },
     select: { logicalCardId: true, language: true, setId: true },
   });
@@ -691,8 +691,8 @@ function buildReport(data: {
   // -------------------------
   // Section H
   // -------------------------
-  lines.push(`\n## H) 버전 가용성 (CardLocale 언어 분포)`);
-  lines.push(`\n각 LogicalCard의 CardLocale 언어 조합. PMCG는 일본 원판이므로 대부분 "ja only" 예상.\n`);
+  lines.push(`\n## H) 버전 가용성 (RegionCard 언어 분포)`);
+  lines.push(`\n각 LogicalCard의 RegionCard 언어 조합. PMCG는 일본 원판이므로 대부분 "ja only" 예상.\n`);
 
   // Collect all patterns
   const allPatterns = new Set<string>();
@@ -710,7 +710,7 @@ function buildReport(data: {
 
   const allMulti = data.sectionH.flatMap(s => s.multiLocale);
   if (allMulti.length > 0) {
-    lines.push(`\n### 다중 언어 CardLocale 보유 카드 (${allMulti.length}건)`);
+    lines.push(`\n### 다중 언어 RegionCard 보유 카드 (${allMulti.length}건)`);
     const mHeaders = ["LogicalCard ID", "언어"];
     const mRows = allMulti.map(c => [c.id, c.langs.join(", ")]);
     lines.push(mdTable(mHeaders, mRows));
@@ -812,7 +812,7 @@ async function main() {
     orderBy: { id: "asc" },
   });
 
-  const locales = await prisma.cardLocale.findMany({
+  const locales = await prisma.regionCard.findMany({
     where: { setId: { startsWith: "jp-tcg-PMCG" } },
     select: { id: true, name: true, setId: true, imageSmall: true },
     orderBy: { id: "asc" },
@@ -838,7 +838,7 @@ async function main() {
     orderBy: { id: "asc" },
   });
 
-  console.log(`Loaded: ${sets.length} sets, ${locales.length} CardLocale, ${lcards.length} LogicalCard`);
+  console.log(`Loaded: ${sets.length} sets, ${locales.length} RegionCard, ${lcards.length} LogicalCard`);
 
   // Run all sections
   const resA = await sectionA(locales);

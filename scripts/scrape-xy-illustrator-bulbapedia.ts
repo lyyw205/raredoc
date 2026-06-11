@@ -1,9 +1,9 @@
 /**
  * XY era カードの LogicalCard.illustrator を Bulbapedia から収集.
  *
- * 対象: EN set 登録後の EN CardLocale (en-tcg-xy*) + JP orphan cards in XY sets.
+ * 対象: EN set 登録後の EN RegionCard (en-tcg-xy*) + JP orphan cards in XY sets.
  *
- * 매칭 전략: Bulbapedia Set_lists テーブルの "N/total" 番号 → CardLocale.number
+ * 매칭 전략: Bulbapedia Set_lists テーブルの "N/total" 番号 → RegionCard.number
  * EN card number と JP card number が一致するため JP LogicalCard にも illustrator を設定.
  *
  * Verified section anchors (probed 2026-05-31):
@@ -148,11 +148,11 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
   const result: SetResult = { illustratorFilled: 0, illustratorSkipped: 0, unmatched: 0, fetchFail: 0 };
 
   for (const card of cards) {
-    // Find EN CardLocale by number
+    // Find EN RegionCard by number
     const numPadded = String(parseInt(card.number, 10)).padStart(3, "0");
     const enLocaleId = `${enSetId}-${numPadded}`;
 
-    const locale = await prisma.cardLocale.findUnique({
+    const locale = await prisma.regionCard.findUnique({
       where: { id: enLocaleId },
       select: { id: true, logicalCardId: true, name: true },
     });
@@ -161,7 +161,7 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
       // Try JP locale if EN not registered yet
       if (set.jpSetId) {
         const jpLocaleId = `${set.jpSetId}-${card.number}`;
-        const jpLocale = await prisma.cardLocale.findUnique({
+        const jpLocale = await prisma.regionCard.findUnique({
           where: { id: jpLocaleId },
           select: { id: true, logicalCardId: true, name: true },
         });
@@ -207,12 +207,12 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
         where: { sourceId_externalId: { sourceId: source.id, externalId } },
         create: {
           sourceId: source.id, externalId,
-          cardLocaleId: locale.id, logicalCardId: locale.logicalCardId,
+          regionCardId: locale.id, logicalCardId: locale.logicalCardId,
           url: `${WIKI_BASE}/wiki/${card.slug}_(${card.suffix})`,
           verifiedBy: "auto:scrape-xy-bulbapedia", confidence: 0.75,
           notes: `Bulbapedia card page. Set ${enSetId}, number ${card.number}.`,
         },
-        update: { cardLocaleId: locale.id, logicalCardId: locale.logicalCardId },
+        update: { regionCardId: locale.id, logicalCardId: locale.logicalCardId },
       });
       continue;
     }
@@ -238,12 +238,12 @@ async function scrapeSet(set: SetDef, source: { id: string }): Promise<SetResult
       where: { sourceId_externalId: { sourceId: source.id, externalId } },
       create: {
         sourceId: source.id, externalId,
-        cardLocaleId: locale.id, logicalCardId: locale.logicalCardId,
+        regionCardId: locale.id, logicalCardId: locale.logicalCardId,
         url: cardUrl,
         verifiedBy: "auto:scrape-xy-bulbapedia", confidence: 0.75,
         notes: `Bulbapedia card page. Set ${enSetId}, number ${card.number}.`,
       },
-      update: { cardLocaleId: locale.id, logicalCardId: locale.logicalCardId },
+      update: { regionCardId: locale.id, logicalCardId: locale.logicalCardId },
     });
   }
 

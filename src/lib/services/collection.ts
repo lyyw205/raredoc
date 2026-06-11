@@ -127,7 +127,7 @@ type RawItem = {
 function toView(item: RawItem): CollectionItemView {
   return {
     id: item.id,
-    cardId: item.localeId, // URL 호환: cardId 명은 그대로, 값은 CardLocale.id
+    cardId: item.localeId, // URL 호환: cardId 명은 그대로, 값은 RegionCard.id
     name: item.locale.name,
     number: item.locale.number,
     rarity: item.logicalCard.rarity?.nameKo ?? item.logicalCard.rarity?.nameEn ?? item.logicalCard.rarity?.code ?? null,
@@ -152,19 +152,19 @@ function toView(item: RawItem): CollectionItemView {
 
 export async function addCollectionItem(input: {
   userId: string;
-  /** CardLocale.id (= 기존 cardId — URL 호환 유지) */
+  /** RegionCard.id (= 기존 cardId — URL 호환 유지) */
   cardId: string;
   grade: string;
   estimatedKrw?: number | null;
   forSale?: boolean;
   certified?: boolean;
 }) {
-  const locale = await prisma.cardLocale.findUnique({
+  const locale = await prisma.regionCard.findUnique({
     where: { id: input.cardId },
     select: { id: true, logicalCardId: true },
   });
   if (!locale) {
-    throw new Error(`CardLocale not found: ${input.cardId}`);
+    throw new Error(`RegionCard not found: ${input.cardId}`);
   }
   return prisma.collectionItem.create({
     data: {
@@ -219,7 +219,7 @@ export async function getUserCollection(userId: string): Promise<CollectionItemV
 
 // ── 컬렉션 탭: 보유 세트의 "전체 카드" 카탈로그 (도감 내카드보기처럼 보유/미보유 표시) ──
 export interface CollectionCatalogCard {
-  cardId: string; // CardLocale.id
+  cardId: string; // RegionCard.id
   name: string;
   number: string;
   imageUrl: string | null;
@@ -256,7 +256,7 @@ export async function getUserSetCatalog(userId: string): Promise<CollectionCatal
   }
   const setIds = [...new Set(items.map((i) => i.setId))];
 
-  const locales = await prisma.cardLocale.findMany({
+  const locales = await prisma.regionCard.findMany({
     where: { setId: { in: setIds } },
     select: {
       id: true,
