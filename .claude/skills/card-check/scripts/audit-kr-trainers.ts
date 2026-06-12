@@ -13,7 +13,7 @@
 //   npx tsx .claude/skills/card-check/scripts/audit-kr-trainers.ts --jp <jpSetId> --kr <krSetId> [--apply]
 //   여러 팩 한 번에:  --pairs "jp-tcg-SVN:kr-svn,jp-sv-destined-rivals:kr-sv10"
 //
-// --apply: 오링크를 교정(KR locale.logicalCardId 재배정 + 해당 JP의 nameKo=KR명).
+// --apply: 오링크를 교정(KR locale.cardId 재배정 + 해당 JP의 nameKo=KR명).
 //   기본은 dry-run(보고만). EN無 불확실 쌍은 적용 전에 반드시 이미지로 직접 판정할 것(아래 ⚠).
 //
 // ⚠ EN 다리가 없는 캐릭터/스타디움 쌍은 사전이 틀려도 전단사가 "성공"한다(이름→이름 매핑이라).
@@ -23,6 +23,7 @@
 import "dotenv/config";
 import { prisma } from "../../../../src/lib/prisma";
 import { TR_JA2KO } from "../../../../scripts/lib/trainer-names-jako";
+import { assertWritable, hasAllowProtectedFlag } from "../../../../scripts/lib/protected-groups";
 
 const argv = process.argv.slice(2);
 const flag = (name: string) => { const i = argv.indexOf(name); return i >= 0 ? argv[i + 1] : undefined; };
@@ -41,16 +42,16 @@ function parsePairs(): [string, string][] {
 
 async function auditPair(jpSet: string, krSet: string) {
   const POKE_EXCLUDE = { supertype: { in: ["Trainer", "Energy"] } };
-  const jp = await prisma.cardLocale.findMany({ where: { setId: jpSet, logicalCard: POKE_EXCLUDE }, select: { number: true, numberInt: true, name: true, logicalCardId: true }, orderBy: { numberInt: "asc" } });
-  const kr = await prisma.cardLocale.findMany({ where: { setId: krSet, logicalCard: POKE_EXCLUDE }, select: { id: true, number: true, numberInt: true, name: true, logicalCardId: true }, orderBy: { numberInt: "asc" } });
-  const en = await prisma.cardLocale.findMany({ where: { region: "EN", logicalCardId: { in: jp.map((j) => j.logicalCardId) } }, select: { logicalCardId: true, name: true } });
-  const enBy = new Map(en.map((e) => [e.logicalCardId, e.name]));
+  const jp = await prisma.regionCard.findMany({ where: { setId: jpSet, card: POKE_EXCLUDE }, select: { number: true, numberInt: true, name: true, cardId: true }, orderBy: { numberInt: "asc" } });
+  const kr = await prisma.regionCard.findMany({ where: { setId: krSet, card: POKE_EXCLUDE }, select: { id: true, number: true, numberInt: true, name: true, cardId: true }, orderBy: { numberInt: "asc" } });
+  const en = await prisma.regionCard.findMany({ where: { region: "EN", cardId: { in: jp.map((j) => j.cardId) } }, select: { cardId: true, name: true } });
+  const enBy = new Map(en.map((e) => [e.cardId, e.name]));
 
   const jpByJa = new Map<string, typeof jp>();
   for (const j of jp) { const a = jpByJa.get(j.name) ?? []; a.push(j); jpByJa.set(j.name, a); }
   const krByJa = new Map<string, typeof kr>(); const krUnmapped: string[] = [];
   for (const k of kr) { const ja = KO2JA.get(nrm(k.name)); if (!ja) { krUnmapped.push(`KR#${k.number} ${k.name}`); continue; } const a = krByJa.get(ja) ?? []; a.push(k); krByJa.set(ja, a); }
-  const jpUnmapped = jp.filter((j) => !TR_JA2KO[j.name]).map((j) => `JP#${j.number} ${j.name}(EN:${enBy.get(j.logicalCardId) ?? "—"})`);
+  const jpUnmapped = jp.filter((j) => !TR_JA2KO[j.name]).map((j) => `JP#${j.number} ${j.name}(EN:${enBy.get(j.cardId) ?? "—"})`);
 
   const mismatches: { krId: string; jpLcid: string; line: string; enBridged: boolean }[] = [];
   const nameKoFix: { lcid: string; ko: string }[] = [];
@@ -59,15 +60,15 @@ async function auditPair(jpSet: string, krSet: string) {
     const kl = (krByJa.get(ja) ?? []).slice().sort((a, b) => a.numberInt! - b.numberInt!);
     const n = Math.min(js.length, kl.length);
     for (let i = 0; i < n; i++) {
-      nameKoFix.push({ lcid: js[i].logicalCardId, ko: kl[i].name });
-      if (kl[i].logicalCardId !== js[i].logicalCardId) {
-        const enName = enBy.get(js[i].logicalCardId);
-        mismatches.push({ krId: kl[i].id, jpLcid: js[i].logicalCardId, enBridged: !!enName,
+      nameKoFix.push({ lcid: js[i].cardId, ko: kl[i].name });
+      if (kl[i].cardId !== js[i].cardId) {
+        const enName = enBy.get(js[i].cardId);
+        mismatches.push({ krId: kl[i].id, jpLcid: js[i].cardId, enBridged: !!enName,
           line: `  ✗ JP#${js[i].number} ${js[i].name}${enName ? `(EN:${enName})` : " (EN無 — 이미지 확인 필요)"}  ← 정답 KR#${kl[i].number} ${kl[i].name}` });
       }
     }
     // KR 없는 JP 잉여(SAR 등)는 사전명으로 nameKo 백필
-    for (let i = n; i < js.length; i++) { const ko = TR_JA2KO[js[i].name]; if (ko) nameKoFix.push({ lcid: js[i].logicalCardId, ko }); }
+    for (let i = n; i < js.length; i++) { const ko = TR_JA2KO[js[i].name]; if (ko) nameKoFix.push({ lcid: js[i].cardId, ko }); }
   }
 
   console.log(`\n### ${jpSet} / ${krSet}  JP트레이너·E ${jp.length} · KR ${kr.length} · 오링크 ${mismatches.length}`);
@@ -80,8 +81,8 @@ async function auditPair(jpSet: string, krSet: string) {
   if (APPLY) {
     if (jpUnmapped.length || krUnmapped.length) { console.log("  ⚠ 사전 미등록이 남아 있음 — 먼저 trainer-names-jako.ts 보강 후 재실행(미등록 카드는 누락될 수 있음)."); }
     if (enLessChanges) console.log(`  ⚠ EN無 변경 ${enLessChanges}건 — 이미지로 직접 판정했는지 확인하고 적용하세요.`);
-    for (const m of mismatches) await prisma.cardLocale.update({ where: { id: m.krId }, data: { logicalCardId: m.jpLcid } });
-    for (const f of nameKoFix) await prisma.logicalCard.update({ where: { id: f.lcid }, data: { nameKo: f.ko } });
+    for (const m of mismatches) await prisma.regionCard.update({ where: { id: m.krId }, data: { cardId: m.jpLcid } });
+    for (const f of nameKoFix) await prisma.card.update({ where: { id: f.lcid }, data: { nameKo: f.ko } });
     console.log(`  → 적용: locale 재배정 ${mismatches.length} · nameKo ${nameKoFix.length}`);
   }
   return { mismatches: mismatches.length, dictGaps: jpUnmapped.length + krUnmapped.length };
@@ -89,6 +90,11 @@ async function auditPair(jpSet: string, krSet: string) {
 
 (async () => {
   const pairs = parsePairs();
+  // 동결 카드팩 가드 — --apply 시 영향 그룹이 보호 목록이면 차단(--allow-protected 로만 해제)
+  if (APPLY) {
+    const sets = await prisma.set.findMany({ where: { id: { in: pairs.flat() } }, select: { cardPackId: true } });
+    assertWritable(sets.map((s) => s.cardPackId), { allow: hasAllowProtectedFlag(), tool: "audit-kr-trainers" });
+  }
   let totalMm = 0, totalGap = 0;
   for (const [jp, kr] of pairs) { const r = await auditPair(jp, kr); totalMm += r.mismatches; totalGap += r.dictGaps; }
   console.log(`\n총 오링크 ${totalMm} · 사전갭 ${totalGap}${APPLY ? " (적용됨)" : " (dry-run — --apply 로 교정)"}`);

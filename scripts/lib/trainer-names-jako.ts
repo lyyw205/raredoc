@@ -468,4 +468,65 @@ export const TR_JA2KO: Record<string, string> = {
   "グラジオ": "글라디오",                              // EN Gladion
   "リーリエ": "릴리에",                                // EN Lillie
   "ルザミーネ": "루자미네",                            // EN Lusamine
+
+  // ── SWSH S12a/S12/S10a 트레이너·아이템·스타디움·에너지 (2026-06-12 사전 보강, Bulbapedia/공식 검증) ──
+  // 아이템·도구
+  "うねりの扇": "너울의 부채",
+  "ガッツのつるはし": "근성의 곡괭이",
+  "霧の水晶": "안개의 수정",
+  "ダークパッチ": "다크패치",
+  "ダメージポンプ": "데미지 펌프",
+  "トレッキングシューズ": "트레킹슈즈",                 // EN Trekking Shoes
+  "パワータブレット": "파워태블릿",
+  "ヒスイのヘビーボール": "히스이의 헤비볼",
+  "ミラージュゲート": "미라주게이트",
+  "レスキューキャリー": "레스큐캐리",                   // EN Rescue Carrier
+  "こだわりベルト": "구애벨트",
+  "空の封印石": "하늘의 봉인석",                        // EN Sky Seal Stone
+  "葉隠れポンチョ": "잎새숨기 판초",                    // EN Leafy Camo Poncho
+  "クワッドストーン": "쿼드스톤",                       // EN Quad Stone
+  "大地の封印石": "대지의 봉인석",                      // EN Earthen Seal Stone
+  "森の封印石": "숲의 봉인석",                          // EN Forest Seal Stone
+  "未開の祭壇": "미개척의 제단",                        // EN Primordial Altar
+  "アルセウスフォン": "아르세우스폰",
+  "からくりアーム": "기계장치암",                       // EN Windup Arm
+  "災いの箱": "재앙의 상자",
+  // 서포트 (캐릭터 — KR 현지화명, Bulbapedia 검증)
+  "アクロマの実験": "아크로마의 실험",                  // EN Colress's Experiment
+  "カイ": "주혜",                                      // EN Irida
+  "カミツレのきらめき": "카밀레의 반짝임",              // EN Elesa's Sparkle
+  "キバナ": "금랑",                                    // EN Raihan
+  "ザクロ": "자크로",                                  // EN Grant
+  "シロナの覇気": "난천의 패기",                        // EN Cynthia's Ambition
+  "シンオウの仲間たち": "신오의 동료들",                // EN Friends in Sinnoh
+  "セキ": "찬석",                                      // EN Adaman
+  "チェレンの気くばり": "체렌의 배려심",                // EN Cheren's Care
+  "ツツジ": "원규",                                    // EN Roxanne
+  "ナタネの活気": "유채의 활기",                        // EN Gardenia's Vigor
+  "博士の研究（ナナカマド博士）": "박사의 연구(마박사)", // EN Professor's Research (Rowan)
+  "ヒスイの仲間たち": "히스이의 동료들",                // EN Friends in Hisui
+  "ボスの指令（アカギ）": "보스의 지령(태홍)",          // EN Boss's Orders (Cyrus)
+  "メロン": "멜론",                                    // EN Melony
+  "モミ": "모미",                                      // EN Cheryl
+  "ウォロ": "월로",                                    // EN Volo
+  "さぎょういん": "작업원",                             // EN Worker
+  "ジンダイ": "기선",                                  // EN Brandon
+  "スズナ": "무청",                                    // EN Candice
+  "ワタル": "목호",                                    // EN Lance
+  "ススキ": "억새",                                    // EN Iscan
+  "ヒナツ": "성화",                                    // EN Arezu
+  "野盗三姉妹": "야적 세 자매",                         // EN Miss Fortune Sisters
+  // 스타디움
+  "嵐の山脈": "폭풍산맥",
+  "頂への雪道": "정상으로 가는 눈길",
+  "大口の沼": "큰입 늪",                                // EN Gapejaw Bog
+  "崩れたスタジアム": "무너진 스타디움",
+  "コトブキムラ": "축복마을",                           // Jubilife Village
+  "シンオウ神殿": "신오신전",
+  "マグマの滝壺": "마그마의 용소",
+  "エイチ湖": "예지호수",                               // EN Lake Acuity
+  // 에너지
+  "ダブルターボエネルギー": "더블 터보 에너지",
+  "フュージョンエネルギー": "퓨전 에너지",
+  "リゲインエネルギー": "리게인 에너지",
 };
