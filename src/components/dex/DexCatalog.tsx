@@ -788,30 +788,70 @@ function SetDetailModal({ set, locale, onClose, onCardClick }: { set: ModalSet; 
 // ── 메인 컴포넌트 ─────────────────────────────────────────────────────────
 const REGION_ORDER: Region[] = ["JP", "EN", "KR"];
 
-// 임시: 지역 형제 인라인 토글(옛 GroupCards/AnchorTile 느낌)이 달린 격자 카드 타일. 매핑 검증 후 제거 예정.
+// [임시 — 그룹 검증용] 토글 없이 JP/EN/KR 3장을 한 묶음에 나란히 펼쳐 표시.
+// 없는 언어는 회색 빈 슬롯. 검증 끝나면 위 git 이력의 토글 버전으로 되돌린다.
+const REGION_TAG: Record<string, string> = { JP: "일본판", EN: "영문판", KR: "한국판" };
+const REGION_HEX: Record<string, string> = { JP: "#e2504a", EN: "#3182f6", KR: "#1f9d55" };
+
 function GridCardTile({ card, dimmed, showOwned, onOpen }: {
   card: DexCard;
   dimmed: boolean;
   showOwned: boolean;
   onOpen: (v: DexCardVariant) => void;
 }) {
-  const variants = card.variants ?? [];
-  const present = (["JP", "EN", "KR"] as const).filter((r) => variants.some((v) => v.region === r));
-  const [active, setActive] = useState<string>(card.region ?? present[0] ?? "");
-  const cur: DexCardVariant =
-    variants.find((v) => v.region === active) ??
-    variants.find((v) => v.region === card.region) ??
-    variants[0] ??
-    { id: card.id, region: card.region ?? "", name: card.name, number: card.number, imageSmall: card.imageSmall, rarity: card.rarity, rarityCategoryNameKo: card.rarityCategoryNameKo };
-  const rarLabel = cur.rarityCategoryNameKo ?? cur.rarity;
+  const variants = card.variants && card.variants.length > 0
+    ? card.variants
+    : [{ id: card.id, region: card.region ?? "", name: card.name, number: card.number, imageSmall: card.imageSmall, rarity: card.rarity, rarityCategoryNameKo: card.rarityCategoryNameKo }];
   return (
-    <div className="group relative block text-left">
-      <button type="button" onClick={() => onOpen(cur)} className="block w-full" title={`${cur.name} · No.${cur.number}`}>
+    <div
+      className="rounded-toss-md p-1 bg-toss-bg-muted/30"
+      style={{ filter: dimmed ? "grayscale(100%)" : "none", opacity: dimmed ? 0.3 : 1, transition: "filter 0.3s, opacity 0.3s" }}
+    >
+      <div className="grid grid-cols-3 gap-1">
+        {(["JP", "EN", "KR"] as const).map((r) => (
+          <RegionSlot
+            key={r}
+            region={r}
+            variant={variants.find((v) => v.region === r) ?? null}
+            card={card}
+            showOwned={showOwned}
+            onOpen={onOpen}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function RegionSlot({ region, variant, card, showOwned, onOpen }: {
+  region: "JP" | "EN" | "KR";
+  variant: DexCardVariant | null;
+  card: DexCard;
+  showOwned: boolean;
+  onOpen: (v: DexCardVariant) => void;
+}) {
+  if (!variant) {
+    return (
+      <div className="block text-left">
+        <div
+          className="rounded-toss-md overflow-hidden border border-dashed border-toss-divider bg-toss-bg-muted flex items-center justify-center"
+          style={{ aspectRatio: "63 / 88" }}
+        >
+          <span className="text-toss-tiny font-bold text-toss-text-quaternary">{region} 없음</span>
+        </div>
+        <p className="mt-1 text-toss-tiny text-center font-bold leading-none text-toss-text-quaternary">{REGION_TAG[region]}</p>
+      </div>
+    );
+  }
+  const rarLabel = variant.rarityCategoryNameKo ?? variant.rarity;
+  return (
+    <div className="group block text-left">
+      <button type="button" onClick={() => onOpen(variant)} className="block w-full" title={`${variant.name} · No.${variant.number}`}>
         <div
           className="relative rounded-toss-md overflow-hidden group-hover:shadow-toss-md transition-shadow"
-          style={{ aspectRatio: "63 / 88", filter: dimmed ? "grayscale(100%)" : "none", opacity: dimmed ? 0.3 : 1, transition: "filter 0.3s, opacity 0.3s" }}
+          style={{ aspectRatio: "63 / 88" }}
         >
-          <CardImage src={cur.imageSmall} alt={cur.name} className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-200" />
+          <CardImage src={variant.imageSmall} alt={variant.name} className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-200" />
           {showOwned && card.owned && card.grade && (
             <div className="absolute bottom-[2px] left-[2px] text-[7px] font-bold bg-toss-text-primary text-toss-bg-base px-1 py-[1px] rounded leading-tight">{card.grade}</div>
           )}
@@ -820,27 +860,10 @@ function GridCardTile({ card, dimmed, showOwned, onOpen }: {
           )}
         </div>
       </button>
-      {/* 임시 인라인 지역 토글 */}
-      <div className="mt-1.5 flex justify-center gap-1">
-        {(["JP", "EN", "KR"] as const).map((r) => {
-          const has = present.includes(r);
-          const on = active === r && has;
-          return (
-            <button
-              key={r}
-              type="button"
-              disabled={!has}
-              onClick={() => { if (has) setActive(r); }}
-              className={`text-[11px] font-bold leading-none px-2 py-1 rounded-toss-sm border transition-colors ${on ? "bg-toss-text-primary text-toss-bg-base border-toss-text-primary" : has ? "bg-toss-bg-base text-toss-text-secondary border-toss-divider hover:border-toss-text-tertiary hover:text-toss-text-primary" : "bg-toss-bg-muted text-toss-text-quaternary border-transparent cursor-default"}`}
-            >
-              {r}
-            </button>
-          );
-        })}
-      </div>
-      <p className="mt-0.5 text-toss-micro text-center text-toss-text-secondary leading-tight truncate" title={cur.name}>{cur.name}</p>
+      <p className="mt-1 text-toss-tiny text-center font-bold leading-none" style={{ color: REGION_HEX[region] }}>{REGION_TAG[region]}</p>
+      <p className="mt-0.5 text-toss-micro text-center text-toss-text-secondary leading-tight truncate" title={variant.name}>{variant.name}</p>
       <p className="text-toss-tiny text-center text-toss-text-quaternary leading-none truncate">
-        #{cur.number}{rarLabel ? ` · ${rarLabel}` : ""}
+        #{variant.number}{rarLabel ? ` · ${rarLabel}` : ""}
       </p>
     </div>
   );
@@ -1283,7 +1306,8 @@ export function DexCatalog({ regionPacks, locale }: { regionPacks: Record<Region
 
               <div
                 className={`grid gap-1.5 dex-card-grid ${view === "mine" ? "mt-1" : "mt-3"}`}
-                style={{ "--dex-cols": cols } as React.CSSProperties}
+                /* [임시] 한 묶음이 JP/EN/KR 3장이라 열 수를 1/3로 보정. 토글 복귀 시 cols 로 되돌린다. */
+                style={{ "--dex-cols": Math.max(1, Math.round(cols / 3)) } as React.CSSProperties}
               >
                 {filteredCards.map((card) => (
                   <GridCardTile

@@ -138,8 +138,9 @@
 
 @layer components {
   /* 카드도감 카드 그리드 — 모바일은 2열 고정, sm(40rem)+ 부터 사용자 '열' 슬라이더(--dex-cols) 적용 */
+  /* [임시 — 그룹 검증용] 한 묶음이 JP/EN/KR 3장이라 모바일은 1열(=묶음 1개)로 축소. 토글 복귀 시 repeat(2, ...) 로 되돌린다. */
   .dex-card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
   @media (min-width: 40rem) {
     .dex-card-grid {
