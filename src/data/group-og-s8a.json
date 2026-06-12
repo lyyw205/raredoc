@@ -6,11 +6,11 @@
     "crossGroupEN": false
   },
   "counts": {
-    "anchors": 33,
-    "enMatched": 22,
-    "krMatched": 33,
-    "enOnly": 3,
-    "krOnly": 0
+    "anchors": 30,
+    "enMatched": 25,
+    "krMatched": 25,
+    "enOnly": 0,
+    "krOnly": 8
   },
   "anchors": [
     {
@@ -83,7 +83,15 @@
         "setId": "jp-tcg-S8a",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-cel25-023",
+        "number": "023",
+        "name": "Professor's Research (Professor Oak)",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/en/small/en-tcg-cel25/023.png",
+        "rarity": "Common",
+        "setId": "en-tcg-cel25",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s8a-3",
         "number": "3",
@@ -585,15 +593,7 @@
         "setId": "jp-tcg-S8a",
         "region": "JP"
       },
-      "en": {
-        "id": "en-tcg-cel25-006",
-        "number": "006",
-        "name": "Flying Pikachu V",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/en/small/en-tcg-cel25/006.png",
-        "rarity": "Double Rare",
-        "setId": "en-tcg-cel25",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-s8a-20",
         "number": "20",
@@ -625,58 +625,6 @@
         "region": "EN"
       },
       "kr": {
-        "id": "kr-s8a-021",
-        "number": "021",
-        "name": "공중날기 피카츄 V",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_021.png",
-        "rarity": "더블 레어",
-        "setId": "kr-s8a",
-        "region": "KR"
-      },
-      "dex": 25
-    },
-    {
-      "jp": {
-        "id": "jp-tcg-S8a-22",
-        "number": "22",
-        "name": "なみのりピカチュウVMAX",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/ja/small/jp-tcg-S8a/22.jpg",
-        "rarity": "Triple Rare",
-        "setId": "jp-tcg-S8a",
-        "region": "JP"
-      },
-      "en": {
-        "id": "en-tcg-cel25-007",
-        "number": "007",
-        "name": "Flying Pikachu VMAX",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/en/small/en-tcg-cel25/007.png",
-        "rarity": "Triple Rare",
-        "setId": "en-tcg-cel25",
-        "region": "EN"
-      },
-      "kr": {
-        "id": "kr-s8a-022",
-        "number": "022",
-        "name": "공중날기 피카츄 VMAX",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_022.png",
-        "rarity": "Triple Rare",
-        "setId": "kr-s8a",
-        "region": "KR"
-      },
-      "dex": 25
-    },
-    {
-      "jp": {
-        "id": "jp-tcg-S8a-23",
-        "number": "23",
-        "name": "そらをとぶピカチュウV",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/ja/small/jp-tcg-S8a/23.jpg",
-        "rarity": "ダブルレア",
-        "setId": "jp-tcg-S8a",
-        "region": "JP"
-      },
-      "en": null,
-      "kr": {
         "id": "kr-s8a-23",
         "number": "23",
         "name": "파도타기 피카츄 V",
@@ -689,10 +637,10 @@
     },
     {
       "jp": {
-        "id": "jp-tcg-S8a-24",
-        "number": "24",
-        "name": "そらをとぶピカチュウVMAX",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/ja/small/jp-tcg-S8a/24.jpg",
+        "id": "jp-tcg-S8a-22",
+        "number": "22",
+        "name": "なみのりピカチュウVMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/ja/small/jp-tcg-S8a/22.jpg",
         "rarity": "Triple Rare",
         "setId": "jp-tcg-S8a",
         "region": "JP"
@@ -711,6 +659,66 @@
         "number": "24",
         "name": "파도타기 피카츄 VMAX",
         "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_024.png",
+        "rarity": "Triple Rare",
+        "setId": "kr-s8a",
+        "region": "KR"
+      },
+      "dex": 25
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S8a-23",
+        "number": "23",
+        "name": "そらをとぶピカチュウV",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/ja/small/jp-tcg-S8a/23.jpg",
+        "rarity": "ダブルレア",
+        "setId": "jp-tcg-S8a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-cel25-006",
+        "number": "006",
+        "name": "Flying Pikachu V",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/en/small/en-tcg-cel25/006.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-cel25",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s8a-021",
+        "number": "021",
+        "name": "공중날기 피카츄 V",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_021.png",
+        "rarity": "더블 레어",
+        "setId": "kr-s8a",
+        "region": "KR"
+      },
+      "dex": 25
+    },
+    {
+      "jp": {
+        "id": "jp-tcg-S8a-24",
+        "number": "24",
+        "name": "そらをとぶピカチュウVMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/ja/small/jp-tcg-S8a/24.jpg",
+        "rarity": "Triple Rare",
+        "setId": "jp-tcg-S8a",
+        "region": "JP"
+      },
+      "en": {
+        "id": "en-tcg-cel25-007",
+        "number": "007",
+        "name": "Flying Pikachu VMAX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/en/small/en-tcg-cel25/007.png",
+        "rarity": "Triple Rare",
+        "setId": "en-tcg-cel25",
+        "region": "EN"
+      },
+      "kr": {
+        "id": "kr-s8a-022",
+        "number": "022",
+        "name": "공중날기 피카츄 VMAX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_022.png",
         "rarity": "Triple Rare",
         "setId": "kr-s8a",
         "region": "KR"
@@ -743,216 +751,181 @@
       "jp": {
         "id": "jp-tcg-S8a-26",
         "number": "26",
-        "name": "基本草エネルギー",
+        "name": "ピカチュウV-UNION",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/ja/small/jp-tcg-S8a/26.jpg",
         "rarity": "Triple Rare",
         "setId": "jp-tcg-S8a",
         "region": "JP"
       },
       "en": null,
-      "kr": {
-        "id": "kr-s8a-31",
-        "number": "31",
-        "name": "기본 풀 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_031.png",
-        "rarity": "Triple Rare",
-        "setId": "kr-s8a",
-        "region": "KR"
-      },
-      "dex": null
+      "kr": null,
+      "dex": 25
     },
     {
       "jp": {
         "id": "jp-tcg-S8a-27",
         "number": "27",
-        "name": "基本炎エネルギー",
+        "name": "ピカチュウV-UNION",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/ja/small/jp-tcg-S8a/27.jpg",
         "rarity": "Triple Rare",
         "setId": "jp-tcg-S8a",
         "region": "JP"
       },
       "en": null,
-      "kr": {
-        "id": "kr-s8a-32",
-        "number": "32",
-        "name": "기본 불꽃 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_032.png",
-        "rarity": "Triple Rare",
-        "setId": "kr-s8a",
-        "region": "KR"
-      },
-      "dex": null
+      "kr": null,
+      "dex": 25
     },
     {
       "jp": {
         "id": "jp-tcg-S8a-28",
         "number": "28",
-        "name": "基本水エネルギー",
+        "name": "ピカチュウV-UNION",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/ja/small/jp-tcg-S8a/28.jpg",
         "rarity": "Triple Rare",
         "setId": "jp-tcg-S8a",
         "region": "JP"
       },
       "en": null,
-      "kr": {
-        "id": "kr-s8a-33",
-        "number": "33",
-        "name": "기본 물 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_033.png",
-        "rarity": "Triple Rare",
-        "setId": "kr-s8a",
-        "region": "KR"
-      },
-      "dex": null
+      "kr": null,
+      "dex": 25
     },
     {
       "jp": {
         "id": "jp-tcg-S8a-29",
         "number": "29",
-        "name": "基本雷エネルギー",
+        "name": "博士の研究",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/ja/small/jp-tcg-S8a/29.jpg",
         "rarity": "スーパーレア",
         "setId": "jp-tcg-S8a",
         "region": "JP"
       },
-      "en": null,
-      "kr": {
-        "id": "kr-s8a-34",
-        "number": "34",
-        "name": "기본 번개 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_034.png",
-        "rarity": "슈퍼 레어",
-        "setId": "kr-s8a",
-        "region": "KR"
+      "en": {
+        "id": "en-tcg-cel25-024",
+        "number": "024",
+        "name": "Professor's Research (Professor Oak)",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/en/small/en-tcg-cel25/024.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-cel25",
+        "region": "EN"
       },
+      "kr": null,
       "dex": null
     },
     {
       "jp": {
         "id": "jp-tcg-S8a-30",
         "number": "30",
-        "name": "基本超エネルギー",
+        "name": "ミュウ",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/ja/small/jp-tcg-S8a/30.jpg",
         "rarity": "ウルトラレア",
         "setId": "jp-tcg-S8a",
         "region": "JP"
       },
-      "en": null,
-      "kr": {
+      "en": {
+        "id": "en-tcg-cel25-025",
+        "number": "025",
+        "name": "Mew",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/en/small/en-tcg-cel25/025.png",
+        "rarity": "Ultra Rare",
+        "setId": "en-tcg-cel25",
+        "region": "EN"
+      },
+      "kr": null,
+      "dex": 151
+    }
+  ],
+  "tail": {
+    "enOnly": [],
+    "krOnly": [
+      {
+        "id": "kr-s8a-31",
+        "number": "31",
+        "name": "기본 풀 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_031.png",
+        "rarity": null,
+        "setId": "kr-s8a",
+        "region": "KR",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "kr-s8a-32",
+        "number": "32",
+        "name": "기본 불꽃 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_032.png",
+        "rarity": null,
+        "setId": "kr-s8a",
+        "region": "KR",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "kr-s8a-33",
+        "number": "33",
+        "name": "기본 물 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_033.png",
+        "rarity": null,
+        "setId": "kr-s8a",
+        "region": "KR",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "kr-s8a-34",
+        "number": "34",
+        "name": "기본 번개 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_034.png",
+        "rarity": null,
+        "setId": "kr-s8a",
+        "region": "KR",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
         "id": "kr-s8a-35",
         "number": "35",
         "name": "기본 초 에너지",
         "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_035.png",
-        "rarity": "울트라 레어",
-        "setId": "kr-s8a",
-        "region": "KR"
-      },
-      "dex": null
-    },
-    {
-      "jp": {
-        "id": "jp-tcg-S8a-031",
-        "number": "031",
-        "name": "基本闘エネルギー",
-        "image": null,
         "rarity": null,
-        "setId": "jp-tcg-S8a",
-        "region": "JP"
+        "setId": "kr-s8a",
+        "region": "KR",
+        "dex": null,
+        "jpElsewhere": false
       },
-      "en": null,
-      "kr": {
+      {
         "id": "kr-s8a-36",
         "number": "36",
         "name": "기본 격투 에너지",
         "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_036.png",
         "rarity": null,
         "setId": "kr-s8a",
-        "region": "KR"
+        "region": "KR",
+        "dex": null,
+        "jpElsewhere": false
       },
-      "dex": null
-    },
-    {
-      "jp": {
-        "id": "jp-tcg-S8a-032",
-        "number": "032",
-        "name": "基本悪エネルギー",
-        "image": null,
-        "rarity": null,
-        "setId": "jp-tcg-S8a",
-        "region": "JP"
-      },
-      "en": null,
-      "kr": {
+      {
         "id": "kr-s8a-37",
         "number": "37",
         "name": "기본 악 에너지",
         "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_037.png",
         "rarity": null,
         "setId": "kr-s8a",
-        "region": "KR"
+        "region": "KR",
+        "dex": null,
+        "jpElsewhere": false
       },
-      "dex": null
-    },
-    {
-      "jp": {
-        "id": "jp-tcg-S8a-033",
-        "number": "033",
-        "name": "基本鋼エネルギー",
-        "image": null,
-        "rarity": null,
-        "setId": "jp-tcg-S8a",
-        "region": "JP"
-      },
-      "en": null,
-      "kr": {
+      {
         "id": "kr-s8a-38",
         "number": "38",
         "name": "기본 강철 에너지",
         "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8a/S8a_038.png",
         "rarity": null,
         "setId": "kr-s8a",
-        "region": "KR"
-      },
-      "dex": null
-    }
-  ],
-  "tail": {
-    "enOnly": [
-      {
-        "id": "en-tcg-cel25-023",
-        "number": "023",
-        "name": "Professor's Research (Professor Oak)",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/en/small/en-tcg-cel25/023.png",
-        "rarity": null,
-        "setId": "en-tcg-cel25",
-        "region": "EN",
+        "region": "KR",
         "dex": null,
         "jpElsewhere": false
-      },
-      {
-        "id": "en-tcg-cel25-024",
-        "number": "024",
-        "name": "Professor's Research (Professor Oak)",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/en/small/en-tcg-cel25/024.png",
-        "rarity": null,
-        "setId": "en-tcg-cel25",
-        "region": "EN",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "en-tcg-cel25-025",
-        "number": "025",
-        "name": "Mew",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s8a/en/small/en-tcg-cel25/025.png",
-        "rarity": null,
-        "setId": "en-tcg-cel25",
-        "region": "EN",
-        "dex": 151,
-        "jpElsewhere": true
       }
     ],
-    "krOnly": [],
     "enKr": []
   }
 }
