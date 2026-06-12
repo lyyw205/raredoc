@@ -10,6 +10,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 - `mega-munikisuzero` (니힐제로) · `mega-dream-ex` (메가드림 ex) · `mega-infernox` (인페르노X) · `mega-brave-symphonia` (메가브레이브) · `mega-symphonia` (메가심포니아)
 - `sv-black-bolt-white-flare` (블랙볼트 Black Bolt) · `sv-white-flare` (화이트플레어 White Flare) · `mega-ninja-spinner` (닌자스피너 Ninja Spinner)
+- SV 18팩: `sv-stellar-crown`(스텔라미라클) · `sv-shrouded-fable`(나이트원더러) · `sv-paradise-dragona`(낙원드래고나) · `sv-twilight-masquerade`(변환의 가면) · `sv-crimson-haze`(크림슨헤이즈) · `sv-temporal-forces`(와일드포스) · `sv-cyber-judge`(사이버저지) · `sv-paldean-fates`(샤이니트레저 ex) · `sv-paradox-rift`(고대의 포효) · `sv-future-flash`(미래의 일섬) · `sv-raging-surf`(레이징서프) · `sv-151`(포켓몬 151) · `sv-obsidian-flames`(흑염의 지배자) · `sv-paldea-evolved`(클레이버스트) · `sv-snow-hazard`(스노해저드) · `sv-triplet-beat`(트리플렛비트) · `sv-violet-ex`(바이올렛 ex) · `sv-base`(스칼렛 ex)
 
 규칙:
 - 단일 출처는 `scripts/lib/protected-groups.ts`의 `PROTECTED_GROUPS`. 목록 추가/해제는 거기만 고친다(이 문서·메모리는 그걸 가리킬 뿐).

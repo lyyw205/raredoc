@@ -14,6 +14,25 @@ export const PROTECTED_GROUPS: ReadonlySet<string> = new Set([
   "sv-black-bolt-white-flare", // 블랙볼트 / Black Bolt (id는 합본명이지만 실 그룹=Black Bolt)
   "sv-white-flare",      // 화이트플레어 / White Flare
   "mega-ninja-spinner",  // 닌자스피너 / ニンジャスピナー
+  // ── SV 시대 (2026-06-12 추가) ──
+  "sv-stellar-crown",        // 스텔라미라클 / ステラミラクル
+  "sv-shrouded-fable",       // 나이트원더러 / ナイトワンダラー
+  "sv-paradise-dragona",     // 낙원드래고나 / 楽園ドラゴーナ
+  "sv-twilight-masquerade",  // 변환의 가면 / 変幻の仮面
+  "sv-crimson-haze",         // 크림슨헤이즈 / クリムゾンヘイズ
+  "sv-temporal-forces",      // 와일드포스 / ワイルドフォース
+  "sv-cyber-judge",          // 사이버저지 / サイバージャッジ
+  "sv-paldean-fates",        // 샤이니트레저 ex / シャイニートレジャーex
+  "sv-paradox-rift",         // 고대의 포효 / 古代の咆哮
+  "sv-future-flash",         // 미래의 일섬 / 未来の一閃
+  "sv-raging-surf",          // 레이징서프 / レイジングサーフ
+  "sv-151",                  // 포켓몬 카드 151 / ポケモンカード151
+  "sv-obsidian-flames",      // 흑염의 지배자 / 黒炎の支配者
+  "sv-paldea-evolved",       // 클레이버스트 / クレイバースト
+  "sv-snow-hazard",          // 스노해저드 / スノーハザード
+  "sv-triplet-beat",         // 트리플렛비트 / トリプレットビート
+  "sv-violet-ex",            // 바이올렛 ex / バイオレットex
+  "sv-base",                 // 스칼렛 ex / スカーレットex
 ]);
 
 export function hasAllowProtectedFlag(argv: string[] = process.argv): boolean {
