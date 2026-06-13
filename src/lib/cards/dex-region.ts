@@ -15,6 +15,7 @@ export type Region = "JP" | "EN" | "KR";
 
 export type RegionPack = {
   setId: string;
+  code: string | null; // 지역 세트 코드 (JP M5/svXX, EN ptcgoCode, KR 사이트ID)
   name: string;
   era: string;
   eraOrder: number;
@@ -35,6 +36,7 @@ async function buildRegionPacks(region: Region, preferred: "ko" | "ja" | "en"): 
       where: { region },
       select: {
         id: true,
+        code: true,
         name: true,
         nameKo: true,
         nameJa: true,
@@ -76,6 +78,7 @@ async function buildRegionPacks(region: Region, preferred: "ko" | "ja" | "en"): 
     const wave = mergeMap.get(s.id) ?? 0;
     return {
       setId: s.id,
+      code: s.code ?? null,
       // locale 우선 이름(ko면 nameKo). Set 에 nameEn 없음 → en/폴백은 name(원어·영문판은 영문).
       name: (preferred === "ja" ? s.nameJa : preferred === "ko" ? s.nameKo : null) || s.name,
       era,

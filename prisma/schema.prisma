@@ -897,8 +897,14 @@ model Rarity {
   category   RarityCategory? @relation(fields: [categoryId], references: [id])
   cards      Card[]
   localeCards RegionCard[]   @relation("RarityLocale") // P4: art메타 하강(인쇄본별 rarity)
+  // Phase2(레어도 재정립): 표시 약어(JP식 C/U/R/RR/AR/SAR/SR/UR/HR/MUR) + 시대무관 정규 그룹 키.
+  //   canonicalCode 가 C↔Common, Holo Rare↔Rare Holo, Art Rare↔Illustration Rare 등 출처별 중복을 통합.
+  //   둘 다 additive·nullable — 원본 code/표시명은 보존(인쇄된 레어도 절대 미변경).
+  abbr          String?
+  canonicalCode String?
 
   @@index([categoryId])
+  @@index([canonicalCode])
 }
 
 model PriceSource {

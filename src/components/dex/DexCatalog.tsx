@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useDeferredValue, useEffect, Fragment, type ReactNode } from "react";
+import { useState, useMemo, useDeferredValue, useEffect, useRef, Fragment, type ReactNode } from "react";
 import Link from "next/link";
 import { Search, ImageOff } from "lucide-react";
 import { eraLabel } from "@/lib/cards/eras";
@@ -906,15 +906,27 @@ function RegionSlot({ region, variant, card, showOwned, onOpen }: {
   );
 }
 
-export function DexCatalog({ regionPacks, locale }: { regionPacks: Record<Region, RegionPack[]>; locale: string }) {
+export function DexCatalog({ regionPacks, locale, initialRegion, initialPack }: {
+  regionPacks: Record<Region, RegionPack[]>;
+  locale: string;
+  initialRegion?: Region; // 딥링크(/dex?region=) 초기 지역탭
+  initialPack?: string;   // 딥링크(/dex?pack=) 초기 선택 팩(= Set.id)
+}) {
   // 노출 지역 = 팩이 1개 이상 있는 지역(JP/EN/KR 순). 기본은 JP 있으면 JP, 없으면 첫째.
   const availableRegions = useMemo(
     () => REGION_ORDER.filter((r) => (regionPacks[r]?.length ?? 0) > 0),
     [regionPacks],
   );
-  const [activeRegion, setActiveRegion] = useState<Region>(
-    availableRegions.includes("JP") ? "JP" : (availableRegions[0] ?? "JP"),
-  );
+  // 딥링크 초기 지역: region 우선 → pack 이 속한 지역 추론 → JP/첫째.
+  const resolvedInitRegion: Region = (() => {
+    if (initialRegion && availableRegions.includes(initialRegion)) return initialRegion;
+    if (initialPack) {
+      const owner = REGION_ORDER.find((r) => (regionPacks[r] ?? []).some((p) => p.setId === initialPack));
+      if (owner && availableRegions.includes(owner)) return owner;
+    }
+    return availableRegions.includes("JP") ? "JP" : (availableRegions[0] ?? "JP");
+  })();
+  const [activeRegion, setActiveRegion] = useState<Region>(resolvedInitRegion);
 
   const packs = regionPacks[activeRegion] ?? [];
 
@@ -930,11 +942,20 @@ export function DexCatalog({ regionPacks, locale }: { regionPacks: Record<Region
   // 패널 열림 상태는 카드와 분리 — 닫힐 때 selectedCard 를 유지해 슬라이드 아웃 애니메이션 중 직전 카드를 보여준다.
   const [panelOpen, setPanelOpen]           = useState(false);
   const openCard = (card: SelectedCard) => { setSelectedCard(card); setPanelOpen(true); };
-  // 좌측 사이드바에서 선택한 팩(= Set.id). 지역 첫 팩으로 초기화.
-  const [selectedSetId, setSelectedSetId]   = useState<string>(packs[0]?.setId ?? "");
+  // 좌측 사이드바에서 선택한 팩(= Set.id). 딥링크 pack 우선, 없으면 지역 첫 팩.
+  const [selectedSetId, setSelectedSetId]   = useState<string>(
+    initialPack && packs.some((p) => p.setId === initialPack) ? initialPack : packs[0]?.setId ?? "",
+  );
   // 선택 팩의 카드 — 팩 선택 시 액션으로 lazy 로드. null = 로딩 전/중.
   const [activeCards, setActiveCards]       = useState<DexCard[] | null>(null);
   const [loadingCards, setLoadingCards]     = useState(false);
+
+  // 딥링크로 진입 시 선택된 팩이 사이드바 스크롤 밖일 수 있어 마운트 시 보이게 스크롤.
+  const activeNavRef = useRef<HTMLButtonElement | null>(null);
+  useEffect(() => {
+    if (initialPack) activeNavRef.current?.scrollIntoView({ block: "nearest" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // 지역 전환 → 그 지역 첫 팩으로 리셋, 카드 비움.
   function changeRegion(r: string) {
@@ -959,6 +980,17 @@ export function DexCatalog({ regionPacks, locale }: { regionPacks: Record<Region
 
   const activePack = useMemo(() => packs.find((p) => p.setId === selectedSetId) ?? packs[0] ?? null, [packs, selectedSetId]);
   const cardsSource = activeCards ?? [];
+
+  // 팩 정보 카드 — 카테고리(희귀도)별 구성·수집 현황 (cardsSource 전체, tier 오름차순)
+  const packRarityStats = useMemo(() => {
+    const map = new Map<string, { total: number; owned: number; tier: number; nameKo: string }>();
+    for (const c of cardsSource) {
+      const key = c.rarityCategoryCode ?? c.rarity ?? "Unknown";
+      const cur = map.get(key) ?? { total: 0, owned: 0, tier: categoryTier(c), nameKo: c.rarityCategoryNameKo ?? c.rarity ?? key };
+      map.set(key, { total: cur.total + 1, owned: cur.owned + (c.owned ? 1 : 0), tier: cur.tier, nameKo: cur.nameKo });
+    }
+    return [...map.entries()].sort(([, a], [, b]) => a.tier - b.tier);
+  }, [cardsSource]);
 
   const modalSet: ModalSet | null = useMemo(() => {
     if (!modalSetId || !activePack || activePack.setId !== modalSetId) return null;
@@ -1146,6 +1178,7 @@ export function DexCatalog({ regionPacks, locale }: { regionPacks: Record<Region
                       </p>
                     )}
                     <button
+                      ref={active ? activeNavRef : null}
                       onClick={() => setSelectedSetId(p.setId)}
                       title={p.name}
                       className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-toss-md text-left transition-colors cursor-pointer ${
@@ -1333,10 +1366,29 @@ export function DexCatalog({ regionPacks, locale }: { regionPacks: Record<Region
                       onClick={() => setModalSetId(activePack.setId)}
                       className="text-toss-caption text-toss-text-tertiary transition-colors hover:text-toss-text-primary"
                     >
-                      희귀도·수집 현황 →
+                      카드 그리드 →
                     </button>
                   </div>
                 </div>
+
+                {/* 희귀도 구성 (모달 → 팩 정보 카드 내 인라인) */}
+                {packRarityStats.length > 0 && (
+                  <div className="mt-4 border-t border-toss-divider pt-3">
+                    <p className="mb-2 text-toss-micro font-semibold uppercase tracking-wide text-toss-text-tertiary">
+                      희귀도 구성{view === "mine" ? " · 수집 현황" : ""}
+                    </p>
+                    <div className="flex flex-wrap gap-x-3 gap-y-1.5">
+                      {packRarityStats.map(([key, s]) => (
+                        <span key={key} className="inline-flex items-center gap-1 text-toss-micro">
+                          <span className="text-toss-text-tertiary">{s.nameKo}</span>
+                          <span className={`font-semibold toss-numeric ${view === "mine" && s.owned === s.total && s.total > 0 ? "text-toss-warning" : "text-toss-text-secondary"}`}>
+                            {view === "mine" ? `${s.owned}/${s.total}` : s.total}
+                          </span>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {view === "mine" && <ProgressBar value={pct} />}

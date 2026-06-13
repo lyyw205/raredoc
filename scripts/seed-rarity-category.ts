@@ -52,42 +52,52 @@ const CATEGORIES = [
     nameEn: "Double Rare",
     tier: 5,
     order: 5,
-    description: "★★ ex/V/GX/VMAX/VSTAR/LV.X",
-  },
-  {
-    code: "ultra_rare",
-    nameKo: "울트라 레어",
-    nameJa: "ウルトラレア",
-    nameEn: "Ultra Rare",
-    tier: 6,
-    order: 6,
-    description: "풀 홀로 SR 종류",
+    description: "★★ 더블레어(RR) — SV/MEGA ex 등 2스타",
   },
   {
     code: "illustration_rare",
     nameKo: "일러스트 레어",
     nameJa: "イラストレア",
     nameEn: "Illustration Rare",
-    tier: 7,
-    order: 7,
-    description: "카드 풀일러 + 일반 프레임",
+    tier: 6,
+    order: 6,
+    description: "카드 풀일러 + 일반 프레임 (AR)",
   },
   {
     code: "special_illustration_rare",
     nameKo: "스페셜 일러 레어",
     nameJa: "スペシャルイラストレア",
     nameEn: "Special Illustration Rare",
+    tier: 7,
+    order: 7,
+    description: "IR + ★★ 표시 (SAR)",
+  },
+  {
+    // Phase 1(2026-06): SR 을 ultra_rare 에서 분리한 독립 카테고리
+    code: "super_rare",
+    nameKo: "슈퍼 레어",
+    nameJa: "スーパーレア",
+    nameEn: "Super Rare",
     tier: 8,
     order: 8,
-    description: "IR + ★★ 표시",
+    description: "SR 풀아트 (캐릭터 풀일러 포함)",
+  },
+  {
+    code: "ultra_rare",
+    nameKo: "울트라 레어",
+    nameJa: "ウルトラレア",
+    nameEn: "Ultra Rare",
+    tier: 9,
+    order: 9,
+    description: "UR + 구 EX·GX·V·VMAX·VSTAR·LV.X 풀홀로",
   },
   {
     code: "shiny",
     nameKo: "시너",
     nameJa: "シャイニー",
     nameEn: "Shiny",
-    tier: 8,
-    order: 9,
+    tier: 10,
+    order: 10,
     description: "시너 ◇ 마크 (시 컬렉션)",
   },
   {
@@ -95,9 +105,9 @@ const CATEGORIES = [
     nameKo: "하이퍼 레어",
     nameJa: "ハイパーレア",
     nameEn: "Hyper Rare",
-    tier: 9,
-    order: 10,
-    description: "무지개/골드/실버 풀아트",
+    tier: 11,
+    order: 11,
+    description: "무지개/골드/실버 풀아트 + 메가 울트라(MUR)",
   },
   {
     code: "promo",
@@ -105,7 +115,7 @@ const CATEGORIES = [
     nameJa: "プロモ",
     nameEn: "Promo",
     tier: 0,
-    order: 11,
+    order: 12,
     description: "팩 외 배포 (미분류 None 포함)",
   },
 ] as const;
@@ -141,32 +151,33 @@ const RARITY_TO_CATEGORY: Record<string, string> = {
   Shining: "holo_rare",
   "Black White Rare": "holo_rare",
 
-  // double_rare
+  // double_rare — 더블레어(RR)만. EX/GX/V/VMAX/VSTAR/LV.X 는 ultra_rare 로 이관(Phase1)
   "Double Rare": "double_rare",
-  "Rare Holo V": "double_rare",
-  "Rare Holo EX": "double_rare",
-  "Rare Holo GX": "double_rare",
-  "Rare Holo VMAX": "double_rare",
-  "Rare Holo VSTAR": "double_rare",
-  "Rare Holo LV.X": "double_rare",
   "Radiant Rare": "double_rare",
   "Amazing Rare": "double_rare",
   "Prism Rare": "double_rare",
   "Rare Prism Star": "double_rare",
   Kagayaku: "double_rare",
 
-  // ultra_rare
+  // super_rare — SR 독립(Phase1). ultra_rare 에서 분리
+  "Super Rare": "super_rare",
+  "Super Rare Holo": "super_rare",
+  "Character Super Rare": "super_rare",
+
+  // ultra_rare — UR + 구 EX/GX/V/VMAX/VSTAR/LV.X 풀홀로
   "Ultra Rare": "ultra_rare",
   "Rare Ultra": "ultra_rare",
-  "Super Rare": "ultra_rare",
-  "Super Rare Holo": "ultra_rare",
+  "Rare Holo V": "ultra_rare",
+  "Rare Holo EX": "ultra_rare",
+  "Rare Holo GX": "ultra_rare",
+  "Rare Holo VMAX": "ultra_rare",
+  "Rare Holo VSTAR": "ultra_rare",
+  "Rare Holo LV.X": "ultra_rare",
   "Secret Rare": "ultra_rare",
   "Shiny Ultra Rare": "ultra_rare",
   "Trainer Rare": "ultra_rare",
   "Character Rare": "ultra_rare",
-  "Character Super Rare": "ultra_rare",
   "ACE SPEC Rare": "ultra_rare",
-  "Mega Ultra Rare": "ultra_rare",
   "Mega Attack Rare": "ultra_rare",
 
   // illustration_rare
@@ -183,11 +194,12 @@ const RARITY_TO_CATEGORY: Record<string, string> = {
   "Shiny Secret Rare": "shiny",
   "Rare Shiny GX": "shiny",
 
-  // hyper_rare
+  // hyper_rare — 무지개/골드 + 메가 울트라(MUR)
   "Hyper Rare": "hyper_rare",
   "Rare Rainbow": "hyper_rare",
   "Mega Hyper Rare": "hyper_rare",
   "Rare Secret": "hyper_rare",
+  "Mega Ultra Rare": "hyper_rare",
 
   // promo
   Promo: "promo",

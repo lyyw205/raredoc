@@ -44,6 +44,9 @@ export function Header({ user, unread = 0 }: { user: HeaderUser | null; unread?:
         <TossHeader.Logo href={link("")}>Raredoc</TossHeader.Logo>
 
         <TossHeader.Nav className="ml-6">
+          <TossHeader.NavItem href={link("/packs")} active={isActive("/packs")}>
+            카드팩
+          </TossHeader.NavItem>
           <TossHeader.NavItem href={link("/dex")} active={isActive("/dex")}>
             카드 도감
           </TossHeader.NavItem>

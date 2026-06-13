@@ -12,6 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 정적 페이지
   const staticRoutes = [
     { path: "", priority: 1.0, changeFrequency: "daily" as const },
+    { path: "/packs", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/dex", priority: 0.9, changeFrequency: "daily" as const },
     { path: "/tier-list", priority: 0.8, changeFrequency: "weekly" as const },
   ];
