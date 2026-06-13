@@ -9,7 +9,7 @@
     "anchors": 103,
     "enMatched": 89,
     "krMatched": 103,
-    "enOnly": 91,
+    "enOnly": 94,
     "krOnly": 0
   },
   "anchors": [
@@ -2303,10 +2303,10 @@
       },
       "en": null,
       "kr": {
-        "id": "kr-sm8-081",
-        "number": "081",
-        "name": "포켓몬 교체",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM8/SM8_0081.png",
+        "id": "kr-sm8-083",
+        "number": "083",
+        "name": "하이퍼볼",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM8/SM8_0083.png",
         "rarity": "언커먼",
         "setId": "kr-sm8",
         "region": "KR"
@@ -2347,10 +2347,10 @@
       },
       "en": null,
       "kr": {
-        "id": "kr-sm8-083",
-        "number": "083",
-        "name": "하이퍼볼",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM8/SM8_0083.png",
+        "id": "kr-sm8-081",
+        "number": "081",
+        "name": "포켓몬 교체",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM8/SM8_0081.png",
         "rarity": "언커먼",
         "setId": "kr-sm8",
         "region": "KR"
@@ -3033,6 +3033,23 @@
         ]
       },
       {
+        "id": "en-tcg-sm8-023",
+        "number": "023",
+        "name": "Wurmple",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm8/en/small/en-tcg-sm8/023.png",
+        "rarity": "Common",
+        "setId": "en-tcg-sm8",
+        "region": "EN",
+        "dex": 265,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm7a",
+            "name": "플라스마 스파크"
+          }
+        ]
+      },
+      {
         "id": "en-tcg-sm8-024",
         "number": "024",
         "name": "Wurmple",
@@ -3578,6 +3595,17 @@
         ]
       },
       {
+        "id": "en-tcg-sm8-084",
+        "number": "084",
+        "name": "Dedenne",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm8/en/small/en-tcg-sm8/084.png",
+        "rarity": "Common",
+        "setId": "en-tcg-sm8",
+        "region": "EN",
+        "dex": 702,
+        "jpElsewhere": true
+      },
+      {
         "id": "en-tcg-sm8-085",
         "number": "085",
         "name": "Tapu Koko",
@@ -3655,12 +3683,12 @@
         "jpElsewhere": true,
         "jpPacks": [
           {
-            "groupId": "og-sm12a",
-            "name": "TAG TEAM GX 태그올스타즈"
-          },
-          {
             "groupId": "og-sm8",
             "name": "버스트임팩트"
+          },
+          {
+            "groupId": "og-sm12a",
+            "name": "TAG TEAM GX 태그올스타즈"
           }
         ]
       },
@@ -3701,6 +3729,17 @@
             "name": "플라스마 스파크"
           }
         ]
+      },
+      {
+        "id": "en-tcg-sm8-117",
+        "number": "117",
+        "name": "Carbink",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm8/en/small/en-tcg-sm8/117.png",
+        "rarity": "Common",
+        "setId": "en-tcg-sm8",
+        "region": "EN",
+        "dex": 703,
+        "jpElsewhere": true
       },
       {
         "id": "en-tcg-sm8-122",
@@ -3955,7 +3994,25 @@
         "setId": "en-tcg-sm8",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm12a",
+            "name": "TAG TEAM GX 태그올스타즈"
+          },
+          {
+            "groupId": "og-sm7a",
+            "name": "플라스마 스파크"
+          },
+          {
+            "groupId": "og-jp-mega-promo",
+            "name": "JP MEGA 프로모"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "en-tcg-sm8-171",
@@ -4136,7 +4193,29 @@
         "setId": "en-tcg-sm8",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm6",
+            "name": "금단의 빛"
+          },
+          {
+            "groupId": "og-sm7a",
+            "name": "플라스마 스파크"
+          },
+          {
+            "groupId": "og-sm9",
+            "name": "태그볼트"
+          },
+          {
+            "groupId": "og-sm11a",
+            "name": "리믹스바우트"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "en-tcg-sm8-210",
@@ -4425,7 +4504,25 @@
         "setId": "en-tcg-sm8",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm12a",
+            "name": "TAG TEAM GX 태그올스타즈"
+          },
+          {
+            "groupId": "og-sm7a",
+            "name": "플라스마 스파크"
+          },
+          {
+            "groupId": "og-jp-mega-promo",
+            "name": "JP MEGA 프로모"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "en-tcg-sm8-231",

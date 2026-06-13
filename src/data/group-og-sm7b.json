@@ -7,10 +7,10 @@
   },
   "counts": {
     "anchors": 56,
-    "enMatched": 56,
+    "enMatched": 53,
     "krMatched": 56,
     "enOnly": 0,
-    "krOnly": 38
+    "krOnly": 0
   },
   "anchors": [
     {
@@ -173,15 +173,7 @@
         "setId": "jp-tcg-SM7b",
         "region": "JP"
       },
-      "en": {
-        "id": "en-tcg-sm8-023",
-        "number": "023",
-        "name": "Wurmple",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm8/en/small/en-tcg-sm8/023.png",
-        "rarity": "Common",
-        "setId": "en-tcg-sm8",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sm7b-006",
         "number": "006",
@@ -923,15 +915,7 @@
         "setId": "jp-tcg-SM7b",
         "region": "JP"
       },
-      "en": {
-        "id": "en-tcg-sm8-084",
-        "number": "084",
-        "name": "Dedenne",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm8/en/small/en-tcg-sm8/084.png",
-        "rarity": "Common",
-        "setId": "en-tcg-sm8",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sm7b-031",
         "number": "031",
@@ -953,15 +937,7 @@
         "setId": "jp-tcg-SM7b",
         "region": "JP"
       },
-      "en": {
-        "id": "en-tcg-sm8-117",
-        "number": "117",
-        "name": "Carbink",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm8/en/small/en-tcg-sm8/117.png",
-        "rarity": "Common",
-        "setId": "en-tcg-sm8",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sm7b-032",
         "number": "032",
@@ -1443,10 +1419,10 @@
         "region": "EN"
       },
       "kr": {
-        "id": "kr-sm7b-048",
-        "number": "048",
-        "name": "말리화",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_048.png",
+        "id": "kr-sm7b-049",
+        "number": "049",
+        "name": "유빈",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_049.png",
         "rarity": "언커먼",
         "setId": "kr-sm7b",
         "region": "KR"
@@ -1473,10 +1449,10 @@
         "region": "EN"
       },
       "kr": {
-        "id": "kr-sm7b-049",
-        "number": "049",
-        "name": "유빈",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_049.png",
+        "id": "kr-sm7b-048",
+        "number": "048",
+        "name": "말리화",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_048.png",
         "rarity": "언커먼",
         "setId": "kr-sm7b",
         "region": "KR"
@@ -1696,426 +1672,7 @@
   ],
   "tail": {
     "enOnly": [],
-    "krOnly": [
-      {
-        "id": "kr-sm7b-057",
-        "number": "057",
-        "name": "덩쿠리",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_057.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 114,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-058",
-        "number": "058",
-        "name": "덩쿠림보",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_058.png",
-        "rarity": "언커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 465,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-059",
-        "number": "059",
-        "name": "나무지기",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_059.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 252,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-060",
-        "number": "060",
-        "name": "나무돌이",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_060.png",
-        "rarity": "언커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 253,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-061",
-        "number": "061",
-        "name": "개무소",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_061.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 265,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-062",
-        "number": "062",
-        "name": "실쿤",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_062.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 266,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-063",
-        "number": "063",
-        "name": "뷰티플라이",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_063.png",
-        "rarity": "언커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 267,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-064",
-        "number": "064",
-        "name": "토중몬",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_064.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 290,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-065",
-        "number": "065",
-        "name": "아이스크",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_065.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 291,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-066",
-        "number": "066",
-        "name": "세꿀버리",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_066.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 415,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-067",
-        "number": "067",
-        "name": "비퀸",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_067.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 416,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-068",
-        "number": "068",
-        "name": "알로라식스테일",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_068.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 37,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-069",
-        "number": "069",
-        "name": "껍질몬",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_069.png",
-        "rarity": "언커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 292,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-070",
-        "number": "070",
-        "name": "깜까미",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_070.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 302,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-071",
-        "number": "071",
-        "name": "데스마스",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_071.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 562,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-072",
-        "number": "072",
-        "name": "데스니칸",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_072.png",
-        "rarity": "언커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 563,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-073",
-        "number": "073",
-        "name": "불켜미",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_073.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 607,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-074",
-        "number": "074",
-        "name": "램프라",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_074.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 608,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-075",
-        "number": "075",
-        "name": "메로엣타",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_075.png",
-        "rarity": "언커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 648,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-076",
-        "number": "076",
-        "name": "푸린",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_076.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 39,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-077",
-        "number": "077",
-        "name": "푸크린",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_077.png",
-        "rarity": "언커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 40,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-078",
-        "number": "078",
-        "name": "랄토스",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_078.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 280,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-079",
-        "number": "079",
-        "name": "킬리아",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_079.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 281,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-080",
-        "number": "080",
-        "name": "데덴네",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_080.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 702,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-081",
-        "number": "081",
-        "name": "멜리시",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_081.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 703,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-082",
-        "number": "082",
-        "name": "에블리",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_082.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 742,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-083",
-        "number": "083",
-        "name": "에리본",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_083.png",
-        "rarity": "언커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 743,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-084",
-        "number": "084",
-        "name": "자마슈",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_084.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 755,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-085",
-        "number": "085",
-        "name": "마셰이드",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_085.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 756,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-086",
-        "number": "086",
-        "name": "켈리몬",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_086.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": 352,
-        "jpElsewhere": true
-      },
-      {
-        "id": "kr-sm7b-087",
-        "number": "087",
-        "name": "넷트볼",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_087.png",
-        "rarity": "언커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-sm7b-088",
-        "number": "088",
-        "name": "모험가방",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_088.png",
-        "rarity": "커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-sm7b-089",
-        "number": "089",
-        "name": "저주의부적",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_089.png",
-        "rarity": "언커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-sm7b-090",
-        "number": "090",
-        "name": "페어리참(초)",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_090.png",
-        "rarity": "언커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-sm7b-091",
-        "number": "091",
-        "name": "페어리참(격투)",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_091.png",
-        "rarity": "언커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-sm7b-092",
-        "number": "092",
-        "name": "페어리참(드래곤)",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_092.png",
-        "rarity": "언커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-sm7b-093",
-        "number": "093",
-        "name": "말리화",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_093.png",
-        "rarity": "언커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
-        "id": "kr-sm7b-094",
-        "number": "094",
-        "name": "유빈",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7B/SM7B_094.png",
-        "rarity": "언커먼",
-        "setId": "kr-sm7b",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      }
-    ],
+    "krOnly": [],
     "enKr": []
   }
 }

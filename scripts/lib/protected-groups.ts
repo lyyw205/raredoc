@@ -14,6 +14,7 @@ export const PROTECTED_GROUPS: ReadonlySet<string> = new Set([
   "sv-black-bolt-white-flare", // 블랙볼트 / Black Bolt (id는 합본명이지만 실 그룹=Black Bolt)
   "sv-white-flare",      // 화이트플레어 / White Flare
   "mega-ninja-spinner",  // 닌자스피너 / ニンジャスピナー
+  "mega-abyss-eye",      // 어비스아이 / アビスアイ (2026-06-13 추가)
   // ── SV 시대 (2026-06-12 추가) ──
   "sv-stellar-crown",        // 스텔라미라클 / ステラミラクル
   "sv-shrouded-fable",       // 나이트원더러 / ナイトワンダラー
@@ -33,6 +34,23 @@ export const PROTECTED_GROUPS: ReadonlySet<string> = new Set([
   "sv-triplet-beat",         // 트리플렛비트 / トリプレットビート
   "sv-violet-ex",            // 바이올렛 ex / バイオレットex
   "sv-base",                 // 스칼렛 ex / スカーレットex
+  // ── SV 시대 (2026-06-13 추가) ──
+  "sv-surging-sparks",       // 초전브레이커 / 超電ブレイカー
+  "sv-prismatic-evolutions", // 테라스탈 페스타 ex / テラスタルフェスex
+  "sv-journey-together",     // 배틀파트너즈 / バトルパートナーズ
+  "sv-heatwave-arena",       // 열풍의 아레나 / 熱風のアリーナ
+  "sv-destined-rivals",      // 로켓단의 영광 / ロケット団の栄光
+  // ── 소드·실드(S) 시대 (2026-06-13 추가) ──
+  "og-s12a",                 // VSTAR 유니버스 / VSTARユニバース
+  "og-s12",                  // 패러다임트리거 / パラダイムトリガー
+  "og-s11a",                 // 백열의 아르카나 / 白熱のアルカナ
+  "og-s11",                  // 로스트어비스 / ロストアビス
+  "og-s10b",                 // 포켓몬 GO / Pokémon GO
+  "og-s10a",                 // 다크판타스마 / ダークファンタズマ
+  "og-s10d",                 // 타임게이저 / タイムゲイザー
+  "og-s10p",                 // 스페이스저글러 / スペースジャグラー
+  "og-s9a",                  // 배틀리전 / バトルリージョン
+  "og-s9",                   // 스타버스 / スターバース
 ]);
 
 export function hasAllowProtectedFlag(argv: string[] = process.argv): boolean {

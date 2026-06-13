@@ -9,7 +9,7 @@
     "anchors": 104,
     "enMatched": 88,
     "krMatched": 104,
-    "enOnly": 87,
+    "enOnly": 95,
     "krOnly": 0
   },
   "anchors": [
@@ -1194,10 +1194,10 @@
         "region": "JP"
       },
       "en": {
-        "id": "en-tcg-sm7-063",
-        "number": "063",
+        "id": "en-tcg-sm7-064",
+        "number": "064",
         "name": "Shuppet",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm7/en/small/en-tcg-sm7/063.png",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm7/en/small/en-tcg-sm7/064.png",
         "rarity": "Common",
         "setId": "en-tcg-sm7",
         "region": "EN"
@@ -2361,10 +2361,10 @@
       },
       "en": null,
       "kr": {
-        "id": "kr-sm7-083",
-        "number": "083",
-        "name": "포켓몬 교체",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7/SM7_083.png",
+        "id": "kr-sm7-085",
+        "number": "085",
+        "name": "하이퍼볼",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7/SM7_085.png",
         "rarity": "언커먼",
         "setId": "kr-sm7",
         "region": "KR"
@@ -2413,10 +2413,10 @@
       },
       "en": null,
       "kr": {
-        "id": "kr-sm7-085",
-        "number": "085",
-        "name": "하이퍼볼",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7/SM7_085.png",
+        "id": "kr-sm7-083",
+        "number": "083",
+        "name": "포켓몬 교체",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7/SM7_083.png",
         "rarity": "언커먼",
         "setId": "kr-sm7",
         "region": "KR"
@@ -2637,10 +2637,10 @@
         "region": "EN"
       },
       "kr": {
-        "id": "kr-sm7-089",
-        "number": "089",
-        "name": "루티아",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7/SM7_089.png",
+        "id": "kr-sm7-092",
+        "number": "092",
+        "name": "풍&란",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7/SM7_092.png",
         "rarity": "레어",
         "setId": "kr-sm7",
         "region": "KR"
@@ -2689,10 +2689,10 @@
         "region": "EN"
       },
       "kr": {
-        "id": "kr-sm7-092",
-        "number": "092",
-        "name": "풍&란",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7/SM7_092.png",
+        "id": "kr-sm7-089",
+        "number": "089",
+        "name": "루티아",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM7/SM7_089.png",
         "rarity": "언커먼",
         "setId": "kr-sm7",
         "region": "KR"
@@ -3145,6 +3145,27 @@
         ]
       },
       {
+        "id": "en-tcg-sm7-023",
+        "number": "023",
+        "name": "Slugma",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm7/en/small/en-tcg-sm7/023.png",
+        "rarity": "Common",
+        "setId": "en-tcg-sm7",
+        "region": "EN",
+        "dex": 218,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm6b",
+            "name": "챔피언로드"
+          },
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          }
+        ]
+      },
+      {
         "id": "en-tcg-sm7-024",
         "number": "024",
         "name": "Magcargo",
@@ -3399,19 +3420,19 @@
         ]
       },
       {
-        "id": "en-tcg-sm7-064",
-        "number": "064",
+        "id": "en-tcg-sm7-063",
+        "number": "063",
         "name": "Shuppet",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm7/en/small/en-tcg-sm7/064.png",
-        "rarity": null,
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm7/en/small/en-tcg-sm7/063.png",
+        "rarity": "Common",
         "setId": "en-tcg-sm7",
         "region": "EN",
         "dex": 353,
         "jpElsewhere": true,
         "jpPacks": [
           {
-            "groupId": "og-sm7",
-            "name": "창공의 카리스마"
+            "groupId": "og-sm6b",
+            "name": "챔피언로드"
           }
         ]
       },
@@ -3448,12 +3469,33 @@
         "jpElsewhere": true,
         "jpPacks": [
           {
-            "groupId": "og-sm1+",
-            "name": "썬&문"
-          },
-          {
             "groupId": "og-sm4+",
             "name": "GX 배틀부스트 REMASTER"
+          },
+          {
+            "groupId": "og-sm1+",
+            "name": "썬&문"
+          }
+        ]
+      },
+      {
+        "id": "en-tcg-sm7-071",
+        "number": "071",
+        "name": "Onix",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm7/en/small/en-tcg-sm7/071.png",
+        "rarity": "Common",
+        "setId": "en-tcg-sm7",
+        "region": "EN",
+        "dex": 95,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm6b",
+            "name": "챔피언로드"
+          },
+          {
+            "groupId": "og-s10b",
+            "name": "Pokémon GO"
           }
         ]
       },
@@ -3580,6 +3622,10 @@
         "jpElsewhere": true,
         "jpPacks": [
           {
+            "groupId": "dp-decks",
+            "name": "DP 구축덱"
+          },
+          {
             "groupId": "og-sm6b",
             "name": "챔피언로드"
           }
@@ -3620,6 +3666,23 @@
           {
             "groupId": "og-sm8b",
             "name": "GX 울트라샤이니"
+          }
+        ]
+      },
+      {
+        "id": "en-tcg-sm7-089",
+        "number": "089",
+        "name": "Steelix",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm7/en/small/en-tcg-sm7/089.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-sm7",
+        "region": "EN",
+        "dex": 208,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm6b",
+            "name": "챔피언로드"
           }
         ]
       },
@@ -3683,6 +3746,17 @@
         ]
       },
       {
+        "id": "en-tcg-sm7-098",
+        "number": "098",
+        "name": "Heatran",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm7/en/small/en-tcg-sm7/098.png",
+        "rarity": "Rare",
+        "setId": "en-tcg-sm7",
+        "region": "EN",
+        "dex": 485,
+        "jpElsewhere": true
+      },
+      {
         "id": "en-tcg-sm7-099",
         "number": "099",
         "name": "Solgaleo",
@@ -3694,12 +3768,12 @@
         "jpElsewhere": true,
         "jpPacks": [
           {
-            "groupId": "og-sm1+",
-            "name": "썬&문"
-          },
-          {
             "groupId": "og-sm4+",
             "name": "GX 배틀부스트 REMASTER"
+          },
+          {
+            "groupId": "og-sm1+",
+            "name": "썬&문"
           }
         ]
       },
@@ -3916,11 +3990,39 @@
         "jpElsewhere": false
       },
       {
+        "id": "en-tcg-sm7-129",
+        "number": "129",
+        "name": "Energy Switch",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm7/en/small/en-tcg-sm7/129.png",
+        "rarity": "Common",
+        "setId": "en-tcg-sm7",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm6b",
+            "name": "챔피언로드"
+          }
+        ]
+      },
+      {
         "id": "en-tcg-sm7-131",
         "number": "131",
         "name": "Friend Ball",
         "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm7/en/small/en-tcg-sm7/131.png",
         "rarity": null,
+        "setId": "en-tcg-sm7",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-sm7-133",
+        "number": "133",
+        "name": "Hiker",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm7/en/small/en-tcg-sm7/133.png",
+        "rarity": "Uncommon",
         "setId": "en-tcg-sm7",
         "region": "EN",
         "dex": null,
@@ -3969,6 +4071,34 @@
         "region": "EN",
         "dex": null,
         "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-sm7-146",
+        "number": "146",
+        "name": "Super Scoop Up",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm7/en/small/en-tcg-sm7/146.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-sm7",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "en-tcg-sm7-147",
+        "number": "147",
+        "name": "Switch",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm7/en/small/en-tcg-sm7/147.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-sm7",
+        "region": "EN",
+        "dex": null,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm6b",
+            "name": "챔피언로드"
+          }
+        ]
       },
       {
         "id": "en-tcg-sm7-149",

@@ -1367,10 +1367,10 @@
         "region": "EN"
       },
       "kr": {
-        "id": "kr-sm4s-046",
-        "number": "046",
-        "name": "엿보기 레드카드",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM4S/SM4S_046.png",
+        "id": "kr-sm4s-047",
+        "number": "047",
+        "name": "카운터 캐처",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM4S/SM4S_047.png",
         "rarity": "언커먼",
         "setId": "kr-sm4s",
         "region": "KR"
@@ -1397,10 +1397,10 @@
         "region": "EN"
       },
       "kr": {
-        "id": "kr-sm4s-047",
-        "number": "047",
-        "name": "카운터 캐처",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM4S/SM4S_047.png",
+        "id": "kr-sm4s-046",
+        "number": "046",
+        "name": "엿보기 레드카드",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM4S/SM4S_046.png",
         "rarity": "언커먼",
         "setId": "kr-sm4s",
         "region": "KR"
@@ -1806,6 +1806,10 @@
           {
             "groupId": "og-sm4a",
             "name": "초차원의 침략자"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
           }
         ]
       },
@@ -1945,7 +1949,17 @@
         "setId": "en-tcg-sm4",
         "region": "EN",
         "dex": null,
-        "jpElsewhere": false
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "og-sm4s",
+            "name": "각성의 용사"
+          }
+        ]
       },
       {
         "id": "en-tcg-sm4-121",

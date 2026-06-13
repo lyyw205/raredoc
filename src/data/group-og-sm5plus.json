@@ -7,7 +7,7 @@
   },
   "counts": {
     "anchors": 56,
-    "enMatched": 7,
+    "enMatched": 4,
     "krMatched": 56,
     "enOnly": 0,
     "krOnly": 47
@@ -251,15 +251,7 @@
         "setId": "jp-tcg-SM5+",
         "region": "JP"
       },
-      "en": {
-        "id": "en-tcg-sm5-016",
-        "number": "016",
-        "name": "Dewpider",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm5s/en/small/en-tcg-sm5/016.png",
-        "rarity": null,
-        "setId": "en-tcg-sm5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sm5+-011",
         "number": "011",
@@ -281,15 +273,7 @@
         "setId": "jp-tcg-SM5+",
         "region": "JP"
       },
-      "en": {
-        "id": "en-tcg-sm5-017",
-        "number": "017",
-        "name": "Araquanid",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm5s/en/small/en-tcg-sm5/017.png",
-        "rarity": null,
-        "setId": "en-tcg-sm5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sm5+-012",
         "number": "012",
@@ -871,10 +855,10 @@
       },
       "en": null,
       "kr": {
-        "id": "kr-sm5+-039",
-        "number": "039",
-        "name": "비스트링",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM5+/SM5plus_039.png",
+        "id": "kr-sm5+-041",
+        "number": "041",
+        "name": "아쿠아패치",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM5+/SM5plus_041.png",
         "rarity": null,
         "setId": "kr-sm5+",
         "region": "KR"
@@ -937,10 +921,10 @@
       },
       "en": null,
       "kr": {
-        "id": "kr-sm5+-041",
-        "number": "041",
-        "name": "아쿠아패치",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM5+/SM5plus_041.png",
+        "id": "kr-sm5+-039",
+        "number": "039",
+        "name": "비스트링",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM5+/SM5plus_039.png",
         "rarity": null,
         "setId": "kr-sm5+",
         "region": "KR"
@@ -1025,10 +1009,10 @@
       },
       "en": null,
       "kr": {
-        "id": "kr-sm5+-044",
-        "number": "044",
-        "name": "맥실러",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM5+/SM5plus_044.png",
+        "id": "kr-sm5+-046",
+        "number": "046",
+        "name": "핸섬",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM5+/SM5plus_046.png",
         "rarity": null,
         "setId": "kr-sm5+",
         "region": "KR"
@@ -1047,10 +1031,10 @@
       },
       "en": null,
       "kr": {
-        "id": "kr-sm5+-046",
-        "number": "046",
-        "name": "핸섬",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM5+/SM5plus_046.png",
+        "id": "kr-sm5+-044",
+        "number": "044",
+        "name": "맥실러",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM5+/SM5plus_044.png",
         "rarity": null,
         "setId": "kr-sm5+",
         "region": "KR"
@@ -1281,15 +1265,7 @@
         "setId": "jp-tcg-SM5+",
         "region": "JP"
       },
-      "en": {
-        "id": "en-tcg-sm5-150",
-        "number": "150",
-        "name": "Lana",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm5s/en/small/en-tcg-sm5/150.png",
-        "rarity": "Super Rare",
-        "setId": "en-tcg-sm5",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sm5+-055",
         "number": "055",
@@ -1314,7 +1290,21 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 387,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5s",
+            "name": "울트라썬"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-058",
@@ -1325,7 +1315,21 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 388,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5s",
+            "name": "울트라썬"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-059",
@@ -1336,7 +1340,21 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 459,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5m",
+            "name": "울트라문"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          },
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-060",
@@ -1347,7 +1365,21 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 460,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5m",
+            "name": "울트라문"
+          },
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-061",
@@ -1358,7 +1390,17 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 390,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          },
+          {
+            "groupId": "og-sm5s",
+            "name": "울트라썬"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-062",
@@ -1369,7 +1411,17 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 391,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5s",
+            "name": "울트라썬"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-063",
@@ -1380,7 +1432,25 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 485,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5s",
+            "name": "울트라썬"
+          },
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-064",
@@ -1391,7 +1461,17 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 393,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5m",
+            "name": "울트라문"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-065",
@@ -1402,7 +1482,17 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 394,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          },
+          {
+            "groupId": "og-sm5m",
+            "name": "울트라문"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-066",
@@ -1413,7 +1503,13 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 751,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-067",
@@ -1424,7 +1520,13 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 752,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-068",
@@ -1437,6 +1539,22 @@
         "dex": 81,
         "jpElsewhere": true,
         "jpPacks": [
+          {
+            "groupId": "og-sm12a",
+            "name": "TAG TEAM GX 태그올스타즈"
+          },
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          },
+          {
+            "groupId": "og-sm5s",
+            "name": "울트라썬"
+          },
           {
             "groupId": "sm-decks",
             "name": "썬·문 구축덱"
@@ -1455,6 +1573,22 @@
         "jpElsewhere": true,
         "jpPacks": [
           {
+            "groupId": "og-sm12a",
+            "name": "TAG TEAM GX 태그올스타즈"
+          },
+          {
+            "groupId": "og-sm5s",
+            "name": "울트라썬"
+          },
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          },
+          {
             "groupId": "sm-decks",
             "name": "썬·문 구축덱"
           }
@@ -1469,7 +1603,17 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 796,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-071",
@@ -1480,7 +1624,21 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 479,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          },
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "og-sm5m",
+            "name": "울트라문"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-072",
@@ -1491,7 +1649,13 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 480,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-073",
@@ -1502,7 +1666,13 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 481,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-074",
@@ -1513,7 +1683,13 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 482,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-075",
@@ -1524,7 +1700,17 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 803,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-076",
@@ -1535,7 +1721,21 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 389,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5s",
+            "name": "울트라썬"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-077",
@@ -1546,7 +1746,21 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 443,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          },
+          {
+            "groupId": "og-sm5m",
+            "name": "울트라문"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-078",
@@ -1557,7 +1771,21 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 444,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5m",
+            "name": "울트라문"
+          },
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-079",
@@ -1568,7 +1796,25 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 447,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5m",
+            "name": "울트라문"
+          },
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-080",
@@ -1579,7 +1825,17 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 453,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          },
+          {
+            "groupId": "og-sm5m",
+            "name": "울트라문"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-081",
@@ -1590,7 +1846,25 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 454,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "mega-start-deck-100",
+            "name": "스타트 덱 100 배틀컬렉션"
+          },
+          {
+            "groupId": "og-sm5m",
+            "name": "울트라문"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          },
+          {
+            "groupId": "mega-brave-symphonia",
+            "name": "메가브레이브"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-082",
@@ -1601,7 +1875,17 @@
         "setId": "kr-sm5+",
         "region": "KR",
         "dex": 794,
-        "jpElsewhere": true
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          }
+        ]
       },
       {
         "id": "kr-sm5+-083",

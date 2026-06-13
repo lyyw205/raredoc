@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useDeferredValue, useEffect, Fragment, type ReactNode } from "react";
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { Search, ImageOff } from "lucide-react";
 import { eraLabel } from "@/lib/cards/eras";
 import { getCardPrices, type CardPriceRow } from "@/lib/actions/getCardPrices";
 import { getCardDetail, type RegionCardVariant, type CardInfo } from "@/lib/actions/getCardDetail";
@@ -479,8 +479,18 @@ function CardDetailContent({
 
   // 선택된 지역판의 이미지 — 없으면 현재 카드 이미지로 폴백
   const activeVariant = variants?.find((v) => v.region === activeRegion) ?? null;
+  // 활성 지역판 이미지 없으면 EN→JP 순 다른 지역판 일러로 대체 + 미수집 마커
+  const activeHasImg = !!(activeVariant?.imageLarge || activeVariant?.imageSmall);
+  const borrowDetail = activeHasImg
+    ? null
+    : (variants?.find((v) => v.region === "EN" && (v.imageLarge || v.imageSmall))
+      ?? variants?.find((v) => v.region === "JP" && (v.imageLarge || v.imageSmall))
+      ?? variants?.find((v) => v.imageLarge || v.imageSmall));
   const displayLarge =
-    activeVariant?.imageLarge ?? activeVariant?.imageSmall ?? card.imageLarge ?? card.imageSmall;
+    activeVariant?.imageLarge ?? activeVariant?.imageSmall
+    ?? borrowDetail?.imageLarge ?? borrowDetail?.imageSmall
+    ?? card.imageLarge ?? card.imageSmall;
+  const detailBorrowedFrom = !activeHasImg && borrowDetail ? borrowDetail.region : null;
   const displayName = activeVariant?.name ?? card.name;
 
   // 지역판별 이름 — 한글명 기본(KR 지역판 우선, 없으면 nameKo 오버레이), 하단에 영어명/일본명
@@ -516,11 +526,21 @@ function CardDetailContent({
         <div className="flex gap-4">
           {/* 좌: 이미지 + 지역판 탭 */}
           <div className="shrink-0 flex flex-col items-center gap-2.5">
-            <CardImage
-              src={displayLarge}
-              alt={displayName}
-              className="w-[220px] aspect-[63/88] rounded-toss-lg shadow-toss-lg"
-            />
+            <div className="relative w-[220px]">
+              <CardImage
+                src={displayLarge}
+                alt={displayName}
+                className="w-[220px] aspect-[63/88] rounded-toss-lg shadow-toss-lg"
+              />
+              {detailBorrowedFrom && (
+                <div
+                  className="absolute top-2 right-2 flex items-center justify-center w-6 h-6 rounded-full bg-toss-text-primary/70 text-white ring-1 ring-white/60"
+                  title={`${REGION_LABEL[activeRegion] ?? activeRegion} 이미지 미수집 — ${REGION_LABEL[detailBorrowedFrom] ?? detailBorrowedFrom}판 일러로 대체 표시`}
+                >
+                  <ImageOff className="w-3.5 h-3.5" strokeWidth={2.5} />
+                </div>
+              )}
+            </div>
             {/* 지역판 탭 — 2개 이상 있을 때만 노출 */}
             {variants && variants.length > 1 && (
               <SegmentedControl
@@ -844,6 +864,15 @@ function RegionSlot({ region, variant, card, showOwned, onOpen }: {
     );
   }
   const rarLabel = variant.rarityCategoryNameKo ?? variant.rarity;
+  // 발매됐으나 이미지 미수집 → EN→JP 순 다른 지역판 일러로 대체 표시 + 미수집 마커
+  const sibs = card.variants ?? [];
+  const borrow = variant.imageSmall
+    ? null
+    : (sibs.find((v) => v.region === "EN" && v.imageSmall)
+      ?? sibs.find((v) => v.region === "JP" && v.imageSmall)
+      ?? sibs.find((v) => v.imageSmall));
+  const displaySrc = variant.imageSmall ?? borrow?.imageSmall ?? null;
+  const borrowedFrom = !variant.imageSmall && borrow ? borrow.region : null;
   return (
     <div className="group block text-left">
       <button type="button" onClick={() => onOpen(variant)} className="block w-full" title={`${variant.name} · No.${variant.number}`}>
@@ -851,7 +880,15 @@ function RegionSlot({ region, variant, card, showOwned, onOpen }: {
           className="relative rounded-toss-md overflow-hidden group-hover:shadow-toss-md transition-shadow"
           style={{ aspectRatio: "63 / 88" }}
         >
-          <CardImage src={variant.imageSmall} alt={variant.name} className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-200" />
+          <CardImage src={displaySrc} alt={variant.name} className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-200" />
+          {borrowedFrom && (
+            <div
+              className="absolute top-[3px] right-[3px] flex items-center justify-center w-4 h-4 rounded-full bg-toss-text-primary/65 text-white ring-1 ring-white/60"
+              title={`${REGION_TAG[region]} 이미지 미수집 — ${borrowedFrom}판 일러로 대체 표시`}
+            >
+              <ImageOff className="w-2.5 h-2.5" strokeWidth={2.5} />
+            </div>
+          )}
           {showOwned && card.owned && card.grade && (
             <div className="absolute bottom-[2px] left-[2px] text-[7px] font-bold bg-toss-text-primary text-toss-bg-base px-1 py-[1px] rounded leading-tight">{card.grade}</div>
           )}

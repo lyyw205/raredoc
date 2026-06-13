@@ -7,9 +7,9 @@
   },
   "counts": {
     "anchors": 57,
-    "enMatched": 57,
+    "enMatched": 56,
     "krMatched": 57,
-    "enOnly": 23,
+    "enOnly": 27,
     "krOnly": 0
   },
   "anchors": [
@@ -1553,15 +1553,7 @@
         "setId": "jp-tcg-SM3H",
         "region": "JP"
       },
-      "en": {
-        "id": "en-tcg-sm3-150",
-        "number": "150",
-        "name": "Charizard-GX",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm3h/en/small/en-tcg-sm3/150.png",
-        "rarity": "Super Rare",
-        "setId": "en-tcg-sm3",
-        "region": "EN"
-      },
+      "en": null,
       "kr": {
         "id": "kr-sm3h-052",
         "number": "052",
@@ -1738,6 +1730,31 @@
         "jpElsewhere": true
       },
       {
+        "id": "en-tcg-sm3-027",
+        "number": "027",
+        "name": "Alolan Vulpix",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm3h/en/small/en-tcg-sm3/027.png",
+        "rarity": null,
+        "setId": "en-tcg-sm3",
+        "region": "EN",
+        "dex": 37,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm2k",
+            "name": "알로라의 햇빛"
+          },
+          {
+            "groupId": "og-sm2+",
+            "name": "새로운 시련"
+          },
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          }
+        ]
+      },
+      {
         "id": "en-tcg-sm3-047",
         "number": "047",
         "name": "Togedemaru",
@@ -1794,6 +1811,52 @@
           {
             "groupId": "og-sm8b",
             "name": "GX 울트라샤이니"
+          }
+        ]
+      },
+      {
+        "id": "en-tcg-sm3-149",
+        "number": "149",
+        "name": "Tapu Bulu-GX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm3h/en/small/en-tcg-sm3/149.png",
+        "rarity": null,
+        "setId": "en-tcg-sm3",
+        "region": "EN",
+        "dex": 787,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm2+",
+            "name": "새로운 시련"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
+      },
+      {
+        "id": "en-tcg-sm3-150",
+        "number": "150",
+        "name": "Charizard-GX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm3h/en/small/en-tcg-sm3/150.png",
+        "rarity": "Super Rare",
+        "setId": "en-tcg-sm3",
+        "region": "EN",
+        "dex": 6,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm3h",
+            "name": "어둠을 밝힌 무지개"
+          },
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
           }
         ]
       },
@@ -1878,6 +1941,39 @@
           {
             "groupId": "og-sm2+",
             "name": "새로운 시련"
+          }
+        ]
+      },
+      {
+        "id": "en-tcg-sm3-155",
+        "number": "155",
+        "name": "Lycanroc-GX",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm3h/en/small/en-tcg-sm3/155.png",
+        "rarity": "Double Rare",
+        "setId": "en-tcg-sm3",
+        "region": "EN",
+        "dex": 745,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm2l",
+            "name": "알로라의 달빛"
+          },
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "og-sm2+",
+            "name": "새로운 시련"
+          },
+          {
+            "groupId": "og-sm4+",
+            "name": "GX 배틀부스트 REMASTER"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
           }
         ]
       },
