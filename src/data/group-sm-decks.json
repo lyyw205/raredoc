@@ -9796,17 +9796,6 @@
     "enOnly": [],
     "krOnly": [
       {
-        "id": "kr-smn-001",
-        "number": "001",
-        "name": "파이리",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_001.png",
-        "rarity": null,
-        "setId": "kr-smn",
-        "region": "KR",
-        "dex": 4,
-        "jpElsewhere": true
-      },
-      {
         "id": "kr-sm30a-001",
         "number": "001",
         "name": "덩쿠리",
@@ -9840,15 +9829,29 @@
         "jpElsewhere": false
       },
       {
-        "id": "kr-smn-002",
-        "number": "002",
-        "name": "리자드",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_002.png",
+        "id": "kr-smn-001",
+        "number": "001",
+        "name": "파이리",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_001.png",
         "rarity": null,
         "setId": "kr-smn",
         "region": "KR",
-        "dex": 5,
-        "jpElsewhere": true
+        "dex": 4,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm3h",
+            "name": "어둠을 밝힌 무지개"
+          },
+          {
+            "groupId": "og-pmcg4",
+            "name": "확장팩 제4탄 로켓단"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm30a-002",
@@ -9884,15 +9887,25 @@
         "jpElsewhere": false
       },
       {
-        "id": "kr-smn-003",
-        "number": "003",
-        "name": "리자몽 GX",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_003.png",
+        "id": "kr-smn-002",
+        "number": "002",
+        "name": "리자드",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_002.png",
         "rarity": null,
         "setId": "kr-smn",
         "region": "KR",
-        "dex": 6,
-        "jpElsewhere": true
+        "dex": 5,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm3h",
+            "name": "어둠을 밝힌 무지개"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm30a-003",
@@ -9928,15 +9941,73 @@
         "jpElsewhere": false
       },
       {
-        "id": "kr-smn-004",
-        "number": "004",
-        "name": "가디",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_004.png",
+        "id": "kr-smn-003",
+        "number": "003",
+        "name": "리자몽 GX",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_003.png",
         "rarity": null,
         "setId": "kr-smn",
         "region": "KR",
-        "dex": 58,
-        "jpElsewhere": true
+        "dex": 6,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "sv-obsidian-flames",
+            "name": "흑염의 지배자"
+          },
+          {
+            "groupId": "og-cp6",
+            "name": "BASE PACK 20th Anniversary"
+          },
+          {
+            "groupId": "og-s9",
+            "name": "스타버스"
+          },
+          {
+            "groupId": "og-sm11a",
+            "name": "리믹스바우트"
+          },
+          {
+            "groupId": "og-sm3h",
+            "name": "어둠을 밝힌 무지개"
+          },
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "sv-paldean-fates",
+            "name": "샤이니트레저 ex"
+          },
+          {
+            "groupId": "xy-decks",
+            "name": "XY 구축덱"
+          },
+          {
+            "groupId": "sv-decks",
+            "name": "SV 구축덱"
+          },
+          {
+            "groupId": "og-xy2",
+            "name": "와일드 블레이즈"
+          },
+          {
+            "groupId": "swsh-decks",
+            "name": "소드실드 구축덱"
+          },
+          {
+            "groupId": "og-s12a",
+            "name": "VSTAR 유니버스"
+          },
+          {
+            "groupId": "og-s4a",
+            "name": "샤이니스타 V"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm30a-004",
@@ -9972,15 +10043,25 @@
         "jpElsewhere": false
       },
       {
-        "id": "kr-smn-005",
-        "number": "005",
-        "name": "윈디",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_005.png",
+        "id": "kr-smn-004",
+        "number": "004",
+        "name": "가디",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_004.png",
         "rarity": null,
         "setId": "kr-smn",
         "region": "KR",
-        "dex": 59,
-        "jpElsewhere": true
+        "dex": 58,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm1s",
+            "name": "썬 컬렉션"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm30a-005",
@@ -10016,15 +10097,25 @@
         "jpElsewhere": false
       },
       {
-        "id": "kr-smn-006",
-        "number": "006",
-        "name": "히드런",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_006.png",
+        "id": "kr-smn-005",
+        "number": "005",
+        "name": "윈디",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_005.png",
         "rarity": null,
         "setId": "kr-smn",
         "region": "KR",
-        "dex": 485,
-        "jpElsewhere": true
+        "dex": 59,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm1s",
+            "name": "썬 컬렉션"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm30a-006",
@@ -10060,15 +10151,33 @@
         "jpElsewhere": false
       },
       {
-        "id": "kr-smn-007",
-        "number": "007",
-        "name": "바오프",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_007.png",
+        "id": "kr-smn-006",
+        "number": "006",
+        "name": "히드런",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_006.png",
         "rarity": null,
         "setId": "kr-smn",
         "region": "KR",
-        "dex": 513,
-        "jpElsewhere": true
+        "dex": 485,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5s",
+            "name": "울트라썬"
+          },
+          {
+            "groupId": "og-sm8b",
+            "name": "GX 울트라샤이니"
+          },
+          {
+            "groupId": "og-sm5+",
+            "name": "울트라포스"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm30a-007",
@@ -10104,15 +10213,25 @@
         "jpElsewhere": false
       },
       {
-        "id": "kr-smn-008",
-        "number": "008",
-        "name": "바오키",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_008.png",
+        "id": "kr-smn-007",
+        "number": "007",
+        "name": "바오프",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_007.png",
         "rarity": null,
         "setId": "kr-smn",
         "region": "KR",
-        "dex": 514,
-        "jpElsewhere": true
+        "dex": 513,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm3h",
+            "name": "어둠을 밝힌 무지개"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm30a-008",
@@ -10148,15 +10267,25 @@
         "jpElsewhere": false
       },
       {
-        "id": "kr-smn-009",
-        "number": "009",
-        "name": "앤티골",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_009.png",
+        "id": "kr-smn-008",
+        "number": "008",
+        "name": "바오키",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_008.png",
         "rarity": null,
         "setId": "kr-smn",
         "region": "KR",
-        "dex": 631,
-        "jpElsewhere": true
+        "dex": 514,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm3h",
+            "name": "어둠을 밝힌 무지개"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm30a-009",
@@ -10192,15 +10321,25 @@
         "jpElsewhere": false
       },
       {
-        "id": "kr-smn-010",
-        "number": "010",
-        "name": "푸호꼬",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_010.png",
+        "id": "kr-smn-009",
+        "number": "009",
+        "name": "앤티골",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_009.png",
         "rarity": null,
         "setId": "kr-smn",
         "region": "KR",
-        "dex": 653,
-        "jpElsewhere": true
+        "dex": 631,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm3h",
+            "name": "어둠을 밝힌 무지개"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm30a-010",
@@ -10236,15 +10375,25 @@
         "jpElsewhere": false
       },
       {
-        "id": "kr-smn-011",
-        "number": "011",
-        "name": "폭거북스",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_011.png",
+        "id": "kr-smn-010",
+        "number": "010",
+        "name": "푸호꼬",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_010.png",
         "rarity": null,
         "setId": "kr-smn",
         "region": "KR",
-        "dex": 776,
-        "jpElsewhere": true
+        "dex": 653,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm6",
+            "name": "금단의 빛"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm30a-011",
@@ -10280,6 +10429,27 @@
         "jpElsewhere": false
       },
       {
+        "id": "kr-smn-011",
+        "number": "011",
+        "name": "폭거북스",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_011.png",
+        "rarity": null,
+        "setId": "kr-smn",
+        "region": "KR",
+        "dex": 776,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5s",
+            "name": "울트라썬"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
+      },
+      {
         "id": "kr-sm30a-012",
         "number": "012",
         "name": "부스터",
@@ -10313,17 +10483,6 @@
         "jpElsewhere": false
       },
       {
-        "id": "kr-smn-013",
-        "number": "013",
-        "name": "내루미",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_013.png",
-        "rarity": null,
-        "setId": "kr-smn",
-        "region": "KR",
-        "dex": 108,
-        "jpElsewhere": true
-      },
-      {
         "id": "kr-sm30a-013",
         "number": "013",
         "name": "파이어",
@@ -10355,6 +10514,27 @@
         "region": "KR",
         "dex": null,
         "jpElsewhere": false
+      },
+      {
+        "id": "kr-smn-013",
+        "number": "013",
+        "name": "내루미",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SMN/SMN_013.png",
+        "rarity": null,
+        "setId": "kr-smn",
+        "region": "KR",
+        "dex": 108,
+        "jpElsewhere": true,
+        "jpPacks": [
+          {
+            "groupId": "og-sm5s",
+            "name": "울트라썬"
+          },
+          {
+            "groupId": "sm-decks",
+            "name": "썬·문 구축덱"
+          }
+        ]
       },
       {
         "id": "kr-sm30a-014",
@@ -10621,17 +10801,6 @@
         "jpElsewhere": false
       },
       {
-        "id": "kr-sme-022",
-        "number": "022",
-        "name": "기본 초 에너지",
-        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SME/SME_022.png",
-        "rarity": null,
-        "setId": "kr-sme",
-        "region": "KR",
-        "dex": null,
-        "jpElsewhere": false
-      },
-      {
         "id": "kr-sm30a-022",
         "number": "022",
         "name": "라이츄 GX",
@@ -10660,6 +10829,17 @@
         "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM60B/SM60B_022.png",
         "rarity": null,
         "setId": "kr-sm60b",
+        "region": "KR",
+        "dex": null,
+        "jpElsewhere": false
+      },
+      {
+        "id": "kr-sme-022",
+        "number": "022",
+        "name": "기본 초 에너지",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SME/SME_022.png",
+        "rarity": null,
+        "setId": "kr-sme",
         "region": "KR",
         "dex": null,
         "jpElsewhere": false

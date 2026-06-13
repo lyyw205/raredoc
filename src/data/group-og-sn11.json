@@ -9,7 +9,7 @@
     "anchors": 106,
     "enMatched": 104,
     "krMatched": 106,
-    "enOnly": 1,
+    "enOnly": 0,
     "krOnly": 0
   },
   "anchors": [
@@ -3179,25 +3179,7 @@
     }
   ],
   "tail": {
-    "enOnly": [
-      {
-        "id": "en-tcg-sm11-242",
-        "number": "242",
-        "name": "Mewtwo & Mew-GX",
-        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-sm11a/en/small/en-tcg-sm11/242.png",
-        "rarity": null,
-        "setId": "en-tcg-sm11",
-        "region": "EN",
-        "dex": 150,
-        "jpElsewhere": true,
-        "jpPacks": [
-          {
-            "groupId": "og-sn11",
-            "name": "미라클트윈"
-          }
-        ]
-      }
-    ],
+    "enOnly": [],
     "krOnly": [],
     "enKr": []
   }
