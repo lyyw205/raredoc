@@ -7,8 +7,8 @@
   },
   "counts": {
     "anchors": 127,
-    "enMatched": 83,
-    "krMatched": 126,
+    "enMatched": 84,
+    "krMatched": 127,
     "enOnly": 77,
     "krOnly": 0
   },
@@ -685,7 +685,15 @@
         "setId": "jp-tcg-S11",
         "region": "JP"
       },
-      "en": null,
+      "en": {
+        "id": "en-tcg-swsh12-038",
+        "number": "038",
+        "name": "Wailord",
+        "image": "https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/og-s11a/en/small/en-tcg-swsh12/038.png",
+        "rarity": "Uncommon",
+        "setId": "en-tcg-swsh12",
+        "region": "EN"
+      },
       "kr": {
         "id": "kr-s11-026",
         "number": "026",
@@ -2680,7 +2688,15 @@
         "setId": "en-tcg-swsh11",
         "region": "EN"
       },
-      "kr": null,
+      "kr": {
+        "id": "kr-s11-101",
+        "number": "101",
+        "name": "마폭시 V",
+        "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S11/S11_101.png",
+        "rarity": "Secret Rare",
+        "setId": "kr-s11",
+        "region": "KR"
+      },
       "dex": 655
     },
     {
