@@ -15,6 +15,7 @@ export const PROTECTED_GROUPS: ReadonlySet<string> = new Set([
   "sv-white-flare",      // 화이트플레어 / White Flare
   "mega-ninja-spinner",  // 닌자스피너 / ニンジャスピナー
   "mega-abyss-eye",      // 어비스아이 / アビスアイ (2026-06-13 추가)
+  "mega-start-deck-100", // 스타트덱100 배틀컬렉션 / スタートデッキ100 (2026-06-15 추가, JP/KR 전수검증·EN=Ascended Heroes 정리완)
   // ── SV 시대 (2026-06-12 추가) ──
   "sv-stellar-crown",        // 스텔라미라클 / ステラミラクル
   "sv-shrouded-fable",       // 나이트원더러 / ナイトワンダラー

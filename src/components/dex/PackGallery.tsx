@@ -24,14 +24,15 @@ function PackTile({ pack, onOpen }: { pack: RegionPack; onOpen: (setId: string) 
       title={pack.name}
       className="group flex flex-col items-center gap-2 rounded-toss-lg border border-toss-divider bg-toss-bg-base p-3 text-center transition-all hover:border-toss-brand/60 hover:shadow-toss-md cursor-pointer"
     >
-      <div className="flex h-14 w-full items-center justify-center">
+      {/* 로고 표시 영역 고정 150×56 — 로고 비율 유지하며 박스 안에 맞춤(object-contain) */}
+      <div className="mx-auto flex h-[56px] w-[150px] max-w-full items-center justify-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={logoUrl}
           alt={pack.name}
           loading="lazy"
           decoding="async"
-          className="max-h-full max-w-full object-contain transition-transform group-hover:scale-105"
+          className="h-full w-full object-contain transition-transform group-hover:scale-105"
           onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }}
         />
       </div>
