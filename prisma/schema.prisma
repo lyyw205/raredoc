@@ -20,6 +20,11 @@ model Set {
   symbolUrl   String?
   region      String      @default("EN") // EN | JP | KR
   code        String? // 지역 팩 코드 (EN ptcgoCode / JP sv2a / KR 사이트ID 등)
+  // 팩 메타(set-meta.ts 단일출처) — additive nullable. 설계: docs/dex-pack-typing.md
+  packType     String? // PackType slug: expansion|reinforced|high_class|concept|starter|deck|box_set|promo|subset
+  titleCleanKo String? // 사이드바 클린 팩명(KR). NULL → CardPack.nameKo → shortenPackName 폴백
+  titleCleanJa String? // 클린 팩명(JP)
+  titleCleanEn String? // 클린 팩명(EN)
   cardPackId  String?     @map("setGroupId")
   cardPack    CardPack?   @relation(fields: [cardPackId], references: [id])
   primarySetForLogical Card[] @relation("LogicalCardPrimarySet")
@@ -33,6 +38,7 @@ model Set {
   @@index([series])
   @@index([releaseDate])
   @@index([region])
+  @@index([region, packType]) // 사이드바 packType 필터(본탄만/특전 제외) 프리필터
   @@index([cardPackId], map: "Set_setGroupId_idx")
 }
 

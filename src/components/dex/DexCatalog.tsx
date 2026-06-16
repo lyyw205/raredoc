@@ -8,6 +8,7 @@ import { getCardPrices, type CardPriceRow } from "@/lib/actions/getCardPrices";
 import { getCardDetail, type RegionCardVariant, type CardInfo } from "@/lib/actions/getCardDetail";
 import { loadSetCards } from "@/lib/actions/loadSetCards";
 import type { Region, RegionPack } from "@/lib/cards/dex-region";
+import { PACK_TYPE_LABEL, SIDEBAR_PRIMARY, type PackType } from "@/lib/cards/set-meta";
 import { categoryTier, categoryTierFromGroup } from "@/lib/cards/rarity";
 import {
   Button,
@@ -928,7 +929,13 @@ export function DexCatalog({ regionPacks, locale, initialRegion, initialPack }: 
   })();
   const [activeRegion, setActiveRegion] = useState<Region>(resolvedInitRegion);
 
-  const packs = regionPacks[activeRegion] ?? [];
+  const [onlyPrimary, setOnlyPrimary] = useState(false); // 사이드바 '본탄만' 필터(특전·덱·프로모 숨김)
+  const packs = useMemo(() => {
+    const all = regionPacks[activeRegion] ?? [];
+    if (!onlyPrimary) return all;
+    // packType 없는(미분류) 팩은 숨기지 않음 — 본탄 의심 우선 노출
+    return all.filter((p) => !p.packType || SIDEBAR_PRIMARY.has(p.packType as PackType));
+  }, [regionPacks, activeRegion, onlyPrimary]);
 
   const [view, setView]                     = useState<ViewMode>("all");
   const [selCategories, setSelCategories]   = useState<Set<string>>(new Set());
@@ -1164,7 +1171,19 @@ export function DexCatalog({ regionPacks, locale, initialRegion, initialPack }: 
         {/* ── 좌측 카드팩 네비 (lg 이상) ──────────────────────────────────── */}
         <aside className="hidden lg:block w-52 shrink-0">
           <div className="sticky top-[68px] max-h-[calc(100vh-88px)] overflow-y-auto no-scrollbar pr-1">
-            <p className="px-2 mb-2 text-toss-micro font-semibold text-toss-text-tertiary uppercase tracking-wide">카드팩</p>
+            <div className="px-2 mb-2 flex items-center justify-between gap-1">
+              <p className="text-toss-micro font-semibold text-toss-text-tertiary uppercase tracking-wide">카드팩</p>
+              <button
+                type="button"
+                onClick={() => setOnlyPrimary((v) => !v)}
+                title="본탄(확장팩·강화확장팩·하이클래스팩)만 보기 — 스타터·덱·특전박스·프로모 숨김"
+                className={`shrink-0 rounded-toss-sm px-1.5 py-0.5 text-toss-tiny font-semibold transition-colors cursor-pointer ${
+                  onlyPrimary ? "bg-toss-brand/10 text-toss-brand" : "text-toss-text-quaternary hover:bg-toss-hover"
+                }`}
+              >
+                본탄만
+              </button>
+            </div>
             <nav className="space-y-0.5">
               {packs.map((p, i) => {
                 const showEra = i === 0 || packs[i - 1].eraOrder !== p.eraOrder || packs[i - 1].isEtc !== p.isEtc;
@@ -1190,6 +1209,9 @@ export function DexCatalog({ regionPacks, locale, initialRegion, initialPack }: 
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={logoUrl} alt="" className="h-4 w-8 object-contain shrink-0" loading="lazy" decoding="async" onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }} />
                       <span className="flex-1 min-w-0 truncate text-toss-caption font-medium">{p.name}</span>
+                      {p.packType && !SIDEBAR_PRIMARY.has(p.packType as PackType) ? (
+                        <span className="shrink-0 rounded-toss-sm bg-toss-bg-muted px-1 text-toss-tiny font-medium text-toss-text-tertiary">{PACK_TYPE_LABEL[p.packType as PackType]}</span>
+                      ) : null}
                       {p.mergeOf && p.mergeOf > 1 ? (
                         <span className="shrink-0 rounded-toss-sm bg-toss-bg-muted px-1 text-toss-tiny font-semibold text-toss-text-quaternary">합본</span>
                       ) : null}

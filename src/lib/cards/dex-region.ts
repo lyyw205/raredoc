@@ -9,6 +9,7 @@
 import { prisma } from "@/lib/prisma";
 import { pickRarityLabel } from "./card-fields";
 import { canonEra, eraOrderIndex } from "./eras";
+import { resolveSidebarTitle } from "./set-meta";
 import type { DexCard, DexCardVariant } from "@/components/dex/DexCatalog";
 
 export type Region = "JP" | "EN" | "KR";
@@ -23,11 +24,24 @@ export type RegionPack = {
   cardCount: number;
   logoUrl: string | null;
   isEtc: boolean;
+  packType: string | null; // set-meta.ts PackType slug (확장팩/특전박스/…) — 사이드바 뱃지·필터·정렬용
   mergeOf?: number; // CardPackLink wave 수(>1 합본) — 합본 뱃지용
 };
 
 const REGION_TTL_MS = 3_600_000; // 1h
 const ETC_ERA_ORDER = 9_000; // isEtc 는 항상 맨뒤로(eraOrder 큰값)
+
+/**
+ * 정규확장팩 사이드바 표기 축약 — "스칼렛&바이올렛 확장팩 「흑염의 지배자」" → "흑염의 지배자".
+ * 본탄 확장팩/강화확장팩/하이클래스팩(raw era 가 -SP 로 끝나지 않음)에만 적용. 스타터·트레이너박스·
+ * 덱·프로모·배틀강화BOX 등 SP 특전상품(era 가 *-SP)과 cardPack 없는 isEtc(rawEra=null)는 원래 이름 유지.
+ * 「…」 괄호가 없으면 그대로(콜렉션 X·라이징 피스트 등). EN 은 괄호가 없어 자연히 무변환.
+ */
+export function shortenPackName(fullName: string, rawEra: string | null | undefined): string {
+  if (!rawEra || rawEra.endsWith("-SP")) return fullName;
+  const m = fullName.match(/「([^」]+)」/);
+  return m ? m[1] : fullName;
+}
 
 // ── 팩 목록 (지역별) ────────────────────────────────────────────────────────
 async function buildRegionPacks(region: Region, preferred: "ko" | "ja" | "en"): Promise<RegionPack[]> {
@@ -43,7 +57,19 @@ async function buildRegionPacks(region: Region, preferred: "ko" | "ja" | "en"): 
         releaseDate: true,
         logoUrl: true,
         series: true,
-        cardPack: { select: { era: true, eraRef: { select: { key: true, order: true } } } },
+        packType: true,
+        titleCleanKo: true,
+        titleCleanJa: true,
+        titleCleanEn: true,
+        cardPack: {
+          select: {
+            era: true,
+            nameKo: true,
+            nameJa: true,
+            nameEn: true,
+            eraRef: { select: { key: true, order: true } },
+          },
+        },
         _count: { select: { localeCards: true } },
       },
     }),
@@ -76,17 +102,30 @@ async function buildRegionPacks(region: Region, preferred: "ko" | "ja" | "en"): 
       isEtc = true;
     }
     const wave = mergeMap.get(s.id) ?? 0;
+    // locale 우선 클린 팩명 — 3단 폴백(set-meta.ts resolveSidebarTitle):
+    //   Set.titleClean{locale}(백필) → CardPack.name{locale}(canonical) → shortenPackName(미백필 폴백).
+    const setTitleClean =
+      preferred === "ja" ? s.titleCleanJa : preferred === "ko" ? s.titleCleanKo : s.titleCleanEn;
+    const cardPackName =
+      preferred === "ja" ? s.cardPack?.nameJa : preferred === "ko" ? s.cardPack?.nameKo : s.cardPack?.nameEn;
+    const legacyName = (preferred === "ja" ? s.nameJa : preferred === "ko" ? s.nameKo : null) || s.name;
     return {
       setId: s.id,
       code: s.code ?? null,
-      // locale 우선 이름(ko면 nameKo). Set 에 nameEn 없음 → en/폴백은 name(원어·영문판은 영문).
-      name: (preferred === "ja" ? s.nameJa : preferred === "ko" ? s.nameKo : null) || s.name,
+      name: resolveSidebarTitle({
+        setTitleClean: setTitleClean ?? null,
+        cardPackName: cardPackName ?? null,
+        legacyName,
+        rawEra: s.cardPack?.era,
+        shortenPackName,
+      }),
       era,
       eraOrder,
       releaseDate: s.releaseDate ? s.releaseDate.toISOString().slice(0, 10) : null,
       cardCount: s._count.localeCards,
       logoUrl: s.logoUrl ?? null,
       isEtc,
+      packType: s.packType ?? null,
       ...(wave > 1 ? { mergeOf: wave } : {}),
     };
   });
