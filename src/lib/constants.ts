@@ -1,5 +1,8 @@
 // RARITY_ORDER 는 Rarity.tier(0~9) 기반 정렬로 대체됨. 정렬 헬퍼: `@/lib/cards/rarity`.
 
+/** 사이트 오리진(SEO·sitemap·robots·JSON-LD metadataBase 단일출처). */
+export const SITE_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://raredoc.kr";
+
 export const RARITY_KO: Record<string, string> = {
   Common: "커먼",
   Uncommon: "언커먼",
@@ -34,6 +37,10 @@ export const SERIES_KO: Record<string, string> = {
   Base: "베이스",
   Other: "기타",
 };
+
+/** 뱃지 티어 등급 순서(낮음→높음) — 게이미피케이션 서비스·뱃지 카탈로그 공용. */
+export const TIER_ORDER = ["SILVER", "GOLD", "DIAMOND"] as const;
+export type TierName = (typeof TIER_ORDER)[number];
 
 export const TIER_LABELS: Record<string, string> = {
   S: "S — 최상위 투자가치",

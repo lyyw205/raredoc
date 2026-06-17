@@ -22,6 +22,42 @@ export function toKrw(value: number, currency: string | null | undefined): numbe
   }
 }
 
+// ── 컨디션·시세 공용(collection/gamification/marketplace 단일출처) ─────────────
+
+/** 컨디션(grade) → 시세 계수. NM(완전 새것) 기준 1.0. */
+export const CONDITION_COEFFICIENT: Record<string, number> = {
+  미개봉: 1.15,
+  "1착": 1.1,
+  NM: 1.0,
+  VNDS: 0.95,
+  LP: 0.85,
+  MP: 0.65,
+  HP: 0.45,
+  DS: 0.3,
+  D: 0.3,
+};
+
+/** 컨디션→계수 룩업(미지정 grade 는 1.0). */
+export function conditionCoefficient(grade: string): number {
+  return CONDITION_COEFFICIENT[grade] ?? 1.0;
+}
+
+/** 전체 9등급 어휘(컨디션 enum·정렬·계수키 단일출처). */
+export const GRADES = ["미개봉", "1착", "NM", "VNDS", "LP", "MP", "HP", "DS", "D"] as const;
+export type Grade = (typeof GRADES)[number];
+
+export interface PriceFields {
+  normal: number | null;
+  holofoil: number | null;
+  reverseHolo: number | null;
+  firstEdition: number | null;
+}
+
+/** Price 행에서 대표 USD 시세 선택 (홀로 > 노말 > 리버스 > 1ed). */
+export function pickPriceUsd(p: PriceFields): number | null {
+  return p.holofoil ?? p.normal ?? p.reverseHolo ?? p.firstEdition ?? null;
+}
+
 export interface PriceBucket {
   id: "tier1" | "tier2" | "tier3" | "tier4";
   minKrw: number;

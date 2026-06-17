@@ -91,3 +91,8 @@ export const ARCHETYPE_KO: Record<string, string> = {
   // ── 특수 ──
   other: "기타", // Limitless 의 미분류 묶음
 };
+
+/** 덱명 표시 — 한글명 없으면 nameEn 폴백, 그것도 없으면 fallback(기본 ""). */
+export function deckLabel(a: { nameKo: string; nameEn: string | null }, fallback = ""): string {
+  return a.nameKo || a.nameEn || fallback;
+}
