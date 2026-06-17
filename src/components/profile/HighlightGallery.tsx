@@ -9,7 +9,7 @@ import {
   setHighlightAction,
   toggleForSaleAction,
   certifyItemAction,
-  searchCardsAction,
+  searchExternalCardsAction,
   type CardSearchResult,
 } from "@/lib/actions/collection";
 
@@ -93,7 +93,7 @@ function AddCardModal({
         setDexResults([]);
         return;
       }
-      void searchCardsAction(q).then(setDexResults);
+      void searchExternalCardsAction(q).then(setDexResults);
     }, 350);
     return () => clearTimeout(t);
   }, [query]);

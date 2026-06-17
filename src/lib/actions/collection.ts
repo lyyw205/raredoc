@@ -13,16 +13,11 @@ import {
   deleteCollectionItem,
 } from "@/lib/services/collection";
 import { ensureListingForItem } from "@/lib/services/marketplace";
+import { GRADES } from "@/lib/trades/shared";
+import { ActionResult, ACTION_ERR } from "./_shared";
 
-export type ActionState = {
-  ok: boolean;
-  error?: string;
-  itemId?: string;
-  /** 인증 사진을 업로드할 Blob 토큰이 없어 사진 없이 보류 접수된 경우 true */
-  certPending?: boolean;
-};
+export type CollectionActionState = ActionResult<{ itemId?: string; certPending?: boolean }>;
 
-const GRADES = ["미개봉", "1착", "NM", "VNDS", "LP", "MP", "HP", "DS", "D"] as const;
 const gradeSchema = z.enum(GRADES);
 
 function revalidateCollectionViews() {
@@ -31,79 +26,13 @@ function revalidateCollectionViews() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 등록
+// 삭제
 // ─────────────────────────────────────────────────────────────────────────────
 
-const addSchema = z.object({
-  cardId: z.string().min(1),
-  grade: gradeSchema,
-  estimatedKrw: z.number().int().positive().nullable().optional(),
-  forSale: z.boolean().optional(),
-});
-
-export async function addItemAction(input: {
-  cardId: string;
-  grade: string;
-  estimatedKrw?: number | null;
-  forSale?: boolean;
-}): Promise<ActionState> {
+export async function deleteItemAction(itemId: string): Promise<CollectionActionState> {
   const user = await getCurrentUser();
-  if (!user) return { ok: false, error: "로그인이 필요합니다." };
-
-  const parsed = addSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: "입력값을 확인해 주세요." };
-
-  // FK 무결성: 카드가 DB 에 없으면 pokemontcg.io 에서 가져와 upsert
-  const card = await ensureLocale(parsed.data.cardId);
-  if (!card) return { ok: false, error: "카드 정보를 찾을 수 없습니다." };
-
-  const item = await addCollectionItem({
-    userId: user.id,
-    cardId: parsed.data.cardId,
-    grade: parsed.data.grade,
-    estimatedKrw: parsed.data.estimatedKrw ?? null,
-    forSale: parsed.data.forSale ?? false,
-  });
-
-  revalidateCollectionViews();
-  return { ok: true, itemId: item.id };
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// 수정 / 삭제
-// ─────────────────────────────────────────────────────────────────────────────
-
-const updateSchema = z.object({
-  itemId: z.string().min(1),
-  grade: gradeSchema.optional(),
-  estimatedKrw: z.number().int().positive().nullable().optional(),
-  forSale: z.boolean().optional(),
-});
-
-export async function updateItemAction(input: {
-  itemId: string;
-  grade?: string;
-  estimatedKrw?: number | null;
-  forSale?: boolean;
-}): Promise<ActionState> {
-  const user = await getCurrentUser();
-  if (!user) return { ok: false, error: "로그인이 필요합니다." };
-
-  const parsed = updateSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: "입력값을 확인해 주세요." };
-
-  const { itemId, ...patch } = parsed.data;
-  const ok = await updateCollectionItem(itemId, user.id, patch);
-  if (!ok) return { ok: false, error: "수정 권한이 없습니다." };
-
-  revalidateCollectionViews();
-  return { ok: true, itemId };
-}
-
-export async function deleteItemAction(itemId: string): Promise<ActionState> {
-  const user = await getCurrentUser();
-  if (!user) return { ok: false, error: "로그인이 필요합니다." };
-  if (!itemId) return { ok: false, error: "잘못된 요청입니다." };
+  if (!user) return { ok: false, error: ACTION_ERR.auth };
+  if (!itemId) return { ok: false, error: ACTION_ERR.badRequest };
 
   const ok = await deleteCollectionItem(itemId, user.id);
   if (!ok) return { ok: false, error: "삭제 권한이 없습니다." };
@@ -119,9 +48,9 @@ export async function deleteItemAction(itemId: string): Promise<ActionState> {
 export async function toggleForSaleAction(
   itemId: string,
   forSale: boolean
-): Promise<ActionState> {
+): Promise<CollectionActionState> {
   const user = await getCurrentUser();
-  if (!user) return { ok: false, error: "로그인이 필요합니다." };
+  if (!user) return { ok: false, error: ACTION_ERR.auth };
 
   const ok = await updateCollectionItem(itemId, user.id, { forSale });
   if (!ok) return { ok: false, error: "권한이 없습니다." };
@@ -145,9 +74,9 @@ const highlightSchema = z.object({
 export async function setHighlightAction(
   itemId: string,
   slot: number | null
-): Promise<ActionState> {
+): Promise<CollectionActionState> {
   const user = await getCurrentUser();
-  if (!user) return { ok: false, error: "로그인이 필요합니다." };
+  if (!user) return { ok: false, error: ACTION_ERR.auth };
 
   const parsed = highlightSchema.safeParse({ itemId, slot });
   if (!parsed.success) return { ok: false, error: "잘못된 슬롯입니다." };
@@ -169,7 +98,7 @@ export async function setHighlightAction(
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 카드 검색 (인증 신청 모달에서 사용)
+// 카드 검색 (인증 신청 모달에서 사용) — pokemontcg.io 외부 API
 // ─────────────────────────────────────────────────────────────────────────────
 
 export type CardSearchResult = {
@@ -180,9 +109,10 @@ export type CardSearchResult = {
   imageUrl: string;
 };
 
-/** pokemontcg.io 카드 이름 검색. 인증 신청 모달의 카드 선택용. */
-export async function searchCardsAction(query: string): Promise<CardSearchResult[]> {
-  const q = query.trim();
+/** pokemontcg.io 카드 이름 검색. 인증 신청 모달의 카드 선택용(외부 API). */
+export async function searchExternalCardsAction(query: string): Promise<CardSearchResult[]> {
+  // Lucene 특수문자 제거 + 길이 상한(쿼리 깨짐·오용 방지)
+  const q = query.trim().replace(/["*:()\\]/g, "").slice(0, 50);
   if (q.length < 1) return [];
   try {
     const res = await searchCards(`name:"*${q}*"`, 1);
@@ -193,7 +123,8 @@ export async function searchCardsAction(query: string): Promise<CardSearchResult
       number: c.number,
       imageUrl: c.images?.large ?? c.images?.small ?? "",
     }));
-  } catch {
+  } catch (e) {
+    console.error("[searchExternalCardsAction] pokemontcg.io error:", e);
     return [];
   }
 }
@@ -207,6 +138,44 @@ const certifySchema = z.object({
   grade: gradeSchema,
 });
 
+/** 인증 사진을 Vercel Blob 에 업로드. 토큰 없음/파일 없음/실패 → 사진 없이 보류(certPending=true). */
+async function uploadCertPhoto(
+  userId: string,
+  photo: FormDataEntryValue | null
+): Promise<{ photoUrl: string; certPending: boolean }> {
+  const hasFile = photo instanceof File && photo.size > 0;
+  if (!hasFile || !process.env.BLOB_READ_WRITE_TOKEN) {
+    return { photoUrl: "", certPending: true };
+  }
+  try {
+    const { put } = await import("@vercel/blob");
+    const ext = (photo.name.split(".").pop() || "jpg").toLowerCase();
+    const blob = await put(`certifications/${userId}/${Date.now()}.${ext}`, photo, {
+      access: "public",
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    });
+    return { photoUrl: blob.url, certPending: false };
+  } catch (e) {
+    // 업로드 실패 → 사진 없이 보류 접수로 graceful fallback
+    console.error("[certifyItemAction] blob upload failed:", e);
+    return { photoUrl: "", certPending: true };
+  }
+}
+
+/** 보유 아이템: 있으면 재사용, 없으면 신규 등록. (downstream 은 id 만 사용) */
+async function ensureCollectionItem(
+  userId: string,
+  cardId: string,
+  grade: string
+): Promise<{ id: string }> {
+  const existing = await prisma.collectionItem.findFirst({
+    where: { userId, regionCardId: cardId },
+    select: { id: true },
+  });
+  if (existing) return existing;
+  return addCollectionItem({ userId, cardId, grade });
+}
+
 /**
  * 인증 신청. 보유 아이템이 없으면 먼저 등록 후 Certification(pending) 생성.
  * - BLOB_READ_WRITE_TOKEN 있으면 사진을 Vercel Blob 에 업로드해 photoUrl 저장.
@@ -214,9 +183,9 @@ const certifySchema = z.object({
  */
 export async function certifyItemAction(
   formData: FormData
-): Promise<ActionState> {
+): Promise<CollectionActionState> {
   const user = await getCurrentUser();
-  if (!user) return { ok: false, error: "로그인이 필요합니다." };
+  if (!user) return { ok: false, error: ACTION_ERR.auth };
 
   const parsed = certifySchema.safeParse({
     cardId: formData.get("cardId"),
@@ -227,47 +196,8 @@ export async function certifyItemAction(
   const card = await ensureLocale(parsed.data.cardId);
   if (!card) return { ok: false, error: "카드 정보를 찾을 수 없습니다." };
 
-  // 사진 업로드 (토큰 있을 때만)
-  let photoUrl = "";
-  let certPending = true;
-  const photo = formData.get("photo");
-  const hasFile = photo instanceof File && photo.size > 0;
-
-  if (hasFile && process.env.BLOB_READ_WRITE_TOKEN) {
-    try {
-      const { put } = await import("@vercel/blob");
-      const ext = (photo.name.split(".").pop() || "jpg").toLowerCase();
-      const blob = await put(
-        `certifications/${user.id}/${Date.now()}.${ext}`,
-        photo,
-        { access: "public", token: process.env.BLOB_READ_WRITE_TOKEN }
-      );
-      photoUrl = blob.url;
-      certPending = false;
-    } catch {
-      // 업로드 실패 → 사진 없이 보류 접수로 graceful fallback
-      photoUrl = "";
-      certPending = true;
-    }
-  }
-
-  // 기존 보유 아이템 있으면 재사용, 없으면 등록
-  let item = await prisma.collectionItem.findFirst({
-    where: { userId: user.id, localeId: parsed.data.cardId },
-    include: { certification: { select: { id: true } } },
-  });
-  if (!item) {
-    const created = await addCollectionItem({
-      userId: user.id,
-      cardId: parsed.data.cardId,
-      grade: parsed.data.grade,
-    });
-    item = await prisma.collectionItem.findUnique({
-      where: { id: created.id },
-      include: { certification: { select: { id: true } } },
-    });
-  }
-  if (!item) return { ok: false, error: "등록 중 오류가 발생했습니다." };
+  const { photoUrl, certPending } = await uploadCertPhoto(user.id, formData.get("photo"));
+  const item = await ensureCollectionItem(user.id, parsed.data.cardId, parsed.data.grade);
 
   // Certification upsert (itemId unique)
   await prisma.certification.upsert({

@@ -9,16 +9,16 @@
  */
 
 import { loadCardByLocaleId, cardToTCG } from "@/lib/cards/queries";
+import { REGION_SORT_PRIORITY } from "@/lib/cards/card-fields";
 
 export type RegionCardVariant = {
   id: string;
   region: string; // EN | JP | KR
-  language: string; // en | ja | ko
   name: string;
   number: string;
   imageSmall: string | null;
   imageLarge: string | null;
-  setName: string;
+  setCode: string | null;
 };
 
 export type CardInfo = {
@@ -38,7 +38,6 @@ export type CardInfo = {
   attacks?: { name: string; cost?: string[]; damage?: string; text?: string }[];
   rules?: string[];
   flavorText?: string;
-  artist?: string;
   legalities?: { standard?: string; expanded?: string; unlimited?: string };
 };
 
@@ -47,38 +46,30 @@ export type CardDetail = {
   info: CardInfo | null;
 };
 
-const REGION_ORDER: Record<string, number> = { EN: 0, JP: 1, KR: 2 };
-
 export async function getCardDetail(regionCardId: string): Promise<CardDetail> {
   const loaded = await loadCardByLocaleId(regionCardId).catch(() => null);
   if (!loaded) return { variants: [], info: null };
 
-  const mapped: RegionCardVariant[] = loaded.allLocales.map((l) => ({
+  const regionVariants: RegionCardVariant[] = loaded.allLocales.map((l) => ({
     id: l.id,
     region: l.region,
-    language: l.language,
     name: l.name,
     number: l.number,
     imageSmall: l.imageSmall,
     imageLarge: l.imageLarge,
-    setName:
-      l.region === "KR"
-        ? l.setNameKo ?? l.setName
-        : l.region === "JP"
-          ? l.setNameJa ?? l.setName
-          : l.setName,
+    setCode: l.setCode,
   }));
 
   // region 당 1장만(탭 key 중복 방지). 같은 region 이 여러 장이면 이미지 있는 쪽 우선.
   const byRegion = new Map<string, RegionCardVariant>();
-  for (const v of mapped) {
+  for (const v of regionVariants) {
     const cur = byRegion.get(v.region);
     if (!cur || (!(cur.imageSmall || cur.imageLarge) && (v.imageSmall || v.imageLarge))) {
       byRegion.set(v.region, v);
     }
   }
   const variants: RegionCardVariant[] = [...byRegion.values()].sort(
-    (a, b) => (REGION_ORDER[a.region] ?? 9) - (REGION_ORDER[b.region] ?? 9)
+    (a, b) => (REGION_SORT_PRIORITY[a.region] ?? 9) - (REGION_SORT_PRIORITY[b.region] ?? 9)
   );
 
   const tcg = cardToTCG(loaded.card, loaded.locale);
@@ -99,7 +90,6 @@ export async function getCardDetail(regionCardId: string): Promise<CardDetail> {
     attacks: tcg.attacks,
     rules: tcg.rules,
     flavorText: tcg.flavorText,
-    artist: tcg.artist,
     legalities: tcg.legalities,
   };
 

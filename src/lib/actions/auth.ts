@@ -7,16 +7,19 @@ import { unstable_rethrow } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
 import { signIn, signOut } from "@/auth";
+import { routing } from "@/i18n/routing";
+import { ActionResult } from "./_shared";
 
-export async function logoutAction(locale: string = "ko"): Promise<void> {
+/** 폼의 locale 필드 → 없으면 기본 로케일(routing 단일출처). */
+function localeFrom(formData: FormData): string {
+  return (formData.get("locale") as string) || routing.defaultLocale;
+}
+
+export async function logoutAction(locale: string = routing.defaultLocale): Promise<void> {
   await signOut({ redirectTo: `/${locale}` });
 }
 
-export type AuthState = {
-  ok: boolean;
-  error?: string;
-  fieldErrors?: Record<string, string>;
-};
+export type AuthState = ActionResult<{ fieldErrors?: Record<string, string> }>;
 
 const loginSchema = z.object({
   email: z.string().email("올바른 이메일을 입력해 주세요."),
@@ -62,7 +65,7 @@ export async function loginAction(
     return { ok: false, fieldErrors: fieldErrorsFrom(parsed.error) };
   }
 
-  const locale = (formData.get("locale") as string) || "ko";
+  const locale = localeFrom(formData);
   try {
     await signIn("credentials", {
       email: parsed.data.email,
@@ -126,7 +129,7 @@ export async function signupAction(
     return { ok: false, error: "회원가입 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요." };
   }
 
-  const locale = (formData.get("locale") as string) || "ko";
+  const locale = localeFrom(formData);
   try {
     await signIn("credentials", {
       email,

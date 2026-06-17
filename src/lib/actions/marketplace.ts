@@ -6,13 +6,9 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth/session";
 import { getOrCreateConversation } from "@/lib/services/messaging";
+import { ActionResult, ACTION_ERR } from "./_shared";
 
-export type MarketplaceActionState = {
-  ok: boolean;
-  error?: string;
-  conversationId?: string;
-  offerId?: string;
-};
+export type MarketplaceActionState = ActionResult<{ conversationId?: string; offerId?: string }>;
 
 function revalidateMarketViews() {
   revalidatePath("/", "layout");
@@ -40,10 +36,10 @@ export async function makeOfferAction(input: {
   proposedKrw?: number | null;
 }): Promise<MarketplaceActionState> {
   const user = await getCurrentUser();
-  if (!user) return { ok: false, error: "로그인이 필요합니다." };
+  if (!user) return { ok: false, error: ACTION_ERR.auth };
 
   const parsed = makeOfferSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: "잘못된 요청입니다." };
+  if (!parsed.success) return { ok: false, error: ACTION_ERR.badRequest };
 
   const listing = await prisma.listing.findUnique({
     where: { id: parsed.data.listingId },
@@ -51,7 +47,7 @@ export async function makeOfferAction(input: {
       id: true,
       sellerId: true,
       status: true,
-      item: { select: { localeId: true } },
+      item: { select: { regionCardId: true } },
     },
   });
   if (!listing) return { ok: false, error: "판매 정보를 찾을 수 없습니다." };
@@ -60,7 +56,7 @@ export async function makeOfferAction(input: {
   if (listing.sellerId === user.id)
     return { ok: false, error: "자신의 카드에는 제안할 수 없습니다." };
 
-  const cardId = parsed.data.cardId ?? listing.item.localeId;
+  const cardId = parsed.data.cardId ?? listing.item.regionCardId;
 
   const { id: conversationId } = await getOrCreateConversation(user.id, listing.sellerId, {
     sourceType: "card_inquiry",
@@ -102,7 +98,7 @@ export async function makeOfferAction(input: {
         data: {
           conversationId,
           senderId: user.id,
-          content: parsed.data.message?.trim() || "안녕하세요! 카드 구매 제안 드립니다.",
+          content: parsed.data.message || "안녕하세요! 카드 구매 제안 드립니다.",
           attachedCardId: cardId,
         },
       });
@@ -131,10 +127,10 @@ export async function respondToOfferAction(input: {
   action: "accept" | "decline" | "cancel";
 }): Promise<MarketplaceActionState> {
   const user = await getCurrentUser();
-  if (!user) return { ok: false, error: "로그인이 필요합니다." };
+  if (!user) return { ok: false, error: ACTION_ERR.auth };
 
   const parsed = respondSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: "잘못된 요청입니다." };
+  if (!parsed.success) return { ok: false, error: ACTION_ERR.badRequest };
 
   const offer = await prisma.offer.findUnique({
     where: { id: parsed.data.offerId },

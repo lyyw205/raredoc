@@ -4,14 +4,12 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 
 import { prisma } from "@/lib/prisma";
+import type { Prisma } from "@/generated/prisma/client";
 import { getCurrentUser } from "@/lib/auth/session";
 import { getOrCreateConversation } from "@/lib/services/messaging";
+import { ActionResult, ACTION_ERR } from "./_shared";
 
-export type MessagingActionState = {
-  ok: boolean;
-  error?: string;
-  conversationId?: string;
-};
+export type MessagingActionState = ActionResult<{ conversationId?: string }>;
 
 function revalidateMessageViews() {
   // 대화 목록/스레드/헤더 안읽음 모두 layout 재검증으로 갱신
@@ -47,10 +45,10 @@ export async function startConversationAction(input: {
   postId?: string | null;
 }): Promise<MessagingActionState> {
   const user = await getCurrentUser();
-  if (!user) return { ok: false, error: "로그인이 필요합니다." };
+  if (!user) return { ok: false, error: ACTION_ERR.auth };
 
   const parsed = startSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: "잘못된 요청입니다." };
+  if (!parsed.success) return { ok: false, error: ACTION_ERR.badRequest };
   if (parsed.data.partnerId === user.id)
     return { ok: false, error: "자기 자신과는 대화할 수 없습니다." };
 
@@ -87,7 +85,7 @@ export async function sendMessageAction(input: {
   attachedCardId?: string | null;
 }): Promise<MessagingActionState> {
   const user = await getCurrentUser();
-  if (!user) return { ok: false, error: "로그인이 필요합니다." };
+  if (!user) return { ok: false, error: ACTION_ERR.auth };
 
   const parsed = sendSchema.safeParse(input);
   if (!parsed.success) return { ok: false, error: "메시지를 확인해 주세요." };
@@ -123,8 +121,8 @@ export async function sendMessageAction(input: {
 
 export async function markReadAction(conversationId: string): Promise<MessagingActionState> {
   const user = await getCurrentUser();
-  if (!user) return { ok: false, error: "로그인이 필요합니다." };
-  if (!conversationId) return { ok: false, error: "잘못된 요청입니다." };
+  if (!user) return { ok: false, error: ACTION_ERR.auth };
+  if (!conversationId) return { ok: false, error: ACTION_ERR.badRequest };
 
   const conv = await loadConversationFor(conversationId, user.id);
   if (!conv) return { ok: false, error: "대화 권한이 없습니다." };
@@ -164,6 +162,46 @@ async function findOfferForConversation(conversationId: string) {
   });
 }
 
+/** 트랜잭션 내부: 거래 완료 마킹 — offer/listing/post 를 completed 로. */
+async function markTradeCompleted(
+  tx: Prisma.TransactionClient,
+  offer: { id: string; listingId: string } | null,
+  sourcePostId: string | null,
+) {
+  if (offer) {
+    await tx.offer.update({
+      where: { id: offer.id },
+      data: { status: "completed", respondedAt: new Date() },
+    });
+    await tx.listing.update({
+      where: { id: offer.listingId },
+      data: { status: "completed" },
+    });
+  }
+  if (sourcePostId) {
+    await tx.post.updateMany({
+      where: { id: sourcePostId },
+      data: { tradeStatus: "completed" },
+    });
+  }
+}
+
+/** 트랜잭션 내부: 링크(약속/후기) 시스템 메시지 생성 + 대화 lastMessageAt 갱신. */
+async function appendLinkedMessage(
+  tx: Prisma.TransactionClient,
+  conversationId: string,
+  senderId: string,
+  link: { appointmentId?: string; reviewId?: string },
+) {
+  await tx.message.create({
+    data: { conversationId, senderId, content: "", ...link },
+  });
+  await tx.conversation.update({
+    where: { id: conversationId },
+    data: { lastMessageAt: new Date() },
+  });
+}
+
 const proposeSchema = z.object({
   conversationId: z.string().min(1),
   date: z.string().min(1), // YYYY-MM-DD
@@ -179,7 +217,7 @@ export async function proposeAppointmentAction(input: {
   place: string;
 }): Promise<MessagingActionState> {
   const user = await getCurrentUser();
-  if (!user) return { ok: false, error: "로그인이 필요합니다." };
+  if (!user) return { ok: false, error: ACTION_ERR.auth };
 
   const parsed = proposeSchema.safeParse(input);
   if (!parsed.success) return { ok: false, error: "약속 정보를 확인해 주세요." };
@@ -201,18 +239,7 @@ export async function proposeAppointmentAction(input: {
         status: "proposed",
       },
     });
-    await tx.message.create({
-      data: {
-        conversationId: conv.id,
-        senderId: user.id,
-        content: "",
-        appointmentId: apt.id,
-      },
-    });
-    await tx.conversation.update({
-      where: { id: conv.id },
-      data: { lastMessageAt: new Date() },
-    });
+    await appendLinkedMessage(tx, conv.id, user.id, { appointmentId: apt.id });
     // 연결된 거래글 예약중 처리
     if (conv.sourcePostId) {
       await tx.post.updateMany({
@@ -236,7 +263,7 @@ export async function confirmAppointmentAction(input: {
   appointmentId: string;
 }): Promise<MessagingActionState> {
   const user = await getCurrentUser();
-  if (!user) return { ok: false, error: "로그인이 필요합니다." };
+  if (!user) return { ok: false, error: ACTION_ERR.auth };
   const conv = await loadConversationFor(input.conversationId, user.id);
   if (!conv) return { ok: false, error: "대화 권한이 없습니다." };
 
@@ -254,7 +281,7 @@ export async function completeOfferAction(
   conversationId: string
 ): Promise<MessagingActionState> {
   const user = await getCurrentUser();
-  if (!user) return { ok: false, error: "로그인이 필요합니다." };
+  if (!user) return { ok: false, error: ACTION_ERR.auth };
 
   const conv = await loadConversationFor(conversationId, user.id);
   if (!conv) return { ok: false, error: "대화 권한이 없습니다." };
@@ -262,19 +289,7 @@ export async function completeOfferAction(
   const offer = await findOfferForConversation(conv.id);
 
   await prisma.$transaction(async (tx) => {
-    if (offer) {
-      await tx.offer.update({
-        where: { id: offer.id },
-        data: { status: "completed", respondedAt: new Date() },
-      });
-      await tx.listing.update({ where: { id: offer.listingId }, data: { status: "completed" } });
-    }
-    if (conv.sourcePostId) {
-      await tx.post.updateMany({
-        where: { id: conv.sourcePostId },
-        data: { tradeStatus: "completed" },
-      });
-    }
+    await markTradeCompleted(tx, offer, conv.sourcePostId);
   });
 
   revalidateMessageViews();
@@ -296,7 +311,7 @@ export async function leaveReviewAction(input: {
   comment?: string;
 }): Promise<MessagingActionState> {
   const user = await getCurrentUser();
-  if (!user) return { ok: false, error: "로그인이 필요합니다." };
+  if (!user) return { ok: false, error: ACTION_ERR.auth };
 
   const parsed = reviewSchema.safeParse(input);
   if (!parsed.success) return { ok: false, error: "후기 내용을 확인해 주세요." };
@@ -318,31 +333,8 @@ export async function leaveReviewAction(input: {
         comment: parsed.data.comment || null,
       },
     });
-    await tx.message.create({
-      data: {
-        conversationId: conv.id,
-        senderId: user.id,
-        content: "",
-        reviewId: review.id,
-      },
-    });
-    await tx.conversation.update({
-      where: { id: conv.id },
-      data: { lastMessageAt: new Date() },
-    });
-    if (offer) {
-      await tx.offer.update({
-        where: { id: offer.id },
-        data: { status: "completed", respondedAt: new Date() },
-      });
-      await tx.listing.update({ where: { id: offer.listingId }, data: { status: "completed" } });
-    }
-    if (conv.sourcePostId) {
-      await tx.post.updateMany({
-        where: { id: conv.sourcePostId },
-        data: { tradeStatus: "completed" },
-      });
-    }
+    await appendLinkedMessage(tx, conv.id, user.id, { reviewId: review.id });
+    await markTradeCompleted(tx, offer, conv.sourcePostId);
   });
 
   revalidateMessageViews();

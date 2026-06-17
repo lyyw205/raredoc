@@ -21,36 +21,37 @@ export type CardPriceRow = {
   region: string; // US | GLOBAL | JP | KR
   currency: string; // USD | EUR | JPY | KRW
   market: number | null;
-  variants: { normal: number | null; holofoil: number | null; reverseHolo: number | null; firstEdition: number | null };
   recordedAt: string;
 };
 
 export async function getCardPrices(regionCardId: string): Promise<CardPriceRow[]> {
-  const me = await prisma.regionCard.findUnique({
+  const anchor = await prisma.regionCard.findUnique({
     where: { id: regionCardId },
     select: { cardId: true },
   });
-  if (!me) return [];
+  if (!anchor) return [];
 
-  const localeIds = await prisma.regionCard.findMany({
-    where: { cardId: me.cardId },
+  const regionCardIds = await prisma.regionCard.findMany({
+    where: { cardId: anchor.cardId },
     select: { id: true },
   });
-  if (localeIds.length === 0) return [];
+  if (regionCardIds.length === 0) return [];
 
   const prices = await prisma.price.findMany({
-    where: { regionCardId: { in: localeIds.map((l) => l.id) }, sourceId: { not: null } },
+    where: { regionCardId: { in: regionCardIds.map((l) => l.id) }, sourceId: { not: null } },
     orderBy: { recordedAt: "desc" },
     include: { priceSource: true },
   });
 
   const seen = new Set<string>();
+  const priorityByCode = new Map<string, number>(); // 정렬용 — include 된 priceSource 에서 바로 캡처
   const rows: CardPriceRow[] = [];
   for (const p of prices) {
     const ps = p.priceSource;
     if (!ps) continue;
     if (seen.has(ps.code)) continue;
     seen.add(ps.code);
+    priorityByCode.set(ps.code, ps.priority);
 
     const market =
       p.marketPrice ??
@@ -65,21 +66,11 @@ export async function getCardPrices(regionCardId: string): Promise<CardPriceRow[
       region: ps.marketRegion,
       currency: p.currency,
       market,
-      variants: {
-        normal: p.normal,
-        holofoil: p.holofoil,
-        reverseHolo: p.reverseHolo,
-        firstEdition: p.firstEdition,
-      },
       recordedAt: p.recordedAt.toISOString(),
     });
   }
 
-  // priority asc — PriceSource 마스터 한 번에 조회해서 정렬
-  const priorityByCode = new Map<string, number>();
-  const all = await prisma.priceSource.findMany({ select: { code: true, priority: true } });
-  for (const s of all) priorityByCode.set(s.code, s.priority);
-
+  // priority asc (낮은 숫자 우선)
   rows.sort((a, b) => (priorityByCode.get(a.sourceCode) ?? 999) - (priorityByCode.get(b.sourceCode) ?? 999));
 
   return rows;

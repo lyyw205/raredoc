@@ -14,7 +14,6 @@ export interface CardSearchHit {
   imageSmall: string | null;
   rarity: string | null;
   number: string;
-  setId: string;
   setName: string;
   setNameKo: string | null;
 }
@@ -45,6 +44,7 @@ export async function searchCardsAction(
   for (const { card, locales } of rows) {
     if (locales.length === 0) continue;
     const primary = pickLocale(locales, "ko") ?? locales[0];
+    // nameKo 는 반드시 한국판(KR) 인쇄본 고유명 — primary 가 JP/EN 폴백이면 null
     const koLocale = locales.find((l) => l.region === "KR") ?? null;
     const rarity = pickRarityLabel(primary.region, {
       nameJa: card.rarityNameJa,
@@ -59,7 +59,6 @@ export async function searchCardsAction(
       imageSmall: primary.imageSmall,
       rarity,
       number: primary.number,
-      setId: primary.setId,
       setName: primary.setName,
       setNameKo: primary.setNameKo,
     });
