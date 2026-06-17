@@ -61,8 +61,8 @@ async function main() {
   // 가드: 기존 JP LC 에 그룹밖 참조(컬렉션/거래) 없어야
   const oldLoc = await prisma.regionCard.findMany({ where: { setId: jpSet }, select: { id: true, cardId: true } });
   const oldLcids = [...new Set(oldLoc.map((l) => l.cardId))];
-  const coll = await prisma.collectionItem.count({ where: { localeId: { in: oldLoc.map((l) => l.id) } } });
-  const trade = await prisma.trade.count({ where: { localeId: { in: oldLoc.map((l) => l.id) } } });
+  const coll = await prisma.collectionItem.count({ where: { regionCardId: { in: oldLoc.map((l) => l.id) } } });
+  const trade = await prisma.trade.count({ where: { regionCardId: { in: oldLoc.map((l) => l.id) } } });
   // 기존 LC 가 JP 외 다른 지역 locale 도 갖나(=병합됨, 그러면 통삭제 위험)
   const otherLoc = await prisma.regionCard.count({ where: { cardId: { in: oldLcids }, NOT: { setId: jpSet } } });
   console.log(`  기존 JP locale ${oldLoc.length} · LC ${oldLcids.length} | 참조 컬렉션 ${coll}·거래 ${trade} | JP외 locale 보유 ${otherLoc}`);

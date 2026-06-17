@@ -1,30 +1,9 @@
 import { prisma } from "@/lib/prisma";
-import { USD_KRW } from "@/lib/trades/shared";
+import { USD_KRW, conditionCoefficient, pickPriceUsd } from "@/lib/trades/shared";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 추정가 (컬렉션 서비스와 동일 계수 — Listing askingKrw 없을 때 폴백)
 // ─────────────────────────────────────────────────────────────────────────────
-
-const CONDITION_COEFFICIENT: Record<string, number> = {
-  미개봉: 1.15,
-  "1착": 1.1,
-  NM: 1.0,
-  VNDS: 0.95,
-  LP: 0.85,
-  MP: 0.65,
-  HP: 0.45,
-  DS: 0.3,
-  D: 0.3,
-};
-
-function pickPriceUsd(p: {
-  normal: number | null;
-  holofoil: number | null;
-  reverseHolo: number | null;
-  firstEdition: number | null;
-}): number | null {
-  return p.holofoil ?? p.normal ?? p.reverseHolo ?? p.firstEdition ?? null;
-}
 
 function estimateKrw(
   grade: string,
@@ -36,7 +15,7 @@ function estimateKrw(
   if (!latest) return null;
   const usd = pickPriceUsd(latest);
   if (usd == null || !Number.isFinite(usd)) return null;
-  return Math.round(usd * USD_KRW * (CONDITION_COEFFICIENT[grade] ?? 1.0));
+  return Math.round(usd * USD_KRW * conditionCoefficient(grade));
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -119,7 +98,7 @@ export async function getOwnersForCard(
   viewerId?: string | null
 ): Promise<CardOwner[]> {
   const listings = await prisma.listing.findMany({
-    where: { status: "active", item: { localeId: cardId } },
+    where: { status: "active", item: { regionCardId: cardId } },
     select: {
       id: true,
       askingKrw: true,
@@ -132,7 +111,7 @@ export async function getOwnersForCard(
           grade: true,
           certified: true,
           estimatedKrw: true,
-          locale: {
+          regionCard: {
             select: {
               prices: {
                 orderBy: { recordedAt: "desc" },
@@ -152,7 +131,7 @@ export async function getOwnersForCard(
   return listings.map((l) => {
     const display = l.seller.displayName ?? l.seller.name ?? l.seller.username ?? "?";
     const asking =
-      l.askingKrw ?? estimateKrw(l.item.grade, l.item.estimatedKrw, l.item.locale.prices);
+      l.askingKrw ?? estimateKrw(l.item.grade, l.item.estimatedKrw, l.item.regionCard.prices);
     return {
       itemId: l.item.id,
       listingId: l.id,
@@ -176,8 +155,8 @@ export async function getOwnersForCard(
 /** 카드 상세 헤더용: 이 카드를 보유한 유저 수 / 판매중(제안 가능) 유저 수. */
 export async function getCardOwnerCounts(cardId: string): Promise<{ total: number; offerable: number }> {
   const [total, offerable] = await Promise.all([
-    prisma.collectionItem.count({ where: { localeId: cardId } }),
-    prisma.collectionItem.count({ where: { localeId: cardId, forSale: true } }),
+    prisma.collectionItem.count({ where: { regionCardId: cardId } }),
+    prisma.collectionItem.count({ where: { regionCardId: cardId, forSale: true } }),
   ]);
   return { total, offerable };
 }

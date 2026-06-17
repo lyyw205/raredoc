@@ -125,8 +125,8 @@ async function main() {
     const pruneLoc = locs.filter((l) => !byNum.has(l.numberInt ?? numKey(l.number)));
     // 참조(컬렉션/거래) 있는 행은 prune 금지
     const ids = pruneLoc.map((l) => l.id);
-    const coll = await prisma.collectionItem.count({ where: { localeId: { in: ids } } });
-    const trade = await prisma.trade.count({ where: { localeId: { in: ids } } });
+    const coll = await prisma.collectionItem.count({ where: { regionCardId: { in: ids } } });
+    const trade = await prisma.trade.count({ where: { regionCardId: { in: ids } } });
     if (coll + trade > 0) { console.log(`  ⚠️ prune 대상에 참조 ${coll + trade}건 — prune 생략(수동확인)`); }
     else {
       const lcids = [...new Set(pruneLoc.map((l) => l.cardId))];

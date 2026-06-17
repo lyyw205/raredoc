@@ -47,7 +47,7 @@ function pickPriceKrw(p: {
 }
 
 type TradeRow = {
-  localeId?: string;
+  regionCardId?: string;
   soldAt: Date;
   priceHighUsd: number;
   priceAvgUsd: number | null;
@@ -191,7 +191,7 @@ export async function rebuildMarketStats(date?: Date): Promise<{ cards: number; 
   // 거래 전량 로드 후 카드별 그룹핑 (대상 카드 결정)
   const allTrades = await prisma.trade.findMany({
     select: {
-      localeId: true,
+      regionCardId: true,
       soldAt: true,
       priceHighUsd: true,
       priceAvgUsd: true,
@@ -201,9 +201,9 @@ export async function rebuildMarketStats(date?: Date): Promise<{ cards: number; 
   });
   const tradesByCard = new Map<string, TradeRow[]>();
   for (const t of allTrades) {
-    const arr = tradesByCard.get(t.localeId) ?? [];
+    const arr = tradesByCard.get(t.regionCardId) ?? [];
     arr.push(t);
-    tradesByCard.set(t.localeId, arr);
+    tradesByCard.set(t.regionCardId, arr);
   }
 
   // 가격 스냅샷 전량 로드 후 카드별 그룹핑.
@@ -289,6 +289,33 @@ export async function recordCardView(cardId: string, date?: Date): Promise<void>
   } catch {
     // 추적 실패는 무시 (graceful)
   }
+}
+
+/**
+ * 카드 상세의 가격 히스토리 1포인트. 차트(recordedAt/normal/holofoil)만 소비한다.
+ */
+export type PricePoint = {
+  recordedAt: Date;
+  normal: number | null;
+  holofoil: number | null;
+};
+
+/**
+ * 단일 RegionCard 의 가격 스냅샷 시계열(오름차순). 실패 시 빈 배열(렌더 비차단).
+ * 차트가 recordedAt/normal/holofoil 만 쓰므로 그 3필드만 select 한다.
+ */
+export async function getCardPriceHistory(regionCardId: string): Promise<PricePoint[]> {
+  return prisma.price
+    .findMany({
+      where: { regionCardId },
+      orderBy: { recordedAt: "asc" },
+      select: {
+        recordedAt: true,
+        normal: true,
+        holofoil: true,
+      },
+    })
+    .catch(() => [] as PricePoint[]);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

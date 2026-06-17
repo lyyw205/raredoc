@@ -47,11 +47,11 @@ export async function getRecentTrades(
       take: opts.limit ?? 24,
       select: {
         id: true,
-        localeId: true,
+        regionCardId: true,
         soldAt: true,
         priceHighUsd: true,
         saleCount: true,
-        locale: {
+        regionCard: {
           select: {
             name: true,
             imageSmall: true,
@@ -64,13 +64,13 @@ export async function getRecentTrades(
 
     return trades.map((t) => ({
       id: t.id,
-      cardId: t.localeId, // URL 호환: shape 이름은 cardId 유지, 값은 RegionCard.id
-      cardName: t.locale.name,
+      cardId: t.regionCardId, // URL 호환: shape 이름은 cardId 유지, 값은 RegionCard.id
+      cardName: t.regionCard.name,
       cardNameKo: null, // RegionCard 은 단일 name. ko 표시는 language=ko locale 선택으로 처리
-      setId: t.locale.setId,
-      setName: t.locale.set.name,
-      setNameKo: t.locale.set.nameKo,
-      imageSmall: t.locale.imageSmall,
+      setId: t.regionCard.setId,
+      setName: t.regionCard.set.name,
+      setNameKo: t.regionCard.set.nameKo,
+      imageSmall: t.regionCard.imageSmall,
       soldAt: t.soldAt,
       priceUsd: t.priceHighUsd,
       priceKrw: Math.round(t.priceHighUsd * USD_KRW),

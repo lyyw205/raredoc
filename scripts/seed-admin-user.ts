@@ -7,7 +7,7 @@
  * - DB에 이미 적재된 RegionCard 에서 직접 카드 선별 (pokemontcg.io API 미사용 — WSL 안전)
  * - 다양한 카테고리(홀로~하이퍼)·지역(EN/JP/KR)·등급(NM~MP)·인증·하이라이트 포함
  *
- * 멱등: user 는 email upsert, collectionItem 은 (userId, localeId, grade) 기준 중복 방지.
+ * 멱등: user 는 email upsert, collectionItem 은 (userId, regionCardId, grade) 기준 중복 방지.
  *
  * 실행: npx tsx scripts/seed-admin-user.ts
  */
@@ -97,7 +97,7 @@ async function main() {
     const highlight = slot < 5 && j % 3 === 0 ? ++slot : null;
 
     const existing = await prisma.collectionItem.findFirst({
-      where: { userId: user.id, localeId: c.id, grade },
+      where: { userId: user.id, regionCardId: c.id, grade },
     });
 
     let itemId: string;
@@ -112,7 +112,7 @@ async function main() {
       const item = await prisma.collectionItem.create({
         data: {
           userId: user.id,
-          localeId: c.id,
+          regionCardId: c.id,
           cardId: c.cardId,
           grade,
           certified,

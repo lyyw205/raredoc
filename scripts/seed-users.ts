@@ -150,9 +150,9 @@ async function main() {
       const card = locale;
 
       const grade = GRADES[(seed + j) % GRADES.length];
-      // 멱등: 같은 (user, localeId, grade) 가 있으면 재사용
+      // 멱등: 같은 (user, regionCardId, grade) 가 있으면 재사용
       const existing = await prisma.collectionItem.findFirst({
-        where: { userId: user.id, localeId: cardId, grade },
+        where: { userId: user.id, regionCardId: cardId, grade },
       });
       const certified = j % 4 === 0; // 일부 인증
       const forSale = j % 3 === 0;   // 일부 판매중
@@ -169,7 +169,7 @@ async function main() {
         const created = await prisma.collectionItem.create({
           data: {
             userId: user.id,
-            localeId: cardId,
+            regionCardId: cardId,
             cardId: locale.cardId,
             grade,
             certified,

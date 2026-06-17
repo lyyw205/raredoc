@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { USD_KRW } from "@/lib/trades/shared";
+import { USD_KRW, conditionCoefficient, pickPriceUsd } from "@/lib/trades/shared";
+import { TIER_ORDER, type TierName } from "@/lib/constants";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Phase 2 — 게이미피케이션 집계/조회 서비스
@@ -9,20 +10,7 @@ import { USD_KRW } from "@/lib/trades/shared";
 // 조회               : getBadgesForUser / getTopCollectors / getCurrentSeason
 // ─────────────────────────────────────────────────────────────────────────────
 
-// 시세 계수 (collection.ts 와 동일 기준)
-const CONDITION_COEFFICIENT: Record<string, number> = {
-  미개봉: 1.15, "1착": 1.1, NM: 1.0, VNDS: 0.95, LP: 0.85, MP: 0.65, HP: 0.45, DS: 0.3, D: 0.3,
-};
-
-function conditionCoefficient(grade: string): number {
-  return CONDITION_COEFFICIENT[grade] ?? 1.0;
-}
-
-function pickPriceUsd(p: {
-  normal: number | null; holofoil: number | null; reverseHolo: number | null; firstEdition: number | null;
-}): number | null {
-  return p.holofoil ?? p.normal ?? p.reverseHolo ?? p.firstEdition ?? null;
-}
+// 시세 계수·USD 선택은 trades/shared.ts 단일출처(collection.ts 와 동일 기준).
 
 // ── rarity 분류 헬퍼 ──────────────────────────────────────────────────────────
 
@@ -72,7 +60,7 @@ async function aggregateUser(userId: string): Promise<UserAgg> {
       certified: true,
       createdAt: true,
       certification: { select: { status: true } },
-      locale: {
+      regionCard: {
         select: {
           setId: true,
           // P7: rarity 를 RegionCard(인쇄본별, P4a 복제)에서 읽음 — 구 card.rarity 와 동치.
@@ -92,7 +80,7 @@ async function aggregateUser(userId: string): Promise<UserAgg> {
   const ownedBySet = new Map<string, number>();
 
   for (const it of items) {
-    const rarity = it.locale.rarity?.code ?? null;
+    const rarity = it.regionCard.rarity?.code ?? null;
     if (isSar(rarity)) sar++;
     if (isUr(rarity)) ur++;
     if (isHolo(rarity)) holo++;
@@ -100,7 +88,7 @@ async function aggregateUser(userId: string): Promise<UserAgg> {
     // 추정가
     let krw = it.estimatedKrw;
     if (krw == null) {
-      const latest = it.locale.prices[0];
+      const latest = it.regionCard.prices[0];
       const usd = latest ? pickPriceUsd(latest) : null;
       if (usd != null && Number.isFinite(usd)) {
         krw = Math.round(usd * USD_KRW * conditionCoefficient(it.grade));
@@ -111,7 +99,7 @@ async function aggregateUser(userId: string): Promise<UserAgg> {
     if (it.certification?.status === "approved" || it.certified) certified++;
     if (it.createdAt >= monthStart) monthlyAdded++;
 
-    ownedBySet.set(it.locale.setId, (ownedBySet.get(it.locale.setId) ?? 0) + 1);
+    ownedBySet.set(it.regionCard.setId, (ownedBySet.get(it.regionCard.setId) ?? 0) + 1);
   }
 
   // 완성 세트 수 (보유수 >= Set.cardCount)
@@ -149,9 +137,6 @@ function badgeValue(badgeId: string, agg: UserAgg): number | null {
     default: return null; // ranker/monthly_king/season_mvp(rankMode), early_bird, season2_open
   }
 }
-
-const TIER_ORDER = ["SILVER", "GOLD", "DIAMOND"] as const;
-type TierName = (typeof TIER_ORDER)[number];
 
 type TierRow = { tier: string; threshold: number };
 

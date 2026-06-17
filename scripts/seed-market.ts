@@ -56,9 +56,9 @@ async function main() {
       userId: true,
       grade: true,
       estimatedKrw: true,
-      localeId: true,
+      regionCardId: true,
       listing: { select: { id: true } },
-      locale: {
+      regionCard: {
         select: {
           prices: {
             orderBy: { recordedAt: "desc" },
@@ -74,7 +74,7 @@ async function main() {
   const dealMethods = ["both", "direct", "delivery"];
   for (const it of forSaleItems) {
     const seed = hashStr(it.id);
-    const asking = estimateKrw(it.grade, it.estimatedKrw, it.locale.prices);
+    const asking = estimateKrw(it.grade, it.estimatedKrw, it.regionCard.prices);
     const dealMethod = dealMethods[seed % dealMethods.length];
     if (it.listing) {
       await prisma.listing.update({
@@ -175,9 +175,9 @@ async function main() {
     // raymond 의 active listing 하나 골라 카드 문의로
     const listing = await prisma.listing.findFirst({
       where: { sellerId: raymond.id, status: "active" },
-      select: { id: true, item: { select: { localeId: true } } },
+      select: { id: true, item: { select: { regionCardId: true } } },
     });
-    const cardId = listing?.item.localeId ?? null;
+    const cardId = listing?.item.regionCardId ?? null;
     const convId = await ensureConv(chaeyeon.id, raymond.id, {
       sourceType: "card_inquiry",
       cardId,
@@ -221,11 +221,11 @@ async function main() {
   if (sora && raymond) {
     const listing = await prisma.listing.findFirst({
       where: { sellerId: raymond.id, status: { in: ["active", "reserved", "completed"] } },
-      select: { id: true, item: { select: { localeId: true } } },
+      select: { id: true, item: { select: { regionCardId: true } } },
       orderBy: { createdAt: "asc" },
       skip: 1,
     });
-    const cardId = listing?.item.localeId ?? null;
+    const cardId = listing?.item.regionCardId ?? null;
     const convId = await ensureConv(sora.id, raymond.id, { sourceType: "card_inquiry", cardId });
     convCount++;
 

@@ -446,12 +446,12 @@ async function main() {
     // 적용: 참조(컬렉션/거래)는 같은 numberInt 로 임시 JP 재지정 → KR 통삭제 → official 재생성 → 새 KR 로 복원
     const krIds = krExisting.map((k) => k.id);
     const krNum = new Map((await prisma.regionCard.findMany({ where: { setId: krSet }, select: { id: true, numberInt: true } })).map((l) => [l.id, l.numberInt]));
-    const colls = await prisma.collectionItem.findMany({ where: { localeId: { in: krIds } }, select: { id: true, localeId: true } });
-    const trades = await prisma.trade.findMany({ where: { localeId: { in: krIds } }, select: { id: true, localeId: true } });
+    const colls = await prisma.collectionItem.findMany({ where: { regionCardId: { in: krIds } }, select: { id: true, regionCardId: true } });
+    const trades = await prisma.trade.findMany({ where: { regionCardId: { in: krIds } }, select: { id: true, regionCardId: true } });
     const jpLoc = await prisma.regionCard.findMany({ where: { setId: { in: cfg.jp.split(",") } }, select: { id: true, numberInt: true, cardId: true } });
     const jpByNum = new Map(jpLoc.map((l) => [l.numberInt, l]));
-    for (const c of colls) { const n = krNum.get(c.localeId); const j = n != null ? jpByNum.get(n) : null; if (j) await prisma.collectionItem.update({ where: { id: c.id }, data: { localeId: j.id, cardId: j.cardId } }); }
-    for (const t of trades) { const n = krNum.get(t.localeId); const j = n != null ? jpByNum.get(n) : null; if (j) await prisma.trade.update({ where: { id: t.id }, data: { localeId: j.id, cardId: j.cardId } }); }
+    for (const c of colls) { const n = krNum.get(c.regionCardId); const j = n != null ? jpByNum.get(n) : null; if (j) await prisma.collectionItem.update({ where: { id: c.id }, data: { regionCardId: j.id, cardId: j.cardId } }); }
+    for (const t of trades) { const n = krNum.get(t.regionCardId); const j = n != null ? jpByNum.get(n) : null; if (j) await prisma.trade.update({ where: { id: t.id }, data: { regionCardId: j.id, cardId: j.cardId } }); }
     if (colls.length + trades.length) console.log(`  참조 ${colls.length + trades.length}건 임시 JP 재지정`);
     await prisma.regionCard.deleteMany({ where: { setId: krSet } });
     let made = 0; const newKrByNum = new Map<number, { id: string; lcid: string }>();
@@ -470,8 +470,8 @@ async function main() {
       made++;
     }
     let restored = 0;
-    for (const c of colls) { const n = krNum.get(c.localeId); const nk = n != null ? newKrByNum.get(n) : null; if (nk) { await prisma.collectionItem.update({ where: { id: c.id }, data: { localeId: nk.id, cardId: nk.lcid } }); restored++; } }
-    for (const t of trades) { const n = krNum.get(t.localeId); const nk = n != null ? newKrByNum.get(n) : null; if (nk) { await prisma.trade.update({ where: { id: t.id }, data: { localeId: nk.id, cardId: nk.lcid } }); restored++; } }
+    for (const c of colls) { const n = krNum.get(c.regionCardId); const nk = n != null ? newKrByNum.get(n) : null; if (nk) { await prisma.collectionItem.update({ where: { id: c.id }, data: { regionCardId: nk.id, cardId: nk.lcid } }); restored++; } }
+    for (const t of trades) { const n = krNum.get(t.regionCardId); const nk = n != null ? newKrByNum.get(n) : null; if (nk) { await prisma.trade.update({ where: { id: t.id }, data: { regionCardId: nk.id, cardId: nk.lcid } }); restored++; } }
     console.log(`  ★적용: KR locale ${made} 재생성${restored ? ` · 참조 ${restored}건 복원` : ""}`);
 
     if (KEEP) {

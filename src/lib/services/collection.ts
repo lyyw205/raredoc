@@ -1,36 +1,9 @@
 import { prisma } from "@/lib/prisma";
-import { USD_KRW } from "@/lib/trades/shared";
+import { USD_KRW, conditionCoefficient, pickPriceUsd } from "@/lib/trades/shared";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 추정가 계산
 // ─────────────────────────────────────────────────────────────────────────────
-
-/** 컨디션(grade) → 시세 계수. NM(완전 새것) 기준 1.0. */
-const CONDITION_COEFFICIENT: Record<string, number> = {
-  미개봉: 1.15,
-  "1착": 1.1,
-  NM: 1.0,
-  VNDS: 0.95,
-  LP: 0.85,
-  MP: 0.65,
-  HP: 0.45,
-  DS: 0.3,
-  D: 0.3,
-};
-
-function conditionCoefficient(grade: string): number {
-  return CONDITION_COEFFICIENT[grade] ?? 1.0;
-}
-
-/** Price 행에서 대표 USD 시세 선택 (홀로 > 노말 > 리버스 > 1ed). */
-function pickPriceUsd(p: {
-  normal: number | null;
-  holofoil: number | null;
-  reverseHolo: number | null;
-  firstEdition: number | null;
-}): number | null {
-  return p.holofoil ?? p.normal ?? p.reverseHolo ?? p.firstEdition ?? null;
-}
 
 /**
  * CollectionItem 의 추정 KRW.
@@ -40,19 +13,19 @@ function pickPriceUsd(p: {
 function estimateItemKrw(item: {
   estimatedKrw: number | null;
   grade: string;
-  locale: { prices: { normal: number | null; holofoil: number | null; reverseHolo: number | null; firstEdition: number | null }[] };
+  regionCard: { prices: { normal: number | null; holofoil: number | null; reverseHolo: number | null; firstEdition: number | null }[] };
 }): number | null {
   if (item.estimatedKrw != null) return item.estimatedKrw;
-  const latest = item.locale.prices[0];
+  const latest = item.regionCard.prices[0];
   if (!latest) return null;
   const usd = pickPriceUsd(latest);
   if (usd == null || !Number.isFinite(usd)) return null;
   return Math.round(usd * USD_KRW * conditionCoefficient(item.grade));
 }
 
-// CollectionItem + locale(표시 데이터) + card(rarity) + 최신 Price 공통 include
+// CollectionItem + regionCard(표시 데이터) + card(rarity) + 최신 Price 공통 include
 const itemInclude = {
-  locale: {
+  regionCard: {
     include: {
       set: { select: { id: true, name: true, nameKo: true } },
       prices: {
@@ -101,7 +74,7 @@ export interface CollectionItemView {
 
 type RawItem = {
   id: string;
-  localeId: string;
+  regionCardId: string;
   cardId: string;
   grade: string;
   certified: boolean;
@@ -109,7 +82,7 @@ type RawItem = {
   forSale: boolean;
   highlightSlot: number | null;
   createdAt: Date;
-  locale: {
+  regionCard: {
     name: string;
     number: string;
     region: string;
@@ -127,15 +100,15 @@ type RawItem = {
 function toView(item: RawItem): CollectionItemView {
   return {
     id: item.id,
-    cardId: item.localeId, // URL 호환: cardId 명은 그대로, 값은 RegionCard.id
-    name: item.locale.name,
-    number: item.locale.number,
+    cardId: item.regionCardId, // URL 호환: cardId 명은 그대로, 값은 RegionCard.id
+    name: item.regionCard.name,
+    number: item.regionCard.number,
     rarity: item.card.rarity?.nameKo ?? item.card.rarity?.nameEn ?? item.card.rarity?.code ?? null,
-    region: item.locale.region,
-    setId: item.locale.set.id,
-    setName: item.locale.set.nameKo ?? item.locale.set.name,
-    imageSmall: item.locale.imageSmall,
-    imageLarge: item.locale.imageLarge,
+    region: item.regionCard.region,
+    setId: item.regionCard.set.id,
+    setName: item.regionCard.set.nameKo ?? item.regionCard.set.name,
+    imageSmall: item.regionCard.imageSmall,
+    imageLarge: item.regionCard.imageLarge,
     grade: item.grade,
     certified: item.certified,
     certStatus: item.certification?.status ?? null,
@@ -169,7 +142,7 @@ export async function addCollectionItem(input: {
   return prisma.collectionItem.create({
     data: {
       userId: input.userId,
-      localeId: locale.id,
+      regionCardId: locale.id,
       cardId: locale.cardId,
       grade: input.grade,
       estimatedKrw: input.estimatedKrw ?? null,
