@@ -65,3 +65,17 @@ designs/*.bak
 
 # 마이그레이션 스냅샷(롤백용, 미커밋)
 .migration-snapshots/
+
+# data/ — 재생성 가능한 외부 페치 캐시(빌드타임 scripts 전용·런타임 무관).
+#   파일은 디스크에 보존하되 git 추적만 제외(91MB→18MB). 출처·소비처·생성스크립트는 data/README.md 참고.
+#   en-ptcg=pokemontcg.io / limitless-web=limitlesstcg / deck-codes=pokemoncard.co.kr
+#   pokedata=pokedata.ovh(출처취약) / kr-league=pokemonkorea(시점스냅샷) → 삭제 전 백업 권장
+#   ★collect/ 와 최상위 kr-secret-collect*·kr-s5a-names 는 재생성 불가 수동자산이라 여기 넣지 않음(커밋 보존).
+/data/en-ptcg/
+/data/limitless-web/
+/data/pokedata/
+/data/kr-league/
+/data/deck-codes/
+
+# 잘못 떨어진 OMC 런타임 상태(루트뿐 아니라 어느 깊이든)
+.omc/
