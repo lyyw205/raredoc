@@ -34,8 +34,11 @@ export function tradeStatusColor(status: string): "brand" | "warning" | "neutral
   return "neutral";
 }
 
+/** 거래 카테고리(팝니다/삽니다) — actions zod enum 과 결합, 값 변경 금지. */
+export const TRADE_CATS = new Set(["팝니다", "삽니다"]);
+
 export function isTradeCategory(category: string): boolean {
-  return category === "팝니다" || category === "삽니다";
+  return TRADE_CATS.has(category);
 }
 
 /** 거래글 대표 이미지: images[0] 우선, 없으면 단일 imageUrl. */

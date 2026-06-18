@@ -1,5 +1,5 @@
 /**
- * UI-1a/I2: 아키타입 아이콘 맵 빌더 — docs/cardgame-ui-plan.md §2-I2
+ * UI-1a/I2: 아키타입 아이콘 맵 빌더 — docs/cardgame/cardgame-ui-plan.md §2-I2
  *
  * 실행: npx tsx scripts/build-deck-icon-map.ts [--force]
  *

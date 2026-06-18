@@ -1,6 +1,6 @@
 /**
  * limitlesstcg.com 메인 사이트 공용 파서 — collect-tournaments-limitless-web(P3 코리안리그 정본)와
- * enrich-majors-limitless(P5 메이저 보강)가 공유. docs/meta-pipeline-multisource.md §3
+ * enrich-majors-limitless(P5 메이저 보강)가 공유. docs/cardgame/meta-pipeline-multisource.md §3
  *
  * 메인 사이트는 JSON API 없음 → SSR HTML 정규식 파싱 (data-* 속성).
  * 아키타입 링크는 숫자 id(/decks/284)라 정본 슬러그가 아님 → tooltip 이름을

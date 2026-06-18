@@ -5,7 +5,7 @@ import { getStandingDecklist, type DecklistViewCard } from "@/lib/services/cardg
 import { CardThumb } from "@/components/cardgame/CardThumb";
 import { DeckCodeButton } from "../../tournaments/[id]/DeckCodeButton";
 
-// 리스트 뷰어 — 입상 덱리스트 1건을 카드 이미지 그리드로 (docs/cardgame-ui-plan.md §4-5, UI-1a).
+// 리스트 뷰어 — 입상 덱리스트 1건을 카드 이미지 그리드로 (docs/cardgame/cardgame-ui-plan.md §4-5, UI-1a).
 // 진입: 덱 상세 입상 타임라인 · 대회 상세 [리스트 보기]. 💰합계는 견적 엔진(UI-1b) 후 추가.
 
 function ordinal(n: number): string {

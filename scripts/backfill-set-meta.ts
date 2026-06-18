@@ -8,7 +8,7 @@
  * Run: npx tsx scripts/backfill-set-meta.ts                          # dry-run(기본, 미적용)
  *      npx tsx scripts/backfill-set-meta.ts --apply --allow-protected
  *
- * 설계: docs/dex-pack-typing.md §4
+ * 설계: docs/design/dex-pack-typing.md §4
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";

@@ -1,5 +1,5 @@
 /**
- * P1: Limitless 세트코드 통합 사전 생성 — docs/meta-pipeline-multisource.md §3 선행 백필 1
+ * P1: Limitless 세트코드 통합 사전 생성 — docs/cardgame/meta-pipeline-multisource.md §3 선행 백필 1
  *
  * 실행: npx tsx scripts/build-limitless-setmap.ts [--dry-run]
  *

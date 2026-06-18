@@ -3,7 +3,7 @@
  * 신규 팩 stale(미백필 NULL)·분류기 변경 후 미반영·override 누락을 적발. mismatch 있으면 exit 1.
  *
  * Run: npx tsx scripts/verify-set-meta.ts
- * 설계: docs/dex-pack-typing.md §4
+ * 설계: docs/design/dex-pack-typing.md §4
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";

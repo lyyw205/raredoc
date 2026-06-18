@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 // 아키타입 아이콘 — DeckArchetype.iconKeys(Limitless 슬러그) → PokeAPI 공식 아트워크(R2 미러).
 // 미해석 슬러그(예: "substitute")는 모노그램 폴백. 훅 없음 — 서버/클라이언트 양쪽에서 사용 가능.
-// docs/cardgame-ui-plan.md §2-I2
+// docs/cardgame/cardgame-ui-plan.md §2-I2
 
 const ICONS: Record<string, string> = (iconMap as { icons: Record<string, string> }).icons;
 

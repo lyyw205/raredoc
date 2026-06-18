@@ -1,7 +1,8 @@
+import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { routing } from "@/i18n/routing";
+import { routing, isLocale } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import Script from "next/script";
 import { Header } from "@/components/layout/Header";
@@ -9,8 +10,8 @@ import { Footer } from "@/components/layout/Footer";
 import { WebSiteJsonLd } from "@/components/seo/JsonLd";
 import { getCurrentUser } from "@/lib/auth/session";
 import { getUnreadCount } from "@/lib/services/messaging";
+import { SITE_BASE_URL as BASE_URL } from "@/lib/constants";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://raredoc.kr";
 const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID ?? "";
 
 export async function generateMetadata({
@@ -50,11 +51,11 @@ export default async function LocaleLayout({
   children,
   params,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  if (!routing.locales.includes(locale as "ko" | "en")) notFound();
+  if (!isLocale(locale)) notFound();
   const messages = await getMessages();
   const currentUser = await getCurrentUser();
   const headerUser = currentUser

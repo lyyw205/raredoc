@@ -1,5 +1,5 @@
 /**
- * P3: limitlesstcg.com 메인 사이트 수집기 — 코리안리그 정본 (docs/meta-pipeline-multisource.md §3 #2)
+ * P3: limitlesstcg.com 메인 사이트 수집기 — 코리안리그 정본 (docs/cardgame/meta-pipeline-multisource.md §3 #2)
  *
  * 실행: npx tsx scripts/collect-tournaments-limitless-web.ts [--dry-run] [--force] [--limit=N] [--id=567]
  *

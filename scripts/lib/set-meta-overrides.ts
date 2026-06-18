@@ -3,7 +3,7 @@ import type { PackType } from "../../src/lib/cards/set-meta";
 /**
  * setId → packType/title 수동 override. 자동 분류기(set-meta.ts `derivePackType`)가
  * 못 잡거나 틀리는 소수 케이스의 단일출처. backfill-set-meta.ts 와 verify-set-meta.ts 가 공유.
- * 근거: docs/dex-pack-typing.md §3.2.
+ * 근거: docs/design/dex-pack-typing.md §3.2.
  */
 export const PACK_TYPE_OVERRIDE: Record<string, { packType?: PackType; title?: string }> = {
   // EN SM 본탄(sm1~sm12, sm35) — 해당 EN Set 이 setGroup 미연결(era=null)이라 자동분류가 null.

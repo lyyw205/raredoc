@@ -1,0 +1,754 @@
+// DBML for dbdiagram.io
+// Converted from uploaded PostgreSQL schema. Some PostgreSQL-specific defaults/array details were simplified for ERD readability.
+
+Table Set {
+  id varchar [pk]
+  name varchar [not null]
+  nameKo varchar
+  series varchar [not null]
+  releaseDate timestamp [not null]
+  cardCount int [not null]
+  logoUrl varchar
+  symbolUrl varchar
+  createdAt timestamp [not null]
+  updatedAt timestamp [not null]
+  code varchar
+  nameJa varchar
+  region varchar [not null]
+  setGroupId varchar
+}
+
+Table Price {
+  id varchar [pk]
+  normal double
+  holofoil double
+  reverseHolo double
+  firstEdition double
+  currency varchar [not null]
+  usdToKrw double
+  recordedAt timestamp [not null]
+  cardLocaleId varchar [not null]
+  condition varchar
+  grade int
+  gradingCompany varchar
+  sourceId varchar
+  marketPrice double
+}
+
+Table TierEntry {
+  id varchar [pk]
+  setId varchar [not null]
+  tier varchar [not null]
+  reason varchar
+  reasonKo varchar
+  updatedAt timestamp [not null]
+  logicalCardId varchar [not null]
+  reasonJa varchar
+}
+
+Table Trade {
+  id varchar [pk]
+  soldAt timestamp [not null]
+  priceHighUsd double [not null]
+  priceLowUsd double
+  priceAvgUsd double
+  saleCount int [not null]
+  tier varchar [not null]
+  source varchar [not null]
+  createdAt timestamp [not null]
+  localeId varchar [not null]
+  logicalCardId varchar [not null]
+}
+
+Table User {
+  id varchar [pk]
+  name varchar
+  email varchar
+  emailVerified timestamp
+  image varchar
+  username varchar
+  displayName varchar
+  passwordHash varchar
+  avatarInitial varchar
+  bio varchar
+  tier varchar [not null]
+  location varchar
+  createdAt timestamp [not null]
+  updatedAt timestamp [not null]
+}
+
+Table Account {
+  id varchar [pk]
+  userId varchar [not null]
+  type varchar [not null]
+  provider varchar [not null]
+  providerAccountId varchar [not null]
+  refresh_token varchar
+  access_token varchar
+  expires_at int
+  token_type varchar
+  scope varchar
+  id_token varchar
+  session_state varchar
+}
+
+Table Session {
+  id varchar [pk]
+  sessionToken varchar [not null]
+  userId varchar [not null]
+  expires timestamp [not null]
+}
+
+Table VerificationToken {
+  identifier varchar [not null]
+  token varchar [not null]
+  expires timestamp [not null]
+}
+
+Table CollectionItem {
+  id varchar [pk]
+  userId varchar [not null]
+  grade varchar [not null]
+  certified boolean [not null]
+  estimatedKrw int
+  forSale boolean [not null]
+  highlightSlot int
+  createdAt timestamp [not null]
+  updatedAt timestamp [not null]
+  localeId varchar [not null]
+  logicalCardId varchar [not null]
+}
+
+Table Certification {
+  id varchar [pk]
+  itemId varchar [not null]
+  photoUrl varchar [not null]
+  status varchar [not null]
+  approvedGrade varchar
+  reviewerId varchar
+  reviewedAt timestamp
+  createdAt timestamp [not null]
+}
+
+Table Badge {
+  id varchar [pk]
+  name varchar [not null]
+  category varchar [not null]
+  emoji varchar [not null]
+  unit varchar
+  rankMode boolean [not null]
+}
+
+Table BadgeTier {
+  id varchar [pk]
+  badgeId varchar [not null]
+  tier varchar [not null]
+  threshold int [not null]
+  label varchar [not null]
+  holders int [not null]
+}
+
+Table UserBadge {
+  id varchar [pk]
+  userId varchar [not null]
+  badgeId varchar [not null]
+  earnedTier varchar
+  currentValue int [not null]
+  earnedAt timestamp
+  updatedAt timestamp [not null]
+}
+
+Table Season {
+  id int [pk]
+  name varchar [not null]
+  startsAt timestamp [not null]
+  endsAt timestamp [not null]
+  active boolean [not null]
+}
+
+Table RankingSnapshot {
+  id varchar [pk]
+  userId varchar [not null]
+  date timestamp [not null]
+  rank int [not null]
+  totalKrw int [not null]
+  certifiedCount int [not null]
+  badgeCount int [not null]
+  monthlyAdded int [not null]
+  createdAt timestamp [not null]
+}
+
+Table Listing {
+  id varchar [pk]
+  itemId varchar [not null]
+  sellerId varchar [not null]
+  askingKrw int
+  negotiable boolean [not null]
+  dealMethod varchar [not null]
+  location varchar
+  status varchar [not null]
+  postId varchar
+  createdAt timestamp [not null]
+  updatedAt timestamp [not null]
+}
+
+Table Offer {
+  id varchar [pk]
+  listingId varchar [not null]
+  buyerId varchar [not null]
+  proposedKrw int
+  status varchar [not null]
+  conversationId varchar
+  createdAt timestamp [not null]
+  respondedAt timestamp
+}
+
+Table Appointment {
+  id varchar [pk]
+  offerId varchar
+  date timestamp [not null]
+  place varchar [not null]
+  status varchar [not null]
+}
+
+Table Review {
+  id varchar [pk]
+  offerId varchar
+  raterId varchar [not null]
+  rateeId varchar [not null]
+  rating int [not null]
+  manner varchar [not null]
+  comment varchar
+  createdAt timestamp [not null]
+}
+
+Table Post {
+  id varchar [pk]
+  userId varchar [not null]
+  collectibleCategory varchar [not null]
+  category varchar [not null]
+  title varchar [not null]
+  body varchar [not null]
+  imageUrl varchar
+  priceKrw int
+  condition varchar
+  certified boolean [not null]
+  location varchar
+  dealMethod varchar
+  tradeStatus varchar
+  negotiable boolean [not null]
+  isPinned boolean [not null]
+  isHot boolean [not null]
+  viewCount int [not null]
+  likeCount int [not null]
+  replyCount int [not null]
+  createdAt timestamp [not null]
+  updatedAt timestamp [not null]
+  deletedAt timestamp
+  images varchar[]
+}
+
+Table Comment {
+  id varchar [pk]
+  postId varchar [not null]
+  userId varchar [not null]
+  parentId varchar
+  body varchar [not null]
+  likeCount int [not null]
+  createdAt timestamp [not null]
+  deletedAt timestamp
+}
+
+Table PostLike {
+  id varchar [pk]
+  postId varchar [not null]
+  userId varchar [not null]
+  createdAt timestamp [not null]
+}
+
+Table CommentLike {
+  id varchar [pk]
+  commentId varchar [not null]
+  userId varchar [not null]
+  createdAt timestamp [not null]
+}
+
+Table Conversation {
+  id varchar [pk]
+  user1Id varchar [not null]
+  user2Id varchar [not null]
+  sourceType varchar [not null]
+  sourceCardId varchar
+  sourcePostId varchar
+  lastMessageAt timestamp
+  createdAt timestamp [not null]
+}
+
+Table Message {
+  id varchar [pk]
+  conversationId varchar [not null]
+  senderId varchar [not null]
+  content varchar [not null]
+  attachedCardId varchar
+  appointmentId varchar
+  reviewId varchar
+  readAt timestamp
+  createdAt timestamp [not null]
+}
+
+Table ConversationRead {
+  id varchar [pk]
+  conversationId varchar [not null]
+  userId varchar [not null]
+  lastReadMessageId varchar
+  updatedAt timestamp [not null]
+}
+
+Table DeckArchetype {
+  id varchar [pk]
+  nameKo varchar [not null]
+  tier varchar [not null]
+  regulation varchar [not null]
+  usageRate double [not null]
+  winCount int [not null]
+  avgRank double [not null]
+  description varchar [not null]
+  strengths varchar[]
+  weaknesses varchar[]
+  counters varchar[]
+  updatedAt timestamp [not null]
+  consistency double [not null]
+  conversion double [not null]
+  deckCostKrw int
+  iconKeys varchar[]
+  isMetaCounter boolean [not null]
+  isTrap boolean [not null]
+  isUnderdog boolean [not null]
+  nameEn varchar
+  region varchar [not null]
+  sampleSize int [not null]
+  winRate double [not null]
+  deckCostBudget int
+  deckCostMeta json
+  deckCostPremium int
+}
+
+Table DeckCard {
+  id varchar [pk]
+  archetypeId varchar [not null]
+  count int [not null]
+  role varchar
+  logicalCardId varchar [not null]
+}
+
+Table DeckVariant {
+  id varchar [pk]
+  archetypeId varchar [not null]
+  nameKo varchar [not null]
+}
+
+Table ArchetypeTrend {
+  id varchar [pk]
+  archetypeId varchar [not null]
+  week varchar [not null]
+  usage double [not null]
+  region varchar [not null]
+}
+
+Table Tournament {
+  id varchar [pk]
+  nameKo varchar [not null]
+  date timestamp [not null]
+  region varchar [not null]
+  format varchar [not null]
+  players int [not null]
+  winnerArchetypeId varchar
+  status varchar [not null]
+  createdAt timestamp [not null]
+  limitlessId varchar
+  name varchar
+  platform varchar
+  syncedAt timestamp
+  externalUrl varchar
+  level varchar
+  metaRegion varchar [not null]
+  source varchar
+  sourceId varchar
+}
+
+Table PlayerRanking {
+  id varchar [pk]
+  season int [not null]
+  rank int [not null]
+  name varchar [not null]
+  csp int [not null]
+  favArchetypeId varchar
+  wins int [not null]
+  updatedAt timestamp [not null]
+}
+
+Table PullRate {
+  id varchar [pk]
+  setId varchar [not null]
+  rarity varchar [not null]
+  types int [not null]
+  probability double [not null]
+  perBox varchar [not null]
+}
+
+Table Ruling {
+  id varchar [pk]
+  question varchar [not null]
+  answer varchar [not null]
+  sourceUrl varchar
+  logicalCardId varchar
+}
+
+Table GlossaryEntry {
+  id varchar [pk]
+  term varchar [not null]
+  definition varchar [not null]
+  example varchar
+  locale varchar [not null]
+}
+
+Table MarketStat {
+  id varchar [pk]
+  cardId varchar [not null]
+  date timestamp [not null]
+  priceKrw int
+  change1w double
+  change1m double
+  change3m double
+  txCount int [not null]
+  volumeKrw int [not null]
+  athKrw int
+  viewDelta double
+  wishlist int [not null]
+}
+
+Table SetGroup {
+  id varchar [pk]
+  era varchar [not null]
+  nameEn varchar
+  nameJa varchar
+  nameKo varchar
+  releaseDate timestamp
+  order int [not null]
+  createdAt timestamp [not null]
+  updatedAt timestamp [not null]
+  eraKey varchar
+}
+
+Table LogicalCard {
+  id varchar [pk]
+  setGroupId varchar
+  primarySetId varchar
+  primaryNumber varchar
+  primaryNumberInt int
+  supertype varchar
+  subtypes varchar[]
+  types varchar[]
+  hp int
+  retreatCost int
+  weakness varchar
+  resistance varchar
+  regulationMark varchar
+  illustrator varchar
+  evolvesFrom varchar
+  evolvesTo varchar[]
+  abilities json
+  attacks json
+  legalities json
+  rules varchar[]
+  flavorText varchar
+  rarityId varchar
+  createdAt timestamp [not null]
+  updatedAt timestamp [not null]
+  pokedexNumbers varchar[]
+  abilitiesKo json
+  attacksKo json
+  flavorTextKo varchar
+  nameKo varchar
+  rulesKo varchar[]
+  gameCardId varchar
+}
+
+Table CardLocale {
+  id varchar [pk]
+  logicalCardId varchar [not null]
+  language varchar [not null]
+  region varchar [not null]
+  setId varchar [not null]
+  number varchar [not null]
+  numberInt int
+  name varchar [not null]
+  flavorText varchar
+  imageSmall varchar
+  imageLarge varchar
+  createdAt timestamp [not null]
+  updatedAt timestamp [not null]
+  rarityId varchar
+  subtypes varchar[]
+  evolvesFrom varchar
+  evolvesTo varchar[]
+  legalities json
+  regulationMark varchar
+  resistance varchar
+  retreatCost int
+  weakness varchar
+}
+
+Table Rarity {
+  id varchar [pk]
+  code varchar [not null]
+  nameEn varchar
+  nameJa varchar
+  nameKo varchar
+  tier int [not null]
+  color varchar
+  categoryId varchar
+}
+
+Table PriceSource {
+  id varchar [pk]
+  code varchar [not null]
+  name varchar [not null]
+  defaultCurrency varchar [not null]
+  marketRegion varchar [not null]
+  baseUrl varchar
+  enabled boolean [not null]
+  priority int [not null]
+  createdAt timestamp [not null]
+  updatedAt timestamp [not null]
+}
+
+Table ExternalSource {
+  id varchar [pk]
+  code varchar [not null]
+  name varchar [not null]
+  baseUrl varchar
+  kind varchar [not null]
+  region varchar
+  enabled boolean [not null]
+  priority int [not null]
+  notes varchar
+  createdAt timestamp [not null]
+  updatedAt timestamp [not null]
+}
+
+Table ExternalIdMapping {
+  id varchar [pk]
+  sourceId varchar [not null]
+  externalId varchar [not null]
+  cardLocaleId varchar
+  logicalCardId varchar
+  setId varchar
+  setGroupId varchar
+  url varchar
+  verifiedAt timestamp
+  verifiedBy varchar
+  confidence double [not null]
+  notes varchar
+  createdAt timestamp [not null]
+  updatedAt timestamp [not null]
+}
+
+Table RarityCategory {
+  id varchar [pk]
+  code varchar [not null]
+  nameKo varchar [not null]
+  nameJa varchar
+  nameEn varchar [not null]
+  tier int [not null]
+  order int [not null]
+  color varchar
+  description varchar
+  createdAt timestamp [not null]
+  updatedAt timestamp [not null]
+}
+
+Table CardText {
+  id varchar [pk]
+  logicalCardId varchar [not null]
+  language varchar [not null]
+  name varchar
+  attacks json
+  abilities json
+  rules varchar[]
+  flavorText varchar
+  source varchar [not null]
+  confidence double [not null]
+  verifiedAt timestamp
+  createdAt timestamp [not null]
+  updatedAt timestamp [not null]
+}
+
+Table DeckRecipeCard {
+  id varchar [pk]
+  archetypeId varchar [not null]
+  cardName varchar [not null]
+  setCode varchar [not null]
+  number varchar [not null]
+  category varchar [not null]
+  avgCount double [not null]
+  adoptionRate double [not null]
+  logicalCardId varchar
+  isCore boolean [not null]
+  region varchar [not null]
+}
+
+Table DeckMatchup {
+  id varchar [pk]
+  deckAId varchar [not null]
+  deckBId varchar [not null]
+  winsA int [not null]
+  winsB int [not null]
+  ties int [not null]
+  games int [not null]
+  winRateA double [not null]
+  updatedAt timestamp [not null]
+}
+
+Table TournamentStanding {
+  id varchar [pk]
+  tournamentId varchar [not null]
+  placing int [not null]
+  playerName varchar [not null]
+  country varchar
+  deckKey varchar
+  deckName varchar
+  wins int [not null]
+  losses int [not null]
+  ties int [not null]
+  decklist json
+  createdAt timestamp [not null]
+  deckIcons varchar[]
+  archetypeRaw varchar
+  deckCode varchar
+  deckSource varchar
+  playerUsername varchar
+}
+
+Table TournamentSourceRef {
+  id varchar [pk]
+  tournamentId varchar [not null]
+  source varchar [not null]
+  sourceId varchar [not null]
+  role varchar [not null]
+  url varchar
+}
+
+Table ArchetypeRegionStat {
+  id varchar [pk]
+  archetypeId varchar [not null]
+  region varchar [not null]
+  tier varchar [not null]
+  usageRate double [not null]
+  winCount int [not null]
+  avgRank double [not null]
+  winRate double [not null]
+  conversion double [not null]
+  consistency double [not null]
+  sampleSize int [not null]
+  tournamentCount int [not null]
+  isUnderdog boolean [not null]
+  isTrap boolean [not null]
+  isMetaCounter boolean [not null]
+  updatedAt timestamp [not null]
+}
+
+Table Species {
+  id int [pk]
+  nameEn varchar [not null]
+  nameJa varchar
+  nameKo varchar
+  genusKo varchar
+  generation int
+  evolvesFromId int
+  evolutionChainId int
+}
+
+Table LogicalCardSpecies {
+  logicalCardId varchar [pk]
+  speciesId int [pk]
+}
+
+Table GameCard {
+  id varchar [pk]
+  supertype varchar
+  name varchar [not null]
+  effectKey varchar [not null]
+  hp int
+}
+
+Table Era {
+  key varchar [pk]
+  order int [not null]
+  labelKo varchar [not null]
+}
+
+Table CardPackLink {
+  id varchar [pk]
+  waveId varchar [not null]
+  region varchar [not null]
+  setId varchar
+  role varchar [not null]
+  relationType varchar [not null]
+  mirrorOfSetId varchar
+  numberMirrors boolean [not null]
+  note varchar
+  createdAt timestamp [not null]
+}
+
+// Relationships
+Ref: Set.setGroupId > SetGroup.id
+Ref: Price.sourceId > PriceSource.id
+Ref: Price.cardLocaleId > CardLocale.id
+Ref: TierEntry.setId > Set.id
+Ref: TierEntry.logicalCardId > LogicalCard.id
+Ref: Trade.localeId > CardLocale.id
+Ref: Trade.logicalCardId > LogicalCard.id
+Ref: Account.userId > User.id
+Ref: Session.userId > User.id
+Ref: CollectionItem.userId > User.id
+Ref: CollectionItem.localeId > CardLocale.id
+Ref: CollectionItem.logicalCardId > LogicalCard.id
+Ref: Certification.itemId > CollectionItem.id
+Ref: BadgeTier.badgeId > Badge.id
+Ref: Listing.itemId > CollectionItem.id
+Ref: Listing.sellerId > User.id
+Ref: Offer.listingId > Listing.id
+Ref: Post.userId > User.id
+Ref: Comment.postId > Post.id
+Ref: Comment.userId > User.id
+Ref: Message.conversationId > Conversation.id
+Ref: DeckCard.archetypeId > DeckArchetype.id
+Ref: DeckCard.logicalCardId > LogicalCard.id
+Ref: DeckVariant.archetypeId > DeckArchetype.id
+Ref: ArchetypeTrend.archetypeId > DeckArchetype.id
+Ref: Ruling.logicalCardId > LogicalCard.id
+Ref: SetGroup.eraKey > Era.key
+Ref: LogicalCard.setGroupId > SetGroup.id
+Ref: LogicalCard.primarySetId > Set.id
+Ref: LogicalCard.rarityId > Rarity.id
+Ref: LogicalCard.gameCardId > GameCard.id
+Ref: CardLocale.logicalCardId > LogicalCard.id
+Ref: CardLocale.setId > Set.id
+Ref: CardLocale.rarityId > Rarity.id
+Ref: Rarity.categoryId > RarityCategory.id
+Ref: ExternalIdMapping.sourceId > ExternalSource.id
+Ref: ExternalIdMapping.cardLocaleId > CardLocale.id
+Ref: ExternalIdMapping.logicalCardId > LogicalCard.id
+Ref: CardText.logicalCardId > LogicalCard.id
+Ref: DeckRecipeCard.archetypeId > DeckArchetype.id
+Ref: DeckMatchup.deckAId > DeckArchetype.id
+Ref: DeckMatchup.deckBId > DeckArchetype.id
+Ref: TournamentStanding.tournamentId > Tournament.id
+Ref: TournamentSourceRef.tournamentId > Tournament.id
+Ref: ArchetypeRegionStat.archetypeId > DeckArchetype.id
+Ref: LogicalCardSpecies.logicalCardId > LogicalCard.id
+Ref: LogicalCardSpecies.speciesId > Species.id
+Ref: CardPackLink.waveId > SetGroup.id
+Ref: CardPackLink.setId > Set.id
+Ref: CardPackLink.mirrorOfSetId > Set.id

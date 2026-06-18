@@ -5,7 +5,7 @@ import { CardStageCarousel } from "@/components/home/CardStageCarousel";
 import { MetaDeckSection } from "@/components/home/MetaDeckSection";
 import { getRecentFeed } from "@/lib/services/collection";
 import { getTopCollectors, getCurrentSeason } from "@/lib/services/gamification";
-import { getHotTopics, type HotTopic } from "@/lib/services/community";
+import { getHotTopics, relativeKo, type HotTopic } from "@/lib/services/community";
 import {
   Avatar,
   Card,
@@ -34,17 +34,6 @@ const CATEGORY_TAG_COLOR: Record<string, "negative" | "neutral" | "warning" | "s
   자랑:    "warning",
   거래후기: "success",
 };
-
-function relativeKo(date: Date): string {
-  const min = Math.floor((Date.now() - date.getTime()) / 60000);
-  const hr = Math.floor(min / 60);
-  const days = Math.floor(hr / 24);
-  if (min < 1) return "방금 전";
-  if (min < 60) return `${min}분 전`;
-  if (hr < 24) return `${hr}시간 전`;
-  if (days === 1) return "어제";
-  return `${days}일 전`;
-}
 
 // ── 컴포넌트 ──────────────────────────────────────────────────────────────
 
@@ -164,30 +153,30 @@ export default async function HomePage({
             </CardHeader>
             <CardDivider className="my-3" />
             <CardContent className="space-y-1">
-              {topCollectors.map((col) => (
+              {topCollectors.map((collector) => (
                 <Link
-                  key={col.username}
-                  href={`/${locale}/profile/${col.username}`}
+                  key={collector.username}
+                  href={`/${locale}/profile/${collector.username}`}
                   className="flex items-center gap-3 hover:bg-toss-hover -mx-2 px-2 py-2 rounded-toss-md transition-colors group"
                 >
-                  <span className="text-base w-5 text-center shrink-0">{RANK_MEDAL[col.rank - 1] ?? `${col.rank}`}</span>
+                  <span className="text-base w-5 text-center shrink-0">{RANK_MEDAL[collector.rank - 1] ?? `${collector.rank}`}</span>
                   <div className="ring-2 ring-toss-brand rounded-full shrink-0">
-                    <Avatar name={col.avatarInitial} size="sm" />
+                    <Avatar name={collector.avatarInitial} size="sm" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-toss-label font-semibold text-toss-text-primary group-hover:text-toss-text-primary truncate transition-colors">
-                      {col.displayName}
+                      {collector.displayName}
                     </p>
                     <p className="text-toss-caption text-toss-text-quaternary truncate">
-                      {col.cardCount}장 보유
+                      {collector.cardCount}장 보유
                     </p>
                   </div>
                   <div className="flex flex-col items-end shrink-0">
                     <p className="text-toss-label font-semibold text-toss-text-primary toss-numeric">
-                      ₩{(col.valueKrw / 10000).toFixed(0)}만
+                      ₩{(collector.valueKrw / 10000).toFixed(0)}만
                     </p>
-                    {col.monthlyAdded > 0 && (
-                      <DeltaBadge delta={col.monthlyAdded} showPercent={false} decimals={0} mode="text" size="sm" />
+                    {collector.monthlyAdded > 0 && (
+                      <DeltaBadge delta={collector.monthlyAdded} showPercent={false} decimals={0} mode="text" size="sm" />
                     )}
                   </div>
                 </Link>

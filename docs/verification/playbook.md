@@ -2,7 +2,7 @@
 
 > 내장 `/goal` 완료조건이 참조하는 **절차 문서**. 한 실행 = 한 팩.
 > ⚠️ `/goal` 평가자는 **transcript(대화)만** 읽고 도구를 실행하지 않는다 → 각 단계 결과·증거를 **반드시 대화에 출력**할 것 (마지막 §Transcript 증거).
-> 연동: 출처 `docs/verification/source-registry.md` · 매핑 `docs/card-packs-jp-en-guide.md` · ERD(`LogicalCard`/`CardLocale`/`CardText`).
+> 연동: 출처 `docs/verification/source-registry.md` · 매핑 `docs/design/card-packs-jp-en-guide.md` · ERD(`LogicalCard`/`CardLocale`/`CardText`).
 
 ## Phase 0 — 입력·범위
 - `TARGET_PACK` 확정. 그 팩의 모든 CardLocale/LogicalCard 로드. `card-packs-jp-en-guide.md`에서 이 팩의 JP↔EN 매핑·1:1/2→1·EN단독/JP단독 확인.

@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://raredoc.kr";
+import { SITE_BASE_URL as BASE_URL } from "@/lib/constants";
 
 export default function robots(): MetadataRoute.Robots {
   return {

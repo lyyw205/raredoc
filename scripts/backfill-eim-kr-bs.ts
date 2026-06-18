@@ -1,5 +1,5 @@
 /**
- * P3: KR BS코드 → ExternalIdMapping(pokemoncard_kr) 백필 — docs/meta-pipeline-multisource.md §3 선행 백필 3
+ * P3: KR BS코드 → ExternalIdMapping(pokemoncard_kr) 백필 — docs/cardgame/meta-pipeline-multisource.md §3 선행 백필 3
  *
  * 실행: npx tsx scripts/backfill-eim-kr-bs.ts [--dry-run]
  *

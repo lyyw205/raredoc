@@ -9,7 +9,7 @@ import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
 
 const JOBS: { id: string; date?: string; note: string }[] = [
-  { id: "jp-tcg-BW7", note: "프라스마게일(Plasma Gale) JP — cardCount 70(stale, base /070만)→79(실제 rows=트래커 79). base70(#1-70)+시크릿9(#71-79=SR6/UR3). 레어도 C34/U20/R16/SR6/UR3 완비(별도 공식검증). date 2012-09-14 정상" },
+  { id: "kr-dc", date: "2012-08-01", note: "드래곤 컬렉션 KR — 발매일 1970 placeholder→2012-08-01 (리서치 wf wdf3qr0dg high conf: pokemoncard.co.kr/card/12 '발매일 2012-08-01' + namu 인포박스). 카드 20장 LC 완벽정합·무레어도, cardCount 20 정상. JP(jp-tcg-DC)는 수정불필요" },
 ];
 
 async function main() {

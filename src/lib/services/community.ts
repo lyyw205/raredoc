@@ -1,20 +1,15 @@
 import { prisma } from "@/lib/prisma";
 import type { Post } from "@/components/community/CommunityBoard";
+import { isTradeCategory } from "@/components/community/tradeMeta";
+import { formatRelativeKo } from "@/lib/format/relative-time";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 공통 헬퍼
 // ─────────────────────────────────────────────────────────────────────────────
 
-/** 한국어 상대시간. 홈/목록/상세에서 동일 톤으로 사용. */
+/** 한국어 상대시간. 홈/목록/상세에서 동일 톤으로 사용(일 단위까지만 — 주/개월/년 표기 없음). */
 export function relativeKo(date: Date): string {
-  const min = Math.floor((Date.now() - date.getTime()) / 60000);
-  const hr = Math.floor(min / 60);
-  const days = Math.floor(hr / 24);
-  if (min < 1) return "방금 전";
-  if (min < 60) return `${min}분 전`;
-  if (hr < 24) return `${hr}시간 전`;
-  if (days === 1) return "어제";
-  return `${days}일 전`;
+  return formatRelativeKo(date, { maxUnit: "day" });
 }
 
 /** body 첫 줄(비어있지 않은)로 preview 파생. */
@@ -24,12 +19,6 @@ function derivePreview(body: string): string {
     .map((l) => l.trim())
     .find((l) => l.length > 0);
   return firstLine ?? "";
-}
-
-const TRADE_CATS = new Set(["팝니다", "삽니다"]);
-
-function isTradeCategory(category: string): boolean {
-  return TRADE_CATS.has(category);
 }
 
 // CommunityBoard 의 Post.condition / tradeStatus 는 유니온 타입이라 안전하게 캐스팅.

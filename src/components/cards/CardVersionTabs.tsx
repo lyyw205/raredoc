@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { REGION_LABEL } from "@/lib/cards/card-fields";
 
 export type CardVersion = {
   region: string; // EN | JP | KR
@@ -11,12 +12,6 @@ export type CardVersion = {
   artist: string | null;
   rarity: string | null;
   image: string | null;
-};
-
-const REGION_LABEL: Record<string, string> = {
-  EN: "영문판",
-  JP: "일본판",
-  KR: "한국판",
 };
 
 /**

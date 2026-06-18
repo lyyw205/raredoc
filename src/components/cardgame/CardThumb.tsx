@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-// 공용 카드 썸네일 — cardgame/cards 의 CardGridItem 패턴 추출 (docs/cardgame-ui-plan.md §2-I3).
+// 공용 카드 썸네일 — cardgame/cards 의 CardGridItem 패턴 추출 (docs/cardgame/cardgame-ui-plan.md §2-I3).
 // aspect 63/88(실물 카드 비율), null → placeholder, count 뱃지 옵션. 훅 없음 — 서버/클라이언트 겸용.
 
 export function CardThumb({

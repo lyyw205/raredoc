@@ -19,6 +19,8 @@ export type RegionCardVariant = {
   imageSmall: string | null;
   imageLarge: string | null;
   setCode: string | null;
+  setTotal: number | null;
+  setName: string;        // 지역 언어 세트명(KR=한글, JP=일본어, EN=영문)
 };
 
 export type CardInfo = {
@@ -58,6 +60,11 @@ export async function getCardDetail(regionCardId: string): Promise<CardDetail> {
     imageSmall: l.imageSmall,
     imageLarge: l.imageLarge,
     setCode: l.setCode,
+    setTotal: l.setCardCount ?? null,
+    setName:
+      l.region === "KR" ? (l.setNameKo ?? l.setName)
+      : l.region === "JP" ? (l.setNameJa ?? l.setName)
+      : l.setName,
   }));
 
   // region 당 1장만(탭 key 중복 방지). 같은 region 이 여러 장이면 이미지 있는 쪽 우선.

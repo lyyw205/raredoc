@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { Tab } from "@/components/toss";
-import { CollectionTab, type CollectionSet } from "./CollectionTab";
+import { CollectionTab } from "./CollectionTab";
 import { BadgesTab } from "./BadgesTab";
 import type { BadgeView } from "@/lib/services/gamification";
+import type { CollectionTabData } from "@/lib/services/collection";
 
 type TabKey = "collection" | "badges";
 
@@ -15,12 +16,14 @@ const TABS: { key: TabKey; label: string }[] = [
 
 export function ProfileTabs({
   defaultTab = "collection",
-  sets = [],
+  collection,
+  profileUserId,
   isOwnProfile = false,
   badges = [],
 }: {
   defaultTab?: TabKey;
-  sets?: CollectionSet[];
+  collection?: CollectionTabData;
+  profileUserId: string;
   isOwnProfile?: boolean;
   badges?: BadgeView[];
 }) {
@@ -39,7 +42,14 @@ export function ProfileTabs({
 
         <div className="mt-6">
           <Tab.Panel value="collection">
-            <CollectionTab sets={sets} isOwnProfile={isOwnProfile} />
+            <CollectionTab
+              key={profileUserId}
+              sets={collection?.sets ?? []}
+              packs={collection?.packs}
+              ownedLogicalCardIds={collection?.ownedLogicalCardIds ?? []}
+              profileUserId={profileUserId}
+              isOwnProfile={isOwnProfile}
+            />
           </Tab.Panel>
           <Tab.Panel value="badges">
             <BadgesTab badges={badges} />

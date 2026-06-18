@@ -168,7 +168,7 @@ const PROMO_GROUP_DEFS: Record<string, { era: string; nameKo: string }> = {
 
 async function appendFollowup(lines: string[]) {
   if (lines.length === 0) return;
-  const fpath = path.join(process.cwd(), "docs/followup-plans.md");
+  const fpath = path.join(process.cwd(), "docs/plans/followup-plans.md");
   const existing = fs.readFileSync(fpath, "utf-8");
   const section = `
 ---

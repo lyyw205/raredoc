@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Card, Tag, EmptyState } from "@/components/toss";
 import { cn } from "@/lib/utils";
 import type {
-  ArchetypeWithCards,
+  ArchetypeSummary,
   ArchetypeRecipe,
   RecipeCard,
   ArchetypeMatchup,
@@ -13,17 +13,9 @@ import type {
 import { ArrowLeft, Trophy, List } from "lucide-react";
 import { DeckIcon } from "@/components/cardgame/DeckIcon";
 import { CardThumb } from "@/components/cardgame/CardThumb";
+import { TierBadge } from "@/components/cardgame/TierBadge";
 import { DeckCostWidget } from "./DeckCostWidget";
 import type { DeckCostResult } from "@/lib/services/deck-pricing";
-
-// ── 상수 ──────────────────────────────────────────────────────────────────────
-
-const TIER_COLORS: Record<string, string> = {
-  S: "bg-red-100 text-red-700 border border-red-200",
-  A: "bg-orange-100 text-orange-700 border border-orange-200",
-  B: "bg-blue-100 text-blue-700 border border-blue-200",
-  C: "bg-gray-100 text-gray-600 border border-gray-200",
-};
 
 // ── 레시피 카테고리 블록 (#16/#17) ────────────────────────────────────────────
 
@@ -260,7 +252,7 @@ export function DeckDetailView({
   cost,
 }: {
   locale: string;
-  archetype: ArchetypeWithCards;
+  archetype: ArchetypeSummary;
   recipe: ArchetypeRecipe;
   matchups: ArchetypeMatchup[];
   results: ArchetypeResultRow[];
@@ -285,14 +277,7 @@ export function DeckDetailView({
         <div className="flex items-center gap-3 flex-wrap mb-2">
           <DeckIcon iconKeys={archetype.iconKeys} size="lg" />
           <h1 className="text-toss-display font-bold text-toss-text-primary">{title}</h1>
-          <span
-            className={cn(
-              "inline-flex items-center justify-center w-8 h-8 rounded-toss-md text-sm font-bold shrink-0",
-              TIER_COLORS[archetype.tier]
-            )}
-          >
-            {archetype.tier}
-          </span>
+          <TierBadge tier={archetype.tier} />
           {archetype.isMetaCounter && (
             <span className="text-[11px] font-semibold px-2 py-1 rounded bg-indigo-100 text-indigo-700">
               🛡 메타카운터

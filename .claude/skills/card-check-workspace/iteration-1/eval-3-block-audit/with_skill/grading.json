@@ -1,0 +1,6 @@
+{"eval_id":3,"config":"with_skill","expectations":[
+ {"text":"제보된 유리나팔 한 장만 보지 않고 그 세트 트레이너/아이템 블록 전체를 감사해야 한다고 인식함","passed":true,"evidence":"audit-kr-trainers.ts 로 jp-mega-dream-ex/kr-m2a 60장 전수 전단사 감사(오링크 0) 수행"},
+ {"text":"audit-kr-trainers.ts 번들 스크립트 또는 kr-trainer-alignment.md 절차를 사용/언급함","passed":true,"evidence":"audit-kr-trainers.ts 실행 + kr-trainer-alignment.md 1단계 진단표 인용"},
+ {"text":"스크램블 근본원인(가나다 재정렬 + TR_JA2KO 사전 미등록 → 번호폴백)을 이해하고 있음","passed":true,"evidence":"잔여 사전갭 Ｎのポイントアップ(전각Ｄ) 식별 + 사전 보강 권고로 근본원인 명시"},
+ {"text":"EN 다리로 정체성을 확증하고, EN無 쌍은 이미지로 판정한다는 검증 위계를 따름","passed":true,"evidence":"EN 다리 43장 전수 교차검증(미스매치 0), Glass Trumpet 으로 정체성 확증"}
+]}

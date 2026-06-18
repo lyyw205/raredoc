@@ -1,0 +1,11 @@
+{
+  "eval_id": 3,
+  "eval_name": "trainer-block-audit-not-single",
+  "prompt": "메가드림ex 카드팩에서 유리나팔이 엉뚱한 카드에 연결된 것 같아. 확인해줘.",
+  "assertions": [
+    "제보된 유리나팔 한 장만 보지 않고 그 세트 트레이너/아이템 블록 전체를 감사해야 한다고 인식함",
+    "audit-kr-trainers.ts 번들 스크립트 또는 kr-trainer-alignment.md 절차를 사용/언급함",
+    "스크램블 근본원인(가나다 재정렬 + TR_JA2KO 사전 미등록 → 번호폴백)을 이해하고 있음",
+    "EN 다리로 정체성을 확증하고, EN無 쌍은 이미지로 판정한다는 검증 위계를 따름"
+  ]
+}

@@ -5,16 +5,13 @@ import { Card } from "@/components/toss";
 import { cn } from "@/lib/utils";
 import { Wallet, ChevronDown, ChevronUp, AlertTriangle } from "lucide-react";
 import type { DeckCostResult } from "@/lib/services/deck-pricing";
+import { formatKrwShort } from "@/lib/format/krw";
 
 // 덱 견적 위젯 (UI-1b) — [저레어↔고레어] 토글은 서버에서 미리 계산된 2값 스왑(재계산 없음).
 // 정직 표기 의무: 기준·날짜·집계율·환율 캡션 + 미집계 카드 전건 노출 + 고가누락 "±변동 큼" 라벨.
 
 function formatMan(krw: number): string {
-  if (krw >= 10000) {
-    const man = krw / 10000;
-    return `${man >= 100 ? Math.round(man).toLocaleString() : man.toFixed(1)}만원`;
-  }
-  return `${krw.toLocaleString()}원`;
+  return formatKrwShort(krw, { suffix: "만원" });
 }
 
 export function DeckCostWidget({ cost }: { cost: DeckCostResult }) {

@@ -1,5 +1,5 @@
 /**
- * 덱리스트 카드 → raredoc 카드 단일 해석기 (4경로) — docs/meta-pipeline-multisource.md §4-②
+ * 덱리스트 카드 → raredoc 카드 단일 해석기 (4경로) — docs/cardgame/meta-pipeline-multisource.md §4-②
  *
  * 경로① EN 약어:    setmap.en[ptcgoCode] → setId → RegionCard 직결({setId}-{number}) → EIM pokemontcg_io → (setId,number) 폴백
  * 경로② JP 세트코드: setmap.jp[code] → jp-tcg-* setId → (setId, numberInt) 조회   [limitless standard-jp — P3]

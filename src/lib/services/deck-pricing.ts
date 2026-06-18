@@ -1,5 +1,5 @@
 /**
- * 덱 견적 엔진 — docs/cardgame-ui-plan.md §2-I1 (UI-1b)
+ * 덱 견적 엔진 — docs/cardgame/cardgame-ui-plan.md §2-I1 (UI-1b)
  *
  * 레시피(INTL) → cardName 그룹 → 인쇄판 후보(레시피 cardId + EN명 역추적) →
  * 모드별 인쇄판 선택(budget=저레어/premium=고레어, RarityCategory.tier 5/6 경계) →

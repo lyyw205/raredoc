@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { Award, Lock, CheckCircle2 } from "lucide-react";
 import { Card, Tag, ToggleGroup, SegmentedControl } from "@/components/toss";
 import { cn } from "@/lib/utils";
+import { TIER_ORDER } from "@/lib/constants";
 
 export type Tier = "SILVER" | "GOLD" | "DIAMOND";
 export type BadgeCategory = "collection" | "ranking" | "cert" | "season";
@@ -34,8 +35,6 @@ const TIER_LABEL: Record<Tier, string> = {
   GOLD: "골드",
   DIAMOND: "다이아",
 };
-
-const TIER_ORDER: Tier[] = ["SILVER", "GOLD", "DIAMOND"];
 
 const CATS: { key: "all" | BadgeCategory; label: string }[] = [
   { key: "all", label: "전체" },

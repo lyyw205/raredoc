@@ -1,0 +1,283 @@
+{
+  "metadata": {
+    "skill_name": "card-check",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-06-09T17:23:57Z",
+    "evals_run": [
+      0,
+      1,
+      2
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 80.8,
+        "tokens": 35520,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "\ub2cc\uc790\uc2a4\ud53c\ub108\uc5d0 \ubfd4\ucda9\uc774\uac00 DB\uc5d0 \uc874\uc7ac\ud55c\ub2e4\uace0 \uc815\ud655\ud788 \uacb0\ub860 \ub0b4\ub9bc",
+          "passed": true,
+          "evidence": "\uacb0\ub860: '\u2705 \uc788\uc2b5\ub2c8\ub2e4. \ub2cc\uc790\uc2a4\ud53c\ub108\uc5d0 \ubfd4\ucda9\uc774(Weedle) \uce74\ub4dc\uac00 DB\uc5d0 \uc815\uc0c1 \uc218\uc9d1' + 4\ubd84\uba74 \ud310\uc815(DB \uc788\uc74c \u00d7 \uc2e4\uc874\ud568)"
+        },
+        {
+          "text": "\ud55c\uad6d\ud310 \ubc1c\ub9e4 \uc5ec\ubd80 \uc9c8\ubb38\uc5d0 \uba85\uc2dc\uc801\uc73c\ub85c \ub2f5\ud568 (KR \ub85c\ucf00\uc77c \uc874\uc7ac = \ud55c\uad6d\ud310 \ub098\uc634)",
+          "passed": true,
+          "evidence": "'\ud55c\uad6d\ud310\ub3c4 \ub098\uc654\uc2b5\ub2c8\ub2e4 (KR \ub85c\ucf00\uc77c 2\uc885 \ubcf4\uc720)' \u2014 M4 001 + M-P \uc7ac\uc218\ub85d\uae4c\uc9c0 \uad6c\ubd84"
+        },
+        {
+          "text": "\uad6c\uccb4\uc801 \uc2dd\ubcc4\uc790\ub97c \uc81c\uc2dc\ud568 (\uc138\ud2b8\ucf54\ub4dc M4, \ubc88\ud638, logicalCardId \uc911 \ud558\ub098 \uc774\uc0c1)",
+          "passed": true,
+          "evidence": "logicalCardId lc-orphan-jp-mega-ninja-spinner-1, \uc138\ud2b8 M4, \ubc88\ud638 1/001 \ubaa8\ub450 \uc81c\uc2dc"
+        },
+        {
+          "text": "\ub2e4\uad6d\uc5b4 \uba85\uce6d \ub610\ub294 \ud0c0\uc9c0\uc5ed \ubc1c\ub9e4 \uc815\ubcf4\ub97c \ubd80\uac00\ub85c \uc81c\uacf5\ud568 (\u30d3\u30fc\u30c9\u30eb/Weedle/EN Chaos Rising \ub4f1)",
+          "passed": true,
+          "evidence": "\uc9c0\uc5ed\ubcc4 \ub85c\ucf00\uc77c \ud45c: JP \u30d3\u30fc\u30c9\u30eb / KR \ubfd4\ucda9\uc774\u00d72 / EN Weedle(Chaos Rising)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 106.6,
+        "tokens": 30705,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Poltchageist\uc758 \uc77c\ubcf8\uc5b4\uba85 \u30c1\u30e3\u30c7\u30b9(\ub610\ub294 \ud55c\uad6d\uc5b4\uba85 \ucc28\ub370\uc2a4)\ub97c \uc815\ud655\ud788 \uc2dd\ubcc4\ud568",
+          "passed": true,
+          "evidence": "'Poltchageist(= \ucc28\ub370\uc2a4 / \u30c1\u30e3\u30c7\u30b9)' \uba85\uc2dc"
+        },
+        {
+          "text": "\uc5b4\ube44\uc2a4\uc544\uc774\uc5d0 \ud574\ub2f9 \uce74\ub4dc(JP 005/081 \u30c1\u30e3\u30c7\u30b9)\uac00 DB\uc5d0 \uc874\uc7ac\ud55c\ub2e4\uace0 \uacb0\ub860 \ub0b4\ub9bc",
+          "passed": true,
+          "evidence": "lc-orphan-jp-mega-abyss-eye-5, \ubc88\ud638 5, M5 \u30a2\u30d3\u30b9\u30a2\u30a4 \u300c\u30c1\u30e3\u30c7\u30b9\u300d"
+        },
+        {
+          "text": "\uc5b4\ube44\uc2a4\uc544\uc774\ub294 \uc77c\ubcf8\ud310\ub9cc \uc788\uace0 KR/EN \ub85c\ucf00\uc77c\uc774 \uc5c6\uc74c\uc744 \uc5b8\uae09\ud568",
+          "passed": true,
+          "evidence": "'\ub85c\ucf00\uc77c: JP\ub9cc ... (EN/KR \ub85c\ucf00\uc77c \uc5c6\uc74c)'"
+        },
+        {
+          "text": "\uc601\ubb38\uba85 \uc9c1\uc811 \uac80\uc0c9 \uc2e4\ud328 \uc2dc \ucd94\uce21\uc73c\ub85c '\uc5c6\ub2e4' \ub2e8\uc815\ud558\uc9c0 \uc54a\uace0 \uad50\ucc28 \uc5b8\uc5b4 \ud655\uc778 \uacfc\uc815\uc744 \uac70\uce68",
+          "passed": true,
+          "evidence": "'\ud45c\uae30 \ucc28\uc774 \uc548\ub0b4' \uc139\uc158: 1\ucc28 \uc601\ubb38 \uac80\uc0c9\uc740 TWM\ub9cc \ubc18\ud658 \u2192 \u30c1\u30e3\u30c7\u30b9\u00b7--dex 1012 2\ucc28 \uac80\uc0c9\uc73c\ub85c \ubc1c\uacac \uacfc\uc815\uc744 \uba85\uc2dc\uc801\uc73c\ub85c \ubb38\uc11c\ud654"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 216.8,
+        "tokens": 42150,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "\uc5b4\ube44\uc2a4\uc544\uc774\uc5d0 \uba54\uac00\ub9ac\uc790\ubabdex\uac00 \uc5c6\ub2e4\uace0 \uc815\ud655\ud788 \uacb0\ub860 \ub0b4\ub9bc",
+          "passed": true,
+          "evidence": "'\uc544\ub2c8\uc694, \uc5b4\ube44\uc2a4\uc544\uc774\uc5d0\ub294 \uba54\uac00\ub9ac\uc790\ubabd ex\uac00 \ub4e4\uc5b4\uc788\uc9c0 \uc54a\uc2b5\ub2c8\ub2e4'"
+        },
+        {
+          "text": "\uba54\uac00\ub9ac\uc790\ubabdX ex\uac00 \ub2e4\ub978 \uc138\ud2b8(\uc778\ud398\ub974\ub178X \ub610\ub294 MEGA \ub4dc\ub9bc ex)\uc5d0 \uc874\uc7ac\ud568\uc744 \uc548\ub0b4\ud568",
+          "passed": true,
+          "evidence": "\uc778\ud398\ub974\ub178X 4\uc885 + MEGA \ub4dc\ub9bc ex 223 + \uc2a4\ud0c0\ud2b8\ub371100 Y ex \ud45c \uc81c\uacf5"
+        },
+        {
+          "text": "\ucd94\uce21\uc774 \uc544\ub2cc DB \uac80\uc0c9 \uadfc\uac70\ub97c \uc81c\uc2dc\ud568 (\uac80\uc0c9 \uacb0\uacfc/\uc218\ub85d \uce74\ub4dc \ud655\uc778 \uc5b8\uae09)",
+          "passed": true,
+          "evidence": "3\uc911 \ud655\uc778: DB --set \uac80\uc0c9 0\uac74 + group json \uc804\ubb38\uac80\uc0c9 0\uac74 + JP \uacf5\uc2dd pg=954 117\uc7a5 \uc804\uc218(NFC) 0\uac74 \u2014 \uc218\uc9d1\ub204\ub77d \uac00\ub2a5\uc131\uae4c\uc9c0 \ubc30\uc81c"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 0,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 253.9,
+        "tokens": 44449,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "\ub2cc\uc790\uc2a4\ud53c\ub108\uc5d0 \ubfd4\ucda9\uc774\uac00 DB\uc5d0 \uc874\uc7ac\ud55c\ub2e4\uace0 \uc815\ud655\ud788 \uacb0\ub860 \ub0b4\ub9bc",
+          "passed": true,
+          "evidence": "'\uc788\uc2b5\ub2c8\ub2e4' + 1\ubc88 \uce74\ub4dc \uba85\uc2dc"
+        },
+        {
+          "text": "\ud55c\uad6d\ud310 \ubc1c\ub9e4 \uc5ec\ubd80 \uc9c8\ubb38\uc5d0 \uba85\uc2dc\uc801\uc73c\ub85c \ub2f5\ud568 (KR \ub85c\ucf00\uc77c \uc874\uc7ac = \ud55c\uad6d\ud310 \ub098\uc634)",
+          "passed": true,
+          "evidence": "'\ud55c\uad6d\ud310\ub3c4 \uc815\uc2dd \ubc1c\ub9e4\ub410\uc2b5\ub2c8\ub2e4' + kr-m4-001 \uc2dd\ubcc4"
+        },
+        {
+          "text": "\uad6c\uccb4\uc801 \uc2dd\ubcc4\uc790\ub97c \uc81c\uc2dc\ud568 (\uc138\ud2b8\ucf54\ub4dc M4, \ubc88\ud638, logicalCardId \uc911 \ud558\ub098 \uc774\uc0c1)",
+          "passed": true,
+          "evidence": "kr-m4-001, M4 001/083, BS2026003001\uae4c\uc9c0 \uc81c\uc2dc"
+        },
+        {
+          "text": "\ub2e4\uad6d\uc5b4 \uba85\uce6d \ub610\ub294 \ud0c0\uc9c0\uc5ed \ubc1c\ub9e4 \uc815\ubcf4\ub97c \ubd80\uac00\ub85c \uc81c\uacf5\ud568 (\u30d3\u30fc\u30c9\u30eb/Weedle/EN Chaos Rising \ub4f1)",
+          "passed": true,
+          "evidence": "\uc77c\u00b7\uc601\u00b7\ud55c 3\uac1c \uc5b8\uc5b4\ud310 \ud45c \uc81c\uacf5"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 130.7,
+        "tokens": 33027,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Poltchageist\uc758 \uc77c\ubcf8\uc5b4\uba85 \u30c1\u30e3\u30c7\u30b9(\ub610\ub294 \ud55c\uad6d\uc5b4\uba85 \ucc28\ub370\uc2a4)\ub97c \uc815\ud655\ud788 \uc2dd\ubcc4\ud568",
+          "passed": true,
+          "evidence": "'Poltchageist(\u30c1\u30e3\u30c7\u30b9 / \ucc28\ub370\uc2a4, \ub3c4\uac10 #1012)'"
+        },
+        {
+          "text": "\uc5b4\ube44\uc2a4\uc544\uc774\uc5d0 \ud574\ub2f9 \uce74\ub4dc(JP 005/081 \u30c1\u30e3\u30c7\u30b9)\uac00 DB\uc5d0 \uc874\uc7ac\ud55c\ub2e4\uace0 \uacb0\ub860 \ub0b4\ub9bc",
+          "passed": true,
+          "evidence": "'mega-abyss-eye \uadf8\ub8f9\uc5d0 1\uc7a5 \uc874\uc7ac', #5, lc-orphan-jp-mega-abyss-eye-5"
+        },
+        {
+          "text": "\uc5b4\ube44\uc2a4\uc544\uc774\ub294 \uc77c\ubcf8\ud310\ub9cc \uc788\uace0 KR/EN \ub85c\ucf00\uc77c\uc774 \uc5c6\uc74c\uc744 \uc5b8\uae09\ud568",
+          "passed": true,
+          "evidence": "'\ub85c\ucf00\uc77c: JP/ja 1\uac74\ub9cc \u2014 EN\u00b7KR \ub85c\ucf00\uc77c \uc5c6\uc74c'"
+        },
+        {
+          "text": "\uc601\ubb38\uba85 \uc9c1\uc811 \uac80\uc0c9 \uc2e4\ud328 \uc2dc \ucd94\uce21\uc73c\ub85c '\uc5c6\ub2e4' \ub2e8\uc815\ud558\uc9c0 \uc54a\uace0 \uad50\ucc28 \uc5b8\uc5b4 \ud655\uc778 \uacfc\uc815\uc744 \uac70\uce68",
+          "passed": true,
+          "evidence": "\uacb0\ub860\uc740 \uc815\ud655\ud558\ub098 1\ucc28 \uac80\uc0c9 \uc2e4\ud328\u2192\uc7ac\ud655\uc778 \uacfc\uc815 \uc11c\uc220\uc740 \uc5c6\uc74c(\ube4c\ub4dc \uc0b0\ucd9c\ubb3c JSON \uad50\ucc28\ub85c \ub3c4\ub2ec). \uc624\ud310 \uc5c6\uc74c \uae30\uc900\uc73c\ub85c \ud1b5\uacfc"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "time_seconds": 214.5,
+        "tokens": 39349,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "\uc5b4\ube44\uc2a4\uc544\uc774\uc5d0 \uba54\uac00\ub9ac\uc790\ubabdex\uac00 \uc5c6\ub2e4\uace0 \uc815\ud655\ud788 \uacb0\ub860 \ub0b4\ub9bc",
+          "passed": true,
+          "evidence": "'\uc544\ub2c8\uc694, \uc5c6\uc2b5\ub2c8\ub2e4... \ub9ac\uc790\ubabd \uacc4\uc5f4 \uce74\ub4dc \uc790\uccb4\uac00 \ud55c \uc7a5\ub3c4 \uc5c6\uc2b5\ub2c8\ub2e4'"
+        },
+        {
+          "text": "\uba54\uac00\ub9ac\uc790\ubabdX ex\uac00 \ub2e4\ub978 \uc138\ud2b8(\uc778\ud398\ub974\ub178X \ub610\ub294 MEGA \ub4dc\ub9bc ex)\uc5d0 \uc874\uc7ac\ud568\uc744 \uc548\ub0b4\ud568",
+          "passed": true,
+          "evidence": "\uc778\ud398\ub974\ub178X/\uba54\uac00\ub4dc\ub9bcex/\uc2a4\ud0c0\ud2b8\ub371100 \ud45c \uc81c\uacf5"
+        },
+        {
+          "text": "\ucd94\uce21\uc774 \uc544\ub2cc DB \uac80\uc0c9 \uadfc\uac70\ub97c \uc81c\uc2dc\ud568 (\uac80\uc0c9 \uacb0\uacfc/\uc218\ub85d \uce74\ub4dc \ud655\uc778 \uc5b8\uae09)",
+          "passed": true,
+          "evidence": "DB 118\uc7a5 \uac80\uc0c9 0\uac74 + group json \uad50\ucc28 \ud655\uc778. \ub2e8 \uc678\ubd80(\uacf5\uc2dd) \uad50\ucc28\uac80\uc99d\uc740 \uc5c6\uc74c \u2014 DB \uc218\uc9d1\ub204\ub77d \uac00\ub2a5\uc131\uc740 \ubbf8\ubc30\uc81c"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 134.7333,
+        "stddev": 72.233,
+        "min": 80.8,
+        "max": 216.8
+      },
+      "tokens": {
+        "mean": 36125.0,
+        "stddev": 5746.4359,
+        "min": 30705,
+        "max": 42150
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 199.7,
+        "stddev": 62.9193,
+        "min": 130.7,
+        "max": 253.9
+      },
+      "tokens": {
+        "mean": 38941.6667,
+        "stddev": 5721.8844,
+        "min": 33027,
+        "max": 44449
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00",
+      "time_seconds": "-65.0",
+      "tokens": "-2817"
+    }
+  },
+  "notes": []
+}

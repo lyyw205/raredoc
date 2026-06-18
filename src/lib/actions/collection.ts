@@ -11,6 +11,8 @@ import {
   addCollectionItem,
   updateCollectionItem,
   deleteCollectionItem,
+  getCollectionSetCards,
+  type CollectionCatalogCard,
 } from "@/lib/services/collection";
 import { ensureListingForItem } from "@/lib/services/marketplace";
 import { GRADES } from "@/lib/trades/shared";
@@ -208,4 +210,15 @@ export async function certifyItemAction(
 
   revalidateCollectionViews();
   return { ok: true, itemId: item.id, certPending };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 컬렉션 탭: 미보유(0수집) 팩 선택 시 그 팩의 전체 카드 지연 로드
+//   - profileUserId 기준 보유 오버레이(프로필 주인의 컬렉션). 컬렉션은 프로필에서 공개됨.
+// ─────────────────────────────────────────────────────────────────────────────
+export async function loadCollectionSetCardsAction(
+  profileUserId: string,
+  setId: string,
+): Promise<CollectionCatalogCard[]> {
+  return getCollectionSetCards(profileUserId, setId);
 }

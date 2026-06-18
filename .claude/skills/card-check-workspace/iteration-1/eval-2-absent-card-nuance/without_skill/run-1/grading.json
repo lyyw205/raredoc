@@ -1,0 +1,24 @@
+{
+ "expectations": [
+  {
+   "text": "어비스아이에 메가리자몽ex가 없다고 정확히 결론 내림",
+   "passed": true,
+   "evidence": "'아니요, 없습니다... 리자몽 계열 카드 자체가 한 장도 없습니다'"
+  },
+  {
+   "text": "메가리자몽X ex가 다른 세트(인페르노X 또는 MEGA 드림 ex)에 존재함을 안내함",
+   "passed": true,
+   "evidence": "인페르노X/메가드림ex/스타트덱100 표 제공"
+  },
+  {
+   "text": "추측이 아닌 DB 검색 근거를 제시함 (검색 결과/수록 카드 확인 언급)",
+   "passed": true,
+   "evidence": "DB 118장 검색 0건 + group json 교차 확인. 단 외부(공식) 교차검증은 없음 — DB 수집누락 가능성은 미배제"
+  }
+ ],
+ "summary": {
+  "passed": 3,
+  "total": 3,
+  "pass_rate": 1.0
+ }
+}

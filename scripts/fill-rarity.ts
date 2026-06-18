@@ -30,7 +30,7 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 // ── 공용: followup-plans.md 미보강 잔여 기록 (apply 시에만) ──────────────────
 function appendFollowup(title: string, note: string, columns: string, lines: string[]) {
   if (lines.length === 0) return;
-  const fpath = path.join(process.cwd(), "docs/followup-plans.md");
+  const fpath = path.join(process.cwd(), "docs/plans/followup-plans.md");
   const existing = readFileSync(fpath, "utf-8");
   const section = `
 ---

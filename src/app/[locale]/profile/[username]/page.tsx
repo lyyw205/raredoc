@@ -8,7 +8,7 @@ import { getCurrentUser } from "@/lib/auth/session";
 import {
   getHighlights,
   getUserStats,
-  getUserSetCatalog,
+  getCollectionTabData,
   getUserCollection,
 } from "@/lib/services/collection";
 import { getBadgesForUser } from "@/lib/services/gamification";
@@ -93,10 +93,11 @@ export default async function ProfilePage({
   const viewer = await getCurrentUser();
   const isOwnProfile = viewer?.id === profileUser.id;
 
-  const [stats, highlightItems, collectionSets, collection, badges] = await Promise.all([
+  const preferred = locale === "en" ? "en" : "ko";
+  const [stats, highlightItems, collectionData, collection, badges] = await Promise.all([
     getUserStats(profileUser.id),
     getHighlights(profileUser.id),
-    getUserSetCatalog(profileUser.id),
+    getCollectionTabData(profileUser.id, preferred),
     getUserCollection(profileUser.id),
     getBadgesForUser(profileUser.id),
   ]);
@@ -196,7 +197,8 @@ export default async function ProfilePage({
       {/* ── 탭: 컬렉션 / 뱃지 ── */}
       <ProfileTabs
         defaultTab={defaultTab}
-        sets={collectionSets}
+        collection={collectionData}
+        profileUserId={profileUser.id}
         isOwnProfile={isOwnProfile}
         badges={badges}
       />

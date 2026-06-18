@@ -1,5 +1,5 @@
 /**
- * 멀티소스 대회 공용 적재기 — docs/meta-pipeline-multisource.md §3
+ * 멀티소스 대회 공용 적재기 — docs/cardgame/meta-pipeline-multisource.md §3
  *
  * 수집기(소스별 독립 스크립트)가 NormalizedTournament 모양으로 변환해 넘기면
  * 멱등 적재 + SourceRef(primary) 등록 + 이중집계 검사를 한 곳에서 처리한다.

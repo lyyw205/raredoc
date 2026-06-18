@@ -1,0 +1,29 @@
+{
+ "expectations": [
+  {
+   "text": "닌자스피너에 뿔충이가 DB에 존재한다고 정확히 결론 내림",
+   "passed": true,
+   "evidence": "'있습니다' + 1번 카드 명시"
+  },
+  {
+   "text": "한국판 발매 여부 질문에 명시적으로 답함 (KR 로케일 존재 = 한국판 나옴)",
+   "passed": true,
+   "evidence": "'한국판도 정식 발매됐습니다' + kr-m4-001 식별"
+  },
+  {
+   "text": "구체적 식별자를 제시함 (세트코드 M4, 번호, logicalCardId 중 하나 이상)",
+   "passed": true,
+   "evidence": "kr-m4-001, M4 001/083, BS2026003001까지 제시"
+  },
+  {
+   "text": "다국어 명칭 또는 타지역 발매 정보를 부가로 제공함 (ビードル/Weedle/EN Chaos Rising 등)",
+   "passed": true,
+   "evidence": "일·영·한 3개 언어판 표 제공"
+  }
+ ],
+ "summary": {
+  "passed": 4,
+  "total": 4,
+  "pass_rate": 1.0
+ }
+}

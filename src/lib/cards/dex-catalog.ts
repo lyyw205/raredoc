@@ -51,7 +51,7 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
                 imageSmall: true,
                 imageLarge: true,
                 setId: true,
-                set: { select: { name: true, nameKo: true, nameJa: true } },
+                set: { select: { name: true, nameKo: true, nameJa: true, code: true } },
                 // P7 전환(P4a): 인쇄본별 rarity 새층. 표시 read 는 picked locale 의 이 값 우선, LC.rarity 폴백.
                 rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true, category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } } } },
               },
@@ -92,6 +92,7 @@ async function buildDexCatalog(preferred: DexPreferred): Promise<DexSet[]> {
           setName: l.set.name,
           setNameKo: l.set.nameKo,
           setNameJa: l.set.nameJa,
+          setCode: l.set.code,
         }));
         const primary = pickLocale(locales, preferred);
         if (!primary) return null;

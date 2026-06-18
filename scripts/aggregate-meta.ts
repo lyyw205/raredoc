@@ -1,6 +1,6 @@
 /**
  * 메타 집계 — 적재된 TournamentStanding 으로 DeckArchetype/RegionStat/Recipe/Matchup/Trend 도출.
- * (P2: region 분리 집계 — docs/meta-pipeline-multisource.md §5)
+ * (P2: region 분리 집계 — docs/cardgame/meta-pipeline-multisource.md §5)
  *
  * 흐름 (region 패스마다):
  *   a. window 일수 내 대회(source not null AND metaRegion=region) + standings (deckKey not null)
@@ -22,7 +22,7 @@
  *
  * 주의: 기존 목업 DeckArchetype(Limitless 키 아님)/Tournament(source=null) 은 건드리지 않음.
  *
- * docs/meta-pipeline-limitless.md · docs/meta-pipeline-multisource.md
+ * docs/cardgame/meta-pipeline-limitless.md · docs/cardgame/meta-pipeline-multisource.md
  */
 import "dotenv/config";
 import { prisma } from "@/lib/prisma";

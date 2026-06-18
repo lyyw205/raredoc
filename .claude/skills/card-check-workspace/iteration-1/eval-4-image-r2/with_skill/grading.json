@@ -1,0 +1,5 @@
+{"eval_id":4,"config":"with_skill","expectations":[
+ {"text":"이미지 깨짐을 식별자/연결 문제가 아니라 R2 객체 부재(404) 가능성으로 우선 진단함","passed":true,"evidence":"kr-trainer-alignment.md 3갈래 표로 lcid/build-group 배제 후 R2 분기로 즉시 진입(404 우선 점검→200 확인)"},
+ {"text":"R2 URL과 원본(pokemonkorea) URL의 HTTP 상태를 대조하는 진단(curl -I 등)을 제안/수행함","passed":true,"evidence":"curl -I R2 + 원본 + md5 대조로 raw 원본 그대로 업로드 확인"},
+ {"text":"DB가 아니라 R2 백필(backfill-kr-images-r2.ts)이 해법이며 빌드/배포 없이 반영됨을 안내함","passed":true,"evidence":"DB 무변경·R2 객체 교체로 즉시 반영 명시 + 현행 백필의 raw 업로드 한계까지 지적"}
+]}

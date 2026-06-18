@@ -5,6 +5,7 @@ import { useEffect, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import type { BucketId, PeriodDays, TradeEvent } from "@/lib/trades/shared";
 import { PRICE_BUCKETS, PERIOD_DAYS } from "@/lib/trades/shared";
+import { formatKrwShort } from "@/lib/format/krw";
 
 interface TradeFeedProps {
   locale: string;
@@ -15,13 +16,7 @@ interface TradeFeedProps {
 }
 
 function formatKrw(value: number): string {
-  if (value >= 100_000_000) {
-    return `${(value / 100_000_000).toFixed(1)}억원`;
-  }
-  if (value >= 10_000) {
-    return `${Math.round(value / 10_000).toLocaleString("ko-KR")}만원`;
-  }
-  return `${value.toLocaleString("ko-KR")}원`;
+  return formatKrwShort(value, { eok: true });
 }
 
 function daysSince(d: Date): number {

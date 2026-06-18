@@ -1,5 +1,5 @@
 /**
- * UI-1b/D5: 덱 견적 캐시 배치 갱신 — docs/cardgame-ui-plan.md §3-D5
+ * UI-1b/D5: 덱 견적 캐시 배치 갱신 — docs/cardgame/cardgame-ui-plan.md §3-D5
  *
  * 실행: npx tsx scripts/update-deck-costs.ts [--dry-run]
  * 주기: meta:weekly 말미 (시세 sync 후).

@@ -2,7 +2,7 @@
 
 > 팩 단위 카드 검증의 **출처 단일 기록처**. 모든 정정/보완 값은 여기 기록된 출처에서 와야 한다.
 > 목적: 나중에 재수정·보완할 때 "이 값은 어디서 왔나"를 즉시 추적. 같은 출처는 재인용, 없으면 탐색 후 추가.
-> 연동: 절차 `docs/verification/playbook.md` (내장 `/goal` 이 참조). 매핑 근거: `docs/card-packs-jp-en-guide.md`.
+> 연동: 절차 `docs/verification/playbook.md` (내장 `/goal` 이 참조). 매핑 근거: `docs/design/card-packs-jp-en-guide.md`.
 
 ## 1) 메타데이터 그룹
 
@@ -28,8 +28,8 @@
 | `ptio` | pokemontcg.io | EN | REST API | ★★★(EN 정규) | STATS·TEXT(en)·IDENTITY·RARITY·IMAGE | EN 메타 표준 소스 |
 | `tcgdex` | TCGdex API | EN/JP | REST | ★★ | IDENTITY·IMAGE·STATS·RARITY | `collect-jp-set-tcgdex.ts` · ⚠️ JA가 SM기 빈껍데기(→pc-jp) |
 | `pokeapi` | PokeAPI | species | REST | ★★★ | dex ↔ ko/ja/en 종이름 | `scripts/lib/pokeapi-names.ts` (포켓몬 그룹화 키) |
-| `bulba` | Bulbapedia | cross | 정적 / Playwright | ★★ | 세트목록·JP↔EN매핑·**트레이너 영문명**·발매일 | `docs/card-packs-jp-en-guide.md` |
-| `limitless` | LimitlessTCG | EN | 정적 / Playwright | ★★ | 카드/덱/메타·EN 트레이너 | `docs/meta-pipeline-limitless.md` |
+| `bulba` | Bulbapedia | cross | 정적 / Playwright | ★★ | 세트목록·JP↔EN매핑·**트레이너 영문명**·발매일 | `docs/design/card-packs-jp-en-guide.md` |
+| `limitless` | LimitlessTCG | EN | 정적 / Playwright | ★★ | 카드/덱/메타·EN 트레이너 | `docs/cardgame/meta-pipeline-limitless.md` |
 | `namu` | 나무위키 | KR | 정적 | ★(보조) | IDENTITY(ko)·TEXT 보조 | `sync-pack-namu-ko.ts` · ⚠️ 다중표 오염주의 [[project_namu_multitable_corruption]] |
 
 ## 3) 기본 배정 (default) — 팩별로 예외만 기록
@@ -40,7 +40,7 @@
 | JP — 전부 | `pc-jp` (보조 `tcgdex`) |
 | EN — 전부 | `ptio` (보조 `tcgdex`·`limitless`) |
 | dex/species (전 locale) | `pokeapi` |
-| JP↔EN 매핑·트레이너 영문명 | `bulba` + `docs/card-packs-jp-en-guide.md` |
+| JP↔EN 매핑·트레이너 영문명 | `bulba` + `docs/design/card-packs-jp-en-guide.md` |
 
 > 아래 §4 팩별 표에는 **기본과 다른 경우만** 적는다(예: 특정 팩 JP TEXT를 tcgdex가 못 줘서 pc-jp 로 교체). 기본대로면 "default" 한 줄.
 

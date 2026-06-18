@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { getRecommendedDecks, type ArchetypeSummary, type ResolvedCard } from "@/lib/services/cardgame";
 import { cn } from "@/lib/utils";
+import { TypeIcon } from "@/components/pokemon/TypeIcon";
 
 // ── 색상 상수 ─────────────────────────────────────────────────────────────────
 // lolchess.gg /meta 의 덱 컴프 행(.css-3q0xzn) 구조·간격을 채용하되 토스 라이트 테마로.
@@ -69,18 +70,9 @@ function MetaDeckRow({
 
       {/* 2컬럼: 특성 (타입 아이콘 28px) */}
       <div className="flex flex-wrap items-center gap-1">
-        {types.map((t) => {
-          const meta = TYPE_ICON[t] ?? TYPE_ICON.colorless;
-          return (
-            <span
-              key={t}
-              title={meta.label}
-              className={cn("inline-flex items-center justify-center w-7 h-7 rounded-full text-[13px]", meta.chip)}
-            >
-              {meta.emoji}
-            </span>
-          );
-        })}
+        {types.map((t) => (
+          <TypeIcon key={t} type={t} size={28} />
+        ))}
       </div>
 
       {/* 3컬럼: 카드 리스트 (포트레잇 52px) */}

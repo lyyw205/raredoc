@@ -1,5 +1,5 @@
 // 카드 도감 사이드바의 카드팩 카테고리(시리즈) 정렬·라벨 단일 출처.
-// JP(일본) 발매 기준 연대순(신→구). 상세 매핑 근거는 docs/card-packs-jp-en-guide.md.
+// JP(일본) 발매 기준 연대순(신→구). 상세 매핑 근거는 docs/design/card-packs-jp-en-guide.md.
 //
 // - ERA_ORDER:  카테고리(canonical era) 노출 순서 (신→구)
 // - ERA_LABEL:  사이드바/헤더 표시 라벨 (한글 병기)
@@ -83,6 +83,13 @@ export function canonEra(raw: string): string {
 
 export function eraLabel(canon: string): string {
   return ERA_LABEL[canon] ?? canon;
+}
+
+/** "SV (스칼렛 & 바이올렛)" → { code: "SV", name: "스칼렛 & 바이올렛" }. 괄호 라벨 없으면 name=null. */
+export function eraParts(canon: string): { code: string; name: string | null } {
+  const full = ERA_LABEL[canon] ?? canon;
+  const m = full.match(/^(.+?) \((.+)\)$/);
+  return m ? { code: m[1], name: m[2] } : { code: full, name: null };
 }
 
 /** ERA_ORDER 내 인덱스(노출 순서). 미등록은 맨 뒤. */

@@ -5,18 +5,11 @@ import Link from "next/link";
 import { ToggleGroup, EmptyState } from "@/components/toss";
 import { cn } from "@/lib/utils";
 import type { ArchetypeSummary } from "@/lib/services/cardgame";
+import { deckLabel } from "@/lib/cardgame/archetype-ko";
 import { BookOpen } from "lucide-react";
 import { DeckIcon } from "@/components/cardgame/DeckIcon";
-
-
-// ── 상수 ──────────────────────────────────────────────────────────────────────
-
-const TIER_COLORS: Record<string, string> = {
-  S: "bg-red-100 text-red-700 border border-red-200",
-  A: "bg-orange-100 text-orange-700 border border-orange-200",
-  B: "bg-blue-100 text-blue-700 border border-blue-200",
-  C: "bg-gray-100 text-gray-600 border border-gray-200",
-};
+import { TierBadge } from "@/components/cardgame/TierBadge";
+import { formatKrwShort } from "@/lib/format/krw";
 
 // 표본 적음 임계값.
 const LOW_SAMPLE = 10;
@@ -34,12 +27,7 @@ const SORT_OPTIONS: { value: SortKey; label: string }[] = [
 
 /** 견적(KRW) → "6.5만" 표기. null = 견적 전. */
 function formatCost(krw: number | null): string {
-  if (krw == null) return "—";
-  if (krw >= 10000) {
-    const man = krw / 10000;
-    return `${man >= 100 ? Math.round(man).toLocaleString() : man.toFixed(1)}만`;
-  }
-  return `${krw.toLocaleString()}원`;
+  return formatKrwShort(krw, { suffix: "만", emptyDash: true });
 }
 
 const TIER_OPTIONS = [
@@ -49,10 +37,6 @@ const TIER_OPTIONS = [
   { value: "B",   label: "B"   },
   { value: "C",   label: "C"   },
 ];
-
-function deckLabel(a: ArchetypeSummary): string {
-  return a.nameKo || a.nameEn || a.id;
-}
 
 // 뱃지 (#9 언더독 / #10 인기함정 / #14 메타카운터).
 function DeckBadges({ a }: { a: ArchetypeSummary }) {
@@ -169,7 +153,7 @@ export function DecksPageView({
                         <DeckIcon iconKeys={a.iconKeys} size="md" />
                         <span className="min-w-0">
                           <span className="font-semibold text-toss-text-primary group-hover:text-toss-brand transition-colors">
-                            {deckLabel(a)}
+                            {deckLabel(a, a.id)}
                           </span>
                           <span className="flex items-center gap-1.5 mt-1">
                             <DeckBadges a={a} />
@@ -181,9 +165,7 @@ export function DecksPageView({
                       </Link>
                     </td>
                     <td className="py-3 px-3 text-center">
-                      <span className={cn("inline-flex w-6 h-6 rounded-toss-md items-center justify-center text-xs font-bold", TIER_COLORS[a.tier])}>
-                        {a.tier}
-                      </span>
+                      <TierBadge tier={a.tier} size="sm" />
                     </td>
                     <td className={cn("py-3 px-3 text-right tabular-nums", lowSample ? "text-toss-text-quaternary" : "text-toss-text-primary font-semibold")}>
                       {a.usageRate.toFixed(1)}%

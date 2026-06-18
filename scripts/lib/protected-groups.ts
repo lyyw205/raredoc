@@ -52,6 +52,31 @@ export const PROTECTED_GROUPS: ReadonlySet<string> = new Set([
   "og-s10p",                 // 스페이스저글러 / スペースジャグラー
   "og-s9a",                  // 배틀리전 / バトルリージョン
   "og-s9",                   // 스타버스 / スターバース
+  // ── MEGA·SV 잔여 setGroup (2026-06-16, "MEGA·SV·SM 세 시대 카드팩 전부 동결" 요청) ──
+  "mega-decks",              // 스타터 세트 MEGA 「메가디안시 ex」/「메가팬텀 ex」
+  "mega-goods",              // MEGA 프리미엄 트레이너 박스 (기술머신 에볼/데볼 스왑 교정완)
+  "og-jp-mega-promo",        // JP MEGA 프로모 / MEGA 스페셜 카드 세트 「메가엘레이드 ex」(kr-m-p)
+  "sv-decks",                // SV 스타터/배틀마스터/배틀아카데미 덱 묶음
+  "sv-ex-start-deck",        // SV ex 스타트 덱
+  "sv-goods",                // SV 배틀강화 BOX/ex 스페셜 세트/프리미엄 트레이너 박스 (SVK 스왑 교정완)
+  "sv-start-deck-generations", // SV 랜덤 스타트 덱 Generations
+  // ── 썬&문(SM) 전체 setGroup (2026-06-16) ──
+  "og-sm0",                  // 피카츄와 새로운 친구들
+  "og-sm1s", "og-sm1m", "og-sm1+",          // 썬/문 컬렉션 + 강화 「썬&문」
+  "og-sm2k", "og-sm2l", "og-sm2+",          // 알로라의 햇빛/달빛 + 새로운 시련
+  "og-sm3h", "og-sm3n", "og-sm3+",          // 무지개/어둠 + 빛나는 전설
+  "og-sm4s", "og-sm4a", "og-sm4+",          // 각성의 용사/초차원 + GX배틀부스트
+  "og-sm5s", "og-sm5m", "og-sm5+",          // 울트라썬/문 + 울트라포스
+  "og-sm6", "og-sm6a", "og-sm6b",           // 금단의 빛 + 드래곤스톰 + 챔피언로드
+  "og-sm7", "og-sm7a", "og-sm7b",           // 창공의 카리스마 + 플라스마스파크 + 페어리라이즈
+  "og-sm8", "og-sm8a", "og-sm8b",           // 버스트임팩트 + 다크오더 + GX울트라샤이니
+  "og-sm9", "og-sm9a", "og-sm9b",           // 태그볼트 + 나이트유니슨 + 풀메탈월
+  "og-sn10a", "og-sm10", "og-sm10b",        // GG엔드 + 더블블레이즈 + 스카이레전드
+  "og-sn11", "og-sm11a", "og-sm11b",        // 미라클트윈 + 리믹스바우트 + 드림리그
+  "og-sm12", "og-sm12a",                    // 얼터제네시스 + 태그올스타즈
+  "og-smp",                  // SM 블랙스타 프로모 (EN)
+  "og-smp2",                 // 명탐정 피카츄 영화 스페셜 팩
+  "sm-decks",                // SM 스타터/덱대전/프리미엄트레이너 박스 묶음
 ]);
 
 export function hasAllowProtectedFlag(argv: string[] = process.argv): boolean {

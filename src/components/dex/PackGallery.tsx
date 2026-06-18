@@ -5,10 +5,8 @@ import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { eraLabel } from "@/lib/cards/eras";
 import type { Region, RegionPack } from "@/lib/cards/dex-region";
+import { REGION_ORDER, REGION_LABEL } from "@/lib/cards/card-fields";
 import { EmptyState, SearchField, SegmentedControl } from "@/components/toss";
-
-const REGION_ORDER: Region[] = ["JP", "EN", "KR"];
-const REGION_LABEL: Record<string, string> = { EN: "영문판", JP: "일본판", KR: "한국판" };
 
 // era(시리즈) 헤더로 묶인 팩 그룹. packs 는 listRegionPacks 가 이미 정렬해 줌
 // (eraOrder asc, isEtc 맨뒤, releaseDate desc) → 순차 스캔으로 그룹 경계 판정.

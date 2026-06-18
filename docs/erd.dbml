@@ -1,0 +1,587 @@
+// raredoc ERD — DBML (https://dbdiagram.io 에 붙여넣어 인터랙티브 렌더)
+// 출처: prisma/schema.prisma (모델 60 · FK 50). Prisma 모델명 기준. DB 물리명은 Note 참고.
+// 무FK 소프트참조(MarketStat.cardId, TournamentStanding.deckKey 등)는 의도적으로 Ref 미설정 — docs/ERD.md §8.
+
+Project raredoc {
+  database_type: 'PostgreSQL'
+  Note: '포켓몬 TCG 리서치/컬렉션/마켓 — 카드 정체성 4계층(Species→GameCard→Card→RegionCard)'
+}
+
+// ─────────────────────────── 카드 정체성 코어 ───────────────────────────
+Table Species {
+  id int [pk, note: '전국도감번호(PokeAPI)']
+  nameEn varchar
+  nameKo varchar
+  nameJa varchar [note: '가나']
+  generation int
+}
+
+Table CardSpecies {
+  cardId varchar [note: '@map logicalCardId']
+  speciesId int
+  Note: '@@map LogicalCardSpecies · 복합PK(cardId, speciesId) · 아트↔종 N:M'
+  indexes { (cardId, speciesId) [pk] }
+}
+
+Table GameCard {
+  id varchar [pk, note: 'gc_+sha1(묶음키)']
+  supertype varchar
+  name varchar
+  effectKey varchar [note: '효과 시그니처']
+  hp int
+  Note: '게임상 같은 카드(oracle) = 덱 4장 제한·게임 dedup 권위'
+}
+
+Table Card {
+  id varchar [pk]
+  cardPackId varchar [note: '@map setGroupId']
+  primarySetId varchar [note: 'JP 원조 세트']
+  gameCardId varchar
+  supertype varchar
+  types varchar [note: 'String[] · Card 전용']
+  hp int [note: 'Card 전용']
+  attacks json [note: 'Card 전용']
+  abilities json [note: 'Card 전용']
+  illustrator varchar [note: 'Card 전용']
+  rules varchar [note: 'String[] · Card 전용']
+  nameKo varchar [note: '한글 overlay']
+  attacksKo json [note: '한글 overlay']
+  // ── ▼ RegionCard 와 겹치는 10컬럼 (마이그레이션 과도기) ──
+  subtypes varchar [note: '🔴 게임값 diff=0 → RegionCard서 DROP예정']
+  weakness varchar [note: '🔴 게임값 diff=0']
+  resistance varchar [note: '🔴 게임값 diff=0']
+  retreatCost int [note: '🔴 게임값 diff=0']
+  evolvesFrom varchar [note: '🔴 게임값 diff=0']
+  evolvesTo varchar [note: '🔴 String[] 게임값 diff=0']
+  regulationMark varchar [note: '🟡 인쇄본별 유지']
+  legalities json [note: '🟡 인쇄본별 유지']
+  rarityId varchar [note: '🟡 인쇄본별 유지(앱 RegionCard 우선)']
+  flavorText varchar [note: '🟢 영문 폴백(언어별은 RegionCard/CardText)']
+  Note: '@@map LogicalCard · 아트(언어중립) 정체성. 시세/이미지 dedup 단위. ▼아래 10컬럼은 RegionCard와 겹침'
+}
+
+Table RegionCard {
+  id varchar [pk]
+  cardId varchar [note: '@map logicalCardId']
+  setId varchar
+  language varchar [note: 'en|ja|ko · RegionCard 전용']
+  region varchar [note: 'EN|JP|KR · RegionCard 전용']
+  number varchar [note: 'RegionCard 전용(지역 콜렉터번호)']
+  numberInt int
+  name varchar [note: 'RegionCard 전용(지역 표기명)']
+  imageSmall varchar
+  imageLarge varchar
+  // ── ▼ Card 와 겹치는 10컬럼 (마이그레이션 과도기) ──
+  subtypes varchar [note: '🔴 diff=0 → DROP 예정']
+  weakness varchar [note: '🔴 DROP 예정']
+  resistance varchar [note: '🔴 DROP 예정']
+  retreatCost int [note: '🔴 DROP 예정']
+  evolvesFrom varchar [note: '🔴 DROP 예정']
+  evolvesTo varchar [note: '🔴 String[] DROP 예정']
+  regulationMark varchar [note: '🟡 per-printing']
+  legalities json [note: '🟡 per-printing']
+  rarityId varchar [note: '🟡 per-printing(앱 우선읽기)']
+  flavorText varchar [note: '🟢 언어별 실데이터(6302행 다름)']
+  Note: '@@map CardLocale · 지역별 발매판(printing). unique 제약 없음. ▼아래 10컬럼은 Card와 겹침'
+}
+
+Table CardText {
+  id varchar [pk]
+  cardId varchar [note: '@map logicalCardId']
+  language varchar [note: 'ko|en|ja']
+  name varchar
+  attacks json
+  source varchar [note: 'official_kr|namuwiki|auto']
+  confidence float
+  Note: '언어별 표시 텍스트 오버레이 · (cardId, language) unique'
+}
+
+Table Era {
+  key varchar [pk, note: 'MEGA|SV|…']
+  order int [unique, note: '노출순(신→구)']
+  labelKo varchar
+}
+
+Table CardPack {
+  id varchar [pk, note: 'slug: sv-151']
+  era varchar [note: 'raw 보존']
+  eraKey varchar
+  nameKo varchar
+  nameJa varchar
+  releaseDate timestamp [note: '그룹 기준일']
+  order int
+  Note: '@@map SetGroup · 논리 확장팩(지역 Set 1~N 묶음)'
+}
+
+Table Set {
+  id varchar [pk]
+  cardPackId varchar [note: '@map setGroupId']
+  region varchar [note: 'EN|JP|KR']
+  name varchar
+  nameKo varchar
+  code varchar [note: '지역 팩코드']
+  releaseDate timestamp
+  cardCount int
+  Note: '지역별 발매판(set). region 으로 EN/JP/KR 구분'
+}
+
+Table CardPackLink {
+  id varchar [pk]
+  waveId varchar [note: '= CardPack.id']
+  setId varchar
+  mirrorOfSetId varchar [note: 'KR미러의 JP set']
+  region varchar [note: 'JP|EN|KR']
+  role varchar [note: 'ANCHOR|NATIVE|MIRROR|CROSS…']
+  relationType varchar [note: 'ONE_TO_ONE|MERGE_N_TO_1…']
+  Note: '팩↔지역세트 대응표 (build-group CONFIG 의 DB 1급화)'
+}
+
+Table RarityCategory {
+  id varchar [pk]
+  code varchar [unique, note: 'common|holo_rare…']
+  nameKo varchar
+  tier int
+  order int
+}
+
+Table Rarity {
+  id varchar [pk]
+  code varchar [unique]
+  categoryId varchar
+  tier int
+}
+
+// ─────────────────────────── 마켓·시세 ───────────────────────────
+Table Price {
+  id varchar [pk]
+  regionCardId varchar [note: '@map cardLocaleId']
+  sourceId varchar
+  marketPrice float
+  normal float
+  holofoil float
+  currency varchar [note: 'USD|JPY|KRW']
+  grade int
+  recordedAt timestamp
+}
+
+Table PriceSource {
+  id varchar [pk]
+  code varchar [unique]
+  name varchar
+  defaultCurrency varchar
+  marketRegion varchar [note: 'GLOBAL|JP|KR|US']
+  priority int
+}
+
+Table Trade {
+  id varchar [pk]
+  localeId varchar
+  cardId varchar [note: '@map logicalCardId']
+  soldAt timestamp
+  priceHighUsd float
+  source varchar
+}
+
+Table TierEntry {
+  id varchar [pk]
+  cardId varchar [note: '@map logicalCardId']
+  setId varchar
+  tier varchar
+}
+
+Table MarketStat {
+  id varchar [pk]
+  cardId varchar [note: 'soft(FK없음)']
+  date timestamp
+  priceKrw int
+  athKrw int
+  Note: '마켓 랭킹 캐시 — cardId 무FK'
+}
+
+Table PullRate {
+  id varchar [pk]
+  setId varchar [note: 'soft(FK없음)']
+  rarity varchar
+  probability float
+}
+
+Table Ruling {
+  id varchar [pk]
+  cardId varchar [note: '@map logicalCardId · nullable']
+  question varchar
+  answer varchar
+}
+
+// ─────────────────────────── 유저·컬렉션·게이미피케이션 ───────────────────────────
+Table User {
+  id varchar [pk]
+  email varchar [unique]
+  username varchar [unique]
+  displayName varchar
+  tier varchar [note: 'BRONZE..LEGEND(파생)']
+}
+
+Table Account {
+  id varchar [pk]
+  userId varchar
+  provider varchar
+  providerAccountId varchar
+}
+
+Table Session {
+  id varchar [pk]
+  userId varchar
+  sessionToken varchar [unique]
+  expires timestamp
+}
+
+Table VerificationToken {
+  identifier varchar
+  token varchar
+  expires timestamp
+  indexes { (identifier, token) [pk] }
+}
+
+Table CollectionItem {
+  id varchar [pk]
+  userId varchar
+  localeId varchar [note: 'RegionCard.id']
+  cardId varchar [note: '@map logicalCardId']
+  grade varchar [note: 'NM/LP/…/미개봉']
+  certified boolean
+  estimatedKrw int
+  forSale boolean
+}
+
+Table Certification {
+  id varchar [pk]
+  itemId varchar [unique]
+  photoUrl varchar
+  status varchar [note: 'pending/approved/…']
+  reviewerId varchar [note: 'soft→User']
+}
+
+Table Badge {
+  id varchar [pk]
+  name varchar
+  category varchar [note: 'collection/cert/ranking/season']
+  rankMode boolean
+}
+
+Table BadgeTier {
+  id varchar [pk]
+  badgeId varchar
+  tier varchar [note: 'SILVER/GOLD/DIAMOND']
+  threshold int
+}
+
+Table UserBadge {
+  id varchar [pk]
+  userId varchar [note: 'soft→User']
+  badgeId varchar [note: 'soft→Badge']
+  earnedTier varchar
+  Note: '게이미피케이션 캐시 · 무FK((userId,badgeId) unique)'
+}
+
+Table Season {
+  id int [pk]
+  name varchar
+  startsAt timestamp
+  endsAt timestamp
+  active boolean
+}
+
+Table RankingSnapshot {
+  id varchar [pk]
+  userId varchar [note: 'soft→User']
+  date timestamp
+  rank int
+  totalKrw int
+  Note: '일별 랭킹 스냅샷 · 무FK'
+}
+
+// ─────────────────────────── 마켓플레이스 ───────────────────────────
+Table Listing {
+  id varchar [pk]
+  itemId varchar [unique]
+  sellerId varchar
+  askingKrw int
+  dealMethod varchar
+  status varchar [note: 'active/reserved/…']
+  postId varchar [note: 'soft→Post']
+}
+
+Table Offer {
+  id varchar [pk]
+  listingId varchar
+  buyerId varchar [note: 'soft→User']
+  proposedKrw int
+  status varchar
+  conversationId varchar [note: 'soft→Conversation']
+}
+
+Table Appointment {
+  id varchar [pk]
+  offerId varchar [note: 'soft→Offer']
+  date timestamp
+  place varchar
+  status varchar
+}
+
+Table Review {
+  id varchar [pk]
+  offerId varchar [note: 'soft→Offer']
+  raterId varchar [note: 'soft→User']
+  rateeId varchar [note: 'soft→User']
+  rating int
+  manner varchar
+}
+
+// ─────────────────────────── 커뮤니티·메시징 ───────────────────────────
+Table Post {
+  id varchar [pk]
+  userId varchar
+  collectibleCategory varchar [note: '포켓몬TCG/유희왕…']
+  category varchar [note: '정보/질문/자랑/팝니다…']
+  title varchar
+  images varchar [note: 'String[]']
+  likeCount int
+}
+
+Table Comment {
+  id varchar [pk]
+  postId varchar
+  userId varchar
+  parentId varchar [note: 'soft(대댓글)']
+  body varchar
+}
+
+Table PostLike {
+  id varchar [pk]
+  postId varchar [note: 'soft→Post']
+  userId varchar [note: 'soft→User']
+  Note: '무FK((postId,userId) unique)'
+}
+
+Table CommentLike {
+  id varchar [pk]
+  commentId varchar [note: 'soft→Comment']
+  userId varchar [note: 'soft→User']
+  Note: '무FK((commentId,userId) unique)'
+}
+
+Table Conversation {
+  id varchar [pk]
+  user1Id varchar [note: 'soft→User']
+  user2Id varchar [note: 'soft→User']
+  sourceType varchar [note: 'direct/card_inquiry/…']
+  lastMessageAt timestamp
+}
+
+Table Message {
+  id varchar [pk]
+  conversationId varchar
+  senderId varchar [note: 'soft→User']
+  content varchar
+  readAt timestamp
+}
+
+Table ConversationRead {
+  id varchar [pk]
+  conversationId varchar [note: 'soft→Conversation']
+  userId varchar [note: 'soft→User']
+  lastReadMessageId varchar
+  Note: '읽음 표식 · 무FK'
+}
+
+// ─────────────────────────── 메타·대회 ───────────────────────────
+Table DeckArchetype {
+  id varchar [pk, note: '= Limitless deck.id']
+  nameKo varchar
+  tier varchar [note: 'S/A/B/C(파생)']
+  regulation varchar
+  usageRate float
+  winRate float
+  deckCostBudget int [note: '견적 캐시(KRW)']
+  deckCostPremium int
+}
+
+Table DeckCard {
+  id varchar [pk]
+  archetypeId varchar
+  cardId varchar [note: '@map logicalCardId']
+  count int
+  role varchar [note: '✓/⚠/✗']
+}
+
+Table DeckRecipeCard {
+  id varchar [pk]
+  archetypeId varchar
+  cardName varchar [note: 'Limitless 영문']
+  setCode varchar
+  avgCount float
+  adoptionRate float
+  cardId varchar [note: 'soft→Card(FK없음)']
+}
+
+Table DeckMatchup {
+  id varchar [pk]
+  deckAId varchar
+  deckBId varchar
+  winsA int
+  winsB int
+  winRateA float
+}
+
+Table DeckVariant {
+  id varchar [pk]
+  archetypeId varchar
+  nameKo varchar
+}
+
+Table ArchetypeTrend {
+  id varchar [pk]
+  archetypeId varchar
+  region varchar [note: 'INTL|JP|KR']
+  week varchar [note: '2026-W22']
+  usage float
+}
+
+Table ArchetypeRegionStat {
+  id varchar [pk]
+  archetypeId varchar
+  region varchar [note: 'INTL|JP|KR']
+  tier varchar
+  usageRate float
+  sampleSize int
+}
+
+Table Tournament {
+  id varchar [pk, note: '{소스}-{sourceId}']
+  source varchar [note: 'limitless/jp-official/…']
+  metaRegion varchar [note: 'INTL|JP|KR']
+  level varchar [note: 'worlds/ic/regional/city…']
+  nameKo varchar
+  date timestamp
+  players int
+  winnerArchetypeId varchar [note: 'soft→DeckArchetype']
+}
+
+Table TournamentStanding {
+  id varchar [pk]
+  tournamentId varchar
+  placing int
+  playerName varchar
+  deckKey varchar [note: 'soft→DeckArchetype.id']
+  decklist json
+  deckCode varchar
+}
+
+Table TournamentSourceRef {
+  id varchar [pk]
+  tournamentId varchar
+  source varchar [note: 'kr-official/pokedata/…']
+  role varchar [note: 'primary|enrichment']
+}
+
+Table PlayerRanking {
+  id varchar [pk]
+  season int
+  rank int
+  name varchar
+  csp int
+  favArchetypeId varchar [note: 'soft→DeckArchetype']
+}
+
+Table GlossaryEntry {
+  id varchar [pk]
+  term varchar
+  definition varchar
+  locale varchar
+}
+
+// ─────────────────────────── 외부 출처 매핑 ───────────────────────────
+Table ExternalSource {
+  id varchar [pk]
+  code varchar [unique, note: 'tcgdex|poketrace|…']
+  kind varchar [note: 'catalog|price|image|name_ko…']
+  region varchar
+  priority int
+}
+
+Table ExternalIdMapping {
+  id varchar [pk]
+  sourceId varchar
+  externalId varchar
+  regionCardId varchar [note: '@map cardLocaleId']
+  cardId varchar [note: '@map logicalCardId']
+  setId varchar [note: 'soft→Set']
+  cardPackId varchar [note: 'soft→CardPack']
+  confidence float
+  Note: '4대상(regionCard/card/set/cardPack) 중 정확히 1개만 채움'
+}
+
+// ═══════════════════════════ 관계 (FK 50) ═══════════════════════════
+// 코어
+Ref: CardSpecies.cardId > Card.id
+Ref: CardSpecies.speciesId > Species.id
+Ref: Card.gameCardId > GameCard.id
+Ref: Card.cardPackId > CardPack.id
+Ref: Card.primarySetId > Set.id
+Ref: Card.rarityId > Rarity.id
+Ref: RegionCard.cardId > Card.id
+Ref: RegionCard.setId > Set.id
+Ref: RegionCard.rarityId > Rarity.id
+Ref: CardText.cardId > Card.id
+Ref: CardPack.eraKey > Era.key
+Ref: Set.cardPackId > CardPack.id
+Ref: CardPackLink.waveId > CardPack.id
+Ref: CardPackLink.setId > Set.id
+Ref: CardPackLink.mirrorOfSetId > Set.id
+Ref: Rarity.categoryId > RarityCategory.id
+
+// 마켓
+Ref: Price.regionCardId > RegionCard.id
+Ref: Price.sourceId > PriceSource.id
+Ref: Trade.localeId > RegionCard.id
+Ref: Trade.cardId > Card.id
+Ref: TierEntry.cardId > Card.id
+Ref: TierEntry.setId > Set.id
+Ref: Ruling.cardId > Card.id
+
+// 유저·컬렉션
+Ref: Account.userId > User.id
+Ref: Session.userId > User.id
+Ref: CollectionItem.userId > User.id
+Ref: CollectionItem.localeId > RegionCard.id
+Ref: CollectionItem.cardId > Card.id
+Ref: Certification.itemId - CollectionItem.id
+Ref: BadgeTier.badgeId > Badge.id
+
+// 마켓플레이스
+Ref: Listing.itemId - CollectionItem.id
+Ref: Listing.sellerId > User.id
+Ref: Offer.listingId > Listing.id
+
+// 커뮤니티·메시징
+Ref: Post.userId > User.id
+Ref: Comment.postId > Post.id
+Ref: Comment.userId > User.id
+Ref: Message.conversationId > Conversation.id
+
+// 메타·대회
+Ref: DeckCard.archetypeId > DeckArchetype.id
+Ref: DeckCard.cardId > Card.id
+Ref: DeckRecipeCard.archetypeId > DeckArchetype.id
+Ref: DeckMatchup.deckAId > DeckArchetype.id
+Ref: DeckMatchup.deckBId > DeckArchetype.id
+Ref: DeckVariant.archetypeId > DeckArchetype.id
+Ref: ArchetypeTrend.archetypeId > DeckArchetype.id
+Ref: ArchetypeRegionStat.archetypeId > DeckArchetype.id
+Ref: TournamentStanding.tournamentId > Tournament.id
+Ref: TournamentSourceRef.tournamentId > Tournament.id
+
+// 외부 출처
+Ref: ExternalIdMapping.sourceId > ExternalSource.id
+Ref: ExternalIdMapping.regionCardId > RegionCard.id
+Ref: ExternalIdMapping.cardId > Card.id

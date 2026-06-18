@@ -1,8 +1,6 @@
 import Link from "next/link";
-import type { Prisma } from "@/generated/prisma/client";
-import { prisma } from "@/lib/prisma";
 import { cn } from "@/lib/utils";
-import { getCardAdoption, type CardAdoption } from "@/lib/services/cardgame";
+import { getCardCatalog, type CatalogCard } from "@/lib/services/cardgame";
 import { CardgameCardsFilters } from "./CardgameCardsFilters";
 
 // ── 희귀도 색상 ───────────────────────────────────────────────────────────────
@@ -17,143 +15,6 @@ const RARITY_COLOR: Record<string, string> = {
   SAR: "bg-orange-100 text-orange-700",
   UR:  "bg-red-100 text-red-700",
 };
-
-const REGION_ORDER: Record<string, number> = { KR: 0, JP: 1, EN: 2 };
-
-// ── 카탈로그 카드 타입 (DB → 그리드 표시용) ──────────────────────────────────
-
-type CatalogCard = {
-  id: string;             // = RegionCard.id (URL용)
-  cardId: string;  // dedupe용
-  name: string;           // locale 이름 (KR 우선)
-  nameSub: string | null; // 보조 이름 (다른 로케일)
-  imageUrl: string;
-  rarity: string | null;  // rarity.code
-  region: string;
-  type: string | null;    // card.types[0]
-  hp: number | null;
-  /** 메타 채용 지표 (cardId 매칭 시에만). 없으면 null → 뱃지 미표시. */
-  adoption: CardAdoption | null;
-};
-
-// ── 데이터 로딩 ───────────────────────────────────────────────────────────────
-
-async function loadCards(params: {
-  q?: string;
-  type?: string;
-  rarity?: string;
-  region?: string;
-  sort?: string;
-  adoptionMap: Map<string, CardAdoption>;
-}): Promise<{ cards: CatalogCard[]; adoptionActive: boolean }> {
-  const where: Prisma.RegionCardWhereInput = {};
-  if (params.region && params.region !== "all") where.region = params.region;
-
-  // rarity → RegionCard 직접(P4a, diff=0). types/illustrator 는 ArtCard 폼변종 over-merge 미해결로 LC 직독 유지.
-  if (params.rarity && params.rarity !== "all")
-    where.rarity = { code: params.rarity };
-
-  const lcWhere: Prisma.CardWhereInput = {};
-  if (params.type && params.type !== "all") lcWhere.types = { has: params.type };
-
-  if (Object.keys(lcWhere).length > 0) {
-    where.card = lcWhere;
-  }
-
-  if (params.q && params.q.trim()) {
-    const q = params.q.trim();
-    where.OR = [
-      { name: { contains: q, mode: "insensitive" } },
-      { card: { illustrator: { contains: q, mode: "insensitive" } } },
-    ];
-  }
-
-  // DB 조회 — 메타 조인. 정렬은 후처리(set.releaseDate, locale.numberInt).
-  const rows = await prisma.regionCard.findMany({
-    where,
-    include: {
-      // P4a: rarity 는 RegionCard 직접(diff=0). 표시는 새층 우선, LC 폴백.
-      rarity: { select: { code: true } },
-      card: {
-        include: {
-          rarity: { select: { code: true } }, // 전환기 폴백용
-          gameCard: { select: { hp: true } }, // hp 그룹균일(diff=0)
-          texts: { where: { language: "ko" }, select: { name: true } },
-        },
-      },
-      set: { select: { releaseDate: true } },
-    },
-    take: 600, // dedupe 전 여유 — Card 단위로 200 확보 위함.
-  });
-
-  // dedupe: 같은 Card 의 여러 locale → KR > JP > EN 우선 1개.
-  const byLogical = new Map<string, (typeof rows)[number]>();
-  for (const r of rows) {
-    const cur = byLogical.get(r.cardId);
-    if (!cur) {
-      byLogical.set(r.cardId, r);
-      continue;
-    }
-    const a = REGION_ORDER[r.region] ?? 9;
-    const b = REGION_ORDER[cur.region] ?? 9;
-    if (a < b) byLogical.set(r.cardId, r);
-  }
-
-  const deduped = [...byLogical.values()];
-
-  // 같은 card 다른 locale 의 이름을 nameSub 로
-  const allByLogical = new Map<string, typeof rows>();
-  for (const r of rows) {
-    const arr = allByLogical.get(r.cardId) ?? [];
-    arr.push(r);
-    allByLogical.set(r.cardId, arr);
-  }
-
-  // 채용률 정렬은 데이터(채용 지표 맵)가 있을 때만 활성. 없으면(=현재) 발매일순 폴백.
-  const adoptionActive = params.sort === "adoption" && params.adoptionMap.size > 0;
-
-  if (adoptionActive) {
-    // 채용률순: usageScore 내림차순. 채용 지표 있는 카드 먼저, 동률/미보유는 발매일순.
-    deduped.sort((a, b) => {
-      const sa = params.adoptionMap.get(a.cardId)?.usageScore ?? -1;
-      const sb = params.adoptionMap.get(b.cardId)?.usageScore ?? -1;
-      if (sa !== sb) return sb - sa;
-      const da = a.set?.releaseDate?.getTime?.() ?? 0;
-      const db = b.set?.releaseDate?.getTime?.() ?? 0;
-      return db - da;
-    });
-  } else {
-    // 발매일순 (기본): set.releaseDate desc, numberInt asc
-    deduped.sort((a, b) => {
-      const da = a.set?.releaseDate?.getTime?.() ?? 0;
-      const db = b.set?.releaseDate?.getTime?.() ?? 0;
-      if (da !== db) return db - da;
-      return (a.numberInt ?? 0) - (b.numberInt ?? 0);
-    });
-  }
-
-  const top = deduped.slice(0, 200);
-
-  const cards = top.map((r) => {
-    const others = allByLogical.get(r.cardId) ?? [];
-    const sub = others.find((o) => o.id !== r.id);
-    const nameKo = r.card.texts?.[0]?.name ?? r.card.nameKo; // P8a: CardText(ko) 우선
-    return {
-      id: r.id,
-      cardId: r.cardId,
-      name: nameKo ?? r.name,
-      nameSub: nameKo ? r.name : (sub?.name ?? null),
-      imageUrl: r.imageSmall ?? r.imageLarge ?? "",
-      rarity: r.rarity?.code ?? r.card.rarity?.code ?? null,
-      region: r.region,
-      type: r.card.types[0] ?? null, // ArtCard over-merge 보류 → LC 직독
-      hp: r.card.gameCard?.hp ?? r.card.hp,
-      adoption: params.adoptionMap.get(r.cardId) ?? null,
-    };
-  });
-
-  return { cards, adoptionActive };
-}
 
 // ── 카드 그리드 아이템 ────────────────────────────────────────────────────────
 
@@ -221,16 +82,13 @@ export default async function CardgameCardsPage({
   const { locale } = await params;
   const sp = await searchParams;
 
-  // 카드 채용 지표 맵 (현재 cardId 미매칭 → 빈 Map). A단계 후 자동 채워짐.
-  const adoptionMap = await getCardAdoption();
-
-  const { cards, adoptionActive } = await loadCards({
+  // 데이터 접근·뷰모델·정렬·dedupe 는 전부 서비스(getCardCatalog)가 담당 — page 는 얇은 셸.
+  const { cards, adoptionActive } = await getCardCatalog({
     q: sp.q,
     type: sp.type,
     rarity: sp.rarity,
     region: sp.region,
     sort: sp.sort,
-    adoptionMap,
   });
 
   // "채용률순" 요청했지만 데이터 미준비 → 안내(발매일순 폴백).

@@ -1,5 +1,5 @@
 /**
- * P5: pokedata.ovh 공식 메이저 수집기 — 정본 (docs/meta-pipeline-multisource.md §3 #8)
+ * P5: pokedata.ovh 공식 메이저 수집기 — 정본 (docs/cardgame/meta-pipeline-multisource.md §3 #8)
  *
  * 실행: npx tsx scripts/collect-majors-pokedata.ts [--dry-run] [--force] [--limit=6] [--id=0000208]
  *

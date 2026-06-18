@@ -1,0 +1,29 @@
+{
+ "expectations": [
+  {
+   "text": "Poltchageist의 일본어명 チャデス(또는 한국어명 차데스)를 정확히 식별함",
+   "passed": true,
+   "evidence": "'Poltchageist(= 차데스 / チャデス)' 명시"
+  },
+  {
+   "text": "어비스아이에 해당 카드(JP 005/081 チャデス)가 DB에 존재한다고 결론 내림",
+   "passed": true,
+   "evidence": "lc-orphan-jp-mega-abyss-eye-5, 번호 5, M5 アビスアイ 「チャデス」"
+  },
+  {
+   "text": "어비스아이는 일본판만 있고 KR/EN 로케일이 없음을 언급함",
+   "passed": true,
+   "evidence": "'로케일: JP만 ... (EN/KR 로케일 없음)'"
+  },
+  {
+   "text": "영문명 직접 검색 실패 시 추측으로 '없다' 단정하지 않고 교차 언어 확인 과정을 거침",
+   "passed": true,
+   "evidence": "'표기 차이 안내' 섹션: 1차 영문 검색은 TWM만 반환 → チャデス·--dex 1012 2차 검색으로 발견 과정을 명시적으로 문서화"
+  }
+ ],
+ "summary": {
+  "passed": 4,
+  "total": 4,
+  "pass_rate": 1.0
+ }
+}

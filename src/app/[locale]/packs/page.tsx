@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import { PackGallery } from "@/components/dex/PackGallery";
 import { Container } from "@/components/toss";
 import { listRegionPacks, type Region, type RegionPack } from "@/lib/cards/dex-region";
+import { REGION_ORDER as REGIONS } from "@/lib/cards/card-fields";
 
 export const metadata: Metadata = { title: "카드팩 — Raredoc" };
-
-const REGIONS: Region[] = ["JP", "EN", "KR"];
 
 export default async function PacksPage({
   params,

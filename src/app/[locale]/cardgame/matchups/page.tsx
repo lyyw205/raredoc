@@ -10,7 +10,7 @@ import {
 } from "@/lib/services/cardgame";
 import { DeckIcon } from "@/components/cardgame/DeckIcon";
 
-// ⚔️ 상성 페이지 (UI-2차) — docs/cardgame-ui-plan.md §4-6.
+// ⚔️ 상성 페이지 (UI-2차) — docs/cardgame/cardgame-ui-plan.md §4-6.
 // ① 상위 8덱 매트릭스(사전 SQL 게이트 96% games>=10 통과) ② 덱별 전체 리스트(?deck=)
 // ③ 산식 푸터 — "무승부=⅓승·표본 컷" 명시가 차별점(벤치마크: 전 세계가 산식을 안 씀).
 

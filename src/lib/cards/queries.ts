@@ -7,7 +7,7 @@
 import type { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import type { TCGCard } from "@/lib/api/pokemontcg";
-import { pickRarityLabel } from "./card-fields";
+import { pickRarityLabel, REGION_SORT_PRIORITY } from "./card-fields";
 
 // ── 공용 타입 ─────────────────────────────────────────────────────────────────
 
@@ -25,6 +25,8 @@ export type LocaleSummary = {
   setName: string;
   setNameKo: string | null;
   setNameJa: string | null;
+  setCode: string | null;
+  setCardCount?: number | null;
   // 인쇄본별 표시필드(RegionCard 하강) — regMark/legalities/rarity 만 유지(per-printing/per-region).
   //   게임필드(weak/resist/retreat/evolves/subtypes)는 diff=0 순수복제라 Card 직독으로 이관(Stage2 2026-06-11).
   regulationMark?: string | null;
@@ -71,7 +73,6 @@ export type CardMeta = {
   nameKo: string | null;
 };
 
-const REGION_ORDER: Record<string, number> = { EN: 0, JP: 1, KR: 2 };
 
 // ── 헬퍼 ──────────────────────────────────────────────────────────────────────
 
@@ -119,7 +120,7 @@ export function pickLocale<T extends { language: string; region: string }>(
   if (lang) return lang;
   // 폴백: region 우선순위
   const sorted = [...locales].sort(
-    (a, b) => (REGION_ORDER[a.region] ?? 9) - (REGION_ORDER[b.region] ?? 9)
+    (a, b) => (REGION_SORT_PRIORITY[a.region] ?? 9) - (REGION_SORT_PRIORITY[b.region] ?? 9)
   );
   return sorted[0] ?? null;
 }
@@ -135,7 +136,7 @@ function toLocaleSummary(l: {
   imageSmall: string | null;
   imageLarge: string | null;
   setId: string;
-  set: { name: string; nameKo: string | null; nameJa: string | null };
+  set: { name: string; nameKo: string | null; nameJa: string | null; code: string | null; cardCount: number };
   regulationMark?: string | null;
   legalities?: Prisma.JsonValue;
   rarity?: { code: string; nameKo: string | null; nameJa: string | null; nameEn: string | null } | null;
@@ -154,6 +155,8 @@ function toLocaleSummary(l: {
     setName: l.set.name,
     setNameKo: l.set.nameKo,
     setNameJa: l.set.nameJa,
+    setCode: l.set.code,
+    setCardCount: l.set.cardCount,
     regulationMark: l.regulationMark ?? null,
     legalities: l.legalities ?? null,
     rarityCode: l.rarity?.code ?? null,
@@ -259,7 +262,7 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
   const cl = await prisma.regionCard.findUnique({
     where: { id: localeId },
     include: {
-      set: { select: { name: true, nameKo: true, nameJa: true } },
+      set: { select: { name: true, nameKo: true, nameJa: true, code: true, cardCount: true } },
       card: {
         include: {
           rarity: {
@@ -269,7 +272,7 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
           texts: { where: { language: "ko" }, select: { name: true } },
           locales: {
             include: {
-              set: { select: { name: true, nameKo: true, nameJa: true } },
+              set: { select: { name: true, nameKo: true, nameJa: true, code: true, cardCount: true } },
               rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true } },
             },
           },
@@ -282,7 +285,7 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
   const allLocales = cl.card.locales
     .map(toLocaleSummary)
     .sort(
-      (a, b) => (REGION_ORDER[a.region] ?? 9) - (REGION_ORDER[b.region] ?? 9)
+      (a, b) => (REGION_SORT_PRIORITY[a.region] ?? 9) - (REGION_SORT_PRIORITY[b.region] ?? 9)
     );
 
   return {
@@ -350,7 +353,7 @@ export async function searchCards(
       gameCard: { select: { supertype: true, hp: true } },
       texts: { where: { language: "ko" }, select: { name: true } },
       locales: {
-        include: { set: { select: { name: true, nameKo: true, nameJa: true } }, rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true } } },
+        include: { set: { select: { name: true, nameKo: true, nameJa: true, code: true, cardCount: true } }, rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true } } },
       },
     },
     take: Math.min(filters.limit ?? 100, 200),
@@ -362,7 +365,7 @@ export async function searchCards(
       .map(toLocaleSummary)
       .sort(
         (a, b) =>
-          (REGION_ORDER[a.region] ?? 9) - (REGION_ORDER[b.region] ?? 9)
+          (REGION_SORT_PRIORITY[a.region] ?? 9) - (REGION_SORT_PRIORITY[b.region] ?? 9)
       ),
   }));
 }

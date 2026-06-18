@@ -268,3 +268,34 @@
 ### 남은 재수집 패스 (데이터 — 구조 아님)
 - [P2] JP 시크릿 다수 누락 · [P1/P15] JP·KR 게임데이터(hp/attacks구조/abilities) 결손 · [P9] **언머지된 서브제품 18개 + KR 미발매분(창공/연격/칠흑)·프로모 pokemoncard.co.kr 재수집** · [P11] 샤이니스타V rarity 163 None · JP Lost Abyss(jp-tcg-S11) 임포트.
 - **타 era 구조**: SM·SV era 서브제품에도 동일 [P17] 잔존(위 참고).
+
+---
+
+## 🔧 수동 교정 로그 (개별 카드)
+
+### swsh-decks / kr-sgg — 하이클래스 덱 「팬텀 VMAX」 — 2026-06-16
+- **퀵볼 ↔ 진화향로 KR 매핑**: 검증 결과 이미 정상(퀵볼 #009→`lc-jp-tcg-SGG-009`, 진화향로 #008→`lc-jp-tcg-SGG-010`). 조치 없음.
+- **ゲンガーVMAX SR(특별 일러스트, 020/019) KR 신규 수집**: KR 공식 CDN/DB는 시크릿 SR 티어를 체계적으로 누락(`SGG_021+` 404) → 부재가 미발매 근거 아님. 마켓 증거로 KR 발매 확인됨. `lc-jp-tcg-SGG-020` 에 KR 카드 `kr-sgg-020-sr`(#020, "팬텀 VMAX") 신규 생성.
+- **번호 정렬**: KR 카탈로그는 SR을 건너뛰고 기본 악 에너지를 #020 으로 압축했었음 → JP 앵커 정렬 위해 기본 악 에너지(`kr-sgg-020`, `lc-jp-tcg-SGG-021`)를 #020→**#021** 로 교정. 결과 KR도 JP와 동일(020=SR, 021=에너지).
+- **⚠ TODO(이미지 임시 fallback)**: `kr-sgg-020-sr` 의 `imageSmall`/`imageLarge` 는 **JP 공식 이미지**(`pokemon-card.com/.../044975_P_GENGAVMAX.jpg`)로 임시 대체. 클린 KR 텍스트 스캔을 네이버 블로그/카페/쇼핑·tcgbox(워터마크) 등에서 확보 못함. **클린 KR 스캔 확보 시 R2 재호스팅 후 교체할 것.**
+
+### swsh-decks / kr-sg — 하이클래스 덱 「인텔리레온 VMAX」 (SGG 트윈) — 2026-06-16
+- **퀵볼 ↔ 진화향로 KR cardId 교차 교정**: KR 번호 체계가 JP와 달라(KR 진화향로=#012, 퀵볼=#013 / JP クイックボール=012, しんかのおこう=013) 수집 시 번호로 LC를 단순매칭해 정체성이 꼬임. 일러스트 실물 확인(SGI_012=인센스, SGI_013=볼)으로 이름·번호·이미지는 정확 확인 → cardId만 스왑(`kr-sg-012`→`lc...SGI-013`, `kr-sg-013`→`lc...SGI-012`).
+- **마리 ↔ 코르니의 기합 KR cardId 교차 교정**: 동일 패턴(KR 마리=#016, 코르니=#020 / JP コルニ=016, マリィ=020). 일러스트 확인(SGI_016=마리, SGI_020=코르니) → cardId 스왑(`kr-sg-016`→`lc...SGI-020`, `kr-sg-020`→`lc...SGI-016`).
+- **インテレオンVMAX SR(특별 일러스트, 023/022) KR — 발매 확정·신규 수집**: 하이클래스 덱은 고정 구성품(SR 보장 동봉). KR 덱 정식 발매(pokemoncard.co.kr/card/369·KREAM·11번가·G마켓, 2021-07-07) → SR도 KR 배포됨. KR 공식 CDN은 `SGI_024+` 404로 SR 누락(부재≠미발매). `lc-jp-tcg-SGI-023` 에 KR 카드 `kr-sg-023-sr`(#023, "인텔리레온 VMAX") 신규 생성.
+- **번호 정렬**: KR 카탈로그가 SR 건너뛰고 기본 물 에너지를 #023 으로 압축 → JP 앵커 정렬 위해 기본 물 에너지(`kr-sg-023`, `lc-jp-tcg-SGI-024`)를 #023→**#024** 교정. 결과 KR도 JP 동일(023=SR, 024=에너지).
+- **⚠ TODO(이미지 임시 fallback)**: `kr-sg-023-sr` 의 `imageSmall`/`imageLarge` 는 **JP 공식 이미지**(`pokemon-card.com/.../044976_P_INTEREONVMAX.jpg`)로 임시 대체(SGG 선례 동일). **클린 KR 스캔 확보 시 R2 재호스팅 후 교체할 것.**
+
+### og-s4a / Shining Fates(en-tcg-swsh45) — EN 오병합 + 이미지 오류 — 2026-06-16
+- **배경**: EN swsh45(Shining Fates, 73장)는 JP S4a(샤이니스타V)와 **다른 구성의 컴필레이션 세트**. 73장 중 **23장이 `lc-orphan-jp-tcg-S4a-*` LC에 dex번호+종 기반으로 오병합**됨(50장은 정상 `lc-en-tcg-swsh45-*` 고아). V카드 등 동일 일러는 정상이나, commons는 JP 프로모/타세트 재판이라 **일러가 달라 별개 카드**.
+- **6장 commons EN 오병합 교정(분리)**: 일러스트 실물 대조 + 일러스트레이터 대조로 별개 카드 확정 → EN RegionCard 를 **원래부터 살아있던 EN 고아 LC로 복귀**(신규생성 불필요). 결과 JP S4a LC는 JP+KR 만 남음(샤이니스타V 카드는 Shining Fates EN 대응 없음=정상):
+  | EN 카드 | 작가(EN) | 작가(JP S4a) | from LC | to LC |
+  |---|---|---|---|---|
+  | Dartrix #007 | AKIRA EGAWA | Mitsuhiro Arita | S4a-2 | swsh45-007 |
+  | Decidueye #008 | Ryota Murayama | Souichirou Gunjima | S4a-3 | swsh45-008 |
+  | Rillaboom #013 | Anesaki Dynamic | Kouki Saitou | S4a-8 | swsh45-013 |
+  | Frosmoth #030 | Kagemaru Himeno | kirisAki | S4a-48 | swsh45-030 |
+  | Spinarak #043 | sowsow | Kyoko Umemoto | S4a-106 | swsh45-043 |
+  | Cufant #049 | 0313 | Akira Komayama | S4a-133 | swsh45-049 |
+- **Indeedee V #039 — 병합은 정상, 이미지가 오류**: EN/JP/KR 모두 동일 regular "Watch Over"(5ban Graphics, HP180) = 같은 카드라 병합 유지. 단 우리 DB의 EN #039 이미지가 **pokemontcg.io의 청록 오이미지**(다른 일러)였음 → 정본(SWSH base #091)·tcgcollector·limitless 대조로 진짜 #039는 자홍 정면임을 확인 → **limitless 클린본을 R2 재호스팅**(`og-s4a/en/{small,large}/en-tcg-swsh45/039.png`)하고 DB 이미지 교체. pokemontcg.io large 핫링크도 R2로 전환.
+- **⚠ 잔여(systematic)**: 같은 og-s4a 에서 **나머지 ~16장(23−7)도 EN 오병합 의심**(commons는 분리, V/동일일러는 유지). 요청분 7장만 처리. 추후 23장 전수 대조 필요. pokemontcg.io swsh45 이미지 오류도 타카드 존재 가능 → EN 이미지 점검 시 유의.

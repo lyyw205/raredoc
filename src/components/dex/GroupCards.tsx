@@ -175,6 +175,7 @@ import ogXy9 from "@/data/group-og-xy9.json";
 import ogXy10 from "@/data/group-og-xy10.json";
 import ogXy11a from "@/data/group-og-xy11a.json";
 import ogXy11b from "@/data/group-og-xy11b.json";
+import { REGION_LABEL } from "@/lib/cards/card-fields";
 
 // 그룹별 EN/JP/KR 그룹핑 카드 UI — JP 앵커(번호순) + 언어탭 + 영판전용 꼬리.
 // 카드 도감(DexCatalog)에서 해당 그룹 선택 시 인-플레이스로 렌더. 데이터는 확정 그룹핑 JSON.
@@ -364,7 +365,6 @@ type TailCard = { id: string; number: string; name: string; image: string | null
 export type GroupCardClick = { id: string; name: string; number: string; rarity: string | null; image: string | null; region: string; setId: string };
 type GroupData = { group: { id: string; crossGroupEN?: boolean; enAnchor?: boolean }; counts: { enMatched: number; krMatched: number }; anchors: Anchor[]; tail: { enOnly: TailCard[]; krOnly?: TailCard[] } };
 
-const REGION_LABEL: Record<string, string> = { JP: "일본판", EN: "영문판", KR: "한국판" };
 const REGION_COLOR: Record<string, string> = { JP: "#e2504a", EN: "#3182f6", KR: "#1f9d55" };
 
 export function GroupCards({ groupId, onCardClick }: { groupId: string; onCardClick?: (c: GroupCardClick) => void }) {

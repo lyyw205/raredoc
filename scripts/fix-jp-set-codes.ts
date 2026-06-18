@@ -1,6 +1,6 @@
 /**
  * JP 세트코드 채움/교정 — 신규 jp-sv-* 수집분이 code 미채움(16팩) + GG엔드 코드 오타(1팩).
- * 값은 JP 공식코드(docs/set-code-comparison.md). code 컬럼만 SET — 연결 FK 무변경(동결 위반 아님).
+ * 값은 JP 공식코드(docs/design/set-code-comparison.md). code 컬럼만 SET — 연결 FK 무변경(동결 위반 아님).
  * Run: npx tsx scripts/fix-jp-set-codes.ts                       # dry-run
  *      npx tsx scripts/fix-jp-set-codes.ts --apply --allow-protected
  */

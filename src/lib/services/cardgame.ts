@@ -1,3 +1,4 @@
+import type { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { CARDS } from "@/lib/cardgame/mock";
 import { REAL_TO_MOCK } from "@/lib/cardgame/mockToReal";
@@ -173,18 +174,23 @@ export type ArchetypeSummary = {
   deckCostBudget: number | null;
   /** 덱 구축 비용 캐시(고레어 기준, KRW). */
   deckCostPremium: number | null;
-  /** 카드매칭 보류로 빈 배열일 수 있음 (옵셔널 체이닝 필수). */
+  /** @deprecated DeckCard/DeckVariant 테이블 드롭(2026-06-11)으로 **현재 항상 빈 배열**.
+   *  카드매칭 복원 시 `toSummary()` 한 곳만 채우면 전 계약이 살아난다. 소비처는 빈 배열 가드 필수. */
   heroCardIds: string[];
+  /** @deprecated heroCardIds 와 동일 — 현재 항상 빈 배열(복원 시 toSummary 에서 채움). */
   cardList: { cardId: string; count: number; role: string | null }[];
   strengths: string[];
   weaknesses: string[];
   counters: string[];
   description: string;
+  /** @deprecated 현재 항상 빈 배열(복원 시 toSummary 에서 채움). */
   variants: { id: string; nameKo: string }[];
 };
 
+/** @deprecated `cards` 소스(cardList/heroCardIds)가 현재 항상 비어 `cards` 도 항상 `{}`.
+ *  복원 전까지 소비처는 `ArchetypeSummary` 로 충분(`getArchetype` 는 결선 보존 위해 유지). */
 export type ArchetypeWithCards = ArchetypeSummary & {
-  /** cardList/heroCard 에 등장하는 모든 cardId 의 표시용 해석 맵. */
+  /** cardList/heroCard 에 등장하는 모든 cardId 의 표시용 해석 맵. 현재 항상 `{}`. */
   cards: Record<string, ResolvedCard>;
 };
 
@@ -435,6 +441,9 @@ export type RecipeCard = {
   regionCardId: string | null;
 };
 
+/** 지역 표시 우선순위 (KR>JP>EN) — 카드 카탈로그 dedupe·이미지 해석 공용 단일출처. */
+const REGION_PRIORITY: Record<string, number> = { KR: 0, JP: 1, EN: 2 };
+
 /** cardId[] → 대표 locale 이미지/id (KR>JP>EN 우선) — 레시피·리스트 뷰어 공용 (UI-1a). */
 async function resolveCardImages(
   ids: string[],
@@ -445,7 +454,6 @@ async function resolveCardImages(
     where: { cardId: { in: unique } },
     select: { id: true, cardId: true, region: true, imageSmall: true, imageLarge: true },
   });
-  const PRIORITY: Record<string, number> = { KR: 0, JP: 1, EN: 2 };
   const byLc = new Map<string, typeof locales>();
   for (const l of locales) {
     const arr = byLc.get(l.cardId) ?? [];
@@ -458,7 +466,7 @@ async function resolveCardImages(
     const best = [...arr].sort((a, b) => {
       const ai = a.imageSmall ?? a.imageLarge ? 0 : 1;
       const bi = b.imageSmall ?? b.imageLarge ? 0 : 1;
-      return ai - bi || (PRIORITY[a.region] ?? 9) - (PRIORITY[b.region] ?? 9);
+      return ai - bi || (REGION_PRIORITY[a.region] ?? 9) - (REGION_PRIORITY[b.region] ?? 9);
     })[0];
     map.set(lcId, { image: best.imageSmall ?? best.imageLarge ?? null, regionCardId: best.id });
   }
@@ -593,6 +601,129 @@ export async function getCardAdoption(): Promise<Map<string, CardAdoption>> {
   for (const lc of allLcOfGc) { const v = perKey.get(lc.gameCardId!); if (v) out.set(lc.id, v); }
   for (const [key, v] of perKey) if (!key.startsWith("gc_")) out.set(key, v); // gameCardId 없는 카드
   return out;
+}
+
+// ── 카드 카탈로그 (cardgame /cards 그리드) ──────────────────────────────────────
+
+/** DB → 카드 일람 그리드 표시용 뷰모델. cards/page.tsx 가 소비. */
+export type CatalogCard = {
+  id: string;             // = RegionCard.id (URL용)
+  cardId: string;         // dedupe용
+  name: string;           // locale 이름 (KR 우선)
+  nameSub: string | null; // 보조 이름 (다른 로케일)
+  imageUrl: string;
+  rarity: string | null;  // rarity.code
+  region: string;
+  type: string | null;    // card.types[0]
+  hp: number | null;
+  /** 메타 채용 지표 (cardId 매칭 시에만). 없으면 null → 뱃지 미표시. */
+  adoption: CardAdoption | null;
+};
+
+/**
+ * 카드 일람 카탈로그 — 필터/정렬 적용 후 KR>JP>EN dedupe 상위 200장 + 채용 지표.
+ * (구 cards/page.tsx 의 loadCards 를 서비스로 승격: 데이터 접근·뷰모델 구성을 단일 출입구로.
+ *  /dex 의 getDexCatalog 와 동형. 채용맵은 내부 getCardAdoption() 자급.)
+ */
+export async function getCardCatalog(params: {
+  q?: string;
+  type?: string;
+  rarity?: string;
+  region?: string;
+  sort?: string;
+}): Promise<{ cards: CatalogCard[]; adoptionActive: boolean }> {
+  const adoptionMap = await getCardAdoption();
+
+  const where: Prisma.RegionCardWhereInput = {};
+  if (params.region && params.region !== "all") where.region = params.region;
+  // rarity → RegionCard 직접(P4a, diff=0).
+  if (params.rarity && params.rarity !== "all") where.rarity = { code: params.rarity };
+
+  const lcWhere: Prisma.CardWhereInput = {};
+  if (params.type && params.type !== "all") lcWhere.types = { has: params.type };
+  if (Object.keys(lcWhere).length > 0) where.card = lcWhere;
+
+  if (params.q && params.q.trim()) {
+    const q = params.q.trim();
+    where.OR = [
+      { name: { contains: q, mode: "insensitive" } },
+      { card: { illustrator: { contains: q, mode: "insensitive" } } },
+    ];
+  }
+
+  // DB 조회 — 메타 조인. 정렬은 후처리(set.releaseDate, locale.numberInt).
+  const rows = await prisma.regionCard.findMany({
+    where,
+    include: {
+      rarity: { select: { code: true } }, // P4a: RegionCard 직접(diff=0), LC 폴백.
+      card: {
+        include: {
+          rarity: { select: { code: true } }, // 전환기 폴백용
+          gameCard: { select: { hp: true } }, // hp 그룹균일(diff=0)
+          texts: { where: { language: "ko" }, select: { name: true } },
+        },
+      },
+      set: { select: { releaseDate: true } },
+    },
+    take: 600, // dedupe 전 여유 — Card 단위로 200 확보 위함.
+  });
+
+  // dedupe: 같은 Card 의 여러 locale → KR>JP>EN 우선 1개.
+  const byLogical = new Map<string, (typeof rows)[number]>();
+  for (const r of rows) {
+    const cur = byLogical.get(r.cardId);
+    if (!cur) { byLogical.set(r.cardId, r); continue; }
+    if ((REGION_PRIORITY[r.region] ?? 9) < (REGION_PRIORITY[cur.region] ?? 9)) byLogical.set(r.cardId, r);
+  }
+  const deduped = [...byLogical.values()];
+
+  // 보조 이름(nameSub)용 — 같은 card 의 다른 locale.
+  const allByLogical = new Map<string, typeof rows>();
+  for (const r of rows) {
+    const arr = allByLogical.get(r.cardId) ?? [];
+    arr.push(r);
+    allByLogical.set(r.cardId, arr);
+  }
+
+  // 채용률 정렬은 채용 지표가 있을 때만 활성. 없으면 발매일순 폴백.
+  const adoptionActive = params.sort === "adoption" && adoptionMap.size > 0;
+  if (adoptionActive) {
+    deduped.sort((a, b) => {
+      const sa = adoptionMap.get(a.cardId)?.usageScore ?? -1;
+      const sb = adoptionMap.get(b.cardId)?.usageScore ?? -1;
+      if (sa !== sb) return sb - sa;
+      const da = a.set?.releaseDate?.getTime?.() ?? 0;
+      const db = b.set?.releaseDate?.getTime?.() ?? 0;
+      return db - da;
+    });
+  } else {
+    deduped.sort((a, b) => {
+      const da = a.set?.releaseDate?.getTime?.() ?? 0;
+      const db = b.set?.releaseDate?.getTime?.() ?? 0;
+      if (da !== db) return db - da;
+      return (a.numberInt ?? 0) - (b.numberInt ?? 0);
+    });
+  }
+
+  const cards = deduped.slice(0, 200).map((r) => {
+    const others = allByLogical.get(r.cardId) ?? [];
+    const sub = others.find((o) => o.id !== r.id);
+    const nameKo = r.card.texts?.[0]?.name ?? r.card.nameKo; // P8a: CardText(ko) 우선
+    return {
+      id: r.id,
+      cardId: r.cardId,
+      name: nameKo ?? r.name,
+      nameSub: nameKo ? r.name : (sub?.name ?? null),
+      imageUrl: r.imageSmall ?? r.imageLarge ?? "",
+      rarity: r.rarity?.code ?? r.card.rarity?.code ?? null,
+      region: r.region,
+      type: r.card.types[0] ?? null, // ArtCard over-merge 보류 → LC 직독
+      hp: r.card.gameCard?.hp ?? r.card.hp,
+      adoption: adoptionMap.get(r.cardId) ?? null,
+    };
+  });
+
+  return { cards, adoptionActive };
 }
 
 export type RisingDeck = {
@@ -985,7 +1116,7 @@ export type StandingDecklist = {
 type RawDeckEntry = { name?: string; count?: number; cardId?: string | null };
 type RawDecklist = { pokemon?: RawDeckEntry[]; trainer?: RawDeckEntry[]; energy?: RawDeckEntry[] };
 
-/** 리스트 뷰어 — standing 1건의 덱리스트를 카드 이미지로 해석 (docs/cardgame-ui-plan.md §4-5). */
+/** 리스트 뷰어 — standing 1건의 덱리스트를 카드 이미지로 해석 (docs/cardgame/cardgame-ui-plan.md §4-5). */
 export async function getStandingDecklist(standingId: string): Promise<StandingDecklist | null> {
   const s = await prisma.tournamentStanding.findUnique({
     where: { id: standingId },

@@ -6,7 +6,8 @@ import {
   CardDivider,
   EmptyState,
 } from "@/components/toss";
-import { cn } from "@/lib/utils";
+import { TierBadge } from "@/components/cardgame/TierBadge";
+import { MetaDeltaPill } from "@/components/cardgame/MetaDeltaPill";
 import {
   LineChart,
   Line,
@@ -22,6 +23,7 @@ import { DeckIcon } from "@/components/cardgame/DeckIcon";
 import { CardThumb } from "@/components/cardgame/CardThumb";
 import { TierShareButton } from "@/components/cardgame/TierShareButton";
 import type { MetaFreshness, TopCard, NewSetMeta } from "@/lib/services/cardgame";
+import { deckLabel } from "@/lib/cardgame/archetype-ko";
 
 // 상대 시각 표기 ("3시간 전") — 신선도 헤더용.
 function timeAgo(iso: string | null): string {
@@ -50,22 +52,10 @@ export type RisingResult = {
 
 // ── 색상 ──────────────────────────────────────────────────────────────────────
 
-const TIER_COLORS: Record<string, string> = {
-  S: "bg-red-100 text-red-700 border border-red-200",
-  A: "bg-orange-100 text-orange-700 border border-orange-200",
-  B: "bg-blue-100 text-blue-700 border border-blue-200",
-  C: "bg-gray-100 text-gray-600 border border-gray-200",
-};
-
 // 라인 차트 색상 팔레트 (archetypeId 미지정 시 인덱스로 순환).
 const CHART_PALETTE = [
   "#6366f1", "#0ea5e9", "#f59e0b", "#10b981", "#ec4899", "#8b5cf6", "#ef4444", "#14b8a6",
 ];
-
-// 덱명 표시 — 한글명 없으면 nameEn 폴백.
-function deckLabel(a: { nameKo: string; nameEn: string | null }): string {
-  return a.nameKo || a.nameEn || "";
-}
 
 // ── 급상승 히어로 (#23) ────────────────────────────────────────────────────────
 
@@ -91,14 +81,7 @@ function RisingHero({ rising, locale }: { rising: RisingResult; locale: string }
               <div className="flex items-center justify-between mb-2">
                 <span className="text-toss-micro text-toss-text-quaternary">#{i + 1}</span>
                 {rising.hasTrend && d.delta !== 0 && (
-                  <span
-                    className={cn(
-                      "text-[10px] font-bold px-1.5 py-0.5 rounded",
-                      d.delta > 0 ? "bg-green-100 text-green-700" : "bg-red-100 text-red-600"
-                    )}
-                  >
-                    {d.delta > 0 ? "▲" : "▼"}{Math.abs(d.delta)}%p
-                  </span>
+                  <MetaDeltaPill delta={d.delta} />
                 )}
               </div>
               <p className="text-toss-label font-bold text-toss-text-primary truncate">{d.nameKo}</p>
@@ -122,14 +105,7 @@ function TierListSection({ archetypes, locale }: { archetypes: ArchetypeSummary[
         if (items.length === 0) return null;
         return (
           <div key={tier} className="flex items-start gap-4">
-            <div
-              className={cn(
-                "shrink-0 w-8 h-8 rounded-toss-md flex items-center justify-center text-sm font-bold mt-0.5",
-                TIER_COLORS[tier]
-              )}
-            >
-              {tier}
-            </div>
+            <TierBadge tier={tier} className="mt-0.5" />
             <div className="flex flex-wrap gap-2">
               {items.map((a) => (
                 <Link key={a.id} href={`/${locale}/cardgame/decks/${a.id}`}>
@@ -251,14 +227,7 @@ function DeltaList({ direction, items, locale }: { direction: "up" | "down"; ite
           <span className="flex-1 min-w-0 text-toss-caption font-semibold text-toss-text-primary truncate group-hover:text-toss-brand transition-colors">
             {d.nameKo}
           </span>
-          <span
-            className={cn(
-              "text-[10px] font-bold px-1.5 py-0.5 rounded shrink-0",
-              direction === "up" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-600"
-            )}
-          >
-            {direction === "up" ? "▲" : "▼"}{Math.abs(d.delta)}%p
-          </span>
+          <MetaDeltaPill delta={d.delta} direction={direction} className="shrink-0" />
         </Link>
       ))}
     </div>

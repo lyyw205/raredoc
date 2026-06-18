@@ -14,7 +14,7 @@
  *
  * 환경: WSL2 → curl(execFile) 강제 (scripts/lib/limitless-api.ts).
  *
- * docs/meta-pipeline-limitless.md
+ * docs/cardgame/meta-pipeline-limitless.md
  */
 import "dotenv/config";
 import { prisma } from "@/lib/prisma";
@@ -147,7 +147,7 @@ async function main() {
         platform: details.platform ?? null,
         winnerArchetypeId,
         status: "completed",
-        // 멀티소스 식별 (docs/meta-pipeline-multisource.md §1): 이 수집기는 온라인 그래스루츠 정본
+        // 멀티소스 식별 (docs/cardgame/meta-pipeline-multisource.md §1): 이 수집기는 온라인 그래스루츠 정본
         source: "limitless-play",
         sourceId: t.id,
         metaRegion: "INTL",

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
+import { SITE_BASE_URL as BASE_URL } from "@/lib/constants";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://raredoc.kr";
 const LOCALES = ["ko", "en"] as const;
 
 export const revalidate = 86400;

@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { searchCards } from "@/lib/api/pokemontcg";
 import { loadCardByLocaleId } from "@/lib/cards/queries";
+import { pickRarityLabel } from "@/lib/cards/card-fields";
 import { OwnersList, type Owner } from "@/components/cards/OwnersList";
 import { getOwnersForCard } from "@/lib/services/marketplace";
 import { getCurrentUser } from "@/lib/auth/session";
@@ -16,12 +17,12 @@ async function getCard(cardId: string) {
   if (loaded) {
     const { locale, card } = loaded;
     const region = locale.region;
-    const rarityLabel =
-      region === "JP"
-        ? card.rarityNameJa ?? card.rarityNameEn ?? card.rarityCode
-        : region === "KR"
-          ? card.rarityNameKo ?? card.rarityNameEn ?? card.rarityCode
-          : card.rarityNameEn ?? card.rarityCode;
+    const rarityLabel = pickRarityLabel(region, {
+      nameJa: card.rarityNameJa,
+      nameEn: card.rarityNameEn,
+      nameKo: card.rarityNameKo,
+      code: card.rarityCode,
+    });
     return {
       id: locale.id,
       name: locale.name,

@@ -6,7 +6,7 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const chipVariants = cva(
-  "inline-flex items-center gap-1 font-semibold rounded-toss-pill transition-colors select-none",
+  "inline-flex items-center gap-1 font-semibold leading-none rounded-toss-pill transition-colors select-none",
   {
     variants: {
       variant: {

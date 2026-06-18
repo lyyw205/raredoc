@@ -1,18 +1,18 @@
 /**
- * 카드 도감 팩 메타(packType 분류 + 클린 팩명) 단일출처 — 준비물(Phase 1).
+ * 카드 도감 팩 메타(packType 분류 + 클린 팩명) 단일출처.
  *
- * ⚠️ 현재 어디에서도 import 하지 않는 순수 함수 모음이다(미배선). DB·렌더 변경 없음.
- *    설계 합의(docs/dex-pack-typing.md §8 오픈이슈) 후 backfill-set-meta.ts / verify-set-meta.ts /
- *    dex-region.ts(buildRegionPacks) 가 이 헬퍼를 공유 funnel 로 호출한다.
+ * ✅ 배선됨: dex-region.ts(buildRegionPacks/resolveSidebarTitle) 가 import 해 사이드바
+ *    클린 팩명·packType 뱃지/필터를 그린다. backfill-set-meta.ts / verify-set-meta.ts(scripts)
+ *    도 이 헬퍼를 공유 funnel 로 호출한다.
  *
  * 분류기는 전 Set(717건) 전수 실측으로 검증됨 — 705/717 = 98.3% 자동 분류.
  * 미분류 12건은 전부 EN SM 본탄(Sun & Moon … Cosmic Eclipse)으로, packType 문제가 아니라
- * 해당 EN Set 이 setGroup 미연결(era=null)인 기존 데이터 갭이다(docs/dex-pack-typing.md §3.1).
+ * 해당 EN Set 이 setGroup 미연결(era=null)인 기존 데이터 갭이다(docs/design/dex-pack-typing.md §3.1).
  *
  * 검증 분포(717): expansion 400 · deck 89 · starter 60 · box_set 57 · reinforced 49 ·
  *                 promo 27 · high_class 16 · subset 4 · concept 3 · NULL 12.
  *
- * 설계 배경/마이그 단계: docs/dex-pack-typing.md
+ * 설계 배경/마이그 단계: docs/design/dex-pack-typing.md
  */
 
 // ── packType ────────────────────────────────────────────────────────────────
@@ -37,6 +37,19 @@ export const PACK_TYPE_LABEL: Record<PackType, string> = {
   box_set: "특전박스",
   promo: "프로모",
   subset: "서브셋",
+};
+
+/** 팩 종류(packType) → 종류별 컬러 칩(본탄=파랑/청록 계열, 특전·덱=따뜻한 색, 프로모=회색). 카드팩 정보 섹션 공용. */
+export const PACK_TYPE_CHIP: Record<PackType, string> = {
+  expansion:  "bg-blue-100 text-blue-700",     // 확장팩(본탄)
+  reinforced: "bg-sky-100 text-sky-700",       // 강화확장팩
+  high_class: "bg-purple-100 text-purple-700", // 하이클래스팩
+  concept:    "bg-pink-100 text-pink-700",     // 컨셉팩
+  subset:     "bg-slate-100 text-slate-600",   // 서브셋
+  starter:    "bg-green-100 text-green-700",   // 스타터
+  deck:       "bg-teal-100 text-teal-700",     // 덱
+  box_set:    "bg-amber-100 text-amber-700",   // 특전박스
+  promo:      "bg-gray-100 text-gray-600",     // 프로모
 };
 
 /** 사이드바 정렬·접기 우선순위(본탄 먼저, 특전·프로모 뒤). 작을수록 위. */

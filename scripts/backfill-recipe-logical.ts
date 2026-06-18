@@ -1,6 +1,6 @@
 /**
  * P1: DeckRecipeCard.cardId 백필 + (옵션) standings decklist JSON 보강
- * — docs/meta-pipeline-multisource.md §4-② / 로드맵 P1
+ * — docs/cardgame/meta-pipeline-multisource.md §4-② / 로드맵 P1
  *
  * 실행: npx tsx scripts/backfill-recipe-logical.ts [--dry-run] [--force] [--decklists]
  *   --force     이미 채워진 행도 재해석

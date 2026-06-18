@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { GRADES } from "@/lib/trades/shared";
 
 export type Owner = {
   listingId: string;
@@ -32,7 +33,7 @@ const GRADE_COLOR: Record<string, string> = {
   HP: "bg-orange-900/60 text-orange-300",
 };
 
-const GRADE_ORDER = ["미개봉", "1착", "NM", "VNDS", "LP", "MP", "HP", "DS", "D"];
+const GRADE_ORDER: readonly string[] = GRADES;
 
 type Filter = "all" | "offerable" | "withPrice";
 type Sort = "priceAsc" | "priceDesc" | "gradeBest";

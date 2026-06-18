@@ -6,10 +6,12 @@
  *   - 캐시 항목은 프로세스 공유 참조 — 호출부 절대 변형(mutate) 금지. owned 오버레이는 액션이 불변으로 얹는다.
  *   - 무효화는 clearRegionCaches().
  */
+import type { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { pickRarityLabel } from "./card-fields";
 import { canonEra, eraOrderIndex } from "./eras";
 import { resolveSidebarTitle } from "./set-meta";
+import { buildSearchText, matchesSearch } from "@/lib/search";
 import type { DexCard, DexCardVariant } from "@/components/dex/DexCatalog";
 
 export type Region = "JP" | "EN" | "KR";
@@ -17,7 +19,9 @@ export type Region = "JP" | "EN" | "KR";
 export type RegionPack = {
   setId: string;
   code: string | null; // 지역 세트 코드 (JP M5/svXX, EN ptcgoCode, KR 사이트ID)
+  cardPackId: string | null; // 그룹(CardPack) id — 지역 트윈(JP/KR/EN) 매칭용
   name: string;
+  nameSub?: string; // JP 원어 팩명(양국어 병기용) — name 과 다를 때만 채움
   era: string;
   eraOrder: number;
   releaseDate: string | null; // ISO yyyy-mm-dd
@@ -26,6 +30,7 @@ export type RegionPack = {
   isEtc: boolean;
   packType: string | null; // set-meta.ts PackType slug (확장팩/특전박스/…) — 사이드바 뱃지·필터·정렬용
   mergeOf?: number; // CardPackLink wave 수(>1 합본) — 합본 뱃지용
+  searchText?: string; // 교차언어 팩명 검색 인덱스(다국어 팩명 + 코드 정규화 결합)
 };
 
 const REGION_TTL_MS = 3_600_000; // 1h
@@ -58,6 +63,7 @@ async function buildRegionPacks(region: Region, preferred: "ko" | "ja" | "en"): 
         logoUrl: true,
         series: true,
         packType: true,
+        cardPackId: true,
         titleCleanKo: true,
         titleCleanJa: true,
         titleCleanEn: true,
@@ -109,16 +115,27 @@ async function buildRegionPacks(region: Region, preferred: "ko" | "ja" | "en"): 
     const cardPackName =
       preferred === "ja" ? s.cardPack?.nameJa : preferred === "ko" ? s.cardPack?.nameKo : s.cardPack?.nameEn;
     const legacyName = (preferred === "ja" ? s.nameJa : preferred === "ko" ? s.nameKo : null) || s.name;
+    const name = resolveSidebarTitle({
+      setTitleClean: setTitleClean ?? null,
+      cardPackName: cardPackName ?? null,
+      legacyName,
+      rawEra: s.cardPack?.era,
+      shortenPackName,
+    });
+    // JP 원어 팩명(양국어 병기용) — ja 기준 동일 해석. name 과 다를 때만 nameSub 로 노출.
+    const nameJaResolved = resolveSidebarTitle({
+      setTitleClean: s.titleCleanJa ?? null,
+      cardPackName: s.cardPack?.nameJa ?? null,
+      legacyName: s.nameJa || s.name,
+      rawEra: s.cardPack?.era,
+      shortenPackName,
+    });
     return {
       setId: s.id,
       code: s.code ?? null,
-      name: resolveSidebarTitle({
-        setTitleClean: setTitleClean ?? null,
-        cardPackName: cardPackName ?? null,
-        legacyName,
-        rawEra: s.cardPack?.era,
-        shortenPackName,
-      }),
+      cardPackId: s.cardPackId ?? null,
+      name,
+      ...(nameJaResolved && nameJaResolved !== name ? { nameSub: nameJaResolved } : {}),
       era,
       eraOrder,
       releaseDate: s.releaseDate ? s.releaseDate.toISOString().slice(0, 10) : null,
@@ -127,6 +144,13 @@ async function buildRegionPacks(region: Region, preferred: "ko" | "ja" | "en"): 
       isEtc,
       packType: s.packType ?? null,
       ...(wave > 1 ? { mergeOf: wave } : {}),
+      // 교차언어 팩명 검색 — 표시명 + 전 지역 팩명/클린명 + 코드 정규화 결합
+      searchText: buildSearchText([
+        name, nameJaResolved, s.name, s.nameKo, s.nameJa,
+        s.titleCleanKo, s.titleCleanJa, s.titleCleanEn,
+        s.cardPack?.nameKo, s.cardPack?.nameJa, s.cardPack?.nameEn,
+        s.code,
+      ]),
     };
   });
 
@@ -167,97 +191,106 @@ export async function listRegionPacks(
 }
 
 // ── 세트 카드 (lazy, owned 미포함) ──────────────────────────────────────────
-async function buildSetCards(setId: string): Promise<DexCard[]> {
-  // RegionCard 는 @@unique 없음 — id 가 물리 식별. dedupe 금지.
-  const rcs = await prisma.regionCard.findMany({
-    where: { setId },
+// RegionCard → DexCard 매핑 공용 select(세트단위·지역단위 페이저 공유). RegionCard 는 @@unique 없음 — dedupe 금지.
+const CARD_SELECT = {
+  id: true,
+  name: true,
+  number: true,
+  numberInt: true,
+  imageSmall: true,
+  imageLarge: true,
+  region: true,
+  rarity: {
     select: {
-      id: true,
-      name: true,
-      number: true,
-      numberInt: true,
-      imageSmall: true,
-      imageLarge: true,
-      region: true,
+      code: true, nameKo: true, nameJa: true, nameEn: true, tier: true,
+      category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } },
+    },
+  },
+  card: {
+    select: {
+      types: true,
+      supertype: true,
+      nameKo: true, // 교차언어 검색 인덱스용(한글 오버레이)
+      gameCard: { select: { supertype: true } },
       rarity: {
         select: {
           code: true, nameKo: true, nameJa: true, nameEn: true, tier: true,
           category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } },
         },
       },
-      card: {
+      // 임시: 카드별 지역 형제(JP/EN/KR 인라인 토글용). 매핑 검증 후 제거 예정.
+      locales: {
         select: {
-          types: true,
-          supertype: true,
-          gameCard: { select: { supertype: true } },
+          id: true, region: true, name: true, number: true, imageSmall: true,
           rarity: {
             select: {
               code: true, nameKo: true, nameJa: true, nameEn: true, tier: true,
               category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } },
             },
           },
-          // 임시: 카드별 지역 형제(JP/EN/KR 인라인 토글용). 매핑 검증 후 제거 예정.
-          locales: {
-            select: {
-              id: true, region: true, name: true, number: true, imageSmall: true,
-              rarity: {
-                select: {
-                  code: true, nameKo: true, nameJa: true, nameEn: true, tier: true,
-                  category: { select: { code: true, nameKo: true, nameJa: true, nameEn: true, tier: true } },
-                },
-              },
-            },
-          },
         },
       },
     },
+  },
+} satisfies Prisma.RegionCardSelect;
+
+type CardRow = Prisma.RegionCardGetPayload<{ select: typeof CARD_SELECT }>;
+
+const REGS = ["JP", "EN", "KR"] as const;
+
+function mapRowToDexCard(rc: CardRow): DexCard {
+  const rar = rc.rarity ?? rc.card.rarity; // 인쇄본별 rarity 우선, LC 폴백
+  // 임시: 카드별 지역 형제(variants) — 현재 region 은 rc 자신, 그 외는 같은 Card 의 첫 형제 1개씩.
+  const byRegion = new Map<string, DexCardVariant>();
+  byRegion.set(rc.region, {
+    id: rc.id, region: rc.region, name: rc.name, number: rc.number,
+    imageSmall: rc.imageSmall ?? rc.imageLarge ?? null,
+    rarity: pickRarityLabel(rc.region, rar) ?? undefined,
+    rarityCategoryNameKo: rar?.category?.nameKo ?? undefined,
+  });
+  for (const v of rc.card.locales) {
+    if (byRegion.has(v.region)) continue;
+    const vr = v.rarity ?? rc.card.rarity;
+    byRegion.set(v.region, {
+      id: v.id, region: v.region, name: v.name, number: v.number, imageSmall: v.imageSmall,
+      rarity: pickRarityLabel(v.region, vr) ?? undefined,
+      rarityCategoryNameKo: vr?.category?.nameKo ?? undefined,
+    });
+  }
+  const variants = REGS.flatMap((reg) => { const v = byRegion.get(reg); return v ? [v] : []; });
+  return {
+    id: rc.id,
+    name: rc.name,
+    number: rc.number,
+    rarity: pickRarityLabel(rc.region, rar) ?? undefined,
+    rarityTier: rar?.tier ?? null,
+    rarityCategoryCode: rar?.category?.code ?? undefined,
+    rarityCategoryNameKo: rar?.category?.nameKo ?? undefined,
+    rarityCategoryNameJa: rar?.category?.nameJa ?? undefined,
+    rarityCategoryNameEn: rar?.category?.nameEn ?? undefined,
+    rarityCategoryTier: rar?.category?.tier ?? null,
+    types: rc.card.types.length > 0 ? rc.card.types : undefined,
+    supertype: rc.card.gameCard?.supertype ?? rc.card.supertype ?? undefined,
+    region: rc.region,
+    imageSmall: rc.imageSmall ?? rc.imageLarge ?? null,
+    imageLarge: rc.imageLarge ?? rc.imageSmall ?? null,
+    // owned 는 액션(loadSetCards)이 유저별로 불변 오버레이
+    owned: false,
+    grade: undefined,
+    certified: false,
+    variants,
+    // 교차언어 검색 인덱스 — 대표명 + 한글 오버레이 + 전 지역 형제명(JP/EN/KR…) 정규화 결합
+    searchText: buildSearchText([rc.name, rc.card.nameKo, ...rc.card.locales.map((l) => l.name)]),
+  };
+}
+
+async function buildSetCards(setId: string): Promise<DexCard[]> {
+  const rcs = await prisma.regionCard.findMany({
+    where: { setId },
+    select: CARD_SELECT,
     orderBy: [{ numberInt: "asc" }, { number: "asc" }],
   });
-
-  const REGS = ["JP", "EN", "KR"] as const;
-  return rcs.map((rc): DexCard => {
-    const rar = rc.rarity ?? rc.card.rarity; // 인쇄본별 rarity 우선, LC 폴백
-    // 임시: 카드별 지역 형제(variants) — 현재 region 은 rc 자신, 그 외는 같은 Card 의 첫 형제 1개씩.
-    const byRegion = new Map<string, DexCardVariant>();
-    byRegion.set(rc.region, {
-      id: rc.id, region: rc.region, name: rc.name, number: rc.number,
-      imageSmall: rc.imageSmall ?? rc.imageLarge ?? null,
-      rarity: pickRarityLabel(rc.region, rar) ?? undefined,
-      rarityCategoryNameKo: rar?.category?.nameKo ?? undefined,
-    });
-    for (const v of rc.card.locales) {
-      if (byRegion.has(v.region)) continue;
-      const vr = v.rarity ?? rc.card.rarity;
-      byRegion.set(v.region, {
-        id: v.id, region: v.region, name: v.name, number: v.number, imageSmall: v.imageSmall,
-        rarity: pickRarityLabel(v.region, vr) ?? undefined,
-        rarityCategoryNameKo: vr?.category?.nameKo ?? undefined,
-      });
-    }
-    const variants = REGS.flatMap((reg) => { const v = byRegion.get(reg); return v ? [v] : []; });
-    return {
-      id: rc.id,
-      name: rc.name,
-      number: rc.number,
-      rarity: pickRarityLabel(rc.region, rar) ?? undefined,
-      rarityTier: rar?.tier ?? null,
-      rarityCategoryCode: rar?.category?.code ?? undefined,
-      rarityCategoryNameKo: rar?.category?.nameKo ?? undefined,
-      rarityCategoryNameJa: rar?.category?.nameJa ?? undefined,
-      rarityCategoryNameEn: rar?.category?.nameEn ?? undefined,
-      rarityCategoryTier: rar?.category?.tier ?? null,
-      types: rc.card.types.length > 0 ? rc.card.types : undefined,
-      supertype: rc.card.gameCard?.supertype ?? rc.card.supertype ?? undefined,
-      region: rc.region,
-      imageSmall: rc.imageSmall ?? rc.imageLarge ?? null,
-      imageLarge: rc.imageLarge ?? rc.imageSmall ?? null,
-      // owned 는 액션(loadSetCards)이 유저별로 불변 오버레이
-      owned: false,
-      grade: undefined,
-      certified: false,
-      variants,
-    };
-  });
+  return rcs.map(mapRowToDexCard);
 }
 
 const cardCache = new Map<string, { at: number; data: DexCard[] }>();
@@ -278,8 +311,192 @@ export async function getSetCardsCached(setId: string): Promise<DexCard[]> {
   return p;
 }
 
+/**
+ * 카드 목록에 로그인 유저의 보유(owned) 상태를 불변 오버레이. 캐시 객체 변형 금지 → 새 배열 반환.
+ * loadSetCards / loadRegionCardsPage 공용.
+ */
+export async function overlayOwnedStatus(cards: DexCard[], userId: string): Promise<DexCard[]> {
+  if (cards.length === 0) return cards;
+  const items = await prisma.collectionItem.findMany({
+    where: { userId, regionCardId: { in: cards.map((c) => c.id) } },
+    select: { regionCardId: true, grade: true, certified: true },
+  });
+  if (items.length === 0) return cards;
+
+  const owned = new Map<string, { grade: string; certified: boolean }>();
+  for (const it of items) {
+    if (!owned.has(it.regionCardId)) owned.set(it.regionCardId, { grade: it.grade, certified: it.certified });
+  }
+  return cards.map((c) => {
+    const own = owned.get(c.id);
+    return own ? { ...c, owned: true, grade: own.grade, certified: own.certified } : c;
+  });
+}
+
+// ── 지역 전체("전체" 가상 팩) — 정렬·필터·페이지네이션 ─────────────────────────
+// 무한스크롤용. 무거운 이미지 없이 지역 전체 카드의 정렬/필터 키만 담은 라이트 카탈로그를
+// 1회 빌드·캐시하고, 필터·정렬은 JS 에서 적용(클라 필터 로직과 동일), 페이지 id 만 풀 로드.
+type RegionCatalogRow = {
+  id: string;
+  name: string;
+  numberInt: number | null;
+  number: string;
+  supertype: string | null;
+  types: string[];
+  categoryCode: string | null;
+  categoryTier: number | null;
+  categoryNameKo: string | null;
+  categoryNameJa: string | null;
+  categoryNameEn: string | null;
+  searchText: string; // 교차 언어 검색용 — 대표명 + 논리카드 다국어명(JP/EN/KR) 소문자 결합
+};
+
+async function buildRegionCatalog(region: Region): Promise<RegionCatalogRow[]> {
+  const rows = await prisma.regionCard.findMany({
+    where: { region },
+    select: {
+      id: true, name: true, numberInt: true, number: true,
+      rarity: { select: { category: { select: { code: true, tier: true, nameKo: true, nameJa: true, nameEn: true } } } },
+      card: {
+        select: {
+          supertype: true, types: true, nameKo: true,
+          gameCard: { select: { supertype: true } },
+          rarity: { select: { category: { select: { code: true, tier: true, nameKo: true, nameJa: true, nameEn: true } } } },
+          locales: { select: { name: true } }, // 교차 언어 검색용 형제 이름(JP/EN/KR)
+        },
+      },
+      set: { select: { releaseDate: true, series: true, cardPack: { select: { eraRef: { select: { order: true } } } } } },
+    },
+  });
+  const lite = rows.map((r) => {
+    const cat = r.rarity?.category ?? r.card.rarity?.category ?? null;
+    const ref = r.set.cardPack?.eraRef;
+    const row: RegionCatalogRow = {
+      id: r.id,
+      name: r.name,
+      numberInt: r.numberInt,
+      number: r.number,
+      supertype: r.card.gameCard?.supertype ?? r.card.supertype ?? null,
+      types: r.card.types ?? [],
+      categoryCode: cat?.code ?? null,
+      categoryTier: cat?.tier ?? null,
+      categoryNameKo: cat?.nameKo ?? null,
+      categoryNameJa: cat?.nameJa ?? null,
+      categoryNameEn: cat?.nameEn ?? null,
+      searchText: buildSearchText([r.name, r.card.nameKo, ...r.card.locales.map((l) => l.name)]),
+    };
+    // cardPack 없는 isEtc 는 맨뒤(팩목록 정렬과 동일축).
+    return { row, eraOrder: ref ? ref.order : ETC_ERA_ORDER, release: r.set.releaseDate ? r.set.releaseDate.toISOString().slice(0, 10) : null };
+  });
+  // 기본 정렬 = 팩목록 동일축: eraOrder asc(신시대 먼저) → releaseDate desc(최신 먼저) → numberInt asc(null 뒤) → number → id
+  lite.sort((a, b) => {
+    if (a.eraOrder !== b.eraOrder) return a.eraOrder - b.eraOrder;
+    if (a.release !== b.release) {
+      if (!a.release) return 1;
+      if (!b.release) return -1;
+      return b.release.localeCompare(a.release);
+    }
+    const an = a.row.numberInt, bn = b.row.numberInt;
+    if (an != null && bn != null && an !== bn) return an - bn;
+    if ((an == null) !== (bn == null)) return an == null ? 1 : -1;
+    const nc = a.row.number.localeCompare(b.row.number, undefined, { numeric: true });
+    return nc !== 0 ? nc : a.row.id.localeCompare(b.row.id);
+  });
+  return lite.map((x) => x.row);
+}
+
+const catalogCache = new Map<string, { at: number; data: RegionCatalogRow[] }>();
+const catalogInflight = new Map<string, Promise<RegionCatalogRow[]>>();
+
+async function getRegionCatalog(region: Region): Promise<RegionCatalogRow[]> {
+  const hit = catalogCache.get(region);
+  if (hit && Date.now() - hit.at < REGION_TTL_MS) return hit.data;
+  const inflight = catalogInflight.get(region);
+  if (inflight) return inflight;
+  const p = buildRegionCatalog(region)
+    .then((data) => { if (data.length > 0) catalogCache.set(region, { at: Date.now(), data }); return data; })
+    .finally(() => catalogInflight.delete(region));
+  catalogInflight.set(region, p);
+  return p;
+}
+
+export type RegionCardSort = "number" | "name" | "rarity";
+
+export type RegionFilterMeta = {
+  categories: { code: string; nameKo: string; nameJa?: string; nameEn: string; tier: number }[];
+  types: string[];
+  supertypes: string[];
+};
+
+export type RegionCardPage = {
+  cards: DexCard[];
+  total: number;
+  nextOffset: number | null;
+  meta?: RegionFilterMeta; // offset 0 에만 — 모달용 지역 전체 후보
+};
+
+/** "전체" 가상 팩: 지역 전체 카드를 서버에서 필터·정렬 후 offset/limit(50) 페이지로 반환. */
+export async function buildRegionCardsPage(
+  region: Region,
+  input: { offset: number; limit: number; search?: string; categories?: string[]; types?: string[]; supertypes?: string[]; sort?: RegionCardSort },
+): Promise<RegionCardPage> {
+  const cat = await getRegionCatalog(region);
+  const search = input.search ?? "";
+  const cats = input.categories?.length ? new Set(input.categories) : null;
+  const types = input.types?.length ? new Set(input.types) : null;
+  const supers = input.supertypes?.length ? new Set(input.supertypes) : null;
+  let filtered = cat.filter((c) => {
+    if (cats && !(c.categoryCode != null && cats.has(c.categoryCode))) return false;
+    if (types && !c.types.some((t) => types.has(t))) return false;
+    if (supers && !(c.supertype != null && supers.has(c.supertype))) return false;
+    if (!matchesSearch(c.searchText, search)) return false;
+    return true;
+  });
+  if (input.sort === "name") filtered = [...filtered].sort((a, b) => a.name.localeCompare(b.name));
+  else if (input.sort === "rarity") filtered = [...filtered].sort((a, b) => (b.categoryTier ?? -1) - (a.categoryTier ?? -1));
+  // "number"/기본 → 카탈로그 기본 정렬(팩순) 유지
+
+  const total = filtered.length;
+  const pageIds = filtered.slice(input.offset, input.offset + input.limit).map((r) => r.id);
+  let cards: DexCard[] = [];
+  if (pageIds.length > 0) {
+    const rcs = await prisma.regionCard.findMany({ where: { id: { in: pageIds } }, select: CARD_SELECT });
+    const byId = new Map(rcs.map((rc) => [rc.id, mapRowToDexCard(rc)] as const));
+    cards = pageIds.map((id) => byId.get(id)).filter((c): c is DexCard => Boolean(c));
+  }
+  const nextOffset = input.offset + input.limit < total ? input.offset + input.limit : null;
+
+  let meta: RegionFilterMeta | undefined;
+  if (input.offset === 0) {
+    const catMap = new Map<string, { tier: number; nameKo: string; nameJa: string | null; nameEn: string }>();
+    const typeSet = new Set<string>();
+    const superSet = new Set<string>();
+    for (const c of cat) {
+      if (c.categoryCode && !catMap.has(c.categoryCode)) {
+        catMap.set(c.categoryCode, {
+          tier: c.categoryTier ?? 999,
+          nameKo: c.categoryNameKo ?? c.categoryCode,
+          nameJa: c.categoryNameJa,
+          nameEn: c.categoryNameEn ?? c.categoryCode,
+        });
+      }
+      for (const t of c.types) typeSet.add(t);
+      if (c.supertype) superSet.add(c.supertype);
+    }
+    meta = {
+      categories: [...catMap.entries()]
+        .map(([code, v]) => ({ code, nameKo: v.nameKo, nameJa: v.nameJa ?? undefined, nameEn: v.nameEn, tier: v.tier }))
+        .sort((a, b) => a.tier - b.tier),
+      types: [...typeSet],
+      supertypes: [...superSet],
+    };
+  }
+  return { cards, total, nextOffset, meta };
+}
+
 /** 데이터 갱신 후 즉시 반영이 필요할 때 호출(전 지역/세트 무효화). */
 export function clearRegionCaches(): void {
   packCache.clear();
   cardCache.clear();
+  catalogCache.clear();
 }

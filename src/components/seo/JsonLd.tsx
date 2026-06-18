@@ -1,3 +1,5 @@
+import { SITE_BASE_URL as BASE_URL } from "@/lib/constants";
+
 interface Props {
   data: Record<string, unknown>;
 }
@@ -10,8 +12,6 @@ export function JsonLd({ data }: Props) {
     />
   );
 }
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://raredoc.kr";
 
 export function WebSiteJsonLd({ locale }: { locale: string }) {
   return (

@@ -1,0 +1,29 @@
+{
+ "expectations": [
+  {
+   "text": "닌자스피너에 뿔충이가 DB에 존재한다고 정확히 결론 내림",
+   "passed": true,
+   "evidence": "결론: '✅ 있습니다. 닌자스피너에 뿔충이(Weedle) 카드가 DB에 정상 수집' + 4분면 판정(DB 있음 × 실존함)"
+  },
+  {
+   "text": "한국판 발매 여부 질문에 명시적으로 답함 (KR 로케일 존재 = 한국판 나옴)",
+   "passed": true,
+   "evidence": "'한국판도 나왔습니다 (KR 로케일 2종 보유)' — M4 001 + M-P 재수록까지 구분"
+  },
+  {
+   "text": "구체적 식별자를 제시함 (세트코드 M4, 번호, logicalCardId 중 하나 이상)",
+   "passed": true,
+   "evidence": "logicalCardId lc-orphan-jp-mega-ninja-spinner-1, 세트 M4, 번호 1/001 모두 제시"
+  },
+  {
+   "text": "다국어 명칭 또는 타지역 발매 정보를 부가로 제공함 (ビードル/Weedle/EN Chaos Rising 등)",
+   "passed": true,
+   "evidence": "지역별 로케일 표: JP ビードル / KR 뿔충이×2 / EN Weedle(Chaos Rising)"
+  }
+ ],
+ "summary": {
+  "passed": 4,
+  "total": 4,
+  "pass_rate": 1.0
+ }
+}

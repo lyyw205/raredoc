@@ -1,6 +1,6 @@
 /**
  * P5: 메이저 아키타입 보강 — limitless-web top cut 라벨 → pokedata 정본 standings
- * (docs/meta-pipeline-multisource.md §1 — 메이저 정본=pokedata, limitless-web 은 보강)
+ * (docs/cardgame/meta-pipeline-multisource.md §1 — 메이저 정본=pokedata, limitless-web 은 보강)
  *
  * 실행: npx tsx scripts/enrich-majors-limitless.ts [--dry-run] [--force]
  *

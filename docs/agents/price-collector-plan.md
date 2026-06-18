@@ -1,7 +1,7 @@
 # Price-Collector 계획 (v2 — 독립 출처 교차검증)
 
-> 작성 2026-05-30. 시세 수집 에이전트 + 파이프라인 설계. `docs/followup-plans.md §8` Fleet 구축의 price-collector 상세판.
-> 관련: `memory/reference_pokemon_tcg_sites.md`(출처 카탈로그), `docs/BACKEND_ARCHITECTURE.md`.
+> 작성 2026-05-30. 시세 수집 에이전트 + 파이프라인 설계. `docs/plans/followup-plans.md §8` Fleet 구축의 price-collector 상세판.
+> 관련: `memory/reference_pokemon_tcg_sites.md`(출처 카탈로그), `docs/design/BACKEND_ARCHITECTURE.md`.
 
 ## 확정된 결정 (사용자)
 1. **KR 시세**: USD→KRW 환산을 기본값으로, **핫카드만 실제 KR 데이터(번개/디시)** 로 덮어씀.

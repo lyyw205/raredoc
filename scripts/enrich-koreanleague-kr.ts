@@ -1,5 +1,5 @@
 /**
- * P3: 코리안리그 KR 공식 보강 — docs/meta-pipeline-multisource.md §3 #6
+ * P3: 코리안리그 KR 공식 보강 — docs/cardgame/meta-pipeline-multisource.md §3 #6
  *
  * 실행: npx tsx scripts/enrich-koreanleague-kr.ts [--dry-run]
  *
