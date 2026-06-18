@@ -1,14 +1,20 @@
-import { getArchetypes } from "@/lib/services/cardgame";
+import {
+  getRecommendedDecksWithCards,
+  getRecentWinnerDecklists,
+} from "@/lib/services/cardgame";
 import { DecksPageView } from "./DecksPageView";
 
-// 덱 리스트 — Limitless 실데이터(sampleSize>0)만. 카드 매칭 보류라 썸네일 없음(tier 뱃지 폴백).
+// 덱 페이지 — 2탭(메타 통계 / 최근 1위 덱). 모두 Limitless 실데이터.
 export default async function CardgameDecksPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const archetypes = await getArchetypes({ realOnly: true });
+  const [recommended, winners] = await Promise.all([
+    getRecommendedDecksWithCards(12, 8),
+    getRecentWinnerDecklists(6),
+  ]);
 
-  return <DecksPageView locale={locale} archetypes={archetypes} />;
+  return <DecksPageView locale={locale} recommended={recommended} winners={winners} />;
 }

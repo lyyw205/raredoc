@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 import type {
   ArchetypeSummary,
   ArchetypeRecipe,
-  RecipeCard,
+  RecipeSlot,
+  RecipeCategory,
   ArchetypeMatchup,
   ArchetypeResultRow,
 } from "@/lib/services/cardgame";
@@ -16,90 +17,176 @@ import { CardThumb } from "@/components/cardgame/CardThumb";
 import { TierBadge } from "@/components/cardgame/TierBadge";
 import { DeckCostWidget } from "./DeckCostWidget";
 import type { DeckCostResult } from "@/lib/services/deck-pricing";
+import { formatKrwShort } from "@/lib/format/krw";
+
+/** 슬롯 💰 단가 범위 — "1,200원 ~ 4.8만". 단일가면 1개만. 시세 없으면 null. */
+function priceRangeLabel(min: number | null, max: number | null): string | null {
+  if (min == null) return null;
+  const lo = formatKrwShort(min, { suffix: "만" });
+  return max == null || max === min ? lo : `${lo} ~ ${formatKrwShort(max, { suffix: "만" })}`;
+}
 
 // ── 레시피 카테고리 블록 (#16/#17) ────────────────────────────────────────────
 
-const CATEGORY_LABEL: Record<keyof ArchetypeRecipe, string> = {
+const CATEGORY_LABEL: Record<RecipeCategory, string> = {
   pokemon: "포켓몬",
   trainer: "트레이너",
   energy: "에너지",
 };
+const CATEGORIES = Object.keys(CATEGORY_LABEL) as RecipeCategory[];
 
-function RecipeRow({ card, locale }: { card: RecipeCard; locale: string }) {
-  const thumb = <CardThumb src={card.cardImage} alt={card.cardName} className="w-9 shrink-0" />;
+function totalSlots(byCat: Record<RecipeCategory, RecipeSlot[]>): number {
+  return CATEGORIES.reduce((s, c) => s + byCat[c].length, 0);
+}
+
+// 통합 슬롯 1행(=한 플레이 카드, 인쇄판 통합) — 썸네일 + 장수/채용률 + 버전 배지 + 💰 시세 힌트(준비 중).
+function SlotRow({
+  slot,
+  locale,
+  emphasis,
+}: {
+  slot: RecipeSlot;
+  locale: string;
+  emphasis: "count" | "rate";
+}) {
+  const thumb = <CardThumb src={slot.cardImage} alt={slot.cardName} className="w-9 shrink-0" />;
+  const top = slot.printings[0];
+  const price = priceRangeLabel(slot.priceMin, slot.priceMax);
+  const printingInfo =
+    slot.printingCount > 1 ? `인쇄판 ${slot.printingCount}종` : [top?.setCode, top?.number].filter(Boolean).join(" ");
   return (
     <div
       className={cn(
         "flex items-center gap-3 p-2 rounded-toss-md",
-        card.isHero
-          ? "bg-amber-50 ring-1 ring-amber-200"
-          : card.isCore
-          ? "bg-toss-bg-muted"
-          : card.isTech
-          ? "opacity-70"
-          : ""
+        slot.isHero && "bg-amber-50 ring-1 ring-amber-200"
       )}
     >
-      {card.regionCardId ? (
-        <Link href={`/${locale}/cards/${card.regionCardId}`} className="shrink-0 hover:opacity-90">
+      {slot.regionCardId ? (
+        <Link href={`/${locale}/cards/${slot.regionCardId}`} className="shrink-0 hover:opacity-90">
           {thumb}
         </Link>
       ) : (
         thumb
       )}
       <span className="text-toss-caption font-bold text-toss-text-primary w-9 text-right shrink-0 tabular-nums">
-        ×{card.avgCount}
+        ×{slot.count}
       </span>
       <div className="flex-1 min-w-0">
-        <p className="text-toss-caption font-semibold text-toss-text-primary truncate">{card.cardName}</p>
+        <div className="flex items-center gap-1.5">
+          <p className="text-toss-caption font-semibold text-toss-text-primary truncate">{slot.cardName}</p>
+          {slot.printingCount > 1 && (
+            <span className="shrink-0 text-[10px] font-medium px-1 py-0.5 rounded bg-toss-bg-muted text-toss-text-tertiary">
+              {slot.printingCount}버전
+            </span>
+          )}
+        </div>
         <p className="text-toss-micro text-toss-text-tertiary truncate">
-          {[card.setCode, card.number].filter(Boolean).join(" ")}
+          {price && <span className="font-medium text-amber-600">💰 {price}</span>}
+          {price && printingInfo && <span className="text-toss-text-quaternary"> · </span>}
+          {printingInfo}
         </p>
       </div>
       <div className="flex items-center gap-2 shrink-0">
-        {card.isHero && (
+        {slot.isHero && (
           <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-amber-100 text-amber-700">⭐ 핵심</span>
         )}
-        {card.isCore && (
-          <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-green-100 text-green-700">코어</span>
-        )}
-        {card.isTech && (
-          <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-gray-100 text-gray-500">테크</span>
-        )}
-        <span className="text-toss-micro text-toss-text-tertiary w-12 text-right tabular-nums">
-          {card.adoptionRate}%
+        <span
+          className={cn(
+            "text-right tabular-nums w-12",
+            emphasis === "rate"
+              ? "text-toss-caption font-bold text-toss-text-secondary"
+              : "text-toss-micro text-toss-text-tertiary"
+          )}
+        >
+          {slot.adoptionRate}%
         </span>
       </div>
     </div>
   );
 }
 
-function RecipeSection({ recipe, locale }: { recipe: ArchetypeRecipe; locale: string }) {
-  const groups = (Object.keys(CATEGORY_LABEL) as (keyof ArchetypeRecipe)[]).filter(
-    (k) => recipe[k].length > 0
+// 카테고리 소그룹(포켓몬/트레이너/에너지) — 코어·플렉스 공용.
+function CatGroups({
+  byCat,
+  locale,
+  emphasis,
+}: {
+  byCat: Record<RecipeCategory, RecipeSlot[]>;
+  locale: string;
+  emphasis: "count" | "rate";
+}) {
+  const cats = CATEGORIES.filter((c) => byCat[c].length > 0);
+  return (
+    <div className="space-y-3">
+      {cats.map((cat) => {
+        const slots = byCat[cat];
+        const total = Math.round(slots.reduce((s, c) => s + c.count, 0) * 10) / 10;
+        return (
+          <div key={cat}>
+            <div className="flex items-center justify-between mb-1.5 px-1">
+              <p className="text-toss-micro font-semibold text-toss-text-tertiary">{CATEGORY_LABEL[cat]}</p>
+              <span className="text-toss-micro text-toss-text-quaternary">
+                {slots.length}종 · 평균 {total}장
+              </span>
+            </div>
+            <div className="space-y-1">
+              {slots.map((s) => (
+                <SlotRow key={`${cat}-${s.cardName}`} slot={s} locale={locale} emphasis={emphasis} />
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
-  if (groups.length === 0) {
+}
+
+// 표준 레시피 = 코어 스켈레톤 + 플렉스 슬롯(카테고리별) + 마이너(접기) — deck-recipe-variants-plan.
+function RecipeSection({ recipe, locale }: { recipe: ArchetypeRecipe; locale: string }) {
+  const coreCount = totalSlots(recipe.core);
+  const flexCount = totalSlots(recipe.flex);
+  if (coreCount === 0 && flexCount === 0 && recipe.minor.length === 0) {
     return <EmptyState title="레시피 데이터가 없습니다" description="이 덱의 표준 레시피가 아직 집계되지 않았습니다." />;
   }
   return (
     <div className="space-y-4">
-      {groups.map((cat) => {
-        const cards = recipe[cat];
-        const total = Math.round(cards.reduce((s, c) => s + c.avgCount, 0) * 10) / 10;
-        return (
-          <Card key={cat} variant="default" padding="md">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-toss-label font-semibold text-toss-text-primary">{CATEGORY_LABEL[cat]}</p>
-              <span className="text-toss-caption text-toss-text-tertiary">평균 {total}장</span>
-            </div>
+      {coreCount > 0 && (
+        <Card variant="default" padding="md">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-toss-label font-semibold text-toss-text-primary flex items-center gap-1.5">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500" /> 코어
+            </p>
+            <span className="text-toss-caption text-toss-text-tertiary">거의 모든 덱 채용 · 고정</span>
+          </div>
+          <CatGroups byCat={recipe.core} locale={locale} emphasis="count" />
+        </Card>
+      )}
+      {flexCount > 0 && (
+        <Card variant="default" padding="md">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-toss-label font-semibold text-toss-text-primary flex items-center gap-1.5">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-400" /> 플렉스 슬롯
+            </p>
+            <span className="text-toss-caption text-toss-text-tertiary">유저마다 갈리는 선택 · 채용률</span>
+          </div>
+          <CatGroups byCat={recipe.flex} locale={locale} emphasis="rate" />
+        </Card>
+      )}
+      {recipe.minor.length > 0 && (
+        <details className="group">
+          <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden text-toss-caption text-toss-text-tertiary hover:text-toss-text-primary px-1 py-2">
+            마이너 채용 카드 {recipe.minor.length}종 (채용률 &lt;12%){" "}
+            <span className="inline-block transition-transform group-open:rotate-180">▾</span>
+          </summary>
+          <Card variant="default" padding="md" className="mt-2">
             <div className="space-y-1">
-              {cards.map((c) => (
-                <RecipeRow key={`${c.cardName}-${c.setCode}-${c.number}`} card={c} locale={locale} />
+              {recipe.minor.map((s) => (
+                <SlotRow key={`minor-${s.category}-${s.cardName}`} slot={s} locale={locale} emphasis="rate" />
               ))}
             </div>
           </Card>
-        );
-      })}
+        </details>
+      )}
     </div>
   );
 }
@@ -107,9 +194,9 @@ function RecipeSection({ recipe, locale }: { recipe: ArchetypeRecipe; locale: st
 // ── 핵심 카드 그리드 (UI-1a — 벤치마크 "Core Cards: 최빈 장수 + 채용률%" 패턴) ──
 
 function CoreCardsSection({ recipe, locale }: { recipe: ArchetypeRecipe; locale: string }) {
-  const all = [...recipe.pokemon, ...recipe.trainer];
+  const all = [...recipe.core.pokemon, ...recipe.core.trainer, ...recipe.flex.pokemon];
   const picks = all
-    .filter((c) => (c.isHero || c.isCore) && c.cardImage)
+    .filter((s) => (s.isHero || s.tier === "core") && s.cardImage)
     .sort((a, b) => (a.isHero === b.isHero ? b.adoptionRate - a.adoptionRate : a.isHero ? -1 : 1))
     .slice(0, 8);
   if (picks.length === 0) return null;
@@ -117,15 +204,15 @@ function CoreCardsSection({ recipe, locale }: { recipe: ArchetypeRecipe; locale:
     <section>
       <h2 className="text-toss-title font-bold text-toss-text-primary mb-4">핵심 카드</h2>
       <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-3">
-        {picks.map((c) => (
+        {picks.map((s) => (
           <Link
-            key={`${c.cardName}-${c.setCode}-${c.number}`}
-            href={c.regionCardId ? `/${locale}/cards/${c.regionCardId}` : "#"}
+            key={`${s.category}-${s.cardName}`}
+            href={s.regionCardId ? `/${locale}/cards/${s.regionCardId}` : "#"}
             className="block hover:opacity-90 transition-opacity"
           >
-            <CardThumb src={c.cardImage} alt={c.cardName} count={Math.round(c.avgCount)} />
+            <CardThumb src={s.cardImage} alt={s.cardName} count={Math.round(s.count)} />
             <p className="mt-1 text-toss-micro text-toss-text-tertiary text-center truncate">
-              {c.adoptionRate}% 채용
+              {s.adoptionRate}% 채용
             </p>
           </Link>
         ))}
@@ -343,11 +430,11 @@ export function DeckDetailView({
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-toss-title font-bold text-toss-text-primary">표준 레시피</h2>
-            <span className="text-toss-caption text-toss-text-tertiary">평균 채용 · 채용률</span>
+            <span className="text-toss-caption text-toss-text-tertiary">플레이 카드 단위 · 인쇄판 통합</span>
           </div>
           <RecipeSection recipe={recipe} locale={locale} />
           <p className="text-toss-micro text-toss-text-quaternary mt-2">
-            입상 덱리스트 집계 기준 평균 레시피입니다. 카드별 시세는 준비 중.
+            최근 14일 입상 덱리스트 집계 · 성능이 같은 인쇄판은 한 슬롯으로 통합(채용률은 덱리스트 기준 정확 집계). 코어=거의 고정, 플렉스=유저마다 갈리는 선택. 💰=인쇄판별 장당 시세(저가판~고가판) · 버전 선택은 카드 상세에서.
           </p>
         </section>
 

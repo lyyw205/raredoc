@@ -2,6 +2,7 @@ import type { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { CARDS } from "@/lib/cardgame/mock";
 import { REAL_TO_MOCK } from "@/lib/cardgame/mockToReal";
+import { toKrw } from "@/lib/trades/shared";
 
 /**
  * Phase 5 — 카드게임 메타 서비스 (DB 기반).
@@ -354,6 +355,123 @@ export async function getRecommendedDecks(n = 4): Promise<{
   return { decks, cards };
 }
 
+export type ReprCard = { name: string; image: string | null; regionCardId: string | null };
+export type RecommendedDeck = ArchetypeSummary & {
+  /** 배너 배경용 대표(hero) 카드 대형 일러스트 (JP). 미해석 시 null. */
+  heroImage: string | null;
+  /** 대표 카드 (hero 우선 → 코어 → 사용량). 이미지·한글명·상세링크 id. */
+  cards: ReprCard[];
+};
+
+/** 아키타입 id[] → 대표 카드 N장 + 배경 히어로 이미지 (추천 메타·최근 1위 덱 배너 공용).
+ *  대표 카드 우선순위: hero(iconKeys 매칭) → 포켓몬>트레이너>에너지 → core → 사용량,
+ *  재판(같은 cardName)은 1장으로 합쳐 서로 다른 N장 노출. 이미지·링크=JP 일본판, 표시명=KR 한국판 우선.
+ *  heroImage = 첫 해석 카드의 대형 일러스트(JP). iconKeysById 는 hero 판정용(호출부가 보유한 값 재사용). */
+async function buildArchetypeReprCards(
+  ids: string[],
+  iconKeysById: Map<string, string[]>,
+  cardsPerDeck: number,
+): Promise<Map<string, { cards: ReprCard[]; heroImage: string | null }>> {
+  const uniqueIds = [...new Set(ids)];
+  if (uniqueIds.length === 0) return new Map();
+
+  // INTL 레시피 일괄 조회 (region 필터: 본체=INTL 의미 고정)
+  const recipeRows = await prisma.deckRecipeCard.findMany({
+    where: { archetypeId: { in: uniqueIds }, region: "INTL" },
+  });
+  const byArch = new Map<string, typeof recipeRows>();
+  for (const r of recipeRows) {
+    const arr = byArch.get(r.archetypeId) ?? [];
+    arr.push(r);
+    byArch.set(r.archetypeId, arr);
+  }
+
+  const CAT_ORDER: Record<string, number> = { pokemon: 0, trainer: 1, energy: 2 };
+  const topByArch = new Map<string, typeof recipeRows>();
+  for (const id of uniqueIds) {
+    const icons = (iconKeysById.get(id) ?? []).map((k) => k.toLowerCase());
+    const isHero = (n: string) => {
+      const x = n.toLowerCase();
+      return icons.some((ic) => x.includes(ic));
+    };
+    const sorted = [...(byArch.get(id) ?? [])].sort((a, b) => {
+      const ah = isHero(a.cardName), bh = isHero(b.cardName);
+      if (ah !== bh) return ah ? -1 : 1;
+      const ca = CAT_ORDER[a.category] ?? 9, cb = CAT_ORDER[b.category] ?? 9;
+      if (ca !== cb) return ca - cb;
+      if (a.isCore !== b.isCore) return a.isCore ? -1 : 1;
+      return b.adoptionRate * b.avgCount - a.adoptionRate * a.avgCount || b.adoptionRate - a.adoptionRate;
+    });
+    const seen = new Set<string>();
+    const distinct = sorted.filter((r) => {
+      const k = normalizeRecipeCardName(r.cardName); // 레시피와 동일 통합 키(인쇄판/재판 변형 흡수)
+      if (seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    });
+    topByArch.set(id, distinct.slice(0, cardsPerDeck));
+  }
+
+  const allCardIds = [...topByArch.values()].flat().map((r) => r.cardId).filter((v): v is string => !!v);
+  // regionCard 1회 조회 → 같은 행 셋에서 JP우선(이미지·링크)·KR우선(이름) 두 픽을 파생 (DB 라운드트립 1회)
+  const byLc = await fetchLocaleRowsByCard(allCardIds);
+  const imageMap = new Map<string, ResolvedImage>(); // JP 일러스트·상세 링크
+  const nameMap = new Map<string, ResolvedImage>(); // KR 우선 이름 (기본 우선순위)
+  for (const [lcId, arr] of byLc) {
+    imageMap.set(lcId, pickResolvedImage(arr, REGION_PRIORITY_JP));
+    nameMap.set(lcId, pickResolvedImage(arr, REGION_PRIORITY));
+  }
+
+  const out = new Map<string, { cards: ReprCard[]; heroImage: string | null }>();
+  for (const id of uniqueIds) {
+    const rows = topByArch.get(id) ?? [];
+    const cards = rows.map((r) => {
+      const img = r.cardId ? imageMap.get(r.cardId) : undefined;
+      const nm = r.cardId ? nameMap.get(r.cardId) : undefined;
+      return {
+        name: nm?.name ?? r.cardName, // KR 인쇄판명 우선, 폴백 레시피 영문명
+        image: img?.image ?? null, // JP 일러스트
+        regionCardId: img?.regionCardId ?? null, // JP 카드 상세 링크
+      };
+    });
+    // 배경 히어로 = 첫 해석된 카드의 대형 이미지(JP)
+    let heroImage: string | null = null;
+    for (const r of rows) {
+      const img = r.cardId ? imageMap.get(r.cardId) : undefined;
+      if (img?.imageLarge) {
+        heroImage = img.imageLarge;
+        break;
+      }
+    }
+    out.set(id, { cards, heroImage });
+  }
+  return out;
+}
+
+/** 추천 메타 탭 — 티어순 상위 덱 + 각 덱의 대표 카드 N장(레시피 hero-first) + 배경 히어로 이미지. */
+export async function getRecommendedDecksWithCards(
+  deckCount = 12,
+  cardsPerDeck = 8,
+): Promise<RecommendedDeck[]> {
+  const rows = await prisma.deckArchetype.findMany({ where: { sampleSize: { gt: 0 } } });
+  const decks = rows
+    .map(toSummary)
+    .sort((a, b) => {
+      const t = (TIER_ORDER[a.tier] ?? 9) - (TIER_ORDER[b.tier] ?? 9);
+      return t !== 0 ? t : b.usageRate - a.usageRate;
+    })
+    .slice(0, deckCount);
+  if (decks.length === 0) return [];
+
+  const iconKeysById = new Map(decks.map((d) => [d.id, d.iconKeys]));
+  const enrich = await buildArchetypeReprCards(decks.map((d) => d.id), iconKeysById, cardsPerDeck);
+
+  return decks.map((d) => {
+    const e = enrich.get(d.id);
+    return { ...d, heroImage: e?.heroImage ?? null, cards: e?.cards ?? [] };
+  });
+}
+
 /** 메타 페이지 사용률 추이 차트용. 실데이터(sampleSize>0)만. */
 export async function getArchetypeTrends(): Promise<{
   weeks: string[];
@@ -424,114 +542,398 @@ export async function getArchetypeMatchups(deckId: string): Promise<ArchetypeMat
     .sort((a, b) => b.winRate - a.winRate);
 }
 
-export type RecipeCard = {
-  cardName: string;
+export type RecipeCategory = "pokemon" | "trainer" | "energy";
+
+/** 코어/플렉스 분류 (통합 채용률 기준). core=거의 모두 채용·고정, flex=갈리는 선택, minor=노이즈(접기). */
+export type RecipeSlotTier = "core" | "flex" | "minor";
+
+/** 한 플레이 카드의 인쇄판(버전) — 버전 목록·시세 힌트용. */
+export type RecipePrinting = {
+  /** 카드 상세(/cards/[id]) 링크용 locale id. */
+  regionCardId: string | null;
   setCode: string | null;
   number: string | null;
-  avgCount: number;
+  /** 이 인쇄판 단독 채용률(%). */
   adoptionRate: number;
-  isCore: boolean;
-  /** 채용률 30~70% = 테크 카드(옅게 표시). */
-  isTech: boolean;
-  /** 덱 핵심 카드 (archetype.iconKeys 에 해당하는 대표 포켓몬). */
+};
+
+/** 통합 레시피 슬롯 = 한 플레이 카드(성능 같은 인쇄판·재판 통합 — deck-recipe-variants-plan §3). */
+export type RecipeSlot = {
+  cardName: string;
+  category: RecipeCategory;
+  /** 통합 장수 — 채용 리스트 기준 전체 인쇄판 매수 합산 평균(1자리 반올림). 폴백 경로는 최다 채용 인쇄판 평균. */
+  count: number;
+  /** 통합 채용률(인쇄판 합산 근사, %). */
+  adoptionRate: number;
+  /** archetype.iconKeys 매칭 핵심 포켓몬. */
   isHero: boolean;
-  /** 대표 인쇄판 썸네일 (KR>JP>EN locale 우선, 미연결 시 null) — UI-1a. */
+  tier: RecipeSlotTier;
+  /** 대표(최다 채용) 인쇄판 썸네일. */
   cardImage: string | null;
-  /** 카드 상세(/cards/[id]) 링크용 대표 locale id. */
+  /** 대표 인쇄판 카드 상세 링크. */
   regionCardId: string | null;
+  /** 인쇄판 수(≥2면 "N버전" 배지). */
+  printingCount: number;
+  /** 인쇄판 목록(채용률 내림차순). */
+  printings: RecipePrinting[];
+  /** 인쇄판 통합 단가(KRW) 범위 — 💰 시세 힌트. 저가판~고가판. 시세 없으면 null. */
+  priceMin: number | null;
+  priceMax: number | null;
 };
 
 /** 지역 표시 우선순위 (KR>JP>EN) — 카드 카탈로그 dedupe·이미지 해석 공용 단일출처. */
 const REGION_PRIORITY: Record<string, number> = { KR: 0, JP: 1, EN: 2 };
 
-/** cardId[] → 대표 locale 이미지/id (KR>JP>EN 우선) — 레시피·리스트 뷰어 공용 (UI-1a). */
-async function resolveCardImages(
-  ids: string[],
-): Promise<Map<string, { image: string | null; regionCardId: string }>> {
+/** JP 우선 (JP>KR>EN) — 추천 메타 대표 카드 등 일본판 일러스트를 우선 노출할 때. */
+const REGION_PRIORITY_JP: Record<string, number> = { JP: 0, KR: 1, EN: 2 };
+
+type ResolvedImage = { image: string | null; imageLarge: string | null; regionCardId: string; name: string };
+type LocaleRow = { id: string; cardId: string; region: string; name: string; imageSmall: string | null; imageLarge: string | null };
+
+/** cardId[] → cardId별 locale 행 묶음 (regionCard 1회 조회). 같은 id 셋을 여러 우선순위로 풀 때 DB 라운드트립 1회로 공유. */
+async function fetchLocaleRowsByCard(ids: string[]): Promise<Map<string, LocaleRow[]>> {
+  const byLc = new Map<string, LocaleRow[]>();
   const unique = [...new Set(ids.filter(Boolean))];
-  if (unique.length === 0) return new Map();
+  if (unique.length === 0) return byLc;
   const locales = await prisma.regionCard.findMany({
     where: { cardId: { in: unique } },
-    select: { id: true, cardId: true, region: true, imageSmall: true, imageLarge: true },
+    select: { id: true, cardId: true, region: true, name: true, imageSmall: true, imageLarge: true },
   });
-  const byLc = new Map<string, typeof locales>();
   for (const l of locales) {
     const arr = byLc.get(l.cardId) ?? [];
     arr.push(l);
     byLc.set(l.cardId, arr);
   }
-  const map = new Map<string, { image: string | null; regionCardId: string }>();
-  for (const [lcId, arr] of byLc) {
-    // 이미지 보유 우선 → 같은 조건이면 KR>JP>EN
-    const best = [...arr].sort((a, b) => {
-      const ai = a.imageSmall ?? a.imageLarge ? 0 : 1;
-      const bi = b.imageSmall ?? b.imageLarge ? 0 : 1;
-      return ai - bi || (REGION_PRIORITY[a.region] ?? 9) - (REGION_PRIORITY[b.region] ?? 9);
-    })[0];
-    map.set(lcId, { image: best.imageSmall ?? best.imageLarge ?? null, regionCardId: best.id });
-  }
+  return byLc;
+}
+
+/** 한 cardId 의 locale 행들 중 대표 1장 선택 — 이미지 보유 우선 → 같은 조건이면 regionPriority 순. */
+function pickResolvedImage(arr: LocaleRow[], regionPriority: Record<string, number>): ResolvedImage {
+  const best = [...arr].sort((a, b) => {
+    // 이미지 보유 우선(0) → 미보유(1). (?? 가 ?: 보다 우선 — 괄호로 명시)
+    const ai = (a.imageSmall ?? a.imageLarge) ? 0 : 1;
+    const bi = (b.imageSmall ?? b.imageLarge) ? 0 : 1;
+    return ai - bi || (regionPriority[a.region] ?? 9) - (regionPriority[b.region] ?? 9);
+  })[0];
+  return {
+    image: best.imageSmall ?? best.imageLarge ?? null,
+    imageLarge: best.imageLarge ?? best.imageSmall ?? null,
+    regionCardId: best.id,
+    name: best.name,
+  };
+}
+
+/** cardId[] → 대표 locale 이미지/대형이미지/id/이름 — 레시피·리스트 뷰어 공용 (UI-1a).
+ *  regionPriority 로 지역 우선순위 지정(기본 KR>JP>EN). imageLarge=대형(배경 히어로용), name=선택 인쇄판 고유명. 소비처 무시 가능(하위호환). */
+async function resolveCardImages(
+  ids: string[],
+  regionPriority: Record<string, number> = REGION_PRIORITY,
+): Promise<Map<string, ResolvedImage>> {
+  const byLc = await fetchLocaleRowsByCard(ids);
+  const map = new Map<string, ResolvedImage>();
+  for (const [lcId, arr] of byLc) map.set(lcId, pickResolvedImage(arr, regionPriority));
   return map;
 }
 
 export type ArchetypeRecipe = {
-  pokemon: RecipeCard[];
-  trainer: RecipeCard[];
-  energy: RecipeCard[];
+  /** 코어 스켈레톤(거의 모든 덱 채용·고정) — 카테고리별. */
+  core: Record<RecipeCategory, RecipeSlot[]>;
+  /** 플렉스 슬롯(유저마다 갈리는 선택) — 카테고리별. */
+  flex: Record<RecipeCategory, RecipeSlot[]>;
+  /** 마이너(<12%) 접힌 슬롯 — 노이즈. */
+  minor: RecipeSlot[];
 };
 
-/** #16/#17 표준 레시피: DeckRecipeCard 를 category별 그룹 + 코어/테크 구분("핵심 카드 먼저" 정렬). */
-export async function getArchetypeRecipe(deckId: string): Promise<ArchetypeRecipe> {
-  const [arch, rows] = await Promise.all([
-    prisma.deckArchetype.findUnique({ where: { id: deckId }, select: { iconKeys: true } }),
-    // region 필터: INTL 의미 고정 — P2 에서 JP/KR 레시피 행이 생겨도 본체 화면 혼합 방지 (multisource P0)
-    prisma.deckRecipeCard.findMany({ where: { archetypeId: deckId, region: "INTL" } }),
+/** 코어/플렉스 분류 임계값(통합 채용률 %) — 튜닝 단일출처(deck-recipe-variants-plan §6 P1). */
+const CORE_MIN_ADOPTION = 80; // ≥80% = 코어(고정)
+const FLEX_MIN_ADOPTION = 12; // 12~80% = 플렉스 슬롯, 미만 = 마이너(접기)
+
+/** 레시피 통합 키 — 덱리스트 소스명 기준(인쇄판/재판 무관, gameCardId 미병합 버그 우회).
+ *  발음기호 제거(Poké↔Poke) + 소스 주석 태그 제거(" - Basic"/" - ACESPEC")로 명칭 변형 흡수.
+ *  예: "Fire Energy"≡"Fire Energy - Basic", "Poké Pad"≡"Poke Pad", "Unfair Stamp"≡"Unfair Stamp - ACESPEC". */
+function normalizeRecipeCardName(name: string): string {
+  return name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // 발음기호(악센트) 제거
+    .toLowerCase()
+    .replace(/\s*-\s*(basic|ace ?spec)$/i, "") // 덱리스트 소스 주석 태그 제거
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/** 표시용 카드명 — 소스 주석 태그(" - Basic"/" - ACESPEC")만 제거(악센트는 보존: "Poké Pad"). */
+function displayRecipeCardName(name: string): string {
+  return name.replace(/\s*-\s*(basic|ace ?spec)$/i, "").trim();
+}
+
+/** category 문자열 런타임 검증(DB는 자유 문자열) — 미지값은 pokemon 폴백(빈 버킷 인덱싱 크래시 방지). */
+function toRecipeCategory(v: string | null | undefined): RecipeCategory {
+  return v === "trainer" || v === "energy" ? v : "pokemon";
+}
+
+// 슬롯 💰 시세 힌트용 — deck-pricing 과 동일 소스/우선순위/환산(JP 매장가 우선).
+const RECIPE_PRICE_SOURCES = ["yuyu_tei_sell", "tcgplayer", "cardmarket"] as const;
+const RECIPE_SOURCE_PRIORITY: Record<string, number> = { yuyu_tei_sell: 0, tcgplayer: 1, cardmarket: 2 };
+
+/** logicalCardId[] → 카드별 대표 단가(KRW). (locale,source) 최신 1행 → 카드별 최우선 소스가.
+ *  condition null·marketPrice 폴백 체인 — deck-pricing.computeDeckCost 와 동일 규약. */
+async function fetchCardUnitKrw(cardIds: string[]): Promise<Map<string, number>> {
+  const out = new Map<string, number>();
+  const ids = [...new Set(cardIds.filter(Boolean))];
+  if (ids.length === 0) return out;
+  const sources = await prisma.priceSource.findMany({
+    where: { code: { in: [...RECIPE_PRICE_SOURCES] } },
+    select: { id: true, code: true },
+  });
+  if (sources.length === 0) return out;
+  const sourceCode = new Map(sources.map((s) => [s.id, s.code]));
+  const rows = await prisma.price.findMany({
+    where: { sourceId: { in: sources.map((s) => s.id) }, condition: null, regionCard: { cardId: { in: ids } } },
+    select: {
+      sourceId: true,
+      currency: true,
+      marketPrice: true,
+      holofoil: true,
+      normal: true,
+      reverseHolo: true,
+      firstEdition: true,
+      regionCardId: true,
+      recordedAt: true,
+      regionCard: { select: { cardId: true } },
+    },
+    orderBy: { recordedAt: "desc" },
+  });
+  const seen = new Set<string>(); // (locale,source) 최신 1행
+  const best = new Map<string, { krw: number; src: string }>();
+  for (const p of rows) {
+    const key = `${p.regionCardId}|${p.sourceId}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const raw = p.marketPrice ?? p.holofoil ?? p.normal ?? p.reverseHolo ?? p.firstEdition;
+    if (raw == null || raw <= 0) continue;
+    const code = sourceCode.get(p.sourceId!) ?? "?";
+    const cardId = p.regionCard.cardId;
+    const cur = best.get(cardId);
+    if (!cur || (RECIPE_SOURCE_PRIORITY[code] ?? 9) < (RECIPE_SOURCE_PRIORITY[cur.src] ?? 9)) {
+      best.set(cardId, { krw: Math.round(toKrw(raw, p.currency)), src: code });
+    }
+  }
+  for (const [cardId, v] of best) out.set(cardId, v.krw);
+  return out;
+}
+
+// aggregate-meta INTL 윈도우 길이와 동일(14일). 단, 분모(deckCount)는 의도적으로 다름 — getArchetypeRecipe 참조.
+const INTL_RECIPE_WINDOW_DAYS = 14;
+
+/** 인쇄판 집계(정확/폴백 공용 중간형). */
+type PrintingAgg = { cardId: string | null; setCode: string | null; number: string | null; adoptionRate: number };
+/** 플레이 카드 집계(통합) 중간형 — 두 경로가 공통 산출. */
+type CardAgg = {
+  name: string; // 대표(최다채용) 인쇄판 원문명
+  category: RecipeCategory;
+  adoptionRate: number; // 통합 채용률(%)
+  count: number; // 채용 리스트 기준 평균 매수
+  printings: PrintingAgg[]; // 채용률 내림차순
+};
+
+/** CardAgg[] → 이미지·시세 해석 + 코어/플렉스/마이너 분류 → ArchetypeRecipe. 정확/폴백 경로 공용 마무리. */
+async function finalizeRecipe(
+  cardAggs: CardAgg[],
+  isHeroCard: (name: string) => boolean,
+): Promise<ArchetypeRecipe> {
+  const allCardIds = cardAggs.flatMap((c) => c.printings.map((p) => p.cardId)).filter((v): v is string => !!v);
+  const [imageMap, unitKrwByCard] = await Promise.all([
+    resolveCardImages(allCardIds),
+    fetchCardUnitKrw(allCardIds),
   ]);
-  // 핵심 카드 매칭: iconKeys(예 "dragapult") 가 cardName(소문자) 에 포함되면 그 덱의 대표 카드.
-  // icon 직접 매칭만 (라인 카드는 제외) — icon slug 가 cardName 에 부분 포함되면 hero.
+
+  const slots: RecipeSlot[] = cardAggs.map((c) => {
+    const prints = c.printings; // 채용률 내림차순(호출부 보장)
+    // 대표 썸네일/링크 = 이미지 보유한 최다 채용 인쇄판
+    let cardImage: string | null = null;
+    let regionCardId: string | null = null;
+    for (const p of prints) {
+      const img = p.cardId ? imageMap.get(p.cardId) : undefined;
+      if (!regionCardId && img) regionCardId = img.regionCardId;
+      if (img?.image) {
+        cardImage = img.image;
+        regionCardId = img.regionCardId;
+        break;
+      }
+    }
+    const printings: RecipePrinting[] = prints.map((p) => ({
+      regionCardId: p.cardId ? imageMap.get(p.cardId)?.regionCardId ?? null : null,
+      setCode: p.setCode,
+      number: p.number,
+      adoptionRate: p.adoptionRate,
+    }));
+    // 💰 단가 범위 = 인쇄판 단가들의 저가~고가
+    const krws = prints.map((p) => (p.cardId ? unitKrwByCard.get(p.cardId) : undefined)).filter((v): v is number => v != null);
+    let priceMin = krws.length ? Math.min(...krws) : null;
+    let priceMax = krws.length ? Math.max(...krws) : null;
+    // 기본 에너지 — 장당 고정 추정(특수 일러 고가판이 슬롯 시세를 왜곡하지 않게, deck-pricing 동일 가드).
+    const isBasicEnergy =
+      c.category === "energy" &&
+      /^(basic )?(grass|fire|water|lightning|psychic|fighting|darkness|metal) energy$/.test(normalizeRecipeCardName(c.name));
+    if (isBasicEnergy || (priceMin == null && c.category === "energy")) {
+      priceMin = 200;
+      priceMax = 200;
+    }
+    const tier: RecipeSlotTier =
+      c.adoptionRate >= CORE_MIN_ADOPTION ? "core" : c.adoptionRate >= FLEX_MIN_ADOPTION ? "flex" : "minor";
+    return {
+      cardName: displayRecipeCardName(c.name),
+      category: c.category,
+      count: c.count,
+      adoptionRate: c.adoptionRate,
+      isHero: isHeroCard(c.name),
+      tier,
+      cardImage,
+      regionCardId,
+      printingCount: prints.length,
+      printings,
+      priceMin,
+      priceMax,
+    };
+  });
+
+  // 카테고리 내 정렬: 핵심 먼저 → 통합 채용률 → 장수
+  const sortSlots = (a: RecipeSlot, b: RecipeSlot) =>
+    (a.isHero === b.isHero ? 0 : a.isHero ? -1 : 1) || b.adoptionRate - a.adoptionRate || b.count - a.count;
+  const emptyByCat = (): Record<RecipeCategory, RecipeSlot[]> => ({ pokemon: [], trainer: [], energy: [] });
+  const core = emptyByCat();
+  const flex = emptyByCat();
+  const minor: RecipeSlot[] = [];
+  for (const s of slots) {
+    if (s.tier === "core") core[s.category].push(s);
+    else if (s.tier === "flex") flex[s.category].push(s);
+    else minor.push(s);
+  }
+  (["pokemon", "trainer", "energy"] as RecipeCategory[]).forEach((cat) => {
+    core[cat].sort(sortSlots);
+    flex[cat].sort(sortSlots);
+  });
+  minor.sort(sortSlots);
+  return { core, flex, minor };
+}
+
+/** 표준 레시피: "플레이 카드" 단위 통합(인쇄판/재판 합침) + 코어/플렉스/마이너.
+ *  통합 채용률은 윈도우(14일·INTL) 원본 덱리스트에서 정확 재집계(같은 리스트의 여러 인쇄판은 1회만 카운트).
+ *  분모 deckCount = 윈도우 내 deckKey standings 중 **덱리스트 보유분만**(null 제외). ★aggregate-meta 는 분모에 null 포함(lists.length)
+ *  → 채용률이 의도적으로 다름(관측 가능한 덱만으로 정직하게 산출). 윈도우/덱리스트 비면 DeckRecipeCard 합산 근사로 폴백.
+ *  (set,number)→cardId 는 DeckRecipeCard resolver 재사용. */
+export async function getArchetypeRecipe(deckId: string): Promise<ArchetypeRecipe> {
+  const since = new Date(Date.now() - INTL_RECIPE_WINDOW_DAYS * 86_400_000);
+  const [arch, rows, standings] = await Promise.all([
+    prisma.deckArchetype.findUnique({ where: { id: deckId }, select: { iconKeys: true } }),
+    // (setCode|number)→cardId 매핑 + 폴백 소스. region=INTL 의미 고정 (multisource P0)
+    prisma.deckRecipeCard.findMany({ where: { archetypeId: deckId, region: "INTL" } }),
+    // 정확 재집계 소스 — aggregate-meta 와 동일 윈도우/필터로 fetch(분모는 후단에서 덱리스트 보유분만으로 축소)
+    prisma.tournamentStanding.findMany({
+      where: { deckKey: deckId, tournament: { date: { gte: since }, source: { not: null }, metaRegion: "INTL" } },
+      select: { decklist: true },
+    }),
+  ]);
   const iconKeys = (arch?.iconKeys ?? []).map((k) => k.toLowerCase());
   const isHeroCard = (name: string): boolean => {
     const n = name.toLowerCase();
     return iconKeys.some((ic) => n.includes(ic));
   };
 
-  type RankedRow = (typeof rows)[number] & { _hero: boolean };
-  const ranked: RankedRow[] = rows.map((r) => ({ ...r, _hero: isHeroCard(r.cardName) }));
+  // (setCode|number) → cardId : DeckRecipeCard resolver 결과 재사용(이미지/시세 링크 해석)
+  const printKey = (set: string | null, num: string | null) => `${set ?? ""}|${num ?? ""}`;
+  const cardIdByPrint = new Map<string, string>();
+  for (const r of rows) if (r.cardId) cardIdByPrint.set(printKey(r.setCode, r.number), r.cardId);
 
-  // 대표 인쇄판 썸네일 (UI-1a) — cardId 연결 행만
-  const imageMap = await resolveCardImages(ranked.map((r) => r.cardId).filter((v): v is string => !!v));
+  // 분모 = 관측 가능한 덱(덱리스트 보유 standing)만. 덱리스트 없는 standing 은 카드 구성을 알 수 없어 제외
+  // (그래야 "거의 모든 덱이 채용"이 ~100% 로 정직하게 나옴 — 미수집 standing 으로 일률 희석 방지).
+  const decklisted = standings.filter((s) => s.decklist != null);
+  const deckCount = decklisted.length;
+  let cardAggs: CardAgg[] = [];
 
-  // 정렬 우선순위:
-  //   1) 핵심 카드(iconKeys 매칭) 먼저
-  //   2) isCore(채용률≥90)
-  //   3) 사용량(채용률 × 평균 장수), 동률은 채용률
-  ranked.sort((a, b) => {
-    if (a._hero !== b._hero) return a._hero ? -1 : 1;
-    if (a.isCore !== b.isCore) return a.isCore ? -1 : 1;
-    const ua = a.adoptionRate * a.avgCount;
-    const ub = b.adoptionRate * b.avgCount;
-    return ub - ua || b.adoptionRate - a.adoptionRate;
-  });
+  // ── 정확 재집계: 윈도우 원본 덱리스트 ──
+  if (deckCount > 0) {
+    type PStat = { name: string; setCode: string | null; number: string | null; decks: number };
+    type CStat = { name: string; category: RecipeCategory; decks: number; copySum: number; prints: Map<string, PStat> };
+    const byCard = new Map<string, CStat>();
+    const cats: [keyof RawDecklist, RecipeCategory][] = [
+      ["pokemon", "pokemon"],
+      ["trainer", "trainer"],
+      ["energy", "energy"],
+    ];
+    for (const s of decklisted) {
+      const dl = s.decklist as RawDecklist | null;
+      if (!dl) continue;
+      const seenCard = new Set<string>();
+      const seenPrint = new Set<string>();
+      for (const [field, category] of cats) {
+        for (const e of dl[field] ?? []) {
+          const name = e.name ?? "";
+          if (!name) continue;
+          const cardKey = `${category}|${normalizeRecipeCardName(name)}`;
+          const pKey = `${cardKey}|${printKey(e.set ?? null, e.number ?? null)}`;
+          let cs = byCard.get(cardKey);
+          if (!cs) {
+            cs = { name, category, decks: 0, copySum: 0, prints: new Map() };
+            byCard.set(cardKey, cs);
+          }
+          let ps = cs.prints.get(pKey);
+          if (!ps) {
+            ps = { name, setCode: e.set ?? null, number: e.number ?? null, decks: 0 };
+            cs.prints.set(pKey, ps);
+          }
+          cs.copySum += e.count ?? 0;
+          if (!seenPrint.has(pKey)) { ps.decks++; seenPrint.add(pKey); }
+          if (!seenCard.has(cardKey)) { cs.decks++; seenCard.add(cardKey); } // 통합: 리스트당 1회
+        }
+      }
+    }
+    cardAggs = [...byCard.values()].map((cs) => {
+      const prints = [...cs.prints.values()].sort((a, b) => b.decks - a.decks);
+      const top = prints[0];
+      return {
+        name: top.name,
+        category: cs.category,
+        adoptionRate: Math.round((cs.decks / deckCount) * 1000) / 10,
+        count: Math.round((cs.copySum / cs.decks) * 10) / 10, // 채용 리스트 기준 평균 매수
+        printings: prints.map((p) => ({
+          cardId: cardIdByPrint.get(printKey(p.setCode, p.number)) ?? null,
+          setCode: p.setCode,
+          number: p.number,
+          adoptionRate: Math.round((p.decks / deckCount) * 1000) / 10,
+        })),
+      };
+    });
+  }
 
-  const toCard = (r: RankedRow): RecipeCard => {
-    const resolved = r.cardId ? imageMap.get(r.cardId) : undefined;
-    return {
-      cardName: r.cardName,
-      setCode: r.setCode,
-      number: r.number,
-      avgCount: Math.round(r.avgCount * 10) / 10,
-      adoptionRate: Math.round(r.adoptionRate * 10) / 10,
-      isCore: r.isCore,
-      isTech: !r.isCore && r.adoptionRate >= 30 && r.adoptionRate <= 70,
-      isHero: r._hero,
-      cardImage: resolved?.image ?? null,
-      regionCardId: resolved?.regionCardId ?? null,
-    };
-  };
-  return {
-    pokemon: ranked.filter((r) => r.category === "pokemon").map(toCard),
-    trainer: ranked.filter((r) => r.category === "trainer").map(toCard),
-    energy: ranked.filter((r) => r.category === "energy").map(toCard),
-  };
+  // ── 폴백: 윈도우 standings/덱리스트가 비면 DeckRecipeCard 합산 근사 ──
+  if (cardAggs.length === 0) {
+    const groups = new Map<string, typeof rows>();
+    for (const r of rows) {
+      const key = `${toRecipeCategory(r.category)}|${normalizeRecipeCardName(r.cardName)}`;
+      const g = groups.get(key);
+      if (g) g.push(r);
+      else groups.set(key, [r]);
+    }
+    cardAggs = [...groups.values()].map((g) => {
+      const ps = [...g].sort((a, b) => b.adoptionRate - a.adoptionRate);
+      const top = ps[0];
+      return {
+        name: top.cardName,
+        category: toRecipeCategory(top.category),
+        adoptionRate: Math.round(Math.min(100, ps.reduce((s, r) => s + r.adoptionRate, 0)) * 10) / 10,
+        count: Math.round(top.avgCount * 10) / 10,
+        printings: ps.map((r) => ({
+          cardId: r.cardId,
+          setCode: r.setCode,
+          number: r.number,
+          adoptionRate: Math.round(r.adoptionRate * 10) / 10,
+        })),
+      };
+    });
+  }
+
+  return finalizeRecipe(cardAggs, isHeroCard);
 }
 
 // ── 카드 채용률 (카드 탭 정렬·뱃지용) ────────────────────────────────────────
@@ -1113,8 +1515,65 @@ export type StandingDecklist = {
   unresolved: number;
 };
 
-type RawDeckEntry = { name?: string; count?: number; cardId?: string | null };
+type RawDeckEntry = {
+  name?: string;
+  count?: number;
+  cardId?: string | null;
+  /** EN ptcgoCode 세트 코드 (Set.code) — cardId 미백필 데클리스트의 이미지 폴백 키. */
+  set?: string | null;
+  number?: string | null;
+};
 type RawDecklist = { pokemon?: RawDeckEntry[]; trainer?: RawDeckEntry[]; energy?: RawDeckEntry[] };
+
+/** (EN 세트코드+번호) → 대표 이미지/regionCardId. cardId 미백필 데클리스트(최근 limitless-play 동기화분)의
+ *  이미지 폴백 — resolveCardImages(cardId) 가 비는 카드만 보강. 미수집 EN 세트(MEG/ASC/CRI…)는 그대로 미해석. */
+async function resolveImagesBySetNumber(
+  pairs: { set: string; number: string }[],
+): Promise<Map<string, { image: string | null; regionCardId: string }>> {
+  const uniq = new Map<string, { set: string; number: string }>();
+  for (const p of pairs) if (p.set && p.number) uniq.set(`${p.set}|${p.number}`, p);
+  if (uniq.size === 0) return new Map();
+
+  const setCodes = [...new Set([...uniq.values()].map((p) => p.set))];
+  const numbers = [...new Set([...uniq.values()].map((p) => p.number))];
+  const sets = await prisma.set.findMany({
+    where: { region: "EN", code: { in: setCodes } },
+    select: { id: true, code: true },
+  });
+  if (sets.length === 0) return new Map();
+  const codeBySetId = new Map(sets.map((s) => [s.id, s.code as string]));
+
+  const cards = await prisma.regionCard.findMany({
+    where: { region: "EN", setId: { in: sets.map((s) => s.id) }, number: { in: numbers } },
+    select: { id: true, setId: true, number: true, imageSmall: true, imageLarge: true },
+  });
+  const map = new Map<string, { image: string | null; regionCardId: string }>();
+  for (const c of cards) {
+    const code = codeBySetId.get(c.setId);
+    if (!code) continue;
+    const key = `${code}|${c.number}`;
+    const image = c.imageSmall ?? c.imageLarge ?? null;
+    const existing = map.get(key);
+    // 이미지 보유 우선 (평행팩·서브셋 중복 시)
+    if (!existing || (existing.image == null && image != null)) {
+      map.set(key, { image, regionCardId: c.id });
+    }
+  }
+  return map;
+}
+
+/** 데클리스트 엔트리 1건의 대표 이미지 — cardId 우선, 비면 (세트코드+번호) 폴백. 이미지 보유분 우선. */
+function pickCardImage(
+  c: RawDeckEntry,
+  byCardId: Map<string, { image: string | null; regionCardId: string }>,
+  bySetNumber: Map<string, { image: string | null; regionCardId: string }>,
+): { image: string | null; regionCardId: string } | undefined {
+  const byId = c.cardId ? byCardId.get(c.cardId) : undefined;
+  const bySn = c.set && c.number ? bySetNumber.get(`${c.set}|${c.number}`) : undefined;
+  if (byId?.image) return byId;
+  if (bySn?.image) return bySn;
+  return byId ?? bySn;
+}
 
 /** 리스트 뷰어 — standing 1건의 덱리스트를 카드 이미지로 해석 (docs/cardgame/cardgame-ui-plan.md §4-5). */
 export async function getStandingDecklist(standingId: string): Promise<StandingDecklist | null> {
@@ -1135,10 +1594,17 @@ export async function getStandingDecklist(standingId: string): Promise<StandingD
   const dl = s.decklist as RawDecklist;
 
   const lcIds: string[] = [];
+  const snPairs: { set: string; number: string }[] = [];
   for (const b of ["pokemon", "trainer", "energy"] as const) {
-    for (const c of dl[b] ?? []) if (c?.cardId) lcIds.push(c.cardId);
+    for (const c of dl[b] ?? []) {
+      if (c?.cardId) lcIds.push(c.cardId);
+      if (c?.set && c?.number) snPairs.push({ set: c.set, number: c.number });
+    }
   }
-  const imageMap = await resolveCardImages(lcIds);
+  const [imageMap, snMap] = await Promise.all([
+    resolveCardImages(lcIds),
+    resolveImagesBySetNumber(snPairs), // cardId 미백필분 이미지 폴백
+  ]);
 
   let totalCards = 0;
   let unresolved = 0;
@@ -1146,7 +1612,7 @@ export async function getStandingDecklist(standingId: string): Promise<StandingD
     (entries ?? []).map((c) => {
       const count = c.count ?? 0;
       totalCards += count;
-      const resolved = c.cardId ? imageMap.get(c.cardId) : undefined;
+      const resolved = pickCardImage(c, imageMap, snMap);
       if (!resolved?.image) unresolved += count;
       return {
         name: c.name ?? "?",
@@ -1185,6 +1651,99 @@ export async function getStandingDecklist(standingId: string): Promise<StandingD
     totalCards,
     unresolved,
   };
+}
+
+export type WinnerDeck = {
+  /** 리스트 뷰어(/lists/[id]) 링크용 standing id. */
+  standingId: string;
+  playerName: string;
+  /** 아키타입 id (덱 상세 링크) — 미분류 입상은 null. */
+  deckKey: string | null;
+  /** 덱 한글명 (deckKey → archetype.nameKo, 폴백 deckName/deckKey). */
+  deckNameKo: string | null;
+  /** 아키타입 영문명 (배너 eyebrow). */
+  nameEn: string | null;
+  /** 공식 덱코드 (있으면 복사 버튼). */
+  deckCode: string | null;
+  /** 배너 배경용 대표(hero) 카드 대형 일러스트 (JP). 미해석/미분류 시 null. */
+  heroImage: string | null;
+  /** 우측 대표 카드 (아키타입 기준, 메타 통계와 동일). 미분류 시 빈 배열. */
+  cards: ReprCard[];
+  /** 덱 구축 견적(저레어, KRW) — null=견적 전. */
+  deckCostBudget: number | null;
+  /** 덱 구축 견적(고레어, KRW). */
+  deckCostPremium: number | null;
+  tournament: {
+    id: string;
+    nameKo: string;
+    date: string;
+    players: number;
+    /** 대회 격 뱃지 (worlds|regional|cl|league|city|online…). */
+    level: string | null;
+    externalUrl: string | null;
+  };
+};
+
+/** 최근 우승(placing=1) 덱리스트 — 정본 대회 최신순 N건, 카드 이미지·아키타입 메타 일괄 해석.
+ *  덱 페이지 "최근 1위 덱" 탭용. 덱리스트 미보유 1위는 제외(JS 필터 — Json null 쿼리 회피 관행). */
+export async function getRecentWinnerDecklists(n = 6): Promise<WinnerDeck[]> {
+  const candidates = await prisma.tournamentStanding.findMany({
+    where: { placing: 1, tournament: { source: { not: null } } },
+    orderBy: { tournament: { date: "desc" } },
+    take: Math.max(n * 4, 24), // 덱리스트 미보유 보정 버퍼
+    select: {
+      id: true,
+      playerName: true,
+      deckKey: true,
+      deckName: true,
+      deckCode: true,
+      decklist: true,
+      tournament: {
+        select: { id: true, nameKo: true, date: true, players: true, level: true, externalUrl: true },
+      },
+    },
+  });
+  const winners = candidates.filter((s) => s.decklist != null).slice(0, n);
+  if (winners.length === 0) return [];
+
+  // 아키타입 메타(한글명·영문명·아이콘·견적) 1쿼리 일괄 조인
+  const deckKeys = [...new Set(winners.map((w) => w.deckKey).filter((v): v is string => !!v))];
+  const archs = deckKeys.length
+    ? await prisma.deckArchetype.findMany({
+        where: { id: { in: deckKeys } },
+        select: { id: true, nameKo: true, nameEn: true, iconKeys: true, deckCostBudget: true, deckCostPremium: true },
+      })
+    : [];
+  const archByKey = new Map(archs.map((a) => [a.id, a]));
+
+  // 대표 카드·배경 히어로 (메타 통계 배너와 동일 레이아웃) — 우승 덱의 아키타입 기준
+  const iconKeysById = new Map(archs.map((a) => [a.id, a.iconKeys]));
+  const enrich = await buildArchetypeReprCards(deckKeys, iconKeysById, 8);
+
+  return winners.map((w) => {
+    const arch = w.deckKey ? archByKey.get(w.deckKey) : undefined;
+    const e = w.deckKey ? enrich.get(w.deckKey) : undefined;
+    return {
+      standingId: w.id,
+      playerName: w.playerName,
+      deckKey: w.deckKey,
+      deckNameKo: arch?.nameKo || arch?.nameEn || w.deckName || w.deckKey,
+      nameEn: arch?.nameEn ?? null,
+      deckCode: w.deckCode,
+      heroImage: e?.heroImage ?? null,
+      cards: e?.cards ?? [],
+      deckCostBudget: arch?.deckCostBudget ?? null,
+      deckCostPremium: arch?.deckCostPremium ?? null,
+      tournament: {
+        id: w.tournament.id,
+        nameKo: w.tournament.nameKo,
+        date: w.tournament.date.toISOString().slice(0, 10),
+        players: w.tournament.players,
+        level: w.tournament.level,
+        externalUrl: w.tournament.externalUrl,
+      },
+    };
+  });
 }
 
 export type StandingRow = {
