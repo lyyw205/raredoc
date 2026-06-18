@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { Card, CardDivider, EmptyState } from "@/components/toss";
+import { Card, EmptyState } from "@/components/toss";
 import { cn } from "@/lib/utils";
 import type { TournamentRow, PlayerRankingRow } from "@/lib/services/cardgame";
 import { platformBadge } from "@/lib/cardgame/platform";
@@ -11,59 +11,50 @@ import { Trophy, Users, ChevronRight } from "lucide-react";
 // ── 대회 카드 (region 노출 안 함) ──────────────────────────────────────────────
 
 function TournamentCard({ t, locale }: { t: TournamentRow; locale: string }) {
+  const b = platformBadge(t.platform);
   return (
     <Link href={`/${locale}/cardgame/tournaments/${t.id}`} className="block">
-      <Card variant="interactive" padding="md" className="h-full">
-        <div className="flex items-start justify-between gap-2 mb-3">
+      <Card variant="interactive" padding="md">
+        <div className="flex items-center gap-4">
+          {/* 좌: 대회명 + 메타 (날짜·참가자·격·포맷·플랫폼) */}
           <div className="flex-1 min-w-0">
             <p className="text-toss-label font-bold text-toss-text-primary truncate">{t.nameKo}</p>
             {t.name && t.name !== t.nameKo && (
               <p className="text-toss-micro text-toss-text-quaternary truncate">{t.name}</p>
             )}
-            <p className="text-toss-micro text-toss-text-tertiary mt-0.5">{t.date}</p>
-          </div>
-          <ChevronRight size={16} className="text-toss-text-quaternary shrink-0 mt-0.5" />
-        </div>
-
-        <CardDivider />
-
-        <div className="flex items-center gap-4 mt-3">
-          <div className="flex items-center gap-1.5">
-            <Users size={13} className="text-toss-text-tertiary" />
-            <span className="text-toss-caption text-toss-text-secondary">{t.players}명</span>
-          </div>
-          {t.level && LEVEL_LABELS[t.level] && (
-            <span className="text-toss-micro px-1.5 py-0.5 rounded bg-toss-bg-muted text-toss-text-tertiary font-medium">
-              {LEVEL_LABELS[t.level]}
-            </span>
-          )}
-          <span className="text-toss-micro text-toss-text-tertiary">{t.format}</span>
-          {(() => {
-            const b = platformBadge(t.platform);
-            return (
+            <div className="flex items-center gap-x-3 gap-y-1 flex-wrap mt-1">
+              <span className="text-toss-micro text-toss-text-tertiary">{t.date}</span>
+              <span className="flex items-center gap-1.5">
+                <Users size={13} className="text-toss-text-tertiary" />
+                <span className="text-toss-caption text-toss-text-secondary">{t.players}명</span>
+              </span>
+              {t.level && LEVEL_LABELS[t.level] && (
+                <span className="text-toss-micro px-1.5 py-0.5 rounded bg-toss-bg-muted text-toss-text-tertiary font-medium">
+                  {LEVEL_LABELS[t.level]}
+                </span>
+              )}
+              <span className="text-toss-micro text-toss-text-tertiary">{t.format}</span>
               <span
                 className={cn(
                   "text-toss-micro px-1.5 py-0.5 rounded font-medium",
-                  b.online
-                    ? "bg-blue-50 text-blue-600"
-                    : "bg-amber-50 text-amber-700"
+                  b.online ? "bg-blue-50 text-blue-600" : "bg-amber-50 text-amber-700"
                 )}
                 title={b.sub ?? undefined}
               >
                 {b.emoji} {b.label}
               </span>
-            );
-          })()}
-        </div>
-
-        {t.winnerArchetypeId && t.winnerNameKo && (
-          <div className="mt-2">
-            <p className="text-toss-micro text-toss-text-tertiary mb-1">우승 덱</p>
-            <span className="inline-flex items-center gap-1 text-toss-caption text-toss-brand font-medium">
-              {t.winnerNameKo}
-            </span>
+            </div>
           </div>
-        )}
+
+          {/* 우: 우승 덱 + chevron */}
+          {t.winnerArchetypeId && t.winnerNameKo && (
+            <div className="hidden text-right shrink-0 sm:block">
+              <p className="text-toss-micro text-toss-text-tertiary mb-0.5">우승 덱</p>
+              <span className="text-toss-caption text-toss-brand font-medium">{t.winnerNameKo}</span>
+            </div>
+          )}
+          <ChevronRight size={16} className="text-toss-text-quaternary shrink-0" />
+        </div>
       </Card>
     </Link>
   );
@@ -161,7 +152,7 @@ export function TournamentsPageView({
           {sorted.length === 0 ? (
             <EmptyState title="대회 데이터가 없습니다" />
           ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="space-y-3">
               {sorted.slice(0, 6).map((t) => (
                 <TournamentCard key={t.id} t={t} locale={locale} />
               ))}
