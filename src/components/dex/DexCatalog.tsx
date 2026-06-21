@@ -6,6 +6,7 @@ import { Search, ImageOff, SlidersHorizontal, Calendar, ChevronDown } from "luci
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { eraLabel, eraParts } from "@/lib/cards/eras";
 import { getCardPrices, type CardPriceRow } from "@/lib/actions/getCardPrices";
+import { PRICE_SOURCE_META, formatPrice } from "@/lib/cards/price-display";
 import { getCardDetail, type RegionCardVariant, type CardInfo } from "@/lib/actions/getCardDetail";
 import { loadSetCards } from "@/lib/actions/loadSetCards";
 import { loadRegionCardsPage } from "@/lib/actions/loadRegionCardsPage";
@@ -61,7 +62,7 @@ export type DexCard = {
   owned: boolean;
   grade?: string;
   certified?: boolean;
-  variants?: DexCardVariant[]; // 임시: 지역 형제(JP/EN/KR 인라인 토글). 매핑 검증 후 제거.
+  variants?: DexCardVariant[]; // 지역 형제(JP/EN/KR) — "3종" 보기(GridCardTile) 전용. 검증 후 제거 예정.
   searchText?: string; // 교차언어 검색 인덱스(대표명+한글오버레이+전 지역 형제명 정규화 결합)
 };
 
@@ -111,6 +112,9 @@ function specialSuffix(set: DexSet): string {
 }
 
 type ViewMode = "all" | "mine";
+// 카드 타일 레이아웃 — single=선택 팩 지역 카드 1장만(기본), triple=JP·EN·KR 한 묶음(검증 보기).
+// triple(번들)은 그룹 매핑 검증용 임시 보기로, 삭제 예정이나 당분간 토글로 유지.
+type CardLayout = "single" | "triple";
 
 // ── 희귀도 메타 ───────────────────────────────────────────────────────────
 const RARITY_LABEL: Record<string, string> = {
@@ -194,29 +198,7 @@ function categoryLabel(card: DexCard, locale: string): string {
 
 type SelectedCard = DexCard & { setName: string; setId: string; setLogoUrl?: string };
 
-// 가격 출처별 표시 메타 — 한글명(name)을 기본, 일본어/원문(native)은 작게 병기
-const PRICE_SOURCE_META: Record<string, { flag: string; name?: string; native?: string; sub: string }> = {
-  tcgplayer:     { flag: "🇺🇸", name: "TCGplayer",                          sub: "미국 · raw 시세" },
-  cardmarket:    { flag: "🇪🇺", name: "카드마켓",      native: "Cardmarket", sub: "유럽 · raw 시세" },
-  yuyu_tei_sell: { flag: "🇯🇵", name: "유유테이 (판매가)", native: "遊々亭 · 販売", sub: "일본 · 가게가 파는 값" },
-  yuyu_tei_buy:  { flag: "🇯🇵", name: "유유테이 (매입가)", native: "遊々亭 · 買取", sub: "일본 · 가게가 사들이는 값" },
-  ebay:          { flag: "🌍", name: "이베이",        native: "eBay",       sub: "글로벌 · 낙찰가" },
-  poketrace:     { flag: "🌍", name: "포케트레이스",   native: "PokeTrace",  sub: "글로벌 · 등급가" },
-  pricecharting: { flag: "🌍", name: "프라이스차팅",   native: "PriceCharting", sub: "글로벌 · 라이브가" },
-  hareruya2:     { flag: "🇯🇵", name: "하레루야2",     native: "晴れる屋2",   sub: "일본 · 등급가" },
-  bunjang:       { flag: "🇰🇷", name: "번개장터",                            sub: "국내 · 중고" },
-};
-
-function formatPrice(amount: number | null, currency: string): string {
-  if (amount == null) return "—";
-  switch (currency) {
-    case "USD": return `$${amount.toFixed(2)}`;
-    case "EUR": return `€${amount.toFixed(2)}`;
-    case "JPY": return `¥${Math.round(amount).toLocaleString("ja-JP")}`;
-    case "KRW": return `₩${Math.round(amount).toLocaleString("ko-KR")}`;
-    default:    return `${amount.toFixed(2)} ${currency}`;
-  }
-}
+// 시세 출처 표시 메타(PRICE_SOURCE_META) + 통화 포맷(formatPrice)은 시세 페이지와 공유 → @/lib/cards/price-display
 
 // ── 카드 정보 섹션 (상세 패널 하단) ───────────────────────────────────────
 // subtypes(한 배열에 섞임) → 단계 / 트레이너 종류 / 에너지 종류 버킷. 나머지는 전부 특수타입.
@@ -487,13 +469,16 @@ function CardDetailContent({
   const primaryName = koName ?? enName ?? jaName ?? card.name;
   const subNames = [enName, jaName].filter((n): n is string => !!n && n !== primaryName);
 
-  // 카드팩명 — 한글명(기본) + 일본어명(부제, JP 앵커 모달)
-  const setKo = variants?.find((v) => v.region === "KR")?.setName ?? card.setName;
+  // 카드팩명 — 지역판 탭(activeRegion)에 맞춰: 영문판=영문명/한글명, 그 외(JP/KR)=한글명/일본명.
+  const setKo = variants?.find((v) => v.region === "KR")?.setName ?? null;
   const setJa = variants?.find((v) => v.region === "JP")?.setName ?? null;
+  const setEn = variants?.find((v) => v.region === "EN")?.setName ?? null;
+  const setPrimary = activeRegion === "EN" ? (setEn ?? card.setName) : (setKo ?? card.setName);
+  const setSub = activeRegion === "EN" ? setKo : setJa;
 
   return (
     <>
-      {/* 헤더 — 카드팩 로고 + 세트코드 + 카드팩명(한글/영문) */}
+      {/* 헤더 — 카드팩 로고 + 세트코드 + 카드팩명(지역별 1차/2차명: EN판=영문/한글, 그 외=한글/일본어) */}
       <Sheet.Header className="px-5 py-3.5">
         <div className="min-w-0 flex items-center gap-2.5">
           {card.setLogoUrl && (
@@ -512,9 +497,9 @@ function CardDetailContent({
                 <span className="shrink-0 text-toss-text-quaternary">·</span>
               </>
             )}
-            <span className="text-toss-label font-semibold text-toss-text-primary">{setKo}</span>
-            {setJa && setJa !== setKo && (
-              <span className="text-toss-micro text-toss-text-quaternary">{setJa}</span>
+            <span className="text-toss-label font-semibold text-toss-text-primary">{setPrimary}</span>
+            {setSub && setSub !== setPrimary && (
+              <span className="text-toss-micro text-toss-text-quaternary">{setSub}</span>
             )}
           </div>
         </div>
@@ -629,8 +614,8 @@ function CardDetailContent({
 
 // ── 메인 컴포넌트 ─────────────────────────────────────────────────────────
 
-// [임시 — 그룹 검증용] 토글 없이 JP/EN/KR 3장을 한 묶음에 나란히 펼쳐 표시.
-// 없는 언어는 회색 빈 슬롯. 검증 끝나면 위 git 이력의 토글 버전으로 되돌린다.
+// [3종 보기 — 그룹 검증용] JP/EN/KR 3장을 한 묶음에 나란히 펼쳐 표시(없는 언어는 회색 빈 슬롯).
+// 기본은 단일 보기(SingleCardTile). 이 번들은 "단일/3종" 토글의 3종일 때만 노출하며, 검증 끝나면 제거 예정.
 const REGION_TAG: Record<string, string> = { JP: "일본판", EN: "영문판", KR: "한국판" };
 const REGION_HEX: Record<string, string> = { JP: "#e2504a", EN: "#3182f6", KR: "#1f9d55" };
 
@@ -727,6 +712,46 @@ function RegionSlot({ region, variant, card, showOwned, onOpen }: {
   );
 }
 
+// [단일 보기 — 기본] 선택 팩 지역의 대표 카드 1장만 표시. card 자체가 그 지역 RegionCard 라
+// 별도 형제(variants) 없이 card 필드로 그린다. 검증용 3종 보기(GridCardTile)와 짝.
+function SingleCardTile({ card, dimmed, showOwned, onOpen }: {
+  card: DexCard;
+  dimmed: boolean;
+  showOwned: boolean;
+  onOpen: (v: DexCardVariant) => void;
+}) {
+  const self: DexCardVariant = {
+    id: card.id, region: card.region ?? "", name: card.name, number: card.number,
+    imageSmall: card.imageSmall, rarity: card.rarity, rarityCategoryNameKo: card.rarityCategoryNameKo,
+  };
+  const rarLabel = card.rarityCategoryNameKo ?? card.rarity;
+  return (
+    <div
+      className="group block text-left"
+      style={{ filter: dimmed ? "grayscale(100%)" : "none", opacity: dimmed ? 0.3 : 1, transition: "filter 0.3s, opacity 0.3s" }}
+    >
+      <button type="button" onClick={() => onOpen(self)} className="block w-full" title={`${card.name} · No.${card.number}`}>
+        <div
+          className="relative rounded-toss-md overflow-hidden group-hover:shadow-toss-md transition-shadow"
+          style={{ aspectRatio: "63 / 88" }}
+        >
+          <CardImage src={card.imageSmall} alt={card.name} className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-200" />
+          {showOwned && card.owned && card.grade && (
+            <div className="absolute bottom-[2px] left-[2px] text-[7px] font-bold bg-toss-text-primary text-toss-bg-base px-1 py-[1px] rounded leading-tight">{card.grade}</div>
+          )}
+          {showOwned && card.owned && card.certified && (
+            <div className="absolute top-[2px] right-[2px] w-2.5 h-2.5 rounded-full bg-toss-success ring-1 ring-toss-bg-base shadow" />
+          )}
+        </div>
+      </button>
+      <p className="mt-1 text-toss-micro text-center text-toss-text-secondary leading-tight truncate" title={card.name}>{card.name}</p>
+      <p className="text-toss-tiny text-center text-toss-text-quaternary leading-none truncate">
+        #{card.number}{rarLabel ? ` · ${rarLabel}` : ""}
+      </p>
+    </div>
+  );
+}
+
 // "전체" 가상 팩 식별자 — 사이드바에 prepend, 선택 시 서버필터+무한스크롤 모드.
 const ALL_PACK_ID = "__all__";
 
@@ -779,9 +804,10 @@ function FilterModal({ open, onClose, groups, total, onClear }: {
 }
 
 // "전체" 가상 팩 — 윈도우 가상 스크롤(행 = cols 타일). 하단 근접 시 다음 페이지 로드.
-function AllModeGrid({ cards, cols, showOwned, dimUnowned, onOpen, hasMore, loadingMore, onLoadMore }: {
+function AllModeGrid({ cards, cols, layout, showOwned, dimUnowned, onOpen, hasMore, loadingMore, onLoadMore }: {
   cards: DexCard[];
   cols: number;
+  layout: CardLayout;
   showOwned: boolean;
   dimUnowned: boolean;
   onOpen: (card: DexCard, v: DexCardVariant) => void;
@@ -831,13 +857,23 @@ function AllModeGrid({ cards, cols, showOwned, dimUnowned, onOpen, hasMore, load
             >
               <div className="grid gap-1.5" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}>
                 {rowCards.map((card) => (
-                  <GridCardTile
-                    key={card.id}
-                    card={card}
-                    dimmed={dimUnowned && !card.owned}
-                    showOwned={showOwned}
-                    onOpen={(v) => onOpen(card, v)}
-                  />
+                  layout === "triple" ? (
+                    <GridCardTile
+                      key={card.id}
+                      card={card}
+                      dimmed={dimUnowned && !card.owned}
+                      showOwned={showOwned}
+                      onOpen={(v) => onOpen(card, v)}
+                    />
+                  ) : (
+                    <SingleCardTile
+                      key={card.id}
+                      card={card}
+                      dimmed={dimUnowned && !card.owned}
+                      showOwned={showOwned}
+                      onOpen={(v) => onOpen(card, v)}
+                    />
+                  )
                 ))}
               </div>
             </div>
@@ -885,12 +921,14 @@ export function DexCatalog({ regionPacks, locale, initialRegion, initialPack }: 
   }, [packs, deferredPackSearch]);
 
   const [view, setView]                     = useState<ViewMode>("all");
+  // 카드 타일 레이아웃 — 기본 단일(선택 팩 지역만), 3종은 JP·EN·KR 묶음(검증 보기).
+  const [cardLayout, setCardLayout]         = useState<CardLayout>("single");
   const [selCategories, setSelCategories]   = useState<Set<string>>(new Set());
   const [selTypes, setSelTypes]             = useState<Set<string>>(new Set());
   const [selSupertypes, setSelSupertypes]   = useState<Set<string>>(new Set());
   const [search, setSearch]                 = useState("");
   const [sortBy, setSortBy]                 = useState<SortKey>("number");
-  const [cols, setCols]                     = useState(10);
+  const [cols, setCols]                     = useState(6);
   const [selectedCard, setSelectedCard]     = useState<SelectedCard | null>(null);
   // 패널 열림 상태는 카드와 분리 — 닫힐 때 selectedCard 를 유지해 슬라이드 아웃 애니메이션 중 직전 카드를 보여준다.
   const [panelOpen, setPanelOpen]           = useState(false);
@@ -1307,20 +1345,31 @@ export function DexCatalog({ regionPacks, locale, initialRegion, initialPack }: 
               </div>
             </div>
 
-            {/* 우측: 전체/수집 토글 */}
-            {!isAllMode && (
+            {/* 우측: 단일/3종 레이아웃 토글 + 전체/수집 토글 */}
+            <div className="flex shrink-0 items-center gap-2">
               <SegmentedControl
                 options={[
-                  { value: "all",  label: "전체" },
-                  { value: "mine", label: "수집" },
+                  { value: "single", label: "단일" },
+                  { value: "triple", label: "3종" },
                 ]}
-                value={view}
-                onChange={(v) => setView(v as ViewMode)}
+                value={cardLayout}
+                onChange={(v) => setCardLayout(v as CardLayout)}
                 variant="filled"
                 size="sm"
-                className="shrink-0"
               />
-            )}
+              {!isAllMode && (
+                <SegmentedControl
+                  options={[
+                    { value: "all",  label: "전체" },
+                    { value: "mine", label: "수집" },
+                  ]}
+                  value={view}
+                  onChange={(v) => setView(v as ViewMode)}
+                  variant="filled"
+                  size="sm"
+                />
+              )}
+            </div>
           </div>
 
           {/* 희귀도 구성 — 전체 모드는 부분 로드라 미표시 (공용 RarityComposition) */}
@@ -1438,7 +1487,8 @@ export function DexCatalog({ regionPacks, locale, initialRegion, initialPack }: 
               {isAllMode ? (
                 <AllModeGrid
                   cards={displayCards}
-                  cols={Math.max(1, Math.round(cols / 3))}
+                  cols={cardLayout === "triple" ? Math.max(1, Math.round(cols / 3)) : cols}
+                  layout={cardLayout}
                   showOwned={view === "mine"}
                   dimUnowned={view === "mine"}
                   hasMore={allNextOffset != null}
@@ -1454,24 +1504,35 @@ export function DexCatalog({ regionPacks, locale, initialRegion, initialPack }: 
               ) : (
                 <div
                   className={`grid gap-1.5 dex-card-grid ${view === "mine" ? "mt-1" : "mt-3"}`}
-                  /* [임시] 한 묶음이 JP/EN/KR 3장이라 열 수를 1/3로 보정. 토글 복귀 시 cols 로 되돌린다. */
-                  style={{ "--dex-cols": Math.max(1, Math.round(cols / 3)) } as React.CSSProperties}
+                  /* 단일=cols 그대로, 3종은 JP/EN/KR 3장 묶음이라 열 수를 1/3로 보정. */
+                  style={{ "--dex-cols": cardLayout === "triple" ? Math.max(1, Math.round(cols / 3)) : cols } as React.CSSProperties}
                 >
-                  {displayCards.map((card) => (
-                    <GridCardTile
-                      key={card.id}
-                      card={card}
-                      dimmed={view === "mine" && !card.owned}
-                      showOwned={view === "mine"}
-                      onOpen={(v) => openCard({
-                        ...card,
-                        id: v.id, region: v.region, name: v.name, number: v.number,
-                        imageSmall: v.imageSmall, rarity: v.rarity, rarityCategoryNameKo: v.rarityCategoryNameKo,
-                        setName: activePack.name, setId: activePack.setId,
-                        setLogoUrl: activePack.logoUrl ?? `https://images.pokemontcg.io/${activePack.setId}/logo.png`,
-                      })}
-                    />
-                  ))}
+                  {displayCards.map((card) => {
+                    const onOpenVariant = (v: DexCardVariant) => openCard({
+                      ...card,
+                      id: v.id, region: v.region, name: v.name, number: v.number,
+                      imageSmall: v.imageSmall, rarity: v.rarity, rarityCategoryNameKo: v.rarityCategoryNameKo,
+                      setName: activePack.name, setId: activePack.setId,
+                      setLogoUrl: activePack.logoUrl ?? `https://images.pokemontcg.io/${activePack.setId}/logo.png`,
+                    });
+                    return cardLayout === "triple" ? (
+                      <GridCardTile
+                        key={card.id}
+                        card={card}
+                        dimmed={view === "mine" && !card.owned}
+                        showOwned={view === "mine"}
+                        onOpen={onOpenVariant}
+                      />
+                    ) : (
+                      <SingleCardTile
+                        key={card.id}
+                        card={card}
+                        dimmed={view === "mine" && !card.owned}
+                        showOwned={view === "mine"}
+                        onOpen={onOpenVariant}
+                      />
+                    );
+                  })}
                 </div>
               )}
             </section>
