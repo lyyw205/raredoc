@@ -887,6 +887,100 @@ function AllModeGrid({ cards, cols, layout, showOwned, dimUnowned, onOpen, hasMo
   );
 }
 
+// 카드팩 네비(지역탭 + 팩 검색 + 시대별 그룹 목록) — 데스크톱 사이드바와 모바일 바텀시트가 공유.
+// onSelectPack 만 컨텍스트별로 다름(데스크톱=선택만, 모바일=선택+시트 닫기).
+function PackNav({
+  availableRegions, activeRegion, onRegionChange,
+  packSearch, onPackSearchChange,
+  navPacks, allPack, isAllMode, selectedSetId, onSelectPack, activeNavRef,
+}: {
+  availableRegions: Region[];
+  activeRegion: Region;
+  onRegionChange: (r: string) => void;
+  packSearch: string;
+  onPackSearchChange: (v: string) => void;
+  navPacks: RegionPack[];
+  allPack: RegionPack;
+  isAllMode: boolean;
+  selectedSetId: string;
+  onSelectPack: (setId: string) => void;
+  activeNavRef?: React.RefObject<HTMLButtonElement | null>;
+}) {
+  return (
+    <>
+      {availableRegions.length > 1 && (
+        <SegmentedControl
+          options={availableRegions.map((r) => ({ value: r, label: REGION_LABEL[r] ?? r }))}
+          value={activeRegion}
+          onChange={onRegionChange}
+          variant="filled"
+          size="sm"
+          className="w-full mb-2"
+        />
+      )}
+      <div className="mb-2 relative">
+        <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-toss-icon pointer-events-none" />
+        <input
+          type="text"
+          value={packSearch}
+          onChange={(e) => onPackSearchChange(e.target.value)}
+          placeholder="팩 이름 검색…"
+          className="w-full rounded-toss-sm bg-toss-input-bg pl-7 pr-2 py-1.5 text-toss-caption text-toss-text-primary placeholder:text-toss-text-quaternary focus:outline-none focus:ring-1 focus:ring-inset focus:ring-toss-brand"
+        />
+      </div>
+      <nav className="space-y-0.5">
+        {/* "전체" — 지역 전체 카드(서버필터+무한스크롤) */}
+        <button
+          onClick={() => onSelectPack(ALL_PACK_ID)}
+          title="전체"
+          className={`mb-1 w-full flex items-center gap-2 px-2 py-1.5 rounded-toss-md text-left transition-colors cursor-pointer ${
+            isAllMode ? "bg-toss-brand/10 text-toss-brand" : "text-toss-text-secondary hover:bg-toss-hover"
+          }`}
+        >
+          <span className="flex h-4 w-8 shrink-0 items-center justify-center text-[11px]">🗂️</span>
+          <span className="flex-1 min-w-0 truncate text-toss-caption font-semibold">전체</span>
+          <span className="shrink-0 text-toss-tiny text-toss-text-quaternary toss-numeric">{allPack.cardCount}</span>
+        </button>
+        {navPacks.map((p, i) => {
+          const showEra = i === 0 || navPacks[i - 1].eraOrder !== p.eraOrder || navPacks[i - 1].isEtc !== p.isEtc;
+          const active = selectedSetId === p.setId;
+          const logoUrl = p.logoUrl ?? `https://images.pokemontcg.io/${p.setId}/logo.png`;
+          return (
+            <Fragment key={p.setId}>
+              {showEra && (
+                <p className="px-2 pb-1 pt-3 text-toss-tiny font-bold tracking-wider text-toss-text-quaternary first:pt-0">
+                  {p.isEtc ? "기타" : eraLabel(p.era)}
+                </p>
+              )}
+              <button
+                ref={active ? activeNavRef : null}
+                onClick={() => onSelectPack(p.setId)}
+                title={p.name}
+                className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-toss-md text-left transition-colors cursor-pointer ${
+                  active
+                    ? "bg-toss-brand/10 text-toss-brand"
+                    : "text-toss-text-secondary hover:bg-toss-hover"
+                }`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={logoUrl} alt="" className="h-4 w-8 object-contain shrink-0" loading="lazy" decoding="async" onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }} />
+                <span className="flex-1 min-w-0 truncate text-toss-caption font-medium">{p.name}</span>
+                {p.packType && !SIDEBAR_PRIMARY.has(p.packType as PackType) ? (
+                  <span className="shrink-0 rounded-toss-sm bg-toss-bg-muted px-1 text-toss-tiny font-medium text-toss-text-tertiary">{PACK_TYPE_LABEL[p.packType as PackType]}</span>
+                ) : null}
+                {p.mergeOf && p.mergeOf > 1 ? (
+                  <span className="shrink-0 rounded-toss-sm bg-toss-bg-muted px-1 text-toss-tiny font-semibold text-toss-text-quaternary">합본</span>
+                ) : null}
+                <span className="shrink-0 text-toss-tiny text-toss-text-quaternary toss-numeric">{p.cardCount}</span>
+              </button>
+            </Fragment>
+          );
+        })}
+      </nav>
+    </>
+  );
+}
+
 export function DexCatalog({ regionPacks, locale, initialRegion, initialPack }: {
   regionPacks: Record<Region, RegionPack[]>;
   locale: string;
@@ -943,6 +1037,8 @@ export function DexCatalog({ regionPacks, locale, initialRegion, initialPack }: 
 
   // [점2] 필터 모달(종류·희귀도·타입 통합) 열림 상태.
   const [filterOpen, setFilterOpen]         = useState(false);
+  // 모바일 카드팩 선택 바텀시트 열림 상태(lg 미만에서만 사용).
+  const [packSheetOpen, setPackSheetOpen]   = useState(false);
 
   // [점1] "전체" 가상 팩 — 서버필터+무한스크롤 누적 상태.
   const isAllMode = selectedSetId === ALL_PACK_ID;
@@ -1155,120 +1251,73 @@ export function DexCatalog({ regionPacks, locale, initialRegion, initialPack }: 
 
   return (
     <div>
-      {/* ── 헤더 (모바일 지역탭만 — 데스크톱은 사이드바로 이동) ──────────────── */}
-      {availableRegions.length > 1 && (
-        <div className="mb-4 flex lg:hidden">
-          <SegmentedControl
-            options={availableRegions.map((r) => ({ value: r, label: REGION_LABEL[r] ?? r }))}
-            value={activeRegion}
-            onChange={changeRegion}
-            variant="filled"
-            size="md"
-            className="shrink-0"
+      {/* ── 모바일 카드팩 선택 트리거 (lg 미만) — 탭하면 하단 시트 ──────────────── */}
+      <button
+        type="button"
+        onClick={() => setPackSheetOpen(true)}
+        className="lg:hidden mb-4 w-full flex items-center gap-2.5 rounded-toss-md border border-toss-divider bg-toss-bg-base px-3 py-2.5 text-left transition-colors hover:bg-toss-hover active:bg-toss-pressed"
+      >
+        {!isAllMode && activePack && (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={activePack.logoUrl ?? `https://images.pokemontcg.io/${activePack.setId}/logo.png`}
+            alt=""
+            className="h-5 w-10 object-contain shrink-0"
+            loading="lazy"
+            decoding="async"
+            onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }}
           />
-        </div>
-      )}
+        )}
+        <span className="flex-1 min-w-0 truncate text-toss-caption font-semibold text-toss-text-primary">
+          {isAllMode ? `전체 · ${REGION_LABEL[activeRegion] ?? activeRegion}` : (activePack?.name ?? "카드팩 선택")}
+        </span>
+        {!isAllMode && (
+          <span className="shrink-0 rounded-toss-sm bg-toss-bg-muted px-1.5 py-0.5 text-toss-tiny font-semibold text-toss-text-tertiary">
+            {REGION_LABEL[activeRegion] ?? activeRegion}
+          </span>
+        )}
+        <ChevronDown className="h-4 w-4 shrink-0 text-toss-text-tertiary" />
+      </button>
 
-      {/* ── 모바일 카드팩 바 (lg 미만) ──────────────────────────────────── */}
-      <div className="lg:hidden -mx-1 mb-4 flex items-center gap-1.5 overflow-x-auto px-1 pb-1 no-scrollbar">
-        <Chip variant="filter" size="sm" selected={isAllMode} onClick={() => setSelectedSetId(ALL_PACK_ID)} className="shrink-0">전체</Chip>
-        {navPacks.map((p, i) => {
-          const showEra = i === 0 || navPacks[i - 1].eraOrder !== p.eraOrder || navPacks[i - 1].isEtc !== p.isEtc;
-          return (
-            <Fragment key={p.setId}>
-              {showEra && (
-                <span className="shrink-0 pl-1 text-toss-tiny font-bold tracking-wider text-toss-text-quaternary">
-                  {p.isEtc ? "기타" : eraLabel(p.era)}
-                </span>
-              )}
-              <Chip
-                variant="filter"
-                size="sm"
-                selected={selectedSetId === p.setId}
-                onClick={() => setSelectedSetId(p.setId)}
-                className="shrink-0"
-              >
-                {p.name}{p.mergeOf && p.mergeOf > 1 ? " (합본)" : ""}
-              </Chip>
-            </Fragment>
-          );
-        })}
-      </div>
+      {/* 모바일 카드팩 선택 바텀시트 — 데스크톱 사이드바와 동일한 PackNav(지역탭+검색+시대그룹) */}
+      <Sheet.Root open={packSheetOpen} onOpenChange={setPackSheetOpen} side="bottom">
+        <Sheet.Header className="px-5 py-3.5">
+          <Sheet.Title>카드팩 선택</Sheet.Title>
+          <Sheet.Close />
+        </Sheet.Header>
+        <Sheet.Content className="px-4 py-3">
+          <PackNav
+            availableRegions={availableRegions}
+            activeRegion={activeRegion}
+            onRegionChange={changeRegion}
+            packSearch={packSearch}
+            onPackSearchChange={setPackSearch}
+            navPacks={navPacks}
+            allPack={allPack}
+            isAllMode={isAllMode}
+            selectedSetId={selectedSetId}
+            onSelectPack={(id) => { setSelectedSetId(id); setPackSheetOpen(false); }}
+          />
+        </Sheet.Content>
+      </Sheet.Root>
 
       <div className="flex gap-6">
         {/* ── 좌측 카드팩 네비 (lg 이상) ──────────────────────────────────── */}
         <aside className="hidden lg:block w-52 shrink-0">
           <div className="sticky top-[68px] max-h-[calc(100vh-88px)] overflow-y-auto no-scrollbar pr-1">
-            {/* 지역탭 — 데스크톱은 사이드바 검색창 위 */}
-            {availableRegions.length > 1 && (
-              <SegmentedControl
-                options={availableRegions.map((r) => ({ value: r, label: REGION_LABEL[r] ?? r }))}
-                value={activeRegion}
-                onChange={changeRegion}
-                variant="filled"
-                size="sm"
-                className="w-full mb-2"
-              />
-            )}
-            <div className="mb-2 relative">
-              <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-toss-icon pointer-events-none" />
-              <input
-                type="text"
-                value={packSearch}
-                onChange={(e) => setPackSearch(e.target.value)}
-                placeholder="팩 이름 검색…"
-                className="w-full rounded-toss-sm bg-toss-input-bg pl-7 pr-2 py-1.5 text-toss-caption text-toss-text-primary placeholder:text-toss-text-quaternary focus:outline-none focus:ring-1 focus:ring-inset focus:ring-toss-brand"
-              />
-            </div>
-            <nav className="space-y-0.5">
-              {/* "전체" — 지역 전체 카드(서버필터+무한스크롤) */}
-              <button
-                onClick={() => setSelectedSetId(ALL_PACK_ID)}
-                title="전체"
-                className={`mb-1 w-full flex items-center gap-2 px-2 py-1.5 rounded-toss-md text-left transition-colors cursor-pointer ${
-                  isAllMode ? "bg-toss-brand/10 text-toss-brand" : "text-toss-text-secondary hover:bg-toss-hover"
-                }`}
-              >
-                <span className="flex h-4 w-8 shrink-0 items-center justify-center text-[11px]">🗂️</span>
-                <span className="flex-1 min-w-0 truncate text-toss-caption font-semibold">전체</span>
-                <span className="shrink-0 text-toss-tiny text-toss-text-quaternary toss-numeric">{allPack.cardCount}</span>
-              </button>
-              {navPacks.map((p, i) => {
-                const showEra = i === 0 || navPacks[i - 1].eraOrder !== p.eraOrder || navPacks[i - 1].isEtc !== p.isEtc;
-                const active = selectedSetId === p.setId;
-                const logoUrl = p.logoUrl ?? `https://images.pokemontcg.io/${p.setId}/logo.png`;
-                return (
-                  <Fragment key={p.setId}>
-                    {showEra && (
-                      <p className="px-2 pb-1 pt-3 text-toss-tiny font-bold tracking-wider text-toss-text-quaternary first:pt-0">
-                        {p.isEtc ? "기타" : eraLabel(p.era)}
-                      </p>
-                    )}
-                    <button
-                      ref={active ? activeNavRef : null}
-                      onClick={() => setSelectedSetId(p.setId)}
-                      title={p.name}
-                      className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-toss-md text-left transition-colors cursor-pointer ${
-                        active
-                          ? "bg-toss-brand/10 text-toss-brand"
-                          : "text-toss-text-secondary hover:bg-toss-hover"
-                      }`}
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={logoUrl} alt="" className="h-4 w-8 object-contain shrink-0" loading="lazy" decoding="async" onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }} />
-                      <span className="flex-1 min-w-0 truncate text-toss-caption font-medium">{p.name}</span>
-                      {p.packType && !SIDEBAR_PRIMARY.has(p.packType as PackType) ? (
-                        <span className="shrink-0 rounded-toss-sm bg-toss-bg-muted px-1 text-toss-tiny font-medium text-toss-text-tertiary">{PACK_TYPE_LABEL[p.packType as PackType]}</span>
-                      ) : null}
-                      {p.mergeOf && p.mergeOf > 1 ? (
-                        <span className="shrink-0 rounded-toss-sm bg-toss-bg-muted px-1 text-toss-tiny font-semibold text-toss-text-quaternary">합본</span>
-                      ) : null}
-                      <span className="shrink-0 text-toss-tiny text-toss-text-quaternary toss-numeric">{p.cardCount}</span>
-                    </button>
-                  </Fragment>
-                );
-              })}
-            </nav>
+            <PackNav
+              availableRegions={availableRegions}
+              activeRegion={activeRegion}
+              onRegionChange={changeRegion}
+              packSearch={packSearch}
+              onPackSearchChange={setPackSearch}
+              navPacks={navPacks}
+              allPack={allPack}
+              isAllMode={isAllMode}
+              selectedSetId={selectedSetId}
+              onSelectPack={setSelectedSetId}
+              activeNavRef={activeNavRef}
+            />
           </div>
         </aside>
 

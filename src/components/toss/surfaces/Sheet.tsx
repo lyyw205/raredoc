@@ -8,15 +8,17 @@ import { cn } from "@/lib/utils";
 export interface SheetRootProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  side?: "right" | "left";
+  side?: "right" | "left" | "bottom";
   width?: number;
+  /** bottom 시트의 최대 높이(기본 85vh). 콘텐츠가 적으면 그만큼만 차지. */
+  maxHeight?: number | string;
   children: React.ReactNode;
 }
 
 interface SheetContextValue {
   open: boolean;
   setOpen: (open: boolean) => void;
-  side: "right" | "left";
+  side: "right" | "left" | "bottom";
   width: number;
 }
 
@@ -35,8 +37,10 @@ function SheetRoot({
   onOpenChange,
   side = "right",
   width = 400,
+  maxHeight,
   children,
 }: SheetRootProps) {
+  const isBottom = side === "bottom";
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => { setMounted(true); }, []);
 
@@ -81,16 +85,16 @@ function SheetRoot({
             aria-modal="true"
             aria-hidden={!open}
             tabIndex={-1}
-            style={{ width }}
+            style={isBottom ? { maxHeight: maxHeight ?? "85vh" } : { width }}
             className={cn(
-              "fixed top-0 bottom-0 z-[60] flex flex-col bg-toss-bg-base shadow-toss-lg",
+              "fixed z-[60] flex flex-col bg-toss-bg-base shadow-toss-lg",
               "transition-transform duration-300 ease-in-out",
-              side === "right" ? "right-0" : "left-0",
-              open
-                ? "translate-x-0"
-                : side === "right"
-                ? "translate-x-full"
-                : "-translate-x-full"
+              // bottom = 하단 풀폭 시트(위로 슬라이드), right/left = 사이드 드로어
+              isBottom && "inset-x-0 bottom-0 rounded-t-2xl",
+              isBottom && (open ? "translate-y-0" : "translate-y-full"),
+              !isBottom && "top-0 bottom-0",
+              !isBottom && (side === "right" ? "right-0" : "left-0"),
+              !isBottom && (open ? "translate-x-0" : side === "right" ? "translate-x-full" : "-translate-x-full"),
             )}
           >
             {children}
