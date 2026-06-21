@@ -9,7 +9,7 @@
 import type { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { pickRarityLabel } from "./card-fields";
-import { canonEra, eraOrderIndex } from "./eras";
+import { canonEra, eraOrderIndex, isKnownEra } from "./eras";
 import { resolveSidebarTitle } from "./set-meta";
 import { buildSearchText, matchesSearch } from "@/lib/search";
 import type { DexCard, DexCardVariant } from "@/components/dex/DexCatalog";
@@ -21,7 +21,7 @@ export type RegionPack = {
   code: string | null; // 지역 세트 코드 (JP M5/svXX, EN ptcgoCode, KR 사이트ID)
   cardPackId: string | null; // 그룹(CardPack) id — 지역 트윈(JP/KR/EN) 매칭용
   name: string;
-  nameSub?: string; // JP 원어 팩명(양국어 병기용) — name 과 다를 때만 채움
+  nameSub?: string; // 병기 부제(EN판=한글명, JP/KR판=일본 원어명) — name 과 다를 때만 채움
   era: string;
   eraOrder: number;
   releaseDate: string | null; // ISO yyyy-mm-dd
@@ -102,10 +102,11 @@ async function buildRegionPacks(region: Region, preferred: "ko" | "ja" | "en"): 
       eraOrder = ref.order;
       isEtc = false;
     } else {
-      // setGroupId NULL(EN 프로모/맥도날드/레거시) — series 폴백 → "기타"
+      // setGroupId NULL(EN 프로모/POP/맥도날드/킷 등) — series 폴백으로 시대 추정.
+      // 알려진 era(ERA_ORDER)면 그 시대로 분류, 아니면 '기타'. (Era.order == ERA_ORDER 인덱스라 grouped 과 정렬 호환)
       era = canonEra(s.series);
       eraOrder = eraOrderIndex(era);
-      isEtc = true;
+      isEtc = !isKnownEra(era);
     }
     const wave = mergeMap.get(s.id) ?? 0;
     // locale 우선 클린 팩명 — 3단 폴백(set-meta.ts resolveSidebarTitle):
@@ -122,7 +123,8 @@ async function buildRegionPacks(region: Region, preferred: "ko" | "ja" | "en"): 
       rawEra: s.cardPack?.era,
       shortenPackName,
     });
-    // JP 원어 팩명(양국어 병기용) — ja 기준 동일 해석. name 과 다를 때만 nameSub 로 노출.
+    // 병기 부제(nameSub) — 영문판=한글명, 그 외(JP/KR)=일본 원어명. name 과 다를 때만 노출.
+    //   카드 상세 패널과 동일 규칙(EN=영문/한글, JP·KR=한글/일본).
     const nameJaResolved = resolveSidebarTitle({
       setTitleClean: s.titleCleanJa ?? null,
       cardPackName: s.cardPack?.nameJa ?? null,
@@ -130,12 +132,20 @@ async function buildRegionPacks(region: Region, preferred: "ko" | "ja" | "en"): 
       rawEra: s.cardPack?.era,
       shortenPackName,
     });
+    const nameKoResolved = resolveSidebarTitle({
+      setTitleClean: s.titleCleanKo ?? null,
+      cardPackName: s.cardPack?.nameKo ?? null,
+      legacyName: s.nameKo || s.name,
+      rawEra: s.cardPack?.era,
+      shortenPackName,
+    });
+    const nameSub = region === "EN" ? nameKoResolved : nameJaResolved;
     return {
       setId: s.id,
       code: s.code ?? null,
       cardPackId: s.cardPackId ?? null,
       name,
-      ...(nameJaResolved && nameJaResolved !== name ? { nameSub: nameJaResolved } : {}),
+      ...(nameSub && nameSub !== name ? { nameSub } : {}),
       era,
       eraOrder,
       releaseDate: s.releaseDate ? s.releaseDate.toISOString().slice(0, 10) : null,

@@ -24,6 +24,10 @@ export const ERA_ORDER = [
   "VS",
   "NEO",
   "BASE",
+  // EN 전용 상품 라인(연대순 본탄 뒤에 배치) — tcgcollector 시리즈 분류
+  "PLAY",
+  "MCD",
+  "TK",
 ] as const;
 
 export type EraKey = (typeof ERA_ORDER)[number];
@@ -46,6 +50,9 @@ export const ERA_LABEL: Record<string, string> = {
   VS: "VS (포켓몬카드 VS)",
   NEO: "NEO (네오·금은)",
   BASE: "Base Set (구판)",
+  PLAY: "Play! Pokémon (POP·프라이즈팩)",
+  MCD: "McDonald's (맥도날드)",
+  TK: "Trainer & Deck Kits (트레이너·덱 키트)",
 };
 
 // DB raw era → canonical era. 미등록 값은 그대로 통과(폴백).
@@ -75,10 +82,37 @@ const CANON: Record<string, EraKey> = {
   VS: "VS",
   네오: "NEO",
   구판: "BASE",
+  // ── Set.series 풀네임(EN, tcgcollector 분류) → era 키 ──
+  //    그룹(eraRef) 있는 세트는 eraRef 가 우선이라 무관하지만, 그룹 없는 EN 세트(프로모·POP·맥도날드·킷 등)를
+  //    series 폴백으로 제 시대에 분류하기 위함.
+  "Mega Evolution": "MEGA",
+  "Scarlet & Violet": "SV",
+  "Sword & Shield": "S",
+  "Sun & Moon": "SM",
+  XY: "XY",
+  "Black & White": "BW",
+  "Call of Legends": "HGSS",
+  "HeartGold & SoulSilver": "HGSS",
+  Platinum: "Pt",
+  "Diamond & Pearl": "DP",
+  EX: "PCG",
+  "e-Card": "e-Card",
+  "Legendary Collection": "NEO",
+  Neo: "NEO",
+  Original: "BASE",
+  "Play! Pokémon": "PLAY",
+  "McDonald's": "MCD",
+  "Trainer & Deck Kits": "TK",
+  // "Other"·"Topps"·"Unnumbered Energies" 등은 매핑 없음 → 미지정(기타).
 };
 
 export function canonEra(raw: string): string {
   return CANON[raw] ?? raw;
+}
+
+/** canonical era 가 노출 카테고리(ERA_ORDER)에 등록돼 있나 — 미등록이면 '기타'. */
+export function isKnownEra(canon: string): boolean {
+  return (ERA_ORDER as readonly string[]).includes(canon);
 }
 
 export function eraLabel(canon: string): string {
