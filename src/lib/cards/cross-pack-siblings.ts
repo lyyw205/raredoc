@@ -1,17 +1,19 @@
 // cross-pack 형제 풀 확장 — feature flag + 헬퍼.
 //
-// flag OFF(기본): 기존 per-Card locales 그대로. 추가 쿼리 0.
-// flag ON: artCardId 그룹 전체 RegionCard 를 후보로 확장.
+// flag ON: artCardId 그룹 전체 RegionCard 를 후보로 확장(= 다른 팩의 같은 그림 형제).
+// flag OFF: 기존 per-Card locales 그대로. 추가 쿼리 0.
 //
+// ★기본 ON (2026-06-22 사용자 결정 — 운영 검증 완료 후 활성). CROSS_PACK_SIBLINGS=0 으로 비활성(되돌림).
+//   ※P9 collapse 후엔 card.locales=artCardId 그룹이라 이 flag·헬퍼 전부 제거(자연 흡수).
 // 설계 근거: docs/migration/identity-model-migration-plan.md §0′ (D3, 2026-06-22).
 // DB 쓰기 없음 — 읽기 전용.
 
 import { prisma } from "@/lib/prisma";
 import type { SiblingCandidate } from "./sibling-resolver";
 
-/** 서버사이드 feature flag. 기본 OFF(env 미설정 시 false). */
+/** 서버사이드 feature flag. 기본 ON. CROSS_PACK_SIBLINGS=0 이면 OFF(per-pack 폴백). */
 export const CROSS_PACK_SIBLINGS_ENABLED =
-  process.env.CROSS_PACK_SIBLINGS === "1";
+  process.env.CROSS_PACK_SIBLINGS !== "0";
 
 /**
  * artCardId 그룹 전체의 RegionCard 를 SiblingCandidate[] 로 반환.
