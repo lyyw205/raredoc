@@ -41,25 +41,25 @@ async function takeSnapshot(): Promise<Snapshot> {
   let cursor: string | undefined;
   const BATCH = 5000;
   for (;;) {
-    const rows = await prisma.cardLocale.findMany({
-      select: { id: true, logicalCardId: true, region: true },
+    const rows = await prisma.regionCard.findMany({
+      select: { id: true, cardId: true, region: true },
       orderBy: { id: "asc" },
       take: BATCH,
       ...(cursor ? { skip: 1, cursor: { id: cursor } } : {}),
     });
     if (!rows.length) break;
-    for (const r of rows) { locales[r.id] = `${r.region}|${r.logicalCardId}`; lcIds.add(r.logicalCardId); }
+    for (const r of rows) { locales[r.id] = `${r.region}|${r.cardId}`; lcIds.add(r.cardId); }
     if (rows.length < BATCH) break;
     cursor = rows[rows.length - 1].id;
   }
   const lcGroup: Record<string, string> = {};
   const ids = [...lcIds];
   for (let i = 0; i < ids.length; i += 5000) {
-    const lcs = await prisma.logicalCard.findMany({
+    const lcs = await prisma.card.findMany({
       where: { id: { in: ids.slice(i, i + 5000) } },
-      select: { id: true, setGroupId: true },
+      select: { id: true, cardPackId: true },
     });
-    for (const lc of lcs) lcGroup[lc.id] = lc.setGroupId ?? "";
+    for (const lc of lcs) lcGroup[lc.id] = lc.cardPackId ?? "";
   }
   return { takenAt: new Date().toISOString(), locales, lcGroup };
 }
@@ -203,7 +203,7 @@ async function enrich(lcIds: string[]): Promise<Map<string, string>> {
   const m = new Map<string, string>();
   const uniq = [...new Set(lcIds)];
   for (let i = 0; i < uniq.length; i += 1000) {
-    const lcs = await prisma.logicalCard.findMany({
+    const lcs = await prisma.card.findMany({
       where: { id: { in: uniq.slice(i, i + 1000) } },
       select: { id: true, nameKo: true, primaryNumber: true,
         locales: { where: { region: "JP" }, select: { setId: true, number: true, name: true }, take: 1 } },
@@ -233,12 +233,12 @@ async function revert() {
   const cur: Record<string, string> = {};
   let cursor: string | undefined; const BATCH = 5000;
   for (;;) {
-    const rows = await prisma.cardLocale.findMany({
-      select: { id: true, logicalCardId: true }, orderBy: { id: "asc" },
+    const rows = await prisma.regionCard.findMany({
+      select: { id: true, cardId: true }, orderBy: { id: "asc" },
       take: BATCH, ...(cursor ? { skip: 1, cursor: { id: cursor } } : {}),
     });
     if (!rows.length) break;
-    for (const r of rows) cur[r.id] = r.logicalCardId;
+    for (const r of rows) cur[r.id] = r.cardId;
     if (rows.length < BATCH) break;
     cursor = rows[rows.length - 1].id;
   }
@@ -250,7 +250,7 @@ async function revert() {
   console.log(`[revert] 스냅샷 대비 소유주 바뀐 로케일 ${fixes.length}건 ${DO ? "→ 복원 실행" : "(dry — --apply 필요)"}`);
   if (!DO) { for (const f of fixes.slice(0, 20)) console.log(`  ${f.id} → ${f.to}`); if (fixes.length > 20) console.log(`  …외 ${fixes.length - 20}건`); return; }
   let n = 0;
-  for (const f of fixes) { await prisma.cardLocale.update({ where: { id: f.id }, data: { logicalCardId: f.to } }); if (++n % 50 === 0) console.log(`  …${n}/${fixes.length}`); }
+  for (const f of fixes) { await prisma.regionCard.update({ where: { id: f.id }, data: { cardId: f.to } }); if (++n % 50 === 0) console.log(`  …${n}/${fixes.length}`); }
   console.log(`[revert] ${n}건 복원 완료. 이제 --compare 로 이동 0건을 확인하고, cleanup-empty-lc 로 빈 orphan 을 정리한다.`);
 }
 
