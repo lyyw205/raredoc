@@ -133,8 +133,11 @@ function isCorrupt(a: any): boolean {
 
 async function main() {
   const gid = process.argv[2], pg = process.argv[3], jpSetId = process.argv[4], APPLY = process.argv.includes("--apply");
-  if (!gid || !pg || !jpSetId) { console.error("usage: <gid> <pgCode> <jpSetId> [--apply] [--allow-protected]"); process.exit(1); }
-  // gid = 영향 cardPackId (아래 where: { cardPackId: gid }) — 동결팩이면 --allow-protected 없이 차단.
+  if (!gid || !pg || !jpSetId) { console.error("usage: <gid> <pgCode> <jpSetId> [--apply] [--set=<dbSetId>] [--allow-protected]"); process.exit(1); }
+  // --set=<dbSetId>: 병합팩(예 sv-decks=69세트 172장)에서 특정 JP 세트만 타깃 — JP 번호충돌 오매칭 방지.
+  //   없으면 cardPackId=gid 전체(단일세트 팩 가정). 병합 덱/스타터 팩은 반드시 --set 필요.
+  const setFilter = process.argv.find((a) => a.startsWith("--set="))?.slice("--set=".length) || null;
+  // gid = 영향 cardPackId — 동결팩이면 --allow-protected 없이 차단.
   assertWritable([gid], { allow: hasAllowProtectedFlag(), dryRun: !APPLY, tool: "fill-jp-attacks-types" });
   const cache = `data/jp-official/${jpSetId}.pcjp.json`;
 
@@ -171,8 +174,8 @@ async function main() {
   }
 
   const lcs = await prisma.card.findMany({
-    where: { cardPackId: gid },
-    select: { id: true, supertype: true, types: true, attacks: true, illustrator: true, weakness: true, resistance: true, retreatCost: true, abilities: true, locales: { select: { region: true, numberInt: true, name: true } } },
+    where: setFilter ? { locales: { some: { setId: setFilter } } } : { cardPackId: gid },
+    select: { id: true, supertype: true, types: true, attacks: true, illustrator: true, weakness: true, resistance: true, retreatCost: true, abilities: true, locales: { select: { region: true, setId: true, numberInt: true, name: true } } },
   });
   let atkFix = 0, atkFill = 0, typFill = 0, illFill = 0, corruptNoSrc = 0, noMatch = 0;
   let wkFill = 0, rsFill = 0, rcFill = 0, abFill = 0;
@@ -181,7 +184,8 @@ async function main() {
     rcUpd: { id: string; retreatCost: number }[] = [], abUpd: { id: string; abilities: any }[] = [];
   const aSamp: string[] = [], tSamp: string[] = [];
   for (const lc of lcs) {
-    const jp = lc.locales.find((l) => l.region === "JP"); if (!jp || jp.numberInt == null) continue;
+    const jp = setFilter ? lc.locales.find((l) => l.region === "JP" && l.setId === setFilter) : lc.locales.find((l) => l.region === "JP");
+    if (!jp || jp.numberInt == null) continue;
     const rec = byNum[String(jp.numberInt)];
     if (!rec) { if (["Pokémon", "Pokemon"].includes(lc.supertype ?? "")) noMatch++; continue; }
     // attacks
