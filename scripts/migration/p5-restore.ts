@@ -5,7 +5,10 @@
 //   1 트랜잭션. dry-run 기본(무엇을 되돌릴지 카운트만). --apply 로만 실제 복원.
 //
 // ★현재(P5 적용 前)에 dry-run 하면 live==snap 이라 "되돌릴 것 0" 이 정상(로직 sanity).
-// ★P5 적용 後 문제 발견 시 --apply 로 실행하면 스냅샷 시점으로 복귀.
+// ★P5 적용 後 문제 발견 시 --apply 로 실행 → 스냅 행 전부 복원 + FK 되돌림. 스냅샷 이후 추가된
+//   새 행(예: 신규 CollectionItem/Trade)은 삭제 안 함(보존). 단 LogicalCardSpecies(복합PK)는
+//   완전정합이라 스냅에 없는 잉여행 삭제 포함. 정확한 시점복귀를 원하면 P5~복원 사이
+//   앱 쓰기가 없는 유지보수 윈도우에서 실행. (완벽한 time-travel 은 Supabase PITR 병행.)
 //
 // 실행: npx tsx scripts/migration/p5-restore.ts            (dry-run)
 //       npx tsx scripts/migration/p5-restore.ts --apply
@@ -70,23 +73,31 @@ async function main() {
     // 1) 부모 LogicalCard 누락행 재삽입 (자식이 가리킬 수 있게 먼저)
     await tx.$executeRawUnsafe(`INSERT INTO "LogicalCard" SELECT * FROM "${sn("LogicalCard")}" s WHERE NOT EXISTS (SELECT 1 FROM "LogicalCard" l WHERE l.id=s.id)`);
 
-    // 2) id-PK 자식: 누락 재삽입 후 FK 되돌림
+    // 2) id-PK 자식: ★FK 되돌림(UPDATE) 먼저 → 누락 재삽입(INSERT).
+    //    순서 중요: CardText @@unique[logicalCardId,language] — 비대표 승자가 logicalCardId=REP 를
+    //    점유 중이라, 삭제된 REP 행을 먼저 INSERT 하면 unique 충돌. UPDATE 로 슬롯 해제 후 INSERT.
     for (const t of ID_FK_TABLES) {
-      await tx.$executeRawUnsafe(`INSERT INTO "${t}" SELECT * FROM "${sn(t)}" s WHERE NOT EXISTS (SELECT 1 FROM "${t}" x WHERE x.id=s.id)`);
       await tx.$executeRawUnsafe(`UPDATE "${t}" x SET "logicalCardId"=s."logicalCardId" FROM "${sn(t)}" s WHERE x.id=s.id AND x."logicalCardId" IS DISTINCT FROM s."logicalCardId"`);
+      await tx.$executeRawUnsafe(`INSERT INTO "${t}" SELECT * FROM "${sn(t)}" s WHERE NOT EXISTS (SELECT 1 FROM "${t}" x WHERE x.id=s.id)`);
     }
 
     // 3) 복합PK LogicalCardSpecies: 잉여 삭제 + 누락 삽입
     await tx.$executeRawUnsafe(`DELETE FROM "LogicalCardSpecies" x WHERE NOT EXISTS (SELECT 1 FROM "${sn("LogicalCardSpecies")}" s WHERE s."logicalCardId"=x."logicalCardId" AND s."speciesId"=x."speciesId")`);
     await tx.$executeRawUnsafe(`INSERT INTO "LogicalCardSpecies" SELECT * FROM "${sn("LogicalCardSpecies")}" s WHERE NOT EXISTS (SELECT 1 FROM "LogicalCardSpecies" x WHERE x."logicalCardId"=s."logicalCardId" AND x."speciesId"=s."speciesId")`);
 
-    // 4) 사후 단언: 각 테이블이 스냅샷과 행수 일치
-    for (const t of ["LogicalCard", ...ID_FK_TABLES, "LogicalCardSpecies"]) {
-      const live = await c2(tx, `SELECT count(*)::int c FROM "${t}"`);
-      const snap = await c2(tx, `SELECT count(*)::int c FROM "${sn(t)}"`);
-      if (live !== snap) throw new Error(`복원 단언 실패 ${t}: live ${live} ≠ snap ${snap} — 롤백`);
+    // 4) 사후 단언 — ★내용 기반(행수 아님): 스냅 행이 전부 복원됐는지(누락 0·FK불일치 0·잉여 0).
+    //    스냅샷 이후 추가된 새 행은 보존·무시(행수 일치 강요 안 함). 정확한 시점복귀는 유지보수 윈도우 전제.
+    const lcMiss = await c2(tx, `SELECT count(*)::int c FROM "${sn("LogicalCard")}" s WHERE NOT EXISTS (SELECT 1 FROM "LogicalCard" l WHERE l.id=s.id)`);
+    if (lcMiss !== 0) throw new Error(`복원 단언 실패 LogicalCard: 누락 ${lcMiss} — 롤백`);
+    for (const t of ID_FK_TABLES) {
+      const miss = await c2(tx, `SELECT count(*)::int c FROM "${sn(t)}" s WHERE NOT EXISTS (SELECT 1 FROM "${t}" x WHERE x.id=s.id)`);
+      const fkBad = await c2(tx, `SELECT count(*)::int c FROM "${t}" x JOIN "${sn(t)}" s ON s.id=x.id WHERE x."logicalCardId" IS DISTINCT FROM s."logicalCardId"`);
+      if (miss !== 0 || fkBad !== 0) throw new Error(`복원 단언 실패 ${t}: 누락 ${miss}·FK불일치 ${fkBad} — 롤백`);
     }
-    console.log(`  ✅ 복원 완료 — 전 테이블 스냅샷 행수 일치.`);
+    const spMissA = await c2(tx, `SELECT count(*)::int c FROM "${sn("LogicalCardSpecies")}" s WHERE NOT EXISTS (SELECT 1 FROM "LogicalCardSpecies" x WHERE x."logicalCardId"=s."logicalCardId" AND x."speciesId"=s."speciesId")`);
+    const spExtraA = await c2(tx, `SELECT count(*)::int c FROM "LogicalCardSpecies" x WHERE NOT EXISTS (SELECT 1 FROM "${sn("LogicalCardSpecies")}" s WHERE s."logicalCardId"=x."logicalCardId" AND s."speciesId"=x."speciesId")`);
+    if (spMissA !== 0 || spExtraA !== 0) throw new Error(`복원 단언 실패 LogicalCardSpecies: 누락 ${spMissA}·잉여 ${spExtraA} — 롤백`);
+    console.log(`  ✅ 복원 완료 — 전 테이블 스냅샷 내용 정합(누락 0·FK불일치 0·잉여 0).`);
   }, { timeout: 600_000 });
 
   console.log(`\n✅ P5 복원 완료(스냅샷 시점 복귀). 다음: gate-fk --compare base 로 무결성 확인.`);
