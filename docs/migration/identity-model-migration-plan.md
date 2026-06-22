@@ -1,6 +1,10 @@
-All critical claims confirmed: `MarketStat.cardId` is an unconstrained `String` (729) with no FK — C2's "unverified reference target" is real. `Rarity` has `nameEn/nameJa/nameKo` (880-882) with `cards LogicalCard[]` (887) — C6's region-keyed display and the LogicalCard→CardLocale roll-up count explosion are real. `ExternalIdMapping` has `setGroupId` (938) confirming the 4-site `setGroupId` atomic removal (C1-adjacent, H8). I have everything. Writing the integrated final plan now.
+# raredoc 도감 DB 정체성 4계층 이행 — 마이그레이션 계획서
 
-# raredoc 도감 DB 정체성 4계층 이행 — 최종 마이그레이션 계획서 (실행 착수판)
+> ## ✅ 상태: 완료·배포 (2026-06-22)
+> 평평 4계층(`Species→GameCard→Card→RegionCard` + CardPack/CardSpecies/CardText) 운영 적용·**P5 collapse(30,800→27,499)**·라이브 배포 완료.
+> - ★**현재 진실·운영 주의·"되살리지 말 것" 폐기 계획 = 메모리 `project_identity_model_migration.md` 가 단일 진실원.**
+> - ★별도 ArtCard 테이블 **없음**(Card 가 그림 단위 = artFingerprint/artCardId). 게임필드는 **LC 코어 RETAIN**.
+> - ⚠ **아래 §0′·P-1~P9 상세는 실행 이력/참조용** — 일부는 실행 중 재스코핑/폐기됨(ArtCard 테이블·19컬럼 드롭·P3v3·id 재발급·BATCH-2 등). **메모리의 폐기 목록이 우선.**
 
 > 작성 기준: `prisma/schema.prisma`(955줄), `scripts/build-group.ts`(1402줄), `src/components/dex/GroupCards.tsx`(515줄, group-json import 174개), `src/data/group-*.json`(206개). 모든 인용은 `(파일:줄)` 형식. 단계 약어 P-1~P9는 PR 시퀀스, Phase A~D는 롤아웃 국면.
 >
