@@ -137,7 +137,10 @@ model Card {
   rarity           Rarity?             @relation(fields: [rarityId], references: [id])
   // ── 한국 유저 대상 한글 overlay — CardText 로 일원화 중 ──
   nameKo           String? // 한국 공식 이름 — 읽기는 CardText(ko) 우선·이 컬럼은 폴백. CardText 100% 커버 검증 후 제거 예정.
-  // attacksKo/abilitiesKo 드롭됨(P9, 2026-06-22): 유효데이터(257/51) 전부 CardText(ko) 에 보존 확인 후 제거.
+  // ★attacksKo/abilitiesKo 드롭 되돌림(P9, 2026-06-22): 배포(master) 클라이언트가 card:{include}(broad)로
+  //   이 컬럼들을 SELECT 하는데 코드 배포 前 드롭하여 라이브 카드쿼리가 깨짐 → 재추가·복원. 재드롭은 브랜치 배포 後.
+  attacksKo        Json? // 한국어 공격 텍스트 — 코드 READ 0. 정본은 CardText(ko).attacks. 배포 후 재드롭 대상.
+  abilitiesKo      Json? // 한국어 특성 텍스트 — 코드 READ 0. 정본은 CardText(ko).abilities. 배포 후 재드롭 대상.
   locales          RegionCard[]
   texts            CardText[] // 언어별 표시 텍스트 오버레이. name은 이관·운용 중(CardText(ko) 우선), attacks/abilities는 이관 예정.
   collectionItems  CollectionItem[]    @relation("CollectionItemLogicalCard")
