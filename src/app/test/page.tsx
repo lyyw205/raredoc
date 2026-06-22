@@ -49,6 +49,7 @@ interface CardRow {
   gameCardId: string | null;
   gameCard: { id: string; name: string; supertype: string | null; hp: number | null } | null;
   rarity: { code: string; abbr: string | null } | null;
+  cardPack: { id: string; nameKo: string | null; nameJa: string | null; nameEn: string | null } | null;
   locales: LocaleRow[];
   texts: TextRow[];
 }
@@ -72,6 +73,7 @@ const cardSelect = {
   gameCardId: true,
   gameCard: { select: { id: true, name: true, supertype: true, hp: true } },
   rarity: { select: { code: true, abbr: true } },
+  cardPack: { select: { id: true, nameKo: true, nameJa: true, nameEn: true } },
   locales: {
     select: {
       id: true,
@@ -143,6 +145,10 @@ function cardDisplayName(card: CardRow): string {
   const koText = card.texts.find((t) => t.language === "ko" && t.name)?.name;
   return card.nameKo ?? koText ?? card.locales[0]?.name ?? "(이름 없음)";
 }
+function packDisplayName(pack: CardRow["cardPack"]): string | null {
+  if (!pack) return null;
+  return pack.nameKo ?? pack.nameJa ?? pack.nameEn ?? pack.id;
+}
 
 function RegionBadge({ region }: { region: string }) {
   const tone =
@@ -158,32 +164,34 @@ function RegionBadge({ region }: { region: string }) {
   );
 }
 
-// ── row(지역판) 1줄 ───────────────────────────────────────────────────────────
+// ── row(지역판) 타일 — 같은 그림 비교용으로 이미지 크게, 가로 나열 ──────────────
 function LocaleRowView({ loc }: { loc: LocaleRow }) {
   return (
-    <div className="flex items-center gap-2 border-t border-gray-100 py-1 text-[13px]">
+    <div className="flex w-[150px] flex-none flex-col gap-1 rounded-md border border-gray-200 bg-white p-1.5 text-[12px]">
       {loc.imageSmall ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={loc.imageSmall}
-          alt=""
-          width={34}
-          height={47}
+          alt={loc.name}
+          width={140}
+          height={196}
           loading="lazy"
-          className="h-[47px] w-[34px] flex-none rounded-sm border border-gray-200 object-cover"
+          className="h-[196px] w-full flex-none rounded border border-gray-200 bg-gray-50 object-contain"
         />
       ) : (
-        <span className="flex h-[47px] w-[34px] flex-none items-center justify-center rounded-sm border border-dashed border-gray-300 text-[9px] text-gray-400">
+        <span className="flex h-[196px] w-full flex-none items-center justify-center rounded border border-dashed border-gray-300 text-[11px] text-gray-400">
           no img
         </span>
       )}
-      <RegionBadge region={loc.region} />
-      <span className="font-mono text-gray-500">
+      <div className="flex items-center gap-1">
+        <RegionBadge region={loc.region} />
+        {loc.rarity && <span className="text-[10px] text-gray-400">{loc.rarity.code}</span>}
+        <span className="ml-auto font-mono text-[10px] text-gray-300">{shortId(loc.id, 5)}</span>
+      </div>
+      <div className="truncate font-mono text-[10px] text-gray-500">
         {loc.set.id} <span className="text-gray-400">#{loc.number}</span>
-      </span>
-      <span className="font-medium text-gray-900">{loc.name}</span>
-      {loc.rarity && <span className="text-gray-400">· {loc.rarity.code}</span>}
-      <span className="ml-auto font-mono text-[11px] text-gray-300">{shortId(loc.id, 6)}</span>
+      </div>
+      <div className="line-clamp-2 font-medium leading-tight text-gray-900">{loc.name}</div>
     </div>
   );
 }
@@ -192,7 +200,7 @@ function LocaleRowView({ loc }: { loc: LocaleRow }) {
 function CardView({ card }: { card: CardRow }) {
   const locales = sortLocales(card.locales);
   return (
-    <div className="rounded-md border border-gray-200 bg-white px-3 py-2">
+    <div className="w-fit max-w-full rounded-md border border-gray-200 bg-white px-3 py-2">
       <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-[13px]">
         <span className="font-semibold text-gray-900">{cardDisplayName(card)}</span>
         {card.supertype && (
@@ -210,10 +218,22 @@ function CardView({ card }: { card: CardRow }) {
         {card.rarity && (
           <span className="text-[11px] text-gray-400">레어 {card.rarity.abbr ?? card.rarity.code}</span>
         )}
+        {packDisplayName(card.cardPack) ? (
+          <span
+            className="rounded bg-violet-100 px-1.5 py-0.5 text-[11px] font-medium text-violet-700"
+            title={card.cardPack?.id}
+          >
+            📦 {packDisplayName(card.cardPack)}
+          </span>
+        ) : (
+          <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[11px] font-medium text-amber-700">
+            📦 소속팩 ∅
+          </span>
+        )}
         <span className="ml-auto font-mono text-[11px] text-gray-300">Card {shortId(card.id)}</span>
       </div>
-      {/* row들: 지역판(RegionCard) */}
-      <div className="mt-1">
+      {/* row들: 지역판(RegionCard) — 같은 그림인지 가로로 비교 */}
+      <div className="mt-2 flex flex-wrap gap-2">
         {locales.length === 0 ? (
           <div className="py-1 text-[12px] text-amber-600">⚠ 지역판(row) 없음 — 빈 카드</div>
         ) : (
@@ -233,79 +253,26 @@ function CardView({ card }: { card: CardRow }) {
   );
 }
 
-// ── GameCard 묶음(여러 Card) ──────────────────────────────────────────────────
-function GameCardGroup({ cards }: { cards: CardRow[] }) {
-  const gc = cards[0].gameCard;
-  const localeTotal = cards.reduce((n, c) => n + c.locales.length, 0);
-  return (
-    <div className="rounded-lg border border-indigo-200 bg-indigo-50/40 p-2">
-      <div className="mb-1.5 flex flex-wrap items-baseline gap-x-2 text-[12px]">
-        {gc ? (
-          <>
-            <span className="rounded bg-indigo-600 px-1.5 py-0.5 text-[11px] font-bold text-white">
-              GameCard
-            </span>
-            <span className="font-semibold text-indigo-900">{gc.name}</span>
-            {gc.supertype && <span className="text-indigo-400">{gc.supertype}</span>}
-            {gc.hp != null && <span className="text-indigo-400">HP {gc.hp}</span>}
-            <span className="font-mono text-[11px] text-indigo-300">{shortId(gc.id, 10)}</span>
-          </>
-        ) : (
-          <span className="rounded bg-amber-500 px-1.5 py-0.5 text-[11px] font-bold text-white">
-            GameCard 없음 (∅)
-          </span>
-        )}
-        <span className="ml-auto text-[11px] text-indigo-400">
-          Card {cards.length} · row {localeTotal}
-        </span>
-      </div>
-      <div className="space-y-1.5">
-        {cards.map((card) => (
-          <CardView key={card.id} card={card} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// 카드 배열을 gameCardId 로 그룹핑(null=∅ 은 카드별 단독 묶음)
-function groupByGameCard(cards: CardRow[]): CardRow[][] {
-  const groups = new Map<string, CardRow[]>();
-  const singles: CardRow[][] = [];
-  for (const card of cards) {
-    if (!card.gameCardId) {
-      singles.push([card]); // gameCard 없는 카드는 각각 단독 표시
-      continue;
-    }
-    const g = groups.get(card.gameCardId);
-    if (g) g.push(card);
-    else groups.set(card.gameCardId, [card]);
-  }
-  return [...groups.values(), ...singles];
-}
-
 // ── 종(Species) 1개 ───────────────────────────────────────────────────────────
 function SpeciesView({ sp }: { sp: SpeciesRow }) {
-  const cards = sp.cards.map((c) => c.card);
-  const groups = groupByGameCard(cards).sort(
-    (a, b) => (a[0].primaryNumberInt ?? 99999) - (b[0].primaryNumberInt ?? 99999),
-  );
+  const cards = sp.cards
+    .map((c) => c.card)
+    .sort((a, b) => (a.primaryNumberInt ?? 99999) - (b.primaryNumberInt ?? 99999));
   const localeTotal = cards.reduce((n, c) => n + c.locales.length, 0);
   return (
     <details open className="rounded-xl border border-gray-300 bg-gray-50 p-3">
       <summary className="cursor-pointer select-none text-[15px] font-bold text-gray-900">
         <span className="font-mono text-gray-400">#{sp.id}</span> {sp.nameKo ?? sp.nameEn}{" "}
         <span className="text-[12px] font-normal text-gray-400">
-          {sp.nameEn} · Card {cards.length} · GameCard {groups.filter((g) => g[0].gameCardId).length}{" "}
-          · row {localeTotal}
+          {sp.nameEn} · Card {cards.length} · row {localeTotal}
         </span>
       </summary>
       {cards.length === 0 ? (
         <div className="mt-2 text-[13px] text-gray-400">연결된 Card 없음</div>
       ) : (
-        <div className="mt-2 space-y-2">
-          {groups.map((g) => (
-            <GameCardGroup key={g[0].gameCardId ?? `single-${g[0].id}`} cards={g} />
+        <div className="mt-2 flex flex-wrap items-start gap-2">
+          {cards.map((card) => (
+            <CardView key={card.id} card={card} />
           ))}
         </div>
       )}
@@ -347,8 +314,8 @@ export default async function TestPage({
       <header className="mb-4">
         <h1 className="text-xl font-bold text-gray-900">DB 그룹 검증 — /test</h1>
         <p className="mt-1 text-[13px] text-gray-500">
-          계층: <b>종(도감#)</b> ▸ <b>GameCard</b> ▸ <b>Card</b> ▸ row(지역판 RegionCard). 마이그 후
-          묶임 점검용 임시 페이지.
+          계층: <b>종(도감#)</b> ▸ <b>Card</b> ▸ row(지역판 RegionCard). 마이그 후 묶임 점검용 임시
+          페이지. (GameCard 묶음 표시는 제외)
         </p>
         <div className="mt-3 flex flex-wrap gap-1.5">
           <Chip label="종" value={summary.species} />
@@ -465,7 +432,6 @@ async function TrainerSection({
   const totalPages = Math.max(1, Math.ceil(total / size));
   const page = clampInt(sp.page, 0, 0, totalPages - 1);
   const cards = await getTrainerPage(page * size, size);
-  const groups = groupByGameCard(cards);
 
   const mk = (p: number) => `/test?view=trainers&page=${p}&size=${size}`;
   return (
@@ -490,14 +456,14 @@ async function TrainerSection({
           )}
         </div>
         <p className="ml-auto text-[11px] text-gray-400">
-          ※ gameCard 묶음이 페이지 경계에서 갈릴 수 있음(정렬: supertype▸gameCard).
+          ※ 정렬: supertype ▸ 번호.
         </p>
       </div>
-      <div className="space-y-2">
-        {groups.length === 0 ? (
+      <div className="flex flex-wrap items-start gap-2">
+        {cards.length === 0 ? (
           <div className="text-[13px] text-gray-400">카드 없음</div>
         ) : (
-          groups.map((g) => <GameCardGroup key={g[0].gameCardId ?? `single-${g[0].id}`} cards={g} />)
+          cards.map((card) => <CardView key={card.id} card={card} />)
         )}
       </div>
     </section>
