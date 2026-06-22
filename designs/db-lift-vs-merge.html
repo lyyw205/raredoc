@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DB 구조 (실제 카드·실값) — 추가형(B) vs 평평 4계층</title>
+<style>
+  :root{
+    --sp:#7c3aed; --gc:#2563eb; --ac:#16a34a; --pc:#ea580c; --rc:#475569; --pack:#d97706;
+    --bg:#0f172a; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:14px/1.55 -apple-system,"Pretendard",system-ui,sans-serif;background:#f1f5f9;color:var(--ink)}
+  header{background:var(--bg);color:#e2e8f0;padding:22px 28px}
+  header h1{margin:0 0 6px;font-size:20px}
+  header p{margin:2px 0;color:#94a3b8;font-size:13px}
+  header code{background:#1e293b;color:#e2e8f0;padding:1px 5px;border-radius:4px}
+  .wrap{padding:20px;max-width:1280px;margin:0 auto}
+  h2.sec{font-size:15px;margin:26px 0 10px;padding-left:9px;border-left:4px solid #94a3b8}
+  /* 정체성 계층 박스 */
+  .idbox{border-radius:11px;padding:11px 13px;margin:9px 0;border:1.5px solid}
+  .idbox .h{font-weight:700;font-size:13.5px}
+  .idbox .role{font-size:11px;color:var(--muted);font-weight:500}
+  .badge{float:right;font-size:10.5px;font-weight:700;color:#fff;border-radius:999px;padding:1px 9px}
+  .kv{margin-top:8px;display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:3px 14px}
+  .kv .row{font-size:12px;font-family:ui-monospace,Menlo,monospace;display:flex;gap:6px;border-bottom:1px dotted #e2e8f0;padding:1px 0}
+  .kv .k{color:#64748b;min-width:96px}
+  .kv .v{color:#0f172a;font-weight:600}
+  .kv .v.null{color:#b45309;font-weight:500}
+  .kv .v.art{color:#15803d}
+  .sp{border-color:var(--sp);background:#f5f3ff}  .sp .badge{background:var(--sp)}
+  .gc{border-color:var(--gc);background:#eff6ff}  .gc .badge{background:var(--gc)}
+  .ac{border-color:var(--ac);background:#f0fdf4}  .ac .badge{background:var(--ac)}
+  .arrow{color:var(--muted);font-size:12px;margin:2px 0 2px 6px}
+  /* 실물 갤러리 */
+  .packgroup{border:1.5px solid var(--pack);border-radius:12px;padding:10px 12px 14px;margin:12px 0;background:#fffdf7}
+  .packgroup > .ph{font-weight:800;color:#92400e;font-size:13.5px;margin-bottom:2px}
+  .packgroup > .ph small{font-weight:600;color:#b45309;font-family:ui-monospace,monospace}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+  @media(max-width:820px){.cards{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:10px;background:#fff;overflow:hidden;display:flex;flex-direction:column}
+  .card .rtag{font-size:11px;font-weight:800;color:#fff;padding:3px 9px}
+  .rEN{background:#1d4ed8} .rJP{background:#b91c1c} .rKR{background:#047857}
+  .card img{width:100%;display:block;background:#f1f5f9;aspect-ratio:367/512;object-fit:contain}
+  .card .meta{padding:8px 9px}
+  .card .meta .row{font-size:11px;font-family:ui-monospace,Menlo,monospace;display:flex;gap:5px;padding:1px 0;border-bottom:1px dotted #eef2f7}
+  .card .meta .k{color:#64748b;min-width:74px}
+  .card .meta .v{color:#0f172a;font-weight:600;word-break:break-all}
+  .card .meta .v.pack{color:#92400e;background:#fef3c7;border-radius:4px;padding:0 4px}
+  .imgnote{font-size:10px;color:#94a3b8;padding:2px 9px 0;word-break:break-all;font-family:ui-monospace,monospace}
+  /* 구조 비교 */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:900px){.compare{grid-template-columns:1fr}}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+  .panel h3{margin:0 0 3px;font-size:14.5px}
+  .panel .sub{color:var(--muted);font-size:12px;margin:0 0 10px}
+  .schem{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;background:#0f172a;color:#cbd5e1;border-radius:9px;padding:11px 12px;white-space:pre;overflow-x:auto;line-height:1.6}
+  .schem .ac{color:#4ade80} .schem .pc{color:#fb923c} .schem .rc{color:#cbd5e1} .schem .lbl{color:#fde047} .schem .dim{color:#64748b}
+  table.cmp{width:100%;border-collapse:collapse;margin:18px 0 0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:12.5px}
+  table.cmp th,table.cmp td{padding:8px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  table.cmp th{background:#f8fafc}
+  td.good{color:#15803d;font-weight:600} td.bad{color:#b91c1c;font-weight:600} td.mid{color:#b45309;font-weight:600}
+  .takeaway{margin:16px 0 0;background:#ecfeff;border:1px solid #a5f3fc;border-radius:10px;padding:13px 15px;font-size:13px;color:#155e75}
+  .note{margin:14px 0 0;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:11px 13px;font-size:12px;color:#78350f}
+  code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:0 4px;border-radius:4px}
+</style>
+</head>
+<body>
+<header>
+  <h1>DB 구조 — 실제 카드·실값으로</h1>
+  <p>실제 예시: <b>피카츄</b> (일러 <code>OKACHEKE</code>, 같은 그림) · 2팩 <b>클레이버스트 · 샤이니트레저 ex</b> · 3지역 EN/JP/KR = 실물 6장</p>
+  <p>전부 raredoc DB 실측값 (<code>gameCardId=gc_b7811c…</code> / 이미지=실제 CDN URL)</p>
+</header>
+
+<div class="wrap">
+
+  <!-- ================= 정체성 계층 (같은 그림 = 1) ================= -->
+  <h2 class="sec">1) 정체성 계층 — 같은 그림이라 각각 1행 (변수: 값)</h2>
+
+  <div class="idbox sp">
+    <span class="badge">1행 / 종</span>
+    <span class="h">Species</span> <span class="role">— 도감 네비·종 이름 (dedup 금지)</span>
+    <div class="kv">
+      <div class="row"><span class="k">id</span><span class="v">25 (전국도감#)</span></div>
+      <div class="row"><span class="k">nameKo</span><span class="v">피카츄</span></div>
+      <div class="row"><span class="k">nameJa</span><span class="v">ピカチュウ</span></div>
+      <div class="row"><span class="k">nameEn</span><span class="v">Pikachu</span></div>
+    </div>
+  </div>
+  <div class="arrow">▲ N:M (pokedexNumbers)</div>
+
+  <div class="idbox gc">
+    <span class="badge">1행 / 게임카드</span>
+    <span class="h">GameCard</span> <span class="role">— oracle: 덱 4장·채용률 dedup 권위 (게임 규칙)</span>
+    <div class="kv">
+      <div class="row"><span class="k">id</span><span class="v">gc_b7811c7194…</span></div>
+      <div class="row"><span class="k">supertype</span><span class="v">Pokémon</span></div>
+      <div class="row"><span class="k">hp</span><span class="v">70</span></div>
+      <div class="row"><span class="k">subtypes</span><span class="v">[Basic]</span></div>
+      <div class="row"><span class="k">weakness</span><span class="v">Fighting ×2</span></div>
+      <div class="row"><span class="k">retreatCost</span><span class="v">1</span></div>
+      <div class="row"><span class="k">evolvesFrom</span><span class="v null">null (기본)</span></div>
+      <div class="row"><span class="k">attacks</span><span class="v null">null · DB 미수집</span></div>
+      <div class="row"><span class="k">abilities</span><span class="v null">null</span></div>
+    </div>
+  </div>
+  <div class="arrow">▲ gameCardId</div>
+
+  <div class="idbox ac">
+    <span class="badge">1행 / 그림 ★</span>
+    <span class="h">ArtCard</span> <span class="role">— "같은 그림" 정체성 (시세·이미지·형제 dedup 단위)</span>
+    <div class="kv">
+      <div class="row"><span class="k">id</span><span class="v art">ac_… (Slice 3 생성)</span></div>
+      <div class="row"><span class="k">illustrator</span><span class="v art">OKACHEKE</span></div>
+      <div class="row"><span class="k">types</span><span class="v art">[Lightning] 전기</span></div>
+      <div class="row"><span class="k">flavorText</span><span class="v">(EN 폴백)</span></div>
+      <div class="row"><span class="k">artFingerprint</span><span class="v null">pHash · Slice 3에서 산출</span></div>
+      <div class="row"><span class="k">gameCardId</span><span class="v">gc_b7811c…</span></div>
+    </div>
+  </div>
+
+  <!-- ================= 실물 6장 (실제 이미지·값) ================= -->
+  <h2 class="sec">2) 실물 6장 (RegionCard) — ArtCard 밑에, 각자 팩·번호·이미지·레어도 보유</h2>
+
+  <div class="packgroup">
+    <div class="ph">📦 클레이버스트 <small>cardPack: sv-paldea-evolved · Card(per-pack) id: lc-orphan-jp-tcg-SV2D-017</small></div>
+    <div class="cards">
+      <div class="card">
+        <div class="rtag rEN">RegionCard · EN</div>
+        <img loading="lazy" src="https://images.pokemontcg.io/sv2/62_hires.png" alt="Pikachu EN sv2 62" />
+        <div class="meta">
+          <div class="row"><span class="k">region</span><span class="v">EN</span></div>
+          <div class="row"><span class="k">setId</span><span class="v pack">sv2 → 클레이버스트</span></div>
+          <div class="row"><span class="k">number</span><span class="v">62</span></div>
+          <div class="row"><span class="k">name</span><span class="v">Pikachu</span></div>
+          <div class="row"><span class="k">rarity</span><span class="v">Common</span></div>
+          <div class="row"><span class="k">releaseDate</span><span class="v">2023-06-08</span></div>
+        </div>
+        <div class="imgnote">imageLarge: images.pokemontcg.io/sv2/62_hires.png</div>
+      </div>
+      <div class="card">
+        <div class="rtag rJP">RegionCard · JP</div>
+        <img loading="lazy" src="https://pub-fe6e8ccccac0452a9030098e4ca54e50.r2.dev/jp-tcg-SV2D/ja/large/jp-tcg-SV2D/017.webp" alt="Pikachu JP SV2D 017" />
+        <div class="meta">
+          <div class="row"><span class="k">region</span><span class="v">JP</span></div>
+          <div class="row"><span class="k">setId</span><span class="v pack">jp-tcg-SV2D → 클레이버스트</span></div>
+          <div class="row"><span class="k">number</span><span class="v">017</span></div>
+          <div class="row"><span class="k">name</span><span class="v">ピカチュウ</span></div>
+          <div class="row"><span class="k">rarity</span><span class="v">Common (コモン)</span></div>
+          <div class="row"><span class="k">releaseDate</span><span class="v">2023-04-14</span></div>
+        </div>
+        <div class="imgnote">imageLarge: pub-…r2.dev/jp-tcg-SV2D/…/017.webp</div>
+      </div>
+      <div class="card">
+        <div class="rtag rKR">RegionCard · KR</div>
+        <img loading="lazy" src="https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2D/SV2D_017.png" alt="Pikachu KR SV2D 017" />
+        <div class="meta">
+          <div class="row"><span class="k">region</span><span class="v">KR</span></div>
+          <div class="row"><span class="k">setId</span><span class="v pack">kr-sv2d → 클레이버스트</span></div>
+          <div class="row"><span class="k">number</span><span class="v">017</span></div>
+          <div class="row"><span class="k">name</span><span class="v">피카츄</span></div>
+          <div class="row"><span class="k">rarity</span><span class="v">Common (커먼)</span></div>
+          <div class="row"><span class="k">releaseDate</span><span class="v">2023-06-14</span></div>
+        </div>
+        <div class="imgnote">imageLarge: …pokemonkorea.co.kr/…/SV2D_017.png</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="packgroup">
+    <div class="ph">📦 샤이니트레저 ex <small>cardPack: sv-paldean-fates · Card(per-pack) id: lc-jp-sv-paldean-fates-055</small></div>
+    <div class="cards">
+      <div class="card">
+        <div class="rtag rEN">RegionCard · EN</div>
+        <img loading="lazy" src="https://images.pokemontcg.io/sv4pt5/18_hires.png" alt="Pikachu EN sv4pt5 18" />
+        <div class="meta">
+          <div class="row"><span class="k">region</span><span class="v">EN</span></div>
+          <div class="row"><span class="k">setId</span><span class="v pack">sv4pt5 → 샤이니트레저 ex</span></div>
+          <div class="row"><span class="k">number</span><span class="v">18</span></div>
+          <div class="row"><span class="k">name</span><span class="v">Pikachu</span></div>
+          <div class="row"><span class="k">rarity</span><span class="v">Common</span></div>
+          <div class="row"><span class="k">releaseDate</span><span class="v">2024-01-25</span></div>
+        </div>
+        <div class="imgnote">imageLarge: images.pokemontcg.io/sv4pt5/18_hires.png</div>
+      </div>
+      <div class="card">
+        <div class="rtag rJP">RegionCard · JP</div>
+        <img loading="lazy" src="https://www.pokemon-card.com/assets/images/card_images/large/SV4a/044578_P_PIKACHIXYUU.jpg" alt="Pikachu JP SV4a 055" />
+        <div class="meta">
+          <div class="row"><span class="k">region</span><span class="v">JP</span></div>
+          <div class="row"><span class="k">setId</span><span class="v pack">jp-sv-paldean-fates → 샤이니트레저 ex</span></div>
+          <div class="row"><span class="k">number</span><span class="v">055</span></div>
+          <div class="row"><span class="k">name</span><span class="v">ピカチュウ</span></div>
+          <div class="row"><span class="k">rarity</span><span class="v">Common (コモン)</span></div>
+          <div class="row"><span class="k">releaseDate</span><span class="v">2023-12-01</span></div>
+        </div>
+        <div class="imgnote">imageLarge: pokemon-card.com/…/SV4a/044578_P_…jpg</div>
+      </div>
+      <div class="card">
+        <div class="rtag rKR">RegionCard · KR</div>
+        <img loading="lazy" src="https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_055.png" alt="Pikachu KR SV4a 055" />
+        <div class="meta">
+          <div class="row"><span class="k">region</span><span class="v">KR</span></div>
+          <div class="row"><span class="k">setId</span><span class="v pack">kr-sv4a → 샤이니트레저 ex</span></div>
+          <div class="row"><span class="k">number</span><span class="v">055</span></div>
+          <div class="row"><span class="k">name</span><span class="v">피카츄</span></div>
+          <div class="row"><span class="k">rarity</span><span class="v">Common (커먼)</span></div>
+          <div class="row"><span class="k">releaseDate</span><span class="v">2024-01-26</span></div>
+        </div>
+        <div class="imgnote">imageLarge: …pokemonkorea.co.kr/…/SV4a_055.png</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    위 6장은 모두 <b>같은 일러(OKACHEKE)·같은 게임카드(hp70·전기·Basic)</b> → <b>같은 ArtCard</b> 후보. 그림 메타(작가·타입)는 ArtCard 한 곳, <b>팩·번호·이미지·레어도·발매일은 RegionCard마다 따로</b>. (attacks가 null인 건 이 카드의 실제 DB 상태 — 미수집)
+  </div>
+
+  <!-- ================= 두 저장 방식 ================= -->
+  <h2 class="sec">3) 그럼 이 6장을 DB에 어떻게 두나 — 두 방식</h2>
+  <div class="compare">
+    <section class="panel">
+      <h3>② 추가형(B) — 지금 Slice 3 · "화면만 평평"</h3>
+      <p class="sub">per-pack <b>Card 버킷 유지</b> + <code>artCardId</code> 라벨. 리졸버가 라벨로 6장을 묶어 화면엔 평평. FK·id 무변경·가역.</p>
+      <div class="schem"><span class="ac">ArtCard "ac_…"</span>  (작가 OKACHEKE·전기·pHash)
+│  <span class="lbl">artCardId 라벨</span>
+├─ <span class="pc">Card lc-…SV2D-017</span>  <span class="dim">(클레이버스트 버킷·FK앵커)</span>
+│    ├ <span class="rc">RC EN sv2#62</span>   ├ <span class="rc">RC JP SV2D#017</span>   └ <span class="rc">RC KR #017</span>
+└─ <span class="pc">Card lc-…fates-055</span> <span class="dim">(샤이니트레저 버킷)</span>
+     ├ <span class="rc">RC EN sv4pt5#18</span> ├ <span class="rc">RC JP #055</span>    └ <span class="rc">RC KR #055</span>
+<span class="dim">▼ 리졸버가 artCardId 로 6장 묶어 표시 (저장은 팩별)</span></div>
+    </section>
+    <section class="panel">
+      <h3>③ 평평 4계층 — 계획안(P9) · "저장도 평평"</h3>
+      <p class="sub"><b>per-pack Card 없음.</b> 6장이 ArtCard 밑에 직접(<code>RegionCard.artCardId</code>). 팩은 각 RC의 <code>setId</code> 필드. = 물리병합.</p>
+      <div class="schem"><span class="ac">ArtCard "ac_…"</span>  (작가 OKACHEKE·전기·pHash)
+│  <span class="lbl">RegionCard.artCardId → 직접</span>
+├ <span class="rc">RC EN  sv2#62</span>        <span class="dim">setId sv2 → 클레이버스트</span>
+├ <span class="rc">RC JP  SV2D#017</span>     <span class="dim">setId jp-tcg-SV2D → 클레이버스트</span>
+├ <span class="rc">RC KR  SV2D#017</span>     <span class="dim">setId kr-sv2d → 클레이버스트</span>
+├ <span class="rc">RC EN  sv4pt5#18</span>     <span class="dim">setId sv4pt5 → 샤이니트레저</span>
+├ <span class="rc">RC JP  #055</span>          <span class="dim">setId jp-sv-…fates → 샤이니트레저</span>
+└ <span class="rc">RC KR  #055</span>          <span class="dim">setId kr-sv4a → 샤이니트레저</span>
+<span class="dim">(중간 Card 버킷 없음 — 6장 평평)</span></div>
+    </section>
+  </div>
+
+  <table class="cmp">
+    <tr><th style="width:24%">항목</th><th>② 추가형(B) · 지금</th><th>③ 평평 4계층 · P9</th></tr>
+    <tr><td>per-pack Card</td><td class="mid">유지(버킷)</td><td class="good">제거</td></tr>
+    <tr><td>각 RC의 팩 필드(setId)</td><td class="good">보유 ✅</td><td class="good">보유 ✅</td></tr>
+    <tr><td>평평함</td><td class="mid">화면만(리졸버)</td><td class="good">저장도</td></tr>
+    <tr><td>FK(컬렉션·거래…)</td><td class="good">무변경</td><td class="bad">RC/ArtCard 재배치</td></tr>
+    <tr><td>id</td><td class="good">보존</td><td class="bad">per-pack Card id 소멸</td></tr>
+    <tr><td>가역성 / 위험</td><td class="good">가역 · 낮음 · 지금</td><td class="bad">비가역 · 높음 · P9</td></tr>
+  </table>
+
+  <div class="takeaway">
+    <b>핵심:</b> 두 방식 다 <b>그림 메타는 ArtCard 한 곳, 팩·번호·이미지·레어도는 RegionCard마다</b>(위 6장 카드 그대로). 차이는 <b>실물 위에 per-pack Card 버킷이 있느냐</b>뿐 —
+    ②(지금)는 버킷을 남기고 리졸버로 화면만 평평하게, ③(P9)는 버킷을 없애 저장까지 평평하게(=물리병합).
+    경로: <b>지금 ②로 안전하게 묶고 검증 → P9에서 ③로 정규화</b>.
+  </div>
+
+  <!-- ================= 4) 기능 연계 ================= -->
+  <h2 class="sec">4) 연계 기능은 4계층 어디에 붙나 (코드 실측 대조)</h2>
+  <table class="cmp">
+    <tr><th style="width:13%">도메인</th><th>기능</th><th>읽는 계층</th><th style="width:30%">상태</th></tr>
+    <tr><td rowspan="3"><b>시세</b></td><td>단일 카드 시세 / 비교 모달</td><td>ArtCard (그림의 모든 RegionCard 가격 집계)</td><td style="color:#b45309">🟡 grain 맞음(gameCardId 안 씀=알트아트 안 섞임) · 단 EN orphan 분열</td></tr>
+    <tr><td>지역별 시세 (/tier-list)</td><td>RegionCard</td><td style="color:#c2410c">🟠 지역분류=출처 국적 휴리스틱(US/GLOBAL→EN)</td></tr>
+    <tr><td>덱 견적 (computeDeckCost)</td><td>GameCard 슬롯 → RegionCard 가격</td><td style="color:#c2410c">🟠 정상 횡단 · 슬롯키가 이름문자열(부채 상속)</td></tr>
+    <tr><td rowspan="3"><b>게임카드</b></td><td>채용률 · 덱 4장 제한</td><td>GameCard</td><td style="color:#15803d">✅ 이미 gameCardId (모범)</td></tr>
+    <tr><td>덱 레시피 슬롯 통합</td><td>GameCard</td><td style="color:#b91c1c">🔴 키가 정규화 카드명(주석 "gameCardId 미병합 우회")</td></tr>
+    <tr><td>"이 카드 쓰는 덱" Top</td><td>GameCard</td><td style="color:#b91c1c">🔴 단일 cardId만 · 재판 누락(채용률과 모집단 불일치)</td></tr>
+    <tr><td rowspan="2"><b>검색</b></td><td>기본 결과 묶음</td><td>ArtCard (기본)</td><td style="color:#b45309">🟡 groupBy 없음 · Card(그림∩팩) 하드코딩 · cross-pack 좁음</td></tr>
+    <tr><td>버전탭 · 시세정렬</td><td>RegionCard → ArtCard 집계</td><td style="color:#15803d">✅ 가격=regionCardId · 대표가=그룹 max</td></tr>
+    <tr><td rowspan="4"><b>도감</b></td><td>본문 팩 리스트</td><td>RegionCard (setId)</td><td style="color:#15803d">✅ 1행=1타일 (가장 깨끗)</td></tr>
+    <tr><td>형제 토글 (EN/JP/KR)</td><td>ArtCard 풀 (resolver)</td><td style="color:#c2410c">🟠 리졸버 설계 우수 · LIVE 풀이 그림∩팩이라 좁음</td></tr>
+    <tr><td>이미지 dedup (썸네일)</td><td>ArtCard</td><td style="color:#b91c1c">🔴 키가 cardId → 같은 그림 재판이 다른 썸네일</td></tr>
+    <tr><td>사이드바 · 합본 뱃지</td><td>팩 축 (Era→CardPack→Set)</td><td style="color:#15803d">✅ 정체성과 완전 직교 (가장 깨끗)</td></tr>
+    <tr><td><b>보조축</b></td><td>attacks/이름 등 언어 텍스트</td><td>CardText (cardId, language)</td><td style="color:#b45309">🟡 설계 깔끔(스키마 존재) · 이행 절반(name만)</td></tr>
+    <tr><td><b>공통</b></td><td>regulationMark / legalities</td><td>RegionCard (per-printing)</td><td style="color:#15803d">✅ 정확히 일치</td></tr>
+  </table>
+  <p class="sub" style="margin-top:6px">✅ 깨끗(한 계층 키) · 🟡 약한 긴장 · 🟠 계층 횡단(의도/설계됨) · 🔴 어긋남(다른 계층 키를 씀)</p>
+
+  <!-- ================= 5) 문제점 쉽게 ================= -->
+  <h2 class="sec">5) 문제점 — 두 종류로 (쉽게)</h2>
+  <div class="compare">
+    <section class="panel" style="border-color:#16a34a;border-width:1.5px">
+      <h3 style="color:#15803d">(A) ArtCard만 넣으면(Slice 3) 자동 해소</h3>
+      <p class="sub">원인 하나: 지금은 <b>"같은 그림이라도 팩이 다르면 딴 카드"</b>. → cross-pack에서 다 좁게 동작:</p>
+      <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.75">
+        <li>🔴 <b>이미지 dedup</b> — 같은 그림 재판이 팩마다 다른 썸네일로 흩어짐</li>
+        <li>🟠 <b>형제 토글·버전탭</b> — 다른 팩의 같은 그림이 안 뜸</li>
+        <li>🟡 <b>검색</b> — 같은 그림이 팩 수만큼 따로 나옴</li>
+        <li>🟡 <b>시세</b> — 같은 그림인데 EN orphan은 가격 분열("EN명 역추적"으로 수작업 봉합 중)</li>
+      </ul>
+      <p style="margin:10px 0 0;font-size:12.5px;color:#15803d;font-weight:600">→ artCardId 스티커 한 번이면 위 4개가 전부 봉합 (리졸버 풀만 넓어짐)</p>
+    </section>
+    <section class="panel" style="border-color:#b91c1c;border-width:1.5px">
+      <h3 style="color:#b91c1c">(B) 4계층과 무관한 기존 부채 (별도 정리 필요)</h3>
+      <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.75">
+        <li>⚠ <b>"같은 게임카드" 세는 법이 3갈래</b> — 채용률=정확(gameCardId), 레시피·견적=카드이름, "쓰는 덱"=그 인쇄본만 → 같은 카드 화면에서 <b>채용률과 "쓰는 덱" 숫자가 안 맞음</b>. 원인=외부(Limitless) 덱목록이 (이름·세트·번호)로 옴 → <b>덱리스트→게임카드 연결기</b>가 필요</li>
+        <li><b>시세 지역분류</b> = 파는 곳 국적(미국=영문판)으로 나눔 → 카드 자체 지역으로 분류해야 정확</li>
+        <li><b>레어도가 두 군데</b> (카드 옛자리 + 실물 새자리 폴백) → 옛자리 청소(별건)</li>
+        <li><b>기본 에너지</b> — "같은 카드"인데 실물이 수십 종 → 대표 하나 고르기 모호, 특수처리 불가피</li>
+        <li><s>한 그림이 여러 팩에 → ArtCard↔CardPack 1:1/N:M 결정</s> — <b>부채 아님(정정).</b> 팩은 RegionCard.setId에만 두고 "이 카드 어느 팩?"은 leaf에서 DISTINCT로 유도(자연 N:M). 링크표 불필요·단일 진실·무동기화 = 더 효율적. 옛 <code>lcIdsInPack</code>의 "대표 팩 1개 박기"만 leaf 유도로 교체하면 됨(코드 변경, 모델 결정 아님)</li>
+      </ul>
+    </section>
+  </div>
+  <div class="note" style="margin-top:14px">
+    핵심: <b>🔴·🟠·🟡 표시 대부분(이미지·형제·검색·시세 분열)은 (A) — ArtCard 한 층이면 해소.</b> 진짜 따로 손봐야 하는 건 (B), 특히 <b>"같은 게임카드 세는 법 통일"(외부 덱리스트→GameCard 연결기)</b> 와 <b>ArtCard↔CardPack 카디널리티 결정</b>.
+  </div>
+</div>
+</body>
+</html>

@@ -4,6 +4,9 @@
 import "dotenv/config";
 import { prisma } from "../../src/lib/prisma";
 const c = async (sql: string) => Number(((await prisma.$queryRawUnsafe(sql)) as any[])[0]?.c ?? 0);
+// 드롭된 테이블 참조 시 throw 방지(ArtCard 는 2026-06-11 폐기). 추가형 Slice3 재도입 시 자동 재점검.
+const tableExists = async (t: string) =>
+  Boolean(((await prisma.$queryRawUnsafe(`SELECT (to_regclass('"${t}"') IS NOT NULL) c`)) as any[])[0]?.c);
 
 async function main() {
   console.log("════ reconciliation 종합 검증 ════\n");
@@ -28,10 +31,11 @@ async function main() {
   for (const e of empties) { const k = e.id.replace(/[0-9].*$/, ""); fam.set(k, (fam.get(k) || 0) + 1); }
   console.log(`[3] 빈-LC 잔존: ${empties.length} (${[...fam].sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k}=${v}`).join(" · ")})`);
 
-  // 4) 고아 gameCard/artCard (멤버 LC 0)
+  // 4) 고아 gameCard/artCard (멤버 LC 0). ArtCard 는 드롭 가능성 있어 존재 가드.
+  const hasArtCard = await tableExists("ArtCard");
   const orphanGC = await c(`SELECT count(*)::int c FROM "GameCard" g WHERE NOT EXISTS (SELECT 1 FROM "LogicalCard" l WHERE l."gameCardId"=g.id)`);
-  const orphanAC = await c(`SELECT count(*)::int c FROM "ArtCard" a WHERE NOT EXISTS (SELECT 1 FROM "LogicalCard" l WHERE l."artCardId"=a.id)`);
-  console.log(`[4] 고아 GameCard ${orphanGC}${orphanGC ? " 🔴" : ""} · 고아 ArtCard ${orphanAC}${orphanAC ? " 🔴" : ""}`);
+  const orphanAC = hasArtCard ? await c(`SELECT count(*)::int c FROM "ArtCard" a WHERE NOT EXISTS (SELECT 1 FROM "LogicalCard" l WHERE l."artCardId"=a.id)`) : 0;
+  console.log(`[4] 고아 GameCard ${orphanGC}${orphanGC ? " 🔴" : ""} · 고아 ArtCard ${hasArtCard ? `${orphanAC}${orphanAC ? " 🔴" : ""}` : "(ArtCard 드롭됨·skip)"}`);
 
   // 5) 스테일 트윈 잔존(격리)
   const staleW = `s."setGroupId" IS NULL AND EXISTS (SELECT 1 FROM "Set" t WHERE t.id='en-tcg-'||s.id AND t."setGroupId" IS NOT NULL)`;
@@ -45,8 +49,8 @@ async function main() {
   const cl = await c(`SELECT count(*)::int c FROM "CardLocale"`);
   const pr = await c(`SELECT count(*)::int c FROM "Price"`);
   const gc = await c(`SELECT count(*)::int c FROM "GameCard"`);
-  const ac = await c(`SELECT count(*)::int c FROM "ArtCard"`);
-  console.log(`[6] 총계 — LC ${lc} · RegionCard ${cl} · Price ${pr} · GameCard ${gc} · ArtCard ${ac}`);
+  const ac = hasArtCard ? await c(`SELECT count(*)::int c FROM "ArtCard"`) : 0;
+  console.log(`[6] 총계 — LC ${lc} · RegionCard ${cl} · Price ${pr} · GameCard ${gc} · ArtCard ${hasArtCard ? ac : "(드롭됨)"}`);
 
   console.log(`\n${d1 + orphanGC + orphanAC + d2 === 0 ? "✅ 무결성 통과 (dangling/고아 0)" : "🔴 무결성 위반 발견"}`);
   await prisma.$disconnect();

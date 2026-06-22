@@ -8,6 +8,93 @@ All critical claims confirmed: `MarketStat.cardId` is an unconstrained `String` 
 
 ---
 
+## 0′. 개정 결정 기록 — 평평 ArtCard + 결정성 형제 리졸버 (2026-06-22, 이 절이 충돌 시 우선)
+
+> 사용자 검토(2026-06-22)로 확정된 방향. **아래 D1~D5 결정과 형제 리졸버 사양은, 본 문서의 §3.1·§3.4·§4.4·§5.3·§5.4·§0.2 와 충돌하는 부분을 대체(supersede)한다.** 근거 수치는 실측(read-only Supabase, project poke) 기준이며 인용은 `(파일:줄)` 또는 `SQL→결과`.
+>
+> **핵심 통찰(실측):** "어떤 형제를 옆에 보여줄까" 모호성은 **grain 에 달려 있다.** GameCard 그레인에서는 (gc,region) 쌍의 30.6%(11,724쌍)가 후보 2개 이상이고, 그 중 wave-내 모호 케이스의 88.3%가 **같은 setId**(같은 발매일 → 날짜 tie-break 무력)다. 그러나 **현재 per-pack `Card`(@@map LogicalCard) 그레인에서는 동일지역 형제가 2개 이상인 (region,Card) 쌍이 단 93건**(2개 88, 3개 5)뿐이고 **전부 distinct setId·전부 이미지 보유 → 결정성 tie-break 로 100% 해소 가능**. ⇒ **형제 풀은 GameCard 가 아니라 ArtCard(같은 그림) 그레인**으로 잡아야 한다. ArtCard 가 아직 없으므로 **이행 전에는 풀 = 현 `Card.id`(=card.locales, 1:1)**, 병합 후에는 풀 = `artCardId`(cross-pack). 같은 함수가 그대로 확장된다.
+
+### 결정 D1~D5
+
+- **D1 (평평·필드구분):** `ArtCard → RegionCard[]` 평평(공통 cross-region 팩 노드 없음). 각 RegionCard 가 `region·language·setId(지역별 Set)·number·name·image·price` 를 **자기 필드로** 보유 → EN/JP/KR 은 **동등 형제이되 필드로 완전 구분**. (이미 §0.1·§1.4·원칙2 형태 — 본 문서가 이미 충족.)
+- **D2 (유연한 검색 묶기):** 정체성이 계층화(Species→GameCard→ArtCard→RegionCard)되고 region 이 필드이므로, 검색/리스트는 **요청 시점에 group-by 레벨 선택** — `artCardId`(같은 그림 1행) / `gameCardId`(게임상 같은 카드 1행=덱슬롯) / region 필터 / `regionCardId`(인쇄본별). DB dedupe 가 아니라 **action/query 계층의 파라미터(`groupBy`)** 로 구현. → §0.2 에 **원칙 6** 추가, §3.4 에 groupBy 주석 추가.
+- **D3 (형제 리졸버 — 표시 전용, 단일 함수):** 아래 사양으로 §4.4 `pickRepresentative` 를 대체. 매칭(pickByImage)+렌더가 공유, **시세는 제외(D5).**
+- **D4 (CardPackLink = 선택적 정확도/내비 레이어):** 정체성·표시에 **하드 의존 금지.** 용도 = Tier-A 트윈(D3), 합본(merge) 뱃지, 교차지역 "같은 확장팩" 점프, 사이드바 시대정렬·클린명. **불완전 커버리지(84/743 세트 미링크)는 출시 차단 금지** — D3 날짜 폴백이 메움. → §5.4 invariant 를 **차단게이트가 아닌 enrichment 타깃**으로 변경, §5.2(c)·§5.3·§1.5 도 "선택적"으로 reframe.
+- **D5 (시세 독립):** `getCardPrices`/덱 시세는 자기 RegionCard 를 잡거나 **ArtCard 전체로 집계** — D3 의 날짜폴백 픽을 **절대 상속 안 함**(엉뚱한 팩 가격은 오해 유발). 집계 그레인 = **ArtCard**(GameCard 아님 — 알트아트/일반판 가격대 분리). → §3.1·§8.2 U9·§4.4 마지막문장의 "price 가 pickRepresentative 재사용" 서술을 **역전**(분리).
+
+### D3 형제 리졸버 사양 (`resolveSibling`, §4.4 대체)
+
+```
+resolveSibling(anchorRC, candidateLocales, packLinksForAnchorSet) → RegionCard | { unavailable: true }
+  // anchorRC = 클릭된 실물. candidateLocales = anchor 가 속한 ArtCard 의 모든 locale.
+  //   (ArtCard 병합 전: 현 Card.id 의 locales = card.locales. 병합 후: artCard.locales.)
+  // 대상지역 rT 마다 1장 결정:
+  1) 후보풀 = candidateLocales 중 region == rT        // 같은 그림 안에서만 — 다른 그림에서 빌리지 않음
+     - 비면 → { unavailable: true } ("이 지역 미발매")
+  2) Tier-A (정확 트윈) = 후보 중, Set 이 anchor 의 Set 과 같은 CardPackLink.waveId 에 묶인 것
+     - MERGE_N_TO_1 이면 단수 아님(집합). 비면 Tier-B.
+  3) Tier-B (폴백) = 후보 전체
+  4) 택1 티어 안 tie-break(순서 고정):
+     ① image-present desc
+     ② pack role: ANCHOR/NATIVE > reprint   // CardPackLink.role, 없으면 anchor 의 primarySet 로 근사
+     ③ |Set.releaseDate(cand) − Set.releaseDate(anchorRC.set)| 최소   // "최초"가 아니라 "클릭카드에 최근접"
+        · releaseDate ≤ 1996-01-01(=1970 센티넬 30건: JP7·KR23) 은 "불명" 취급 → ③ 건너뜀
+     ④ 같은 setId 다중(날짜·이미지·역할 동률, gameCard그레인의 88% 케이스) → number 오름차순(=비시크릿 우선) → 안정 id
+```
+- 날짜 키는 **`Set.releaseDate`(NOT NULL)** 사용, `CardPack.releaseDate`(nullable 5건)는 금지.
+- 후보풀의 "같은 그림"은 ArtCard. **이행 전엔 같은 `Card.id`** 로 대용(자연히 per-pack, 93건만 모호·전부 ④로 해소). **`gameCardId` 로 풀을 넓히지 말 것** — 다른 아트를 섞어 88% 동일세트 모호를 끌어들임.
+- `gameCardId` 8.7%(2,684 LC) 누락 → anchor 의 정체성 키가 없으면 **현 Card.id 풀로 폴백**(커버리지 후퇴 금지).
+
+### 구현 슬라이스 순서 (지금 시작)
+
+1. **Slice 1 — `resolveSibling` 순수 함수(읽기전용·스키마 무변경·revert 가역).** `src/lib/cards/sibling-resolver.ts` 신설(위 사양). 4개 분산 picker(`dex-region.ts:261-269` first-wins, `getCardDetail.ts:70-80` byRegion, `queries.ts:114-126` pickLocale, `dex-catalog.ts:97`)를 이 함수로 수렴. `loadCardByLocaleId`/`mapRowToDexCard` select 에 `locales.set.releaseDate` + 앵커 `gameCardId` 추가, 풀=card.locales. **효과: picker 단일화 + 93 모호건 결정화 + cross-pack seam 확보**(아직 cross-pack 형제는 아님 — 그건 Slice 3). `getCardPrices` 는 불변(D5), import 금지 lint/test 추가.
+2. **Slice 2 — Set.releaseDate 센티넬 백필(가드된 뮤테이터).** 1970-01-01 30건(JP7·KR23) 을 `data/jp-official`·`data/kr-official`·namu 로 채움. **반드시 `assertWritable()`**(다수가 동결 SV/SM 팩 → `--allow-protected` 체크포인트), dry-run 기본. Set 테이블만(정체성 행 무변경). 사이드바 정렬도 동시 교정.
+3. **Slice 3 — cross-pack 같은-그림 그룹(헤드라인 기능). ★방식 확정(2026-06-22 검증 워크플로): 추가형(B)만 — 물리 Card 병합·id 재발급 안 함.** 리졸버는 호출부가 넘긴 풀로 동작하므로(현재 per-pack `card.locales`), Slice 3 은 **그 풀을 cross-pack 아트그룹으로 넓히기만** 하면 된다.
+   - **구현:** ▸additive `Card.artFingerprint String?`(pHash 64bit hex, nullable·db push·drop 가역) + `Card.artCardId String?`(그룹 대표 id, 파생) **2개 컬럼만 추가 → 기존 FK 0개 건드림·완전 가역.** ▸offline 멱등 배치 `scripts/migration/build-art-groups.ts`: `RegionCard.imageLarge`(98.2% 커버)로 pHash 계산 후, **같은 gameCardId 안에서** §0′ 병합 3조건(같은 GameCard + pHash Hamming ≤ 임계 + art-불변 메타 무충돌)으로 그룹핑·`artCardId` 부여(이미지 없는 ~1,116·메타 충돌·null pHash → under-merge). ▸리졸버 풀을 `card.locales`→아트그룹 locales 로 **feature flag 뒤에서** 교체(flag off = DB 롤백 없이 차단; cross-pack 풀엔 `anchorGameCardId` 넘기지 않음). **★pHash 라이브러리 없음 → 추가 필요**(`sharp` + 작은 pHash 구현 또는 `image-hash`/`blockhash`).
+   - **★P3 v3 키(GameCard de-over-merge)는 이 기능의 전제 아님 — 디커플.** 리졸버는 아트그룹으로 풀링하고 `gameCardId` 는 비활성 옵션 필터(`anchorGameCardId`)라, over-merge 는 **채용률/게임 dedup 정확도만** 해치지 형제표시는 안 깬다(오거폰 4가면은 병합조건 (c) `types` 충돌로 GameCard 상태와 무관하게 자동 4분할). ⇒ P3 v3 apply·물리 Card 병합·id 재발급·`deck-pricing.ts:98-111` "EN명 역추적" 삭제·이미지 dedup `cardId→artCardId`·컬럼 드롭·도감 동결은 **전부 P9 엔드게임으로 이연**(이번 배치에 묶지 않음 — 메모리의 'id 재발급 동반' 지침은 이 기능엔 불필요).
+   - **순서(가역성 표기):** [1] Slice 1 커밋(읽기전용·git revert 가역) → [2] `p0-recon-verify.ts:33,48` 수리(드롭된 ArtCard 테이블 SELECT 가드 — 지금 실행 시 에러) → [3] db push: `artFingerprint`+`artCardId` 추가(가역) → [4] build-art-groups **dry-run**(오거폰/Switch/태그팀 샘플 출력) → [5] `check-locale-conservation --save` + `g0-golden-check.sh` before-snapshot → [6] build-art-groups **--apply**(`assertWritable`·동결팩 `--allow-protected`, **컬럼만 씀 — RegionCard.cardId/Card.id 불변**) → [7] conservation `--compare` + golden after(**diff=0** 게이트) → [8] 리졸버 풀 cross-pack 전환(flag on). DEFERRED→P9: 물리 Card 병합·Card.id 재발급·P3 v3 apply·@map 컬럼 드롭·SetGroup/setGroupId 제거·도감 동결.
+   - **⚠이력:** 2026-06-11 ArtCard(테이블) 폐기 사유 = 키 `gameCardId|illustrator` 의 폼변종 over-merge(오거폰 4가면→1, 라이브 347 GameCard 가 여전히 type 충돌). **이번엔 그 사고를 병합조건 (c) 메타 가드가 막는다**(P3 v3 가 아니라). Slice 1·2 는 이 모두와 무관(현 per-pack Card 에서 안전).
+  - **★Slice 3 병합 판정 기준(확장, 2026-06-22 — over-merge 2중 방어):** 두 인쇄본을 한 ArtCard 로 합치려면 **세 조건 동시 충족**: ▸(구조) 같은 `GameCard` ▸(1차 양성신호) 이미지 pHash 임계 이내 ▸(가드) 아래 *art-불변* 메타가 **충돌하지 않을 것** — 둘 다 값이 있을 때만 비교하고 한쪽 결측은 차단하지 않음, 정규화 후 비교: `illustrator`(대소문자·공백 정규화)·`types`(정렬 집합 — ★오거폰 가면 구분 핵심)·`subtypes`(정렬 집합)·`supertype`·`pokedexNumbers`(집합)·`evolvesFrom`. **하나라도 충돌하면 병합 금지**(같은 GameCard 아래 별 ArtCard 로 둠). 보수적으로 **under-merge 선호**(정당한 같은-그림 둘로 갈리는 손해 ≪ over-merge 로 타입 오표시되는 손해). ▸반대로 reprints 에서 **정당히 갈리는 값**(`rarity`·`number`·이미지 URL·`regulationMark`·`legalities`·hp errata)은 **일치 요구 안 함** — 요구하면 정당한 재판 병합을 막는다. ※이미지는 1차 양성신호, 메타는 음성(충돌) 가드 — 둘이 합쳐져야 예전 "메타 추측 단독" over-merge 와 "pHash 오탐" 양쪽을 막는다.
+
+### 보존(변경 불필요) / 정직성 메모
+
+- `getCardAdoption`(`cardgame.ts:991-1033`)은 이미 `gameCardId` roll-up — **무변경**. `getDecksUsingCard take:n*2`·`normalizeRecipeCardName`(텍스트 정규화) 유지(주석의 "gameCardId 미병합 우회" 문구만 정리).
+- `db push` 는 additive 만(no migrations dir, Prisma 7.8). 컬럼 drop/rename 은 P9 격리.
+- **솔직히:** Slice 1 단독으로는 "다른 팩의 같은 그림"이 형제로 뜨지 않는다(현 Card 가 팩단위라서). 그 헤드라인 기능은 **Slice 3(추가형 아트그룹 + 풀 확장)** 에서 켜진다(물리 병합 아님). Slice 1·2 는 그 토대 + 즉시 가치(결정성·정렬·picker 단일화).
+
+### ★ 지금 → P9 무손실 전체 실행 로드맵 (2026-06-22 확정 · 목적지=P9 완전 정규화)
+
+> 사용자 확정: **목적지는 P9(평평 collapse·완전 정규화)**, 중간 인간-점검 없음, Slice 들은 **카드 손실 최소화하며 거쳐가는 staging**. ⇒ 인간 점검을 **자동 게이트**로 대체하고 끊김 없이 진행. (검증 워크플로 wwwhg3p23, author+적대적 손실비평)
+>
+> **게이트 4종(전 단계 통과 필수, 사람 아닌 자동):** ① `recon`=check-locale-conservation(locale 소유권 — cardId 이동 포착, ★FK 테이블 손실은 못 잡음) ② `golden`=g0-golden-check(도감 JSON diff=0) ③ **★G_FK(신설)**=9개 FK 테이블(RegionCard·CardText·CardSpecies·ExternalIdMapping·DeckRecipeCard·Trade·CollectionItem·Ruling) 행수+값 베이스라인/델타(=FK 손실 포착, recon 사각 보완) ④ **★G_MERGE(신설)**=아트그룹 메타 충돌 하드블록(잘못된 병합 자동 차단 = 비가역 전 인간점검 대체).
+
+| # | 단계 | 핵심 작업 | 가역성 | 무손실 게이트 |
+|---|---|---|---|---|
+| **S0** | 게이트 선작성 | `G_FK`·`G_MERGE` 작성 + `p0-recon-verify.ts:33,48` 드롭된 ArtCard SELECT 에 `to_regclass` 가드 | 가역 | recon 무에러·G_FK 베이스라인 |
+| **S1** | Slice1 커밋 + 베이스라인 | sibling-resolver 커밋, recon/golden/G_FK 베이스라인 저장 | 가역 | recon0·golden0·MOVES0·baseline==live |
+| **S2** | Slice2 releaseDate | JP 트윈 발매일 백필(Set만, assertWritable) | 가역 | 행수 불변·golden0 |
+| **S3a** | Slice3 컬럼+ArtCard | `Card.artFingerprint`+`artCardId`(또는 ArtCard) nullable 추가(additive·FK 0) | 가역 | recon0·행수불변·G_FK Δ0 |
+| **S3b** | build-art-groups | **같은 gameCardId 안에서** pHash+메타3조건 그룹핑, NOHASH/충돌=under-merge, 리졸버 풀 flag | 가역 | MOVES0·golden0·**G_MERGE0**·Card당 artCardId 1개 |
+| **B** | 덱리스트→GameCard resolver | 외부 Limitless 덱리스트→gameCardId 통일 + `DeckRecipeCard.cardId` 생존자 재바인드(★collapse 전 필수) | 가역 | 채용률 diff0·recon0·non-null→생존자 |
+| **P3v3** | P3 v3 키 apply | name+types 키로 GameCard de-over-merge → build-art-groups 재실행 | 가역 | p3 self-verify·G_MERGE0·MOVES0 |
+| **P4** | art-meta→ArtCard 복제 | illustrator/types 등 대표 복제(합치 단언) | 가역 | mismatch0·G_FK Δ0 |
+| **P8a** | CardText ko 백필 | 병합 대상 전 Card 에 ko CardText 보장 | 가역 | missing-ko0 |
+| **P6.5** | unique 사전 dedup **플랜** | CardSpecies(union)·CardText(authority+loser 로그)·ExternalId(dedup) 충돌 사전 해소 플랜 산출 | 가역(until next) | 위반0·union==baseline |
+| **SNAP** | 스냅샷+골든 동결 | `pg_dump` + recon/G_FK save + **restore 리허설**(모든 비가역 직전) | 가역 | scratch restore==baseline |
+| **P5** | **COLLAPSE** (per-pack Card→ArtCard) | **1 트랜잭션**: 자식 FK 전부 생존자로 repoint→dedup→비대표 Card 삭제하되 **cascade victim 0 단언**(CardText Cascade 주의: 삭제 전 이동). RegionCard.id 불변 | **비가역** | recon0·G_FK 보존·cascade0·RegionCard.id 불변. 실패=SNAP 복원 |
+| **P5.5** | region rarity 정정 | 지역별 rarity 표기차 정정(P4 보류분) | **비가역** | RegionCard.id 불변·golden0 |
+| **P7** | 읽기 재배선 | 소비처를 collapse 모델로(flag·A/B render diff0) | 가역(until next) | render diff0·recon0 |
+| **P8** | ko→CardText 완주 | 표시/효과 2축, READ 전환 | 가역(until next) | dupe0·superset·전 read CardText |
+| **P9** | **TERMINAL** | setGroupId/SetGroup 드롭 → 잔여 art-meta 컬럼 드롭 → (**id 재발급=skip 권장**) → 도감 동결 | **비가역** | recon0·RegionCard.id 바이트동일·golden0 |
+
+**collapse 손실 벡터 & 무손실 처리(P5 핵심):** ▸CardText `@@unique[cardId,language]` 충돌 ~2,005 → authority-pick + loser 로그 ▸CardSpecies `@@id[cardId,speciesId]` 충돌 ~2,600 → DISTINCT union ▸ExternalIdMapping `@@unique[sourceId,externalId]` → dedup 후 repoint ▸**★CardText `onDelete:Cascade`** → 비대표 Card 삭제가 텍스트를 cascade 삭제하지 않게 **삭제 전 자식 이동 + cascade victim 0 단언** ▸**RegionCard.id 절대 불변**(Price 61k·MarketStat 60k·카드페이지 URL 이 탐) ▸**id 재발급 skip 권장**(8 FK orphan 위험·가치 낮음, 하면 동일 트랜잭션).
+
+**남은 결정:** pHash 라이브러리(sharp vs image-hash, 골든 위해 결정성) · pHash 임계(under-merge 편향) · CardText errata authority · 관찰 윈도우(크론 1주기) · id 재발급 최종 skip 여부.
+
+**실행 현실:** 코드 작업(S0 게이트·recon수리·S3 스키마/스크립트·B resolver·읽기재배선)은 진행 가능. **DB 쓰기·스냅샷·collapse(--apply/pg_dump)는 DB 접속 필요 → 사용자 로컬 실행**(스크립트는 전부 준비해 둠).
+
+---
+
 ## 0. 요약 (Executive Summary)
 
 ### 0.0 용어 / 네이밍 규칙 (확정 2026-06-10) — 이 표가 권위

@@ -8,6 +8,7 @@ import type { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import type { TCGCard } from "@/lib/api/pokemontcg";
 import { pickRarityLabel, REGION_SORT_PRIORITY } from "./card-fields";
+import { resolveSiblings, isUnavailable, type SiblingCandidate, type Region } from "./sibling-resolver";
 
 // ── 공용 타입 ─────────────────────────────────────────────────────────────────
 
@@ -258,11 +259,13 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
   locale: LocaleSummary;
   card: CardMeta;
   allLocales: LocaleSummary[];
+  // D3 형제 리졸버 결과 — 지역별 대표 1장(표시 전용). 미발매 지역은 키 없음.
+  siblingByRegion: Partial<Record<Region, LocaleSummary>>;
 } | null> {
   const cl = await prisma.regionCard.findUnique({
     where: { id: localeId },
     include: {
-      set: { select: { name: true, nameKo: true, nameJa: true, code: true, cardCount: true } },
+      set: { select: { name: true, nameKo: true, nameJa: true, code: true, cardCount: true, releaseDate: true } },
       card: {
         include: {
           rarity: {
@@ -272,7 +275,7 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
           texts: { where: { language: "ko" }, select: { name: true } },
           locales: {
             include: {
-              set: { select: { name: true, nameKo: true, nameJa: true, code: true, cardCount: true } },
+              set: { select: { name: true, nameKo: true, nameJa: true, code: true, cardCount: true, releaseDate: true } },
               rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true } },
             },
           },
@@ -288,10 +291,41 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
       (a, b) => (REGION_SORT_PRIORITY[a.region] ?? 9) - (REGION_SORT_PRIORITY[b.region] ?? 9)
     );
 
+  // D3 형제 리졸버(표시 전용). 풀 = 같은 그림(현 Card)의 locale 들 — cross-pack 은 ArtCard 병합 후 자동 확장.
+  //   docs/migration/identity-model-migration-plan.md §0′. ★시세는 이 결과를 쓰지 않는다(D5).
+  const toCand = (l: {
+    id: string;
+    region: string;
+    setId: string;
+    set: { releaseDate: Date };
+    imageSmall: string | null;
+    imageLarge: string | null;
+    numberInt: number | null;
+    number: string;
+  }): SiblingCandidate => ({
+    id: l.id,
+    region: l.region,
+    setId: l.setId,
+    releaseDate: l.set.releaseDate,
+    hasImage: !!(l.imageLarge || l.imageSmall),
+    numberInt: l.numberInt,
+    number: l.number,
+  });
+  const resolved = resolveSiblings(toCand(cl), cl.card.locales.map(toCand));
+  const byId = new Map(allLocales.map((l) => [l.id, l] as const));
+  const siblingByRegion: Partial<Record<Region, LocaleSummary>> = {};
+  for (const region of ["EN", "JP", "KR"] as const) {
+    const pick = resolved[region];
+    if (isUnavailable(pick)) continue;
+    const summary = byId.get(pick.id);
+    if (summary) siblingByRegion[region] = summary;
+  }
+
   return {
     locale: toLocaleSummary(cl),
     card: toCardMeta(cl.card),
     allLocales,
+    siblingByRegion,
   };
 }
 

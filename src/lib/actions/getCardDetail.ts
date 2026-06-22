@@ -52,32 +52,26 @@ export async function getCardDetail(regionCardId: string): Promise<CardDetail> {
   const loaded = await loadCardByLocaleId(regionCardId).catch(() => null);
   if (!loaded) return { variants: [], info: null };
 
-  const regionVariants: RegionCardVariant[] = loaded.allLocales.map((l) => ({
-    id: l.id,
-    region: l.region,
-    name: l.name,
-    number: l.number,
-    imageSmall: l.imageSmall,
-    imageLarge: l.imageLarge,
-    setCode: l.setCode,
-    setTotal: l.setCardCount ?? null,
-    setName:
-      l.region === "KR" ? (l.setNameKo ?? l.setName)
-      : l.region === "JP" ? (l.setNameJa ?? l.setName)
-      : l.setName,
-  }));
-
-  // region 당 1장만(탭 key 중복 방지). 같은 region 이 여러 장이면 이미지 있는 쪽 우선.
-  const byRegion = new Map<string, RegionCardVariant>();
-  for (const v of regionVariants) {
-    const cur = byRegion.get(v.region);
-    if (!cur || (!(cur.imageSmall || cur.imageLarge) && (v.imageSmall || v.imageLarge))) {
-      byRegion.set(v.region, v);
-    }
-  }
-  const variants: RegionCardVariant[] = [...byRegion.values()].sort(
-    (a, b) => (REGION_SORT_PRIORITY[a.region] ?? 9) - (REGION_SORT_PRIORITY[b.region] ?? 9)
-  );
+  // 지역 탭 = D3 형제 리졸버가 고른 지역별 대표 1장(loadCardByLocaleId.siblingByRegion).
+  //   같은 region 다중 인쇄본은 이미지>역할>최근접 발매일>번호>id 로 결정성 선택(임시 이미지픽 제거).
+  const variants: RegionCardVariant[] = (["EN", "JP", "KR"] as const)
+    .map((r) => loaded.siblingByRegion[r])
+    .filter((l): l is NonNullable<typeof l> => !!l)
+    .map((l) => ({
+      id: l.id,
+      region: l.region,
+      name: l.name,
+      number: l.number,
+      imageSmall: l.imageSmall,
+      imageLarge: l.imageLarge,
+      setCode: l.setCode,
+      setTotal: l.setCardCount ?? null,
+      setName:
+        l.region === "KR" ? (l.setNameKo ?? l.setName)
+        : l.region === "JP" ? (l.setNameJa ?? l.setName)
+        : l.setName,
+    }))
+    .sort((a, b) => (REGION_SORT_PRIORITY[a.region] ?? 9) - (REGION_SORT_PRIORITY[b.region] ?? 9));
 
   const tcg = cardToTCG(loaded.card, loaded.locale);
   const info: CardInfo = {

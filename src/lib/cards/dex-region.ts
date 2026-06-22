@@ -9,6 +9,7 @@
 import type { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { pickRarityLabel } from "./card-fields";
+import { resolveSiblings, isUnavailable, type SiblingCandidate } from "./sibling-resolver";
 import { canonEra, eraOrderIndex, isKnownEra } from "./eras";
 import { resolveSidebarTitle } from "./set-meta";
 import { buildSearchText, matchesSearch } from "@/lib/search";
@@ -210,6 +211,8 @@ const CARD_SELECT = {
   imageSmall: true,
   imageLarge: true,
   region: true,
+  setId: true,
+  set: { select: { releaseDate: true } },
   rarity: {
     select: {
       code: true, nameKo: true, nameJa: true, nameEn: true, tier: true,
@@ -231,7 +234,9 @@ const CARD_SELECT = {
       // 임시: 카드별 지역 형제(JP/EN/KR 인라인 토글용). 매핑 검증 후 제거 예정.
       locales: {
         select: {
-          id: true, region: true, name: true, number: true, imageSmall: true,
+          id: true, region: true, name: true, number: true, numberInt: true, imageSmall: true,
+          setId: true,
+          set: { select: { releaseDate: true } },
           rarity: {
             select: {
               code: true, nameKo: true, nameJa: true, nameEn: true, tier: true,
@@ -250,18 +255,35 @@ const REGS = ["JP", "EN", "KR"] as const;
 
 function mapRowToDexCard(rc: CardRow): DexCard {
   const rar = rc.rarity ?? rc.card.rarity; // 인쇄본별 rarity 우선, LC 폴백
-  // 임시: 카드별 지역 형제(variants) — 현재 region 은 rc 자신, 그 외는 같은 Card 의 첫 형제 1개씩.
-  const byRegion = new Map<string, DexCardVariant>();
-  byRegion.set(rc.region, {
-    id: rc.id, region: rc.region, name: rc.name, number: rc.number,
-    imageSmall: rc.imageSmall ?? rc.imageLarge ?? null,
-    rarity: pickRarityLabel(rc.region, rar) ?? undefined,
-    rarityCategoryNameKo: rar?.category?.nameKo ?? undefined,
+  // 지역 형제(variants) = D3 형제 리졸버(표시 전용). anchor = rc(이 세트/지역의 이 카드).
+  //   풀 = 같은 그림(현 Card)의 locale 들 — cross-pack 은 ArtCard 병합 후 자동 확장. (§0′)
+  const toCand = (l: {
+    id: string; region: string; setId: string; set: { releaseDate: Date };
+    imageSmall: string | null; imageLarge?: string | null;
+    numberInt: number | null; number: string;
+  }): SiblingCandidate => ({
+    id: l.id, region: l.region, setId: l.setId, releaseDate: l.set.releaseDate,
+    hasImage: !!(l.imageLarge || l.imageSmall), numberInt: l.numberInt, number: l.number,
   });
-  for (const v of rc.card.locales) {
-    if (byRegion.has(v.region)) continue;
+  const resolved = resolveSiblings(toCand(rc), rc.card.locales.map(toCand));
+  const localeById = new Map(rc.card.locales.map((l) => [l.id, l] as const));
+  const byRegion = new Map<string, DexCardVariant>();
+  for (const reg of REGS) {
+    const pick = resolved[reg];
+    if (isUnavailable(pick)) continue;
+    if (pick.id === rc.id) {
+      byRegion.set(reg, {
+        id: rc.id, region: rc.region, name: rc.name, number: rc.number,
+        imageSmall: rc.imageSmall ?? rc.imageLarge ?? null,
+        rarity: pickRarityLabel(rc.region, rar) ?? undefined,
+        rarityCategoryNameKo: rar?.category?.nameKo ?? undefined,
+      });
+      continue;
+    }
+    const v = localeById.get(pick.id);
+    if (!v) continue;
     const vr = v.rarity ?? rc.card.rarity;
-    byRegion.set(v.region, {
+    byRegion.set(reg, {
       id: v.id, region: v.region, name: v.name, number: v.number, imageSmall: v.imageSmall,
       rarity: pickRarityLabel(v.region, vr) ?? undefined,
       rarityCategoryNameKo: vr?.category?.nameKo ?? undefined,
