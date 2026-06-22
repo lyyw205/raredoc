@@ -535,6 +535,9 @@ async function main() {
   // ── 수정 #2: apply 시 스냅샷 타임스탬프 준비 ──────────────────────────────
   const ts = new Date().toISOString().replace(/[:.]/g, "-");
 
+  // RegionCard 행수 불변 단언용 — P5는 CardLocale.id 미변경·미삭제(오직 logicalCardId UPDATE).
+  const rcTotalBefore = await qCount(`SELECT count(*)::int c FROM "CardLocale"`);
+
   await prisma.$transaction(
     async (tx) => {
       // 4-a) CardText: cascade victim 0 보장을 위해 반드시 Card 삭제 전에 처리
@@ -699,19 +702,16 @@ async function main() {
       }
       console.log(`    ✅ 사후 cascade victim 단언 통과 (고아 0)`);
 
-      // 4-m) RegionCard.id 불변 단언: 삭제된 id 가 RegionCard.id 로 남아있으면 안 됨
-      //      (RegionCard 자체는 삭제 안 함 — FK logicalCardId 만 바꿨음)
-      const deletedAsRcId = Number(
-        ((await tx.$queryRawUnsafe<{ c: bigint }[]>(
-          `SELECT count(*)::int c FROM "CardLocale" WHERE id = ANY($1::text[])`,
-          nonRepIds,
-        )) as { c: bigint }[])[0]?.c ?? 0,
+      // 4-m) RegionCard 불변 단언 — P5는 CardLocale.id 를 변경/삭제하지 않음(오직 logicalCardId repoint).
+      //   ★구판 단언(삭제 Card.id == RegionCard.id 이면 차단)은 FALSE-POSITIVE 제거:
+      //     정체성 마이그가 1:1 카드의 LogicalCard.id 를 RegionCard.id 와 동일하게 둔 설계라(jp-svp-37 등 293건),
+      //     비대표 LC 삭제 시 같은 id 의 RegionCard 는 살아남아 logicalCardId 가 대표로 repoint 됨
+      //     (위 '사후 cascade victim 고아 0' 단언이 FK 무결성 이미 보증). → 행수 불변으로 교체.
+      const rcTotalAfter = Number(
+        ((await tx.$queryRawUnsafe<{ c: bigint }[]>(`SELECT count(*)::int c FROM "CardLocale"`)) as { c: bigint }[])[0]?.c ?? 0,
       );
-      if (deletedAsRcId > 0) {
-        // 비대표 Card.id 가 RegionCard.id 로 쓰이는 행이 있다면 이건 설계 버그
-        throw new Error(
-          `RegionCard.id 불변 위반 우려: 삭제된 Card.id 가 RegionCard.id 로 ${deletedAsRcId}건 존재 — 롤백. 설계 재검토 필요.`,
-        );
+      if (rcTotalAfter !== rcTotalBefore) {
+        throw new Error(`RegionCard 행수 불변 위반: ${rcTotalBefore} → ${rcTotalAfter} (RegionCard 삭제/생성 발생) — 롤백.`);
       }
 
       console.log(`\n  ✅ 트랜잭션 완료. collapse ${nonRepIds.length}건.`);
