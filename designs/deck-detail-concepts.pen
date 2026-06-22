@@ -1,0 +1,4573 @@
+{
+  "version": "2.13",
+  "children": [
+    {
+      "type": "text",
+      "id": "w3MJSK",
+      "x": 0,
+      "y": 0,
+      "name": "Label A",
+      "fill": "$text-primary",
+      "content": "A — 탭 플로우",
+      "fontFamily": "Noto Sans KR",
+      "fontSize": 16,
+      "fontWeight": "700"
+    },
+    {
+      "type": "text",
+      "id": "KzXAb",
+      "x": 500,
+      "y": 0,
+      "name": "Label B",
+      "fill": "$text-primary",
+      "content": "B — 대시보드 뷰",
+      "fontFamily": "Noto Sans KR",
+      "fontSize": 16,
+      "fontWeight": "700"
+    },
+    {
+      "type": "text",
+      "id": "Jemtt",
+      "x": 1000,
+      "y": 0,
+      "name": "Label C",
+      "fill": "$text-primary",
+      "content": "C — 카드 매거진",
+      "fontFamily": "Noto Sans KR",
+      "fontSize": 16,
+      "fontWeight": "700"
+    },
+    {
+      "type": "frame",
+      "id": "Vbc91",
+      "x": 0,
+      "y": 30,
+      "name": "A — 탭 플로우",
+      "clip": true,
+      "width": 420,
+      "height": 1020,
+      "fill": "$bg-page",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "dA24Y",
+          "name": "Nav",
+          "width": "fill_container",
+          "fill": "$bg-card",
+          "padding": [
+            12,
+            20
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "xqPMR",
+              "name": "Logo",
+              "fill": "$accent-yellow",
+              "content": "레어독",
+              "fontFamily": "Noto Sans KR",
+              "fontSize": 17,
+              "fontWeight": "800"
+            },
+            {
+              "type": "frame",
+              "id": "EvazR",
+              "name": "Nav Right",
+              "gap": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "R1Y5bV",
+                  "name": "덱 도감",
+                  "fill": "$text-secondary",
+                  "content": "덱 도감",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "eSjSy",
+                  "name": "대회결과",
+                  "fill": "$text-secondary",
+                  "content": "대회결과",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "uVfhv",
+                  "name": "메타",
+                  "fill": "$text-secondary",
+                  "content": "메타",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "icon",
+                  "id": "BFCaq",
+                  "name": "User Icon",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "user",
+                  "library": "lucide",
+                  "fill": "$text-secondary"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "B3XYGX",
+          "name": "Banner",
+          "width": "fill_container",
+          "fill": "$accent-yellow-soft",
+          "layout": "vertical",
+          "gap": 8,
+          "padding": [
+            20,
+            20,
+            16,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "SkeVw",
+              "name": "Banner Title Row",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "y9pBUY",
+                  "name": "Trophy",
+                  "width": 20,
+                  "height": 20,
+                  "icon": "trophy",
+                  "library": "lucide",
+                  "fill": "$accent-yellow"
+                },
+                {
+                  "type": "text",
+                  "id": "eZ8tK",
+                  "name": "Deck Name",
+                  "fill": "$text-primary",
+                  "content": "드림엑스트래 ex",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 19,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "MX7XB",
+              "name": "Archetype",
+              "fill": "$text-secondary",
+              "content": "무쏘순발  ·  3위 / 4회",
+              "fontFamily": "Noto Sans KR",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "uvHlQ",
+              "name": "Stats Row",
+              "width": "fill_container",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Yo8U2",
+                  "name": "카드 Pill",
+                  "fill": "$bg-card",
+                  "cornerRadius": 10,
+                  "gap": 4,
+                  "padding": [
+                    3,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "UrVBV",
+                      "name": "카드 PL",
+                      "fill": "$text-secondary",
+                      "content": "카드",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "SoWvb",
+                      "name": "카드 PV",
+                      "fill": "$text-primary",
+                      "content": "12장",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "v7N1cc",
+                  "name": "채용률 Pill",
+                  "fill": "$bg-card",
+                  "cornerRadius": 10,
+                  "gap": 4,
+                  "padding": [
+                    3,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "fnsvK",
+                      "name": "채용률 PL",
+                      "fill": "$text-secondary",
+                      "content": "채용률",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "r4Zds",
+                      "name": "채용률 PV",
+                      "fill": "$text-primary",
+                      "content": "88.6%",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "f7B05",
+                  "name": "메인 Pill",
+                  "fill": "$bg-card",
+                  "cornerRadius": 10,
+                  "gap": 4,
+                  "padding": [
+                    3,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Ovg50",
+                      "name": "메인 PL",
+                      "fill": "$text-secondary",
+                      "content": "메인",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "AYyxo",
+                      "name": "메인 PV",
+                      "fill": "$text-primary",
+                      "content": "91.7%",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "sFVj3",
+                  "name": "B10K Pill",
+                  "fill": "$bg-card",
+                  "cornerRadius": 10,
+                  "gap": 4,
+                  "padding": [
+                    3,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "cYZeP",
+                      "name": "B10K PL",
+                      "fill": "$text-secondary",
+                      "content": "B10K",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "sswIR",
+                      "name": "B10K PV",
+                      "fill": "$text-primary",
+                      "content": "1.2",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Bi3Jk",
+                  "name": "S41 Pill",
+                  "fill": "$bg-card",
+                  "cornerRadius": 10,
+                  "gap": 4,
+                  "padding": [
+                    3,
+                    8
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "XisAR",
+                      "name": "S41 PL",
+                      "fill": "$text-secondary",
+                      "content": "S41",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "oGa7j",
+                      "name": "S41 PV",
+                      "fill": "$text-primary",
+                      "content": "—",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "dbgNU",
+          "name": "Key Cards Sec",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "padding": [
+            14,
+            20,
+            10,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "M6VxF",
+              "name": "Key Title",
+              "fill": "$text-primary",
+              "content": "핵심 카드",
+              "fontFamily": "Noto Sans KR",
+              "fontSize": 14,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "K9boy6",
+              "name": "Key Row",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "sORzt",
+                  "name": "KC1",
+                  "width": 44,
+                  "height": 62,
+                  "fill": "#E8793A",
+                  "cornerRadius": 4,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "sVHIb",
+                  "name": "KC2",
+                  "width": 44,
+                  "height": 62,
+                  "fill": "#D4AF37",
+                  "cornerRadius": 4,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "kGZyJ",
+                  "name": "KC3",
+                  "width": 44,
+                  "height": 62,
+                  "fill": "#E891B4",
+                  "cornerRadius": 4,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "d8chM",
+                  "name": "KC4",
+                  "width": 44,
+                  "height": 62,
+                  "fill": "#5B9BD5",
+                  "cornerRadius": 4,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "GSnlb",
+                  "name": "KC5",
+                  "width": 44,
+                  "height": 62,
+                  "fill": "#6BBF59",
+                  "cornerRadius": 4,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "dWBuV",
+                  "name": "KC6",
+                  "width": 44,
+                  "height": 62,
+                  "fill": "#F5C842",
+                  "cornerRadius": 4,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "P3GOU",
+                  "name": "KC7",
+                  "width": 44,
+                  "height": 62,
+                  "fill": "#9B7FCC",
+                  "cornerRadius": 4,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "jFj22",
+                  "name": "KC8",
+                  "width": 44,
+                  "height": 62,
+                  "fill": "#5A5A6A",
+                  "cornerRadius": 4,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Kd1ry",
+          "name": "Tab Bar",
+          "width": "fill_container",
+          "fill": "$bg-card",
+          "stroke": "$border",
+          "strokeWidth": {
+            "bottom": 1
+          },
+          "children": [
+            {
+              "type": "frame",
+              "id": "mCKqW",
+              "name": "Tab 포켓몬",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                10,
+                0,
+                8,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "O3wbEW",
+                  "name": "포켓몬 Lbl",
+                  "fill": "$text-primary",
+                  "content": "포켓몬",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 1,
+                  "id": "nzZ6i",
+                  "name": "포켓몬 Ind",
+                  "fill": "$accent-yellow",
+                  "width": 40,
+                  "height": 2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ZtbV5",
+              "name": "Tab 트레이너",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                10,
+                0,
+                8,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "OsJzM",
+                  "name": "트레이너 Lbl",
+                  "fill": "$text-secondary",
+                  "content": "트레이너",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 13
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "o9TSS",
+              "name": "Tab 에너지",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                10,
+                0,
+                8,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "BKBHa",
+                  "name": "에너지 Lbl",
+                  "fill": "$text-secondary",
+                  "content": "에너지",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 13
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "zj57F",
+          "name": "Card List",
+          "width": "fill_container",
+          "layout": "vertical",
+          "padding": [
+            6,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "ixsp5",
+              "name": "드래곤파이트 ex Row",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                7,
+                4
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "H6lqM",
+                  "name": "드래곤파이트 ex T",
+                  "width": 28,
+                  "height": 39,
+                  "fill": "#E8793A",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "text",
+                  "id": "J1i73",
+                  "name": "드래곤파이트 ex N",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "드래곤파이트 ex",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "X06c9i",
+                  "name": "드래곤파이트 ex R",
+                  "fill": "$text-secondary",
+                  "content": "100%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "jImiZ",
+              "name": "아크레이스 Row",
+              "width": "fill_container",
+              "fill": "$bg-page",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                7,
+                4
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Ju6ln",
+                  "name": "아크레이스 T",
+                  "width": 28,
+                  "height": 39,
+                  "fill": "#D4AF37",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "text",
+                  "id": "hIJ5t",
+                  "name": "아크레이스 N",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "아크레이스",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "RUWLo",
+                  "name": "아크레이스 R",
+                  "fill": "$text-secondary",
+                  "content": "100%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "P0MJd",
+              "name": "뮤 Row",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                7,
+                4
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "I7W7KI",
+                  "name": "뮤 T",
+                  "width": 28,
+                  "height": 39,
+                  "fill": "#E891B4",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "text",
+                  "id": "sWoaV",
+                  "name": "뮤 N",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "뮤",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "LEein",
+                  "name": "뮤 R",
+                  "fill": "$text-secondary",
+                  "content": "88.0%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "S1L4N",
+              "name": "보쏘나이트 ex Row",
+              "width": "fill_container",
+              "fill": "$bg-page",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                7,
+                4
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "JYjuS",
+                  "name": "보쏘나이트 ex T",
+                  "width": 28,
+                  "height": 39,
+                  "fill": "#5B9BD5",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "text",
+                  "id": "qMMCz",
+                  "name": "보쏘나이트 ex N",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "보쏘나이트 ex",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "N23oX",
+                  "name": "보쏘나이트 ex R",
+                  "fill": "$text-secondary",
+                  "content": "84.2%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "crsZH",
+              "name": "피카츄 ex Row",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                7,
+                4
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "x2Ryj",
+                  "name": "피카츄 ex T",
+                  "width": 28,
+                  "height": 39,
+                  "fill": "#F5C842",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "text",
+                  "id": "VCfGm",
+                  "name": "피카츄 ex N",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "피카츄 ex",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "Arq6n",
+                  "name": "피카츄 ex R",
+                  "fill": "$text-secondary",
+                  "content": "80.7%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "E31NsJ",
+              "name": "쿨소공 Row",
+              "width": "fill_container",
+              "fill": "$bg-page",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                7,
+                4
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "geazi",
+                  "name": "쿨소공 T",
+                  "width": 28,
+                  "height": 39,
+                  "fill": "#6BBF59",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "text",
+                  "id": "X9Alu",
+                  "name": "쿨소공 N",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "쿨소공",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "lG2XO",
+                  "name": "쿨소공 R",
+                  "fill": "$text-secondary",
+                  "content": "36.6%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ytbXz",
+              "name": "미뮤도리 Row",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 10,
+              "padding": [
+                7,
+                4
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "DCKya",
+                  "name": "미뮤도리 T",
+                  "width": 28,
+                  "height": 39,
+                  "fill": "#9B7FCC",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "text",
+                  "id": "NALWv",
+                  "name": "미뮤도리 N",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "미뮤도리",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "VYlEd",
+                  "name": "미뮤도리 R",
+                  "fill": "$text-secondary",
+                  "content": "19.8%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "QIWKO",
+          "name": "Divider Wrap",
+          "width": "fill_container",
+          "height": 1,
+          "fill": "$border",
+          "layout": "none"
+        },
+        {
+          "type": "frame",
+          "id": "aEOjF",
+          "name": "Rankings",
+          "width": "fill_container",
+          "fill": "$accent-yellow-soft",
+          "layout": "vertical",
+          "gap": 8,
+          "padding": [
+            12,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "hZhAa",
+              "name": "Rank Title",
+              "fill": "$text-primary",
+              "content": "정상 Top 3",
+              "fontFamily": "Noto Sans KR",
+              "fontSize": 14,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "m84G0Z",
+              "name": "Rank Row",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Le0Pg",
+                  "name": "피카츄/라이츄 Card",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "cornerRadius": 8,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    8,
+                    6
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "iFA6B",
+                      "name": "피카츄/라이츄 Img",
+                      "width": 40,
+                      "height": 56,
+                      "fill": "#F5C842",
+                      "cornerRadius": 4
+                    },
+                    {
+                      "type": "text",
+                      "id": "e7YtkU",
+                      "name": "피카츄/라이츄 N",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "피카츄/라이츄",
+                      "textAlign": "center",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "taPqh",
+                      "name": "피카츄/라이츄 V",
+                      "fill": "$accent-yellow",
+                      "content": "100%",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "pVUOQ",
+                  "name": "두비클리나 Card",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "cornerRadius": 8,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    8,
+                    6
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "mA7Yv",
+                      "name": "두비클리나 Img",
+                      "width": 40,
+                      "height": 56,
+                      "fill": "#5B9BD5",
+                      "cornerRadius": 4
+                    },
+                    {
+                      "type": "text",
+                      "id": "Z320CH",
+                      "name": "두비클리나 N",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "두비클리나",
+                      "textAlign": "center",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "xbTyy",
+                      "name": "두비클리나 V",
+                      "fill": "$accent-yellow",
+                      "content": "100%",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "B0YSr",
+                  "name": "드래곤파이트 Card",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "cornerRadius": 8,
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": [
+                    8,
+                    6
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "D6Rmt",
+                      "name": "드래곤파이트 Img",
+                      "width": 40,
+                      "height": 56,
+                      "fill": "#E8793A",
+                      "cornerRadius": 4
+                    },
+                    {
+                      "type": "text",
+                      "id": "T89WJk",
+                      "name": "드래곤파이트 N",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "드래곤파이트",
+                      "textAlign": "center",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "T0TGsP",
+                      "name": "드래곤파이트 V",
+                      "fill": "$accent-yellow",
+                      "content": "86%",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "k25utG",
+          "name": "Tournaments",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 6,
+          "padding": [
+            12,
+            20,
+            16,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "JJcl6",
+              "name": "Tour Title",
+              "fill": "$text-primary",
+              "content": "최근 대회 리스트",
+              "fontFamily": "Noto Sans KR",
+              "fontSize": 14,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "L4fuF",
+              "name": "시티리그 서울",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 8,
+              "padding": [
+                8,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "BPGti",
+                  "name": "06.15",
+                  "fill": "$text-secondary",
+                  "content": "06.15",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "mNNRj",
+                  "name": "시티리그 서울 N",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "시티리그 서울",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "GDDpQ",
+                  "name": "3위 B",
+                  "fill": "$accent-green-soft",
+                  "cornerRadius": 8,
+                  "padding": [
+                    2,
+                    8
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "WoWhS",
+                      "name": "3위 T",
+                      "fill": "$accent-green",
+                      "content": "3위",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "fUBSj",
+              "name": "시티리그 부산",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 8,
+              "padding": [
+                8,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "mCvzO",
+                  "name": "06.08",
+                  "fill": "$text-secondary",
+                  "content": "06.08",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "g0rMM",
+                  "name": "시티리그 부산 N",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "시티리그 부산",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "viiiD",
+                  "name": "1위 B",
+                  "fill": "$accent-green-soft",
+                  "cornerRadius": 8,
+                  "padding": [
+                    2,
+                    8
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Glv7h",
+                      "name": "1위 T",
+                      "fill": "$accent-green",
+                      "content": "1위",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "JStLd",
+              "name": "주간 대회 #41",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 8,
+              "padding": [
+                8,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "N8X5U",
+                  "name": "05.25",
+                  "fill": "$text-secondary",
+                  "content": "05.25",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "lyPnq",
+                  "name": "주간 대회 #41 N",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "주간 대회 #41",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "BzqTx",
+                  "name": "4위 B",
+                  "fill": "$accent-green-soft",
+                  "cornerRadius": 8,
+                  "padding": [
+                    2,
+                    8
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "pZecf",
+                      "name": "4위 T",
+                      "fill": "$accent-green",
+                      "content": "4위",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "MFPT5",
+      "x": 500,
+      "y": 30,
+      "name": "B — 대시보드 뷰",
+      "clip": true,
+      "width": 420,
+      "height": 1020,
+      "fill": "$bg-page",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "PkrNx",
+          "name": "Header",
+          "width": "fill_container",
+          "fill": "#2D2D2D",
+          "padding": [
+            14,
+            20
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Q4HbOR",
+              "name": "Header Left",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "z3b5P",
+                  "name": "Arrow",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "arrow-left",
+                  "library": "lucide",
+                  "fill": "#FFFFFF"
+                },
+                {
+                  "type": "text",
+                  "id": "I5SVF",
+                  "name": "Header Title",
+                  "fill": "#FFFFFF",
+                  "content": "드림엑스트래 ex",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "nUYes",
+              "name": "Header Right",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "O6OHSo",
+                  "name": "Share",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "share-2",
+                  "library": "lucide",
+                  "fill": "#FFFFFF"
+                },
+                {
+                  "type": "icon",
+                  "id": "G30Og",
+                  "name": "Bookmark",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "bookmark",
+                  "library": "lucide",
+                  "fill": "#FFFFFF"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Rqhy8",
+          "name": "Archetype Bar",
+          "width": "fill_container",
+          "fill": "#3A3A3A",
+          "gap": 8,
+          "padding": [
+            8,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "W4gYx",
+              "name": "Rank Dot",
+              "width": 8,
+              "height": 8,
+              "fill": "$accent-yellow",
+              "cornerRadius": 4
+            },
+            {
+              "type": "text",
+              "id": "e67180",
+              "name": "Archetype",
+              "fill": "#CCCCCC",
+              "content": "무쏘순발  ·  3위 / 4회",
+              "fontFamily": "Noto Sans KR",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "pCAg6",
+          "name": "Stats Grid",
+          "width": "fill_container",
+          "gap": 8,
+          "padding": [
+            12,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "dsGGX",
+              "name": "카드 수 Card",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 10,
+              "layout": "vertical",
+              "gap": 6,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "g7qMnB",
+                  "name": "카드 수 Top",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "blWrF",
+                      "name": "카드 수 Ico",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "layers",
+                      "library": "lucide",
+                      "fill": "$text-secondary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Qtytd",
+                      "name": "카드 수 L",
+                      "fill": "$text-secondary",
+                      "content": "카드 수",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "E405J7",
+                  "name": "카드 수 V",
+                  "fill": "$text-primary",
+                  "content": "12장",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 20,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "zoTk0",
+              "name": "채용률 Card",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 10,
+              "layout": "vertical",
+              "gap": 6,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "O6nv9",
+                  "name": "채용률 Top",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "iBarc",
+                      "name": "채용률 Ico",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "percent",
+                      "library": "lucide",
+                      "fill": "$text-secondary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "t3WH4",
+                      "name": "채용률 L",
+                      "fill": "$text-secondary",
+                      "content": "채용률",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "BnOhc",
+                  "name": "채용률 V",
+                  "fill": "$text-primary",
+                  "content": "88.6%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 20,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "gYB2V",
+              "name": "메인 비율 Card",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 10,
+              "layout": "vertical",
+              "gap": 6,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "xY9OH",
+                  "name": "메인 비율 Top",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "yLDU1",
+                      "name": "메인 비율 Ico",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "target",
+                      "library": "lucide",
+                      "fill": "$text-secondary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "w7fEiG",
+                      "name": "메인 비율 L",
+                      "fill": "$text-secondary",
+                      "content": "메인 비율",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "rTx0X",
+                  "name": "메인 비율 V",
+                  "fill": "$text-primary",
+                  "content": "91.7%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 20,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ag1JK",
+              "name": "B10K Card",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 10,
+              "layout": "vertical",
+              "gap": 6,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "O5R6V",
+                  "name": "B10K Top",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "C62FW",
+                      "name": "B10K Ico",
+                      "width": 14,
+                      "height": 14,
+                      "icon": "trending-up",
+                      "library": "lucide",
+                      "fill": "$text-secondary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jFHbE",
+                      "name": "B10K L",
+                      "fill": "$text-secondary",
+                      "content": "B10K",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "W45Qu",
+                  "name": "B10K V",
+                  "fill": "$text-primary",
+                  "content": "1.2",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 20,
+                  "fontWeight": "700"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "jyqKV",
+          "name": "Key Strip",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 6,
+          "padding": [
+            10,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "XE0Aw",
+              "name": "Key Lbl",
+              "fill": "$text-secondary",
+              "content": "핵심 카드",
+              "fontFamily": "Noto Sans KR",
+              "fontSize": 12,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "Pr3O3",
+              "name": "Key Row",
+              "gap": 5,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "gITDa",
+                  "name": "BKC1",
+                  "width": 40,
+                  "height": 56,
+                  "fill": "#E8793A",
+                  "cornerRadius": 3,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "PTxY1",
+                  "name": "BKC2",
+                  "width": 40,
+                  "height": 56,
+                  "fill": "#D4AF37",
+                  "cornerRadius": 3,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "shUTg",
+                  "name": "BKC3",
+                  "width": 40,
+                  "height": 56,
+                  "fill": "#E891B4",
+                  "cornerRadius": 3,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "C3yVN9",
+                  "name": "BKC4",
+                  "width": 40,
+                  "height": 56,
+                  "fill": "#5B9BD5",
+                  "cornerRadius": 3,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "EPVcS",
+                  "name": "BKC5",
+                  "width": 40,
+                  "height": 56,
+                  "fill": "#6BBF59",
+                  "cornerRadius": 3,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "Q1KByY",
+                  "name": "BKC6",
+                  "width": 40,
+                  "height": 56,
+                  "fill": "#F5C842",
+                  "cornerRadius": 3,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "E5Q3zj",
+                  "name": "BKC7",
+                  "width": 40,
+                  "height": 56,
+                  "fill": "#9B7FCC",
+                  "cornerRadius": 3,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "mxYdP",
+                  "name": "BKC8",
+                  "width": 40,
+                  "height": 56,
+                  "fill": "#5A5A6A",
+                  "cornerRadius": 3,
+                  "stroke": "$border",
+                  "strokeWidth": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "jZOzg",
+          "name": "포켓몬 Sec",
+          "width": "fill_container",
+          "stroke": "$border",
+          "strokeWidth": {
+            "bottom": 1
+          },
+          "layout": "vertical",
+          "gap": 4,
+          "padding": [
+            10,
+            16,
+            6,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "XraTH",
+              "name": "포켓몬 H",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "nAlyr",
+                  "name": "포켓몬 T",
+                  "fill": "$text-primary",
+                  "content": "포켓몬",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "l2Gtc",
+                  "name": "포켓몬 Cnt",
+                  "fill": "$text-secondary",
+                  "content": "5종",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ENqgs",
+              "name": "드래곤파이트 ex R",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 8,
+              "padding": [
+                5,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "wFdwK",
+                  "name": "드래곤파이트 ex T",
+                  "width": 24,
+                  "height": 33,
+                  "fill": "#E8793A",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "frame",
+                  "id": "YG2xV",
+                  "name": "드래곤파이트 ex Col",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "A124Q",
+                      "name": "드래곤파이트 ex N",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "드래곤파이트 ex",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "DzXaL",
+                      "name": "드래곤파이트 ex BW",
+                      "width": "fill_container",
+                      "height": 4,
+                      "fill": "$border",
+                      "cornerRadius": 2,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 2,
+                          "id": "v6QwSU",
+                          "name": "드래곤파이트 ex Bar",
+                          "fill": "$accent-yellow",
+                          "width": 120,
+                          "height": 4
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "vloEl",
+                  "name": "드래곤파이트 ex P",
+                  "fill": "$accent-yellow",
+                  "content": "100%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "N5IY6R",
+              "name": "아크레이스 R",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 8,
+              "padding": [
+                5,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "OZs4h",
+                  "name": "아크레이스 T",
+                  "width": 24,
+                  "height": 33,
+                  "fill": "#D4AF37",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "frame",
+                  "id": "lWKpA",
+                  "name": "아크레이스 Col",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "gogZ8",
+                      "name": "아크레이스 N",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "아크레이스",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "eS5pr",
+                      "name": "아크레이스 BW",
+                      "width": "fill_container",
+                      "height": 4,
+                      "fill": "$border",
+                      "cornerRadius": 2,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 2,
+                          "id": "zUNen",
+                          "name": "아크레이스 Bar",
+                          "fill": "$accent-yellow",
+                          "width": 120,
+                          "height": 4
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "sN1dx",
+                  "name": "아크레이스 P",
+                  "fill": "$accent-yellow",
+                  "content": "100%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "n4ARF",
+              "name": "뮤 R",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 8,
+              "padding": [
+                5,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "dp4Oc",
+                  "name": "뮤 T",
+                  "width": 24,
+                  "height": 33,
+                  "fill": "#E891B4",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "frame",
+                  "id": "nepNt",
+                  "name": "뮤 Col",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "hERTL",
+                      "name": "뮤 N",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "뮤",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "q4GVmQ",
+                      "name": "뮤 BW",
+                      "width": "fill_container",
+                      "height": 4,
+                      "fill": "$border",
+                      "cornerRadius": 2,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 2,
+                          "id": "IULYU",
+                          "name": "뮤 Bar",
+                          "fill": "$accent-yellow",
+                          "width": 105.6,
+                          "height": 4
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "GSb9E",
+                  "name": "뮤 P",
+                  "fill": "$text-secondary",
+                  "content": "88.0%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "OximE",
+              "name": "보쏘나이트 ex R",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 8,
+              "padding": [
+                5,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "hZXkf",
+                  "name": "보쏘나이트 ex T",
+                  "width": 24,
+                  "height": 33,
+                  "fill": "#5B9BD5",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "frame",
+                  "id": "q5Hcv",
+                  "name": "보쏘나이트 ex Col",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "VH6ws",
+                      "name": "보쏘나이트 ex N",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "보쏘나이트 ex",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ezNuX",
+                      "name": "보쏘나이트 ex BW",
+                      "width": "fill_container",
+                      "height": 4,
+                      "fill": "$border",
+                      "cornerRadius": 2,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 2,
+                          "id": "eTXai",
+                          "name": "보쏘나이트 ex Bar",
+                          "fill": "$accent-yellow",
+                          "width": 101.04,
+                          "height": 4
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "N8UvLT",
+                  "name": "보쏘나이트 ex P",
+                  "fill": "$text-secondary",
+                  "content": "84.2%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "TFqkB",
+              "name": "피카츄 ex R",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 8,
+              "padding": [
+                5,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "d76R9W",
+                  "name": "피카츄 ex T",
+                  "width": 24,
+                  "height": 33,
+                  "fill": "#F5C842",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "frame",
+                  "id": "w778Rf",
+                  "name": "피카츄 ex Col",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Bsf0b",
+                      "name": "피카츄 ex N",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "피카츄 ex",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "HuF58",
+                      "name": "피카츄 ex BW",
+                      "width": "fill_container",
+                      "height": 4,
+                      "fill": "$border",
+                      "cornerRadius": 2,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 2,
+                          "id": "NYBCL",
+                          "name": "피카츄 ex Bar",
+                          "fill": "$accent-yellow",
+                          "width": 96.84,
+                          "height": 4
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "K5vWJ",
+                  "name": "피카츄 ex P",
+                  "fill": "$text-secondary",
+                  "content": "80.7%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "700"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Fdd3x",
+          "name": "트레이너 Sec",
+          "width": "fill_container",
+          "stroke": "$border",
+          "strokeWidth": {
+            "bottom": 1
+          },
+          "layout": "vertical",
+          "gap": 4,
+          "padding": [
+            10,
+            16,
+            6,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "g8trjX",
+              "name": "트레이너 H",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "r4ljx5",
+                  "name": "트레이너 T",
+                  "fill": "$text-primary",
+                  "content": "트레이너",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "K3Hax3",
+                  "name": "트레이너 Cnt",
+                  "fill": "$text-secondary",
+                  "content": "4종",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "tVQ7l",
+              "name": "보스의 지령 R",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 8,
+              "padding": [
+                5,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "TfOR2",
+                  "name": "보스의 지령 T",
+                  "width": 24,
+                  "height": 33,
+                  "fill": "#5A5A6A",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "frame",
+                  "id": "fWD8b",
+                  "name": "보스의 지령 Col",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "a0XiA",
+                      "name": "보스의 지령 N",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "보스의 지령",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Y1tEd",
+                      "name": "보스의 지령 BW",
+                      "width": "fill_container",
+                      "height": 4,
+                      "fill": "$border",
+                      "cornerRadius": 2,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 2,
+                          "id": "hPGmT",
+                          "name": "보스의 지령 Bar",
+                          "fill": "$accent-yellow",
+                          "width": 120,
+                          "height": 4
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "uIBv5",
+                  "name": "보스의 지령 P",
+                  "fill": "$accent-yellow",
+                  "content": "100%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "I6EUj",
+              "name": "네스트볼 R",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 8,
+              "padding": [
+                5,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "UuyrE",
+                  "name": "네스트볼 T",
+                  "width": 24,
+                  "height": 33,
+                  "fill": "#5B9BD5",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "frame",
+                  "id": "W3gDfg",
+                  "name": "네스트볼 Col",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "sdMDQ",
+                      "name": "네스트볼 N",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "네스트볼",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "jaIei",
+                      "name": "네스트볼 BW",
+                      "width": "fill_container",
+                      "height": 4,
+                      "fill": "$border",
+                      "cornerRadius": 2,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 2,
+                          "id": "UIsrh",
+                          "name": "네스트볼 Bar",
+                          "fill": "$accent-yellow",
+                          "width": 120,
+                          "height": 4
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "LAdjc",
+                  "name": "네스트볼 P",
+                  "fill": "$accent-yellow",
+                  "content": "100%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "H6WzsW",
+              "name": "나나미의 도움 R",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 8,
+              "padding": [
+                5,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "QQ02Z",
+                  "name": "나나미의 도움 T",
+                  "width": 24,
+                  "height": 33,
+                  "fill": "#E891B4",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "frame",
+                  "id": "pSvRl",
+                  "name": "나나미의 도움 Col",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "rw9Cr",
+                      "name": "나나미의 도움 N",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "나나미의 도움",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "PJbYX",
+                      "name": "나나미의 도움 BW",
+                      "width": "fill_container",
+                      "height": 4,
+                      "fill": "$border",
+                      "cornerRadius": 2,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 2,
+                          "id": "Tdz3Z",
+                          "name": "나나미의 도움 Bar",
+                          "fill": "$accent-yellow",
+                          "width": 105.6,
+                          "height": 4
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "mLBSb",
+                  "name": "나나미의 도움 P",
+                  "fill": "$text-secondary",
+                  "content": "88.0%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "mbaEO",
+              "name": "하이퍼볼 R",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 8,
+              "padding": [
+                5,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Iqb0v",
+                  "name": "하이퍼볼 T",
+                  "width": 24,
+                  "height": 33,
+                  "fill": "#D4AF37",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "frame",
+                  "id": "l0mFRy",
+                  "name": "하이퍼볼 Col",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "z49pxq",
+                      "name": "하이퍼볼 N",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "하이퍼볼",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "j2BP5G",
+                      "name": "하이퍼볼 BW",
+                      "width": "fill_container",
+                      "height": 4,
+                      "fill": "$border",
+                      "cornerRadius": 2,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 2,
+                          "id": "voNYb",
+                          "name": "하이퍼볼 Bar",
+                          "fill": "$accent-yellow",
+                          "width": 101.04,
+                          "height": 4
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "DjzIJ",
+                  "name": "하이퍼볼 P",
+                  "fill": "$text-secondary",
+                  "content": "84.2%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "700"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "itnDD",
+          "name": "에너지 Sec",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 4,
+          "padding": [
+            10,
+            16,
+            6,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "gPVXT",
+              "name": "에너지 H",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "FIHIb",
+                  "name": "에너지 T",
+                  "fill": "$text-primary",
+                  "content": "에너지",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "tkwlX",
+                  "name": "에너지 Cnt",
+                  "fill": "$text-secondary",
+                  "content": "2종",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "mNk8M",
+              "name": "기본 초 에너지 R",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 8,
+              "padding": [
+                5,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "RAraP",
+                  "name": "기본 초 에너지 T",
+                  "width": 24,
+                  "height": 33,
+                  "fill": "#6BBF59",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "frame",
+                  "id": "v0vhXY",
+                  "name": "기본 초 에너지 Col",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "jGDWg",
+                      "name": "기본 초 에너지 N",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "기본 초 에너지",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "N4Eqxk",
+                      "name": "기본 초 에너지 BW",
+                      "width": "fill_container",
+                      "height": 4,
+                      "fill": "$border",
+                      "cornerRadius": 2,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 2,
+                          "id": "mRGCS",
+                          "name": "기본 초 에너지 Bar",
+                          "fill": "$accent-yellow",
+                          "width": 120,
+                          "height": 4
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "T3A4Me",
+                  "name": "기본 초 에너지 P",
+                  "fill": "$accent-yellow",
+                  "content": "100%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ZzTOy",
+              "name": "더블터보 에너지 R",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 6,
+              "gap": 8,
+              "padding": [
+                5,
+                8
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "R7lVbx",
+                  "name": "더블터보 에너지 T",
+                  "width": 24,
+                  "height": 33,
+                  "fill": "#F5C842",
+                  "cornerRadius": 3
+                },
+                {
+                  "type": "frame",
+                  "id": "sSyWZ",
+                  "name": "더블터보 에너지 Col",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "aEZ4g",
+                      "name": "더블터보 에너지 N",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "더블터보 에너지",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "XRvbC",
+                      "name": "더블터보 에너지 BW",
+                      "width": "fill_container",
+                      "height": 4,
+                      "fill": "$border",
+                      "cornerRadius": 2,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "cornerRadius": 2,
+                          "id": "llwgr",
+                          "name": "더블터보 에너지 Bar",
+                          "fill": "$accent-yellow",
+                          "width": 96.84,
+                          "height": 4
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "KVnO3",
+                  "name": "더블터보 에너지 P",
+                  "fill": "$text-secondary",
+                  "content": "80.7%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "700"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Pa3lX",
+          "name": "Rank Bar",
+          "width": "fill_container",
+          "fill": "$accent-yellow-soft",
+          "gap": 8,
+          "padding": [
+            10,
+            16,
+            12,
+            16
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "UuEFt",
+              "name": "TopLbl",
+              "fill": "$text-primary",
+              "content": "Top 3",
+              "fontFamily": "Noto Sans KR",
+              "fontSize": 12,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "UrfZ8",
+              "name": "피카츄/라이츄 P",
+              "fill": "$bg-card",
+              "cornerRadius": 12,
+              "padding": [
+                4,
+                10
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "UiUHG",
+                  "name": "피카츄/라이츄 PT",
+                  "fill": "$text-primary",
+                  "content": "피카츄/라이츄",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "h93fE3",
+              "name": "두비클리나 P",
+              "fill": "$bg-card",
+              "cornerRadius": 12,
+              "padding": [
+                4,
+                10
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "v5tQ4w",
+                  "name": "두비클리나 PT",
+                  "fill": "$text-primary",
+                  "content": "두비클리나",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "f4AZHv",
+              "name": "드래곤파이트 P",
+              "fill": "$bg-card",
+              "cornerRadius": 12,
+              "padding": [
+                4,
+                10
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Bn807",
+                  "name": "드래곤파이트 PT",
+                  "fill": "$text-primary",
+                  "content": "드래곤파이트",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "eYBWm",
+      "x": 1000,
+      "y": 30,
+      "name": "C — 카드 매거진",
+      "clip": true,
+      "width": 420,
+      "height": 1020,
+      "fill": "$bg-page",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "mYoQn",
+          "name": "Hero",
+          "width": "fill_container",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 180,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#1A1A1A",
+                "position": 0
+              },
+              {
+                "color": "#2D2D2D",
+                "position": 1
+              }
+            ]
+          },
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            20,
+            24
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "C3T68R",
+              "name": "Hero Top",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Yr3JO",
+                  "name": "Logo C",
+                  "fill": "$accent-yellow",
+                  "content": "레어독",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 15,
+                  "fontWeight": "800"
+                },
+                {
+                  "type": "frame",
+                  "id": "Z07ZlI",
+                  "name": "Hero Icons",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Q9hnLf",
+                      "name": "Search C",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "search",
+                      "library": "lucide",
+                      "fill": "#999999"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "Z6XOD",
+                      "name": "Menu C",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "menu",
+                      "library": "lucide",
+                      "fill": "#999999"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "LrE2Z",
+              "name": "Hero Main",
+              "width": "fill_container",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "lJmY3",
+                  "name": "Hero Cards",
+                  "gap": -16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ULqNB",
+                      "name": "Hero Card 1",
+                      "rotation": 8,
+                      "width": 72,
+                      "height": 100,
+                      "fill": "#E8793A",
+                      "cornerRadius": 6,
+                      "stroke": "#444",
+                      "strokeWidth": 1,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#00000033",
+                        "offset": {
+                          "x": 2,
+                          "y": 4
+                        },
+                        "blur": 8
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "WDiXb",
+                      "name": "Hero Card 2",
+                      "width": 72,
+                      "height": 100,
+                      "fill": "#D4AF37",
+                      "cornerRadius": 6,
+                      "stroke": "#444",
+                      "strokeWidth": 1,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#00000044",
+                        "offset": {
+                          "x": 0,
+                          "y": 4
+                        },
+                        "blur": 8
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n2j0O",
+                      "name": "Hero Card 3",
+                      "rotation": -8,
+                      "width": 72,
+                      "height": 100,
+                      "fill": "#E891B4",
+                      "cornerRadius": 6,
+                      "stroke": "#444",
+                      "strokeWidth": 1,
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "color": "#00000033",
+                        "offset": {
+                          "x": -2,
+                          "y": 4
+                        },
+                        "blur": 8
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "xack1",
+                  "name": "Hero Info",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "sne3H",
+                      "name": "Deck Name C",
+                      "fill": "#FFFFFF",
+                      "content": "드림엑스트래 ex",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZJYwT",
+                      "name": "Sub C",
+                      "fill": "#999999",
+                      "content": "무쏘순발  ·  3위 / 4회",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "OcNk0",
+                      "name": "Hero Badges",
+                      "gap": 6,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "q5Jf7",
+                          "name": "HB1",
+                          "fill": "#3A3A3A",
+                          "cornerRadius": 10,
+                          "padding": [
+                            3,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "RfzvQ",
+                              "name": "HB1 T",
+                              "fill": "$accent-yellow",
+                              "content": "12장",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 10,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "j8crVO",
+                          "name": "HB2",
+                          "fill": "#3A3A3A",
+                          "cornerRadius": 10,
+                          "padding": [
+                            3,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "KGAPP",
+                              "name": "HB2 T",
+                              "fill": "#AAAAAA",
+                              "content": "88.6%",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 10,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "MHx1y",
+          "name": "Stats Ribbon",
+          "width": "fill_container",
+          "fill": "$accent-yellow-soft",
+          "padding": [
+            10,
+            0
+          ],
+          "justifyContent": "space_around",
+          "children": [
+            {
+              "type": "frame",
+              "id": "nqjgt",
+              "name": "카드 S",
+              "layout": "vertical",
+              "gap": 2,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "v3YeJ",
+                  "name": "카드 SV",
+                  "fill": "$text-primary",
+                  "content": "12",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "wr6wJ",
+                  "name": "카드 SL",
+                  "fill": "$text-secondary",
+                  "content": "카드",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 9,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "wea9i",
+              "name": "채용률 S",
+              "layout": "vertical",
+              "gap": 2,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "PaJbA",
+                  "name": "채용률 SV",
+                  "fill": "$text-primary",
+                  "content": "88.6%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "tT8R8",
+                  "name": "채용률 SL",
+                  "fill": "$text-secondary",
+                  "content": "채용률",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 9,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "pt3M5",
+              "name": "메인 S",
+              "layout": "vertical",
+              "gap": 2,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ye4FE",
+                  "name": "메인 SV",
+                  "fill": "$text-primary",
+                  "content": "91.7%",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "mLBdv",
+                  "name": "메인 SL",
+                  "fill": "$text-secondary",
+                  "content": "메인",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 9,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "cGoF8",
+              "name": "B10K S",
+              "layout": "vertical",
+              "gap": 2,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "moXU7",
+                  "name": "B10K SV",
+                  "fill": "$text-primary",
+                  "content": "1.2",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "qe1Ga",
+                  "name": "B10K SL",
+                  "fill": "$text-secondary",
+                  "content": "B10K",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 9,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Gsrer",
+          "name": "포켓몬 Sec",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "padding": [
+            14,
+            20,
+            8,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "J48zf4",
+              "name": "포켓몬 Header",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "V0JA5",
+                  "name": "포켓몬 Emoji",
+                  "fill": "$text-primary",
+                  "content": "⚔️",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "j3WYg5",
+                  "name": "포켓몬 Title",
+                  "fill": "$text-primary",
+                  "content": "포켓몬",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "rectangle",
+                  "id": "N6I9K",
+                  "name": "포켓몬 Line",
+                  "fill": "$border",
+                  "width": "fill_container",
+                  "height": 1
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "G0NSE",
+              "name": "포켓몬 Grid",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "JfRpQ",
+                  "name": "포켓몬 Col1",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "HsSlu",
+                      "name": "드래곤파이트 ex GC",
+                      "width": "fill_container",
+                      "fill": "$bg-card",
+                      "cornerRadius": 8,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 8,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "irqhX",
+                          "name": "드래곤파이트 ex GT",
+                          "width": 32,
+                          "height": 44,
+                          "fill": "#E8793A",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "czPHL",
+                          "name": "드래곤파이트 ex GR",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Nxxox",
+                              "name": "드래곤파이트 ex GN",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "드래곤파이트 ex",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "JOYw4",
+                              "name": "드래곤파이트 ex GP",
+                              "fill": "$accent-yellow",
+                              "content": "100%",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "i0hU6",
+                      "name": "아크레이스 GC",
+                      "width": "fill_container",
+                      "fill": "$bg-card",
+                      "cornerRadius": 8,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 8,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "N5I8R",
+                          "name": "아크레이스 GT",
+                          "width": 32,
+                          "height": 44,
+                          "fill": "#D4AF37",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "o2wo5",
+                          "name": "아크레이스 GR",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Aa89U",
+                              "name": "아크레이스 GN",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "아크레이스",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "PcgBq",
+                              "name": "아크레이스 GP",
+                              "fill": "$accent-yellow",
+                              "content": "100%",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "t4CgP",
+                      "name": "뮤 GC",
+                      "width": "fill_container",
+                      "fill": "$bg-card",
+                      "cornerRadius": 8,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 8,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "rHomK",
+                          "name": "뮤 GT",
+                          "width": 32,
+                          "height": 44,
+                          "fill": "#E891B4",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "BNrze",
+                          "name": "뮤 GR",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "I1Wasj",
+                              "name": "뮤 GN",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "뮤",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "sHcC5",
+                              "name": "뮤 GP",
+                              "fill": "$text-secondary",
+                              "content": "88.0%",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "zWpAx",
+                  "name": "포켓몬 Col2",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "i4GFno",
+                      "name": "보쏘나이트 ex GC",
+                      "width": "fill_container",
+                      "fill": "$bg-card",
+                      "cornerRadius": 8,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 8,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "yxYIJ",
+                          "name": "보쏘나이트 ex GT",
+                          "width": 32,
+                          "height": 44,
+                          "fill": "#5B9BD5",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "d2jr6h",
+                          "name": "보쏘나이트 ex GR",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "PLsCe",
+                              "name": "보쏘나이트 ex GN",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "보쏘나이트 ex",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Qar3x",
+                              "name": "보쏘나이트 ex GP",
+                              "fill": "$text-secondary",
+                              "content": "84.2%",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "w6QNN",
+                      "name": "피카츄 ex GC",
+                      "width": "fill_container",
+                      "fill": "$bg-card",
+                      "cornerRadius": 8,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 8,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "m13xz",
+                          "name": "피카츄 ex GT",
+                          "width": 32,
+                          "height": 44,
+                          "fill": "#F5C842",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "IAfT6",
+                          "name": "피카츄 ex GR",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "RsoYD",
+                              "name": "피카츄 ex GN",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "피카츄 ex",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "D0kRIM",
+                              "name": "피카츄 ex GP",
+                              "fill": "$text-secondary",
+                              "content": "80.7%",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "BP5Hx",
+                      "name": "쿨소공 GC",
+                      "width": "fill_container",
+                      "fill": "$bg-card",
+                      "cornerRadius": 8,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 8,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "r2UAE",
+                          "name": "쿨소공 GT",
+                          "width": 32,
+                          "height": 44,
+                          "fill": "#6BBF59",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "vOZfj",
+                          "name": "쿨소공 GR",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "bnnRg",
+                              "name": "쿨소공 GN",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "쿨소공",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "ejEBr",
+                              "name": "쿨소공 GP",
+                              "fill": "$text-secondary",
+                              "content": "36.6%",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "DlkGa",
+          "name": "트레이너 Sec",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "padding": [
+            14,
+            20,
+            8,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "JjZ9b",
+              "name": "트레이너 Header",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "LNpnL",
+                  "name": "트레이너 Emoji",
+                  "fill": "$text-primary",
+                  "content": "🃏",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "PWhvb",
+                  "name": "트레이너 Title",
+                  "fill": "$text-primary",
+                  "content": "트레이너",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "rectangle",
+                  "id": "H1IorW",
+                  "name": "트레이너 Line",
+                  "fill": "$border",
+                  "width": "fill_container",
+                  "height": 1
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Y4Kex",
+              "name": "트레이너 Grid",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "MheT9",
+                  "name": "트레이너 Col1",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "M4Pic",
+                      "name": "보스의 지령 GC",
+                      "width": "fill_container",
+                      "fill": "$bg-card",
+                      "cornerRadius": 8,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 8,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "QCE90",
+                          "name": "보스의 지령 GT",
+                          "width": 32,
+                          "height": 44,
+                          "fill": "#5A5A6A",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "LkKVi",
+                          "name": "보스의 지령 GR",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Vl9fl",
+                              "name": "보스의 지령 GN",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "보스의 지령",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "OI513",
+                              "name": "보스의 지령 GP",
+                              "fill": "$accent-yellow",
+                              "content": "100%",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "g0oFq",
+                      "name": "네스트볼 GC",
+                      "width": "fill_container",
+                      "fill": "$bg-card",
+                      "cornerRadius": 8,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 8,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "hFLGM",
+                          "name": "네스트볼 GT",
+                          "width": 32,
+                          "height": 44,
+                          "fill": "#5B9BD5",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "mvmto",
+                          "name": "네스트볼 GR",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "yfBPq",
+                              "name": "네스트볼 GN",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "네스트볼",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "ZpwxP",
+                              "name": "네스트볼 GP",
+                              "fill": "$accent-yellow",
+                              "content": "100%",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "YkLhF",
+                  "name": "트레이너 Col2",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "NRcTE",
+                      "name": "나나미의 도움 GC",
+                      "width": "fill_container",
+                      "fill": "$bg-card",
+                      "cornerRadius": 8,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 8,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "IlrDT",
+                          "name": "나나미의 도움 GT",
+                          "width": 32,
+                          "height": 44,
+                          "fill": "#E891B4",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "gvEop",
+                          "name": "나나미의 도움 GR",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "v3x7I",
+                              "name": "나나미의 도움 GN",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "나나미의 도움",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "wOKO7",
+                              "name": "나나미의 도움 GP",
+                              "fill": "$text-secondary",
+                              "content": "88.0%",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "GxY60",
+                      "name": "하이퍼볼 GC",
+                      "width": "fill_container",
+                      "fill": "$bg-card",
+                      "cornerRadius": 8,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 8,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "pp45t",
+                          "name": "하이퍼볼 GT",
+                          "width": 32,
+                          "height": 44,
+                          "fill": "#D4AF37",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "aSzaw",
+                          "name": "하이퍼볼 GR",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "d8dZcA",
+                              "name": "하이퍼볼 GN",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "하이퍼볼",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Www05",
+                              "name": "하이퍼볼 GP",
+                              "fill": "$text-secondary",
+                              "content": "84.2%",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "I5cQkm",
+          "name": "에너지 Sec",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "padding": [
+            14,
+            20,
+            8,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "x9LST",
+              "name": "에너지 Header",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "fKMLE",
+                  "name": "에너지 Emoji",
+                  "fill": "$text-primary",
+                  "content": "⚡",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "y8ZQDj",
+                  "name": "에너지 Title",
+                  "fill": "$text-primary",
+                  "content": "에너지",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "rectangle",
+                  "id": "xbZba",
+                  "name": "에너지 Line",
+                  "fill": "$border",
+                  "width": "fill_container",
+                  "height": 1
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "z4CLXv",
+              "name": "에너지 Grid",
+              "width": "fill_container",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "I5gVDz",
+                  "name": "에너지 Col1",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "NeFzW",
+                      "name": "기본 초 에너지 GC",
+                      "width": "fill_container",
+                      "fill": "$bg-card",
+                      "cornerRadius": 8,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 8,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "V6cdr8",
+                          "name": "기본 초 에너지 GT",
+                          "width": 32,
+                          "height": 44,
+                          "fill": "#6BBF59",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "pbTJD",
+                          "name": "기본 초 에너지 GR",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "yBVSP",
+                              "name": "기본 초 에너지 GN",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "기본 초 에너지",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "HaEqj",
+                              "name": "기본 초 에너지 GP",
+                              "fill": "$accent-yellow",
+                              "content": "100%",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "jcjqV",
+                  "name": "에너지 Col2",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "snquI",
+                      "name": "더블터보 에너지 GC",
+                      "width": "fill_container",
+                      "fill": "$bg-card",
+                      "cornerRadius": 8,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 8,
+                      "padding": [
+                        6,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "f8rmWE",
+                          "name": "더블터보 에너지 GT",
+                          "width": 32,
+                          "height": 44,
+                          "fill": "#F5C842",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ZGXZU",
+                          "name": "더블터보 에너지 GR",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "p9VF3",
+                              "name": "더블터보 에너지 GN",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "더블터보 에너지",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "JkR2l",
+                              "name": "더블터보 에너지 GP",
+                              "fill": "$text-secondary",
+                              "content": "80.7%",
+                              "fontFamily": "Noto Sans KR",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "zk5Ge",
+          "name": "Timeline",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "padding": [
+            14,
+            20,
+            16,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "G3e8g",
+              "name": "TL Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "K0N7M",
+                  "name": "TL Title",
+                  "fill": "$text-primary",
+                  "content": "대회 히스토리",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "L1RPvB",
+                  "name": "TL More",
+                  "fill": "$text-secondary",
+                  "content": "더보기 →",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "yONe0",
+              "name": "시티리그 서울 TL",
+              "width": "fill_container",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Inb47",
+                  "name": "시티리그 서울 Dot",
+                  "layout": "vertical",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "fZ5JS",
+                      "name": "시티리그 서울 Circle",
+                      "fill": "$accent-green",
+                      "width": 12,
+                      "height": 12
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "Gqq8A",
+                  "name": "06.15 D",
+                  "fill": "$text-secondary",
+                  "content": "06.15",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "WmGKZ",
+                  "name": "시티리그 서울 TN",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "시티리그 서울",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "zW3V1",
+                  "name": "3위 RB",
+                  "fill": "$accent-green",
+                  "cornerRadius": 10,
+                  "padding": [
+                    2,
+                    8
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "vNZ6s",
+                      "name": "3위 RT",
+                      "fill": "#FFFFFF",
+                      "content": "3위",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "nEfUq",
+              "name": "시티리그 부산 TL",
+              "width": "fill_container",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "clvfw",
+                  "name": "시티리그 부산 Dot",
+                  "layout": "vertical",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "XdOnP",
+                      "name": "시티리그 부산 Circle",
+                      "fill": "$accent-yellow",
+                      "width": 12,
+                      "height": 12
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "KJJXw",
+                  "name": "06.08 D",
+                  "fill": "$text-secondary",
+                  "content": "06.08",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "tyVv3",
+                  "name": "시티리그 부산 TN",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "시티리그 부산",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "oQuCK",
+                  "name": "1위 RB",
+                  "fill": "$accent-yellow",
+                  "cornerRadius": 10,
+                  "padding": [
+                    2,
+                    8
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "CMPOL",
+                      "name": "1위 RT",
+                      "fill": "#FFFFFF",
+                      "content": "1위",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "o1dD4k",
+              "name": "주간 대회 #41 TL",
+              "width": "fill_container",
+              "gap": 10,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "pYKBX",
+                  "name": "주간 대회 #41 Dot",
+                  "layout": "vertical",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "fr8si",
+                      "name": "주간 대회 #41 Circle",
+                      "fill": "$accent-blue",
+                      "width": 12,
+                      "height": 12
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "g5E6cR",
+                  "name": "05.25 D",
+                  "fill": "$text-secondary",
+                  "content": "05.25",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 10,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "Kg3PY",
+                  "name": "주간 대회 #41 TN",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "주간 대회 #41",
+                  "fontFamily": "Noto Sans KR",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "LIcE9",
+                  "name": "4위 RB",
+                  "fill": "$accent-blue",
+                  "cornerRadius": 10,
+                  "padding": [
+                    2,
+                    8
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "U6I8FX",
+                      "name": "4위 RT",
+                      "fill": "#FFFFFF",
+                      "content": "4위",
+                      "fontFamily": "Noto Sans KR",
+                      "fontSize": 10,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "accent-blue": {
+      "type": "color",
+      "value": "#4A90D9"
+    },
+    "accent-green": {
+      "type": "color",
+      "value": "#5CB85C"
+    },
+    "accent-green-soft": {
+      "type": "color",
+      "value": "#E8F5E9"
+    },
+    "accent-red": {
+      "type": "color",
+      "value": "#E85D5D"
+    },
+    "accent-yellow": {
+      "type": "color",
+      "value": "#FFCE31"
+    },
+    "accent-yellow-soft": {
+      "type": "color",
+      "value": "#FFF8DC"
+    },
+    "bg-card": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "bg-page": {
+      "type": "color",
+      "value": "#FAF7F2"
+    },
+    "bg-section": {
+      "type": "color",
+      "value": "#F5F2ED"
+    },
+    "border": {
+      "type": "color",
+      "value": "#EEEEEE"
+    },
+    "border-strong": {
+      "type": "color",
+      "value": "#DDDDDD"
+    },
+    "font-main": {
+      "type": "string",
+      "value": "Noto Sans KR"
+    },
+    "font-mono": {
+      "type": "string",
+      "value": "JetBrains Mono"
+    },
+    "text-inverse": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "text-primary": {
+      "type": "color",
+      "value": "#1A1A1A"
+    },
+    "text-secondary": {
+      "type": "color",
+      "value": "#888888"
+    },
+    "text-tertiary": {
+      "type": "color",
+      "value": "#BBBBBB"
+    }
+  }
+}

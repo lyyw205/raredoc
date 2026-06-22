@@ -39,99 +39,121 @@ function totalSlots(byCat: Record<RecipeCategory, RecipeSlot[]>): number {
   return CATEGORIES.reduce((s, c) => s + byCat[c].length, 0);
 }
 
-// 통합 슬롯 1행(=한 플레이 카드, 인쇄판 통합) — 썸네일 + 장수/채용률 + 버전 배지 + 💰 시세 힌트(준비 중).
-function SlotRow({
-  slot,
-  locale,
-  emphasis,
+// 슬롯 지표 칩 — 라벨(상) + 값(하)을 개별 카드로 감쌈. className 으로 폭(flex) 지정.
+function StatChip({
+  label,
+  value,
+  valueClass,
+  className,
 }: {
-  slot: RecipeSlot;
-  locale: string;
-  emphasis: "count" | "rate";
+  label: string;
+  value: string;
+  valueClass?: string;
+  className?: string;
 }) {
-  const thumb = <CardThumb src={slot.cardImage} alt={slot.cardName} className="w-9 shrink-0" />;
-  const top = slot.printings[0];
-  const price = priceRangeLabel(slot.priceMin, slot.priceMax);
-  const printingInfo =
-    slot.printingCount > 1 ? `인쇄판 ${slot.printingCount}종` : [top?.setCode, top?.number].filter(Boolean).join(" ");
   return (
     <div
       className={cn(
-        "flex items-center gap-3 p-2 rounded-toss-md",
-        slot.isHero && "bg-amber-50 ring-1 ring-amber-200"
+        "flex flex-col items-center justify-center gap-0.5 rounded-md border border-toss-divider bg-toss-bg-subtle px-1 py-1 text-center",
+        className
       )}
     >
-      {slot.regionCardId ? (
-        <Link href={`/${locale}/cards/${slot.regionCardId}`} className="shrink-0 hover:opacity-90">
-          {thumb}
-        </Link>
-      ) : (
-        thumb
+      <span className="text-[9px] leading-none text-toss-text-quaternary">{label}</span>
+      <b className={cn("break-keep text-[11px] font-bold leading-tight tabular-nums text-toss-text-secondary", valueClass)}>
+        {value}
+      </b>
+    </div>
+  );
+}
+
+// 통합 슬롯 카드 — 대표(최다 채용) 카드 + 우측 정보(이름 + 평균/채용/시세 지표 칩), 하단에 같은 성능의 다른 버전(인쇄판) 나열.
+function SlotTile({ slot, locale }: { slot: RecipeSlot; locale: string }) {
+  const price = priceRangeLabel(slot.priceMin, slot.priceMax);
+  // 같은 성능의 다른 인쇄판(대표 제외, 이미지 있는 것만)
+  const variants = slot.printings.filter((p) => p.image && p.regionCardId !== slot.regionCardId);
+  const mainThumb = <CardThumb src={slot.cardImage} alt={slot.cardName} className="w-full rounded-sm" />;
+  return (
+    <div
+      className={cn(
+        "rounded-md border p-2.5",
+        slot.isHero ? "border-amber-200 bg-amber-50" : "border-toss-divider bg-toss-bg-base"
       )}
-      <span className="text-toss-caption font-bold text-toss-text-primary w-9 text-right shrink-0 tabular-nums">
-        ×{slot.count}
-      </span>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-1.5">
-          <p className="text-toss-caption font-semibold text-toss-text-primary truncate">{slot.cardName}</p>
-          {slot.printingCount > 1 && (
-            <span className="shrink-0 text-[10px] font-medium px-1 py-0.5 rounded bg-toss-bg-muted text-toss-text-tertiary">
-              {slot.printingCount}버전
-            </span>
+    >
+      <div className="flex gap-3">
+        {/* 대표 카드 (크게) */}
+        {slot.regionCardId ? (
+          <Link
+            href={`/${locale}/cards/${slot.regionCardId}`}
+            className="w-28 shrink-0 transition-opacity hover:opacity-90"
+          >
+            {mainThumb}
+          </Link>
+        ) : (
+          <div className="w-28 shrink-0">{mainThumb}</div>
+        )}
+        {/* 우측: 정보 + (가격 밑) 다른 버전 */}
+        <div className="flex min-w-0 flex-1 flex-col gap-1">
+          <div className="flex items-center gap-1.5">
+            <p className="truncate text-toss-caption font-bold text-toss-text-primary">{slot.cardName}</p>
+            {slot.isHero && (
+              <span className="shrink-0 rounded bg-amber-100 px-1 py-0.5 text-[9px] font-semibold text-amber-700">
+                ⭐ 핵심
+              </span>
+            )}
+          </div>
+          <div className="flex items-stretch gap-1.5">
+            <StatChip label="평균" value={`×${slot.count}`} className="flex-[2]" />
+            <StatChip label="채용" value={`${slot.adoptionRate}%`} valueClass="text-toss-brand" className="flex-[2]" />
+            <StatChip label="시세" value={price ?? "—"} valueClass="text-amber-600" className="flex-[3]" />
+          </div>
+          {/* 같은 성능의 다른 버전(인쇄판) — 가격 밑 */}
+          {variants.length > 0 && (
+            <div className="mt-1 flex flex-wrap gap-1">
+              {variants.map((v, i) => {
+                const title = [slot.cardName, v.setCode, v.number].filter(Boolean).join(" ");
+                const t = <CardThumb src={v.image} alt={slot.cardName} className="w-full rounded-sm" />;
+                return v.regionCardId ? (
+                  <Link
+                    key={`${v.setCode}-${v.number}-${i}`}
+                    href={`/${locale}/cards/${v.regionCardId}`}
+                    title={title}
+                    className="w-10 shrink-0 transition-opacity hover:opacity-90"
+                  >
+                    {t}
+                  </Link>
+                ) : (
+                  <div key={`${v.setCode}-${v.number}-${i}`} title={title} className="w-10 shrink-0">
+                    {t}
+                  </div>
+                );
+              })}
+            </div>
           )}
         </div>
-        <p className="text-toss-micro text-toss-text-tertiary truncate">
-          {price && <span className="font-medium text-amber-600">💰 {price}</span>}
-          {price && printingInfo && <span className="text-toss-text-quaternary"> · </span>}
-          {printingInfo}
-        </p>
-      </div>
-      <div className="flex items-center gap-2 shrink-0">
-        {slot.isHero && (
-          <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-amber-100 text-amber-700">⭐ 핵심</span>
-        )}
-        <span
-          className={cn(
-            "text-right tabular-nums w-12",
-            emphasis === "rate"
-              ? "text-toss-caption font-bold text-toss-text-secondary"
-              : "text-toss-micro text-toss-text-tertiary"
-          )}
-        >
-          {slot.adoptionRate}%
-        </span>
       </div>
     </div>
   );
 }
 
-// 카테고리 소그룹(포켓몬/트레이너/에너지) — 코어·플렉스 공용.
-function CatGroups({
-  byCat,
-  locale,
-  emphasis,
-}: {
-  byCat: Record<RecipeCategory, RecipeSlot[]>;
-  locale: string;
-  emphasis: "count" | "rate";
-}) {
+// 카테고리 소그룹(포켓몬/트레이너/에너지) — 코어·플렉스 공용. 각 카드를 카드 타일 그리드로.
+function CatGroups({ byCat, locale }: { byCat: Record<RecipeCategory, RecipeSlot[]>; locale: string }) {
   const cats = CATEGORIES.filter((c) => byCat[c].length > 0);
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       {cats.map((cat) => {
         const slots = byCat[cat];
         const total = Math.round(slots.reduce((s, c) => s + c.count, 0) * 10) / 10;
         return (
           <div key={cat}>
-            <div className="flex items-center justify-between mb-1.5 px-1">
+            <div className="mb-2 flex items-center justify-between px-0.5">
               <p className="text-toss-micro font-semibold text-toss-text-tertiary">{CATEGORY_LABEL[cat]}</p>
               <span className="text-toss-micro text-toss-text-quaternary">
                 {slots.length}종 · 평균 {total}장
               </span>
             </div>
-            <div className="space-y-1">
+            <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {slots.map((s) => (
-                <SlotRow key={`${cat}-${s.cardName}`} slot={s} locale={locale} emphasis={emphasis} />
+                <SlotTile key={`${cat}-${s.cardName}`} slot={s} locale={locale} />
               ))}
             </div>
           </div>
@@ -151,15 +173,15 @@ function RecipeSection({ recipe, locale }: { recipe: ArchetypeRecipe; locale: st
   return (
     <div className="space-y-4">
       {coreCount > 0 && (
-        <Card variant="default" padding="md">
+        <section>
           <div className="flex items-center justify-between mb-3">
             <p className="text-toss-label font-semibold text-toss-text-primary flex items-center gap-1.5">
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500" /> 코어
             </p>
             <span className="text-toss-caption text-toss-text-tertiary">거의 모든 덱 채용 · 고정</span>
           </div>
-          <CatGroups byCat={recipe.core} locale={locale} emphasis="count" />
-        </Card>
+          <CatGroups byCat={recipe.core} locale={locale} />
+        </section>
       )}
       {flexCount > 0 && (
         <Card variant="default" padding="md">
@@ -169,7 +191,7 @@ function RecipeSection({ recipe, locale }: { recipe: ArchetypeRecipe; locale: st
             </p>
             <span className="text-toss-caption text-toss-text-tertiary">유저마다 갈리는 선택 · 채용률</span>
           </div>
-          <CatGroups byCat={recipe.flex} locale={locale} emphasis="rate" />
+          <CatGroups byCat={recipe.flex} locale={locale} />
         </Card>
       )}
       {recipe.minor.length > 0 && (
@@ -179,9 +201,9 @@ function RecipeSection({ recipe, locale }: { recipe: ArchetypeRecipe; locale: st
             <span className="inline-block transition-transform group-open:rotate-180">▾</span>
           </summary>
           <Card variant="default" padding="md" className="mt-2">
-            <div className="space-y-1">
+            <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {recipe.minor.map((s) => (
-                <SlotRow key={`minor-${s.category}-${s.cardName}`} slot={s} locale={locale} emphasis="rate" />
+                <SlotTile key={`minor-${s.category}-${s.cardName}`} slot={s} locale={locale} />
               ))}
             </div>
           </Card>
