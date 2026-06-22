@@ -1,16 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { useParams } from "next/navigation";
 import {
+  Button,
   Container,
   DeltaBadge,
   EmptyState,
   RankingTable,
+  SearchField,
   Tag,
   ToggleGroup,
 } from "@/components/toss";
+import { searchCardsAction, type CardSearchHit } from "@/lib/actions/searchCards";
 import { cn } from "@/lib/utils";
+import { CardVersionResults } from "./CardVersionResults";
+import { CardPriceByRegion } from "./CardPriceByRegion";
 
 // ── 데이터 타입 (서버에서 주입) ───────────────────────────────────────────────
 
@@ -322,11 +326,11 @@ function HighsTab({ rows }: { rows: MarketCardRow[] }) {
 // ── 페이지 ────────────────────────────────────────────────────────────────────
 
 const TABS = [
-  { id: "gainers",  label: "상승률",         popular: false },
-  { id: "volume",   label: "거래량",         popular: false },
-  { id: "trending", label: "트렌딩",         popular: true  },
-  { id: "dips",     label: "고점 대비 낙폭", popular: false },
-  { id: "highs",    label: "52주 신고가",    popular: false },
+  { id: "gainers",  label: "상승률",         short: "상승률" },
+  { id: "volume",   label: "거래량",         short: "거래량" },
+  { id: "trending", label: "트렌딩",         short: "트렌딩" },
+  { id: "dips",     label: "고점 대비 낙폭", short: "낙폭"   },
+  { id: "highs",    label: "52주 신고가",    short: "신고가" },
 ] as const;
 
 type TabId = typeof TABS[number]["id"];
@@ -340,17 +344,133 @@ const TAB_SUBTITLES: Record<TabId, string> = {
 };
 
 export default function MarketRankingsClient({ data }: { data: MarketRankingsData }) {
-  const params = useParams();
-  void params;
+  // 최상위 탭: 시세 검색 / 시세 랭킹
+  const [mainTab, setMainTab] = useState<"search" | "ranking">("search");
+  // 시세 랭킹 하위 탭
   const [activeTab, setActiveTab] = useState<TabId>("gainers");
+
+  // 시세 검색 상태 (① 검색 → ② 카드 버전 → ③ 지역별 시세)
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<CardSearchHit[] | null>(null);
+  const [selected, setSelected] = useState<CardSearchHit | null>(null);
+  const [searching, setSearching] = useState(false);
+
+  const runSearch = async (raw: string) => {
+    const q = raw.trim();
+    if (!q) {
+      setResults(null);
+      setSelected(null);
+      return;
+    }
+    setSearching(true);
+    try {
+      const hits = await searchCardsAction({ q, limit: 24, sort: "price" });
+      setResults(hits);
+      setSelected(null);
+    } finally {
+      setSearching(false);
+    }
+  };
 
   return (
     <Container size="xl" padding="md" className="py-8">
-      <div className="grid lg:grid-cols-[220px_1fr] gap-8">
-        {/* 좌측 사이드바 (토스 screener 패턴) */}
-        <aside className="lg:sticky lg:top-[68px] lg:self-start">
-          <div>
-            <p className="px-4 pt-3 pb-2 text-toss-body text-toss-text-secondary">카드 랭킹</p>
+      {/* ── 최상위 탭: 시세 검색 / 시세 랭킹 ─────────────────────────── */}
+      <div className="flex gap-1 border-b border-toss-divider mb-8">
+        {([
+          { id: "search", label: "시세 검색" },
+          { id: "ranking", label: "시세 랭킹" },
+        ] as const).map((t) => {
+          const active = mainTab === t.id;
+          return (
+            <button
+              key={t.id}
+              onClick={() => setMainTab(t.id)}
+              className={cn(
+                "relative px-4 h-11 text-toss-label font-semibold transition-colors",
+                active
+                  ? "text-toss-text-primary"
+                  : "text-toss-text-tertiary hover:text-toss-text-secondary"
+              )}
+            >
+              {t.label}
+              {active && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-toss-text-primary" />
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* ══ 시세 검색 탭 ══════════════════════════════════════════════ */}
+      {mainTab === "search" && (
+        <>
+          {/* ① 히어로: 카드 검색 */}
+          <section className="max-w-2xl mx-auto text-center">
+            <h1 className="text-toss-display font-bold text-toss-text-primary">시세</h1>
+            <p className="text-toss-body text-toss-text-tertiary mt-1.5">
+              카드 이름으로 검색해 종별·지역별 시세를 확인하세요.
+            </p>
+            <div className="mt-5 flex gap-2">
+              <div className="flex-1">
+                <SearchField
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  onClear={() => {
+                    setQuery("");
+                    setResults(null);
+                    setSelected(null);
+                  }}
+                  onSearch={runSearch}
+                  placeholder="예: 피카츄, 리자몽 ex, Charizard"
+                  size="lg"
+                />
+              </div>
+              <Button size="lg" onClick={() => runSearch(query)} loading={searching}>
+                검색
+              </Button>
+            </div>
+          </section>
+
+          {/* ② 검색 결과: 카드 버전 */}
+          {(searching || results !== null) && (
+            <section className="mt-8">
+              <h2 className="text-toss-label font-bold text-toss-text-secondary mb-3">
+                카드 버전
+                {results && results.length > 0 && (
+                  <span className="ml-1 text-toss-text-quaternary font-normal">({results.length})</span>
+                )}
+              </h2>
+              {searching ? (
+                <p className="text-toss-body text-toss-text-tertiary py-10 text-center">검색 중…</p>
+              ) : (
+                <CardVersionResults
+                  hits={results ?? []}
+                  selectedId={selected?.id ?? null}
+                  onSelect={setSelected}
+                />
+              )}
+            </section>
+          )}
+
+          {/* ③ 선택 카드: 지역별 시세 */}
+          {selected && (
+            <section className="mt-8">
+              <h2 className="text-toss-label font-bold text-toss-text-secondary mb-3">
+                지역별 시세
+                <span className="ml-2 text-toss-text-tertiary font-normal">{selected.nameKo ?? selected.name}</span>
+              </h2>
+              <CardPriceByRegion key={selected.id} regionCardId={selected.id} />
+            </section>
+          )}
+        </>
+      )}
+
+      {/* ══ 시세 랭킹 탭: 좌측 세로 사이드바 ═════════════════════════ */}
+      {mainTab === "ranking" && (
+        <section className="grid lg:grid-cols-[220px_1fr] gap-8">
+          {/* 좌측 세로 탭 */}
+          <aside className="lg:sticky lg:top-[68px] lg:self-start">
+            <p className="px-4 pt-1 pb-2 text-toss-body text-toss-text-secondary">카드 랭킹</p>
             <nav>
               {TABS.map((tab) => {
                 const active = activeTab === tab.id;
@@ -359,45 +479,42 @@ export default function MarketRankingsClient({ data }: { data: MarketRankingsDat
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
                     className={cn(
-                      "w-full flex items-center gap-1 px-4 py-2.5 h-10 text-toss-body transition-colors rounded-toss-md",
+                      "w-full flex items-center px-4 py-2.5 h-10 text-toss-body transition-colors rounded-toss-md",
                       active
                         ? "bg-toss-brand-weak text-toss-brand font-semibold"
                         : "text-toss-text-secondary hover:bg-toss-hover"
                     )}
                   >
-                    <span>{tab.label}</span>
-                    {tab.popular && (
-                      <Tag color="brand" shape="soft" className="ml-1">인기</Tag>
-                    )}
+                    {tab.label}
                   </button>
                 );
               })}
             </nav>
-          </div>
-        </aside>
+          </aside>
 
-        {/* 메인 영역 */}
-        <div className="min-w-0">
-          <div className="mb-6">
-            <h1 className="text-toss-display font-bold text-toss-text-primary">
-              {TABS.find((t) => t.id === activeTab)?.label}
-            </h1>
-            <p className="text-toss-body text-toss-text-tertiary mt-1">
-              {TAB_SUBTITLES[activeTab]}
+          {/* 우측 본문 */}
+          <div className="min-w-0">
+            <div className="mb-6">
+              <h3 className="text-toss-title-2 font-bold text-toss-text-primary">
+                {TABS.find((t) => t.id === activeTab)?.label}
+              </h3>
+              <p className="text-toss-body text-toss-text-tertiary mt-1">
+                {TAB_SUBTITLES[activeTab]}
+              </p>
+            </div>
+
+            {activeTab === "gainers"  && <GainersTab data={data} />}
+            {activeTab === "volume"   && <VolumeTab rows={data.volume} />}
+            {activeTab === "trending" && <TrendingTab rows={data.trending} />}
+            {activeTab === "dips"     && <DipsTab rows={data.dips} />}
+            {activeTab === "highs"    && <HighsTab rows={data.highs} />}
+
+            <p className="text-toss-micro text-toss-text-quaternary mt-8 text-center">
+              시세 데이터는 번개장터·포켓마켓 거래 기반 추정값입니다. 실제 투자 손익을 보장하지 않습니다.
             </p>
           </div>
-
-          {activeTab === "gainers"  && <GainersTab data={data} />}
-          {activeTab === "volume"   && <VolumeTab rows={data.volume} />}
-          {activeTab === "trending" && <TrendingTab rows={data.trending} />}
-          {activeTab === "dips"     && <DipsTab rows={data.dips} />}
-          {activeTab === "highs"    && <HighsTab rows={data.highs} />}
-
-          <p className="text-toss-micro text-toss-text-quaternary mt-8 text-center">
-            시세 데이터는 번개장터·포켓마켓 거래 기반 추정값입니다. 실제 투자 손익을 보장하지 않습니다.
-          </p>
-        </div>
-      </div>
+        </section>
+      )}
     </Container>
   );
 }
