@@ -35,6 +35,11 @@ const FK: { t: string; col: string; parent: string; side: "card" | "locale" | "o
   { t: "CollectionItem", col: "localeId", parent: "CardLocale", side: "locale" },
   { t: "Ruling", col: "logicalCardId", parent: "LogicalCard", side: "card" },
   { t: "Price", col: "cardLocaleId", parent: "CardLocale", side: "locale" },
+  // 소프트 FK (RegionCard.id 참조, P5 에선 RegionCard.id 불변이라 무해하지만 게이트 가시성 확보;
+  // P9 에서 RegionCard.id 재발급 재고 시 필수 모니터링 대상)
+  { t: "MarketStat", col: "cardId", parent: "CardLocale", side: "locale" },
+  { t: "Conversation", col: "sourceCardId", parent: "CardLocale", side: "locale" },
+  { t: "Message", col: "attachedCardId", parent: "CardLocale", side: "locale" },
 ];
 
 type Metric = { total: number; nonNull: number; orphan: number; side: string };
@@ -83,8 +88,16 @@ async function main() {
     console.log(`════ G_FK 대조 vs '${label}' ════`);
     for (const [k, v] of Object.entries(m)) {
       const b = base[k];
-      const dTotal = v.total - (b?.total ?? v.total);
-      const dNon = v.nonNull - (b?.nonNull ?? v.nonNull);
+      if (!b) {
+        // 베이스라인에 없는 테이블 — 신규 모니터링 항목(정보용, fail 카운트 안 함)
+        console.log(
+          `   ${k.padEnd(36)} total=${v.total} nonNull=${v.nonNull} orphan=${v.orphan}` +
+            `${v.orphan > 0 ? " ⓘ고아(기존상태)" : ""} ⓘ신규/baseline없음(정보용)`,
+        );
+        continue;
+      }
+      const dTotal = v.total - b.total;
+      const dNon = v.nonNull - b.nonNull;
       const orphanBad = v.orphan > 0;
       const localeLoss = v.side === "locale" && dNon < 0;
       if (orphanBad || localeLoss) fail++;

@@ -87,11 +87,18 @@ resolveSibling(anchorRC, candidateLocales, packLinksForAnchorSet) → RegionCard
 | **P8** | ko→CardText 완주 | 표시/효과 2축, READ 전환 | 가역(until next) | dupe0·superset·전 read CardText |
 | **P9** | **TERMINAL** | setGroupId/SetGroup 드롭 → 잔여 art-meta 컬럼 드롭 → (**id 재발급=skip 권장**) → 도감 동결 | **비가역** | recon0·RegionCard.id 바이트동일·golden0 |
 
-**collapse 손실 벡터 & 무손실 처리(P5 핵심):** ▸CardText `@@unique[cardId,language]` 충돌 ~2,005 → authority-pick + loser 로그 ▸CardSpecies `@@id[cardId,speciesId]` 충돌 ~2,600 → DISTINCT union ▸ExternalIdMapping `@@unique[sourceId,externalId]` → dedup 후 repoint ▸**★CardText `onDelete:Cascade`** → 비대표 Card 삭제가 텍스트를 cascade 삭제하지 않게 **삭제 전 자식 이동 + cascade victim 0 단언** ▸**RegionCard.id 절대 불변**(Price 61k·MarketStat 60k·카드페이지 URL 이 탐) ▸**id 재발급 skip 권장**(8 FK orphan 위험·가치 낮음, 하면 동일 트랜잭션).
+**collapse 손실 벡터 & 무손실 처리(P5 핵심):** ▸CardText `@@unique[cardId,language]` 충돌 **실측 7,820**(이전 추정 ~2,005) → authority-pick + loser 로그 ▸CardSpecies `@@id[cardId,speciesId]` 충돌 **실측 7,248**(이전 추정 ~2,600, 1,025 종집합 100% 보존) → DISTINCT union ▸ExternalIdMapping `@@unique[sourceId,externalId]` **실측 충돌 0** → 단순 repoint ▸**★CardText `onDelete:Cascade`** → 비대표 Card 삭제가 텍스트를 cascade 삭제하지 않게 **삭제 전 자식 이동 + cascade victim 0 단언** ▸**RegionCard.id 절대 불변**(Price 61k·MarketStat 60k·카드페이지 URL 이 탐) ▸**id 재발급 skip 권장**(8 FK orphan 위험·가치 낮음, 하면 동일 트랜잭션).
+> ★실측 출처(2026-06-22, `scripts/migration/p6_5-collision-plan.ts` 읽기전용): grain=gameCard(=collapse 상한; artCard 그룹 ⊆ gameCard 그룹이라 실제는 이보다 작음). 전체Card 30,800 · 그룹 16,406 · 비대표(삭제대상) 11,580. CardText cascade=true 확정. ExternalId 충돌 0 확인. **세 충돌유형 처리설계가 실측치 전부 커버.**
 
 **남은 결정:** pHash 라이브러리(sharp vs image-hash, 골든 위해 결정성) · pHash 임계(under-merge 편향) · CardText errata authority · 관찰 윈도우(크론 1주기) · id 재발급 최종 skip 여부.
 
 **실행 현실:** 코드 작업(S0 게이트·recon수리·S3 스키마/스크립트·B resolver·읽기재배선)은 진행 가능. **DB 쓰기·스냅샷·collapse(--apply/pg_dump)는 DB 접속 필요 → 사용자 로컬 실행**(스크립트는 전부 준비해 둠).
+
+**prep 산출물(2026-06-22, dry-run 대기 중 선작성·적대검증 완료):**
+- `scripts/migration/p6_5-collision-plan.ts` — 읽기전용 충돌 사전집계(`--grain=gameCard|artCard`). apply 후 `--grain=artCard` 재실행으로 실제 grain 수치 확정.
+- `scripts/migration/p5-collapse.ts` — **P5 비가역 collapse(dry-run 기본·`--apply` 게이트·미실행).** ★적대검증이 BLOCKING 결함 캐치·수정 완료: (1) 트랜잭션 경계 붕괴 — 4개 FK 헬퍼가 루트 `prisma` 대신 `tx` 경유하도록 수정(half-collapse 차단) (2) loser/dedup 삭제분을 `SELECT *` 전체컬럼으로 `.migration-snapshots/*.jsonl` 영구화(복구로그 완전성) (3) CardText·CardSpecies·ExternalId `onDelete:Cascade` 전용 cascade-victim-0 단언 (4) half-collapse 사전감지 + 10분 타임아웃. verifier PASS(12/12).
+- `src/lib/cards/decklist-gamecard-resolver.ts` (+테스트 22 pass) — B단계 순수 리졸버(채용률 보존용 canonical gameCardId 통일·생존자 재바인드). 소비처 배선은 미적용(P5 직전).
+- `scripts/migration/gate-fk.ts` — 소프트 FK 3종(MarketStat.cardId·Conversation.sourceCardId·Message.attachedCardId) 모니터링 추가 + baseline-부재 테이블 내성(`--compare base` 무중단).
 
 ---
 
