@@ -12,6 +12,7 @@
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
+import { assertWritable, hasAllowProtectedFlag } from "./lib/protected-groups";
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -48,7 +49,10 @@ async function fetchCard(tcgId: string, num: string): Promise<Card | null> {
 
 async function main() {
   const jpSet = process.argv[2], tcgId = process.argv[3], APPLY = process.argv.includes("--apply"), OW = process.argv.includes("--overwrite");
-  if (!jpSet || !tcgId) { console.error("usage: <jpSetId> <tcgdexId> [--apply] [--overwrite]"); process.exit(1); }
+  if (!jpSet || !tcgId) { console.error("usage: <jpSetId> <tcgdexId> [--apply] [--overwrite] [--allow-protected]"); process.exit(1); }
+  // 영향 cardPackId = 이 JP 세트가 속한 cardPack — 동결팩이면 --allow-protected 없이 차단.
+  const setRow = await prisma.set.findUnique({ where: { id: jpSet }, select: { cardPackId: true } });
+  assertWritable([setRow?.cardPackId], { allow: hasAllowProtectedFlag(), dryRun: !APPLY, tool: "enrich-jp-meta-tcgdex" });
   const ja = buildNameIndex("ja");
   const locs = await prisma.regionCard.findMany({ where: { setId: jpSet }, select: { number: true, name: true, cardId: true,
     card: { select: { supertype: true, subtypes: true, pokedexNumbers: true, types: true, hp: true, attacks: true, abilities: true, regulationMark: true, illustrator: true, locales: { select: { region: true } } } } } });

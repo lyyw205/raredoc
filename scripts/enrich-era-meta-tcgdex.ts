@@ -27,6 +27,7 @@
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
+import { assertWritable, hasAllowProtectedFlag } from "./lib/protected-groups";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 const execFileP = promisify(execFile);
@@ -136,13 +137,14 @@ type CardRecord = {
   weakness: string | null;
   resistance: string | null;
   rarityId: string | null;
+  cardPackId: string | null;
 };
 
 const CARD_SELECT = {
   id: true, hp: true, types: true, subtypes: true, pokedexNumbers: true,
   retreatCost: true, illustrator: true, evolvesFrom: true, supertype: true,
   attacks: true, abilities: true, legalities: true, weakness: true,
-  resistance: true, rarityId: true,
+  resistance: true, rarityId: true, cardPackId: true,
 } as const;
 
 function findCardById(id: string) {
@@ -379,6 +381,14 @@ async function main() {
   let enriched = 0, skipped = 0, missing = 0, totalMap = 0;
   const summaryCache = new Map<string, CardSummary[]>();
 
+  // ⚠ 원본은 dry-run 없는 즉시쓰기였음 — 안전화: 기본 dry-run(--apply 로 실제 기록) + 동결팩 가드.
+  //   영향 cardPack 을 루프에서 모은 뒤 일괄 판정하고, 쓰기는 pending 으로 미뤘다가 APPLY 시 적용.
+  const APPLY = process.argv.includes("--apply");
+  const allow = hasAllowProtectedFlag();
+  const affectedPacks = new Set<string>();
+  const pendingCard: { id: string; data: Record<string, unknown> }[] = [];
+  const pendingMap: any[] = [];
+
   for (const s of sets) {
     const summaryId = (cfg.summaryId ?? ((t: string) => t))(s.tcgId);
     console.log(`\n─── ${era}:${s.tcgId} → ${s.dbCode} ───`);
@@ -409,7 +419,8 @@ async function main() {
       }
 
       if (Object.keys(update).length > 0) {
-        await prisma.card.update({ where: { id: lc.id }, data: update });
+        if (lc.cardPackId) affectedPacks.add(lc.cardPackId);
+        pendingCard.push({ id: lc.id, data: update });
         enriched++;
       } else skipped++;
 
@@ -426,7 +437,7 @@ async function main() {
         createData.regionCardId = regionCardId;
         updateData.regionCardId = regionCardId;
       }
-      await prisma.externalIdMapping.upsert({
+      pendingMap.push({
         where: { sourceId_externalId: { sourceId: source.id, externalId } },
         create: createData as never,
         update: updateData,
@@ -444,6 +455,16 @@ async function main() {
   if (unmatched.size > 0) {
     console.log(`  매칭 안된 rarity (${unmatched.size}):`);
     for (const r of unmatched) console.log(`    "${r}"`);
+  }
+
+  // 동결팩 가드 — 영향권에 동결팩 있고 --allow-protected 없으면 차단(dry-run 이면 경고만).
+  assertWritable([...affectedPacks], { allow, dryRun: !APPLY, tool: "enrich-era-meta-tcgdex" });
+  if (APPLY) {
+    for (const u of pendingCard) await prisma.card.update({ where: { id: u.id }, data: u.data });
+    for (const m of pendingMap) await prisma.externalIdMapping.upsert(m);
+    console.log(`★APPLY: Card ${pendingCard.length} · Mapping ${pendingMap.length}`);
+  } else {
+    console.log(`(dry-run) 적용 예정: Card ${pendingCard.length} · Mapping ${pendingMap.length} — --apply 로 실제 기록`);
   }
   await prisma.$disconnect();
 }

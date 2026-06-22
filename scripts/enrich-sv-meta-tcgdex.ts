@@ -9,6 +9,7 @@
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
+import { assertWritable, hasAllowProtectedFlag } from "./lib/protected-groups";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 const execFileP = promisify(execFile);
@@ -157,6 +158,11 @@ async function main() {
   const setsToRun = arg
     ? TARGET_SETS.filter(s => s.tcgId === arg.slice("--set=".length))
     : TARGET_SETS;
+
+  // 영향 cardPackId = 대상 SV 세트들이 속한 cardPack — 동결팩이면 --allow-protected 없이 차단.
+  //   (이 스크립트는 즉시쓰기라 dryRun:false; 동결 세트 포함 시 전체 run 차단 → --set= 로 비동결만 돌리거나 --allow-protected.)
+  const setRows = await prisma.set.findMany({ where: { id: { in: setsToRun.map(s => s.dbSetId) } }, select: { cardPackId: true } });
+  assertWritable(setRows.map(s => s.cardPackId), { allow: hasAllowProtectedFlag(), dryRun: false, tool: "enrich-sv-meta-tcgdex" });
 
   console.log(`=== SV Meta Enrich via tcgdex (${setsToRun.length} sets) ===`);
   let totals = { ok: 0, skip: 0, fail: 0 };
