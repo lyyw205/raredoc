@@ -109,23 +109,58 @@ async function main() {
     return best;
   };
 
-  // 2) gameCardId 버킷 내 union-find
-  const parent = new Map<string, string>();
-  const find = (x: string): string => { while (parent.get(x)! !== x) { parent.set(x, parent.get(parent.get(x)!)!); x = parent.get(x)!; } return x; };
-  const union = (a: string, b: string) => { const ra = find(a), rb = find(b); if (ra !== rb) parent.set(ra < rb ? rb : ra, ra < rb ? ra : rb); };
-  for (const r of rows) parent.set(r.id, r.id);
+  // 2) gameCardId 버킷 내 ★complete-linkage 응집 클러스터링 (single-linkage 체이닝 over-merge 차단).
+  //   클러스터 거리 = 두 클러스터의 "공통지역 비교가능 쌍"의 최대 Hamming(=complete-linkage).
+  //   - metaConflict 쌍이 하나라도 있으면 ∞(병합 금지) — art-불변 메타 가드(오거폰 4가면 등).
+  //   - 비교가능 쌍이 전무(전부 공통지역 없음=∞)면 ∞(브리지 없는 cross-region 미병합·under-merge 선호).
+  //   - 거리 ≤ THRESHOLD 인 가장 가까운 두 클러스터를 반복 병합.
+  //   ⇒ Hamming 은 메트릭 → 최종 클러스터 내 모든 공통지역 쌍 ≤ THRESHOLD (그룹 지름 상한 = maxD=60 류 체이닝 제거).
+  //   ★cross-region 브리지 보존: 같은 그림 JP↔EN 은 공통지역(예: 둘 다 JP 이미지 보유) 비교로 묶이고,
+  //     공통지역 전무 멤버는 브리지 프린트(JP+EN 모두 보유)를 통해서만 합류 → 정당한 cross-pack 통합 유지.
   const byGc = new Map<string, Row[]>();
   for (const r of rows) { const k = r.gameCardId ?? `__solo_${r.id}`; const g = byGc.get(k); if (g) g.push(r); else byGc.set(k, [r]); }
-  let edges = 0;
+  const rep = new Map<string, string>();
+  let edges = 0; // 수행된 클러스터 병합 수(= 카드수 − 그룹수)
   for (const [, bucket] of byGc) {
-    for (let i = 0; i < bucket.length; i++) for (let j = i + 1; j < bucket.length; j++) {
-      const a = bucket[i], b = bucket[j];
-      if (metaConflict(a, b)) continue;
-      if (dist(a.id, b.id) <= THRESHOLD) { union(a.id, b.id); edges++; }
+    if (bucket.length === 1) { rep.set(bucket[0].id, bucket[0].id); continue; }
+    const m = bucket.length;
+    // 쌍별 거리/메타충돌 사전계산(인덱스 기반)
+    const D: number[][] = Array.from({ length: m }, () => new Array<number>(m).fill(0));
+    const MC: boolean[][] = Array.from({ length: m }, () => new Array<boolean>(m).fill(false));
+    for (let i = 0; i < m; i++) for (let j = i + 1; j < m; j++) {
+      const mc = metaConflict(bucket[i], bucket[j]);
+      const d = dist(bucket[i].id, bucket[j].id);
+      MC[i][j] = MC[j][i] = mc; D[i][j] = D[j][i] = d;
+    }
+    // complete-linkage 클러스터 거리
+    const cdist = (ca: number[], cb: number[]): number => {
+      let mx = 0, comparable = false;
+      for (const x of ca) for (const y of cb) {
+        if (MC[x][y]) return Infinity;
+        const d = D[x][y];
+        if (d !== Infinity) { comparable = true; if (d > mx) mx = d; }
+      }
+      return comparable ? mx : Infinity;
+    };
+    let clusters: number[][] = bucket.map((_, i) => [i]);
+    for (;;) {
+      let bi = -1, bj = -1, bd = Infinity;
+      for (let i = 0; i < clusters.length; i++) for (let j = i + 1; j < clusters.length; j++) {
+        const d = cdist(clusters[i], clusters[j]);
+        if (d <= THRESHOLD && d < bd) { bd = d; bi = i; bj = j; }
+      }
+      if (bi < 0) break;
+      clusters[bi] = clusters[bi].concat(clusters[bj]);
+      clusters.splice(bj, 1);
+      edges++;
+    }
+    // rep = 클러스터 내 최소 id (기존 union 컨벤션과 동일: 작은 id 가 대표 → 멱등)
+    for (const cl of clusters) {
+      let r = bucket[cl[0]].id;
+      for (const idx of cl) if (bucket[idx].id < r) r = bucket[idx].id;
+      for (const idx of cl) rep.set(bucket[idx].id, r);
     }
   }
-  const rep = new Map<string, string>();
-  for (const r of rows) rep.set(r.id, find(r.id));
 
   // 3) 리포트
   const groups = new Map<string, Row[]>();
@@ -133,6 +168,28 @@ async function main() {
   const multi = [...groups.values()].filter((m) => m.length > 1);
   const noHash = rows.filter((r) => !repFp.get(r.id)).length;
   console.log(`\n그룹 ${groups.size} (멤버 2+ ${multi.length}) · 병합엣지 ${edges} · pHash없음 ${noHash}(단독) · 최대그룹 ${Math.max(...[...groups.values()].map((m) => m.length))}`);
+
+  // ★상위 그룹 over-merge 진단(읽기전용): 큰 그룹이 단일 gameCard·단일 일러·단일 types·근접 pHash인지.
+  //   gc>1=구조버그(같은 gameCardId 버킷서만 union하므로 불가) · illus/types>1=메타가드 우회(버그) ·
+  //   maxD>THRESHOLD=single-linkage 체이닝 드리프트(다른그림이 제3자 경유로 끌려온 over-merge 의심).
+  const multiSorted = multi.slice().sort((a, b) => b.length - a.length).slice(0, 15);
+  console.log(`\n[상위 ${multiSorted.length} 그룹 진단] n=멤버 gc=게임카드수 illus=비공백일러distinct types=타입셋distinct maxD=최대쌍거리(공통지역) inf=공통지역없는쌍`);
+  for (const g of multiSorted) {
+    const gcs = new Set(g.map((r) => r.gameCardId ?? "∅"));
+    const illus = new Set(g.map((r) => norm(r.illustrator)).filter((s) => s !== ""));
+    const tys = new Set(g.map((r) => setKey(r.types)));
+    let maxD = 0, infPairs = 0;
+    for (let i = 0; i < g.length; i++) for (let j = i + 1; j < g.length; j++) {
+      const d = dist(g[i].id, g[j].id);
+      if (d === Infinity) infPairs++; else maxD = Math.max(maxD, d);
+    }
+    const flag = gcs.size > 1 || illus.size > 1 || tys.size > 1 || maxD > THRESHOLD ? " 🔴점검" : " ✅";
+    console.log(
+      `  n=${String(g.length).padStart(3)} gc=${gcs.size} illus=${illus.size} types=${tys.size} maxD=${maxD} inf=${infPairs}${flag}` +
+        `  gameCard=${[...gcs][0]}  일러=${[...illus].slice(0, 2).join("|") || "(없음)"}  types=${[...tys].slice(0, 3).join(" / ")}`,
+    );
+  }
+
   if (ONLY || (LIMIT && LIMIT <= 600)) {
     console.log(`\n[샘플 상세] gameCard별 멤버·공통지역 최소거리:`);
     for (const [gc, bucket] of byGc) {
