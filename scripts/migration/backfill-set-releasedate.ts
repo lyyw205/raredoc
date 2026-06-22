@@ -13,6 +13,7 @@
 // 안전: dry-run 기본. --apply 로만 기록. assertWritable 가드(--allow-protected). Set 테이블만(정체성 행 무변경). 멱등(재실행=no-op).
 //   실행:  npx tsx scripts/migration/backfill-set-releasedate.ts            (dry-run)
 //          npx tsx scripts/migration/backfill-set-releasedate.ts --apply
+import "dotenv/config";
 import { prisma } from "../../src/lib/prisma";
 import { assertWritable, hasAllowProtectedFlag } from "../lib/protected-groups";
 

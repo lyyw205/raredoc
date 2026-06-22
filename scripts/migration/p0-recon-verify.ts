@@ -15,6 +15,7 @@ async function main() {
   console.log("[1] dangling cardId 참조 (LC 부재):");
   let d1 = 0;
   for (const t of ["DeckRecipeCard", "CollectionItem", "Trade", "Ruling", "CardText", "ExternalIdMapping", "TierEntry", "DeckCard"]) {
+    if (!(await tableExists(t))) { console.log(`   ${t}: (테이블 없음·skip)`); continue; }
     const n = await c(`SELECT count(*)::int c FROM "${t}" x WHERE x."logicalCardId" IS NOT NULL AND NOT EXISTS (SELECT 1 FROM "LogicalCard" l WHERE l.id=x."logicalCardId")`);
     d1 += n; console.log(`   ${t}: ${n}${n ? " 🔴" : ""}`);
   }
