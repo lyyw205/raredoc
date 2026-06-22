@@ -89,7 +89,6 @@ const CANON: Record<string, EraKey> = {
   "Scarlet & Violet": "SV",
   "Sword & Shield": "S",
   "Sun & Moon": "SM",
-  XY: "XY",
   "Black & White": "BW",
   "Call of Legends": "HGSS",
   "HeartGold & SoulSilver": "HGSS",
