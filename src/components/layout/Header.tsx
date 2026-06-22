@@ -51,10 +51,7 @@ export function Header({ user, unread = 0 }: { user: HeaderUser | null; unread?:
             카드 도감
           </TossHeader.NavItem>
           <TossHeader.NavItem href={link("/tier-list")} active={isActive("/tier-list")}>
-            마켓 랭킹
-          </TossHeader.NavItem>
-          <TossHeader.NavItem href={link("/cardgame")} active={isActive("/cardgame")}>
-            카드게임
+            시세
           </TossHeader.NavItem>
           <TossHeader.NavItem href={link("/community")} active={isActive("/community")}>
             마켓

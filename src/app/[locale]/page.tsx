@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { HomeHero } from "@/components/home/HomeHero";
 import { CardStageCarousel } from "@/components/home/CardStageCarousel";
-import { MetaDeckSection } from "@/components/home/MetaDeckSection";
 import { getRecentFeed } from "@/lib/services/collection";
 import { getTopCollectors, getCurrentSeason } from "@/lib/services/gamification";
 import { getHotTopics, relativeKo, type HotTopic } from "@/lib/services/community";
@@ -105,16 +104,8 @@ export default async function HomePage({
         <CardStageCarousel cards={recentCards} locale={locale} />
       )}
 
-      {/* ── 하단 그리드: (커뮤니티 핫 토픽 + 추천 메타) + 사이드바 ──────────── */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-        {/* 좌측 2컬럼: 추천 메타 */}
-        <div className="lg:col-span-2">
-          <MetaDeckSection locale={locale} />
-        </div>
-
-        {/* 우측 사이드바: 커뮤니티 핫 토픽 → 이달의 TOP3 → … */}
-        <div className="space-y-4">
+      {/* ── 하단: 커뮤니티 핫 토픽 · 이달의 TOP3 · TCG 정보 · 시즌 ──────────── */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 
           {/* 커뮤니티 핫 토픽 (헤더는 카드 밖) */}
           <section>
@@ -123,12 +114,6 @@ export default async function HomePage({
                 <h2 className="text-toss-title font-bold text-toss-text-primary">커뮤니티 핫 토픽</h2>
                 <p className="text-toss-caption text-toss-text-quaternary mt-1">지금 가장 많이 읽히는 글</p>
               </div>
-              <Link
-                href={`/${locale}/cardgame/community`}
-                className="text-toss-caption text-toss-text-tertiary hover:text-toss-text-primary transition-colors"
-              >
-                전체보기 →
-              </Link>
             </div>
             <Card padding="md">
               <CardContent>
@@ -192,7 +177,7 @@ export default async function HomePage({
               {[
                 { label: "카드 도감",       emoji: "📖", href: `/dex` },
                 { label: "최근 등록 카드",  emoji: "🆕", href: `/recent` },
-                { label: "투자 티어리스트", emoji: "📊", href: `/tier-list` },
+                { label: "시세",            emoji: "📊", href: `/tier-list` },
                 { label: "뱃지 도감",       emoji: "🏅", href: topCollectors[0] ? `/profile/${topCollectors[0].username}?tab=badges` : `/profile` },
               ].map(({ label, emoji, href }) => (
                 <Link
@@ -231,7 +216,6 @@ export default async function HomePage({
           </div>
           )}
 
-        </div>
       </div>
       </Container>
     </>
