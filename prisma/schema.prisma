@@ -148,6 +148,9 @@ model Card {
   speciesLinks     CardSpecies[]       @relation("LogicalCardSpeciesLink") // 종(Species) N:M
   gameCardId       String? // 게임상 같은 카드(oracle) — 덱/메타 dedup 단위
   gameCard         GameCard?           @relation("LogicalCardGameCard", fields: [gameCardId], references: [id])
+  // 추가형 ArtCard(Slice 3, docs/migration §0′) — 같은 그림 그룹. additive·nullable·drop 가역.
+  artFingerprint   String? // perceptual hash(pHash). build-art-groups 가 imageLarge 로 산출.
+  artCardId        String? // 같은 그림 그룹 대표 id(파생). cross-pack 형제·이미지·시세 dedup 단위(P5 전엔 FK 아님).
   createdAt        DateTime            @default(now())
   updatedAt        DateTime            @updatedAt
 
@@ -155,6 +158,7 @@ model Card {
   @@index([rarityId], map: "LogicalCard_rarityId_idx")
   @@index([primarySetId], map: "LogicalCard_primarySetId_idx")
   @@index([gameCardId], map: "LogicalCard_gameCardId_idx")
+  @@index([artCardId], map: "LogicalCard_artCardId_idx")
   @@map("LogicalCard")
 }
 
