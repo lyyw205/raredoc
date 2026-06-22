@@ -9,7 +9,6 @@ import { prisma } from "@/lib/prisma";
 import type { TCGCard } from "@/lib/api/pokemontcg";
 import { pickRarityLabel, REGION_SORT_PRIORITY } from "./card-fields";
 import { resolveSiblings, isUnavailable, type SiblingCandidate, type Region } from "./sibling-resolver";
-import { CROSS_PACK_SIBLINGS_ENABLED, loadArtGroupCandidates } from "./cross-pack-siblings";
 
 // ── 공용 타입 ─────────────────────────────────────────────────────────────────
 
@@ -292,8 +291,8 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
       (a, b) => (REGION_SORT_PRIORITY[a.region] ?? 9) - (REGION_SORT_PRIORITY[b.region] ?? 9)
     );
 
-  // D3 형제 리졸버(표시 전용). 풀 = 같은 그림(현 Card)의 locale 들 — cross-pack 은 ArtCard 병합 후 자동 확장.
-  //   docs/migration/identity-model-migration-plan.md §0′. ★시세는 이 결과를 쓰지 않는다(D5).
+  // D3 형제 리졸버(표시 전용). P5 collapse 후 card.locales = artCardId 그룹이므로
+  //   풀은 무조건 card.locales(추가 쿼리 없음). ★시세는 이 결과를 쓰지 않는다(D5).
   const toCand = (l: {
     id: string;
     region: string;
@@ -312,47 +311,14 @@ export async function loadCardByLocaleId(localeId: string): Promise<{
     numberInt: l.numberInt,
     number: l.number,
   });
-  // cross-pack 형제 풀 분기(§0′).
-  // flag OFF(기본) 또는 artCardId null → per-pack 풀(추가 쿼리 0, 기존과 바이트 동일).
-  // flag ON + artCardId 존재 → artCardId 그룹 전체 RegionCard 를 후보로.
-  let candidates: SiblingCandidate[];
-  if (CROSS_PACK_SIBLINGS_ENABLED && cl.card.artCardId) {
-    candidates = await loadArtGroupCandidates(cl.card.artCardId);
-  } else {
-    candidates = cl.card.locales.map(toCand);
-  }
+  const candidates: SiblingCandidate[] = cl.card.locales.map(toCand);
   const resolved = resolveSiblings(toCand(cl), candidates);
   const byId = new Map(allLocales.map((l) => [l.id, l] as const));
   const siblingByRegion: Partial<Record<Region, LocaleSummary>> = {};
-  const missingIds: string[] = [];
   for (const region of ["EN", "JP", "KR"] as const) {
     const pick = resolved[region];
     if (isUnavailable(pick)) continue;
-    const summary = byId.get(pick.id);
-    if (summary) {
-      siblingByRegion[region] = summary;
-    } else {
-      // flag ON 경로에서 cross-pack 형제가 per-pack byId 에 없을 때
-      missingIds.push(pick.id);
-    }
-  }
-  // cross-pack 형제 상세 보완 — per-pack 에 없는 id 만 추가 로드(보통 0~2건)
-  if (missingIds.length > 0) {
-    const extras = await prisma.regionCard.findMany({
-      where: { id: { in: missingIds } },
-      include: {
-        set: { select: { name: true, nameKo: true, nameJa: true, code: true, cardCount: true, releaseDate: true } },
-        rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true } },
-      },
-    });
-    const extraMap = new Map(extras.map((e) => [e.id, toLocaleSummary(e)] as const));
-    for (const region of ["EN", "JP", "KR"] as const) {
-      if (siblingByRegion[region]) continue;
-      const pick = resolved[region];
-      if (isUnavailable(pick)) continue;
-      const summary = extraMap.get(pick.id);
-      if (summary) siblingByRegion[region] = summary;
-    }
+    siblingByRegion[region] = byId.get(pick.id);
   }
 
   return {

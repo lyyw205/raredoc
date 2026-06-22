@@ -10,7 +10,6 @@ import type { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { pickRarityLabel } from "./card-fields";
 import { resolveSiblings, isUnavailable, type SiblingCandidate } from "./sibling-resolver";
-import { CROSS_PACK_SIBLINGS_ENABLED, loadArtGroupCandidatesBatch, type ArtGroupEntry } from "./cross-pack-siblings";
 import { canonEra, eraOrderIndex, isKnownEra } from "./eras";
 import { resolveSidebarTitle } from "./set-meta";
 import { buildSearchText, matchesSearch } from "@/lib/search";
@@ -225,7 +224,7 @@ const CARD_SELECT = {
       types: true,
       supertype: true,
       nameKo: true, // 교차언어 검색 인덱스용(한글 오버레이)
-      artCardId: true, // cross-pack 형제 풀 확장용(flag ON 시 사용, flag OFF 시 무시)
+      artCardId: true, // cardgame.ts·build-candidate-pool·decklist-resolver 용(RETAIN)
       gameCard: { select: { supertype: true } },
       rarity: {
         select: {
@@ -255,14 +254,9 @@ type CardRow = Prisma.RegionCardGetPayload<{ select: typeof CARD_SELECT }>;
 
 const REGS = ["JP", "EN", "KR"] as const;
 
-function mapRowToDexCard(
-  rc: CardRow,
-  artGroupMap?: Map<string, ArtGroupEntry[]> | null,
-): DexCard {
+function mapRowToDexCard(rc: CardRow): DexCard {
   const rar = rc.rarity ?? rc.card.rarity; // 인쇄본별 rarity 우선, LC 폴백
-  // 지역 형제(variants) = D3 형제 리졸버(표시 전용). anchor = rc(이 세트/지역의 이 카드).
-  //   flag OFF(기본): 풀 = 같은 Card 의 locales(per-pack) — 기존과 동일.
-  //   flag ON: artGroupMap 에서 artCardId 그룹 전체 RegionCard 를 후보로(cross-pack). (§0′)
+  // 지역 형제(variants) = D3 형제 리졸버(표시 전용). P5 collapse 후 card.locales = artCardId 그룹.
   const toCand = (l: {
     id: string; region: string; setId: string; set: { releaseDate: Date };
     imageSmall: string | null; imageLarge?: string | null;
@@ -272,15 +266,9 @@ function mapRowToDexCard(
     hasImage: !!(l.imageLarge || l.imageSmall), numberInt: l.numberInt, number: l.number,
   });
 
-  // cross-pack 후보풀 분기(§0′)
-  const artCands = rc.card.artCardId ? artGroupMap?.get(rc.card.artCardId) : undefined;
-  const candidates: SiblingCandidate[] =
-    artCands && artCands.length > 0 ? artCands : rc.card.locales.map(toCand);
-
+  const candidates: SiblingCandidate[] = rc.card.locales.map(toCand);
   const resolved = resolveSiblings(toCand(rc), candidates);
   const localeById = new Map(rc.card.locales.map((l) => [l.id, l] as const));
-  // artGroupMap 이 있을 때는 cross-pack 형제 상세도 맵에서 조회
-  const artEntryById = artCands ? new Map(artCands.map((e) => [e.id, e] as const)) : null;
   const byRegion = new Map<string, DexCardVariant>();
   for (const reg of REGS) {
     const pick = resolved[reg];
@@ -294,7 +282,6 @@ function mapRowToDexCard(
       });
       continue;
     }
-    // per-pack 에서 먼저 찾고, 없으면 artGroupMap 에서 조회(cross-pack 형제)
     const v = localeById.get(pick.id);
     if (v) {
       const vr = v.rarity ?? rc.card.rarity;
@@ -303,15 +290,6 @@ function mapRowToDexCard(
         rarity: pickRarityLabel(v.region, vr) ?? undefined,
         rarityCategoryNameKo: vr?.category?.nameKo ?? undefined,
       });
-    } else if (artEntryById) {
-      const e = artEntryById.get(pick.id);
-      if (e) {
-        byRegion.set(reg, {
-          id: e.id, region: e.region, name: e.name, number: e.number ?? "", imageSmall: e.imageSmall,
-          rarity: pickRarityLabel(e.region, e.rarity) ?? undefined,
-          rarityCategoryNameKo: e.rarity?.category?.nameKo ?? undefined,
-        });
-      }
     }
   }
   const variants = REGS.flatMap((reg) => { const v = byRegion.get(reg); return v ? [v] : []; });
@@ -347,23 +325,7 @@ async function buildSetCards(setId: string): Promise<DexCard[]> {
     select: CARD_SELECT,
     orderBy: [{ numberInt: "asc" }, { number: "asc" }],
   });
-
-  // flag ON: 세트 내 고유 artCardId 를 IN 1회로 배치 프리페치(N+1 방지)
-  let artGroupMap: Map<string, ArtGroupEntry[]> | null = null;
-  if (CROSS_PACK_SIBLINGS_ENABLED) {
-    const artIds = [
-      ...new Set(
-        rcs
-          .map((rc) => rc.card.artCardId)
-          .filter((id): id is string => id != null),
-      ),
-    ];
-    if (artIds.length > 0) {
-      artGroupMap = await loadArtGroupCandidatesBatch(artIds);
-    }
-  }
-
-  return rcs.map((rc) => mapRowToDexCard(rc, artGroupMap));
+  return rcs.map((rc) => mapRowToDexCard(rc));
 }
 
 const cardCache = new Map<string, { at: number; data: DexCard[] }>();
@@ -534,21 +496,7 @@ export async function buildRegionCardsPage(
   let cards: DexCard[] = [];
   if (pageIds.length > 0) {
     const rcs = await prisma.regionCard.findMany({ where: { id: { in: pageIds } }, select: CARD_SELECT });
-    // flag ON: 페이지 내 고유 artCardId 배치 프리페치(페이지 크기 50 — 소규모)
-    let artGroupMap: Map<string, ArtGroupEntry[]> | null = null;
-    if (CROSS_PACK_SIBLINGS_ENABLED) {
-      const artIds = [
-        ...new Set(
-          rcs
-            .map((rc) => rc.card.artCardId)
-            .filter((id): id is string => id != null),
-        ),
-      ];
-      if (artIds.length > 0) {
-        artGroupMap = await loadArtGroupCandidatesBatch(artIds);
-      }
-    }
-    const byId = new Map(rcs.map((rc) => [rc.id, mapRowToDexCard(rc, artGroupMap)] as const));
+    const byId = new Map(rcs.map((rc) => [rc.id, mapRowToDexCard(rc)] as const));
     cards = pageIds.map((id) => byId.get(id)).filter((c): c is DexCard => Boolean(c));
   }
   const nextOffset = input.offset + input.limit < total ? input.offset + input.limit : null;
