@@ -85,7 +85,7 @@ resolveSibling(anchorRC, candidateLocales, packLinksForAnchorSet) → RegionCard
 | **P5.5** | region rarity 정정 | 지역별 rarity 표기차 정정(P4 보류분) | **비가역** | RegionCard.id 불변·golden0 |
 | **P7** | 읽기 재배선 | 소비처를 collapse 모델로(flag·A/B render diff0) | 가역(until next) | render diff0·recon0 |
 | **P8** | ko→CardText 완주 | 표시/효과 2축, READ 전환 | 가역(until next) | dupe0·superset·전 read CardText |
-| **P9** | **TERMINAL** | setGroupId/SetGroup 드롭 → 잔여 art-meta 컬럼 드롭 → (**id 재발급=skip 권장**) → 도감 동결 | **비가역** | recon0·RegionCard.id 바이트동일·golden0 |
+| **P9** | **TERMINAL** | setGroupId/SetGroup 드롭 → 잔여 art-meta 컬럼 드롭 → **★cross-pack flag·`cross-pack-siblings.ts` 제거**(collapse 후 `card.locales`=artCardId 그룹이라 flag/추가쿼리/missingIds 전부 죽은코드 → queries/dex-region 을 단순 `card.locales` 로 복귀) → (**id 재발급=skip 권장**) → 도감 동결 | **비가역** | recon0·RegionCard.id 바이트동일·golden0 |
 
 **collapse 손실 벡터 & 무손실 처리(P5 핵심):** ▸CardText `@@unique[cardId,language]` 충돌 **실측 7,820**(이전 추정 ~2,005) → authority-pick + loser 로그 ▸CardSpecies `@@id[cardId,speciesId]` 충돌 **실측 7,248**(이전 추정 ~2,600, 1,025 종집합 100% 보존) → DISTINCT union ▸ExternalIdMapping `@@unique[sourceId,externalId]` **실측 충돌 0** → 단순 repoint ▸**★CardText `onDelete:Cascade`** → 비대표 Card 삭제가 텍스트를 cascade 삭제하지 않게 **삭제 전 자식 이동 + cascade victim 0 단언** ▸**RegionCard.id 절대 불변**(Price 61k·MarketStat 60k·카드페이지 URL 이 탐) ▸**id 재발급 skip 권장**(8 FK orphan 위험·가치 낮음, 하면 동일 트랜잭션).
 > ★실측 출처(2026-06-22, `scripts/migration/p6_5-collision-plan.ts` 읽기전용): grain=gameCard(=collapse 상한; artCard 그룹 ⊆ gameCard 그룹이라 실제는 이보다 작음). 전체Card 30,800 · 그룹 16,406 · 비대표(삭제대상) 11,580. CardText cascade=true 확정. ExternalId 충돌 0 확인. **세 충돌유형 처리설계가 실측치 전부 커버.**
