@@ -137,8 +137,7 @@ model Card {
   rarity           Rarity?             @relation(fields: [rarityId], references: [id])
   // ── 한국 유저 대상 한글 overlay — CardText 로 일원화 중 ──
   nameKo           String? // 한국 공식 이름 — 읽기는 CardText(ko) 우선·이 컬럼은 폴백. CardText 100% 커버 검증 후 제거 예정.
-  attacksKo        Json? // 한국어 공격 텍스트 — 코드 READ 0. CardText.attacks 백필 미착수 → 백필 후 제거 예정(지금 DROP시 데이터 유실).
-  abilitiesKo      Json? // 한국어 특성 텍스트 — 코드 READ 0. CardText.abilities 백필 미착수 → 백필 후 제거 예정(지금 DROP시 데이터 유실).
+  // attacksKo/abilitiesKo 드롭됨(P9, 2026-06-22): 유효데이터(257/51) 전부 CardText(ko) 에 보존 확인 후 제거.
   locales          RegionCard[]
   texts            CardText[] // 언어별 표시 텍스트 오버레이. name은 이관·운용 중(CardText(ko) 우선), attacks/abilities는 이관 예정.
   collectionItems  CollectionItem[]    @relation("CollectionItemLogicalCard")
