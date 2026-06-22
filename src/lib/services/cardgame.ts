@@ -3,6 +3,9 @@ import { prisma } from "@/lib/prisma";
 import { CARDS } from "@/lib/cardgame/mock";
 import { REAL_TO_MOCK } from "@/lib/cardgame/mockToReal";
 import { toKrw } from "@/lib/trades/shared";
+import { USE_GAMECARD_RESOLVER } from "@/lib/cards/flags";
+import { getCandidatePool } from "@/lib/cards/build-candidate-pool";
+import { resolveRecipeCard } from "@/lib/cards/decklist-gamecard-resolver";
 
 /**
  * Phase 5 — 카드게임 메타 서비스 (DB 기반).
@@ -551,6 +554,8 @@ export type RecipeSlotTier = "core" | "flex" | "minor";
 export type RecipePrinting = {
   /** 카드 상세(/cards/[id]) 링크용 locale id. */
   regionCardId: string | null;
+  /** 이 인쇄판 썸네일 — 버전 나열용. */
+  image: string | null;
   setCode: string | null;
   number: string | null;
   /** 이 인쇄판 단독 채용률(%). */
@@ -761,12 +766,16 @@ async function finalizeRecipe(
         break;
       }
     }
-    const printings: RecipePrinting[] = prints.map((p) => ({
-      regionCardId: p.cardId ? imageMap.get(p.cardId)?.regionCardId ?? null : null,
-      setCode: p.setCode,
-      number: p.number,
-      adoptionRate: p.adoptionRate,
-    }));
+    const printings: RecipePrinting[] = prints.map((p) => {
+      const img = p.cardId ? imageMap.get(p.cardId) : undefined;
+      return {
+        regionCardId: img?.regionCardId ?? null,
+        image: img?.image ?? null,
+        setCode: p.setCode,
+        number: p.number,
+        adoptionRate: p.adoptionRate,
+      };
+    });
     // 💰 단가 범위 = 인쇄판 단가들의 저가~고가
     const krws = prints.map((p) => (p.cardId ? unitKrwByCard.get(p.cardId) : undefined)).filter((v): v is number => v != null);
     let priceMin = krws.length ? Math.min(...krws) : null;
@@ -843,7 +852,37 @@ export async function getArchetypeRecipe(deckId: string): Promise<ArchetypeRecip
   // (setCode|number) → cardId : DeckRecipeCard resolver 결과 재사용(이미지/시세 링크 해석)
   const printKey = (set: string | null, num: string | null) => `${set ?? ""}|${num ?? ""}`;
   const cardIdByPrint = new Map<string, string>();
-  for (const r of rows) if (r.cardId) cardIdByPrint.set(printKey(r.setCode, r.number), r.cardId);
+  // cardKey → DeckRecipeCard 인쇄판들(집계 전체) — "다른 버전" 표시는 윈도우보다 넓은 이 목록 사용
+  const recipeRowsByCard = new Map<string, typeof rows>();
+
+  // flag ON: DeckRecipeCard 행마다 resolveRecipeCard()로 gameCardId 기준 cardKey 생성
+  // flag OFF: 현행 normalizeRecipeCardName 문자열 키 그대로
+  let resolverPool: Awaited<ReturnType<typeof getCandidatePool>> | null = null;
+  if (USE_GAMECARD_RESOLVER) {
+    resolverPool = await getCandidatePool();
+  }
+
+  /** DeckRecipeCard 행 → cardKey 결정 (flag ON: gameCardId 우선, OFF/미해결: normalizedName 폴백) */
+  const toCardKey = (r: { cardId: string | null; setCode: string | null; number: string | null; cardName: string; category: string }): string => {
+    const cat = toRecipeCategory(r.category);
+    if (resolverPool) {
+      const res = resolveRecipeCard(
+        { cardId: r.cardId, setCode: r.setCode ?? "", number: r.number ?? "", cardName: r.cardName },
+        resolverPool.poolById,
+        resolverPool.snIdx,
+      );
+      if (res.status === "resolved") return `${cat}|gc:${res.gameCardId}`;
+    }
+    return `${cat}|${normalizeRecipeCardName(r.cardName)}`;
+  };
+
+  for (const r of rows) {
+    if (r.cardId) cardIdByPrint.set(printKey(r.setCode, r.number), r.cardId);
+    const key = toCardKey(r);
+    const arr = recipeRowsByCard.get(key) ?? [];
+    arr.push(r);
+    recipeRowsByCard.set(key, arr);
+  }
 
   // 분모 = 관측 가능한 덱(덱리스트 보유 standing)만. 덱리스트 없는 standing 은 카드 구성을 알 수 없어 제외
   // (그래야 "거의 모든 덱이 채용"이 ~100% 로 정직하게 나옴 — 미수집 standing 으로 일률 희석 방지).
@@ -870,7 +909,21 @@ export async function getArchetypeRecipe(deckId: string): Promise<ArchetypeRecip
         for (const e of dl[field] ?? []) {
           const name = e.name ?? "";
           if (!name) continue;
-          const cardKey = `${category}|${normalizeRecipeCardName(name)}`;
+          // flag ON: resolveRecipeCard 로 gameCardId 기준 cardKey 생성(미해결 시 normalizedName 폴백)
+          // flag OFF: 현행 normalizeRecipeCardName 문자열 키 그대로
+          let cardKey: string;
+          if (resolverPool) {
+            const res = resolveRecipeCard(
+              { cardId: null, setCode: e.set ?? "", number: e.number ?? "", cardName: name },
+              resolverPool.poolById,
+              resolverPool.snIdx,
+            );
+            cardKey = res.status === "resolved"
+              ? `${category}|gc:${res.gameCardId}`
+              : `${category}|${normalizeRecipeCardName(name)}`;
+          } else {
+            cardKey = `${category}|${normalizeRecipeCardName(name)}`;
+          }
           const pKey = `${cardKey}|${printKey(e.set ?? null, e.number ?? null)}`;
           let cs = byCard.get(cardKey);
           if (!cs) {
@@ -888,20 +941,34 @@ export async function getArchetypeRecipe(deckId: string): Promise<ArchetypeRecip
         }
       }
     }
-    cardAggs = [...byCard.values()].map((cs) => {
-      const prints = [...cs.prints.values()].sort((a, b) => b.decks - a.decks);
-      const top = prints[0];
+    cardAggs = [...byCard.entries()].map(([cardKey, cs]) => {
+      const winPrints = [...cs.prints.values()].sort((a, b) => b.decks - a.decks);
+      const top = winPrints[0];
+      // 표시 인쇄판 = 윈도우 ∪ DeckRecipeCard 집계(더 풍부한 버전 목록). setCode|number 로 dedupe.
+      const printMap = new Map<string, PrintingAgg>();
+      for (const p of winPrints) {
+        const k = printKey(p.setCode, p.number);
+        printMap.set(k, {
+          cardId: cardIdByPrint.get(k) ?? null,
+          setCode: p.setCode,
+          number: p.number,
+          adoptionRate: Math.round((p.decks / deckCount) * 1000) / 10,
+        });
+      }
+      for (const r of recipeRowsByCard.get(cardKey) ?? []) {
+        printMap.set(printKey(r.setCode, r.number), {
+          cardId: r.cardId,
+          setCode: r.setCode,
+          number: r.number,
+          adoptionRate: Math.round(r.adoptionRate * 10) / 10,
+        });
+      }
       return {
         name: top.name,
         category: cs.category,
         adoptionRate: Math.round((cs.decks / deckCount) * 1000) / 10,
         count: Math.round((cs.copySum / cs.decks) * 10) / 10, // 채용 리스트 기준 평균 매수
-        printings: prints.map((p) => ({
-          cardId: cardIdByPrint.get(printKey(p.setCode, p.number)) ?? null,
-          setCode: p.setCode,
-          number: p.number,
-          adoptionRate: Math.round((p.decks / deckCount) * 1000) / 10,
-        })),
+        printings: [...printMap.values()].sort((a, b) => b.adoptionRate - a.adoptionRate),
       };
     });
   }
@@ -910,7 +977,8 @@ export async function getArchetypeRecipe(deckId: string): Promise<ArchetypeRecip
   if (cardAggs.length === 0) {
     const groups = new Map<string, typeof rows>();
     for (const r of rows) {
-      const key = `${toRecipeCategory(r.category)}|${normalizeRecipeCardName(r.cardName)}`;
+      // flag ON: toCardKey(resolveRecipeCard 우선) / flag OFF: 현행 normalizedName 키
+      const key = toCardKey(r);
       const g = groups.get(key);
       if (g) g.push(r);
       else groups.set(key, [r]);
@@ -1338,24 +1406,85 @@ export type TopCard = {
 export async function getTopAdoptedCards(n = 10): Promise<TopCard[]> {
   const rows = await prisma.deckRecipeCard.findMany({
     where: { region: "INTL", cardId: { not: null }, category: { not: "energy" } },
-    select: { cardId: true, cardName: true, adoptionRate: true },
+    // flag ON: archetypeId 로 dedup(gameCardId 병합 시 같은 아키타입의 sibling 행이 decks 중복 계상 방지)
+    select: { cardId: true, cardName: true, adoptionRate: true, archetypeId: true },
   });
-  const acc = new Map<string, { name: string; decks: number; rateSum: number }>();
-  for (const r of rows) {
-    const a = acc.get(r.cardId!) ?? { name: r.cardName, decks: 0, rateSum: 0 };
-    a.decks++;
-    a.rateSum += r.adoptionRate;
-    acc.set(r.cardId!, a);
+
+  // flag ON: cardId → gameCardId 매핑 후 gameCardId 기준 dedup(재판 분산 해소)
+  // flag OFF: 현행 cardId 키 집계 그대로
+  let resolvedKey: (cardId: string) => string;
+  if (USE_GAMECARD_RESOLVER) {
+    const lcIds = [...new Set(rows.map((r) => r.cardId!))];
+    const lcRows = await prisma.card.findMany({
+      where: { id: { in: lcIds } },
+      select: { id: true, gameCardId: true },
+    });
+    const lcToGc = new Map(lcRows.map((l) => [l.id, l.gameCardId]));
+    resolvedKey = (cardId: string) => lcToGc.get(cardId) ?? cardId;
+  } else {
+    resolvedKey = (cardId: string) => cardId;
   }
-  const top = [...acc.entries()]
-    .sort((x, y) => y[1].decks - x[1].decks || y[1].rateSum - x[1].rateSum)
-    .slice(0, n);
-  const imageMap = await resolveCardImages(top.map(([id]) => id));
-  return top.map(([id, a]) => ({
+
+  // flag ON: archetypeId Set 으로 dedup — gameCardId 병합 시 같은 아키타입의 sibling 행이
+  //          decks 를 중복 계상해 avgAdoption 을 희석하는 문제 방지.
+  // flag OFF: 현행 decks 카운터 그대로(바이트 동일).
+  let top: [string, { name: string; decks: number; rateSum: number }][];
+  if (USE_GAMECARD_RESOLVER) {
+    const accGc = new Map<string, { name: string; archs: Set<string>; rateSum: number }>();
+    for (const r of rows) {
+      const key = resolvedKey(r.cardId!);
+      const a = accGc.get(key) ?? { name: r.cardName, archs: new Set<string>(), rateSum: 0 };
+      a.archs.add(r.archetypeId);
+      a.rateSum += r.adoptionRate;
+      accGc.set(key, a);
+    }
+    top = [...accGc.entries()]
+      .map(([id, a]) => [id, { name: a.name, decks: a.archs.size, rateSum: a.rateSum }] as [string, { name: string; decks: number; rateSum: number }])
+      .sort((x, y) => y[1].decks - x[1].decks || y[1].rateSum - x[1].rateSum)
+      .slice(0, n);
+  } else {
+    const acc = new Map<string, { name: string; decks: number; rateSum: number }>();
+    for (const r of rows) {
+      const key = resolvedKey(r.cardId!);
+      const a = acc.get(key) ?? { name: r.cardName, decks: 0, rateSum: 0 };
+      a.decks++;
+      a.rateSum += r.adoptionRate;
+      acc.set(key, a);
+    }
+    top = [...acc.entries()]
+      .sort((x, y) => y[1].decks - x[1].decks || y[1].rateSum - x[1].rateSum)
+      .slice(0, n);
+  }
+
+  // 이미지 해석: flag ON 시 key가 gameCardId일 수 있음 → gc_ 키면 대표 LC id 조회
+  let imageKeys: string[];
+  if (USE_GAMECARD_RESOLVER) {
+    const gcKeys = top.map(([id]) => id).filter((k) => k.startsWith("gc_"));
+    const repMap = new Map<string, string>(); // gcId → 대표 cardId
+    if (gcKeys.length > 0) {
+      // artCardId===id인 카드를 대표로 우선, 없으면 첫 번째 행 폴백
+      const artReps = await prisma.card.findMany({
+        where: { gameCardId: { in: gcKeys } },
+        select: { id: true, gameCardId: true, artCardId: true },
+      });
+      for (const c of artReps) {
+        if (!c.gameCardId) continue;
+        if (!repMap.has(c.gameCardId) || c.artCardId === c.id) {
+          repMap.set(c.gameCardId, c.id);
+        }
+      }
+    }
+    imageKeys = top.map(([id]) => repMap.get(id) ?? id);
+  } else {
+    imageKeys = top.map(([id]) => id);
+  }
+
+  const imageMap = await resolveCardImages(imageKeys);
+  return top.map(([id, a], i) => ({
     cardId: id,
     name: a.name,
-    image: imageMap.get(id)?.image ?? null,
-    regionCardId: imageMap.get(id)?.regionCardId ?? null,
+    image: imageMap.get(imageKeys[i])?.image ?? null,
+    regionCardId: imageMap.get(imageKeys[i])?.regionCardId ?? null,
     deckCount: a.decks,
     avgAdoption: Math.round((a.rateSum / a.decks) * 10) / 10,
   }));
@@ -1372,8 +1501,31 @@ export type DeckUsingCard = {
 
 /** 카드 상세 역링크 — 이 카드를 쓰는 덱 Top N (INTL 채용률순). */
 export async function getDecksUsingCard(cardId: string, n = 5): Promise<DeckUsingCard[]> {
+  // flag ON: cardId → gameCardId → 같은 게임카드의 모든 인쇄판(siblings)으로 확장 조회
+  // flag OFF: 현행 단일 cardId WHERE 그대로
+  let whereCardIds: string | { in: string[] };
+  if (USE_GAMECARD_RESOLVER) {
+    const lc = await prisma.card.findUnique({
+      where: { id: cardId },
+      select: { gameCardId: true },
+    });
+    const gcId = lc?.gameCardId;
+    if (gcId) {
+      const siblings = await prisma.card.findMany({
+        where: { gameCardId: gcId },
+        select: { id: true },
+      });
+      whereCardIds = { in: siblings.map((s) => s.id) };
+    } else {
+      // gameCardId 없음 → 현행 단일 cardId 폴백
+      whereCardIds = cardId;
+    }
+  } else {
+    whereCardIds = cardId;
+  }
+
   const rows = await prisma.deckRecipeCard.findMany({
-    where: { region: "INTL", cardId },
+    where: { region: "INTL", cardId: whereCardIds },
     select: { archetypeId: true, adoptionRate: true, avgCount: true },
     orderBy: { adoptionRate: "desc" },
     take: n * 2, // 인쇄판별 행 중복 대비

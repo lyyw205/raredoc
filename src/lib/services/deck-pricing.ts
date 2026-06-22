@@ -19,6 +19,9 @@
  */
 import { prisma } from "@/lib/prisma";
 import { toKrw } from "@/lib/trades/shared";
+import { USE_GAMECARD_RESOLVER } from "@/lib/cards/flags";
+import { getCandidatePool } from "@/lib/cards/build-candidate-pool";
+import { resolveRecipeCard } from "@/lib/cards/decklist-gamecard-resolver";
 
 const PRICE_SOURCES = ["yuyu_tei_sell", "tcgplayer", "cardmarket"] as const;
 /** 표기 우선순위: JP 매장가(한국 유저 직구 기준) > 미국 > 유럽 */
@@ -59,24 +62,52 @@ type PrintInfo = {
 
 export async function computeDeckCost(archetypeId: string): Promise<DeckCostResult | null> {
   // ① 레시피 (INTL) — 인쇄판별 행
+  // flag ON: setCode/number 포함(resolveRecipeCard Path2용). flag OFF와 select 분리하면
+  // OFF 경로 바이트가 달라지므로 ON/OFF 공통 select에 추가하되 OFF 분기에서는 무시.
+  // ★ OFF 경로는 setCode/number를 읽기만 하고 사용하지 않으므로 동작 동일.
   const rows = await prisma.deckRecipeCard.findMany({
     where: { archetypeId, region: "INTL" },
-    select: { cardName: true, category: true, avgCount: true, adoptionRate: true, cardId: true },
+    select: { cardName: true, category: true, avgCount: true, adoptionRate: true, cardId: true, setCode: true, number: true },
   });
   if (rows.length === 0) return null;
 
   // ② cardName 그룹: 수량 = Σ avgCount 반올림 (비에너지 상한 4 — Limitless name=게임 텍스트 단위 의미론)
+  // flag ON: 그룹 키 = gameCardId(resolveRecipeCard 성공 시) — 이름 변형 중복 계상 해소
+  // flag OFF: 그룹 키 = cardName 원문(현행 동일)
   type Group = { cardName: string; category: string; qty: number; maxAdoption: number; lcIds: Set<string> };
   const groups = new Map<string, Group>();
+
+  // flag ON: 후보 풀 1회 조회
+  let resolverPool: Awaited<ReturnType<typeof getCandidatePool>> | null = null;
+  if (USE_GAMECARD_RESOLVER) {
+    resolverPool = await getCandidatePool();
+  }
+
   for (const r of rows) {
-    let g = groups.get(r.cardName);
+    // flag ON: gameCardId 기준 키(미해결 시 cardName 원문 폴백)
+    // flag OFF: cardName 원문 키(현행 동일)
+    let groupKey = r.cardName;
+    let survivorCardId: string | null = r.cardId;
+    if (resolverPool) {
+      const res = resolveRecipeCard(
+        { cardId: r.cardId, setCode: r.setCode ?? "", number: r.number ?? "", cardName: r.cardName },
+        resolverPool.poolById,
+        resolverPool.snIdx,
+      );
+      if (res.status === "resolved") {
+        groupKey = `gc:${res.gameCardId}`;
+        survivorCardId = res.survivorCardId;
+      }
+    }
+
+    let g = groups.get(groupKey);
     if (!g) {
       g = { cardName: r.cardName, category: r.category, qty: 0, maxAdoption: 0, lcIds: new Set() };
-      groups.set(r.cardName, g);
+      groups.set(groupKey, g);
     }
     g.qty += r.avgCount;
     g.maxAdoption = Math.max(g.maxAdoption, r.adoptionRate);
-    if (r.cardId) g.lcIds.add(r.cardId);
+    if (survivorCardId) g.lcIds.add(survivorCardId);
   }
   for (const g of groups.values()) {
     g.qty = Math.max(1, Math.round(g.qty));
