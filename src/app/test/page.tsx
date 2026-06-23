@@ -182,6 +182,10 @@ function LocaleRowView({ loc }: { loc: LocaleRow }) {
         <RegionBadge region={loc.region} />
         <span className="flex-1 truncate font-mono text-[10px] text-gray-500">{loc.set.id} #{loc.number}</span>
       </div>
+      {/* 이 행(RegionCard)이 속한 Set(지역 발매판) 이름 — 📦 팩(논리 그룹)과 구분 */}
+      <div className="truncate rounded bg-slate-100 px-1 py-0.5 text-[10px] font-medium text-slate-600" title={loc.set.id}>
+        🗂 {loc.set.name}
+      </div>
       {/* 이 행(RegionCard)의 팩 = set.cardPack — "이 행이 어느 팩"을 1:1 로 표시 */}
       {loc.set.cardPack ? (
         <div
