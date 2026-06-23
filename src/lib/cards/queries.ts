@@ -9,6 +9,7 @@ import { prisma } from "@/lib/prisma";
 import type { TCGCard } from "@/lib/api/pokemontcg";
 import { pickRarityLabel, REGION_SORT_PRIORITY } from "./card-fields";
 import { resolveSiblings, isUnavailable, type SiblingCandidate, type Region } from "./sibling-resolver";
+import { matchesSearch, buildSearchText } from "@/lib/search";
 
 // ── 공용 타입 ─────────────────────────────────────────────────────────────────
 
@@ -354,7 +355,34 @@ export type CardSearchFilters = {
   rarityCode?: string;
   cardPackId?: string;
   limit?: number;
+  // true → q 를 "종(Species)"으로도 해석해 그 종의 모든 Card 를 포함(이름-글자 일치로만 잡지 않음).
+  //   KR판 없는 JP/EN 단독 아트가 한글 검색에서 누락되던 문제 해결. opt-in(시세 검색 등에서만 사용).
+  expandSpecies?: boolean;
 };
+
+/**
+ * 쿼리가 가리키는 종(Species)에 속한 모든 Card id.
+ *   언어무관 매칭(matchesSearch: NFKC+토큰 AND)으로 Species.nameKo/Ja/En 을 검사해
+ *   매칭된 종들의 CardSpecies 링크에서 Card id 를 수집한다(도감/`/test` 와 동일한 종 해석 기준).
+ *   매칭 종이 없으면 [] — 호출부는 이름-글자 검색으로 폴백한다.
+ *   ※ "리자몽 ex" 같이 종이름에 없는 토큰("ex")이 섞이면 AND 매칭이 실패해 종으로 안 잡힘(의도).
+ */
+async function cardIdsForQuerySpecies(q: string): Promise<string[]> {
+  const norm = q.trim();
+  if (!norm) return [];
+  const species = await prisma.species.findMany({
+    select: { id: true, nameKo: true, nameJa: true, nameEn: true },
+  });
+  const speciesIds = species
+    .filter((s) => matchesSearch(buildSearchText([s.nameKo, s.nameJa, s.nameEn]), norm))
+    .map((s) => s.id);
+  if (speciesIds.length === 0) return [];
+  const links = await prisma.cardSpecies.findMany({
+    where: { speciesId: { in: speciesIds } },
+    select: { cardId: true },
+  });
+  return [...new Set(links.map((l) => l.cardId))];
+}
 
 /**
  * Card 메타 + 모든 locale 조인 검색. dedupe 는 Card 단위로 보장.
@@ -375,9 +403,17 @@ export async function searchCards(
   if (filters.rarityCode) where.rarity = { code: filters.rarityCode };
   if (filters.cardPackId) where.id = { in: await lcIdsInPack(filters.cardPackId) };
   if (q) {
-    where.locales = {
-      some: { name: { contains: q, mode: "insensitive" } },
+    const nameMatch: Prisma.CardWhereInput = {
+      locales: { some: { name: { contains: q, mode: "insensitive" } } },
     };
+    // expandSpecies: 이름-글자(언어종속) 일치에 더해, 쿼리가 가리키는 종의 Card 전부를 합집합으로.
+    //   예) "이상해씨"(한글) → species#1 → KR판 없는 JP/EN 단독 아트까지 포함.
+    const speciesCardIds = filters.expandSpecies ? await cardIdsForQuerySpecies(q) : [];
+    if (speciesCardIds.length > 0) {
+      where.OR = [{ id: { in: speciesCardIds } }, nameMatch]; // pack/type 등 다른 where 와는 AND
+    } else {
+      where.locales = nameMatch.locales;
+    }
   }
 
   const lcs = await prisma.card.findMany({

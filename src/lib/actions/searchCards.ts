@@ -28,6 +28,7 @@ export interface CardSearchParams {
   setId?: string; // CardPack.id (그룹 단위 필터)
   limit?: number;
   sort?: "price"; // "price" → 카드 대표 시세 높은순(미지정 시 기본 무정렬)
+  expandSpecies?: boolean; // true → q 를 종으로도 해석해 그 종의 모든 Card 포함(KR판 없는 아트 누락 방지)
 }
 
 export async function searchCardsAction(
@@ -39,6 +40,7 @@ export async function searchCardsAction(
     rarityCode: params.rarity,
     cardPackId: params.setId,
     limit: params.limit,
+    expandSpecies: params.expandSpecies,
   };
 
   // Card 단위 dedupe 후, KO 우선 locale 1개만 결과로.

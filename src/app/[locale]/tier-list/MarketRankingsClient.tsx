@@ -364,7 +364,9 @@ export default function MarketRankingsClient({ data }: { data: MarketRankingsDat
     }
     setSearching(true);
     try {
-      const hits = await searchCardsAction({ q, limit: 24, sort: "price" });
+      // expandSpecies: "이상해씨" 처럼 종 이름으로 검색하면 KR판 없는 JP/EN 단독 아트까지 전부.
+      //   limit 100: 한 종의 모든 버전이 들어오도록 상향(슬라이더는 가로 스크롤).
+      const hits = await searchCardsAction({ q, limit: 100, sort: "price", expandSpecies: true });
       setResults(hits);
       setSelected(null);
     } finally {
