@@ -336,7 +336,7 @@ export default async function TestPage({
   const view = sp.view === "trainers" ? "trainers" : "species";
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-6">
+    <main className="mx-auto max-w-[1920px] px-4 py-6">
       <header className="mb-4">
         <h1 className="text-xl font-bold text-gray-900">DB 그룹 검증 — /test</h1>
         <p className="mt-1 text-[13px] text-gray-500">
@@ -379,7 +379,7 @@ export default async function TestPage({
 
 // 종 뷰 섹션
 async function SpeciesSection({ sp }: { sp: { page?: string; size?: string; dex?: string } }) {
-  const size = clampInt(sp.size, 25, 5, 100); // 도감 윈도우 폭
+  const size = clampInt(sp.size, 50, 5, 150); // 도감 윈도우 폭(기본 50종 — 한눈에 많이)
   // dex 점프가 있으면 그 종이 포함된 페이지로, 없으면 page 사용
   const page = sp.dex
     ? Math.floor((clampInt(sp.dex, 1, 1, MAX_DEX) - 1) / size)
@@ -425,7 +425,7 @@ async function SpeciesSection({ sp }: { sp: { page?: string; size?: string; dex?
             type="number"
             name="size"
             min={5}
-            max={100}
+            max={150}
             defaultValue={size}
             className="w-16 rounded border border-gray-300 px-2 py-1"
             title="윈도우 폭"
