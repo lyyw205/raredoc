@@ -110,9 +110,10 @@ export function getName(dex: number, lang: "ko" | "ja" | "en" = "ko"): string | 
   return loadPokeapiNames().get(dex)?.[lang];
 }
 
-/** 정규화(공백/구두점 제거 + 소문자) — 이름→도감번호 역索引용. */
+/** 정규화(NFKC 전각↔반각 통일 + 공백/구두점 제거 + 소문자) — 이름→도감번호 역索引용.
+ *  ★NFKC: ポリゴンＺ↔ポリゴンZ 같은 전각/반각 불일치 해소(없으면 exact 빗나가 substring 오매칭). */
 function normalizeName(name: string): string {
-  return name.toLowerCase().replace(/[\s.'’\-:·・]/g, "");
+  return name.normalize("NFKC").toLowerCase().replace(/[\s.'’\-:·・]/g, "");
 }
 
 const _nameIdxCache = new Map<string, Map<string, number>>();
@@ -222,13 +223,31 @@ function jaCandidates(seg: string): string[] {
  * TCG 카드명 → 도감번호 배열. 태그팀("A & B")은 다중 dex. 매칭 0건이면 빈 배열.
  * lang: 카드명 언어("en" 우선 권장, "ja"=카타카나 JP단독, "ko" 폴백).
  */
+/**
+ * seg 안에 포함된 "가장 긴" 종 이름 → dex. 코스튬/장식명(ポンチョを着たピカチュウ→피카츄,
+ * ホワイトキュレム→キュレム) 최후 폴백. 가장 긴 매칭 우선이라 ポリゴンZ(474) > ポリゴン(137) 안전.
+ * JA 전용(공백 없는 일본어에서만 사용 — EN/KO 는 단어분해 후보가 이미 커버, 오매칭 격리).
+ */
+function resolveBySubstring(seg: string, lang: "en" | "ko" | "ja"): number | undefined {
+  const nseg = normalizeName(seg);
+  if (nseg.length < 3) return undefined;
+  let bestLen = 0, bestDex: number | undefined;
+  for (const [key, dex] of buildNameIndex(lang)) {
+    if (key.length >= 3 && key.length > bestLen && nseg.includes(key)) { bestLen = key.length; bestDex = dex; }
+  }
+  return bestDex;
+}
+
 export function resolveCardDexes(name: string | null | undefined, lang: "en" | "ko" | "ja" = "en"): number[] {
   if (!name) return [];
   const cands = lang === "ko" ? koCandidates : lang === "ja" ? jaCandidates : enCandidates;
   const segs = name.split(/\s*&\s*|\s*\+\s*/).filter(Boolean); // 태그팀/유나이트
   const found: number[] = [];
   for (const seg of segs) {
-    for (const c of cands(seg)) { const d = resolveDex(c, lang); if (d) { found.push(d); break; } }
+    let hit: number | undefined;
+    for (const c of cands(seg)) { const d = resolveDex(c, lang); if (d) { hit = d; break; } }
+    if (hit == null && lang === "ja") hit = resolveBySubstring(seg, "ja"); // 장식명 폴백(JA 한정)
+    if (hit != null) found.push(hit);
   }
   return [...new Set(found)];
 }
