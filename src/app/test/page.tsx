@@ -320,7 +320,7 @@ export default async function TestPage({
 }) {
   const sp = await searchParams;
   const summary = await getSummary();
-  const view = sp.view === "trainers" ? "trainers" : "species";
+  const view = sp.view === "trainers" ? "trainers" : sp.view === "newest" ? "newest" : "species";
 
   return (
     <main className="mx-auto max-w-[1920px] px-4 py-6">
@@ -352,13 +352,21 @@ export default async function TestPage({
           >
             무종(트레이너·에너지)
           </Link>
+          <Link
+            href="/test?view=newest"
+            className={`rounded-md px-3 py-1 ${view === "newest" ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-700"}`}
+          >
+            최신순(발매일)
+          </Link>
         </nav>
       </header>
 
-      {view === "species" ? (
-        <SpeciesSection sp={sp} />
-      ) : (
+      {view === "newest" ? (
+        <NewestSection sp={sp} />
+      ) : view === "trainers" ? (
         <TrainerSection sp={sp} total={summary.noSpecies} />
+      ) : (
+        <SpeciesSection sp={sp} />
       )}
     </main>
   );
@@ -477,6 +485,93 @@ async function TrainerSection({
           <div className="text-[13px] text-gray-400">카드 없음</div>
         ) : (
           cards.map((card) => <CardView key={card.id} card={card} />)
+        )}
+      </div>
+    </section>
+  );
+}
+
+// ── 최신순(발매일) 뷰 ──────────────────────────────────────────────────────────
+// Card(한 그림) 단위, 그 카드의 최신 인쇄본 발매일 desc. 같은 [gameCard+작가] 는 ⊕병합후보로 한 유닛.
+async function getNewestUnits(
+  offset: number,
+  size: number,
+): Promise<{ units: { cards: CardRow[]; date: string | null; candidate: boolean }[]; total: number }> {
+  // 1) 경량: 카드별 최신 발매일 + 그룹키(gameCard|작가)
+  const rows = await prisma.$queryRaw<{ id: string; gc: string | null; illus: string | null; newest: Date | null }[]>`
+    SELECT lc.id, lc."gameCardId" AS gc, lc.illustrator AS illus, MAX(s."releaseDate") AS newest
+    FROM "LogicalCard" lc
+    JOIN "CardLocale" cl ON cl."logicalCardId" = lc.id
+    JOIN "Set" s ON s.id = cl."setId"
+    GROUP BY lc.id, lc."gameCardId", lc.illustrator`;
+  // 2) 유닛(병합후보 그룹 or 단독)으로 묶고 발매일 최신순
+  const um = new Map<string, { ids: string[]; date: number }>();
+  for (const r of rows) {
+    const key = r.gc && r.illus ? `g:${r.gc}|${r.illus}` : `s:${r.id}`;
+    const d = r.newest ? new Date(r.newest).getTime() : 0;
+    const u = um.get(key);
+    if (u) { u.ids.push(r.id); if (d > u.date) u.date = d; }
+    else um.set(key, { ids: [r.id], date: d });
+  }
+  const all = [...um.values()].sort((a, b) => b.date - a.date);
+  const total = all.length;
+  const pageUnits = all.slice(offset, offset + size);
+  const cards = (await prisma.card.findMany({ where: { id: { in: pageUnits.flatMap((u) => u.ids) } }, select: cardSelect })) as unknown as CardRow[];
+  const byId = new Map(cards.map((c) => [c.id, c]));
+  const units = pageUnits.map((u) => ({
+    cards: u.ids.map((id) => byId.get(id)).filter((c): c is CardRow => !!c),
+    date: u.date ? new Date(u.date).toISOString().slice(0, 10) : null,
+    candidate: u.ids.length > 1,
+  }));
+  return { units, total };
+}
+
+async function NewestSection({ sp }: { sp: { page?: string; size?: string } }) {
+  const size = clampInt(sp.size, 40, 5, 200);
+  const page = clampInt(sp.page, 0, 0, 100000);
+  const { units, total } = await getNewestUnits(page * size, size);
+  const totalPages = Math.max(1, Math.ceil(total / size));
+  const mk = (p: number) => `/test?view=newest&page=${p}&size=${size}`;
+  return (
+    <section>
+      <div className="mb-3 flex flex-wrap items-center gap-3">
+        <div className="text-[14px] font-semibold text-gray-700">
+          최신순(발매일) {page * size + 1}–{page * size + units.length} / {total.toLocaleString()} 묶음{" "}
+          <span className="text-[12px] font-normal text-gray-400">(페이지 {page + 1}/{totalPages})</span>
+        </div>
+        <div className="flex gap-1">
+          {page > 0 && (
+            <Link href={mk(page - 1)} className="rounded bg-gray-100 px-2 py-1 text-[13px] text-gray-700">← 이전</Link>
+          )}
+          {page < totalPages - 1 && (
+            <Link href={mk(page + 1)} className="rounded bg-gray-100 px-2 py-1 text-[13px] text-gray-700">다음 →</Link>
+          )}
+        </div>
+        <p className="ml-auto text-[11px] text-gray-400">※ 위→아래 = 발매일 최신순 · ⊕ = 같은 gameCard+작가(검증 후 병합)</p>
+      </div>
+      <div className="flex flex-wrap items-start gap-2">
+        {units.length === 0 ? (
+          <div className="text-[13px] text-gray-400">없음</div>
+        ) : (
+          units.map((u, i) =>
+            u.candidate ? (
+              <div key={i} className="rounded-lg border-2 border-dashed border-amber-400 bg-amber-50/40 p-1.5">
+                <div className="mb-1 text-[11px] font-bold text-amber-700">
+                  ⊕ 병합후보 {u.cards.length}장 · {u.date ?? "?"} · 작가 {u.cards[0]?.illustrator ?? "?"}
+                </div>
+                <div className="flex flex-wrap items-start gap-2">
+                  {u.cards.map((c) => (
+                    <CardView key={c.id} card={c} />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div key={i} className="flex flex-col gap-0.5">
+                <div className="font-mono text-[10px] text-gray-400">{u.date ?? "?"}</div>
+                {u.cards[0] ? <CardView card={u.cards[0]} /> : null}
+              </div>
+            ),
+          )
         )}
       </div>
     </section>
