@@ -141,22 +141,8 @@ function sortLocales(locales: LocaleRow[]): LocaleRow[] {
       a.number.localeCompare(b.number),
   );
 }
-function cardDisplayName(card: CardRow): string {
-  const koText = card.texts.find((t) => t.language === "ko" && t.name)?.name;
-  return card.nameKo ?? koText ?? card.locales[0]?.name ?? "(이름 없음)";
-}
 function packDisplayName(pack: PackLite): string {
   return pack.nameKo ?? pack.nameJa ?? pack.nameEn ?? pack.id;
-}
-// 팩소속 직교화: 카드가 걸친 모든 팩 = 각 locale 의 set.cardPack 중복제거(앵커 JP>KR>EN 순서로 정렬).
-const ANCHOR_RANK: Record<string, number> = { JP: 0, KR: 1, EN: 2 };
-function cardPacks(card: CardRow): PackLite[] {
-  const seen = new Map<string, PackLite>();
-  for (const l of [...card.locales].sort((a, b) => (ANCHOR_RANK[a.region] ?? 9) - (ANCHOR_RANK[b.region] ?? 9))) {
-    const p = l.set.cardPack;
-    if (p && !seen.has(p.id)) seen.set(p.id, p);
-  }
-  return [...seen.values()];
 }
 
 function RegionBadge({ region }: { region: string }) {
@@ -194,11 +180,7 @@ function LocaleRowView({ loc }: { loc: LocaleRow }) {
       )}
       <div className="flex items-center gap-1">
         <RegionBadge region={loc.region} />
-        {loc.rarity && <span className="text-[10px] text-gray-400">{loc.rarity.code}</span>}
-        <span className="ml-auto font-mono text-[10px] text-gray-300">{shortId(loc.id, 5)}</span>
-      </div>
-      <div className="truncate font-mono text-[10px] text-gray-500">
-        {loc.set.id} <span className="text-gray-400">#{loc.number}</span>
+        <span className="flex-1 truncate font-mono text-[10px] text-gray-500">{loc.set.id} #{loc.number}</span>
       </div>
       {/* 이 행(RegionCard)의 팩 = set.cardPack — "이 행이 어느 팩"을 1:1 로 표시 */}
       {loc.set.cardPack ? (
@@ -211,7 +193,6 @@ function LocaleRowView({ loc }: { loc: LocaleRow }) {
       ) : (
         <div className="rounded bg-amber-100 px-1 py-0.5 text-[10px] font-medium text-amber-700">📦 소속팩 ∅</div>
       )}
-      <div className="line-clamp-2 font-medium leading-tight text-gray-900">{loc.name}</div>
     </div>
   );
 }
@@ -222,48 +203,14 @@ function CardView({ card }: { card: CardRow }) {
   // 박스 너비 = 타일(150px) 한 줄 너비에 고정 → 헤더(긴 메타줄)가 박스를 넓히지 못하게.
   //   타일 1장이면 좁게, 여러 장이면 그만큼만. 헤더는 이 너비 안에서 줄바꿈.
   const cols = Math.max(1, locales.length);
-  const boxWidth = cols * 150 + (cols - 1) * 8 + 24; // 타일×150 + gap-2(8) + px-3 패딩(24)
+  const boxWidth = cols * 150 + (cols - 1) * 8 + 32; // 타일×150 + gap-2(8) + px-3(24) + border(2) + 여유(6) — 일러 줄바꿈 방지
   return (
     <div
       className="rounded-md border border-gray-200 bg-white px-3 py-2"
       style={{ width: boxWidth, maxWidth: "100%" }}
     >
-      <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-[13px]">
-        <span className="font-semibold text-gray-900">{cardDisplayName(card)}</span>
-        {card.supertype && (
-          <span className="rounded bg-gray-100 px-1.5 py-0.5 text-[11px] text-gray-600">
-            {card.supertype}
-          </span>
-        )}
-        {card.subtypes.length > 0 && (
-          <span className="text-[11px] text-gray-400">{card.subtypes.join("/")}</span>
-        )}
-        {card.hp != null && <span className="text-[11px] text-gray-400">HP {card.hp}</span>}
-        {card.types.length > 0 && (
-          <span className="text-[11px] text-gray-400">{card.types.join("·")}</span>
-        )}
-        {card.rarity && (
-          <span className="text-[11px] text-gray-400">레어 {card.rarity.abbr ?? card.rarity.code}</span>
-        )}
-        {(() => {
-          const packs = cardPacks(card);
-          return packs.length > 0 ? (
-            packs.map((p) => (
-              <span
-                key={p.id}
-                className="rounded bg-violet-100 px-1.5 py-0.5 text-[11px] font-medium text-violet-700"
-                title={p.id}
-              >
-                📦 {packDisplayName(p)}
-              </span>
-            ))
-          ) : (
-            <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[11px] font-medium text-amber-700">
-              📦 소속팩 ∅
-            </span>
-          );
-        })()}
-        <span className="font-mono text-[11px] text-gray-300">Card {shortId(card.id)}</span>
+      <div className="text-[11px]">
+        <span className="font-mono text-gray-400">Card {shortId(card.id)}</span>
       </div>
       {/* row들: 지역판(RegionCard) — 같은 그림인지 가로로 비교 */}
       <div className="mt-2 flex flex-wrap gap-2">
@@ -273,15 +220,6 @@ function CardView({ card }: { card: CardRow }) {
           locales.map((loc) => <LocaleRowView key={loc.id} loc={loc} />)
         )}
       </div>
-      {/* 텍스트 오버레이(CardText) 요약 */}
-      {card.texts.length > 0 && (
-        <div className="mt-1 text-[11px] text-gray-400">
-          텍스트:{" "}
-          {card.texts
-            .map((t) => `${t.language}${t.name ? "" : "(이름∅)"}·${t.source}`)
-            .join("  ")}
-        </div>
-      )}
     </div>
   );
 }
