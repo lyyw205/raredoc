@@ -219,8 +219,15 @@ function LocaleRowView({ loc }: { loc: LocaleRow }) {
 // ── Card(정체성) 1장 ──────────────────────────────────────────────────────────
 function CardView({ card }: { card: CardRow }) {
   const locales = sortLocales(card.locales);
+  // 박스 너비 = 타일(150px) 한 줄 너비에 고정 → 헤더(긴 메타줄)가 박스를 넓히지 못하게.
+  //   타일 1장이면 좁게, 여러 장이면 그만큼만. 헤더는 이 너비 안에서 줄바꿈.
+  const cols = Math.max(1, locales.length);
+  const boxWidth = cols * 150 + (cols - 1) * 8 + 24; // 타일×150 + gap-2(8) + px-3 패딩(24)
   return (
-    <div className="w-fit max-w-full rounded-md border border-gray-200 bg-white px-3 py-2">
+    <div
+      className="rounded-md border border-gray-200 bg-white px-3 py-2"
+      style={{ width: boxWidth, maxWidth: "100%" }}
+    >
       <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-[13px]">
         <span className="font-semibold text-gray-900">{cardDisplayName(card)}</span>
         {card.supertype && (
@@ -256,7 +263,7 @@ function CardView({ card }: { card: CardRow }) {
             </span>
           );
         })()}
-        <span className="ml-auto font-mono text-[11px] text-gray-300">Card {shortId(card.id)}</span>
+        <span className="font-mono text-[11px] text-gray-300">Card {shortId(card.id)}</span>
       </div>
       {/* row들: 지역판(RegionCard) — 같은 그림인지 가로로 비교 */}
       <div className="mt-2 flex flex-wrap gap-2">
@@ -379,7 +386,7 @@ export default async function TestPage({
 
 // 종 뷰 섹션
 async function SpeciesSection({ sp }: { sp: { page?: string; size?: string; dex?: string } }) {
-  const size = clampInt(sp.size, 50, 5, 150); // 도감 윈도우 폭(기본 50종 — 한눈에 많이)
+  const size = clampInt(sp.size, 1, 1, 150); // 도감 윈도우 폭(기본 1종 — 도감번호 하나씩)
   // dex 점프가 있으면 그 종이 포함된 페이지로, 없으면 page 사용
   const page = sp.dex
     ? Math.floor((clampInt(sp.dex, 1, 1, MAX_DEX) - 1) / size)
@@ -424,7 +431,7 @@ async function SpeciesSection({ sp }: { sp: { page?: string; size?: string; dex?
           <input
             type="number"
             name="size"
-            min={5}
+            min={1}
             max={150}
             defaultValue={size}
             className="w-16 rounded border border-gray-300 px-2 py-1"
