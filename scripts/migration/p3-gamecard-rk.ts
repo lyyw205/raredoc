@@ -30,8 +30,8 @@ async function main() {
   const [lcs, speciesRows] = await Promise.all([
     prisma.card.findMany({
       where: { locales: { some: {} } },
-      select: { id: true, supertype: true, hp: true, attacks: true, abilities: true, subtypes: true, types: true, cardPackId: true, pokedexNumbers: true,
-        locales: { select: { region: true, name: true } } },
+      select: { id: true, supertype: true, hp: true, attacks: true, abilities: true, subtypes: true, types: true, pokedexNumbers: true,
+        locales: { select: { region: true, name: true, set: { select: { cardPackId: true } } } } },
     }),
     prisma.species.findMany({ select: { id: true, nameEn: true } }),
   ]);
@@ -139,7 +139,7 @@ async function main() {
     console.log("\n  (dry-run) — 이상 없으면 --apply --allow-protected"); await prisma.$disconnect(); return;
   }
 
-  const packs = [...new Set(lcs.map((l) => l.cardPackId).filter(Boolean))] as string[];
+  const packs = [...new Set(lcs.flatMap((l) => l.locales.map((x) => x.set?.cardPackId)).filter(Boolean))] as string[];
   assertWritable(packs, { allow: hasAllowProtectedFlag(), dryRun: false, tool: "p3-gamecard-rk" });
   let s = 0;
   const rows = arr.map((g) => ({ id: g.id, supertype: g.supertype, name: g.name, hp: g.hp }));

@@ -63,10 +63,9 @@ async function main() {
   console.log(`■ ${jpSet} ← ${jsonPath} | JSON ${cards.length}장 ${APPLY ? "★APPLY" : "(dry)"}${PRUNE ? " +prune" : ""}`);
 
   const setRow = await prisma.set.findUnique({ where: { id: jpSet }, select: { cardPackId: true } });
-  const sgId = setRow?.cardPackId ?? null;
   const locs = await prisma.regionCard.findMany({ where: { setId: jpSet }, select: { id: true, number: true, numberInt: true, name: true, cardId: true } });
   const dbNums = new Set(locs.map((l) => l.numberInt ?? numKey(l.number)));
-  console.log(`  기존 JP locale ${locs.length} · cardPack ${sgId ?? "—"}`);
+  console.log(`  기존 JP locale ${locs.length} · cardPack ${setRow?.cardPackId ?? "—"}`);
 
   let dexTcg = 0, dexJa = 0, dexNone = 0, matched = 0; const noDex: string[] = [], noJson: string[] = [];
   const updates: { lcid: string; data: any }[] = [];
@@ -109,7 +108,7 @@ async function main() {
     const lcId = `lc-${jpSet}-${c.number}`;
     if (await prisma.card.findUnique({ where: { id: lcId } })) continue;
     await prisma.card.create({ data: {
-      id: lcId, cardPackId: sgId ?? undefined, supertype: supertype ?? undefined, subtypes, pokedexNumbers: dex,
+      id: lcId, supertype: supertype ?? undefined, subtypes, pokedexNumbers: dex,
       illustrator: c.illustrator ?? undefined, hp: c.hp ?? undefined, types: c.types ?? [],
       primarySetId: jpSet, primaryNumber: c.number, primaryNumberInt: numInt ?? undefined,
     } });

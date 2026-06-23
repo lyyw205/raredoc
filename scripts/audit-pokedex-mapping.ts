@@ -54,7 +54,7 @@ async function main() {
   const cards = await prisma.card.findMany({
     where: { supertype: { in: POKE as unknown as string[] } },
     select: {
-      id: true, supertype: true, pokedexNumbers: true, nameKo: true, cardPackId: true,
+      id: true, supertype: true, pokedexNumbers: true, nameKo: true,
       locales: { select: { language: true, name: true, setId: true } },
     },
   });
@@ -71,7 +71,7 @@ async function main() {
     const en = c.locales.find((l) => l.language === "en")?.name ?? null;
     const ko = c.nameKo ?? c.locales.find((l) => l.language === "ko")?.name ?? null;
     const anySetId = c.locales[0]?.setId ?? null;
-    const era = eraOf(c.cardPackId, anySetId);
+    const era = eraOf(null, anySetId);
     const e = E(era);
     e.total++;
 

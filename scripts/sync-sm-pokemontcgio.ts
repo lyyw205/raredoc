@@ -198,7 +198,7 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
       await prisma.card.upsert({
         where: { id: lcId },
         create: {
-          id: lcId, cardPackId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
+          id: lcId, primarySetId: enSetId, primaryNumber: numPadded,
           primaryNumberInt: parseInt(numPadded, 10) || null,
           hp: card.hp ? parseInt(card.hp, 10) || null : null,
           types: card.types ?? [], subtypes: card.subtypes ?? [],
@@ -214,7 +214,7 @@ async function syncSet(setDef: SetDef, rarityMap: Map<string, string>, sourceId:
           ...(card.legalities ? { legalities: card.legalities as never } : {}),
         },
         update: {
-          cardPackId: groupId, primarySetId: enSetId, primaryNumber: numPadded,
+          primarySetId: enSetId, primaryNumber: numPadded,
           primaryNumberInt: parseInt(numPadded, 10) || null,
           hp: card.hp ? parseInt(card.hp, 10) || null : null,
           types: card.types ?? [], subtypes: card.subtypes ?? [],

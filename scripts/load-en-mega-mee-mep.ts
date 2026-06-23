@@ -155,7 +155,6 @@ async function upsertCards(setMeta: typeof MEE_SET | typeof MEP_SET, cards: Card
       where: { id: rcId },
       create: {
         id: rcId,
-        cardPackId: null,
         primarySetId: setMeta.id,
         primaryNumber: c.number,
         primaryNumberInt: toInt(c.number),

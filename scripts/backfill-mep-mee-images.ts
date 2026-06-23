@@ -108,7 +108,6 @@ async function main() {
         where: { id: rcId },
         create: {
           id: rcId,
-          cardPackId: null,
           primarySetId: "en-tcg-mep",
           primaryNumber: c.number,
           primaryNumberInt: toInt(c.number),

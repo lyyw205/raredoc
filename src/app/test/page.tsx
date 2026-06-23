@@ -30,8 +30,9 @@ interface LocaleRow {
   name: string;
   imageSmall: string | null;
   rarity: { code: string } | null;
-  set: { id: string; name: string; region: string };
+  set: { id: string; name: string; region: string; cardPack: PackLite | null };
 }
+type PackLite = { id: string; nameKo: string | null; nameJa: string | null; nameEn: string | null };
 interface TextRow {
   language: string;
   name: string | null;
@@ -49,7 +50,6 @@ interface CardRow {
   gameCardId: string | null;
   gameCard: { id: string; name: string; supertype: string | null; hp: number | null } | null;
   rarity: { code: string; abbr: string | null } | null;
-  cardPack: { id: string; nameKo: string | null; nameJa: string | null; nameEn: string | null } | null;
   locales: LocaleRow[];
   texts: TextRow[];
 }
@@ -73,7 +73,7 @@ const cardSelect = {
   gameCardId: true,
   gameCard: { select: { id: true, name: true, supertype: true, hp: true } },
   rarity: { select: { code: true, abbr: true } },
-  cardPack: { select: { id: true, nameKo: true, nameJa: true, nameEn: true } },
+  // 팩소속 직교화(P9): Card.cardPackId 폐지 → 카드의 팩은 각 locale 의 set.cardPack 에서 도출.
   locales: {
     select: {
       id: true,
@@ -84,7 +84,7 @@ const cardSelect = {
       name: true,
       imageSmall: true,
       rarity: { select: { code: true } },
-      set: { select: { id: true, name: true, region: true } },
+      set: { select: { id: true, name: true, region: true, cardPack: { select: { id: true, nameKo: true, nameJa: true, nameEn: true } } } },
     },
   },
   texts: { select: { language: true, name: true, source: true } },
@@ -145,9 +145,18 @@ function cardDisplayName(card: CardRow): string {
   const koText = card.texts.find((t) => t.language === "ko" && t.name)?.name;
   return card.nameKo ?? koText ?? card.locales[0]?.name ?? "(이름 없음)";
 }
-function packDisplayName(pack: CardRow["cardPack"]): string | null {
-  if (!pack) return null;
+function packDisplayName(pack: PackLite): string {
   return pack.nameKo ?? pack.nameJa ?? pack.nameEn ?? pack.id;
+}
+// 팩소속 직교화: 카드가 걸친 모든 팩 = 각 locale 의 set.cardPack 중복제거(앵커 JP>KR>EN 순서로 정렬).
+const ANCHOR_RANK: Record<string, number> = { JP: 0, KR: 1, EN: 2 };
+function cardPacks(card: CardRow): PackLite[] {
+  const seen = new Map<string, PackLite>();
+  for (const l of [...card.locales].sort((a, b) => (ANCHOR_RANK[a.region] ?? 9) - (ANCHOR_RANK[b.region] ?? 9))) {
+    const p = l.set.cardPack;
+    if (p && !seen.has(p.id)) seen.set(p.id, p);
+  }
+  return [...seen.values()];
 }
 
 function RegionBadge({ region }: { region: string }) {
@@ -218,18 +227,24 @@ function CardView({ card }: { card: CardRow }) {
         {card.rarity && (
           <span className="text-[11px] text-gray-400">레어 {card.rarity.abbr ?? card.rarity.code}</span>
         )}
-        {packDisplayName(card.cardPack) ? (
-          <span
-            className="rounded bg-violet-100 px-1.5 py-0.5 text-[11px] font-medium text-violet-700"
-            title={card.cardPack?.id}
-          >
-            📦 {packDisplayName(card.cardPack)}
-          </span>
-        ) : (
-          <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[11px] font-medium text-amber-700">
-            📦 소속팩 ∅
-          </span>
-        )}
+        {(() => {
+          const packs = cardPacks(card);
+          return packs.length > 0 ? (
+            packs.map((p) => (
+              <span
+                key={p.id}
+                className="rounded bg-violet-100 px-1.5 py-0.5 text-[11px] font-medium text-violet-700"
+                title={p.id}
+              >
+                📦 {packDisplayName(p)}
+              </span>
+            ))
+          ) : (
+            <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[11px] font-medium text-amber-700">
+              📦 소속팩 ∅
+            </span>
+          );
+        })()}
         <span className="ml-auto font-mono text-[11px] text-gray-300">Card {shortId(card.id)}</span>
       </div>
       {/* row들: 지역판(RegionCard) — 같은 그림인지 가로로 비교 */}

@@ -54,8 +54,9 @@ async function main() {
   // 동결 카드팩 가드 — jpSet 의 그룹 + enSet EN 의 현재 소유 그룹(크로스그룹 탈취 방지)에 보호 그룹이 있으면 차단.
   {
     const jpSetRows = await prisma.set.findMany({ where: { id: { in: jpSets } }, select: { cardPackId: true } });
-    const enOwners = await prisma.regionCard.findMany({ where: { region: "EN", setId: enSet }, select: { card: { select: { cardPackId: true } } } });
-    const affected = [...jpSetRows.map((s) => s.cardPackId), ...enOwners.map((e) => e.card.cardPackId)];
+    // 팩소속 직교화: EN 소유 카드의 팩 = Card.cardPackId 폐지 → 각 카드 locale 의 set.cardPackId 전부(가드는 넓게=안전).
+    const enOwners = await prisma.regionCard.findMany({ where: { region: "EN", setId: enSet }, select: { card: { select: { locales: { select: { set: { select: { cardPackId: true } } } } } } } });
+    const affected = [...jpSetRows.map((s) => s.cardPackId), ...enOwners.flatMap((e) => e.card.locales.map((l) => l.set.cardPackId))];
     assertWritable(affected, { allow: hasAllowProtectedFlag(), dryRun: !APPLY, tool: "merge-en-identity" });
   }
   const isSWSH = /^en-tcg-swsh/.test(enSet); // SWSH(en-tcg-swsh*)

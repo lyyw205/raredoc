@@ -174,7 +174,7 @@ async function main() {
   }
 
   const lcs = await prisma.card.findMany({
-    where: setFilter ? { locales: { some: { setId: setFilter } } } : { cardPackId: gid },
+    where: setFilter ? { locales: { some: { setId: setFilter } } } : { locales: { some: { set: { cardPackId: gid } } } },
     select: { id: true, supertype: true, types: true, attacks: true, illustrator: true, weakness: true, resistance: true, retreatCost: true, abilities: true, locales: { select: { region: true, setId: true, numberInt: true, name: true } } },
   });
   let atkFix = 0, atkFill = 0, typFill = 0, illFill = 0, corruptNoSrc = 0, noMatch = 0;

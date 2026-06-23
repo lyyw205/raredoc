@@ -54,7 +54,7 @@ async function main() {
     await prisma.card.upsert({
       where: { id: lcId },
       create: {
-        id: lcId, cardPackId: GROUP, primarySetId: SET_ID,
+        id: lcId, primarySetId: SET_ID,
         primaryNumber: key, primaryNumberInt: c.numberInt,
         supertype: c.supertype ?? null,
         pokedexNumbers: [], subtypes: [], types: [], evolvesTo: [], rules: [],

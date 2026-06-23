@@ -1093,7 +1093,7 @@ export type CatalogCard = {
 /**
  * 카드 일람 카탈로그 — 필터/정렬 적용 후 KR>JP>EN dedupe 상위 200장 + 채용 지표.
  * (구 cards/page.tsx 의 loadCards 를 서비스로 승격: 데이터 접근·뷰모델 구성을 단일 출입구로.
- *  /dex 의 getDexCatalog 와 동형. 채용맵은 내부 getCardAdoption() 자급.)
+ *  채용맵은 내부 getCardAdoption() 자급.)
  */
 export async function getCardCatalog(params: {
   q?: string;

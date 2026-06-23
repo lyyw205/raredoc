@@ -61,7 +61,7 @@ model CardPack {
   releaseDate DateTime? // 그룹 기준일(보통 일본 최초 발매) — 정렬용
   order       Int            @default(0)
   sets        Set[]
-  cards       Card[]         @relation("LogicalCardCardPack")
+  // ★Card[] 역관계(LogicalCardCardPack) 제거됨 — 팩소속 직교화(P9). 카드↔팩은 Set 경유(Set.cardPack).
   // canonical era FK + 팩 대응표 (era raw 필드는 보존)
   eraKey      String?
   eraRef      Era?           @relation(fields: [eraKey], references: [key])
@@ -110,8 +110,9 @@ model CardPackLink {
 // rename 완료 모델: 과거 Card→RegionCard, 신규 모델→Card 전환이 적용된 결과물.
 model Card {
   id               String              @id @default(cuid())
-  cardPackId       String?             @map("setGroupId")
-  cardPack         CardPack?           @relation("LogicalCardCardPack", fields: [cardPackId], references: [id])
+  // ★팩소속 직교화(P9): Card.cardPackId(@map setGroupId) 제거됨. 카드의 팩소속은 가변 스칼라 대신
+  //   각 RegionCard 의 불변 물리관계 Set.cardPackId(앵커 JP>KR>EN)로 도출(queries.ts lcIdsInPack).
+  //   DB 컬럼 DROP 은 이 스키마 배포 後 ALTER TABLE "LogicalCard" DROP COLUMN "setGroupId".
   primarySetId     String? // JP 원조 세트(있으면)
   primarySet       Set?                @relation("LogicalCardPrimarySet", fields: [primarySetId], references: [id])
   primaryNumber    String? // 원조 번호
@@ -153,7 +154,6 @@ model Card {
   createdAt        DateTime            @default(now())
   updatedAt        DateTime            @updatedAt
 
-  @@index([cardPackId], map: "LogicalCard_setGroupId_idx")
   @@index([rarityId], map: "LogicalCard_rarityId_idx")
   @@index([primarySetId], map: "LogicalCard_primarySetId_idx")
   @@index([gameCardId], map: "LogicalCard_gameCardId_idx")
@@ -426,7 +426,7 @@ model ExternalIdMapping {
   regionCardId String?        @map("cardLocaleId")
   cardId       String?        @map("logicalCardId")
   setId        String?
-  cardPackId   String?        @map("setGroupId")
+  // ★cardPackId(@map setGroupId) 제거됨 — 100% NULL·무참조(팩소속 직교화 P9). DB DROP 동반.
   url          String?
   verifiedAt   DateTime?
   verifiedBy   String? // userId or "auto:scriptname"
@@ -442,7 +442,6 @@ model ExternalIdMapping {
   @@index([regionCardId], map: "ExternalIdMapping_cardLocaleId_idx")
   @@index([cardId], map: "ExternalIdMapping_logicalCardId_idx")
   @@index([setId])
-  @@index([cardPackId], map: "ExternalIdMapping_setGroupId_idx")
 }
 
 // ═════════════════════════════════════════════════════════════════════════════

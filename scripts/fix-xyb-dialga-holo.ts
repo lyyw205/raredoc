@@ -60,7 +60,7 @@ async function main() {
   await prisma.$transaction(async (tx) => {
     // --- (1) 에너지 #19 → #20 (lc/rc id 정합 rename: 새 LC 생성 → RC 재지정 → 옛 LC 삭제) ---
     await tx.card.create({ data: {
-      id: ENERGY_LC_NEW, cardPackId: energyLc.cardPackId, primarySetId: energyLc.primarySetId,
+      id: ENERGY_LC_NEW, primarySetId: energyLc.primarySetId,
       primaryNumber: "020", primaryNumberInt: 20, pokedexNumbers: energyLc.pokedexNumbers,
       supertype: energyLc.supertype, subtypes: energyLc.subtypes, types: energyLc.types,
       hp: energyLc.hp, retreatCost: energyLc.retreatCost, weakness: energyLc.weakness, resistance: energyLc.resistance,
@@ -68,8 +68,7 @@ async function main() {
       evolvesFrom: energyLc.evolvesFrom, evolvesTo: energyLc.evolvesTo,
       abilities: energyLc.abilities ?? undefined, attacks: energyLc.attacks ?? undefined,
       legalities: energyLc.legalities ?? undefined, rules: energyLc.rules, flavorText: energyLc.flavorText,
-      rarityId: energyLc.rarityId, nameKo: energyLc.nameKo, attacksKo: energyLc.attacksKo ?? undefined,
-      abilitiesKo: energyLc.abilitiesKo ?? undefined, gameCardId: energyLc.gameCardId,
+      rarityId: energyLc.rarityId, nameKo: energyLc.nameKo, gameCardId: energyLc.gameCardId,
     } });
     await tx.regionCard.update({ where: { id: ENERGY_RC }, data: {
       id: ENERGY_RC_NEW, cardId: ENERGY_LC_NEW, number: "020", numberInt: 20,
@@ -78,7 +77,7 @@ async function main() {
 
     // --- (2) 홀로 ディアルガEX #19 신규(base #4 복제) ---
     await tx.card.create({ data: {
-      id: DIALGA_LC, cardPackId: base.cardPackId, primarySetId: SET,
+      id: DIALGA_LC, primarySetId: SET,
       primaryNumber: "019", primaryNumberInt: 19, pokedexNumbers: base.pokedexNumbers,
       supertype: base.supertype, subtypes: base.subtypes, types: base.types,
       hp: base.hp, retreatCost: base.retreatCost, weakness: base.weakness, resistance: base.resistance,
@@ -86,8 +85,7 @@ async function main() {
       evolvesFrom: base.evolvesFrom, evolvesTo: base.evolvesTo,
       abilities: base.abilities ?? undefined, attacks: base.attacks ?? undefined,
       legalities: base.legalities ?? undefined, rules: base.rules, flavorText: base.flavorText,
-      rarityId: null, nameKo: base.nameKo, attacksKo: base.attacksKo ?? undefined,
-      abilitiesKo: base.abilitiesKo ?? undefined, gameCardId: base.gameCardId,
+      rarityId: null, nameKo: base.nameKo, gameCardId: base.gameCardId,
     } });
     await tx.regionCard.create({ data: {
       id: DIALGA_RC, cardId: DIALGA_LC, language: "ja", region: "JP", setId: SET,

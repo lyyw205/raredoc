@@ -56,7 +56,7 @@ async function main() {
     console.log(`■ 스크랩 ${off.length}장: 타입보유 ${ok} · 빈값(트레이너/에너지) ${empty} · curl실패 ${fail} → ${cache}`);
   }
 
-  const lcs = await prisma.card.findMany({ where: { cardPackId: gid }, select: { id: true, supertype: true, types: true, locales: { select: { region: true, numberInt: true } } } });
+  const lcs = await prisma.card.findMany({ where: { locales: { some: { set: { cardPackId: gid } } } }, select: { id: true, supertype: true, types: true, locales: { select: { region: true, numberInt: true } } } });
   let fill = 0, diff = 0, already = 0, noScrape = 0; const samples: string[] = []; const updates: { id: string; t: string[] }[] = [];
   for (const lc of lcs) {
     const jp = lc.locales.find((l) => l.region === "JP"); if (!jp || jp.numberInt == null) continue;

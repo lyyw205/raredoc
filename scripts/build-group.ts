@@ -1146,7 +1146,7 @@ async function main() {
   let kr = await load(cfg.kr);
   if (cfg.krMerged) {
     // 크로스그룹 합본 KR(kr-bs 등): cardPackId 스코프로 이 그룹 LC 에 병합된 KR 추가 로드 (enMerged 의 KR 대칭)
-    const merged = (await prisma.regionCard.findMany({ where: { region: "KR", card: { cardPackId: groupId } }, select: sel })).map(toRow);
+    const merged = (await prisma.regionCard.findMany({ where: { region: "KR", card: { locales: { some: { set: { cardPackId: groupId } } } } }, select: sel })).map(toRow);
     const seenK = new Set(kr.map((k) => k.cid));
     kr = [...kr, ...merged.filter((m) => !seenK.has(m.cid))];
   }
@@ -1156,7 +1156,7 @@ async function main() {
     // EN 은 DB 에서 JP 앵커 LC(매칭) + 영판전용 orphan 으로 병합되며 cardPackId 를 가짐 → **그룹 단위로 스코프** 로드.
     //   한 EN 세트가 여러 JP 그룹에 걸친 경우(SM Sun&Moon en-tcg-sm1 → SM1S/SM1M/SM1+)에도 그룹별로 정확히 분배.
     //   (단일그룹 EN 세트(sv-base 등)는 결과 동일 — 하위호환.)
-    en = (await prisma.regionCard.findMany({ where: { region: "EN", card: { cardPackId: groupId } }, select: sel })).map(toRow);
+    en = (await prisma.regionCard.findMany({ where: { region: "EN", card: { locales: { some: { set: { cardPackId: groupId } } } } }, select: sel })).map(toRow);
   } else if (cfg.enNative) en = await load(cfg.enNative);
   else {
     const dexes = [...new Set(jp.filter(isPoke).flatMap((r) => r.dexAll.length ? r.dexAll : (r.dex != null ? [r.dex] : [])))] as number[];

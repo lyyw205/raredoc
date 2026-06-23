@@ -30,13 +30,13 @@ async function main() {
 
   const oldCard = await prisma.card.findUnique({ where: { id: OLD_LC } });
   if (!oldCard) throw new Error(`옛 LC 없음: ${OLD_LC}`);
-  const oldLocales = await prisma.regionCard.findMany({ where: { cardId: OLD_LC }, select: { region: true } });
+  const oldLocales = await prisma.regionCard.findMany({ where: { cardId: OLD_LC }, select: { region: true, set: { select: { cardPackId: true } } } });
   const oldRegions = oldLocales.map((l) => l.region);
   if (!oldRegions.includes("JP") || !oldRegions.includes("KR"))
     throw new Error(`옛 LC가 JP+KR 공유앵커가 아님(${oldRegions.join("/")}) — 떼기 안전성 미확보. 중단.`);
 
   const exists = await prisma.card.findUnique({ where: { id: NEW_LC }, select: { id: true } });
-  const affected = [oldCard.cardPackId, rc.set?.cardPackId ?? null];
+  const affected = [...oldLocales.map((l) => l.set?.cardPackId ?? null), rc.set?.cardPackId ?? null];
 
   console.log(`${apply ? "[APPLY]" : "[DRY]"} unbind ${EN_RC} (EN#${rc.number} ${rc.name})`);
   console.log(`  옛 LC ${OLD_LC} 로케일: ${oldRegions.join("+")} → EN 제거 후 ${oldRegions.filter((r) => r !== "EN").join("+")} 유지`);
@@ -51,7 +51,6 @@ async function main() {
       // 옛 LC 게임메타 복제 → EN전용 orphan LC. id/primarySet/cardPack 만 EN 카드 기준으로 교체.
       await tx.card.create({ data: {
         id: NEW_LC,
-        cardPackId: rc.set?.cardPackId ?? null, // me2pt5 그룹(mega-dream-ex)
         primarySetId: rc.set?.id ?? null,
         primaryNumber: rc.number,
         primaryNumberInt: rc.numberInt,

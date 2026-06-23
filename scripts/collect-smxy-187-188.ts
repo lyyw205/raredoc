@@ -55,7 +55,6 @@ async function main() {
       if (!lcExists) {
         await tx.card.create({ data: {
           id: newLc,
-          cardPackId: base.cardPackId,
           primarySetId: SET_ID,
           primaryNumber: String(c.num),
           primaryNumberInt: c.num,
@@ -67,7 +66,7 @@ async function main() {
           abilities: base.abilities ?? undefined, attacks: base.attacks ?? undefined,
           legalities: base.legalities ?? undefined, rules: base.rules,
           flavorText: base.flavorText, rarityId: base.rarityId,
-          nameKo: base.nameKo, attacksKo: base.attacksKo ?? undefined, abilitiesKo: base.abilitiesKo ?? undefined,
+          nameKo: base.nameKo,
           gameCardId: base.gameCardId,
         } });
         await tx.cardSpecies.create({ data: { cardId: newLc, speciesId: c.speciesId } });

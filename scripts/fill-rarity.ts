@@ -68,13 +68,13 @@ async function fetchTcgdexRarity(setId: string, num: string): Promise<string | n
 }
 async function runTcgdex(apply: boolean) {
   const BATCH = 15, DELAY = 200;
-  const whereNull = { rarityId: null, cardPackId: { not: null }, locales: { none: { region: "EN" as const } } };
+  const whereNull = { rarityId: null, locales: { none: { region: "EN" as const }, some: { set: { cardPackId: { not: null } } } } };
   const beforeTotal = await prisma.card.count({ where: whereNull });
   console.log(`시작: JP-only rarityId NULL = ${beforeTotal} ${apply ? "★APPLY" : "(dry)"}`);
 
   const targets = await prisma.card.findMany({
-    where: { rarityId: null, cardPackId: { not: null }, locales: { none: { region: "EN" }, some: { region: "JP" } } },
-    select: { id: true, cardPack: { select: { era: true } }, locales: { where: { region: "JP" }, select: { id: true }, take: 1 } },
+    where: { rarityId: null, locales: { none: { region: "EN" }, some: { region: "JP", set: { cardPackId: { not: null } } } } },
+    select: { id: true, locales: { where: { region: "JP" }, select: { id: true, set: { select: { cardPack: { select: { era: true } } } } }, take: 1 } },
   });
   console.log(`대상: JP-only + rarityId NULL = ${targets.length}건`);
 
@@ -101,7 +101,7 @@ async function runTcgdex(apply: boolean) {
       const lookupKey = mapped ? mapped.toLowerCase() : rarityLc;
       const rarityId = nameEnMap.get(lookupKey) ?? nameJaMap.get(lookupKey) ?? codeMap.get(lookupKey);
       if (rarityId) { if (apply) await prisma.card.update({ where: { id: lc.id }, data: { rarityId } }); updated++; }
-      else { followupLines.push(`| ${lc.id} | ${jpLocaleId} | ${lc.cardPack?.era ?? "-"} | ${rarityText} |`); notFound++; }
+      else { followupLines.push(`| ${lc.id} | ${jpLocaleId} | ${lc.locales[0]?.set?.cardPack?.era ?? "-"} | ${rarityText} |`); notFound++; }
     }));
     if (i + BATCH < targets.length) await sleep(DELAY);
     if ((i / BATCH) % 10 === 0) console.log(`  진행: ${i + batch.length}/${targets.length} (updated=${updated})`);
@@ -109,7 +109,11 @@ async function runTcgdex(apply: boolean) {
 
   const afterTotal = await prisma.card.count({ where: whereNull });
   const afterEra = await prisma.$queryRaw<{ era: string; cnt: bigint }[]>`
-    SELECT sg.era, COUNT(*) as cnt FROM "LogicalCard" lc JOIN "SetGroup" sg ON sg.id = lc."setGroupId"
+    SELECT sg.era, COUNT(*) as cnt FROM "LogicalCard" lc
+    JOIN LATERAL (SELECT s."setGroupId" AS grp FROM "CardLocale" cl JOIN "Set" s ON s.id = cl."setId"
+      WHERE cl."logicalCardId" = lc.id AND s."setGroupId" IS NOT NULL
+      ORDER BY CASE cl.region WHEN 'JP' THEN 0 WHEN 'KR' THEN 1 WHEN 'EN' THEN 2 ELSE 3 END LIMIT 1) a ON true
+    JOIN "SetGroup" sg ON sg.id = a.grp
     WHERE lc."rarityId" IS NULL AND NOT EXISTS (SELECT 1 FROM "CardLocale" cl WHERE cl."logicalCardId" = lc.id AND cl.region = 'EN')
     GROUP BY sg.era ORDER BY cnt DESC`;
   if (apply) appendFollowup("rarityId 미보강 잔여 — tcgdex JP-only (fill-rarity --source=tcgdex)", "tcgdex 에서 rarity 텍스트를 가져왔으나 Rarity 마스터 매칭 실패.", "", followupLines);
@@ -139,15 +143,19 @@ async function runPokemontcg(apply: boolean) {
   const API_KEY = process.env.POKEMONTCG_API_KEY ?? "";
   const BATCH = 20, DELAY = 300;
   const eraSql = prisma.$queryRaw<{ era: string; cnt: bigint }[]>`
-    SELECT sg.era, COUNT(*) as cnt FROM "LogicalCard" lc JOIN "SetGroup" sg ON sg.id = lc."setGroupId"
+    SELECT sg.era, COUNT(*) as cnt FROM "LogicalCard" lc
+    JOIN LATERAL (SELECT s."setGroupId" AS grp FROM "CardLocale" cl JOIN "Set" s ON s.id = cl."setId"
+      WHERE cl."logicalCardId" = lc.id AND s."setGroupId" IS NOT NULL
+      ORDER BY CASE cl.region WHEN 'JP' THEN 0 WHEN 'KR' THEN 1 WHEN 'EN' THEN 2 ELSE 3 END LIMIT 1) a ON true
+    JOIN "SetGroup" sg ON sg.id = a.grp
     WHERE lc."rarityId" IS NULL GROUP BY sg.era ORDER BY cnt DESC`;
-  const beforeTotal = await prisma.card.count({ where: { rarityId: null, cardPackId: { not: null } } });
+  const beforeTotal = await prisma.card.count({ where: { rarityId: null, locales: { some: { set: { cardPackId: { not: null } } } } } });
   console.log(`시작: rarityId NULL (era 있는 것) = ${beforeTotal} ${apply ? "★APPLY" : "(dry)"}`);
   (await eraSql).forEach((r) => console.log(`  ${r.era}: ${r.cnt}`));
 
   const targets = await prisma.card.findMany({
-    where: { rarityId: null, cardPackId: { not: null }, locales: { some: { region: "EN" } } },
-    select: { id: true, cardPack: { select: { era: true } }, locales: { where: { region: "EN" }, select: { id: true }, take: 1 } },
+    where: { rarityId: null, locales: { some: { region: "EN", set: { cardPackId: { not: null } } } } },
+    select: { id: true, locales: { where: { region: "EN" }, select: { id: true, set: { select: { cardPack: { select: { era: true } } } } }, take: 1 } },
   });
   console.log(`\n대상: EN locale 보유 + rarityId NULL = ${targets.length}건`);
 
@@ -163,19 +171,23 @@ async function runPokemontcg(apply: boolean) {
       const enLocaleId = lc.locales[0]?.id; if (!enLocaleId) return;
       const rarityText = await fetchPokemontcgRarity(enLocaleId, API_KEY);
       if (rarityText === undefined) { apiError++; return; }
-      if (rarityText === null) { followupLines.push(`| ${lc.id} | ${enLocaleId} | ${lc.cardPack?.era ?? "-"} | (없음) |`); notFound++; return; }
+      if (rarityText === null) { followupLines.push(`| ${lc.id} | ${enLocaleId} | ${lc.locales[0]?.set?.cardPack?.era ?? "-"} | (없음) |`); notFound++; return; }
       const rarityLc = rarityText.toLowerCase();
       const rarityId = nameEnMap.get(rarityLc) ?? codeMap.get(rarityLc);
       if (rarityId) { if (apply) await prisma.card.update({ where: { id: lc.id }, data: { rarityId } }); updated++; }
-      else { followupLines.push(`| ${lc.id} | ${enLocaleId} | ${lc.cardPack?.era ?? "-"} | ${rarityText} |`); notFound++; }
+      else { followupLines.push(`| ${lc.id} | ${enLocaleId} | ${lc.locales[0]?.set?.cardPack?.era ?? "-"} | ${rarityText} |`); notFound++; }
     }));
     if (i + BATCH < targets.length) await sleep(DELAY);
     if ((i / BATCH) % 10 === 0) console.log(`  진행: ${i + batch.length}/${targets.length} (updated=${updated})`);
   }
 
-  const afterTotal = await prisma.card.count({ where: { rarityId: null, cardPackId: { not: null } } });
+  const afterTotal = await prisma.card.count({ where: { rarityId: null, locales: { some: { set: { cardPackId: { not: null } } } } } });
   const afterEra = await prisma.$queryRaw<{ era: string; cnt: bigint }[]>`
-    SELECT sg.era, COUNT(*) as cnt FROM "LogicalCard" lc JOIN "SetGroup" sg ON sg.id = lc."setGroupId"
+    SELECT sg.era, COUNT(*) as cnt FROM "LogicalCard" lc
+    JOIN LATERAL (SELECT s."setGroupId" AS grp FROM "CardLocale" cl JOIN "Set" s ON s.id = cl."setId"
+      WHERE cl."logicalCardId" = lc.id AND s."setGroupId" IS NOT NULL
+      ORDER BY CASE cl.region WHEN 'JP' THEN 0 WHEN 'KR' THEN 1 WHEN 'EN' THEN 2 ELSE 3 END LIMIT 1) a ON true
+    JOIN "SetGroup" sg ON sg.id = a.grp
     WHERE lc."rarityId" IS NULL GROUP BY sg.era ORDER BY cnt DESC`;
   if (apply) appendFollowup("rarityId 미보강 잔여 — pokemontcg.io (fill-rarity --source=pokemontcg)", "pokemontcg.io rarity 텍스트를 Rarity 마스터에 매칭 실패 (신규 row 생성 금지). 수동 검토 필요.", "", followupLines);
   console.log("─".repeat(50));
@@ -239,7 +251,7 @@ async function runJpIcon(gid: string, officialJson: string, apply: boolean) {
     console.log(`■ 스크랩 ${off.length}: 아이콘 ${ok} · 실패 ${fail} → ${cache}`);
   }
 
-  const lcs = await prisma.card.findMany({ where: { cardPackId: gid }, select: { id: true, locales: { select: { region: true, numberInt: true } }, rarity: { select: { code: true } } } });
+  const lcs = await prisma.card.findMany({ where: { locales: { some: { set: { cardPackId: gid } } } }, select: { id: true, locales: { select: { region: true, numberInt: true } }, rarity: { select: { code: true } } } });
   const learn = new Map<string, Map<string, number>>();
   for (const lc of lcs) {
     if (!lc.rarity?.code) continue;

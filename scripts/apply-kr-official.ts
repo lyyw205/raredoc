@@ -484,7 +484,7 @@ async function main() {
         await prisma.card.upsert({
           where: { id: lcId },
           update: { nameKo: o.koName, illustrator: o.illustrator ?? undefined },
-          create: { id: lcId, cardPackId: sg ?? undefined, supertype: d != null ? "Pokémon" : undefined, pokedexNumbers: d != null ? [d] : [], illustrator: o.illustrator ?? undefined, nameKo: o.koName, primarySetId: krSet, primaryNumber: o.number, primaryNumberInt: o.numInt },
+          create: { id: lcId, supertype: d != null ? "Pokémon" : undefined, pokedexNumbers: d != null ? [d] : [], illustrator: o.illustrator ?? undefined, nameKo: o.koName, primarySetId: krSet, primaryNumber: o.number, primaryNumberInt: o.numInt },
         });
         await prisma.regionCard.create({ data: { id: `${krSet}-${o.number}`, setId: krSet, region: "KR", language: "ko", number: o.number, numberInt: o.numInt, name: o.koName, imageSmall: o.image, imageLarge: o.image, cardId: lcId } });
         tail++;

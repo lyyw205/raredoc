@@ -80,36 +80,8 @@ function CardImage({
   return <img src={src} alt={alt} className={className} loading="lazy" decoding="async" />;
 }
 
-export type DexRegionSet = {
-  region: string;
-  name: string;
-  releaseDate: string | null;
-  cardCount: number;
-  code: string | null;
-};
-
-export type DexSet = {
-  id: string;
-  name: string;
-  era: string;
-  logoUrl?: string;
-  cards: DexCard[];
-  names: { KR?: string; JA?: string; EN?: string };
-  releaseDate: string | null;
-  regions: string[];
-  regionSets: DexRegionSet[];
-  enName?: string | null;   // 대응 영문판 이름 (JP↔EN 매칭 시)
-  isEnOnly?: boolean;       // EN 단독 발매 (JP 원판 없음)
-  isSpecial?: boolean;      // 강화확장팩·덱/굿즈 — era 하단 노출
-};
-
-// 특수상품(덱/굿즈) 사이드바 이름 꼬리표 — "()안에 표시"
-function specialSuffix(set: DexSet): string {
-  if (!set.isSpecial) return "";
-  if (/-goods$/.test(set.id)) return " (굿즈)";
-  if (/-decks$/.test(set.id)) return " (덱)";
-  return " (특수)";
-}
+// (DexSet/DexRegionSet/specialSuffix 제거됨 — 구 eager dex-catalog 전용 死타입.
+//  라이브 /dex 는 Set.cardPackId 앵커 경로(dex-region.ts RegionPack)로 동작. 팩소속 직교화 P9.)
 
 type ViewMode = "all" | "mine";
 // 카드 타일 레이아웃 — single=선택 팩 지역 카드 1장만(기본), triple=JP·EN·KR 한 묶음(검증 보기).
