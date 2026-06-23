@@ -12,6 +12,7 @@ import { PROTECTED_GROUPS } from "../../../../scripts/lib/protected-groups";
 import { execFile } from "node:child_process";
 import { mkdirSync } from "node:fs";
 import { promisify } from "node:util";
+import sharp from "sharp";
 const execFileP = promisify(execFile);
 
 const OUT = "/tmp/merge-inspect";
@@ -46,7 +47,7 @@ async function main() {
   mkdirSync(OUT, { recursive: true });
   console.log(`\n══ 병합 후보 ${lcs.length} LC inspect ══`);
   const gcs = new Set<string>(), illus = new Set<string>(); const frozenPacks = new Set<string>();
-  const imgFiles: string[] = [];
+  const dl: { lc: string; path: string }[] = [];
 
   for (const lc of lcs) {
     if (lc.gameCardId) gcs.add(lc.gameCardId);
@@ -64,7 +65,7 @@ async function main() {
     if (img) {
       const ext = img.split("?")[0].endsWith(".jpg") ? "jpg" : "png";
       const path = `${OUT}/${lc.id}.${ext}`;
-      try { await execFileP("curl", ["-sSL", "--max-time", "30", img, "-o", path]); imgFiles.push(path); console.log(`   🖼  ${path}`); }
+      try { await execFileP("curl", ["-sSL", "--max-time", "30", img, "-o", path]); dl.push({ lc: lc.id, path }); }
       catch { console.log(`   🖼  (다운로드 실패) ${img}`); }
     } else console.log(`   🖼  (이미지 없음)`);
   }
@@ -73,8 +74,28 @@ async function main() {
   console.log(`  gameCard: ${gcs.size === 1 ? "전부 동일 ✓ (같은 카드 강한 신호)" : `⚠ ${gcs.size}종 다름 — 정말 같은 카드인지 의심`}`);
   console.log(`  작가: ${illus.size === 1 ? `전부 동일 (${[...illus][0]}) — 필터 통과(확정 아님)` : `⚠ ${illus.size}종 다름 — 다른 그림 가능성`}`);
   console.log(`  동결팩: ${frozenPacks.size ? `🔒 ${[...frozenPacks]} → 병합 시 --allow-protected + 사용자 확인 필수` : "없음"}`);
-  console.log(`\n★ 확정 근거는 위 🖼 이미지를 직접 보고 "같은 그림인가" 판단. 같으면 merge-logical-cards.ts 로 병합.`);
-  console.log(`  내려받은 이미지: ${imgFiles.join("  ")}`);
+  // ★토큰 절감: N장 고해상도 대신, 작게 줄여 1장 가로 몽타주로 합쳐서 그것만 Read 한다.
+  let montage = "";
+  const parts: { buf: Buffer; w: number; h: number }[] = [];
+  for (const d of dl) {
+    try {
+      const buf = await sharp(d.path).resize({ width: 200 }).png().toBuffer();
+      const m = await sharp(buf).metadata();
+      parts.push({ buf, w: m.width ?? 200, h: m.height ?? 0 });
+    } catch { /* 깨진 이미지 스킵 */ }
+  }
+  if (parts.length) {
+    const GAP = 8;
+    const totalW = parts.reduce((s, p) => s + p.w, 0) + GAP * (parts.length - 1);
+    const maxH = Math.max(...parts.map((p) => p.h));
+    let x = 0; const comp: sharp.OverlayOptions[] = [];
+    for (const p of parts) { comp.push({ input: p.buf, left: x, top: 0 }); x += p.w + GAP; }
+    montage = `${OUT}/_montage.png`;
+    await sharp({ create: { width: totalW, height: maxH, channels: 4, background: { r: 235, g: 235, b: 235, alpha: 1 } } }).composite(comp).png().toFile(montage);
+  }
+  console.log(`\n★ 확정: 아래 몽타주 1장만 Read 해 "왼→오 순서대로 같은 그림인가" 판단(토큰 절감).`);
+  console.log(`  순서(왼→오): ${dl.map((d) => d.lc).join("  ·  ")}`);
+  console.log(`  몽타주: ${montage || "(생성 실패 — 개별 이미지로 폴백)"}`);
   await prisma.$disconnect();
 }
 main().catch((e) => { console.error(e); process.exit(1); });

@@ -36,9 +36,9 @@ DB 모델은 **`Card`(LogicalCard) = "한 그림"** 이고, 같은 그림의 지
 ```bash
 npx tsx .claude/skills/card-merge/scripts/inspect-merge.ts <loc1> <loc2> [<loc3> ...]
 ```
-출력: 각 LC 의 이름·supertype·HP·작가·gameCard·지역·팩(🔒=동결) + 대표 이미지를 `/tmp/merge-inspect/<lc>.<ext>` 로 다운로드. 교차점검(gameCard/작가 동일 여부·동결팩).
-- **다운로드된 🖼 이미지를 Read 로 모두 열어 직접 비교한다.** 일러가 같은지 본다.
-- gameCard 가 다르면 "정말 같은 카드인지" 추가 확인(이름·효과·이미지).
+출력: 각 LC 의 이름·supertype·HP·작가·gameCard·지역·팩(🔒=동결) + 교차점검(gameCard/작가 동일·동결팩) + 후보 이미지를 작게 줄여 **1장 가로 몽타주** `/tmp/merge-inspect/_montage.png` 로 합쳐 저장(왼→오 순서도 출력).
+- **★토큰 절감: `_montage.png` 1장만 Read 한다(개별 카드 N장 Read 금지).** 왼→오 순서대로 같은 일러인지 본다. 스크립트 텍스트 출력에 필드·동결·gameCard 다 있으니 **별도 DB 쿼리는 최소화**(inspect 가 이미 다 줌).
+- gameCard 가 다르면 "정말 같은 카드인지" 추가 확인(텍스트 출력의 이름·HP + 몽타주).
 - 판정: **같은 그림 확정 → §2** / **다른 그림(언노운류) → 병합 안 함, 사용자에게 "이건 다른 그림이라 따로 둠" 보고** / **애매 → 사용자에게 판단 요청.**
 
 ### 2. 타깃 선정
@@ -55,13 +55,9 @@ npx tsx scripts/merge-logical-cards.ts <srcLC> <tgtLC> --apply [--allow-protecte
 - `merge-logical-cards.ts` 가 소스의 RegionCard·CardText(언어충돌은 타깃권위로 삭제)·CardSpecies(중복 cascade)·ExternalIdMapping(충돌회피)·CollectionItem·Trade·Ruling·DeckRecipeCard 를 모두 타깃으로 이전하고 소스 LC 를 삭제한다. 트랜잭션·동결가드 내장.
 - 3개 이상이면 소스를 하나씩 같은 타깃으로 반복 적용한다.
 
-### 4. 검증
-```bash
-# 타깃 locale 이 합쳐졌고 소스 LC 가 사라졌는지(MCP/쿼리로):
-#   SELECT region,setId,number FROM "CardLocale" WHERE "logicalCardId"='<tgt>';
-#   SELECT count(*) FROM "LogicalCard" WHERE id IN ('<src1>','<src2>',...);  -- 0 기대
-```
-타깃이 의도한 지역(JP/EN/KR…)을 다 갖고, 소스 LC 가 0 인지 확인한다(스크립트 출력만 믿지 않는다).
+### 4. 검증 (토큰 절감 — 스크립트 출력 우선)
+`merge-logical-cards.ts` 가 적용 직후 `✅ 병합 완료. 타깃 <tgt> locale: [JP,EN,KR]` 를 출력한다(트랜잭션 후 실제 재조회). **그 출력으로 1차 확인** — 의도한 지역이 다 들어왔으면 OK. 매 건 별도 쿼리하지 말 것.
+- 배치(여러 쌍)가 끝났을 때 **한 번만** 종합 확인(원하면): `SELECT count(*) FROM "LogicalCard" WHERE id IN ('<src...>')` = 0.
 
 ### 5. 보고
 사용자에게 한국어로: 병합한 그룹(어느 LC 들 → 어느 타깃, **이미지로 같은 그림 확인** 근거 한 줄), 동결 override 했으면 그 사실, 검증 결과(타깃 locale·소스 삭제). 다른 그림이라 안 합친 후보도 사유와 함께. 코드·세트명 원문 유지.
