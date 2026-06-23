@@ -49,6 +49,7 @@ interface CardRow {
   primaryNumberInt: number | null;
   gameCardId: string | null;
   gameCard: { id: string; name: string; supertype: string | null; hp: number | null } | null;
+  illustrator: string | null;
   rarity: { code: string; abbr: string | null } | null;
   locales: LocaleRow[];
   texts: TextRow[];
@@ -72,6 +73,7 @@ const cardSelect = {
   primaryNumberInt: true,
   gameCardId: true,
   gameCard: { select: { id: true, name: true, supertype: true, hp: true } },
+  illustrator: true,
   rarity: { select: { code: true, abbr: true } },
   // 팩소속 직교화(P9): Card.cardPackId 폐지 → 카드의 팩은 각 locale 의 set.cardPack 에서 도출.
   locales: {
@@ -234,21 +236,57 @@ function SpeciesView({ sp }: { sp: SpeciesRow }) {
     .map((c) => c.card)
     .sort((a, b) => (a.primaryNumberInt ?? 99999) - (b.primaryNumberInt ?? 99999));
   const localeTotal = cards.reduce((n, c) => n + c.locales.length, 0);
+
+  // rough 병합후보(표시·검증용·★DB 변경 없음·비가역 아님): [gameCardId + illustrator] 동일 =
+  //   같은 게임카드·같은 작가 → "같은 일러 재판" 후보. 느슨한 휴리스틱이라 언노운 글자·다른시대
+  //   프로모 오탐 가능 — 눈으로 보면서 검증하는 전제. 진짜 병합은 검증 후 별도.
+  const groups = new Map<string, CardRow[]>();
+  for (const c of cards) {
+    if (!c.gameCardId || !c.illustrator) continue;
+    const k = `${c.gameCardId}|${c.illustrator}`;
+    const arr = groups.get(k);
+    if (arr) arr.push(c); else groups.set(k, [c]);
+  }
+  let candNo = 0;
+  const seen = new Set<string>();
+  const rendered = cards.flatMap((c) => {
+    const k = c.gameCardId && c.illustrator ? `${c.gameCardId}|${c.illustrator}` : null;
+    if (k && (groups.get(k)?.length ?? 0) > 1) {
+      if (seen.has(k)) return [];
+      seen.add(k);
+      return [{ key: k, cards: groups.get(k)!, no: ++candNo }];
+    }
+    return [{ key: c.id, cards: [c], no: 0 }];
+  });
   return (
     <details open className="rounded-xl border border-gray-300 bg-gray-50 p-3">
       <summary className="cursor-pointer select-none text-[15px] font-bold text-gray-900">
         <span className="font-mono text-gray-400">#{sp.id}</span> {sp.nameKo ?? sp.nameEn}{" "}
         <span className="text-[12px] font-normal text-gray-400">
           {sp.nameEn} · Card {cards.length} · row {localeTotal}
+          {candNo > 0 ? ` · 병합후보 ${candNo}그룹` : ""}
         </span>
       </summary>
       {cards.length === 0 ? (
         <div className="mt-2 text-[13px] text-gray-400">연결된 Card 없음</div>
       ) : (
         <div className="mt-2 flex flex-wrap items-start gap-2">
-          {cards.map((card) => (
-            <CardView key={card.id} card={card} />
-          ))}
+          {rendered.map((g) =>
+            g.no > 0 ? (
+              <div key={g.key} className="rounded-lg border-2 border-dashed border-amber-400 bg-amber-50/40 p-1.5">
+                <div className="mb-1 text-[11px] font-bold text-amber-700">
+                  ⊕ 병합후보 #{g.no} · {g.cards.length}장 · 같은 일러 추정 (작가 {g.cards[0].illustrator})
+                </div>
+                <div className="flex flex-wrap items-start gap-2">
+                  {g.cards.map((card) => (
+                    <CardView key={card.id} card={card} />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <CardView key={g.key} card={g.cards[0]} />
+            ),
+          )}
         </div>
       )}
     </details>
@@ -290,7 +328,7 @@ export default async function TestPage({
         <h1 className="text-xl font-bold text-gray-900">DB 그룹 검증 — /test</h1>
         <p className="mt-1 text-[13px] text-gray-500">
           계층: <b>종(도감#)</b> ▸ <b>Card</b> ▸ row(지역판 RegionCard). 마이그 후 묶임 점검용 임시
-          페이지. (GameCard 묶음 표시는 제외)
+          페이지. <b className="text-amber-700">⊕ 병합후보</b> = 같은 gameCard+작가(느슨한 휴리스틱·DB 변경 없음·눈으로 검증용)
         </p>
         <div className="mt-3 flex flex-wrap gap-1.5">
           <Chip label="종" value={summary.species} />
