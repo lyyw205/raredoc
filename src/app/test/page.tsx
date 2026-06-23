@@ -200,6 +200,17 @@ function LocaleRowView({ loc }: { loc: LocaleRow }) {
       <div className="truncate font-mono text-[10px] text-gray-500">
         {loc.set.id} <span className="text-gray-400">#{loc.number}</span>
       </div>
+      {/* 이 행(RegionCard)의 팩 = set.cardPack — "이 행이 어느 팩"을 1:1 로 표시 */}
+      {loc.set.cardPack ? (
+        <div
+          className="truncate rounded bg-violet-100 px-1 py-0.5 text-[10px] font-medium text-violet-700"
+          title={loc.set.cardPack.id}
+        >
+          📦 {packDisplayName(loc.set.cardPack)}
+        </div>
+      ) : (
+        <div className="rounded bg-amber-100 px-1 py-0.5 text-[10px] font-medium text-amber-700">📦 소속팩 ∅</div>
+      )}
       <div className="line-clamp-2 font-medium leading-tight text-gray-900">{loc.name}</div>
     </div>
   );
