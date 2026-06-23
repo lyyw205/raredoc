@@ -15,7 +15,7 @@ DB 모델은 **`Card`(LogicalCard) = "한 그림"** 이고, 같은 그림의 지
 
 1. **★ 같은 그림(이미지)인가 — 확정 근거.** 후보 LC 들의 카드 이미지를 **직접 눈으로** 비교한다. 일러스트(그림)가 같으면 OK(프레임·홀로·언어텍스트가 달라도 무방). **이것만이 확정이다.**
 2. **같은 카드인가 — 보조 확인.** 같은 포켓몬/이름이어야 한다. `gameCard` 가 동일하면(이름+효과 동일) 강한 신호. **gameCard 가 다르면** 정말 같은 카드인지 한 번 더 의심한다(스탯 차이 = 다른 카드일 수 있음).
-3. **동결팩인가 — 안전 확인.** 영향 팩이 PROTECTED_GROUPS 면, 병합은 EN/KR 매칭(RegionCard 연결)을 바꾸는 거라 **동결의 핵심 보호 대상**이다 → 사용자 확인 + `--allow-protected`.
+3. **동결팩이면 `--allow-protected` 자동(사전승인됨).** 병합은 EN/KR 매칭을 바꾸지만, **card-merge 작업 한정으로 사용자가 사전 승인**(2026-06-23)했고 **이미지 확정(§1)이 진짜 안전장치**다 → 동결팩이어도 매번 따로 안 묻고 `--allow-protected` 로 진행. (★`PROTECTED_GROUPS` 목록 자체는 유지 — merge-en-identity·build-group 등 다른 스크립트엔 그대로 적용.)
 
 작가(illustrator)·gameCard 일치는 **후보를 좁히는 필터**일 뿐이다. **둘 다 같아도 다른 그림일 수 있다**(예: 언노운 A~Z 는 같은 작가·같은 gameCard·다른 글자그림 → 병합 금지). 그래서 1번(이미지)이 빠지면 안 된다.
 
@@ -24,7 +24,7 @@ DB 모델은 **`Card`(LogicalCard) = "한 그림"** 이고, 같은 그림의 지
 1. **이미지를 안 보고 병합하지 않는다.** 작가·gameCard·번호만 보고 자동 병합 금지(언노운 함정). 반드시 §1 inspect 의 🖼 이미지를 Read 로 보고 같은 그림임을 확정한다.
 2. **불확실하면 병합하지 않는다.** 이미지가 애매(저화질·크롭 다름)하면 합치지 말고 사용자에게 판단을 구한다. 원칙: **미병합 > 오병합**(비가역).
 3. **dry-run 먼저.** `merge-logical-cards.ts` 는 항상 dry-run 으로 계획을 보여준 뒤 `--apply`.
-4. **동결팩이면 사용자 확인 + `--allow-protected`.** inspect 가 🔒 표시한 팩이 있으면, 무엇을·왜 바꾸는지 알리고 명시 승인받기 전엔 적용하지 않는다. 즉석 prisma/SQL 우회 금지.
+4. **동결팩은 `--allow-protected` 자동(사전승인)이지만, 이미지 확정 없이는 여전히 금지.** card-merge 한정 동결 사전승인(2026-06-23)이라 동결팩이어도 따로 안 묻고 진행한다 — 단 그 게이트는 §1 **이미지 확정**이다(이미지 안 보고 진행하면 #1 위반). 즉석 prisma/SQL 우회 금지(`merge-logical-cards.ts` 경유).
 5. **타깃은 정보가 가장 풍부한 LC.** locale 수가 많은 LC(특히 JP 앵커 보유)를 타깃(생존)으로, 나머지를 소스로 합친다. 임의로 EN-only LC 를 타깃 삼지 않는다.
 
 ## 파이프라인 (순서 불변)
@@ -44,13 +44,13 @@ npx tsx .claude/skills/card-merge/scripts/inspect-merge.ts <loc1> <loc2> [<loc3>
 ### 2. 타깃 선정
 생존할 타깃 LC = **locale 수가 가장 많은 것**(동률이면 **JP locale 보유** = `lc-orphan-jp-*` 우선 / 그래도 동률이면 id 안정순). 나머지 LC = 소스. (타깃 = "한 그림"의 대표가 된다.)
 
-### 3. dry-run → (동결 확인) → apply
-소스마다 한 번씩 타깃으로 합친다(타깃 고정):
+### 3. dry-run → apply (동결팩 사전승인 — 매번 안 물음)
+소스마다 한 번씩 타깃으로 합친다(타깃 고정). **§1 이미지 확정만 됐으면 동결팩이어도 바로 진행.** `--allow-protected` 는 항상 붙인다(비동결엔 무영향이라 분기 불필요):
 ```bash
-# 1) 먼저 dry-run 으로 계획·의존 이전·동결여부 확인:
-npx tsx scripts/merge-logical-cards.ts <srcLC> <tgtLC> [--allow-protected]
-# 2) 동결팩이면 사용자에게 확인받은 뒤 적용 / 비동결이면 그림 확정 後 적용:
-npx tsx scripts/merge-logical-cards.ts <srcLC> <tgtLC> --apply [--allow-protected]
+# 1) dry-run 으로 계획·의존 이전·동결여부 확인:
+npx tsx scripts/merge-logical-cards.ts <srcLC> <tgtLC> --allow-protected
+# 2) 이미지 같은 그림 확정됐으면 적용:
+npx tsx scripts/merge-logical-cards.ts <srcLC> <tgtLC> --apply --allow-protected
 ```
 - `merge-logical-cards.ts` 가 소스의 RegionCard·CardText(언어충돌은 타깃권위로 삭제)·CardSpecies(중복 cascade)·ExternalIdMapping(충돌회피)·CollectionItem·Trade·Ruling·DeckRecipeCard 를 모두 타깃으로 이전하고 소스 LC 를 삭제한다. 트랜잭션·동결가드 내장.
 - 3개 이상이면 소스를 하나씩 같은 타깃으로 반복 적용한다.

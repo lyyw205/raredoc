@@ -16,3 +16,4 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - 단일 출처는 `scripts/lib/protected-groups.ts`의 `PROTECTED_GROUPS`. 목록 추가/해제는 거기만 고친다(이 문서·메모리는 그걸 가리킬 뿐).
 - DB 를 바꾸는 스크립트는 영향 cardPackId 들로 `assertWritable()` 를 호출해 기본 차단해야 한다. `merge-en-identity.ts` 는 적용됨(크로스그룹 EN 탈취까지 차단). `audit-kr-trainers.ts`(스킬, 수리 시)·`group-kr-merge.ts` 등 다른 뮤테이터도 수리/수정 시 동일 가드를 추가한다.
 - 의도적 수정일 때만 `--allow-protected` 플래그로 해제(= 사용자 확인 체크포인트). 즉석 prisma 수정·raw SQL 로 우회하지 않는다 — 그 경우에도 먼저 사용자에게 확인한다.
+- ★예외(2026-06-23 사용자 사전승인): **`card-merge` 스킬**(`.claude/skills/card-merge`)로 **이미지로 "같은 그림" 확정한 병합**은 동결팩이어도 매번 안 묻고 `--allow-protected` 적용해도 된다 — 그 게이트는 *이미지 확정*이다. 이 사전승인은 card-merge 한정. **그 외 모든 EN/KR 매칭 변경(다른 스크립트·이미지 미확정 병합)은 종전대로 건건 확인.** `PROTECTED_GROUPS` 목록은 비우지 않는다.
