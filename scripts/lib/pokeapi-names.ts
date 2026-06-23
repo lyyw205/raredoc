@@ -202,13 +202,29 @@ function koCandidates(seg: string): string[] {
   return [...out].filter(Boolean);
 }
 
+/** 일본어(카타카나) 카드명 → 종 후보들. 끝 로마자 메커니즘(V/EX/GX…)·폼/소유격(○○の) 접두 제거. */
+function jaCandidates(seg: string): string[] {
+  let base = seg.trim();
+  base = base.replace(/[（(][^）)]*[）)]/g, "");                                 // 괄호 주석
+  base = base.replace(/δ/gi, "").replace(/[★☆◇◆]/g, "");
+  base = base.replace(/\s*(v-?union|vmax|vstar|gx|ex|break|prime|v)\s*$/i, ""); // 끝 로마자 메커니즘(붙여쓰기)
+  base = base.replace(/\s+/g, "").trim();                                       // 일본어는 공백 거의 없음
+  const out = new Set<string>();
+  out.add(base);                                                               // 원형 우선(종명 보호)
+  const prefixes = ["メガ", "キョダイマックス", "ダイマックス", "アローラ", "ガラル", "ヒスイ", "パルデア", "オリジン", "はくば", "こくば", "れんげき", "いちげき", "かがやく", "ひかる", "ダーク", "ライト", "クリスタル"];
+  for (const p of prefixes) if (base.startsWith(p) && base.length > p.length) out.add(base.slice(p.length));
+  const m = base.match(/^.+?の(.+)$/);                                          // 소유격 "○○の△△" → △△(트레이너 소유)
+  if (m && m[1].length >= 2) out.add(m[1]);
+  return [...out].filter(Boolean);
+}
+
 /**
  * TCG 카드명 → 도감번호 배열. 태그팀("A & B")은 다중 dex. 매칭 0건이면 빈 배열.
- * lang: 카드명 언어("en" 우선 권장, "ko" 폴백).
+ * lang: 카드명 언어("en" 우선 권장, "ja"=카타카나 JP단독, "ko" 폴백).
  */
-export function resolveCardDexes(name: string | null | undefined, lang: "en" | "ko" = "en"): number[] {
+export function resolveCardDexes(name: string | null | undefined, lang: "en" | "ko" | "ja" = "en"): number[] {
   if (!name) return [];
-  const cands = lang === "ko" ? koCandidates : enCandidates;
+  const cands = lang === "ko" ? koCandidates : lang === "ja" ? jaCandidates : enCandidates;
   const segs = name.split(/\s*&\s*|\s*\+\s*/).filter(Boolean); // 태그팀/유나이트
   const found: number[] = [];
   for (const seg of segs) {

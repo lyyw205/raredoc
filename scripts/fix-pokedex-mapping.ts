@@ -30,8 +30,9 @@ async function pool<T>(items: T[], n: number, fn: (t: T) => Promise<void>) {
   }));
 }
 
-function deriveDexes(en: string | null, ko: string | null): number[] {
+function deriveDexes(en: string | null, ko: string | null, ja: string | null): number[] {
   if (en) { const d = resolveCardDexes(en, "en"); if (d.length) return d; }
+  if (ja) { const d = resolveCardDexes(ja, "ja"); if (d.length) return d; } // JP단독 카드(카타카나) — EN/KO 없을 때
   if (ko) { const d = resolveCardDexes(ko, "ko"); if (d.length) return d; }
   return [];
 }
@@ -52,8 +53,9 @@ async function main() {
   for (const c of cards) {
     const en = c.locales.find((l) => l.language === "en")?.name ?? null;
     const ko = c.nameKo ?? c.locales.find((l) => l.language === "ko")?.name ?? null;
+    const ja = c.locales.find((l) => l.language === "ja")?.name ?? null;
     const stored = (c.pokedexNumbers ?? []).filter((n) => n > 0);
-    const derived = deriveDexes(en, ko);
+    const derived = deriveDexes(en, ko, ja);
     const name = en ?? ko ?? "(이름없음)";
 
     if (derived.length === 0) { unresolved++; continue; }
