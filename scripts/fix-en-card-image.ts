@@ -36,20 +36,21 @@ async function dl(url: string): Promise<Buffer> {
 
 async function main() {
   const setCode = arg("--set");
-  const numInt = arg("--num") ? parseInt(arg("--num")!, 10) : NaN;
+  const numArg = arg("--num"); // 정수("94") 또는 문자열("HGSS18", 프로모) 모두 지원
+  const numInt = numArg ? parseInt(numArg, 10) : NaN;
   const pio = arg("--src-pio");
   const srcUrl = arg("--src-url");
-  if (!setCode || !Number.isFinite(numInt) || (!pio && !srcUrl)) {
-    console.error("usage: --set <CODE> --num <int> (--src-pio <pioSetId> [--src-num N] | --src-url <URL>) [--apply]");
+  if (!setCode || !numArg || (!pio && !srcUrl)) {
+    console.error("usage: --set <CODE> --num <int|str> (--src-pio <pioSetId> [--src-num N] | --src-url <URL>) [--apply]");
     process.exit(1);
   }
-  const src = srcUrl ?? `https://images.pokemontcg.io/${pio}/${arg("--src-num") ?? numInt}_hires.png`;
+  const src = srcUrl ?? `https://images.pokemontcg.io/${pio}/${arg("--src-num") ?? (Number.isFinite(numInt) ? numInt : numArg)}_hires.png`;
 
   const rc = await prisma.regionCard.findFirst({
-    where: { region: "EN", numberInt: numInt, set: { code: setCode } },
+    where: { region: "EN", set: { code: setCode }, ...(Number.isFinite(numInt) ? { numberInt: numInt } : { number: numArg }) },
     select: { id: true, region: true, number: true, setId: true, name: true, imageLarge: true, imageSmall: true, set: { select: { cardPackId: true } } },
   });
-  if (!rc) throw new Error(`RegionCard not found (EN ${setCode} #${numInt})`);
+  if (!rc) throw new Error(`RegionCard not found (EN ${setCode} #${numArg})`);
 
   // EN RegionCard 이미지 변경 → region-aware 가드: EN 은 자유.
   assertMappingWritable([rc.set.cardPackId], { regions: [rc.region], allow: hasAllowProtectedFlag(), dryRun: !APPLY, tool: "fix-en-card-image", what: `${setCode}#${rc.number} 이미지 교체` });
