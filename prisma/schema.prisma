@@ -187,6 +187,8 @@ model RegionCard {
   collectionItems CollectionItem[]    @relation("CollectionItemLocale")
   trades          Trade[]             @relation("TradeLocale")
   externalIds     ExternalIdMapping[] @relation("ExternalIdMappingLocale")
+  printVariants   PrintVariant[]      @relation("RegionCardPrintVariant")
+  distributions   PrintDistribution[] @relation("RegionCardDistribution")
   createdAt       DateTime            @default(now())
   updatedAt       DateTime            @updatedAt
 
@@ -198,6 +200,63 @@ model RegionCard {
   @@index([region])
   @@index([rarityId])
   @@map("CardLocale")
+}
+
+// ═════════════════════════════════════════════════════════════════════════════
+// ⓧ 가격 SKU 확장 — 변형/실링/환율/다중출신 (docs/plans/card-model-and-pricing-taxonomy.md)
+//   ※ 전부 additive·빈 테이블. 시세/마켓의 FREE 레이어(mapping-lock 무관).
+// ═════════════════════════════════════════════════════════════════════════════
+
+// 마감/스탬프 변형 = 가격 매기는 SKU. RegionCard(=Print)의 자식. 기본 'standard' 1행.
+model PrintVariant {
+  id           String     @id @default(cuid())
+  regionCardId String // RegionCard.id (= Print)
+  kind         String // standard|reverse|masterball|pokeball|first_edition|shadowless|stamp|error
+  slug         String // 'standard' | 'stamp-worlds-2023' ... (kind 내 구분)
+  label        String?
+  regionCard   RegionCard @relation("RegionCardPrintVariant", fields: [regionCardId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([regionCardId, kind, slug]) // 결정적 자연키
+  @@index([regionCardId])
+}
+
+// 미개봉 상품(부스터박스·ETB·블리스터·번들) = 싱글 아닌 별 상품축. 자체 시세.
+model SealedProduct {
+  id          String    @id @default(cuid())
+  kind        String // booster_box|etb|blister|bundle|deck
+  nameKo      String?
+  nameJa      String?
+  nameEn      String?
+  setGroupId  String? // CardPack(@@map SetGroup) 느슨 연결(FK 아님)
+  releaseDate DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([setGroupId])
+}
+
+// 환율 시계열 — KRW 환산 재현/일괄갱신용.
+model FxRate {
+  base  String // 'USD'
+  quote String // 'KRW'
+  date  DateTime
+  rate  Float
+
+  @@id([base, quote, date])
+}
+
+// 한 인쇄본의 다중 출신(프로모/덱 동시수록 등). 정체성 primary 1개 + 출처 N개.
+model PrintDistribution {
+  id           String     @id @default(cuid())
+  regionCardId String
+  setId        String
+  role         String // primary|secondary
+  regionCard   RegionCard @relation("RegionCardDistribution", fields: [regionCardId], references: [id], onDelete: Cascade)
+
+  @@unique([regionCardId, setId])
+  @@index([setId])
 }
 
 // 언어별 표시 텍스트 오버레이 (옵션 C)

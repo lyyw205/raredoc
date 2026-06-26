@@ -75,3 +75,104 @@ export async function getCardPrices(regionCardId: string): Promise<CardPriceRow[
 
   return rows;
 }
+
+/**
+ * 같은 아트(Card)의 시세를 ★팩별(에디션×세트×번호 = RegionCard)로 분리★ 반환.
+ *
+ * getCardPrices 와 달리 출처를 Card 전체로 합치지 않는다 — 같은 그림이 여러 팩(본탄·재판·하이클래스)에
+ * 있으면 가격이 수배~수십배 갈리므로(docs/plans/card-model-and-pricing-taxonomy.md ④) 절대 합치면 안 된다.
+ * 각 RegionCard(=Print) 단위로 출처별 최신 1건씩 묶고, 가격이 1건 이상 있는 프린트만 반환.
+ * 에디션은 RegionCard.region(JP/EN/KR) 그대로(=실물 판본) — PriceSource.marketRegion 이 아님.
+ */
+export type PrintPriceGroup = {
+  regionCardId: string;
+  region: string; // JP | EN | KR (실물 판본 = 에디션)
+  setId: string;
+  setName: string;
+  number: string;
+  numberInt: number | null;
+  prices: CardPriceRow[];
+};
+
+export async function getCardPrintPrices(regionCardId: string): Promise<PrintPriceGroup[]> {
+  const anchor = await prisma.regionCard.findUnique({
+    where: { id: regionCardId },
+    select: { cardId: true },
+  });
+  if (!anchor) return [];
+
+  const rcs = await prisma.regionCard.findMany({
+    where: { cardId: anchor.cardId },
+    select: { id: true, region: true, number: true, numberInt: true, setId: true },
+  });
+  if (rcs.length === 0) return [];
+
+  const sets = await prisma.set.findMany({
+    where: { id: { in: [...new Set(rcs.map((r) => r.setId))] } },
+    select: { id: true, name: true },
+  });
+  const setName = new Map(sets.map((s) => [s.id, s.name]));
+
+  const prices = await prisma.price.findMany({
+    where: { regionCardId: { in: rcs.map((r) => r.id) }, sourceId: { not: null } },
+    orderBy: { recordedAt: "desc" },
+    include: { priceSource: true },
+  });
+
+  // RegionCard(프린트)별로 묶고, 그 안에서 출처(code)별 최신 1건만
+  const byRc = new Map<string, { row: CardPriceRow; priority: number }[]>();
+  const seenByRc = new Map<string, Set<string>>();
+  for (const p of prices) {
+    const ps = p.priceSource;
+    if (!ps) continue;
+    let seen = seenByRc.get(p.regionCardId);
+    if (!seen) {
+      seen = new Set();
+      seenByRc.set(p.regionCardId, seen);
+    }
+    if (seen.has(ps.code)) continue;
+    seen.add(ps.code);
+    const market =
+      p.marketPrice ?? p.holofoil ?? p.normal ?? p.reverseHolo ?? p.firstEdition ?? null;
+    let arr = byRc.get(p.regionCardId);
+    if (!arr) {
+      arr = [];
+      byRc.set(p.regionCardId, arr);
+    }
+    arr.push({
+      row: {
+        sourceCode: ps.code,
+        sourceName: ps.name,
+        region: ps.marketRegion,
+        currency: p.currency,
+        market,
+        recordedAt: p.recordedAt.toISOString(),
+      },
+      priority: ps.priority,
+    });
+  }
+
+  const groups: PrintPriceGroup[] = [];
+  for (const rc of rcs) {
+    const arr = byRc.get(rc.id);
+    if (!arr || arr.length === 0) continue; // 시세 있는 프린트만
+    arr.sort((a, b) => a.priority - b.priority);
+    groups.push({
+      regionCardId: rc.id,
+      region: rc.region,
+      setId: rc.setId,
+      setName: setName.get(rc.setId) ?? rc.setId,
+      number: rc.number,
+      numberInt: rc.numberInt,
+      prices: arr.map((x) => x.row),
+    });
+  }
+
+  const regionOrder: Record<string, number> = { JP: 0, EN: 1, KR: 2 };
+  groups.sort(
+    (a, b) =>
+      (regionOrder[a.region] ?? 9) - (regionOrder[b.region] ?? 9) ||
+      (a.numberInt ?? 0) - (b.numberInt ?? 0),
+  );
+  return groups;
+}
