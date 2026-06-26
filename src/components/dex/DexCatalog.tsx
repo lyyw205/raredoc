@@ -46,6 +46,7 @@ export type DexCard = {
   id: string;
   name: string;
   number: string;
+  numberInt?: number | null; // 정렬 키. number 문자열만으로 정렬하면 레터번호(예: 에너지 F/L)가 알파벳순으로 뒤바뀜.
   rarity?: string;
   rarityTier?: number | null; // Rarity.tier (0~9). raw 정렬 키.
   // 카테고리 레이어 (11개 그룹)
@@ -1148,6 +1149,12 @@ export function DexCatalog({ regionPacks, locale, initialRegion, initialPack }: 
       .sort((a, b) => {
         if (sortBy === "name")   return a.name.localeCompare(b.name);
         if (sortBy === "rarity") return categoryTier(b) - categoryTier(a); // 높은 tier 우선
+        // 번호순: numberInt 우선(null 은 뒤) → number 문자열 폴백.
+        //   레터번호(에너지 F/L 등)는 문자열만 쓰면 알파벳순(F<L)으로 세트순서가 뒤바뀜 → numberInt 로 보정.
+        const an = a.numberInt ?? null, bn = b.numberInt ?? null;
+        if (an !== null && bn !== null) { if (an !== bn) return an - bn; }
+        else if (an !== null) return -1;
+        else if (bn !== null) return 1;
         return a.number.localeCompare(b.number, undefined, { numeric: true });
       });
   }, [cardsSource, selCategories, selTypes, selSupertypes, deferredSearch, sortBy]);

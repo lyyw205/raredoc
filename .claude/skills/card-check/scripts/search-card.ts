@@ -38,14 +38,13 @@ async function main() {
     if (args.dex) and.push({ pokedexNumbers: { has: args.dex } });
     if (args.set)
       and.push({
-        OR: [
+        // ★P9: Card.cardPackId 제거됨. 팩소속은 RegionCard 의 Set.cardPackId(=setGroupId) 로 도출.
+        locales: { some: { set: { OR: [
           { cardPackId: { contains: args.set, mode: "insensitive" } },
-          { locales: { some: { set: { OR: [
-            { code: { contains: args.set, mode: "insensitive" } },
-            { id: { contains: args.set, mode: "insensitive" } },
-            { name: { contains: args.set, mode: "insensitive" } },
-          ] } } } },
-        ],
+          { code: { contains: args.set, mode: "insensitive" } },
+          { id: { contains: args.set, mode: "insensitive" } },
+          { name: { contains: args.set, mode: "insensitive" } },
+        ] } } },
       });
     if (args.num) {
       const n = parseInt(args.num, 10);
@@ -65,17 +64,26 @@ async function main() {
     const cards = await prisma.card.findMany({
       where: { AND: and },
       take: args.limit,
-      orderBy: [{ cardPackId: "asc" }, { primaryNumberInt: "asc" }],
+      orderBy: [{ primaryNumberInt: "asc" }],
       include: {
         rarity: { select: { code: true } },
-        cardPack: { select: { id: true, era: true, nameKo: true, nameJa: true, releaseDate: true } },
         locales: {
-          select: { region: true, language: true, number: true, name: true, setId: true,
-                    set: { select: { code: true, name: true } } },
+          select: { region: true, language: true, number: true, name: true, setId: true, imageLarge: true, imageSmall: true,
+                    set: { select: { code: true, name: true, cardPackId: true,
+                                     cardPack: { select: { id: true, era: true, nameKo: true, nameJa: true, releaseDate: true } } } } },
           orderBy: [{ region: "asc" }, { setId: "asc" }],
         },
       },
     });
+
+    // ★P9: 팩소속은 앵커 RegionCard(JP>KR>EN) 의 Set.cardPack 로 도출.
+    const REGION_RANK: Record<string, number> = { JP: 0, KR: 1, EN: 2 };
+    const deriveSetGroup = (locales: { region: string; set: { cardPack: { id: string; era: string | null; nameKo: string | null; nameJa: string | null } | null } }[]) => {
+      const sorted = [...locales].sort((a, b) => (REGION_RANK[a.region] ?? 3) - (REGION_RANK[b.region] ?? 3));
+      const anchor = sorted.find((l) => l.set.cardPack);
+      const cp = anchor?.set.cardPack;
+      return cp ? { id: cp.id, era: cp.era, name: cp.nameKo ?? cp.nameJa } : null;
+    };
 
     results.push({
       query: q || null,
@@ -84,7 +92,7 @@ async function main() {
       truncated: cards.length === args.limit,
       matches: cards.map((c) => ({
         logicalCardId: c.id,
-        setGroup: c.cardPack ? { id: c.cardPack.id, era: c.cardPack.era, name: c.cardPack.nameKo ?? c.cardPack.nameJa } : null,
+        setGroup: deriveSetGroup(c.locales),
         primaryNumber: c.primaryNumber,
         rarity: c.rarity?.code ?? null,
         pokedexNumbers: c.pokedexNumbers,
@@ -93,7 +101,9 @@ async function main() {
         illustrator: c.illustrator,
         locales: c.locales.map((l) => ({
           region: l.region, number: l.number, name: l.name,
-          set: l.set.code ?? l.setId, setName: l.set.name,
+          set: l.set.code ?? l.setId, setName: l.set.name, setGroupId: l.set.cardPackId,
+          hasImage: Boolean(l.imageLarge || l.imageSmall),
+          imageLarge: l.imageLarge, imageSmall: l.imageSmall,
         })),
       })),
     });

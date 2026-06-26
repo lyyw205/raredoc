@@ -297,6 +297,7 @@ function mapRowToDexCard(rc: CardRow): DexCard {
     id: rc.id,
     name: rc.name,
     number: rc.number,
+    numberInt: rc.numberInt, // 정렬 키(레터번호 F/L 등 문자열 알파벳정렬 보정용)
     rarity: pickRarityLabel(rc.region, rar) ?? undefined,
     rarityTier: rar?.tier ?? null,
     rarityCategoryCode: rar?.category?.code ?? undefined,

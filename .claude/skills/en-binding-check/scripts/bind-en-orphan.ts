@@ -12,7 +12,7 @@
 //   npx tsx .claude/skills/en-binding-check/scripts/bind-en-orphan.ts --pairs "<enId>=<lcid>,<enId>=<lcid>" [--apply] [--allow-protected]
 import "dotenv/config";
 import { prisma } from "../../../../src/lib/prisma";
-import { assertWritable, hasAllowProtectedFlag } from "../../../../scripts/lib/protected-groups";
+import { assertMappingWritable, hasAllowProtectedFlag } from "../../../../scripts/lib/protected-groups";
 
 function parseArgs(argv: string[]) {
   const out: { en?: string; to?: string; pairs?: string; apply: boolean } = { apply: false };
@@ -87,9 +87,9 @@ async function main() {
     });
   }
 
-  // 동결 가드 — 유효 플랜의 영향 cardPack 전체로 한 번에 검사(dry-run=경고, apply=allow 없으면 차단)
+  // 매핑 잠금 — EN orphan→JP앵커 repoint 은 RegionCard.cardId 변경(정체성 매핑)이라 전역 가드 적용.
   const affectedAll = plans.filter((p) => p.ok).flatMap((p) => p.affected);
-  assertWritable(affectedAll, { allow: hasAllowProtectedFlag(), dryRun: !APPLY, tool: "bind-en-orphan" });
+  assertMappingWritable(affectedAll, { allow: hasAllowProtectedFlag(), dryRun: !APPLY, tool: "bind-en-orphan", what: `EN orphan ${affectedAll.length}건 repoint` });
 
   let applied = 0, cleaned = 0;
   for (const p of plans) {

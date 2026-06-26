@@ -23,7 +23,7 @@
 import "dotenv/config";
 import { prisma } from "../../../../src/lib/prisma";
 import { TR_JA2KO } from "../../../../scripts/lib/trainer-names-jako";
-import { assertWritable, hasAllowProtectedFlag } from "../../../../scripts/lib/protected-groups";
+import { assertMappingWritable, hasAllowProtectedFlag } from "../../../../scripts/lib/protected-groups";
 
 const argv = process.argv.slice(2);
 const flag = (name: string) => { const i = argv.indexOf(name); return i >= 0 ? argv[i + 1] : undefined; };
@@ -90,10 +90,10 @@ async function auditPair(jpSet: string, krSet: string) {
 
 (async () => {
   const pairs = parsePairs();
-  // 동결 카드팩 가드 — --apply 시 영향 그룹이 보호 목록이면 차단(--allow-protected 로만 해제)
+  // 매핑 잠금 — KR 트레이너 가나다 재정렬 untangle 은 RegionCard 번호/연결(정체성 매핑) 변경. 잠금 시대 팩이면 차단.
   if (APPLY) {
     const sets = await prisma.set.findMany({ where: { id: { in: pairs.flat() } }, select: { cardPackId: true } });
-    assertWritable(sets.map((s) => s.cardPackId), { allow: hasAllowProtectedFlag(), tool: "audit-kr-trainers" });
+    assertMappingWritable(sets.map((s) => s.cardPackId), { allow: hasAllowProtectedFlag(), tool: "audit-kr-trainers", what: `KR 트레이너 매핑 교정 (${pairs.length}쌍)` });
   }
   let totalMm = 0, totalGap = 0;
   for (const [jp, kr] of pairs) { const r = await auditPair(jp, kr); totalMm += r.mismatches; totalGap += r.dictGaps; }

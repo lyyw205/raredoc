@@ -9,7 +9,7 @@
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
 import { resolveCardDexes } from "./lib/pokeapi-names";
-import { assertWritable, hasAllowProtectedFlag } from "./lib/protected-groups";
+import { assertMappingWritable, hasAllowProtectedFlag } from "./lib/protected-groups";
 import { TR_JP2EN as TR_SV, profResearchEn } from "./lib/trainer-names-sv";
 import { TR_JP2EN as TR_SM } from "./lib/trainer-names-sm";
 import { TR_JP2EN as TR_SWSH } from "./lib/trainer-names-swsh";
@@ -51,14 +51,12 @@ async function main() {
   if (!jpSetArg || !enSet) { console.error("usage: <jpSetId[,jpSetId2]> <enSetId> [--apply]"); process.exit(1); }
   const jpSets = jpSetArg.split(",").map((s) => s.trim()).filter(Boolean); // 합본 EN ↔ 분할 JP 다중세트 지원
 
-  // 동결 카드팩 가드 — jpSet 의 그룹 + enSet EN 의 현재 소유 그룹(크로스그룹 탈취 방지)에 보호 그룹이 있으면 차단.
-  {
-    const jpSetRows = await prisma.set.findMany({ where: { id: { in: jpSets } }, select: { cardPackId: true } });
-    // 팩소속 직교화: EN 소유 카드의 팩 = Card.cardPackId 폐지 → 각 카드 locale 의 set.cardPackId 전부(가드는 넓게=안전).
-    const enOwners = await prisma.regionCard.findMany({ where: { region: "EN", setId: enSet }, select: { card: { select: { locales: { select: { set: { select: { cardPackId: true } } } } } } } });
-    const affected = [...jpSetRows.map((s) => s.cardPackId), ...enOwners.flatMap((e) => e.card.locales.map((l) => l.set.cardPackId))];
-    assertWritable(affected, { allow: hasAllowProtectedFlag(), dryRun: !APPLY, tool: "merge-en-identity" });
-  }
+  // 매핑 잠금 — EN→JP 정체성 병합은 RegionCard.cardId 재연결. jpSet 그룹 + enSet 현재소유 그룹(크로스그룹 탈취 방지)에 잠금 시대 팩이 있으면 차단.
+  const jpSetRows = await prisma.set.findMany({ where: { id: { in: jpSets } }, select: { cardPackId: true } });
+  const enOwners = await prisma.regionCard.findMany({ where: { region: "EN", setId: enSet }, select: { card: { select: { locales: { select: { set: { select: { cardPackId: true } } } } } } } });
+  const affected = [...jpSetRows.map((s) => s.cardPackId), ...enOwners.flatMap((e) => e.card.locales.map((l) => l.set.cardPackId))];
+  // 변경 대상은 EN RegionCard.cardId(EN-side 재연결) — region-aware 가드: EN 은 자유(잠금은 JP 카드만).
+  assertMappingWritable(affected, { regions: ["EN"], allow: hasAllowProtectedFlag(), dryRun: !APPLY, tool: "merge-en-identity", what: `EN→JP 정체성 병합 (${enSet} → ${jpSets.join(",")})` });
   const isSWSH = /^en-tcg-swsh/.test(enSet); // SWSH(en-tcg-swsh*)
   const isSM = /^en-tcg-(sm|det)/.test(enSet); // SM(en-tcg-sm*, 프로모 sma/smp, det1 명탐정 포함)
   const isXY = /^en-tcg-(xy|dc|g\d)/.test(enSet); // XY(en-tcg-xy*, dc1 더블크라이시스, g1 제너레이션즈)

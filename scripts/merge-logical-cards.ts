@@ -9,7 +9,7 @@
  */
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
-import { PROTECTED_GROUPS } from "./lib/protected-groups";
+import { assertMappingWritable } from "./lib/protected-groups";
 
 const APPLY = process.argv.includes("--apply");
 const ALLOW = process.argv.includes("--allow-protected");
@@ -33,12 +33,9 @@ async function main() {
   console.log(`  gameCard: src=${src.gameCardId} · tgt=${tgt.gameCardId} ${src.gameCardId === tgt.gameCardId ? "동일✓" : "⚠ 다름"}`);
   console.log(`  소스 locale [${src.locales.map((l) => l.region)}] → 타깃 [${tgt.locales.map((l) => l.region)}]`);
 
+  // 매핑 잠금 — LC 병합은 region카드↔논리카드 재연결(정체성 매핑 변경). 영향 팩이 잠금 시대면 --allow-protected 필요.
   const packs = [...new Set([...src.locales, ...tgt.locales].map((l) => l.set.cardPackId).filter(Boolean) as string[])];
-  const frozen = packs.filter((p) => PROTECTED_GROUPS.has(p));
-  if (frozen.length) {
-    if (!ALLOW) { console.error(`\n🔴 동결팩 ${frozen} — EN/KR 매칭 변경이라 --allow-protected 필수.`); process.exit(1); }
-    console.log(`  ⚠ 동결팩 ${frozen} (--allow-protected 승인됨)`);
-  }
+  assertMappingWritable(packs, { allow: ALLOW, dryRun: !APPLY, tool: "merge-logical-cards", what: `LC 병합 ${SRC} → ${TGT}` });
   if (src.gameCardId !== tgt.gameCardId) console.log(`  ⚠ gameCard 다름 — 정말 같은 카드인지 재확인 권장(병합은 진행).`);
 
   const tgtLangs = new Set(tgt.texts.map((t) => t.language));

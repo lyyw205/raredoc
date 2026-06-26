@@ -15,7 +15,7 @@ DB 모델은 **`Card`(LogicalCard) = "한 그림"** 이고, 같은 그림의 지
 
 1. **★ 같은 그림(이미지)인가 — 확정 근거.** 후보 LC 들의 카드 이미지를 **직접 눈으로** 비교한다. 일러스트(그림)가 같으면 OK(프레임·홀로·언어텍스트가 달라도 무방). **이것만이 확정이다.**
 2. **같은 카드인가 — 보조 확인.** 같은 포켓몬/이름이어야 한다. `gameCard` 가 동일하면(이름+효과 동일) 강한 신호. **gameCard 가 다르면** 정말 같은 카드인지 한 번 더 의심한다(스탯 차이 = 다른 카드일 수 있음).
-3. **동결팩이면 `--allow-protected` 자동(사전승인됨).** 병합은 EN/KR 매칭을 바꾸지만, **card-merge 작업 한정으로 사용자가 사전 승인**(2026-06-23)했고 **이미지 확정(§1)이 진짜 안전장치**다 → 동결팩이어도 매번 따로 안 묻고 `--allow-protected` 로 진행. (★`PROTECTED_GROUPS` 목록 자체는 유지 — merge-en-identity·build-group 등 다른 스크립트엔 그대로 적용.)
+3. **병합은 매핑 변경 → `--allow-protected` 자동(사전승인됨).** 병합은 RegionCard↔LC 연결(정체성 매핑)을 바꾸므로 매핑 잠금 대상이지만, **card-merge 작업 한정으로 사용자가 사전 승인**(2026-06-23)했고 **이미지 확정(§1)이 진짜 안전장치**다 → 매번 따로 안 묻고 `--allow-protected` 로 진행. (★2026-06-26 매핑 잠금 재정의: `PROTECTED_GROUPS`=완료시대(MEGA·SV·SWSH·SM·XY) JP팩 150개, 매핑 변경은 `assertMappingWritable(packIds)`로 그 시대만 가드. `merge-logical-cards` 적용 — card-merge는 사전승인이라 `--allow-protected` 항상 첨부, 비잠금 시대엔 무영향.)
 
 작가(illustrator)·gameCard 일치는 **후보를 좁히는 필터**일 뿐이다. **둘 다 같아도 다른 그림일 수 있다**(예: 언노운 A~Z 는 같은 작가·같은 gameCard·다른 글자그림 → 병합 금지). 그래서 1번(이미지)이 빠지면 안 된다.
 

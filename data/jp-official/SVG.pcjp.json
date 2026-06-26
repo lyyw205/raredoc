@@ -1,0 +1,1169 @@
+{
+ "1": {
+  "number": 1,
+  "jaName": "フシギダネ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass",
+     "Colorless"
+    ],
+    "name": "やどりぎのタネ",
+    "text": "このポケモンのHPを「20」回復する。",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Yuu Nishida",
+  "weakness": "[{\"type\":\"Fire\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 2,
+  "abilities": []
+ },
+ "2": {
+  "number": 2,
+  "jaName": "フシギソウ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass",
+     "Colorless"
+    ],
+    "name": "やどりぎのタネ",
+    "text": "このポケモンのHPを「20」回復する。",
+    "damage": "30"
+   },
+   {
+    "cost": [
+     "Grass",
+     "Grass",
+     "Colorless"
+    ],
+    "name": "つるのムチ",
+    "text": "",
+    "damage": "80"
+   }
+  ],
+  "illustrator": "Yuu Nishida",
+  "weakness": "[{\"type\":\"Fire\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 3,
+  "abilities": []
+ },
+ "3": {
+  "number": 3,
+  "jaName": "フシギバナex",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass",
+     "Grass",
+     "Colorless"
+    ],
+    "name": "もうどくウィップ",
+    "text": "相手のバトルポケモンをどくとこんらんにする。",
+    "damage": "150"
+   }
+  ],
+  "illustrator": "Saki Hayashiro",
+  "weakness": "[{\"type\":\"Fire\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 4,
+  "abilities": [
+   {
+    "name": "やすらぎのはな",
+    "text": "このポケモンがバトル場にいるなら、自分の番に1回使える。自分のポケモン1匹のHPを「60」回復する。",
+    "type": "特性"
+   }
+  ]
+ },
+ "4": {
+  "number": 4,
+  "jaName": "ストライク",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "アシストスラッシュ",
+    "text": "自分のトラッシュから「基本エネルギー」を1枚選び、ベンチポケモンにつける。",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Grass",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "スライスブレード",
+    "text": "",
+    "damage": "70"
+   }
+  ],
+  "illustrator": "Hideki Ishikawa",
+  "weakness": "[{\"type\":\"Fire\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 0,
+  "abilities": []
+ },
+ "5": {
+  "number": 5,
+  "jaName": "トロピウス",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "リーフドレイン",
+    "text": "このポケモンのHPを「20」回復する。",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Grass",
+     "Grass",
+     "Colorless"
+    ],
+    "name": "なんごくのかぜ",
+    "text": "このポケモンについているエネルギーをすべて、ベンチポケモン1匹につけ替える。",
+    "damage": "130"
+   }
+  ],
+  "illustrator": "Taira Akitsu",
+  "weakness": "[{\"type\":\"Fire\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 1,
+  "abilities": []
+ },
+ "6": {
+  "number": 6,
+  "jaName": "マスキッパ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass"
+    ],
+    "name": "ただれるだえき",
+    "text": "相手のバトルポケモンをどくとやけどにする。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "しばりつける",
+    "text": "次の相手の番、このワザを受けたポケモンは、にげられない。",
+    "damage": "40"
+   }
+  ],
+  "illustrator": "Shibuzoh.",
+  "weakness": "[{\"type\":\"Fire\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 1,
+  "abilities": []
+ },
+ "7": {
+  "number": 7,
+  "jaName": "ヒトカゲ",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire"
+    ],
+    "name": "ヒートタックル",
+    "text": "このポケモンにも10ダメージ。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "DOM",
+  "weakness": "[{\"type\":\"Water\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 1,
+  "abilities": []
+ },
+ "8": {
+  "number": 8,
+  "jaName": "リザード",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire"
+    ],
+    "name": "かえん",
+    "text": "",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Fire",
+     "Fire",
+     "Fire"
+    ],
+    "name": "だいもんじ",
+    "text": "このポケモンについているエネルギーを1個選び、トラッシュする。",
+    "damage": "90"
+   }
+  ],
+  "illustrator": "GIDORA",
+  "weakness": "[{\"type\":\"Water\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 2,
+  "abilities": []
+ },
+ "9": {
+  "number": 9,
+  "jaName": "リザードンex",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire"
+    ],
+    "name": "ブレイブウイング",
+    "text": "このポケモンにダメカンがのっているなら、100ダメージ追加。",
+    "damage": "60＋"
+   },
+   {
+    "cost": [
+     "Fire",
+     "Fire",
+     "Fire",
+     "Fire"
+    ],
+    "name": "ばくえんのうず",
+    "text": "このポケモンについているエネルギーを3個選び、トラッシュする。",
+    "damage": "330"
+   }
+  ],
+  "illustrator": "PLANETA Mochizuki",
+  "weakness": "[{\"type\":\"Water\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 2,
+  "abilities": []
+ },
+ "10": {
+  "number": 10,
+  "jaName": "ファイヤー",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire"
+    ],
+    "name": "れっかのつばさ",
+    "text": "このポケモンにダメカンがのっているなら、70ダメージ追加。このワザのダメージは弱点を計算しない。",
+    "damage": "20＋"
+   }
+  ],
+  "illustrator": "otumami",
+  "weakness": "[{\"type\":\"Water\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 1,
+  "abilities": []
+ },
+ "11": {
+  "number": 11,
+  "jaName": "ボルケニオン",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire"
+    ],
+    "name": "デュアルターボ",
+    "text": "自分のベンチポケモンを2匹まで選び、トラッシュから「基本エネルギー」を1枚ずつつける。",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Fire",
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ヘビーインパクト",
+    "text": "",
+    "damage": "120"
+   }
+  ],
+  "illustrator": "Nisota Niso",
+  "weakness": "[{\"type\":\"Water\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 2,
+  "abilities": []
+ },
+ "12": {
+  "number": 12,
+  "jaName": "カルボウ",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire",
+     "Fire",
+     "Colorless"
+    ],
+    "name": "ヒートブラスト",
+    "text": "",
+    "damage": "60"
+   }
+  ],
+  "illustrator": "nagimiso",
+  "weakness": "[{\"type\":\"Water\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 1,
+  "abilities": []
+ },
+ "13": {
+  "number": 13,
+  "jaName": "グレンアルマ",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire",
+     "Fire",
+     "Colorless"
+    ],
+    "name": "フレイムキャノン",
+    "text": "相手のバトルポケモンをやけどにする。",
+    "damage": "90"
+   }
+  ],
+  "illustrator": "AKIRA EGAWA",
+  "weakness": "[{\"type\":\"Water\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 2,
+  "abilities": [
+   {
+    "name": "ひおくり",
+    "text": "自分の番に何回でも使える。自分のベンチポケモンについているエネルギーを1個選び、バトルポケモンにつけ替える。",
+    "type": "特性"
+   }
+  ]
+ },
+ "14": {
+  "number": 14,
+  "jaName": "ゼニガメ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water"
+    ],
+    "name": "からにこもる",
+    "text": "コインを1回投げオモテなら、次の相手の番、このポケモンはワザのダメージを受けない。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Water",
+     "Water"
+    ],
+    "name": "ロケットずつき",
+    "text": "",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "kantaro",
+  "weakness": "[{\"type\":\"Lightning\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 1,
+  "abilities": []
+ },
+ "15": {
+  "number": 15,
+  "jaName": "カメール",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water"
+    ],
+    "name": "すもぐり",
+    "text": "自分のトラッシュから「基本エネルギー」を3枚まで選び、相手に見せて、手札に加える。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Water",
+     "Water"
+    ],
+    "name": "かいてんアタック",
+    "text": "",
+    "damage": "50"
+   }
+  ],
+  "illustrator": "kantaro",
+  "weakness": "[{\"type\":\"Lightning\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 2,
+  "abilities": []
+ },
+ "16": {
+  "number": 16,
+  "jaName": "カメックスex",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water",
+     "Water"
+    ],
+    "name": "ツインカノン",
+    "text": "自分の手札から「基本エネルギー」を2枚までトラッシュし、その枚数×140ダメージ。",
+    "damage": "140×"
+   }
+  ],
+  "illustrator": "PLANETA Igarashi",
+  "weakness": "[{\"type\":\"Lightning\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 3,
+  "abilities": [
+   {
+    "name": "かたいこうら",
+    "text": "このポケモンが受けるワザのダメージは「-30」される。",
+    "type": "特性"
+   }
+  ]
+ },
+ "17": {
+  "number": 17,
+  "jaName": "ママンボウ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water",
+     "Colorless"
+    ],
+    "name": "なみのり",
+    "text": "",
+    "damage": "30"
+   },
+   {
+    "cost": [
+     "Water",
+     "Water",
+     "Colorless"
+    ],
+    "name": "アクアスラッシュ",
+    "text": "次の自分の番、このポケモンはワザが使えない。",
+    "damage": "120"
+   }
+  ],
+  "illustrator": "Shinji Kanda",
+  "weakness": "[{\"type\":\"Lightning\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 2,
+  "abilities": []
+ },
+ "18": {
+  "number": 18,
+  "jaName": "ケルディオ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "けとばす",
+    "text": "",
+    "damage": "20"
+   },
+   {
+    "cost": [
+     "Water",
+     "Colorless"
+    ],
+    "name": "ラインフォース",
+    "text": "自分のベンチポケモンの数×20ダメージ追加。",
+    "damage": "10＋"
+   }
+  ],
+  "illustrator": "Naoyo Kimura",
+  "weakness": "[{\"type\":\"Lightning\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 1,
+  "abilities": []
+ },
+ "19": {
+  "number": 19,
+  "jaName": "ヘイラッシャ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ぶちかます",
+    "text": "",
+    "damage": "60"
+   },
+   {
+    "cost": [
+     "Water",
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ひっさつウェーブ",
+    "text": "コインを2回投げ、すべてオモテなら、100ダメージ追加。",
+    "damage": "100＋"
+   }
+  ],
+  "illustrator": "Shin Nagasawa",
+  "weakness": "[{\"type\":\"Lightning\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 4,
+  "abilities": []
+ },
+ "20": {
+  "number": 20,
+  "jaName": "ガルーラ",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "ずつき",
+    "text": "",
+    "damage": "30"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "スパイクドロー",
+    "text": "自分の山札を2枚引く。",
+    "damage": "60"
+   }
+  ],
+  "illustrator": "Yuya Oka",
+  "weakness": "[{\"type\":\"Fighting\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 2,
+  "abilities": []
+ },
+ "21": {
+  "number": 21,
+  "jaName": "カビゴン",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "どっすんグースカ",
+    "text": "このポケモンをねむりにする。このねむりで投げるコインは2回になり、すべてオモテが出ないと回復しない。",
+    "damage": "180"
+   }
+  ],
+  "illustrator": "0313",
+  "weakness": "[{\"type\":\"Fighting\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 4,
+  "abilities": [
+   {
+    "name": "へいきなしぼう",
+    "text": "このポケモンは、相手のポケモンが使うワザの効果を受けない。",
+    "type": "特性"
+   }
+  ]
+ },
+ "22": {
+  "number": 22,
+  "jaName": "ジグザグマ",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "とびだしヘッド",
+    "text": "",
+    "damage": "10"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ツメできりさく",
+    "text": "",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Kagemaru Himeno",
+  "weakness": "[{\"type\":\"Fighting\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 1,
+  "abilities": []
+ },
+ "23": {
+  "number": 23,
+  "jaName": "マッスグマ",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "ジェットヘッド",
+    "text": "",
+    "damage": "40"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "とつげき",
+    "text": "このポケモンにも30ダメージ。",
+    "damage": "150"
+   }
+  ],
+  "illustrator": "Nagomi Nijo",
+  "weakness": "[{\"type\":\"Fighting\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 0,
+  "abilities": []
+ },
+ "24": {
+  "number": 24,
+  "jaName": "ザングース",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "きりさく",
+    "text": "",
+    "damage": "40"
+   }
+  ],
+  "illustrator": "Yuya Oka",
+  "weakness": "[{\"type\":\"Fighting\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 1,
+  "abilities": []
+ },
+ "25": {
+  "number": 25,
+  "jaName": "チラーミィ",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "なかまをよぶ",
+    "text": "自分の山札からたねポケモンを2枚まで選び、ベンチに出す。そして山札を切る。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "はたく",
+    "text": "",
+    "damage": "10"
+   }
+  ],
+  "illustrator": "Mina Nakai",
+  "weakness": "[{\"type\":\"Fighting\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 1,
+  "abilities": []
+ },
+ "26": {
+  "number": 26,
+  "jaName": "チラチーノ",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "ビンタ",
+    "text": "",
+    "damage": "40"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "トリプルアクセル",
+    "text": "コインを3回投げ、オモテの数×50ダメージ。",
+    "damage": "50×"
+   }
+  ],
+  "illustrator": "Atsuko Nishida",
+  "weakness": "[{\"type\":\"Fighting\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 1,
+  "abilities": []
+ },
+ "27": {
+  "number": 27,
+  "jaName": "グルトン",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "もってくる",
+    "text": "自分の山札を1枚引く。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "たいあたり",
+    "text": "",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "kodama",
+  "weakness": "[{\"type\":\"Fighting\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 1,
+  "abilities": []
+ },
+ "28": {
+  "number": 28,
+  "jaName": "パフュートン",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "ぶつかる",
+    "text": "",
+    "damage": "50"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "レッグスタンプ",
+    "text": "コインを1回投げウラなら、次の自分の番、このポケモンはワザが使えない。",
+    "damage": "130"
+   }
+  ],
+  "illustrator": "kirisAki",
+  "weakness": "[{\"type\":\"Fighting\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 2,
+  "abilities": []
+ },
+ "29": {
+  "number": 29,
+  "jaName": "カラミンゴ",
+  "types": [
+   "Colorless"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Colorless"
+    ],
+    "name": "はばたく",
+    "text": "",
+    "damage": "30"
+   },
+   {
+    "cost": [
+     "Colorless",
+     "Colorless",
+     "Colorless"
+    ],
+    "name": "きゅうこうか",
+    "text": "このポケモンにも20ダメージ。",
+    "damage": "110"
+   }
+  ],
+  "illustrator": "kantaro",
+  "weakness": "[{\"type\":\"Lightning\",\"value\":\"×2\"}]",
+  "resistance": "[{\"type\":\"Fighting\",\"value\":\"－30\"}]",
+  "retreatCost": 1,
+  "abilities": []
+ },
+ "30": {
+  "number": 30,
+  "jaName": "エネルギーシール",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Ayaka Yoshida",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "31": {
+  "number": 31,
+  "jaName": "スーパーエネルギー回収",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Studio Bora Inc.",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "32": {
+  "number": 32,
+  "jaName": "すごいつりざお",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Toyste Beach",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "33": {
+  "number": 33,
+  "jaName": "ネストボール",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Toyste Beach",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "34": {
+  "number": 34,
+  "jaName": "ハイパーボール",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Ayaka Yoshida",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "35": {
+  "number": 35,
+  "jaName": "ふしぎなアメ",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Studio Bora Inc.",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "36": {
+  "number": 36,
+  "jaName": "ポケモンいれかえ",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Studio Bora Inc.",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "37": {
+  "number": 37,
+  "jaName": "カイ",
+  "types": [],
+  "attacks": [],
+  "illustrator": "kirisAki",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "38": {
+  "number": 38,
+  "jaName": "サワロ",
+  "types": [],
+  "attacks": [],
+  "illustrator": "nagimiso",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "39": {
+  "number": 39,
+  "jaName": "シロナの覇気",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Megumi Mizutani",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "40": {
+  "number": 40,
+  "jaName": "ナタネの活気",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Yuu Nishida",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "41": {
+  "number": 41,
+  "jaName": "ナンジャモ",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Sanosuke Sakuma",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "42": {
+  "number": 42,
+  "jaName": "ネモ",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Sanosuke Sakuma",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "43": {
+  "number": 43,
+  "jaName": "ネモ",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Sanosuke Sakuma",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "44": {
+  "number": 44,
+  "jaName": "博士の研究",
+  "types": [],
+  "attacks": [],
+  "illustrator": "kirisAki",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "45": {
+  "number": 45,
+  "jaName": "博士の研究",
+  "types": [],
+  "attacks": [],
+  "illustrator": "kirisAki",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "46": {
+  "number": 46,
+  "jaName": "ボスの指令",
+  "types": [],
+  "attacks": [],
+  "illustrator": "NC Empire",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "47": {
+  "number": 47,
+  "jaName": "テーブルシティ",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Oswaldo KATO",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "48": {
+  "number": 48,
+  "jaName": "ビーチコート",
+  "types": [],
+  "attacks": [],
+  "illustrator": "Oswaldo KATO",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "49": {
+  "number": 49,
+  "jaName": "マグマの滝壺",
+  "types": [],
+  "attacks": [],
+  "illustrator": "ORBITALLINK Inc.",
+  "weakness": null,
+  "resistance": null,
+  "retreatCost": null,
+  "abilities": []
+ },
+ "50": {
+  "number": 50,
+  "jaName": "フシギダネ",
+  "types": [
+   "Grass"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Grass",
+     "Colorless"
+    ],
+    "name": "やどりぎのタネ",
+    "text": "このポケモンのHPを「20」回復する。",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Orca",
+  "weakness": "[{\"type\":\"Fire\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 2,
+  "abilities": []
+ },
+ "51": {
+  "number": 51,
+  "jaName": "ヒトカゲ",
+  "types": [
+   "Fire"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Fire"
+    ],
+    "name": "ヒートタックル",
+    "text": "このポケモンにも10ダメージ。",
+    "damage": "30"
+   }
+  ],
+  "illustrator": "MINAMINAMI Take",
+  "weakness": "[{\"type\":\"Water\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 1,
+  "abilities": []
+ },
+ "52": {
+  "number": 52,
+  "jaName": "ゼニガメ",
+  "types": [
+   "Water"
+  ],
+  "attacks": [
+   {
+    "cost": [
+     "Water"
+    ],
+    "name": "からにこもる",
+    "text": "コインを1回投げオモテなら、次の相手の番、このポケモンはワザのダメージを受けない。",
+    "damage": null
+   },
+   {
+    "cost": [
+     "Water",
+     "Water"
+    ],
+    "name": "ロケットずつき",
+    "text": "",
+    "damage": "20"
+   }
+  ],
+  "illustrator": "Saboteri",
+  "weakness": "[{\"type\":\"Lightning\",\"value\":\"×2\"}]",
+  "resistance": null,
+  "retreatCost": 1,
+  "abilities": []
+ }
+}

@@ -33,7 +33,7 @@ EN 카드의 내용(스탯·기술·레어도·이미지 등)이 **빠짐없이 
 3. **rarity 는 EN 값을 RegionCard 에만 쓴다.** EN↔JP 레어도 체계가 다르다(Uncommon↔Rare, Art Rare↔Illustration Rare). 공유 `Card.rarity` 를 EN 값으로 덮지 않는다 — `RegionCard.rarity` 에 EN 값을 세팅해 JP 표시를 안 깬다. (§C-4)
 4. **subtypes 는 합집합으로 enrich** — MEGA/Tera/Ancient 등 EN 메커니즘 누락은 추가만, 기존 값 제거 금지. (§C-3)
 5. **불확실하면 두고 리포트.** mismatch 가 EN↔JP 정상 차이인지 진짜 오류인지 모호하면 교정하지 말고 보고. 추측 수정 금지.
-6. **동결팩 가드 우회 금지.** `apply-en-metadata.ts` 의 `assertWritable` 통과 — 동결 영향 시 dry-run 확인 → 사용자 확인 → `--apply --allow-protected`. 즉석 prisma/SQL 금지.
+6. **매핑 잠금 우회 금지.** `apply-en-metadata.ts` 는 **필드+시대 인지 가드**(`assertMappingWritable`) — 매핑 필드(name·imageLarge·imageSmall·pokedexNumbers) 변경이 plan 에 있고 그 카드가 **잠금 시대(MEGA·SV·SWSH·SM·XY) 팩**이면 `--apply` 시 `--allow-protected` 필요. 나머지(hp/attacks/types/rarity/illustrator 등 메타데이터, 또는 잠금 시대 밖 팩)는 자유. 즉석 prisma/SQL 금지. → AGENTS.md "매핑 잠금".
 
 ---
 
