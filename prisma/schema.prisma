@@ -217,6 +217,7 @@ model PrintVariant {
   regionCard   RegionCard @relation("RegionCardPrintVariant", fields: [regionCardId], references: [id], onDelete: Cascade)
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
+  prices       Price[]    @relation("PriceVariant")
 
   @@unique([regionCardId, kind, slug]) // 결정적 자연키
   @@index([regionCardId])
@@ -233,6 +234,7 @@ model SealedProduct {
   releaseDate DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+  prices      Price[]   @relation("PriceSealed")
 
   @@index([setGroupId])
 }
@@ -394,21 +396,27 @@ model Price {
   regionCard     RegionCard   @relation("PriceCardLocale", fields: [regionCardId], references: [id], onDelete: Cascade)
   sourceId       String?
   priceSource    PriceSource? @relation("PricePriceSource", fields: [sourceId], references: [id])
-  normal         Float?
-  holofoil       Float?
-  reverseHolo    Float?
-  firstEdition   Float?
-  marketPrice    Float? // 단일값 출처용 일반 시세(등급가·샵 販売/買取·해외 한국판 등). raw 변형 다출처는 normal/holofoil 사용.
+  // ★옛 와이드 finish 컬럼(normal/holofoil/reverseHolo/firstEdition/marketPrice)은 amount 로 통합·제거됨.
+  //   DB 물리 DROP 은 master 배포 後(expand-contract). 코드는 amount 단일값 사용.
   currency       String       @default("USD")
   usdToKrw       Float?
   condition      String?
-  gradingCompany String?
+  gradingCompany String? // = grader(PSA/BGS/CGC/BRG/TAG…)
   grade          Int?
+  // ── SKU 정규화(docs/plans/card-model-and-pricing-taxonomy.md) — expand 단계, additive ──
+  printVariantId  String?        // 단일카드 SKU(= PrintVariant). regionCardId 와 공존(점진 이관).
+  printVariant    PrintVariant?  @relation("PriceVariant", fields: [printVariantId], references: [id])
+  sealedProductId String?        // 실링 상품 시세(= SealedProduct). printVariantId 와 배타.
+  sealedProduct   SealedProduct? @relation("PriceSealed", fields: [sealedProductId], references: [id])
+  amount          Float?         // 단일 시세값(normal/holofoil/reverseHolo/firstEdition 통합). finish는 PrintVariant로.
+  priceKind       String?        // market|sell|buy|listing|sold (JP 販売/買取 분리)
+  conditionType   String?        // raw|graded|sealed (condition/gradingCompany+grade 와 함께)
   recordedAt     DateTime     @default(now())
 
   @@index([regionCardId], map: "Price_cardLocaleId_idx")
   @@index([recordedAt])
   @@index([sourceId])
+  @@index([printVariantId])
 }
 
 // 거래 체결 1행 (시장 분석). regionCardId=실제 거래판, cardId=Card 단위 dedupe.

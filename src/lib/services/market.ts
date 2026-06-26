@@ -28,20 +28,14 @@ function startOfDay(d: Date): Date {
 
 /**
  * Price 행에서 대표 가격을 KRW로 환산해 고른다.
- * - marketPrice(단일값 출처: yuyu JPY / cardmarket EUR / 등급가) 우선,
- *   없으면 raw 변형(holofoil/normal/…, tcgplayer USD).
- * - 각 값은 행의 currency 로 KRW 환산(통화 혼합 안전).
+ * - 단일값 amount(출처별 통화: yuyu JPY / cardmarket EUR / tcgplayer USD / 등급가).
+ * - 값은 행의 currency 로 KRW 환산(통화 혼합 안전).
  */
 function pickPriceKrw(p: {
-  marketPrice: number | null;
-  normal: number | null;
-  holofoil: number | null;
-  reverseHolo: number | null;
-  firstEdition: number | null;
+  amount: number | null;
   currency: string | null;
 }): number | null {
-  const v =
-    p.marketPrice ?? p.holofoil ?? p.normal ?? p.reverseHolo ?? p.firstEdition ?? null;
+  const v = p.amount ?? null;
   if (v == null) return null;
   return Math.round(toKrw(v, p.currency));
 }
@@ -58,11 +52,7 @@ type TradeRow = {
 type PriceRow = {
   regionCardId?: string;
   recordedAt: Date;
-  marketPrice: number | null;
-  normal: number | null;
-  holofoil: number | null;
-  reverseHolo: number | null;
-  firstEdition: number | null;
+  amount: number | null;
   currency: string | null;
 };
 
@@ -215,11 +205,7 @@ export async function rebuildMarketStats(date?: Date): Promise<{ cards: number; 
     select: {
       regionCardId: true,
       recordedAt: true,
-      marketPrice: true,
-      normal: true,
-      holofoil: true,
-      reverseHolo: true,
-      firstEdition: true,
+      amount: true,
       currency: true,
     },
   });
@@ -292,17 +278,16 @@ export async function recordCardView(cardId: string, date?: Date): Promise<void>
 }
 
 /**
- * 카드 상세의 가격 히스토리 1포인트. 차트(recordedAt/normal/holofoil)만 소비한다.
+ * 카드 상세의 가격 히스토리 1포인트. 차트(recordedAt/amount)만 소비한다.
  */
 export type PricePoint = {
   recordedAt: Date;
-  normal: number | null;
-  holofoil: number | null;
+  amount: number | null;
 };
 
 /**
  * 단일 RegionCard 의 가격 스냅샷 시계열(오름차순). 실패 시 빈 배열(렌더 비차단).
- * 차트가 recordedAt/normal/holofoil 만 쓰므로 그 3필드만 select 한다.
+ * 차트가 recordedAt/amount 만 쓰므로 그 2필드만 select 한다.
  */
 export async function getCardPriceHistory(regionCardId: string): Promise<PricePoint[]> {
   return prisma.price
@@ -311,8 +296,7 @@ export async function getCardPriceHistory(regionCardId: string): Promise<PricePo
       orderBy: { recordedAt: "asc" },
       select: {
         recordedAt: true,
-        normal: true,
-        holofoil: true,
+        amount: true,
       },
     })
     .catch(() => [] as PricePoint[]);

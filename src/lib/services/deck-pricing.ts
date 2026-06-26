@@ -6,7 +6,7 @@
  * 최신 시세 합산(KRW 환산).
  *
  * 실측 함정 반영(2026-06-06 사실확인):
- * - 가격 필드 혼재: yuyu/cardmarket=marketPrice만, tcgplayer=변형필드 → 폴백 체인
+ * - 가격은 Price.amount 단일값 사용(옛 마감별 와이드 컬럼은 amount 로 통합됨)
  * - (locale,source)당 1~3행 시계열 → 최신 1행 선택
  * - SWSH 병합 LC 의 EN 가격이 orphan LC 에 분열 → EN명 역추적으로 인쇄판 확장
  * - condition 행(tcgplayer 16k) 혼재 → condition null 만
@@ -177,11 +177,7 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
     select: {
       sourceId: true,
       currency: true,
-      marketPrice: true,
-      holofoil: true,
-      normal: true,
-      reverseHolo: true,
-      firstEdition: true,
+      amount: true,
       recordedAt: true,
       regionCardId: true,
       regionCard: { select: { cardId: true } },
@@ -198,7 +194,7 @@ export async function computeDeckCost(archetypeId: string): Promise<DeckCostResu
     const key = `${p.regionCardId}|${p.sourceId}`;
     if (seen.has(key)) continue; // recordedAt desc 정렬 → 첫 행이 최신
     seen.add(key);
-    const raw = p.marketPrice ?? p.holofoil ?? p.normal ?? p.reverseHolo ?? p.firstEdition;
+    const raw = p.amount;
     if (raw == null || raw <= 0) continue;
     const code = sourceCode.get(p.sourceId!) ?? "?";
     const krw = Math.round(toKrw(raw, p.currency));

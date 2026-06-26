@@ -681,7 +681,7 @@ const RECIPE_PRICE_SOURCES = ["yuyu_tei_sell", "tcgplayer", "cardmarket"] as con
 const RECIPE_SOURCE_PRIORITY: Record<string, number> = { yuyu_tei_sell: 0, tcgplayer: 1, cardmarket: 2 };
 
 /** logicalCardId[] → 카드별 대표 단가(KRW). (locale,source) 최신 1행 → 카드별 최우선 소스가.
- *  condition null·marketPrice 폴백 체인 — deck-pricing.computeDeckCost 와 동일 규약. */
+ *  condition null·amount 단일값 — deck-pricing.computeDeckCost 와 동일 규약. */
 async function fetchCardUnitKrw(cardIds: string[]): Promise<Map<string, number>> {
   const out = new Map<string, number>();
   const ids = [...new Set(cardIds.filter(Boolean))];
@@ -697,11 +697,7 @@ async function fetchCardUnitKrw(cardIds: string[]): Promise<Map<string, number>>
     select: {
       sourceId: true,
       currency: true,
-      marketPrice: true,
-      holofoil: true,
-      normal: true,
-      reverseHolo: true,
-      firstEdition: true,
+      amount: true,
       regionCardId: true,
       recordedAt: true,
       regionCard: { select: { cardId: true } },
@@ -714,7 +710,7 @@ async function fetchCardUnitKrw(cardIds: string[]): Promise<Map<string, number>>
     const key = `${p.regionCardId}|${p.sourceId}`;
     if (seen.has(key)) continue;
     seen.add(key);
-    const raw = p.marketPrice ?? p.holofoil ?? p.normal ?? p.reverseHolo ?? p.firstEdition;
+    const raw = p.amount;
     if (raw == null || raw <= 0) continue;
     const code = sourceCode.get(p.sourceId!) ?? "?";
     const cardId = p.regionCard.cardId;

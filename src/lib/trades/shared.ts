@@ -47,15 +47,12 @@ export const GRADES = ["미개봉", "1착", "NM", "VNDS", "LP", "MP", "HP", "DS"
 export type Grade = (typeof GRADES)[number];
 
 export interface PriceFields {
-  normal: number | null;
-  holofoil: number | null;
-  reverseHolo: number | null;
-  firstEdition: number | null;
+  amount: number | null;
 }
 
-/** Price 행에서 대표 USD 시세 선택 (홀로 > 노말 > 리버스 > 1ed). */
+/** Price 행에서 대표 USD 시세 선택. */
 export function pickPriceUsd(p: PriceFields): number | null {
-  return p.holofoil ?? p.normal ?? p.reverseHolo ?? p.firstEdition ?? null;
+  return p.amount ?? null;
 }
 
 export interface PriceBucket {

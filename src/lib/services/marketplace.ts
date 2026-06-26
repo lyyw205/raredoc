@@ -8,7 +8,7 @@ import { USD_KRW, conditionCoefficient, pickPriceUsd } from "@/lib/trades/shared
 function estimateKrw(
   grade: string,
   estimatedKrw: number | null,
-  prices: { normal: number | null; holofoil: number | null; reverseHolo: number | null; firstEdition: number | null }[]
+  prices: { amount: number | null }[]
 ): number | null {
   if (estimatedKrw != null) return estimatedKrw;
   const latest = prices[0];
@@ -116,7 +116,7 @@ export async function getOwnersForCard(
               prices: {
                 orderBy: { recordedAt: "desc" },
                 take: 1,
-                select: { normal: true, holofoil: true, reverseHolo: true, firstEdition: true },
+                select: { amount: true },
               },
             },
           },

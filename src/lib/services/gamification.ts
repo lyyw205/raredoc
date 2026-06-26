@@ -68,7 +68,7 @@ async function aggregateUser(userId: string): Promise<UserAgg> {
           prices: {
             orderBy: { recordedAt: "desc" },
             take: 1,
-            select: { normal: true, holofoil: true, reverseHolo: true, firstEdition: true },
+            select: { amount: true },
           },
         },
       },

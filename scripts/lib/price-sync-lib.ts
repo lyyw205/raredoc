@@ -111,8 +111,23 @@ export async function fetchJsonWithRetry<T>(
   }
 }
 
+// sourceId → priceKind(market|sell|buy) 매핑 캐시 (JP 販売/買取 분리).
+const _priceKindCache = new Map<string, string>();
+async function priceKindFor(sourceId: string): Promise<string> {
+  let code = _priceKindCache.get(sourceId);
+  if (code === undefined) {
+    const s = await prisma.priceSource.findUnique({ where: { id: sourceId }, select: { code: true } });
+    code = s?.code ?? "";
+    _priceKindCache.set(sourceId, code);
+  }
+  return code === "yuyu_tei_buy" ? "buy" : code === "yuyu_tei_sell" ? "sell" : "market";
+}
+
 /**
  * Price 멱등 스냅샷: 같은 (regionCardId, sourceId)의 오늘자 행이 있으면 update, 없으면 create.
+ * ★SKU 정규화(docs/plans/card-model-and-pricing-taxonomy.md): 옛 와이드컬럼과 함께 새 칸도 동기화한다 —
+ *   amount(통합값)·printVariant(standard SKU, 없으면 생성)·priceKind(판매/매입/시장)·conditionType(raw/graded).
+ *   읽는 코드는 아직 옛 컬럼을 쓰므로 이중기록(무중단). 와이드컬럼 드롭(B-3)은 변형 쪼개기 後.
  * @returns true=새로 생성, false=기존 갱신(dup)
  */
 export async function upsertDailyPrice(
@@ -131,15 +146,35 @@ export async function upsertDailyPrice(
     grade?: number | null;
   }
 ): Promise<boolean> {
+  const amount =
+    data.marketPrice ?? data.holofoil ?? data.normal ?? data.reverseHolo ?? data.firstEdition ?? null;
+  // standard PrintVariant 보장(FK) — 새 RegionCard도 시세 적재 시 SKU 자동 생성(멱등)
+  await prisma.printVariant.upsert({
+    where: { regionCardId_kind_slug: { regionCardId, kind: "standard", slug: "standard" } },
+    create: { id: `pv-${regionCardId}`, regionCardId, kind: "standard", slug: "standard" },
+    update: {},
+  });
+  // 옛 와이드컬럼(normal/holofoil/...)은 amount 계산에만 쓰고 *저장하지 않는다*(스키마에서 제거됨).
+  const enriched = {
+    currency: data.currency,
+    condition: data.condition ?? null,
+    gradingCompany: data.gradingCompany ?? null,
+    grade: data.grade ?? null,
+    amount,
+    conditionType: data.gradingCompany ? "graded" : "raw",
+    priceKind: await priceKindFor(sourceId),
+    printVariantId: `pv-${regionCardId}`,
+  };
+
   const existing = await prisma.price.findFirst({
     where: { regionCardId, sourceId, recordedAt: { gte: today } },
     select: { id: true },
   });
   if (existing) {
-    await prisma.price.update({ where: { id: existing.id }, data });
+    await prisma.price.update({ where: { id: existing.id }, data: enriched });
     return false;
   }
-  await prisma.price.create({ data: { regionCardId, sourceId, ...data } });
+  await prisma.price.create({ data: { regionCardId, sourceId, ...enriched } });
   return true;
 }
 

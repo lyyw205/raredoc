@@ -96,7 +96,7 @@ export async function searchCardsAction(
 /**
  * 여러 RegionCard 의 "대표 시세(KRW)"를 배치 1쿼리로 계산.
  * - 출처(sourceId)별 최신 1건만(= getCardPrices 와 동일한 dedup), 그 중 최댓값을 RegionCard 별로.
- * - 가격 우선순위: marketPrice > holofoil > normal > reverseHolo > firstEdition.
+ * - 가격은 단일값 amount 사용.
  */
 async function maxPriceKrwByRegionCard(
   regionCardIds: string[]
@@ -110,11 +110,7 @@ async function maxPriceKrwByRegionCard(
     select: {
       regionCardId: true,
       sourceId: true,
-      marketPrice: true,
-      holofoil: true,
-      normal: true,
-      reverseHolo: true,
-      firstEdition: true,
+      amount: true,
       currency: true,
     },
     orderBy: { recordedAt: "desc" },
@@ -125,13 +121,7 @@ async function maxPriceKrwByRegionCard(
     const key = `${p.regionCardId}:${p.sourceId}`;
     if (seen.has(key)) continue;
     seen.add(key);
-    const raw =
-      p.marketPrice ??
-      p.holofoil ??
-      p.normal ??
-      p.reverseHolo ??
-      p.firstEdition ??
-      null;
+    const raw = p.amount ?? null;
     if (raw == null) continue;
     const krw = toKrw(raw, p.currency);
     const prev = result.get(p.regionCardId);

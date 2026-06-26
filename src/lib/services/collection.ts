@@ -14,7 +14,7 @@ import { listRegionPacks, type Region, type RegionPack } from "@/lib/cards/dex-r
 function estimateItemKrw(item: {
   estimatedKrw: number | null;
   grade: string;
-  regionCard: { prices: { normal: number | null; holofoil: number | null; reverseHolo: number | null; firstEdition: number | null }[] };
+  regionCard: { prices: { amount: number | null }[] };
 }): number | null {
   if (item.estimatedKrw != null) return item.estimatedKrw;
   const latest = item.regionCard.prices[0];
@@ -33,10 +33,7 @@ const itemInclude = {
         orderBy: { recordedAt: "desc" as const },
         take: 1,
         select: {
-          normal: true,
-          holofoil: true,
-          reverseHolo: true,
-          firstEdition: true,
+          amount: true,
         },
       },
     },
@@ -90,7 +87,7 @@ type RawItem = {
     imageSmall: string | null;
     imageLarge: string | null;
     set: { id: string; name: string; nameKo: string | null };
-    prices: { normal: number | null; holofoil: number | null; reverseHolo: number | null; firstEdition: number | null }[];
+    prices: { amount: number | null }[];
   };
   card: {
     rarity: { code: string; nameKo: string | null; nameEn: string | null } | null;

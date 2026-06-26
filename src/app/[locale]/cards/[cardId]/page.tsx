@@ -114,8 +114,8 @@ function buildChartData(
   ptHistory: PokeTraceHistoryEntry[],
   priceHistory: PricePoint[]
 ): {
-  historyForChart: { recordedAt: string; normal: number | null; holofoil: number | null }[];
-  chartLineLabels: { normal: string; holofoil: string } | undefined;
+  historyForChart: { recordedAt: string; amount: number | null }[];
+  chartLineLabels: { amount: string } | undefined;
   chartRanges: typeof PT_RANGES | undefined;
 } {
   if (ptHistory.length > 0) {
@@ -131,20 +131,18 @@ function buildChartData(
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([date, { ebay, tcg }]) => ({
         recordedAt: date,
-        normal: ebay ?? null,
-        holofoil: tcg ?? null,
+        amount: ebay ?? tcg ?? null,
       }));
     return {
       historyForChart,
-      chartLineLabels: { normal: "eBay NM", holofoil: "TCGPlayer NM" },
+      chartLineLabels: { amount: "시세" },
       chartRanges: PT_RANGES,
     };
   }
   return {
     historyForChart: priceHistory.map((p) => ({
       recordedAt: p.recordedAt.toISOString(),
-      normal: p.normal,
-      holofoil: p.holofoil,
+      amount: p.amount,
     })),
     chartLineLabels: undefined,
     chartRanges: undefined,

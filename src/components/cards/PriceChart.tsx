@@ -14,15 +14,14 @@ import { ToggleGroup } from "@/components/toss";
 
 interface PricePoint {
   recordedAt: string;
-  normal: number | null;
-  holofoil: number | null;
+  amount: number | null;
 }
 
 type RangeDef = { key: string; label: string; days: number | null };
 
 interface Props {
   history: PricePoint[];
-  lineLabels?: { normal: string; holofoil: string };
+  lineLabel?: string;
   ranges?: RangeDef[];
 }
 
@@ -50,8 +49,8 @@ const COLORS = {
   line2:        "#DD7D02",            // toss-warning (오렌지)
 };
 
-export function PriceChart({ history, lineLabels, ranges = DEFAULT_RANGES }: Props) {
-  const labels = lineLabels ?? { normal: "노말", holofoil: "홀로포일" };
+export function PriceChart({ history, lineLabel, ranges = DEFAULT_RANGES }: Props) {
+  const label = lineLabel ?? "시세";
   const [rangeKey, setRangeKey] = useState(ranges[0].key);
 
   const selected = ranges.find((r) => r.key === rangeKey) ?? ranges[0];
@@ -70,8 +69,7 @@ export function PriceChart({ history, lineLabels, ranges = DEFAULT_RANGES }: Pro
       month: "short",
       day: "numeric",
     }),
-    normal: p.normal,
-    holofoil: p.holofoil,
+    amount: p.amount,
   }));
 
   return (
@@ -113,18 +111,9 @@ export function PriceChart({ history, lineLabels, ranges = DEFAULT_RANGES }: Pro
           <Legend wrapperStyle={{ fontSize: 12, color: COLORS.legend }} />
           <Line
             type="monotone"
-            dataKey="normal"
-            name={labels.normal}
+            dataKey="amount"
+            name={label}
             stroke={COLORS.line1}
-            dot={false}
-            strokeWidth={2}
-            connectNulls
-          />
-          <Line
-            type="monotone"
-            dataKey="holofoil"
-            name={labels.holofoil}
-            stroke={COLORS.line2}
             dot={false}
             strokeWidth={2}
             connectNulls

@@ -8,7 +8,7 @@
  *   (예: 같은 카드라도 EN은 tcgplayer, JP는 yuyu-tei에서 가격이 들어옴 → 같은 카드의 한 모달에 4개 출처 행 표시)
  * - 출처별 dedup: PriceSource.code 기준 가장 최근 1건만
  * - 정렬: PriceSource.priority asc (낮은 숫자 우선)
- * - 가격 우선순위: marketPrice > holofoil > normal > reverseHolo > firstEdition
+ * - 가격: 단일값 amount
  *
  * 참고: count(거래·리스팅 수) 컬럼은 현 스키마에 없음 → 표시 X.
  */
@@ -53,13 +53,7 @@ export async function getCardPrices(regionCardId: string): Promise<CardPriceRow[
     seen.add(ps.code);
     priorityByCode.set(ps.code, ps.priority);
 
-    const market =
-      p.marketPrice ??
-      p.holofoil ??
-      p.normal ??
-      p.reverseHolo ??
-      p.firstEdition ??
-      null;
+    const market = p.amount ?? null;
     rows.push({
       sourceCode: ps.code,
       sourceName: ps.name,
@@ -132,8 +126,7 @@ export async function getCardPrintPrices(regionCardId: string): Promise<PrintPri
     }
     if (seen.has(ps.code)) continue;
     seen.add(ps.code);
-    const market =
-      p.marketPrice ?? p.holofoil ?? p.normal ?? p.reverseHolo ?? p.firstEdition ?? null;
+    const market = p.amount ?? null;
     let arr = byRc.get(p.regionCardId);
     if (!arr) {
       arr = [];

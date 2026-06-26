@@ -51,8 +51,8 @@ export function PriceSection({
   ptTotalSaleCount,
   ptUpdatedAt,
 }: {
-  historyForChart: { recordedAt: string; normal: number | null; holofoil: number | null }[];
-  chartLineLabels: { normal: string; holofoil: string } | undefined;
+  historyForChart: { recordedAt: string; amount: number | null }[];
+  chartLineLabels: { amount: string } | undefined;
   chartRanges: typeof PT_RANGES | undefined;
   ptTcgNm: number | null;
   ptTcgNmTrend: number | null;
@@ -80,7 +80,7 @@ export function PriceSection({
       <div className="space-y-5">
         {/* A: 가격 히스토리 (최상단) */}
         <Card padding="md">
-          <PriceChart history={historyForChart} lineLabels={chartLineLabels} ranges={chartRanges} />
+          <PriceChart history={historyForChart} lineLabel={chartLineLabels?.amount} ranges={chartRanges} />
         </Card>
 
         {/* B: 시세 3출처 가로 그리드 */}
@@ -133,10 +133,10 @@ export function PriceSection({
                   <p className="text-toss-tiny text-toss-text-quaternary toss-numeric">{ptEbaySaleCount}건</p>
                 )}
               </>
-            ) : latest?.normal ? (
+            ) : latest?.amount ? (
               <>
-                <p className="text-toss-title-1 font-bold text-toss-text-primary toss-numeric">${latest.normal.toFixed(2)}</p>
-                <p className="text-toss-tiny text-toss-text-quaternary mt-1.5">노말 · {new Date(priceHistory.at(-1)!.recordedAt).toLocaleDateString("ko-KR")} 기준</p>
+                <p className="text-toss-title-1 font-bold text-toss-text-primary toss-numeric">${latest.amount.toFixed(2)}</p>
+                <p className="text-toss-tiny text-toss-text-quaternary mt-1.5">시세 · {new Date(priceHistory.at(-1)!.recordedAt).toLocaleDateString("ko-KR")} 기준</p>
               </>
             ) : (
               <p className="text-toss-label text-toss-text-quaternary py-2">— 데이터 수집 중</p>
