@@ -67,6 +67,9 @@ const SETS: SetCfg[] = [
   // KWBP(Kids' WB! Poké Card Creator, 2004): 고유 5장(1/5~5/5) — 재판 아님. tcgcollector 교차검증(set 11115).
   //   전부 Basic 포켓몬 60HP(웹 확인). 재판 리졸버 억지매칭 방지 위해 orphan 모드.
   { setId: "kwbp", name: "Kids WB Promos", series: "Promo", code: "KWBP", release: "2004-07-02", packType: "promo", group: 2214, orphanEnergyYears: [], mode: "orphan", orphanHp: 60, orphanSubtypes: ["Basic"] },
+  // SAMPLE: e-Reader 데모 Pikachu 1장(고유). 30C: 미발매(2026-09) 신규세트라 게임데이터 없음 → minimal orphan.
+  { setId: "sample", name: "e-Reader Sample Cards", series: "Promo", code: "SAMPLE", release: "2002-08-02", packType: "promo", group: 24493, orphanEnergyYears: [], mode: "orphan", orphanSubtypes: ["Basic"] },
+  { setId: "30c", name: "ME: 30th Celebration", series: "Mega Evolution", code: "30C", release: "2026-09-16", packType: "expansion", group: 24722, orphanEnergyYears: [], mode: "orphan" },
   // Prize Pack Series(Play! Pokémon 프라이즈, 2022~): 대형 재판 버킷. base+Cosmos Holo 변형 병합.
   // World Championship Decks(세계대회 우승덱 재판, 2004~): 초대형. 선수/연도 변형 병합.
   { setId: "wcd", name: "World Championship Decks", series: "Promo", code: "WCD", release: "2004-08-01", packType: "deck", group: 2282, orphanEnergyYears: [], collapseStamps: true,
@@ -113,7 +116,7 @@ const norm = (s: string) => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").t
 const slug = (s: string) => (s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const BASIC_ENERGY = /^(grass|fire|water|lightning|psychic|fighting|darkness|metal|fairy|dragon)\s+energy$/i;
 // 이 로더가 만든 재판/특수 버킷 세트들 — 재판 해석 후보에서 제외(원본세트에만 연결).
-const BUCKET_SETS = ["ppp", "ccp", "fpp", "kwbp", "pwcp", "tt2022", "tt2023", "tt2024", "ba2020", "ba2022", "ba2024", "pp", "wcd", "mcd23", "mcd24", "tk-sm-l", "tk-sm-r"];
+const BUCKET_SETS = ["ppp", "ccp", "fpp", "kwbp", "pwcp", "tt2022", "tt2023", "tt2024", "ba2020", "ba2022", "ba2024", "pp", "wcd", "sample", "30c", "mcap", "ble", "mcd23", "mcd24", "tk-sm-l", "tk-sm-r"];
 
 function parseProd(p: Prod, deckStrip = false): Parsed {
   const raw = p.name;
