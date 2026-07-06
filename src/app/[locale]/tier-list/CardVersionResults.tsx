@@ -6,6 +6,14 @@ import type { CardSearchHit } from "@/lib/actions/searchCards";
 import { CardThumb } from "@/components/cardgame/CardThumb";
 import { cn } from "@/lib/utils";
 
+// 카드번호 표시 — 순수 숫자는 3자리 0패딩 + 세트 총장수(004/078), 문자 포함(SM158 등)은 원본 유지.
+//   (DexCatalog.tsx padCardNumber 와 동일 규칙 — 표시 전용 헬퍼라 별도 유지)
+function formatCardNumber(number: string, setCardCount: number | null): string {
+  if (!/^\d+$/.test(number)) return number;
+  const padded = number.padStart(3, "0");
+  return setCardCount ? `${padded}/${String(setCardCount).padStart(3, "0")}` : padded;
+}
+
 // 검색된 종의 여러 카드 버전(세트·일러·레어도 차이)을 가로 1줄 슬라이더로 나열.
 // 좌우 화살표로 슬라이드(양 끝에서 자동 숨김), 클릭 시 상위에서 시세 패널 표시.
 export function CardVersionResults({
@@ -98,10 +106,22 @@ export function CardVersionResults({
                   <p className="text-toss-micro text-toss-text-quaternary truncate">시세 없음</p>
                 )}
                 <p className="text-toss-micro text-toss-text-tertiary truncate">{set}</p>
-                <p className="text-toss-micro text-toss-text-quaternary truncate">
-                  {hit.number}
-                  {hit.rarity ? ` · ${hit.rarity}` : ""}
-                </p>
+                <div className="flex items-center gap-1 text-toss-micro text-toss-text-quaternary">
+                  {hit.setSymbolUrl && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={hit.setSymbolUrl}
+                      alt={hit.region}
+                      className="h-3 w-3 shrink-0 object-contain"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                  <span className="truncate">
+                    {formatCardNumber(hit.number, hit.setCardCount)}
+                    {hit.rarity ? ` · ${hit.rarity}` : ""}
+                  </span>
+                </div>
               </div>
             </button>
           );

@@ -29,6 +29,7 @@ export type LocaleSummary = {
   setNameJa: string | null;
   setCode: string | null;
   setCardCount?: number | null;
+  setSymbolUrl?: string | null;
   // 인쇄본별 표시필드(RegionCard 하강) — regMark/legalities/rarity 만 유지(per-printing/per-region).
   //   게임필드(weak/resist/retreat/evolves/subtypes)는 diff=0 순수복제라 Card 직독으로 이관(Stage2 2026-06-11).
   regulationMark?: string | null;
@@ -138,7 +139,7 @@ function toLocaleSummary(l: {
   imageSmall: string | null;
   imageLarge: string | null;
   setId: string;
-  set: { name: string; nameKo: string | null; nameJa: string | null; code: string | null; cardCount: number };
+  set: { name: string; nameKo: string | null; nameJa: string | null; code: string | null; cardCount: number; symbolUrl?: string | null };
   regulationMark?: string | null;
   legalities?: Prisma.JsonValue;
   rarity?: { code: string; nameKo: string | null; nameJa: string | null; nameEn: string | null } | null;
@@ -159,6 +160,7 @@ function toLocaleSummary(l: {
     setNameJa: l.set.nameJa,
     setCode: l.set.code,
     setCardCount: l.set.cardCount,
+    setSymbolUrl: l.set.symbolUrl ?? null,
     regulationMark: l.regulationMark ?? null,
     legalities: l.legalities ?? null,
     rarityCode: l.rarity?.code ?? null,
@@ -358,6 +360,8 @@ export type CardSearchFilters = {
   // true → q 를 "종(Species)"으로도 해석해 그 종의 모든 Card 를 포함(이름-글자 일치로만 잡지 않음).
   //   KR판 없는 JP/EN 단독 아트가 한글 검색에서 누락되던 문제 해결. opt-in(시세 검색 등에서만 사용).
   expandSpecies?: boolean;
+  // 지정 시 그 지역(RegionCard.region) 인쇄본이 있는 Card 만 — 시세 검색 필터 탭(전체/KR/EN/JP)용.
+  region?: "EN" | "JP" | "KR";
 };
 
 /**
@@ -402,6 +406,10 @@ export async function searchCards(
   if (filters.type) where.types = { has: filters.type };
   if (filters.rarityCode) where.rarity = { code: filters.rarityCode };
   if (filters.cardPackId) where.id = { in: await lcIdsInPack(filters.cardPackId) };
+
+  // locales 관계를 건드리는 조건(이름/종 검색 + 지역 필터)은 where.AND 로 모아 독립적으로 AND.
+  //   (where.locales 를 두 번 대입하면 뒤의 대입이 앞을 덮어써 버리므로 분리)
+  const and: Prisma.CardWhereInput[] = [];
   if (q) {
     const nameMatch: Prisma.CardWhereInput = {
       locales: { some: { name: { contains: q, mode: "insensitive" } } },
@@ -409,12 +417,17 @@ export async function searchCards(
     // expandSpecies: 이름-글자(언어종속) 일치에 더해, 쿼리가 가리키는 종의 Card 전부를 합집합으로.
     //   예) "이상해씨"(한글) → species#1 → KR판 없는 JP/EN 단독 아트까지 포함.
     const speciesCardIds = filters.expandSpecies ? await cardIdsForQuerySpecies(q) : [];
-    if (speciesCardIds.length > 0) {
-      where.OR = [{ id: { in: speciesCardIds } }, nameMatch]; // pack/type 등 다른 where 와는 AND
-    } else {
-      where.locales = nameMatch.locales;
-    }
+    and.push(
+      speciesCardIds.length > 0
+        ? { OR: [{ id: { in: speciesCardIds } }, nameMatch] }
+        : nameMatch
+    );
   }
+  // region: 그 지역 인쇄본(RegionCard)이 있는 Card 만 — 필터 탭(전체/KR/EN/JP)용.
+  if (filters.region) {
+    and.push({ locales: { some: { region: filters.region } } });
+  }
+  if (and.length > 0) where.AND = and;
 
   const lcs = await prisma.card.findMany({
     where,
@@ -423,7 +436,7 @@ export async function searchCards(
       gameCard: { select: { supertype: true, hp: true } },
       texts: { where: { language: "ko" }, select: { name: true } },
       locales: {
-        include: { set: { select: { name: true, nameKo: true, nameJa: true, code: true, cardCount: true } }, rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true } } },
+        include: { set: { select: { name: true, nameKo: true, nameJa: true, code: true, cardCount: true, symbolUrl: true } }, rarity: { select: { code: true, nameKo: true, nameJa: true, nameEn: true } } },
       },
     },
     take: Math.min(filters.limit ?? 100, 200),
