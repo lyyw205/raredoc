@@ -29,10 +29,17 @@ export const VARIANT_KIND_LABEL: Record<string, string> = {
   staff: "스태프",
 };
 
-/** 변형 표시명 — standard 면 null(라벨 생략). 알려진 kind 는 한글, 그 외는 label→kind 폴백. */
-export function variantLabel(kind: string, label: string | null): string | null {
+/**
+ * 변형 표시명 — standard 면 null(라벨 생략).
+ * - 알려진 kind 는 한글(마스터볼 미러 등); slug 가 kind 와 다르면 하위구분을 뒤에 붙임("섀도우리스 · Red Cheeks").
+ * - 미등록 kind(stamp/error 등)는 label→slug→kind 폴백(구체 라벨 우선).
+ */
+export function variantLabel(kind: string, slug: string, label: string | null): string | null {
   if (kind === "standard") return null;
-  return VARIANT_KIND_LABEL[kind] ?? label ?? kind;
+  const known = VARIANT_KIND_LABEL[kind];
+  const isSub = !!slug && slug !== kind && slug !== "standard";
+  if (known) return isSub ? `${known} · ${label ?? slug}` : known;
+  return label ?? slug ?? kind;
 }
 
 export function formatPrice(amount: number | null, currency: string): string {

@@ -139,7 +139,7 @@ export async function getCardPrintPrices(regionCardId: string): Promise<PrintPri
     }
     let agg = vmap.get(vkey);
     if (!agg) {
-      agg = { kind, slug, label: variantLabel(kind, p.printVariant?.label ?? null), rows: [], seen: new Set() };
+      agg = { kind, slug, label: variantLabel(kind, slug, p.printVariant?.label ?? null), rows: [], seen: new Set() };
       vmap.set(vkey, agg);
     }
     if (agg.seen.has(ps.code)) continue; // 같은 변형 안에서 출처별 최신 1건
