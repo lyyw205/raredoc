@@ -43,6 +43,8 @@ type SetCfg = {
   // 시크릿 때문에 우리 cardCount≠denom 이라 복수모호일 때 유효세트로 좁혀 판별.
   denomSet?: Record<number, string | string[]>;
   collapseStamps?: boolean; // "(#N Stamped)" 덱슬롯 SKU 변형을 distinct (이름,번호)로 병합(Battle Academy)
+  // 자동해석 실패 카드 명시연결: tcgcsv productId(문자열) → 원본 RegionCard id(이미지/이름확정). WCD 잔여 등.
+  overrides?: Record<string, string>;
 };
 const SETS: SetCfg[] = [
   { setId: "ppp", name: "Professor Program Promos", series: "Promo", code: "PPP", release: "2004-01-01", packType: "promo", group: 2332, orphanEnergyYears: ["2023", "2024"] },
@@ -76,6 +78,15 @@ const SETS: SetCfg[] = [
       145: "en-tcg-sm2", 168: "en-tcg-sm7", 70: "en-tcg-sm75", 196: "en-tcg-swsh11",
       198: ["sv1", "en-tcg-swsh6"], 189: ["en-tcg-swsh10", "en-tcg-swsh3"],
       195: "en-tcg-swsh12", 64: "sv6pt5", 78: "en-tcg-pgo",
+    },
+    // 자동해석 실패 6건 명시연결(이미지/이름확정): Piplup·Sableye(이미지), 에너지약어·RC·SWSH154.
+    overrides: {
+      "479803": "pop6-15",              // Piplup 15/17 (이미지=pop6)
+      "479818": "en-tcg-ex14-10",       // Sableye 10/100 (이미지=ex14 Crystal Guardians)
+      "480823": "en-tcg-bw6-118",       // Blend Energy WLFM = WaterLightningFightingMetal
+      "482031": "en-tcg-sm5-138",       // Unit Energy LPM = LightningPsychicMetal
+      "482032": "en-tcg-g1-RC11",       // Wobbuffet RC11 (Generations Radiant Collection)
+      "542073": "en-tcg-swshp-SWSH154", // Dragonite V 154 = SWSH154
     } },
   { setId: "pp", name: "Prize Pack Series Cards", series: "Promo", code: "PPS", release: "2022-11-30", packType: "promo", group: 22880, orphanEnergyYears: [], collapseStamps: true,
     denomSet: {
@@ -246,6 +257,14 @@ async function collectSet(cfg: SetCfg, apply: boolean, allowUnresolved = false) 
     if (!pp.numField.trim()) { skipped.push(pp); continue; }
     // 기본에너지 덱필러(Battle Academy 등 collapseStamps 세트) 스킵 — 재판 카탈로그 대상 아님.
     if (cfg.collapseStamps && /^basic\s+.+\s+energy$/i.test(pp.cleanName)) { skipped.push(pp); continue; }
+    // 명시 override(자동해석 실패분 이미지/이름확정): productId → 원본 RegionCard id.
+    const ovId = cfg.overrides?.[String(pp.productId)];
+    if (ovId) {
+      const tgt = await prisma.regionCard.findUnique({ where: { id: ovId }, select: { setId: true, number: true, name: true, cardId: true } });
+      if (!tgt) { unresolved.push({ pp, reason: `override 대상 ${ovId} 없음`, cands: [] }); continue; }
+      linked.push({ pp, cardId: tgt.cardId, via: `override→${tgt.setId} ${tgt.number} "${tgt.name}"`, srcSetId: tgt.setId, fullNum: pp.fullNum, num: pp.num });
+      continue;
+    }
     // orphan 모드: 재판 해석 없이 전부 신규 Card 로.
     if (cfg.mode === "orphan") { orphanCards.push(pp); continue; }
     if (pp.denom == null && BASIC_ENERGY.test(pp.cleanName) && pp.year != null && cfg.orphanEnergyYears.includes(pp.year)) {
