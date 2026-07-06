@@ -39,8 +39,9 @@ type SetCfg = {
   orphanHp?: number | null;    // orphan 모드 포켓몬 HP(균일 HP 세트)
   orphanSubtypes?: string[];   // orphan 모드 포켓몬 subtypes(예: ["Basic"])
   orphanIdBy?: "number" | "name"; // orphan id 기준. number(기본)=번호 / name=이름슬러그(번호중복·공백 세트)
-  // 분모(본편장수) → 원본세트 id. 시크릿 때문에 우리 cardCount≠denom 이라 복수모호일 때 명시 판별.
-  denomSet?: Record<number, string>;
+  // 분모(본편장수) → 원본세트 id(또는 여러 세트: 같은 본편장수 세트가 둘 이상일 때 [swsh10, swsh3]).
+  // 시크릿 때문에 우리 cardCount≠denom 이라 복수모호일 때 유효세트로 좁혀 판별.
+  denomSet?: Record<number, string | string[]>;
   collapseStamps?: boolean; // "(#N Stamped)" 덱슬롯 SKU 변형을 distinct (이름,번호)로 병합(Battle Academy)
 };
 const SETS: SetCfg[] = [
@@ -64,6 +65,16 @@ const SETS: SetCfg[] = [
   // KWBP(Kids' WB! Poké Card Creator, 2004): 고유 5장(1/5~5/5) — 재판 아님. tcgcollector 교차검증(set 11115).
   //   전부 Basic 포켓몬 60HP(웹 확인). 재판 리졸버 억지매칭 방지 위해 orphan 모드.
   { setId: "kwbp", name: "Kids WB Promos", series: "Promo", code: "KWBP", release: "2004-07-02", packType: "promo", group: 2214, orphanEnergyYears: [], mode: "orphan", orphanHp: 60, orphanSubtypes: ["Basic"] },
+  // Prize Pack Series(Play! Pokémon 프라이즈, 2022~): 대형 재판 버킷. base+Cosmos Holo 변형 병합.
+  { setId: "pp", name: "Prize Pack Series Cards", series: "Promo", code: "PPS", release: "2022-11-30", packType: "promo", group: 22880, orphanEnergyYears: [], collapseStamps: true,
+    denomSet: {
+      172: "en-tcg-swsh9", 198: ["sv1", "en-tcg-swsh6"], 132: "en-tcg-me1",
+      189: ["en-tcg-swsh10", "en-tcg-swsh3"], 193: "sv2", 182: ["sv4", "sv10"],
+      203: "en-tcg-swsh7", 167: "sv6", 131: "sv8pt5", 94: "en-tcg-me2",
+      142: "sv7", 191: "sv8", 163: "en-tcg-swsh5", 195: "en-tcg-swsh12",
+      196: "en-tcg-swsh11", 197: "sv3", 159: "sv9", 88: "en-tcg-me3",
+      185: "en-tcg-swsh4", 73: "en-tcg-swsh35", 86: ["rsv10pt5", "zsv10pt5"],
+    } },
 ];
 
 type Prod = { productId: number; name: string; imageUrl?: string; extendedData?: { name: string; value: string }[] };
@@ -79,6 +90,8 @@ const ext = (p: Prod, k: string) => p.extendedData?.find((e) => e.name === k)?.v
 const norm = (s: string) => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
 const slug = (s: string) => (s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const BASIC_ENERGY = /^(grass|fire|water|lightning|psychic|fighting|darkness|metal|fairy|dragon)\s+energy$/i;
+// 이 로더가 만든 재판/특수 버킷 세트들 — 재판 해석 후보에서 제외(원본세트에만 연결).
+const BUCKET_SETS = ["ppp", "ccp", "fpp", "kwbp", "pwcp", "tt2022", "tt2023", "tt2024", "ba2020", "ba2022", "ba2024", "pp", "mcd23", "mcd24", "tk-sm-l", "tk-sm-r"];
 
 function parseProd(p: Prod, deckStrip = false): Parsed {
   const raw = p.name;
@@ -94,6 +107,8 @@ function parseProd(p: Prod, deckStrip = false): Parsed {
   let clean = raw.replace(/\[staff\]/i, "").trim();
   // "(#1 Charizard Stamped)"·"(Mewtwo Stamped)" 같은 덱슬롯 스탬프 SKU 표기 제거.
   clean = clean.replace(/\s*\(#?\s*\d*\s*[A-Za-z]+\s+stamped\)\s*$/i, "").trim();
+  // 포일 descriptor 제거(Cosmos Holo 등) — 같은 카드의 변형(Prize Pack 등). 항상 안전(카드명 아님).
+  clean = clean.replace(/\s*\((cosmos holo|reverse holo|non-holo|holo)\)\s*$/i, "").trim();
   // BA2024식 덱슬롯 접미 "- Pikachu 1"·"- Armarouge 13"·"- Darkrai Deck"(collapseStamps 세트만).
   if (deckStrip) clean = clean.replace(/\s*-\s*[A-Za-z][A-Za-z' ]*?(\s+\d+|\s+Deck)\s*$/i, "").trim();
   clean = clean.replace(/\((\d{4}(?:-\d{4})?)\)\s*$/, "").trim();
@@ -124,12 +139,12 @@ function parseProd(p: Prod, deckStrip = false): Parsed {
   return { productId: p.productId, rawName: raw, cleanName: clean, numField, fullNum, num, denom, letterPrefix, year, fieldNum: pf.num, fieldDenom: pf.denom, isStaff, cardType, image, discrepancy };
 }
 
-async function resolveReprint(pp: Parsed, selfSetId: string, denomSet?: Record<number, string>) {
+async function resolveReprint(pp: Parsed, selfSetId: string, denomSet?: Record<number, string | string[]>) {
   const nClean = norm(pp.cleanName);
   // 문자접두 번호(DP16·SWSH167): numberInt 매칭 불가 → 번호문자열 정확 + 이름으로 매칭.
   if (pp.letterPrefix) {
     const byStr = await prisma.regionCard.findMany({
-      where: { region: "EN", number: pp.numField, name: { contains: pp.cleanName, mode: "insensitive" }, setId: { not: selfSetId } },
+      where: { region: "EN", number: pp.numField, name: { contains: pp.cleanName, mode: "insensitive" }, setId: { notIn: [selfSetId, ...BUCKET_SETS] } },
       select: { id: true, name: true, number: true, setId: true, cardId: true, set: { select: { cardCount: true, name: true } } },
     });
     if (byStr.length === 1) return { ok: true as const, pick: byStr[0] };
@@ -149,9 +164,9 @@ async function resolveReprint(pp: Parsed, selfSetId: string, denomSet?: Record<n
 }
 
 // numberInt + 이름 + (denomSet/cardCount) 로 후보 확정. 실패 시 {ok:false}.
-async function tryNumeric(num: number, denom: number | null, nClean: string, cleanName: string, selfSetId: string, denomSet?: Record<number, string>) {
+async function tryNumeric(num: number, denom: number | null, nClean: string, cleanName: string, selfSetId: string, denomSet?: Record<number, string | string[]>) {
   const cands = await prisma.regionCard.findMany({
-    where: { region: "EN", numberInt: num, setId: { not: selfSetId } },
+    where: { region: "EN", numberInt: num, setId: { notIn: [selfSetId, ...BUCKET_SETS] } },
     select: { id: true, name: true, number: true, setId: true, cardId: true, set: { select: { cardCount: true, name: true } } },
   });
   const pool = cands.filter((c) => {
@@ -160,11 +175,16 @@ async function tryNumeric(num: number, denom: number | null, nClean: string, cle
   });
   if (pool.length === 0) return { ok: false as const, reason: `이름+번호 매칭 0 (num=${num}, "${cleanName}")`, cands: cands.map((c) => `${c.setId} ${c.number} ${c.name}`) };
   if (pool.length === 1) return { ok: true as const, pick: pool[0] };
-  // 명시 분모→세트 매핑 우선(시크릿으로 cardCount≠denom 인 경우).
+  // 명시 분모→유효세트 매핑 우선(시크릿으로 cardCount≠denom 인 경우). 다중값 지원.
   if (denom != null && denomSet?.[denom]) {
-    const byMap = pool.filter((c) => c.setId === denomSet[denom]);
+    const allow = denomSet[denom];
+    const list = Array.isArray(allow) ? allow : [allow];
+    const byMap = pool.filter((c) => list.includes(c.setId));
     if (byMap.length === 1) return { ok: true as const, pick: byMap[0] };
   }
+  // 정확 이름매칭(V/VMAX/ex 접미 구분) — 유일하면 채택.
+  const exact = pool.filter((c) => norm(c.name) === nClean);
+  if (exact.length === 1) return { ok: true as const, pick: exact[0] };
   if (denom != null) {
     const byDenom = pool.filter((c) => c.set?.cardCount === denom);
     if (byDenom.length === 1) return { ok: true as const, pick: byDenom[0] };
