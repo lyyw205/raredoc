@@ -144,16 +144,21 @@ export async function upsertDailyPrice(
     condition?: string | null;
     gradingCompany?: string | null;
     grade?: number | null;
+    // 지정 시 그 SKU(PrintVariant, 호출자가 이미 만들어뒀다고 가정)에 기록. 미지정=standard(기존 동작 그대로).
+    printVariantId?: string;
   }
 ): Promise<boolean> {
   const amount =
     data.marketPrice ?? data.holofoil ?? data.normal ?? data.reverseHolo ?? data.firstEdition ?? null;
-  // standard PrintVariant 보장(FK) — 새 RegionCard도 시세 적재 시 SKU 자동 생성(멱등)
-  await prisma.printVariant.upsert({
-    where: { regionCardId_kind_slug: { regionCardId, kind: "standard", slug: "standard" } },
-    create: { id: `pv-${regionCardId}`, regionCardId, kind: "standard", slug: "standard" },
-    update: {},
-  });
+  const printVariantId = data.printVariantId ?? `pv-${regionCardId}`;
+  if (!data.printVariantId) {
+    // standard PrintVariant 보장(FK) — 새 RegionCard도 시세 적재 시 SKU 자동 생성(멱등)
+    await prisma.printVariant.upsert({
+      where: { regionCardId_kind_slug: { regionCardId, kind: "standard", slug: "standard" } },
+      create: { id: printVariantId, regionCardId, kind: "standard", slug: "standard" },
+      update: {},
+    });
+  }
   // 옛 와이드컬럼(normal/holofoil/...)은 amount 계산에만 쓰고 *저장하지 않는다*(스키마에서 제거됨).
   const enriched = {
     currency: data.currency,
@@ -163,11 +168,12 @@ export async function upsertDailyPrice(
     amount,
     conditionType: data.gradingCompany ? "graded" : "raw",
     priceKind: await priceKindFor(sourceId),
-    printVariantId: `pv-${regionCardId}`,
+    printVariantId,
   };
 
+  // 존재 조회 키 = printVariantId(=SKU) 기준 — 한 RegionCard의 여러 변형(SKU)이 서로 덮어쓰지 않도록.
   const existing = await prisma.price.findFirst({
-    where: { regionCardId, sourceId, recordedAt: { gte: today } },
+    where: { printVariantId, sourceId, recordedAt: { gte: today } },
     select: { id: true },
   });
   if (existing) {

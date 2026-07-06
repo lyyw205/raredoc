@@ -11,8 +11,13 @@ datasource db {
 // ⓐ 카드 정체성 코어
 //   Set(지역 발매판) → CardPack(논리 확장팩) / Card(언어중립 정체성) → RegionCard(지역 표시판)
 //   + CardText(언어 오버레이) · Species(종) · GameCard(게임 oracle)
-//   ※ 모델/테이블 rename 부채: Card→@@map("LogicalCard") · RegionCard→@@map("CardLocale") · CardPack→@@map("SetGroup").
-//     DB 컬럼은 @map 으로 옛 이름 보존(예: cardId @map("logicalCardId")) — 컬럼명 변경 금지(db push drop/recreate 위험).
+//   ※ model명 ↔ 물리테이블명 매핑(@@map — 의도된 안정 매핑, '부채' 아님. Prisma 표준 패턴):
+//       Card=LogicalCard · RegionCard=CardLocale · CardPack=SetGroup · CardSpecies=LogicalCardSpecies
+//     물리컬럼(@map): cardId=logicalCardId · cardPackId=setGroupId ·
+//       regionCardId=cardLocaleId(Price·ExternalIdMapping) / localeId(Trade·CollectionItem·RankingSnapshot) ← 두 철자 공존
+//     ▶ 규칙: Prisma 클라이언트는 model/필드명(prisma.card·regionCardId), raw SQL/psql 은 물리명("LogicalCard"·"cardLocaleId").
+//     ▶ 라이브 prod 대용량: Price·MarketStat·PrintVariant·ExternalIdMapping 등 6만+행 ("빈 클러스터" 아님).
+//       테이블/컬럼 개명은 db push 금지(rename 미감지 → DROP+CREATE = 데이터 손실). 반드시 수동 ALTER RENAME + scripts raw SQL 일괄교정.
 // ═════════════════════════════════════════════════════════════════════════════
 
 // 지역별 발매판(printing) 1행. region 으로 EN/JP/KR 구분, setGroupId 로 동일 확장팩 연결.
@@ -110,9 +115,8 @@ model CardPackLink {
 // rename 완료 모델: 과거 Card→RegionCard, 신규 모델→Card 전환이 적용된 결과물.
 model Card {
   id               String              @id @default(cuid())
-  // ★팩소속 직교화(P9): Card.cardPackId(@map setGroupId) 제거됨. 카드의 팩소속은 가변 스칼라 대신
+  // 팩소속 직교화: Card 는 cardPackId 를 갖지 않음(과거 컬럼 물리 DROP 완료). 카드의 팩소속은
   //   각 RegionCard 의 불변 물리관계 Set.cardPackId(앵커 JP>KR>EN)로 도출(queries.ts lcIdsInPack).
-  //   DB 컬럼 DROP 은 이 스키마 배포 後 ALTER TABLE "LogicalCard" DROP COLUMN "setGroupId".
   primarySetId     String? // JP 원조 세트(있으면)
   primarySet       Set?                @relation("LogicalCardPrimarySet", fields: [primarySetId], references: [id])
   primaryNumber    String? // 원조 번호
@@ -138,7 +142,7 @@ model Card {
   rarity           Rarity?             @relation(fields: [rarityId], references: [id])
   // ── 한국 유저 대상 한글 overlay — CardText 로 일원화 중 ──
   nameKo           String? // 한국 공식 이름 — 읽기는 CardText(ko) 우선·이 컬럼은 폴백. CardText 100% 커버 검증 후 제거 예정.
-  // ★attacksKo/abilitiesKo 제거됨(P9, CardText(ko) 무손실 이관·GATE PASS 후). DB 컬럼 DROP 은 이 스키마 배포 後 p9-drop-attacksko.
+  // (historical) attacksKo/abilitiesKo 는 CardText(ko)로 무손실 이관 후 물리 DROP 완료. 한글 게임텍스트는 CardText.
   locales          RegionCard[]
   texts            CardText[] // 언어별 표시 텍스트 오버레이. name은 이관·운용 중(CardText(ko) 우선), attacks/abilities는 이관 예정.
   collectionItems  CollectionItem[]    @relation("CollectionItemLogicalCard")
@@ -148,9 +152,9 @@ model Card {
   speciesLinks     CardSpecies[]       @relation("LogicalCardSpeciesLink") // 종(Species) N:M
   gameCardId       String? // 게임상 같은 카드(oracle) — 덱/메타 dedup 단위
   gameCard         GameCard?           @relation("LogicalCardGameCard", fields: [gameCardId], references: [id])
-  // 추가형 ArtCard(Slice 3, docs/migration §0′) — 같은 그림 그룹. additive·nullable·drop 가역.
+  // 같은-그림(아트) 그룹 키 — Card 가 곧 '한 그림'(P5 collapse 완료, 별도 ArtCard 테이블 없음).
   artFingerprint   String? // perceptual hash(pHash). build-art-groups 가 imageLarge 로 산출.
-  artCardId        String? // 같은 그림 그룹 대표 id(파생). cross-pack 형제·이미지·시세 dedup 단위(P5 전엔 FK 아님).
+  artCardId        String? // 같은 그림 그룹 대표 id(파생). cross-pack 형제·이미지·시세 dedup 단위. 일부 NULL(아트그룹 없음).
   createdAt        DateTime            @default(now())
   updatedAt        DateTime            @updatedAt
 
@@ -209,15 +213,16 @@ model RegionCard {
 
 // 마감/스탬프 변형 = 가격 매기는 SKU. RegionCard(=Print)의 자식. 기본 'standard' 1행.
 model PrintVariant {
-  id           String     @id @default(cuid())
-  regionCardId String // RegionCard.id (= Print)
-  kind         String // standard|reverse|masterball|pokeball|first_edition|shadowless|stamp|error
-  slug         String // 'standard' | 'stamp-worlds-2023' ... (kind 내 구분)
-  label        String?
-  regionCard   RegionCard @relation("RegionCardPrintVariant", fields: [regionCardId], references: [id], onDelete: Cascade)
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  prices       Price[]    @relation("PriceVariant")
+  id                 String              @id @default(cuid())
+  regionCardId       String // RegionCard.id (= Print)
+  kind               String // standard|reverse|masterball|pokeball|first_edition|shadowless|stamp|error
+  slug               String // 'standard' | 'stamp-worlds-2023' ... (kind 내 구분)
+  label              String?
+  regionCard         RegionCard          @relation("RegionCardPrintVariant", fields: [regionCardId], references: [id], onDelete: Cascade)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  prices             Price[]             @relation("PriceVariant")
+  externalIdMappings ExternalIdMapping[] @relation("ExternalIdMappingPrintVariant")
 
   @@unique([regionCardId, kind, slug]) // 결정적 자연키
   @@index([regionCardId])
@@ -376,6 +381,7 @@ model Rarity {
   @@index([canonicalCode])
 }
 
+// 시세 피드 레지스트리 — Price.sourceId 가 참조(가격 연산·통화·우선순위). ExternalSource(매핑·카탈로그)와 별개 테이블.
 model PriceSource {
   id              String   @id @default(cuid())
   code            String   @unique
@@ -391,27 +397,27 @@ model PriceSource {
 }
 
 model Price {
-  id             String       @id @default(cuid())
-  regionCardId   String       @map("cardLocaleId")
-  regionCard     RegionCard   @relation("PriceCardLocale", fields: [regionCardId], references: [id], onDelete: Cascade)
-  sourceId       String?
-  priceSource    PriceSource? @relation("PricePriceSource", fields: [sourceId], references: [id])
+  id              String         @id @default(cuid())
+  regionCardId    String         @map("cardLocaleId")
+  regionCard      RegionCard     @relation("PriceCardLocale", fields: [regionCardId], references: [id], onDelete: Cascade)
+  sourceId        String?
+  priceSource     PriceSource?   @relation("PricePriceSource", fields: [sourceId], references: [id])
   // ★옛 와이드 finish 컬럼(normal/holofoil/reverseHolo/firstEdition/marketPrice)은 amount 로 통합·제거됨.
   //   DB 물리 DROP 은 master 배포 後(expand-contract). 코드는 amount 단일값 사용.
-  currency       String       @default("USD")
-  usdToKrw       Float?
-  condition      String?
-  gradingCompany String? // = grader(PSA/BGS/CGC/BRG/TAG…)
-  grade          Int?
+  currency        String         @default("USD")
+  usdToKrw        Float?
+  condition       String?
+  gradingCompany  String? // = grader(PSA/BGS/CGC/BRG/TAG…)
+  grade           Int?
   // ── SKU 정규화(docs/plans/card-model-and-pricing-taxonomy.md) — expand 단계, additive ──
-  printVariantId  String?        // 단일카드 SKU(= PrintVariant). regionCardId 와 공존(점진 이관).
+  printVariantId  String? // 단일카드 SKU(= PrintVariant). regionCardId 와 공존(점진 이관).
   printVariant    PrintVariant?  @relation("PriceVariant", fields: [printVariantId], references: [id])
-  sealedProductId String?        // 실링 상품 시세(= SealedProduct). printVariantId 와 배타.
+  sealedProductId String? // 실링 상품 시세(= SealedProduct). printVariantId 와 배타.
   sealedProduct   SealedProduct? @relation("PriceSealed", fields: [sealedProductId], references: [id])
-  amount          Float?         // 단일 시세값(normal/holofoil/reverseHolo/firstEdition 통합). finish는 PrintVariant로.
-  priceKind       String?        // market|sell|buy|listing|sold (JP 販売/買取 분리)
-  conditionType   String?        // raw|graded|sealed (condition/gradingCompany+grade 와 함께)
-  recordedAt     DateTime     @default(now())
+  amount          Float? // 단일 시세값(normal/holofoil/reverseHolo/firstEdition 통합). finish는 PrintVariant로.
+  priceKind       String? // market|sell|buy|listing|sold (JP 販売/買取 분리)
+  conditionType   String? // raw|graded|sealed (condition/gradingCompany+grade 와 함께)
+  recordedAt      DateTime       @default(now())
 
   @@index([regionCardId], map: "Price_cardLocaleId_idx")
   @@index([recordedAt])
@@ -467,6 +473,7 @@ model MarketStat {
 //   - 같은 카드에 출처 N개 동시 매핑 OK (sourceId가 달라 unique 안 깨짐)
 // ═════════════════════════════════════════════════════════════════════════════
 
+// id-매핑 · 카탈로그 출처 레지스트리 — ExternalIdMapping.sourceId 가 참조(외부ID↔우리카드 크로스워크). PriceSource(가격 피드)와 별개 테이블.
 model ExternalSource {
   id        String              @id @default(cuid())
   code      String              @unique // "tcgcsv" | "pokemoncard_kr" | "tcgdex" | "poketrace" | "pokemontcg_io" ...
@@ -486,29 +493,33 @@ model ExternalSource {
 }
 
 model ExternalIdMapping {
-  id           String         @id @default(cuid())
-  sourceId     String
-  externalId   String // 사이트 쪽 식별자 (productId/CardNum/poketraceId/…)
-  // 매핑 대상 — 정확히 하나만 채움 (앱 레벨 검증)
-  regionCardId String?        @map("cardLocaleId")
-  cardId       String?        @map("logicalCardId")
-  setId        String?
-  // ★cardPackId(@map setGroupId) 제거됨 — 100% NULL·무참조(팩소속 직교화 P9). DB DROP 동반.
-  url          String?
-  verifiedAt   DateTime?
-  verifiedBy   String? // userId or "auto:scriptname"
-  confidence   Float          @default(1.0) // 0..1
-  notes        String?
-  source       ExternalSource @relation(fields: [sourceId], references: [id], onDelete: Cascade)
-  regionCard   RegionCard?    @relation("ExternalIdMappingLocale", fields: [regionCardId], references: [id], onDelete: Cascade)
-  card         Card?          @relation("ExternalIdMappingLogicalCard", fields: [cardId], references: [id], onDelete: Cascade)
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  id             String         @id @default(cuid())
+  sourceId       String
+  externalId     String // 사이트 쪽 식별자 (productId/CardNum/poketraceId/…)
+  // 매핑 대상: regionCardId 가 1차 키. cardId 는 비정규화 편의 사본(대부분 행이 둘 다 채움). setId 는 세트-수준 매핑용.
+  regionCardId   String?        @map("cardLocaleId")
+  cardId         String?        @map("logicalCardId")
+  setId          String?
+  // 마감/변형(SKU) 특정 — null이면 표준(standard). 예: tcgcsv의 "Master Ball Pattern" 상품처럼
+  //   같은 regionCardId를 가리키는 여러 외부 상품을 변형별로 구분해서 붙일 때 사용.
+  printVariantId String?
+  url            String?
+  verifiedAt     DateTime?
+  verifiedBy     String? // userId or "auto:scriptname"
+  confidence     Float          @default(1.0) // 0..1
+  notes          String?
+  source         ExternalSource @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  regionCard     RegionCard?    @relation("ExternalIdMappingLocale", fields: [regionCardId], references: [id], onDelete: Cascade)
+  card           Card?          @relation("ExternalIdMappingLogicalCard", fields: [cardId], references: [id], onDelete: Cascade)
+  printVariant   PrintVariant?  @relation("ExternalIdMappingPrintVariant", fields: [printVariantId], references: [id], onDelete: Cascade)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
 
   @@unique([sourceId, externalId])
   @@index([regionCardId], map: "ExternalIdMapping_cardLocaleId_idx")
   @@index([cardId], map: "ExternalIdMapping_logicalCardId_idx")
   @@index([setId])
+  @@index([printVariantId])
 }
 
 // ═════════════════════════════════════════════════════════════════════════════

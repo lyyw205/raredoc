@@ -79,9 +79,12 @@ export async function run(opts: EnOptions = {}): Promise<SyncResult> {
   const today = startOfUtcDay();
 
   for (const setId of setIds) {
+    // 우리 DB의 Set.id 는 "en-tcg-base1"처럼 접두사가 붙기도 하는데,
+    // pokemontcg.io 의 set.id 는 접두사 없는 원본("base1")이라 그대로 넘기면 0건이 된다.
+    const pmtcgSetId = setId.replace(/^en-tcg-/, "");
     let cards: TCGCard[] = [];
     try {
-      cards = await getCardsBySet(setId);
+      cards = await getCardsBySet(pmtcgSetId);
     } catch (e) {
       // getCardsBySet 자체에 재시도가 없으므로 여기서 경고만 — 오케스트레이터가 전체 재시도
       r.warnings.push(`[${setId}] fetch 실패: ${(e as Error).message}`);
@@ -96,13 +99,32 @@ export async function run(opts: EnOptions = {}): Promise<SyncResult> {
 
     const locales = await prisma.regionCard.findMany({
       where: { setId, region: "EN" },
-      select: { id: true },
+      select: { id: true, numberInt: true },
     });
-    const known = new Set(locales.map((l) => l.id));
+    // RegionCard.id 도 "en-tcg-base1-1"처럼 접두사가 붙어있어 pokemontcg.io card.id("base1-1")와
+    // 그대로는 안 맞는다 — 접두사 벗긴 값을 키로 조회해 원래 RegionCard.id 로 되돌린다.
+    const byBareId = new Map(locales.map((l) => [l.id.replace(/^en-tcg-/, ""), l.id]));
+    // 세트별로 번호 0패딩 자릿수가 달라("en-tcg-bw2-001" vs pokemontcg.io "bw2-1") id 문자열이
+    // 안 맞는 경우가 있다 — numberInt 로 폴백(그 세트 안에서 유일할 때만, 추측 매칭 금지).
+    const numberIntCounts = new Map<number, number>();
+    for (const l of locales) {
+      if (l.numberInt == null) continue;
+      numberIntCounts.set(l.numberInt, (numberIntCounts.get(l.numberInt) ?? 0) + 1);
+    }
+    const byNumberInt = new Map(
+      locales
+        .filter((l) => l.numberInt != null && numberIntCounts.get(l.numberInt) === 1)
+        .map((l) => [l.numberInt as number, l.id])
+    );
 
     let setWritten = 0;
     for (const card of cards) {
-      if (!known.has(card.id)) {
+      let regionCardId = byBareId.get(card.id);
+      if (!regionCardId) {
+        const n = parseInt(card.number, 10);
+        if (!Number.isNaN(n)) regionCardId = byNumberInt.get(n);
+      }
+      if (!regionCardId) {
         r.unmatched++;
         continue; // 추측 매칭 금지
       }
@@ -115,7 +137,7 @@ export async function run(opts: EnOptions = {}): Promise<SyncResult> {
 
       const tp = pickTcgplayer(tcgPrices);
       if (tp) {
-        const wrote = await upsertDailyPrice(card.id, sid.tcgplayer, today, {
+        const wrote = await upsertDailyPrice(regionCardId, sid.tcgplayer, today, {
           normal: tp.normal ?? null,
           holofoil: tp.holofoil ?? null,
           reverseHolo: tp.reverseHolo ?? null,
@@ -129,7 +151,7 @@ export async function run(opts: EnOptions = {}): Promise<SyncResult> {
       const cmVal =
         cmPrices?.averageSellPrice ?? cmPrices?.trendPrice ?? cmPrices?.avg7 ?? cmPrices?.avg30;
       if (cmPrices && cmVal !== undefined) {
-        const wrote = await upsertDailyPrice(card.id, sid.cardmarket, today, {
+        const wrote = await upsertDailyPrice(regionCardId, sid.cardmarket, today, {
           marketPrice: cmVal,
           currency: "EUR",
         });

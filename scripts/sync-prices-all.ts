@@ -22,9 +22,10 @@ import dns from "node:dns";
 dns.setDefaultResultOrder("ipv4first");
 import { prisma } from "@/lib/prisma";
 import { type SyncResult, sleep } from "./lib/price-sync-lib";
-import { run as runEn } from "./sync-prices-pokemontcg";
+import { run as runTcgcsv } from "./sync-prices-tcgcsv";
 import { run as runYuyu } from "./sync-prices-yuyu";
-import { run as runPoketrace } from "./sync-prices-poketrace";
+// import { run as runEn } from "./sync-prices-pokemontcg"; // 보조/백업(2026-07-02~ tcgcsv 가 메인) — 재도입 시 주석 해제
+// import { run as runPoketrace } from "./sync-prices-poketrace"; // 미사용(2026-07-02) — 재도입 시 주석 해제
 
 type Job = {
   key: string; // --only 필터용
@@ -42,9 +43,10 @@ function ts() {
 }
 
 const ALL_JOBS: Job[] = [
-  { key: "en", label: "EN pokemontcg.io", run: () => runEn({ limit: enLimit }) },
+  { key: "en", label: "EN tcgcsv", run: () => runTcgcsv({ cat: 3 }) },
   { key: "jp-yuyu", label: "JP yuyu-tei", run: () => runYuyu({}) },
-  { key: "en-poketrace", label: "EN PokeTrace", run: () => runPoketrace({ limit: enLimit }) },
+  // { key: "en-pmtcg", label: "EN pokemontcg.io", run: () => runEn({ limit: enLimit }) }, // 보조/백업(2026-07-02)
+  // { key: "en-poketrace", label: "EN PokeTrace", run: () => runPoketrace({ limit: enLimit }) }, // 미사용(2026-07-02)
 ];
 
 /** 출처 1개를 ok 될 때까지(또는 횟수 소진까지) 재시도. */
