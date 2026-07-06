@@ -92,6 +92,13 @@ const SETS: SetCfg[] = [
       "542073": "en-tcg-swshp-SWSH154", // Dragonite V 154 = SWSH154
     } },
   // MCAP: 잡화 재판 버킷(다양한 프로모 변형). 재판 해석 + 변형 병합. 미해결(고유 프로모)은 --allow-unresolved.
+  // BLE: 블리스터 전용 프로모(Cosmos Holo·Dragon Vault 변형). 재판 버킷.
+  { setId: "ble", name: "Blister Exclusives", series: "Promo", code: "BLE", release: "2012-01-01", packType: "promo", group: 2289, orphanEnergyYears: [], collapseStamps: true,
+    denomSet: {
+      99: "en-tcg-bw4", 114: "en-tcg-bw1", 214: ["en-tcg-sm8", "en-tcg-sm10"],
+      122: "en-tcg-xy9", 119: "en-tcg-xy4", 202: "en-tcg-swsh1", 124: "en-tcg-bw6",
+      149: ["en-tcg-sm1", "en-tcg-bw7"], 94: "en-tcg-me2",
+    } },
   { setId: "mcap", name: "Miscellaneous Cards & Products", series: "Promo", code: "MCAP", release: "1999-01-01", packType: "promo", group: 2374, orphanEnergyYears: [], collapseStamps: true,
     denomSet: {
       165: "sv3pt5", 193: "sv2", 83: "en-tcg-g1", 160: "en-tcg-xy5", 185: "en-tcg-swsh4",
