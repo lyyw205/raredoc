@@ -1,4 +1,8 @@
 /**
+ * ⚠️ 사후정정(scripts/fix-mmb-era-date.ts): 아래 cardPack=mega-decks·release=2025-08-07·series=메가신포니아 는 오분류.
+ *   실제 = XY 시대(xy-decks/XY-SP), 2015-08-07 (XY M마스터덱빌드BOX, "M"=XY 시대 메가진화·2025 MEGA 블록 아님). DB 교정 완료.
+ *   ※ 존재시 스킵 가드라 재실행해도 DB 안 되돌림. 이미지 R2 경로는 mega-decks/ 그대로 유지.
+ *
  * マスターデッキビルドBOX MEGA (MMBp パワースタイル / MMBs スピードスタイル) 신규 수집.
  *   메가신화 시대 구축덱 박스 2종(각 49장) — 우리 DB 미수집. cardPack = mega-decks(MEGA-SP).
  *
