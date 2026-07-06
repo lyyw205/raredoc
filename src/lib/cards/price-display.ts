@@ -16,6 +16,25 @@ export const PRICE_SOURCE_META: Record<string, { flag: string; name?: string; na
   bunjang:       { flag: "🇰🇷", name: "번개장터",                            sub: "국내 · 중고" },
 };
 
+// PrintVariant.kind → 표시 라벨(한글). standard 는 라벨 없음(일반판 = 라벨 생략).
+// stamp/error 등 세부가 있는 종류는 PrintVariant.label(예: "Staff", "Worlds 2023")을 우선.
+export const VARIANT_KIND_LABEL: Record<string, string> = {
+  reverse: "리버스 홀로",
+  masterball: "마스터볼 미러",
+  pokeball: "포켓볼 미러",
+  first_edition: "1st Edition",
+  shadowless: "섀도우리스",
+  pokemon_center: "포켓몬센터",
+  prerelease: "프리릴리스",
+  staff: "스태프",
+};
+
+/** 변형 표시명 — standard 면 null(라벨 생략). 알려진 kind 는 한글, 그 외는 label→kind 폴백. */
+export function variantLabel(kind: string, label: string | null): string | null {
+  if (kind === "standard") return null;
+  return VARIANT_KIND_LABEL[kind] ?? label ?? kind;
+}
+
 export function formatPrice(amount: number | null, currency: string): string {
   if (amount == null) return "—";
   switch (currency) {

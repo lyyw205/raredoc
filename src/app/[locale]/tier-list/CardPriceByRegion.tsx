@@ -87,13 +87,23 @@ export function CardPriceByRegion({ regionCardId }: { regionCardId: string }) {
                         #{pk.number}
                       </span>
                     </div>
-                    <div>
-                      {pk.prices.map((r, idx) => {
+                    <div className="flex flex-col gap-2">
+                      {pk.variants.map((v) => {
+                        // 일반판 단독이면 변형 라벨 생략(기존 표시와 동일). 실변형이 있으면 라벨로 구분.
+                        const showLabel = !(pk.variants.length === 1 && v.kind === "standard");
+                        return (
+                          <div key={`${v.kind}-${v.slug}`}>
+                            {showLabel && (
+                              <div className="mb-0.5 text-toss-micro font-semibold text-toss-text-tertiary">
+                                {v.label ?? "일반판"}
+                              </div>
+                            )}
+                            {v.prices.map((r, idx) => {
                         const meta = PRICE_SOURCE_META[r.sourceCode] ?? { flag: "🏷️", sub: r.region };
                         return (
                           <DataRow
                             key={r.sourceCode}
-                            divider={idx < pk.prices.length - 1}
+                            divider={idx < v.prices.length - 1}
                             label={
                               <span className="flex items-center gap-2">
                                 <span className="text-base">{meta.flag}</span>
@@ -117,6 +127,9 @@ export function CardPriceByRegion({ regionCardId }: { regionCardId: string }) {
                               </span>
                             }
                           />
+                        );
+                      })}
+                          </div>
                         );
                       })}
                     </div>
