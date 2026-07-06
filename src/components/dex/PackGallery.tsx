@@ -42,7 +42,6 @@ function PackTile({ pack, onOpen }: { pack: RegionPack; onOpen: (setId: string) 
           </span>
         )}
         {pack.name}
-        {pack.mergeOf && pack.mergeOf > 1 ? " (합본)" : ""}
       </span>
       {/* 출시일 YY.MM · 카드장수 */}
       <span className="text-toss-micro text-toss-text-quaternary toss-numeric">

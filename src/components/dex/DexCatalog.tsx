@@ -13,7 +13,6 @@ import { loadRegionCardsPage } from "@/lib/actions/loadRegionCardsPage";
 import { matchesSearch } from "@/lib/search";
 import type { Region, RegionPack, RegionFilterMeta } from "@/lib/cards/dex-region";
 import { REGION_ORDER } from "@/lib/cards/card-fields";
-import { PACK_TYPE_LABEL, PACK_TYPE_CHIP, SIDEBAR_PRIMARY, type PackType } from "@/lib/cards/set-meta";
 import { categoryTier } from "@/lib/cards/rarity";
 import { RARITY_CAT_ABBR } from "@/lib/cards/rarity-display";
 import { RarityComposition } from "@/components/cards/RarityComposition";
@@ -938,12 +937,6 @@ function PackNav({
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={logoUrl} alt="" className="h-4 w-8 object-contain shrink-0" loading="lazy" decoding="async" onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }} />
                 <span className="flex-1 min-w-0 truncate text-toss-caption font-medium">{p.name}</span>
-                {p.packType && !SIDEBAR_PRIMARY.has(p.packType as PackType) ? (
-                  <span className="shrink-0 rounded-toss-sm bg-toss-bg-muted px-1 text-toss-tiny font-medium text-toss-text-tertiary">{PACK_TYPE_LABEL[p.packType as PackType]}</span>
-                ) : null}
-                {p.mergeOf && p.mergeOf > 1 ? (
-                  <span className="shrink-0 rounded-toss-sm bg-toss-bg-muted px-1 text-toss-tiny font-semibold text-toss-text-quaternary">합본</span>
-                ) : null}
                 <span className="shrink-0 text-toss-tiny text-toss-text-quaternary toss-numeric">{p.cardCount}</span>
               </button>
             </Fragment>
@@ -1334,7 +1327,7 @@ export function DexCatalog({ regionPacks, locale, initialRegion, initialPack }: 
                   )}
                 </div>
 
-                {/* 메타 행: 시리즈 · 팩타입 · 합본 · 발매일 · 수록종 · 지역 · (보유) */}
+                {/* 메타 행: 시리즈 · 발매일 · 수록종 · 지역 · (보유) */}
                 <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5">
                   {!isAllMode && (
                     activePack.isEtc ? (
@@ -1349,14 +1342,6 @@ export function DexCatalog({ regionPacks, locale, initialRegion, initialPack }: 
                       );
                     })()
                   )}
-                  {!isAllMode && activePack.packType && (
-                    <span className={`inline-flex items-center rounded-toss-sm px-2 py-0.5 text-toss-micro font-semibold ${PACK_TYPE_CHIP[activePack.packType as PackType] ?? "bg-toss-bg-muted text-toss-text-secondary"}`}>
-                      {PACK_TYPE_LABEL[activePack.packType as PackType] ?? activePack.packType}
-                    </span>
-                  )}
-                  {!isAllMode && activePack.mergeOf && activePack.mergeOf > 1 ? (
-                    <Chip variant="tag" size="sm">합본 ({activePack.mergeOf})</Chip>
-                  ) : null}
                   {!isAllMode && activePack.releaseDate && (
                     <span className="inline-flex items-center gap-1 text-toss-caption text-toss-text-tertiary"><Calendar className="h-3.5 w-3.5 shrink-0" /><span className="toss-numeric">{activePack.releaseDate}</span></span>
                   )}

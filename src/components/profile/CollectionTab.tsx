@@ -5,7 +5,6 @@ import { useParams } from "next/navigation";
 import { Search, Settings, Calendar } from "lucide-react";
 import { Card, Chip, Modal, SegmentedControl, Switch } from "@/components/toss";
 import { eraLabel, eraParts } from "@/lib/cards/eras";
-import { PACK_TYPE_LABEL, PACK_TYPE_CHIP, SIDEBAR_PRIMARY, type PackType } from "@/lib/cards/set-meta";
 import { matchesSearch } from "@/lib/search";
 import { RarityComposition, type RarityStatEntry } from "@/components/cards/RarityComposition";
 import {
@@ -373,12 +372,6 @@ export function CollectionTab({
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img src={logoUrl} alt="" className="h-4 w-8 object-contain shrink-0" loading="lazy" decoding="async" onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }} />
                             <span className={`flex-1 min-w-0 truncate text-toss-caption font-medium leading-4 ${active ? "text-toss-brand" : "text-toss-text-secondary"}`}>{p.name}</span>
-                            {p.packType && !SIDEBAR_PRIMARY.has(p.packType as PackType) ? (
-                              <span className="shrink-0 rounded-toss-sm bg-toss-bg-muted px-1 text-toss-tiny font-medium text-toss-text-tertiary">{PACK_TYPE_LABEL[p.packType as PackType]}</span>
-                            ) : null}
-                            {p.mergeOf && p.mergeOf > 1 ? (
-                              <span className="shrink-0 rounded-toss-sm bg-toss-bg-muted px-1 text-toss-tiny font-semibold text-toss-text-quaternary">합본</span>
-                            ) : null}
                           </div>
                           <div className="mt-1.5">
                             <ProgressBar value={pct} />
@@ -429,7 +422,7 @@ export function CollectionTab({
                           )}
                         </div>
 
-                        {/* 메타 행: (팩) 시리즈·팩타입·합본·발매일 / (전체) N장 보유 + 추정가치(공통, 컬렉션 전용) */}
+                        {/* 메타 행: (팩) 시리즈·발매일 / (전체) N장 보유 + 추정가치(공통, 컬렉션 전용) */}
                         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5">
                           {!isAll && packMeta && (packMeta.isEtc ? (
                             <Chip variant="tag" size="sm">기타</Chip>
@@ -442,14 +435,6 @@ export function CollectionTab({
                               </Chip>
                             );
                           })())}
-                          {!isAll && packMeta?.packType && (
-                            <span className={`inline-flex items-center rounded-toss-sm px-2 py-0.5 text-toss-micro font-semibold ${PACK_TYPE_CHIP[packMeta.packType as PackType] ?? "bg-toss-bg-muted text-toss-text-secondary"}`}>
-                              {PACK_TYPE_LABEL[packMeta.packType as PackType] ?? packMeta.packType}
-                            </span>
-                          )}
-                          {!isAll && packMeta?.mergeOf && packMeta.mergeOf > 1 ? (
-                            <Chip variant="tag" size="sm">합본 ({packMeta.mergeOf})</Chip>
-                          ) : null}
                           {!isAll && packMeta?.releaseDate && (
                             <span className="inline-flex items-center gap-1 text-toss-caption text-toss-text-tertiary"><Calendar className="h-3.5 w-3.5 shrink-0" /><span className="toss-numeric">{packMeta.releaseDate}</span></span>
                           )}
