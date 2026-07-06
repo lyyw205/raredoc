@@ -93,6 +93,11 @@ const SETS: SetCfg[] = [
     } },
   // MCAP: 잡화 재판 버킷(다양한 프로모 변형). 재판 해석 + 변형 병합. 미해결(고유 프로모)은 --allow-unresolved.
   // BLE: 블리스터 전용 프로모(Cosmos Holo·Dragon Vault 변형). 재판 버킷.
+  // SMK2: SM Trainer Kit(Alolan Sandslash & Ninetales) 재판. 덱슬롯"(N)"·Half-Deck 표기 병합.
+  { setId: "smk2", name: "SM Trainer Kit: Alolan Sandslash & Alolan Ninetales", series: "Sun & Moon", code: "SMK2", release: "2018-03-23", packType: "deck", group: 2208, orphanEnergyYears: [], collapseStamps: true,
+    denomSet: { 111: "en-tcg-sm4", 149: "en-tcg-sm1" },
+    // Jigglypuff: tcgcsv Number "21/111" 오류(킷슬롯 22 오입력) — 실제 Crimson Invasion #71/111.
+    overrides: { "168249": "en-tcg-sm4-071" } },
   { setId: "ble", name: "Blister Exclusives", series: "Promo", code: "BLE", release: "2012-01-01", packType: "promo", group: 2289, orphanEnergyYears: [], collapseStamps: true,
     denomSet: {
       99: "en-tcg-bw4", 114: "en-tcg-bw1", 214: ["en-tcg-sm8", "en-tcg-sm10"],
@@ -135,7 +140,7 @@ const norm = (s: string) => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").t
 const slug = (s: string) => (s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const BASIC_ENERGY = /^(grass|fire|water|lightning|psychic|fighting|darkness|metal|fairy|dragon)\s+energy$/i;
 // 이 로더가 만든 재판/특수 버킷 세트들 — 재판 해석 후보에서 제외(원본세트에만 연결).
-const BUCKET_SETS = ["ppp", "ccp", "fpp", "kwbp", "pwcp", "tt2022", "tt2023", "tt2024", "ba2020", "ba2022", "ba2024", "pp", "wcd", "sample", "30c", "mcap", "ble", "mcd23", "mcd24", "tk-sm-l", "tk-sm-r"];
+const BUCKET_SETS = ["ppp", "ccp", "fpp", "kwbp", "pwcp", "tt2022", "tt2023", "tt2024", "ba2020", "ba2022", "ba2024", "pp", "wcd", "sample", "30c", "mcap", "ble", "smk2", "mcd23", "mcd24", "tk-sm-l", "tk-sm-r"];
 
 function parseProd(p: Prod, deckStrip = false): Parsed {
   const raw = p.name;
