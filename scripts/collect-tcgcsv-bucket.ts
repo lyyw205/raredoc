@@ -91,6 +91,18 @@ const SETS: SetCfg[] = [
       "482032": "en-tcg-g1-RC11",       // Wobbuffet RC11 (Generations Radiant Collection)
       "542073": "en-tcg-swshp-SWSH154", // Dragonite V 154 = SWSH154
     } },
+  // MCAP: 잡화 재판 버킷(다양한 프로모 변형). 재판 해석 + 변형 병합. 미해결(고유 프로모)은 --allow-unresolved.
+  { setId: "mcap", name: "Miscellaneous Cards & Products", series: "Promo", code: "MCAP", release: "1999-01-01", packType: "promo", group: 2374, orphanEnergyYears: [], collapseStamps: true,
+    denomSet: {
+      165: "sv3pt5", 193: "sv2", 83: "en-tcg-g1", 160: "en-tcg-xy5", 185: "en-tcg-swsh4",
+      86: ["en-tcg-me4", "zsv10pt5", "rsv10pt5"], 94: "en-tcg-me2", 182: ["sv4", "sv10"],
+      142: "sv7", 131: "sv8pt5", 132: "en-tcg-me1", 147: "en-tcg-sm3",
+      73: ["en-tcg-pgo", "en-tcg-swsh35"], 172: "en-tcg-swsh9", 198: ["sv1", "en-tcg-swsh6"],
+      197: "sv3", 191: "sv8", 91: "sv4pt5", 217: "en-tcg-me1",
+      108: "en-tcg-xy12", 202: "en-tcg-swsh1", 116: "en-tcg-swsh45", 214: "en-tcg-sm8",
+      149: ["en-tcg-sm1", "en-tcg-bw7"], 163: "en-tcg-sm5", 78: "en-tcg-pgo",
+      195: "en-tcg-swsh12", 203: "en-tcg-swsh7", 167: "sv6", 159: "sv9",
+    } },
   { setId: "pp", name: "Prize Pack Series Cards", series: "Promo", code: "PPS", release: "2022-11-30", packType: "promo", group: 22880, orphanEnergyYears: [], collapseStamps: true,
     denomSet: {
       172: "en-tcg-swsh9", 198: ["sv1", "en-tcg-swsh6"], 132: "en-tcg-me1",
@@ -139,6 +151,9 @@ function parseProd(p: Prod, deckStrip = false): Parsed {
     clean = clean.replace(/\s*-\s*\d{4}\s*\([^)]*\)\s*$/, "").trim(); // WCD "- 2004 (Chris Fulop)"
     clean = clean.replace(/\s*-\s*[A-Za-z][A-Za-z' ]*?(\s+\d+|\s+Deck)\s*$/i, "").trim(); // BA2024 "- Pikachu 1"·"- Darkrai Deck"
     clean = clean.replace(/\s*\([A-Z0-9/]+\)\s*$/, "").trim(); // 번호코드 중복 괄호 "(DP03)"·"(15)"·"(067/195/)"
+    // 후행 변형 descriptor 괄호 전반 제거 "(2014 Movie Promo)"·"(E3 Stamped)"·"(Toys R Us Promo)" 등.
+    //   ★번호 뒤 끝에 있을 때만 — 폼 괄호 "Burmy (Plant Cloak) - 78/132"는 번호가 뒤라 안 걸림(안전).
+    clean = clean.replace(/\s*\([^)]*\)\s*$/, "").trim();
   }
   clean = clean.replace(/\((\d{4}(?:-\d{4})?)\)\s*$/, "").trim();
   const embMatch = clean.match(/-\s*([A-Za-z]*\d+(?:\/\d+)?)\s*$/);
