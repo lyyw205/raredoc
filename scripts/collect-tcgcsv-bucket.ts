@@ -66,6 +66,17 @@ const SETS: SetCfg[] = [
   //   전부 Basic 포켓몬 60HP(웹 확인). 재판 리졸버 억지매칭 방지 위해 orphan 모드.
   { setId: "kwbp", name: "Kids WB Promos", series: "Promo", code: "KWBP", release: "2004-07-02", packType: "promo", group: 2214, orphanEnergyYears: [], mode: "orphan", orphanHp: 60, orphanSubtypes: ["Basic"] },
   // Prize Pack Series(Play! Pokémon 프라이즈, 2022~): 대형 재판 버킷. base+Cosmos Holo 변형 병합.
+  // World Championship Decks(세계대회 우승덱 재판, 2004~): 초대형. 선수/연도 변형 병합.
+  { setId: "wcd", name: "World Championship Decks", series: "Promo", code: "WCD", release: "2004-08-01", packType: "deck", group: 2282, orphanEnergyYears: [], collapseStamps: true,
+    denomSet: {
+      106: "en-tcg-ex9", 108: "en-tcg-xy6", 109: "en-tcg-ex7", 112: "en-tcg-ex6",
+      111: ["en-tcg-pl2", "en-tcg-xy3"], 113: ["en-tcg-ex11", "en-tcg-bw11"],
+      115: "en-tcg-ex10", 116: "en-tcg-bw9", 100: "en-tcg-dp7", 147: "en-tcg-pl3",
+      95: "en-tcg-col1", 99: "en-tcg-bw4", 149: ["en-tcg-bw7", "en-tcg-sm1"],
+      145: "en-tcg-sm2", 168: "en-tcg-sm7", 70: "en-tcg-sm75", 196: "en-tcg-swsh11",
+      198: ["sv1", "en-tcg-swsh6"], 189: ["en-tcg-swsh10", "en-tcg-swsh3"],
+      195: "en-tcg-swsh12", 64: "sv6pt5", 78: "en-tcg-pgo",
+    } },
   { setId: "pp", name: "Prize Pack Series Cards", series: "Promo", code: "PPS", release: "2022-11-30", packType: "promo", group: 22880, orphanEnergyYears: [], collapseStamps: true,
     denomSet: {
       172: "en-tcg-swsh9", 198: ["sv1", "en-tcg-swsh6"], 132: "en-tcg-me1",
@@ -91,7 +102,7 @@ const norm = (s: string) => (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").t
 const slug = (s: string) => (s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const BASIC_ENERGY = /^(grass|fire|water|lightning|psychic|fighting|darkness|metal|fairy|dragon)\s+energy$/i;
 // 이 로더가 만든 재판/특수 버킷 세트들 — 재판 해석 후보에서 제외(원본세트에만 연결).
-const BUCKET_SETS = ["ppp", "ccp", "fpp", "kwbp", "pwcp", "tt2022", "tt2023", "tt2024", "ba2020", "ba2022", "ba2024", "pp", "mcd23", "mcd24", "tk-sm-l", "tk-sm-r"];
+const BUCKET_SETS = ["ppp", "ccp", "fpp", "kwbp", "pwcp", "tt2022", "tt2023", "tt2024", "ba2020", "ba2022", "ba2024", "pp", "wcd", "mcd23", "mcd24", "tk-sm-l", "tk-sm-r"];
 
 function parseProd(p: Prod, deckStrip = false): Parsed {
   const raw = p.name;
@@ -109,8 +120,12 @@ function parseProd(p: Prod, deckStrip = false): Parsed {
   clean = clean.replace(/\s*\(#?\s*\d*\s*[A-Za-z]+\s+stamped\)\s*$/i, "").trim();
   // 포일 descriptor 제거(Cosmos Holo 등) — 같은 카드의 변형(Prize Pack 등). 항상 안전(카드명 아님).
   clean = clean.replace(/\s*\((cosmos holo|reverse holo|non-holo|holo)\)\s*$/i, "").trim();
-  // BA2024식 덱슬롯 접미 "- Pikachu 1"·"- Armarouge 13"·"- Darkrai Deck"(collapseStamps 세트만).
-  if (deckStrip) clean = clean.replace(/\s*-\s*[A-Za-z][A-Za-z' ]*?(\s+\d+|\s+Deck)\s*$/i, "").trim();
+  // collapseStamps 세트 변형 접미 제거(선수/연도·덱슬롯).
+  if (deckStrip) {
+    clean = clean.replace(/\s*-\s*\d{4}\s*\([^)]*\)\s*$/, "").trim(); // WCD "- 2004 (Chris Fulop)"
+    clean = clean.replace(/\s*-\s*[A-Za-z][A-Za-z' ]*?(\s+\d+|\s+Deck)\s*$/i, "").trim(); // BA2024 "- Pikachu 1"·"- Darkrai Deck"
+    clean = clean.replace(/\s*\([A-Z0-9/]+\)\s*$/, "").trim(); // 번호코드 중복 괄호 "(DP03)"·"(15)"·"(067/195/)"
+  }
   clean = clean.replace(/\((\d{4}(?:-\d{4})?)\)\s*$/, "").trim();
   const embMatch = clean.match(/-\s*([A-Za-z]*\d+(?:\/\d+)?)\s*$/);
   const embNum = embMatch ? embMatch[1] : null;
@@ -143,13 +158,15 @@ async function resolveReprint(pp: Parsed, selfSetId: string, denomSet?: Record<n
   const nClean = norm(pp.cleanName);
   // 문자접두 번호(DP16·SWSH167): numberInt 매칭 불가 → 번호문자열 정확 + 이름으로 매칭.
   if (pp.letterPrefix) {
-    const byStr = await prisma.regionCard.findMany({
-      where: { region: "EN", number: pp.numField, name: { contains: pp.cleanName, mode: "insensitive" }, setId: { notIn: [selfSetId, ...BUCKET_SETS] } },
+    // 번호문자열 정확 일치로 후보 뽑고, 이름은 정규화 비교(하이픈/공백/악센트 무관: "Xurkitree GX"↔"Xurkitree-GX").
+    const byNum = await prisma.regionCard.findMany({
+      where: { region: "EN", number: pp.numField, setId: { notIn: [selfSetId, ...BUCKET_SETS] } },
       select: { id: true, name: true, number: true, setId: true, cardId: true, set: { select: { cardCount: true, name: true } } },
     });
-    if (byStr.length === 1) return { ok: true as const, pick: byStr[0] };
-    if (byStr.length > 1) return { ok: false as const, reason: `문자번호 복수 ${byStr.length}`, cands: byStr.map((c) => `${c.setId} ${c.number} ${c.name}`) };
-    return { ok: false as const, reason: `문자번호 매칭 0 (num=${pp.numField}, "${pp.cleanName}")`, cands: [] };
+    const hit = byNum.filter((c) => { const nc = norm(c.name); return nc === nClean || nc.includes(nClean) || nClean.includes(nc); });
+    if (hit.length === 1) return { ok: true as const, pick: hit[0] };
+    if (hit.length > 1) return { ok: false as const, reason: `문자번호 복수 ${hit.length}`, cands: hit.map((c) => `${c.setId} ${c.number} ${c.name}`) };
+    return { ok: false as const, reason: `문자번호 매칭 0 (num=${pp.numField}, "${pp.cleanName}")`, cands: byNum.map((c) => `${c.setId} ${c.number} ${c.name}`) };
   }
   // 숫자 경로: 우선 해석(이름내장/필드 chosen) 실패 시 Number필드 해석 재시도 — tcgcsv 이름/필드 오타 양방향 대응.
   const attempts: { num: number; denom: number | null; alt: boolean }[] = [{ num: pp.num, denom: pp.denom, alt: false }];
@@ -175,16 +192,16 @@ async function tryNumeric(num: number, denom: number | null, nClean: string, cle
   });
   if (pool.length === 0) return { ok: false as const, reason: `이름+번호 매칭 0 (num=${num}, "${cleanName}")`, cands: cands.map((c) => `${c.setId} ${c.number} ${c.name}`) };
   if (pool.length === 1) return { ok: true as const, pick: pool[0] };
-  // 명시 분모→유효세트 매핑 우선(시크릿으로 cardCount≠denom 인 경우). 다중값 지원.
+  // 정확 이름매칭 우선(V/VMAX/ex 접미 구분) — 가장 신뢰도 높음. 유일하면 채택.
+  const exact = pool.filter((c) => norm(c.name) === nClean);
+  if (exact.length === 1) return { ok: true as const, pick: exact[0] };
+  // 명시 분모→유효세트 매핑(시크릿으로 cardCount≠denom 인 경우). 다중값 지원.
   if (denom != null && denomSet?.[denom]) {
     const allow = denomSet[denom];
     const list = Array.isArray(allow) ? allow : [allow];
-    const byMap = pool.filter((c) => list.includes(c.setId));
+    const byMap = (exact.length ? exact : pool).filter((c) => list.includes(c.setId));
     if (byMap.length === 1) return { ok: true as const, pick: byMap[0] };
   }
-  // 정확 이름매칭(V/VMAX/ex 접미 구분) — 유일하면 채택.
-  const exact = pool.filter((c) => norm(c.name) === nClean);
-  if (exact.length === 1) return { ok: true as const, pick: exact[0] };
   if (denom != null) {
     const byDenom = pool.filter((c) => c.set?.cardCount === denom);
     if (byDenom.length === 1) return { ok: true as const, pick: byDenom[0] };
@@ -194,7 +211,7 @@ async function tryNumeric(num: number, denom: number | null, nClean: string, cle
   return { ok: false as const, reason: `복수모호 ${pool.length}건`, cands: pool.map((c) => `${c.setId} ${c.number} ${c.name} [cc=${c.set?.cardCount}]`) };
 }
 
-async function collectSet(cfg: SetCfg, apply: boolean) {
+async function collectSet(cfg: SetCfg, apply: boolean, allowUnresolved = false) {
   log.info(`${apply ? "APPLY" : "DRY-RUN"} — ${cfg.setId.toUpperCase()} (${cfg.name}, group ${cfg.group})`);
 
   const d = JSON.parse(readFileSync(`${SP}/${cfg.setId}-tcgcsv.json`, "utf-8"));
@@ -267,7 +284,8 @@ async function collectSet(cfg: SetCfg, apply: boolean) {
   console.log(`\n요약: LINKED ${linked.length} · ENERGY ${orphanEnergy.length} · ORPHAN ${orphanCards.length} · UNRESOLVED ${unresolved.length} · SKIP ${skipped.length} / 카드 ${cardCount} (총상품 ${parsed.length})`);
 
   if (!apply) { log.info("(dry-run) 미해결 정리 후 --apply."); return; }
-  if (unresolved.length) { log.warn(`UNRESOLVED ${unresolved.length}건 — 전량 해결 전 적재 중단.`); return; }
+  if (unresolved.length && !allowUnresolved) { log.warn(`UNRESOLVED ${unresolved.length}건 — 전량 해결 전 적재 중단(--allow-unresolved 로 스킵 적재).`); return; }
+  if (unresolved.length) log.warn(`UNRESOLVED ${unresolved.length}건 스킵(--allow-unresolved) — 나머지만 적재.`);
 
   // ── 적재 (EN 신규세트 = mapping-lock FREE) ──
   await prisma.set.upsert({
@@ -401,11 +419,12 @@ async function collectSet(cfg: SetCfg, apply: boolean) {
 async function main() {
   const args = process.argv.slice(2);
   const apply = args.includes("--apply");
+  const allowUnresolved = args.includes("--allow-unresolved");
   const only = args.find((a) => a.startsWith("--set="))?.split("=")[1];
   if (!only) throw new Error(`--set=<id> 필요 (${SETS.map((s) => s.setId).join(", ")})`);
   const cfg = SETS.find((s) => s.setId === only);
   if (!cfg) throw new Error(`--set='${only}' 미정의`);
-  await collectSet(cfg, apply);
+  await collectSet(cfg, apply, allowUnresolved);
   await prisma.$disconnect();
 }
 main().catch((e) => { console.error(e); process.exit(1); });
