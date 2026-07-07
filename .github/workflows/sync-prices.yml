@@ -1,10 +1,13 @@
 name: Sync Prices (daily)
 
-# pokemontcg.io 의 TCGplayer market price 를 Price 테이블에 스냅샷.
-# 매일 1회 실행 → 시계열 history 누적.
+# tcgcsv(TCGplayer 일일 미러) 기반 EN 시세를 Price 테이블에 일일 스냅샷.
+#   productId→RegionCard 크로스워크(ExternalIdMapping, sourceId=tcgcsv)를 id-join 해 가격만 갱신.
+#   ★크로스워크는 사전 적재돼 있어야 함(scripts/build-tcgcsv-crosswalk.ts, "map-once").
+#   JP(yuyu-tei)는 재점검 대상이라 당분간 제외 — tcgcsv EN(cat=3)만 수집.
+#   tcgcsv.com 은 공개 API(키 불필요) → DATABASE_URL 만 필요.
 on:
   schedule:
-    - cron: "0 0 * * *" # 00:00 UTC = 09:00 KST
+    - cron: "0 15 * * *" # 15:00 UTC = 00:00 KST (매일 자정, KST)
   workflow_dispatch:
 
 concurrency:
@@ -18,17 +21,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # node 24 = npm 11 (로컬 개발환경과 동일). package-lock.json 이 npm 11 로 생성돼
+      #   npm 10(=node 20)의 npm ci 는 optional peer(@swc/helpers) 처리 차이로 실패한다.
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "npm"
 
       - run: npm ci
 
       - run: npx prisma generate
 
-      - name: Run sync:prices
-        run: npm run sync:prices
+      - name: Sync prices (tcgcsv EN, cat=3)
+        run: npm run sync:prices:tcgcsv -- --cat=3
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          POKEMONTCG_API_KEY: ${{ secrets.POKEMONTCG_API_KEY }}
