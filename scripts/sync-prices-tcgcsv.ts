@@ -20,13 +20,14 @@
 import "dotenv/config";
 import dns from "node:dns";
 dns.setDefaultResultOrder("ipv4first");
+import fs from "node:fs";
 import { prisma } from "@/lib/prisma";
 import {
   Logger,
   type SyncResult,
   emptyResult,
   startOfUtcDay,
-  upsertDailyPrice,
+  priceKindFor,
   getSourceIds,
   fetchJsonWithRetry,
   sanityCheck,
@@ -35,7 +36,7 @@ import {
 const CAT_REGION: Record<number, "EN" | "JP"> = { 3: "EN", 85: "JP" };
 const BASE = "https://tcgcsv.com/tcgplayer";
 
-export type TcgcsvOptions = { cat: number; group?: number };
+export type TcgcsvOptions = { cat: number; group?: number; dryRun?: boolean; out?: string };
 
 type TcgGroup = { groupId: number };
 type TcgPriceRow = {
@@ -94,6 +95,15 @@ export async function run(opts: TcgcsvOptions): Promise<SyncResult> {
   if (opts.group) groups = groups.filter((g) => g.groupId === opts.group);
 
   const today = startOfUtcDay();
+  const priceKind = await priceKindFor(sid.tcgplayer);
+
+  // ── Phase 1: 전체 그룹 스윕 → 의도한 write 를 메모리에 수집(DB 왕복 없음) ──
+  //   행마다 upsertDailyPrice(PV보장+존재조회+생성 = 왕복3회) 대신 여기서 모으고 아래서 배치.
+  //   버킷/금액 우선순위 로직은 upsertDailyPrice 와 동일(정확성 불변). 같은 printVariantId 가
+  //   여러 productId 에 걸리면 마지막 값이 이김(per-row upsert 덮어쓰기와 동일 순서).
+  type Intended = { regionCardId: string; amount: number; standard: boolean };
+  const byPv = new Map<string, Intended>();
+
   for (const g of groups) {
     const priceResp = await fetchJsonWithRetry<{ results: TcgPriceRow[] }>(`${BASE}/${opts.cat}/${g.groupId}/prices`, { log });
     const rows = priceResp?.results ?? [];
@@ -120,17 +130,66 @@ export async function run(opts: TcgcsvOptions): Promise<SyncResult> {
         r.noPrice++;
         continue;
       }
-      const wrote = await upsertDailyPrice(target.regionCardId, sid.tcgplayer, today, {
-        normal: p.normal ?? null,
-        holofoil: p.holofoil ?? null,
-        reverseHolo: p.reverseHolo ?? null,
-        firstEdition: p.firstEdition ?? null,
-        currency: "USD",
-        printVariantId: target.printVariantId,
-      });
-      wrote ? r.written++ : r.dupSkipped++;
+      // upsertDailyPrice 와 동일한 금액 우선순위(tcgcsv 는 marketPrice 미제공 → holofoil 부터).
+      const amount = (p.holofoil ?? p.normal ?? p.reverseHolo ?? p.firstEdition) as number;
+      const printVariantId = target.printVariantId ?? `pv-${target.regionCardId}`;
+      byPv.set(printVariantId, { regionCardId: target.regionCardId, amount, standard: !target.printVariantId });
     }
   }
+
+  // ── dry-run: 실제 기록 없이 의도한 (printVariantId, amount) 만 정렬해 파일로 덤프(정확성 대조용) ──
+  if (opts.dryRun) {
+    const out = opts.out ?? `/tmp/tcgcsv-batch-cat${opts.cat}.json`;
+    const dump = [...byPv]
+      .map(([printVariantId, v]) => ({ printVariantId, amount: v.amount }))
+      .sort((a, b) => a.printVariantId.localeCompare(b.printVariantId));
+    fs.writeFileSync(out, JSON.stringify(dump));
+    log.info(`[dry-run] 의도 ${dump.length}행 → ${out} (DB 기록 안 함)`);
+    r.durationMs = Date.now() - t0;
+    return r;
+  }
+
+  // ── Phase 2: 배치 기록 — 왕복 수만 줄이고 결과는 per-row upsert 와 동일(멱등) ──
+  const createData = [...byPv].map(([printVariantId, v]) => ({
+    regionCardId: v.regionCardId,
+    sourceId: sid.tcgplayer,
+    currency: "USD",
+    condition: null as string | null,
+    gradingCompany: null as string | null,
+    grade: null as number | null,
+    amount: v.amount,
+    conditionType: "raw",
+    priceKind,
+    printVariantId,
+  }));
+
+  // (a) standard PrintVariant 벌크 보장(이미 있으면 skip) — 행마다 upsert 제거
+  const standardPvs = [...byPv]
+    .filter(([, v]) => v.standard)
+    .map(([printVariantId, v]) => ({ id: printVariantId, regionCardId: v.regionCardId, kind: "standard", slug: "standard" }));
+  if (standardPvs.length) await prisma.printVariant.createMany({ data: standardPvs, skipDuplicates: true });
+
+  // (b) 오늘 이미 있는 대상 PV 행 id 수집(메모리 필터로 거대한 IN 회피) → 삭제 후 전량 재삽입.
+  //     삭제+삽입을 한 트랜잭션으로 원자성 보장(중간 실패 시 오늘치 유실 방지).
+  const existingToday = await prisma.price.findMany({
+    where: { sourceId: sid.tcgplayer, recordedAt: { gte: today } },
+    select: { id: true, printVariantId: true },
+  });
+  const replaceIds = existingToday
+    .filter((e) => e.printVariantId && byPv.has(e.printVariantId))
+    .map((e) => e.id);
+
+  const CHUNK = 1000;
+  const ops: unknown[] = [];
+  for (let i = 0; i < replaceIds.length; i += 5000)
+    ops.push(prisma.price.deleteMany({ where: { id: { in: replaceIds.slice(i, i + 5000) } } }));
+  for (let i = 0; i < createData.length; i += CHUNK)
+    ops.push(prisma.price.createMany({ data: createData.slice(i, i + CHUNK) }));
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  await prisma.$transaction(ops as any);
+
+  r.written = createData.length - replaceIds.length; // 새로 생성
+  r.dupSkipped = replaceIds.length; // 기존 대체(=per-row update)
 
   r.durationMs = Date.now() - t0;
   sanityCheck(r);
@@ -144,6 +203,8 @@ if (isMain) {
   const opts: TcgcsvOptions = {
     cat: Number(args.find((a) => a.startsWith("--cat="))?.split("=")[1]) || 3,
     group: Number(args.find((a) => a.startsWith("--group="))?.split("=")[1]) || undefined,
+    dryRun: args.includes("--dry-run"),
+    out: args.find((a) => a.startsWith("--out="))?.split("=")[1],
   };
   run(opts)
     .then((r) => {

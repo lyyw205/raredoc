@@ -113,7 +113,7 @@ export async function fetchJsonWithRetry<T>(
 
 // sourceId → priceKind(market|sell|buy) 매핑 캐시 (JP 販売/買取 분리).
 const _priceKindCache = new Map<string, string>();
-async function priceKindFor(sourceId: string): Promise<string> {
+export async function priceKindFor(sourceId: string): Promise<string> {
   let code = _priceKindCache.get(sourceId);
   if (code === undefined) {
     const s = await prisma.priceSource.findUnique({ where: { id: sourceId }, select: { code: true } });
