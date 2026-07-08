@@ -179,14 +179,14 @@ export async function run(opts: TcgcsvOptions): Promise<SyncResult> {
     .filter((e) => e.printVariantId && byPv.has(e.printVariantId))
     .map((e) => e.id);
 
-  const CHUNK = 1000;
-  const ops: unknown[] = [];
+  // 삭제 → 삽입을 순차 실행(단일 트랜잭션 미사용). 대DB 지연 환경에서 하나의 $transaction 으로
+  //   묶으면 왕복 누적이 Prisma 인터랙티브 트랜잭션 5s 타임아웃(P2028)을 넘는다. per-row 도
+  //   비트랜잭션이라 보장 동일. 일일 크론은 매일 새 날짜라 replaceIds 가 비어 삽입만 수행(멱등).
+  const CHUNK = 2000; // createMany 1콜당 2,000행(≈2만 파라미터, PG 한계 내) — 왕복 최소화
   for (let i = 0; i < replaceIds.length; i += 5000)
-    ops.push(prisma.price.deleteMany({ where: { id: { in: replaceIds.slice(i, i + 5000) } } }));
+    await prisma.price.deleteMany({ where: { id: { in: replaceIds.slice(i, i + 5000) } } });
   for (let i = 0; i < createData.length; i += CHUNK)
-    ops.push(prisma.price.createMany({ data: createData.slice(i, i + CHUNK) }));
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  await prisma.$transaction(ops as any);
+    await prisma.price.createMany({ data: createData.slice(i, i + CHUNK) });
 
   r.written = createData.length - replaceIds.length; // 새로 생성
   r.dupSkipped = replaceIds.length; // 기존 대체(=per-row update)
